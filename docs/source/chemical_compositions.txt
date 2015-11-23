@@ -1,0 +1,11 @@
+.. chemical_composition:
+
+.. default-domain:: py
+
+####################
+Chemical Composition
+####################
+
+.. autoclass:: ursgal.ChemicalComposition
+   :members:
+

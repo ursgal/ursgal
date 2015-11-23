@@ -1,0 +1,108 @@
+.. _general_structure:
+
+General Structure
+=================
+
+Each engine requires a **resource**, **knowledge base** and **engine** file to
+be declared properly.
+
+Schematic Overview
+------------------
+
+.. figure:: figAB.png
+   :align: center
+
+
+Resources
+---------
+
+Engine code should be standalone and executable from the command line.
+The location for engines is
+
+    #.  <installation path of uplanit>\ **/resources/**\ <platform>/\ **<architecture>**
+        Whereas platform is darwin (OS X), linux or win32 (Windows (and yes even if you have windows 64 bit ...))
+    #.  Architecture independent engines, like python scripts or java packages
+        can be placed in <installation path of uplanit>/arc_independent/
+    #.  Each engine has to have its own folder following python class name
+        conventions, but all lowercase. For more details in the naming
+        convention see `PEP 3131`_.
+
+Knowledge base
+--------------
+
+Each engine has to have a knowledge base file located in
+<installation path of uplanit>\ **/kb/**, ( e.g. usearch/kb/mzml2mgf_1_0_0.py),
+which contains at least the python dictionary META_INFO ::
+
+    {
+        'engine_type' : {
+            'search_engine' : True,
+        },
+        'output_suffix'             : '.xml',
+        'input_types'               : ['.mgf'],
+        'create_own_folder'         : True,
+        'include_engine_in_name'    : True,
+        'engine': {
+            'darwin' : {
+                '64bit' : {
+                    'exe'            : 'tandem',
+                    'url'            : '',
+                    'zip_md5'        : '261dce3746481d1cc4223bccb6bf265e',
+                    'additional_exe' : [],
+                },
+            },
+            'linux' : {
+                '64bit' : {
+                    'exe'            : 'tandem.exe',
+                    'url'            : '',
+                    'zip_md5'        : 'af307fea9f2b954f1a9a3652c14a5742',
+                    'additional_exe' : [],
+                },
+            },
+            'win32' : {
+                '64bit' : {
+                    'exe'            : 'tandem.exe',
+                    'url'            : '',
+                    'zip_md5'        : '16c3b766e02690386f280515175cdc90',
+                    'additional_exe' : [],
+                },
+            },
+        },
+        'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
+            matching proteins with tandem mass spectra.',
+    }
+
+There it is declared
+
+    #. What kind of type the engine is (engine_type).
+    #. What is the executable name of the engine (engine_exe)
+       if engine is arc_independent, then only this has to be specified.
+    #. Citation is an important part. Please include this information as it
+       will be displayed during run time.
+
+.. _PEP 3131:
+    https://www.python.org/dev/peps/pep-3131/
+
+Engine python class
+-------------------
+
+The engine inherits from the uNode, which during initialization injects
+the knowledge base data into the class. Thus, those dictionaries (e.g. self.META_INFO)
+are available as attribute of each engine.
+
+The default structure of the engine is::
+
+    class mzml2mgf_1_0_0( usearch.UNode ):
+        def __init__(self, *args, **kwargs):
+                super(mzml2mgf_1_0_0, self).__init__(*args, **kwargs)
+
+
+Defined `preflight` and `postflight` functions will be executed
+during preflight and postflight **(how? when?)**. During preflight, a
+command line list (see `subprocess`_) is cated. It should include the executable path
+of the engine (accessible via self.exe) and all other parameters, available via
+self.params.
+What about **'_execute'**?
+
+.. _subprocess:
+    https://docs.python.org/3/library/subprocess.html

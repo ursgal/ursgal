@@ -1,0 +1,11 @@
+.. ucore:
+
+.. default-domain:: py
+
+#####
+UCore
+#####
+
+.. automodule:: ursgal.ucore
+   :members:
+

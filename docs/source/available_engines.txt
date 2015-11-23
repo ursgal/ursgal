@@ -1,0 +1,150 @@
+.. _available-engines:
+
+Available Search Engines
+=================
+
+MS Amanda
+-------------------
+
+.. autoclass:: ursgal.engines.msamanda_1_0_0_5242.msamanda_1_0_0_5242
+   :members:
+
+.. autoclass:: ursgal.engines.msamanda_1_0_0_5243.msamanda_1_0_0_5243
+   :members:
+
+MS-GF+
+-----------
+
+.. autoclass:: ursgal.engines.msgfplus_v9979.msgfplus_v9979
+   :members:
+
+MyriMatch
+-----------------
+
+.. autoclass:: ursgal.engines.myrimatch_2_1_138.myrimatch_2_1_138
+   :members:
+
+.. autoclass:: ursgal.engines.myrimatch_2_2_140.myrimatch_2_2_140
+   :members:
+
+OMSSA
+-----------
+
+.. autoclass:: ursgal.engines.omssa_2_1_9.omssa_2_1_9
+   :members:
+
+X!Tandem
+---------------------
+
+.. autoclass:: ursgal.engines.xtandem_cyclone_2010.xtandem_cyclone_2010
+   :members:
+
+.. autoclass:: ursgal.engines.xtandem_jackhammer.xtandem_jackhammer
+   :members:
+
+.. autoclass:: ursgal.engines.xtandem_piledriver.xtandem_piledriver
+   :members:
+
+.. autoclass:: ursgal.engines.xtandem_sledgehammer.xtandem_sledgehammer
+   :members:
+
+
+Other Engines
+=================
+
+
+Combine FDR 0_1
+---------------
+
+.. autoclass:: ursgal.engines.combine_FDR_0_1.combine_FDR_0_1
+   :members:
+   :private-members:
+
+Filter CSV 1_0_0
+----------------
+
+.. autoclass:: ursgal.engines.filter_csv_1_0_0.filter_csv_1_0_0
+   :members:
+   :private-members:
+
+.. autoclass:: ursgal.resources.platform_independent.arc_independent.filter_csv_1_0_0.filter_csv_1_0_0.main
+   :members:
+
+
+Generate Target Decoy 1_0_0
+---------------------------
+
+.. autoclass:: ursgal.engines.generate_target_decoy_1_0_0.generate_target_decoy_1_0_0
+   :members:
+   :private-members:
+
+.. autoclass:: ursgal.resources.platform_independent.arc_independent.generate_target_decoy_1_0_0.generate_target_decoy_1_0_0.main
+   :members:
+
+Merge CSVS 1_0_0
+----------------
+
+.. autoclass:: ursgal.engines.merge_csvs_1_0_0.merge_csvs_1_0_0
+   :members:
+   :private-members:
+
+.. autoclass:: ursgal.resources.platform_independent.arc_independent.merge_csvs_1_0_0.merge_csvs_1_0_0.main
+   :members:
+
+MzidLib 1_6_10
+--------------
+
+.. autoclass:: ursgal.engines.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
+   :members:
+
+MzidLib 1_6_11
+--------------
+
+.. autoclass:: ursgal.engines.mzidentml_lib_1_6_11.mzidentml_lib_1_6_11
+   :members:
+
+.. autoclass:: ursgal.engines.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
+   :members:
+
+mzml2mgf 1_0_0
+--------------
+
+.. autoclass:: ursgal.engines.mzml2mgf_1_0_0.mzml2mgf_1_0_0
+   :members:
+
+.. autoclass:: ursgal.resources.platform_independent.arc_independent.mzml2mgf_1_0_0.mzml2mgf_1_0_0.main
+   :members:
+
+Percolator 2_08
+---------------
+
+.. autoclass:: ursgal.engines.percolator_2_08.percolator_2_08
+   :members:
+
+qyality 2_02
+------------
+
+.. autoclass:: ursgal.engines.qvality_2_02.qvality_2_02
+   :members:
+
+Unify CSV v1_0_0
+----------------
+
+.. autoclass:: ursgal.engines.unify_csv_1_0_0.unify_csv_1_0_0
+   :members:
+   :private-members:
+
+.. autoclass:: ursgal.resources.platform_independent.arc_independent.unify_csv_1_0_0.unify_csv_1_0_0.main
+   :members:
+   :private-members:
+
+Venn Diagram v1_0_0
+-------------------
+
+.. autoclass:: ursgal.engines.venndiagram_1_0_0.venndiagram_1_0_0
+   :members:
+   :private-members:
+
+.. autoclass:: ursgal.resources.platform_independent.arc_independent.venndiagram_1_0_0.venndiagram_1_0_0.main
+   :members:
+   :private-members:

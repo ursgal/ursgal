@@ -1,0 +1,158 @@
+.. _quick-start:
+
+Quick Start Tutorial
+================================
+
+This tutorial will explain the basic usage of Ursgal using simple examples.
+To get started, make sure you have :ref:`installed Ursgal<installation>`.
+
+1. Getting Started
+--------------------------------
+
+Once you installed Ursgal, you should be able to import it in your Python3 scripts like this: ::
+    
+    import ursgal
+
+To get an overview over the engines that are available on your computer, initialize the Ursgal UController class.
+This should print a list of engines to your screen, sorted by category: ::
+
+    uc = ursgal.UController()
+
+The UController controls, manages and executes the tools that are available in Ursgal. These tools are called UNodes. Some UNodes (especially search engines) require binary executable files, which are not included in Ursgal by default. If the UController overview shows a lot of missing search engines, you probably have not executed the script 'install_resources.py' in the Ursgal directory (see: :ref:`Installation<installation>`). This script automatically downloads third-party tools. 'install_resources.py' should be executed before 'setup.py'. If you did it the other way around, you have to re-run 'setup.py' once again.
+
+2. Running a Simple Search
+--------------------------------
+
+One of the key features of Ursgal is peptide spectrum matching with up to five search engines.
+To perform a search, you need:
+    * a peptide database (.fasta) that will be searched
+    * one or more mass spectrometer output files (.mzML)
+Once you have these files, you are ready to execute a full search with Ursgal: ::
+
+    import ursgal
+    uc = ursgal.UController(
+        params = {'database': 'my_database.fasta'}
+    )
+
+    search_result = uc.search(
+        input_file = 'my_mass_spec_file.mzML',
+        engine     = 'omssa',
+    )
+
+This will produce a .csv file containing the peptide-spectrum-matches (PSMs) found by the specified search engine. The above example uses the search engine `OMSSA <http://www.ncbi.nlm.nih.gov/pubmed/15473683>`_. To use a different search engine, simply replace the engine keyword argument 'omssa' of :meth:`.UController.search` with the name of a different engine (see: :ref:`Available Engines<available-engines>`).
+
+
+3. Adjusting Parameters
+--------------------------------
+
+If you used OMSSA or any other search engine before, you will know that there are a lot of search parameters and settings that can be defined. For instance, depending on the mass spectrometer that was used, you might want to set the fragment mass tolerance unit to Dalton or ppm.
+In Ursgal, there are two ways to adjust such parameters: ::
+    
+    # 1) define parameters at UController initialization:
+    uc = ursgal.UController(
+        params = {
+            'database': 'my_database.fasta',
+            'frag_mass_tolerance':      0.5,
+            'frag_mass_tolerance_unit': 'da',
+        }
+    )
+    
+    # 2) change parameters after UController is already initialized:
+    uc.params['database'] = 'my_other_database.fasta'
+    uc.params['frag_mass_tolerance']      = 15
+    uc.params['frag_mass_tolerance_unit'] = 'ppm'
+
+The second method allows you to re-adjust parameters at different points of your Python script.
+
+For a list of available ursgal parameters, see :ref:`Parameters<parameters>`. Ursgal also includes pre-defined sets of parameters for different mass spectrometers. These are called profiles. Currently, three profiles are available: 'LTQ XL low res', 'LTQ XL high res' and 'QExactive+'.
+Profiles can be used like this: ::
+    
+    uc = ursgal.UController(
+        params  = {'database': 'my_database.fasta'},
+        profile = 'QExactive+'
+    )
+
+
+4. Available Workflow Functions
+--------------------------------
+
+You have already seen the :meth:`.UController.search` function in section 2. :meth:`.UController.search` is only one of many UController functions that you can use to define custom workflows. A commonly used procedure is to post-process search engine results with tools such as `Percolator <http://www.per-colator.com/>`_ or `qvality <http://noble.gs.washington.edu/proj/qvality/>`_. These tools can be accessed using the :meth:`.UController.validate` function. In this example, we use Percolator to discriminate correct from incorrect peptide-spectrum matches and calculate posterior error probabilities: ::
+
+    search_result = uc.search(
+        input_file = 'my_mass_spec_file.mzML',
+        engine     = 'omssa',
+    )
+
+    validated_result = uc.validate(
+        input_file = search_result,
+        engine     = 'percolator_2_08',
+    )
+
+Currently, the following UController workflow functions are available:
+    * :meth:`.UController.add_estimated_fdr`
+        Estimates the false discovery rate of target-decoy-based result files, given a quality score
+    * :meth:`.UController.combine_search_results`
+        Statistical integration of search results from multiple engines
+    * :meth:`.UController.fetch_file`
+        Downloads files (HTTP or FTP)
+    * :meth:`.UController.filter_csv`
+        Filters csv files row-wise according to custom filtering rules
+    * :meth:`.UController.generate_target_decoy`
+        Generates a target-decoy database from a regular fasta database
+    * :meth:`.UController.merge_csvs`
+        Merges csv files
+    * :meth:`.UController.search`
+        Peptide spectrum matching
+    * :meth:`.UController.validate`
+        Statistical post-processing of search results
+    * :meth:`.UController.visualize`
+        Visualization of results
+
+
+5. Building Custom Workflows
+--------------------------------
+
+The above functions can be used in conjunction with standard Python control flow tools such as loops and if-statements.
+This makes it possible to define complex and highly customizable workflows. For instance, imagine you have multiple mzML files and you want to use all available search engines with them: ::
+    
+    spec_files     = ['fileA.mzML', 'fileB.mzML']
+    search_engines = ['omssa_2_1_9', 'xtandem_piledriver', 'msgfplus',
+                      'msamanda_1_0_0_5243', 'myrimatch_2_1_138']
+
+This task can be easily achieved with the power of nested for-loops: ::
+    
+    results = []
+    for spec_file in spec_files:
+        for search_engine in search_engines:
+            result = uc.search(
+                input_file = spec_file,
+                engine     = search_engine,
+            )
+            results.append( result )
+
+The above script will generate ten output files (search results of two mzML files per engine): ::
+
+    >>> print( results )
+    ['fileA_omssa_2_1_9_unified.csv', 'fileB_omssa_2_1_9_unified.csv',
+     'fileA_xtandem_piledriver_unified.csv', 'fileB_xtandem_piledriver_unified.csv',
+     'fileA_msgfplus_v9979_unified.csv', 'fileB_msgfplus_v9979_unified.csv',
+     'fileA_msamanda_1_0_0_5243_unified.csv', 'fileB_msamanda_1_0_0_5243_unified.csv',
+     'fileA_myrimatch_2_1_138_unified.csv', 'fileB_myrimatch_2_1_138_unified.csv']
+
+
+6. JSONs, Force and File Names
+--------------------------------
+
+If you execute the same Ursgal script twice, you will notice that the UNodes are not executed in the second run. This is because Ursgal notes down the input file (md5) and relevant parameters of each UNode execution. If these factors did not change, re-running your script will not execute the UNode again.
+This makes it possible to cancel Ursgal scripts and resume them later without losing progress, for instance to add an additional search engine. Information about each run is stored in files ending with .u.json. Since the JSON format is human-readable, these files also act as log files that contain all relevant parameters and file paths.
+
+If you want to force UNodes to re-run each time, you can use the force keyword argument. force = True will ignore all JSON files and re-run the UNode even if the parameters did not change.
+Another useful keyword argument is 'output_file_name', which allows you to define the name of the UNodes' output file. If you don't specify this argument, Ursgal will automatically generate an appropriate output file name (recommended). ::
+
+    search_result = uc.search(
+        input_file       = 'my_mass_spec_file.mzML',
+        engine           = 'omssa',
+        force            = True,
+        output_file_name = 'my_omssa_result.csv'
+    )
+

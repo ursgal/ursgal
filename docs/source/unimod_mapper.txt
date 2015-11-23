@@ -1,0 +1,11 @@
+.. unimod_mapper:
+
+.. default-domain:: py
+
+#############
+Unimod Mapper
+#############
+
+.. autoclass:: ursgal.UnimodMapper
+   :members:
+

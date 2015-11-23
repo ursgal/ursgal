@@ -1,0 +1,227 @@
+Example Scripts
+=================
+
+
+simple example search
+---------------------
+
+.. autofunction:: simple_example_search.main
+
+.. include:: code_inc/simple_example_search.inc
+
+
+
+do it all folder wide
+----------------------
+
+.. autofunction:: do_it_all_folder_wide.main
+
+
+.. include:: code_inc/do_it_all_folder_wide.inc
+
+
+
+X!Tandem version comparison
+---------------------------
+
+.. autofunction:: xtandem_version_comparison.main
+
+.. include:: code_inc/xtandem_version_comparison.inc
+
+
+
+BSA machine ppm offset example
+------------------------------
+
+.. autofunction:: bsa_ppm_offset_test.main
+
+
+.. include:: code_inc/bsa_ppm_offset_test.inc
+
+
+
+Bruderer high resolution machine ppm offset example
+---------------------------------------------------
+
+.. autofunction:: qexactive_xtandem_version_comparison.main
+
+
+.. include:: code_inc/qexactive_xtandem_version_comparison.inc
+
+
+
+
+target decoy generation
+-----------------------
+
+.. autofunction:: target_decoy_generation_example.main
+
+
+.. include:: code_inc/target_decoy_generation_example.inc
+
+
+
+precursor mass tolerance example
+--------------------------------
+
+.. autofunction:: bsa_precursor_mass_tolerance_example.main
+
+
+.. include:: code_inc/bsa_precursor_mass_tolerance_example.inc
+
+
+fragment mass tolerance example
+--------------------------------
+
+.. autofunction:: bsa_fragment_mass_tolerance_example.main
+
+
+.. include:: code_inc/bsa_fragment_mass_tolerance_example.inc
+
+
+
+filter csv examples
+-------------------
+
+filter for modifications
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: filter_csv_for_mods_example.main
+
+
+.. include:: code_inc/filter_csv_for_mods_example.inc
+
+
+
+filter validated results
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: filter_csv_validation_example.main
+
+
+.. include:: code_inc/filter_csv_validation_example.inc
+
+
+
+Machine ppm offset sweep
+------------------------
+
+Reproduce data for figure 2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: machine_offset_bruderer_sweep.search
+
+
+.. autofunction:: machine_offset_bruderer_sweep.analyze
+
+
+.. include:: code_inc/machine_offset_bruderer_sweep.inc
+
+
+
+Large scale data analysis
+-------------------------
+
+
+.. autofunction:: barth_et_al_large_scale.main
+
+
+.. include:: code_inc/barth_et_al_large_scale.inc
+
+
+
+
+
+cascade search
+--------------
+
+
+cascade search example
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: cascade_search_example.search
+
+
+.. autofunction:: cascade_search_example.analyze
+
+
+.. include:: code_inc/cascade_search_example.inc
+
+
+ungouped search for comparison
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: ungrouped_search_example.search
+
+
+.. autofunction:: ungrouped_search_example.analyze
+
+
+.. include:: code_inc/ungrouped_search_example.inc
+
+
+grouped search for comparison
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autofunction:: grouped_search_example.search
+
+
+.. autofunction:: grouped_search_example.analyze
+
+
+.. include:: code_inc/grouped_search_example.inc
+
+
+Example results for cascade search
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ROS dataset results from a subsset of data from Barth et al. 2014.
+
+.. exceltable:: ROS dataset results from Barth et al. 2014
+   :file: barth_cascade_results.xls
+   :header: 1
+   :sheet: 0
+   :selection: A1:K8
+
+
+
+
+Human BR dataset results.
+
+
+.. exceltable:: Human BR dataset results.
+   :file: cascade_results_all_engines_qvality.xls
+   :header: 1
+   :sheet: 0
+   :selection: A1:K8
+
+
+
+Complete workflow for human BR dataset analysis
+-----------------------------------------------
+
+
+.. autofunction:: human_br_complete_workflow.main
+
+
+.. include:: code_inc/human_br_complete_workflow.inc
+
+
+
+mgf conversion loop examples
+----------------------------
+
+.. autofunction:: mgf_conversion_inside_and_outside_loop.main
+
+
+.. include:: code_inc/mgf_conversion_inside_and_outside_loop.inc
+
+
+Example search with search for labeling with 15N and no label
+-------------------------------------------------------------
+
+.. autofunction:: search_with_label_15N.main
+
+
+.. include:: code_inc/search_with_label_15N.inc
+

@@ -1,0 +1,41 @@
+prune Documentation/html/.doctrees/
+exclude Documentation/html/.buildinfo
+
+recursive-include Documentation/html *
+recursive-include Documentation/html/_sources *
+recursive-include Documentation/html/_static *
+
+include example_scripts/*.py
+
+
+
+include example_data/misc/*.csv
+include example_data/BSA.fasta
+include example_data/BSA1.mzML
+
+
+
+recursive-include ursgal/resources/*
+
+recursive-include tests/data/omssa_2_1_9 *
+recursive-include tests/data/xtandem_sledgehammer *
+include tests/data/*.csv
+include tests/data/*.fasta
+include tests/data/*.mzML
+include tests/data/test*.json
+include tests/data/_test*.pkl
+include tests/*.py
+
+
+
+
+recursive-include ursgal/kb *.py
+recursive-include ursgal/engines *.py
+recursive-include ursgal/kb/ext *.xml
+
+include COPYING.txt
+include Documentation/ursgal.pdf
+include AUTHORS.txt
+include README.txt
+include requirements.txt
+

@@ -1,0 +1,445 @@
+.. _generate-your-engines:
+
+Create/Implement our own Engine
+================================
+
+The :ref:`General structure<general_structure>` of ursgal needs to be considered.
+The tutorial will explain the implementation into the ursgal
+**resources**, **knowledge base (kb)** and **engines**
+based on two examples:
+    * A python script: filter_csv_1_0_0.py
+    * A standalone search engine: MS-GF+ v9979
+
+
+1. Integration into Resources
+--------------------------------
+
+Engine code should be standalone and executable from the command line.
+Each engine has to have its own folder following python class name
+conventions, but all lowercase. For more details in the naming
+convention see `PEP 3131`_.
+
+    #. Platfom dependent engines need to be placed according to the platform:
+       darwin (OS X), linux or win32 (Windows (and yes even if you have windows 64 bit ...))
+
+        * <ursgal_path>\ **/resources/**\ <platform>/\ <architecture>/<name_of_engine>/source (executable + potential additional files)
+
+       **Example**: MS-GF+ on windows 64 bit:
+
+        * <ursgal_path>\ **/resources/**\ win32/\ 64bit/msgfplus_v9979/MSGFPlus.jar
+
+
+    #. Architecture independent engines, like Python scripts or java packages
+       should be placed in arc_independent
+
+        * <ursgal_path>\ **/resources/**\platform_independent/arc_independent/<name_of_engine>/engine.py
+
+       **Example**: filter_csv_1_0_0.py:
+
+        * <ursgal_path>\ **/resources/**\platform_independent/arc_independent/filter_csv_1_0_0/filter_csv_1_0_0.py
+
+       Actually, MS-GF+ is platform independent as well (since it it based on java) and can therefore also be placed in:
+
+        * <ursgal_path>\ **/resources/**\platform_independent/arc_independent/msgfplus_v9979/MSGFPlus.jar
+
+
+.. _PEP 3131:
+    https://www.python.org/dev/peps/pep-3131/
+
+
+2. Integration into the knowledge base
+-----------------------------------------
+
+Each engine has to have a knowledge base file located in:
+
+ * <ursgal_path>\ **/kb/** engine.py
+
+**Examples**:
+
+ * <ursgal_path>\ **/kb/** filter_csv_1_0_0.py
+ * <ursgal_path>\ **/kb/** msgfplus_v9979.py
+
+The file must contain at least the Python dictionary META_INFO.
+There, one declares:
+
+    #. **engine_type**: What kind of type the engine is.
+    #. **output_extension**: The file extension of the output file (i.e. '.csv')
+    #. **output_suffix**: A suffix that will be added to the filename. If not defined, the engine's name will automatically be formatted into the output file name. If None, no suffix will be added.
+    #. **input_types**: A list of input types (file extensions) that are supported by the engine.
+    #. **engine**: A dict describing the path to the engine executable (see below).
+    #. **citation**: Citing the authors of engines is important. Please include this information as it will be displayed during run time.
+    #. **create_own_folder**: A boolean indicating whether the engine should create a subfolder or not.
+    #. **include_in_git**: A boolean indicating whether the engine executable should be uploaded to the Ursgal GitHub repository or not. This should be True for lightweight Python UNodes and False for binary executables. If you wish to include a UNode with binary executables, contact the Ursgal team so we can host it on our download server, or enter your own download URL (see MS-GF+ example below).
+
+**Example**: ursgal/kb/filter_csv_1_0_0.py ::
+
+   META_INFO = {
+       'engine_type' : {
+           'controller'        : False,
+           'converter'         : True,
+           'validation_engine' : False,
+           'search_engine'     : False,
+           'meta_engine'       : False,
+       },
+       'output_extension' : '.csv',
+       'output_suffix'    : 'accepted',
+       'input_types'      : ['.csv'],
+   
+       'rejected_output_suffix': 'rejected',  # this entry is specific to filter_csv
+       'include_in_git'        : True,
+       
+       'engine': {
+           'platform_independent' : {
+               'arc_independent'  : {
+                   'exe'     : 'filter_csv_1_0_0.py',
+               },
+           },
+       }, 
+   }
+   
+   DEFAULT_PARAMS = {
+       'write_unfiltered_results' : False,
+       'csv_filter_rules'         : None,
+   }
+   
+   USEARCH_PARAM_VALUE_TRANSLATIONS = {}
+   
+   USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {}
+   
+   USED_USEARCH_PARAMS = set([
+       'write_unfiltered_results',
+       'csv_filter_rules'
+   ])
+
+
+Furthermore, the following dictionaries can be defined:
+
+    #. **DEFAULT_PARAMS**:
+       These default parameters are used by the search engine,
+       if not changed before execution
+    #. **USEARCH_PARAM_VALUE_TRANSLATIONS**:
+       Parameters can be used by several engines (e.g. 'enzyme'),
+       but their values might be engine specific and need o be translated.
+       E.g. the enzyme 'trypsin' is '0' in OMSSA but '1' in MS-GF+
+    #. **USEARCH_PARAM_KEY_VALUE_TRANSLATOR**:
+       Similar to the previous one, but values are only translated for specific
+       keys.
+    #. **USED_USEARCH_PARAMS**:
+       Set of parameters that this engine shares with other engines.
+
+A table with all parameters of the different engines (including shared parameters)
+can be found in the documentation (:ref:`Parameters<parameters>`) and in the Ursgal directory
+(<ursgal_path>/docs/source/ursgal_params.xls).
+Please enter variable and shared parameters for your engine here as well.
+We adopted a convention that parameters that are not shared should contain the
+engine as prefix, e.g. http_url and ftp_url.
+
+**Example**: ursgal/kb/msgfplus_v9979.py ::
+
+   META_INFO = {
+       'engine_type' : {
+           'search_engine' : True,
+       },
+       'engine': {
+           'platform_independent' : {
+               'arc_independent' : {
+                   'exe'            : 'MSGFPlus.jar',
+                   'url'            : 'http://proteomics.ucsd.edu/Software/MSGFPlus/MSGFPlus.zip',
+                   'zip_md5'        : '82a3e2204ff698e260ac9f89d3880b59',
+                   'additional_exe' : [],
+               },
+           },
+       },
+       'output_extension'          : '.mzid',
+       'input_types'               : ['.mgf', '.mzML'],
+       'create_own_folder'         : True,
+       'citation'                  : 'Kim S, Mischerikow N, Bandeira N, '\
+           'Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) '\
+           'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
+           'Tandem Mass Spectra: Applications to Database Search.',
+   
+       'include_in_git'            : False,
+   }
+   
+   DEFAULT_PARAMS = {
+       'validation_score_field'    : 'MS-GF:SpecEValue',
+       'evalue_field'              : 'MS-GF:SpecEValue',
+       'validation_minimum_score'  : 1e-100,
+       'bigger_scores_better'      : False,
+       'max_num_mods'              : 2,
+   }
+   
+   USEARCH_PARAM_VALUE_TRANSLATIONS = {
+       'nonspecific'            : 0,
+       'trypsin'                : 1,
+       'chymotrypsin'           : 2,
+       'lys_c'                  : 3,
+       'lys_n'                  : 4,
+       'glutamyl_endopeptidase' : 5,
+       'arg_c'                  : 6,
+       'asp_n'                  : 7,
+       'alpha_lp'               : 8,
+       'no_cleavage'            : 9,
+       'cid'                    : 1,
+       'etd'                    : 2,
+       'hcd'                    : 3,
+       'da'                     : 'Da',
+       'low_res_LTQ'            : 0,
+       'high_res_LTQ'           : 1,
+       'tof'                    : 2,
+       'q_exactive'             : 3,
+   }
+   
+   USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
+       'semi_enzyme' : {
+           True : 1,
+           False : 2
+       }
+   }
+   
+   USED_USEARCH_PARAMS = set( [
+       'modifications',
+       'semi_enzyme',
+       'enzyme',
+       'precursor_mass_tolerance_unit',
+       'precursor_mass_tolerance_minus',
+       'precursor_mass_tolerance_plus',
+       'precursor_isotope_range',
+       'instrument',
+       'cpus',
+       'database',
+       'max_pep_length',
+       'min_pep_length',
+       'num_match_spec',
+       'frag_method',
+       'precursor_min_charge',
+       'precursor_max_charge',
+   ] )
+
+
+
+3. Implementation into Engines
+------------------------------
+
+The engine has to inherit from the UNode class, which during initialization injects
+the knowledge base data into the class. Thus those dictionaries (e.g. self.META_INFO)
+are available as attribute of each engine.
+
+The default structure of the engine has to be::
+
+    class filter_csv_1_0_0( ursgal.UNode ):
+        def __init__(self, *args, **kwargs):
+                super(filter_csv_1_0_0, self).__init__(*args, **kwargs)
+
+
+One can define `preflight` and `postflight` functions that will be executed by the uNode
+during preflight and postflight (= before execution and after execution).
+For binary executable UNodes, one has to create a command line list (see `subprocess`_) during preflight.
+It should include the executable path of the engine (accessible via self.exe) and all relevant
+parameters, available via self.params.
+
+.. _subprocess:
+    https://docs.python.org/3/library/subprocess.html
+
+3.1 Implementaion of an engine from a command line tool
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Command line tools have to have their pythonian subprocess
+command line list defined, which is normally done during the preflight.
+The command list is expected under self.params['command_list']. For example::
+
+        self.params['command_list'] = [
+            self.exe,
+            '{input}'.format(**self.params),
+        ]
+
+After preflight, Ursgal automatically passes the command_list to subprocess: ::
+
+        proc = subprocess.Popen(
+            self.params['command_list'],
+            stdout = subprocess.PIPE,
+        )
+
+After the execution procedure, the postflight sequence is executed, if
+a postflight function was defined as part of the class e.g.::
+
+        def postflight( self ):
+            convert_xtandemXML_to_identcsv( self.params )
+
+
+**Example**: ursgal/engines/msgfplus_v9979.py ::
+
+    #!/usr/bin/env python3.4
+    import ursgal
+    import os
+
+    class msgfplus_v9979( ursgal.UNode ):
+        """
+        MSGF+ UNode
+        Parameter options at https://bix-lab.ucsd.edu/pages/viewpage.action?pageId=13533355
+        """
+        def __init__(self, *args, **kwargs):
+            super(msgfplus_v9979, self).__init__(*args, **kwargs)
+            pass
+
+        def preflight( self ):
+            '''
+            Formatting the command line via self.params
+
+            Modifications file will be created in the output folder
+
+            Returns:
+                    dict: self.params
+            '''
+
+            self.params['mgf_input_file'] = os.path.join(
+                self.params['input_dir_path'],
+                self.params['file_root'] + '.mgf'
+            )
+
+            self.params['output_file_incl_path'] = os.path.join(
+                self.params['output_dir_path'],
+                self.params['output_file']
+            )
+
+            self.params['modification_file'] = os.path.join(
+                self.params['output_dir_path'],
+                self.params['output_file'] + '_Mods.txt'
+            )
+            self.created_tmp_files.append( self.params['modification_file'] )
+
+            mods_file = open( self.params['modification_file'], 'w', encoding = 'UTF-8' )
+            modifications = []
+            cam = False
+            for t in [ 'fix', 'opt' ]:
+                for mod in self.params[ 'mods' ][ t ]:
+                    if self.params['label'] == '15N' and mod[ 'aa' ] == 'C' and mod[ 'name' ] == 'Carbamidomethyl':
+                        cam = True
+                        continue
+                    modifications.append( '{0},{1},{2},{3},{4}'.format(mod[ 'mass' ], mod[ 'aa' ], t, mod[ 'pos' ], mod[ 'name' ] ) )
+
+            if self.params['label'] == '15N':
+                DICT_15N_DIFF = ursgal.kb.ursgal.DICT_15N_DIFF
+                for aa, mass in DICT_15N_DIFF.items():
+                    if cam:
+                        if aa == 'C':
+                            modifications.append( '{0},{1},fix,any,15N {2}'.format( float(mass) + 57.021464, aa, aa + 'Carbamidomethyl') )
+                        else:
+                            modifications.append( '{0},{1},fix,any,15N {1}'.format( mass, aa ) )
+                    else:
+                        modifications.append( '{0},{1},fix,any,15N {1}'.format( mass, aa ) )
+
+            for mod in modifications:
+                print( mod, file = mods_file )
+            mods_file.close()
+
+            self.params[ 'command_list' ] = [
+                'java', '-Xmx{java_-Xmx}'.format( **self.params), '-jar', self.exe,
+                '-s', '{mgf_input_file}'.format( **self.params),
+                '-d', '{database}'.format(**self.params),
+                '-o', '{output_file_incl_path}'.format(**self.params),
+                '-t', '{precursor_mass_tolerance_minus}{precursor_mass_tolerance_unit}, {precursor_mass_tolerance_plus}{precursor_mass_tolerance_unit}'.format(**self.params),
+                '-ti', '{precursor_isotope_range}'.format(**self.params),
+                '-thread', '{cpus}'.format(**self.params),
+                '-tda', '0',
+                '-m', '{frag_method}'.format(**self.params),
+                '-inst', '{instrument}'.format(**self.params),
+                '-e', '{enzyme}'.format(**self.params),
+                '-ntt', '{semi_enzyme}'.format(**self.params),
+                '-mod', '{modification_file}'.format(**self.params),
+                '-minLength', '{min_pep_length}'.format(**self.params),
+                '-maxLength', '{max_pep_length}'.format(**self.params),
+                '-minCharge', '{precursor_min_charge}'.format(**self.params),
+                '-maxCharge', '{precursor_max_charge}'.format(**self.params),
+                '-n', '{num_match_spec}'.format(**self.params),
+                '-addFeatures', '1',
+            ]
+
+            return self.params
+
+
+3.2 Implementation of an engine from Python code
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Python code can be executed as command line tool. It is also possible to import
+the main function of a script using self.import_engine_as_python_function()
+and to directly pass arguments to the function. The `preflight` function can then
+be replaced by an '_execute' function. As we only return the output_file,
+one has the opportunity to set, e.g. self.execute_answer and handle the data in
+the script or controller. There are several unode examples, e.g.
+filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
+
+**Example**: ursgal/engines/filter_csv_1_0_0.py ::
+
+   #!/usr/bin/env python3.4
+   import ursgal
+   import importlib
+   import os
+   import sys
+   import pickle
+   import shutil
+   
+   class filter_csv_1_0_0( ursgal.UNode ):
+       """filter_csv_1_0_0 UNode"""
+       def __init__(self, *args, **kwargs):
+           super(filter_csv_1_0_0, self).__init__(*args, **kwargs)
+   
+       def _execute( self ):
+           '''
+           Enter docstring here!
+           '''
+           print('[ -ENGINE- ] Executing conversion ..')
+           self.time_point(tag = 'execution')
+           
+           # import the main function from the UNode's python script
+           filter_csv_main = self.import_engine_as_python_function()
+   
+           if self.params['output_file'].lower().endswith('.csv') is False:
+               raise ValueError('Trying to filter a non-csv file')
+   
+           # receive auto-generated filename from UController
+           output_file = os.path.join(
+               self.params['output_dir_path'],
+               self.params['output_file']
+           )
+           # receive name of the input file so it can be passed to main function
+           input_file  = os.path.join(
+               self.params['input_dir_path'],
+               self.params['input_file']
+           )
+   
+           # Sometimes, engine-specific code is required! For instance,
+           # filter_csv() can produce a second output file with the columns
+           # that were removed:
+           if self.params['write_unfiltered_results'] is False:
+               output_file_unfiltered = None
+           else:
+               file_extension = self.meta_unodes[ self.engine ].META_INFO.get(
+                   'output_suffix',
+                   None
+               )
+               new_file_extension = self.meta_unodes[ self.engine ].META_INFO.get(
+                   'rejected_output_suffix',
+                   None
+               )
+               output_file_unfiltered = output_file.replace(
+                   file_extension,
+                   new_file_extension
+               )
+               shutil.copyfile(
+                   '{0}.u.json'.format(output_file),
+                   '{0}.u.json'.format(output_file_unfiltered)
+               )
+           # Engine-specific code ends here
+           
+           # Call the Python script's main() function using the information
+           # we collected above:
+           filter_csv_main(
+               input_file     = input_file,
+               output_file    = output_file,
+               filter_rules   = self.params['csv_filter_rules'],
+               output_file_unfiltered = output_file_unfiltered,
+           )
+   
+           self.print_execution_time(tag='execution')
+           return output_file

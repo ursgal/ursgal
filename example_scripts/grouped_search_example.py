@@ -1,0 +1,292 @@
+#!/usr/bin/env python3.4
+# encoding: utf-8
+import ursgal
+import csv
+from collections import defaultdict as ddict
+import os
+import glob
+import math
+
+params = {
+    'database' : os.path.join(
+        os.pardir,
+        'example_data',
+        'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
+    ),
+    'csv_filter_rules' : [
+        ('Is decoy','equals','false'),
+        ('PEP','lte',0.01),
+    ],
+    # Modifications that should be included in the search
+    'modifications' : [
+        'C,fix,any,Carbamidomethyl',
+        'M,opt,any,Oxidation',
+        'N,opt,any,Deamidated',
+        'Q,opt,any,Deamidated',
+        'E,opt,any,Methyl',
+        'K,opt,any,Methyl',
+        'R,opt,any,Methyl',
+        '*,opt,Prot-N-term,Acetyl',
+        'S,opt,any,Phospho',
+        'T,opt,any,Phospho',
+    ],
+}
+# We specify all search engines and validation engines that we want
+# to use in a list (version numbers might differ on windows or mac):
+search_engines  = [
+    'omssa',
+    'xtandem_piledriver',
+    'msgf',
+    # 'myrimatch_2_1_138',
+    'msamanda_1_0_0_5243',
+]
+validation_engines = [
+    'percolator_2_08',
+    'qvality',
+]
+
+# Groups that are evaluated seperately
+groups = {
+    '0' : '',
+    '1' : 'Oxidation',
+    '2' : 'Deamidated',
+    '3' : 'Methyl',
+    '4' : 'Acetyl',
+    '5' : 'Phospho',
+}
+
+mass_spectrometer = 'LTQ XL low res'
+
+get_params = {
+    'ftp_url'           : 'ftp.peptideatlas.org',
+    'ftp_login'         : 'PASS00269',
+    'ftp_password'      : 'FI4645a',
+    'ftp_include_ext'   : [
+        'JB_FASP_pH8_2-3_28122012.mzML',
+        'JB_FASP_pH8_2-4_28122012.mzML',
+        'JB_FASP_pH8_3-1_28122012.mzML',
+        'JB_FASP_pH8_4-1_28122012.mzML',
+
+    ],
+    'ftp_output_folder' : os.path.join(os.pardir, 'example_data','grouped_search'),
+    'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta' ,
+    'http_output_folder' : os.path.join(
+        os.pardir,
+        'example_data'
+    )
+}
+
+def get_files():
+    uc = ursgal.UController(
+        params=get_params
+        )
+
+    if os.path.exists(params['database']) is False:
+        uc.fetch_file(
+            engine     = 'get_http_files_1_0_0'
+            )
+    if os.path.exists(get_params['ftp_output_folder']) is False:
+        os.makedirs(get_params['ftp_output_folder'])
+    uc.fetch_file(
+        engine = 'get_ftp_files_1_0_0'
+    )
+
+    spec_files = []
+    for mzML_file in glob.glob(os.path.join(get_params['ftp_output_folder'],'*.mzML')):
+        spec_files.append(mzML_file)
+
+    return spec_files
+
+collector = {}
+def search(validation_engine):
+    '''
+    Executes a grouped search on four example files from the 
+    data from Barth et al.
+
+    usage:
+        ./grouped_search_example.py
+
+    Searches for peptides including the following potential modifications: 
+    oxidation of M,
+    deamidation of N/Q,
+    methylation of E/K/R,
+    N-terminal acetylation,
+    phosphorylation of S/T.
+
+    After the search, each type of modification is validated seperately. 
+    '''
+    # Initializing the ursgal UController class with
+    # our specified modifications and mass spectrometer
+    uc = ursgal.UController(
+        profile = mass_spectrometer,  # 'LTQ XL low res' profile!
+        params = params
+    )
+
+    # complete workflow:
+    # every spectrum file is searched with every search engine,
+    # results are seperated into groups and validated seperately,
+    # validated results are merged and filtered for targets and PEP <= 0.01.
+    # In the end, all filtered results from all spectrum files are merged
+    # for validation_engine in validation_engines:
+    result_files = []
+    for n, spec_file in enumerate(spec_files):
+        validated_results = []
+        for search_engine in search_engines:
+            unified_search_results = uc.search(
+                input_file = mgf_spec_file,
+                engine     = search_engine,
+            )
+
+            # Calculate PEP for every group seperately, therefore need to split the csv first
+            group_list = sorted(groups.keys())
+            for p, group in  enumerate(group_list):
+                if group == '0':
+                    uc.params['csv_filter_rules'] = [
+                        ('Modifications','contains_not','{0}'.format(groups['1'])),
+                        ('Modifications','contains_not','{0}'.format(groups['2'])),
+                        ('Modifications','contains_not','{0}'.format(groups['3'])),
+                        ('Modifications','contains_not','{0}'.format(groups['4'])),
+                        ('Modifications','contains_not','{0}'.format(groups['5'])),
+                        ]
+                else:
+                    uc.params['csv_filter_rules'] = [
+                        ('Modifications','contains','{0}'.format(groups[group]))
+                        ]
+                    for other_group in group_list:
+                        if other_group == '0' or other_group == group:
+                            continue
+                        uc.params['csv_filter_rules'].append(
+                            ('Modifications','contains_not','{0}'.format(groups[other_group])),
+                        )
+                uc.params['prefix'] = 'grouped-{0}'.format(group)
+                filtered_results = uc.filter_csv(
+                    input_file = unified_search_results,
+                    )
+                uc.params['prefix'] = ''
+                validated_search_results = uc.validate(
+                    input_file  = filtered_results,
+                    engine      = validation_engine,
+                )
+                validated_results.append(validated_search_results)
+
+        if len(validated_results) == 1:
+            validated_results_from_all_engines = validated_results[0]
+        else:
+            uc.params['prefix'] = 'file{0}'.format(n)
+            validated_results_from_all_engines = uc.merge_csvs(
+                    input_files = sorted(validated_results),
+                )
+        uc.params['prefix'] = ''
+        uc.params['csv_filter_rules'] = [
+                ('Is decoy','equals','false'),
+                ('PEP','lte',0.01),
+                ]
+        filtered_validated_results = uc.filter_csv(
+            input_file = validated_results_from_all_engines
+            )
+        result_files.append(filtered_validated_results)
+
+    if len(result_files) == 1:
+        results_all_files = result_files[0]
+    else:
+        results_all_files = uc.merge_csvs(
+                input_files = sorted(result_files),
+            )
+    return results_all_files
+
+def analyze(results_all_files, validation_engine):
+    '''
+    Simle analysis script for the grouped search,
+    counting the number of identified peptides (combination of peptide sequence and modifications)
+    and PSMs (additionally include the spectrum ID)
+    '''
+    mod_list = ['Oxidation', 'Deamidated', 'Methyl', 'Acetyl', 'Phospho']
+    fieldnames = ['approach','count_type','validation_engine','unmodified','multimodified'] + mod_list +['total']
+
+    csv_writer = csv.DictWriter(open('grouped_results.csv','w'),fieldnames)
+    csv_writer.writeheader()
+    uc = ursgal.UController()
+    uc.params['validation_score_field'] = 'PEP'
+    uc.params['bigger_scores_better'] = False
+
+    # Count the number of identified peptides and PSMs for the different modifications
+    # Spectra with multiple PSMs are sanitized, i.e. only the PSM with best PEP score is counted
+    # and only if the best hit has a PEP that is at least two orders of magnitude smaller than the others
+    for validation_engine, result_file in collector.items():
+        counter_dict = {
+            'psm'  : ddict(set),
+            'pep'  : ddict(set)
+        }
+        grouped_psms = uc._group_psms( result_file, dev_mode = True )
+        for spec_title, grouped_psm_list in grouped_psms.items():
+            best_score, best_line_dict = grouped_psm_list[0]
+            if len(grouped_psm_list) > 1:
+                second_best_score, second_best_line_dict = grouped_psm_list[1]
+                best_peptide_and_mod = best_line_dict['Sequence']+best_line_dict['Modifications']
+                second_best_peptide_and_mod = second_best_line_dict['Sequence']+second_best_line_dict['Modifications']
+                
+                if best_peptide_and_mod == second_best_peptide_and_mod:
+                    line_dict = best_line_dict
+                elif best_line_dict['Sequence'] == second_best_line_dict['Sequence']:
+                    if best_score == second_best_score:
+                        line_dict = best_line_dict
+                    else:
+                        if (-1*math.log10(best_score)) - (-1*math.log10(second_best_score)) >= 2:
+                            line_dict = best_line_dict
+                        else:
+                            continue
+                else:   
+                    if (-1*math.log10(best_score)) - (-1*math.log10(second_best_score)) >= 2:
+                        line_dict = best_line_dict
+                    else:
+                        continue
+            else:
+                line_dict = best_line_dict
+
+            count = 0
+            for mod in mod_list:
+                if mod in line_dict['Modifications']:
+                    count += 1
+            key_2_add = ''
+            if count == 0:
+                key_2_add = 'unmodified'
+            elif count >= 2:
+                key_2_add = 'multimodified'
+            elif count == 1:
+                for mod in mod_list:
+                    if mod in line_dict['Modifications']:
+                        key_2_add = mod
+                        break
+            # for peptide identification comparison
+            counter_dict['pep'][ key_2_add ].add( 
+                line_dict['Sequence'] + line_dict['Modifications']
+            )
+            # for PSM comparison
+            counter_dict['psm'][ key_2_add ].add( 
+                line_dict['Spectrum Title'] + line_dict['Sequence'] + line_dict['Modifications']
+            )
+        for counter_key, count_dict in counter_dict.items():
+            dict_2_write = {
+                'approach'          : 'grouped',
+                'count_type'        : counter_key,
+                'validation_engine' : validation_engine
+            }
+            total_number = 0
+            for key, obj_set in count_dict.items():
+                dict_2_write[key] = len(obj_set)
+                total_number += len(obj_set)
+            dict_2_write['total'] = total_number
+            csv_writer.writerow( dict_2_write )
+    return
+
+if __name__ == '__main__':
+    spec_files = get_files()
+    collector = {}
+    for validation_engine in validation_engines:
+        results_all_files = search(validation_engine)
+        print( '>>> ', 'final results for {0}'.format(validation_engine), ' were written into:')
+        print( '>>> ', results_all_files )
+        collector[validation_engine] = results_all_files
+    analyze(collector)
+    print( '>>> ', 'number of identified peptides and PSMs were written into:')
+    print( '>>> ', 'grouped_results.csv' )

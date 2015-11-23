@@ -1,0 +1,38 @@
+Frequently Asked Questions
+==========================
+
+
+Installation
+------------
+
+Q: MS Amanda does not work on Unix. What could be the problem?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A: To run MSAmanda one needs to install the Mono frameweork.
+Visit http://www.mono-project.com/ for proper installation instructions.
+
+
+Usage
+-----
+
+Q: Found mismatch between json parameter ....
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    Found mismatch between json parameter csv_filter_rules:
+    [['PEP', 'lte', 0.01], ['Is decoy', 'equals', 'false']] and
+    controller params csv_filter_rules:
+    [('PEP', 'lte', 0.01), ('Is decoy', 'equals', 'false')].
+    Consider re-run with force=True or delete old u.jsons.
+
+During JSON dump Python tuples are converted into list like objects, thus this might be a reason. Just change your parameter to lists instead of tuples :)
+
+
+Development
+-----------
+
+Q: How do I create/add a new engine ?
+
+See :ref:`generate-your-engines`.
+
