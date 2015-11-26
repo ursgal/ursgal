@@ -214,7 +214,8 @@ class UController(ursgal.UNode):
                             'cannot_distribute': kb_module.META_INFO.get(
                                 'cannot_distribute',
                                 None
-                            )
+                            ),
+                            'META_INFO': kb_module.META_INFO
                         }
 
                         if meta_type not in unodes['_by_meta_type'].keys():
@@ -491,13 +492,13 @@ class UController(ursgal.UNode):
     def fetch_file( self, engine=None ):
         '''
         The UController fetch_file function
-        
+
         Downloads files (FTP or HTTP).
-        
+
         Keyword Arguments:
             engine (str): Available options are 'get_http_files_1_0_0' and
                 'get_ftp_files_1_0_0'
-        
+
         Example::
 
             >>> params = {
@@ -532,7 +533,7 @@ class UController(ursgal.UNode):
         '''
         The UController add_estimated_fdr function
 
-        Parses a target/decoy search result file and adds a column called 
+        Parses a target/decoy search result file and adds a column called
         "estimated_FDR".
         The CSV must contain:
             * a column with a quality score for each PSM (e-value, error probability etc.)
@@ -1120,7 +1121,7 @@ class UController(ursgal.UNode):
                 self.io['input']['finfo']['dir'],
                 sanitized_fname
             )
-            
+
         self.io['output']['finfo'] = self.set_file_info_dict( output_file )
 
         self.take_care_of_params_and_stats( io_mode = 'output')
@@ -1304,7 +1305,7 @@ class UController(ursgal.UNode):
                 #if os.path.exists( engine_folder ) is False:
                     #os.mkdir(engine_folder, mode=0o777)
                 #path_building_blocks.append( engine_folder )
-        
+
         engine_creates_folder = self.meta_unodes[ engine ].META_INFO.get(
             'create_own_folder', False
         )
@@ -1315,8 +1316,8 @@ class UController(ursgal.UNode):
             )
             if os.path.exists( engine_folder ) is False:
                 os.mkdir(engine_folder, mode=0o777)
-            path_building_blocks.append( engine_folder )            
-        
+            path_building_blocks.append( engine_folder )
+
         path_building_blocks.append( output_file )
         full_output = os.path.join(
             *path_building_blocks
@@ -1352,7 +1353,7 @@ class UController(ursgal.UNode):
                 # changing the amount of CPUs should not trigger re-run:
                 if used_param == 'cpus':
                     continue
-                
+
                 if used_param in o_params.keys() and used_param in i_params.keys():
                     if o_params[ used_param ] != i_params[ used_param ]:
                         reasons.append(
@@ -1831,7 +1832,7 @@ class UController(ursgal.UNode):
             ... )
             >>> xtandem_result_csv = uc.convert_results_to_csv(
             ...     input_file = xtandem_result_xml
-            ... )            
+            ... )
             >>> unified_csv = uc.unify_csv(
             ...     input_file = xtandem_result_csv
             ... )
@@ -1935,7 +1936,7 @@ Please include the following in the knowledge base in META_INFO of {0}:
                 )
 
                 splitted_root_dir = resource_source_folder.split( os.sep )
-                
+
                 current_platform     = splitted_root_dir[ -3 ]
                 current_architecture = splitted_root_dir[ -2 ]
 
@@ -2148,7 +2149,7 @@ Nothing to do here...
                         print(
                             'Engine {0} cannot be downloaded automatically, please download the engine manually and move it to the appropriate folder'.format(
                                 engine,
-                            ) 
+                            )
                         )
                         continue
                     # check for md5 in kb:

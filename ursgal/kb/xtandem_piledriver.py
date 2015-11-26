@@ -1,4 +1,6 @@
 META_INFO = {
+    'name': 'X!Tandem',
+    'version' : 'Piledriver',
     'engine_type' : {
         'search_engine' : True,
     },
@@ -8,7 +10,7 @@ META_INFO = {
     'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
         'matching proteins with tandem mass spectra.',
     'include_in_git'            : False,
-    
+
     'engine': {
         'darwin' : {
             '64bit' : {
