@@ -15,59 +15,59 @@ R = ursgal.UController()
 
 TESTS = [
     {
-        'csv_filter_rules' : [ ('Calc m/z','gte',1100),('Calc m/z','lte',1400)  ],
+        'csv_filter_rules' : [ ['Calc m/z','gte',1100],['Calc m/z','lte',1400]  ],
         'number_of_expected_lines': 4,
     },
     {
-        'csv_filter_rules' : [ ('Modifications','contains','Carbamidomethyl') ],
+        'csv_filter_rules' : [ ['Modifications','contains','Carbamidomethyl'] ],
         'number_of_expected_lines': 9,
     },
     {
-        'csv_filter_rules' : [ ('Modifications','contains_not','Carbamidomethyl') ],
+        'csv_filter_rules' : [ ['Modifications','contains_not','Carbamidomethyl'] ],
         'number_of_expected_lines': 1,
     },
     {
-        'csv_filter_rules' : [ ('Retention Time (s)','gt',1793.82605) ], #last RT
+        'csv_filter_rules' : [ ['Retention Time (s)','gt',1793.82605] ], #last RT
         'number_of_expected_lines': 0,
     },
     {
-        'csv_filter_rules' : [ ('Retention Time (s)','lt',1793.82605) ], #last RT
+        'csv_filter_rules' : [ ['Retention Time (s)','lt',1793.82605] ], #last RT
         'number_of_expected_lines': 9,
     },
     {
-        'csv_filter_rules' : [ ('Sequence','contains','T') ],
+        'csv_filter_rules' : [ ['Sequence','contains','T'] ],
         'number_of_expected_lines': 4,
     },
     {
-        'csv_filter_rules' : [ ('Is decoy','equals','FALSE') ], # Excel style
+        'csv_filter_rules' : [ ['Is decoy','equals','FALSE'] ], # Excel style
         'number_of_expected_lines': 10,
     },
     {
-        'csv_filter_rules' : [ ('Is decoy','equals','TRUE') ], # Excel style
+        'csv_filter_rules' : [ ['Is decoy','equals','TRUE'] ], # Excel style
         'number_of_expected_lines': 0,
     },
     {
         'csv_filter_rules' : [
-            ('Modifications','contains','Carbamidomethyl'),
-            ('PEP','lte',7.121E-05)
+            ['Modifications','contains','Carbamidomethyl'],
+            ['PEP','lte',7.121E-05]
         ],
         'number_of_expected_lines': 1,
     },
     {
         'csv_filter_rules' : [
-            ('Modifications','regex','Carbamidomethyl\:2')
+            ['Modifications','regex','Carbamidomethyl\:2']
         ],
         'number_of_expected_lines': 6,
     },
     {
         'csv_filter_rules' : [
-            ('Spectrum Title','regex','.25\d*.')
+            ['Spectrum Title','regex','.25\d*.']
         ],
         'number_of_expected_lines': 8,
     },
     {
         'csv_filter_rules' : [
-            ('Sequence','regex','C[T|D]')
+            ['Sequence','regex','C[T|D]']
         ],
         'number_of_expected_lines': 6,
     },

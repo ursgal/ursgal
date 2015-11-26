@@ -33,7 +33,7 @@ META_INFO = {
 
 DEFAULT_PARAMS = {
     'validation_score_field'    : 'MyriMatch:MVH',
-    'evalue_field'        : 'MyriMatch:MVH',
+    'evalue_field'              : 'MyriMatch:MVH',
     'validation_minimum_score'  : 0,
     'bigger_scores_better'      : True
 }

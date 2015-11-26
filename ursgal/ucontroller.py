@@ -1871,8 +1871,8 @@ class UController(ursgal.UNode):
             >>> # a) 'PEP' column value must be lower than or equal to 0.01
             >>> # b) 'Is decoy' column value must equal 'false'
             >>> uc.params['csv_filter_rules'] = [
-            ...     ('PEP',      'lte',    0.01   ),
-            ...     ('Is decoy', 'equals', 'false')
+            ...     ['PEP',      'lte',    0.01   ],
+            ...     ['Is decoy', 'equals', 'false']
             ... ]
             >>> uc.filter_csv( 'my_results.csv' )
         '''

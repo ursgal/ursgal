@@ -41,17 +41,17 @@ class filter_csv_1_0_0( ursgal.UNode ):
 
             >>> params = {
             >>>     'csv_filter_rules':[
-            >>>         ('PEP','lte',0.01),
-            >>>         ('Is decoy','equals','false')
+            >>>         ['PEP', 'lte', 0.01],
+            >>>         ['Is decoy', 'equals', 'false']
             >>>     ]
             >>>}
 
         The example above would filter for posterior error probabilities lower
         than or equal to 0.01 and filter out all decoy proteins.
 
-        Rules are defined as list of tuples with the first tuple element as the
-        column name/csv fieldname, the second tuple element the rule and the
-        third tuple element the value which should be compared. Multiple rules
+        Rules are defined as list of lists with the first list element as the
+        column name/csv fieldname, the second list element the rule and the
+        third list element the value which should be compared. Multiple rules
         can be applied, see example above. If the same fieldname should be
         filtered multiply (E.g. Sequence should not contain 'T' and 'Y'), the
         rules have to be defined separately.
@@ -60,8 +60,8 @@ class filter_csv_1_0_0( ursgal.UNode ):
 
             >>> params = {
             >>>     'csv_filter_rules':[
-            >>>         ('Sequence','contains_not','T'),
-            >>>         ('Sequence','contains_not','Y')
+            >>>         ['Sequence','contains_not','T'],
+            >>>         ['Sequence','contains_not','Y']
             >>>     ]
             >>>}
 
@@ -71,52 +71,52 @@ class filter_csv_1_0_0( ursgal.UNode ):
 
             'lower than or equal' (<=) value has to comparable i.e. float or
             int. Values are accepted if they are lower than or equal to the
-            defined value. E.g. ('PEP','lte',0.01)
+            defined value. E.g. ['PEP','lte',0.01]
 
         gte:
 
             'greater than or equal' (>=) value has to comparable
             i.e. float or int. Values are accepted if they are greater than or
-            equal to the defined value. E.g. ('Exp m/z','gte',180)
+            equal to the defined value. E.g. ['Exp m/z','gte',180]
 
         lt:
 
             'lower than' (<=) value has to comparable
             i.e. float or int. Values are accepted if they are lower than
-            the defined value. E.g. ('PEP','lt',0.01)
+            the defined value. E.g. ['PEP','lt',0.01]
 
         gt:
 
             'greater than' (>=) value has to comparable
             i.e. float or int. Values are accepted if they are greater than
-            the defined value. E.g. ('PEP','gt',0.01)
+            the defined value. E.g. ['PEP','gt',0.01]
 
         contains:
 
             Substrings are checked if they are present in the the full string.
-            E.g. ('Modifications','contains','Oxidation')
+            E.g. ['Modifications','contains','Oxidation']
 
         contains_not:
 
             Substrings are checked if they are present in the the full string.
-            E.g. ('Sequence','contains_not','M')
+            E.g. ['Sequence','contains_not','M']
 
         equals:
 
             String comparison (==). Comparison has to be an exact match to pass.
-            E.g. ('Is decoy','equals','false'). Floats and ints are not compared
+            E.g. ['Is decoy','equals','false']. Floats and ints are not compared
             at the moment!
 
         equals_not:
 
             String comparison (!=). Comparisons differing will be rejected.
-            E.g. ('Is decoy','equals_not','true'). Floats and ints are not
+            E.g. ['Is decoy','equals_not','true']. Floats and ints are not
             compared at the moment!
 
         regex:
 
             Any regular expression matching is possible E.g. CT and CD motif
-            search ('Sequence','regex','C[T|D]')
+            search ['Sequence','regex','C[T|D]']
 
 
         Note:
@@ -124,7 +124,7 @@ class filter_csv_1_0_0( ursgal.UNode ):
             Some spreadsheet tools interpret False and True and show them as
             upper case when opening the files, even if they are actually 
             written in lower case. This is especially important for target and
-            decoy filtering, i.e. ('Is decoy','equals','false').
+            decoy filtering, i.e. ['Is decoy','equals','false'].
             'false' has to be lower case, even if the spreadsheet tool displays
             it as 'FALSE'.
 

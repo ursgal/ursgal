@@ -14,8 +14,8 @@ params = {
         'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
     ),
     'csv_filter_rules' : [
-        ('Is decoy','equals','false'),
-        ('PEP','lte',0.01),
+        ['Is decoy','equals','false'],
+        ['PEP','lte',0.01],
     ],
 }
 # We specify all search engines and validation engines that we want
@@ -162,7 +162,7 @@ def search(validation_engine):
 
             if filter_before_validation == True:
                 uc.params['csv_filter_rules'] = [
-                    ('Modifications','contains','{0}'.format(cascade[level][1].split(',')[3]))
+                    ['Modifications','contains','{0}'.format(cascade[level][1].split(',')[3])]
                 ]
                 filtered_search_results = uc.filter_csv(
                     input_file = unified_search_results,
@@ -184,9 +184,9 @@ def search(validation_engine):
                 force      = force,
             )
         uc.params['csv_filter_rules'] = [
-            ('Is decoy','equals','false'),
-            ('PEP','lte',0.01),
-            ]
+            ['Is decoy','equals','false'],
+            ['PEP','lte',0.01],
+        ]
         filtered_validated_results = uc.filter_csv(
                 input_file = validated_results_from_all_engines,
                 )

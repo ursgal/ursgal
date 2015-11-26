@@ -6,7 +6,7 @@ import sys
 import pickle
 
 class add_estimated_fdr_1_0_0( ursgal.UNode ):
-    """filter_csv_1_0_0 UNode"""
+    """add_estimated_fdr_1_0_0 UNode"""
     def __init__(self, *args, **kwargs):
         super(add_estimated_fdr_1_0_0, self).__init__(*args, **kwargs)
 

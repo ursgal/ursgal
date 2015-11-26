@@ -15,8 +15,8 @@ params = {
         'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
     ),
     'csv_filter_rules' : [
-        ('Is decoy','equals','false'),
-        ('PEP','lte',0.01),
+        ['Is decoy','equals','false'],
+        ['PEP','lte',0.01],
     ],
     # Modifications that should be included in the search
     'modifications' : [
