@@ -407,8 +407,8 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                     ]
                 )
             upep = line_dict['Sequence'] + '#' + line_dict['Modifications']
-            if upep not in mz_buffer.keys():
-                # print(upep)
+            buffer_key = (upep, line_dict['Charge'])
+            if buffer_key not in mz_buffer.keys():
                 cc.use(upep)
                 mass = cc._mass()
                 if use15N:
@@ -420,9 +420,9 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                     mass,
                     line_dict['Charge']
                 )
-                mz_buffer[ upep ] = calc_mz
+                mz_buffer[ buffer_key ] = calc_mz
             else:
-                calc_mz = mz_buffer[ upep ]
+                calc_mz = mz_buffer[ buffer_key ]
 
             line_dict['uCalc m/z'] = calc_mz
             if 'msamanda' in search_engine.lower():
