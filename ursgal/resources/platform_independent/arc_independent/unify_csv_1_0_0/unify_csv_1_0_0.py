@@ -407,7 +407,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                     ]
                 )
             upep = line_dict['Sequence'] + '#' + line_dict['Modifications']
-            buffer_key = (upep, line_dict['Charge'])
+            buffer_key = (upep, line_dict['Charge'], params['label'])
             if buffer_key not in mz_buffer.keys():
                 cc.use(upep)
                 mass = cc._mass()
