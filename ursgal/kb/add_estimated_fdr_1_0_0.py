@@ -28,4 +28,7 @@ USEARCH_PARAM_VALUE_TRANSLATIONS = {}
 
 USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {}
 
-USED_USEARCH_PARAMS = set()
+USED_USEARCH_PARAMS = set([
+    'validation_score_field',
+    'bigger_scores_better',
+])
