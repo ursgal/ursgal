@@ -58,7 +58,7 @@ class UController(ursgal.UNode):
         self.unodes               = {}
         self.scan_rt_lookup       = {}  # will be set on self.set_target()
         self.scan_rt_lookup_path  = {}  # will be set on self.set_target()
-        self.force                = False
+        self.force                = kwargs.get('force', False)
         self.user_defined_params  = {}
         self.params               = {}
         self.init_kwargs          = {}
