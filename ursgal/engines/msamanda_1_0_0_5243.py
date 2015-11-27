@@ -165,139 +165,135 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         '''
 
         cached_msamanada_output = []
-        result_file = open(
-            self.params['output_file_incl_path'],
-            'r'
-        )
-        csv_dict_reader_object = csv.DictReader(
-            [row for row in result_file if not row.startswith('#')],
-            delimiter = '\t'
-        )
-        headers = csv_dict_reader_object.fieldnames
-        translated_headers = []
-        for header in headers:
-            translated_headers.append(
-                self.USEARCH_PARAM_VALUE_TRANSLATIONS.get(header, header)
+        with open(self.params['output_file_incl_path'], 'r') as result_file:
+            csv_dict_reader_object = csv.DictReader(
+                (row for row in result_file if not row.startswith('#')),
+                delimiter = '\t'
             )
-        translated_headers += [
-            'Is decoy',
-            'Start',
-            'Stop',
-            'Calc m/z'
-            # 'Retention Time (s)',
-            # 'Raw data location'
-        ]
-        print('[ PARSING  ] Loading unformatted MS Amanda results ...')
-        for line_dict in csv_dict_reader_object:
-            cached_msamanada_output.append( line_dict )
-        result_file.close()
+            headers = csv_dict_reader_object.fieldnames
+            translated_headers = []
+            for header in headers:
+                translated_headers.append(
+                    self.USEARCH_PARAM_VALUE_TRANSLATIONS.get(header, header)
+                )
+            translated_headers += [
+                'Is decoy',
+                'Start',
+                'Stop',
+                'Calc m/z'
+                # 'Retention Time (s)',
+                # 'Raw data location'
+            ]
+            print('[ PARSING  ] Loading unformatted MS Amanda results ...')
+            for line_dict in csv_dict_reader_object:
+                cached_msamanada_output.append( line_dict )
         print('[ PARSING  ] Done')
+
         self.params['output_file'] = self.params['output_file'].replace(
             'tsv',
             'csv'
         )
-        result_file = open(
+        with open(
             os.path.join(
                 self.params['output_dir_path'],
                 self.params['output_file'],
             ),
             'w'
-        )
-        csv_dict_writer_object = csv.DictWriter(
-            result_file,
-            fieldnames = translated_headers
-        )
-        csv_dict_writer_object.writeheader()
-        print('[ INFO  ] Writing MS Amanda results, this can take a while...')
-        database = self.params['database']
-        csv_write_list = []
+        ) as result_file:
+            csv_dict_writer_object = csv.DictWriter(
+                result_file,
+                fieldnames = translated_headers
+            )
+            csv_dict_writer_object.writeheader()
+            print('[ INFO  ] Writing MS Amanda results, this can take a while...')
+            database = self.params['database']
+            csv_write_list = []
 
-        total_docs =len(cached_msamanada_output)
+            total_docs =len(cached_msamanada_output)
 
-        for cache_pos, m in enumerate(cached_msamanada_output):
-            tmp = {}
-            for header in headers:
-                translated_header = self.USEARCH_PARAM_VALUE_TRANSLATIONS.get(header, header)
-                tmp[ translated_header ] = m[ header ]
-            tmp['Sequence'] = tmp['Sequence'].upper()
+            for cache_pos, m in enumerate(cached_msamanada_output):
+                tmp = {}
+                for header in headers:
+                    translated_header = self.USEARCH_PARAM_VALUE_TRANSLATIONS.get(header, header)
+                    tmp[ translated_header ] = m[ header ]
+                tmp['Sequence'] = tmp['Sequence'].upper()
 
-            if cache_pos % 500 == 0:
-                print(
-                    '[ INFO ] Processing line number:    {0}/{1}'.format(
-                        cache_pos,
-                        total_docs
-                    ),
-                    end='\r'
-                )
-
-            protein_id = tmp['proteinacc_start_stop_pre_post_;']
-
-            if ';' in protein_id:
-                protein_id_list = protein_id.split(';')
-            else:
-                protein_id_list = [ protein_id ]
-            for protein_id in protein_id_list:
-
-                returned_peptide_regex_list = self.peptide_regex(
-                    self.params['database'],
-                    protein_id,
-                    tmp['Sequence']
-                )
-                for start, stop, pre_aa, post_aa, returned_protein_id in returned_peptide_regex_list:
-                    dict_2_write = copy.deepcopy( tmp )
-                    dict_2_write['proteinacc_start_stop_pre_post_;'] = returned_protein_id
-                    dict_2_write['Start'] = start
-                    dict_2_write['Stop']  = stop
-
-                    dict_2_write['proteinacc_start_stop_pre_post_;'] = '{0}_{1}_{2}'.format(
-                        dict_2_write['proteinacc_start_stop_pre_post_;'],
-                        pre_aa,
-                        post_aa
+                if cache_pos % 500 == 0:
+                    print(
+                        '[ INFO ] Processing line number:    {0}/{1}'.format(
+                            cache_pos,
+                            total_docs
+                        ),
+                        end='\r'
                     )
 
-                    translated_mods = []
-                    #N-Term(Acetyl|42.010565|fixed);M1(Oxidation|15.994915|fixed);M23(Oxidation|15.994915|fixed)
-                    if dict_2_write['Modifications'] != '':
-                        splitted_Modifications = dict_2_write['Modifications'].split(';')
-                        for mod in splitted_Modifications:
+                protein_id = tmp['proteinacc_start_stop_pre_post_;']
 
-                            position_or_aa_and_pos_unimod_name, mod_mass, fixed_or_opt = mod.split('|')
-                            position_or_aa_and_pos,unimod_name = position_or_aa_and_pos_unimod_name.split('(')
-                            position_or_aa_and_pos = position_or_aa_and_pos.strip()
-                            unimod_name = unimod_name.strip()
+                if ';' in protein_id:
+                    protein_id_list = protein_id.split(';')
+                else:
+                    protein_id_list = [ protein_id ]
+                for protein_id in protein_id_list:
 
-                            if position_or_aa_and_pos.upper() == 'N-TERM':
-                                position = 0
-                            else:
-                                position = position_or_aa_and_pos[ 1: ]
+                    returned_peptide_regex_list = self.peptide_regex(
+                        self.params['database'],
+                        protein_id,
+                        tmp['Sequence']
+                    )
+                    for start, stop, pre_aa, post_aa, returned_protein_id in returned_peptide_regex_list:
+                        dict_2_write = copy.deepcopy( tmp )
+                        dict_2_write['proteinacc_start_stop_pre_post_;'] = returned_protein_id
+                        dict_2_write['Start'] = start
+                        dict_2_write['Stop']  = stop
 
-                            translated_mods.append(
-                                '{0}:{1}'.format(
-                                    unimod_name,
-                                    position
+                        dict_2_write['proteinacc_start_stop_pre_post_;'] = '{0}_{1}_{2}'.format(
+                            dict_2_write['proteinacc_start_stop_pre_post_;'],
+                            pre_aa,
+                            post_aa
+                        )
+
+                        translated_mods = []
+                        #N-Term(Acetyl|42.010565|fixed);M1(Oxidation|15.994915|fixed);M23(Oxidation|15.994915|fixed)
+                        if dict_2_write['Modifications'] != '':
+                            splitted_Modifications = dict_2_write['Modifications'].split(';')
+                            for mod in splitted_Modifications:
+
+                                position_or_aa_and_pos_unimod_name, mod_mass, fixed_or_opt = mod.split('|')
+                                position_or_aa_and_pos,unimod_name = position_or_aa_and_pos_unimod_name.split('(')
+                                position_or_aa_and_pos = position_or_aa_and_pos.strip()
+                                unimod_name = unimod_name.strip()
+
+                                if position_or_aa_and_pos.upper() == 'N-TERM':
+                                    position = 0
+                                else:
+                                    position = position_or_aa_and_pos[ 1: ]
+
+                                translated_mods.append(
+                                    '{0}:{1}'.format(
+                                        unimod_name,
+                                        position
+                                    )
                                 )
-                            )
 
-                    dict_2_write['Modifications'] = ';'.join( translated_mods )
+                        dict_2_write['Modifications'] = ';'.join( translated_mods )
 
-                    if self.params['decoy_tag'] in dict_2_write['proteinacc_start_stop_pre_post_;']:
-                        dict_2_write['Is decoy'] = 'true'
-                    else:
-                        dict_2_write['Is decoy'] = 'false'
-                    csv_write_list.append( dict_2_write )
-        print()
-        duplicity_buffer = set()
-        for final_dict_2_write in csv_write_list:
-            duplicity_key = (
-                final_dict_2_write['Sequence'],
-                final_dict_2_write['Modifications'],
-                final_dict_2_write['proteinacc_start_stop_pre_post_;'],
-                final_dict_2_write['Spectrum ID']
-            )
-            if duplicity_key not in duplicity_buffer:
-                csv_dict_writer_object.writerow( final_dict_2_write )
-                duplicity_buffer.add( duplicity_key )
-        result_file.close()
+                        if self.params['decoy_tag'] in dict_2_write['proteinacc_start_stop_pre_post_;']:
+                            dict_2_write['Is decoy'] = 'true'
+                        else:
+                            dict_2_write['Is decoy'] = 'false'
+                        csv_write_list.append( dict_2_write )
+            print()
+            duplicity_buffer = set()
+            for final_dict_2_write in csv_write_list:
+                duplicity_key = (
+                    final_dict_2_write['Sequence'],
+                    final_dict_2_write['Modifications'],
+                    final_dict_2_write['proteinacc_start_stop_pre_post_;'],
+                    final_dict_2_write['Spectrum ID']
+                )
+                if duplicity_key not in duplicity_buffer:
+                    csv_dict_writer_object.writerow( final_dict_2_write )
+                    duplicity_buffer.add( duplicity_key )
         print('[ INFO  ] Writing MS Amanda results done!')
         pass
 
