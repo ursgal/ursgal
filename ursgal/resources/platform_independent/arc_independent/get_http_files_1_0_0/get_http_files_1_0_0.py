@@ -15,6 +15,17 @@ from urllib import request as request
 import os
 import tempfile
 import urllib
+import string
+
+
+def format_filename(s):
+    """
+    Take a string and return a valid filename constructed from the string.
+    Any characters not present in valid_chars are removed.
+    """
+    valid_chars = "-_.()=# " + string.ascii_letters + string.digits
+    filename = ''.join(char for char in s if char in valid_chars)
+    return filename
 
 
 def main( http_url = None, http_output_folder = None):
@@ -25,7 +36,7 @@ def main( http_url = None, http_output_folder = None):
         http_url
     ))
 
-    basename = os.path.basename( http_url )
+    basename = format_filename(os.path.basename(http_url))
 
     if http_output_folder is None:
         http_output_folder = tempfile.gettempdir()
@@ -52,6 +63,7 @@ def main( http_url = None, http_output_folder = None):
         )
         os.remove( output_path )
     return output_path
+
 
 if __name__ == '__main__':
     main(
