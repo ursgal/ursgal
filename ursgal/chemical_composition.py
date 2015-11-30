@@ -124,6 +124,15 @@ class ChemicalComposition(dict):
         if sequence is not None:
             self.use( sequence )
 
+        self.isotope_mass_lookup = {}
+        for element, isotope_list in self.isotopic_distributions.items():
+            for isotope_mass, abundance in isotope_list:
+                isotope_mass_key = '{0}{1}'.format(
+                    str(round(isotope_mass)).split('.')[0],
+                    element
+                )
+                self.isotope_mass_lookup[ isotope_mass_key ] = isotope_mass
+
     def __add__( self, other_cc ):
         '''Experimental'''
         tmp = copy.deepcopy( self )
@@ -416,7 +425,8 @@ class ChemicalComposition(dict):
         { element : count , ... }
 
         This does however not work with enriched elements, e.g. 15N
-        Better use ursgal.lib for more accurate mass calculations.
+        Better use pyQms isotopologue library for more accurate mass
+        calculations.
         '''
         mass = 0
         if cc is None:
@@ -424,7 +434,13 @@ class ChemicalComposition(dict):
         else:
             cc_mass_dict = cc
         for element, count in cc_mass_dict.items():
-            mass += count * self.isotopic_distributions[element][0][0]
+            isotope_mass = None
+            try:
+                isotope_mass = self.isotopic_distributions[ element ][0][0]
+            except:
+                # we check for 15N or 13C or other isotopes
+                isotope_mass = self.isotope_mass_lookup[ element ]
+            mass += count * isotope_mass
 
         return mass
 

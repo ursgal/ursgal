@@ -17,6 +17,7 @@ import csv
 import ursgal
 import ursgal.kb.ursgal
 import re
+from copy import deepcopy as dc
 
 DIFFERENCE_14N_15N = ursgal.kb.ursgal.DIFFERENCE_14N_15N
 
@@ -83,21 +84,25 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
         )
     )
 
-    cc=ursgal.ChemicalComposition()
+    cc = ursgal.ChemicalComposition()
     use15N = False
     if params['label'] == '15N':
         use15N = True
 
     aa_exception_dict = params['aa_exception_dict']
     n_term_replacement = {
-        'Ammonia-loss': None, 
-        'Trimethyl': None, 
-        'Gly->Val': None, 
+        'Ammonia-loss' : None,
+        'Trimethyl'    : None,
+        'Gly->Val'     : None,
     }
     fixed_mods = {}
     opt_mods = {}
     modname2aa = {}
     cam = False
+
+    #mod pattern
+    mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
+
     for modification in params['modifications']:
         aa = modification.split(',')[0]
         mod_type = modification.split(',')[1]
@@ -272,8 +277,24 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                 Nterm = False
                 if modification == '':
                     continue
-                mod = modification.split(':')[0] 
-                pos = int(modification.split(':')[1])
+                pos, mod = None, None
+                for match in mod_pattern.finditer( modification ):
+                    pos = int( match.group('pos') )
+                    mod = modification[ :match.start() ]
+                    break
+                if pos is None:
+                    print(
+                        'The format of the modification {0}'
+                        'is not recognized by ursgal'.format(
+                            modification
+                        )
+                    )
+                    exit()
+
+                # old version, does not work with ':' in modification
+                # mod = modification.split(':')[0]
+                # pos = int(modification.split(':')[1])
+
                 if pos == 0 or pos == 1:
                     Nterm = True
                     pos = 1
@@ -294,13 +315,13 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                             modifications in parameters: {2}
                             '''.format(mod, aa, params['modifications'])
                         )
-                        exit('Fail1')
+                        exit('Modification not defined')
                 elif 'unknown modification' == mod:
                     if aa  in opt_mods.keys(): # fixed mods are corrected/added already
                         modification = '{0}:{1}'.format(opt_mods[aa],pos)
                     else:
                         print('''
-                            unify csv does not work for the givn unknown modification for
+                            unify csv does not work for the given unknown modification for
                             {0} {1}
                             maybe an unknown modification with terminal position was given?
                             '''.format(line_dict['Sequence'], modification)
@@ -317,7 +338,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                             modifications in parameters: {1}
                             '''.format(mod, params['modifications'])
                         )
-                        exit('Fail2')
+                        exit('Modification not reported in params')
                     mapped_mod = False
                     for name in name_list:
                         if name in modname2aa.keys():
@@ -392,8 +413,8 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                     else:
                         # other way to do it...
                         # pos_of_split_point = re.search( ':\d*\Z', e )
-                        pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
-                        for occ, match in enumerate( pattern.finditer( e )):
+                        # pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
+                        for occ, match in enumerate( mod_pattern.finditer( e )):
                             mod = e[:match.start()]
                             mod_pos = e[match.start()+1:]
                             # mod, pos = e.split(':')
@@ -410,12 +431,20 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
             buffer_key = (upep, line_dict['Charge'], params['label'])
             if buffer_key not in mz_buffer.keys():
                 cc.use(upep)
-                mass = cc._mass()
+                # print(cc)
+                # print(mass)
                 if use15N:
-                    number_N = cc['N']
+                    number_N = dc( cc['N'] )
+                    cc['15N'] = number_N
+                    del cc['N']
                     if cam:
-                        number_N -= line_dict['Sequence'].count('C')
-                    mass = mass + ( DIFFERENCE_14N_15N * number_N )
+                        c_count = line_dict['Sequence'].count('C')
+                        cc['14N'] = c_count
+                        cc['15N'] -= c_count
+                    # mass = mass + ( DIFFERENCE_14N_15N * number_N )
+                mass = cc._mass()
+                # print(upep)
+                # print(mass)
                 calc_mz = ursgal.ucore.calculate_mz(
                     mass,
                     line_dict['Charge']
