@@ -39,15 +39,14 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
         * Retention Time (s) is correctly set using _ursgal_lookup.pkl
           During mzML conversion to mgf the retention time for every spec
           is stored in a internal lookup and used later for setting the RT.
-        * All modifications are sorted according to their position
+        * All modifications are checked if they were given in params['modifications'],
+          converted to the name, that was given there and
+          sorted according to their position.
+        * Fixed modifications are added in 'Modifications', if not reported by the engine
 
     X!Tandem
         * 'RTINSECONDS=' is stripped from Spectrum Title if present in .mgf or
           in search result.
-        * N-terminal modifications are reported at position 1, this is
-          corrected to position 0 (N-Term). Otherwise there will be
-          conflicting unimods at postion 1 (e.g. Carbamidomethyl at postion
-          1 and Acetylation at position 1)
 
     Myrimatch
         * Spectrum Title is corrected
@@ -119,6 +118,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
             opt_mods[aa] = name
         if 'C,fix,any,Carbamidomethyl' in modification:
             cam = True
+    ursgal.GlobalUnimodMapper._reparseXML() 
 
     de_novo_engines = ['novor', 'pepnovo', 'uninovo', 'unknown_engine']
     de_novo = False
@@ -282,14 +282,11 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                     pos = int( match.group('pos') )
                     mod = modification[ :match.start() ]
                     break
-                if pos is None:
-                    print(
-                        'The format of the modification {0}'
-                        'is not recognized by ursgal'.format(
+                assert pos != None,'''
+                        The format of the modification {0}
+                        is not recognized by ursgal'''.format(
                             modification
                         )
-                    )
-                    exit()
 
                 # old version, does not work with ':' in modification
                 # mod = modification.split(':')[0]
@@ -307,27 +304,29 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                     elif Nterm and '*' in modname2aa[mod]:
                         correct_mod = True
                         # still is ok
-                    if correct_mod == False:
-                        print('''
+                    assert correct_mod == True,'''
                             A modification was reported for an aminoacid for which it was not defined
                             unify_csv cannot deal with this, please check your parameters and engine output
                             reported modification: {0} on {1}
                             modifications in parameters: {2}
-                            '''.format(mod, aa, params['modifications'])
-                        )
-                        exit('Modification not defined')
+                            '''.format(
+                                mod, 
+                                aa, 
+                                params['modifications']
+                            )
                 elif 'unknown modification' == mod:
+                    modification_known = False
                     if aa  in opt_mods.keys(): # fixed mods are corrected/added already
                         modification = '{0}:{1}'.format(opt_mods[aa],pos)
-                    else:
-                        print('''
+                        modification_known = True
+                    assert modification_known == True,'''
                             unify csv does not work for the given unknown modification for
                             {0} {1}
                             maybe an unknown modification with terminal position was given?
-                            '''.format(line_dict['Sequence'], modification)
+                            '''.format(
+                                line_dict['Sequence'], modification
                             )
                 else:
-                    ursgal.GlobalUnimodMapper._reparseXML() 
                     try:
                         name_list = ursgal.GlobalUnimodMapper.appMass2name_list( round(float(mod), 4), decimal_places = 4 )
                     except:
@@ -338,7 +337,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                             modifications in parameters: {1}
                             '''.format(mod, params['modifications'])
                         )
-                        exit('Modification not reported in params')
+                        exit('unify_csv failed because a modification was reported that was not given in params')
                     mapped_mod = False
                     for name in name_list:
                         if name in modname2aa.keys():
@@ -350,8 +349,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                                 mapped_mod = True
                             else:
                                 continue
-                    if mapped_mod == False:
-                        print('''
+                    assert mapped_mod == True, '''
                             A mass was reported that does not map on any unimod or userdefined modification
                             or the modified aminoacid is no the specified one
                             unify_csv cannot deal with this, please check your parameters and engine output
@@ -359,12 +357,14 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                             maps on: {1}
                             reported modified aminoacid: {2}
                             modifications in parameters: {3}
-                            '''.format(mod, name_list, aa, params['modifications'])
-                        )
-                        exit('Fail3')
+                            '''.format(
+                                mod,
+                                name_list, 
+                                aa, 
+                                params['modifications']
+                            )
                 tmp_mods.append(modification)
             line_dict['Modifications'] = ';'.join( tmp_mods )
-
 
             for unimod_name in n_term_replacement.keys():
                 if '{0}:1'.format(unimod_name) in line_dict['Modifications']:
