@@ -26,7 +26,7 @@ The UController controls, manages and executes the tools that are available in U
 One of the key features of Ursgal is peptide spectrum matching with up to five search engines.
 To perform a search, you need:
     * a peptide database (.fasta) that will be searched
-    * one or more mass spectrometer output files (.mzML)
+    * one or more mass spectrometer output files (.mzML or .mgf)
 Once you have these files, you are ready to execute a full search with Ursgal: ::
 
     import ursgal
