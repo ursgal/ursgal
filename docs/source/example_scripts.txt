@@ -1,5 +1,8 @@
+.. _examplescripts:
+
 Example Scripts
 =================
+
 
 
 simple example search

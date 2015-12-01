@@ -156,3 +156,15 @@ Another useful keyword argument is 'output_file_name', which allows you to defin
         output_file_name = 'my_omssa_result.csv'
     )
 
+
+7. Example Scripts
+--------------------------------
+
+Now that we covered all the basics of Ursgal, you should be able to write a basic Ursgal script. Make sure to check out the :ref:`example scripts<installation>` folder ("ursgal/example_scripts") which contains a variety of basic and advanced Ursgal scripts that are ready to execute.
+Example scripts will automatically download the required files before execution.
+
+These example scripts are a good starting point:
+
+    * :ref:`simple_example_search.py<simpleexamplesearch>`
+    * :ref:`target_decoy_generation_example.py<targetdecoygen>`
+    * :ref:`do_it_all_folder_wide.py<doitall>`
