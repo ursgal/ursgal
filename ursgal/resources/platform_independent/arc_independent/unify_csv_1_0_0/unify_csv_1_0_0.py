@@ -17,6 +17,7 @@ import csv
 import ursgal
 import ursgal.kb.ursgal
 import re
+from collections import Counter, defaultdict
 
 DIFFERENCE_14N_15N = ursgal.kb.ursgal.DIFFERENCE_14N_15N
 
@@ -39,6 +40,8 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
           During mzML conversion to mgf the retention time for every spec
           is stored in a internal lookup and used later for setting the RT.
         * All modifications are sorted according to their position
+        * Rows describing the same PSM (i.e. when two proteins share the
+          same peptide) are merged to one row.
 
     X!Tandem
         * 'RTINSECONDS=' is stripped from Spectrum Title if present in .mgf or
@@ -53,7 +56,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
         * 15N label is not formatted correctly these modifications are
           removed for further analysis.
         * When using 15N modifications on amino acids and Carbamidomethyl
-          myrimtach reports sometimes Carboxymethylation on Cystein.
+          myrimatch reports sometimes Carboxymethylation on Cystein.
 
     MS-GF+
         * 15N label is not formatted correctly these modifications are
@@ -83,7 +86,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
         )
     )
 
-    cc=ursgal.ChemicalComposition()
+    cc = ursgal.ChemicalComposition()
     use15N = False
     if params['label'] == '15N':
         use15N = True
@@ -120,6 +123,10 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
     for de_novo_engine in de_novo_engines:
         if de_novo_engine in search_engine.lower():
             de_novo = True
+
+    psm_counter = Counter()
+    # if a PSM with multiple rows is found (i.e. in omssa results), the psm 
+    # rows are merged afterwards
 
     output_file_object = open(output_file,'w')
     mz_buffer = {}
@@ -436,9 +443,74 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                     line_dict['Is decoy'] = 'true'
                 else:
                     line_dict['Is decoy'] = 'false'
+
+            psm = (
+                line_dict['Spectrum Title'],
+                line_dict['Sequence'],
+                line_dict['Modifications'],
+                line_dict['Charge'],
+                line_dict['Is decoy'],
+            )  # each unique combination of these should only have ONE row!
+            psm_counter[psm] += 1
+
             csv_output.writerow( line_dict )
     output_file_object.close()
+
+    # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
+    if max(psm_counter.values()) > 1:
+        merge_duplicate_psm_rows(output_file, psm_counter)
     return
+
+
+def merge_rowdicts(list_of_rowdicts, joinchar):
+    merged_d = {}
+    fieldnames = list_of_rowdicts[0].keys()
+    for fieldname in fieldnames:
+        values = {d[fieldname] for d in list_of_rowdicts}
+        if len(values) == 1:
+            merged_d[fieldname] = list(values)[0]
+        else:
+            merged_d[fieldname] = joinchar.join(sorted(values))
+    return merged_d
+
+
+def merge_duplicate_psm_rows(unified_csv_path, psm_counter):
+    '''
+    Rows describing the same PSM (i.e. when two proteins share the
+    same peptide) are merged to one row.
+    '''
+    rows_to_merge_dict = defaultdict(list)
+
+    tmp_file = unified_csv_path + ".tmp"
+    os.rename(unified_csv_path, tmp_file)
+    print('Merging rows of the same PSM...')
+    with open(tmp_file, 'r') as tmp, open(unified_csv_path, 'w', newline='') as out:
+        tmp_reader = csv.DictReader(tmp)
+        writer = csv.DictWriter(out, fieldnames=tmp_reader.fieldnames)
+        writer.writeheader()
+        for row in tmp_reader:
+            psm = (
+                row['Spectrum Title'],
+                row['Sequence'],
+                row['Modifications'],
+                row['Charge'],
+                row['Is decoy'],
+            )   # each unique combination of these should only have ONE row!
+            if psm_counter[psm] == 1:
+                # no duplicate = no problem, we can just write the row again
+                writer.writerow(row)
+            elif psm_counter[psm] > 1:
+                # we have to collect all rows of this psm, and merge + write them later!
+                rows_to_merge_dict[psm].append(row) 
+            else:
+                raise Exception("This should never happen.")
+        # finished parsing the old unmerged unified csv
+        for rows_to_merge in rows_to_merge_dict.values():
+            writer.writerow(
+                merge_rowdicts(rows_to_merge, joinchar = ';')  # possibly change joinchar to '>' later as noted by JB!
+            )
+    os.remove(tmp_file)  # remove the old unified csv that contains duplicate rows
+
 
 
 if __name__ == '__main__':
