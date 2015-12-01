@@ -39,7 +39,7 @@ def main():
             engine = 'get_http_files_1_0_0'
         )
         shutil.move(
-            '{0}?format=raw'.format(mzML_file),
+            '{0}format=raw'.format(mzML_file),
             mzML_file
         )
 
