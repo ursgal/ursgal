@@ -4,6 +4,7 @@ Example Scripts
 =================
 
 
+.. _simpleexamplesearch:
 
 simple example search
 ---------------------
@@ -13,6 +14,8 @@ simple example search
 .. include:: code_inc/simple_example_search.inc
 
 
+
+.. _doitall:
 
 do it all folder wide
 ----------------------
@@ -53,6 +56,8 @@ Bruderer high resolution machine ppm offset example
 
 
 
+
+.. _targetdecoygen:
 
 target decoy generation
 -----------------------
