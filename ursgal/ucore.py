@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.4
 import re
 import sys
+import os
 
 DIFFERENCE_14N_15N = 0.997035
 PROTON             = 1.00727646677
