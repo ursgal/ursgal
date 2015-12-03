@@ -120,19 +120,19 @@ def main(input_file = None, decoy_tag = None, output_file = None):
                 # domain_groups.append( domain )
             elif element.tag.endswith('note'):
                 if notes_key == 'spectrum':
-                    protein['Spectrum Title'] = element.text.strip()
+                    group['Spectrum Title'] = element.text.strip()
                 elif notes_key == 'protein':
                     protein['Defline'] = element.text.strip()
             elif element.tag.endswith('group'):
                 group_counter -= 1
                 if group_counter == 0:
                     dict2write = {}
-                    proteins = []
+                    # proteins = []
                     for protein_group in protein_groups:
                         for key in NEW_HEADERS:
-                            if key == 'proteinacc_start_stop_pre_post_;':
-                                proteins.append(protein_group[key])
-                                continue
+                            # if key == 'proteinacc_start_stop_pre_post_;':
+                            #     proteins.append(protein_group[key])
+                            #     continue
                             if key == 'Modifications' and protein_group[key] !='':
                                 dict2write[key] = ';'.join(protein_group[key])
                                 continue
@@ -140,9 +140,10 @@ def main(input_file = None, decoy_tag = None, output_file = None):
                                 dict2write[key] = group[key]
                             except:
                                 dict2write[key] = protein_group[key]
-                    dict2write['proteinacc_start_stop_pre_post_;'] = ''.join(proteins)
-                    csvOut.writerow( dict2write )
+                        # dict2write['proteinacc_start_stop_pre_post_;'] = ''.join(proteins)
+                        csvOut.writerow( dict2write )
+                    protein_groups = []
     return
 
 if __name__ == '__main__':
-    script = main(sys.argv[1], sys.argv[2], sys.argv[3])
+    script = main(input_file = sys.argv[1], decoy_tag = sys.argv[2], output_file = sys.argv[3])
