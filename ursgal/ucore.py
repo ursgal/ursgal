@@ -1,5 +1,7 @@
 #!/usr/bin/env python3.4
 import re
+import sys
+
 DIFFERENCE_14N_15N = 0.997035
 PROTON             = 1.00727646677
 
@@ -28,6 +30,24 @@ COLORS = {
     'BWHITE'    : '\033[97m',
 }
 
+def terminal_supports_color():
+    """
+    Returns True if the running system's terminal supports color, and False
+    otherwise. Source:
+    https://github.com/django/django/blob/master/django/core/management/color.py
+    """
+    plat = sys.platform
+    supported_platform = plat != 'Pocket PC' and (plat != 'win32' or
+                                                  'ANSICON' in os.environ)
+    # isatty is not always implemented, #6223.
+    is_a_tty = hasattr(sys.stdout, 'isatty') and sys.stdout.isatty()
+    if not supported_platform or not is_a_tty:
+        return False
+    return True
+
+if not terminal_supports_color():
+    # disable terminal colors
+    COLORS = {k: '' for k, v in COLORS.items()}
 
 def print_current_params( params, old_params=None ):
     '''

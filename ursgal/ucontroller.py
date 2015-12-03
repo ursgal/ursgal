@@ -71,12 +71,13 @@ class UController(ursgal.UNode):
 
     def _after_init_meta_callback(self, *args, **kwargs):
         self.time_point( tag = 'init' )
-        # kwargs.get('verbose', True)
-        self.print_header( 'UController initialized', tag='init')
+        self.print_header( 'UController initialized', tag='init', newline=False)
+        ursgal_string = 'Ursgal v{0}  -  '\
+            'https://github.com/ursgal/ursgal'.format(ursgal.__version__)
+        print('         -\-{0: ^58}-/-\n'.format(ursgal_string))
         self.params = {}
         self.init_kwargs = kwargs
         self.reset_controller()
-
         self.unodes = self.collect_all_unodes_from_kb()
         self.determine_availability_of_unodes()
         # verbose = kwargs.get('verbose', True)
@@ -85,6 +86,7 @@ class UController(ursgal.UNode):
         # if input_file is not None:
         #     self.set_target( kwargs['input_file'] )
         # self.params = UControllerParams( self )
+
 
     def reset_controller( self ):
 
@@ -1683,8 +1685,6 @@ class UController(ursgal.UNode):
                                 **ursgal.COLORS
                             )
 
-                    # else:
-                    #     if
                 print('\t{0: >3} : {1:28} [{3} {2: ^25} {ENDC}] {4}'.format(
                     n,
                     engine,
@@ -1693,10 +1693,7 @@ class UController(ursgal.UNode):
                     url_available,
                     **ursgal.COLORS
                 ))
-                # print( dir(self.unodes[ engine ]['class']) )
-                # exit(1)
                 n += 1
-            print()
         return
 
     def run_unode_if_required( self, force, engine_name, answer, history_addon=None ):
