@@ -19,8 +19,8 @@ with open(version_path, 'r') as version_file:
 __version__  = ursgal_version
 version_info = tuple(map(int, ursgal_version.split(".")))
 
-if not hasattr(sys, "version_info") or sys.version_info < (2, 6):
-    raise RuntimeError("ursgal requires Python 2.7 or later.")
+if not hasattr(sys, "version_info") or sys.version_info < (3, 4):
+    raise RuntimeError("Ursgal requires Python 3.4 or later.")
 
 from .unode import UNode
 from .unode import Meta_UNode
