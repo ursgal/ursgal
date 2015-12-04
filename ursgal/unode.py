@@ -1020,7 +1020,7 @@ class UNode(object, metaclass=Meta_UNode):
             msg
         ))
 
-    def print_header( self, header, tag=None):
+    def print_header( self, header, tag=None, newline=True):
         if tag is not None:
             time_stamp = '({0})'.format(
                 self.time_point(
@@ -1033,11 +1033,12 @@ class UNode(object, metaclass=Meta_UNode):
         else:
             time_stamp = ''
         print('''
-        -\-     {0} {1}     -/-
-        '''.format(
+        -\-     {0} {1}     -/-'''.format(
             header,
             time_stamp
         ))
+        if newline:
+            print()
 
     def initialize_run(self ):
         self.created_tmp_files = []
