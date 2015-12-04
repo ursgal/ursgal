@@ -27,20 +27,20 @@ def main(input_file = None, decoy_tag = None, output_file = None):
     ... and yes it should be mzIndentML
     '''
     NEW_HEADERS = [
-    'Raw data location', 
-    'Spectrum ID', 
-    'Spectrum Title',
-    'Retention Time (s)',
-    'rank',
-    'Calc m/z',
-    'Exp m/z',
-    'Charge',
-    'Sequence',
-    'Modifications',
-    'X\!Tandem:expect',
-    'X\!Tandem:hyperscore',
-    'proteinacc_start_stop_pre_post_;',
-    'Is decoy',
+        'Raw data location',
+        'Spectrum ID',
+        'Spectrum Title',
+        'Retention Time (s)',
+        'rank',
+        'Calc m/z',
+        'Exp m/z',
+        'Charge',
+        'Sequence',
+        'Modifications',
+        'X\!Tandem:expect',
+        'X\!Tandem:hyperscore',
+        'proteinacc_start_stop_pre_post_;',
+        'Is decoy',
     ]
     PROTON = 1.00727646677
     protein = None

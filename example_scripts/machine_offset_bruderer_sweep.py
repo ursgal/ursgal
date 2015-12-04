@@ -91,8 +91,8 @@ def search(input_folder=None):
     file_2_target_offset = {}
     for MQ_offset, file_name in MQ_OFFSET_TO_FILENAME:
         file_2_target_offset[ file_name ] = { 'offsets' : [] }
-        for n in range(-20,0,2):
-            file_2_target_offset[ file_name ][ 'offsets' ].append(  n/1e6 )
+        for n in range(-20, 20, 2):
+            file_2_target_offset[ file_name ][ 'offsets' ].append(  n / 1e6 )
 
     engine_list                  = ['xtandem_sledgehammer']
 

@@ -312,7 +312,11 @@ class percolator_2_08( ursgal.UNode ):
                 # write all results including decoy into the full csv:
                 csv_output.writerow( line_dict )
             else:
-                print('WARNING! The key {0} has no entry in s2l dict'.format(_psmid_pep_key))
+                print(
+                    'WARNING! The key {0} has no entry in s2l dict'.format(
+                        _psmid_pep_key
+                    )
+                )
 
 
     def generating_score_list( self ):
