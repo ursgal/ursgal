@@ -41,7 +41,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
         * Retention Time (s) is correctly set using _ursgal_lookup.pkl
           During mzML conversion to mgf the retention time for every spec
           is stored in a internal lookup and used later for setting the RT.
-        * All modifications are checked if they were given in 
+        * All modifications are checked if they were given in
           params['modifications'], converted to the name that was given
           there and sorted according to their position.
         * Fixed modifications are added in 'Modifications', if not reported
@@ -123,7 +123,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
             opt_mods[aa] = name
         if 'C,fix,any,Carbamidomethyl' in modification:
             cam = True
-    ursgal.GlobalUnimodMapper._reparseXML() 
+    ursgal.GlobalUnimodMapper._reparseXML()
 
     de_novo_engines = ['novor', 'pepnovo', 'uninovo', 'unknown_engine']
     de_novo = False
@@ -132,7 +132,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
             de_novo = True
 
     psm_counter = Counter()
-    # if a PSM with multiple rows is found (i.e. in omssa results), the psm 
+    # if a PSM with multiple rows is found (i.e. in omssa results), the psm
     # rows are merged afterwards
 
     output_file_object = open(output_file,'w')
@@ -257,7 +257,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                                 tmp_mods = line_dict['Modifications'].split(';')
                                 tmp_mods.append(tmp)
                                 line_dict['Modifications'] = ';'.join( tmp_mods )
-                                
+
             # Myrimatch and msgf+ can not handle 15N that easily
             # report all AAs moded with unknown modification
             # Note: masses are checked below to avoid any mismatch
@@ -319,8 +319,8 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                             reported modification: {0} on {1}
                             modifications in parameters: {2}
                             '''.format(
-                                mod, 
-                                aa, 
+                                mod,
+                                aa,
                                 params['modifications']
                             )
                 elif 'unknown modification' == mod:
@@ -368,8 +368,8 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                             modifications in parameters: {3}
                             '''.format(
                                 mod,
-                                name_list, 
-                                aa, 
+                                name_list,
+                                aa,
                                 params['modifications']
                             )
                 tmp_mods.append(modification)
@@ -436,6 +436,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                         '{m}:{p}'.format( m=mod, p=pos) for pos, mod in tmp
                     ]
                 )
+
             upep = line_dict['Sequence'] + '#' + line_dict['Modifications']
             buffer_key = (upep, line_dict['Charge'], params['label'])
             if buffer_key not in mz_buffer.keys():
@@ -469,7 +470,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
 
             # mzidentml-lib does not always set 'Is decoy' correctly
             # (it's always 'false' for MS-GF+ results), this is fixed here:
-            if de_novo == False:
+            if de_novo is False:
                 if params['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
                     line_dict['Is decoy'] = 'true'
                 else:
@@ -485,11 +486,23 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
             psm_counter[psm] += 1
 
             csv_output.writerow( line_dict )
+            '''
+            to_be_written_csv_lines.append( line_dict )
+            '''
     output_file_object.close()
 
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if max(psm_counter.values()) > 1:
         merge_duplicate_psm_rows(output_file, psm_counter)
+        '''
+        to_be_written_csv_lines = merge_duplicate_psm_rows(
+            to_be_written_csv_lines,
+            psm_counter
+        )
+        '''
+    '''
+    do output_file magic with to_be_written_csv_lines
+    '''
     return
 
 
@@ -532,7 +545,7 @@ def merge_duplicate_psm_rows(unified_csv_path, psm_counter):
                 writer.writerow(row)
             elif psm_counter[psm] > 1:
                 # we have to collect all rows of this psm, and merge + write them later!
-                rows_to_merge_dict[psm].append(row) 
+                rows_to_merge_dict[psm].append(row)
             else:
                 raise Exception("This should never happen.")
         # finished parsing the old unmerged unified csv

@@ -9,7 +9,7 @@ import shutil
 
 def main():
     '''
-    Executes a search with OMSSA, XTandem, MS-GF+ and MS Amanda on the BSA1.mzML
+    Executes a search with OMSSA, XTandem and MS-GF+ on the BSA1.mzML
     input_file
 
     usage:
@@ -31,14 +31,18 @@ def main():
         }
     )
 
-    if sys.platform == 'win32':
-        msamanda = 'msamanda_1_0_0_5242'
-    else: 
-        msamanda = 'msamanda_1_0_0_5243'
+    if sys.maxsize > 2**32:
+        xtandem = 'xtandem_piledriver'
+    else:
+        xtandem = 'xtandem_sledgehammer'
+    # if sys.platform == 'win32':
+    #     msamanda = 'msamanda_1_0_0_5242'
+    # else: 
+    #     msamanda = 'msamanda_1_0_0_5243'
 
     engine_list = [
         'omssa',
-        'xtandem_piledriver',
+        xtandem,
         'msgf',
         # msamanda
     ]

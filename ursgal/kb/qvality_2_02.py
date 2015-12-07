@@ -71,7 +71,7 @@ META_INFO = {
 USEARCH_PARAM_VALUE_TRANSLATIONS = {
 }
 
-DEFAULT_PARAMS={
+DEFAULT_PARAMS = {
     'validation_generalized'   : False,# '-g','False',#Generalized target decoy competition, situations where PSMs known to more frequently be incorrect are mixed in with the correct PSMs
     'qvality_number_of_bins'   : '500',
     'qvality_verbose'          : '2',#medium verbose
@@ -81,7 +81,12 @@ DEFAULT_PARAMS={
 
 USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
 }
-USED_USEARCH_PARAMS= set()
+USED_USEARCH_PARAMS = set([
+    'validation_generalized',
+    'qvality_number_of_bins',
+    'qvality_epsilon_step',
+    'qvality_cross_validation',
+])
 
 '''
 

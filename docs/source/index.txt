@@ -45,6 +45,7 @@ Included engines
    :maxdepth: 2
 
    available_engines
+   other_engines
    general_structure
 
 How to extend and create new engines ?
