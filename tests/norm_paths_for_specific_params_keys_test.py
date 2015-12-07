@@ -2,17 +2,19 @@
 # encoding: utf-8
 
 import ursgal
+import os
+
 R = ursgal.UController()
 
 TESTS = [
     {
-        'params' : {'database' : '/tmp/../mo_fasta.fasta'} ,
-        'output' : {'database' : '/mo_fasta.fasta'}
+        'params' : {'database' : os.path.join(os.sep,'tmp','..','mo_fasta.fasta')} ,
+        'output' : {'database' : os.path.join(os.sep,'mo_fasta.fasta')}
     },
     {
-        'params' : {'mosh' : '/tmp/../mo_fasta.fasta'},
+        'params' : {'mosh' : os.path.join(os.sep,'tmp','..','mo_fasta.fasta')},
         'input_kwargs' : {'param_keys' : ['mosh']},
-        'output' : {'mosh' : '/mo_fasta.fasta'}
+        'output' : {'mosh' : os.path.join(os.sep,'mo_fasta.fasta')}
     },
 ]
 
