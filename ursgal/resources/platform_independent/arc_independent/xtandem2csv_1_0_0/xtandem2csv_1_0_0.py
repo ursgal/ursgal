@@ -24,6 +24,13 @@ from collections import defaultdict as ddict
 def main(input_file = None, decoy_tag = None, output_file = None):
     '''
     Converts xTandem.xml files into .csv
+    We need to do this on our own, because mzidentml_lib 
+    reports wrong positions for modifications
+    (and it is also not able to convert the piledriver.mzid into csv)
+
+    It should be noted that
+    - xtandem groups are not merged (since it is not the same as protein groups)
+    - multiple domains (multiple occurence of a peptide in the same protein) are not reported
     
     '''
     NEW_HEADERS = [
