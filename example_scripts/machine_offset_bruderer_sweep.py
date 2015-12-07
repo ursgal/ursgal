@@ -110,22 +110,28 @@ def search(input_folder=None):
             engine     = 'get_http_files_1_0_0'
         )
 
-    prefix_format_string = 'ppm_offset_{0}_pit_{1}_fit_{2}'
+    prefix_format_string = '_pit_{1}_fit_{2}'
     for mzML_path in glob.glob( os.path.join( input_folder, '*.mzML' ) ):
+
         mzML_basename = os.path.basename( mzML_path )
         if mzML_basename not in file_2_target_offset.keys():
             continue
-        for engine in engine_list:
-            for ppm_offset in file_2_target_offset[ mzML_basename ]['offsets']:
+        for ppm_offset in file_2_target_offset[ mzML_basename ]['offsets']:
+            R.params['machine_offset_in_ppm'] = ppm_offset
+            R.params['prefix']                = 'ppm_offset_{0}'.format(
+                int(ppm_offset * 1e6)
+            )
+            mgf_file = R.convert_to_mgf_and_update_rt_lookup(
+                input_file = mzML_path
+            )
+            for engine in engine_list:
                 for precursor_ion_tolerane in precursor_ion_tolerance_list:
                     for frag_ion_tolerance in frag_ion_tolerance_list:
 
                         new_prefix = prefix_format_string.format(
-                            int(ppm_offset * 1e6),
                             precursor_ion_tolerane,
                             frag_ion_tolerance
                         )
-                        R.params['machine_offset_in_ppm']          = ppm_offset
                         R.params['precursor_mass_tolerance_minus'] = precursor_ion_tolerane
                         R.params['precursor_mass_tolerance_plus']  = precursor_ion_tolerane
                         R.params['frag_mass_tolerance']            = frag_ion_tolerance
