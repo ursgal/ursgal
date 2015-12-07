@@ -15,7 +15,7 @@ TESTS = [
                 os.path.join( os.sep, 'Volumes', '_', '_', '_', '1') + os.sep
             ],
         },
-        'output' : os.path.join( os.sep, 'Volumes', '_', '_', '_', '1') + os.sep
+        'output' : os.path.join( os.path.abspath( os.sep ), 'Volumes', '_', '_', '_', '1') + os.sep
     },
     {
         'input' : {
@@ -24,7 +24,7 @@ TESTS = [
                 os.path.join( os.sep, 'Volumes', '_', '_', '_', '1') + os.sep
             ],
         },
-        'output' : os.path.join( os.sep, 'Volumes', '_', '_', '_') + os.sep,
+        'output' : os.path.join( os.path.abspath( os.sep ), 'Volumes', '_', '_', '_') + os.sep,
     },
     {
         'input' : {
@@ -33,7 +33,7 @@ TESTS = [
                 os.path.join( os.sep, 'Volumes', '_', '_', '_', '1') + os.sep,
             ],
         },
-        'output' : os.path.join( os.sep, 'Volumes') + os.sep
+        'output' : os.path.join( os.path.abspath( os.sep ), 'Volumes') + os.sep
     },
 
 ]
