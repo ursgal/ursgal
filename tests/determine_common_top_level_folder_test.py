@@ -2,35 +2,38 @@
 # encoding: utf-8
 
 import ursgal
+import os
+
+
 R = ursgal.UController()
 
 TESTS = [
     {
         'input' : {
             'input_files' : [
-                '/Volumes/_/_/_/1/',
-                '/Volumes/_/_/_/1/'
+                os.path.join( os.sep, 'Volumes', '_', '_', '_', '1') + os.sep,
+                os.path.join( os.sep, 'Volumes', '_', '_', '_', '1') + os.sep
             ],
         },
-        'output' : '/Volumes/_/_/_/1/'
+        'output' : os.path.join( os.sep, 'Volumes', '_', '_', '_', '1') + os.sep
     },
     {
         'input' : {
             'input_files' : [
-                '/Volumes/_/_/_/',
-                '/Volumes/_/_/_/1'
+                os.path.join( os.sep, 'Volumes', '_', '_', '_') + os.sep,
+                os.path.join( os.sep, 'Volumes', '_', '_', '_', '1') + os.sep
             ],
         },
-        'output' : '/Volumes/_/_/_/'
+        'output' : os.path.join( os.sep, 'Volumes', '_', '_', '_') + os.sep,
     },
     {
         'input' : {
             'input_files' : [
-                '/Volumes/',
-                '/Volumes/_/_/_/1',
+                os.path.join( os.sep, 'Volumes') + os.sep,
+                os.path.join( os.sep, 'Volumes', '_', '_', '_', '1') + os.sep,
             ],
         },
-        'output' : '/Volumes/'
+        'output' : os.path.join( os.sep, 'Volumes') + os.sep
     },
 
 ]
