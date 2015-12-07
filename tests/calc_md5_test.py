@@ -26,9 +26,12 @@ def check_md5_test():
 def check_md5( test_dict ):
     out_put = R.calc_md5( test_dict['input'] )
     print( out_put , test_dict)
-    assert out_put == test_dict['output'], 'MD5 {0} failed'.format(
-        test_dict
-    )
+    assert out_put == test_dict['output'], '''
+        MD5 {0} failed
+        output: {1}'''.format(
+            test_dict,
+            out_put
+        )
 
 
 if __name__ == '__main__':
