@@ -50,8 +50,8 @@ for line_dict in csv.DictReader(open(expected_csv, 'r')):
 # print(ident_list)
 
 def unify_xtandem_test():
-    for test_id, test_dict in enumerate(ident_list):
-        expected_dict = expected_list[test_id]
+    for test_id, expected_dict in enumerate(expected_list):
+        test_dict = ident_list[test_id]
         yield unify_xtandem, test_dict, expected_dict
 
 
@@ -78,7 +78,7 @@ def unify_xtandem( test_dict, expected_dict ):
 
 if __name__ == '__main__':
     print(__doc__)
-    for test_id, test_dict in enumerate(ident_list):
-        expected_dict = expected_list[test_id]
+    for test_id, expected_dict in enumerate(expected_list):
+        test_dict = ident_list[test_id]
         unify_xtandem(test_dict, expected_dict)
 

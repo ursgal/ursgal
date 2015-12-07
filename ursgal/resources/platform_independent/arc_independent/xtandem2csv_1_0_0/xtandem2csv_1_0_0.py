@@ -45,6 +45,8 @@ def main(input_file = None, decoy_tag = None, output_file = None):
     PROTON = 1.00727646677
     protein = None
     group = None
+    group_counter = 0
+    protein_groups = []
 
     csvOut     = csv.DictWriter( open( output_file , 'w', newline='') , NEW_HEADERS )
     csvOut.writeheader()
