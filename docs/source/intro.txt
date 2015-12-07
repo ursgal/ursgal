@@ -146,5 +146,11 @@ You will require Sphinx and other packages to build the documentation from scrat
 Testing
 *******
 
-To test your installation of ursgal, run: ::
+To test your installation of ursgal, run:
     ``nosetests ursgal/tests/*.py``
+
+(You might need to install `nose`_ first)
+
+
+.. _nose:
+    https://nose.readthedocs.org/en/latest/
