@@ -1153,6 +1153,9 @@ class UNode(object, metaclass=Meta_UNode):
         #
         # We use original params for second and final dump
         #
+        if 'command_list' in original_params:
+            del original_params['command_list']
+
         translated_params = self.translate_params( self.params )
         self.params.update( translated_params )
 
