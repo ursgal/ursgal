@@ -160,7 +160,8 @@ class UController(ursgal.UNode):
         The ucontroller function to collect all unodes
 
         Iterates over all files in the kb folder and checks if the import is
-        possible. Nodes in developement are ignored ('in_developement' = True).
+        possible. Nodes in developement are loaded ('in_developement' = True),
+        but not shown in the UController overview.
 
         Note: internal function
 
@@ -188,7 +189,9 @@ class UController(ursgal.UNode):
                         False
                     )
                     if is_dev_unode:
-                        continue
+                        unodes[kb_module_name]['in_development'] = True
+                        # UNode is in development and not shown in overview,
+                        # but technically available and can be executed
 
                 engine_type = kb_module.META_INFO['engine_type']
                 for meta_type, meta_type_bool in engine_type.items():
@@ -220,11 +223,14 @@ class UController(ursgal.UNode):
                             'META_INFO': kb_module.META_INFO
                         }
 
-                        if meta_type not in unodes['_by_meta_type'].keys():
-                            unodes['_by_meta_type'][ meta_type ] = []
-                        unodes['_by_meta_type'][ meta_type ].append(
-                            kb_module_name
-                        )
+                        # only engines that are not tagged as 'in_development'
+                        # are shown in the overview
+                        if not kb_module.META_INFO.get('in_development', False):
+                            if meta_type not in unodes['_by_meta_type'].keys():
+                                unodes['_by_meta_type'][ meta_type ] = []
+                            unodes['_by_meta_type'][ meta_type ].append(
+                                kb_module_name
+                            )
         return unodes
 
     def convert_results_to_csv(self, input_file, force=None, output_file_name=None):
@@ -484,7 +490,8 @@ class UController(ursgal.UNode):
   Multiple hits found: {1}.
         '''.format( short_engine, ", ".join(matches) )
         full_engine_name = matches[0]
-        assert self.unodes[ full_engine_name ]['available'] is True, '''
+        assert self.unodes[full_engine_name].get('available', False) is True or \
+            self.unodes[full_engine_name].get('in_development', False) is True, '''
   Requested engine {0} was mapped on {1}, which is not available
   on your system.
         '''.format( short_engine, full_engine_name )
