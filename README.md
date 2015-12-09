@@ -38,12 +38,15 @@ Ursgal requires Python 3.4 or higher. Starting with this the easiest way is to c
     user@localhost:~$ pip3.4 install -r requirements.txt
 
 Install third party engines:
+
     user@localhost:~$ python3.4 install_resources.py
 
 Install Ursgal:
+
     user@localhost:~$ python3.4 setup.py install
 
 Note:
+
     Under Linux it may be required to change the permission in the
     python3.4 site-package folder so that all files are executable
 
