@@ -174,7 +174,7 @@ class novor_1_1beta( ursgal.UNode ):
             ('\[Carbamyl\]','Carbamyl'),
             ('\(Carbamyl\)','Carbamyl'),
             ('\(Carboxymethyl\)','Carboxymethyl'),
-            ('\(Phospho\)','{Phospho}'),
+            ('\(Phospho\)','Phospho'),
 
         ]
 
