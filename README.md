@@ -58,9 +58,9 @@ start the command line with administrator privileges.)
 
 ### TESTS
 
-cd into the tests folder and execute
+Run nosetests in root folder
 
-    nosetests *py
+    nosetests
 
 ### PARTICIPATE
 
