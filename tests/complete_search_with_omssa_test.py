@@ -3,6 +3,7 @@
 
 import ursgal
 import csv
+import os
 
 TESTS =[
     {'peptide': 'STGGAAGMLGGARSQRVVR'},
@@ -52,11 +53,21 @@ R = ursgal.UController(
     },
     force=True
 )
-output_file = R.search(
-    input_file = 'tests/data/test_Creinhardtii_QE_pH8.mzML',
-    engine     = 'omssa',
-    force      = True
-)
+IS_AVAILABLE = R.unodes['omssa_2_1_9']['available']
+# IS_AVAILABLE = False
+
+if IS_AVAILABLE:
+    output_file = R.search(
+        input_file = 'tests/data/test_Creinhardtii_QE_pH8.mzML',
+        engine     = 'omssa',
+        force      = True
+    )
+else:
+    output_file = os.path.join(
+        'tests',
+        'data',
+        'test_shipped_Creinhardtii_QE_pH8_omssa_2_1_9_unified.csv'
+    )
 
 peptides_set = set()
 for line_dict in csv.DictReader(open(output_file, 'r')):
