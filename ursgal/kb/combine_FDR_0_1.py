@@ -39,3 +39,10 @@ DEFAULT_PARAMS = {
     'filter_decoys'             : False,
     'combined_FDR_cutoff'       : 0.01,
 }
+
+# Changing these params will trigger re-run:
+USED_USEARCH_PARAMS = set([
+    'apply_combined_FDR_cutoff',
+    'filter_decoys',
+    'combined_FDR_cutoff',
+])
