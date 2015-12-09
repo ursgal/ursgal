@@ -31,35 +31,21 @@ Ursgal is a Python module that offers a generalized interface to common bottom-u
 
 ### INSTALLATION
 
-    - Requirements:
-        Python3.4 or higher (www.python.org)
+Ursgal requires Python 3.4 or higher. Starting with this the easiest way is to clone the github repo.
 
-        pymzML:
-            Installation with python pip:
-                pip3 install pymzml
-            Alternatively, install pymzML from source:
-                Download and extract files from https://github.com/pymzml/pymzML
-                install from command line with 'python3.4 setup.py install'
+    user@localhost:~$ git clone git@github.com:ursgal/ursgal
+    user@localhost:~$ cd ursgal
+    user@localhost:~$ pip3.4 install -r requirements.txt
 
-    - Download and extract files from https://github.com/ursgal/ursgal
+Install third party engines:
+    user@localhost:~$ python3.4 install_resources.py
 
-    - change directory into folder
+Install Ursgal:
+    user@localhost:~$ python3.4 setup.py install
 
-    - pip3.4 install -r requirements.txt
-
-    - install third party engines:
-        python3.4 install_resources.py
-
-    - install Ursgal:
-        python3.4 setup.py install
-
-    - 'import ursgal' in your_script.py
-
-    - Under Linux it may be required to change the permission in the
+Note:
+    Under Linux it may be required to change the permission in the
     python3.4 site-package folder so that all files are executable
-
-    - Done!
-
 
 (You might need administrator privileges to write in the Python site-package folder.
 On Linux or OS X, use ```sudo python setup.py install``` or write into a user folder
