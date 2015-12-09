@@ -118,7 +118,8 @@ def digest(sequence , enzyme, no_missed_cleavages = False):
 
     Keyword Arguments:
         sequence (str): amino acid sequence to digest
-        enzyme (tuple): enzyme specified to peformed the cleavage
+        enzyme (tuple): enzyme properties used for cleavage ('aminoacid(s)', 'N/C(terminus)')
+                        e.g. ('KR','C') for trypsin
         no_missed_cleavages (bool): allow missed cleavages or not
 
     Returns:
@@ -190,9 +191,8 @@ def parseFasta(io):
 
 def reformat_peptide( regex_pattern, unimod_name, peptide ):
     '''
-    reformats the MQ and Novoar peptide string to ursgal format
-    (ac)SSSLM(ox)RPGPSR -->
-
+    reformats the MQ and Novor peptide string to ursgal format
+    (ac)SSSLM(ox)RPGPSR --> SSSLMRPGPSR#Acetyl:0;Oxidation:5
 
     '''
     mods = []
