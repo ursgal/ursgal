@@ -45,7 +45,7 @@ TESTS =[
 R = ursgal.UController(
     profile = 'LTQ XL low res',
     params = {
-        'database': 'data/test_Creinhardtii_target_decoy.fasta',
+        'database': 'tests/data/test_Creinhardtii_target_decoy.fasta',
         'modifications':[
             '*,opt,Prot-N-term,Acetyl'    # N-Acteylation[]
         ]
@@ -54,7 +54,7 @@ R = ursgal.UController(
 )
 
 mgf_file = R.convert_to_mgf_and_update_rt_lookup(
-    input_file = 'data/test_Creinhardtii_QE_pH8.mzML',
+    input_file = 'tests/data/test_Creinhardtii_QE_pH8.mzML',
     force      = True
 )
 raw_results = R.search_mgf(

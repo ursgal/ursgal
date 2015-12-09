@@ -45,7 +45,7 @@ TESTS =[
 R = ursgal.UController(
     profile = 'LTQ XL low res',
     params = {
-        'database': 'data/test_Creinhardtii_target_decoy.fasta',
+        'database': 'tests/data/test_Creinhardtii_target_decoy.fasta',
         'modifications':[
             '*,opt,Prot-N-term,Acetyl'    # N-Acteylation[]
         ]
@@ -53,7 +53,7 @@ R = ursgal.UController(
     force=True
 )
 output_file = R.search(
-    input_file = 'data/test_Creinhardtii_QE_pH8.mzML',
+    input_file = 'tests/data/test_Creinhardtii_QE_pH8.mzML',
     engine     = 'omssa',
     force      = True
 )
