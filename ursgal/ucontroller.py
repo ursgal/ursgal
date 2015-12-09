@@ -2183,7 +2183,7 @@ Nothing to do here...
                         md5_in_kb = kb_engine_dict[ current_platform ][ current_architecture ]['zip_md5']
                     except:
                         print(
-                            'No md5 entry for {engine} on {plaform}/{architecture}'.format(
+                            'No md5 entry for {engine} on {platform}/{architecture}'.format(
                                 engine       = engine,
                                 platform     = current_platform,
                                 architecture = current_architecture
