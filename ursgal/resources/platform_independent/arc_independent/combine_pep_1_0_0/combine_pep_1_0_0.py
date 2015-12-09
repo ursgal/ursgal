@@ -20,28 +20,45 @@ def sliding_window(iterable, window_size):
     half_window_size = int((window_size-1)/2)
     win = collections.deque(maxlen=window_size)
 
-    # collect first bin (half the size of window_len)
-    for __ in range(half_window_size):
-        win.append(iterable.__next__())
+    try:
 
-    # the first few values cannot get full bins since there are few values
-    # to the left, so their bins are smaller and contain fewer values to the
-    # left:
-    for i in range(half_window_size):
-        win.append(iterable.__next__())
-        yield win, win[i]
+        # collect first bin (half the size of window_len)
+        for __ in range(half_window_size):
+            try:
+                win.append(iterable.__next__())
+            except StopIteration:
+                continue
 
-    # windows from the center of the iterable, all have the full-length:
-    for e in iterable:
-        win.append(e)
-        yield win, win[half_window_size]
+        # the first few values cannot get full bins since there are few values
+        # to the left, so their bins are smaller and contain fewer values to the
+        # left:
+        iter_terminated = False
+        for i in range(half_window_size):
+            try:
+                win.append(iterable.__next__())
+            except StopIteration:
+                # this would terminate the whole function...
+                iter_terminated = True
+                pass
+            yield win, win[i]
 
-    # the last few values also cannot get full bins since there are few values
-    # to the right, so their bins are smaller and contain fewer values to the
-    # right:
-    for __ in range(half_window_size):
-        win.popleft()
-        yield win, win[half_window_size]
+        if iter_terminated:
+            yield win, win[i+1]
+
+        # windows from the center of the iterable, all have the full-length:
+        for e in iterable:
+            win.append(e)
+            yield win, win[half_window_size]
+
+        # the last few values also cannot get full bins since there are few values
+        # to the right, so their bins are smaller and contain fewer values to the
+        # right:
+        for __ in range(half_window_size):
+            win.popleft()
+            yield win, win[half_window_size]
+
+    except IndexError:
+        raise StopIteration
 
 
 class CombinedPEP(object):
@@ -210,24 +227,6 @@ class CombinedPEP(object):
                     intersection_PEP
         return
 
-    def __write_output_old(self, output_csv_path):
-        new_scores = ['combined PEP', 'Bayes PEP', 'Is decoy']
-        fieldnames = list(self.columns_for_grouping) + new_scores + ['engines']
-        with open(output_csv_path, 'w', encoding='utf8') as out_obj:
-            writer = csv.DictWriter(out_obj, fieldnames=fieldnames)
-            writer.writeheader()
-
-            for engine_combo, combo_score_dict in self.score_dict.items():
-
-                for psm_key, score_dict_val in combo_score_dict.items():
-                    out_row = {}
-                    out_row['engines'] = self.join_sep.join(engine_combo)
-                    for i, field in enumerate(self.columns_for_grouping):
-                        out_row[field] = psm_key[i]
-                    for j, score_field in enumerate(new_scores):
-                        out_row[score_field] = score_dict_val[score_field]
-                    writer.writerow(out_row)
-
     def write_output_csv(self, output_csv_path):
         new_scores = ['combined PEP', 'Bayes PEP']
         fieldnames = list(self.input_csv_fieldnames) + new_scores + ['engines']
@@ -272,7 +271,7 @@ class CombinedPEP(object):
                     # value is not there yet, so add it
                     md[col_name] = field_val
                     continue
-                
+
                 if md[col_name] == field_val:
                     # value is already there, no need to add it
                     continue

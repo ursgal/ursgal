@@ -7,27 +7,27 @@ import sys
 from pprint import pprint
 
 
-class naive_bayes_1_0_0( ursgal.UNode ):
+class combine_pep_1_0_0( ursgal.UNode ):
     '''
-    naive_bayes_1_0_0 UNode
+    combine_pep_1_0_0 UNode
     '''
     def __init__(self, *args, **kwargs):
-        super(naive_bayes_1_0_0, self).__init__(*args, **kwargs)
+        super(combine_pep_1_0_0, self).__init__(*args, **kwargs)
         pass
 
 
     def preflight( self ):
         '''
         Building the list of parameters that will be passed to the
-        naive_bayes_1_0_0 main function.
+        combine_pep_1_0_0 main function.
 
         These parameters are stored in self.command_dict
 
         Returns:
                 None
         '''
-        input_file_list_for_bayes = []
-        search_engine_list_for_bayes = []
+        input_file_list_for_cPEP = []
+        search_engine_list_for_cPEP = []
         # careful, these must have the same order!
 
         for input_file_dict in self.params["input_file_dicts"]:
@@ -35,9 +35,9 @@ class naive_bayes_1_0_0( ursgal.UNode ):
                 input_file_dict['dir'],
                 input_file_dict['file']
             )
-            input_file_list_for_bayes.append(input_file_path)
+            input_file_list_for_cPEP.append(input_file_path)
             search_engine = input_file_dict["last_search_engine"]
-            search_engine_list_for_bayes.append(search_engine)
+            search_engine_list_for_cPEP.append(search_engine)
 
         features_that_define_unique_psm = \
             ['Sequence', 'Modifications', 'Spectrum Title', 'Is decoy']#, 'Charge', 'Is decoy']
@@ -48,8 +48,8 @@ class naive_bayes_1_0_0( ursgal.UNode ):
         )
 
         self.command_dict = {
-            'input_csvs': input_file_list_for_bayes,
-            'input_engines': search_engine_list_for_bayes,
+            'input_csvs': input_file_list_for_cPEP,
+            'input_engines': search_engine_list_for_cPEP,
             'output_csv': output_csv_full_path,
             'columns_for_grouping': features_that_define_unique_psm,
             'input_sep': ',',  # input csv separating char
@@ -71,7 +71,7 @@ class naive_bayes_1_0_0( ursgal.UNode ):
         Returns:
                 None
         '''
-        naive_bayes_main = self.import_engine_as_python_function()
+        cPEP_main = self.import_engine_as_python_function()
 
         print('''
 
@@ -86,7 +86,7 @@ Executing main() function from {scriptpath} with the following parameters:
 ...     output_sep = '{output_sep}',
 ...     join_sep = '{join_sep}',
 ...     pep_colname = '{pep_colname}',
-...     window_size = '{window_size}',
+...     window_size = {window_size},
 ... )
 
         '''.format(
@@ -96,8 +96,8 @@ Executing main() function from {scriptpath} with the following parameters:
             )
         )
 
-        # executing main function of the naive bayes script
-        naive_bayes_main(
+        # executing main function of the combine_PEP script
+        cPEP_main(
             input_csvs = self.command_dict['input_csvs'],
             input_engines = self.command_dict['input_engines'],
             output_csv = self.command_dict['output_csv'],
