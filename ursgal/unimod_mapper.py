@@ -92,9 +92,22 @@ class UnimodMapper( object ):
         for index, unimod_data_dict in enumerate(self.data_list):
             for key, value in unimod_data_dict.items():
                 if key == 'element':
+
+                    MAJORS = ['C', 'H']
                     hill_notation = ''
+                    for major in MAJORS:
+                        if major in unimod_data_dict[key].keys():
+                            hill_notation += '{0}({1})'.format(
+                                major,
+                                unimod_data_dict[key][major]
+                            )
                     for symbol, number in sorted(unimod_data_dict[key].items()):
-                        hill_notation += '{0}{1}'.format(symbol,number)
+                        if symbol in MAJORS:
+                            continue
+                        hill_notation += '{0}({1})'.format(
+                            symbol,
+                            number
+                        )
                     if hill_notation not in mapper.keys():
                         mapper[ hill_notation ] = []
                     mapper[ hill_notation ].append( index )
