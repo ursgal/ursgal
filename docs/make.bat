@@ -13,8 +13,8 @@ if NOT "%PAPER%" == "" (
 	set I18NSPHINXOPTS=-D latex_paper_size=%PAPER% %I18NSPHINXOPTS%
 )
 
-./parse_example_scripts.py
-./format_param_table.py
+./usr/bin/env python parse_example_scripts.py
+./usr/bin/env python format_param_table.py
 
 if "%1" == "" goto help
 

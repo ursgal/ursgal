@@ -72,16 +72,16 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         For X!Tandem result files first need to be converted into .mzid
         with raw2mzid
         '''
-        search_engine = None
-        for history_step_dict in self.stats['history']:
-            is_search_engine  = history_step_dict['META_INFO']['engine_type'].get(
-                'search_engine',False
-            )
-            if is_search_engine:
-                search_engine = history_step_dict['engine']
 
+        search_engine = self.get_last_search_engine(
+            history = self.stats['history']
+        )
         if search_engine is None:
-            raise TypeError( 'mzidentml_lib UNode: Last search engine was not found in history. Can\'t convert results without knowing which search engine was used.' )
+            raise TypeError(
+                '\nmzidentml_lib UNode: Last search engine was not found in '\
+                'history. Can\'t convert results without knowing which '\
+                'search engine was used.'
+            )
 
         self.params['mzid_output_file'] = os.path.join(
             self.params['output_dir_path'],

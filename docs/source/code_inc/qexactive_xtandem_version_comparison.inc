@@ -77,8 +77,8 @@
 	        ),
 	        'modifications' : [ 'C,fix,any,Carbamidomethyl' ],
 	        'csv_filter_rules':[
-	            ('PEP'      , 'lte'    , 0.01)    ,
-	            ('Is decoy' , 'equals' , 'false')
+	            ['PEP'      , 'lte'    , 0.01]    ,
+	            ['Is decoy' , 'equals' , 'false']
 	        ],
 	        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/hs_201303_qs_sip_target_decoy.fasta' ,
 	        'http_output_folder' : os.path.join(

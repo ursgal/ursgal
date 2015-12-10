@@ -54,7 +54,6 @@ R = ursgal.UController(
     force=True
 )
 IS_AVAILABLE = R.unodes['omssa_2_1_9']['available']
-# IS_AVAILABLE = False
 
 if IS_AVAILABLE:
     output_file = R.search(

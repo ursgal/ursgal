@@ -7,8 +7,9 @@ import xlrd
 
 
 if __name__ == '__main__':
-
-
+    print('''
+        Converting parameter tables from xls into rst files for the docs
+''')
     book = xlrd.open_workbook('source/ursgal_params.xls')
     # print("The number of worksheets is", book.nsheets)
     # print("Worksheet name(s):", book.sheet_names())

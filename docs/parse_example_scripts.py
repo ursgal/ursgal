@@ -6,8 +6,8 @@ import os
 
 if __name__ == '__main__':
     print('''
-        Formatting example scripts into rst files for the docu
-        ''')
+        Formatting example scripts into rst files for the docs
+''')
     # input()
     for example_script in glob.glob('../example_scripts/*.py'):
         if os.path.exists(example_script) is False:
@@ -19,4 +19,5 @@ if __name__ == '__main__':
             with open( example_script ) as infile:
                 for line in infile:
                     print('\t{0}'.format( line.rstrip()), file=o)
+
 

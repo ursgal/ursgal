@@ -21,8 +21,8 @@
 	    '''
 	    params = {
 	        'csv_filter_rules': [
-	            ('PEP','lte',0.01),
-	            ('Is decoy','equals','false')
+	            ['PEP', 'lte', 0.01],
+	            ['Is decoy', 'equals', 'false']
 	        ]
 	    }
 	

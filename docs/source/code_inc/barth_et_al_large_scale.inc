@@ -299,8 +299,8 @@
 	    # less RAM-intensive, we remove all decoys and PSMs above
 	    # 0.06 FDR
 	    uc.params['csv_filter_rules'] = [
-	        ('estimated_FDR', 'lte', 0.06),
-	        ('Is decoy', 'equals', 'false')
+	        ['estimated_FDR', 'lte', 0.06],
+	        ['Is decoy', 'equals', 'false']
 	    ]
 	    for engine, percolator_validated_list in percolator_results.items():
 	
@@ -340,8 +340,8 @@
 	    # Removing decoys and low quality hits, to obtain a
 	    # smaller file:
 	    uc.params['csv_filter_rules'] = [
-	        ('estimated_FDR', 'lte', 0.06),
-	        ('Is decoy', 'equals', 'false')
+	        ['estimated_FDR', 'lte', 0.06],
+	        ['Is decoy', 'equals', 'false']
 	    ]
 	    cFDR_filtered_results = uc.filter_csv(
 	        input_file = cFDR_FDR,

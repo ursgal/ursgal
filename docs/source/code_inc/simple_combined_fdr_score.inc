@@ -35,8 +35,8 @@
 	        ),
 	        'modifications' : [ ],
 	        'csv_filter_rules':[
-	            ('PEP'      , 'lte'    , 0.01)    ,
-	            ('Is decoy' , 'equals' , 'false')
+	            ['PEP'      , 'lte'    , 0.01]    ,
+	            ['Is decoy' , 'equals' , 'false']
 	        ],
 	        'ftp_url'       : 'ftp.peptideatlas.org',
 	        'ftp_login'         : 'PASS00269',
