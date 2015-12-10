@@ -27,7 +27,8 @@ META_INFO = {
 }
 
 DEFAULT_PARAMS = {
-    'decoy_generation_mode' : 'shuffle_peptide'
+    'decoy_generation_mode' : 'shuffle_peptide',
+    'enzyme'                : 'trypsin'
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {}

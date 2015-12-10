@@ -36,3 +36,14 @@ DEFAULT_PARAMS = {
     'ftp_max_number_of_files' : None,
     'ftp_blocksize'           : 1024,
 }
+
+USED_USEARCH_PARAMS = set([
+    'ftp_url',
+    'ftp_folder',
+    'ftp_login',
+    'ftp_password',
+    'ftp_include_ext',
+    'ftp_output_folder',
+    'ftp_max_number_of_files',
+    'ftp_blocksize',
+])

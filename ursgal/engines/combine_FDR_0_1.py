@@ -67,12 +67,12 @@ class combine_FDR_0_1( ursgal.UNode ):
 
         self.command_dict = {
             "input_file_list" : input_file_list_for_cFDR_script,
-            "cutoff"          : self.DEFAULT_PARAMS['combined_FDR_cutoff'],
+            "cutoff"          : self.params['combined_FDR_cutoff'],
             "directory"       : self.params['output_dir_path'],
             "file_info"       : file_info_for_cFDR_script,
             "output_filename" : self.params['output_file'],
-            "filter_decoys"   : self.DEFAULT_PARAMS['filter_decoys'],
-            "filter_cutoff"   : self.DEFAULT_PARAMS['apply_combined_FDR_cutoff'],
+            "filter_decoys"   : self.params['filter_decoys'],
+            "filter_cutoff"   : self.params['apply_combined_FDR_cutoff'],
         }
 
 

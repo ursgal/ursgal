@@ -15,8 +15,12 @@ PROFILES = {
 
     'QExactive+' : {
         'score_a_ions'              : True,
-        'score_ions'                : ['a', 'b', 'x', 'b-h2o'],
+        'score_imm_ions'            : True, # only MSAmanda
+        'score_int_ions'            : True, # only MSAmanda
         'instrument'                : 'q_exactive',
 
     },
 }
+
+# score a ions for HCD spectra, according to 
+# Michalski et al (2012): A systematic investigation into the nature of tryptic HCD spectra. J Proteome Res (11)

@@ -9,7 +9,6 @@ META_INFO={
         'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
         'a universal identification algorithm optimized for high accuracy '\
         'tandem mass spectra.',
-
     'include_in_git'            : None,
     'cannot_distribute'         : True,
 
@@ -32,11 +31,6 @@ META_INFO={
         },
     },
     
-    # 'engine_exe':{
-    #     'linux':'MSAmanda.exe',
-    #     'darwin':'MSAmanda.exe',
-    # },
-    # 'zip_md5'                   : None,
 }
 
 DEFAULT_PARAMS={
@@ -50,13 +44,8 @@ DEFAULT_PARAMS={
 USEARCH_PARAM_VALUE_TRANSLATIONS = {
     'nonspecific'            : 'No-Enzyme',
     'trypsin'                : 'Trypsin',
-    # 'chymotrypsin'           : 2,
-    'lys_c'                  : 'LysC',
-    # 'lys_n'                  : 4,
+    'lysc'                   : 'LysC',
     'gluc'                   : 'GluC',
-    # 'arg_c'                  : 6,
-    # 'asp_n'                  : 7,
-    # 'alpha_lp'               : 8,
     'no_cleavage'            : 'No-Cleavage',
     'da'                     : 'Da',
 
@@ -76,10 +65,6 @@ USEARCH_PARAM_VALUE_TRANSLATIONS = {
     }
 
 USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
-    'semi_enzyme' : {
-        True : 'Semi',
-        False : 'Full'
-      }
     }
 
 USED_USEARCH_PARAMS = set( [
@@ -93,8 +78,6 @@ USED_USEARCH_PARAMS = set( [
     'precursor_max_charge',
     'frag_mass_tolerance_unit',
     'frag_mass_tolerance',
-    # 'input_file',
-    # 'input_type',
     'score_a_ions',
     'score_b_ions',
     'score_c_ions',
@@ -109,7 +92,6 @@ USED_USEARCH_PARAMS = set( [
     'score_z+2_ions',
     'cpus',
     'database',
-    # 'output_file',
     ]
      )
 
