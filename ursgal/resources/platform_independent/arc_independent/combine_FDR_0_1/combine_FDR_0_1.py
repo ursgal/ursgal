@@ -163,7 +163,7 @@ class MultiScorer(object):
                 if 'decoy' in row['proteinacc_start_stop_pre_post_;'].lower():
                     row['Is decoy'] = 'true'
 
-                PSM_tuple        = ( pep_sequence, spectrum_identifier, modifications )
+                PSM_tuple        = ( pep_sequence, spectrum_identifier, modifications, row['Is decoy'] )
                 row["PSM tuple"] = PSM_tuple
                 row["Percolator:q-Value"] = row["q-value"]
                 del row["q-value"]

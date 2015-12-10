@@ -77,6 +77,7 @@ TESTS = [
 filter_csv_main = R.unodes['filter_csv_1_0_0']['class'].import_engine_as_python_function()
 
 input_csv = os.path.join(
+    'tests',
     'data',
     'test_BSA1_omssa_2_1_9_unified_filter_csv_test.csv'
 )
@@ -92,6 +93,7 @@ def compare_filter( test_dict ):
     output_csv = filter_csv_main(
         input_file     = input_csv,
         output_file    = os.path.join(
+            'tests',
             'data',
             'test_BSA1_omssa_2_1_9_unified_filter_csv_test_filtered.csv'
         ),

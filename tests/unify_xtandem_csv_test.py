@@ -14,7 +14,7 @@ import os
 R = ursgal.UController(
     profile = 'LTQ XL low res',
     params  = {
-        'database': os.path.join( 'data', 'BSA.fasta')
+        'database': os.path.join( 'tests', 'data', 'BSA.fasta')
     },
     force   = False
 )
@@ -22,6 +22,7 @@ R = ursgal.UController(
 scan_rt_lookup = pickle.load(
     open(
         os.path.join(
+            'tests',
             'data',
             '_test_ursgal_lookup.pkl')
         ,
@@ -31,11 +32,13 @@ scan_rt_lookup = pickle.load(
 
 unify_csv_main = R.unodes['unify_csv_1_0_0']['class'].import_engine_as_python_function()
 input_csv = os.path.join(
+    'tests',
     'data',
     'xtandem_sledgehammer',
     'test_BSA1_xtandem_sledgehammer.csv'
 )
 output_csv = os.path.join(
+    'tests',
     'data',
     'xtandem_sledgehammer',
     'test_BSA1_xtandem_sledgehammer_unified.csv'

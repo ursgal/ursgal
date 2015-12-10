@@ -16,6 +16,7 @@ R = ursgal.UController()
 scan_rt_lookup = pickle.load(
     open(
         os.path.join(
+            'tests',
             'data',
             '_test_ursgal_lookup.pkl')
         ,
@@ -25,11 +26,13 @@ scan_rt_lookup = pickle.load(
 
 unify_csv_main = R.unodes['unify_csv_1_0_0']['class'].import_engine_as_python_function()
 input_csv = os.path.join(
+    'tests',
     'data',
     'msamanda_1_0_0_5243',
     'test_BSA1_msamanda_1_0_0_5243.csv'
 )
 output_csv = os.path.join(
+    'tests',
     'data',
     'msamanda_1_0_0_5243',
     'test_BSA1_msamanda_1_0_0_5243_unified.csv'

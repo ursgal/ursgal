@@ -21,16 +21,19 @@ R = ursgal.UController(
 
 xtandem2csv_main = R.unodes['xtandem2csv_1_0_0']['class'].import_engine_as_python_function()
 input_xml = os.path.join(
+    'tests',
     'data',
     'xtandem_sledgehammer',
     'test_BSA1_xtandem.xml'
 )
 output_csv = os.path.join(
+    'tests',
     'data',
     'xtandem_sledgehammer',
     'test_BSA1_xtandem.csv'
 )
 expected_csv = os.path.join(
+    'tests',
     'data',
     'xtandem_sledgehammer',
     'test_BSA1_xtandem_expected.csv'
@@ -57,8 +60,8 @@ def unify_xtandem_test():
 
 def unify_xtandem( test_dict, expected_dict ):
     for key in [
-        'Raw data location', 
-        'Spectrum ID', 
+        'Raw data location',
+        'Spectrum ID',
         'Spectrum Title',
         'Retention Time (s)',
         'rank',

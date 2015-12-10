@@ -8,7 +8,7 @@ Test the peptide_regex function
 import ursgal
 import os
 
-database = os.path.join( 'data', 'BSA.fasta')
+database = os.path.join( 'tests', 'data', 'BSA.fasta')
 
 R = ursgal.UController(
     profile = 'LTQ XL low res',

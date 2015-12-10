@@ -8,11 +8,11 @@ R = ursgal.UController()
 
 TESTS = [
     {
-        'input' : os.path.join('data', 'test.json'),
+        'input' : os.path.join('tests', 'data', 'test.json'),
         'output' : '379450895e2c116886b2e92dfcd68b2b'
     },
     {
-        'input' : os.path.join('data', 'test_without_database.json'),
+        'input' : os.path.join('tests', 'data', 'test_without_database.json'),
         'output' : 'deb20d01ff369188a583decf203cf769'
     }
 ]
