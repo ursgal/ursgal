@@ -3,11 +3,15 @@ Introduction
 
 *Ursgal - universal Python module combining common bottom-up proteomics tools for large-scale analysis*
 
-|build-status|
+|build-status| |doc-status|
 
 .. |build-status| image:: https://travis-ci.org/ursgal/ursgal.svg?branch=master
    :target: https://travis-ci.org/ursgal/ursgal
    :alt: Travis CI status
+
+.. |doc-status| image:: https://readthedocs.org/projects/ursgal/badge/?version=latest
+    :target: http://ursgal.readthedocs.org/en/latest/?badge=latest
+    :alt: Documentation Status
 
 Summary
 *******

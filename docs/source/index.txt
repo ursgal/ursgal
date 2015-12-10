@@ -8,7 +8,7 @@ Welcome to ursgal's documentation!
 The latest Documentation was generated on: |today|
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    intro
 
