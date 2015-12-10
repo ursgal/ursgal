@@ -10,8 +10,8 @@
 	def main():
 	    '''
 	    Executes a search with 3 different search engines on an example file from
-	    the data from Barth et al. (The same file that is used in the XTandem
-	    version comparison example.)
+	    the data from Barth et al. Two searches are performed pe engine for each
+	    14N (unlabeled) and 15N labeling.
 	
 	    usage:
 	        ./search_with_label_15N.py
@@ -34,8 +34,8 @@
 	        ),
 	        'modifications' : [ ],
 	        'csv_filter_rules' : [
-	            ('PEP'      , 'lte'    , 0.01),
-	            ('Is decoy' , 'equals' , 'false')
+	            ['PEP'      , 'lte'    , 0.01],
+	            ['Is decoy' , 'equals' , 'false']
 	        ],
 	        'ftp_url'       : 'ftp.peptideatlas.org',
 	        'ftp_login'         : 'PASS00269',

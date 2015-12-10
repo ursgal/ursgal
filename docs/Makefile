@@ -1,9 +1,11 @@
 # Makefile for Sphinx documentation
 #
+AUTO_GEN1 = /usr/bin/env python3 parse_example_scripts.py
+AUTO_GEN2 = /usr/bin/env python3 format_param_table.py
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
+SPHINXBUILD   = $(AUTO_GEN1);$(AUTO_GEN2);sphinx-build
 PAPER         =
 BUILDDIR      = build
 PROJECT       = ursgal
@@ -12,6 +14,7 @@ PROJECT       = ursgal
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
 $(error The '$(SPHINXBUILD)' command was not found. Make sure you have Sphinx installed, then set the SPHINXBUILD environment variable to point to the full path of the '$(SPHINXBUILD)' executable. Alternatively you can add the directory with the executable to your PATH. If you don't have Sphinx installed, grab it from http://sphinx-doc.org/)
 endif
+
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4

@@ -72,9 +72,9 @@
 	        'database'      : target_decoy_database,
 	        'modifications' : all_mods,
 	        'csv_filter_rules' : [
-	            ('Is decoy','equals','false'),
-	            ('PEP','lte',0.01),
-	            ]
+	            ['Is decoy', 'equals', 'false'],
+	            ['PEP','lte', 0.01],
+	        ]
 	    }
 	
 	    uc = ursgal.UController(

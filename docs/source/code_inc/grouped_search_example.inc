@@ -16,8 +16,8 @@
 	        'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
 	    ),
 	    'csv_filter_rules' : [
-	        ('Is decoy','equals','false'),
-	        ('PEP','lte',0.01),
+	        ['Is decoy','equals','false'],
+	        ['PEP','lte',0.01],
 	    ],
 	    # Modifications that should be included in the search
 	    'modifications' : [
@@ -144,21 +144,21 @@
 	            for p, group in  enumerate(group_list):
 	                if group == '0':
 	                    uc.params['csv_filter_rules'] = [
-	                        ('Modifications','contains_not','{0}'.format(groups['1'])),
-	                        ('Modifications','contains_not','{0}'.format(groups['2'])),
-	                        ('Modifications','contains_not','{0}'.format(groups['3'])),
-	                        ('Modifications','contains_not','{0}'.format(groups['4'])),
-	                        ('Modifications','contains_not','{0}'.format(groups['5'])),
-	                        ]
+	                        ['Modifications','contains_not','{0}'.format(groups['1'])],
+	                        ['Modifications','contains_not','{0}'.format(groups['2'])],
+	                        ['Modifications','contains_not','{0}'.format(groups['3'])],
+	                        ['Modifications','contains_not','{0}'.format(groups['4'])],
+	                        ['Modifications','contains_not','{0}'.format(groups['5'])],
+	                    ]
 	                else:
 	                    uc.params['csv_filter_rules'] = [
-	                        ('Modifications','contains','{0}'.format(groups[group]))
-	                        ]
+	                        ['Modifications','contains','{0}'.format(groups[group])]
+	                    ]
 	                    for other_group in group_list:
 	                        if other_group == '0' or other_group == group:
 	                            continue
 	                        uc.params['csv_filter_rules'].append(
-	                            ('Modifications','contains_not','{0}'.format(groups[other_group])),
+	                            ['Modifications','contains_not','{0}'.format(groups[other_group])],
 	                        )
 	                uc.params['prefix'] = 'grouped-{0}'.format(group)
 	                filtered_results = uc.filter_csv(
@@ -180,9 +180,9 @@
 	                )
 	        uc.params['prefix'] = ''
 	        uc.params['csv_filter_rules'] = [
-	                ('Is decoy','equals','false'),
-	                ('PEP','lte',0.01),
-	                ]
+	                ['Is decoy','equals','false'],
+	                ['PEP','lte',0.01],
+	            ]
 	        filtered_validated_results = uc.filter_csv(
 	            input_file = validated_results_from_all_engines
 	            )

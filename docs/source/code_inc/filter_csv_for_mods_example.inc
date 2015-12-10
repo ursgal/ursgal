@@ -21,7 +21,7 @@
 	    '''
 	    params = {
 	        'csv_filter_rules': [
-	            ('Modifications', 'contains', 'Carbamidomethyl'),
+	            ['Modifications', 'contains', 'Carbamidomethyl'],
 	        ],
 	        'write_unfiltered_results':False
 	
