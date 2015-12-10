@@ -24,12 +24,11 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         '''
         tmp_options = [
             self.exe,
-            '-outputFragmentation', 'false',
+            '-outputFragmentation', 
+            '{mzidentml_outputFragmentation}'.format(**self.params),
             '-decoyRegex',
-            '{decoy_tag}'.format(
-                **self.params
-            ),
-            '-compress', 'false',
+            '{decoy_tag}'.format(**self.params),
+            '-compress', '{mzidentml_compress}'.format(**self.params),
         ]
 
         if 'tandem' in search_engine:
@@ -73,13 +72,8 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         For X!Tandem result files first need to be converted into .mzid
         with raw2mzid
         '''
-        #import pprint
-        #pprint.pprint( self.stats )
-        #exit()
-
         search_engine = None
         for history_step_dict in self.stats['history']:
-            # print(history_step_dict)
             is_search_engine  = history_step_dict['META_INFO']['engine_type'].get(
                 'search_engine',False
             )
@@ -121,9 +115,9 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                     self.params['output_dir_path'],
                     self.params['output_file']
                 ),
-                '-exportType'    , 'exportPSMs' ,
-                '-verboseOutput' , 'false'      ,
-                '-compress'      , 'false'
+                '-exportType'    , '{mzidentml_exportType}'.format(**self.params),
+                '-verboseOutput' , '{mzidentml_verboseOutput}'.format(**self.params),
+                '-compress'      , '{mzidentml_compress}'.format(**self.params),
             ]
         else:
             #OMSSA and MS amanda does not need a conversion

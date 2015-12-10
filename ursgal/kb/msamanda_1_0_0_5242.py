@@ -34,7 +34,7 @@ DEFAULT_PARAMS={
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {
-    'unspecific_cleavage'    : 'No-Enzyme',
+    'nonspecific'            : 'No-Enzyme',
     'trypsin'                : 'Trypsin',
     'lysc'                   : 'LysC',
     'gluc'                   : 'GluC',
@@ -84,6 +84,11 @@ USED_USEARCH_PARAMS = set( [
     'score_z+2_ions',
     'cpus',
     'database',
+    'validation_score_field',
+    'evalue_field',
+    'validation_minimum_score',
+    'bigger_scores_better',
+    'input_type',
     ]
      )
 

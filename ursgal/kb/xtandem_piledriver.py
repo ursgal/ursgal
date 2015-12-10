@@ -68,7 +68,7 @@ USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
         'clostripain' : '[R]|[X]',
         'cnbr' : '[M]|{P}',
         'elastase' : '[AGILV]|{P}',
-        'formicacid' : '[D]|{P}',
+        'formic_acid' : '[D]|{P}',
         'gluc' : '[DE]|{P}',
         'gluc_bicarb' : '[E]|{P}',
         'iodosobenzoate' : '[W]|[X]',
@@ -83,8 +83,8 @@ USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
         'tca' : '[FMWY]|{P},[KR]|{P},[X]|[D]',
         'trypsin' : '[KR]|{P}',
         'trypsin_p' : '[RK]|[X]',
-        'trypsin/cnbr' : '[KR]|{P},[M]|{P}',
-        'trypsin/gluc' : '[DEKR]|{P}',
+        'trypsin_cnbr' : '[KR]|{P},[M]|{P}',
+        'trypsin_gluc' : '[DEKR]|{P}',
     }
 }
 USED_USEARCH_PARAMS = set([

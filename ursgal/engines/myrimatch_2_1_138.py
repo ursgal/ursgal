@@ -76,18 +76,8 @@ class myrimatch_2_1_138( ursgal.UNode ):
         ''' Writes a file containing all parameters for the search '''
 
         config_file= open(self.params['myrimatch_config_file_path'], 'w') #param file must be in execution folder
-        # param_io = open('config_file','w')
         self.params['myrimatch_static_mods'] = ''
-        # self.params['cam_mod_mass'] = ursgal.kb.ursgal.CAM_MOD
         self.params['myrimatch_dynamic_mods'] = ''
-        # cam = False
-
-        # if self.params['label'] == '15N':
-        #     for aminoacid, modification in ursgal.kb.ursgal.DICT_15N_DIFF.items():
-        #         if aminoacid == 'C' and cam == True:
-        #             self.params['myrimatch_static_mods']+= '{0} {1} '.format( aminoacid, modification + ursgal.kb.ursgal.CAM_MOD )
-        #         else:
-        #             self.params['myrimatch_static_mods']+= '{0} {1} '.format( aminoacid, modification )
 
         if self.params['label'] == '15N':
             for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
@@ -101,9 +91,6 @@ class myrimatch_2_1_138( ursgal.UNode ):
                 self.params['myrimatch_static_mods']+= '{0} {1} '.format( aminoacid, N15_Diff )
             
         for mod in self.params[ 'mods' ][ 'fix' ]:
-            # if self.params['label'] == '15N' and mod[ 'aa' ] == 'C' and mod[ 'name' ] == 'Carbamidomethyl':
-            #     cam = True
-            #     continue
             self.params['myrimatch_static_mods'] += '{0} {1} '.format( mod[ 'aa' ], mod[ 'mass' ] )
             
         characters = ['$', '%', '^', '&', '*', '_', '<', '>', '|', ':', ';' ]
