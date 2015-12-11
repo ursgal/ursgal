@@ -89,9 +89,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         else:
             self.params['semi_enzyme'] = 'Full'
 
-        # use_mass = False
         if self.params['label'] == '15N':
-            # use_mass = True
             for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
                 existing = False
                 for mod in self.params[ 'mods' ][ 'fix' ]:
@@ -106,8 +104,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                                                          'name': '15N_{0}'.format(aminoacid),
                                                          'mass': N15_Diff }
                                                       )
-        # if mod[ 'unimod' ] == False:
-        #     use_mass = True
 
         modifications = [ ]
         for t in [ 'fix', 'opt' ]:
@@ -136,13 +132,10 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                     modifications.append( '<modification fix="{0}" protein="{1}" nterm="{2}" cterm="{3}" delta_mass="{4}">{5}</modification>'.format(
                                         fix, protein, n_term, c_term, mod[ 'mass' ], mod[ 'name' ] ))
                     continue
-                # if use_mass == True:
                 modifications.append( '<modification fix="{0}" protein="{1}" nterm="{2}" cterm="{3}" delta_mass="{4}">{5}({6})</modification>'.format(
                                     fix, protein, n_term, c_term, mod[ 'mass' ], mod['name'], mod[ 'aa' ] )
                                 )
-                # modifications.append( '<modification fix="{0}" protein="{1}" nterm="{2}" cterm="{3}">{4}({5})</modification>'.format(
-                #                         fix, protein, n_term, c_term, mod[ 'name' ], mod[ 'aa' ] )
-                                    # )
+
         self.params['modifications'] = ''.join( modifications )
         print(self.params['modifications'])
 
@@ -181,8 +174,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                 'Start',
                 'Stop',
                 'Calc m/z'
-                # 'Retention Time (s)',
-                # 'Raw data location'
             ]
             print('[ PARSING  ] Loading unformatted MS Amanda results ...')
             for line_dict in csv_dict_reader_object:

@@ -20,28 +20,17 @@ META_INFO = {
             },
         },
     },    
-
-
-    # 'engine_exe':{
-    #     'arc_independent':'mzml2mgf_1_0_0.py',
-    # },
-    # 'engine_url' : {
-    #     'internal' : True,
-    # },
 }
 
 DEFAULT_PARAMS = {
     'number_of_mz_decimals' : 5,
     'number_of_i_decimals'  : 5,
-    # 'precursor_ppm_offset'  : None,
-    # 'fragment_ppm_offset'   : None,
     'machine_offset_in_ppm'  : None,
     'scan_exclusion_list'   : None,
     'scan_skip_modulo_step' : None,
 }
 
 USED_USEARCH_PARAMS = [
-    # used to be AVAILABLE PARAMS ..
     # Only these will be translated ...
     # Only those will trigger a re-run if changed!!
     'number_of_mz_decimals',
@@ -52,7 +41,6 @@ USED_USEARCH_PARAMS = [
 ]
 
 USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
-    # USED TO BE UBER_SPECIFIC_TRANSLATIONS
     # params['mega_flag'] of 5 is translated to 'monster peanut' for unode
     # because Gnome Chompski
     # Note: only USED_USEARCH_PARAMS are actually translated !!
@@ -66,7 +54,6 @@ USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {
-    # USED TO BE UBER_UBER_VALUE_TRANSLATIONS
-    # USearch value is not know to the node bu can be mapped 1 to 1
+    # USearch value is not know to the node but can be mapped 1 to 1
     'trypsin' : 'at least no human can read it in our code ...',
 }
