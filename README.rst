@@ -59,7 +59,7 @@ Installation
 
 Ursgal requires Python 3.4 or higher. Starting with this the easiest way is to clone the github repo.::
 
-    user@localhost:~$ git clone git@github.com:ursgal/ursgal
+    user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
     user@localhost:~$ cd ursgal
     user@localhost:~/ursgal$ pip3.4 install -r requirements.txt
 
