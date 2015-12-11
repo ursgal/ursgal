@@ -118,4 +118,4 @@ The default structure of the engine is::
 
 
 The special methods `preflight()` and `postflight()` are automatically called
-be Ursgal's UController when a UNode is run.
+by Ursgal's UController when a UNode is run.
