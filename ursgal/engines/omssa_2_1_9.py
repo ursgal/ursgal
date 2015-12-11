@@ -227,9 +227,7 @@ class omssa_2_1_9( ursgal.UNode ):
             # BLAST package
 
             # -- OUTPUT: ---
-            # '-ox', '{output_file_incl_path}'.format(**self.params), # we dont change this, omx is defautl
-            '-oc', '{output_file_incl_path}'.format(**self.params),
-            # we dont change this, csv is defautl
+            '{omssa_output_type}'.format(**self.params), '{output_file_incl_path}'.format(**self.params), # -oc for csv, -ox for omx
             '-w',
             # include search spetra and self.params in results,
             # is required for mzid conversion, if omx is used, but omx files

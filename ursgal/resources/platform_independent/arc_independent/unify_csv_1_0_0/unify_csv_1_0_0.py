@@ -492,17 +492,18 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
     output_file_object.close()
 
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
-    if max(psm_counter.values()) > 1:
-        merge_duplicate_psm_rows(output_file, psm_counter)
+    if psm_counter != Counter():
+        if max(psm_counter.values()) > 1:
+            merge_duplicate_psm_rows(output_file, psm_counter)
+            '''
+            to_be_written_csv_lines = merge_duplicate_psm_rows(
+                to_be_written_csv_lines,
+                psm_counter
+            )
+            '''
         '''
-        to_be_written_csv_lines = merge_duplicate_psm_rows(
-            to_be_written_csv_lines,
-            psm_counter
-        )
+        do output_file magic with to_be_written_csv_lines
         '''
-    '''
-    do output_file magic with to_be_written_csv_lines
-    '''
     return
 
 

@@ -16,14 +16,14 @@ import shutil
 
 def debug_print(*args, pretty=True, color="GREEN"):
     ''' pprint debug info in green, delete this function before release '''
-    color = coldor.upper()
-    print( "{0}".format( ursgal.COLORS[color] ) )
+    color = color.upper()
+    print('{0}'.format(ursgal.COLORS[color]))
     for text in args:
         if pretty:
             pprint.pprint( text )
         else:
-            print( text )
-    print( "{ENDC}".format( **ursgal.COLORS ) )
+            print(text)
+    print('{ENDC}'.format(**ursgal.COLORS))
 
 
 class UController(ursgal.UNode):
@@ -880,6 +880,8 @@ class UController(ursgal.UNode):
         directory, basename = self.generate_multi_dir_and_basename( input_files )
         extension           = self.params['helper_extension']
 
+        '''
+        # TODO: confirm that this code block is not needed anymore:
         prefix = self.params['prefix']
         if prefix != "" and prefix != None:
             prefix_bools = set()
@@ -889,9 +891,9 @@ class UController(ursgal.UNode):
                 prefix = None
                 self.params["prefix"] = None
 
-
         if prefix != "" and prefix != None:
             basename = prefix + "_" + basename
+        '''
 
         multi_helper_fname = os.path.join( directory, basename + extension )
 

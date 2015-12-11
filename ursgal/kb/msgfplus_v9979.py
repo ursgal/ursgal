@@ -35,11 +35,11 @@ USEARCH_PARAM_VALUE_TRANSLATIONS = {
     'nonspecific'            : 0,
     'trypsin'                : 1,
     'chymotrypsin'           : 2,
-    'lys_c'                  : 3,
-    'lys_n'                  : 4,
+    'lysc'                   : 3,
+    'lysn'                   : 4,
     'glutamyl_endopeptidase' : 5,
-    'arg_c'                  : 6,
-    'asp_n'                  : 7,
+    'argc'                   : 6,
+    'aspn'                   : 7,
     'alpha_lp'               : 8,
     'no_cleavage'            : 9,
     'cid'                    : 1,
@@ -76,6 +76,12 @@ USED_USEARCH_PARAMS = set( [
     'frag_method',
     'precursor_min_charge',
     'precursor_max_charge',
+    'validation_score_field',
+    'evalue_field',
+    'validation_minimum_score',
+    'bigger_scores_better',
+    'max_num_mods',
+    'java_-Xmx',
 ] )
 
 

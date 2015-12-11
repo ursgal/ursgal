@@ -1,7 +1,7 @@
 .. _generate-your-engines:
 
 Create/Implement our own Engine
-================================
+===============================
 
 The :ref:`General structure<general_structure>` of ursgal needs to be considered.
 The tutorial will explain the implementation into the ursgal
@@ -12,7 +12,7 @@ based on two examples:
 
 
 1. Integration into Resources
---------------------------------
+-----------------------------
 
 Engine code should be standalone and executable from the command line.
 Each engine has to have its own folder following python class name
@@ -48,7 +48,7 @@ convention see `PEP 3131`_.
 
 
 2. Integration into the knowledge base
------------------------------------------
+--------------------------------------
 
 Each engine has to have a knowledge base file located in:
 
@@ -84,28 +84,28 @@ There, one declares:
        'output_extension' : '.csv',
        'output_suffix'    : 'accepted',
        'input_types'      : ['.csv'],
-   
+
        'rejected_output_suffix': 'rejected',  # this entry is specific to filter_csv
        'include_in_git'        : True,
-       
+
        'engine': {
            'platform_independent' : {
                'arc_independent'  : {
                    'exe'     : 'filter_csv_1_0_0.py',
                },
            },
-       }, 
+       },
    }
-   
+
    DEFAULT_PARAMS = {
        'write_unfiltered_results' : False,
        'csv_filter_rules'         : None,
    }
-   
+
    USEARCH_PARAM_VALUE_TRANSLATIONS = {}
-   
+
    USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {}
-   
+
    USED_USEARCH_PARAMS = set([
        'write_unfiltered_results',
        'csv_filter_rules'
@@ -157,10 +157,10 @@ engine as prefix, e.g. http_url and ftp_url.
            'Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) '\
            'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
            'Tandem Mass Spectra: Applications to Database Search.',
-   
+
        'include_in_git'            : False,
    }
-   
+
    DEFAULT_PARAMS = {
        'validation_score_field'    : 'MS-GF:SpecEValue',
        'evalue_field'              : 'MS-GF:SpecEValue',
@@ -168,7 +168,7 @@ engine as prefix, e.g. http_url and ftp_url.
        'bigger_scores_better'      : False,
        'max_num_mods'              : 2,
    }
-   
+
    USEARCH_PARAM_VALUE_TRANSLATIONS = {
        'nonspecific'            : 0,
        'trypsin'                : 1,
@@ -189,14 +189,14 @@ engine as prefix, e.g. http_url and ftp_url.
        'tof'                    : 2,
        'q_exactive'             : 3,
    }
-   
+
    USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
        'semi_enzyme' : {
            True : 1,
            False : 2
        }
    }
-   
+
    USED_USEARCH_PARAMS = set( [
        'modifications',
        'semi_enzyme',
@@ -221,6 +221,10 @@ engine as prefix, e.g. http_url and ftp_url.
 3. Implementation into Engines
 ------------------------------
 
+Each engine has to have a Python wrapper file located in:
+
+ * <ursgal_path>\ **/engines/** engine.py
+
 The engine has to inherit from the UNode class, which during initialization injects
 the knowledge base data into the class. Thus those dictionaries (e.g. self.META_INFO)
 are available as attribute of each engine.
@@ -229,10 +233,10 @@ The default structure of the engine has to be::
 
     class filter_csv_1_0_0( ursgal.UNode ):
         def __init__(self, *args, **kwargs):
-                super(filter_csv_1_0_0, self).__init__(*args, **kwargs)
+            super(filter_csv_1_0_0, self).__init__(*args, **kwargs)
 
 
-One can define `preflight` and `postflight` functions that will be executed by the uNode
+One can define `preflight` and `postflight` methods that will be executed by the uNode
 during preflight and postflight (= before execution and after execution).
 For binary executable UNodes, one has to create a command line list (see `subprocess`_) during preflight.
 It should include the executable path of the engine (accessible via self.exe) and all relevant
@@ -378,25 +382,25 @@ filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
    import sys
    import pickle
    import shutil
-   
+
    class filter_csv_1_0_0( ursgal.UNode ):
        """filter_csv_1_0_0 UNode"""
        def __init__(self, *args, **kwargs):
            super(filter_csv_1_0_0, self).__init__(*args, **kwargs)
-   
+
        def _execute( self ):
            '''
            Enter docstring here!
            '''
            print('[ -ENGINE- ] Executing conversion ..')
            self.time_point(tag = 'execution')
-           
+
            # import the main function from the UNode's python script
            filter_csv_main = self.import_engine_as_python_function()
-   
+
            if self.params['output_file'].lower().endswith('.csv') is False:
                raise ValueError('Trying to filter a non-csv file')
-   
+
            # receive auto-generated filename from UController
            output_file = os.path.join(
                self.params['output_dir_path'],
@@ -407,7 +411,7 @@ filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
                self.params['input_dir_path'],
                self.params['input_file']
            )
-   
+
            # Sometimes, engine-specific code is required! For instance,
            # filter_csv() can produce a second output file with the columns
            # that were removed:
@@ -431,7 +435,7 @@ filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
                    '{0}.u.json'.format(output_file_unfiltered)
                )
            # Engine-specific code ends here
-           
+
            # Call the Python script's main() function using the information
            # we collected above:
            filter_csv_main(
@@ -440,6 +444,6 @@ filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
                filter_rules   = self.params['csv_filter_rules'],
                output_file_unfiltered = output_file_unfiltered,
            )
-   
+
            self.print_execution_time(tag='execution')
            return output_file
