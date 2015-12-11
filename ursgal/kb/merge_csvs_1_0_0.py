@@ -15,13 +15,6 @@ META_INFO = {
             },
         },
     },    
-
-    # 'engine_exe':{
-    #     'arc_independent' : 'merge_csvs_1_0_0.py',
-    # },
-    # 'engine_url' : {
-    #     'internal' : True,
-    # },
 }
 
 DEFAULT_PARAMS = {}

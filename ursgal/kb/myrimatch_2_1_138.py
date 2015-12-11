@@ -20,15 +20,6 @@ META_INFO = {
             },
         },
     },
-
-    # 'engine_exe':{
-    #     'linux':'myrimatch_2_1_138',
-    # },
-    # 'zip_md5' : {
-    #     'linux' : {
-    #         '64bit' : '99b4eb99bf59cd80e850bf9368b4eb3f'
-    #     }
-    # },
 }
 
 DEFAULT_PARAMS = {
@@ -72,11 +63,8 @@ USED_USEARCH_PARAMS= set([
     'enzyme',
     'semi_enzyme',
     'modifications',
-    # 'decoy_tag',
-    # 'dynamic_mods',
     'frag_mass_tolerance',
     'frag_mass_tolerance_unit',
-    # '{myrimatch_ions_to_search',
     'maximum_missed_cleavages',
     'maximal_accounted_observed_peaks',
     'max_pep_length',
@@ -87,19 +75,20 @@ USED_USEARCH_PARAMS= set([
     'precursor_mass_tolerance_minus',
     'precursor_mass_tolerance_unit',
     'precursor_max_charge',
-
     'score_a_ions',
     'score_b_ions',
     'score_c_ions',
     'score_x_ions',
     'score_y_ions',
     'score_z_ions',
-
-    # 'output_file_type',
-    # 'monoisotopic',
     'database',
-    # 'static_mods',
-    'batch_size'
+    'batch_size',
+    'validation_score_field',
+    'evalue_field',
+    'validation_minimum_score',
+    'bigger_scores_better',
+    'cpus',
+    
 
 
     # 'myri_average': 'AvgPrecursorMzTolerance', #default=1.5m/z
@@ -124,7 +113,7 @@ USEARCH_PARAM_VALUE_TRANSLATIONS = {
     'trypsin'               :'Trypsin',
     'trypsin_p'             :'Trypsin/P',
     'chymotrypsin'          :'Chymotrypsin',
-    'lys_c'                 :'Lys-C',
+    'lysc'                  :'Lys-C',
 
     # -       “Trypsin” (allows for cut after K or R)
     # -       “Trypsin/P” (normal trypsin cut, disallows cutting when the site is before a proline)

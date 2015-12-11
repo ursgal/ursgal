@@ -46,29 +46,6 @@ META_INFO = {
         'Open Mass Spectrometry Search Algorithm.',
 
     'include_in_git'            : False,
-    
-    # 'engine_exe' : {
-    #     'linux'  : 'omssacl',
-    #     'darwin' : 'omssacl',
-    #     'win32'  : 'omssacl.exe',
-    # },
-    # 'engine_url' : {
-    #     'linux'  : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.linux.tar.gz',
-    #     'darwin' : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.macos.tar.gz',
-    #     'win32'  : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
-    # },
-    # 'zip_md5' : {
-    #     'darwin' : { 
-    #         '64bit' : 'ec8012a10ed6cc85e93673604036712f'
-    #     },
-    #     'linux' : { 
-    #         '64bit' : 'a2013cad79c472266d924d6a68f76e36'
-    #     },
-    #     'win32' : { 
-    #         '32bit' : 'df338f99df2ba03c5f15b9ec2c22c41a',
-    #         '64bit' : '9f575e1bd7dfa6ccc6e16eb073a5989a'
-    #     }
-    # }
 }
 
 DEFAULT_PARAMS = {
@@ -80,7 +57,7 @@ DEFAULT_PARAMS = {
     # the following parameters are not changeable, e.g. default
     # protein/taxon
     'x': '0',  # default, all taxids, we dont want to change this
-
+    'omssa_output_type' : '-oc',
     # ions
     'sct': '0',   # search c terminal ions?, same as sGUI default, 0=yes, 1=no
     'sb1': '1',   # should first forward (b1) product ions be in search (1=no)
@@ -139,28 +116,28 @@ USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
 USEARCH_PARAM_VALUE_TRANSLATIONS = {
     #enzymes
     'trypsin'              : '0',
-    'arg_c'                : '1',
+    'argc'                 : '1',
     'cnbr'                 : '2',
     'chymotrypsin'         : '3',
     'formic_acid'          : '4',
-    'lys_c'                : '5',
-    'lys_c_p'              : '6',
-    'pepsin_a'             : '7',
+    'lysc'                 : '5',
+    'lysc_p'               : '6',
+    'pepsina'              : '7',
     'trypsin_cnbr'         : '8',
     'trypsin_chymotrypsin' : '9',
     'trypsin_p'            : '10',
-    'whole_protein'        : '11',
-    'asp_n'                : '12',
-    'glu_c'                : '13',
-    'asp_n_glu_c'          : '14',
+    'no_cleavage'          : '11',
+    'aspn'                 : '12',
+    'gluc'                 : '13',
+    'aspn_gluc'            : '14',
     'top_down'             : '15',
     'semi_tryptic'         : '16',
     'nonspecific'          : '17',
     'chymotrypsin_p'       : '18',
-    'lys_n'                : '21',
+    'lysn'                 : '21',
     'thermolysin_p'        : '22',
     'semi_chymotrypsin'    : '23',
-    'semi_glu_c'           : '24',
+    'semi_gluc'            : '24',
 
     #label
     # '15N'                : '2',
@@ -188,18 +165,13 @@ USED_USEARCH_PARAMS = set([
     'database',
     'modifications',
     'num_match_spec',
-
     'precursor_min_charge',
     'precursor_max_charge',
-
     'maximum_missed_cleavages',
-
     'precursor_mass_tolerance_minus',
     'precursor_mass_tolerance_plus',
-
     'frag_mass_tolerance',
     'frag_mass_tolerance_unit',
-
     'enzyme',
     'score_a_ions',
     'score_b_ions',
@@ -207,11 +179,39 @@ USED_USEARCH_PARAMS = set([
     'score_x_ions',
     'score_y_ions',
     'score_z_ions',
-
     'mininimal_required_observed_peaks',
-    'precursor_isotope_range'
-
-    # 'label'
+    'precursor_isotope_range',
+    'label',
+    'validation_score_field',
+    'evalue_field',
+    'validation_minimum_score',
+    'bigger_scores_better',
+    'x',
+    'omssa_output_type',
+    'sct',
+    'sb1',
+    'sp',
+    'z1',
+    'zcc',
+    'tez',
+    'pc',
+    'zoh',
+    'zt',
+    'zc',
+    'scorr',
+    'scorp',
+    'he',
+    'ht',
+    'cl',
+    'cp',
+    'h2',
+    'h1',
+    'w1',
+    'w2',
+    'ta',
+    'tex',
+    'mm',
+    'hl',
 ])
 
 

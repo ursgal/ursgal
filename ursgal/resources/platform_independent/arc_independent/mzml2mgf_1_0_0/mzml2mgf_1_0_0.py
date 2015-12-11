@@ -27,8 +27,8 @@ def _determine_mzml_name_base( file_name, prefix ):
     elif file_name.upper().endswith('.MZML'):
         mzml_name_base = file_name[:-5]
     else:
-        raise Exception("Can not determine mzml base name from {0} ".format( file_name))
-    if prefix is not None:
+        raise Exception("Can not determine mzml base name from {0}".format( file_name))
+    if prefix is not None and prefix is not '':
         mzml_name_base = '_'.join( [prefix, mzml_name_base] )
     return mzml_name_base
 

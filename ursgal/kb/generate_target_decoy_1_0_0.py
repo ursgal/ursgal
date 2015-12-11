@@ -43,7 +43,7 @@ USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
         'clostripain' :     ('R', 'C'),
         'cnbr' :            ('M', 'C'),
         'elastase' :        ('AGILV', 'C'),
-        'formicacid' :      ('D', 'C'),
+        'formic_acid' :     ('D', 'C'),
         'gluc' :            ('DE', 'C'),
         'gluc_bicarb' :     ('E', 'C'),
         'iodosobenzoate' :  ('W', 'C'),
@@ -56,8 +56,8 @@ USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
         'staph_protease' :  ('E', 'C'),
         'trypsin' :         ('KR', 'C'),
         'trypsin_p' :       ('KR', 'C'),
-        'trypsin/cnbr' :    ('KRM', 'C'),
-        'trypsin/gluc' :    ('DEKR', 'C'),
+        'trypsin_cnbr' :    ('KRM', 'C'),
+        'trypsin_gluc' :    ('DEKR', 'C'),
     }
 }
 USED_USEARCH_PARAMS = set([
