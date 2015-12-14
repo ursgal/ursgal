@@ -1374,11 +1374,17 @@ class UController(ursgal.UNode):
                         )
                         break
                 else:
-                    reasons.append(
-                        'A new node related parameter ("{0}") '\
-                        'has been added compared to the last output '\
-                        '...'.format(used_param)
-                    )
+                    default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(used_param, None)
+                    assert used_param in o_params.keys(), 'USED_USEARCH_PARAM '\
+                        '"{0}" was not found in DEFAULT_PARAMS. '\
+                        'This should never happen!'.format(used_param)
+                        
+                    if o_params[ used_param ] != default_value:
+                        reasons.append(
+                            'A new node related parameter ("{0}") '\
+                            'has been added compared to the last output '\
+                            '...'.format(used_param)
+                        )
                     break
 
         if self.io['output']['finfo']['json_exists']:
@@ -2334,24 +2340,21 @@ File {0} is not present in online resource folder.
 
         return download_zip_files
 
-    def execute_unode(self, input_file, engine, force=False, output_file_name=None):
+    def execute_unode(self, input_file, engine, force=False, output_file_name=None, dry_run=False):
         '''
-        The ucontroller execute_unode function
+        The UController execute_unode function. Executes arbitrary UNodes, as
+        specified by their name.
 
         Keyword Arguments:
             input_file (str or list of str): The complete path to the input,
                 or a list of paths to the input files.
             engine (str): Engine name one wants to execute
-            force (bool): (re)do the analysis if output files already exists
+            force (bool): (Re)do the analysis if output files already exists
+            dry_run (bool): Do not execute; only return the output file name
 
-
-        Can currently execute:
-
-            * mzidentml to csv conversion
-            * unify csv results
-            * filter csv results
-            * validate
-            * get files via http and ftp
+        Note:
+            Can also execute UNodes that are tagged as 'in development' in kb
+            (=not shown in UController overview) if their name is specified.
         '''
 
         if input_file is None:
@@ -2395,7 +2398,6 @@ True
                 # pass
             input_file = tmp_file_name
 
-
         engine_name = self.engine_sanity_check( engine )
         multi, input_file = self.distinguish_multi_and_single_input( input_file )
         self.input_file_sanity_check( input_file, engine=engine_name, multi=multi )
@@ -2406,6 +2408,10 @@ True
             engine = engine_name,
             force  = force
         )
+
+        if dry_run is True:
+            answer = None  # do not execute, even if params changed!
+
         report = self.run_unode_if_required(
             force, engine_name, answer
         )

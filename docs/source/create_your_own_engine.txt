@@ -1,26 +1,31 @@
 .. _generate-your-engines:
 
-Create/Implement our own Engine
+Create/Implement your own UNode
 ===============================
 
-The :ref:`General structure<general_structure>` of ursgal needs to be considered.
-The tutorial will explain the implementation into the ursgal
-**resources**, **knowledge base (kb)** and **engines**
-based on two examples:
-    * A python script: filter_csv_1_0_0.py
+Before implementing your own UNode, make sure that you have read about
+the :ref:`General structure<general_structure>` of Ursgal.
+This page will explain how to integrate a standalone executable or Python
+script into Ursgal's structure of **resources**, **knowledge base (kb)**
+and **engines**, based on two examples:
+    * A Python script: filter_csv_1_0_0.py
     * A standalone search engine: MS-GF+ v9979
-
 
 1. Integration into Resources
 -----------------------------
 
-Engine code should be standalone and executable from the command line.
-Each engine has to have its own folder following python class name
-conventions, but all lowercase. For more details in the naming
-convention see `PEP 3131`_.
+The **resources/** folder contains the main code of each UNode (an executable
+or Python script). This executable should be standalone and executable from the command line.
+Each UNode requires its own subfolder in the **resources/** folder, which contains the
+executable.
+
+Note:
+    The UNodes' **resources/** subfolder, **engine/** class and **kb/** file should all have the same name
+    (lowercase and underscores instead of spaces, i.e. 'msgfplus_v9979' or 'filter_csv_1_0_0').
+
 
     #. Platfom dependent engines need to be placed according to the platform:
-       darwin (OS X), linux or win32 (Windows (and yes even if you have windows 64 bit ...))
+       darwin (OS X), linux or win32 (Windows 32 or 64 bit)
 
         * <ursgal_path>\ **/resources/**\ <platform>/\ <architecture>/<name_of_engine>/source (executable + potential additional files)
 
@@ -29,8 +34,8 @@ convention see `PEP 3131`_.
         * <ursgal_path>\ **/resources/**\ win32/\ 64bit/msgfplus_v9979/MSGFPlus.jar
 
 
-    #. Architecture independent engines, like Python scripts or java packages
-       should be placed in arc_independent
+    #. Architecture independent engines, like Python scripts or Java packages
+       should be placed in **/resources/**\platform_independent/arc_independent/
 
         * <ursgal_path>\ **/resources/**\platform_independent/arc_independent/<name_of_engine>/engine.py
 
@@ -38,21 +43,17 @@ convention see `PEP 3131`_.
 
         * <ursgal_path>\ **/resources/**\platform_independent/arc_independent/filter_csv_1_0_0/filter_csv_1_0_0.py
 
-       Actually, MS-GF+ is platform independent as well (since it it based on java) and can therefore also be placed in:
+       Actually, MS-GF+ is platform independent as well (since it it based on Java) and can therefore also be placed in:
 
         * <ursgal_path>\ **/resources/**\platform_independent/arc_independent/msgfplus_v9979/MSGFPlus.jar
 
 
-.. _PEP 3131:
-    https://www.python.org/dev/peps/pep-3131/
-
-
-2. Integration into the knowledge base
+2. Integration into the knowledge base (kb)
 --------------------------------------
 
 Each engine has to have a knowledge base file located in:
 
- * <ursgal_path>\ **/kb/** engine.py
+ * <ursgal_path>\ **/kb/** <unode_name>.py
 
 **Examples**:
 
@@ -62,7 +63,7 @@ Each engine has to have a knowledge base file located in:
 The file must contain at least the Python dictionary META_INFO.
 There, one declares:
 
-    #. **engine_type**: What kind of type the engine is.
+    #. **engine_type**: What kind of type the UNode is (i.e. search_engine).
     #. **output_extension**: The file extension of the output file (i.e. '.csv')
     #. **output_suffix**: A suffix that will be added to the filename. If not defined, the engine's name will automatically be formatted into the output file name. If None, no suffix will be added.
     #. **input_types**: A list of input types (file extensions) that are supported by the engine.
@@ -71,7 +72,9 @@ There, one declares:
     #. **create_own_folder**: A boolean indicating whether the engine should create a subfolder or not.
     #. **include_in_git**: A boolean indicating whether the engine executable should be uploaded to the Ursgal GitHub repository or not. This should be True for lightweight Python UNodes and False for binary executables. If you wish to include a UNode with binary executables, contact the Ursgal team so we can host it on our download server, or enter your own download URL (see MS-GF+ example below).
 
+
 **Example**: ursgal/kb/filter_csv_1_0_0.py ::
+
 
    META_INFO = {
        'engine_type' : {
@@ -221,53 +224,87 @@ engine as prefix, e.g. http_url and ftp_url.
 3. Implementation into Engines
 ------------------------------
 
-Each engine has to have a Python wrapper file located in:
+Each UNode has to have a Python wrapper file located in:
 
- * <ursgal_path>\ **/engines/** engine.py
+ * <ursgal_path>\ **/engines/** <unode_name>.py
 
-The engine has to inherit from the UNode class, which during initialization injects
+The UNode has to inherit from the UNode class, which during initialization injects
 the knowledge base data into the class. Thus those dictionaries (e.g. self.META_INFO)
-are available as attribute of each engine.
+are available as attribute of each UNode.
 
-The default structure of the engine has to be::
+The default structure of the UNode class has to be::
 
-    class filter_csv_1_0_0( ursgal.UNode ):
+    class my_unode_1_0_0(ursgal.UNode):
         def __init__(self, *args, **kwargs):
-            super(filter_csv_1_0_0, self).__init__(*args, **kwargs)
+            super(my_unode_1_0_0, self).__init__(*args, **kwargs)
 
+        def preflight(self):
+            # code that should be run before the UNode is executed
+            # i.e. writing a config file
+            return
 
-One can define `preflight` and `postflight` methods that will be executed by the uNode
-during preflight and postflight (= before execution and after execution).
-For binary executable UNodes, one has to create a command line list (see `subprocess`_) during preflight.
-It should include the executable path of the engine (accessible via self.exe) and all relevant
-parameters, available via self.params.
+        def postflight(self):
+            # code that should be run after the UNode is executed
+            # i.e. formatting the output file
+            return
 
-.. _subprocess:
-    https://docs.python.org/3/library/subprocess.html
+where `my_unode_1_0_0` is the name of the UNode. One can define `preflight()` and `postflight()`
+methods that will be executed by the uNode during preflight and postflight (= before execution of the
+main executable and after execution).
 
 3.1 Implementaion of an engine from a command line tool
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command line tools have to have their pythonian subprocess
-command line list defined, which is normally done during the preflight.
-The command list is expected under self.params['command_list']. For example::
 
-        self.params['command_list'] = [
-            self.exe,
-            '{input}'.format(**self.params),
-        ]
+For binary executable UNodes, one has to create a command line list (see `subprocess`_) in
+the `preflight()` method. The command list is used to run the UNode's executable with the
+appropriate command line parameters. It should include the executable path of the engine
+(accessible via self.exe) and all relevant parameters, available via self.params.
 
-After preflight, Ursgal automatically passes the command_list to subprocess: ::
+
+The command list is stored in self.params['command_list']. This list should be constructed
+in the UNode class `preflight()` method like this::
+
+
+        def preflight(self):
+
+            # retrieve the path of the input file:
+            input_file = os.path.join(
+                self.params['input_dir_path'],
+                self.params['input_file']
+            )
+
+            # retrieve the auto-generated output file name:
+            output_file = os.path.join(
+                self.params['output_dir_path'],
+                self.params['output_file'],
+            )
+
+            # format parameters and input/output file names into command list:
+            self.params['command_list'] = [
+                self.exe,
+                '-o',
+                output_file,
+                '-i',
+                input_file,
+                '--some_parameter',
+                '{some_param_in_ursgal}'.format(**self.params),
+                '--another_parameter',
+                '{another_param}'.format(**self.params),
+            ]
+
+
+After `preflight()`, Ursgal automatically passes the command_list to Python's built-in `subprocess`_ module: ::
 
         proc = subprocess.Popen(
             self.params['command_list'],
             stdout = subprocess.PIPE,
         )
 
-After the execution procedure, the postflight sequence is executed, if
-a postflight function was defined as part of the class e.g.::
+After the execution procedure, the `postflight()` sequence is executed (if
+a postflight function was defined as part of the class), e.g.::
 
-        def postflight( self ):
+        def postflight(self):
             convert_xtandemXML_to_identcsv( self.params )
 
 
@@ -362,15 +399,20 @@ a postflight function was defined as part of the class e.g.::
             return self.params
 
 
-3.2 Implementation of an engine from Python code
+.. _subprocess:
+    https://docs.python.org/3/library/subprocess.html
+
+
+3.2 Implementation of a UNode from Python code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Python code can be executed as command line tool. It is also possible to import
-the main function of a script using self.import_engine_as_python_function()
-and to directly pass arguments to the function. The `preflight` function can then
-be replaced by an '_execute' function. As we only return the output_file,
-one has the opportunity to set, e.g. self.execute_answer and handle the data in
-the script or controller. There are several unode examples, e.g.
+Using sys.argv or the argparse module, any Python code can be executed like a command line tool.
+Thus, it is possible to include pure Python UNodes using the steps described above.
+For convenience, it is also possible to import the main function of a Python script using
+self.import_engine_as_python_function(). This function can then be directly executed by Ursgal,
+which makes it possible to include Python scripts that don't use argparse or sys.argv.
+To skip command line execution and run the main function of a Python script, one has to define the
+`_execute()` method of the UNode class. There are several pure Python UNodes in Ursgal, e.g.
 filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
 
 **Example**: ursgal/engines/filter_csv_1_0_0.py ::
@@ -389,9 +431,6 @@ filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
            super(filter_csv_1_0_0, self).__init__(*args, **kwargs)
 
        def _execute( self ):
-           '''
-           Enter docstring here!
-           '''
            print('[ -ENGINE- ] Executing conversion ..')
            self.time_point(tag = 'execution')
 
@@ -399,17 +438,17 @@ filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
            filter_csv_main = self.import_engine_as_python_function()
 
            if self.params['output_file'].lower().endswith('.csv') is False:
-               raise ValueError('Trying to filter a non-csv file')
+               raise ValueError('Trying to filter a non-csv file.')
 
-           # receive auto-generated filename from UController
-           output_file = os.path.join(
-               self.params['output_dir_path'],
-               self.params['output_file']
-           )
            # receive name of the input file so it can be passed to main function
            input_file  = os.path.join(
                self.params['input_dir_path'],
                self.params['input_file']
+           )
+           # receive auto-generated filename from UController
+           output_file = os.path.join(
+               self.params['output_dir_path'],
+               self.params['output_file']
            )
 
            # Sometimes, engine-specific code is required! For instance,

@@ -3,8 +3,8 @@
 General Structure
 =================
 
-Each engine requires a **resource**, **knowledge base** and **engine** file to
-be declared properly.
+Each UNode requires a **resource**, **knowledge base (kb)** and **engine** file to
+be declared properly (see Schematic Overview A below).
 
 Schematic Overview
 ------------------
@@ -16,25 +16,35 @@ Schematic Overview
 Resources
 ---------
 
-Engine code should be standalone and executable from the command line.
-The location for engines is
+The **resources/** directory contains the main code of each UNode, i.e.:
 
-    #.  <installation path of uplanit>\ **/resources/**\ <platform>/\ **<architecture>**
+    #.  executables (i.e. .exe or .jar)
+    #.  standalone Python scripts
+
+Compared to the original standalone applications, this code is completely
+unchanged. Integration into Ursgal is achieved by Python wrappers around
+the executables ("engines", see below) and a knowledgebase ("kb", see below).
+The resources directory path depends on the platform dependencies of
+the UNode:
+
+    #.  <installation path of ursgal>\ **/resources/**\ <platform>/\ **<architecture>**
         Whereas platform is darwin (OS X), linux or win32 (Windows (and yes even if you have windows 64 bit ...))
-    #.  Architecture independent engines, like python scripts or java packages
-        can be placed in <installation path of uplanit>/arc_independent/
-    #.  Each engine has to have its own folder following python class name
+    #.  Architecture independent engines, like Python scripts or Java packages
+        can be placed in <installation path of ursgal>/resources/platform_independent/arc_independent/
+    #.  Each UNode has to have its own folder following Python class name
         conventions, but all lowercase. For more details in the naming
         convention see `PEP 3131`_.
 
-Knowledge base
+Knowledge base (kb)
 --------------
 
 Each engine has to have a knowledge base file located in
-<installation path of uplanit>\ **/kb/**, ( e.g. usearch/kb/mzml2mgf_1_0_0.py),
-which contains at least the python dictionary META_INFO ::
+<installation path of ursgal>\ **/kb/**, ( e.g. ursgal/kb/mzml2mgf_1_0_0.py).
+The kb contains such as default parameters, parameter translations and
+valid input file types of the UNode. This information is stored in Python
+dictionaries such as META_INFO ::
 
-    {
+    META_INFO = {
         'engine_type' : {
             'search_engine' : True,
         },
@@ -72,18 +82,18 @@ which contains at least the python dictionary META_INFO ::
             matching proteins with tandem mass spectra.',
     }
 
-There it is declared
+The META_INFO dictionary declares:
 
     #. What kind of type the engine is (engine_type).
-    #. What is the executable name of the engine (engine_exe)
-       if engine is arc_independent, then only this has to be specified.
-    #. Citation is an important part. Please include this information as it
-       will be displayed during run time.
+    #. What is the executable name of the engine for different platforms
+       ('engine': 'darwin', 'win32', 'linux')
+    #. Citation of the third party tool that was incorporated into Ursgal.
+       This information is printed at runtime.
 
 .. _PEP 3131:
     https://www.python.org/dev/peps/pep-3131/
 
-Engine python class
+Engine Python class
 -------------------
 
 The engine inherits from the uNode, which during initialization injects
@@ -92,17 +102,20 @@ are available as attribute of each engine.
 
 The default structure of the engine is::
 
-    class mzml2mgf_1_0_0( usearch.UNode ):
+    class mzml2mgf_1_0_0(ursgal.UNode):
         def __init__(self, *args, **kwargs):
                 super(mzml2mgf_1_0_0, self).__init__(*args, **kwargs)
 
+        def preflight(self):
+            # code that should be run before the UNode is executed
+            # i.e. writing a config file
+            return
 
-Defined `preflight` and `postflight` functions will be executed
-during preflight and postflight **(how? when?)**. During preflight, a
-command line list (see `subprocess`_) is cated. It should include the executable path
-of the engine (accessible via self.exe) and all other parameters, available via
-self.params.
-What about **'_execute'**?
+        def postflight(self):
+            # code that should be run after the UNode is executed
+            # i.e. formatting the output file
+            return
 
-.. _subprocess:
-    https://docs.python.org/3/library/subprocess.html
+
+The special methods `preflight()` and `postflight()` are automatically called
+by Ursgal's UController when a UNode is run.

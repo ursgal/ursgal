@@ -35,16 +35,16 @@ def main():
         xtandem = 'xtandem_piledriver'
     else:
         xtandem = 'xtandem_sledgehammer'
-    # if sys.platform == 'win32':
-    #     msamanda = 'msamanda_1_0_0_5242'
-    # else: 
-    #     msamanda = 'msamanda_1_0_0_5243'
+    if sys.platform == 'win32':
+        msamanda = 'msamanda_1_0_0_5242'
+    else: 
+        msamanda = 'msamanda_1_0_0_5243'
 
     engine_list = [
-        'omssa',
-        xtandem,
-        'msgf',
-        # msamanda
+        # 'omssa',
+        # xtandem,
+        # 'msgf',
+        msamanda
     ]
 
     mzML_file = os.path.join(
