@@ -7,7 +7,7 @@ import os
 
 def main():
     '''
-    Simple example script how to generate a target decoy databse.
+    Simple example script how to generate a target decoy database.
 
     usage:
 
