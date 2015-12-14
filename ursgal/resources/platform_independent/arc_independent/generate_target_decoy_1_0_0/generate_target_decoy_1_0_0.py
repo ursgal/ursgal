@@ -2,6 +2,7 @@
 # encoding: utf-8
 """
 Generates a taget decoy database with consitent shuffled peptides
+or reverse proteins
 
 usage:
 ./generate_target_decoy_1_0_0.py <fastaDB1 fastaDB2 fastaDB3 ... fastaDBn>

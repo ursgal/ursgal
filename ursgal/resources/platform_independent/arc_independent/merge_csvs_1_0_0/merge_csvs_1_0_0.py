@@ -38,11 +38,18 @@ def main(csv_files=None, output=None):
     WARNING!
         ''')
     out_csv = open( output, 'w')
+    csv_kwargs = {}
+    if sys.platform == 'win32':
+        csv_kwargs['lineterminator'] = '\n'
+    else:
+        csv_kwargs['lineterminator'] = '\r\n'
     csv_writer = csv.DictWriter(
         out_csv,
-        all_fieldnames
+        all_fieldnames,
+        **csv_kwargs
     )
     csv_writer.writeheader()
+
     for csv_file, csv_dict_reader in buffered_input_files.items():
         for line_dict in csv_dict_reader:
             csv_writer.writerow( line_dict )
