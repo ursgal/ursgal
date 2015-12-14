@@ -123,8 +123,8 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
             opt_mods[aa] = name
         if 'C,fix,any,Carbamidomethyl' in modification:
             cam = True
-    ursgal.GlobalUnimodMapper._reparseXML()
 
+    ursgal.GlobalUnimodMapper._reparseXML()
     de_novo_engines = ['novor', 'pepnovo', 'uninovo', 'unknown_engine']
     de_novo = False
     for de_novo_engine in de_novo_engines:
