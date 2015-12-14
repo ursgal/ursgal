@@ -28,12 +28,13 @@ def adjust_window_size(desired_window_size, iter_len, minimum=29):
     return adjusted_window_size
 
 
-def sliding_window(iterable, window_size):
+def sliding_window(iterable, window_size, flexible=True):
     '''Sliding window generator'''
 
-    window_size = adjust_window_size(
-        window_size, len(iterable)
-    )
+    if flexible:
+        window_size = adjust_window_size(
+            window_size, len(iterable)
+        )
 
     if window_size % 2 == 0:
         print('Warning! Window size must be uneven (to determine a '\

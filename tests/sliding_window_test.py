@@ -113,6 +113,7 @@ def check_sliding_window( test_dict ):
     window_slider = cpep.sliding_window(
         test_dict['iterable'],
         test_dict['window_len'],
+        flexible=False,
     )
     expected_results = test_dict['out_windows']
     i = -1
