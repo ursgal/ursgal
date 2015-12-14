@@ -1375,10 +1375,13 @@ class UController(ursgal.UNode):
                         break
                 else:
                     default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(used_param, None)
-                    assert used_param in o_params.keys(), 'USED_USEARCH_PARAM '\
-                        '"{0}" was not found in DEFAULT_PARAMS. '\
-                        'This should never happen!'.format(used_param)
-                        
+                    if used_param not in o_params.keys():
+                        reasons.append(
+                            'USED_USEARCH_PARAM "{0}" '\
+                            'was not found in previous output params.'\
+                            '...'.format(used_param)
+                        )
+
                     if o_params[ used_param ] != default_value:
                         reasons.append(
                             'A new node related parameter ("{0}") '\
