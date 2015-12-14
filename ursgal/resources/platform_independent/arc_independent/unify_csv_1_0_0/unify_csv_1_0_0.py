@@ -476,13 +476,25 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                 else:
                     line_dict['Is decoy'] = 'false'
 
-            psm = (
-                line_dict['Spectrum Title'],
-                line_dict['Sequence'],
-                line_dict['Modifications'],
-                line_dict['Charge'],
-                line_dict['Is decoy'],
-            )  # each unique combination of these should only have ONE row!
+            if 'omssa' in search_engine.lower():
+                is_omssa = True
+                psm = (
+                    line_dict['Spectrum Title'],
+                    line_dict['Sequence'],
+                    line_dict['Modifications'],
+                    line_dict['Charge'],
+                    line_dict['Is decoy'],
+                    line_dict['OMSSA:pvalue'],
+                )
+            else:
+                is_omssa = False
+                psm = (
+                    line_dict['Spectrum Title'],
+                    line_dict['Sequence'],
+                    line_dict['Modifications'],
+                    line_dict['Charge'],
+                    line_dict['Is decoy'],
+                )  # each unique combination of these should only have ONE row!
             psm_counter[psm] += 1
 
             csv_output.writerow( line_dict )
@@ -494,7 +506,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:
-            merge_duplicate_psm_rows(output_file, psm_counter)
+            merge_duplicate_psm_rows(output_file, psm_counter, is_omssa)
             '''
             to_be_written_csv_lines = merge_duplicate_psm_rows(
                 to_be_written_csv_lines,
@@ -519,7 +531,7 @@ def merge_rowdicts(list_of_rowdicts, joinchar):
     return merged_d
 
 
-def merge_duplicate_psm_rows(unified_csv_path, psm_counter):
+def merge_duplicate_psm_rows(unified_csv_path, psm_counter, is_omssa):
     '''
     Rows describing the same PSM (i.e. when two proteins share the
     same peptide) are merged to one row.
@@ -534,13 +546,23 @@ def merge_duplicate_psm_rows(unified_csv_path, psm_counter):
         writer = csv.DictWriter(out, fieldnames=tmp_reader.fieldnames)
         writer.writeheader()
         for row in tmp_reader:
-            psm = (
-                row['Spectrum Title'],
-                row['Sequence'],
-                row['Modifications'],
-                row['Charge'],
-                row['Is decoy'],
-            )   # each unique combination of these should only have ONE row!
+            if is_omssa:
+                psm = (
+                    row['Spectrum Title'],
+                    row['Sequence'],
+                    row['Modifications'],
+                    row['Charge'],
+                    row['Is decoy'],
+                    row['OMSSA:pvalue'],
+                )
+            else:
+                psm = (
+                    row['Spectrum Title'],
+                    row['Sequence'],
+                    row['Modifications'],
+                    row['Charge'],
+                    row['Is decoy'],
+                )   # each unique combination of these should only have ONE row!
             if psm_counter[psm] == 1:
                 # no duplicate = no problem, we can just write the row again
                 writer.writerow(row)

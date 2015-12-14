@@ -1374,11 +1374,20 @@ class UController(ursgal.UNode):
                         )
                         break
                 else:
-                    reasons.append(
-                        'A new node related parameter ("{0}") '\
-                        'has been added compared to the last output '\
-                        '...'.format(used_param)
-                    )
+                    default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(used_param, None)
+                    if used_param not in o_params.keys():
+                        reasons.append(
+                            'USED_USEARCH_PARAM "{0}" '\
+                            'was not found in previous output params.'\
+                            '...'.format(used_param)
+                        )
+
+                    if o_params[ used_param ] != default_value:
+                        reasons.append(
+                            'A new node related parameter ("{0}") '\
+                            'has been added compared to the last output '\
+                            '...'.format(used_param)
+                        )
                     break
 
         if self.io['output']['finfo']['json_exists']:
