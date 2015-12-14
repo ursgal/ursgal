@@ -1382,7 +1382,7 @@ class UController(ursgal.UNode):
                             '...'.format(used_param)
                         )
 
-                    if o_params[ used_param ] != default_value:
+                    elif o_params[ used_param ] != default_value:
                         reasons.append(
                             'A new node related parameter ("{0}") '\
                             'has been added compared to the last output '\
