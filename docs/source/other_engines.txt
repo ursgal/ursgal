@@ -81,7 +81,7 @@ Percolator 2_08
 .. autoclass:: ursgal.engines.percolator_2_08.percolator_2_08
    :members:
 
-qyality 2_02
+qvality 2_02
 ------------
 
 .. autoclass:: ursgal.engines.qvality_2_02.qvality_2_02
