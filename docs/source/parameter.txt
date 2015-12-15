@@ -1,4 +1,3 @@
-.. _general_structure:
 .. _parameters:
 
 Ursgal to Search Engine Parameters
