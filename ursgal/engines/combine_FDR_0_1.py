@@ -2,9 +2,6 @@
 
 import ursgal
 import os.path
-import importlib.machinery
-import sys
-from pprint import pprint
 
 
 class combine_FDR_0_1( ursgal.UNode ):
@@ -15,6 +12,12 @@ class combine_FDR_0_1( ursgal.UNode ):
     Jones AR, Siepen JA, Hubbard SJ, Paton NW (2009):
     "Improving sensitivity in proteome studies by analysis of false discovery
     rates for multiple search engines."
+    
+    Input should be multiple CSV files from different search engines. Each
+    CSV requires a PEP column, for instance by post-processing with Percolator.
+
+    Returns a merged CSV file with all PSMs that were found and an added
+    column "Combined FDR Score".
     '''
     def __init__(self, *args, **kwargs):
         super(combine_FDR_0_1, self).__init__(*args, **kwargs)

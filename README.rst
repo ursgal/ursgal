@@ -43,13 +43,13 @@ Get the latest version via GitHub:
     | https://github.com/ursgal/ursgal
 
    .zip package:
-      | https://github.com/ursgal/ursgal/archive/master.zip
+   | https://github.com/ursgal/ursgal/archive/master.zip
 
    git clone URL:
-      | https://github.com/ursgal/ursgal.git
+   | https://github.com/ursgal/ursgal.git
 
 The complete Documentation can be found at
-    | http://ursgal.readthedocs.org/
+   | http://ursgal.readthedocs.org/
 
 
 .. _installation:

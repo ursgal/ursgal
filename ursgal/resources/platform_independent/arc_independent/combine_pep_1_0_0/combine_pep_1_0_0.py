@@ -8,8 +8,34 @@ import itertools
 import collections
 
 
-def sliding_window(iterable, window_size):
+def adjust_window_size(desired_window_size, iter_len, minimum=29):
+    '''
+    Dynamically adjusts the window size depending on the total length
+    of values. When there are few values (below 1/5 of the window size),
+    the window size is decreased.
+    '''
+    if desired_window_size < iter_len // 5:
+        adjusted_window_size = desired_window_size
+    else:
+        adjusted_window_size = desired_window_size // 5
+        if adjusted_window_size < minimum:
+            adjusted_window_size = minimum
+    if adjusted_window_size != desired_window_size:
+        print('Adjusted window size from {0} to {1} because the '\
+              'total number of values is only {2}.'.format(
+                  desired_window_size, adjusted_window_size, iter_len
+              ))
+    return adjusted_window_size
+
+
+def sliding_window(iterable, window_size, flexible=True):
     '''Sliding window generator'''
+
+    if flexible:
+        window_size = adjust_window_size(
+            window_size, len(iterable)
+        )
+
     if window_size % 2 == 0:
         print('Warning! Window size must be uneven (to determine a '\
               'central value). Adjusted window size from {0} to {1}'\
