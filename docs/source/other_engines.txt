@@ -11,6 +11,15 @@ Combine FDR 0_1
    :members:
    :private-members:
 
+
+Combine PEP 1_0_0
+---------------
+
+.. autoclass:: ursgal.engines.combine_pep_1_0_0.combine_pep_1_0_0
+   :members:
+   :private-members:
+
+
 Filter CSV 1_0_0
 ----------------
 
