@@ -1074,7 +1074,8 @@ class UController(ursgal.UNode):
             number_of_diffs_between_json_and_params = 0
             for u_param, u_value in self.params.items():
                 if u_param not in self.io['input']['params'] or \
-                self.io['input']['params'][ u_param ] != u_value:
+                        self.io['input']['params'][ u_param ] != u_value:
+                    #
                     number_of_diffs_between_json_and_params += 1
                     self.print_info(
                         'Mismatch of param {0}: UController: {1}; i_json: {2}'.format(
@@ -1379,7 +1380,10 @@ class UController(ursgal.UNode):
                         )
                         break
                 else:
-                    default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(used_param, None)
+                    default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(
+                        used_param,
+                        None
+                    )
                     if used_param not in o_params.keys():
                         reasons.append(
                             'USED_USEARCH_PARAM "{0}" '\
@@ -1393,7 +1397,7 @@ class UController(ursgal.UNode):
                             'has been added compared to the last output '\
                             '...'.format(used_param)
                         )
-                    break
+                        break
 
         if self.io['output']['finfo']['json_exists']:
             # o_json exists no force no node related params changed
