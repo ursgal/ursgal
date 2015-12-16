@@ -3,17 +3,17 @@ Frequently Asked Questions
 
 
 Installation
-------------
+############
 
-Q: MS Amanda does not work on Unix. What could be the problem?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Q: MS Amanda does not work on Unix. What could be the problem ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A: To run MSAmanda one needs to install the Mono frameweork.
 Visit http://www.mono-project.com/ for proper installation instructions.
 
 
 Usage
------
+#####
 
 Q: Found mismatch between json parameter ....
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -30,7 +30,7 @@ During JSON dump Python tuples are converted into list like objects, thus this m
 
 
 Development
------------
+###########
 
 Q: How do I create/add a new engine ?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -38,29 +38,6 @@ Q: How do I create/add a new engine ?
 See :ref:`generate-your-engines`.
 
 
-
-Known Issues
-------------
-
-Windows 10
-^^^^^^^^^^
-	
-	* MS Amanda can not load .fasta files
-	* calculating the md5 can cause problems e.g. while executing test
-
-General
-^^^^^^^
-
-	* Java used memory size 
-		
-		Ajust the memory usage by Java according to your needs. When using
-		memory intensive tasks as mzIdentML conversion of large files, an
-		adjustement of the Java Xmx values may be required. The default is the
-		usage of 13 GB of your RAM. Please refer to the Java documentation
-		for further information.
-		http://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-		In Ursgal the parameter `java_-Xmx` can be used to adjust the Java memory
-		usage.
 
 
 
