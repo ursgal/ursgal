@@ -97,7 +97,6 @@ def get_files():
 
     return spec_files
 
-collector = {}
 def search(validation_engine):
     '''
     Executes a grouped search on four example files from the 
@@ -133,7 +132,7 @@ def search(validation_engine):
         validated_results = []
         for search_engine in search_engines:
             unified_search_results = uc.search(
-                input_file = mgf_spec_file,
+                input_file = spec_file,
                 engine     = search_engine,
             )
 
@@ -194,7 +193,7 @@ def search(validation_engine):
             )
     return results_all_files
 
-def analyze(results_all_files, validation_engine):
+def analyze(collector):
     '''
     Simle analysis script for the grouped search,
     counting the number of identified peptides (combination of peptide sequence and modifications)

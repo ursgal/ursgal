@@ -98,12 +98,16 @@ def main(input_file = None, decoy_tag = None, output_file = None):
                     protein['Stop']       = element.attrib['end']
                     protein['pre']        = element.attrib['pre'][-1]
                     protein['post']       = element.attrib['post'][0]
+                    if protein['Start'] == '1':
+                        protein['pre'] = '-'
+                    if protein['post'] == ']':
+                        protein['post'] = '-'
                     domain['proteinacc_start_stop_pre_post_;'] = '{0}_{1}_{2}_{3}_{4};'.format(
                         protein['Defline'],
                         protein['Start'],
                         protein['Stop'],
                         protein['pre'],
-                        protein['post']
+                        protein['post'],
                     )
                     if protein['Defline'].startswith(decoy_tag):
                         domain['Is decoy'] = True
