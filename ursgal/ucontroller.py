@@ -1370,7 +1370,6 @@ class UController(ursgal.UNode):
                 # changing the amount of CPUs should not trigger re-run:
                 if used_param == 'cpus':
                     continue
-
                 if used_param in o_params.keys() and used_param in i_params.keys():
                     if o_params[ used_param ] != i_params[ used_param ]:
                         reasons.append(
@@ -1390,7 +1389,7 @@ class UController(ursgal.UNode):
                             'was not found in previous output params.'\
                             '...'.format(used_param)
                         )
-
+                        break
                     elif o_params[ used_param ] != default_value:
                         reasons.append(
                             'A new node related parameter ("{0}") '\
