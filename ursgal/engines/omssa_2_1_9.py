@@ -210,6 +210,12 @@ class omssa_2_1_9( ursgal.UNode ):
             float(self.params['precursor_mass_tolerance_minus']) \
         ) / 2.0
 
+        self.params['tmp_output_file_incl_path'] = os.path.join(
+            self.params['output_dir_path'],
+            self.params['output_file'] + '_tmp'
+        )
+        self.created_tmp_files.append( self.params['tmp_output_file_incl_path'] )
+
         self.params['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
@@ -227,7 +233,7 @@ class omssa_2_1_9( ursgal.UNode ):
             # BLAST package
 
             # -- OUTPUT: ---
-            '{omssa_output_type}'.format(**self.params), '{output_file_incl_path}'.format(**self.params), # -oc for csv, -ox for omx
+            '{omssa_output_type}'.format(**self.params), '{tmp_output_file_incl_path}'.format(**self.params), # -oc for csv, -ox for omx
             '-w',
             # include search spetra and self.params in results,
             # is required for mzid conversion, if omx is used, but omx files
@@ -367,7 +373,7 @@ class omssa_2_1_9( ursgal.UNode ):
         '''
         # exit()
         cached_omssa_output = []
-        result_file = open( self.params['output_file_incl_path'], 'r')
+        result_file = open( self.params['tmp_output_file_incl_path'], 'r')
         csv_dict_reader_object = csv.DictReader(
             row for row in result_file if not row.startswith('#')
         )
@@ -386,6 +392,7 @@ class omssa_2_1_9( ursgal.UNode ):
         for line_dict in csv_dict_reader_object:
             cached_omssa_output.append( line_dict )
         result_file.close()
+
         #
         result_file = open( self.params['output_file_incl_path'], 'w')
         csv_dict_writer_object = csv.DictWriter(
@@ -412,55 +419,59 @@ class omssa_2_1_9( ursgal.UNode ):
                 tmp['proteinacc_start_stop_pre_post_;'],
                 tmp['Sequence']
             )
-            for start, stop, pre_aa, post_aa, returned_protein_id in returned_peptide_regex_list:
-                protein_scan_start_stop = (
-                    returned_protein_id,
-                    tmp['Spectrum Title'],
-                    start,
-                    stop
-                )
-                if protein_scan_start_stop in already_seen_protein_scan_start_stop_combos:
-                    continue
-                else:
-                    already_seen_protein_scan_start_stop_combos.add(protein_scan_start_stop)
+            for protein in returned_peptide_regex_list:
+                for pep_regex in protein:
+                    start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
+                    protein_scan_start_stop = (
+                        returned_protein_id,
+                        tmp['Spectrum Title'],
+                        start,
+                        stop
+                    )
+                    if protein_scan_start_stop in already_seen_protein_scan_start_stop_combos:
+                        continue
+                    else:
+                        already_seen_protein_scan_start_stop_combos.add(protein_scan_start_stop)
 
 
-                tmp['Start'] = start
-                tmp['Stop'] = stop
+                    tmp['Start'] = start
+                    tmp['Stop'] = stop
 
-                tmp['proteinacc_start_stop_pre_post_;'] = '{0}_{1}_{2}'.format(
-                    tmp['proteinacc_start_stop_pre_post_;'],
-                    pre_aa,
-                    post_aa
-                )
+                    tmp['proteinacc_start_stop_pre_post_;'] = '{0}_{1}_{2}_{3}_{4}'.format(
+                        tmp['proteinacc_start_stop_pre_post_;'],
+                        start,
+                        stop,
+                        pre_aa,
+                        post_aa
+                    )
 
-                translated_mods = []
-                if tmp['Modifications'] != '':
-                    splitted_Modifications = tmp['Modifications'].split(',')
-                    for mod in splitted_Modifications:
-                        omssa_name, position = mod.split(':')
-                        omssa_name  = omssa_name.strip()
-                        position    = position.strip()
-                        unimod_name = self.lookups[ omssa_name ]['name']
-                        if position.strip() == '1':
-                            # print( self.lookups[ omssa_name ] )
-                            for target in self.lookups[ omssa_name ]['aa_targets']:
-                                if 'N-TERM' in target.upper():
-                                    position = '0'
-                        translated_mods.append(
-                            '{0}:{1}'.format(
-                                unimod_name,
-                                position
+                    translated_mods = []
+                    if tmp['Modifications'] != '':
+                        splitted_Modifications = tmp['Modifications'].split(',')
+                        for mod in splitted_Modifications:
+                            omssa_name, position = mod.split(':')
+                            omssa_name  = omssa_name.strip()
+                            position    = position.strip()
+                            unimod_name = self.lookups[ omssa_name ]['name']
+                            if position.strip() == '1':
+                                # print( self.lookups[ omssa_name ] )
+                                for target in self.lookups[ omssa_name ]['aa_targets']:
+                                    if 'N-TERM' in target.upper():
+                                        position = '0'
+                            translated_mods.append(
+                                '{0}:{1}'.format(
+                                    unimod_name,
+                                    position
+                                )
                             )
-                        )
 
-                tmp['Modifications'] = ';'.join( translated_mods )
+                    tmp['Modifications'] = ';'.join( translated_mods )
 
-                if self.params['decoy_tag'] in tmp['proteinacc_start_stop_pre_post_;']:
-                    tmp['Is decoy'] = 'true'
-                else:
-                    tmp['Is decoy'] = 'false'
-                csv_dict_writer_object.writerow( tmp )
+                    if self.params['decoy_tag'] in tmp['proteinacc_start_stop_pre_post_;']:
+                        tmp['Is decoy'] = 'true'
+                    else:
+                        tmp['Is decoy'] = 'false'
+                    csv_dict_writer_object.writerow( tmp )
         return
 
 

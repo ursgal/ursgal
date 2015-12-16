@@ -485,7 +485,7 @@ class UNode(object, metaclass=Meta_UNode):
             self.lookups['fasta_dbs'][ database ] = {}
             lookup_hook = self.lookups['fasta_dbs'][ database ]
             self.print_info(
-                'Fasta_db {database}'.format( **self.params ),
+                'Fasta_db {0}'.format( database ),
                 caller ='Caching'
             )
             current_id = None
@@ -833,7 +833,7 @@ class UNode(object, metaclass=Meta_UNode):
         as well as the amino acid before and after the peptide sequence in the
         full protein sequence. If the peptide sequence contains known amino acid
         substitutions like U (Selenocystein) or J (Leucin or Isoleucin) this
-        amingo acid is replaced by a regex wildcard '.' in order to be matchable
+        amino acid is replaced by a regex wildcard '.' in order to be matchable
         on the fasta database (this is defined in kb.unify_csv_1_0_0.py).
         This is especially needed if the original sequence contains a 'X' and
         the search engine guesses/determines the aminno acid at this position.
@@ -868,19 +868,15 @@ class UNode(object, metaclass=Meta_UNode):
         if database not in self.lookups['fasta_dbs'].keys():
             self.generate_fasta_database_lookup( database )
         # print(self.lookups)
-        unify_csv_converter_version = self.params['unify_csv_converter_version']
+        # unify_csv_converter_version = self.params['unify_csv_converter_version']
         peptide_for_regex = peptide
         # corrected_peptide = peptide
-        for aa_exception, aa_exception_info in self.meta_unodes[ unify_csv_converter_version ].DEFAULT_PARAMS['aa_exception_dict'].items():
+        for aa_exception, aa_exception_info in self.meta_unodes[ 'unify_csv_1_0_0' ].DEFAULT_PARAMS['aa_exception_dict'].items():
             #regex will match any character in place of unknown aminoc acid...
             peptide_for_regex = peptide_for_regex.replace(
                 aa_exception,
                 '.'
             )
-            # corrected_peptide = peptide.replace(
-            #     aa_exception,
-            #     aa_exception_info['original_aa']
-            # )
         ids_matched = []
         if protein_id not in self.lookups['fasta_dbs'][ database ].keys():
             #ms amanda short name problem
@@ -892,21 +888,16 @@ class UNode(object, metaclass=Meta_UNode):
                         ids_matched.append( long_protein_id )
         else:
             ids_matched = [ protein_id ]
-        # print(peptide_for_regex)
-        # print()
         return_buffer_keys = []
         for protein_id in ids_matched:
             full_sequence = self.lookups['fasta_dbs'][ database ][ protein_id ]
-            #known exceptions
             buffer_key = ( database, peptide_for_regex, protein_id )
             if 'peptide_pos_buffer' not in self.lookups.keys():
                 self.lookups['peptide_pos_buffer'] = {}
             if buffer_key not in self.lookups['peptide_pos_buffer'].keys():
-                # print(peptide_for_regex)
-                match = re.search( peptide_for_regex, full_sequence )
-                #alternatively we could use finditer to get all positions and
-                #return them, but is this needed?
-                if match is not None:
+                match_found = False
+                for match in re.finditer( peptide_for_regex, full_sequence ):
+                    match_found = True
                     start = match.start()
                     stop = start + len(peptide)
 
@@ -919,22 +910,26 @@ class UNode(object, metaclass=Meta_UNode):
                         post_aa = '-'
                     else:
                         post_aa = full_sequence[ stop ]
-                    self.lookups['peptide_pos_buffer'][buffer_key] = (
+                    pos_aa_protein = (
                         start,
                         stop,
                         pre_aa,
                         post_aa,
                         protein_id
-                    )
-
-                else:
-                    self.lookups['peptide_pos_buffer'][buffer_key] = (
+                        )
+                    if buffer_key in self.lookups['peptide_pos_buffer']:
+                        self.lookups['peptide_pos_buffer'][buffer_key].append(pos_aa_protein)
+                    else:
+                        self.lookups['peptide_pos_buffer'][buffer_key] = [pos_aa_protein]
+                if match_found == False:
+                    self.lookups['peptide_pos_buffer'][buffer_key] = [(
                         None,
                         None,
                         None,
                         None,
                         protein_id
-                    )
+                        )]
+            # print(self.lookups['peptide_pos_buffer'].keys())
             if self.lookups['peptide_pos_buffer'][buffer_key][0] is None:
                 self.print_info(
                     'Peptide {0} cant be found in database {1}, peptide for regex: {2}'.format(
