@@ -17,7 +17,7 @@ R = ursgal.UController(
             'tests',
             'data',
             'BSA.fasta'
-        )
+        ),
     },
     force  = False
 )
@@ -71,6 +71,9 @@ unify_csv_main(
         ],
         'label' : '',
         'decoy_tag': 'decoy_',
+        'enzyme' : 'trypsin',
+        'semi_enzyme' : False,
+        'database': os.path.join( 'tests', 'data', 'BSA.fasta'),
     },
     search_engine  = 'omssa_2_1_9',
 )

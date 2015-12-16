@@ -84,6 +84,7 @@ USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
 USED_USEARCH_PARAMS = set([
     'validation_generalized',
     'qvality_number_of_bins',
+    'qvality_verbose',
     'qvality_epsilon_step',
     'qvality_cross_validation',
 ])

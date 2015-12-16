@@ -17,8 +17,7 @@ R = ursgal.UController(
     },
     force   = False
 )
-# print(R)
-# exit()
+
 TESTS = [
     {
         'peptide' : 'SHCIAEVEK',
@@ -103,15 +102,18 @@ def peptide_regex( test_dict ):
         test_dict['protein_id'],
         test_dict['peptide'],
     )
-    for start,stop,pre_aa,post_aa, protein_id in return_list:
-        print(test_dict)
-        print(start,stop,pre_aa,post_aa,protein_id)
-        print()
-        assert start      == test_dict['start']
-        assert stop       == test_dict['stop']
-        assert pre_aa     == test_dict['pre_aa']
-        assert post_aa    == test_dict['post_aa']
-        assert protein_id == test_dict['protein_id']
+    print(return_list)
+    for proteins in return_list:
+        for pep_regex in proteins: 
+            start,stop,pre_aa,post_aa, protein_id = pep_regex
+            print(test_dict)
+            print(start,stop,pre_aa,post_aa,protein_id)
+            print()
+            assert start      == test_dict['start']
+            assert stop       == test_dict['stop']
+            assert pre_aa     == test_dict['pre_aa']
+            assert post_aa    == test_dict['post_aa']
+            assert protein_id == test_dict['protein_id']
 
 
 

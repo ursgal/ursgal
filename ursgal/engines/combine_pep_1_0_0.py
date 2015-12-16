@@ -2,14 +2,47 @@
 
 import ursgal
 import os.path
-import importlib.machinery
-import sys
-from pprint import pprint
 
 
-class combine_pep_1_0_0( ursgal.UNode ):
+class combine_pep_1_0_0(ursgal.UNode):
     '''
     combine_pep_1_0_0 UNode
+
+    Combine_PEP is a variation of the combined FDR score algorithm
+    (Jones et al., 2009). Instead of sorting PSMs by the average FDR
+    score (AFS), PSMs are sorted by their multi-engine PEP as computed
+    from the single-engine PEPs using Bayes’ theorem.
+    For instance, consider a PSM that received three different PEPs
+    (a, b and c) from three different search engines. The multi-engine
+    PEP can then be computed:
+
+                                a*b*c
+    multi-engine PEP = -------------------------
+                       a*b*c + (1-a)*(1-b)*(1-c)
+
+    For each combination of search engines, all PSMs that were found
+    by these engines are then scored separately. First, they are sorted
+    by their multi-engine PEP. Then their combined PEPs are computed by
+    iterating a sliding window over the sorted PSMs. Each PSM receives
+    a PEP based on the target/decoy ratio of the surrounding PEPs:
+
+    PEP = (2 * number_of_decoys_in_window) / number_of_total_PSMs_in_window
+
+    The window_size can be defined by adjusting the Ursgal parameter
+    'cPEP:window_size', default is 249.
+
+    Input should be multiple CSV files from different search engines. Each
+    CSV requires a PEP column, for instance by post-processing with Percolator.
+
+    Returns a merged CSV file with all PSMs that were found and two added
+    columns:
+    - column 'Bayes PEP':
+        The multi-engine PEP, see explanation above
+    - column 'combined PEP':
+        The PEP as computed within the engine combination PSMs
+
+    For optimal ranking, PSMs should be sorted by combined PEP.
+    Ties can be resolved by sorting them by Bayes PEP.
     '''
     def __init__(self, *args, **kwargs):
         super(combine_pep_1_0_0, self).__init__(*args, **kwargs)

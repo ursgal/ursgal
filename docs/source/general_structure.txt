@@ -32,7 +32,7 @@ the UNode:
     #.  Architecture independent engines, like Python scripts or Java packages
         can be placed in <installation path of ursgal>/resources/platform_independent/arc_independent/
     #.  Each UNode has to have its own folder following Python class name
-        conventions, but all lowercase. For more details in the naming
+        conventions, **but all lowercase**. For more details in the naming
         convention see `PEP 3131`_.
 
 Knowledge base (kb)

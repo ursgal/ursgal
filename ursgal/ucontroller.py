@@ -842,13 +842,18 @@ class UController(ursgal.UNode):
             userdefined_output_fname = output_file
         )
 
-        #debug_print( "self.io['input']['o_finfo']", self.io['input']['o_finfo'], color="green" )
-        #debug_print( "self.io['output']['i_finfo']", self.io['output']['i_finfo'], color="red" )
         # set basic io finfo and takes care of json load into proper io
         answer = self.eval_if_run_needs_to_be_executed(
             engine = engine_name,
             force  = force,
         )
+
+        # if re-run is scheduled, delete output file from previous run
+        # if there is one (it might cause trouble...)
+        if answer:
+            if os.path.isfile(self.io['output']['finfo']['full']):
+                os.remove(self.io['output']['finfo']['full'])
+
         # At this point we know if we need to rerun and
         # thus we can move params and stats on
         if answer is not None:
@@ -1375,11 +1380,14 @@ class UController(ursgal.UNode):
                         break
                 else:
                     default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(used_param, None)
-                    assert used_param in o_params.keys(), 'USED_USEARCH_PARAM '\
-                        '"{0}" was not found in DEFAULT_PARAMS. '\
-                        'This should never happen!'.format(used_param)
-                        
-                    if o_params[ used_param ] != default_value:
+                    if used_param not in o_params.keys():
+                        reasons.append(
+                            'USED_USEARCH_PARAM "{0}" '\
+                            'was not found in previous output params.'\
+                            '...'.format(used_param)
+                        )
+
+                    elif o_params[ used_param ] != default_value:
                         reasons.append(
                             'A new node related parameter ("{0}") '\
                             'has been added compared to the last output '\

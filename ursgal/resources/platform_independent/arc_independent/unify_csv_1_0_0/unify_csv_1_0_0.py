@@ -123,8 +123,8 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
             opt_mods[aa] = name
         if 'C,fix,any,Carbamidomethyl' in modification:
             cam = True
-    ursgal.GlobalUnimodMapper._reparseXML()
 
+    ursgal.GlobalUnimodMapper._reparseXML()
     de_novo_engines = ['novor', 'pepnovo', 'uninovo', 'unknown_engine']
     de_novo = False
     for de_novo_engine in de_novo_engines:
@@ -218,27 +218,6 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
             line_dict['Retention Time (s)'] = float( retention_time_in_minutes ) * rt_corr_factor
             #
             # Modification block
-            #
-            # X!Tandem can not determine N-Acetyl correctly
-            # if 'tandem' in search_engine.lower():
-            #     if 'unknown modification:0' in line_dict['Modifications']:
-            #         line_dict['Modifications'] = line_dict['Modifications'].replace(
-            #             'unknown modification:0',
-            #             'Ammonia-loss:0'
-            #         )
-
-                # line_dict['Modifications'] = line_dict['Modifications'].replace(
-                #     'Ammonia-loss:1',
-                #     'Ammonia-loss:0'
-                # )
-                # line_dict['Modifications'] = line_dict['Modifications'].replace(
-                #     'Gln->pyro-Glu:1',
-                #     'Gln->pyro-Glu:0'
-                # )
-                # line_dict['Modifications'] = line_dict['Modifications'].replace(
-                #     'Glu->pyro-Glu:1',
-                #     'Glu->pyro-Glu:0'
-                # )
 
             # some engines do not report fixed modifications
             # include in unified csv
@@ -437,12 +416,59 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                     ]
                 )
 
+            # check if proteinacc_start_stop_pre_post is correct
+            
+            # match = re.search('_\d+_\d+_[A-Z-]_[A-Z-]', line_dict['proteinacc_start_stop_pre_post_;'])
+            # if match == None:
+            #     print('>>>>>>>>>>',line_dict) 
+            # start = match.start()
+            # protein_id = line_dict['proteinacc_start_stop_pre_post_;'][0:start]
+            # peptide = line_dict['Sequence']
+            # protein_pep = '{0}_{1}'.format(protein_id, peptide)
+
+            # allowed_aa = params['enzyme'][0]
+            # cleavage_site = params['enzyme'][1]
+
+            # change_proteinacc_start_stop_pre_post = False
+
+            # already_seen_protein_pep = {}
+            # un = ursgal.UNode()
+            # if protein_pep not in already_seen_protein_pep:
+            #     already_seen_protein_pep[protein_pep] = un.peptide_regex(
+            #         params['database'],
+            #         protein_id,
+            #         peptide
+            #     )
+            # returned_peptide_regex_list = already_seen_protein_pep[protein_pep]
+            # for protein in returned_peptide_regex_list:
+            #     for pep_regex in protein:
+            #         print(pep_regex)
+            #         start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
+            #         proteinacc_start_stop_pre_post = '{0}_{1}_{2}_{3}_{4}'.format(
+            #             returned_protein_id,
+            #             start,
+            #             stop,
+            #             pre_aa,
+            #             post_aa
+            #         )
+            #         if start != 1 and params['semi_enzyme'] == False:
+            #             if cleavage_site == 'C':
+            #                 if pre_aa not in allowed_aa:
+            #                     change_proteinacc_start_stop_pre_post = True
+            #             elif cleavage_site == 'N':
+            #                 if post_aa not in allowed_aa:
+            #                     change_proteinacc_start_stop_pre_post = True
+
+
+            #         if proteinacc_start_stop_pre_post in line_dict['proteinacc_start_stop_pre_post_;']:
+            #             start = start
+
+            # caculate m/z
+
             upep = line_dict['Sequence'] + '#' + line_dict['Modifications']
             buffer_key = (upep, line_dict['Charge'], params['label'])
             if buffer_key not in mz_buffer.keys():
                 cc.use(upep)
-                # print(cc)
-                # print(mass)
                 if use15N:
                     number_N = dc( cc['N'] )
                     cc['15N'] = number_N
@@ -453,8 +479,6 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                         cc['15N'] -= c_count
                     # mass = mass + ( DIFFERENCE_14N_15N * number_N )
                 mass = cc._mass()
-                # print(upep)
-                # print(mass)
                 calc_mz = ursgal.ucore.calculate_mz(
                     mass,
                     line_dict['Charge']
@@ -462,7 +486,6 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                 mz_buffer[ buffer_key ] = calc_mz
             else:
                 calc_mz = mz_buffer[ buffer_key ]
-
             line_dict['uCalc m/z'] = calc_mz
             if 'msamanda' in search_engine.lower():
                 # ms amanda does not return calculated mz values

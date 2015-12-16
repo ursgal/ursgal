@@ -55,6 +55,13 @@ unify_csv_main(
         ],
         'label' : '15N',
         'decoy_tag': 'decoy_',
+        'enzyme' : 'trypsin',
+        'semi_enzyme' : False,
+        'database': os.path.join(
+            'tests',
+            'data',
+            'BSA.fasta'
+        ),
     },
     search_engine  = 'msgfplus_v9979',
 )
