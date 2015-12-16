@@ -156,6 +156,9 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         '''
         Convert .tsv result files to .csv
         '''
+        self.meta_unodes['ucontroller'].verify_engine_produced_an_output_file(
+            self.params['output_file_incl_path'], 'MSAmanda'
+        )
 
         cached_msamanada_output = []
         with open(self.params['output_file_incl_path'], 'r') as result_file:

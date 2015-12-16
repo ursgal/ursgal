@@ -1,0 +1,32 @@
+Known Issues
+============
+
+General
+#######
+
+    * Java used memory size
+
+        Ajust the memory usage by Java according to your needs. When using
+        memory intensive tasks as mzIdentML conversion of large files, an
+        adjustement of the Java Xmx values may be required. The default is the
+        usage of 13 GB of your RAM. Please refer to the Java documentation
+        for further information.
+        http://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+        In Ursgal the parameter `java_-Xmx` can be used to adjust the Java memory
+        usage.
+
+Windows 10
+##########
+
+    * MS Amanda can not load .fasta files
+    * calculating the md5 can cause problems e.g. while executing test
+
+
+MONO
+####
+
+Mono is the .NET replacement under *nix systems, since .NET is not directly
+ported by Microsoft to other systems than windows.
+Unfortunately mono is not as stable as the official .NET build. Therefore:
+
+    * MS Amanda crashes randomly under *nix systems (e.g. Linux or OS X)

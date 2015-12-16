@@ -150,8 +150,8 @@
 	        validated_results = []
 	
 	        # Convert mzML to MGF outside the loop, so this step is not repeated in the loop
-	        mgf_spec_file = R.convert_to_mgf_and_update_rt_lookup(
-	            input_file = mzML_file
+	        mgf_spec_file = uc.convert_to_mgf_and_update_rt_lookup(
+	            input_file = spec_file
 	        )
 	        for search_engine in search_engines:
 	            uc.params[ 'prefix' ] = prefix
