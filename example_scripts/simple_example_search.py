@@ -37,7 +37,7 @@ def main():
         xtandem = 'xtandem_sledgehammer'
     if sys.platform == 'win32':
         msamanda = 'msamanda_1_0_0_5242'
-    else: 
+    else:
         msamanda = 'msamanda_1_0_0_5243'
 
     engine_list = [
@@ -57,7 +57,7 @@ def main():
         uc.params['http_url'] = 'http://sourceforge.net/p/open-ms/code/HEAD/tree/OpenMS/share/OpenMS/examples/BSA/BSA1.mzML?format=raw'
         uc.params['http_output_folder'] = os.path.dirname(mzML_file)
         uc.fetch_file(
-            engine     = 'get_http_files_1_0_0'
+            engine     = 'get_http_files_1_0_0',
         )
         shutil.move(
             '{0}format=raw'.format(mzML_file),

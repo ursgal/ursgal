@@ -533,10 +533,18 @@ class UController(ursgal.UNode):
         Engines: get_http_files_1_0_0 or get_ftp_files_1_0_0
 
         '''
-        return self.execute_unode(
+        answer = self.execute_unode(
             input_file = None,
             engine     = engine,
         )
+        # remove the temporary input file!
+        os.remove(
+            os.path.join(
+                self.io['input']['finfo']['dir'],
+                self.io['input']['finfo']['json']
+            )
+        )
+        return answer
 
     def add_estimated_fdr( self, input_file=None, force=False, output_file_name=None ):
         '''
@@ -814,7 +822,6 @@ class UController(ursgal.UNode):
         # and updating self.io['input']['params'] to reflect
         # merged params and json if available ..
         self.reset_controller()
-
         #if force is not None:   # overwriting default force value with
             #self.force = force  # user-specified settings
 
@@ -850,9 +857,10 @@ class UController(ursgal.UNode):
 
         # if re-run is scheduled, delete output file from previous run
         # if there is one (it might cause trouble...)
-        if answer:
+        if answer is not None:
             if os.path.isfile(self.io['output']['finfo']['full']):
-                os.remove(self.io['output']['finfo']['full'])
+                os.remove( self.io['output']['finfo']['full'] )
+
 
         # At this point we know if we need to rerun and
         # thus we can move params and stats on
@@ -1415,9 +1423,11 @@ class UController(ursgal.UNode):
                     )
                 )
 
-        if self.force == True:  # when specifying UController(force=True)
+        if self.force is True:  
+            # when specifying UController(force=True)
             reasons.append( 'You used (the) force! (via UController)' )
-        if force == True:  # when specifying i.e. search(force=True)
+        if force is True:  
+            # when specifying i.e. search(force=True)
             reasons.append( 'You used (the) force!' )
 
         if len(reasons) == 0:
@@ -2366,8 +2376,10 @@ File {0} is not present in online resource folder.
 
         if input_file is None:
             tmp_file_name = tempfile.NamedTemporaryFile().name
-            with open (tmp_file_name,'w') as tmp_io:
-                print('''>> import this
+            with open (tmp_file_name, 'w') as tmp_io:
+                print(
+                    '''
+>> import this
 The Zen of Python, by Tim Peters
 
 Beautiful is better than ugly.
@@ -2401,10 +2413,12 @@ True
 >>> love is love
 True
 >>>
-            ''',file=tmp_io)
-                # pass
+                ''',
+                    file = tmp_io
+                )
+            tmp_io.close()
+                      # pass
             input_file = tmp_file_name
-
         engine_name = self.engine_sanity_check( engine )
         multi, input_file = self.distinguish_multi_and_single_input( input_file )
         self.input_file_sanity_check( input_file, engine=engine_name, multi=multi )
@@ -2415,10 +2429,8 @@ True
             engine = engine_name,
             force  = force
         )
-
         if dry_run is True:
             answer = None  # do not execute, even if params changed!
-
         report = self.run_unode_if_required(
             force, engine_name, answer
         )
@@ -2596,7 +2608,6 @@ True
             "engine"     : engine,
             "custom_str" : custom_str,
         }
-
 
         if multi:
             # verify that input to multi-nodes is a list of 2 or more elements:

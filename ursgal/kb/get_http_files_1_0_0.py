@@ -13,8 +13,8 @@ META_INFO = {
         },
     },
 
-    'input_types': '',
-    'output_suffix':None,
+    'input_types'    : '',
+    'output_suffix'  : None,
     'include_in_git' : True,
 
     # 'in_development' : True
