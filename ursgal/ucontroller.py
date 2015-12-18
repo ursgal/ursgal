@@ -878,8 +878,9 @@ class UController(ursgal.UNode):
             self.determine_common_head_tail_part_of_names( input_files )
         )
         common_fname, __ = os.path.splitext( common_fname_w_ext )
-        common_dir = self.determine_common_top_level_folder( input_files )
-
+        common_dir = self.determine_common_top_level_folder(
+            [os.path.abspath(path) for path in input_files]
+        )
         return common_dir, common_fname.strip("_")
 
     def generate_multi_helper_file( self, input_files ):
