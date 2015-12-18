@@ -62,6 +62,7 @@ def main( http_url = None, http_output_folder = None):
             ).format(http_url)
         )
         os.remove( output_path )
+    # exit()
     return output_path
 
 

@@ -50,6 +50,8 @@ def main(
     if output_folder is None:
         output_folder = tempfile.gettempdir()
 
+    downloaded_files = []
+
     def download_file(source, target, file_size ):
         print(
             'Downloading: {0} into {1} with file size of {2:1.1f} MB'.format(
@@ -67,10 +69,11 @@ def main(
 
         return
 
-    def walk_deeper( folder = None, output_root = None):
+    def walk_deeper( folder = None, output_root = None, downloaded_files=None):
         if folder is None:
             folder = ''
-
+        if downloaded_files is None:
+            downloaded_files = []
         for file_or_directory in ftp.nlst( folder ):
             # print( file_or_directory )
             try:
@@ -120,6 +123,7 @@ def main(
                                     file_path_on_host
                                 )
                             )
+                            downloaded_files.append( file_path_on_host )
                     else:
                         if os.path.exists(folder_path_on_host) is False:
                             print(
@@ -134,8 +138,13 @@ def main(
                             file_path_on_host,
                             ftp_size
                         )
+                        downloaded_files.append( file_path_on_host )
+        return downloaded_files
 
-    walk_deeper( output_root = output_folder)
+    downloaded_files = walk_deeper(
+        output_root      = output_folder,
+        downloaded_files = downloaded_files
+    )
 
     # ftp shortcut for debugging if ftp.size() does not work!
     # for file_or_directory in ftp.nlst( folder ):
@@ -164,7 +173,7 @@ def main(
     #          )
     #     )
 
-    return output_folder
+    return downloaded_files
 
 if __name__ == '__main__':
     # main(
