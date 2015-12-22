@@ -180,13 +180,13 @@ class omssa_2_1_9( ursgal.UNode ):
         # semienyzmatic cleavage --> tanslation into omssa enyzme number
         if self.params['semi_enzyme'] == True:
             if self.params['enzyme'] == '0':
-                self.params['enzyme'] == '16'
+                self.params['enzyme'] = '16'
             elif self.params['enzyme'] == '3':
-                self.params['enzyme'] == '23'
+                self.params['enzyme'] = '23'
             elif self.params['enzyme'] == '13':
-                self.params['enzyme'] == '24'
+                self.params['enzyme'] = '24'
 
-        # define the iosn to search
+        # define the ions to search
 
         self.params['omssa_ions_to_search'] = []
         for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
