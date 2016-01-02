@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.4
 import ursgal
-
+import os
 
 class get_ftp_files_1_0_0( ursgal.UNode ):
     """
@@ -31,7 +31,7 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
         print('[ -ENGINE- ] Executing FTP Download ..')
         self.time_point(tag = 'execution')
         main = self.import_engine_as_python_function()
-        main(
+        downloaded_files = main(
             ftp_url             = self.params.get('ftp_url', None),
             folder              = self.params.get('ftp_folder', None),
             login               = self.params.get('ftp_login', None),
@@ -42,4 +42,6 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
             blocksize           = self.params.get('ftp_blocksize', None)
         )
         self.print_execution_time(tag='execution')
+        self.io['output']['finfo']['dir'] =  os.path.dirname( downloaded_files[-1] )
+        self.io['output']['finfo']['file'] = os.path.basename( downloaded_files[-1] )
         return

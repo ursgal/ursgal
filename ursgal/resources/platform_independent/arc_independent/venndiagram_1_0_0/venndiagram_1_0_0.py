@@ -18,6 +18,7 @@ import sys
 import bisect
 import math
 import codecs
+csv.field_size_limit(sys.maxsize)
 
 def main( *args, **kwargs ):
     """

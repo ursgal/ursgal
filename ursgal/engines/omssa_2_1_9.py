@@ -8,6 +8,8 @@ import sys
 import subprocess
 import csv
 
+csv.field_size_limit(sys.maxsize)
+
 class omssa_2_1_9( ursgal.UNode ):
     """
     omssa_2_1_9 UNode
@@ -180,13 +182,13 @@ class omssa_2_1_9( ursgal.UNode ):
         # semienyzmatic cleavage --> tanslation into omssa enyzme number
         if self.params['semi_enzyme'] == True:
             if self.params['enzyme'] == '0':
-                self.params['enzyme'] == '16'
+                self.params['enzyme'] = '16'
             elif self.params['enzyme'] == '3':
-                self.params['enzyme'] == '23'
+                self.params['enzyme'] = '23'
             elif self.params['enzyme'] == '13':
-                self.params['enzyme'] == '24'
+                self.params['enzyme'] = '24'
 
-        # define the iosn to search
+        # define the ions to search
 
         self.params['omssa_ions_to_search'] = []
         for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
@@ -419,6 +421,29 @@ class omssa_2_1_9( ursgal.UNode ):
                 tmp['proteinacc_start_stop_pre_post_;'],
                 tmp['Sequence']
             )
+
+            translated_mods = []
+            if tmp['Modifications'] != '':
+                splitted_Modifications = tmp['Modifications'].split(',')
+                for mod in splitted_Modifications:
+                    omssa_name, position = mod.split(':')
+                    omssa_name  = omssa_name.strip()
+                    position    = position.strip()
+                    unimod_name = self.lookups[ omssa_name ]['name']
+                    if position.strip() == '1':
+                        # print( self.lookups[ omssa_name ] )
+                        for target in self.lookups[ omssa_name ]['aa_targets']:
+                            if 'N-TERM' in target.upper():
+                                position = '0'
+                    translated_mods.append(
+                        '{0}:{1}'.format(
+                            unimod_name,
+                            position
+                        )
+                    )
+
+            tmp['Modifications'] = ';'.join( translated_mods )
+
             for protein in returned_peptide_regex_list:
                 for pep_regex in protein:
                     start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
@@ -445,27 +470,7 @@ class omssa_2_1_9( ursgal.UNode ):
                         post_aa
                     )
 
-                    translated_mods = []
-                    if tmp['Modifications'] != '':
-                        splitted_Modifications = tmp['Modifications'].split(',')
-                        for mod in splitted_Modifications:
-                            omssa_name, position = mod.split(':')
-                            omssa_name  = omssa_name.strip()
-                            position    = position.strip()
-                            unimod_name = self.lookups[ omssa_name ]['name']
-                            if position.strip() == '1':
-                                # print( self.lookups[ omssa_name ] )
-                                for target in self.lookups[ omssa_name ]['aa_targets']:
-                                    if 'N-TERM' in target.upper():
-                                        position = '0'
-                            translated_mods.append(
-                                '{0}:{1}'.format(
-                                    unimod_name,
-                                    position
-                                )
-                            )
-
-                    tmp['Modifications'] = ';'.join( translated_mods )
+                    
 
                     if self.params['decoy_tag'] in tmp['proteinacc_start_stop_pre_post_;']:
                         tmp['Is decoy'] = 'true'
