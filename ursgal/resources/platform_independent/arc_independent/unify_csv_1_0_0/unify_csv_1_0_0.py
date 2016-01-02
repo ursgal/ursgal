@@ -126,10 +126,15 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
 
     ursgal.GlobalUnimodMapper._reparseXML()
     de_novo_engines = ['novor', 'pepnovo', 'uninovo', 'unknown_engine']
+    database_search_engines = ['msamanda', 'msgf', 'myrimatch', 'omssa', 'xtandem']
     de_novo = False
+    database_search = False
     for de_novo_engine in de_novo_engines:
         if de_novo_engine in search_engine.lower():
             de_novo = True
+    for db_se in search_engines:
+        if db_se in search_engine.lower():
+            database_search = True
 
     psm_counter = Counter()
     # if a PSM with multiple rows is found (i.e. in omssa results), the psm
@@ -415,54 +420,6 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                         '{m}:{p}'.format( m=mod, p=pos) for pos, mod in tmp
                     ]
                 )
-
-            # check if proteinacc_start_stop_pre_post is correct
-            
-            # match = re.search('_\d+_\d+_[A-Z-]_[A-Z-]', line_dict['proteinacc_start_stop_pre_post_;'])
-            # if match == None:
-            #     print('>>>>>>>>>>',line_dict) 
-            # start = match.start()
-            # protein_id = line_dict['proteinacc_start_stop_pre_post_;'][0:start]
-            # peptide = line_dict['Sequence']
-            # protein_pep = '{0}_{1}'.format(protein_id, peptide)
-
-            # allowed_aa = params['enzyme'][0]
-            # cleavage_site = params['enzyme'][1]
-
-            # change_proteinacc_start_stop_pre_post = False
-
-            # already_seen_protein_pep = {}
-            # un = ursgal.UNode()
-            # if protein_pep not in already_seen_protein_pep:
-            #     already_seen_protein_pep[protein_pep] = un.peptide_regex(
-            #         params['database'],
-            #         protein_id,
-            #         peptide
-            #     )
-            # returned_peptide_regex_list = already_seen_protein_pep[protein_pep]
-            # for protein in returned_peptide_regex_list:
-            #     for pep_regex in protein:
-            #         print(pep_regex)
-            #         start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
-            #         proteinacc_start_stop_pre_post = '{0}_{1}_{2}_{3}_{4}'.format(
-            #             returned_protein_id,
-            #             start,
-            #             stop,
-            #             pre_aa,
-            #             post_aa
-            #         )
-            #         if start != 1 and params['semi_enzyme'] == False:
-            #             if cleavage_site == 'C':
-            #                 if pre_aa not in allowed_aa:
-            #                     change_proteinacc_start_stop_pre_post = True
-            #             elif cleavage_site == 'N':
-            #                 if post_aa not in allowed_aa:
-            #                     change_proteinacc_start_stop_pre_post = True
-
-
-            #         if proteinacc_start_stop_pre_post in line_dict['proteinacc_start_stop_pre_post_;']:
-            #             start = start
-
             # caculate m/z
 
             upep = line_dict['Sequence'] + '#' + line_dict['Modifications']
@@ -491,39 +448,102 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                 # ms amanda does not return calculated mz values
                 line_dict['Calc m/z'] = calc_mz
 
-            # mzidentml-lib does not always set 'Is decoy' correctly
-            # (it's always 'false' for MS-GF+ results), this is fixed here:
-            if de_novo is False:
-                if params['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
-                    line_dict['Is decoy'] = 'true'
+            # protein block, only for database search engine
+
+            if database_search == True:
+
+                # check if proteinacc_start_stop_pre_post is correct
+                tmp_decoy = set()
+                tmp_proteinacc = []
+                for protein in line_dict['proteinacc_start_stop_pre_post_;'].split(';'):
+                    # match = re.search('_\d+_\d+_[A-Z-]_[A-Z-]', protein)
+                    # if match == None:
+                    #     id_stop = len(protein)
+                    # else:
+                    #     id_stop = match.start()
+                    # protein_id = protein[0:id_stop]
+                    # peptide = line_dict['Sequence']
+                    # protein_pep = '{0}_{1}'.format(protein_id, peptide)
+
+                    # allowed_aa = params['enzyme'][0]
+                    # cleavage_site = params['enzyme'][1]
+
+                    # change_proteinacc_start_stop_pre_post = False
+
+                    # already_seen_protein_pep = {}
+                    # un = ursgal.UNode()
+                    # if protein_pep not in already_seen_protein_pep:
+                    #     already_seen_protein_pep[protein_pep] = un.peptide_regex(
+                    #         params['database'],
+                    #         protein_id,
+                    #         peptide
+                    #     )
+                    # returned_peptide_regex_list = already_seen_protein_pep[protein_pep]
+                    # for protein in returned_peptide_regex_list:
+                    #     for pep_regex in protein:
+                    #         print(pep_regex)
+                    #         start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
+                    #         proteinacc_start_stop_pre_post = '{0}_{1}_{2}_{3}_{4}'.format(
+                    #             returned_protein_id,
+                    #             start,
+                    #             stop,
+                    #             pre_aa,
+                    #             post_aa
+                    #         )
+                    #         if start != 1 and params['semi_enzyme'] == False:
+                    #             if cleavage_site == 'C':
+                    #                 if pre_aa not in allowed_aa:
+                    #                     change_proteinacc_start_stop_pre_post = True
+                    #             elif cleavage_site == 'N':
+                    #                 if post_aa not in allowed_aa:
+                    #                     change_proteinacc_start_stop_pre_post = True
+
+
+                    #         if proteinacc_start_stop_pre_post in line_dict['proteinacc_start_stop_pre_post_;']:
+                    #             start = start
+
+
+                    # mzidentml-lib does not always set 'Is decoy' correctly
+                    # (it's always 'false' for MS-GF+ results), this is fixed here:
+                    if params['decoy_tag'] in protein:
+                        tmp_decoy.add('true')
+                    else:
+                        tmp_decoy.add('false')
+                if len(tmp_decoy) >= 2:
+                    print(
+                        '''
+                        [ WARNING ] The following peptide occurs in a target as well as decoy protein
+                        [ WARNING ] {0} 
+                        [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
+                            line_dict['Sequence'],
+                        )
+                    )
+
+                if 'omssa' in search_engine.lower():
+                    is_omssa = True
+                    psm = (
+                        line_dict['Spectrum Title'],
+                        line_dict['Sequence'],
+                        line_dict['Modifications'],
+                        line_dict['Charge'],
+                        line_dict['Is decoy'],
+                        line_dict['OMSSA:pvalue'],
+                    )
                 else:
-                    line_dict['Is decoy'] = 'false'
+                    is_omssa = False
+                    psm = (
+                        line_dict['Spectrum Title'],
+                        line_dict['Sequence'],
+                        line_dict['Modifications'],
+                        line_dict['Charge'],
+                        line_dict['Is decoy'],
+                    )  # each unique combination of these should only have ONE row!
+                psm_counter[psm] += 1
 
-            if 'omssa' in search_engine.lower():
-                is_omssa = True
-                psm = (
-                    line_dict['Spectrum Title'],
-                    line_dict['Sequence'],
-                    line_dict['Modifications'],
-                    line_dict['Charge'],
-                    line_dict['Is decoy'],
-                    line_dict['OMSSA:pvalue'],
-                )
-            else:
-                is_omssa = False
-                psm = (
-                    line_dict['Spectrum Title'],
-                    line_dict['Sequence'],
-                    line_dict['Modifications'],
-                    line_dict['Charge'],
-                    line_dict['Is decoy'],
-                )  # each unique combination of these should only have ONE row!
-            psm_counter[psm] += 1
-
-            csv_output.writerow( line_dict )
-            '''
-            to_be_written_csv_lines.append( line_dict )
-            '''
+                csv_output.writerow( line_dict )
+                '''
+                to_be_written_csv_lines.append( line_dict )
+                '''
     output_file_object.close()
 
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
