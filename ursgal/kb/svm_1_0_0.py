@@ -40,7 +40,8 @@ DEFAULT_PARAMS = {
         'OMSSA:pvalue',
         'X\!Tandem:expect',
         'X\!Tandem:hyperscore',
-    ])
+    ]),
+    'available_RAM_in_MB' : 3000,
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {}

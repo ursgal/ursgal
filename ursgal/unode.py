@@ -1168,17 +1168,20 @@ class UNode(object, metaclass=Meta_UNode):
         if is_search_engine or is_denovo_engine:
             self.map_mods()
 
-        self.stats['history'] = self.update_history_status( status = 'launching', history = self.stats['history']  )
+        self.stats['history'] = self.update_history_status(
+            status='launching',
+            history = self.stats['history']
+        )
 
-        is_validation_engine = self.META_INFO['engine_type'].get(
-            'validation_engine',
+        requires_grouped_psms = self.META_INFO.get(
+            'group_psms',
             False
         )
-        if is_validation_engine:
+        if requires_grouped_psms:
             self.print_info(
                 'Grouping PSMs'
             )
-            self.time_point(tag = 'group_psms')
+            self.time_point(tag='group_psms')
             self.params['grouped_psms'] = self._group_psms(
                 os.path.join(
                     self.params['input_dir_path'],

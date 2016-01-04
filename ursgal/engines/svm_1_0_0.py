@@ -58,6 +58,8 @@ class svm_1_0_0( ursgal.UNode ):
             self.params['validation_score_field'],
             '-c',
             str(self.params['c']),
+            '--mb_ram',
+            str(self.params['available_RAM_in_MB']),
         ]
         if self.params.get('bigger_scores_better', False):
             self.params['command_list'].append('--bigger_scores_better')

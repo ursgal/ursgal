@@ -34,6 +34,8 @@ parser.add_argument(
 parser.add_argument(
     '-c', type=float, default=1.0, help='Penalty parameter C of the error term')
 parser.add_argument(
+    '-r', '--mb_ram', type=float, default=3000, help='Available RAM in megabytes, for SVM calculation')
+parser.add_argument(
     '-f', '--fdr_cutoff', type=float, default=0.01, 
     help='Target PSMs with a lower FDR will be used as a positive training set')
 parser.add_argument(
@@ -65,6 +67,7 @@ FDR_CUTOFF = args['fdr_cutoff']  # 0.01 works well (for humanBR omssa/xtandem/ms
 COL_TO_SORT_BY = args['sort_by']  # the name of the column that should be used for sorting
 BIGGER_SCORES_BETTER = args.get('bigger_scores_better', False)
 ENGINE_SPECIFIC_FEATURES = args['columns_as_features'].split(',')
+MB_RAM = args['mb_ram']
 
 PROTON = 1.00727646677
 
@@ -382,7 +385,7 @@ class SVMWrapper():
             C           = C,
             kernel      = KERNEL,
             probability = True,  # we want to get probabilities later on
-            cache_size  = 3000,  # use 3 GB of RAM
+            cache_size  = MB_RAM,  # available RAM in megabytes
             #decision_function_shape = 'ovr',  # doesn't seem to matter
             #class_weight= "balanced",  # doesn't seem to matter
         )
@@ -456,9 +459,10 @@ FDR_CUTOFF: {4}
 COL_TO_SORT_BY: {5}
 BIGGER_SCORES_BETTER: {6}
 ENGINE_SPECIFIC_FEATURES: {7}
+MB_RAM: {8}
 
     '''.format(
-        IN_PATH, OUT_PATH, KERNEL, C, FDR_CUTOFF, COL_TO_SORT_BY, BIGGER_SCORES_BETTER, ENGINE_SPECIFIC_FEATURES
+        IN_PATH, OUT_PATH, KERNEL, C, FDR_CUTOFF, COL_TO_SORT_BY, BIGGER_SCORES_BETTER, ENGINE_SPECIFIC_FEATURES, MB_RAM
         )
     )
 
