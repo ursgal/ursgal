@@ -836,7 +836,7 @@ class UNode(object, metaclass=Meta_UNode):
         amino acid is replaced by a regex wildcard '.' in order to be matchable
         on the fasta database (this is defined in kb.unify_csv_1_0_0.py).
         This is especially needed if the original sequence contains a 'X' and
-        the search engine guesses/determines the aminno acid at this position.
+        the search engine guesses/determines the amino acid at this position.
 
         If the protein ID is ambigous, the peptide is matched against all
         protein candidates and the positions, pre- and post aminoacids in the
@@ -844,6 +844,9 @@ class UNode(object, metaclass=Meta_UNode):
         database is returned. This is especially needed for MS Amanda results
         where protein IDs are returned truncated and become ambigous for some
         databases.
+
+        If the peptide occurs several times in the protein, all occurences are
+        returned.
 
         The function uses a buffer to perform the regex only once for
         (peptide, protein, database) tuples. All fasta sequences are also

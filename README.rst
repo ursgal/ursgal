@@ -31,7 +31,7 @@ Abstract
 
 Proteomics data integration has become a broad field with a variety of programs offering innovative algorithms to analyze increasing amounts of data. Unfortunately, this software diversity leads to many problems as soon as one tries to analyze data using more than one algorithm. Although it was shown that the combination of multiple algorithms yields more robust results, it is only recently that unified approaches are emerging which try to streamline the most prominent search algorithms. However, workflows that for example aim to optimize search parameters or that employ cascaded style searches 3 can only be made accessible if data analysis becomes not only unified but also and most importantly scriptable. Here we introduce Ursgal, an interface between the Python programming language and many commonly used bottom-up proteomics tools as well as several auxiliary programs. Complex common and novel workflows can thus be composed using the Python scripting language using a few lines of code. Ursgal is easily extendable and we have made several database search engines (X!Tandem, OMSSA, MS-GF+, MyriMatch, MSAmanda), post processing algorithms (qvality, Percolator) and two algorithm that combines validated outputs (combined FDR score and combined PEP score) accessible as a Python interface.
 
-*Kremer et al. (2015) Journal of Proteome research xx, pp. xxx, in minor revision.*
+*Kremer et al. (2015): Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis, Journal of Proteome research 12/2015, DOI:10.1021/acs.jproteome.5b00860.*
 
 
 .. _download:

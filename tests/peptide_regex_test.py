@@ -21,74 +21,87 @@ R = ursgal.UController(
 TESTS = [
     {
         'peptide' : 'SHCIAEVEK',
-        'protein_id':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start'   : 309,
-        'stop'    : 318,
-        'pre_aa'  : 'K',
-        'post_aa' : 'D'
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
+        'start1'   : 309,
+        'stop1'    : 318,
+        'pre_aa1'  : 'K',
+        'post_aa1' : 'D'
     },
     {
         'peptide' : 'SHCIAEVE',
-        'protein_id':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4', # test short id
-        'start'   : 309,
-        'stop'    : 317,
-        'pre_aa'  : 'K',
-        'post_aa' : 'K'
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4', # test short id
+        'start1'   : 309,
+        'stop1'    : 317,
+        'pre_aa1'  : 'K',
+        'post_aa1' : 'K'
     },
     {
         'peptide' : 'SHUIAEVEK',
-        'protein_id':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start'   : 309,
-        'stop'    : 318,
-        'pre_aa'  : 'K',
-        'post_aa' : 'D'
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
+        'start1'   : 309,
+        'stop1'    : 318,
+        'pre_aa1'  : 'K',
+        'post_aa1' : 'D'
     },
     {
         'peptide' : 'YOLO',
-        'protein_id':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start'   : None,
-        'stop'    : None,
-        'pre_aa'  : None,
-        'post_aa' : None
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
+        'start1'   : None,
+        'stop1'    : None,
+        'pre_aa1'  : None,
+        'post_aa1' : None
     },
     {
         'peptide' : 'SHXIAEVEK',
-        'protein_id':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start'   : None,
-        'stop'    : None,
-        'pre_aa'  : None,
-        'post_aa' : None
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
+        'start1'   : None,
+        'stop1'    : None,
+        'pre_aa1'  : None,
+        'post_aa1' : None
     },
     {
         'peptide' : 'SHCIUEVEK',
-        'protein_id':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start'   : 309,
-        'stop'    : 318,
-        'pre_aa'  : 'K',
-        'post_aa' : 'D'
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
+        'start1'   : 309,
+        'stop1'    : 318,
+        'pre_aa1'  : 'K',
+        'post_aa1' : 'D'
     },
     {
         'peptide' : 'EYEATLEECCAK',
-        'protein_id':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start'   : 374,
-        'stop'    : 386,
-        'pre_aa'  : 'K',
-        'post_aa' : 'D'
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
+        'start1'   : 374,
+        'stop1'    : 386,
+        'pre_aa1'  : 'K',
+        'post_aa1' : 'D'
     },
     {
         'peptide' : 'EYEATLEEUUAK',
-        'protein_id':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start'   : 374,
-        'stop'    : 386,
-        'pre_aa'  : 'K',
-        'post_aa' : 'D'
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
+        'start1'   : 374,
+        'stop1'    : 386,
+        'pre_aa1'  : 'K',
+        'post_aa1' : 'D'
+    },
+    {
+        'peptide' : 'LR',
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
+        'start1'   : 103,
+        'stop1'    : 105,
+        'pre_aa1'  : 'S',
+        'post_aa1' : 'E',
+        'start2'   : 220,
+        'stop2'    : 222,
+        'pre_aa2'  : 'R',
+        'post_aa2' : 'C',
+        'start3'   : 369,
+        'stop3'    : 371,
+        'pre_aa3'  : 'L',
+        'post_aa3' : 'L'
     },
 
-
-
-
 ]
-# print(ident_list)
+
 def peptide_regex_test():
     for test_id, test_dict in enumerate(TESTS):
         yield peptide_regex, test_dict
@@ -99,25 +112,21 @@ def peptide_regex( test_dict ):
     '''
     return_list = R.peptide_regex(
         database,
-        test_dict['protein_id'],
+        test_dict['protein_id1'],
         test_dict['peptide'],
     )
     print(return_list)
-    for proteins in return_list:
-        for pep_regex in proteins: 
+    for n, proteins in enumerate(return_list):
+        for m, pep_regex in enumerate(proteins): 
             start,stop,pre_aa,post_aa, protein_id = pep_regex
             print(test_dict)
             print(start,stop,pre_aa,post_aa,protein_id)
             print()
-            assert start      == test_dict['start']
-            assert stop       == test_dict['stop']
-            assert pre_aa     == test_dict['pre_aa']
-            assert post_aa    == test_dict['post_aa']
-            assert protein_id == test_dict['protein_id']
-
-
-
-
+            assert start      == test_dict['start{0}'.format(m+1)]
+            assert stop       == test_dict['stop{0}'.format(m+1)]
+            assert pre_aa     == test_dict['pre_aa{0}'.format(m+1)]
+            assert post_aa    == test_dict['post_aa{0}'.format(m+1)]
+            assert protein_id == test_dict['protein_id{0}'.format(n+1)]
 
 
 if __name__ == '__main__':
