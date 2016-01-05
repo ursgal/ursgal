@@ -14,6 +14,7 @@ META_INFO = {
         'non-parametric estimation of q-values and posterior error '\
         'probabilities.',
     'include_in_git'            : False,
+    'group_psms'                : True,
     
     'engine': {
         'darwin' : {

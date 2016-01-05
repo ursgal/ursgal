@@ -16,6 +16,8 @@ META_INFO = {
         'MacCoss MJ. (2007) Semi-supervised learning for peptide '\
         'identification from shotgun proteomics datasets.',
     'include_in_git'            : False,
+    'group_psms'                : True,
+
     'engine': {
         'darwin' : {
             '64bit' : {
