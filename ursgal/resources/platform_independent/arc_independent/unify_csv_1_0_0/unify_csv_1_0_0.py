@@ -21,7 +21,8 @@ from collections import Counter, defaultdict
 from copy import deepcopy as dc
 
 # increase the field size limit to avoid crash if protein merge tags become too long
-csv.field_size_limit(sys.maxsize)
+# does not work under windows
+# csv.field_size_limit(sys.maxsize)
 
 DIFFERENCE_14N_15N = ursgal.kb.ursgal.DIFFERENCE_14N_15N
 

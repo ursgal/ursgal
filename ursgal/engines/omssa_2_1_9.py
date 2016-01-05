@@ -8,8 +8,6 @@ import sys
 import subprocess
 import csv
 
-csv.field_size_limit(sys.maxsize)
-
 class omssa_2_1_9( ursgal.UNode ):
     """
     omssa_2_1_9 UNode
