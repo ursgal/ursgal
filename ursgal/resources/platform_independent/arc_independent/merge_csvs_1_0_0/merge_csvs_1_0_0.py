@@ -13,7 +13,7 @@ import sys
 import os
 import csv
 
-csv.field_size_limit(sys.maxsize)
+# csv.field_size_limit(sys.maxsize)
 
 def main(csv_files=None, output=None):
     '''Merges ident csvs'''
