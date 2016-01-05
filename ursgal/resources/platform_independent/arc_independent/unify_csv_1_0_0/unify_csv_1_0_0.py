@@ -26,7 +26,9 @@ csv.field_size_limit(sys.maxsize)
 DIFFERENCE_14N_15N = ursgal.kb.ursgal.DIFFERENCE_14N_15N
 
 
-def main( input_file=None, output_file=None, scan_rt_lookup=None, peptide_regex_lookup = None, params=None, search_engine=None ):
+def main(input_file=None, output_file=None, scan_rt_lookup=None,
+         peptide_regex_lookup=None, params=None, search_engine=None,
+         score_colname=None):
     '''
     Arguments:
         input_file (str): input filename of csv which should be unified
@@ -36,6 +38,8 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, peptide_regex_
         force (bool): force True or False
         params (dict): params as passed by ursgal
         search_engine(str): the search engine the csv file stems from
+        score_colname (str): the column names of the search engine's
+            score (i.e. 'OMSSA:pvalue')
 
     List of fixes
 
@@ -89,6 +93,9 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, peptide_regex_
             search_engine,
         )
     )
+
+    # get the rows which define a unique PSM (i.e. sequence+spec+score...)
+    psm_defining_colnames = get_psm_defining_colnames(score_colname)
 
     cc = ursgal.ChemicalComposition()
     # un = ursgal.UNode()
@@ -340,7 +347,10 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, peptide_regex_
                             modifications in parameters: {1}
                             '''.format(mod, params['modifications'])
                         )
-                        exit('unify_csv failed because a modification was reported that was not given in params')
+                        raise Exception('unify_csv failed because a '\
+                            'modification was reported that was not '\
+                            'given in params.'
+                        )
                     mapped_mod = False
                     for name in name_list:
                         if name in modname2aa.keys():
@@ -547,28 +557,11 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, peptide_regex_
                 else:
                     line_dict['Is decoy'] = list(tmp_decoy)[0]
 
-                if 'omssa' in search_engine.lower():
-                    is_omssa = True
-                    psm = (
-                        line_dict['Spectrum Title'],
-                        line_dict['Sequence'],
-                        line_dict['Modifications'],
-                        line_dict['Charge'],
-                        line_dict['Is decoy'],
-                        line_dict['OMSSA:pvalue'],
-                    )
-                else:
-                    is_omssa = False
-                    psm = (
-                        line_dict['Spectrum Title'],
-                        line_dict['Sequence'],
-                        line_dict['Modifications'],
-                        line_dict['Charge'],
-                        line_dict['Is decoy'],
-                    )  # each unique combination of these should only have ONE row!
+                # count each PSM occurence to check whether row-merging is needed:
+                psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 psm_counter[psm] += 1
 
-                csv_output.writerow( line_dict )
+                csv_output.writerow(line_dict)
                 '''
                 to_be_written_csv_lines.append( line_dict )
                 '''
@@ -577,7 +570,7 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, peptide_regex_
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:
-            merge_duplicate_psm_rows(output_file, psm_counter, is_omssa)
+            merge_duplicate_psm_rows(output_file, psm_counter, psm_defining_colnames)
             '''
             to_be_written_csv_lines = merge_duplicate_psm_rows(
                 to_be_written_csv_lines,
@@ -590,19 +583,48 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, peptide_regex_
     return peptide_regex_lookup
 
 
-def merge_rowdicts(list_of_rowdicts, joinchar):
+def get_psm_defining_colnames(score_colname):
+    '''
+    Returns the all PSM-defining column names (i.e spectrum & peptide,
+    but also score field because sometimes the same PSMs are reported
+    with different scores...
+    '''
+    psm = [
+        'Spectrum Title',
+        'Sequence',
+        'Modifications',
+        'Charge',
+        'Is decoy',
+    ]
+    if score_colname:
+        psm.append(score_colname)
+    return psm
+
+
+def merge_rowdicts(list_of_rowdicts, joinchar, alt_joinchar='<|>'):
+    '''
+    Merges CSV rows. If the column values are conflicting, they
+    are joined with a character (joinchar).
+    Special case: proteinaccessions are not joined with the joinchar,
+    but rather with alt_joinchar.
+    '''
     merged_d = {}
     fieldnames = list_of_rowdicts[0].keys()
     for fieldname in fieldnames:
+
+        joinchar_used = joinchar
+        if fieldname == 'proteinacc_start_stop_pre_post_;':
+            joinchar_used = alt_joinchar
+
         values = {d[fieldname] for d in list_of_rowdicts}
         if len(values) == 1:
             merged_d[fieldname] = list(values)[0]
         else:
-            merged_d[fieldname] = joinchar.join(sorted(values))
+            merged_d[fieldname] = joinchar_used.join(sorted(values))
     return merged_d
 
 
-def merge_duplicate_psm_rows(unified_csv_path, psm_counter, is_omssa):
+def merge_duplicate_psm_rows(unified_csv_path, psm_counter, psm_defining_colnames):
     '''
     Rows describing the same PSM (i.e. when two proteins share the
     same peptide) are merged to one row.
@@ -617,23 +639,9 @@ def merge_duplicate_psm_rows(unified_csv_path, psm_counter, is_omssa):
         writer = csv.DictWriter(out, fieldnames=tmp_reader.fieldnames)
         writer.writeheader()
         for row in tmp_reader:
-            if is_omssa:
-                psm = (
-                    row['Spectrum Title'],
-                    row['Sequence'],
-                    row['Modifications'],
-                    row['Charge'],
-                    row['Is decoy'],
-                    row['OMSSA:pvalue'],
-                )
-            else:
-                psm = (
-                    row['Spectrum Title'],
-                    row['Sequence'],
-                    row['Modifications'],
-                    row['Charge'],
-                    row['Is decoy'],
-                )   # each unique combination of these should only have ONE row!
+            psm = tuple([row[x] for x in psm_defining_colnames])
+            # each unique combination of these should only have ONE row!
+            # i.e. combination of seq+spec+score
             if psm_counter[psm] == 1:
                 # no duplicate = no problem, we can just write the row again
                 writer.writerow(row)
@@ -645,7 +653,7 @@ def merge_duplicate_psm_rows(unified_csv_path, psm_counter, is_omssa):
         # finished parsing the old unmerged unified csv
         for rows_to_merge in rows_to_merge_dict.values():
             writer.writerow(
-                merge_rowdicts(rows_to_merge, joinchar = ';')  # possibly change joinchar to '>' later as noted by JB!
+                merge_rowdicts(rows_to_merge, joinchar=';')
             )
     os.remove(tmp_file)  # remove the old unified csv that contains duplicate rows
 

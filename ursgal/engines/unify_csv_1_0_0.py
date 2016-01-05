@@ -45,6 +45,7 @@ Could not load RT lookup dict from this location: {0}
             open( scan_rt_lookup_path, 'rb' )
         )
 
+        # find the last search/denovo engine:
         last_engine = None
         for engine_type in ['search_engine', 'denovo_engine']:
             if last_engine == None:
@@ -53,6 +54,10 @@ Could not load RT lookup dict from this location: {0}
                 engine_type = engine_type,
             )
 
+        # find the column name of the engine score
+        last_eng_node = self.meta_unodes[last_engine]
+        last_search_engine_colname = \
+            last_eng_node.DEFAULT_PARAMS.get('validation_score_field', None)
 
         unify_csv_main(
             input_file     = input_file,
@@ -60,6 +65,7 @@ Could not load RT lookup dict from this location: {0}
             scan_rt_lookup = scan_rt_lookup_dict,
             params         = self.params,
             search_engine  = last_engine,
+            score_colname  = last_search_engine_colname,
         )
 
         self.print_execution_time(tag='execution')
