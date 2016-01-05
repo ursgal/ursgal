@@ -143,7 +143,9 @@ Citation
 
 Ursgal citation
 
-Lukas P. M. Kremer :sup:`1`, Johannes Leufken :sup:`1`, Purevdulam Oyunchimeg :sup:`1`, Stefan Schulze :sup:`1` and Christian Fufezan (2015) Journal of Proteome research, manuscript in minor revision.
+Lukas P. M. Kremer :sup:`1`, Johannes Leufken :sup:`1`, Purevdulam Oyunchimeg :sup:`1`, Stefan Schulze :sup:`1` and Christian Fufezan (2015) Journal of Proteome research, accepted
+
+DOI: 10.1021/acs.jproteome.5b00860
 
 :sup:`1` These authors contributed equally.
 
