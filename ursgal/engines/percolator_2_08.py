@@ -7,8 +7,6 @@ import os
 from collections import defaultdict as ddict
 import sys
 
-csv.field_size_limit(sys.maxsize)
-
 PROTON = 1.00727646677
 
 
