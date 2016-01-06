@@ -99,6 +99,22 @@ TESTS = [
         'pre_aa3'  : 'L',
         'post_aa3' : 'L'
     },
+    {
+        'peptide' : 'MKWVTFISLLLLFSSAYSR',
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
+        'start1'   : 1,
+        'stop1'    : 19,
+        'pre_aa1'  : '-',
+        'post_aa1' : 'G'
+    },
+    {
+        'peptide' : 'LVVSTQTALA',
+        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
+        'start1'   : 598,
+        'stop1'    : 607,
+        'pre_aa1'  : 'K',
+        'post_aa1' : '-'
+    },
 
 ]
 

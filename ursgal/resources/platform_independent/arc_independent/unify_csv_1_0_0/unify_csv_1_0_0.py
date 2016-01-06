@@ -477,7 +477,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 # check if proteinacc_start_stop_pre_post is correct ... work in progress
                 tmp_decoy = set()
                 tmp_proteinacc = []
-                for protein in line_dict['proteinacc_start_stop_pre_post_;'].split(';'):
+                for protein in line_dict['proteinacc_start_stop_pre_post_;'].split('<|>'):
                     # match = re.search('_\d+_\d+_[A-Z-]_[A-Z-]', protein)
                     # if match == None:
                     #     id_stop = len(protein)
