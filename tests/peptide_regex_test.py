@@ -22,7 +22,7 @@ TESTS = [
     {
         'peptide' : 'SHCIAEVEK',
         'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start1'   : 309,
+        'start1'   : 310,
         'stop1'    : 318,
         'pre_aa1'  : 'K',
         'post_aa1' : 'D'
@@ -30,7 +30,7 @@ TESTS = [
     {
         'peptide' : 'SHCIAEVE',
         'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4', # test short id
-        'start1'   : 309,
+        'start1'   : 310,
         'stop1'    : 317,
         'pre_aa1'  : 'K',
         'post_aa1' : 'K'
@@ -38,7 +38,7 @@ TESTS = [
     {
         'peptide' : 'SHUIAEVEK',
         'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start1'   : 309,
+        'start1'   : 310,
         'stop1'    : 318,
         'pre_aa1'  : 'K',
         'post_aa1' : 'D'
@@ -62,7 +62,7 @@ TESTS = [
     {
         'peptide' : 'SHCIUEVEK',
         'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start1'   : 309,
+        'start1'   : 310,
         'stop1'    : 318,
         'pre_aa1'  : 'K',
         'post_aa1' : 'D'
@@ -70,7 +70,7 @@ TESTS = [
     {
         'peptide' : 'EYEATLEECCAK',
         'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start1'   : 374,
+        'start1'   : 375,
         'stop1'    : 386,
         'pre_aa1'  : 'K',
         'post_aa1' : 'D'
@@ -78,7 +78,7 @@ TESTS = [
     {
         'peptide' : 'EYEATLEEUUAK',
         'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start1'   : 374,
+        'start1'   : 375,
         'stop1'    : 386,
         'pre_aa1'  : 'K',
         'post_aa1' : 'D'
@@ -86,15 +86,15 @@ TESTS = [
     {
         'peptide' : 'LR',
         'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start1'   : 103,
+        'start1'   : 104,
         'stop1'    : 105,
         'pre_aa1'  : 'S',
         'post_aa1' : 'E',
-        'start2'   : 220,
+        'start2'   : 221,
         'stop2'    : 222,
         'pre_aa2'  : 'R',
         'post_aa2' : 'C',
-        'start3'   : 369,
+        'start3'   : 370,
         'stop3'    : 371,
         'pre_aa3'  : 'L',
         'post_aa3' : 'L'

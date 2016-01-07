@@ -904,7 +904,7 @@ class UNode(object, metaclass=Meta_UNode):
                     start = match.start()
                     stop = start + len(peptide)
 
-                    if start - 1 == 0:
+                    if start == 0:
                         pre_aa = '-'
                     else:
                         pre_aa = full_sequence[ start - 1 ]
@@ -914,7 +914,7 @@ class UNode(object, metaclass=Meta_UNode):
                     else:
                         post_aa = full_sequence[ stop ]
                     pos_aa_protein = (
-                        start,
+                        start + 1,
                         stop,
                         pre_aa,
                         post_aa,
