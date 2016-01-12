@@ -57,14 +57,16 @@ The complete Documentation can be found at
 Installation
 ************
 
-Ursgal requires Python 3.4 or higher. Download ursgal using path A (Github) or path B (ZIP):
+Ursgal requires Python 3.4 or higher. 
 
-* A) Github version: Starting with this the easiest way is to clone the github repo.::
+Download ursgal using Github **or** the zip file:
 
-    user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
+* Github version: Starting with this the easiest way is to clone the github repo.::
+
+   user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
     
 
-* B) ZIP version: Download and extract the `ursgalzip`_ file
+* ZIP version: Download and extract the `ursgalzip`_ file
 
 .. _ursgalzip:
    https://github.com/ursgal/ursgal/archive/master.zip
