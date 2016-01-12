@@ -92,15 +92,19 @@ def unify_omssa( test_dict ):
     assert 'uCalc m/z' in test_dict.keys()
 
     for key in [
-            'Retention Time (s)',
             'Spectrum ID',
-            'Modifications',
             'Spectrum Title',
-            'proteinacc_start_stop_pre_post_;'
+            'Retention Time (s)',
+            'Modifications',
+            'uCalc m/z',
+            'Sequence',
+            'Is decoy',
+            'proteinacc_start_stop_pre_post_;',
+            'some_other_value',
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]
-        if key == 'Retention Time (s)':
+        if key in ('Retention Time (s)', 'uCalc m/z'):
             test_value      = round(float(test_value), 4)
             expected_value  = round(float(expected_value), 4)
 

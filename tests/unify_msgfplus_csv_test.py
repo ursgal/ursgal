@@ -93,7 +93,11 @@ def unify_msgfplus( test_dict ):
             test_value     = round(float(test_value), 4)
             expected_value = round(float(expected_value), 4)
 
-        assert test_value == expected_value
+        assert test_value == expected_value, '''
+  Unexpected value in column "{0}":
+    test value:     {1}
+    expected value: {2}
+            '''.format(key, test_value, expected_value)
 
 
 if __name__ == '__main__':

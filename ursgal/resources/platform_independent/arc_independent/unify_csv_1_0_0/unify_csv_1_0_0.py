@@ -20,11 +20,16 @@ import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
 
+# increase the field size limit to avoid crash if protein merge tags become too long
+# does not work under windows
+# csv.field_size_limit(sys.maxsize)
 
 DIFFERENCE_14N_15N = ursgal.kb.ursgal.DIFFERENCE_14N_15N
 
 
-def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, search_engine=None ):
+def main(input_file=None, output_file=None, scan_rt_lookup=None,
+         peptide_regex_lookup=None, params=None, search_engine=None,
+         score_colname=None):
     '''
     Arguments:
         input_file (str): input filename of csv which should be unified
@@ -34,6 +39,8 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
         force (bool): force True or False
         params (dict): params as passed by ursgal
         search_engine(str): the search engine the csv file stems from
+        score_colname (str): the column names of the search engine's
+            score (i.e. 'OMSSA:pvalue')
 
     List of fixes
 
@@ -88,7 +95,16 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
         )
     )
 
+    # get the rows which define a unique PSM (i.e. sequence+spec+score...)
+    psm_defining_colnames = get_psm_defining_colnames(score_colname)
+
     cc = ursgal.ChemicalComposition()
+    # un = ursgal.UNode()
+
+    # if peptide_regex_lookup == None:
+        # peptide_regex_lookup = {}
+    # already_seen_protein_pep = {}
+
     use15N = False
     if params['label'] == '15N':
         use15N = True
@@ -126,10 +142,15 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
 
     ursgal.GlobalUnimodMapper._reparseXML()
     de_novo_engines = ['novor', 'pepnovo', 'uninovo', 'unknown_engine']
+    database_search_engines = ['msamanda', 'msgf', 'myrimatch', 'omssa', 'xtandem']
     de_novo = False
+    database_search = False
     for de_novo_engine in de_novo_engines:
         if de_novo_engine in search_engine.lower():
             de_novo = True
+    for db_se in database_search_engines:
+        if db_se in search_engine.lower():
+            database_search = True
 
     psm_counter = Counter()
     # if a PSM with multiple rows is found (i.e. in omssa results), the psm
@@ -143,7 +164,9 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
     else:
         csv_kwargs['lineterminator'] = '\r\n'
     with open( input_file, 'r' ) as in_file:
-        csv_input  = csv.DictReader( in_file )
+        csv_input  = csv.DictReader(
+            in_file
+        )
         csv_output = csv.DictWriter(
             output_file_object,
             list(csv_input.fieldnames) + ['uCalc m/z'],
@@ -325,7 +348,10 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                             modifications in parameters: {1}
                             '''.format(mod, params['modifications'])
                         )
-                        exit('unify_csv failed because a modification was reported that was not given in params')
+                        raise Exception('unify_csv failed because a '\
+                            'modification was reported that was not '\
+                            'given in params.'
+                        )
                     mapped_mod = False
                     for name in name_list:
                         if name in modname2aa.keys():
@@ -416,53 +442,6 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                     ]
                 )
 
-            # check if proteinacc_start_stop_pre_post is correct
-            
-            # match = re.search('_\d+_\d+_[A-Z-]_[A-Z-]', line_dict['proteinacc_start_stop_pre_post_;'])
-            # if match == None:
-            #     print('>>>>>>>>>>',line_dict) 
-            # start = match.start()
-            # protein_id = line_dict['proteinacc_start_stop_pre_post_;'][0:start]
-            # peptide = line_dict['Sequence']
-            # protein_pep = '{0}_{1}'.format(protein_id, peptide)
-
-            # allowed_aa = params['enzyme'][0]
-            # cleavage_site = params['enzyme'][1]
-
-            # change_proteinacc_start_stop_pre_post = False
-
-            # already_seen_protein_pep = {}
-            # un = ursgal.UNode()
-            # if protein_pep not in already_seen_protein_pep:
-            #     already_seen_protein_pep[protein_pep] = un.peptide_regex(
-            #         params['database'],
-            #         protein_id,
-            #         peptide
-            #     )
-            # returned_peptide_regex_list = already_seen_protein_pep[protein_pep]
-            # for protein in returned_peptide_regex_list:
-            #     for pep_regex in protein:
-            #         print(pep_regex)
-            #         start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
-            #         proteinacc_start_stop_pre_post = '{0}_{1}_{2}_{3}_{4}'.format(
-            #             returned_protein_id,
-            #             start,
-            #             stop,
-            #             pre_aa,
-            #             post_aa
-            #         )
-            #         if start != 1 and params['semi_enzyme'] == False:
-            #             if cleavage_site == 'C':
-            #                 if pre_aa not in allowed_aa:
-            #                     change_proteinacc_start_stop_pre_post = True
-            #             elif cleavage_site == 'N':
-            #                 if post_aa not in allowed_aa:
-            #                     change_proteinacc_start_stop_pre_post = True
-
-
-            #         if proteinacc_start_stop_pre_post in line_dict['proteinacc_start_stop_pre_post_;']:
-            #             start = start
-
             # caculate m/z
 
             upep = line_dict['Sequence'] + '#' + line_dict['Modifications']
@@ -491,45 +470,108 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
                 # ms amanda does not return calculated mz values
                 line_dict['Calc m/z'] = calc_mz
 
-            # mzidentml-lib does not always set 'Is decoy' correctly
-            # (it's always 'false' for MS-GF+ results), this is fixed here:
-            if de_novo is False:
-                if params['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
+            # protein block, only for database search engine
+
+            if database_search == True:
+
+                # check if proteinacc_start_stop_pre_post is correct ... work in progress
+                tmp_decoy = set()
+                tmp_proteinacc = []
+                for protein in line_dict['proteinacc_start_stop_pre_post_;'].split('<|>'):
+                    # match = re.search('_\d+_\d+_[A-Z-]_[A-Z-]', protein)
+                    # if match == None:
+                    #     id_stop = len(protein)
+                    # else:
+                    #     id_stop = match.start()
+                    # protein_id = protein[0:id_stop]
+                    # peptide = line_dict['Sequence']
+                    # protein_pep = '{0}_{1}'.format(protein_id, peptide)
+                    # database_protein_pep = '{0}_{1}'.format(
+                    #     params['database'],
+                    #     protein_id,
+                    #     peptide
+                    # )
+
+                    # allowed_aa = params['enzyme'][0] + '-'
+                    # cleavage_site = params['enzyme'][1] + '-'
+
+
+                    # if protein_pep not in already_seen_protein_pep:
+                        # if database_protein_pep not in peptide_regex_lookup:
+                        #     peptide_regex_lookup[database_protein_pep] = un.peptide_regex(
+                        #         params['database'],
+                        #         protein_id,
+                        #         peptide
+                        #     )
+                        # returned_peptide_regex_list = peptide_regex_lookup[database_protein_pep]
+                        
+                        # corr_proteinacc_start_stop_pre_post = []
+                        # for protein in returned_peptide_regex_list:
+                        #     for pep_regex in protein:
+                        #         print(pep_regex)
+                        #         nterm_correct = False
+                        #         cterm_correct = False
+                        #         start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
+                        #         proteinacc_start_stop_pre_post = '{0}_{1}_{2}_{3}_{4}'.format(
+                        #             returned_protein_id,
+                        #             start,
+                        #             stop,
+                        #             pre_aa,
+                        #             post_aa
+                        #         )
+    # 
+                    #             if cleavage_site == 'C':
+                    #                 if pre_aa in allowed_aa:
+                    #                     nterm_correct = True
+                                    # if peptide[-1] in allowed_aa:
+                                    #     cterm_correct = True
+                    #             elif cleavage_site == 'N':
+                                    # if peptide[0] in allowed_aa:
+                                    #     nterm_correct = True
+                    #                 if post_aa not in allowed_aa:
+                    #                     cterm_correct = True
+
+                                # if params['semi_enzyme'] == True:
+                                #     if cterm_correct == True or nterm_correct == True:
+                                #         corr_proteinacc_start_stop_pre_post.append(proteinacc_start_stop_pre_post)
+                                # elif cterm_correct == True and nterm_correct == True:
+                                #     corr_proteinacc_start_stop_pre_post.append(proteinacc_start_stop_pre_post)
+                        # already_seen_protein_pep[protein_pep] = corr_proteinacc_start_stop_pre_post
+                    # corr_proteinacc_start_stop_pre_post = already_seen_protein_pep[protein_pep]
+
+                    # mzidentml-lib does not always set 'Is decoy' correctly
+                    # (it's always 'false' for MS-GF+ results), this is fixed here:
+                    if params['decoy_tag'] in protein:
+                        tmp_decoy.add('true')
+                    else:
+                        tmp_decoy.add('false')
+                if len(tmp_decoy) >= 2:
+                    print(
+                        '''
+                        [ WARNING ] The following peptide occurs in a target as well as decoy protein
+                        [ WARNING ] {0} 
+                        [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
+                            line_dict['Sequence'],
+                        )
+                    )
                     line_dict['Is decoy'] = 'true'
                 else:
-                    line_dict['Is decoy'] = 'false'
+                    line_dict['Is decoy'] = list(tmp_decoy)[0]
 
-            if 'omssa' in search_engine.lower():
-                is_omssa = True
-                psm = (
-                    line_dict['Spectrum Title'],
-                    line_dict['Sequence'],
-                    line_dict['Modifications'],
-                    line_dict['Charge'],
-                    line_dict['Is decoy'],
-                    line_dict['OMSSA:pvalue'],
-                )
-            else:
-                is_omssa = False
-                psm = (
-                    line_dict['Spectrum Title'],
-                    line_dict['Sequence'],
-                    line_dict['Modifications'],
-                    line_dict['Charge'],
-                    line_dict['Is decoy'],
-                )  # each unique combination of these should only have ONE row!
-            psm_counter[psm] += 1
+                # count each PSM occurence to check whether row-merging is needed:
+                psm = tuple([line_dict[x] for x in psm_defining_colnames])
+                psm_counter[psm] += 1
 
-            csv_output.writerow( line_dict )
-            '''
-            to_be_written_csv_lines.append( line_dict )
-            '''
+                csv_output.writerow(line_dict)
+                '''
+                to_be_written_csv_lines.append( line_dict )
+                '''
     output_file_object.close()
 
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:
-            merge_duplicate_psm_rows(output_file, psm_counter, is_omssa)
+            merge_duplicate_psm_rows(output_file, psm_counter, psm_defining_colnames)
             '''
             to_be_written_csv_lines = merge_duplicate_psm_rows(
                 to_be_written_csv_lines,
@@ -539,22 +581,51 @@ def main( input_file=None, output_file=None, scan_rt_lookup=None, params=None, s
         '''
         do output_file magic with to_be_written_csv_lines
         '''
-    return
+    return peptide_regex_lookup
 
 
-def merge_rowdicts(list_of_rowdicts, joinchar):
+def get_psm_defining_colnames(score_colname):
+    '''
+    Returns the all PSM-defining column names (i.e spectrum & peptide,
+    but also score field because sometimes the same PSMs are reported
+    with different scores...
+    '''
+    psm = [
+        'Spectrum Title',
+        'Sequence',
+        'Modifications',
+        'Charge',
+        'Is decoy',
+    ]
+    if score_colname:
+        psm.append(score_colname)
+    return psm
+
+
+def merge_rowdicts(list_of_rowdicts, joinchar, alt_joinchar='<|>'):
+    '''
+    Merges CSV rows. If the column values are conflicting, they
+    are joined with a character (joinchar).
+    Special case: proteinaccessions are not joined with the joinchar,
+    but rather with alt_joinchar.
+    '''
     merged_d = {}
     fieldnames = list_of_rowdicts[0].keys()
     for fieldname in fieldnames:
+
+        joinchar_used = joinchar
+        if fieldname == 'proteinacc_start_stop_pre_post_;':
+            joinchar_used = alt_joinchar
+
         values = {d[fieldname] for d in list_of_rowdicts}
         if len(values) == 1:
             merged_d[fieldname] = list(values)[0]
         else:
-            merged_d[fieldname] = joinchar.join(sorted(values))
+            merged_d[fieldname] = joinchar_used.join(sorted(values))
     return merged_d
 
 
-def merge_duplicate_psm_rows(unified_csv_path, psm_counter, is_omssa):
+def merge_duplicate_psm_rows(unified_csv_path, psm_counter, psm_defining_colnames):
     '''
     Rows describing the same PSM (i.e. when two proteins share the
     same peptide) are merged to one row.
@@ -569,23 +640,9 @@ def merge_duplicate_psm_rows(unified_csv_path, psm_counter, is_omssa):
         writer = csv.DictWriter(out, fieldnames=tmp_reader.fieldnames)
         writer.writeheader()
         for row in tmp_reader:
-            if is_omssa:
-                psm = (
-                    row['Spectrum Title'],
-                    row['Sequence'],
-                    row['Modifications'],
-                    row['Charge'],
-                    row['Is decoy'],
-                    row['OMSSA:pvalue'],
-                )
-            else:
-                psm = (
-                    row['Spectrum Title'],
-                    row['Sequence'],
-                    row['Modifications'],
-                    row['Charge'],
-                    row['Is decoy'],
-                )   # each unique combination of these should only have ONE row!
+            psm = tuple([row[x] for x in psm_defining_colnames])
+            # each unique combination of these should only have ONE row!
+            # i.e. combination of seq+spec+score
             if psm_counter[psm] == 1:
                 # no duplicate = no problem, we can just write the row again
                 writer.writerow(row)
@@ -597,7 +654,7 @@ def merge_duplicate_psm_rows(unified_csv_path, psm_counter, is_omssa):
         # finished parsing the old unmerged unified csv
         for rows_to_merge in rows_to_merge_dict.values():
             writer.writerow(
-                merge_rowdicts(rows_to_merge, joinchar = ';')  # possibly change joinchar to '>' later as noted by JB!
+                merge_rowdicts(rows_to_merge, joinchar=';')
             )
     os.remove(tmp_file)  # remove the old unified csv that contains duplicate rows
 

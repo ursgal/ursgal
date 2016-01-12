@@ -836,7 +836,7 @@ class UNode(object, metaclass=Meta_UNode):
         amino acid is replaced by a regex wildcard '.' in order to be matchable
         on the fasta database (this is defined in kb.unify_csv_1_0_0.py).
         This is especially needed if the original sequence contains a 'X' and
-        the search engine guesses/determines the aminno acid at this position.
+        the search engine guesses/determines the amino acid at this position.
 
         If the protein ID is ambigous, the peptide is matched against all
         protein candidates and the positions, pre- and post aminoacids in the
@@ -844,6 +844,9 @@ class UNode(object, metaclass=Meta_UNode):
         database is returned. This is especially needed for MS Amanda results
         where protein IDs are returned truncated and become ambigous for some
         databases.
+
+        If the peptide occurs several times in the protein, all occurences are
+        returned.
 
         The function uses a buffer to perform the regex only once for
         (peptide, protein, database) tuples. All fasta sequences are also
@@ -901,7 +904,7 @@ class UNode(object, metaclass=Meta_UNode):
                     start = match.start()
                     stop = start + len(peptide)
 
-                    if start - 1 == 0:
+                    if start == 0:
                         pre_aa = '-'
                     else:
                         pre_aa = full_sequence[ start - 1 ]
@@ -911,7 +914,7 @@ class UNode(object, metaclass=Meta_UNode):
                     else:
                         post_aa = full_sequence[ stop ]
                     pos_aa_protein = (
-                        start,
+                        start + 1,
                         stop,
                         pre_aa,
                         post_aa,
@@ -1165,17 +1168,20 @@ class UNode(object, metaclass=Meta_UNode):
         if is_search_engine or is_denovo_engine:
             self.map_mods()
 
-        self.stats['history'] = self.update_history_status( status = 'launching', history = self.stats['history']  )
+        self.stats['history'] = self.update_history_status(
+            status='launching',
+            history = self.stats['history']
+        )
 
-        is_validation_engine = self.META_INFO['engine_type'].get(
-            'validation_engine',
+        requires_grouped_psms = self.META_INFO.get(
+            'group_psms',
             False
         )
-        if is_validation_engine:
+        if requires_grouped_psms:
             self.print_info(
                 'Grouping PSMs'
             )
-            self.time_point(tag = 'group_psms')
+            self.time_point(tag='group_psms')
             self.params['grouped_psms'] = self._group_psms(
                 os.path.join(
                     self.params['input_dir_path'],

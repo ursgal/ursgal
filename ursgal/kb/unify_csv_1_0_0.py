@@ -56,6 +56,7 @@ USEARCH_PARAM_VALUE_TRANSLATIONS = {
     'trypsin_p' :       ('KR', 'C'),
     'trypsin_cnbr' :    ('KRM', 'C'),
     'trypsin_gluc' :    ('DEKR', 'C'),
+    'nonspecific' :     ('ACDEFGHIKLMNPQRSTVWY', 'C'),
 }
 
 
