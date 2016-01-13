@@ -37,21 +37,19 @@ class svm_1_0_0( ursgal.UNode ):
             self.params['kernel'],
             '--fdr_cutoff',
             str(self.params['fdr_cutoff']),
-            '--sort_by',
-            self.params['validation_score_field'],
             '-c',
             str(self.params['c']),
             '--mb_ram',
             str(self.params['available_RAM_in_MB']),
         ]
 
-    if self.params['columns_as_features']:
-        self.params['command_list'].append(
-            '--columns_as_features'
-        )
-        self.params['command_list'].append(
-            ' '.join(self.params['columns_as_features'])
-        )
+        if self.params['columns_as_features']:
+            self.params['command_list'].append(
+                '--columns_as_features'
+            )
+            self.params['command_list'].append(
+                ' '.join(self.params['columns_as_features'])
+            )
 
     def postflight(self):
         return
