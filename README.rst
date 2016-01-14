@@ -1,6 +1,10 @@
 Introduction
 ############
 
+.. image:: https://badges.gitter.im/ursgal/ursgal.svg
+   :alt: Join the chat at https://gitter.im/ursgal/ursgal
+   :target: https://gitter.im/ursgal/ursgal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
 *Ursgal - universal Python module combining common bottom-up proteomics tools for large-scale analysis*
 
 |build-status| |doc-status|
