@@ -13,7 +13,7 @@ Introduction
     :target: http://ursgal.readthedocs.org/en/latest/?badge=latest
     :alt: Documentation Status
     
-.. |Gitter-join Chat| image:: https://img.shields.io/badge/GITTER-join%20chat-green.svg
+.. |Gitter-join Chat| image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
     :target: https://gitter.im/ursgal?utm_source=share-link&utm_medium=link&utm_campaign=share-link
     :alt: Gitter
 
