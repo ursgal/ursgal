@@ -12,6 +12,10 @@ Introduction
 .. |doc-status| image:: https://readthedocs.org/projects/ursgal/badge/?version=latest
     :target: http://ursgal.readthedocs.org/en/latest/?badge=latest
     :alt: Documentation Status
+    
+.. |Gitter| image:: https://img.shields.io/badge/GITTER-join%20chat-green.svg
+    :target: https://gitter.im/ursgal?utm_source=share-link&utm_medium=link&utm_campaign=share-link
+    :alt: Gitter
 
 Summary
 *******
