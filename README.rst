@@ -90,7 +90,7 @@ Install requirements::
    
     Pip is included in Python 3.4 and higher. However, it might not be included in in your system's PATH environment variable.
     If this is the case, you can either add the python Scripts directory to you PATH or use the path to the pip.exe 
-    directly for the installation, e.g. for Windows User: C:\Python34\Scripts\pip.exe install -r requirements.txt
+    directly for the installation, e.g.: ~/Python34/Scripts/pip.exe install -r requirements.txt
 
 Install third party engines::
 
@@ -128,6 +128,8 @@ Participate
 ***********
 
 Fork us at https://github.com/ursgal/ursgal and open up pull requests! Thanks!
+
+If you encounter any problems you can open up issues at GitHub, join the conversation at Gitter, or write an email to ursgal.team@gmail.com
 
 
 Documentation
