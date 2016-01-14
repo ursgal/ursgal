@@ -78,11 +78,11 @@ Install requirements::
 
 Install third party engines::
 
-    user@localhost:~$ python3.4 install_resources.py
+    user@localhost:~/ursgal$ python3.4 install_resources.py
 
 Install Ursgal::
 
-    user@localhost:~$ python3.4 setup.py install
+    user@localhost:~/ursgal$ python3.4 setup.py install
 
 
 .. note::
