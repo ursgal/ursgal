@@ -3,7 +3,7 @@ Introduction
 
 *Ursgal - universal Python module combining common bottom-up proteomics tools for large-scale analysis*
 
-|build-status| |doc-status|
+|build-status| |doc-status| |Gitter|
 
 .. |build-status| image:: https://travis-ci.org/ursgal/ursgal.svg?branch=master
    :target: https://travis-ci.org/ursgal/ursgal
@@ -13,7 +13,7 @@ Introduction
     :target: http://ursgal.readthedocs.org/en/latest/?badge=latest
     :alt: Documentation Status
  
-.. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
+.. |Gitter| image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
    :alt: Join the chat at https://gitter.im/ursgal/ursgal
    :target: https://gitter.im/ursgal/ursgal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
