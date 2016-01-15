@@ -3,7 +3,7 @@ Introduction
 
 *Ursgal - universal Python module combining common bottom-up proteomics tools for large-scale analysis*
 
-|build-status| |doc-status| |Gitter-join Chat|
+|build-status| |doc-status| |Gitter|
 
 .. |build-status| image:: https://travis-ci.org/ursgal/ursgal.svg?branch=master
    :target: https://travis-ci.org/ursgal/ursgal
@@ -12,10 +12,10 @@ Introduction
 .. |doc-status| image:: https://readthedocs.org/projects/ursgal/badge/?version=latest
     :target: http://ursgal.readthedocs.org/en/latest/?badge=latest
     :alt: Documentation Status
-    
-.. |Gitter-join Chat| image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
-    :target: https://gitter.im/ursgal?utm_source=share-link&utm_medium=link&utm_campaign=share-link
-    :alt: Gitter
+ 
+.. |Gitter| image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
+   :alt: Join the chat at https://gitter.im/ursgal/ursgal
+   :target: https://gitter.im/ursgal/ursgal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 Summary
 *******
@@ -33,9 +33,9 @@ Ursgal is a Python module that offers a generalized interface to common bottom-u
 Abstract
 ********
 
-Proteomics data integration has become a broad field with a variety of programs offering innovative algorithms to analyze increasing amounts of data. Unfortunately, this software diversity leads to many problems as soon as one tries to analyze data using more than one algorithm. Although it was shown that the combination of multiple algorithms yields more robust results, it is only recently that unified approaches are emerging which try to streamline the most prominent search algorithms. However, workflows that for example aim to optimize search parameters or that employ cascaded style searches 3 can only be made accessible if data analysis becomes not only unified but also and most importantly scriptable. Here we introduce Ursgal, an interface between the Python programming language and many commonly used bottom-up proteomics tools as well as several auxiliary programs. Complex common and novel workflows can thus be composed using the Python scripting language using a few lines of code. Ursgal is easily extendable and we have made several database search engines (X!Tandem, OMSSA, MS-GF+, MyriMatch, MSAmanda), post processing algorithms (qvality, Percolator) and two algorithm that combines validated outputs (combined FDR score and combined PEP score) accessible as a Python interface.
+Proteomics data integration has become a broad field with a variety of programs offering innovative algorithms to analyze increasing amounts of data. Unfortunately, this software diversity leads to many problems as soon as the data is analyzed using more than one algorithm for the same task. Although it was shown that the combination of multiple peptide identification algorithms yields more robust results,1−3 it is only recently that unified approaches are emerging;4,5 however, workflows that, for example, aim to optimize search parameters or that employ cascaded style searches6 can only be made accessible if data analysis becomes not only unified but also and most importantly scriptable. Here we introduce Ursgal, a Python interface to many commonly used bottom-up proteomics tools and to additional auxiliary programs. Complex workflows can thus be composed using the Python scripting language using a few lines of code. Ursgal is easily extensible, and we have made several database search engines (X!Tandem,7 OMSSA,8 MS-GF+,9 Myrimatch,10 MS Amanda11), statistical postprocessing algorithms (qvality,12 Percolator13), and one algorithm that combines statistically postprocessed outputs from multiple search engines (“combined FDR”14) accessible as an interface in Python. Furthermore, we have implemented a new algorithm (“combined PEP”) that combines multiple search engines employing elements of “combined FDR”,14 PeptideShaker,2 and Bayes’ theorem.
 
-*Kremer et al. (2015): Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis, Journal of Proteome research 12/2015, DOI:10.1021/acs.jproteome.5b00860.*
+*Kremer et al. (2015): Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis, Journal of Proteome Research 12/2015, DOI:10.1021/acs.jproteome.5b00860.*
 
 
 .. _download:
@@ -61,16 +61,22 @@ The complete Documentation can be found at
 Installation
 ************
 
-Ursgal requires Python 3.4 or higher. 
+Ursgal requires `Python`_ 3.4 or higher. 
 
-Download ursgal using Github **or** the zip file:
+Download ursgal using `Github`_ **or** the zip file:
 
-* Github version: Starting with this the easiest way is to clone the github repo.::
+* Github version: Starting with this the easiest way is to clone the GitHub repo.::
 
    user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
     
 
 * ZIP version: Download and extract the `ursgalzip`_ file
+
+.. _Python:
+   https://www.python.org/downloads/
+
+.. _GitHub:
+   https://github.com/
 
 .. _ursgalzip:
    https://github.com/ursgal/ursgal/archive/master.zip
@@ -80,13 +86,20 @@ Install requirements::
     user@localhost:~$ cd ursgal
     user@localhost:~/ursgal$ pip3.4 install -r requirements.txt
 
+.. note::
+   
+    Pip is included in Python 3.4 and higher. However, it might not be included in in your system's PATH environment variable.
+    If this is the case, you can either add the python Scripts directory to you PATH or use the path to the pip.exe 
+    directly for the installation, e.g.: ~/Python34/Scripts/pip.exe install -r requirements.txt
+
 Install third party engines::
 
-    user@localhost:~$ python3.4 install_resources.py
+    user@localhost:~/ursgal$ python3.4 install_resources.py
+ 
 
 Install Ursgal::
 
-    user@localhost:~$ python3.4 setup.py install
+    user@localhost:~/ursgal$ python3.4 setup.py install
 
 
 .. note::
@@ -115,6 +128,8 @@ Participate
 ***********
 
 Fork us at https://github.com/ursgal/ursgal and open up pull requests! Thanks!
+
+If you encounter any problems you can open up issues at GitHub, join the conversation at Gitter, or write an email to ursgal.team@gmail.com
 
 
 Documentation
@@ -160,11 +175,7 @@ Citation
 
 Ursgal citation
 
-Lukas P. M. Kremer :sup:`1`, Johannes Leufken :sup:`1`, Purevdulam Oyunchimeg :sup:`1`, Stefan Schulze :sup:`1` and Christian Fufezan (2015) Journal of Proteome research, accepted
-
-DOI: 10.1021/acs.jproteome.5b00860
-
-:sup:`1` These authors contributed equally.
+Lukas P. M. Kremer, Johannes Leufken, Purevdulam Oyunchimeg, Stefan Schulze, and Christian Fufezan (2015): Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis, Journal of Proteome research, DOI:10.1021/acs.jproteome.5b00860
 
 .. note::
     Please cite every tool you use in ursgal. During runtime the references of

@@ -23,15 +23,13 @@ META_INFO = {
 
 
 DEFAULT_PARAMS = {
-    'validation_score_field' : None,
-    'validation_reverse_scores' : None,
     'kernel' : 'rbf',  # linear kernel yields good
         # results at all possible FDR cutoffs. rbf kernel seems to be better
         # at low FDR cutoffs (around 0.01), but linear is better when using
         # high cutoffs (i.e. 0.3)
     'c' : 1,  # penalty parameter C of the error term, one seems to be good
     'fdr_cutoff' : 0.01,  # 0.01 works well (for humanBR omssa/xtandem/msgfplus results at least...)
-    'columns_as_features' : ','.join([
+    'columns_as_features' : [
         'MS-GF:RawScore',
         'MS-GF:DeNovoScore',
         'MS-GF:SpecEValue',
@@ -40,15 +38,13 @@ DEFAULT_PARAMS = {
         'OMSSA:pvalue',
         'X\!Tandem:expect',
         'X\!Tandem:hyperscore',
-    ]),
+    ],
     'available_RAM_in_MB' : 3000,
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {}
 USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {}
 USED_USEARCH_PARAMS = set([
-    'validation_score_field',
-    'validation_reverse_scores',
     'kernel',
     'c',
     'fdr_cutoff',

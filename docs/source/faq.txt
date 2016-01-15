@@ -37,8 +37,15 @@ Q: How do I create/add a new engine ?
 
 See :ref:`generate-your-engines`.
 
+Q: How do I keep Ursgal up-to-date?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Ursgal is still in development and changes, extensions, etc. are pushed to GitHub. Therefore, the easiest way (if you have cloned Ursgal from GitHub) is::
 
+    user@localhost:~/ursgal$ git pull
 
+If you have not cloned Ursgal but used the ZIP file you can replace the folder with the newly downloaded and extracted version.
 
+In both cases you might need to run the setup again to update the python site-packages::
 
+    user@localhost:~/ursgal$ python3.4 setup.py install
