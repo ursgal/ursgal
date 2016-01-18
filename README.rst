@@ -12,7 +12,7 @@ Introduction
 .. |doc-status| image:: https://readthedocs.org/projects/ursgal/badge/?version=latest
     :target: http://ursgal.readthedocs.org/en/latest/?badge=latest
     :alt: Documentation Status
- 
+
 .. |Gitter| image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
    :alt: Join the chat at https://gitter.im/ursgal/ursgal
    :target: https://gitter.im/ursgal/ursgal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
@@ -61,14 +61,14 @@ The complete Documentation can be found at
 Installation
 ************
 
-Ursgal requires `Python`_ 3.4 or higher. 
+Ursgal requires `Python`_ 3.4 or higher.
 
 Download ursgal using `Github`_ **or** the zip file:
 
 * Github version: Starting with this the easiest way is to clone the GitHub repo.::
 
    user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
-    
+
 
 * ZIP version: Download and extract the `ursgalzip`_ file
 
@@ -76,7 +76,7 @@ Download ursgal using `Github`_ **or** the zip file:
    https://www.python.org/downloads/
 
 .. _GitHub:
-   https://github.com/
+   https://github.com/ursgal/ursgal
 
 .. _ursgalzip:
    https://github.com/ursgal/ursgal/archive/master.zip
@@ -87,15 +87,15 @@ Install requirements::
     user@localhost:~/ursgal$ pip3.4 install -r requirements.txt
 
 .. note::
-   
+
     Pip is included in Python 3.4 and higher. However, it might not be included in in your system's PATH environment variable.
-    If this is the case, you can either add the python Scripts directory to you PATH or use the path to the pip.exe 
+    If this is the case, you can either add the python Scripts directory to you PATH or use the path to the pip.exe
     directly for the installation, e.g.: ~/Python34/Scripts/pip.exe install -r requirements.txt
 
 Install third party engines::
 
     user@localhost:~/ursgal$ python3.4 install_resources.py
- 
+
 
 Install Ursgal::
 
@@ -151,9 +151,9 @@ Copyrights
 Copyright 2014-2015 by authors and contributors
 
 * Lukas P. M. Kremer,
-* Purevdulam Oyunchimeg,
 * Johannes Leufken,
 * Stefan Schulze,
+* Purevdulam Oyunchimeg,
 * Christian Fufezan
 
 Contact

@@ -16,8 +16,8 @@
 	        'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
 	    ),
 	    'csv_filter_rules' : [
-	        ['Is decoy','equals','false'],
-	        ['PEP','lte',0.01],
+	        ['Is decoy', 'equals', 'false'],
+	        ['PEP', 'lte', 0.01],
 	    ],
 	}
 	# We specify all search engines and validation engines that we want
@@ -78,7 +78,6 @@
 	        'JB_FASP_pH8_2-4_28122012.mzML',
 	        'JB_FASP_pH8_3-1_28122012.mzML',
 	        'JB_FASP_pH8_4-1_28122012.mzML',
-	
 	    ],
 	    'ftp_output_folder' : os.path.join(
 	        os.pardir,
@@ -91,6 +90,7 @@
 	        'example_data'
 	    )
 	}
+	
 	
 	def get_files():
 	    uc = ursgal.UController(
@@ -117,6 +117,7 @@
 	        spec_files.append(mzML_file)
 	
 	    return spec_files
+	
 	
 	def search(validation_engine):
 	    '''
@@ -220,6 +221,7 @@
 	            input_files = sorted(result_files),
 	        )
 	    return results_all_files
+	
 	
 	def analyze(collector):
 	    '''
