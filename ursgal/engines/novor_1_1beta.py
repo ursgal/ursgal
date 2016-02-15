@@ -165,7 +165,8 @@ class novor_1_1beta( ursgal.UNode ):
         # exit()
         regex_list = [
             ('\(Cam\)','Carbamidomethyl'), 
-            ('\(O\)','Oxidation'), 
+            ('\(O\)','Oxidation'),
+            ('\(N-term Acetyl\)','Acetyl'),  
             ('\[Acetyl\]','Acetyl'),
             ('\(Acetyl\)','Acetyl'),
             ('\[Amidated\]','Amidated'),
@@ -206,6 +207,7 @@ class novor_1_1beta( ursgal.UNode ):
             'Spectrum Title',
             'Modifications',
             'Raw data location',
+            'Is decoy',
         ]
 
         new_line_dict_list = []
