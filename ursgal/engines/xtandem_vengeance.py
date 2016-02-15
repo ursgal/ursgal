@@ -116,6 +116,7 @@ class xtandem_vengeance( ursgal.UNode ):
                 continue
             else:
                 forbidden_cterm = ''
+                max_num_per_mod = ''
                 if mod['name'] in self.params['forbidden_cterm_mods']:
                     forbidden_cterm = ']'
                 if mod['name'] in self.params['max_num_per_mod']:
