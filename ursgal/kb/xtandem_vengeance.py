@@ -60,7 +60,7 @@ USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
     'precursor_isotope_range'   : {
         '0'     : 'no',
         '0,1'   : 'yes',
-        '0,1,2' : 'yes'
+        '0,2' : 'yes'
     },
     'enzyme' : {
         # NOTE: '{' & '}' are used by pythons format function, thus
@@ -96,6 +96,7 @@ USED_USEARCH_PARAMS = set([
     # 'saps',
     # 'search_c_terminal_ions',
     # 'search_first_b1_ion',
+    'database',
     'modifications',
     'batch_size',
     'cleavage_cterm_mass_change',
@@ -127,8 +128,8 @@ USED_USEARCH_PARAMS = set([
     'precursor_mass_tolerance_plus',
     'precursor_mass_tolerance_unit',
     'precursor_mass_type',
-    'precursor_max_charge',
-    'precursor_min_charge',
+    # 'precursor_max_charge',
+    # 'precursor_min_charge',
     'precursor_min_mass',
     'score_a_ions',
     'score_b_ions',
