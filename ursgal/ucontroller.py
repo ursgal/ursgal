@@ -1505,6 +1505,14 @@ class UController(ursgal.UNode):
             engine = engine_name,
             force  = force
         )
+
+        # in case we run search_mgf only, uc.scan_rt_lookup_path has not been
+        # set thus we do it again ...
+        # this wont work if the mgf conversion was done differently and we
+        # do not have TRUSTWORTHY information about RT and SCAN_IDs for this
+        # file ....
+        self.scan_rt_lookup_path = self.io['input']['scan_rt_lookup_path']
+
         report = self.run_unode_if_required(
             force, engine_name, answer
         )
