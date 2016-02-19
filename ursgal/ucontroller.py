@@ -63,7 +63,7 @@ class UController(ursgal.UNode):
         self.params               = {}
         self.init_kwargs          = {}
         self._run_after_meta_init = True
-        #self.update_user_params   = False
+        # self.update_user_params   = False
 
         # Second init is initialized after the Meta_class has returned the
         # object ... otherwise we can not access the info injected by the
@@ -71,7 +71,11 @@ class UController(ursgal.UNode):
 
     def _after_init_meta_callback(self, *args, **kwargs):
         self.time_point( tag = 'init' )
-        self.print_header( 'UController initialized', tag='init', newline=False)
+        self.print_header(
+            'UController initialized',
+            tag='init',
+            newline=False
+        )
         ursgal_string = 'Ursgal v{0}  -  '\
             'https://github.com/ursgal/ursgal'.format(ursgal.__version__)
         print('         -\-{0: ^58}-/-\n'.format(ursgal_string))
@@ -86,7 +90,6 @@ class UController(ursgal.UNode):
         # if input_file is not None:
         #     self.set_target( kwargs['input_file'] )
         # self.params = UControllerParams( self )
-
 
     def reset_controller( self ):
 
@@ -134,7 +137,6 @@ class UController(ursgal.UNode):
         # self.params.clear()
         # self.params.update( self.DEFAULT_PARAMS )
 
-
         # profile = kwargs.get('profile', None)
         # if profile is not None:
         #     self.set_profile( profile )
@@ -144,7 +146,6 @@ class UController(ursgal.UNode):
         #     sanitized_params = self.abs_paths_for_specific_keys( params )
         #     self.user_defined_params = sanitized_params
         #     self.params.update( self.user_defined_params )
-
 
         # force = kwargs.get('force', None)
         # if force is not None and force is True:
@@ -321,7 +322,7 @@ class UController(ursgal.UNode):
         if answer is None:
             file_root = self.io['output']['finfo']['file_root']
             if file_root not in scan_rt_lookup.keys():
-                answer = '{file_root} has not entry in RT lookup pickle: {0}'.format(
+                answer = '{file_root} has no entry in RT lookup pkl: {0}'.format(
                     scan_rt_lookup_path,
                     **self.io['output']['finfo']
                 )
@@ -341,7 +342,6 @@ class UController(ursgal.UNode):
                 )
         self.scan_rt_lookup_path = scan_rt_lookup_path
         return report['output_file']
-
 
     def determine_availability_of_unodes(self):
         '''
@@ -365,8 +365,16 @@ class UController(ursgal.UNode):
             'arc_independent'
         )
         engine_folders = [
-            (self.platform, self.architecture[0], arc_specific_engine_folders),
-            ('platform_independent','arc_independent', arc_independent_engine_folders)
+            (
+                self.platform,
+                self.architecture[0],
+                arc_specific_engine_folders
+            ),
+            (
+                'platform_independent',
+                'arc_independent',
+                arc_independent_engine_folders
+            )
         ]
         for platform_key, arc_key, engine_folder in engine_folders:
             # print('>>>', platform_key , engine_folder )
@@ -447,7 +455,7 @@ class UController(ursgal.UNode):
 
                 else:
                     print(
-                        '[ WARNING ] Engine {0} is not available in {1})'.format(
+                        '[ WARNING ] Engine {0} is not available in {1}'.format(
                             engine,
                             engine_folder_path
                         )
@@ -594,7 +602,7 @@ class UController(ursgal.UNode):
         Keyword Arguments:
             input_files (list): List with complete paths to one or more
                 fasta databases.
-            engine (str): the name of the database generator which should be run,
+            engine (str): name of the database generator which should be run,
                 can also be a short version if this name is unambigous
             force (bool): (re)do the analysis if ouput files already exists
             output_file_name (str or None): Desired output file name
@@ -719,7 +727,6 @@ class UController(ursgal.UNode):
         )
         return report['output_file']
 
-
     def combine_search_results(self, input_files, engine, force=None, output_file_name=None ):
         '''
         The ucontroller combine_search_results function
@@ -759,7 +766,11 @@ class UController(ursgal.UNode):
             str: Path of the output file
         '''
         engine_name = self.engine_sanity_check( engine )
-        self.input_file_sanity_check( input_files, engine=engine_name, multi=True )
+        self.input_file_sanity_check(
+            input_files,
+            engine=engine_name,
+            multi=True
+        )
 
         answer = self.prepare_unode_run(
             input_files,
@@ -785,7 +796,7 @@ class UController(ursgal.UNode):
             len(input_files),
             input_files,
             len(input_file_search_engines)
-  )
+        )
 
         report = self.run_unode_if_required(
             force, engine_name, answer
@@ -822,10 +833,11 @@ class UController(ursgal.UNode):
         # and updating self.io['input']['params'] to reflect
         # merged params and json if available ..
         self.reset_controller()
-        #if force is not None:   # overwriting default force value with
-            #self.force = force  # user-specified settings
+        # if force is not None:   # overwriting default force value with
+            # self.force = force  # user-specified settings
 
-        engine_name = self.engine_sanity_check( engine )  # isn't this executed b4?
+        engine_name = self.engine_sanity_check( engine )
+        # isn't this executed b4?
         self.print_info(
             "Preparing unode run for engine {0} on file(s) {1}".format(
                 engine_name,
@@ -835,10 +847,10 @@ class UController(ursgal.UNode):
 
         # If the UNode received multiple input files,
         # a helper file is generated (contains input filenames and their MD5s)
-        # the helper file acts as the new input file. A basic json is dumped for
-        # the helper file, too.
+        # the helper file acts as the new input file. A basic json is dumped
+        # for the helper file, too.
         if isinstance( input_file, list ):
-            self.input_file_dicts = self.generate_multi_file_dicts( input_file )
+            self.input_file_dicts = self.generate_multi_file_dicts(input_file)
             # the helper file now acts as the input file:
             input_file       = self.generate_multi_helper_file( input_file )
             self.dump_multi_json( input_file, self.input_file_dicts )
@@ -860,7 +872,6 @@ class UController(ursgal.UNode):
         if answer is not None:
             if os.path.isfile(self.io['output']['finfo']['full']):
                 os.remove( self.io['output']['finfo']['full'] )
-
 
         # At this point we know if we need to rerun and
         # thus we can move params and stats on
@@ -935,7 +946,7 @@ class UController(ursgal.UNode):
         # input files (i.e. 'file_extention': [".csv", ".csv"] )
         multi_info  = self.merge_fdicts( *fdicts )
 
-        # a file-info dict containing information about the multi-helper file alone
+        # file-info dict containing information about the multi-helper file
         helper_info = self.set_file_info_dict( fpath )
 
         # get the md5 of the multi-helper file
@@ -961,7 +972,7 @@ class UController(ursgal.UNode):
             if param_key.startswith('_'):
                 del j_content[2][ param_key ]
 
-        #j_content[3]['history'][-1]['ursgal_version'] = ursgal.__version__
+        # j_content[3]['history'][-1]['ursgal_version'] = ursgal.__version__
 
         # dumping a history for multiple files would be tricky,
         # so let's not attempt it for now...
@@ -1007,7 +1018,8 @@ class UController(ursgal.UNode):
         for input_file in input_files:
             file_json_path = input_file + self.params['json_extension']
 
-            # if the file has a json, we can retrieve its file information from it:
+            # if the file has a json, we can retrieve its file information
+            # from it
             if os.path.exists( file_json_path ):
 
                 json_content = self.load_json(
@@ -1428,10 +1440,10 @@ class UController(ursgal.UNode):
                     )
                 )
 
-        if self.force is True:  
+        if self.force is True:
             # when specifying UController(force=True)
             reasons.append( 'You used (the) force! (via UController)' )
-        if force is True:  
+        if force is True:
             # when specifying i.e. search(force=True)
             reasons.append( 'You used (the) force!' )
 
