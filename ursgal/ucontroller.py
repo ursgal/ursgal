@@ -1612,6 +1612,22 @@ class UController(ursgal.UNode):
         )
         return unified_search_results
 
+    def _compress_output(self):
+        '''
+        Compresses output file routine from original uSearch project
+        This has to be implemented at one point ..
+        '''
+        # post_compressing = self.params.get('compress_after_post_flight', False)
+        # if post_compressing:
+        #     with open( self.params['output_file'], 'rb') as f_in:
+        #         with gzip.open(
+        #                 '{final_output_file}'.format(**self.params),
+        #                 'wb') as f_out:
+        #             f_out.writelines(f_in)
+        #     self.params['created_tmp_files'].append(
+        #         self.params['output_file']
+        #     )
+
     def get_mzml_that_corresponds_to_mgf(self, mgf_path):
         '''
         Checks the history of a MGF file to determine which
