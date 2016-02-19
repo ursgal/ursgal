@@ -72,7 +72,8 @@ class percolator_2_08( ursgal.UNode ):
         writer = csv.DictWriter(
             o,
             list(self._kb.PERCOLATOR_FIELDS.keys()),
-            delimiter='\t'
+            delimiter='\t',
+            extrasaction='ignore'
         )
         writer.writeheader()
 
@@ -115,7 +116,7 @@ class percolator_2_08( ursgal.UNode ):
         for n, spectrum_title in enumerate( self.params['grouped_psms'].keys()):
             best_score = self.params['grouped_psms'][ spectrum_title ][0][0]
             worst_score = self.params['grouped_psms'][ spectrum_title ][ -1 ][0]
-                        
+
             if self.params['bigger_scores_better'] is False:
                 best_score = transform_score(best_score, minimum_score)
                 worst_score = transform_score(worst_score, minimum_score)
@@ -138,7 +139,7 @@ class percolator_2_08( ursgal.UNode ):
                 # t['lnrSp'] = math.log( 1 + rank_of_score )
                 # t['Sp'] = rank_of_score
                 #
-          
+
                 charge      = float(line_dict['Charge'])
                 exp_mz      = float(line_dict['Exp m/z'])
                 t['Mass']   = ( exp_mz * charge ) - ( charge - 1 ) * PROTON
