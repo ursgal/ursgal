@@ -27,7 +27,8 @@ def main():
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
-            ]
+            ],
+            'scan_skip_modulo_step' :None
         }
     )
 
@@ -44,7 +45,9 @@ def main():
         'omssa',
         xtandem,
         'msgf',
-        # msamanda
+        # msamanda,
+        'novor',
+        'pepnovo',    
     ]
 
     mzML_file = os.path.join(

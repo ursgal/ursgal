@@ -14,6 +14,16 @@ simple example search
 .. include:: code_inc/simple_example_search.inc
 
 
+.. _simpleexamplecombinedfdr:
+
+simple example using combined fdr (or pep)
+------------------------------------------
+
+.. autofunction:: simple_combined_fdr_score.main
+
+.. include:: code_inc/simple_combined_fdr_score.inc
+
+
 
 .. _doitall:
 
@@ -232,4 +242,6 @@ Example search with search for labeling with 15N and no label
 
 
 .. include:: code_inc/search_with_label_15N.inc
+
+
 

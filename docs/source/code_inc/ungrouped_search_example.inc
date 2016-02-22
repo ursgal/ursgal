@@ -153,7 +153,7 @@
 	    return results_all_files
 	
 	
-	def analyze(results_all_files, validation_engine):
+	def analyze(collector):
 	    '''
 	    Simple analysis script for the ungrouped search,
 	    counting the number of identified peptides (combination of peptide sequence and modifications)

@@ -43,10 +43,10 @@
 	        msamanda = 'msamanda_1_0_0_5243'
 	
 	    engine_list = [
-	        # 'omssa',
-	        # xtandem,
-	        # 'msgf',
-	        msamanda
+	        'omssa',
+	        xtandem,
+	        'msgf',
+	        # msamanda
 	    ]
 	
 	    mzML_file = os.path.join(
@@ -59,7 +59,7 @@
 	        uc.params['http_url'] = 'http://sourceforge.net/p/open-ms/code/HEAD/tree/OpenMS/share/OpenMS/examples/BSA/BSA1.mzML?format=raw'
 	        uc.params['http_output_folder'] = os.path.dirname(mzML_file)
 	        uc.fetch_file(
-	            engine     = 'get_http_files_1_0_0'
+	            engine     = 'get_http_files_1_0_0',
 	        )
 	        shutil.move(
 	            '{0}format=raw'.format(mzML_file),

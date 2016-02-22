@@ -2,14 +2,11 @@ language: python
 python:
   - "3.4"
   - "3.5"
-# command to install dependencies
-before_install:
-  - pip install codecov
-after_success:
-  - codecov
+sudo: false
 
-install:
-  - pip install -r requirements.txt
+before_install: pip install codecov
+after_success:  codecov
 
-# command to run tests
+install: pip install -r requirements.txt
+
 script: nosetests

@@ -1014,16 +1014,33 @@ class UController(ursgal.UNode):
                     json_path = file_json_path
                 )
                 if len(json_content) > 3 and 'history' in json_content[3]:
-                    last_search_engine = self.get_last_search_engine(
-                        history = json_content[3]['history']
-                    )
-                    if last_search_engine != "unknown_engine" and "multiple engines" not in last_search_engine:
-                        last_engine_meta_node = self.meta_unodes[ last_search_engine ]
-                        last_search_engine_colname = \
-                            last_engine_meta_node.DEFAULT_PARAMS['validation_score_field'].split(":")[0]
+                    for engine_type in ['denovo_engine', 'search_engine']:                 
+                        for elem in json_content[3]['history']:
+                            #checking the history with all the if-statements is necessary because the history contains several history events and if this is not specified, 
+                            #get_last_engine will only browse one of them (the wrong one) and will return None-Type for denovo_engines
+                            if 'META_INFO' in elem:
+                                if 'engine_type' in json_content[3]['history'][json_content[3]['history'].index(elem)]['META_INFO']:
+                                    if engine_type in json_content[3]['history'][json_content[3]['history'].index(elem)]['META_INFO']['engine_type']:
+                                        if json_content[3]['history'][json_content[3]['history'].index(elem)]['META_INFO']['engine_type'][engine_type] == True:             
+                        
+                                            last_result_engine = self.get_last_engine(
+                                                history = json_content[3]['history'],
+                                                engine_type = engine_type
+                                            )
+
+                                            if last_result_engine != "unknown_engine" and "multiple engines" not in last_result_engine:
+                                                last_engine_meta_node = self.meta_unodes[ last_result_engine ]
+                                                if engine_type == 'denovo_engine':
+                                                    last_result_engine_colname = None
+                                                else:
+                                                    last_result_engine_colname = \
+                                                    last_engine_meta_node.DEFAULT_PARAMS['validation_score_field'].split(":")[0]  
+                                                                                                
+                        else:
+                            continue
                 else:
                     last_search_engine = None
-
+                    last_result_engine = None
                 # write all the information we just collected to a dict for that file:
                 file_dict = {}
 
@@ -1034,16 +1051,22 @@ class UController(ursgal.UNode):
                 file_dict.update(
                     self.set_file_info_dict( input_file )
                 )
-                file_dict['last_search_engine']         = last_search_engine
-                if "multiple engines" not in last_search_engine and last_search_engine != "unknown_engine":
-                    file_dict['last_search_engine_colname'] = last_search_engine_colname
+                if engine_type == 'denovo_engine':
+                    file_dict['last_denovo_engine'] = last_result_engine
+                    if "multiple engines" not in last_result_engine and last_result_engine != "unknown_engine":
+                        file_dict['last_denovo_engine_colname'] = last_result_engine_colname
+                if engine_type == 'search_engine':
+                    file_dict['last_search_engine'] = last_result_engine
+                    if "multiple engines" not in last_result_engine and last_result_engine != "unknown_engine":
+                        file_dict['last_search_engine_colname'] = last_result_engine_colname
 
             else:
-            # if the file has no json yet, we generate only the file path dict...
-            # in that case, we have no auxiliary information like "last_search_engine"
+                # if the file has no json yet, we generate only the file path dict...
+                # in that case, we have no auxiliary information like "last_search_engine"
                 file_dict = self.set_file_info_dict( input_file )
 
             list_of_file_dicts.append( file_dict )
+
         return list_of_file_dicts
 
     def set_ios(self, input_file, engine=None, userdefined_output_fname=None ):
@@ -1083,7 +1106,8 @@ class UController(ursgal.UNode):
             number_of_diffs_between_json_and_params = 0
             for u_param, u_value in self.params.items():
                 if u_param not in self.io['input']['params'] or \
-                self.io['input']['params'][ u_param ] != u_value:
+                        self.io['input']['params'][ u_param ] != u_value:
+                    #
                     number_of_diffs_between_json_and_params += 1
                     self.print_info(
                         'Mismatch of param {0}: UController: {1}; i_json: {2}'.format(
@@ -1387,7 +1411,10 @@ class UController(ursgal.UNode):
                         )
                         break
                 else:
-                    default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(used_param, None)
+                    default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(
+                        used_param,
+                        None
+                    )
                     if used_param not in o_params.keys():
                         reasons.append(
                             'USED_USEARCH_PARAM "{0}" '\
