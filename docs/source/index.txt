@@ -47,6 +47,7 @@ Included engines
    :maxdepth: 2
 
    available_engines
+   available_de_novo_engines
    other_engines
    general_structure
 
@@ -81,6 +82,17 @@ fucntionality and can be used as templates for own scripts.
    :maxdepth: 2
 
    example_scripts
+
+Changelog
+=========
+
+Record of released Ursgal versions with all notable changes
+
+.. toctree::
+   :maxdepth: 1
+
+   changelog
+
 
 
 FAQ

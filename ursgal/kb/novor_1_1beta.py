@@ -30,6 +30,8 @@ META_INFO = {
 
 DEFAULT_PARAMS = {
     'novor_forbidden_residues'    : 'I,U',
+    'validation_score_field'      : 'Novor:score',
+
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {

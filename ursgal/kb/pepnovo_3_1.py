@@ -9,12 +9,11 @@ META_INFO = {
                 'exe'            :'PepNovo_bin',
             }
         },
-        # which file to run in darwin?
-        #'darwin' : {
-        #    '64bit' : {
-        #        'exe'            :'?',
-        #    }
-        #},
+        'darwin' : {
+           '64bit' : {
+               'exe'             :'PepNovo_bin',
+           }
+        },
         'win32' : {
             '64bit' : {
                 'exe'            : 'PepNovo.exe',
@@ -29,6 +28,7 @@ META_INFO = {
     'include_in_git'            : False,
 }
 DEFAULT_PARAMS = {
+    'validation_score_field'  : 'Pepnovo:PnvScr',
     'pepnovo_model'           : 'CID_IT_TRYP',
     'pepnovo_model_dir'       : None,
     'base_mz'                 : 1000,

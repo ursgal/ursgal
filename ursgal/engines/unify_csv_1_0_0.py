@@ -46,13 +46,9 @@ Could not load RT lookup dict from this location: {0}
         )
 
         # find the last search/denovo engine:
-        last_engine = None
-        for engine_type in ['search_engine', 'denovo_engine']:
-            if last_engine == None:
-                last_engine = self.get_last_engine(
-                history = self.stats['history'],
-                engine_type = engine_type,
-            )
+        last_engine = self.get_last_engine(
+        history = self.stats['history'],
+        )
 
         # find the column name of the engine score
         last_eng_node = self.meta_unodes[last_engine]

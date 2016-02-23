@@ -66,11 +66,10 @@ def main( *args, **kwargs ):
     or for 2 or 3  or 5 VennDiagrams the appropriate combinations ...
 
     """
-    args = args[0]
 
     assert len(args) >= 2, "2 Sets (A, B ) are minimal arguments ! :)"
     for _ in args:
-        assert isinstance(_, set) , "Input args have to be Python sets"
+        assert isinstance(_, set) , "Input args have to be Python sets, got ... {0}".format( type(_))
 
     A = args[0]
     B = args[1]

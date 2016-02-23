@@ -54,19 +54,16 @@ class venndiagram_1_0_0( ursgal.UNode ):
         input_file_dicts = self.params['input_file_dicts']
 
         data = []
+        print(input_file_dicts)
         for result_file in input_file_dicts:
-            for elem in ('last_search_engine','last_de_novo_engine'):
-                if elem in result_file:
-                    data_field = (
-                        result_file[elem],
-                        os.path.join(
-                            result_file['dir'],
-                            result_file['file']
-                        )
-                    )
-                    data.append( data_field )
-                else:
-                    continue
+            data_field = (
+                result_file['last_engine'],
+                os.path.join(
+                    result_file['dir'],
+                    result_file['file']
+                )
+            )
+            data.append( data_field )
 
         all_are_csv = all( [f[1].upper().endswith('.CSV') for f in data] )
         assert all_are_csv == True, "VennDiagram input files all have to be .csv"
@@ -135,7 +132,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
             in_sets.append( column_sets[label] )
 
         return_dict = venndiagram_main(
-            in_sets,
+            *in_sets,
             output_file = output_incl_path,
             **venn_params
             )

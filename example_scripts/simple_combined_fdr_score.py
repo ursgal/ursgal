@@ -45,7 +45,7 @@ def main():
         'ftp_output_folder' : os.path.join(
             os.pardir,
             'example_data',
-            'xtandem_version_comparison'
+            'simple_combined_fdr_score'
         ),
         'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta' ,
         'http_output_folder' : os.path.join(
@@ -91,7 +91,7 @@ def main():
 
     combined_results = uc.combine_search_results(
         input_files     = validated_files_list,
-        engine          = 'combine_FDR_0_1',
+        engine          = 'combine_pep_1_0_0',
         # use combine_pep_1_0_0 for combined PEP :)
     )
     print('\n\tCombined results can be found here:')

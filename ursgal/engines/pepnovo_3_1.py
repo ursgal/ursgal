@@ -176,7 +176,9 @@ class pepnovo_3_1( ursgal.UNode ):
 
 
     def postflight( self ):
-
+        '''
+        Reformats the PepNovo output file
+        '''
         filepath = self.params['output_file_incl_path']
 
         print('[ PARSING  ] Loading unformatted Pepnovo results ...')
@@ -211,7 +213,6 @@ class pepnovo_3_1( ursgal.UNode ):
         translated_headers.append('Spectrum Title')
         translated_headers.append('Modifications')
         translated_headers.append('Raw data location')
-        translated_headers.append('Is decoy')
         translated_headers.append('Retention Time (s)')
         translated_headers.insert(1,'Spectrum ID')
 
@@ -373,7 +374,7 @@ class pepnovo_3_1( ursgal.UNode ):
                     pepnovo_outputfile_new.write(spectrumtitle_list[x]+',')
                     pepnovo_outputfile_new.write(mods+',')
                     pepnovo_outputfile_new.write(self.params['mgf_input_file']+',')
-                    pepnovo_outputfile_new.write('FALSE')
+                    pepnovo_outputfile_new.write('False')
                     pepnovo_outputfile_new.write('\n')
                     
         pepnovo_outputfile_new.close()

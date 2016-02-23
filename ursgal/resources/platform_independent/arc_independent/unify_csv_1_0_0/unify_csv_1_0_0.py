@@ -562,7 +562,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 psm_counter[psm] += 1
 
-                #csv_output.writerow(line_dict) #wrong indentation
             csv_output.writerow(line_dict)
             '''
                 to_be_written_csv_lines.append( line_dict )
