@@ -9,20 +9,16 @@ import shutil
 
 def main():
     '''
-    Executes a search with OMSSA, XTandem and MS-GF+ on the BSA1.mzML
+    Executes a search with Novor and PepNovo on the BSA1.mzML
     input_file
 
     usage:
-        ./simple_example_search.py
-
-    Note:
-        myrimatch does not work with this file in this case
+        ./simple_de_novo_search.py
 
     '''
     uc = ursgal.UController(
         profile = 'LTQ XL low res',
         params = {
-            'database' : os.path.join( os.pardir, 'example_data', 'BSA.fasta' ),
             'modifications' : [
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
@@ -31,26 +27,15 @@ def main():
         }
     )
 
-    if sys.maxsize > 2**32:
-        xtandem = 'xtandem_piledriver'
-    else:
-        xtandem = 'xtandem_sledgehammer'
-    if sys.platform == 'win32':
-        msamanda = 'msamanda_1_0_0_5242'
-    else:
-        msamanda = 'msamanda_1_0_0_5243'
-
     engine_list = [
-        'omssa',
-        xtandem,
-        'msgf',
-        # msamanda,
+        'novor',
+        'pepnovo',    
     ]
 
     mzML_file = os.path.join(
         os.pardir,
         'example_data',
-        'BSA_simple_example_search',
+        'BSA_simple_de_novo_search',
         'BSA1.mzML'
     )
     if os.path.exists(mzML_file) is False:

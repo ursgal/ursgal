@@ -45,8 +45,8 @@ class combine_FDR_0_1( ursgal.UNode ):
             )
             input_file_list_for_cFDR_script.append( input_file_path )
 
-            search_engine = input_file_dict["last_search_engine"]
-            score_colname = input_file_dict["last_search_engine_colname"]
+            search_engine = input_file_dict["last_engine"]
+            score_colname = input_file_dict["last_engine_colname"]
             input_file_search_engines.add( search_engine )
 
             file_info_for_cFDR_script[ input_file_path ] = {

@@ -6,7 +6,7 @@ import os
 
 def main():
     '''
-    Executes a search with 3 different search engines on an example file from the 
+    Executes a search with 3 different search engines on an example file from the
     data from Barth et al. (The same file that is used in the XTandem version
     comparison example.)
 
@@ -45,7 +45,7 @@ def main():
         'ftp_output_folder' : os.path.join(
             os.pardir,
             'example_data',
-            'xtandem_version_comparison'
+            'simple_combined_fdr_score'
         ),
         'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta' ,
         'http_output_folder' : os.path.join(
@@ -53,7 +53,7 @@ def main():
             'example_data'
         )
     }
-    
+
     if os.path.exists(params['ftp_output_folder']) is False:
         os.mkdir(params['ftp_output_folder'])
 
@@ -76,7 +76,7 @@ def main():
 
     validated_files_list = []
     for engine in engine_list:
-        
+
         unified_result_file = uc.search(
             input_file = mzML_file,
             engine     = engine,
@@ -91,9 +91,10 @@ def main():
 
     combined_results = uc.combine_search_results(
         input_files     = validated_files_list,
-        engine          = 'combine_FDR_0_1',
+        engine          = 'combine_pep_1_0_0',
+        # use combine_pep_1_0_0 for combined PEP :)
     )
-    print('\n\tCombined FDR Score results can be found here:')
+    print('\n\tCombined results can be found here:')
     print(combined_results)
     return
 

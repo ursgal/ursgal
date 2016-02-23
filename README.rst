@@ -12,7 +12,7 @@ Introduction
 .. |doc-status| image:: https://readthedocs.org/projects/ursgal/badge/?version=latest
     :target: http://ursgal.readthedocs.org/en/latest/?badge=latest
     :alt: Documentation Status
- 
+
 .. |Gitter| image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
    :alt: Join the chat at https://gitter.im/ursgal/ursgal
    :target: https://gitter.im/ursgal/ursgal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
@@ -61,14 +61,14 @@ The complete Documentation can be found at
 Installation
 ************
 
-Ursgal requires `Python`_ 3.4 or higher. 
+Ursgal requires `Python`_ 3.4 or higher.
 
 Download ursgal using `Github`_ **or** the zip file:
 
 * Github version: Starting with this the easiest way is to clone the GitHub repo.::
 
    user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
-    
+
 
 * ZIP version: Download and extract the `ursgalzip`_ file
 
@@ -76,7 +76,7 @@ Download ursgal using `Github`_ **or** the zip file:
    https://www.python.org/downloads/
 
 .. _GitHub:
-   https://github.com/
+   https://github.com/ursgal/ursgal
 
 .. _ursgalzip:
    https://github.com/ursgal/ursgal/archive/master.zip
@@ -87,15 +87,15 @@ Install requirements::
     user@localhost:~/ursgal$ pip3.4 install -r requirements.txt
 
 .. note::
-   
+
     Pip is included in Python 3.4 and higher. However, it might not be included in in your system's PATH environment variable.
-    If this is the case, you can either add the python Scripts directory to you PATH or use the path to the pip.exe 
+    If this is the case, you can either add the python Scripts directory to you PATH or use the path to the pip.exe
     directly for the installation, e.g.: ~/Python34/Scripts/pip.exe install -r requirements.txt
 
 Install third party engines::
 
     user@localhost:~/ursgal$ python3.4 install_resources.py
- 
+
 
 Install Ursgal::
 
@@ -151,9 +151,9 @@ Copyrights
 Copyright 2014-2015 by authors and contributors
 
 * Lukas P. M. Kremer,
-* Purevdulam Oyunchimeg,
 * Johannes Leufken,
 * Stefan Schulze,
+* Purevdulam Oyunchimeg,
 * Christian Fufezan
 
 Contact
@@ -183,13 +183,14 @@ Lukas P. M. Kremer, Johannes Leufken, Purevdulam Oyunchimeg, Stefan Schulze, and
 
 Full list of tools with proper citations that are integrated into ursgal are:
 
-    * Kwon, T.; Choi, H.; Vogel, C.; Nesvizhskii, A. I.; Marcotte, E. M. MSblender: A probabilistic approach for integrating peptide identifications from multiple database search engines. J. Proteome res. 2011, 10 (7), 2949–2958.
-    * Geer, L. Y.; Markey, S. P.; Kowalak, J. A.; Wagner, L.; Xu, M.; Maynard, D. M.; Yang, X.; Shi, W.; Bryant, S. H. Open Mass Spectrometry Search Algorithm. J. Proteome res. 2004, 3 (5), 958–964.
     * Craig, R.; Beavis, R. C. TANDEM: matching proteins with tandem mass spectra. Bioinformatics 2004, 20 (9), 1466–1467.
-    * Tabb, D. L.; Fernando, C. G.; Chambers, M. C. MyriMatch:highly accurate tandem mass spectral peptide identificaiton by multivariate hypergeometric analysis. J Proteome Res. 2008, 6 (2), 654–661.
-    * Jones, A. R.; Siepen, J. a.; Hubbard, S. J.; Paton, N. W. Improving sensitivity in proteome studies by analysis of false discovery rates for multiple search engines. Proteomics 2009, 9 (5), 1220–1229.
     * Dorfer, V.; Pichler, P.; Stranzl, T.; Stadlmann, J.; Taus, T.; Winkler, S.; Mechtler, K. MS Amanda, a Universal Identification Algorithm Optimised for High Accuracy Tandem Mass Spectra. J. Proteome res. 2014.
-    * Käll, L.; Canterbury, J. D.; Weston, J.; Noble, W. S.; MacCoss, M. J. Semi-supervised learning for peptide identification from shotgun proteomics datasets. Nature methods 2007, 4 (11), 923–925.
+    * Frank, A. M.; Savitski, M. M.; Nielsen, M. L.; Zubarev, R. A. and Pevzner, P. A. De Novo Peptide Sequencing and Identification with Precision Mass Spectrometry. J. Proteome Res. 2007 6:114-123.',
+    * Geer, L. Y.; Markey, S. P.; Kowalak, J. A.; Wagner, L.; Xu, M.; Maynard, D. M.; Yang, X.; Shi, W.; Bryant, S. H. Open Mass Spectrometry Search Algorithm. J. Proteome res. 2004, 3 (5), 958–964.
+    * Jones, A. R.; Siepen, J. a.; Hubbard, S. J.; Paton, N. W. Improving sensitivity in proteome studies by analysis of false discovery rates for multiple search engines. Proteomics 2009, 9 (5), 1220–1229.
     * Kim, S.; Mischerikow, N.; Bandeira, N.; Navarro, J. D.; Wich, L.; Mohammed, S.; Heck, A. J. R.; Pevzner, P. a. The Generating Function of CID , ETD , and CID ETD Pairs of Tandem Mass Spectra Applications to Database Search MCP 2010, 2840–2852.
-    * Reisinger, F.; Krishna, R.; Ghali, F.; Ríos, D.; Hermjakob, H.; Antonio Vizcaíno, J.; Jones, A. R. JmzIdentML API: A Java interface to the mzIdentML standard for peptide and protein identification data. Proteomics 2012, 12 (6), 790–794.
+    * Käll, L.; Canterbury, J. D.; Weston, J.; Noble, W. S.; MacCoss, M. J. Semi-supervised learning for peptide identification from shotgun proteomics datasets. Nature methods 2007, 4 (11), 923–925.
     * Käll, L.; Storey, J. D.; Noble, W. S. Qvality: Non-parametric estimation of q-values and posterior error probabilities. Bioinformatics 2009, 25 (7), 964–966.
+    * Ma, B. Novor: real-time peptide de novo sequencing software. J Am Soc Mass Spectrom. 2015 Nov;26(11):1885-94
+    * Reisinger, F.; Krishna, R.; Ghali, F.; Ríos, D.; Hermjakob, H.; Antonio Vizcaíno, J.; Jones, A. R. JmzIdentML API: A Java interface to the mzIdentML standard for peptide and protein identification data. Proteomics 2012, 12 (6), 790–794.
+    * Tabb, D. L.; Fernando, C. G.; Chambers, M. C. MyriMatch:highly accurate tandem mass spectral peptide identificaiton by multivariate hypergeometric analysis. J Proteome Res. 2008, 6 (2), 654–661.
