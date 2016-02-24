@@ -31,7 +31,6 @@ DEFAULT_PARAMS = {
     'validation_score_field'  : 'Pepnovo:PnvScr',
     'pepnovo_model'           : 'CID_IT_TRYP',
     'pepnovo_model_dir'       : None,
-    'base_mz'                 : 1000,
     'pepnovo_tag_length'      : None,
     'output_cum_probs'        : True, 
     'output_aa_probs'         : True,  
@@ -69,6 +68,19 @@ USED_USEARCH_PARAMS = set( [
     'frag_mass_tolerance_unit',
     'num_match_spec',
     'modifications',
+    'pepnovo_model',
+    'pepnovo_model_dir',
+    'base_mz',
+    'pepnovo_tag_length',
+    'output_cum_probs', 
+    'output_aa_probs',  
+    'prm',
+    'prm_norm',
+    'correct_pm',
+    'use_spectrum_charge',
+    'use_spectrum_mz',
+    'no_quality_filter',
+    'min_filter_prob',
     ]
      )
 

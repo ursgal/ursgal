@@ -67,8 +67,14 @@ class pepnovo_3_1( ursgal.UNode ):
         )
 
         if self.params['precursor_mass_tolerance_unit'] == 'ppm':
-            self.params['precursor_mass_tolerance_plus'] = ursgal.ucore.convert_ppm_to_dalton( self.params['precursor_mass_tolerance_plus'], base_mz=self.params['base_mz'] )
-            self.params['precursor_mass_tolerance_minus'] = ursgal.ucore.convert_ppm_to_dalton( self.params['precursor_mass_tolerance_minus'], base_mz=self.params['base_mz'] )
+            self.params['precursor_mass_tolerance_plus'] = ursgal.ucore.convert_ppm_to_dalton( 
+                self.params['precursor_mass_tolerance_plus'], 
+                base_mz=self.params['base_mz'] 
+            )
+            self.params['precursor_mass_tolerance_minus'] = ursgal.ucore.convert_ppm_to_dalton( 
+                self.params['precursor_mass_tolerance_minus'], 
+                base_mz=self.params['base_mz'] 
+            )
         self.params['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
                                                     float(self.params['precursor_mass_tolerance_minus']) ) \
                                                 / 2.0
