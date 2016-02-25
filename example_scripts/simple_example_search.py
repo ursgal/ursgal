@@ -32,7 +32,7 @@ def main():
     )
 
     if sys.maxsize > 2**32:
-        xtandem = 'xtandem_piledriver'
+        xtandem = 'xtandem_vengeance'
     else:
         xtandem = 'xtandem_sledgehammer'
     if sys.platform == 'win32':

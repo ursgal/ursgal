@@ -15,6 +15,11 @@ def main():
     usage:
         ./simple_de_novo_search.py
 
+    Note:
+        PepNovo currently only works for Linux. 
+        Novor needs to be downloaded from http://rapidnovor.com/novor/standalone/ and 
+        stored at <ursgal_path>/resources/<platform>/<architecture>/novor_1_1beta
+
     '''
     uc = ursgal.UController(
         profile = 'LTQ XL low res',
