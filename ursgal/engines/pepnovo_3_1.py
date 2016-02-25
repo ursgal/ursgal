@@ -83,7 +83,10 @@ class pepnovo_3_1( ursgal.UNode ):
             self.params['frag_mass_tolerance'] = ursgal.ucore.convert_ppm_to_dalton( self.params['frag_mass_tolerance'], base_mz=self.params['base_mz'] )
 
         if self.params['pepnovo_model_dir'] == None:
-            self.params['pepnovo_model_dir'] = os.path.dirname(self.exe) + '/Models'
+            self.params['pepnovo_model_dir'] = os.path.join(
+                os.path.dirname(self.exe),
+                'Models'
+            )
 
         modifications = []
         for mod in self.params[ 'mods' ][ 'fix' ]:
@@ -140,6 +143,8 @@ class pepnovo_3_1( ursgal.UNode ):
 
     def _execute(self):
         if len(self.params['command_list']) != 0:
+            # print(self.params['command_list'])
+            # exit()
             proc = subprocess.Popen(
                 self.params['command_list'],
                 stdout = subprocess.PIPE,

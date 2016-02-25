@@ -17,7 +17,11 @@ executable_list = [
     'omssacl',
     'myrimatch_2_1_138',
     'myrimatch.exe',
-    'MSAmanda.exe'
+    'MSAmanda.exe',
+    'PepNovo_bin',
+    'novor.bat',
+    'novor.sh',
+    'PepNovo.exe',
 ]
 
 if sys.platform in ['win32']:
