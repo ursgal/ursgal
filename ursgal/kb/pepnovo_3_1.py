@@ -7,6 +7,9 @@ META_INFO = {
         'linux' : {
             '64bit' : {
                 'exe'            :'PepNovo_bin',
+                'url'            : '',
+                'zip_md5'        : '318866ea0ade5b2309cbcddc0066d2a8',
+                'additional_exe' : [],
             }
         },
         'darwin' : {
