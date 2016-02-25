@@ -54,9 +54,10 @@ class venndiagram_1_0_0( ursgal.UNode ):
         input_file_dicts = self.params['input_file_dicts']
 
         data = []
+        print(input_file_dicts)
         for result_file in input_file_dicts:
             data_field = (
-                result_file['last_search_engine'],
+                result_file['last_engine'],
                 os.path.join(
                     result_file['dir'],
                     result_file['file']
@@ -131,7 +132,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
             in_sets.append( column_sets[label] )
 
         return_dict = venndiagram_main(
-            in_sets,
+            *in_sets,
             output_file = output_incl_path,
             **venn_params
             )

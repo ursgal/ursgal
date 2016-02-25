@@ -25,11 +25,13 @@ META_INFO = {
     'citation'                  : \
         'Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software.',
     'include_in_git'            : False,
-    'in_development'            : True,
+    'in_development'            : False,
 }
 
 DEFAULT_PARAMS = {
     'novor_forbidden_residues'    : 'I,U',
+    'validation_score_field'      : 'Novor:score',
+
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {

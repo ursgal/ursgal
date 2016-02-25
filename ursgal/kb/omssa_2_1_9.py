@@ -213,6 +213,7 @@ USED_USEARCH_PARAMS = set([
     'mm',
     'hl',
     'semi_enzyme',
+    'base_mz'
 ])
 
 

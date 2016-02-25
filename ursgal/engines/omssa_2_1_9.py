@@ -200,7 +200,8 @@ class omssa_2_1_9( ursgal.UNode ):
         if self.params['frag_mass_tolerance_unit'] == 'ppm':
             self.params['frag_mass_tolerance'] = \
                 ursgal.ucore.convert_ppm_to_dalton(
-                    self.params['frag_mass_tolerance']
+                    self.params['frag_mass_tolerance'],
+                    base_mz=self.params['base_mz']
                 )
 
         # 5ppm precursor error

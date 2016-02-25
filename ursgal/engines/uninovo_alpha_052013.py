@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.4
 import ursgal
 import os
-
+import subprocess
 
 class uninovo_alpha_052013( ursgal.UNode ):
     """
@@ -39,19 +39,84 @@ class uninovo_alpha_052013( ursgal.UNode ):
                                                 / 2.0
 
         self.params[ 'command_list' ] = [
+            'pushd', self.exe.rstrip('UniNovo.jar'), '&&', #need to specify this because UniNovo searches the Pars directory in the shell working directory
+
             'java', '-Xmx{java_-Xmx}'.format( **self.params), '-jar', self.exe, # path 2 executable
             '-i', '{mgf_input_file}'.format( **self.params), # SpectrumFile (*.mzXML, *.mgf, *.ms2)
-            '-o', '{output_file_incl_path}'.format(**self.params), # output file prefix - UniNovo will output file named as "prefix.den" 
+            '-o', '{output_file_incl_path}'.format(**self.params).rstrip('.den'), # output file prefix - UniNovo will output file named as "prefix.den" 
             '-pt', '{precursor_mass_tolerance}{precursor_mass_tolerance_unit}'.format(**self.params), # precursor ion tolerance (ending in ppm or Da)
             '-t', '{frag_mass_tolerance}{frag_mass_tolerance_unit}'.format(**self.params), # ion tolerances (ending in ppm or Da)
             '-f', '{frag_method}'.format(**self.params), # fragmentation method (CID/ETD/HCD) - if -par option is specified, this option will be ignored
             '-e', '{enzyme}'.format(**self.params), # enzyme applied (0: No enzyme specificity, 1: Trypsin (default), 2: LysC)
             '-c', '{uninovo_num_13C}'.format(**self.params), # number of 13C considered (default : 0)
-            '-l', '{min_pep_length}'.format(**self.params), # minimum length of reconstructions (default : 5)
+            #'-l', '{min_pep_length}'.format(**self.params), # minimum length of reconstructions (default : 5), in small datasets UniNovo might produce empty outputfiles, so the whole script crashes
             '-n', '{num_match_spec}'.format(**self.params), # number of de novo sequences per one spectrum (1-200 : default 100)
             '-acc', '{uninovo_accuracy}'.format(**self.params),# set accuracy threshold (0.0-0.9 : default 0.8)
             '-g', '{uninovo_num_mass_gaps}'.format(**self.params), # number of possible mass gaps per each sequence (2-10 : default 10)
-             # '-par', {trained_par_file}.format(**self.params), # use user trained parameter file (see below to see how to train UniNovo)
-        ]
+            #'-par', {trained_par_file}.format(**self.params), # use user trained parameter file (see below to see how to train UniNovo)
 
+            '&&','popd', #going back to the previous shell working directory
+        ]
+        #print(self.params[ 'command_list' ])
         return self.params
+
+    def _execute(self):
+        '''
+        The _execute unode function
+
+        Executes the unode executable via shell.
+
+        Note: internal function
+            Unodes that do not require execution via shell
+            redefine the _execute() function in their engine
+            class.
+
+        Returns:
+            None
+        '''
+        self.print_info('Executing command list ...', caller='eXecution')
+        assert 'command_list' in self.params.keys(), '''
+  No command_list was found in self.params. Convention is to define
+  the command list during preflight in the uNode Engine class code or,
+  alternatively, redefine uNode._execute() in the engine class altogether
+        '''
+        self.time_point(tag = 'execution')
+        execute_answer = []
+        proc = None
+
+        if len(self.params['command_list']) != 0:
+            proc = subprocess.Popen(
+                self.params['command_list'],
+                stdout = subprocess.PIPE,
+                shell = True
+            )
+        else:
+            print('Command list is empty, nothing to do here...')
+            print('_execute failed ....', self.params['command_list'])
+            execute_answer.append( 'Command list is empty' )
+            self.execute_return_code = 500
+
+        if proc is not None:
+            for line in proc.stdout:
+                line_decoded = line.strip().decode('utf')
+                print( line_decoded )
+                execute_answer.append( line_decoded )
+
+            # catching the executable's exit code to detect crashes:
+            proc.communicate()[0]
+            self.execute_return_code = proc.returncode
+            assert self.execute_return_code in [0, None], '''
+  \n{0} crashed!
+
+  The executable
+    {1}
+  terminated with Error code {2} .
+  Inspect the printouts above for possible causes and verify that all input files are valid.
+            '''.format( self.engine, os.path.relpath(self.exe), self.execute_return_code)
+
+        self.print_execution_time(tag='execution')
+        return 
+
+    def postflight( self ):
+        return
+

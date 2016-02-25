@@ -709,7 +709,7 @@ class UController(ursgal.UNode):
 
         search_engines_of_merged_files = []
         for d in self.io['output']['params']['input_file_dicts']:
-            search_engines_of_merged_files.append( d["last_search_engine"] )
+            search_engines_of_merged_files.append( d["last_engine"] )
 
         report = self.run_unode_if_required(
             force, engine_name, answer,
@@ -771,7 +771,7 @@ class UController(ursgal.UNode):
         # making sure that all input files are from different engines:
         input_file_dicts = self.io['output']['params']['input_file_dicts']
         input_file_search_engines = {
-            ifd["last_search_engine"] for ifd in input_file_dicts
+            ifd["last_engine"] for ifd in input_file_dicts
         }
 
         assert len(input_file_search_engines) == len(input_files), '''
@@ -1001,11 +1001,14 @@ class UController(ursgal.UNode):
         under self.params["input_file_dicts"].
         also adds some "quick-access" entries to the file_dicts.
         these file dicts contain the input/output file dicts for that file,
-        as well as quick-access information (i.e. "last_search_engine")
+        as well as quick-access information (i.e. "last_engine")
         '''
         list_of_file_dicts = []
         for input_file in input_files:
             file_json_path = input_file + self.params['json_extension']
+
+            last_engine = None
+            last_engine_colname = None
 
             # if the file has a json, we can retrieve its file information from it:
             if os.path.exists( file_json_path ):
@@ -1014,15 +1017,13 @@ class UController(ursgal.UNode):
                     json_path = file_json_path
                 )
                 if len(json_content) > 3 and 'history' in json_content[3]:
-                    last_search_engine = self.get_last_search_engine(
-                        history = json_content[3]['history']
-                    )
-                    if last_search_engine != "unknown_engine" and "multiple engines" not in last_search_engine:
-                        last_engine_meta_node = self.meta_unodes[ last_search_engine ]
-                        last_search_engine_colname = \
+                    last_engine = self.get_last_engine(
+                            history = json_content[3]['history'],
+                        )
+                    if last_engine is not None:
+                        last_engine_meta_node = self.meta_unodes[ last_engine ]
+                        last_engine_colname = \
                             last_engine_meta_node.DEFAULT_PARAMS['validation_score_field'].split(":")[0]
-                else:
-                    last_search_engine = None
 
                 # write all the information we just collected to a dict for that file:
                 file_dict = {}
@@ -1034,9 +1035,8 @@ class UController(ursgal.UNode):
                 file_dict.update(
                     self.set_file_info_dict( input_file )
                 )
-                file_dict['last_search_engine']         = last_search_engine
-                if "multiple engines" not in last_search_engine and last_search_engine != "unknown_engine":
-                    file_dict['last_search_engine_colname'] = last_search_engine_colname
+                file_dict['last_engine'] = last_engine
+                file_dict['last_engine_colname'] = last_engine_colname
 
             else:
             # if the file has no json yet, we generate only the file path dict...
@@ -1484,9 +1484,11 @@ class UController(ursgal.UNode):
         '''
         engine_name = self.engine_sanity_check( engine )
         self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.mgf'] )
-        self.input_file_sanity_check( self.params['database'], engine=engine_name,
-                                      custom_str='FASTA database (uc.params["database"])',
-                                      extensions = ['fasta', 'fa', 'fast'] )
+        if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
+            if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
+                self.input_file_sanity_check( self.params['database'], engine=engine_name,
+                                              custom_str='FASTA database (uc.params["database"])',
+                                              extensions = ['fasta', 'fa', 'fast'] )
         answer = self.prepare_unode_run(
             input_file,
             output_file = output_file_name,
@@ -1547,7 +1549,7 @@ class UController(ursgal.UNode):
                 * :meth:`.unify_csv`
         '''
 
-        # Verify that the specified engine is a valid uNode
+        # Verify that the specified engine is a valid UNode
         engine_name = self.engine_sanity_check( engine )
         # Verify input file exists and is mzML
         self.input_file_sanity_check(
@@ -1555,12 +1557,14 @@ class UController(ursgal.UNode):
             extensions = ['mzml', 'mzml.gz', 'mgf']
         )
         # verify database exists and is fasta
-        self.input_file_sanity_check(
-            self.params['database'],
-            engine     = engine_name,
-            custom_str = 'FASTA database (uc.params["database"])',
-            extensions = ['fasta', 'fa', 'fast'],
-        )
+        if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
+            if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
+                self.input_file_sanity_check(
+                    self.params['database'],
+                    engine     = engine_name,
+                    custom_str = 'FASTA database (uc.params["database"])',
+                    extensions = ['fasta', 'fa', 'fast'],
+                )
 
         # 1. Convert mzML(.gz) to MGF format (if it's not already MGF):
         if not input_file.upper().endswith('.MGF'):

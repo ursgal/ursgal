@@ -16,7 +16,7 @@ META_INFO = {
             '64bit' : {
                 'exe'            : 'tandem',
                 'url'            : '',
-                # 'zip_md5'        : '261dce3746481d1cc4223bccb6bf265e',
+                'zip_md5'        : '8611a65a9cb87ab0cae59756dffe9213',
                 'additional_exe' : [],
             },
         },
@@ -24,7 +24,7 @@ META_INFO = {
             '64bit' : {
                 'exe'            : 'tandem.exe',
                 'url'            : '',
-                # 'zip_md5'        : 'af307fea9f2b954f1a9a3652c14a5742',
+                'zip_md5'        : '034fa00d6cd0f1d7101f12d845062949',
                 'additional_exe' : [],
             },
         },
@@ -32,7 +32,7 @@ META_INFO = {
             '64bit' : {
                 'exe'            : 'tandem.exe',
                 'url'            : '',
-                # 'zip_md5'        : '16c3b766e02690386f280515175cdc90',
+                'zip_md5'        : 'b9d2b1da628627f0ff0ba64d8e7b93b1',
                 'additional_exe' : [],
             },
         },

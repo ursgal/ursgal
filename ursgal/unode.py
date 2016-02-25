@@ -502,7 +502,7 @@ class UNode(object, metaclass=Meta_UNode):
                 caller ='Caching'
             )
 
-    def get_last_engine(self, history=None, engine_type=None ):
+    def get_last_engine(self, history=None, engine_types=None ):
         '''
         The unode get_last_engine function
 
@@ -515,15 +515,15 @@ class UNode(object, metaclass=Meta_UNode):
                 that file.
                 If not specified, this information is taken from the unode class
                 itself, and not a specific file.
-            engine_type (str): the engine type for which the last used enfine 
+            engine_types (list): the engine type(s) for which the last used engine 
                 should be identified
 
         Examples:
             >>> fpaths = self.generate_basic_file_info( "14N_xtandem.csv" )
-            >>> file_info, __   = self.load_json( fpaths=fpaths, mode='input')
-            >>> last_engine     = self.get_last_engine(
-                    history     = file_info["history"],
-                    engine_type = "search_engine"
+            >>> file_info, __    = self.load_json( fpaths=fpaths, mode='input')
+            >>> last_engine      = self.get_last_engine(
+                    history      = file_info["history"],
+                    engine_types = ["search_engine"]
                 )
             >>> print( last_engine )
             "xtandem_sledgehammer"
@@ -533,31 +533,44 @@ class UNode(object, metaclass=Meta_UNode):
                 Returns None if no search engine was used yet.
         '''
         last_engine = None
+        if engine_types is None:
+            engine_types = [
+                'search_engine',
+                'denovo_engine',
+                'spectral_engine'
+            ]
         if not history:
             history = self.stats["history"]
         else:
-            for history_event in history:
-                if history_event['engine'] == 'merge_csvs_1_0_0':
+            for history_event in history[::-1]:
+                meta = history_event.get("META_INFO", {})
+                meta_engine_type_info = meta.get("engine_type", {})
+                for engine_type in engine_types:
+                    if meta_engine_type_info.get( engine_type, False ):
+                        last_engine = history_event["engine"]    
+                        break
+
+                # if history_event['engine'] == 'merge_csvs_1_0_0':
 
 
-                    # temporary fix for backwards compatability with jsons from old ursgal versions:
-                    # TODO: remove this later
-                    if isinstance( history_event['history_addon'], list ):
-                        merged_engines = set( history_event['history_addon'] )
-                        print( "WARNING! old JSON detected" )
-                    else:  # how it should be!
-                        merged_engines = set( history_event['history_addon']['search_engines_of_merged_files'] )
+                #     # temporary fix for backwards compatability with jsons from old ursgal versions:
+                #     # TODO: remove this later
+                #     if isinstance( history_event['history_addon'], list ):
+                #         merged_engines = set( history_event['history_addon'] )
+                #         print( "WARNING! old JSON detected" )
+                #     else:  # how it should be!
+                #         merged_engines = set( history_event['history_addon']['search_engines_of_merged_files'] )
 
 
-                    if len( merged_engines ) == 1:
-                        last_engine = list(merged_engines)[0]
-                    else:
-                        last_engine = "multiple engines: {0}".format( ", ".join(merged_engines) )
-                    break
-                if engine_type in history_event["META_INFO"]["engine_type"] and \
-                history_event["META_INFO"]["engine_type"][engine_type] == True:
-                    last_engine = history_event["engine"]
-                    break
+                #     if len( merged_engines ) == 1:
+                #         last_engine = list(merged_engines)[0]
+                #     else:
+                #         last_engine = "multiple engines: {0}".format( ", ".join(merged_engines) )
+                #     break
+                # if engine_type in history_event["META_INFO"]["engine_type"] and \
+                # history_event["META_INFO"]["engine_type"][engine_type] == True:
+                #     last_engine = history_event["engine"]
+                #     break
         return last_engine
 
     def get_last_search_engine(self, history=None ):
@@ -588,7 +601,7 @@ class UNode(object, metaclass=Meta_UNode):
             used. Returns None if no search engine was used yet.
         '''
         last_search_engine = None
-        last_search_engine = self.get_last_engine( history=history, engine_type='search_engine')
+        last_search_engine = self.get_last_engine( history=history, engine_types=['search_engine'])
         return last_search_engine
 
     def _group_psms(self, input_file, dev_mode = False):

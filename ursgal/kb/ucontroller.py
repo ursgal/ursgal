@@ -125,6 +125,7 @@ DEFAULT_PARAMS = {
 
     # __ Spectrum __
     'spec_dynamic_range'                : 10000,  # default is 100 .. ui ui ui
+    'base_mz'                           : 1000,
     'precursor_mass_type'               : 'monoisotopic',
     'precursor_mass_tolerance_unit'     : 'ppm',
     'precursor_mass_tolerance_minus'    : 5,

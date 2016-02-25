@@ -160,12 +160,12 @@ class novor_1_1beta( ursgal.UNode ):
 
     def postflight( self ):
         '''
-        Will correct the Novor headers
+        Reformats the Novor output file
         '''
-        # exit()
         regex_list = [
             ('\(Cam\)','Carbamidomethyl'), 
-            ('\(O\)','Oxidation'), 
+            ('\(O\)','Oxidation'),
+            ('\(N-term Acetyl\)','Acetyl'),  
             ('\[Acetyl\]','Acetyl'),
             ('\(Acetyl\)','Acetyl'),
             ('\[Amidated\]','Amidated'),
@@ -186,7 +186,7 @@ class novor_1_1beta( ursgal.UNode ):
                 if line.startswith('# id'):
                     headers = line.strip().split(',')
                     break
-        assert headers is not None , ''' Change in NOVOR output ? could not find header starting wth # id'''
+        assert headers is not None , '''Change in NOVOR output ? could not find header starting wth # id'''
 
         print('[ PARSING  ] Loading unformatted Novor results ...')
         non_commented_csv_lines = [ row for row in result_file if not row.startswith('#') ]
@@ -231,9 +231,6 @@ class novor_1_1beta( ursgal.UNode ):
                 new_line_dict[ self.USEARCH_PARAM_VALUE_TRANSLATIONS[k] ] = v.strip()
             new_line_dict['Raw data location'] = self.params['mgf_input_file']
             new_line_dict_list.append(new_line_dict)
-            # print( new_line_dict )
-            # exit(1)
-
 
         new_result_file = open( self.params['new_output_file_incl_path'], 'w')
         csv_dict_writer_object = csv.DictWriter(
