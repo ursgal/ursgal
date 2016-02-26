@@ -268,10 +268,16 @@ class UController(ursgal.UNode):
             report = input_file
 
         else:
-            if input_suffix == ".xml":
+            file_json_path = input_file + self.params['json_extension']
+            json_content = self.load_json( json_path = file_json_path )
+            last_engine = self.get_last_engine(
+                history = json_content[3]['history'],
+            )
+            if 'xtandem' in last_engine:
                 engine_name = 'xtandem2csv_1_0_0'
             else:
                 engine_name = self.params['mzidentml_converter_version']
+
             report = self.execute_unode(
                 input_file       = input_file,
                 engine           = engine_name,
@@ -1293,6 +1299,7 @@ class UController(ursgal.UNode):
         # add uNodes name as defined in kb
         # if there is no entry called 'output_suffix', the engine/node
         # name is used instead; if it's None, no suffix is added
+
         output_suffix = self.meta_unodes[ engine ].META_INFO.get(
             'output_suffix', engine
         )
@@ -1303,10 +1310,11 @@ class UController(ursgal.UNode):
         prefix = self.params['prefix']
 
         # prepend prefix, but only if it wasnt prepended before
-        if prefix != "" and prefix != None:
+        if prefix != "" and prefix is not None:
             current_file = '_'.join( file_name_blocks )
             if not current_file.startswith( prefix ):
                 file_name_blocks.insert( 0, prefix )
+
         #
         # Final output file name (without directory)
         #
@@ -1327,6 +1335,11 @@ class UController(ursgal.UNode):
             file_extension = self.io['input']['finfo']['file_extention']
 
         output_file += file_extension
+
+        global_ucontroller_compress_flag = self.params.get('compress_raw_search_results_if_possible', False)
+        compress_engine_output = self.unodes[ engine ]['class'].META_INFO.get( 'compress_raw_search_results', False)
+        if compress_engine_output and global_ucontroller_compress_flag:
+            output_file += '.gz'
 
         path_building_blocks = [
             self.io['input']['finfo']['dir']
@@ -1451,6 +1464,22 @@ class UController(ursgal.UNode):
         else:
             answer = '\n & '.join( reasons )
         return answer
+
+    def compress_out_if_possible( self, raw_search_results, engine ):
+        global_ucontroller_compress_flag = self.params.get('compress_raw_search_results_if_possible', False)
+        compress_engine_output = self.unodes[ engine ]['class'].META_INFO.get( 'compress_raw_search_results', False)
+        print('''
+
+
+            {0} & {1} <<< Compress ?
+
+
+            '''.format( compress_engine_output, global_ucontroller_compress_flag )
+        )
+        if compress_engine_output and global_ucontroller_compress_flag:
+            print('We are compressing now and renaming the shiznit')
+            exit(1)
+
 
     def search_mgf(self, input_file, engine, force=None, output_file_name=None):
         '''
@@ -1577,7 +1606,7 @@ class UController(ursgal.UNode):
         )
         # verify database exists and is fasta
         if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
-            if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
+            if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] is True:
                 self.input_file_sanity_check(
                     self.params['database'],
                     engine     = engine_name,
@@ -1600,6 +1629,8 @@ class UController(ursgal.UNode):
             engine     = engine,
             force      = force,
         )
+        # exit( raw_search_results )
+
 
         # 3. Convert search result to CSV if required (mzidentml-lib):
         csv_search_results = self.convert_results_to_csv(
@@ -1614,22 +1645,6 @@ class UController(ursgal.UNode):
             force            = force,
         )
         return unified_search_results
-
-    def _compress_output(self):
-        '''
-        Compresses output file routine from original uSearch project
-        This has to be implemented at one point ..
-        '''
-        # post_compressing = self.params.get('compress_after_post_flight', False)
-        # if post_compressing:
-        #     with open( self.params['output_file'], 'rb') as f_in:
-        #         with gzip.open(
-        #                 '{final_output_file}'.format(**self.params),
-        #                 'wb') as f_out:
-        #             f_out.writelines(f_in)
-        #     self.params['created_tmp_files'].append(
-        #         self.params['output_file']
-        #     )
 
     def get_mzml_that_corresponds_to_mgf(self, mgf_path):
         '''
@@ -1841,6 +1856,7 @@ class UController(ursgal.UNode):
             report = self.unodes[ engine_name ]['class'].run(
                 json_path = json_path,
             )
+
             self.dump_json_and_calc_md5(
                 stats = report['stats'],
                 params = report['params']

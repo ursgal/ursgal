@@ -22,9 +22,14 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         '''
         Convert raw result files into .mzid result files
         '''
+        if self.io['input']['finfo']['is_compressed']:
+            self.params['mzidentml_compress'] = True
+        else:
+            self.params['mzidentml_compress'] = False
+
         tmp_options = [
             self.exe,
-            '-outputFragmentation', 
+            '-outputFragmentation',
             '{mzidentml_outputFragmentation}'.format(**self.params),
             '-decoyRegex',
             '{decoy_tag}'.format(**self.params),
@@ -52,7 +57,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                 self.params['input_dir_path'],
                 self.params['input_file']
             ),
-            self.params['mzid_output_file'],
+            self.params['input_fileds'],
         ]
 
         tmp_command_list += tmp_options
@@ -72,7 +77,6 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         For X!Tandem result files first need to be converted into .mzid
         with raw2mzid
         '''
-
         search_engine = self.get_last_search_engine(
             history = self.stats['history']
         )
@@ -83,9 +87,13 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                 'search engine was used.'
             )
 
-        self.params['mzid_output_file'] = os.path.join(
-            self.params['output_dir_path'],
-            self.params['file_root'] + '.mzid'
+        # self.params['input_file'] = os.path.join(
+        #     self.params['output_dir_path'],
+        #     self.params['file_root'] + '.mzid'
+        # )
+        FULL_INPUT_PATH = os.path.join(
+            self.params['input_dir_path'],
+            self.params['input_file']
         )
         if 'tandem' in search_engine:
             # xtandem uses xml outpur which has first to be converted to .mzid
@@ -103,14 +111,15 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
             raise Exception("Don't know the search engine that created your file...")
 
         if run_mz_ident_2_csv:
-            assert os.path.exists(self.params['mzid_output_file']), '''
+            assert os.path.exists(FULL_INPUT_PATH), '''
                 No mzident file found {0}
-            '''.format( self.params['mzid_output_file'] )
+            '''.format( FULL_INPUT_PATH )
+
             self.params[ 'command_list' ] = [
                 'java', '-Xmx{java_-Xmx}'.format( **self.params),
                 '-jar', self.exe,
                 'Mzid2Csv',
-                self.params['mzid_output_file'],
+                FULL_INPUT_PATH,
                 os.path.join(
                     self.params['output_dir_path'],
                     self.params['output_file']

@@ -12,6 +12,7 @@ META_INFO = {
             },
         },
     },
+    'compress_raw_search_results' : True,
     'output_extension'          : '.mzid',
     'input_types'               : ['.mgf', '.mzML'],
     'create_own_folder'         : True,

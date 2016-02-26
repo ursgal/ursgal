@@ -5,12 +5,14 @@ META_INFO = {
     'input_types'               : ['.mzML'],
     'output_extension'          : '.mzid',
     'create_own_folder'         : True,
+    'compress_raw_search_results' : True,
+
     'citation'                  : 'Tabb DL, Fernando CG, Chambers MC. '\
         '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
         'identification by multivariate hypergeometric analysis.',
 
     'include_in_git'            : False,
-    
+
     'engine': {
         'win32' : {
             '64bit' : {

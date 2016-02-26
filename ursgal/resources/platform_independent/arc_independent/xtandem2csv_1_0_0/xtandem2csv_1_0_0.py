@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 Converts xTandem.xml files into .csv
-We need to do this on our own, because mzidentml_lib 
+We need to do this on our own, because mzidentml_lib
 reports wrong positions for modifications
 (and it is also not able to convert the piledriver.mzid into csv)
 
@@ -19,20 +19,21 @@ import csv
 import math
 from xml.etree import cElementTree
 from collections import defaultdict as ddict
+import codecs
 
 # csv.field_size_limit(sys.maxsize)
 
 def main(input_file = None, decoy_tag = None, output_file = None):
     '''
     Converts xTandem.xml files into .csv
-    We need to do this on our own, because mzidentml_lib 
+    We need to do this on our own, because mzidentml_lib
     reports wrong positions for modifications
     (and it is also not able to convert the piledriver.mzid into csv)
 
     It should be noted that
     - xtandem groups are not merged (since it is not the same as protein groups)
     - multiple domains (multiple occurence of a peptide in the same protein) are not reported
-    
+
     '''
     NEW_HEADERS = [
         'Raw data location',
@@ -56,11 +57,28 @@ def main(input_file = None, decoy_tag = None, output_file = None):
     group_counter = 0
     protein_groups = []
 
+    if input_file.endswith('.gz'):
+        compressed = True
+        # Gzipped files are not seekable
+        import gzip
+        # file_object = codecs.getreader("utf-8")(
+        #     gzip.open(path)
+        # )
+        file_object = codecs.getreader("utf-8")(
+            gzip.open(input_file)
+        )
+    else:
+        file_object = codecs.open(
+            input_file,
+            mode     = 'r',
+            encoding = 'utf-8'
+        )
+
     csvOut     = csv.DictWriter( open( output_file , 'w', newline='') , NEW_HEADERS )
     csvOut.writeheader()
 
     print("Converting XTandem XML into CSV: {0}".format(input_file))
-    tandemXML = iter(cElementTree.iterparse( input_file, events = ( b'start',b'end')))
+    tandemXML = iter(cElementTree.iterparse( file_object, events = ( b'start',b'end')))
 
     for pos, (event, element) in enumerate(tandemXML):
         if event == b'start':

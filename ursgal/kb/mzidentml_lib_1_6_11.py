@@ -6,7 +6,7 @@ META_INFO = {
     },
     'output_extension'  : '.csv',
     'output_suffix'     : None,
-    'input_types'       : ['.xml', '.csv', '.mzid'],
+    'input_types'       : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
     # 'can_gz': True,
     'citation'       : 'Reisinger F, Krishna R, Ghali F, Ríos D, '\
         'Hermjakob H, Vizcaíno JA, Jones AR. (2012) jmzIdentML API: '\
@@ -14,7 +14,7 @@ META_INFO = {
         'protein identification data.',
 
     'include_in_git'            : False,
-    
+
     'engine': {
         'platform_independent' : {
             'arc_independent' : {
@@ -25,7 +25,7 @@ META_INFO = {
             },
         },
     },
-    
+
 
     # 'engine_exe':{
     #     'arc_independent':'mzidentml-lib-1.6.11.jar',
@@ -39,10 +39,11 @@ META_INFO = {
 }
 
 DEFAULT_PARAMS = {
-'mzidentml_outputFragmentation' : False,
-'mzidentml_compress'            : False,
-'mzidentml_exportType'          :'exportPSMs',
-'mzidentml-verboseOutput'       : False,
+    'mzidentml_outputFragmentation' : False,
+    # 'mzidentml_compress'            : False,
+    # this is determined autmoatically now
+    'mzidentml_exportType'          : 'exportPSMs',
+    'mzidentml-verboseOutput'       : False,
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {

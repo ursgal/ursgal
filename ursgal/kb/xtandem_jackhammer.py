@@ -6,6 +6,8 @@ META_INFO = {
     'input_types'               : ['.mgf'],
     'create_own_folder'         : True,
     'include_in_git'            : False,
+    'compress_raw_search_results' : True,
+
     'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
         'matching proteins with tandem mass spectra.',
 
@@ -42,13 +44,13 @@ META_INFO = {
     #     'linux'  : 'tandem.exe'
     # },
     # 'zip_md5' : {
-    #     'darwin' : { 
+    #     'darwin' : {
     #         '64bit' : '65a270dd63acca8c29a66cbe1406c9ba'
     #     },
-    #     'linux' : { 
+    #     'linux' : {
     #         '64bit' : '4f53c35f9adae43f01106db95fe6419c'
     #     },
-    #     'win32' : { 
+    #     'win32' : {
     #         '64bit' : '0241c62699bde4d81995f2b9df56f781'
     #     }
     # }

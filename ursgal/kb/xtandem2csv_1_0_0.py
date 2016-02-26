@@ -5,7 +5,7 @@ META_INFO = {
     },
     'output_extension'  : '.csv',
     'output_suffix'     : None,
-    'input_types'       : ['.xml'],
+    'input_types'       : ['.xml', '.xml.gz' ],
     'include_in_git' : True,
 
     'engine': {

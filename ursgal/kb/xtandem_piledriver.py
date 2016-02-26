@@ -7,6 +7,8 @@ META_INFO = {
     'output_extension'          : '.xml',
     'input_types'               : ['.mgf'],
     'create_own_folder'         : True,
+    'compress_raw_search_results' : True,
+
     'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
         'matching proteins with tandem mass spectra.',
     'include_in_git'            : False,

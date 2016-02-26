@@ -1145,6 +1145,12 @@ class UNode(object, metaclass=Meta_UNode):
             ),
             tag=tag
         )
+        if self.io['output']['finfo']['is_compressed']:
+            self.params['output_file'] = self.params['output_file'].replace('.gz','')
+            self.print_info(
+                'Will compress output {output_file} on the fly ... renamed temporarily params["output_file"]'
+            .format( **self.params ))
+
         # DEFAULT PARAMS ARE INCLUDED HERE :)
         # self.params = self.DEFAULT_PARAMS.copy()
         self.check_if_all_default_params_are_in_params()
@@ -1223,24 +1229,25 @@ class UNode(object, metaclass=Meta_UNode):
         # but keep novel params that are passed from the unode
         # jsons will get bigger if junk is collected
         # NOTE: all keys starting with _ will be deleted before dump
-        self.params.update( original_params )
-
-        # Compress if required ...
-        post_compressing = self.params.get('compress_after_post_flight', False)
-        compress_engine_output = self.META_INFO.get( 'compress_output', False)
-        if post_compressing and compress_engine_output:
-            output_file = os.path.join(
+        if self.io['output']['finfo']['is_compressed']:
+            gz_output_file = os.path.join(
                 self.io['output']['finfo']['dir'],
                 self.io['output']['finfo']['file']
             )
-            gz_ouput_file = '{0}.gz'.format(output_file)
-            with open( output_file, 'rb') as f_in:
-                with gzip.open( gz_ouput_file, 'wb') as f_out:
+            raw_output = os.path.join(
+                self.params['output_dir_path'],
+                self.params['output_file'],
+                )
+            self.print_info('Compressing output {0} > {1}'.format(
+                os.path.basename(raw_output),
+                os.path.basename(gz_output_file),
+            ))
+            with open( raw_output, 'rb') as f_in:
+                with gzip.open( gz_output_file, 'wb') as f_out:
                     f_out.writelines(f_in)
-            self.io['output']['finfo']['is_compressed'] = True
-            self.io['output']['finfo']['file'] = gz_ouput_file
+            self.created_tmp_files.append( raw_output )
 
-            self.created_tmp_files.append( output_file )
+        self.params.update( original_params )
 
         if self.params['remove_temporary_files']:
             for tmp_file in self.created_tmp_files:
@@ -1260,22 +1267,6 @@ class UNode(object, metaclass=Meta_UNode):
         report['stats'] = self.stats
         report['params'] = self.params
         return report
-
-    def _compress_output(self):
-        '''
-        Compresses output file routine from original uSearch project
-        This has to be implemented at one point ..
-        '''
-        # post_compressing = self.params.get('compress_after_post_flight', False)
-        # if post_compressing:
-        #     with open( self.params['output_file'], 'rb') as f_in:
-        #         with gzip.open(
-        #                 '{final_output_file}'.format(**self.params),
-        #                 'wb') as f_out:
-        #             f_out.writelines(f_in)
-        #     self.params['created_tmp_files'].append(
-        #         self.params['output_file']
-        #     )
 
     def set_params( self, params):
         self.params.update( params )

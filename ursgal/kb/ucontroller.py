@@ -25,7 +25,7 @@ DEFAULT_PARAMS = {
     'rt_pickle_name'                    : '_ursgal_lookup.pkl',
     'json_extension'                    : '.u.json',
     'helper_extension'                  : '.u_helper',
-    'remove_temporary_files'            : False,
+    'remove_temporary_files'            : True,
     # 'remove_config_files'               : False,
     'mzidentml_converter_version'       : 'mzidentml_lib_1_6_10',
     'mzml2mgf_converter_version'        : 'mzml2mgf_1_0_0',
@@ -33,6 +33,7 @@ DEFAULT_PARAMS = {
     'filter_csv_converter_version'      : 'filter_csv_1_0_0',
     'show_unodes_in_development'        : False,
     'search_engines_create_folders'     : True,
+    'compress_raw_search_results_if_possible' : True,
     # -----------------------------------------------------
     'log_enabled'                                           : False,
     # will redirect sys.stdout to the logfile, default name : ursgal.log
