@@ -2,9 +2,7 @@
 # encoding: utf-8
 
 import ursgal
-import os
-import sys
-import pprint
+
 
 def main():
     '''
