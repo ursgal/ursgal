@@ -1,6 +1,6 @@
 META_INFO = {
     'name': 'X!Tandem',
-    'version' : 'Piledriver',
+    'version' : 'Vengeance',
     'engine_type' : {
         'search_engine' : True,
     },
@@ -16,7 +16,7 @@ META_INFO = {
             '64bit' : {
                 'exe'            : 'tandem',
                 'url'            : '',
-                'zip_md5'        : '261dce3746481d1cc4223bccb6bf265e',
+                'zip_md5'        : '8611a65a9cb87ab0cae59756dffe9213',
                 'additional_exe' : [],
             },
         },
@@ -24,7 +24,7 @@ META_INFO = {
             '64bit' : {
                 'exe'            : 'tandem.exe',
                 'url'            : '',
-                'zip_md5'        : 'af307fea9f2b954f1a9a3652c14a5742',
+                'zip_md5'        : '034fa00d6cd0f1d7101f12d845062949',
                 'additional_exe' : [],
             },
         },
@@ -32,7 +32,7 @@ META_INFO = {
             '64bit' : {
                 'exe'            : 'tandem.exe',
                 'url'            : '',
-                'zip_md5'        : '16c3b766e02690386f280515175cdc90',
+                'zip_md5'        : 'b9d2b1da628627f0ff0ba64d8e7b93b1',
                 'additional_exe' : [],
             },
         },
@@ -44,6 +44,10 @@ DEFAULT_PARAMS = {
     'evalue_field'              : 'X\!Tandem:expect',
     'validation_minimum_score'  : 0,
     'bigger_scores_better'      : True,
+    'max_mod_alternatives'      : 6.0,
+    'search_for_saps'           : False, # if set to 'True', this will (most likely) cause problems for unify_csv
+    'forbidden_cterm_mods'      : [],
+    'max_num_per_mod'           : {}
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {
@@ -100,6 +104,7 @@ USED_USEARCH_PARAMS = set([
     'compensate_small_fasta',
     'cpus',
     'enzyme',
+    'forbidden_cterm_mods',
     'frag_mass_tolerance',
     'frag_mass_tolerance_unit',
     'frag_mass_type',
@@ -109,6 +114,7 @@ USED_USEARCH_PARAMS = set([
     'input_file_type',
     #'instrument',
     'label',
+    'max_num_per_mod',
     'maximal_accounted_observed_peaks',
     'maximum_missed_cleavages',
     'mininimal_required_matched_peaks',
@@ -116,15 +122,14 @@ USED_USEARCH_PARAMS = set([
     'neutral_loss_enabled',
     'neutral_loss_mass',
     'neutral_loss_window',
-    'noise_suppression_enabled',
     'num_match_spec',
     'precursor_isotope_range',
     'precursor_mass_tolerance_minus',
     'precursor_mass_tolerance_plus',
     'precursor_mass_tolerance_unit',
     'precursor_mass_type',
-    'precursor_max_charge',
-    'precursor_min_charge',
+    # 'precursor_max_charge',
+    # 'precursor_min_charge',
     'precursor_min_mass',
     'score_a_ions',
     'score_b_ions',
@@ -132,6 +137,7 @@ USED_USEARCH_PARAMS = set([
     'score_x_ions',
     'score_y_ions',
     'score_z_ions',
+    'search_for_saps',
     'semi_enzyme',
     'spec_dynamic_range',
     'stp_bias',

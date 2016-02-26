@@ -110,7 +110,7 @@ USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
 
     'search_c_terminal_ions' : {True : '1', False : '0'},
     'search_first_b1_ion'    : {True : '0', False : '1'},
-    'precursor_isotope_range': {'0':'0','0,1':'1','0,1,2':'2'}
+    'precursor_isotope_range': {'0':'0','0,1':'1','0,2':'2'}
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {
@@ -213,6 +213,7 @@ USED_USEARCH_PARAMS = set([
     'mm',
     'hl',
     'semi_enzyme',
+    'base_mz'
 ])
 
 

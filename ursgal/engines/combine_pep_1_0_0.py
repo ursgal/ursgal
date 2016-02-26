@@ -69,7 +69,7 @@ class combine_pep_1_0_0(ursgal.UNode):
                 input_file_dict['file']
             )
             input_file_list_for_cPEP.append(input_file_path)
-            search_engine = input_file_dict["last_search_engine"]
+            search_engine = input_file_dict["last_engine"]
             search_engine_list_for_cPEP.append(search_engine)
 
         features_that_define_unique_psm = \

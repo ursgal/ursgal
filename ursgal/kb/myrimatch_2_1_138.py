@@ -55,7 +55,7 @@ USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
     'precursor_isotope_range'   : {
         '0'     : '[0,]',
         '0,1'   : '[0,1]',
-        '0,1,2' : '[0,1,2]'
+        '0,2' : '[0,1,2]'
     },
 }
 

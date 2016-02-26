@@ -18,7 +18,7 @@ def main():
     print()
     print('<<<Summary>>>')
     if len(zip_files_list) == 0:
-        print('[ INFO ] All files are correct stored in online repository')
+        print('[ INFO ] All files are correctly stored in online repository')
     else:
         for zip_file, md5 in zip_files_list:
             print(
