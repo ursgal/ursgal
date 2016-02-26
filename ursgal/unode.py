@@ -515,7 +515,7 @@ class UNode(object, metaclass=Meta_UNode):
                 that file.
                 If not specified, this information is taken from the unode class
                 itself, and not a specific file.
-            engine_types (list): the engine type(s) for which the last used engine 
+            engine_types (list): the engine type(s) for which the last used engine
                 should be identified
 
         Examples:
@@ -529,7 +529,7 @@ class UNode(object, metaclass=Meta_UNode):
             "xtandem_sledgehammer"
 
         Returns:
-            str: The name of the last engine that was used. 
+            str: The name of the last engine that was used.
                 Returns None if no search engine was used yet.
         '''
         last_engine = None
@@ -547,7 +547,7 @@ class UNode(object, metaclass=Meta_UNode):
                 meta_engine_type_info = meta.get("engine_type", {})
                 for engine_type in engine_types:
                     if meta_engine_type_info.get( engine_type, False ):
-                        last_engine = history_event["engine"]    
+                        last_engine = history_event["engine"]
                         break
 
                 # if history_event['engine'] == 'merge_csvs_1_0_0':
@@ -766,7 +766,7 @@ class UNode(object, metaclass=Meta_UNode):
                 if unimod_id is None:
                     print (    '''
                         [ WARNING ] '{1}' is not a Unimod modification
-                        [ WARNING ] please change it to a valid PSI-MS unimod_Name 
+                        [ WARNING ] please change it to a valid PSI-MS unimod_Name
                         [ WARNING ] or add the chemical composition hill notation (including 1)
                         [ WARNING ] e.g.: H-1N1O2
                         [ WARNING ] ursgal_style: 'amino_acid,opt/fix,position,name,chemical_composition'
@@ -825,7 +825,7 @@ class UNode(object, metaclass=Meta_UNode):
                 'id'    : unimod_id,
                 'unimod': unimod,
             }
-            if mod_dict['unimod'] == False:            
+            if mod_dict['unimod'] == False:
                 ursgal.GlobalUnimodMapper.writeXML( mod_dict )
 
             self.params[ 'mods' ][ mod_option ].append( mod_dict )
@@ -1262,7 +1262,20 @@ class UNode(object, metaclass=Meta_UNode):
         return report
 
     def _compress_output(self):
-        pass
+        '''
+        Compresses output file routine from original uSearch project
+        This has to be implemented at one point ..
+        '''
+        # post_compressing = self.params.get('compress_after_post_flight', False)
+        # if post_compressing:
+        #     with open( self.params['output_file'], 'rb') as f_in:
+        #         with gzip.open(
+        #                 '{final_output_file}'.format(**self.params),
+        #                 'wb') as f_out:
+        #             f_out.writelines(f_in)
+        #     self.params['created_tmp_files'].append(
+        #         self.params['output_file']
+        #     )
 
     def set_params( self, params):
         self.params.update( params )
