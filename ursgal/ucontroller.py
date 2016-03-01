@@ -385,17 +385,12 @@ class UController(ursgal.UNode):
         for platform_key, arc_key, engine_folder in engine_folders:
             # print('>>>', platform_key , engine_folder )
             for engine in sorted( self.unodes.keys() ):
-                # if engine.startswith('.'):
-                #     continue
-                kb_info = self.unodes[ engine ]
                 # kb_info = self.unodes.get( engine, {} )
+                kb_info = self.unodes[ engine ]
                 if len(kb_info.keys()) == 0:
                     # No info available
                     continue
-                kb_engine_entry = kb_info.get(
-                    'engine',
-                    None
-                )
+                kb_engine_entry = kb_info.get( 'engine', None )
                 if kb_engine_entry is None:
                     continue
                 if platform_key not in kb_engine_entry.keys():
@@ -460,15 +455,19 @@ class UController(ursgal.UNode):
                         self.unodes[ engine ]['available'] = True
 
                 else:
-                    print(
-                        '[ WARNING ] Engine {0} is not available in {1}'.format(
-                            engine,
-                            engine_folder_path
-                        )
-                    )
                     self.unodes[ engine ]['import_status'] = 'cant find exe'
                     self.unodes[ engine ]['available'] = False
-
+                    in_development = self.unodes[ engine ]['META_INFO']['in_development']
+                    if not in_development:
+                        print(
+                            '[ WARNING! ] Engine {0} is not available in {1}'.format(
+                                engine,
+                                engine_folder_path
+                            )
+                        )
+                    # for meta_type in sorted(self.unodes['_by_meta_type'].keys()):
+                    #             if meta_type == 'in_development':
+                    #                 continue
         return
 
     def engine_sanity_check( self, short_engine):

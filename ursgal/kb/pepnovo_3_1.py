@@ -28,7 +28,6 @@ META_INFO = {
     'output_extension'          : '.csv',
     'create_own_folder'         : True,
     'citation'   : 'Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing and Identification with Precision Mass Spectrometry, J. Proteome Res. 6:114-123.',
-    'in_development' : False,
     'include_in_git'            : False,
 }
 DEFAULT_PARAMS = {

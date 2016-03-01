@@ -11,7 +11,7 @@ META_INFO={
         'tandem mass spectra.',
     'include_in_git'            : None,
     'cannot_distribute'         : True,
-'in_development'            : True,
+    'in_development'            : True,
     'engine': {
         'linux' : {
             '64bit' : {
