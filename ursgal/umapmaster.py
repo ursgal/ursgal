@@ -13,6 +13,9 @@ class UParamMapper( object ):
     '''
     '''
     def __init__( self, params_dict ):
+        self._parse_params( params_dict )
+
+    def _parse_params( self, params_dict ):
         pass
 
 if __name__ == '__main__':
