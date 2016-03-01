@@ -20,7 +20,7 @@ META_INFO = {
         'Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) '\
         'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
         'Tandem Mass Spectra: Applications to Database Search.',
-
+'in_development'            : True,
     'include_in_git'            : False,
 }
 

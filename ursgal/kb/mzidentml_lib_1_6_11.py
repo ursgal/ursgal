@@ -12,7 +12,7 @@ META_INFO = {
         'Hermjakob H, Vizcaíno JA, Jones AR. (2012) jmzIdentML API: '\
         'A Java interface to the mzIdentML standard for peptide and '\
         'protein identification data.',
-
+'in_development'            : True,
     'include_in_git'            : False,
 
     'engine': {

@@ -6,19 +6,20 @@ META_INFO = {
         'search_engine'     : False,
         'meta_engine'       : True,
     },
+    'in_development'            : True,
     'input_types'               : ['.csv'],
     'output_extension'          : '.csv',
     'create_own_folder'         : False,
     #'citation' : 'Combines PEP scores from different search engines.',
     'include_in_git'            : True,
-    
+
     'engine': {
         'platform_independent' : {
             'arc_independent' : {
                 'exe'     : 'combine_pep_1_0_0.py',
             },
         },
-    },    
+    },
 }
 
 DEFAULT_PARAMS = {

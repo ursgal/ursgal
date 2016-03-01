@@ -7,7 +7,7 @@ META_INFO = {
     'in_development'            : True,
 
     'include_in_git'            : None,
-
+'in_development'            : True,
     'engine': {
         'platform_independent' : {
             'arc_independent' : {

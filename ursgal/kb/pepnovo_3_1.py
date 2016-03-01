@@ -24,6 +24,7 @@ META_INFO = {
         },
     },
     'input_types'               : ['.mgf'],
+    'in_development'            : True,
     'output_extension'          : '.csv',
     'create_own_folder'         : True,
     'citation'   : 'Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing and Identification with Precision Mass Spectrometry, J. Proteome Res. 6:114-123.',
@@ -35,8 +36,8 @@ DEFAULT_PARAMS = {
     'pepnovo_model'           : 'CID_IT_TRYP',
     'pepnovo_model_dir'       : None,
     'pepnovo_tag_length'      : None,
-    'output_cum_probs'        : True, 
-    'output_aa_probs'         : True,  
+    'output_cum_probs'        : True,
+    'output_aa_probs'         : True,
     'prm'                     : False,
     'prm_norm'                : False,
     'correct_pm'              : False,
@@ -55,7 +56,7 @@ USEARCH_PARAM_VALUE_TRANSLATIONS = {
     'PnvScr'                 : 'Pepnovo:PnvScr',
     'N-Gap'                  : 'Pepnovo:N-Gap',
     'C-Gap'                  : 'Pepnovo:C-Gap',
-    '[M+H]'                  : 'Calc mass(Da)', 
+    '[M+H]'                  : 'Calc mass(Da)',
     'output_aa_probs'        : 'Pepnovo:aaScore'
 }
 
@@ -75,8 +76,8 @@ USED_USEARCH_PARAMS = set( [
     'pepnovo_model_dir',
     'base_mz',
     'pepnovo_tag_length',
-    'output_cum_probs', 
-    'output_aa_probs',  
+    'output_cum_probs',
+    'output_aa_probs',
     'prm',
     'prm_norm',
     'correct_pm',

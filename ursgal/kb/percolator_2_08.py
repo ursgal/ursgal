@@ -17,7 +17,7 @@ META_INFO = {
         'identification from shotgun proteomics datasets.',
     'include_in_git'            : False,
     'group_psms'                : True,
-
+'in_development'            : True,
     'engine': {
         'darwin' : {
             '64bit' : {
@@ -57,13 +57,13 @@ META_INFO = {
     #     'win32'  : 'percolator.exe',
     # },
     # 'zip_md5' :  {
-        # 'darwin' : { 
+        # 'darwin' : {
         #     '64bit' : 'ecaa830a570f4bd8f010b5beda1c1b7c'
         # },
-        # 'linux' : { 
+        # 'linux' : {
         #     '64bit' : 'b03bf30ef4c4bdda1725de4c70351842'
         # },
-        # 'win32' : { 
+        # 'win32' : {
         #     '32bit' : '8b1387860c15d07e938a517ddd2cfffa',
         #     '64bit' : 'ca267a3104cedc20887698a499f58859'
         # }

@@ -11,7 +11,7 @@ META_INFO = {
     'output_suffix'       : 'venndiagram',
     'input_types'         : ['.csv',],
     'include_in_git'            : True,
-
+'in_development'            : True,
     'engine': {
         'platform_independent' : {
             'arc_independent' : {

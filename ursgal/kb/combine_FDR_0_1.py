@@ -6,6 +6,7 @@ META_INFO = {
         'search_engine'     : False,
         'meta_engine'       : True,
     },
+    'in_development'            : True,
     'input_types'               : ['.csv'],
     'output_extension'          : '.csv',
     'create_own_folder'         : False,
@@ -14,14 +15,14 @@ META_INFO = {
         'Improving sensitivity in proteome studies by analysis of false '\
         'discovery rates for multiple search engines.',
     'include_in_git'            : True,
-    
+
     'engine': {
         'platform_independent' : {
             'arc_independent' : {
                 'exe'     : 'combine_FDR_0_1.py',
             },
         },
-    },    
+    },
     # 'engine_exe'                : {
     #     'arc_independent':'combine_FDR_0_1.py',
     # },

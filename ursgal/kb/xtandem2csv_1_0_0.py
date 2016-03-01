@@ -7,7 +7,7 @@ META_INFO = {
     'output_suffix'     : None,
     'input_types'       : ['.xml', '.xml.gz' ],
     'include_in_git' : True,
-
+'in_development'            : True,
     'engine': {
         'platform_independent' : {
             'arc_independent' : {

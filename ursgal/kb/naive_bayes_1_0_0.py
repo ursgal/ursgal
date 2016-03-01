@@ -14,14 +14,14 @@ META_INFO = {
         'using naive Bayes (see i.e. '\
         'http://www.paulgraham.com/naivebayes.html)',
     'include_in_git'            : True,
-    
+ 'in_development'            : True,
     'engine': {
         'platform_independent' : {
             'arc_independent' : {
                 'exe'     : 'naive_bayes_1_0_0.py',
             },
         },
-    },    
+    },
 }
 
 DEFAULT_PARAMS = {

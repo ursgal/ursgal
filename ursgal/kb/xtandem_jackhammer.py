@@ -10,7 +10,7 @@ META_INFO = {
 
     'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
         'matching proteins with tandem mass spectra.',
-
+'in_development'            : True,
     'engine': {
         'darwin' : {
             '64bit' : {

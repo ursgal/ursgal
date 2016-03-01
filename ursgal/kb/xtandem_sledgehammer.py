@@ -4,6 +4,7 @@ META_INFO = {
     'engine_type' : {
         'search_engine' : True,
     },
+    'in_development'            : True,
     'output_extension'          : '.xml',
     'input_types'               : ['.mgf'],
     'create_own_folder'         : True,

@@ -2,6 +2,7 @@ META_INFO = {
     'engine_type' : {
         'converter'  : True
     },
+    'in_development'            : True,
     'input_types'      : ['.csv'],
     'output_extension' : '.csv',
     'output_suffix'    : 'withFDR',

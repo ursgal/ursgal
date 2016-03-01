@@ -18,6 +18,7 @@ META_INFO={
         'identification from shotgun proteomics datasets.',
     'include_in_git'            : False,
     'group_psms'                : True,
+    'in_development'            : True,
 }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {

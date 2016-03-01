@@ -7,6 +7,7 @@ META_INFO = {
         'search_engine'     : False,
         'meta_engine'       : False
     },
+    'in_development'            : True,
     'input_types'      : ['.csv'],
     'output_extension' : '.csv',
     'output_suffix'    : 'svm_validated',

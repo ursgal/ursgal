@@ -4,9 +4,9 @@ META_INFO = {
         'converter'     : True
     },
     'output_extension' : '.fasta',
-    'output_suffix'    : 'target_decoy', 
+    'output_suffix'    : 'target_decoy',
     'input_types'      : [''],
-
+'in_development'            : True,
     'include_in_git' : True,
 
     'engine': {
@@ -15,7 +15,7 @@ META_INFO = {
                 'exe'     : 'generate_target_decoy_1_0_0.py',
             },
         },
-    }, 
+    },
 
     # 'engine_exe'                : {
     #     'arc_independent' : 'generate_target_decoy_1_0_0.py',

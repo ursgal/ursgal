@@ -12,7 +12,7 @@ META_INFO = {
 
     'input_types': '',
     'output_suffix':None,
-
+'in_development'            : True,
     'include_in_git' : True,
 
     # 'in_development' : True

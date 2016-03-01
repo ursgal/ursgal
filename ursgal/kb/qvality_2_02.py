@@ -15,7 +15,7 @@ META_INFO = {
         'probabilities.',
     'include_in_git'            : False,
     'group_psms'                : True,
-    
+    'in_development'            : True,
     'engine': {
         'darwin' : {
             '64bit' : {
@@ -55,13 +55,13 @@ META_INFO = {
     #     'win32'  : 'qvality.exe',
     # },
     # 'zip_md5' : {
-    #     # 'darwin' : { 
+    #     # 'darwin' : {
     #     #     '64bit' : '4f2c1a6eb697cb66d066047c98c1f114'
     #     # },
-    #     'linux' : { 
+    #     'linux' : {
     #         '64bit' : '2ddd863add4095b710e6883abbd5efbf'
     #     },
-    #     'win32' : { 
+    #     'win32' : {
     #         '32bit' : 'f10aee7feec1340364c64eccc6f75a3c',
     #         '64bit' : '45c98d18d99f46578d938362c3302804'
     #     }

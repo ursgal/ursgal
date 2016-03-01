@@ -19,6 +19,7 @@ META_INFO = {
             }
         },
     },
+    'in_development'            : True,
     'output_extension'          : '.csv',
     'input_types'               : ['.mgf'],
     'create_own_folder'         : True,
