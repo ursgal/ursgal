@@ -465,9 +465,6 @@ class UController(ursgal.UNode):
                                 engine_folder_path
                             )
                         )
-                    # for meta_type in sorted(self.unodes['_by_meta_type'].keys()):
-                    #             if meta_type == 'in_development':
-                    #                 continue
         return
 
     def engine_sanity_check( self, short_engine):
