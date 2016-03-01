@@ -1,20 +1,12 @@
 .DS_Store
 __pycache__
 __pycache__/*
-<<<<<<< HEAD
 tests/data/msamanda_1_0_0_5243/test_BSA1_msamanda_1_0_0_5243_unified.csv
 tests/data/msgfplus_v9979/test_BSA1_msgfplus_v9979_unified.csv
 tests/data/myrimatch_2_1_138/test_BSA1_myrimatch_2_1_138_unified.csv
 tests/data/novor_1_1beta/test_BSA1_novor_1_1beta_unified.csv
 tests/data/omssa_2_1_9/test_BSA1_omssa_2_1_9_unified.csv
 tests/data/xtandem_sledgehammer/test_BSA1_xtandem_sledgehammer_unified.csv
-=======
-tests/data/xtandem_sledgehammer/*
-tests/data/myrimatch_2_1_138/*
-tests/data/msamanda_1_0_0_5243/*
-tests/data/msgfplus_v9979/*
-tests/data/omssa_2_1_9/*
->>>>>>> 0180b6b... Updated .gitignore
 tests/data/_ursgal_lookup.pkl
 docs/build/
 tests/data/test_Creinhardtii_target_decoy.fasta.*
