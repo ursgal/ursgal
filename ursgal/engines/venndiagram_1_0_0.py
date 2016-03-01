@@ -6,7 +6,7 @@ import sys
 import csv
 import os.path
 
-# csv.field_size_limit(sys.maxsize)
+csv.field_size_limit(sys.maxsize)
 
 class venndiagram_1_0_0( ursgal.UNode ):
     """Venn Diagram uNode"""
