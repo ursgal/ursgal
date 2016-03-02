@@ -25,7 +25,6 @@ ursgal_params={
         ],
         'uvalue_translation':"",
         'uvalue_type':'bool',
-        'Check':"",
     },
     'cleavage_cterm_mass_change':{
         'available_in_unode':[
@@ -104,6 +103,18 @@ ursgal_params={
         'uvalue_translation':"",
         'uvalue_type':"",
     },
+    'compress_raw_search_results_if_possible':{
+        'available_in_unode':[
+            'ucontroller'
+        ],
+        'default_value':True,
+        'description': ''' Compress raw search result to .gz: True or False ''',
+        'ukey_translation':{},
+        'utag':['file_handling'
+        ],
+        'uvalue_translation':"",
+        'uvalue_type':"bool",
+    },
     'cpus':{
         'available_in_unode':[
             'msgfplus',
@@ -145,10 +156,10 @@ ursgal_params={
         'description': ''' Exension for .json files ''',
         'ukey_translation':{
         },
-        'utag':[
+        'utag':['file_extension',
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"str",
     },
     'helper_extension':{
         'available_in_unode':[
@@ -158,10 +169,10 @@ ursgal_params={
         'description': ''' Exension for helper files ''',
         'ukey_translation':{
         },
-        'utag':[
+        'utag':['file_extension',
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"str",
     },
     'csv_filter_rules':{
         'available_in_unode':[
@@ -256,10 +267,10 @@ ursgal_params={
         'default_value':"filter_csv_1_0_0",
         'description': ''' filter csv converter version: version name ''',
         'ukey_translation':{},
-        'utag':[
+        'utag':['converter_version'
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"str",
     },
     'forbidden_cterm_mods':{
         'available_in_unode':[
@@ -284,7 +295,7 @@ ursgal_params={
         'utag':[
         ],
         'uvalue_translation':"",
-        'uvalue_type':"bool oder au nid",
+        'uvalue_type':"bool",
     },
     'frag_mass_tolerance':{
         'available_in_unode':[
@@ -373,17 +384,18 @@ ursgal_params={
         'uvalue_translation':"",
         'uvalue_type':"",
     },
-    'ident_csv_suffix':{
-        'available_in_unode':[
-        ],
-        'default_value':"idents.csv",
-        'description': ''' CSV suffix of identification: string, CSV-file which contains identifications with retention times. ''',
-        'ukey_translation':{},
-        'utag':[
-        ],
-        'uvalue_translation':"",
-        'uvalue_type':"",
-    },
+    # 'ident_csv_suffix':{
+    #     'available_in_unode':[
+    #         'ucontroller'
+    #     ],
+    #     'default_value':"idents.csv",
+    #     'description': ''' CSV suffix of identification: string, CSV-file which contains identifications with retention times. ''',
+    #     'ukey_translation':{},
+    #     'utag':['file_extension'
+    #     ],
+    #     'uvalue_translation':"",
+    #     'uvalue_type':"str",
+    # },
     'include_reverse (not used)':{
         'available_in_unode':[
             'msamanda',
@@ -472,25 +484,27 @@ ursgal_params={
     },
     'log_enabled':{
         'available_in_unode':[
+            'ucontroller'
         ],
-        'default_value':"False",
+        'default_value':False,
         'description': ''' Will redirect sys.stdout to the logfile, default name: ursgal.log ''',
         'ukey_translation':{},
         'utag':[
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"bool",
     },
     'log_file_name':{
         'available_in_unode':[
+            'ucontroller'
         ],
-        'default_value':"None",
+        'default_value':None,
         'description': ''' This can be used to specify a different log file path ''',
         'ukey_translation':{},
-        'utag':[
+        'utag':['file_handling'
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"str",
     },
     'machine_offset_in_ppm':{
         'available_in_unode':[
@@ -716,10 +730,10 @@ Example:
         'default_value':"mzidentml_lib_1_6_10",
         'description': ''' mzidentml converter version: version name ''',
         'ukey_translation':{},
-        'utag':[
+        'utag':['converter_version'
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"str",
     },
     'mzml2mgf_converter_version':{
         'available_in_unode':[
@@ -728,10 +742,10 @@ Example:
         'default_value':"mzml2mgf_1_0_0",
         'description': ''' mzml to mgf converter version: version name ''',
         'ukey_translation':{},
-        'utag':[
+        'utag':['converter_version'
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"str",
     },
     'neutral_loss_enabled':{
         'available_in_unode':[
@@ -1023,25 +1037,27 @@ Example:
     },
     'raw_ident_csv_suffix':{
         'available_in_unode':[
+            'ucontroller'
         ],
         'default_value':".csv",
         'description': ''' CSV suffix of raw indentification: this is the conversion result after CSV conversion but before adding retention time ''',
         'ukey_translation':{},
-        'utag':[
+        'utag':['file_extension'
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"str",
     },
     'remove_temporary_files':{
         'available_in_unode':[
+            'ucontroller',
         ],
-        'default_value':"False",
+        'default_value':False,
         'description': ''' Remove temporary files: True or False ''',
         'ukey_translation':{},
-        'utag':[
+        'utag':['file_handling'
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"bool",
     },
     'rt_pickle_name':{
         'available_in_unode':[
@@ -1271,14 +1287,15 @@ Example:
     },
     'search_engines_create_folders':{
         'available_in_unode':[
+            'ucontroller'
         ],
-        'default_value':"True",
+        'default_value':True,
         'description': ''' Create folders for search engines. True or False ''',
         'ukey_translation':{},
-        'utag':[
+        'utag':['file_handling'
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"bool",
     },
     'search_for_saps':{
         'available_in_unode':[
@@ -1320,8 +1337,8 @@ Example:
         'available_in_unode':[
             'ucontroller'
         ],
-        'default_value':'False',
-        'description': ''' Show ursgal nodes in development: False or True ''',
+        'default_value':False,
+        'description': ''' Show ursgal nodes that are in development: False or True ''',
         'ukey_translation':{},
         'utag':[
         ],
@@ -1453,10 +1470,10 @@ Example:
         'default_value':"unify_csv_1_0_0",
         'description': ''' unify csv converter version: version name ''',
         'ukey_translation':{},
-        'utag':[
+        'utag':['converter_version'
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"str",
     },
     'use_refine':{
         'available_in_unode':[
@@ -1471,14 +1488,15 @@ Example:
     },
     'validated_ident_csv_suffix':{
         'available_in_unode':[
+            'ucontroller'
         ],
         'default_value':"validated.csv",
-        'description': ''' CSV suffix of validated idententification: string, CSV-file which contains PSMs validated with validation tools ''',
+        'description': ''' CSV suffix of validated idententification files: string, CSV-file which contains PSMs validated with validation tools ''',
         'ukey_translation':{},
-        'utag':[
+        'utag':['file_extension'
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"str",
     },
     'validation_score_field':{
         'available_in_unode':[

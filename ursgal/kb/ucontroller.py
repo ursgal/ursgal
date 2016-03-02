@@ -17,40 +17,40 @@ META_INFO = {
 
 # DEFAULT_PARAMS = {
 #     # general -
-    'force'                             : False,
+    # 'force'                             : False,
 #     'cpus'                              : multiprocessing.cpu_count() - 1,
 #     # do not use up all the power...
     # 'output_suffix'                     : '',
-    'del_from_params_before_json_dump'  : ['grouped_psms'],
+    # 'del_from_params_before_json_dump'  : ['grouped_psms'],
 #     'rt_pickle_name'                    : '_ursgal_lookup.pkl',
-    'json_extension'                    : '.u.json',
-    'helper_extension'                  : '.u_helper',
+    # 'json_extension'                    : '.u.json',
+    # 'helper_extension'                  : '.u_helper',
 #     'remove_temporary_files'            : True,
 #     # 'remove_config_files'               : False,
-    'mzidentml_converter_version'       : 'mzidentml_lib_1_6_10',
-    'mzml2mgf_converter_version'        : 'mzml2mgf_1_0_0',
-    'unify_csv_converter_version'       : 'unify_csv_1_0_0',
-    'filter_csv_converter_version'      : 'filter_csv_1_0_0',
-    'show_unodes_in_development'        : False,
-    'search_engines_create_folders'     : True,
-    'compress_raw_search_results_if_possible' : True,
+    # 'mzidentml_converter_version'       : 'mzidentml_lib_1_6_10',
+    # 'mzml2mgf_converter_version'        : 'mzml2mgf_1_0_0',
+    # 'unify_csv_converter_version'       : 'unify_csv_1_0_0',
+    # 'filter_csv_converter_version'      : 'filter_csv_1_0_0',
+    # 'show_unodes_in_development'        : False,
+    # 'search_engines_create_folders'     : True,
+    # 'compress_raw_search_results_if_possible' : True,
 #     # -----------------------------------------------------
-    'log_enabled'                                           : False,
+    # 'log_enabled'                                           : False,
 #     # will redirect sys.stdout to the logfile, default name : ursgal.log
-    'log_file_name'                                         : None,
+    # 'log_file_name'                                         : None,
 #     # this can be used to specify a different log file path
 
 #     # - xtandem
-    'raw_ident_csv_suffix'             : '.csv', #this is the conversion result after csv conversion but before adding of rt
-    'ident_csv_suffix'                 : 'idents.csv', #this is final with retention times
-    'validated_ident_csv_suffix'       : 'validated.csv',
-    'multi_engine_csv_suffix'          : 'summary.csv',
+    # 'raw_ident_csv_suffix'             : '.csv', #this is the conversion result after csv conversion but before adding of rt
+    # 'ident_csv_suffix'                 : 'idents.csv', #this is final with retention times
+    # 'validated_ident_csv_suffix'       : 'validated.csv',
+    # 'multi_engine_csv_suffix'          : 'summary.csv',
 #     'maximum_pep_for_ident_csv'        : 0.1,
 #     'output_file_type'                 : None,
 #     'input_file_type'                  : None,
 
 #     # java
-    'java_-Xmx'                        : '13312m',
+    # 'java_-Xmx'                        : '13312m',
 
 #     # mgf conversion
 #     'number_of_mz_decimals'            : 5,
