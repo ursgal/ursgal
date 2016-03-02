@@ -1,23 +1,23 @@
-META_INFO = {
-    'engine_type' : {
-        'converter'     : True
-    },
-    'output_extension' : '.csv',
-    'output_suffix'    : 'accepted',
-    'input_types'      : ['.csv'],
-'in_development'            : True,
-    'rejected_output_suffix': 'rejected',
+# META_INFO = {
+#     'engine_type' : {
+#         'converter'     : True
+#     },
+#     'output_extension' : '.csv',
+#     'output_suffix'    : 'accepted',
+#     'input_types'      : ['.csv'],
+# 'in_development'            : True,
+#     'rejected_output_suffix': 'rejected',
 
-    'include_in_git'            : True,
+#     'include_in_git'            : True,
 
-    'engine': {
-        'platform_independent' : {
-            'arc_independent' : {
-                'exe'     : 'filter_csv_1_0_0.py',
-            },
-        },
-    },
-}
+#     'engine': {
+#         'platform_independent' : {
+#             'arc_independent' : {
+#                 'exe'     : 'filter_csv_1_0_0.py',
+#             },
+#         },
+#     },
+# }
 
 DEFAULT_PARAMS = {
     'write_unfiltered_results' : False,

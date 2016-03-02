@@ -12,13 +12,41 @@ class combine_FDR_0_1( ursgal.UNode ):
     Jones AR, Siepen JA, Hubbard SJ, Paton NW (2009):
     "Improving sensitivity in proteome studies by analysis of false discovery
     rates for multiple search engines."
-    
+
     Input should be multiple CSV files from different search engines. Each
     CSV requires a PEP column, for instance by post-processing with Percolator.
 
     Returns a merged CSV file with all PSMs that were found and an added
     column "Combined FDR Score".
     '''
+
+    META_INFO = {
+        'engine_type'    : {
+            'controller'        : False,
+            'converter'         : False,
+            'validation_engine' : False,
+            'search_engine'     : False,
+            'meta_engine'       : True,
+        },
+        'in_development'        : True,
+        'input_types'           : ['.csv'],
+        'output_extension'      : '.csv',
+        'create_own_folder'     : False,
+        'citation' : 'An implementation of the "combined FDR Score" algorithm, '\
+            'as described in: Jones AR, Siepen JA, Hubbard SJ, Paton NW (2009) '\
+            'Improving sensitivity in proteome studies by analysis of false '\
+            'discovery rates for multiple search engines.',
+        'include_in_git'            : True,
+
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'     : 'combine_FDR_0_1.py',
+                },
+            },
+        },
+    }
+
     def __init__(self, *args, **kwargs):
         super(combine_FDR_0_1, self).__init__(*args, **kwargs)
         pass

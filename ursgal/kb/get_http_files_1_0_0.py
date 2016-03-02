@@ -1,24 +1,24 @@
-META_INFO = {
-    'engine_type' : {
-        'fetcher' : True,
-    },
-    # 'engine_url' : {
-    #     'internal' : True,
-    # },
-    'engine': {
-        'platform_independent' : {
-            'arc_independent' : {
-                'exe'     : 'get_http_files_1_0_0.py',
-            },
-        },
-    },
-'in_development'            : True,
-    'input_types'    : '',
-    'output_suffix'  : None,
-    'include_in_git' : True,
+# META_INFO = {
+#     'engine_type' : {
+#         'fetcher' : True,
+#     },
+#     # 'engine_url' : {
+#     #     'internal' : True,
+#     # },
+#     'engine': {
+#         'platform_independent' : {
+#             'arc_independent' : {
+#                 'exe'     : 'get_http_files_1_0_0.py',
+#             },
+#         },
+#     },
+# 'in_development'            : True,
+#     'input_types'    : '',
+#     'output_suffix'  : None,
+#     'include_in_git' : True,
 
-    # 'in_development' : True
-}
+#     # 'in_development' : True
+# }
 
 
 DEFAULT_PARAMS = {

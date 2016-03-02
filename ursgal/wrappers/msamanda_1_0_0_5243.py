@@ -15,6 +15,40 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
     Dorfer V, Pichler P, Stranzl T, Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, a universal identification algorithm optimized for high accuracy tandem mass spectra.
 
     """
+    META_INFO = {
+        'engine_type': {
+            'search_engine': True,
+        },
+        'output_extension'          : '.csv',
+        'input_types'               : ['.mgf'],
+        'create_own_folder'         : True,
+        'citation'                  : 'Dorfer V, Pichler P, Stranzl T, '\
+            'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
+            'a universal identification algorithm optimized for high accuracy '\
+            'tandem mass spectra.',
+        'include_in_git'            : None,
+        'cannot_distribute'         : True,
+        'in_development'            : True,
+        'engine': {
+            'linux' : {
+                '64bit' : {
+                    'exe'            : 'MSAmanda.exe',
+                    'url'            : '',
+                    'zip_md5'        : None,
+                    'additional_exe' : [],
+                },
+            },
+            'darwin' : {
+                '64bit' : {
+                    'exe'            : 'MSAmanda.exe',
+                    'url'            : '',
+                    'zip_md5'        : None,
+                    'additional_exe' : [],
+                },
+            },
+        },
+    }
+
     def __init__(self, *args, **kwargs):
         super(msamanda_1_0_0_5243, self).__init__(*args, **kwargs)
         if sys.platform in ['win32']:
@@ -236,7 +270,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                         ),
                         end='\r'
                     )
-                
+
                 dict_2_write = copy.deepcopy( tmp )
                 translated_mods = []
                 #N-Term(Acetyl|42.010565|fixed);M1(Oxidation|15.994915|fixed);M23(Oxidation|15.994915|fixed)

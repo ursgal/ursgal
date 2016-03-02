@@ -17,6 +17,26 @@ class msblender_09_2015( ursgal.UNode ):
     MSblender UNode
     Documentation at http://www.marcottelab.org/index.php/MSblender
     """
+    META_INFO = {
+        'engine_exe' : {
+            'linux'   : 'msblender',
+            'darwin'  : 'msblender',
+        },
+        'engine_type' : {
+            'meta_engine' : True,
+        },
+        'in_development'            : True,
+        'output_extension'          : '.csv',
+        'input_types'               : ['.csv'],
+        'create_own_folder'         : False,
+        'citation'    : 'Kwon T, Choi H, Vogel C, Nesvizhskii AI, '\
+            'Marcotte EM. (2011) MSblender: A Probabilistic Approach '\
+            'for Integrating Peptide Identifications from Multiple '\
+            'Database Search Engines.',
+
+        'include_in_git'            : True,
+    }
+
     def __init__( self, *args, **kwargs ):
         super(msblender_09_2015, self).__init__(*args, **kwargs)
 
@@ -35,7 +55,7 @@ class msblender_09_2015( ursgal.UNode ):
         Returns:
 
             self.params(dict)
-            
+
         http://www.marcottelab.org/index.php/MSblender#Pre-processing
         '''
 

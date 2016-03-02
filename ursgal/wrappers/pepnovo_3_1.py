@@ -13,6 +13,39 @@ class pepnovo_3_1( ursgal.UNode ):
     Reference:
     Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing and Identification with Precision Mass Spectrometry, J. Proteome Res. 6:114-123.
     """
+    META_INFO = {
+        # see http://proteomics.ucsd.edu/Software/UniNovo/#Downloads
+        'engine_type' : {
+            'denovo_engine' : True,
+        },
+        'engine' : {
+            'linux' : {
+                '64bit' : {
+                    'exe'            :'PepNovo_bin',
+                    'url'            : '',
+                    'zip_md5'        : '318866ea0ade5b2309cbcddc0066d2a8',
+                    'additional_exe' : [],
+                }
+            },
+            'darwin' : {
+               '64bit' : {
+                   'exe'             :'PepNovo_bin',
+               }
+            },
+            'win32' : {
+                '64bit' : {
+                    'exe'            : 'PepNovo.exe',
+                }
+            },
+        },
+        'input_types'               : ['.mgf'],
+        'in_development'            : True,
+        'output_extension'          : '.csv',
+        'create_own_folder'         : True,
+        'citation'   : 'Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing and Identification with Precision Mass Spectrometry, J. Proteome Res. 6:114-123.',
+        'include_in_git'            : False,
+    }
+
     def __init__(self, *args, **kwargs):
         super(pepnovo_3_1, self).__init__(*args, **kwargs)
         self.available_mods = {
@@ -62,18 +95,18 @@ class pepnovo_3_1( ursgal.UNode ):
         self.created_tmp_files.append( self.params['output_file_incl_path'])
 
         self.params['new_output_file_incl_path'] = os.path.join(
-            self.params['output_dir_path'],        
+            self.params['output_dir_path'],
             self.params['output_file']
         )
 
         if self.params['precursor_mass_tolerance_unit'] == 'ppm':
-            self.params['precursor_mass_tolerance_plus'] = ursgal.ucore.convert_ppm_to_dalton( 
-                self.params['precursor_mass_tolerance_plus'], 
-                base_mz=self.params['base_mz'] 
+            self.params['precursor_mass_tolerance_plus'] = ursgal.ucore.convert_ppm_to_dalton(
+                self.params['precursor_mass_tolerance_plus'],
+                base_mz=self.params['base_mz']
             )
-            self.params['precursor_mass_tolerance_minus'] = ursgal.ucore.convert_ppm_to_dalton( 
-                self.params['precursor_mass_tolerance_minus'], 
-                base_mz=self.params['base_mz'] 
+            self.params['precursor_mass_tolerance_minus'] = ursgal.ucore.convert_ppm_to_dalton(
+                self.params['precursor_mass_tolerance_minus'],
+                base_mz=self.params['base_mz']
             )
         self.params['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
                                                     float(self.params['precursor_mass_tolerance_minus']) ) \
@@ -124,7 +157,7 @@ class pepnovo_3_1( ursgal.UNode ):
                     ]) # < 3-6> - returns peptide sequence of the specified length (only lengths 3-6 are allowed).
 
         for param in [
-            'output_cum_probs', 
+            'output_cum_probs',
             'output_aa_probs',
             'prm',
             'prm_norm',
@@ -213,7 +246,7 @@ class pepnovo_3_1( ursgal.UNode ):
                     save_headers = False
 
         #extend and translate headers
-        translated_headers = []    
+        translated_headers = []
         for header in headers:
             if header == '':
                 continue
@@ -271,10 +304,10 @@ class pepnovo_3_1( ursgal.UNode ):
 
         print('[ Writing  ] Rewriting Pepnovo Outputfile...')
 
-        #this section reads all sequences from result_dict, detects modifications 
+        #this section reads all sequences from result_dict, detects modifications
         #and stores them together with the corresponding aa (last_aa) and the position in moddict.
         #Afterwards, modifications get translated, deleted from sequence and stored with the old sequences as keys
-        #in translated_PTMs 
+        #in translated_PTMs
         translated_PTMs = {}
         for spec_id in result_dict:
             for rnk_list in result_dict[spec_id]:
@@ -323,9 +356,9 @@ class pepnovo_3_1( ursgal.UNode ):
                         #here, the modifications are actually stored in moddict
                         moddict[mod] = (last_aa, position)
                         last_aa = elem
-                        mod = ''    
+                        mod = ''
                 #this does still count for every rnk_list
-                #in this part, the modifications are translated             
+                #in this part, the modifications are translated
                 modstring = ''
                 modlist = []
                 for key in self.available_mods:
@@ -342,7 +375,7 @@ class pepnovo_3_1( ursgal.UNode ):
                                             modlist.append((str(key),int(moddict[mod][1])))
                                 else:
                                     modlist.append((str(key),int(moddict[mod][1])))
-                modlist = sorted(modlist, key=lambda x: x[1])               
+                modlist = sorted(modlist, key=lambda x: x[1])
                 for mod in modlist:
                     modstring += mod[0] + ':'+ str(mod[1]) + ';'
                 #this part produces sequences without modifications
@@ -360,10 +393,10 @@ class pepnovo_3_1( ursgal.UNode ):
                     break
                 for PTM in translated_PTMs.keys():
                     if PTM == rnk_list[8]:
-                        rnk_list[8] = translated_PTMs[PTM][0]               
+                        rnk_list[8] = translated_PTMs[PTM][0]
                         translated_PTMs_new[translated_PTMs[PTM][0]] = (PTM,translated_PTMs[PTM][1])
         translated_PTMs = translated_PTMs_new
-        
+
         #in this section the new reorganized pepnovo outputfile gets written from the collected information
         pepnovo_outputfile_new = open(self.params['new_output_file_incl_path'],'w')
         for header in translated_headers:
@@ -387,8 +420,8 @@ class pepnovo_3_1( ursgal.UNode ):
                     pepnovo_outputfile_new.write(self.params['mgf_input_file']+',')
                     pepnovo_outputfile_new.write('False')
                     pepnovo_outputfile_new.write('\n')
-                    
+
         pepnovo_outputfile_new.close()
-               
+
         return
 

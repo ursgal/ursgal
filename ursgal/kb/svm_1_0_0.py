@@ -1,26 +1,26 @@
-META_INFO = {
-    'in_development' : True,  # do not show in UNode overview
-    'engine_type'            : {
-        'controller'        : False,
-        'converter'         : False,
-        'validation_engine' : True,
-        'search_engine'     : False,
-        'meta_engine'       : False
-    },
-    'in_development'            : True,
-    'input_types'      : ['.csv'],
-    'output_extension' : '.csv',
-    'output_suffix'    : 'svm_validated',
-    'engine': {
-        'platform_independent' : {
-            'arc_independent' : {
-                'exe' : 'svm.py',
-            },
-        },
-    },
-    'create_own_folder'         : False,
-    'include_in_git'            : False,
-}
+# META_INFO = {
+#     'in_development' : True,  # do not show in UNode overview
+#     'engine_type'            : {
+#         'controller'        : False,
+#         'converter'         : False,
+#         'validation_engine' : True,
+#         'search_engine'     : False,
+#         'meta_engine'       : False
+#     },
+#     'in_development'            : True,
+#     'input_types'      : ['.csv'],
+#     'output_extension' : '.csv',
+#     'output_suffix'    : 'svm_validated',
+#     'engine': {
+#         'platform_independent' : {
+#             'arc_independent' : {
+#                 'exe' : 'svm.py',
+#             },
+#         },
+#     },
+#     'create_own_folder'         : False,
+#     'include_in_git'            : False,
+# }
 
 
 DEFAULT_PARAMS = {

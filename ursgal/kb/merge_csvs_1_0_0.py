@@ -1,21 +1,20 @@
-#!/usr/bin/env python3.4
-META_INFO = {
-    'engine_type'            : {
-        'converter'         : True,
-    },
-    'output_extension'       : '.csv',
-    'output_suffix'          : 'merged',
-    'input_types'            : ['.csv'],
-    'include_in_git'            : True,
-'in_development'            : True,
-    'engine': {
-        'platform_independent' : {
-            'arc_independent' : {
-                'exe'     : 'merge_csvs_1_0_0.py',
-            },
-        },
-    },
-}
+# META_INFO = {
+#     'engine_type'            : {
+#         'converter'         : True,
+#     },
+#     'output_extension'       : '.csv',
+#     'output_suffix'          : 'merged',
+#     'input_types'            : ['.csv'],
+#     'include_in_git'            : True,
+# 'in_development'            : True,
+#     'engine': {
+#         'platform_independent' : {
+#             'arc_independent' : {
+#                 'exe'     : 'merge_csvs_1_0_0.py',
+#             },
+#         },
+#     },
+# }
 
 DEFAULT_PARAMS = {}
 

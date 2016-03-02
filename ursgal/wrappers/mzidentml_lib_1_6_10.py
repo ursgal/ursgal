@@ -15,6 +15,34 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
     Java program to convert resulta to .mzIdentML and .mzIdentML to .csv
 
     """
+    META_INFO = {
+        'engine_type' : {
+            'search_engine' : False,
+            'converter'     : True
+        },
+        'output_extension'  : '.csv',
+        'output_suffix'     : None,
+        'input_types'       : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
+        # 'can_gz': True,
+        'citation'       : 'Reisinger F, Krishna R, Ghali F, Ríos D, '\
+            'Hermjakob H, Vizcaíno JA, Jones AR. (2012) jmzIdentML API: '\
+            'A Java interface to the mzIdentML standard for peptide and '\
+            'protein identification data.',
+        'in_development'            : True,
+        'include_in_git'            : False,
+
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'            : 'mzidentml-lib-1.6.10.jar',
+                    'url'            : '',
+                    'zip_md5'        : '61451563e924b13eebca24e903340da9',
+                    'additional_exe' : [],
+                },
+            },
+        },
+    }
+
     def __init__(self, *args, **kwargs):
         super(mzidentml_lib_1_6_10, self).__init__(*args, **kwargs)
 

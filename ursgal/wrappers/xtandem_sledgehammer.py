@@ -11,6 +11,59 @@ class xtandem_sledgehammer( ursgal.UNode ):
     Reference:
     Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem mass spectra.
     """
+    META_INFO = {
+        'name': 'X!Tandem',
+        'version' : 'Sledgehammer',
+        'engine_type' : {
+            'search_engine' : True,
+        },
+        'in_development'            : True,
+        'output_extension'          : '.xml',
+        'input_types'               : ['.mgf'],
+        'create_own_folder'         : True,
+        'compress_raw_search_results' : True,
+        'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
+            'matching proteins with tandem mass spectra.',
+        'include_in_git'            : False,
+        'engine': {
+            'darwin' : {
+                '64bit' : {
+                    'exe'            : 'tandem',
+                    'url'            : '',
+                    'zip_md5'        : '879a5e29abf66a9a2b21ca2053a22689',
+                    'additional_exe' : [],
+                },
+            },
+            'linux' : {
+                '64bit' : {
+                    'exe'            : 'tandem',
+                    'url'            : '',
+                    'zip_md5'        : 'a011c993e9007b80852a7253da101e9e',
+                    'additional_exe' : [],
+                },
+                'i386' : {
+                    'exe'            : 'tandem',
+                    'url'            : '',
+                    'zip_md5'        : '9b11bcdf86137ffdcee08e8940053e19',
+                    'additional_exe' : [],
+                },
+            },
+            'win32' : {
+                '64bit' : {
+                    'exe'            : 'tandem.exe',
+                    'url'            : '',
+                    'zip_md5'        : '01c6da9cf976916888c212e4baf45a99',
+                    'additional_exe' : [],
+                },
+                '32bit' : {
+                    'exe'            : 'tandem.exe',
+                    'url'            : '',
+                    'zip_md5'        : '86b78ea31389ab7d2634d0272ea6371f',
+                    'additional_exe' : [],
+                },
+            },
+        },
+    }
     def __init__(self, *args, **kwargs):
         super(xtandem_sledgehammer, self).__init__(*args, **kwargs)
         pass
@@ -57,7 +110,7 @@ class xtandem_sledgehammer( ursgal.UNode ):
             self.exe,
             '{input}'.format(**self.params),
         ]
-        
+
         if self.params['label'] == '15N':
             self.params['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">{15N-masses}</note>'.format(**self.params)
         else:
@@ -67,7 +120,7 @@ class xtandem_sledgehammer( ursgal.UNode ):
         potential_mods = []
         refine_potential_mods = []
         fixed_mods = []
-        self.params['Prot-N-term'] = 0.0 
+        self.params['Prot-N-term'] = 0.0
         self.params['Prot-C-term'] = 0.0
         for mod in self.params[ 'mods' ][ 'fix' ]:
             fixed_mods.append(

@@ -10,6 +10,28 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
 
     Converts .mzML files into .mgf files
     """
+    META_INFO = {
+        'engine_type'            : {
+            'converter'         : True,
+            'validation_engine' : False,
+            'search_engine'     : False,
+            'meta_engine'       : False
+        },
+
+        'output_extension'       : '.mgf',
+        'output_suffix'          : None,
+        'input_types'            : ['.mzml', '.mzml.gz'],
+    'in_development'            : True,
+        'include_in_git'         : True,
+
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'     : 'mzml2mgf_1_0_0.py',
+                },
+            },
+        },
+    }
     def __init__(self, *args, **kwargs):
         super(mzml2mgf_1_0_0, self).__init__(*args, **kwargs)
 

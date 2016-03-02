@@ -11,6 +11,48 @@ class xtandem_piledriver( ursgal.UNode ):
     Reference:
     Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem mass spectra.
     """
+    META_INFO = {
+        'name': 'X!Tandem',
+        'version' : 'Piledriver',
+        'engine_type' : {
+            'search_engine' : True,
+        },
+        'output_extension'          : '.xml',
+        'input_types'               : ['.mgf'],
+        'create_own_folder'         : True,
+        'compress_raw_search_results' : True,
+    'in_development'            : True,
+        'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
+            'matching proteins with tandem mass spectra.',
+        'include_in_git'            : False,
+
+        'engine': {
+            'darwin' : {
+                '64bit' : {
+                    'exe'            : 'tandem',
+                    'url'            : '',
+                    'zip_md5'        : '261dce3746481d1cc4223bccb6bf265e',
+                    'additional_exe' : [],
+                },
+            },
+            'linux' : {
+                '64bit' : {
+                    'exe'            : 'tandem.exe',
+                    'url'            : '',
+                    'zip_md5'        : 'af307fea9f2b954f1a9a3652c14a5742',
+                    'additional_exe' : [],
+                },
+            },
+            'win32' : {
+                '64bit' : {
+                    'exe'            : 'tandem.exe',
+                    'url'            : '',
+                    'zip_md5'        : '16c3b766e02690386f280515175cdc90',
+                    'additional_exe' : [],
+                },
+            },
+        },
+    }
     def __init__(self, *args, **kwargs):
         super(xtandem_piledriver, self).__init__(*args, **kwargs)
         pass
@@ -57,7 +99,7 @@ class xtandem_piledriver( ursgal.UNode ):
             self.exe,
             '{input}'.format(**self.params),
         ]
-        
+
         if self.params['label'] == '15N':
             self.params['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">{15N-masses}</note>'.format(**self.params)
         else:
@@ -67,7 +109,7 @@ class xtandem_piledriver( ursgal.UNode ):
         potential_mods = []
         refine_potential_mods = []
         fixed_mods = []
-        self.params['Prot-N-term'] = 0.0 
+        self.params['Prot-N-term'] = 0.0
         self.params['Prot-C-term'] = 0.0
         for mod in self.params[ 'mods' ][ 'fix' ]:
             fixed_mods.append(

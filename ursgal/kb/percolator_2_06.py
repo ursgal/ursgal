@@ -1,25 +1,25 @@
 from collections import OrderedDict
 
-META_INFO={
-     'engine_type'            : {
-        'controller'        : False,
-        'converter'         : False,
-        'validation_engine' : True,
-        'search_engine'     : False,
-        'meta_engine'       : False
-    },
-    'output_extension'          : '.csv',
-    'output_suffix'             : 'percolator_validated',
-    'input_types'               : ['.csv'],
-    'create_own_folder'         : False,
-    'in_development'            : True,
-    'citation'   : 'Käll L, Canterbury JD, Weston J, Noble WS, '\
-        'MacCoss MJ. (2007) Semi-supervised learning for peptide '\
-        'identification from shotgun proteomics datasets.',
-    'include_in_git'            : False,
-    'group_psms'                : True,
-    'in_development'            : True,
-}
+# META_INFO={
+#      'engine_type'            : {
+#         'controller'        : False,
+#         'converter'         : False,
+#         'validation_engine' : True,
+#         'search_engine'     : False,
+#         'meta_engine'       : False
+#     },
+#     'output_extension'          : '.csv',
+#     'output_suffix'             : 'percolator_validated',
+#     'input_types'               : ['.csv'],
+#     'create_own_folder'         : False,
+#     'in_development'            : True,
+#     'citation'   : 'Käll L, Canterbury JD, Weston J, Noble WS, '\
+#         'MacCoss MJ. (2007) Semi-supervised learning for peptide '\
+#         'identification from shotgun proteomics datasets.',
+#     'include_in_git'            : False,
+#     'group_psms'                : True,
+#     'in_development'            : True,
+# }
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {
 }

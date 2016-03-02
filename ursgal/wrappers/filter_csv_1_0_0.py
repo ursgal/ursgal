@@ -8,6 +8,29 @@ import shutil
 
 class filter_csv_1_0_0( ursgal.UNode ):
     """filter_csv_1_0_0 UNode"""
+
+    META_INFO = {
+        'engine_type' : {
+            'converter'     : True
+        },
+        'output_extension' : '.csv',
+        'output_suffix'    : 'accepted',
+        'input_types'      : ['.csv'],
+        'in_development'   : True,
+        'rejected_output_suffix': 'rejected',
+
+        'include_in_git'   : True,
+
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'     : 'filter_csv_1_0_0.py',
+                },
+            },
+        },
+    }
+
+
     def __init__(self, *args, **kwargs):
         super(filter_csv_1_0_0, self).__init__(*args, **kwargs)
 
@@ -122,7 +145,7 @@ class filter_csv_1_0_0( ursgal.UNode ):
         Note:
 
             Some spreadsheet tools interpret False and True and show them as
-            upper case when opening the files, even if they are actually 
+            upper case when opening the files, even if they are actually
             written in lower case. This is especially important for target and
             decoy filtering, i.e. ['Is decoy','equals','false'].
             'false' has to be lower case, even if the spreadsheet tool displays

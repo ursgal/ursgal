@@ -14,6 +14,33 @@ class myrimatch_2_1_138( ursgal.UNode ):
     Reference:
     Tabb DL, Fernando CG, Chambers MC. (2007) MyriMatch: highly accurate tandem mass spectral peptide identification by multivariate hypergeometric analysis.
     """
+    META_INFO = {
+        'engine_type' : {
+            'search_engine' : True,
+        },
+        'include_in_git'            : False,
+        'output_extension'          : '.mzid',
+        'input_types'               : ['.mzML'],
+        'create_own_folder'         : True,
+        'compress_raw_search_results' : True,
+
+        'citation'                  : 'Tabb DL, Fernando CG, Chambers MC. '\
+            '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
+            'identification by multivariate hypergeometric analysis.',
+
+        'in_development'            : True,
+        'engine': {
+            'linux' : {
+                '64bit' : {
+                    'exe'            : 'myrimatch_2_1_138',
+                    'url'            : '',
+                    'zip_md5'        : '99b4eb99bf59cd80e850bf9368b4eb3f',
+                    'additional_exe' : [],
+                },
+            },
+        },
+    }
+
     def __init__(self, *args, **kwargs):
         super(myrimatch_2_1_138, self).__init__(*args, **kwargs)
         pass
@@ -89,21 +116,21 @@ class myrimatch_2_1_138( ursgal.UNode ):
                 if existing == True:
                     continue
                 self.params['myrimatch_static_mods']+= '{0} {1} '.format( aminoacid, N15_Diff )
-            
+
         for mod in self.params[ 'mods' ][ 'fix' ]:
             self.params['myrimatch_static_mods'] += '{0} {1} '.format( mod[ 'aa' ], mod[ 'mass' ] )
-            
+
         characters = ['$', '%', '^', '&', '*', '_', '<', '>', '|', ':', ';' ]
         for n, mod in enumerate( self.params[ 'mods' ][ 'opt' ] ):
             if n >= len(characters)-1:
-                print( 
+                print(
                     '''
                     [ WARNING ] To many potential modifications. Ran out of characters.
                     [ WARNING ] Continues without modification: {0}'''.format(mod)
                 )
                 continue
             if mod[ 'pos' ] != 'any':
-                print( 
+                print(
                     '''
                     [ WARNING ] myrimatch does only support "any" as position of modifications.
                     [ WARNING ] Continues without modification: {0}'''.format(mod)

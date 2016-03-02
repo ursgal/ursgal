@@ -7,6 +7,33 @@ import pprint
 
 class generate_target_decoy_1_0_0( ursgal.UNode ):
     """Generate Target Decoy 1_0_0 UNode"""
+    META_INFO = {
+        'engine_type' : {
+            'search_engine' : False,
+            'converter'     : True
+        },
+        'output_extension' : '.fasta',
+        'output_suffix'    : 'target_decoy',
+        'input_types'      : [''],
+        'in_development'   : True,
+        'include_in_git'   : True,
+
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'     : 'generate_target_decoy_1_0_0.py',
+                },
+            },
+        },
+
+        # 'engine_exe'                : {
+        #     'arc_independent' : 'generate_target_decoy_1_0_0.py',
+        # },
+        # 'engine_url' : {
+        #     'internal' : True,
+        # },
+    }
+
     def __init__(self, *args, **kwargs):
         super(generate_target_decoy_1_0_0, self).__init__(*args, **kwargs)
 

@@ -1,28 +1,28 @@
-META_INFO = {
-    'engine_type' : {
-        'search_engine' : True,
-    },
-    'engine': {
-        'platform_independent' : {
-            'arc_independent' : {
-                'exe'            : 'MSGFPlus.jar',
-                'url'            : 'http://proteomics.ucsd.edu/Software/MSGFPlus/MSGFPlus.zip',
-                'zip_md5'        : '82a3e2204ff698e260ac9f89d3880b59',
-                'additional_exe' : [],
-            },
-        },
-    },
-    'compress_raw_search_results' : True,
-    'output_extension'          : '.mzid',
-    'input_types'               : ['.mgf', '.mzML'],
-    'create_own_folder'         : True,
-    'citation'                  : 'Kim S, Mischerikow N, Bandeira N, '\
-        'Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) '\
-        'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
-        'Tandem Mass Spectra: Applications to Database Search.',
-'in_development'            : True,
-    'include_in_git'            : False,
-}
+# META_INFO = {
+#     'engine_type' : {
+#         'search_engine' : True,
+#     },
+#     'engine': {
+#         'platform_independent' : {
+#             'arc_independent' : {
+#                 'exe'            : 'MSGFPlus.jar',
+#                 'url'            : 'http://proteomics.ucsd.edu/Software/MSGFPlus/MSGFPlus.zip',
+#                 'zip_md5'        : '82a3e2204ff698e260ac9f89d3880b59',
+#                 'additional_exe' : [],
+#             },
+#         },
+#     },
+#     'compress_raw_search_results' : True,
+#     'output_extension'          : '.mzid',
+#     'input_types'               : ['.mgf', '.mzML'],
+#     'create_own_folder'         : True,
+#     'citation'                  : 'Kim S, Mischerikow N, Bandeira N, '\
+#         'Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) '\
+#         'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
+#         'Tandem Mass Spectra: Applications to Database Search.',
+# 'in_development'            : True,
+#     'include_in_git'            : False,
+# }
 
 DEFAULT_PARAMS = {
     'validation_score_field'    : 'MS-GF:SpecEValue',

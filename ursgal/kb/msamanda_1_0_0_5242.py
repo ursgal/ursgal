@@ -1,29 +1,29 @@
-META_INFO={
-    'engine_type': {
-        'search_engine': True,
-    },
-    'output_extension'          : '.csv',
-    'input_types'               : ['.mgf'],
-    'create_own_folder'         : True,
-    'citation'                  : 'Dorfer V, Pichler P, Stranzl T, '\
-        'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
-        'a universal identification algorithm optimized for high accuracy '\
-        'tandem mass spectra.',
-    'include_in_git'            : None,
-    'cannot_distribute'         : True,
-  'in_development'            : True,
-    'engine': {
-        'win32' : {
-            '64bit' : {
-                'exe'            : 'MSAmanda.exe',
-                'url'            : '',
-                'zip_md5'        : None,
-                'additional_exe' : [],
-            },
-        },
-    },
+# META_INFO={
+#     'engine_type': {
+#         'search_engine': True,
+#     },
+#     'output_extension'          : '.csv',
+#     'input_types'               : ['.mgf'],
+#     'create_own_folder'         : True,
+#     'citation'                  : 'Dorfer V, Pichler P, Stranzl T, '\
+#         'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
+#         'a universal identification algorithm optimized for high accuracy '\
+#         'tandem mass spectra.',
+#     'include_in_git'            : None,
+#     'cannot_distribute'         : True,
+#   'in_development'            : True,
+#     'engine': {
+#         'win32' : {
+#             '64bit' : {
+#                 'exe'            : 'MSAmanda.exe',
+#                 'url'            : '',
+#                 'zip_md5'        : None,
+#                 'additional_exe' : [],
+#             },
+#         },
+#     },
 
-}
+# }
 
 DEFAULT_PARAMS={
     'validation_score_field'    : 'Amanda:Score',

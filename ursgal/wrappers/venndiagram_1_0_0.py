@@ -10,6 +10,32 @@ csv.field_size_limit(sys.maxsize)
 
 class venndiagram_1_0_0( ursgal.UNode ):
     """Venn Diagram uNode"""
+    META_INFO = {
+        'engine_type'           : {
+            'converter'         : False,
+            'validation_engine' : False,
+            'search_engine'     : False,
+            'meta_engine'       : False,
+            'visualizer'        : True,
+        },
+        'output_extension'    : '.svg',
+        'output_suffix'       : 'venndiagram',
+        'input_types'         : ['.csv',],
+        'include_in_git'            : True,
+        'in_development'            : True,
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'            : 'venndiagram_1_0_0.py',
+                },
+            },
+        },
+
+        # 'engine_exe'          : {
+        #     'arc_independent' : 'venndiagram_1_0_0.py',
+        # },
+
+    }
     def __init__(self, *args, **kwargs):
         super(venndiagram_1_0_0, self).__init__(*args, **kwargs)
 
@@ -54,7 +80,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
         input_file_dicts = self.params['input_file_dicts']
 
         data = []
-        
+
         for result_file in input_file_dicts:
             data_field = (
                 result_file['last_engine'],
@@ -116,7 +142,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
   # The column header "{0}" was not found in {1}. Please use files that have a "PEP" column
   # (i.e. Percolator-validated files) for plotting VennDiagrams, or specify another column
   # that should be used as cutoff like this:
-  # >>> uc.params['cutoff_column_name'] = 'name_of_my_score_column'  
+  # >>> uc.params['cutoff_column_name'] = 'name_of_my_score_column'
   #               '''.format( cutoff_column_name, os.path.basename(file_path) )
   #               if float( line_dict[ cutoff_column_name ] ) > self.params['cutoff_column_value']:
   #                   continue

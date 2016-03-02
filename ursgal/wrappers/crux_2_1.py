@@ -8,6 +8,16 @@ class crux_2_1( ursgal.UNode ):
 
     Not implemented yet
     """
+
+    META_INFO = {
+        'engine_type' : {
+            'search_engine' : True,
+        },
+        'in_development' : True,
+        'include_in_git' : None,
+    }
+
+
     def __init__(self, *args, **kwargs):
         super(crux_2_1, self).__init__(*args, **kwargs)
 

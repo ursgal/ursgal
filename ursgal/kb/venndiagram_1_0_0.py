@@ -1,30 +1,30 @@
 #!/usr/bin/env python3.4
-META_INFO = {
-    'engine_type'           : {
-        'converter'         : False,
-        'validation_engine' : False,
-        'search_engine'     : False,
-        'meta_engine'       : False,
-        'visualizer'        : True,
-    },
-    'output_extension'    : '.svg',
-    'output_suffix'       : 'venndiagram',
-    'input_types'         : ['.csv',],
-    'include_in_git'            : True,
-'in_development'            : True,
-    'engine': {
-        'platform_independent' : {
-            'arc_independent' : {
-                'exe'            : 'venndiagram_1_0_0.py',
-            },
-        },
-    },
+# META_INFO = {
+#     'engine_type'           : {
+#         'converter'         : False,
+#         'validation_engine' : False,
+#         'search_engine'     : False,
+#         'meta_engine'       : False,
+#         'visualizer'        : True,
+#     },
+#     'output_extension'    : '.svg',
+#     'output_suffix'       : 'venndiagram',
+#     'input_types'         : ['.csv',],
+#     'include_in_git'            : True,
+# 'in_development'            : True,
+#     'engine': {
+#         'platform_independent' : {
+#             'arc_independent' : {
+#                 'exe'            : 'venndiagram_1_0_0.py',
+#             },
+#         },
+#     },
 
-    # 'engine_exe'          : {
-    #     'arc_independent' : 'venndiagram_1_0_0.py',
-    # },
+#     # 'engine_exe'          : {
+#     #     'arc_independent' : 'venndiagram_1_0_0.py',
+#     # },
 
-}
+# }
 
 DEFAULT_PARAMS = {
     'column_names'        : ['Sequence', 'Modifications'],

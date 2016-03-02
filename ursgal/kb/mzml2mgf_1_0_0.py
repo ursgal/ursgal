@@ -1,26 +1,25 @@
-#!/usr/bin/env python3.4
-META_INFO = {
-    'engine_type'            : {
-        'converter'         : True,
-        'validation_engine' : False,
-        'search_engine'     : False,
-        'meta_engine'       : False
-    },
+# META_INFO = {
+#     'engine_type'            : {
+#         'converter'         : True,
+#         'validation_engine' : False,
+#         'search_engine'     : False,
+#         'meta_engine'       : False
+#     },
 
-    'output_extension'       : '.mgf',
-    'output_suffix'          : None,
-    'input_types'            : ['.mzml', '.mzml.gz'],
-'in_development'            : True,
-    'include_in_git'         : True,
+#     'output_extension'       : '.mgf',
+#     'output_suffix'          : None,
+#     'input_types'            : ['.mzml', '.mzml.gz'],
+# 'in_development'            : True,
+#     'include_in_git'         : True,
 
-    'engine': {
-        'platform_independent' : {
-            'arc_independent' : {
-                'exe'     : 'mzml2mgf_1_0_0.py',
-            },
-        },
-    },
-}
+#     'engine': {
+#         'platform_independent' : {
+#             'arc_independent' : {
+#                 'exe'     : 'mzml2mgf_1_0_0.py',
+#             },
+#         },
+#     },
+# }
 
 DEFAULT_PARAMS = {
     'number_of_mz_decimals' : 5,

@@ -11,6 +11,32 @@ class uninovo_alpha_052013( ursgal.UNode ):
     Reference:
     Jeong K, Kim S, Pevzner PA (2013): UniNovo: a universal tool for de novo peptide sequencing.
     """
+    META_INFO = {
+        # see http://proteomics.ucsd.edu/Software/UniNovo/#Downloads
+        'engine_type' : {
+            'denovo_engine' : True,
+        },
+        'citation'                  : 'Jeong K, Kim S, Pevzner PA (2013): UniNovo: a universal tool for de novo peptide sequencing.',
+        'in_development'            : True,
+
+        'include_in_git'            : None,
+    'in_development'            : True,
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'            : 'UniNovo.jar',
+                    'url'            : 'http://proteomics.ucsd.edu/Software/UniNovo/UniNovo.20130520.zip',
+                    # 'zip_md5'        : '',
+                    # 'additional_exe' : [],
+                },
+            },
+        },
+
+        'output_extension'          : '.den',
+        'input_types'               : ['.mgf'],
+        'create_own_folder'         : True,
+    }
+
     def __init__(self, *args, **kwargs):
         super(uninovo_alpha_052013, self).__init__(*args, **kwargs)
         pass
@@ -33,7 +59,7 @@ class uninovo_alpha_052013( ursgal.UNode ):
             self.params['output_dir_path'],
             self.params['output_file']
         )
-        
+
         self.params['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
                                                     float(self.params['precursor_mass_tolerance_minus']) ) \
                                                 / 2.0
@@ -43,7 +69,7 @@ class uninovo_alpha_052013( ursgal.UNode ):
 
             'java', '-Xmx{java_-Xmx}'.format( **self.params), '-jar', self.exe, # path 2 executable
             '-i', '{mgf_input_file}'.format( **self.params), # SpectrumFile (*.mzXML, *.mgf, *.ms2)
-            '-o', '{output_file_incl_path}'.format(**self.params).rstrip('.den'), # output file prefix - UniNovo will output file named as "prefix.den" 
+            '-o', '{output_file_incl_path}'.format(**self.params).rstrip('.den'), # output file prefix - UniNovo will output file named as "prefix.den"
             '-pt', '{precursor_mass_tolerance}{precursor_mass_tolerance_unit}'.format(**self.params), # precursor ion tolerance (ending in ppm or Da)
             '-t', '{frag_mass_tolerance}{frag_mass_tolerance_unit}'.format(**self.params), # ion tolerances (ending in ppm or Da)
             '-f', '{frag_method}'.format(**self.params), # fragmentation method (CID/ETD/HCD) - if -par option is specified, this option will be ignored
@@ -115,7 +141,7 @@ class uninovo_alpha_052013( ursgal.UNode ):
             '''.format( self.engine, os.path.relpath(self.exe), self.execute_return_code)
 
         self.print_execution_time(tag='execution')
-        return 
+        return
 
     def postflight( self ):
         return

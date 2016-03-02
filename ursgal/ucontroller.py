@@ -57,6 +57,7 @@ class UController(ursgal.UNode):
         },
         'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis. J. Proteome res. acs.jproteome.5b00860 (2015). doi:10.1021/acs.jproteome.5b00860'
     }
+
     def __init__( self, *args, **kwargs):
         # kwargs['engine_path'] = ursgal.__file__
         super(UController, self).__init__(*args, **kwargs)

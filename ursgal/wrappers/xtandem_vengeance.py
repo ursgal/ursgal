@@ -11,6 +11,49 @@ class xtandem_vengeance( ursgal.UNode ):
     Reference:
     Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem mass spectra.
     """
+    META_INFO = {
+        'name': 'X!Tandem',
+        'version' : 'Vengeance',
+        'engine_type' : {
+            'search_engine' : True,
+        },
+        'in_development'            : True,
+        'output_extension'          : '.xml',
+        'input_types'               : ['.mgf'],
+        'create_own_folder'         : True,
+        'compress_raw_search_results' : True,
+        'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
+            'matching proteins with tandem mass spectra.',
+        'include_in_git'            : False,
+
+        'engine': {
+            'darwin' : {
+                '64bit' : {
+                    'exe'            : 'tandem',
+                    'url'            : '',
+                    'zip_md5'        : '8611a65a9cb87ab0cae59756dffe9213',
+                    'additional_exe' : [],
+                },
+            },
+            'linux' : {
+                '64bit' : {
+                    'exe'            : 'tandem.exe',
+                    'url'            : '',
+                    'zip_md5'        : '034fa00d6cd0f1d7101f12d845062949',
+                    'additional_exe' : [],
+                },
+            },
+            'win32' : {
+                '64bit' : {
+                    'exe'            : 'tandem.exe',
+                    'url'            : '',
+                    'zip_md5'        : 'b9d2b1da628627f0ff0ba64d8e7b93b1',
+                    'additional_exe' : [],
+                },
+            },
+        },
+    }
+
     def __init__(self, *args, **kwargs):
         super(xtandem_vengeance, self).__init__(*args, **kwargs)
         pass
@@ -57,7 +100,7 @@ class xtandem_vengeance( ursgal.UNode ):
             self.exe,
             '{input}'.format(**self.params),
         ]
-        
+
         if self.params['label'] == '15N':
             self.params['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">{15N-masses}</note>'.format(**self.params)
         else:
@@ -67,7 +110,7 @@ class xtandem_vengeance( ursgal.UNode ):
         potential_mods = []
         refine_potential_mods = []
         fixed_mods = []
-        self.params['Prot-N-term'] = 0.0 
+        self.params['Prot-N-term'] = 0.0
         self.params['Prot-C-term'] = 0.0
         for mod in self.params[ 'mods' ][ 'fix' ]:
             fixed_mods.append(

@@ -2,6 +2,7 @@
 import ursgal
 import os
 
+
 class get_http_files_1_0_0( ursgal.UNode ):
     """
     get_http_files_1_0_0 UNode
@@ -12,6 +13,28 @@ class get_http_files_1_0_0( ursgal.UNode ):
     def main( http_url = None, http_output_folder = None):
 
     """
+    META_INFO = {
+        'engine_type' : {
+            'fetcher' : True,
+        },
+        # 'engine_url' : {
+        #     'internal' : True,
+        # },
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'     : 'get_http_files_1_0_0.py',
+                },
+            },
+        },
+        'in_development'            : True,
+        'input_types'    : '',
+        'output_suffix'  : None,
+        'include_in_git' : True,
+
+        # 'in_development' : True
+    }
+
     def __init__(self, *args, **kwargs):
         super(get_http_files_1_0_0, self).__init__(*args, **kwargs)
 
@@ -28,6 +51,6 @@ class get_http_files_1_0_0( ursgal.UNode ):
             http_output_folder  = self.params.get('http_output_folder', None),
         )
         self.print_execution_time(tag='execution')
-        self.io['output']['finfo']['dir'] =  os.path.dirname( output_path ) 
+        self.io['output']['finfo']['dir']  = os.path.dirname( output_path )
         self.io['output']['finfo']['file'] = os.path.basename( output_path )
         return output_path

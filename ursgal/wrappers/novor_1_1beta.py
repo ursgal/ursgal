@@ -12,6 +12,36 @@ class novor_1_1beta( ursgal.UNode ):
     Reference:
     Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software.
     """
+    META_INFO = {
+        'engine_type' : {
+            'denovo_engine' : True,
+        },
+        'engine' : {
+            'linux' : {
+                '64bit' : {
+                    'exe'            :'novor.sh',
+                }
+            },
+            'darwin' : {
+                '64bit' : {
+                    'exe'            :'novor.sh',
+                }
+            },
+            'win32' : {
+                '64bit' : {
+                    'exe'            : 'novor.bat',
+                }
+            },
+        },
+        'in_development'            : True,
+        'output_extension'          : '.csv',
+        'input_types'               : ['.mgf'],
+        'create_own_folder'         : True,
+        'citation'                  : \
+            'Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software.',
+        'include_in_git'            : False,
+    }
+
     def __init__(self, *args, **kwargs):
         super(novor_1_1beta, self).__init__(*args, **kwargs)
         pass
@@ -151,7 +181,7 @@ class novor_1_1beta( ursgal.UNode ):
 
         self.params[ 'command_list' ] = [
             self.exe,
-            '-p', '{params_file}'.format(**self.params), 
+            '-p', '{params_file}'.format(**self.params),
             self.params['mgf_new_input_file'], '-f',
         ]
 
@@ -163,9 +193,9 @@ class novor_1_1beta( ursgal.UNode ):
         Reformats the Novor output file
         '''
         regex_list = [
-            ('\(Cam\)','Carbamidomethyl'), 
+            ('\(Cam\)','Carbamidomethyl'),
             ('\(O\)','Oxidation'),
-            ('\(N-term Acetyl\)','Acetyl'),  
+            ('\(N-term Acetyl\)','Acetyl'),
             ('\[Acetyl\]','Acetyl'),
             ('\(Acetyl\)','Acetyl'),
             ('\[Amidated\]','Amidated'),

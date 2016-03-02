@@ -7,6 +7,31 @@ import pickle
 
 class add_estimated_fdr_1_0_0( ursgal.UNode ):
     """add_estimated_fdr_1_0_0 UNode"""
+    META_INFO = {
+        'engine_type' : {
+            'converter'  : True
+        },
+        'in_development'            : True,
+        'input_types'      : ['.csv'],
+        'output_extension' : '.csv',
+        'output_suffix'    : 'withFDR',
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'     : 'add_estimated_fdr_1_0_0.py',
+                },
+            },
+        },
+        'citation' : \
+            'An implementation of the target/decoy FDR estimation '\
+            'method described in: Lukas Käll, John D. Storey, Michael J. '\
+            'MacCoss and William Stafford Noble (2007) Assigning significance '\
+            'to peptides identified by tandem mass spectrometry using decoy '\
+            'databases.' ,
+
+        'include_in_git'            : True,
+    }
+
     def __init__(self, *args, **kwargs):
         super(add_estimated_fdr_1_0_0, self).__init__(*args, **kwargs)
 
@@ -48,7 +73,7 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
                 self.params['input_dir_path'],
                 self.params['input_file']
             )
-        
+
         add_fdr_main(
             input_file           = input_file,
             output_file          = output_file,

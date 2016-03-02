@@ -1,72 +1,54 @@
-META_INFO = {
-    'engine_type'            : {
-        'controller'        : False,
-        'converter'         : False,
-        'validation_engine' : True,
-        'search_engine'     : False,
-        'meta_engine'       : False
-    },
-    'output_extension'          : '.csv',
-    'output_suffix'             : 'qvality_validated',
-    'input_types'               : ['.csv'],
-    'create_own_folder'         : False,
-    'citation'   : 'Käll L, Storey JD, Noble WS (2009) QVALITY: '\
-        'non-parametric estimation of q-values and posterior error '\
-        'probabilities.',
-    'include_in_git'            : False,
-    'group_psms'                : True,
-    'in_development'            : True,
-    'engine': {
-        'darwin' : {
-            '64bit' : {
-                'exe'            : 'qvality',
-                'url'            : '',
-                'zip_md5'        : '4f2c1a6eb697cb66d066047c98c1f114',
-                'additional_exe' : [],
-            },
-        },
-        'linux' : {
-            '64bit' : {
-                'exe'            : 'qvality',
-                'url'            : '',
-                'zip_md5'        : '2ddd863add4095b710e6883abbd5efbf',
-                'additional_exe' : [],
-            },
-        },
-        'win32' : {
-            '64bit' : {
-                'exe'            : 'qvality.exe',
-                'url'            : '',
-                'zip_md5'        : '45c98d18d99f46578d938362c3302804',
-                'additional_exe' : [],
-            },
-            '32bit' : {
-                'exe'            : 'qvality.exe',
-                'url'            : '',
-                'zip_md5'        : 'f10aee7feec1340364c64eccc6f75a3c',
-                'additional_exe' : [],
-            },
-        },
-    },
-
-    # 'engine_exe' : {
-    #     'linux'  : 'qvality',
-    #     # 'darwin' : 'qvality',
-    #     'win32'  : 'qvality.exe',
-    # },
-    # 'zip_md5' : {
-    #     # 'darwin' : {
-    #     #     '64bit' : '4f2c1a6eb697cb66d066047c98c1f114'
-    #     # },
-    #     'linux' : {
-    #         '64bit' : '2ddd863add4095b710e6883abbd5efbf'
-    #     },
-    #     'win32' : {
-    #         '32bit' : 'f10aee7feec1340364c64eccc6f75a3c',
-    #         '64bit' : '45c98d18d99f46578d938362c3302804'
-    #     }
-    # }
-}
+# META_INFO = {
+#     'engine_type'            : {
+#         'controller'        : False,
+#         'converter'         : False,
+#         'validation_engine' : True,
+#         'search_engine'     : False,
+#         'meta_engine'       : False
+#     },
+#     'output_extension'          : '.csv',
+#     'output_suffix'             : 'qvality_validated',
+#     'input_types'               : ['.csv'],
+#     'create_own_folder'         : False,
+#     'citation'   : 'Käll L, Storey JD, Noble WS (2009) QVALITY: '\
+#         'non-parametric estimation of q-values and posterior error '\
+#         'probabilities.',
+#     'include_in_git'            : False,
+#     'group_psms'                : True,
+#     'in_development'            : True,
+#     'engine': {
+#         'darwin' : {
+#             '64bit' : {
+#                 'exe'            : 'qvality',
+#                 'url'            : '',
+#                 'zip_md5'        : '4f2c1a6eb697cb66d066047c98c1f114',
+#                 'additional_exe' : [],
+#             },
+#         },
+#         'linux' : {
+#             '64bit' : {
+#                 'exe'            : 'qvality',
+#                 'url'            : '',
+#                 'zip_md5'        : '2ddd863add4095b710e6883abbd5efbf',
+#                 'additional_exe' : [],
+#             },
+#         },
+#         'win32' : {
+#             '64bit' : {
+#                 'exe'            : 'qvality.exe',
+#                 'url'            : '',
+#                 'zip_md5'        : '45c98d18d99f46578d938362c3302804',
+#                 'additional_exe' : [],
+#             },
+#             '32bit' : {
+#                 'exe'            : 'qvality.exe',
+#                 'url'            : '',
+#                 'zip_md5'        : 'f10aee7feec1340364c64eccc6f75a3c',
+#                 'additional_exe' : [],
+#             },
+#         },
+#     },
+# }
 
 
 USEARCH_PARAM_VALUE_TRANSLATIONS = {

@@ -7,6 +7,26 @@ import pickle
 
 class xtandem2csv_1_0_0( ursgal.UNode ):
     """xtandem2csv_1_0_0 UNode"""
+    META_INFO = {
+        'engine_type' : {
+            'search_engine' : False,
+            'converter'     : True
+        },
+        'output_extension'  : '.csv',
+        'output_suffix'     : None,
+        'input_types'       : ['.xml', '.xml.gz' ],
+        'include_in_git' : True,
+    'in_development'            : True,
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe' : 'xtandem2csv_1_0_0.py',
+                },
+            },
+        },
+
+    }
+
     def __init__(self, *args, **kwargs):
         super(xtandem2csv_1_0_0, self).__init__(*args, **kwargs)
 

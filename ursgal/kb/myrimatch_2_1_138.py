@@ -1,28 +1,28 @@
-META_INFO = {
-    'engine_type' : {
-        'search_engine' : True,
-    },
-    'include_in_git'            : False,
-    'output_extension'          : '.mzid',
-    'input_types'               : ['.mzML'],
-    'create_own_folder'         : True,
-    'compress_raw_search_results' : True,
+# META_INFO = {
+#     'engine_type' : {
+#         'search_engine' : True,
+#     },
+#     'include_in_git'            : False,
+#     'output_extension'          : '.mzid',
+#     'input_types'               : ['.mzML'],
+#     'create_own_folder'         : True,
+#     'compress_raw_search_results' : True,
 
-    'citation'                  : 'Tabb DL, Fernando CG, Chambers MC. '\
-        '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
-        'identification by multivariate hypergeometric analysis.',
-'in_development'            : True,
-    'engine': {
-        'linux' : {
-            '64bit' : {
-                'exe'            : 'myrimatch_2_1_138',
-                'url'            : '',
-                'zip_md5'        : '99b4eb99bf59cd80e850bf9368b4eb3f',
-                'additional_exe' : [],
-            },
-        },
-    },
-}
+#     'citation'                  : 'Tabb DL, Fernando CG, Chambers MC. '\
+#         '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
+#         'identification by multivariate hypergeometric analysis.',
+# 'in_development'            : True,
+#     'engine': {
+#         'linux' : {
+#             '64bit' : {
+#                 'exe'            : 'myrimatch_2_1_138',
+#                 'url'            : '',
+#                 'zip_md5'        : '99b4eb99bf59cd80e850bf9368b4eb3f',
+#                 'additional_exe' : [],
+#             },
+#         },
+#     },
+# }
 
 DEFAULT_PARAMS = {
     'validation_score_field'    : 'MyriMatch:MVH',

@@ -1,29 +1,29 @@
-META_INFO = {
-    'engine_type' : {
-        'fetcher' : True,
-    },
-    'engine': {
-        'platform_independent' : {
-            'arc_independent' : {
-                'exe'     : 'get_ftp_files_1_0_0.py',
-            },
-        },
-    },
+# META_INFO = {
+#     'engine_type' : {
+#         'fetcher' : True,
+#     },
+#     'engine': {
+#         'platform_independent' : {
+#             'arc_independent' : {
+#                 'exe'     : 'get_ftp_files_1_0_0.py',
+#             },
+#         },
+#     },
 
-    'input_types': '',
-    'output_suffix':None,
-'in_development'            : True,
-    'include_in_git' : True,
+#     'input_types': '',
+#     'output_suffix':None,
+# 'in_development'            : True,
+#     'include_in_git' : True,
 
-    # 'in_development' : True
-    # is available but not displayed :)
-    # 'engine_exe' : {
-    #     'arc_independent' : 'get_ftp_files_1_0_0.py',
-    # },
-    # 'engine_url' : {
-    #     'internal' : True,
-    # },
-}
+#     # 'in_development' : True
+#     # is available but not displayed :)
+#     # 'engine_exe' : {
+#     #     'arc_independent' : 'get_ftp_files_1_0_0.py',
+#     # },
+#     # 'engine_url' : {
+#     #     'internal' : True,
+#     # },
+# }
 
 
 DEFAULT_PARAMS = {

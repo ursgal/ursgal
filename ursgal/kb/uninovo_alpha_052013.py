@@ -1,28 +1,28 @@
-META_INFO = {
-    # see http://proteomics.ucsd.edu/Software/UniNovo/#Downloads
-    'engine_type' : {
-        'denovo_engine' : True,
-    },
-    'citation'                  : 'Jeong K, Kim S, Pevzner PA (2013): UniNovo: a universal tool for de novo peptide sequencing.',
-    'in_development'            : True,
+# META_INFO = {
+#     # see http://proteomics.ucsd.edu/Software/UniNovo/#Downloads
+#     'engine_type' : {
+#         'denovo_engine' : True,
+#     },
+#     'citation'                  : 'Jeong K, Kim S, Pevzner PA (2013): UniNovo: a universal tool for de novo peptide sequencing.',
+#     'in_development'            : True,
 
-    'include_in_git'            : None,
-'in_development'            : True,
-    'engine': {
-        'platform_independent' : {
-            'arc_independent' : {
-                'exe'            : 'UniNovo.jar',
-                'url'            : 'http://proteomics.ucsd.edu/Software/UniNovo/UniNovo.20130520.zip',
-                # 'zip_md5'        : '',
-                # 'additional_exe' : [],
-            },
-        },
-    },
+#     'include_in_git'            : None,
+# 'in_development'            : True,
+#     'engine': {
+#         'platform_independent' : {
+#             'arc_independent' : {
+#                 'exe'            : 'UniNovo.jar',
+#                 'url'            : 'http://proteomics.ucsd.edu/Software/UniNovo/UniNovo.20130520.zip',
+#                 # 'zip_md5'        : '',
+#                 # 'additional_exe' : [],
+#             },
+#         },
+#     },
 
-    'output_extension'          : '.den',
-    'input_types'               : ['.mgf'],
-    'create_own_folder'         : True,
-}
+#     'output_extension'          : '.den',
+#     'input_types'               : ['.mgf'],
+#     'create_own_folder'         : True,
+# }
 DEFAULT_PARAMS = {
     'uninovo_num_13C'      : 0,
     'uninovo_accuracy'     : 0.8,

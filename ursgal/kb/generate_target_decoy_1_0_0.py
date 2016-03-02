@@ -1,30 +1,30 @@
-META_INFO = {
-    'engine_type' : {
-        'search_engine' : False,
-        'converter'     : True
-    },
-    'output_extension' : '.fasta',
-    'output_suffix'    : 'target_decoy',
-    'input_types'      : [''],
-'in_development'            : True,
-    'include_in_git' : True,
+# META_INFO = {
+#     'engine_type' : {
+#         'search_engine' : False,
+#         'converter'     : True
+#     },
+#     'output_extension' : '.fasta',
+#     'output_suffix'    : 'target_decoy',
+#     'input_types'      : [''],
+# 'in_development'            : True,
+#     'include_in_git' : True,
 
-    'engine': {
-        'platform_independent' : {
-            'arc_independent' : {
-                'exe'     : 'generate_target_decoy_1_0_0.py',
-            },
-        },
-    },
+#     'engine': {
+#         'platform_independent' : {
+#             'arc_independent' : {
+#                 'exe'     : 'generate_target_decoy_1_0_0.py',
+#             },
+#         },
+#     },
 
-    # 'engine_exe'                : {
-    #     'arc_independent' : 'generate_target_decoy_1_0_0.py',
-    # },
-    # 'engine_url' : {
-    #     'internal' : True,
-    # },
+#     # 'engine_exe'                : {
+#     #     'arc_independent' : 'generate_target_decoy_1_0_0.py',
+#     # },
+#     # 'engine_url' : {
+#     #     'internal' : True,
+#     # },
 
-}
+# }
 
 DEFAULT_PARAMS = {
     'decoy_generation_mode' : 'shuffle_peptide',

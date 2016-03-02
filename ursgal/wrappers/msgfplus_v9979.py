@@ -11,6 +11,32 @@ class msgfplus_v9979( ursgal.UNode ):
     Reference:
     Kim S, Mischerikow N, Bandeira N, Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) The Generating Function of CID, ETD, and CID/ETD Pairs of Tandem Mass Spectra: Applications to Database Search.
     """
+    META_INFO = {
+        'engine_type' : {
+            'search_engine' : True,
+        },
+        'engine': {
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'            : 'MSGFPlus.jar',
+                    'url'            : 'http://proteomics.ucsd.edu/Software/MSGFPlus/MSGFPlus.zip',
+                    'zip_md5'        : '82a3e2204ff698e260ac9f89d3880b59',
+                    'additional_exe' : [],
+                },
+            },
+        },
+        'compress_raw_search_results' : True,
+        'output_extension'          : '.mzid',
+        'input_types'               : ['.mgf', '.mzML'],
+        'create_own_folder'         : True,
+        'citation'                  : 'Kim S, Mischerikow N, Bandeira N, '\
+            'Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) '\
+            'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
+            'Tandem Mass Spectra: Applications to Database Search.',
+        'in_development'            : True,
+        'include_in_git'            : False,
+    }
+
     def __init__(self, *args, **kwargs):
         super(msgfplus_v9979, self).__init__(*args, **kwargs)
         pass
@@ -44,7 +70,7 @@ class msgfplus_v9979( ursgal.UNode ):
 
         mods_file = open( self.params['modification_file'], 'w', encoding = 'UTF-8' )
         modifications = []
-        
+
         if self.params['label'] == '15N':
             for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
                 existing = False

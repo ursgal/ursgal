@@ -1,32 +1,32 @@
-META_INFO = {
-    'engine_type' : {
-        'denovo_engine' : True,
-    },
-    'engine' : {
-        'linux' : {
-            '64bit' : {
-                'exe'            :'novor.sh',
-            }
-        },
-        'darwin' : {
-            '64bit' : {
-                'exe'            :'novor.sh',
-            }
-        },
-        'win32' : {
-            '64bit' : {
-                'exe'            : 'novor.bat',
-            }
-        },
-    },
-    'in_development'            : True,
-    'output_extension'          : '.csv',
-    'input_types'               : ['.mgf'],
-    'create_own_folder'         : True,
-    'citation'                  : \
-        'Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software.',
-    'include_in_git'            : False,
-}
+# META_INFO = {
+#     'engine_type' : {
+#         'denovo_engine' : True,
+#     },
+#     'engine' : {
+#         'linux' : {
+#             '64bit' : {
+#                 'exe'            :'novor.sh',
+#             }
+#         },
+#         'darwin' : {
+#             '64bit' : {
+#                 'exe'            :'novor.sh',
+#             }
+#         },
+#         'win32' : {
+#             '64bit' : {
+#                 'exe'            : 'novor.bat',
+#             }
+#         },
+#     },
+#     'in_development'            : True,
+#     'output_extension'          : '.csv',
+#     'input_types'               : ['.mgf'],
+#     'create_own_folder'         : True,
+#     'citation'                  : \
+#         'Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software.',
+#     'include_in_git'            : False,
+# }
 
 DEFAULT_PARAMS = {
     'novor_forbidden_residues'    : 'I,U',

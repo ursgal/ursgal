@@ -50,6 +50,21 @@ class Meta_UNode(type):
             # This happens only when we call our Controller
             engine = 'ucontroller'
             kwargs['engine_path'] = __file__
+            try:
+                class_default_params = importlib.__import__(
+                    "ursgal.default_params.{0}".format( engine ),
+                    fromlist = ['ursgal.default_params']
+                )
+            except:
+                print("""
+            [ Import failed ]
+            [ Import failed ]\tYou have a syntax error in ursgal.default_params.{0}
+            [ Import failed ] """.format( engine ))
+                exit(1)
+            assert hasattr(class_default_params, 'DEFAULT_PARAMS'), '''
+                DEFAULT_PARAMS dict has to be define in default_params/{0}.py'
+                '''.format( engine )
+            initd_klass.DEFAULT_PARAMS = getattr(class_default_params, 'DEFAULT_PARAMS')
         else:
             all_parts = os.path.abspath( kwargs['engine_path'] ).split(os.sep)
             engine = all_parts[ -2 ]
@@ -66,21 +81,6 @@ class Meta_UNode(type):
         #     '''.format( engine, method )
         initd_klass.engine = engine
 
-        try:
-            class_default_params = importlib.__import__(
-                "ursgal.default_params.{0}".format( engine ),
-                fromlist = ['ursgal.default_params']
-            )
-        except:
-            print("""
-        [ Import failed ]
-        [ Import failed ]\tYou have a syntax error in ursgal.default_params.{0}
-        [ Import failed ] """.format( engine ))
-            exit(1)
-        assert hasattr(class_default_params, 'DEFAULT_PARAMS'), '''
-            DEFAULT_PARAMS dict has to be define in default_params/{0}.py'
-            '''.format( engine )
-        initd_klass.DEFAULT_PARAMS = getattr(class_default_params, 'DEFAULT_PARAMS')
         # OBLIGATORY_FIELDS = [
         #     'DEFAULT_PARAMS',
         #     'META_INFO',

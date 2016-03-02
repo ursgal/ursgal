@@ -34,6 +34,58 @@ class percolator_2_08( ursgal.UNode ):
     Reference:
     Käll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
     """
+    META_INFO = {
+        'engine_type'            : {
+            'controller'        : False,
+            'converter'         : False,
+            'validation_engine' : True,
+            'search_engine'     : False,
+            'meta_engine'       : False
+        },
+        'output_extension'          : '.csv',
+        'output_suffix'             : 'percolator_validated',
+        'input_types'               : ['.csv'],
+        'create_own_folder'         : False,
+        'citation'   : 'Käll L, Canterbury JD, Weston J, Noble WS, '\
+            'MacCoss MJ. (2007) Semi-supervised learning for peptide '\
+            'identification from shotgun proteomics datasets.',
+        'include_in_git'            : False,
+        'group_psms'                : True,
+    'in_development'            : True,
+        'engine': {
+            'darwin' : {
+                '64bit' : {
+                    'exe'            : 'percolator_2_08',
+                    'url'            : '',
+                    'zip_md5'        : 'ecaa830a570f4bd8f010b5beda1c1b7c',
+                    'additional_exe' : [],
+                },
+            },
+            'linux' : {
+                '64bit' : {
+                    'exe'            : 'percolator',
+                    'url'            : '',
+                    'zip_md5'        : 'b03bf30ef4c4bdda1725de4c70351842',
+                    'additional_exe' : [],
+                },
+            },
+            'win32' : {
+                '64bit' : {
+                    'exe'            : 'percolator.exe',
+                    'url'            : '',
+                    'zip_md5'        : 'ca267a3104cedc20887698a499f58859',
+                    'additional_exe' : [],
+                },
+                '32bit' : {
+                    'exe'            : 'percolator.exe',
+                    'url'            : '',
+                    'zip_md5'        : '8b1387860c15d07e938a517ddd2cfffa',
+                    'additional_exe' : [],
+                },
+            },
+        }
+    }
+
     def __init__(self, *args, **kwargs):
         super(percolator_2_08, self).__init__(*args, **kwargs)
         pass
