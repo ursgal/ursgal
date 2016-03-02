@@ -3,14 +3,29 @@ ursgal_params={
         'available_in_unode':[
             'xtandem',
         ],
-        'default_value':"100000",
+        'default_value':'100000',
         'description': ''' sets the number of sequences loaded in as a batch from the database file ''',
         'ukey_translation':{
             'xtandem_style_1':'spectrum, sequence batch size',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
+    },
+    'force':{
+        'available_in_unode':[
+            'ucontroller',
+        ],
+        'default_value':'False',
+        'description': ''' If set 'True', engines are forced to re-run although no node-related parameters have changed''',
+        'ukey_translation':{
+        },
+        'utag':[
+        ],
+        'uvalue_translation':"",
+        'uvalue_type':'bool',
+        'Check':"",
     },
     'cleavage_cterm_mass_change':{
         'available_in_unode':[
@@ -21,7 +36,8 @@ ursgal_params={
         'ukey_translation':{
             'xtandem_style_1':'protein, cleavage C-terminal mass change',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -34,7 +50,8 @@ ursgal_params={
         'ukey_translation':{
             'xtandem_style_1':'protein, cleavage N-terminal mass change',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -47,7 +64,8 @@ ursgal_params={
         'ukey_translation':{
             'xtandem_style_1':'scoring, cyclic permutation',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -56,9 +74,9 @@ ursgal_params={
         ],
         'default_value':"False",
         'description': ''' Compress after post flight: True or False to .GZ ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -69,9 +87,9 @@ ursgal_params={
             '.csv',
         ],
         'description': ''' file type excluded from compression ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -80,9 +98,9 @@ ursgal_params={
         ],
         'default_value':"False",
         'description': ''' Compress output: True or False to .GZ ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -94,14 +112,54 @@ ursgal_params={
             'xtandem',
         ],
         'default_value':"multiprocessing.cpu_count() - 1",
-        'description': ''' Cpus: set number of used cpu ''',
+        'description': ''' Number of used cpus/threads ''',
         'ukey_translation':{
             'msgfplus_style_1':'-thread',
             'myrimatch_style_1':'-cpus <integer>',
             'omssa_style_1':'-nt',
             'xtandem_style_1':'spectrum, threads',
         },
-        'utag':"",
+        'utag':[
+        ],
+        'uvalue_translation':"",
+        'uvalue_type':'int',
+    },
+    'del_from_params_before_json_dump':{
+        'available_in_unode':[
+            'ucontroller',
+        ],
+        'default_value':['grouped_psms'],
+        'description': ''' List of parameters that are deleted before .json is dumped (to not overload the .json with unimportant informations) ''',
+        'ukey_translation':{
+        },
+        'utag':[
+        ],
+        'uvalue_translation':"",
+        'uvalue_type':'list',
+    },
+    'json_extension':{
+        'available_in_unode':[
+            'ucontroller',
+        ],
+        'default_value':'.u.json',
+        'description': ''' Exension for .json files ''',
+        'ukey_translation':{
+        },
+        'utag':[
+        ],
+        'uvalue_translation':"",
+        'uvalue_type':"",
+    },
+    'helper_extension':{
+        'available_in_unode':[
+            'ucontroller',
+        ],
+        'default_value':'.u.json',
+        'description': ''' Exension for helper files ''',
+        'ukey_translation':{
+        },
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -110,9 +168,9 @@ ursgal_params={
         ],
         'default_value':"None",
         'description': ''' Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -129,7 +187,8 @@ ursgal_params={
             'myrimatch_style_1':'-ProteinDatabase <string>',
             'omssa_style_1':'-d',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -138,9 +197,9 @@ ursgal_params={
         ],
         'default_value':"shuffle_peptide",
         'description': ''' Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein). ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -149,9 +208,9 @@ ursgal_params={
         ],
         'default_value':"decoy_",
         'description': ''' decoy-specific tag to differentiate between targets and decoys ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -161,12 +220,12 @@ ursgal_params={
         'default_value':[
             'grouped_psms',
         ],
-        'description': ''' parameters deleted before the json is dumped ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'description': ''' List of parameters that will be deleted before the json is dumped ''',
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':'list',
     },
     'enzyme':{
         'available_in_unode':[
@@ -185,18 +244,20 @@ ursgal_params={
             'omssa_style_1':'-e',
             'xtandem_style_1':'protein, cleavage site',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
     'filter_csv_converter_version':{
-        'available_in_unode':[
+        'available_in_unode':[            
+            'ucontroller',
         ],
         'default_value':"filter_csv_1_0_0",
         'description': ''' filter csv converter version: version name ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -209,7 +270,8 @@ ursgal_params={
         'ukey_translation':{
             'xtandem_style_1':'residue, potential modification mass',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -218,9 +280,9 @@ ursgal_params={
         ],
         'default_value':"False",
         'description': ''' Force: True or False to overwrite the existing files ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -235,7 +297,8 @@ ursgal_params={
             'omssa_style_1':'-to',
             'xtandem_style_1':'spectrum, fragment monoisotopic mass error',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -248,7 +311,8 @@ ursgal_params={
         'ukey_translation':{
             'xtandem_style_1':'spectrum, fragment monoisotopic mass error units',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -263,7 +327,8 @@ ursgal_params={
             'omssa_style_1':'-tom',
             'xtandem_style_1':'spectrum, fragment mass type',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -278,7 +343,8 @@ ursgal_params={
             'msgfplus_style_1':'-m',
             'myrimatch_style_1':'-FragmentationRule<str>',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -291,7 +357,8 @@ ursgal_params={
         'ukey_translation':{
             'xtandem_style_1':'spectrum, minimum fragment mz',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -300,9 +367,9 @@ ursgal_params={
         ],
         'default_value':".u_helper",
         'description': ''' Helper extention: string ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -311,9 +378,9 @@ ursgal_params={
         ],
         'default_value':"idents.csv",
         'description': ''' CSV suffix of identification: string, CSV-file which contains identifications with retention times. ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -330,7 +397,8 @@ ursgal_params={
             'msgfplus_style_1':'-tda',
             'xtandem_style_1':'scoring, include reverse',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -345,7 +413,8 @@ ursgal_params={
             'msgfplus_style_1':'-s',
             'xtandem_style_1':'spectrum, path',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -358,7 +427,8 @@ ursgal_params={
         'ukey_translation':{
             'xtandem_style_1':'spectrum, path type',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -367,9 +437,9 @@ ursgal_params={
         ],
         'default_value':"13312m",
         'description': ''' set maximum Java heap size ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -378,9 +448,9 @@ ursgal_params={
         ],
         'default_value':".u.json",
         'description': ''' Extention of json file ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -395,7 +465,8 @@ ursgal_params={
             'omssa_style_1':'-tem / -tom',
             'xtandem_style_1':'protein, modified residue mass file',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -404,9 +475,9 @@ ursgal_params={
         ],
         'default_value':"False",
         'description': ''' Will redirect sys.stdout to the logfile, default name: ursgal.log ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -415,9 +486,9 @@ ursgal_params={
         ],
         'default_value':"None",
         'description': ''' This can be used to specify a different log file path ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -426,9 +497,9 @@ ursgal_params={
         ],
         'default_value':"None",
         'description': ''' Machine offset ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -441,7 +512,8 @@ ursgal_params={
         'ukey_translation':{
             'xtandem_style_1':'protein, ptm complexity',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -454,7 +526,8 @@ ursgal_params={
         'ukey_translation':{
             'msgfplus_style_1':'NumMods',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -467,7 +540,8 @@ ursgal_params={
         'ukey_translation':{
             'xtandem_style_1':'residue, potential modification mass',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -484,7 +558,8 @@ ursgal_params={
             'myrimatch_style_1':'-MaxPeptideLength<int>',
             'omssa_style_1':'-nox',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -499,7 +574,8 @@ ursgal_params={
             'myrimatch_style_1':'-MaxPeakCount',
             'xtandem_style_1':'spectrum, total peaks',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -516,7 +592,8 @@ ursgal_params={
             'myrimatch_style_1':'-MaxMissedCleavages<int>',
             'xtandem_style_1':'scoring, maximum missed cleavage sites',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -525,9 +602,9 @@ ursgal_params={
         ],
         'default_value':"0.1",
         'description': ''' Maximum value for PEP (posterior error probability): Threshold for identifications put in CSV-files. ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -544,7 +621,8 @@ ursgal_params={
             'myrimatch_style_1':'-MinPeptideLength<int>',
             'omssa_style_1':'-no',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -559,7 +637,8 @@ ursgal_params={
             'omssa_style_1':'-hm',
             'xtandem_style_1':'scoring, minimum ion count',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -574,7 +653,8 @@ ursgal_params={
             'omssa_style_1':'-hs',
             'xtandem_style_1':'spectrum, minimum peaks',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -624,29 +704,32 @@ Example:
             'omssa_style_1':'-mv',
             'xtandem_style_1':'protein, C-terminal residue modification mass',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
     'mzidentml_converter_version':{
         'available_in_unode':[
+            'ucontroller',
         ],
         'default_value':"mzidentml_lib_1_6_10",
         'description': ''' mzidentml converter version: version name ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
     'mzml2mgf_converter_version':{
         'available_in_unode':[
+                    'ucontroller',
         ],
         'default_value':"mzml2mgf_1_0_0",
         'description': ''' mzml to mgf converter version: version name ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -659,7 +742,8 @@ Example:
         'ukey_translation':{
             'xtandem_style_1':'spectrum, use neutral loss window',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -672,7 +756,8 @@ Example:
         'ukey_translation':{
             'xtandem_style_1':'spectrum, neutral loss mass',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -685,7 +770,8 @@ Example:
         'ukey_translation':{
             'xtandem_style_1':'spectrum, neutral loss window',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -698,7 +784,8 @@ Example:
         'ukey_translation':{
             'xtandem_style_1':'spectrum, use noise suppression',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -717,7 +804,8 @@ Example:
             'myrimatch_style_1':'This parameter sets the maximum rank of peptide-spectrum-matches to report for each spectrum',
             'omssa_style_1':'maximum number of hits retained per precursor charge state per spectrum',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -726,9 +814,9 @@ Example:
         ],
         'default_value':"5",
         'description': ''' Number of decimals for intensity (peak) ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -737,9 +825,9 @@ Example:
         ],
         'default_value':"5",
         'description': ''' Number of decimals for m/z mass ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -748,9 +836,9 @@ Example:
         ],
         'default_value':"None",
         'description': ''' Output file type ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -759,9 +847,9 @@ Example:
         ],
         'default_value':"",
         'description': ''' Output suffix: string ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -776,7 +864,8 @@ Example:
             'msgfplus_style_1':'-ti',
             'xtandem_style_1':'spectrum, parent monoisotopic mass isotope error',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -797,7 +886,8 @@ Example:
             'omssa_style_1':'-te',
             'xtandem_style_1':'spectrum, parent monoisotopic mass error minus',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -814,7 +904,8 @@ Example:
             'omssa_style_1':'-te',
             'xtandem_style_1':'spectrum, parent monoisotopic mass error plus',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -831,7 +922,8 @@ Example:
             'omssa_style_1':'-teppm',
             'xtandem_style_1':'spectrum, parent monoisotopic mass error units',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -848,7 +940,8 @@ Example:
             'myrimatch_style_1':'-PrecursorMzToleranceRule <str>',
             'omssa_style_1':'-tem',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -867,7 +960,8 @@ Example:
             'myrimatch_style_1':'-NumChargeStates <interger>',
             'omssa_style_1':'-zh',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -884,7 +978,8 @@ Example:
             'msgfplus_style_1':'-minCharge',
             'omssa_style_1':'-zl',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -899,7 +994,8 @@ Example:
             'myrimatch_style_1':'-MinPeptideMass <real>',
             'xtandem_style_1':'spectrum, minimum parent m+h -sets the minimum parent M+H required for a spectrum to be considered.',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -908,9 +1004,9 @@ Example:
         ],
         'default_value':"None",
         'description': ''' Precursor offset in ppm ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -919,9 +1015,9 @@ Example:
         ],
         'default_value':"None",
         'description': '''  ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -930,9 +1026,9 @@ Example:
         ],
         'default_value':".csv",
         'description': ''' CSV suffix of raw indentification: this is the conversion result after CSV conversion but before adding retention time ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -941,9 +1037,9 @@ Example:
         ],
         'default_value':"False",
         'description': ''' Remove temporary files: True or False ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -952,9 +1048,9 @@ Example:
         ],
         'default_value':"_ursgal_lookup.pkl",
         'description': ''' name of the pickle that is used to map the retention time ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -965,7 +1061,8 @@ Example:
         'description': ''' spectra rejected during mzml2mgf conversion ''',
         'ukey_translation':{
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -974,9 +1071,9 @@ Example:
         ],
         'default_value':"None",
         'description': ''' include only the n'th spectrum during mzml2mgf conversion ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -989,7 +1086,8 @@ Example:
         'ukey_translation':{
             'msamanda_style_1':'series',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1002,7 +1100,8 @@ Example:
         'ukey_translation':{
             'msamanda_style_1':'series',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1019,7 +1118,8 @@ Example:
             'omssa_style_1':'-i',
             'xtandem_style_1':'scoring, a ions',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1036,7 +1136,8 @@ Example:
             'omssa_style_1':'-i',
             'xtandem_style_1':'scoring, b ions',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1053,7 +1154,8 @@ Example:
             'omssa_style_1':'-i',
             'xtandem_style_1':'scoring, c ions',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1066,7 +1168,8 @@ Example:
         'ukey_translation':{
             'msamanda_style_1':'series',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1079,7 +1182,8 @@ Example:
         'ukey_translation':{
             'msamanda_style_1':'series',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1096,7 +1200,8 @@ Example:
             'omssa_style_1':'-i',
             'xtandem_style_1':'scoring, x ions',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1113,7 +1218,8 @@ Example:
             'omssa_style_1':'-i',
             'xtandem_style_1':'scoring, y ions',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1126,7 +1232,8 @@ Example:
         'ukey_translation':{
             'msamanda_style_1':'series',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1139,7 +1246,8 @@ Example:
         'ukey_translation':{
             'msamanda_style_1':'series',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1156,7 +1264,8 @@ Example:
             'omssa_style_1':'-i',
             'xtandem_style_1':'scoring, z ions',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1165,9 +1274,9 @@ Example:
         ],
         'default_value':"True",
         'description': ''' Create folders for search engines. True or False ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1180,7 +1289,8 @@ Example:
         'ukey_translation':{
             'xtandem_style_1':'protein, saps',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1201,20 +1311,22 @@ Example:
             'omssa_style_1':'-e',
             'xtandem_style_1':'protein, cleavage semi',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
     'show_unodes_in_development':{
         'available_in_unode':[
+            'ucontroller'
         ],
-        'default_value':"False",
+        'default_value':'False',
         'description': ''' Show ursgal nodes in development: False or True ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':'bool',
     },
     'spec_dynamic_range':{
         'available_in_unode':[
@@ -1225,7 +1337,8 @@ Example:
         'ukey_translation':{
             'xtandem_style_1':'spectrum, dynamic range',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1238,7 +1351,8 @@ Example:
         'ukey_translation':{
             'xtandem_style_1':'protein, stP bias',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1253,7 +1367,8 @@ Example:
             'msamanda_style_1':'modification protein=true nterm=true',
             'xtandem_style_1':'protein, N-terminal residue modification mass',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1266,7 +1381,8 @@ Example:
         'ukey_translation':{
             'xtandem_style_1':'protein, quick acetyl',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1279,7 +1395,8 @@ Example:
         'ukey_translation':{
             'xtandem_style_1':'protein, quick pyrolidone',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1294,7 +1411,8 @@ Example:
             'msamanda_style_1':'modification fix=true',
             'xtandem_style_1':'residue, modification mass',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1309,7 +1427,8 @@ Example:
             'msamanda_style_1':'modification fix=false',
             'xtandem_style_1':'residue, potential modification mass',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1322,18 +1441,20 @@ Example:
         'ukey_translation':{
             'xtandem_style_1':'residue, potential modification motif',
         },
-        'utag':"",
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
     'unify_csv_converter_version':{
         'available_in_unode':[
+            'ucontroller',
         ],
         'default_value':"unify_csv_1_0_0",
         'description': ''' unify csv converter version: version name ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1342,9 +1463,9 @@ Example:
         ],
         'default_value':"False",
         'description': '''  ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
@@ -1353,10 +1474,28 @@ Example:
         ],
         'default_value':"validated.csv",
         'description': ''' CSV suffix of validated idententification: string, CSV-file which contains PSMs validated with validation tools ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
+        'uvalue_type':"",
+    },
+    'validation_score_field':{
+        'available_in_unode':[
+            'percolator_2_08',
+            'qvality_2_02',
+        ],
+        'default_value':"",
+        'description': ''' Name of the column that is used for validation, e.g. by qvality and percolator ''',
+        'ukey_translation':{},
+        'utag':[
+            'validation',
+        ],
+        'uvalue_translation':{
+            'percolator_style_1':{
+                'omssa_style_1':'OMSSA:pvalue',
+            },
+        },
         'uvalue_type':"",
     },
     'write_unfiltered_results':{
@@ -1364,9 +1503,9 @@ Example:
         ],
         'default_value':"False",
         'description': ''' writes rejected results if True ''',
-        'ukey_translation':{
-        },
-        'utag':"",
+        'ukey_translation':{},
+        'utag':[
+        ],
         'uvalue_translation':"",
         'uvalue_type':"",
     },
