@@ -35,6 +35,7 @@ class omssa_2_1_9( ursgal.UNode ):
         'output_extension'      : '.csv',
         'create_own_folder'     : True,
         'include_in_git'        : False,
+        'utranslation_style'    : 'omssa_style_1'
         ### Below are the download information ###
         'engine': {
             'darwin' : {
