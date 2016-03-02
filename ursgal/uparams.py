@@ -361,7 +361,7 @@ ursgal_params={
             'thermolysin_p',
             'top_down',
             'trypsin',
-            'trypsin_chymotrypsin,
+            'trypsin_chymotrypsin',
             'trypsin_cnbr',
             'trypsin_p',
         ],
