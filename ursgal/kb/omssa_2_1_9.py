@@ -1,52 +1,52 @@
-META_INFO = {
-     'engine_type'            : {
-        'controller'        : False,
-        'converter'         : False,
-        'validation_engine' : False,
-        'search_engine'     : True,
-        'meta_engine'       : False
-    },
-    'engine': {
-        'darwin' : {
-            '64bit' : {
-                'exe'            : 'omssacl',
-                'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.macos.tar.gz',
-                'zip_md5'        : '9cb92a98c4d96c34cc925b9336cbaec7',
-                'additional_exe' : ['makeblastdb'],
-            },
-        },
-        'linux' : {
-            '64bit' : {
-                'exe'            : 'omssacl',
-                'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.linux.tar.gz',
-                'zip_md5'        : '921e01df9cd2a99d21e9a336b5b862c1',
-                'additional_exe' : ['makeblastdb'],
-            },
-        },
-        'win32' : {
-            '64bit' : {
-                'exe'            : 'omssacl.exe',
-                'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
-                'zip_md5'        : 'b9d9a8aec3cfe77c48ce0f5752aba8f9',
-                'additional_exe' : ['makeblastdb'],
-            },
-            '32bit' : {
-                'exe'            : 'omssacl.exe',
-                'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
-                'zip_md5'        : 'a05a5cdd45fd8abcfc75b1236f8a2390',
-                'additional_exe' : ['makeblastdb'],
-            },
-        },
-    },
-    'input_types'               : ['.mgf'],
-    'output_extension'          : '.csv',
-    'create_own_folder'         : True,
-    'citation'                  : 'Geer LY, Markey SP, Kowalak JA, '\
-        'Wagner L, Xu M, Maynard DM, Yang X, Shi W, Bryant SH (2004) '\
-        'Open Mass Spectrometry Search Algorithm.',
+# META_INFO = {
+#      'engine_type'            : {
+#         'controller'        : False,
+#         'converter'         : False,
+#         'validation_engine' : False,
+#         'search_engine'     : True,
+#         'meta_engine'       : False
+#     },
+#     'engine': {
+#         'darwin' : {
+#             '64bit' : {
+#                 'exe'            : 'omssacl',
+#                 'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.macos.tar.gz',
+#                 'zip_md5'        : '9cb92a98c4d96c34cc925b9336cbaec7',
+#                 'additional_exe' : ['makeblastdb'],
+#             },
+#         },
+#         'linux' : {
+#             '64bit' : {
+#                 'exe'            : 'omssacl',
+#                 'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.linux.tar.gz',
+#                 'zip_md5'        : '921e01df9cd2a99d21e9a336b5b862c1',
+#                 'additional_exe' : ['makeblastdb'],
+#             },
+#         },
+#         'win32' : {
+#             '64bit' : {
+#                 'exe'            : 'omssacl.exe',
+#                 'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
+#                 'zip_md5'        : 'b9d9a8aec3cfe77c48ce0f5752aba8f9',
+#                 'additional_exe' : ['makeblastdb'],
+#             },
+#             '32bit' : {
+#                 'exe'            : 'omssacl.exe',
+#                 'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
+#                 'zip_md5'        : 'a05a5cdd45fd8abcfc75b1236f8a2390',
+#                 'additional_exe' : ['makeblastdb'],
+#             },
+#         },
+#     },
+#     'input_types'               : ['.mgf'],
+#     'output_extension'          : '.csv',
+#     'create_own_folder'         : True,
+#     'citation'                  : 'Geer LY, Markey SP, Kowalak JA, '\
+#         'Wagner L, Xu M, Maynard DM, Yang X, Shi W, Bryant SH (2004) '\
+#         'Open Mass Spectrometry Search Algorithm.',
 
-    'include_in_git'            : False,
-}
+#     'include_in_git'            : False,
+# }
 
 DEFAULT_PARAMS = {
     'validation_score_field'    : 'OMSSA:pvalue',

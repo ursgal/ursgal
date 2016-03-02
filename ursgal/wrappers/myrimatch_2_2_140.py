@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.4
 
-from ursgal.engines.myrimatch_2_1_138 import myrimatch_2_1_138 as myri
+from .myrimatch_2_1_138 import myrimatch_2_1_138 as myri
 
 
 class myrimatch_2_2_140( myri ):

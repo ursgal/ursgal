@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.3
-from ursgal.engines.mzidentml_lib_1_6_10 import mzidentml_lib_1_6_10 as ml
+from .mzidentml_lib_1_6_10 import mzidentml_lib_1_6_10 as ml
 
 
 class mzidentml_lib_1_6_11( ml ):

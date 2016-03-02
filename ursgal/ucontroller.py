@@ -48,6 +48,15 @@ class UController(ursgal.UNode):
         ...)
 
     '''
+    META_INFO = {
+        'engine_type'            : {
+            'controller'        : True,
+        },
+        'engine_url' : {
+            'internal' : True,
+        },
+        'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis. J. Proteome res. acs.jproteome.5b00860 (2015). doi:10.1021/acs.jproteome.5b00860'
+    }
     def __init__( self, *args, **kwargs):
         # kwargs['engine_path'] = ursgal.__file__
         super(UController, self).__init__(*args, **kwargs)
@@ -84,7 +93,7 @@ class UController(ursgal.UNode):
         self.reset_controller()
         self.unodes = self._collect_all_unode_wrappers()
         # self.unodes = self.collect_all_unodes_from_kb()
-        # self.determine_availability_of_unodes()
+        self.determine_availability_of_unodes()
         # verbose = kwargs.get('verbose', True)
         self.show_unode_overview()
         # input_file = kwargs.get('input_file', None)
@@ -170,116 +179,163 @@ class UController(ursgal.UNode):
             '_by_meta_type' : {}, # groups e.g. all search engines
             '_engine_type' : {}   # groups e.g. all XTandem
         }
-        wrappers_path_glob = os.path.join( ursgal.base_dir, 'engines', '*.py' )
+        wrappers_path_glob = os.path.join( ursgal.base_dir, 'wrappers', '*.py' )
         for wrapper_file in glob.glob( wrappers_path_glob ):
-            filename = os.path.basename( kb_file )
+            filename = os.path.basename( wrapper_file )
+            # if 'omssa' not in wrapper_file:
+            #     self.print_info('Skipping {0} for dev purpose ...'.format(
+            #         filename
+            #     ))
+            #     continue
             if filename.startswith('__'):
                 continue
-            if kb_file.startswith('.'):
+            if wrapper_file.startswith('.'):
                 continue
             wrapper_module_name = filename.replace('.py', '')
+
             wrapper_module = importlib.__import__(
                 "ursgal.wrappers.{0}".format( wrapper_module_name ),
                 fromlist = [ wrapper_module_name ]
             )
-            assert hasattr(engine_module, engine ), '''
+            assert hasattr(wrapper_module, wrapper_module_name ), '''
             wrappers/{0}.py contains no class named {0}
             '''.format( wrapper_module_name )
 
-            wrapper = getattr(engine_module, engine)
-            try:
-                initialized_wrapper_class = engine_class(
-                    engine_path = engine_exe_path
-                )
-            except TypeError:
-                print('''
 
-        Do you have *args and **kwargs in your Class ?
+            wrapper_class = getattr(wrapper_module, wrapper_module_name)
+        #     try:
+        #         initialized_wrapper_class = wrapper_class(
+        #             engine_path = engine_exe_path
+        #         )
+        #     except TypeError:
+        #         print('''
 
-        E.g.:
+        # Do you have *args and **kwargs in your Class ?
 
-        class msblender_09_2015( ursgal.UNode ):
-            def __init__( self,  *args, **kwargs ):
+        # E.g.:
 
-                ''')
-            assert hasattr(wrapper, 'META_INFO' ), '''
-            wrappers/{0}.py contains class attribute META_INFO
-            '''.format( wrapper_module_name )
-            wrapper_meta_info = getattr(wrapper, 'META_INFO')
-            # unodes[ wrapper_module_name ] = {
-            #     'available' : available,
-            #     'type'      : meta_type,
-            #     'class'     : None,
-            #     'engine': kb_module.META_INFO.get(
-            #         'engine',
-            #         None
-            #     ),
-            #     # 'zip_md5'   : kb_module.META_INFO.get(
-            #     #     'zip_md5',
-            #     #     None
-            #     # ),
-            #     'include_in_git': kb_module.META_INFO.get(
-            #         'include_in_git',
-            #         None
-            #     ),
-            #     'cannot_distribute': kb_module.META_INFO.get(
-            #         'cannot_distribute',
-            #         None
-            #     ),
-            #     'META_INFO': kb_module.META_INFO
-            # }
-            exit(1)
+        # class msblender_09_2015( ursgal.UNode ):
+        #     def __init__( self,  *args, **kwargs ):
 
-            unodes[ wrapper_module_name ] = {}
-            if hasattr(kb_module, 'META_INFO'):
-                if self.params['show_unodes_in_development'] is False:
-                    is_dev_unode = kb_module.META_INFO.get(
-                        'in_development',
-                        False
+        #         ''')
+
+            '''NOTE: This has to be assert in the final version '''
+
+            # assert hasattr(wrapper_class, 'META_INFO' ), '''
+            # wrappers/{0}.py contains class attribute META_INFO
+            # '''.format( wrapper_module_name )
+
+            if hasattr(wrapper_class, 'META_INFO' ):
+                wrapper_meta_info = getattr(wrapper_class, 'META_INFO')
+            else:
+                wrapper_meta_info = {}
+            engine            = wrapper_meta_info.get('engine', None)
+            include_in_git    = wrapper_meta_info.get('include_in_git', None)
+            in_development    = wrapper_meta_info.get('in_development', True)
+            # not sure if we need those below ...
+            zip_md5           = wrapper_meta_info.get('zip_md5', None)
+            cannot_distribute = wrapper_meta_info.get('cannot_distribute', None)
+            # and if so please change cannot_distribute >> distributable
+
+            unodes[ wrapper_module_name ] = {
+                'available'         : False,
+                'type'              : None,
+                'class'             : None,
+                'engine'            : engine,
+                'include_in_git'    : include_in_git,
+                'cannot_distribute' : None,  # <Seriously ...
+                'distributable'     : False,
+                'META_INFO'         : wrapper_meta_info,
+                'in_development'    : in_development,
+                'import_status'     : 'n/d',
+                '_wrapper_class'    : wrapper_class,
+            }
+
+            engine_type = wrapper_meta_info.get('engine_type', {})
+            for meta_type, meta_type_bool in engine_type.items():
+                if meta_type_bool is True:
+                    if meta_type not in unodes['_by_meta_type'].keys():
+                        unodes['_by_meta_type'][ meta_type ] = []
+                    unodes['_by_meta_type'][ meta_type ].append(
+                        wrapper_module_name
                     )
-                    if is_dev_unode:
-                        unodes[kb_module_name]['in_development'] = True
-                        # UNode is in development and not shown in overview,
-                        # but technically available and can be executed
 
-                engine_type = kb_module.META_INFO['engine_type']
-                for meta_type, meta_type_bool in engine_type.items():
-                    if meta_type_bool:
-                        available = False
-                        if kb_module_name == self.engine:
-                            # controller :)
-                            available = True
-                        unodes[ kb_module_name ] = {
-                            'available' : available,
-                            'type'      : meta_type,
-                            'class'     : None,
-                            'engine': kb_module.META_INFO.get(
-                                'engine',
-                                None
-                            ),
-                            # 'zip_md5'   : kb_module.META_INFO.get(
-                            #     'zip_md5',
-                            #     None
-                            # ),
-                            'include_in_git': kb_module.META_INFO.get(
-                                'include_in_git',
-                                None
-                            ),
-                            'cannot_distribute': kb_module.META_INFO.get(
-                                'cannot_distribute',
-                                None
-                            ),
-                            'META_INFO': kb_module.META_INFO
-                        }
+            # # unodes[ wrapper_module_name ] = {
+            # #     'available' : available,
+            # #     'type'      : meta_type,
+            # #     'class'     : None,
+            # #     'engine': kb_module.META_INFO.get(
+            # #         'engine',
+            # #         None
+            # #     ),
+            # #     # 'zip_md5'   : kb_module.META_INFO.get(
+            # #     #     'zip_md5',
+            # #     #     None
+            # #     # ),
+            # #     'include_in_git': kb_module.META_INFO.get(
+            # #         'include_in_git',
+            # #         None
+            # #     ),
+            # #     'cannot_distribute': kb_module.META_INFO.get(
+            # #         'cannot_distribute',
+            # #         None
+            # #     ),
+            # #     'META_INFO': kb_module.META_INFO,
+            # #     'import_status' : 'n/d',
+            # # }
+            # print( wrapper_meta_info )
+            # exit(1)
 
-                        # only engines that are not tagged as 'in_development'
-                        # are shown in the overview
-                        if not kb_module.META_INFO.get('in_development', False):
-                            if meta_type not in unodes['_by_meta_type'].keys():
-                                unodes['_by_meta_type'][ meta_type ] = []
-                            unodes['_by_meta_type'][ meta_type ].append(
-                                kb_module_name
-                            )
+            # unodes[ wrapper_module_name ] = {}
+            # if hasattr(kb_module, 'META_INFO'):
+            #     if self.params['show_unodes_in_development'] is False:
+            #         is_dev_unode = kb_module.META_INFO.get(
+            #             'in_development',
+            #             False
+            #         )
+            #         if is_dev_unode:
+            #             unodes[kb_module_name]['in_development'] = True
+            #             # UNode is in development and not shown in overview,
+            #             # but technically available and can be executed
+
+            #     engine_type = kb_module.META_INFO['engine_type']
+            #     for meta_type, meta_type_bool in engine_type.items():
+            #         if meta_type_bool:
+            #             available = False
+            #             if kb_module_name == self.engine:
+            #                 # controller :)
+            #                 available = True
+            #             unodes[ kb_module_name ] = {
+            #                 'available' : available,
+            #                 'type'      : meta_type,
+            #                 'class'     : None,
+            #                 'engine': kb_module.META_INFO.get(
+            #                     'engine',
+            #                     None
+            #                 ),
+            #                 # 'zip_md5'   : kb_module.META_INFO.get(
+            #                 #     'zip_md5',
+            #                 #     None
+            #                 # ),
+            #                 'include_in_git': kb_module.META_INFO.get(
+            #                     'include_in_git',
+            #                     None
+            #                 ),
+            #                 'cannot_distribute': kb_module.META_INFO.get(
+            #                     'cannot_distribute',
+            #                     None
+            #                 ),
+            #                 'META_INFO': kb_module.META_INFO
+            #             }
+
+            #             # only engines that are not tagged as 'in_development'
+            #             # are shown in the overview
+            #             if not kb_module.META_INFO.get('in_development', False):
+            #                 if meta_type not in unodes['_by_meta_type'].keys():
+            #                     unodes['_by_meta_type'][ meta_type ] = []
+            #                 unodes['_by_meta_type'][ meta_type ].append(
+            #                     kb_module_name
+            #                 )
         return unodes
 
     def collect_all_unodes_from_kb( self ):
@@ -508,13 +564,19 @@ class UController(ursgal.UNode):
             )
         ]
         for platform_key, arc_key, engine_folder in engine_folders:
-            # print('>>>', platform_key , engine_folder )
             for engine in sorted( self.unodes.keys() ):
+                if engine.startswith('_'):
+                    # we skip _by_meta_type and _engine_type dicts ...
+                    continue
+
                 # kb_info = self.unodes.get( engine, {} )
                 kb_info = self.unodes[ engine ]
-                if len(kb_info.keys()) == 0:
-                    # No info available
-                    continue
+
+                # if len(kb_info.keys()) == 0:
+                #     self.print_info('No wrapper found for ')
+                #     # No info available
+                #     continue
+
                 kb_engine_entry = kb_info.get( 'engine', None )
                 if kb_engine_entry is None:
                     continue
@@ -522,40 +584,25 @@ class UController(ursgal.UNode):
                     continue
                 if arc_key not in kb_engine_entry[ platform_key ].keys():
                     continue
-                plat_form_exe_name = kb_engine_entry[ platform_key ][ arc_key ].get(
+                exe_name = kb_engine_entry[ platform_key ][ arc_key ].get(
                     'exe',
                     None
                 )
-                # print('\t\t', engine, plat_form_exe_name)
-                if plat_form_exe_name is None:
+                if exe_name is None:
                     continue
+
                 # print(platform_key, engine, kb_info)
                 # exit()
 
-                engine_folder_path = os.path.join(
-                    engine_folder,
-                    engine,
-                )
+                engine_folder_path = os.path.join( engine_folder, engine )
+                engine_exe_path = os.path.join( engine_folder_path, exe_name )
 
-                engine_exe_path = os.path.join(
-                    engine_folder_path,
-                    plat_form_exe_name
-                )
-                # print( engine_path )
                 self.unodes[ engine ]['resource_folder'] = engine_folder_path
 
                 if os.path.exists( engine_exe_path ):
-
-                    engine_module = importlib.__import__(
-                        "ursgal.engines.{0}".format( engine ),
-                        fromlist = [ engine ]
-                    )
-                    assert hasattr(engine_module, engine ), '''
-                    engines/{0}.py contains no class named {0}
-                    '''.format( engine )
-                    engine_class = getattr(engine_module, engine)
+                    _wrapper_class = self.unodes[ engine ]['_wrapper_class']
                     try:
-                        self.unodes[ engine ]['class'] = engine_class(
+                        self.unodes[ engine ]['class'] = _wrapper_class(
                             engine_path = engine_exe_path
                         )
                     except TypeError:
