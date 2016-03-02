@@ -82,8 +82,9 @@ class UController(ursgal.UNode):
         self.params = {}
         self.init_kwargs = kwargs
         self.reset_controller()
-        self.unodes = self.collect_all_unodes_from_kb()
-        self.determine_availability_of_unodes()
+        self.unodes = self._collect_all_unode_wrappers()
+        # self.unodes = self.collect_all_unodes_from_kb()
+        # self.determine_availability_of_unodes()
         # verbose = kwargs.get('verbose', True)
         self.show_unode_overview()
         # input_file = kwargs.get('input_file', None)
@@ -155,6 +156,131 @@ class UController(ursgal.UNode):
         # # if self.params
         # self.print_info('Ucontroller resetted {0}...'.format( addon_text ))
         return
+
+    def _collect_all_unode_wrappers( self ):
+        '''
+        The ucontroller function to collect all unode wrappers
+
+        Iterates over all files in the engine folder and checks
+
+        Returns:
+            dict: Dictionary of unodes
+        '''
+        unodes = {
+            '_by_meta_type' : {}, # groups e.g. all search engines
+            '_engine_type' : {}   # groups e.g. all XTandem
+        }
+        wrappers_path_glob = os.path.join( ursgal.base_dir, 'engines', '*.py' )
+        for wrapper_file in glob.glob( wrappers_path_glob ):
+            filename = os.path.basename( kb_file )
+            if filename.startswith('__'):
+                continue
+            if kb_file.startswith('.'):
+                continue
+            wrapper_module_name = filename.replace('.py', '')
+            wrapper_module = importlib.__import__(
+                "ursgal.wrappers.{0}".format( wrapper_module_name ),
+                fromlist = [ wrapper_module_name ]
+            )
+            assert hasattr(engine_module, engine ), '''
+            wrappers/{0}.py contains no class named {0}
+            '''.format( wrapper_module_name )
+
+            wrapper = getattr(engine_module, engine)
+            try:
+                initialized_wrapper_class = engine_class(
+                    engine_path = engine_exe_path
+                )
+            except TypeError:
+                print('''
+
+        Do you have *args and **kwargs in your Class ?
+
+        E.g.:
+
+        class msblender_09_2015( ursgal.UNode ):
+            def __init__( self,  *args, **kwargs ):
+
+                ''')
+            assert hasattr(wrapper, 'META_INFO' ), '''
+            wrappers/{0}.py contains class attribute META_INFO
+            '''.format( wrapper_module_name )
+            wrapper_meta_info = getattr(wrapper, 'META_INFO')
+            # unodes[ wrapper_module_name ] = {
+            #     'available' : available,
+            #     'type'      : meta_type,
+            #     'class'     : None,
+            #     'engine': kb_module.META_INFO.get(
+            #         'engine',
+            #         None
+            #     ),
+            #     # 'zip_md5'   : kb_module.META_INFO.get(
+            #     #     'zip_md5',
+            #     #     None
+            #     # ),
+            #     'include_in_git': kb_module.META_INFO.get(
+            #         'include_in_git',
+            #         None
+            #     ),
+            #     'cannot_distribute': kb_module.META_INFO.get(
+            #         'cannot_distribute',
+            #         None
+            #     ),
+            #     'META_INFO': kb_module.META_INFO
+            # }
+            exit(1)
+
+            unodes[ wrapper_module_name ] = {}
+            if hasattr(kb_module, 'META_INFO'):
+                if self.params['show_unodes_in_development'] is False:
+                    is_dev_unode = kb_module.META_INFO.get(
+                        'in_development',
+                        False
+                    )
+                    if is_dev_unode:
+                        unodes[kb_module_name]['in_development'] = True
+                        # UNode is in development and not shown in overview,
+                        # but technically available and can be executed
+
+                engine_type = kb_module.META_INFO['engine_type']
+                for meta_type, meta_type_bool in engine_type.items():
+                    if meta_type_bool:
+                        available = False
+                        if kb_module_name == self.engine:
+                            # controller :)
+                            available = True
+                        unodes[ kb_module_name ] = {
+                            'available' : available,
+                            'type'      : meta_type,
+                            'class'     : None,
+                            'engine': kb_module.META_INFO.get(
+                                'engine',
+                                None
+                            ),
+                            # 'zip_md5'   : kb_module.META_INFO.get(
+                            #     'zip_md5',
+                            #     None
+                            # ),
+                            'include_in_git': kb_module.META_INFO.get(
+                                'include_in_git',
+                                None
+                            ),
+                            'cannot_distribute': kb_module.META_INFO.get(
+                                'cannot_distribute',
+                                None
+                            ),
+                            'META_INFO': kb_module.META_INFO
+                        }
+
+                        # only engines that are not tagged as 'in_development'
+                        # are shown in the overview
+                        if not kb_module.META_INFO.get('in_development', False):
+                            if meta_type not in unodes['_by_meta_type'].keys():
+                                unodes['_by_meta_type'][ meta_type ] = []
+                            unodes['_by_meta_type'][ meta_type ].append(
+                                kb_module_name
+                            )
+        return unodes
 
     def collect_all_unodes_from_kb( self ):
         '''
@@ -285,7 +411,6 @@ class UController(ursgal.UNode):
                 output_file_name = output_file_name
             )
         return report
-
 
     def convert_to_mgf_and_update_rt_lookup(self, input_file, force=None, output_file_name=None):
         '''
