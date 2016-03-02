@@ -31,7 +31,7 @@ ursgal_params={
             'xtandem',
         ],
         'default_value':"17.00305",
-        'description': ''' The mass added to the peptide C-terminus bz protein cleavage ''',
+        'description': ''' The mass added to the peptide C-terminus by protein cleavage ''',
         'ukey_translation':{
             'xtandem_style_1':'protein, cleavage C-terminal mass change',
         },
@@ -117,7 +117,7 @@ ursgal_params={
     },
     'cpus':{
         'available_in_unode':[
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
             'xtandem',
@@ -132,7 +132,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':'int',
     },
     'del_from_params_before_json_dump':{
@@ -187,7 +187,7 @@ ursgal_params={
     },
     'database':{
         'available_in_unode':[
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
         ],
@@ -200,7 +200,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'decoy_generation_mode':{
@@ -241,7 +241,7 @@ ursgal_params={
     'enzyme':{
         'available_in_unode':[
             'msamanda',
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
             'xtandem',
@@ -337,6 +337,18 @@ ursgal_params={
                 'trypsin_p' : '[RK]|[X]',
                 'trypsin_cnbr' : '[KR]|{P},[M]|{P}',
                 'trypsin_gluc' : '[DEKR]|{P}',
+            },
+            'msgfplus_style_1' : {
+                'nonspecific'            : 0,
+                'trypsin'                : 1,
+                'chymotrypsin'           : 2,
+                'lysc'                   : 3,
+                'lysn'                   : 4,
+                'glutamyl_endopeptidase' : 5,
+                'argc'                   : 6,
+                'aspn'                   : 7,
+                'alpha_lp'               : 8,
+                'no_cleavage'            : 9,
             }
         },
         'uvalue_type':[
@@ -451,19 +463,30 @@ ursgal_params={
     },
     'frag_method':{
         'available_in_unode':[
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
         ],
         'default_value':"hcd",
-        'description': ''' used fragmentatiom method. e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
+        'description': ''' used fragmentation method. e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
         'ukey_translation':{
             'msgfplus_style_1':'-m',
             'myrimatch_style_1':'-FragmentationRule<str>',
         },
         'utag':[
         ],
-        'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_translation': {
+            'msgfplus_style_1' : {
+                'cid' : 1,
+                'etd' : 2,
+                'hcd' : 3,
+            }
+        },
+        'uvalue_type': [
+            'cid',
+            'ecd',
+            'etd',
+            'hcd'
+        ],
     },
     'frag_min_mz':{
         'available_in_unode':[
@@ -505,7 +528,7 @@ ursgal_params={
     'include_reverse (not used)':{
         'available_in_unode':[
             'msamanda',
-            'msgfplus',
+            'msgfplus_v9979',
             'xtandem',
         ],
         'default_value':"",
@@ -522,7 +545,7 @@ ursgal_params={
     },
     'input_file':{
         'available_in_unode':[
-            'msgfplus',
+            'msgfplus_v9979',
             'xtandem',
         ],
         'default_value':"",
@@ -533,7 +556,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation': {},
         'uvalue_type':"",
     },
     'input_file_type':{
@@ -639,7 +662,7 @@ ursgal_params={
     },
     'max_num_mods':{
         'available_in_unode':[
-            'msgfplus',
+            'msgfplus_v9979',
         ],
         'default_value':"2",
         'description': ''' Maximal number of modifications per peptide ''',
@@ -667,7 +690,7 @@ ursgal_params={
     },
     'max_pep_length':{
         'available_in_unode':[
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
         ],
@@ -730,7 +753,7 @@ ursgal_params={
     },
     'min_pep_length':{
         'available_in_unode':[
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
         ],
@@ -781,7 +804,7 @@ ursgal_params={
     'modifications':{
         'available_in_unode':[
             'msamanda',
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
             'xtandem',
@@ -912,7 +935,7 @@ Example:
     'num_match_spec':{
         'available_in_unode':[
             'msamanda',
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
         ],
@@ -975,7 +998,7 @@ Example:
     },
     'precursor_isotope_range':{
         'available_in_unode':[
-            'msgfplus',
+            'msgfplus_v9979',
             'xtandem',
         ],
         'default_value':"0,1",
@@ -992,7 +1015,7 @@ Example:
     'precursor_mass_tolerance_minus':{
         'available_in_unode':[
             'msamanda',
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
             'xtandem',
@@ -1074,7 +1097,7 @@ Example:
     'precursor_max_charge':{
         'available_in_unode':[
             'msamanda',
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
         ],
@@ -1094,7 +1117,7 @@ Example:
     'precursor_min_charge':{
         'available_in_unode':[
             'msamanda',
-            'msgfplus',
+            'msgfplus_v9979',
             'omssa_2_1_9',
         ],
         'default_value':"1",
@@ -1426,7 +1449,7 @@ Example:
     'semi_enzyme':{
         'available_in_unode':[
             'msamanda',
-            'msgfplus',
+            'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
             'xtandem',
@@ -1442,7 +1465,8 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation': {},
+        'uvalue_translation': {
+        },
         'uvalue_type': "bool",
     },
     'show_unodes_in_development':{
@@ -1603,7 +1627,7 @@ Example:
             'ucontroller'
         ],
         'default_value':"validated.csv",
-        'description': ''' CSV suffix of validated idententification files: string, CSV-file which contains PSMs validated with validation tools ''',
+        'description': ''' CSV suffix of validated identification files: string, CSV-file which contains PSMs validated with validation tools ''',
         'ukey_translation':{},
         'utag':['file_extension'
         ],
