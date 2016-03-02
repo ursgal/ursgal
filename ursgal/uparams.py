@@ -250,7 +250,7 @@ ursgal_params={
         'uvalue_type':"",
     },
     'filter_csv_converter_version':{
-        'available_in_unode':[            
+        'available_in_unode':[
             'ucontroller',
         ],
         'default_value':"filter_csv_1_0_0",
@@ -284,7 +284,7 @@ ursgal_params={
         'utag':[
         ],
         'uvalue_translation':"",
-        'uvalue_type':"",
+        'uvalue_type':"bool oder au nid",
     },
     'frag_mass_tolerance':{
         'available_in_unode':[
@@ -670,17 +670,17 @@ ursgal_params={
             '*,opt,Prot-N-term,Acetyl',
             'M,opt,any,Oxidation',
         ],
-        'description': ''' Modifications are given as a list of strings, each representing the modification of one amino acid. The string consists of four informations seperated by comma: 
+        'description': ''' Modifications are given as a list of strings, each representing the modification of one amino acid. The string consists of four informations seperated by comma:
 
-'amino acid,type,position,unimod name’ 
+'amino acid,type,position,unimod name’
 
  amino acid : specify the modified amino acid as a single letter, use '*' if the amino acid is variable
 
- type   : specify if it is a fixed (fix) or potential (opt) modification 
+ type   : specify if it is a fixed (fix) or potential (opt) modification
 
- position  : specify the position within the protein/peptide (Prot-N-term, Prot-C-term), use 'any' if the positon is variable 
+ position  : specify the position within the protein/peptide (Prot-N-term, Prot-C-term), use 'any' if the positon is variable
 
- unimod name : specify the unimod PSI-MS Name (see unimod.org) 
+ unimod name : specify the unimod PSI-MS Name (see unimod.org)
 
 Examples:
 
