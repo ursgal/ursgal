@@ -42,7 +42,7 @@ def main():
 
     engine_list = [
         # 'omssa',
-        xtandem,
+        # xtandem,
         'msgf',
         # msamanda,
     ]

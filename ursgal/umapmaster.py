@@ -37,9 +37,9 @@ class UParamMapper( dict ):
             style = engine_or_engine_style
         else:
             lookup_key = 'engine_2_params'
-            style = self.lookup['engine_2_style'][ engine_or_engine_style ]
+            style = self.lookup['engine_2_style'].get(engine_or_engine_style,  None)
 
-        for uparam in self.lookup[ lookup_key ][ engine_or_engine_style ]:
+        for uparam in self.lookup[ lookup_key ].get(engine_or_engine_style, []):
             sup = self[ uparam ]
 
             yield {
@@ -87,26 +87,42 @@ class UParamMapper( dict ):
         }
         '''
         lookup = {
-            'style_2_engine' : ddict(list),
+            'style_2_engine' : ddict(set),
             'engine_2_style' : {},
             # these two are not in the docu yet ...
             'engine_2_params': ddict(list),
             'style_2_params': ddict(list)
         }
-        for uparam, udict in self.items():
+        for uparam, udict in sorted(self.items()):
+            # print( uparam, end = '\t')
+            if uparam == 'force':
+                print(udict)
             for style in udict['ukey_translation'].keys():
-                style_basename, style_version = style.split('_style_')
-
+                try:
+                    style_basename, style_version = style.split('_style_')
+                except:
+                    print('Syntax Error @ uparam {0}'.format(uparam))
+                    print('style : {0}'.format( style ))
+                    exit(1)
+                vvv = False
+                if style_basename == 'ucontroller':
+                    vvv = True
+                    # print('UController params {0}'.format( uparam ))
+                # else:
+                    # print()
                 styles_seen = set()
                 for engine in udict['available_in_unode']:
+                    # if vvv:
+                    #     print(engine )
                     if style_basename not in engine:
                         continue
 
-                    lookup['style_2_engine'][ style ].append( engine )
-                    if style not in styles_seen:
+                    lookup['style_2_engine'][ style ].add( engine )
+                    lookup['engine_2_params'][ engine ].append( uparam )
+
+                    if True: # style not in styles_seen:
                         lookup['style_2_params'][ style ].append( uparam )
                         styles_seen.add( style )
-                    lookup['engine_2_params'][ engine ].append( uparam )
 
                     parsed_e2s = lookup['engine_2_style'].get( engine, None)
                     if parsed_e2s is None:
@@ -122,6 +138,7 @@ class UParamMapper( dict ):
 
     def show_params_overview( self, engine=None):
         self._assert_engine( engine )
+        # This can be done differently with the lookups now ...
         for param in sorted(self.get_all_params( engine=engine)):
             udefault_value     = self[ param ]['default_value']
 

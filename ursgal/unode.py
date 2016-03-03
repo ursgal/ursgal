@@ -51,24 +51,30 @@ class Meta_UNode(type):
             # This happens only when we call our Controller
             engine = 'ucontroller'
             kwargs['engine_path'] = __file__
-            try:
-                class_default_params = importlib.__import__(
-                    "ursgal.default_params.{0}".format( engine ),
-                    fromlist = ['ursgal.default_params']
-                )
-            except:
-                print("""
-            [ Import failed ]
-            [ Import failed ]\tYou have a syntax error in ursgal.default_params.{0}
-            [ Import failed ] """.format( engine ))
-                exit(1)
-            assert hasattr(class_default_params, 'DEFAULT_PARAMS'), '''
-                DEFAULT_PARAMS dict has to be define in default_params/{0}.py'
-                '''.format( engine )
-            initd_klass.DEFAULT_PARAMS = getattr(class_default_params, 'DEFAULT_PARAMS')
+            # try:
+            #     class_default_params = importlib.__import__(
+            #         "ursgal.default_params.{0}".format( engine ),
+            #         fromlist = ['ursgal.default_params']
+            #     )
+            # except:
+            #     print("""
+            # [ Import failed ]
+            # [ Import failed ]\tYou have a syntax error in ursgal.default_params.{0}
+            # [ Import failed ] """.format( engine ))
+            #     exit(1)
+            # assert hasattr(class_default_params, 'DEFAULT_PARAMS'), '''
+            #     DEFAULT_PARAMS dict has to be define in default_params/{0}.py'
+            #     '''.format( engine )
+            # initd_klass.DEFAULT_PARAMS = getattr(class_default_params, 'DEFAULT_PARAMS')
         else:
             all_parts = os.path.abspath( kwargs['engine_path'] ).split(os.sep)
             engine = all_parts[ -2 ]
+
+        initd_klass.DEFAULT_PARAMS = {}
+        initd_klass.TRANSLATIONS = {}
+        for mDict in Meta_UNode.upama.mapping_dicts( engine ):
+            initd_klass.DEFAULT_PARAMS[ mDict['ukey_translation'] ] = mDict['default_value']
+            initd_klass.TRANSLATIONS[ mDict['ukey_translation'] ] = mDict
         initd_klass.exe = kwargs['engine_path']
         # obligatory_methods = [
         #     'preflight',
@@ -1283,7 +1289,7 @@ class UNode(object, metaclass=Meta_UNode):
         '''
         Translates ursgal parameters into uNode specific syntax.
 
-        1) Each uNode.USED_SEARCH_PARAMS contains params that have
+        1) Each unode.USED_SEARCH_PARAMS contains params that have
         to be passed to the uNode.
 
         2) params values are not translated is they [] or {}
@@ -1294,7 +1300,12 @@ class UNode(object, metaclass=Meta_UNode):
               > translating only key:value pairs to key:newValue
 
         Those lookups are found in kb/{engine}.py
+
+        TAG:
+            - v0.4
         '''
+        print( self.DEFAULT_PARAMS )
+        exit(1)
         translated_params = {}
         for mapped_unode_param in self.USED_USEARCH_PARAMS:
             assert mapped_unode_param in list(params.keys()), '''
