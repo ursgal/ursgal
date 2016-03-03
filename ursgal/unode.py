@@ -26,6 +26,7 @@ class Meta_UNode(type):
     are read and set.
     """
     XX_meta_collected_nodes = {}
+    upama = ursgal.UParamMapper()
 
     def __new__(cls, cls_name, cls_bases, cls_dict ):
         new_class = super(
@@ -139,6 +140,7 @@ class Meta_UNode(type):
 
         Meta_UNode.XX_meta_collected_nodes[ engine ] = initd_klass
         initd_klass.meta_unodes = Meta_UNode.XX_meta_collected_nodes
+        initd_klass.upama = Meta_UNode.upama
         if hasattr( initd_klass, '_run_after_meta_init'):
             initd_klass._after_init_meta_callback( *args, **kwargs )
 

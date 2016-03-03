@@ -1913,12 +1913,21 @@ class UController(ursgal.UNode):
         for meta_type in sorted(self.unodes['_by_meta_type'].keys()):
             if meta_type == 'in_development':
                 continue
+            number_of_no_dev_nodes = 0
+            for engine in sorted(self.unodes['_by_meta_type'][ meta_type ]):
+                if self.unodes[ engine ]['in_development'] is False:
+                    number_of_no_dev_nodes += 1
+
+            if number_of_no_dev_nodes == 0:
+                continue
+
             print('\t{BOLD}{0}{ENDC}(s):'.format(
                 meta_type.upper(),
                 **ursgal.COLORS
             ))
             for engine in sorted(self.unodes['_by_meta_type'][ meta_type ]):
-
+                if self.unodes[ engine ]['in_development']:
+                    continue
                 node_status = self.unodes[ engine ].get(
                     'import_status',
                     'n/a'

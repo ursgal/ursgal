@@ -10,7 +10,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'force':{
@@ -23,7 +23,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':'bool',
     },
     'cleavage_cterm_mass_change':{
@@ -37,7 +37,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'cleavage_nterm_mass_change':{
@@ -51,7 +51,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'compensate_small_fasta':{
@@ -65,7 +65,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'compress_after_post_flight':{
@@ -76,7 +76,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'compress_ext_exculsion':{
@@ -89,7 +89,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'compress_output':{
@@ -100,7 +100,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'compress_raw_search_results_if_possible':{
@@ -112,7 +112,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':['file_handling'
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"bool",
     },
     'cpus':{
@@ -145,7 +145,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':'list',
     },
     'json_extension':{
@@ -158,7 +158,7 @@ ursgal_params={
         },
         'utag':['file_extension',
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"str",
     },
     'helper_extension':{
@@ -171,7 +171,7 @@ ursgal_params={
         },
         'utag':['file_extension',
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"str",
     },
     'csv_filter_rules':{
@@ -182,7 +182,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'database':{
@@ -211,7 +211,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'decoy_tag':{
@@ -222,7 +222,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'del_from_params_before_json_dump':{
@@ -235,7 +235,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':'list',
     },
     'enzyme':{
@@ -387,7 +387,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':['converter_version'
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"str",
     },
     'forbidden_cterm_mods':{
@@ -401,7 +401,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'force':{
@@ -412,7 +412,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"bool",
     },
     'frag_mass_tolerance':{
@@ -428,7 +428,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'frag_mass_tolerance_unit':{
@@ -442,7 +442,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'frag_mass_type':{
@@ -458,7 +458,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'frag_method':{
@@ -499,7 +499,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'helper_extension':{
@@ -510,7 +510,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     # 'ident_csv_suffix':{
@@ -522,7 +522,7 @@ ursgal_params={
     #     'ukey_translation':{},
     #     'utag':['file_extension'
     #     ],
-    #     'uvalue_translation':"",
+    #     'uvalue_translation':{},
     #     'uvalue_type':"str",
     # },
     'include_reverse (not used)':{
@@ -540,7 +540,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'input_file':{
@@ -570,7 +570,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'java_-Xmx':{
@@ -581,7 +581,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'json_extension':{
@@ -592,7 +592,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'label':{
@@ -608,7 +608,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'log_enabled':{
@@ -620,7 +620,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"bool",
     },
     'log_file_name':{
@@ -632,7 +632,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':['file_handling'
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"str",
     },
     'machine_offset_in_ppm':{
@@ -643,7 +643,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'max_mod_alternatives':{
@@ -657,7 +657,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'max_num_mods':{
@@ -671,7 +671,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'max_num_per_mod':{
@@ -685,7 +685,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'max_pep_length':{
@@ -703,7 +703,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'maximal_accounted_observed_peaks':{
@@ -719,7 +719,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'maximum_missed_cleavages':{
@@ -737,7 +737,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'maximum_pep_for_ident_csv':{
@@ -748,7 +748,7 @@ ursgal_params={
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'min_pep_length':{
@@ -766,7 +766,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'mininimal_required_matched_peaks':{
@@ -782,7 +782,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'mininimal_required_observed_peaks':{
@@ -798,7 +798,7 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'modifications':{
@@ -849,7 +849,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'mzidentml_converter_version':{
@@ -861,7 +861,7 @@ Example:
         'ukey_translation':{},
         'utag':['converter_version'
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"str",
     },
     'mzml2mgf_converter_version':{
@@ -873,7 +873,7 @@ Example:
         'ukey_translation':{},
         'utag':['converter_version'
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"str",
     },
     'neutral_loss_enabled':{
@@ -887,7 +887,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'neutral_loss_mass':{
@@ -901,7 +901,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'neutral_loss_window':{
@@ -915,7 +915,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'noise_suppression_enabled':{
@@ -929,7 +929,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'num_match_spec':{
@@ -949,7 +949,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'number_of_i_decimals':{
@@ -960,7 +960,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'number_of_mz_decimals':{
@@ -971,7 +971,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'output_file_type':{
@@ -982,7 +982,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'output_suffix':{
@@ -993,7 +993,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'precursor_isotope_range':{
@@ -1009,7 +1009,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'precursor_mass_tolerance_minus':{
@@ -1031,7 +1031,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'precursor_mass_tolerance_plus':{
@@ -1049,7 +1049,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'precursor_mass_tolerance_unit':{
@@ -1067,7 +1067,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'precursor_mass_type':{
@@ -1111,7 +1111,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'precursor_min_charge':{
@@ -1129,7 +1129,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'precursor_min_mass':{
@@ -1145,7 +1145,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'precursor_ppm_offset':{
@@ -1156,7 +1156,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'prefix':{
@@ -1167,7 +1167,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'raw_ident_csv_suffix':{
@@ -1179,7 +1179,7 @@ Example:
         'ukey_translation':{},
         'utag':['file_extension'
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"str",
     },
     'remove_temporary_files':{
@@ -1191,7 +1191,7 @@ Example:
         'ukey_translation':{},
         'utag':['file_handling'
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"bool",
     },
     'rt_pickle_name':{
@@ -1202,7 +1202,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'scan_exclusion_list':{
@@ -1214,7 +1214,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'scan_skip_modulo_step':{
@@ -1225,7 +1225,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_-h2o_ions':{
@@ -1239,7 +1239,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_-nh3_ions':{
@@ -1253,7 +1253,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_a_ions':{
@@ -1271,7 +1271,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_b_ions':{
@@ -1289,7 +1289,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_c_ions':{
@@ -1307,7 +1307,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_imm_ions':{
@@ -1321,7 +1321,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_int_ions':{
@@ -1335,7 +1335,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_x_ions':{
@@ -1353,7 +1353,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_y_ions':{
@@ -1371,7 +1371,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_z+1_ions':{
@@ -1385,7 +1385,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_z+2_ions':{
@@ -1399,7 +1399,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'score_z_ions':{
@@ -1417,7 +1417,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'search_engines_create_folders':{
@@ -1429,7 +1429,7 @@ Example:
         'ukey_translation':{},
         'utag':['file_handling'
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"bool",
     },
     'search_for_saps':{
@@ -1443,7 +1443,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'semi_enzyme':{
@@ -1478,7 +1478,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':'bool',
     },
     'spec_dynamic_range':{
@@ -1492,7 +1492,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'stp_bias':{
@@ -1506,7 +1506,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'ukey1':{
@@ -1522,7 +1522,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'ukey2':{
@@ -1536,7 +1536,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'ukey3':{
@@ -1550,7 +1550,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'ukey4':{
@@ -1566,7 +1566,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'ukey5':{
@@ -1582,7 +1582,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'ukey6':{
@@ -1596,7 +1596,7 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'unify_csv_converter_version':{
@@ -1608,7 +1608,7 @@ Example:
         'ukey_translation':{},
         'utag':['converter_version'
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"str",
     },
     'use_refine':{
@@ -1619,7 +1619,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
     'validated_ident_csv_suffix':{
@@ -1631,7 +1631,7 @@ Example:
         'ukey_translation':{},
         'utag':['file_extension'
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"str",
     },
     'validation_score_field':{
@@ -1660,7 +1660,7 @@ Example:
         'ukey_translation':{},
         'utag':[
         ],
-        'uvalue_translation':"",
+        'uvalue_translation':{},
         'uvalue_type':"",
     },
 }

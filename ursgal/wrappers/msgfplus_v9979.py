@@ -25,6 +25,7 @@ class msgfplus_v9979( ursgal.UNode ):
                 },
             },
         },
+        'utranslation_style'    : 'msgfplus_style_1',
         'compress_raw_search_results' : True,
         'output_extension'          : '.mzid',
         'input_types'               : ['.mgf', '.mzML'],
@@ -33,7 +34,7 @@ class msgfplus_v9979( ursgal.UNode ):
             'Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) '\
             'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
             'Tandem Mass Spectra: Applications to Database Search.',
-        'in_development'            : True,
+        'in_development'            : False,
         'include_in_git'            : False,
     }
 

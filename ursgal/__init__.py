@@ -22,6 +22,7 @@ version_info = tuple(map(int, ursgal_version.split(".")))
 if not hasattr(sys, "version_info") or sys.version_info < (3, 4):
     raise RuntimeError("Ursgal requires Python 3.4 or later.")
 
+from .umapmaster import UParamMapper
 from .unode import UNode
 from .unode import Meta_UNode
 from .ucontroller import UController

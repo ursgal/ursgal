@@ -9,34 +9,34 @@ from ursgal import umapmaster as umama
 
 TEST_DICT = {
     'enzyme' : {
-        'default' : 'Try',
+        'default_value' : 'trypsin',
         'available_in_unode' : ['omssa', 'xtandem'],
         'description' : 'Enzyme used for digestions',
-        'ukey-translation' : {
+        'ukey_translation' : {
             'omssa_style_1' : '-ot',
             'xtandem_style_1' : 'enzyme'
         },
-        'uvalue-translation' : {
-            'try' : {
-                'omssa_style_1': 1,
-                'xtandem_style_1' : 'try'
+        'uvalue_translation' : {
+            'omssa_style_1' : {
+                'trypsin' : 1
+            },
+            'xtandem_style_1' : {
+                'trypsin' : '[KR]|{P}'
             }
         }
     },
     'frag_mass_type' : {
-        'default' : 'monoisotopic',
+        'default_value' : 'monoisotopic',
         'available_in_unode' : ['omssa'],
         'description' : 'use chemical average or monoisotopic mass for fragment ions.',
-        'ukey-translation' : {
+        'ukey_translation' : {
             'omssa_style_1' : '-tom',
         },
-        'uvalue-translation' : {
-            'monoisotopic' : {
-                'omssa_style_1': 0,
-            },
-            'average' : {
-                'omssa_style_1': 1,
-            },
+        'uvalue_translation' : {
+            'omssa_style' : {
+                'monoisotopic' : 0,
+                'average' : 1
+            }
         }
     },
 }
@@ -44,13 +44,20 @@ TEST_DICT = {
 
 class UMapMaster(unittest.TestCase):
     def setUp(self):
-        self.umama = umama.UParamMapper( TEST_DICT )
+        self.umama_small = umama.UParamMapper( TEST_DICT )
+        self.umama_default = umama.UParamMapper()
 
-
-    def test_get_omssa_all_params(self):
-        all_omssa_params = self.umama.get_all_params( engine='omssa')
-        self.assertEqual(all_omssa_params, ['enzyme', 'frag_mass_type'])
-
+    def test_all_mappings_by_style(self):
+        results = []
+        for mDict in self.umama_small.mapping_dicts('omssa'):
+            results.append( (mDict['ukey'], mDict['default_value']) )
+        self.assertEqual(
+            sorted(results),
+            sorted([
+                ('enzyme', 'trypsin'),
+                ('frag_mass_type', 'monoisotopic' )
+            ])
+        )
 
 if __name__ == '__main__':
     unittest.main()
