@@ -95,8 +95,8 @@ class UParamMapper( dict ):
         }
         for uparam, udict in sorted(self.items()):
             # print( uparam, end = '\t')
-            if uparam == 'force':
-                print(udict)
+            # if uparam == 'force':
+            #     print(udict)
             for style in udict['ukey_translation'].keys():
                 try:
                     style_basename, style_version = style.split('_style_')

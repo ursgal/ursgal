@@ -14,21 +14,19 @@ ursgal_params={
         'uvalue_translation':{},
         'uvalue_type':"int",
     },
-    'force':{
-        'available_in_unode':[
+    'force' : {
+        'available_in_unode' : [
             'ucontroller'
         ],
         'default_value':'False',
         'description': ''' If set 'True', engines are forced to re-run although no node-related parameters have changed''',
-        'ukey_translation':{
-            'ucontroller_style_1' : 'force'
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'force',
         },
         'utag':[
         ],
         'uvalue_translation':{
-            'bowtie_style_1' : {
-                True: 'yes'
-            }
+
         },
         'uvalue_type':'bool',
     },
@@ -438,17 +436,6 @@ ursgal_params={
         'uvalue_translation':{},
         'uvalue_type':"",
     },
-    'force':{
-        'available_in_unode':[
-        ],
-        'default_value':"False",
-        'description': ''' Force: True or False to overwrite the existing files ''',
-        'ukey_translation':{},
-        'utag':[
-        ],
-        'uvalue_translation':{},
-        'uvalue_type':"bool",
-    },
     'frag_mass_tolerance':{
         'available_in_unode':[
             'omssa_2_1_9',
@@ -614,17 +601,6 @@ ursgal_params={
         ],
         'default_value':"13312m",
         'description': ''' set maximum Java heap size ''',
-        'ukey_translation':{},
-        'utag':[
-        ],
-        'uvalue_translation':{},
-        'uvalue_type':"",
-    },
-    'json_extension':{
-        'available_in_unode':[
-        ],
-        'default_value':".u.json",
-        'description': ''' Extention of json file ''',
         'ukey_translation':{},
         'utag':[
         ],
@@ -1732,5 +1708,5 @@ Example:
         ],
         'uvalue_translation':{},
         'uvalue_type':"",
-    },
+    }
 }

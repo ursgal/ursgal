@@ -1305,7 +1305,8 @@ class UNode(object, metaclass=Meta_UNode):
             - v0.4
         '''
         print( self.DEFAULT_PARAMS )
-        exit(1)
+
+        exit("Translation is not done yet ....")
         translated_params = {}
         for mapped_unode_param in self.USED_USEARCH_PARAMS:
             assert mapped_unode_param in list(params.keys()), '''
