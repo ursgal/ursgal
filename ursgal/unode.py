@@ -73,8 +73,12 @@ class Meta_UNode(type):
         initd_klass.DEFAULT_PARAMS = {}
         initd_klass.TRANSLATIONS = {}
         for mDict in Meta_UNode.upama.mapping_dicts( engine ):
-            initd_klass.DEFAULT_PARAMS[ mDict['ukey_translation'] ] = mDict['default_value']
-            initd_klass.TRANSLATIONS[ mDict['ukey_translation'] ] = mDict
+            translated_value = mDict['uvalue_style_translation'].get(
+                mDict['default_value'],
+                mDict['default_value']
+            )
+            initd_klass.DEFAULT_PARAMS[ mDict['ukey_translated'] ] = translated_value
+            initd_klass.TRANSLATIONS[ mDict['ukey'] ] = mDict
         initd_klass.exe = kwargs['engine_path']
         # obligatory_methods = [
         #     'preflight',

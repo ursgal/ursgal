@@ -46,8 +46,8 @@ class UParamMapper( dict ):
                 'ukey'   : uparam,
                 'style'  : style,
                 'default_value' : sup['default_value'],
-                'ukey_translation' : sup['ukey_translation'][ style ],
-                'uvalue_translation' : sup['uvalue_translation'].get(style, {})
+                'ukey_translated' : sup['ukey_translation'][ style ],
+                'uvalue_style_translation' : sup['uvalue_translation'].get(style, {})
             }
 
     def get_all_params( self, engine=None):
