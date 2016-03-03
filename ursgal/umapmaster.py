@@ -97,12 +97,15 @@ class UParamMapper( dict ):
             for style in udict['ukey_translation'].keys():
                 style_basename, style_version = style.split('_style_')
 
+                styles_seen = set()
                 for engine in udict['available_in_unode']:
                     if style_basename not in engine:
                         continue
 
                     lookup['style_2_engine'][ style ].append( engine )
-                    lookup['style_2_params'][ style ].append( uparam )
+                    if style not in styles_seen:
+                        lookup['style_2_params'][ style ].append( uparam )
+                        styles_seen.add( style )
                     lookup['engine_2_params'][ engine ].append( uparam )
 
                     parsed_e2s = lookup['engine_2_style'].get( engine, None)

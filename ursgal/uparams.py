@@ -1,7 +1,7 @@
 ursgal_params={
     'batch_size':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance',
         ],
         'default_value':'100000',
         'description': ''' sets the number of sequences loaded in as a batch from the database file ''',
@@ -9,9 +9,10 @@ ursgal_params={
             'xtandem_style_1':'spectrum, sequence batch size',
         },
         'utag':[
+            'spectrum'
         ],
         'uvalue_translation':{},
-        'uvalue_type':"",
+        'uvalue_type':"int",
     },
     'force':{
         'available_in_unode':[
@@ -23,12 +24,16 @@ ursgal_params={
         },
         'utag':[
         ],
-        'uvalue_translation':{},
+        'uvalue_translation':{
+            'bowtie_style_1' : {
+                True: 'yes'
+            }
+        },
         'uvalue_type':'bool',
     },
     'cleavage_cterm_mass_change':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"17.00305",
         'description': ''' The mass added to the peptide C-terminus by protein cleavage ''',
@@ -42,7 +47,7 @@ ursgal_params={
     },
     'cleavage_nterm_mass_change':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"1.00794",
         'description': ''' The mass added to the peptide N-terminus bz protein cleavage ''',
@@ -56,7 +61,7 @@ ursgal_params={
     },
     'compensate_small_fasta':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"False",
         'description': ''' compensate for very small database files. ''',
@@ -120,7 +125,7 @@ ursgal_params={
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"multiprocessing.cpu_count() - 1",
         'description': ''' Number of used cpus/threads ''',
@@ -244,7 +249,7 @@ ursgal_params={
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance',
         ],
         'default_value':"trypsin",
         'description': '''
@@ -385,14 +390,15 @@ ursgal_params={
         'default_value':"filter_csv_1_0_0",
         'description': ''' filter csv converter version: version name ''',
         'ukey_translation':{},
-        'utag':['converter_version'
+        'utag':[
+            'converter_version'
         ],
         'uvalue_translation':{},
         'uvalue_type':"str",
     },
     'forbidden_cterm_mods':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"[]",
         'description': ''' List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide ''',
@@ -418,7 +424,7 @@ ursgal_params={
     'frag_mass_tolerance':{
         'available_in_unode':[
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"monoisotopic",
         'description': ''' Fragment mass type: monoisotopic or average ''',
@@ -433,7 +439,7 @@ ursgal_params={
     },
     'frag_mass_tolerance_unit':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"ppm",
         'description': ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), Da (Dalton) or mmu (Milli mass unit) ''',
@@ -448,7 +454,7 @@ ursgal_params={
     'frag_mass_type':{
         'available_in_unode':[
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"monoisotopic",
         'description': ''' Fragment mass type: monoisotopic or average ''',
@@ -490,7 +496,7 @@ ursgal_params={
     },
     'frag_min_mz':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"150",
         'description': ''' minimal considered fragment ion m/z ''',
@@ -529,7 +535,7 @@ ursgal_params={
         'available_in_unode':[
             'msamanda',
             'msgfplus_v9979',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"",
         'description': ''' A target decoy database should be generated independently from the search engine, e.g. by using the uNode generate_target_decoy ''',
@@ -546,7 +552,7 @@ ursgal_params={
     'input_file':{
         'available_in_unode':[
             'msgfplus_v9979',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"",
         'description': ''' Input file: path/to/input/file ''',
@@ -561,7 +567,7 @@ ursgal_params={
     },
     'input_file_type':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"None",
         'description': ''' Input file type ''',
@@ -598,7 +604,7 @@ ursgal_params={
     'label':{
         'available_in_unode':[
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"14N",
         'description': ''' 15N if the corresponding amino acid labeling was applied ''',
@@ -648,7 +654,7 @@ ursgal_params={
     },
     'max_mod_alternatives':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"6",
         'description': ''' Maximal number of variable modification alternatives, given as C in 2^C ''',
@@ -676,7 +682,7 @@ ursgal_params={
     },
     'max_num_per_mod':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"{}",
         'description': ''' Maximal number of modification sites per peptide for a specific modification, given as a dictionary: {unimod_name : number} ''',
@@ -709,7 +715,7 @@ ursgal_params={
     'maximal_accounted_observed_peaks':{
         'available_in_unode':[
             'myrimatch',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"50",
         'description': ''' Maximum number of peaks from a spectrum used. ''',
@@ -726,7 +732,7 @@ ursgal_params={
         'available_in_unode':[
             'msamanda',
             'myrimatch',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"2",
         'description': ''' Maximum number of missed cleavages per peptide ''',
@@ -772,7 +778,7 @@ ursgal_params={
     'mininimal_required_matched_peaks':{
         'available_in_unode':[
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"4",
         'description': ''' Mimimum number of matched ions required for a peptide to be scored ''',
@@ -788,7 +794,7 @@ ursgal_params={
     'mininimal_required_observed_peaks':{
         'available_in_unode':[
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"5",
         'description': ''' Mimimum number of peaks in the spectrum to be considered. ''',
@@ -807,7 +813,7 @@ ursgal_params={
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':[
             '*,opt,Prot-N-term,Acetyl',
@@ -878,7 +884,7 @@ Example:
     },
     'neutral_loss_enabled':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"False",
         'description': ''' Neutral losses enabled for spectrum algorithm: set  True or False ''',
@@ -892,7 +898,7 @@ Example:
     },
     'neutral_loss_mass':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"0",
         'description': ''' Sets the centre of the window for ignoring neutral molecule losses. ''',
@@ -906,7 +912,7 @@ Example:
     },
     'neutral_loss_window':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"0",
         'description': ''' Neutral loss window: sets the width of the window for ignoring neutral molecule losses. ''',
@@ -920,7 +926,7 @@ Example:
     },
     'noise_suppression_enabled':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"False",
         'description': ''' used for noise suppresssion ''',
@@ -972,7 +978,7 @@ Example:
         'utag':[
         ],
         'uvalue_translation':{},
-        'uvalue_type':"",
+        'uvalue_type':"int",
     },
     'output_file_type':{
         'available_in_unode':[
@@ -999,7 +1005,7 @@ Example:
     'precursor_isotope_range':{
         'available_in_unode':[
             'msgfplus_v9979',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"0,1",
         'description': ''' Error range for incorrect carbon isotope parent ion assignment ''',
@@ -1009,7 +1015,13 @@ Example:
         },
         'utag':[
         ],
-        'uvalue_translation':{},
+        'uvalue_translation':{
+            'xtandem_style_1' : {
+                '0'     : 'no',
+                '0,1'   : 'yes',
+                '0,2'   : 'yes'
+            }
+        },
         'uvalue_type':"",
     },
     'precursor_mass_tolerance_minus':{
@@ -1018,7 +1030,7 @@ Example:
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"5",
         'description': ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
@@ -1038,7 +1050,7 @@ Example:
         'available_in_unode':[
             'msamanda',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"5",
         'description': ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
@@ -1056,7 +1068,7 @@ Example:
         'available_in_unode':[
             'msamanda',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"ppm",
         'description': ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), Da (Dalton) or mmu (Milli mass unit) ''',
@@ -1135,7 +1147,7 @@ Example:
     'precursor_min_mass':{
         'available_in_unode':[
             'myrimatch',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"400",
         'description': ''' minimal parent ion mass ''',
@@ -1260,7 +1272,7 @@ Example:
         'available_in_unode':[
             'msamanda',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"False",
         'description': ''' Spectrum: if true, a ions are used in algorithm ''',
@@ -1278,7 +1290,7 @@ Example:
         'available_in_unode':[
             'msamanda',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"True",
         'description': ''' Spectrum: if true, b ions are used in algorithm ''',
@@ -1296,7 +1308,7 @@ Example:
         'available_in_unode':[
             'msamanda',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"False",
         'description': ''' Spectrum: if true, c ions are used in algorithm ''',
@@ -1342,7 +1354,7 @@ Example:
         'available_in_unode':[
             'msamanda',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"False",
         'description': ''' Spectrum: if true, x ions are used in algorithm ''',
@@ -1360,7 +1372,7 @@ Example:
         'available_in_unode':[
             'msamanda',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"True",
         'description': ''' Spectrum: if true, y ions are used in algorithm ''',
@@ -1406,7 +1418,7 @@ Example:
         'available_in_unode':[
             'msamanda',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"False",
         'description': ''' Spectrum: if true, z ions are used in algorithm ''',
@@ -1434,7 +1446,7 @@ Example:
     },
     'search_for_saps':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"False",
         'description': ''' search for potential single amino acid polymorphisms ''',
@@ -1452,7 +1464,7 @@ Example:
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"False",
         'description': ''' Allows semi-enzymatic peptide ends ''',
@@ -1483,7 +1495,7 @@ Example:
     },
     'spec_dynamic_range':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"100",
         'description': ''' Spectrum, internal normalization: The highest peak (intensity) within a spectrum is set to given value and all other peaks are normalized to this peak. If the normalized value is less than 1 he peak is rejected. ''',
@@ -1497,7 +1509,7 @@ Example:
     },
     'stp_bias':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"False",
         'description': ''' Interpretation of peptide phosphorylation models. ''',
@@ -1512,7 +1524,7 @@ Example:
     'ukey1':{
         'available_in_unode':[
             'msamanda',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"",
         'description': '''  ''',
@@ -1527,7 +1539,7 @@ Example:
     },
     'ukey2':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"",
         'description': '''  ''',
@@ -1541,7 +1553,7 @@ Example:
     },
     'ukey3':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"",
         'description': '''  ''',
@@ -1556,7 +1568,7 @@ Example:
     'ukey4':{
         'available_in_unode':[
             'msamanda',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"",
         'description': '''  ''',
@@ -1572,7 +1584,7 @@ Example:
     'ukey5':{
         'available_in_unode':[
             'msamanda',
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"",
         'description': '''  ''',
@@ -1587,7 +1599,7 @@ Example:
     },
     'ukey6':{
         'available_in_unode':[
-            'xtandem',
+            'xtandem_cyclone_2010', 'xtandem_jackhammer', 'xtandem_piledriver' , 'xtandem_sledgehammer', 'xtandem_vengeance'
         ],
         'default_value':"",
         'description': '''  ''',
