@@ -3,32 +3,39 @@
 
 import csv
 import sys
-import json
+import re
 import pprint
 
 
 if __name__ == '__main__':
+    input_file_name = sys.argv[1]
+    output_file_name = sys.argv[2]
+
+    print('''
+        Testing params dict for duplicates
+    ''')
+
+    params = set()
+    duplicates = []
+    with open( input_file_name , 'r') as input_file:
+        for line in input_file:
+            if line.startswith('    ') and line[4] == "'":
+                hit = re.match("    '.{1,}'", line)
+                param = hit.group(0).strip()
+                if param not in params:
+                    params.add(param)
+                else:
+                    duplicates.appnd(param)
+    if duplicates == []:
+        print('no duplicates were found')
+    else:
+        print('remove duplicates for:', duplicates)
+        exit()
+
     print('''
         Rewriting params dict
-''')
-    output_file_name = sys.argv[1]
-    # input_file_name = sys.argv[1]
-    # output_file_name = sys.argv[2]
-    # urgsal_dict = json.load( open( input_file_name, 'r' ) )
-
-    # print(j_content)
-    # exit()
-
+    ''')
     from ursgal.uparams import ursgal_params as urgsal_dict
-
-    # with open( output_file_name , 'w') as output_file:
-    #         json.dump(
-    #             urgsal_dict,
-    #             output_file,
-    #             sort_keys = True,
-    #             indent = 4
-    #         )
-    pprint.pprint( urgsal_dict[ 'force' ])
 
     output_file = open(output_file_name, 'w')
     print('ursgal_params = {', file=output_file)
