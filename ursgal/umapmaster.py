@@ -42,12 +42,27 @@ class UParamMapper( dict ):
         for uparam in self.lookup[ lookup_key ].get(engine_or_engine_style, []):
             sup = self[ uparam ]
 
+            uvalue_style_translation = sup['uvalue_translation'].get(style, {})
+            assert isinstance(uvalue_style_translation, dict), '''
+            Syntax error in ursgal/uparams.py at key {0}
+            '''.format( uparam )
+            if len(uvalue_style_translation.keys()) != 0:
+                # can be translated, at least by some engine
+                # and thus is not a list of elements ;)
+                translated_value = uvalue_style_translation.get(
+                    sup['default_value'],
+                    sup['default_value']
+                )
+            else:
+                translated_value = sup['default_value']
             yield {
-                'ukey'   : uparam,
-                'style'  : style,
-                'default_value' : sup['default_value'],
-                'ukey_translated' : sup['ukey_translation'][ style ],
-                'uvalue_style_translation' : sup['uvalue_translation'].get(style, {})
+                'style'                    : style,
+                'ukey'                     : uparam,
+                'ukey_translated'          : sup['ukey_translation'][ style ],
+                'default_value'            : sup['default_value'],
+                'default_value_translated' : translated_value,
+                'uvalue_style_translation' : uvalue_style_translation,
+                'triggers_rerun'           : sup.get('triggers_rerun', True)
             }
 
     def get_all_params( self, engine=None):
@@ -83,6 +98,9 @@ class UParamMapper( dict ):
             },
             'style_2_params' : {
                 'xtandem_style_1' : [ uparam1, uparam2, ... ], ...
+            },
+            'params_triggering_rerun' : {
+                'xtandem_style_1' : [ uparam1, uparam2 .... ]
             }
         }
         '''
@@ -91,7 +109,8 @@ class UParamMapper( dict ):
             'engine_2_style' : {},
             # these two are not in the docu yet ...
             'engine_2_params': ddict(list),
-            'style_2_params': ddict(list)
+            'style_2_params': ddict(list),
+            'params_triggering_rerun' : ddict(list)
         }
         for uparam, udict in sorted(self.items()):
             # print( uparam, end = '\t')
@@ -120,8 +139,10 @@ class UParamMapper( dict ):
                     lookup['style_2_engine'][ style ].add( engine )
                     lookup['engine_2_params'][ engine ].append( uparam )
 
-                    if True: # style not in styles_seen:
+                    if style not in styles_seen:
                         lookup['style_2_params'][ style ].append( uparam )
+                        if udict.get('triggers_rerun', True):
+                            lookup['params_triggering_rerun'][ style ].append( uparam )
                         styles_seen.add( style )
 
                     parsed_e2s = lookup['engine_2_style'].get( engine, None)

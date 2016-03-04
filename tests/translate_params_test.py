@@ -7,36 +7,79 @@ import unittest
 
 class TestRun(unittest.TestCase):
     def setUp(self):
-        self.R = ursgal.UController()
-        self.R.USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
-            'score_a_ions' : {
-                True : 'translate_YES!',
-                False : 'translate_PLEASE_NOT'
-            }
-        }
-        self.R.USEARCH_PARAM_VALUE_TRANSLATIONS = {
-            'trypsin' : 'trypsin_translated',  # value for enzyme
-        }
-        self.R.USED_USEARCH_PARAMS = set(['score_a_ions', 'enzyme'])
-
-    def test_simple_transation(self):
-        translated_params = self.R.translate_params(
+        self.uc = ursgal.UController()
+        self.uc.TRANSLATIONS.update(
             {
-                'enzyme' : 'trypsin',
-                'score_a_ions' : True
+                'test_ions' : {
+                    'style'                    : 'test_style_1',
+                    'ukey'                     : 'test_ions',
+                    'ukey_translated'          : '__test_00000_ions',
+                    'default_value'            : 'Yes',
+                    'default_value_translated' : True,
+                    'uvalue_style_translation' : {
+                        'Yes' : True,
+                        'No'  : False
+                    },
+                    'triggers_rerun'           : True
+                },
+                'score_test_ions' : {
+                    'style'                    : 'test_style_1',
+                    'ukey'                     : 'score_test_ions',
+                    'ukey_translated'          : 'score_test_ions',
+                    'default_value'            : True,
+                    'default_value_translated' : 'Please yes translate',
+                    'uvalue_style_translation' : {
+                        True : 'Please yes translate',
+                        False: 'No please leave me alone'
+                    },
+                    'triggers_rerun'           : True
+                },
+                'list_of_things' : {
+                    'style'                    : 'test_style_1',
+                    'ukey'                     : 'list_of_things',
+                    'ukey_translated'          : 'list_of_things',
+                    'default_value'            : [ True, True, True],
+                    'default_value_translated' : [ True, True, True],
+                    'uvalue_style_translation' : {},
+                    'triggers_rerun'           : True
+                }
             }
         )
-        self.assertEqual(translated_params, {
-            'enzyme' : 'trypsin_translated',
-            'score_a_ions' : 'translate_YES!'
-        })
 
-    def test_missing_used_params( self ):
-        old_used_params = self.R.USED_USEARCH_PARAMS
-        self.R.USED_USEARCH_PARAMS = set(['missing_param!'])
-        with self.assertRaises(Exception):
-            self.R.translate_params({})
-        self.R.USED_USEARCH_PARAMS = old_used_params
+    def test_key_and_value_translation(self):
+        translated_params = self.uc.translate_params(
+            {
+                'test_ions' : 'No',
+            }
+        )
+        self.assertEqual(
+            translated_params['test_ions_key'], '__test_00000_ions'
+        )
+        self.assertEqual(
+            translated_params['test_ions'], False
+        )
 
+
+    def test_bool_translation(self):
+        translated_params = self.uc.translate_params(
+            {
+                'score_test_ions' : False,
+            }
+        )
+        self.assertEqual(
+            translated_params['score_test_ions'], 'No please leave me alone'
+        )
+    def test_empty_translation_return_default(self):
+        translated_params = self.uc.translate_params({})
+        self.assertEqual(
+            translated_params['score_test_ions'], 'Please yes translate'
+        )
+    def test_list_ov_values_is_kept(self):
+        translated_params = self.uc.translate_params(
+            {'list_of_things' : [False, False, False]}
+        )
+        self.assertEqual(
+            translated_params['list_of_things'], [False, False, False]
+        )
 if __name__ == '__main__':
     unittest.main()

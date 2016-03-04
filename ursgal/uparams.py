@@ -713,9 +713,11 @@ ursgal_params = {
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
+
         'default_value' : None,
         'description' :  ''' http download URL, will fail if it is not set by the user ''',
         'trigger_rerun' : True,
+
         'ukey_translation' : {
             'get_http_style_1' : 'http_url',
         },
@@ -883,13 +885,16 @@ ursgal_params = {
     },
     'machine_offset_in_ppm' : {
         'available_in_unode' : [
+            'mzml2mgf_1_0_0'
         ],
-        'default_value' : "None",
+        'default_value' : None,
         'description' :  ''' Machine offset ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'mzml2mgf_style_1' : 'machine_offset_in_ppm'
         },
         'utag' : [
+            'converter'
         ],
         'uvalue_translation' : {
         },
@@ -1328,13 +1333,16 @@ Example:
     },
     'number_of_i_decimals' : {
         'available_in_unode' : [
+            'mzml2mgf_1_0_0'
         ],
-        'default_value' : "5",
+        'default_value' : 5,
         'description' :  ''' Number of decimals for intensity (peak) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'mzml2mgf_style_1' : 'number_of_i_decimals'
         },
         'utag' : [
+            'converter'
         ],
         'uvalue_translation' : {
         },
@@ -1342,13 +1350,16 @@ Example:
     },
     'number_of_mz_decimals' : {
         'available_in_unode' : [
+            'mzml2mgf_1_0_0'
         ],
-        'default_value' : "5",
+        'default_value' : 5,
         'description' :  ''' Number of decimals for m/z mass ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'mzml2mgf_style_1' : 'number_of_mz_decimals'
         },
         'utag' : [
+            'converter'
         ],
         'uvalue_translation' : {
         },
@@ -1610,7 +1621,7 @@ Example:
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
-        'default_value' : "None",
+        'default_value' : None,
         'description' :  ''' Precursor offset in ppm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1626,7 +1637,7 @@ Example:
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : "None",
+        'default_value' : None,
         'description' :  '''  ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1690,13 +1701,16 @@ Example:
     },
     'scan_exclusion_list' : {
         'available_in_unode' : [
+            'mzml2mgf_1_0_0'
         ],
-        'default_value' : "None",
+        'default_value' : None,
         'description' :  ''' spectra rejected during mzml2mgf conversion ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'mzml2mgf_style_1' : 'scan_exclusion_list'
         },
         'utag' : [
+            'converter'
         ],
         'uvalue_translation' : {
         },
@@ -1704,11 +1718,13 @@ Example:
     },
     'scan_skip_modulo_step' : {
         'available_in_unode' : [
+            'mzml2mgf_1_0_0'
         ],
-        'default_value' : "None",
+        'default_value' : None,
         'description' :  ''' include only the n'th spectrum during mzml2mgf conversion ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'mzml2mgf_style_1' : 'scan_skip_modulo_step'
         },
         'utag' : [
         ],

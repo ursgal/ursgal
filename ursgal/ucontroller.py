@@ -1568,10 +1568,10 @@ class UController(ursgal.UNode):
             i_params = self.io['input']['params']
             o_params = self.io['output']['params']
 
-            for used_param in self.meta_unodes[ engine ].USED_USEARCH_PARAMS:
-                # changing the amount of CPUs should not trigger re-run:
-                if used_param == 'cpus':
-                    continue
+            for used_param in self.meta_unodes[ engine ].PARAMS_TRIGGERING_RERUN:
+                # # changing the amount of CPUs should not trigger re-run:
+                # if used_param == 'cpus':
+                #     continue
                 if used_param in o_params.keys() and used_param in i_params.keys():
                     if o_params[ used_param ] != i_params[ used_param ]:
                         reasons.append(
@@ -1585,9 +1585,11 @@ class UController(ursgal.UNode):
                         used_param,
                         None
                     )
+                    default_value = self.meta_unodes[engine].DEFAULT_PARAMS[ used_param ]
+
                     if used_param not in o_params.keys():
                         reasons.append(
-                            'USED_USEARCH_PARAM "{0}" '\
+                            'parameter "{0}" '\
                             'was not found in previous output params.'\
                             '...'.format(used_param)
                         )

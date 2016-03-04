@@ -26,7 +26,9 @@ class Meta_UNode(type):
     are read and set.
     """
     XX_meta_collected_nodes = {}
-    upama = ursgal.UParamMapper()
+    _collected_initialized_unodes = {}
+
+    _uparam_mapper = ursgal.UParamMapper()
 
     def __new__(cls, cls_name, cls_bases, cls_dict ):
         new_class = super(
@@ -51,108 +53,149 @@ class Meta_UNode(type):
             # This happens only when we call our Controller
             engine = 'ucontroller'
             kwargs['engine_path'] = __file__
-            # try:
-            #     class_default_params = importlib.__import__(
-            #         "ursgal.default_params.{0}".format( engine ),
-            #         fromlist = ['ursgal.default_params']
-            #     )
-            # except:
-            #     print("""
-            # [ Import failed ]
-            # [ Import failed ]\tYou have a syntax error in ursgal.default_params.{0}
-            # [ Import failed ] """.format( engine ))
-            #     exit(1)
-            # assert hasattr(class_default_params, 'DEFAULT_PARAMS'), '''
-            #     DEFAULT_PARAMS dict has to be define in default_params/{0}.py'
-            #     '''.format( engine )
-            # initd_klass.DEFAULT_PARAMS = getattr(class_default_params, 'DEFAULT_PARAMS')
         else:
             all_parts = os.path.abspath( kwargs['engine_path'] ).split(os.sep)
             engine = all_parts[ -2 ]
 
         initd_klass.DEFAULT_PARAMS = {}
         initd_klass.TRANSLATIONS = {}
-        for mDict in Meta_UNode.upama.mapping_dicts( engine ):
-            translated_value = mDict['uvalue_style_translation'].get(
-                mDict['default_value'],
-                mDict['default_value']
-            )
-            initd_klass.DEFAULT_PARAMS[ mDict['ukey_translated'] ] = translated_value
-            initd_klass.TRANSLATIONS[ mDict['ukey'] ] = mDict
-        initd_klass.exe = kwargs['engine_path']
-        # obligatory_methods = [
-        #     'preflight',
-        #     'postflight',
-        # ]
+        initd_klass.PARAMS_TRIGGERING_RERUN = set()
 
-        # for method in obligatory_methods:
-        #     engine_method  = getattr( initd_klass, method, None)
-        #     assert callable(engine_method), '''
-        #     {0} class requires {1} method to be defined
-        #     '''.format( engine, method )
+        for mDict in Meta_UNode._uparam_mapper.mapping_dicts( engine ):
+            initd_klass.DEFAULT_PARAMS[ mDict['ukey_translated'] ] = \
+                mDict['default_value_translated']
+            initd_klass.TRANSLATIONS[ mDict['ukey'] ] = mDict
+            if mDict['triggers_rerun']:
+                initd_klass.PARAMS_TRIGGERING_RERUN.add( mDict['ukey'] )
+
+        initd_klass.exe = kwargs['engine_path']
+
+        obligatory_methods = [
+            'preflight',
+            'postflight',
+        ]
+        for method in obligatory_methods:
+            engine_method  = getattr( initd_klass, method, None)
+            assert callable(engine_method), '''
+            {0} class requires {1} method to be defined
+            '''.format( engine, method )
         initd_klass.engine = engine
 
-        # OBLIGATORY_FIELDS = [
-        #     'DEFAULT_PARAMS',
-        #     'META_INFO',
-        # ]
-
-        # for field in OBLIGATORY_FIELDS:
-        #     assert hasattr(initd_klass._kb, field), '''
-        #     {0} dict has to be define in kb/{1}.py'
-        #     '''.format( field, engine )
-
-        # initd_klass.META_INFO = {}
-        # # initd_klass.META_INFO.update( ursgal.kb.ursgal.META_INFO )
-        # initd_klass.META_INFO.update( initd_klass._kb.META_INFO )
-        # initd_klass.DEFAULT_PARAMS = initd_klass._kb.DEFAULT_PARAMS
-        # # initd_klass.available_params = initd_klass._kb.AVAILABLE_PARAMS
-
-        # if hasattr(initd_klass._kb, 'AVAILABLE_PARAMS'):
-        #     initd_klass.AVAILABLE_PARAMS = initd_klass._kb.AVAILABLE_PARAMS
-        # else:
-        #     initd_klass.AVAILABLE_PARAMS = initd_klass._kb.DEFAULT_PARAMS
-
-        # OPTIONAL_FIELDS = [
-        #     'VALUE_TRANSLATIONS',
-        #     'SPECIFIC_TRANSLATIONS',
-        #     'DEFAULT_PARAMS'
-        # ]
-
-        # for field in OPTIONAL_FIELDS:
-        #     if hasattr(initd_klass._kb, field):
-        #         o = getattr( initd_klass._kb, field)
-        #         setattr( initd_klass, field, o )
-        #     else:
-        #         setattr( initd_klass, field, {} )
-
-        # NEW_FIELDS = [
-        #     'USED_USEARCH_PARAMS',
-        #     'USEARCH_PARAM_KEY_VALUE_TRANSLATOR',
-        #     'USEARCH_PARAM_VALUE_TRANSLATIONS'
-        # ]
-
-        # for field in NEW_FIELDS:
-        #     if hasattr(initd_klass._kb, field):
-        #         o = getattr( initd_klass._kb, field)
-        #         setattr( initd_klass, field, o )
-        #     else:
-        #         setattr( initd_klass, field, {} )
-
-        # # essential_default_params = {
-        # #     'output_suffix'   : '',
-        # #     'rm_tmp_files'    : False,
-        # #     'rm_config_files' : False,
-        # # }
-        # # for k, v in essential_default_params.items():
-        # #     if k not in initd_klass.default_params.keys():
-        # #         initd_klass.default_params[ k ] = v
-
-        Meta_UNode.XX_meta_collected_nodes[ engine ] = initd_klass
-        initd_klass.meta_unodes = Meta_UNode.XX_meta_collected_nodes
-        initd_klass.upama = Meta_UNode.upama
+        Meta_UNode._collected_initialized_unodes[ engine ] = initd_klass
+        initd_klass.meta_unodes = Meta_UNode._collected_initialized_unodes
+        initd_klass.uparam_mapper = Meta_UNode._uparam_mapper
         if hasattr( initd_klass, '_run_after_meta_init'):
             initd_klass._after_init_meta_callback( *args, **kwargs )
+
+
+        # v0.3.4 below
+        # engine_path = kwargs.get('engine_path', None)
+        # if engine_path is None:
+        #     # This happens only when we call our Controller
+        #     engine = 'ucontroller'
+        #     kwargs['engine_path'] = __file__
+        #     # try:
+        #     #     class_default_params = importlib.__import__(
+        #     #         "ursgal.default_params.{0}".format( engine ),
+        #     #         fromlist = ['ursgal.default_params']
+        #     #     )
+        #     # except:
+        #     #     print("""
+        #     # [ Import failed ]
+        #     # [ Import failed ]\tYou have a syntax error in ursgal.default_params.{0}
+        #     # [ Import failed ] """.format( engine ))
+        #     #     exit(1)
+        #     # assert hasattr(class_default_params, 'DEFAULT_PARAMS'), '''
+        #     #     DEFAULT_PARAMS dict has to be define in default_params/{0}.py'
+        #     #     '''.format( engine )
+        #     # initd_klass.DEFAULT_PARAMS = getattr(class_default_params, 'DEFAULT_PARAMS')
+        # else:
+        #     all_parts = os.path.abspath( kwargs['engine_path'] ).split(os.sep)
+        #     engine = all_parts[ -2 ]
+
+        # initd_klass.DEFAULT_PARAMS = {}
+        # initd_klass.TRANSLATIONS = {}
+        # for mDict in Meta_UNode.upama.mapping_dicts( engine ):
+        #     translated_value = mDict['uvalue_style_translation'].get(
+        #         mDict['default_value'],
+        #         mDict['default_value']
+        #     )
+        #     initd_klass.DEFAULT_PARAMS[ mDict['ukey_translated'] ] = translated_value
+        #     initd_klass.TRANSLATIONS[ mDict['ukey'] ] = mDict
+        # initd_klass.exe = kwargs['engine_path']
+        # # obligatory_methods = [
+        # #     'preflight',
+        # #     'postflight',
+        # # ]
+
+        # # for method in obligatory_methods:
+        # #     engine_method  = getattr( initd_klass, method, None)
+        # #     assert callable(engine_method), '''
+        # #     {0} class requires {1} method to be defined
+        # #     '''.format( engine, method )
+        # initd_klass.engine = engine
+
+        # # OBLIGATORY_FIELDS = [
+        # #     'DEFAULT_PARAMS',
+        # #     'META_INFO',
+        # # ]
+
+        # # for field in OBLIGATORY_FIELDS:
+        # #     assert hasattr(initd_klass._kb, field), '''
+        # #     {0} dict has to be define in kb/{1}.py'
+        # #     '''.format( field, engine )
+
+        # # initd_klass.META_INFO = {}
+        # # # initd_klass.META_INFO.update( ursgal.kb.ursgal.META_INFO )
+        # # initd_klass.META_INFO.update( initd_klass._kb.META_INFO )
+        # # initd_klass.DEFAULT_PARAMS = initd_klass._kb.DEFAULT_PARAMS
+        # # # initd_klass.available_params = initd_klass._kb.AVAILABLE_PARAMS
+
+        # # if hasattr(initd_klass._kb, 'AVAILABLE_PARAMS'):
+        # #     initd_klass.AVAILABLE_PARAMS = initd_klass._kb.AVAILABLE_PARAMS
+        # # else:
+        # #     initd_klass.AVAILABLE_PARAMS = initd_klass._kb.DEFAULT_PARAMS
+
+        # # OPTIONAL_FIELDS = [
+        # #     'VALUE_TRANSLATIONS',
+        # #     'SPECIFIC_TRANSLATIONS',
+        # #     'DEFAULT_PARAMS'
+        # # ]
+
+        # # for field in OPTIONAL_FIELDS:
+        # #     if hasattr(initd_klass._kb, field):
+        # #         o = getattr( initd_klass._kb, field)
+        # #         setattr( initd_klass, field, o )
+        # #     else:
+        # #         setattr( initd_klass, field, {} )
+
+        # # NEW_FIELDS = [
+        # #     'USED_USEARCH_PARAMS',
+        # #     'USEARCH_PARAM_KEY_VALUE_TRANSLATOR',
+        # #     'USEARCH_PARAM_VALUE_TRANSLATIONS'
+        # # ]
+
+        # # for field in NEW_FIELDS:
+        # #     if hasattr(initd_klass._kb, field):
+        # #         o = getattr( initd_klass._kb, field)
+        # #         setattr( initd_klass, field, o )
+        # #     else:
+        # #         setattr( initd_klass, field, {} )
+
+        # # # essential_default_params = {
+        # # #     'output_suffix'   : '',
+        # # #     'rm_tmp_files'    : False,
+        # # #     'rm_config_files' : False,
+        # # # }
+        # # # for k, v in essential_default_params.items():
+        # # #     if k not in initd_klass.default_params.keys():
+        # # #         initd_klass.default_params[ k ] = v
+
+        # Meta_UNode.XX_meta_collected_nodes[ engine ] = initd_klass
+        # initd_klass.meta_unodes = Meta_UNode.XX_meta_collected_nodes
+        # initd_klass.upama = Meta_UNode.upama
+        # if hasattr( initd_klass, '_run_after_meta_init'):
+        #     initd_klass._after_init_meta_callback( *args, **kwargs )
 
         return initd_klass
 
@@ -1308,61 +1351,80 @@ class UNode(object, metaclass=Meta_UNode):
         TAG:
             - v0.4
         '''
-        print( self.DEFAULT_PARAMS )
-
-        exit("Translation is not done yet ....")
+        # print( self.DEFAULT_PARAMS )
         translated_params = {}
-        for mapped_unode_param in self.USED_USEARCH_PARAMS:
-            assert mapped_unode_param in list(params.keys()), '''
-            Missing required parameter {0}.
-            All engine parameters (in kb.{1}.USED_USEARCH_PARAMS)
-            have to be passed in params.
-            '''.format(mapped_unode_param, self.engine, )
-
-            ursgal_value = params[ mapped_unode_param ]
-            # print(ursgal_value, type( ursgal_value ))
-            if isinstance( ursgal_value, list) is True:
-                translated_value = ursgal_value
-            elif isinstance( ursgal_value, dict) is True:
-                translated_value = ursgal_value
-                # print( '''>>?<''' )
+        for ukey, mDict in self.TRANSLATIONS.items():
+            pvalue = params.get( ukey, mDict['default_value'] )
+            if pvalue == mDict['default_value']:
+                translated_value = mDict['default_value_translated']
             else:
-                # -- USEARCH_PARAM_KEY_VALUE_TRANSLATOR --
-                LOOKUP = self.USEARCH_PARAM_KEY_VALUE_TRANSLATOR
-                if mapped_unode_param in LOOKUP.keys():
-
-                    assert ursgal_value in LOOKUP[ mapped_unode_param ].keys(), '''
-        {0} is defined in kb.{1}.USEARCH_PARAM_KEY_VALUE_TRANSLATOR,
-        yet the ursgal_value {2}
-        has no specific translation defined.'''.format(
-                        mapped_unode_param,
-                        self.engine,
-                        ursgal_value
-                    )
-                    translated_value = \
-                        LOOKUP[ mapped_unode_param ][ ursgal_value ]
-                # -- USEARCH_PARAM_VALUE_TRANSLATIONS --
+                if isinstance( pvalue, list):
+                    translated_value = pvalue
+                elif isinstance( pvalue, dict):
+                    translated_value = pvalue
                 else:
-                    LOOKUP = self.USEARCH_PARAM_VALUE_TRANSLATIONS
-                    if ursgal_value in LOOKUP.keys():
-                        lookup_list = list( LOOKUP.keys() )
-                        index       = lookup_list.index( ursgal_value )
-                        lookup_key  = lookup_list[ index ]
-                        # print(ursgal_value, lookup_key)
-
-                        if lookup_key == ursgal_value and type(lookup_key) == type(ursgal_value):
-                            # print(ursgal_value, lookup_key)
-
-                            translated_value = LOOKUP.get(ursgal_value, None)
-                            # print(translated_value)
-                            if translated_value is None:
-                                translated_value = ursgal_value
-                        else:
-                            translated_value = ursgal_value
-                    else:
-                        translated_value = ursgal_value
-            translated_params[ mapped_unode_param ] = translated_value
+                    translated_value = mDict['uvalue_style_translation'].get(
+                        pvalue,
+                        pvalue
+                    )
+            translated_params[ mDict['ukey'] ] = translated_value
+            translated_params[ '{ukey}_key'.format(**mDict) ] = mDict['ukey_translated']
         return translated_params
+
+
+        # exit("Translation is not done yet ....")
+        # translated_params = {}
+        # for mapped_unode_param in self.USED_USEARCH_PARAMS:
+        #     assert mapped_unode_param in list(params.keys()), '''
+        #     Missing required parameter {0}.
+        #     All engine parameters (in kb.{1}.USED_USEARCH_PARAMS)
+        #     have to be passed in params.
+        #     '''.format(mapped_unode_param, self.engine, )
+
+        #     ursgal_value = params[ mapped_unode_param ]
+        #     # print(ursgal_value, type( ursgal_value ))
+        #     if isinstance( ursgal_value, list) is True:
+        #         translated_value = ursgal_value
+        #     elif isinstance( ursgal_value, dict) is True:
+        #         translated_value = ursgal_value
+        #         # print( '''>>?<''' )
+        #     else:
+        #         # -- USEARCH_PARAM_KEY_VALUE_TRANSLATOR --
+        #         LOOKUP = self.USEARCH_PARAM_KEY_VALUE_TRANSLATOR
+        #         if mapped_unode_param in LOOKUP.keys():
+
+        #             assert ursgal_value in LOOKUP[ mapped_unode_param ].keys(), '''
+        # {0} is defined in kb.{1}.USEARCH_PARAM_KEY_VALUE_TRANSLATOR,
+        # yet the ursgal_value {2}
+        # has no specific translation defined.'''.format(
+        #                 mapped_unode_param,
+        #                 self.engine,
+        #                 ursgal_value
+        #             )
+        #             translated_value = \
+        #                 LOOKUP[ mapped_unode_param ][ ursgal_value ]
+        #         # -- USEARCH_PARAM_VALUE_TRANSLATIONS --
+        #         else:
+        #             LOOKUP = self.USEARCH_PARAM_VALUE_TRANSLATIONS
+        #             if ursgal_value in LOOKUP.keys():
+        #                 lookup_list = list( LOOKUP.keys() )
+        #                 index       = lookup_list.index( ursgal_value )
+        #                 lookup_key  = lookup_list[ index ]
+        #                 # print(ursgal_value, lookup_key)
+
+        #                 if lookup_key == ursgal_value and type(lookup_key) == type(ursgal_value):
+        #                     # print(ursgal_value, lookup_key)
+
+        #                     translated_value = LOOKUP.get(ursgal_value, None)
+        #                     # print(translated_value)
+        #                     if translated_value is None:
+        #                         translated_value = ursgal_value
+        #                 else:
+        #                     translated_value = ursgal_value
+        #             else:
+        #                 translated_value = ursgal_value
+        #     translated_params[ mapped_unode_param ] = translated_value
+        # return translated_params
 
     def time_point( self, tag=None, diff=True, format_time=False, stop=False ):
         '''
