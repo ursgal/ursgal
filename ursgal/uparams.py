@@ -1502,6 +1502,7 @@ Example:
     'precursor_mass_tolerance_unit' : {
         'available_in_unode' : [
             'msamanda',
+            'msgfplus_v9979',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
