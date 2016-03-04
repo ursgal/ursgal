@@ -752,28 +752,28 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'input_file' : {
-        'available_in_unode' : [
-            'msgfplus_v9979',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : "",
-        'description' :  ''' Input file: path/to/input/file ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'msgfplus_style_1' : '-s',
-            'xtandem_style_1' : 'spectrum, path',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
+    # 'input_file' : {
+    #     'available_in_unode' : [
+    #         'msgfplus_v9979',
+    #         'xtandem_cyclone_2010',
+    #         'xtandem_jackhammer',
+    #         'xtandem_piledriver',
+    #         'xtandem_sledgehammer',
+    #         'xtandem_vengeance',
+    #     ],
+    #     'default_value' : "",
+    #     'description' :  ''' Input file: path/to/input/file ''',
+    #     'trigger_rerun' : True,
+    #     'ukey_translation' : {
+    #         'msgfplus_style_1' : '-s',
+    #         'xtandem_style_1' : 'spectrum, path',
+    #     },
+    #     'utag' : [
+    #     ],
+    #     'uvalue_translation' : {
+    #     },
+    #     'uvalue_type' : "",
+    # },
     'input_file_type' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
