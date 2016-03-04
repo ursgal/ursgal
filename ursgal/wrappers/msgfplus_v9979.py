@@ -42,7 +42,6 @@ class msgfplus_v9979( ursgal.UNode ):
         super(msgfplus_v9979, self).__init__(*args, **kwargs)
         pass
 
-
     def preflight( self ):
         '''
         Formatting the command line via self.params
@@ -52,7 +51,11 @@ class msgfplus_v9979( ursgal.UNode ):
         Returns:
                 dict: self.params
         '''
-
+        import pprint
+        pprint.pprint(
+            self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        )
+        exit(1)
         self.params['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
             self.params['file_root'] + '.mgf'

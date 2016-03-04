@@ -836,6 +836,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'msgfplus_v9979',
         ],
         'default_value' : "14N",
         'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
@@ -843,6 +844,7 @@ ursgal_params = {
         'ukey_translation' : {
             'omssa_style_1' : '-tem / -tom',
             'xtandem_style_1' : 'protein, modified residue mass file',
+            'msgfplus_style_1' : 'label',
         },
         'utag' : [
         ],

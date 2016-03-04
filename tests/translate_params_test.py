@@ -25,7 +25,7 @@ class TestRun(unittest.TestCase):
                 'score_test_ions' : {
                     'style'                    : 'test_style_1',
                     'ukey'                     : 'score_test_ions',
-                    'ukey_translated'          : 'score_test_ions',
+                    'ukey_translated'          : '__test_00000_ions',
                     'default_value'            : True,
                     'default_value_translated' : 'Please yes translate',
                     'uvalue_style_translation' : {
@@ -80,6 +80,15 @@ class TestRun(unittest.TestCase):
         )
         self.assertEqual(
             translated_params['list_of_things'], [False, False, False]
+        )
+
+    def test_grouping_on_translated_keys(self):
+        translated_params = self.uc.translate_params({})
+        self.assertEqual(
+            len(
+                translated_params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']['__test_00000_ions']
+            ),
+            2
         )
 if __name__ == '__main__':
     unittest.main()

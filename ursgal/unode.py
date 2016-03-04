@@ -59,12 +59,14 @@ class Meta_UNode(type):
 
         initd_klass.DEFAULT_PARAMS = {}
         initd_klass.TRANSLATIONS = {}
+        initd_klass.TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY = {}
         initd_klass.PARAMS_TRIGGERING_RERUN = set()
-
         for mDict in Meta_UNode._uparam_mapper.mapping_dicts( engine ):
-            initd_klass.DEFAULT_PARAMS[ mDict['ukey_translated'] ] = \
+            initd_klass.DEFAULT_PARAMS[ mDict['ukey'] ] = \
                 mDict['default_value_translated']
+
             initd_klass.TRANSLATIONS[ mDict['ukey'] ] = mDict
+
             if mDict['triggers_rerun']:
                 initd_klass.PARAMS_TRIGGERING_RERUN.add( mDict['ukey'] )
 
@@ -217,16 +219,16 @@ class UNode(object, metaclass=Meta_UNode):
             # 'executable_path' : self.exe,
             'file_info': {}
         }
-        self.stats = self._regenerate_default_stats()
+        self.stats               = self._regenerate_default_stats()
         # This can be updated during __init__
-        self.created_tmp_files = []
-        self.lookups = {}
-        self.user_defined_params  = {}
-        self.force = False
-        self.preflight_answer = None
-        self.execute_answer = None
-        self.postflight_answer = None
-        self.dependencies_ok = True
+        self.created_tmp_files   = []
+        self.lookups             = {}
+        self.user_defined_params = {}
+        self.force               = False
+        self.preflight_answer    = None
+        self.execute_answer      = None
+        self.postflight_answer   = None
+        self.dependencies_ok     = True
         #self.loaded_json = False  # not used?
 
     def _regenerate_default_stats( self ):
@@ -1353,8 +1355,11 @@ class UNode(object, metaclass=Meta_UNode):
         '''
         # print( self.DEFAULT_PARAMS )
         translated_params = {}
+        GROUPED_TRANSLATIONS = {}
         for ukey, mDict in self.TRANSLATIONS.items():
             pvalue = params.get( ukey, mDict['default_value'] )
+            ukey_t = mDict['ukey_translated']
+
             if pvalue == mDict['default_value']:
                 translated_value = mDict['default_value_translated']
             else:
@@ -1367,8 +1372,20 @@ class UNode(object, metaclass=Meta_UNode):
                         pvalue,
                         pvalue
                     )
+
             translated_params[ mDict['ukey'] ] = translated_value
-            translated_params[ '{ukey}_key'.format(**mDict) ] = mDict['ukey_translated']
+            translated_params[ '{ukey}_key'.format(**mDict) ] = ukey_t
+
+            if ukey_t not in GROUPED_TRANSLATIONS.keys():
+                GROUPED_TRANSLATIONS[ ukey_t ] = {}
+            GROUPED_TRANSLATIONS[ ukey_t ].update(
+                {
+                    mDict['ukey'] : translated_value
+                }
+            )
+        translated_params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] = \
+            GROUPED_TRANSLATIONS
+
         return translated_params
 
 
