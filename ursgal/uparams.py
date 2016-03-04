@@ -152,7 +152,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "multiprocessing.cpu_count() - 1",
+        'default_value' : 4,
         'description' :  ''' Number of used cpus/threads ''',
         'trigger_rerun' : False,
         'ukey_translation' : {
@@ -249,6 +249,35 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
     },
+    'engine_internal_decoy_generation' : {
+        'available_in_unode' : [
+            'msamanda',
+            'msgfplus_v9979',
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
+        ],
+        'default_value' : False,
+        'description' :  ''' Engine creates an own decoy database. Not recommended, because a target decoy database should be generated independently from the search engine, e.g. by using the uNode generate_target_decoy_1_0_0 ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'msamanda_style_1' : 'generate_decoy',
+            'msgfplus_style_1' : '-tda',
+            'xtandem_style_1' : 'scoring, include reverse',
+        },
+        'utag' : [
+            'input',
+        ],
+        'uvalue_translation' : {
+            'msgfplus_style_1' : {
+                False : '0',
+                True : '1',
+            },
+        },
+        'uvalue_type' : "bool",
+    },
     'enzyme' : {
         'available_in_unode' : [
             'msamanda',
@@ -271,7 +300,6 @@ ursgal_params = {
                 'chymotrypsin_p' -> '[FMWY]|[X]'
                 'cnbr'           -> '[M]|{P}'
                 'elastase'       -> '[AGILV]|{P}'
-                # Note not all search engines support all enzymes ! :)
                 'formic_acid'    -> '[D]|{P}'
                 'gluc'
                 'lysc'
@@ -288,7 +316,8 @@ ursgal_params = {
                 'trypsin'
                 'trypsin_chymotrypsin
                 'trypsin_cnbr'
-                'trypsin_p' ''',
+                'trypsin_p'
+                # Note not all search engines support all enzymes ! :) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'enzyme specificity',
@@ -298,6 +327,7 @@ ursgal_params = {
             'xtandem_style_1' : 'protein, cleavage site',
         },
         'utag' : [
+            'protein',
         ],
         'uvalue_translation' : {
             'msgfplus_style_1' : {
@@ -514,7 +544,7 @@ ursgal_params = {
             'myrimatch',
         ],
         'default_value' : "hcd",
-        'description' :  ''' used fragmentation method. e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
+        'description' :  ''' Used fragmentation method, e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-m',
@@ -728,52 +758,6 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
-    'include_reverse (not used)' : {
-        'available_in_unode' : [
-            'msamanda',
-            'msgfplus_v9979',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : "",
-        'description' :  ''' A target decoy database should be generated independently from the search engine, e.g. by using the uNode generate_target_decoy ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'generate_decoy',
-            'msgfplus_style_1' : '-tda',
-            'xtandem_style_1' : 'scoring, include reverse',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
-    # 'input_file' : {
-    #     'available_in_unode' : [
-    #         'msgfplus_v9979',
-    #         'xtandem_cyclone_2010',
-    #         'xtandem_jackhammer',
-    #         'xtandem_piledriver',
-    #         'xtandem_sledgehammer',
-    #         'xtandem_vengeance',
-    #     ],
-    #     'default_value' : "",
-    #     'description' :  ''' Input file: path/to/input/file ''',
-    #     'trigger_rerun' : True,
-    #     'ukey_translation' : {
-    #         'msgfplus_style_1' : '-s',
-    #         'xtandem_style_1' : 'spectrum, path',
-    #     },
-    #     'utag' : [
-    #     ],
-    #     'uvalue_translation' : {
-    #     },
-    #     'uvalue_type' : "",
-    # },
     'input_file_type' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
@@ -793,6 +777,34 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "",
+    },
+    'instrument' : {
+        'available_in_unode' : [
+            'msgfplus_v9979',
+        ],
+        'default_value' : "q_exactive",
+        'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'msgfplus_style_1' : '-inst',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+            'msgfplus_style_1' : {
+                'high_res_ltq' : '1',
+                'low_res_ltq' : '0',
+                'q_exactive' : '3',
+                'tof' : '2',
+            },
+        },
+        'uvalue_type' : [
+            'high_res_ltq',
+            'low_res_ltq',
+            'q_exactive',
+            'tof',
+        ],
     },
     'java_-Xmx' : {
         'available_in_unode' : [
@@ -924,13 +936,11 @@ ursgal_params = {
     },
     'max_num_mods' : {
         'available_in_unode' : [
-            'msgfplus_v9979',
         ],
         'default_value' : "2",
         'description' :  ''' Maximal number of modifications per peptide ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'msgfplus_style_1' : 'NumMods',
         },
         'utag' : [
         ],
@@ -964,7 +974,7 @@ ursgal_params = {
             'myrimatch',
             'omssa_2_1_9',
         ],
-        'default_value' : "40",
+        'default_value' : 40,
         'description' :  ''' Maximal length of a peptide ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -973,10 +983,11 @@ ursgal_params = {
             'omssa_style_1' : '-nox',
         },
         'utag' : [
+            'peptide',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'maximal_accounted_observed_peaks' : {
         'available_in_unode' : [
@@ -1061,7 +1072,7 @@ ursgal_params = {
             'myrimatch',
             'omssa_2_1_9',
         ],
-        'default_value' : "6",
+        'default_value' : 6,
         'description' :  ''' Minimal length of a peptide ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1070,10 +1081,11 @@ ursgal_params = {
             'omssa_style_1' : '-no',
         },
         'utag' : [
+            'peptide',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'mininimal_required_matched_peaks' : {
         'available_in_unode' : [
@@ -1214,6 +1226,23 @@ Example:
         },
         'uvalue_type' : "str",
     },
+    'mzidentml_outputFragmentation' : {
+        'available_in_unode' : [
+            'mzidentml_lib_1_6_10',
+        ],
+        'default_value' : False,
+        'description' :  ''' Include fragmentation in mzidentml_lib output ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'mzidentml_style_1' : '-outputFragmentation',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
     'mzml2mgf_converter_version' : {
         'available_in_unode' : [
             'ucontroller',
@@ -1319,7 +1348,7 @@ Example:
             'omssa_2_1_9',
         ],
         'default_value' : 10,
-        'description' :  ''' This parameter sets the maximum number of peptide spectrum matches to report for each spectrum ''',
+        'description' :  ''' Maximum number of peptide spectrum matches to report for each spectrum ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'Specify the number of matches to report for each spectrum',
@@ -1328,10 +1357,12 @@ Example:
             'omssa_style_1' : 'maximum number of hits retained per precursor charge state per spectrum',
         },
         'utag' : [
+            'output',
+            'scoring',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'number_of_i_decimals' : {
         'available_in_unode' : [
@@ -1366,6 +1397,27 @@ Example:
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+    },
+    'output_add_features' : {
+        'available_in_unode' : [
+            'msgfplus_v9979',
+        ],
+        'default_value' : True,
+        'description' :  ''' Number of decimals for intensity (peak) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'msgfplus_style_1' : '-addFeatures',
+        },
+        'utag' : [
+            'output',
+        ],
+        'uvalue_translation' : {
+            'msgfplus_style_1' : {
+                False : '0',
+                True : '1',
+            },
+        },
+        'uvalue_type' : "bool",
     },
     'output_file_incl_path' : {
         'available_in_unode' : [
@@ -1484,16 +1536,17 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "5",
+        'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'ms1_tol',
-            'omssa_style_1' : '-te',
             'msgfplus_style_1' : '-t',
+            'omssa_style_1' : '-te',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
         },
         'utag' : [
+            'precursor',
         ],
         'uvalue_translation' : {
         },
@@ -1565,8 +1618,8 @@ Example:
             'myrimatch',
             'omssa_2_1_9',
         ],
-        'default_value' : "5",
-        'description' :  ''' maximal accepted parent ion charge ''',
+        'default_value' : 5,
+        'description' :  ''' Maximal accepted parent ion charge ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'considered_charges',
@@ -1575,10 +1628,11 @@ Example:
             'omssa_style_1' : '-zh',
         },
         'utag' : [
+            'precursor',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'precursor_min_charge' : {
         'available_in_unode' : [
@@ -1586,8 +1640,8 @@ Example:
             'msgfplus_v9979',
             'omssa_2_1_9',
         ],
-        'default_value' : "1",
-        'description' :  ''' minimal accepted parent ion charge ''',
+        'default_value' : 1,
+        'description' :  ''' Minimal accepted parent ion charge ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'considered_charges',
@@ -1595,10 +1649,11 @@ Example:
             'omssa_style_1' : '-zl',
         },
         'utag' : [
+            'precursor',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'precursor_min_mass' : {
         'available_in_unode' : [
@@ -2026,7 +2081,7 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Allows semi-enzymatic peptide ends ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -2036,8 +2091,13 @@ Example:
             'xtandem_style_1' : 'protein, cleavage semi',
         },
         'utag' : [
+            'protein',
         ],
         'uvalue_translation' : {
+            'msgfplus_style_1' : {
+                False : '2',
+                True : '1',
+            },
         },
         'uvalue_type' : "bool",
     },

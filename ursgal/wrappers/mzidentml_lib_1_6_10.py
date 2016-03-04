@@ -30,6 +30,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
             'protein identification data.',
         'in_development'            : True,
         'include_in_git'            : False,
+        'utranslation_style'    : 'mzidentml_lib_1_6_10',
 
         'engine': {
             'platform_independent' : {

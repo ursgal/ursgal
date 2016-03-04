@@ -51,26 +51,36 @@ class msgfplus_v9979( ursgal.UNode ):
         Returns:
                 dict: self.params
         '''
-        import pprint
-        pprint.pprint(
-            self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
-        )
-        exit(1)
+
+        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        # import pprint
+        # pprint.pprint(translations)
+        # exit(1)
+
+        self.params[ 'command_list' ] = [
+            'java',
+            '-jar', 
+            self.exe,
+        ]
+
         self.params['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
-            self.params['file_root'] + '.mgf'
+            self.params['input_file']
         )
+        translations['-s']['mgf_input_file'] = self.params['mgf_input_file']
 
         self.params['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
+        translations['-o']['output_file_incl_path'] = self.params['output_file_incl_path']
 
         self.params['modification_file'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file'] + '_Mods.txt'
         )
         self.created_tmp_files.append( self.params['modification_file'] )
+        translations['-mod']['modifications'] = self.params['modification_file']
 
         mods_file = open( self.params['modification_file'], 'w', encoding = 'UTF-8' )
         modifications = []
@@ -97,28 +107,30 @@ class msgfplus_v9979( ursgal.UNode ):
 
         mods_file.close()
 
+        translations['-t'] = { '-t' : '{0}{1}, {2}{1}'.format(
+                    translations['-t']['precursor_mass_tolerance_minus'],
+                    translations['-t']['precursor_mass_tolerance_unit'],
+                    translations['-t']['precursor_mass_tolerance_plus'],
+                )}
 
-        self.params[ 'command_list' ] = [
-            'java', '{java_-Xmx_key}{java_-Xmx}'.format( **self.params), '-jar', self.exe, # path 2 MS-GF+ executable
-            '{mgf_input_file_key}'.format( **self.params), '{mgf_input_file}'.format( **self.params), # SpectrumFile (*.mzML, *.mzXML, *.mgf, *.ms2, *.pkl or *_dta.txt)
-            '{database_key}'.format(**self.params), '{database}'.format(**self.params), # DatabaseFile (*.fasta or *.fa)
-            '{output_file_incl_path_key}'.format(**self.params), '{output_file_incl_path}'.format(**self.params), # OutputFile (*.mzid) (Default: SpectrumFileName.mzid)
-            '{precursor_mass_tolerance_unit}'.format(**self.params), '{precursor_mass_tolerance_minus}{precursor_mass_tolerance_unit}, {precursor_mass_tolerance_plus}{precursor_mass_tolerance_unit}'.format(**self.params), # PrecursorMassTolerance] (e.g. 2.5Da, 20ppm or 0.5Da,2.5Da, Default: 20ppm)
-            '-ti', '{precursor_isotope_range}'.format(**self.params), # IsotopeErrorRange (Range of allowed isotope peak errors, Default:0,1)
-            '-thread', '{cpus}'.format(**self.params), # NumThreads] (Number of concurrent threads to be executed, Default: Number of available cores)
-            '-tda', '0', # (0: don't search decoy database (Default), 1: search decoy database)
-            '-m', '{frag_method}'.format(**self.params), # FragmentMethodID (0: As written in the spectrum or CID if no info (Default), 1: CID, 2: ETD, 3: HCD)
-            '-inst', '{instrument}'.format(**self.params), # InstrumentID (0: Low-res LCQ/LTQ (Default), 1: High-res LTQ, 2: TOF, 3: Q-Exactive)
-            '-e', '{enzyme}'.format(**self.params), # EnzymeID (0: unspecific cleavage, 1: Trypsin (Default), 2: Chymotrypsin, 3: Lys-C, 4: Lys-N, 5: glutamyl endopeptidase, 6: Arg-C, 7: Asp-N, 8: alphaLP, 9: no cleavage)
-            '-protocol', '{msgfplus_protocol_id}' # (0: NoProtocol (Default), 1: Phosphorylation, 2: iTRAQ, 3: iTRAQPhospho)
-            '-ntt', '{semi_enzyme}'.format(**self.params), #(Number of Tolerable Termini, Default: 2)
-            '-mod', '{modification_file}'.format(**self.params), # ModificationFileName (Modification file, Default: standard amino acids with fixed C+57)
-            '-minLength', '{min_pep_length}'.format(**self.params), # MinPepLength (Minimum peptide length to consider, Default: 6)
-            '-maxLength', '{max_pep_length}'.format(**self.params), # MaxPepLength (Maximum peptide length to consider, Default: 40)
-            '-minCharge', '{precursor_min_charge}'.format(**self.params), # MinCharge (Minimum precursor charge to consider if charges are not specified in the spectrum file, Default: 2)
-            '-maxCharge', '{precursor_max_charge}'.format(**self.params), # MaxCharge (Maximum precursor charge to consider if charges are not specified in the spectrum file, Default: 3)
-            '-n', '{num_match_spec}'.format(**self.params), # NumMatchesPerSpec (Number of matches per spectrum to be reported, Default: 1)
-            '-addFeatures', '1', # (0: output basic scores only (Default), 1: output additional features)
-        ]
+        command_dict = {}
+            
+        for translated_key, translation_dict in translations.items():
+            if translated_key == '-Xmx':
+                self.params[ 'command_list' ].insert(1,'{0}{1}'.format(
+                    translated_key, 
+                    list(translation_dict.values())[0]
+                ))
+            elif translated_key == 'label':
+                continue
+            elif len(translation_dict) == 1:
+                command_dict[translated_key] = str((list(translation_dict.values())[0]))
+
+            else:
+                print('well .... shit', translated_key)
+                exit(1)
+        for k, v in command_dict.items():
+            self.params[ 'command_list' ].extend((k, v))
+        print( ' '.join(self.params[ 'command_list' ]) )
 
         return self.params

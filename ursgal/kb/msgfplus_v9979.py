@@ -24,66 +24,66 @@
 #     'include_in_git'            : False,
 # }
 
-DEFAULT_PARAMS = {
-    'validation_score_field'    : 'MS-GF:SpecEValue',
-    'evalue_field'              : 'MS-GF:SpecEValue',
-    'validation_minimum_score'  : 1e-100,
-    'bigger_scores_better'      : False,
-    'max_num_mods'              : 2,
-}
+# DEFAULT_PARAMS = {
+#     'validation_score_field'    : 'MS-GF:SpecEValue',
+#     'evalue_field'              : 'MS-GF:SpecEValue',
+#     'validation_minimum_score'  : 1e-100,
+#     'bigger_scores_better'      : False,
+#     'max_num_mods'              : 2,
+# }
 
-USEARCH_PARAM_VALUE_TRANSLATIONS = {
-    'nonspecific'            : 0,
-    'trypsin'                : 1,
-    'chymotrypsin'           : 2,
-    'lysc'                   : 3,
-    'lysn'                   : 4,
-    'glutamyl_endopeptidase' : 5,
-    'argc'                   : 6,
-    'aspn'                   : 7,
-    'alpha_lp'               : 8,
-    'no_cleavage'            : 9,
-    'cid'                    : 1,
-    'etd'                    : 2,
-    'hcd'                    : 3,
-    'da'                     : 'Da',
-    'low_res_LTQ'            : 0,
-    'high_res_LTQ'           : 1,
-    'tof'                    : 2,
-    'q_exactive'             : 3,
-}
+# USEARCH_PARAM_VALUE_TRANSLATIONS = {
+#     'nonspecific'            : 0,
+#     'trypsin'                : 1,
+#     'chymotrypsin'           : 2,
+#     'lysc'                   : 3,
+#     'lysn'                   : 4,
+#     'glutamyl_endopeptidase' : 5,
+#     'argc'                   : 6,
+#     'aspn'                   : 7,
+#     'alpha_lp'               : 8,
+#     'no_cleavage'            : 9,
+#     'cid'                    : 1,
+#     'etd'                    : 2,
+#     'hcd'                    : 3,
+#     'da'                     : 'Da',
+#     'low_res_LTQ'            : 0,
+#     'high_res_LTQ'           : 1,
+#     'tof'                    : 2,
+#     'q_exactive'             : 3,
+# }
 
-USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
-    'semi_enzyme' : {
-        True : 1,
-        False : 2
-    }
-}
+# USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
+#     'semi_enzyme' : {
+#         True : 1,
+#         False : 2
+#     }
+# }
 
-USED_USEARCH_PARAMS = set( [
-    'modifications',
-    'semi_enzyme',
-    'enzyme',
-    'precursor_mass_tolerance_unit',
-    'precursor_mass_tolerance_minus',
-    'precursor_mass_tolerance_plus',
-    'precursor_isotope_range',
-    'instrument',
-    'cpus',
-    'database',
-    'max_pep_length',
-    'min_pep_length',
-    'num_match_spec',
-    'frag_method',
-    'precursor_min_charge',
-    'precursor_max_charge',
-    'validation_score_field',
-    'evalue_field',
-    'validation_minimum_score',
-    'bigger_scores_better',
-    'max_num_mods',
-    'java_-Xmx',
-] )
+# USED_USEARCH_PARAMS = set( [
+#     'modifications',
+#     'semi_enzyme',
+#     'enzyme',
+#     'precursor_mass_tolerance_unit',
+#     'precursor_mass_tolerance_minus',
+#     'precursor_mass_tolerance_plus',
+#     'precursor_isotope_range',
+#     'instrument',
+#     'cpus',
+#     'database',
+#     'max_pep_length',
+#     'min_pep_length',
+#     'num_match_spec',
+#     'frag_method',
+#     'precursor_min_charge',
+#     'precursor_max_charge',
+#     'validation_score_field',
+#     'evalue_field',
+#     'validation_minimum_score',
+#     'bigger_scores_better',
+#     'max_num_mods',
+#     'java_-Xmx',
+# ] )
 
 
 
