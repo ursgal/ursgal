@@ -27,6 +27,7 @@ class get_http_files_1_0_0( ursgal.UNode ):
                 },
             },
         },
+        'utranslation_style'        : 'get_http_style_1',
         'in_development'            : True,
         'input_types'    : '',
         'output_suffix'  : None,

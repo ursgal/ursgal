@@ -31,7 +31,7 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
                 },
             },
         },
-
+        'utranslation_style'    : 'get_ftp_style_1',
         'input_types': '',
         'output_suffix' :  None,
         'in_development' : True,

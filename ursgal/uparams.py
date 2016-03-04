@@ -1,5 +1,5 @@
 ursgal_params = {
-    'batch_size':{
+    'batch_size' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -9,6 +9,7 @@ ursgal_params = {
         ],
         'default_value' : "100000",
         'description' :  ''' sets the number of sequences loaded in as a batch from the database file ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, sequence batch size',
         },
@@ -19,7 +20,7 @@ ursgal_params = {
         },
         'uvalue_type' : "int",
     },
-    'cleavage_cterm_mass_change':{
+    'cleavage_cterm_mass_change' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -29,6 +30,7 @@ ursgal_params = {
         ],
         'default_value' : "17.00305",
         'description' :  ''' The mass added to the peptide C-terminus by protein cleavage ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, cleavage C-terminal mass change',
         },
@@ -38,7 +40,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'cleavage_nterm_mass_change':{
+    'cleavage_nterm_mass_change' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -48,6 +50,7 @@ ursgal_params = {
         ],
         'default_value' : "1.00794",
         'description' :  ''' The mass added to the peptide N-terminus bz protein cleavage ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, cleavage N-terminal mass change',
         },
@@ -57,7 +60,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'compensate_small_fasta':{
+    'compensate_small_fasta' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -67,6 +70,7 @@ ursgal_params = {
         ],
         'default_value' : "False",
         'description' :  ''' compensate for very small database files. ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'scoring, cyclic permutation',
         },
@@ -76,11 +80,12 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'compress_after_post_flight':{
+    'compress_after_post_flight' : {
         'available_in_unode' : [
         ],
         'default_value' : "False",
         'description' :  ''' Compress after post flight: True or False to .GZ  NOTE: This is old stuff, init ? ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -89,13 +94,14 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'compress_ext_exculsion':{
+    'compress_ext_exculsion' : {
         'available_in_unode' : [
         ],
         'default_value' : [
             '.csv',
         ],
         'description' :  ''' file type excluded from compression ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -104,11 +110,12 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'compress_output':{
+    'compress_output' : {
         'available_in_unode' : [
         ],
         'default_value' : "False",
         'description' :  ''' Compress output: True or False to .GZ ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -117,12 +124,13 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'compress_raw_search_results_if_possible':{
+    'compress_raw_search_results_if_possible' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "True",
         'description' :  ''' Compress raw search result to .gz: True or False ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'compress_raw_search_results_if_possible',
         },
@@ -133,7 +141,7 @@ ursgal_params = {
         },
         'uvalue_type' : "bool",
     },
-    'cpus':{
+    'cpus' : {
         'available_in_unode' : [
             'msgfplus_v9979',
             'myrimatch',
@@ -146,6 +154,7 @@ ursgal_params = {
         ],
         'default_value' : "multiprocessing.cpu_count() - 1",
         'description' :  ''' Number of used cpus/threads ''',
+        'trigger_rerun' : False,
         'ukey_translation' : {
             'msgfplus_style_1' : '-thread',
             'myrimatch_style_1' : '-cpus <integer>',
@@ -153,16 +162,18 @@ ursgal_params = {
             'xtandem_style_1' : 'spectrum, threads',
         },
         'utag' : [
+            'hardware_resources',
         ],
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
     },
-    'csv_filter_rules':{
+    'csv_filter_rules' : {
         'available_in_unode' : [
         ],
         'default_value' : "None",
         'description' :  ''' Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -171,30 +182,33 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'database':{
+    'database' : {
         'available_in_unode' : [
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
         ],
-        'default_value' : "",
-        'description' :  ''' path/to/database/file ''',
+        'default_value' : None,
+        'description' :  ''' Path to database file ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-d',
             'myrimatch_style_1' : '-ProteinDatabase <string>',
             'omssa_style_1' : '-d',
         },
         'utag' : [
+            'input',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "str",
     },
-    'decoy_generation_mode':{
+    'decoy_generation_mode' : {
         'available_in_unode' : [
         ],
         'default_value' : "shuffle_peptide",
         'description' :  ''' Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein). ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -203,11 +217,12 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'decoy_tag':{
+    'decoy_tag' : {
         'available_in_unode' : [
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -216,7 +231,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'del_from_params_before_json_dump':{
+    'del_from_params_before_json_dump' : {
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -224,6 +239,7 @@ ursgal_params = {
             'grouped_psms',
         ],
         'description' :  ''' List of parameters that are deleted before .json is dumped (to not overload the .json with unimportant informations) ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'del_from_params_before_json_dump',
         },
@@ -233,7 +249,7 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
     },
-    'enzyme':{
+    'enzyme' : {
         'available_in_unode' : [
             'msamanda',
             'msgfplus_v9979',
@@ -273,6 +289,7 @@ ursgal_params = {
                 'trypsin_chymotrypsin
                 'trypsin_cnbr'
                 'trypsin_p' ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-e',
@@ -374,12 +391,13 @@ ursgal_params = {
             'trypsin_p',
         ],
     },
-    'filter_csv_converter_version':{
+    'filter_csv_converter_version' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "filter_csv_1_0_0",
         'description' :  ''' filter csv converter version: version name ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'filter_csv_converter_version',
         },
@@ -390,7 +408,7 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
-    'forbidden_cterm_mods':{
+    'forbidden_cterm_mods' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -400,6 +418,7 @@ ursgal_params = {
         ],
         'default_value' : "[]",
         'description' :  ''' List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'residue, potential modification mass',
         },
@@ -409,12 +428,13 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'force':{
+    'force' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "False",
         'description' :  ''' If set 'True', engines are forced to re-run although no node-related parameters have changed ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'force',
         },
@@ -424,7 +444,7 @@ ursgal_params = {
         },
         'uvalue_type' : "bool",
     },
-    'frag_mass_tolerance':{
+    'frag_mass_tolerance' : {
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -435,6 +455,7 @@ ursgal_params = {
         ],
         'default_value' : "monoisotopic",
         'description' :  ''' Fragment mass type: monoisotopic or average ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-to',
             'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error',
@@ -445,7 +466,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'frag_mass_tolerance_unit':{
+    'frag_mass_tolerance_unit' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -455,6 +476,7 @@ ursgal_params = {
         ],
         'default_value' : "ppm",
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), Da (Dalton) or mmu (Milli mass unit) ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error units',
         },
@@ -464,7 +486,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'frag_mass_type':{
+    'frag_mass_type' : {
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -475,6 +497,7 @@ ursgal_params = {
         ],
         'default_value' : "monoisotopic",
         'description' :  ''' Fragment mass type: monoisotopic or average ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-tom',
             'xtandem_style_1' : 'spectrum, fragment mass type',
@@ -485,13 +508,14 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'frag_method':{
+    'frag_method' : {
         'available_in_unode' : [
             'msgfplus_v9979',
             'myrimatch',
         ],
         'default_value' : "hcd",
         'description' :  ''' used fragmentation method. e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-m',
             'myrimatch_style_1' : '-FragmentationRule<str>',
@@ -512,7 +536,7 @@ ursgal_params = {
             'hcd',
         ],
     },
-    'frag_min_mz':{
+    'frag_min_mz' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -522,6 +546,7 @@ ursgal_params = {
         ],
         'default_value' : "150",
         'description' :  ''' minimal considered fragment ion m/z ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, minimum fragment mz',
         },
@@ -531,12 +556,132 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'helper_extension':{
+    'ftp_blocksize' : {
+        'available_in_unode' : [
+            'get_ftp_files_1_0_0',
+        ],
+        'default_value' : 1024,
+        'description' :  ''' Blocksize for ftp download ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'get_http_style_1' : 'ftp_blocksize',
+        },
+        'utag' : [
+            'download',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'ftp_folder' : {
+        'available_in_unode' : [
+            'get_ftp_files_1_0_0',
+        ],
+        'default_value' : None,
+        'description' :  ''' ftp folder that should be downloaded ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'get_http_style_1' : 'ftp_folder',
+        },
+        'utag' : [
+            'download',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'ftp_include_ext' : {
+        'available_in_unode' : [
+            'get_ftp_files_1_0_0',
+        ],
+        'default_value' : None,
+        'description' :  ''' Only files with the defined file extension are downloaded with ftp download ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'get_http_style_1' : 'ftp_include_ext',
+        },
+        'utag' : [
+            'download',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'ftp_max_number_of_files' : {
+        'available_in_unode' : [
+            'get_ftp_files_1_0_0',
+        ],
+        'default_value' : None,
+        'description' :  ''' Maximum number of files that will be downloaded ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'get_http_style_1' : 'ftp_max_number_of_files',
+        },
+        'utag' : [
+            'download',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'ftp_output_folder' : {
+        'available_in_unode' : [
+            'get_ftp_files_1_0_0',
+        ],
+        'default_value' : None,
+        'description' :  ''' Default ftp download path ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'get_http_style_1' : 'ftp_output_folder',
+        },
+        'utag' : [
+            'download',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'ftp_password' : {
+        'available_in_unode' : [
+            'get_ftp_files_1_0_0',
+        ],
+        'default_value' : None,
+        'description' :  ''' ftp download password ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'get_http_style_1' : 'ftp_password',
+        },
+        'utag' : [
+            'download',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'ftp_url' : {
+        'available_in_unode' : [
+            'get_ftp_files_1_0_0',
+        ],
+        'default_value' : None,
+        'description' :  ''' ftp download URL, will fail if it is not set by the user ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'get_http_style_1' : 'ftp_url',
+        },
+        'utag' : [
+            'download',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'helper_extension' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : ".u.json",
         'description' :  ''' Exension for helper files ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'helper_extension',
         },
@@ -547,12 +692,13 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
-    'http_output_folder':{
+    'http_output_folder' : {
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
         'default_value' : "None",
         'description' :  ''' Default http download path ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'http_output_folder',
         },
@@ -563,7 +709,24 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
-    'include_reverse (not used)':{
+    'http_url' : {
+        'available_in_unode' : [
+            'get_http_files_1_0_0',
+        ],
+        'default_value' : None,
+        'description' :  ''' http download URL, will fail if it is not set by the user ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'get_http_style_1' : 'http_url',
+        },
+        'utag' : [
+            'download',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'include_reverse (not used)' : {
         'available_in_unode' : [
             'msamanda',
             'msgfplus_v9979',
@@ -575,6 +738,7 @@ ursgal_params = {
         ],
         'default_value' : "",
         'description' :  ''' A target decoy database should be generated independently from the search engine, e.g. by using the uNode generate_target_decoy ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'generate_decoy',
             'msgfplus_style_1' : '-tda',
@@ -586,7 +750,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'input_file':{
+    'input_file' : {
         'available_in_unode' : [
             'msgfplus_v9979',
             'xtandem_cyclone_2010',
@@ -597,6 +761,7 @@ ursgal_params = {
         ],
         'default_value' : "",
         'description' :  ''' Input file: path/to/input/file ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-s',
             'xtandem_style_1' : 'spectrum, path',
@@ -607,7 +772,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'input_file_type':{
+    'input_file_type' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -617,6 +782,7 @@ ursgal_params = {
         ],
         'default_value' : "None",
         'description' :  ''' Input file type ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, path type',
         },
@@ -626,25 +792,30 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'java_-Xmx':{
+    'java_-Xmx' : {
         'available_in_unode' : [
+            'msgfplus_v9979',
         ],
         'default_value' : "13312m",
-        'description' :  ''' set maximum Java heap size ''',
+        'description' :  ''' Set maximum Java heap size (used RAM) ''',
+        'trigger_rerun' : False,
         'ukey_translation' : {
+            'msgfplus_style_1' : '-Xmx',
         },
         'utag' : [
+            'hardware_resources',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "str",
     },
-    'json_extension':{
+    'json_extension' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : ".u.json",
         'description' :  ''' Exension for .json files ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'json_extension',
         },
@@ -655,7 +826,7 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
-    'label':{
+    'label' : {
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -666,6 +837,7 @@ ursgal_params = {
         ],
         'default_value' : "14N",
         'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-tem / -tom',
             'xtandem_style_1' : 'protein, modified residue mass file',
@@ -676,12 +848,13 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'log_enabled':{
+    'log_enabled' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "False",
         'description' :  ''' Will redirect sys.stdout to the logfile, default name: ursgal.log ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'log_enabled',
         },
@@ -691,12 +864,13 @@ ursgal_params = {
         },
         'uvalue_type' : "bool",
     },
-    'log_file_name':{
+    'log_file_name' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "None",
         'description' :  ''' This can be used to specify a different log file path ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'log_file_name',
         },
@@ -707,11 +881,12 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
-    'machine_offset_in_ppm':{
+    'machine_offset_in_ppm' : {
         'available_in_unode' : [
         ],
         'default_value' : "None",
         'description' :  ''' Machine offset ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -720,7 +895,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'max_mod_alternatives':{
+    'max_mod_alternatives' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -730,6 +905,7 @@ ursgal_params = {
         ],
         'default_value' : "6",
         'description' :  ''' Maximal number of variable modification alternatives, given as C in 2^C ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, ptm complexity',
         },
@@ -739,12 +915,13 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'max_num_mods':{
+    'max_num_mods' : {
         'available_in_unode' : [
             'msgfplus_v9979',
         ],
         'default_value' : "2",
         'description' :  ''' Maximal number of modifications per peptide ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : 'NumMods',
         },
@@ -754,7 +931,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'max_num_per_mod':{
+    'max_num_per_mod' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -764,6 +941,7 @@ ursgal_params = {
         ],
         'default_value' : "{}",
         'description' :  ''' Maximal number of modification sites per peptide for a specific modification, given as a dictionary: {unimod_name : number} ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'residue, potential modification mass',
         },
@@ -773,7 +951,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'max_pep_length':{
+    'max_pep_length' : {
         'available_in_unode' : [
             'msgfplus_v9979',
             'myrimatch',
@@ -781,6 +959,7 @@ ursgal_params = {
         ],
         'default_value' : "40",
         'description' :  ''' Maximal length of a peptide ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-maxLength',
             'myrimatch_style_1' : '-MaxPeptideLength<int>',
@@ -792,7 +971,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'maximal_accounted_observed_peaks':{
+    'maximal_accounted_observed_peaks' : {
         'available_in_unode' : [
             'myrimatch',
             'xtandem_cyclone_2010',
@@ -803,6 +982,7 @@ ursgal_params = {
         ],
         'default_value' : "50",
         'description' :  ''' Maximum number of peaks from a spectrum used. ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : '-MaxPeakCount',
             'xtandem_style_1' : 'spectrum, total peaks',
@@ -813,7 +993,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'maximum_missed_cleavages':{
+    'maximum_missed_cleavages' : {
         'available_in_unode' : [
             'msamanda',
             'myrimatch',
@@ -825,6 +1005,7 @@ ursgal_params = {
         ],
         'default_value' : "2",
         'description' :  ''' Maximum number of missed cleavages per peptide ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'missed_cleavages',
             'myrimatch_style_1' : '-MaxMissedCleavages<int>',
@@ -836,11 +1017,12 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'maximum_pep_for_ident_csv':{
+    'maximum_pep_for_ident_csv' : {
         'available_in_unode' : [
         ],
         'default_value' : "0.1",
         'description' :  ''' Maximum value for PEP (posterior error probability): Threshold for identifications put in CSV-files. ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -849,7 +1031,24 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'min_pep_length':{
+    'mgf_input_file' : {
+        'available_in_unode' : [
+            'msgfplus_v9979',
+        ],
+        'default_value' : None,
+        'description' :  ''' Path to input .mgf file ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'msgfplus_style_1' : '-s',
+        },
+        'utag' : [
+            'input',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'min_pep_length' : {
         'available_in_unode' : [
             'msgfplus_v9979',
             'myrimatch',
@@ -857,6 +1056,7 @@ ursgal_params = {
         ],
         'default_value' : "6",
         'description' :  ''' Minimal length of a peptide ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-minLength',
             'myrimatch_style_1' : '-MinPeptideLength<int>',
@@ -868,7 +1068,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'mininimal_required_matched_peaks':{
+    'mininimal_required_matched_peaks' : {
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -879,6 +1079,7 @@ ursgal_params = {
         ],
         'default_value' : "4",
         'description' :  ''' Mimimum number of matched ions required for a peptide to be scored ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-hm',
             'xtandem_style_1' : 'scoring, minimum ion count',
@@ -889,7 +1090,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'mininimal_required_observed_peaks':{
+    'mininimal_required_observed_peaks' : {
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -900,6 +1101,7 @@ ursgal_params = {
         ],
         'default_value' : "5",
         'description' :  ''' Mimimum number of peaks in the spectrum to be considered. ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-hs',
             'xtandem_style_1' : 'spectrum, minimum peaks',
@@ -910,7 +1112,7 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'modifications':{
+    'modifications' : {
         'available_in_unode' : [
             'msamanda',
             'msgfplus_v9979',
@@ -953,6 +1155,7 @@ Additionally, userdefined modifications can be given and are written to a userde
 Example:
 
  [ 'S,opt,any,New_mod,C2H5N1O3' ] ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'modification protein=true cterm=true',
             'msgfplus_style_1' : '-mod',
@@ -966,12 +1169,34 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'mzidentml_converter_version':{
+    'msgfplus_protocol_id' : {
+        'available_in_unode' : [
+            'msgfplus_v9979',
+        ],
+        'default_value' : 0,
+        'description' :  ''' MS-GF+ specific protocol identifier. Protocols are used to enable scoring parameters for enriched and/or labeled samples. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'msgfplus_style_1' : '-protocol',
+        },
+        'utag' : [
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : [
+            '0',
+            '1',
+            '2',
+            '3',
+        ],
+    },
+    'mzidentml_converter_version' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "mzidentml_lib_1_6_10",
         'description' :  ''' mzidentml converter version: version name ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'mzidentml_converter_version',
         },
@@ -982,12 +1207,13 @@ Example:
         },
         'uvalue_type' : "str",
     },
-    'mzml2mgf_converter_version':{
+    'mzml2mgf_converter_version' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "mzml2mgf_1_0_0",
         'description' :  ''' mzml to mgf converter version: version name ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'mzml2mgf_converter_version',
         },
@@ -998,7 +1224,7 @@ Example:
         },
         'uvalue_type' : "str",
     },
-    'neutral_loss_enabled':{
+    'neutral_loss_enabled' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1008,6 +1234,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' Neutral losses enabled for spectrum algorithm: set  True or False ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, use neutral loss window',
         },
@@ -1017,7 +1244,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'neutral_loss_mass':{
+    'neutral_loss_mass' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1027,6 +1254,7 @@ Example:
         ],
         'default_value' : "0",
         'description' :  ''' Sets the centre of the window for ignoring neutral molecule losses. ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, neutral loss mass',
         },
@@ -1036,7 +1264,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'neutral_loss_window':{
+    'neutral_loss_window' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1046,6 +1274,7 @@ Example:
         ],
         'default_value' : "0",
         'description' :  ''' Neutral loss window: sets the width of the window for ignoring neutral molecule losses. ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, neutral loss window',
         },
@@ -1055,7 +1284,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'noise_suppression_enabled':{
+    'noise_suppression_enabled' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1065,6 +1294,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' used for noise suppresssion ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, use noise suppression',
         },
@@ -1074,18 +1304,19 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'num_match_spec':{
+    'num_match_spec' : {
         'available_in_unode' : [
             'msamanda',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
         ],
-        'default_value' : "10",
+        'default_value' : 10,
         'description' :  ''' This parameter sets the maximum number of peptide spectrum matches to report for each spectrum ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'Specify the number of matches to report for each spectrum',
-            'msgfplus_style_1' : 'number of matches per spectrum to be reported',
+            'msgfplus_style_1' : '-n',
             'myrimatch_style_1' : 'This parameter sets the maximum rank of peptide-spectrum-matches to report for each spectrum',
             'omssa_style_1' : 'maximum number of hits retained per precursor charge state per spectrum',
         },
@@ -1095,11 +1326,12 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'number_of_i_decimals':{
+    'number_of_i_decimals' : {
         'available_in_unode' : [
         ],
         'default_value' : "5",
         'description' :  ''' Number of decimals for intensity (peak) ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -1108,11 +1340,12 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'number_of_mz_decimals':{
+    'number_of_mz_decimals' : {
         'available_in_unode' : [
         ],
         'default_value' : "5",
         'description' :  ''' Number of decimals for m/z mass ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -1121,11 +1354,29 @@ Example:
         },
         'uvalue_type' : "int",
     },
-    'output_file_type':{
+    'output_file_incl_path' : {
+        'available_in_unode' : [
+            'msgfplus_v9979',
+        ],
+        'default_value' : None,
+        'description' :  ''' Path to output file ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'msgfplus_style_1' : '-o',
+        },
+        'utag' : [
+            'output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'output_file_type' : {
         'available_in_unode' : [
         ],
         'default_value' : "None",
         'description' :  ''' Output file type ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -1134,11 +1385,12 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'output_suffix':{
+    'output_suffix' : {
         'available_in_unode' : [
         ],
         'default_value' : "",
         'description' :  ''' Output suffix: string ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -1147,7 +1399,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'precursor_isotope_range':{
+    'precursor_isotope_range' : {
         'available_in_unode' : [
             'msgfplus_v9979',
             'xtandem_cyclone_2010',
@@ -1158,11 +1410,13 @@ Example:
         ],
         'default_value' : "0,1",
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-ti',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
         },
         'utag' : [
+            'precursor',
         ],
         'uvalue_translation' : {
             'xtandem_style_1' : {
@@ -1171,9 +1425,13 @@ Example:
                 '0,2' : 'yes',
             },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : [
+            '0',
+            '0,1',
+            '0,2',
+        ],
     },
-    'precursor_mass_tolerance_minus':{
+    'precursor_mass_tolerance_minus' : {
         'available_in_unode' : [
             'msamanda',
             'msgfplus_v9979',
@@ -1185,8 +1443,9 @@ Example:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "5",
+        'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
@@ -1195,12 +1454,13 @@ Example:
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
         },
         'utag' : [
+            'precursor',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
-    'precursor_mass_tolerance_plus':{
+    'precursor_mass_tolerance_plus' : {
         'available_in_unode' : [
             'msamanda',
             'omssa_2_1_9',
@@ -1212,6 +1472,7 @@ Example:
         ],
         'default_value' : "5",
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'ms1_tol',
             'omssa_style_1' : '-te',
@@ -1223,7 +1484,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'precursor_mass_tolerance_unit':{
+    'precursor_mass_tolerance_unit' : {
         'available_in_unode' : [
             'msamanda',
             'omssa_2_1_9',
@@ -1234,19 +1495,26 @@ Example:
             'xtandem_vengeance',
         ],
         'default_value' : "ppm",
-        'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), Da (Dalton) or mmu (Milli mass unit) ''',
+        'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'ms1_tol unit',
+            'msgfplus_style_1' : '-t',
             'omssa_style_1' : '-teppm',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error units',
         },
         'utag' : [
+            'precursor',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : [
+            'da',
+            'mmu',
+            'ppm',
+        ],
     },
-    'precursor_mass_type':{
+    'precursor_mass_type' : {
         'available_in_unode' : [
             'msamanda',
             'myrimatch',
@@ -1254,6 +1522,7 @@ Example:
         ],
         'default_value' : "monoisotopic, (average)",
         'description' :  ''' Precursor mass type: monoisotopic or average ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'monoisotopic',
             'myrimatch_style_1' : '-PrecursorMzToleranceRule <str>',
@@ -1273,7 +1542,7 @@ Example:
             'monoisotopic',
         ],
     },
-    'precursor_max_charge':{
+    'precursor_max_charge' : {
         'available_in_unode' : [
             'msamanda',
             'msgfplus_v9979',
@@ -1282,6 +1551,7 @@ Example:
         ],
         'default_value' : "5",
         'description' :  ''' maximal accepted parent ion charge ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'considered_charges',
             'msgfplus_style_1' : '-maxCharge',
@@ -1294,7 +1564,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'precursor_min_charge':{
+    'precursor_min_charge' : {
         'available_in_unode' : [
             'msamanda',
             'msgfplus_v9979',
@@ -1302,6 +1572,7 @@ Example:
         ],
         'default_value' : "1",
         'description' :  ''' minimal accepted parent ion charge ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'considered_charges',
             'msgfplus_style_1' : '-minCharge',
@@ -1313,7 +1584,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'precursor_min_mass':{
+    'precursor_min_mass' : {
         'available_in_unode' : [
             'myrimatch',
             'xtandem_cyclone_2010',
@@ -1324,6 +1595,7 @@ Example:
         ],
         'default_value' : "400",
         'description' :  ''' minimal parent ion mass ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : '-MinPeptideMass <real>',
             'xtandem_style_1' : 'spectrum, minimum parent m+h -sets the minimum parent M+H required for a spectrum to be considered.',
@@ -1334,12 +1606,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'precursor_ppm_offset':{
+    'precursor_ppm_offset' : {
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
         'default_value' : "None",
         'description' :  ''' Precursor offset in ppm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -1349,12 +1622,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'prefix':{
+    'prefix' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "None",
         'description' :  '''  ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'prefix',
         },
@@ -1364,12 +1638,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'raw_ident_csv_suffix':{
+    'raw_ident_csv_suffix' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : ".csv",
         'description' :  ''' CSV suffix of raw indentification: this is the conversion result after CSV conversion but before adding retention time ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'raw_ident_csv_suffix',
         },
@@ -1380,12 +1655,13 @@ Example:
         },
         'uvalue_type' : "str",
     },
-    'remove_temporary_files':{
+    'remove_temporary_files' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "False",
         'description' :  ''' Remove temporary files: True or False ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'remove_temporary_files',
         },
@@ -1396,12 +1672,13 @@ Example:
         },
         'uvalue_type' : "bool",
     },
-    'rt_pickle_name':{
+    'rt_pickle_name' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "_ursgal_lookup.pkl",
         'description' :  ''' name of the pickle that is used to map the retention time ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'rt_pickle_name',
         },
@@ -1411,11 +1688,12 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'scan_exclusion_list':{
+    'scan_exclusion_list' : {
         'available_in_unode' : [
         ],
         'default_value' : "None",
         'description' :  ''' spectra rejected during mzml2mgf conversion ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -1424,11 +1702,12 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'scan_skip_modulo_step':{
+    'scan_skip_modulo_step' : {
         'available_in_unode' : [
         ],
         'default_value' : "None",
         'description' :  ''' include only the n'th spectrum during mzml2mgf conversion ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -1437,12 +1716,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_-h2o_ions':{
+    'score_-h2o_ions' : {
         'available_in_unode' : [
             'msamanda',
         ],
         'default_value' : "False",
         'description' :  ''' Spectrum: if true, ions loss of H2O are respected in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -1452,12 +1732,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_-nh3_ions':{
+    'score_-nh3_ions' : {
         'available_in_unode' : [
             'msamanda',
         ],
         'default_value' : "False",
         'description' :  ''' Spectrum: if true, ions loss of NH3 are respected in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -1467,7 +1748,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_a_ions':{
+    'score_a_ions' : {
         'available_in_unode' : [
             'msamanda',
             'omssa_2_1_9',
@@ -1479,6 +1760,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' Spectrum: if true, a ions are used in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
@@ -1490,7 +1772,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_b_ions':{
+    'score_b_ions' : {
         'available_in_unode' : [
             'msamanda',
             'omssa_2_1_9',
@@ -1502,6 +1784,7 @@ Example:
         ],
         'default_value' : "True",
         'description' :  ''' Spectrum: if true, b ions are used in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
@@ -1513,7 +1796,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_c_ions':{
+    'score_c_ions' : {
         'available_in_unode' : [
             'msamanda',
             'omssa_2_1_9',
@@ -1525,6 +1808,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' Spectrum: if true, c ions are used in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
@@ -1536,12 +1820,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_imm_ions':{
+    'score_imm_ions' : {
         'available_in_unode' : [
             'msamanda',
         ],
         'default_value' : "False",
         'description' :  ''' Spectrum: if true, immonium ions are respected in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -1551,12 +1836,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_int_ions':{
+    'score_int_ions' : {
         'available_in_unode' : [
             'msamanda',
         ],
         'default_value' : "False",
         'description' :  ''' Spectrum: if true, internal fragment ions are respect in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -1566,7 +1852,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_x_ions':{
+    'score_x_ions' : {
         'available_in_unode' : [
             'msamanda',
             'omssa_2_1_9',
@@ -1578,6 +1864,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' Spectrum: if true, x ions are used in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
@@ -1589,7 +1876,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_y_ions':{
+    'score_y_ions' : {
         'available_in_unode' : [
             'msamanda',
             'omssa_2_1_9',
@@ -1601,6 +1888,7 @@ Example:
         ],
         'default_value' : "True",
         'description' :  ''' Spectrum: if true, y ions are used in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
@@ -1612,12 +1900,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_z+1_ions':{
+    'score_z+1_ions' : {
         'available_in_unode' : [
             'msamanda',
         ],
         'default_value' : "False",
         'description' :  ''' Spectrum: if true, z ion plus 1 Da mass are used in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -1627,12 +1916,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_z+2_ions':{
+    'score_z+2_ions' : {
         'available_in_unode' : [
             'msamanda',
         ],
         'default_value' : "False",
         'description' :  ''' Spectrum: if true z ion plus 2 Da mass are used in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -1642,7 +1932,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'score_z_ions':{
+    'score_z_ions' : {
         'available_in_unode' : [
             'msamanda',
             'omssa_2_1_9',
@@ -1654,6 +1944,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' Spectrum: if true, z ions are used in algorithm ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
@@ -1665,12 +1956,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'search_engines_create_folders':{
+    'search_engines_create_folders' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "True",
         'description' :  ''' Create folders for search engines. True or False ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'search_engines_create_folders',
         },
@@ -1681,7 +1973,7 @@ Example:
         },
         'uvalue_type' : "bool",
     },
-    'search_for_saps':{
+    'search_for_saps' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1691,6 +1983,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' search for potential single amino acid polymorphisms ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, saps',
         },
@@ -1700,7 +1993,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'semi_enzyme':{
+    'semi_enzyme' : {
         'available_in_unode' : [
             'msamanda',
             'msgfplus_v9979',
@@ -1714,6 +2007,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' Allows semi-enzymatic peptide ends ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-ntt',
@@ -1726,12 +2020,13 @@ Example:
         },
         'uvalue_type' : "bool",
     },
-    'show_unodes_in_development':{
+    'show_unodes_in_development' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "False",
         'description' :  ''' Show ursgal nodes that are in development: False or True ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'show_unodes_in_development',
         },
@@ -1741,7 +2036,7 @@ Example:
         },
         'uvalue_type' : "bool",
     },
-    'spec_dynamic_range':{
+    'spec_dynamic_range' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1751,6 +2046,7 @@ Example:
         ],
         'default_value' : "100",
         'description' :  ''' Spectrum, internal normalization: The highest peak (intensity) within a spectrum is set to given value and all other peaks are normalized to this peak. If the normalized value is less than 1 he peak is rejected. ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, dynamic range',
         },
@@ -1760,7 +2056,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'stp_bias':{
+    'stp_bias' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1770,6 +2066,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' Interpretation of peptide phosphorylation models. ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, stP bias',
         },
@@ -1779,7 +2076,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'ukey1':{
+    'ukey1' : {
         'available_in_unode' : [
             'msamanda',
             'xtandem_cyclone_2010',
@@ -1790,6 +2087,7 @@ Example:
         ],
         'default_value' : "",
         'description' :  '''  ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'modification protein=true nterm=true',
             'xtandem_style_1' : 'protein, N-terminal residue modification mass',
@@ -1800,7 +2098,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'ukey2':{
+    'ukey2' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1810,6 +2108,7 @@ Example:
         ],
         'default_value' : "",
         'description' :  '''  ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, quick acetyl',
         },
@@ -1819,7 +2118,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'ukey3':{
+    'ukey3' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1829,6 +2128,7 @@ Example:
         ],
         'default_value' : "",
         'description' :  '''  ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, quick pyrolidone',
         },
@@ -1838,7 +2138,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'ukey4':{
+    'ukey4' : {
         'available_in_unode' : [
             'msamanda',
             'xtandem_cyclone_2010',
@@ -1849,6 +2149,7 @@ Example:
         ],
         'default_value' : "",
         'description' :  '''  ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'modification fix=true',
             'xtandem_style_1' : 'residue, modification mass',
@@ -1859,7 +2160,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'ukey5':{
+    'ukey5' : {
         'available_in_unode' : [
             'msamanda',
             'xtandem_cyclone_2010',
@@ -1870,6 +2171,7 @@ Example:
         ],
         'default_value' : "",
         'description' :  '''  ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'modification fix=false',
             'xtandem_style_1' : 'residue, potential modification mass',
@@ -1880,7 +2182,7 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'ukey6':{
+    'ukey6' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1890,6 +2192,7 @@ Example:
         ],
         'default_value' : "",
         'description' :  '''  ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'residue, potential modification motif',
         },
@@ -1899,12 +2202,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'unify_csv_converter_version':{
+    'unify_csv_converter_version' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "unify_csv_1_0_0",
         'description' :  ''' unify csv converter version: version name ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'unify_csv_converter_version',
         },
@@ -1915,11 +2219,12 @@ Example:
         },
         'uvalue_type' : "str",
     },
-    'use_refine':{
+    'use_refine' : {
         'available_in_unode' : [
         ],
         'default_value' : "False",
         'description' :  '''  ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -1928,12 +2233,13 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'validated_ident_csv_suffix':{
+    'validated_ident_csv_suffix' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : "validated.csv",
         'description' :  ''' CSV suffix of validated identification files: string, CSV-file which contains PSMs validated with validation tools ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'validated_ident_csv_suffix',
         },
@@ -1944,13 +2250,14 @@ Example:
         },
         'uvalue_type' : "str",
     },
-    'validation_score_field':{
+    'validation_score_field' : {
         'available_in_unode' : [
             'percolator_2_08',
             'qvality_2_02',
         ],
         'default_value' : "",
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [
@@ -1963,11 +2270,12 @@ Example:
         },
         'uvalue_type' : "",
     },
-    'write_unfiltered_results':{
+    'write_unfiltered_results' : {
         'available_in_unode' : [
         ],
         'default_value' : "False",
         'description' :  ''' writes rejected results if True ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
         },
         'utag' : [

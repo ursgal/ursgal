@@ -44,7 +44,7 @@ if __name__ == '__main__':
         # if param != 'force':
         #     continue
         # print(urgsal_dict[param])
-        print('''    '{0}':{1}'''.format(param, '{'), file=output_file )
+        print('''    '{0}' : {1}'''.format(param, '{'), file=output_file )
         for k, v in sorted(urgsal_dict[param].items()):
             # print(k, type(v))
             if k == 'description':
@@ -68,8 +68,9 @@ if __name__ == '__main__':
                     print('''            '{0}','''.format(elem), file=output_file)
                 print('        ],', file=output_file)
             else:
-                print('''        '{0}' : "{1}",'''.format(k,v), file=output_file)
+                print('''        '{0}' : {1},'''.format(k,v), file=output_file)
         # exit()
+        # print('''        'trigger_rerun' : True,''', file=output_file)
         print('    },', file=output_file)
     print('}', file=output_file)
     output_file.close()
