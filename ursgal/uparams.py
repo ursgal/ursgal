@@ -1476,6 +1476,7 @@ Example:
     'precursor_mass_tolerance_plus' : {
         'available_in_unode' : [
             'msamanda',
+            'msgfplus_v9979',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1489,6 +1490,7 @@ Example:
         'ukey_translation' : {
             'msamanda_style_1' : 'ms1_tol',
             'omssa_style_1' : '-te',
+            'msgfplus_style_1' : '-t',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
         },
         'utag' : [
