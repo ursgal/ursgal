@@ -230,6 +230,11 @@ class omssa_2_1_9( ursgal.UNode ):
 
             self.params[ param_key ] = modifications.strip(',')
 
+
+        import pprint
+        pprint.pprint( self.params )
+        pprint.pprint(  self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] )
+        exit(1)
         # semienyzmatic cleavage --> tanslation into omssa enyzme number
         if self.params['semi_enzyme'] == True:
             if self.params['enzyme'] == '0':
@@ -274,7 +279,8 @@ class omssa_2_1_9( ursgal.UNode ):
             self.params['output_dir_path'],
             self.params['output_file']
         )
-
+        print( translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] )
+        exit(1)
         self.params['command_list'] = [
             # ---------------------------------------------------------------------
             # general

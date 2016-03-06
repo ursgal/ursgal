@@ -59,7 +59,7 @@ class msgfplus_v9979( ursgal.UNode ):
 
         self.params[ 'command_list' ] = [
             'java',
-            '-jar', 
+            '-jar',
             self.exe,
         ]
 
@@ -107,18 +107,20 @@ class msgfplus_v9979( ursgal.UNode ):
 
         mods_file.close()
 
-        translations['-t'] = { '-t' : '{0}{1}, {2}{1}'.format(
-                    translations['-t']['precursor_mass_tolerance_minus'],
-                    translations['-t']['precursor_mass_tolerance_unit'],
-                    translations['-t']['precursor_mass_tolerance_plus'],
-                )}
+        translations['-t'] = {
+            '-t' : '{0}{1}, {2}{1}'.format(
+                translations['-t']['precursor_mass_tolerance_minus'],
+                translations['-t']['precursor_mass_tolerance_unit'],
+                translations['-t']['precursor_mass_tolerance_plus'],
+            )
+        }
 
         command_dict = {}
-            
+
         for translated_key, translation_dict in translations.items():
             if translated_key == '-Xmx':
                 self.params[ 'command_list' ].insert(1,'{0}{1}'.format(
-                    translated_key, 
+                    translated_key,
                     list(translation_dict.values())[0]
                 ))
             elif translated_key == 'label':
