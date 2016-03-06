@@ -160,6 +160,7 @@ class omssa_2_1_9( ursgal.UNode ):
             self._load_omssa_xml()
 
         # building command_list !
+        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
 
         blastdb_suffixes = [ '.phr', '.pin', '.psq' ]
         blastdb_present = True
@@ -219,7 +220,7 @@ class omssa_2_1_9( ursgal.UNode ):
                                 'omssa_id'   : omssa_id,
                                 'id'         : mod['id']
                             }
-                if unimod_id_does_not_exist == True or aa_can_not_be_mapped == True :
+                if unimod_id_does_not_exist or aa_can_not_be_mapped:
                     self.print_info( '''
     The combination of modification name and aminoacid is not supported by
     OMSSA. Continuing without modification: {0}
@@ -231,24 +232,20 @@ class omssa_2_1_9( ursgal.UNode ):
             self.params[ param_key ] = modifications.strip(',')
 
 
-        import pprint
-        pprint.pprint( self.params )
-        pprint.pprint(  self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] )
-        exit(1)
-        # semienyzmatic cleavage --> tanslation into omssa enyzme number
-        if self.params['semi_enzyme'] == True:
-            if self.params['enzyme'] == '0':
-                self.params['enzyme'] = '16'
-            elif self.params['enzyme'] == '3':
-                self.params['enzyme'] = '23'
-            elif self.params['enzyme'] == '13':
-                self.params['enzyme'] = '24'
+        # semi-enyzmatic cleavage --> translation into omssa enzyme number
+        if self.params['semi_enzyme'] is True:
+            if translations['-e']['enzyme'] == '0':
+                translations['-e']['enzyme'] = '16'
+            elif translations['-e']['enzyme'] == '3':
+                translations['-e']['enzyme'] = '23'
+            elif translations['-e']['enzyme'] == '13':
+                translations['-e']['enzyme'] = '24'
 
         # define the ions to search
 
         self.params['omssa_ions_to_search'] = []
         for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
-            ion_2_add = self.params['score_{0}_ions'.format(ion)]
+            ion_2_add = translations['-i'].get('score_{0}_ions'.format(ion), '')
             if ion_2_add != '':
                 self.params['omssa_ions_to_search'].append( ion_2_add )
         self.params['omssa_ions_to_search'] = ','.join(
@@ -279,8 +276,12 @@ class omssa_2_1_9( ursgal.UNode ):
             self.params['output_dir_path'],
             self.params['output_file']
         )
-        print( translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] )
-        exit(1)
+        import pprint
+        pprint.pprint( self.params )
+        pprint.pprint(  self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] )
+        exit('break it <<<<')
+        # print( translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] )
+        # exit(1)
         self.params['command_list'] = [
             # ---------------------------------------------------------------------
             # general
@@ -298,9 +299,10 @@ class omssa_2_1_9( ursgal.UNode ):
             # include search spetra and self.params in results,
             # is required for mzid conversion, if omx is used, but omx files
             # are huge ...
-            '-hc', '{num_match_spec}'.format(**self.params),
+            '{num_match_spec_key}'.format(**self.params),
+            '{num_match_spec}'.format(**self.params),
 
-            '-hl', '{hl}'.format(**self.params),
+            '{num_hits_retain_spec_key}'.format(**self.params), '{num_hits_retain_spec}'.format(**self.params),
             # was 30 before, smaller output files?
             # maximum number of hits retained per precursor charge state per
             # spectrum during the search
@@ -320,15 +322,15 @@ class omssa_2_1_9( ursgal.UNode ):
 
             # '-teppm',
             # search precursor masses in units of ppm - this set above!
-            '-zl', '{precursor_min_charge}'.format(**self.params),
+            '{precursor_min_charge_key}'.format(**self.params), '{precursor_min_charge}'.format(**self.params),
             # minimum precursor charge to search when not 1+
-            '-zh', '{precursor_max_charge}'.format(**self.params),
+            '{precursor_max_charge_key}'.format(**self.params), '{precursor_max_charge}'.format(**self.params),
             # maximum precursor charge max 5
 
             # PRODUCT
             '-tom', '{omssa_label}'.format(**self.params),
             # product ion search type, 14N or 15N
-            '-to', '{frag_mass_tolerance}'.format(**self.params),
+            '{frag_mass_tolerance_key}'.format(**self.params), '{frag_mass_tolerance}'.format(**self.params),
             # 20 ppm, QExactive, product ion tolerance
 
             # --- IONS ---
@@ -336,27 +338,27 @@ class omssa_2_1_9( ursgal.UNode ):
             # ids of ions to search (comma delimited, no spaces) b and y ions
 
             # --- ENZYME ---
-            '-e', '{enzyme}'.format(**self.params),
+            '{enzyme_key}'.format(**self.params), '{enzyme}'.format(**self.params),
             # enzyme is trypsin-p
-            '-v', '{maximum_missed_cleavages}'.format(**self.params),
+            '{maximum_missed_cleavages_key}'.format(**self.params), '{maximum_missed_cleavages}'.format(**self.params),
             #  missed cleavages
-            '-no', '{min_pep_length}'.format(**self.params),
+            '{min_pep_length_key}'.format(**self.params), '{min_pep_length}'.format(**self.params),
             # minimum size of peptides for no-enzyme and semi-tryptic searches
-            '-nox', '{max_pep_length}'.format(**self.params),
+            '{max_pep_length_key}'.format(**self.params), '{max_pep_length}'.format(**self.params),
             # sGUI has 30,maximum size of peptides for no-enzyme and
             # semi-tryptic searches (0=none)
 
             # --- COMPUTATIONAL AND SPEED ---
-            '-nt', '{cpus}'.format(**self.params),
+            '{cpu_key}'.format(**self.params), '{cpus}'.format(**self.params),
             # number of horses
 
             # --- SPECTRUM ---
-            '-hs', '{mininimal_required_observed_peaks}'.format(**self.params),
+            '{mininimal_required_observed_peaks_key}'.format(**self.params), '{mininimal_required_observed_peaks}'.format(**self.params),
             # the minimum number of m/z values a spectrum must have to be
             # searched
 
             # --- SCORING ---
-            '-hm', '{mininimal_required_matched_peaks}'.format(**self.params),
+            '{mininimal_required_matched_peaks_key}'.format(**self.params), '{mininimal_required_matched_peaks}'.format(**self.params),
             # the minimum number of m/z matches a sequence library peptide must
             # have for the hit to the peptide to be recorded
 

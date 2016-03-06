@@ -37,7 +37,7 @@ class UParamMapper( dict ):
             style = engine_or_engine_style
         else:
             lookup_key = 'engine_2_params'
-            style = self.lookup['engine_2_style'].get(engine_or_engine_style,  None)
+            style = self.lookup['engine_2_style'].get(engine_or_engine_style, None)
 
         for uparam in self.lookup[ lookup_key ].get(engine_or_engine_style, []):
             sup = self[ uparam ]
@@ -135,7 +135,9 @@ class UParamMapper( dict ):
                     #     print(engine )
                     if style_basename not in engine:
                         continue
-
+                    # this style 2 engine lookup is not quite right ...
+                    # This function requires unode meta info for proper
+                    # mapping ....
                     lookup['style_2_engine'][ style ].add( engine )
                     lookup['engine_2_params'][ engine ].append( uparam )
 

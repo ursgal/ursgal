@@ -1015,25 +1015,27 @@ ursgal_params = {
         'available_in_unode' : [
             'msamanda',
             'myrimatch',
+            'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "2",
+        'default_value' : 2,
         'description' :  ''' Maximum number of missed cleavages per peptide ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'missed_cleavages',
             'myrimatch_style_1' : '-MaxMissedCleavages<int>',
             'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
+            'omssa_style_1' : '-v',
         },
         'utag' : [
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : int,
     },
     'maximum_pep_for_ident_csv' : {
         'available_in_unode' : [
@@ -1354,7 +1356,25 @@ Example:
             'msamanda_style_1' : 'Specify the number of matches to report for each spectrum',
             'msgfplus_style_1' : '-n',
             'myrimatch_style_1' : 'This parameter sets the maximum rank of peptide-spectrum-matches to report for each spectrum',
-            'omssa_style_1' : 'maximum number of hits retained per precursor charge state per spectrum',
+            'omssa_style_1' : '-hc',
+        },
+        'utag' : [
+            'output',
+            'scoring',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'num_hits_retain_spec' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 30,
+        'description' :  ''' Maximum number of hits retained per precursor charge state per spectrum during the search ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-hl',
         },
         'utag' : [
             'output',
@@ -2089,6 +2109,7 @@ Example:
             'msgfplus_style_1' : '-ntt',
             'myrimatch_style_1' : '-MinTerminiCleavages<int>',
             'xtandem_style_1' : 'protein, cleavage semi',
+            'omssa_style_1' : 'semi_enzyme'
         },
         'utag' : [
             'protein',
