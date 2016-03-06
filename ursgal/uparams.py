@@ -1,4 +1,23 @@
 ursgal_params = {
+    '-xmx' : {
+        'available_in_unode' : [
+            'msgfplus_v9979',
+            'mzidentml_lib_1_6_10',
+        ],
+        'default_value' : "13312m",
+        'description' :  ''' Set maximum Java heap size (used RAM) ''',
+        'trigger_rerun' : False,
+        'ukey_translation' : {
+            'msgfplus_style_1' : '-Xmx',
+            'mzidentml_style_1' : '-Xmx',
+        },
+        'utag' : [
+            'hardware_resources',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'batch_size' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
@@ -219,17 +238,20 @@ ursgal_params = {
     },
     'decoy_tag' : {
         'available_in_unode' : [
+            'mzidentml_lib_1_6_10',
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'mzidentml_style_1' : '-decoyRegex',
         },
         'utag' : [
+            'database',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "str",
     },
     'del_from_params_before_json_dump' : {
         'available_in_unode' : [
@@ -1028,14 +1050,14 @@ ursgal_params = {
         'ukey_translation' : {
             'msamanda_style_1' : 'missed_cleavages',
             'myrimatch_style_1' : '-MaxMissedCleavages<int>',
-            'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
             'omssa_style_1' : '-v',
+            'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
         },
         'utag' : [
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : int,
+        'uvalue_type' : <class 'int'>,
     },
     'maximum_pep_for_ident_csv' : {
         'available_in_unode' : [
@@ -1211,6 +1233,27 @@ Example:
             '3',
         ],
     },
+    'mzidentml_compress' : {
+        'available_in_unode' : [
+            'mzidentml_lib_1_6_10',
+        ],
+        'default_value' : False,
+        'description' :  ''' Compress mzidentml_lib output files ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'mzidentml_style_1' : '-compress',
+        },
+        'utag' : [
+            'output',
+        ],
+        'uvalue_translation' : {
+            'mzidentml_style_1' : {
+                False : 'false',
+                True : 'true',
+            },
+        },
+        'uvalue_type' : "bool",
+    },
     'mzidentml_converter_version' : {
         'available_in_unode' : [
             'ucontroller',
@@ -1228,7 +1271,30 @@ Example:
         },
         'uvalue_type' : "str",
     },
-    'mzidentml_outputFragmentation' : {
+    'mzidentml_export_type' : {
+        'available_in_unode' : [
+            'mzidentml_lib_1_6_10',
+        ],
+        'default_value' : "exportPSMs",
+        'description' :  ''' Defines which paramters shoul be exporte by mzidentml_lib ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'mzidentml_style_1' : '-exportType',
+        },
+        'utag' : [
+            'output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : [
+            'exportPSMs',
+            'exportProteinGroups',
+            'exportProteinsOnly',
+            'exportProteoAnnotator',
+            'exportRepProteinPerPAGOnly',
+        ],
+    },
+    'mzidentml_output_fragmentation' : {
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
         ],
@@ -1239,9 +1305,34 @@ Example:
             'mzidentml_style_1' : '-outputFragmentation',
         },
         'utag' : [
-            'conversion',
+            'output',
         ],
         'uvalue_translation' : {
+            'mzidentml_style_1' : {
+                False : 'false',
+                True : 'true',
+            },
+        },
+        'uvalue_type' : "bool",
+    },
+    'mzidentml_verbose_output' : {
+        'available_in_unode' : [
+            'mzidentml_lib_1_6_10',
+        ],
+        'default_value' : False,
+        'description' :  ''' Verbose mzidentml_lib output ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'mzidentml_style_1' : '-verboseOutput',
+        },
+        'utag' : [
+            'output',
+        ],
+        'uvalue_translation' : {
+            'mzidentml_style_1' : {
+                False : 'false',
+                True : 'true',
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -1342,6 +1433,24 @@ Example:
         },
         'uvalue_type' : "",
     },
+    'num_hits_retain_spec' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 30,
+        'description' :  ''' Maximum number of hits retained per precursor charge state per spectrum during the search ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-hl',
+        },
+        'utag' : [
+            'output',
+            'scoring',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
     'num_match_spec' : {
         'available_in_unode' : [
             'msamanda',
@@ -1357,24 +1466,6 @@ Example:
             'msgfplus_style_1' : '-n',
             'myrimatch_style_1' : 'This parameter sets the maximum rank of peptide-spectrum-matches to report for each spectrum',
             'omssa_style_1' : '-hc',
-        },
-        'utag' : [
-            'output',
-            'scoring',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-    },
-    'num_hits_retain_spec' : {
-        'available_in_unode' : [
-            'omssa_2_1_9',
-        ],
-        'default_value' : 30,
-        'description' :  ''' Maximum number of hits retained per precursor charge state per spectrum during the search ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'omssa_style_1' : '-hl',
         },
         'utag' : [
             'output',
@@ -2108,8 +2199,8 @@ Example:
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-ntt',
             'myrimatch_style_1' : '-MinTerminiCleavages<int>',
+            'omssa_style_1' : 'semi_enzyme',
             'xtandem_style_1' : 'protein, cleavage semi',
-            'omssa_style_1' : 'semi_enzyme'
         },
         'utag' : [
             'protein',

@@ -59,7 +59,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         tmp_options = [
             self.exe,
             '-outputFragmentation',
-            '{mzidentml_outputFragmentation}'.format(**self.params),
+            '{mzidentml_output_fragmentation}'.format(**self.params),
             '-decoyRegex',
             '{decoy_tag}'.format(**self.params),
             '-compress', '{mzidentml_compress}'.format(**self.params),
@@ -116,16 +116,12 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                 'search engine was used.'
             )
 
-        # self.params['input_file'] = os.path.join(
-        #     self.params['output_dir_path'],
-        #     self.params['file_root'] + '.mzid'
-        # )
         FULL_INPUT_PATH = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
         if 'tandem' in search_engine:
-            # xtandem uses xml outpur which has first to be converted to .mzid
+            # xtandem uses xml output which has first to be converted to .mzid
             self.raw2mzid( search_engine=search_engine)
             run_mz_ident_2_csv = True
         elif 'omssa' in search_engine:
@@ -145,7 +141,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
             '''.format( FULL_INPUT_PATH )
 
             self.params[ 'command_list' ] = [
-                'java', '-Xmx{java_-Xmx}'.format( **self.params),
+                'java', '-Xmx{-xmx}'.format( **self.params),
                 '-jar', self.exe,
                 'Mzid2Csv',
                 FULL_INPUT_PATH,
@@ -153,8 +149,8 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                     self.params['output_dir_path'],
                     self.params['output_file']
                 ),
-                '-exportType'    , '{mzidentml_exportType}'.format(**self.params),
-                '-verboseOutput' , '{mzidentml_verboseOutput}'.format(**self.params),
+                '-exportType'    , '{mzidentml_export_type}'.format(**self.params),
+                '-verboseOutput' , '{mzidentml_verbose_output}'.format(**self.params),
                 '-compress'      , '{mzidentml_compress}'.format(**self.params),
             ]
         else:
