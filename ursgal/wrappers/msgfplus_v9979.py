@@ -85,6 +85,8 @@ class msgfplus_v9979( ursgal.UNode ):
         mods_file = open( self.params['modification_file'], 'w', encoding = 'UTF-8' )
         modifications = []
 
+        print('NumMods={0}'.format(translations['NumMods']['max_num_mods']), file = mods_file)
+
         if self.params['label'] == '15N':
             for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
                 existing = False
@@ -123,7 +125,7 @@ class msgfplus_v9979( ursgal.UNode ):
                     translated_key,
                     list(translation_dict.values())[0]
                 ))
-            elif translated_key == 'label':
+            elif translated_key in ['label', 'NumMods']:
                 continue
             elif len(translation_dict) == 1:
                 command_dict[translated_key] = str((list(translation_dict.values())[0]))

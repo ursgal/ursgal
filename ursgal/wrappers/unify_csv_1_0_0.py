@@ -15,8 +15,9 @@ class unify_csv_1_0_0( ursgal.UNode ):
         'output_extension'  : '.csv',
         'output_suffix'     : 'unified',
         'input_types'       : ['.csv'],
-        'include_in_git' : True,
-        'in_development'            : True,
+        'include_in_git'    : True,
+        'in_development'    : True,
+        'utranslation_style': 'unify_csv_style_1',
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
@@ -70,10 +71,13 @@ Could not load RT lookup dict from this location: {0}
         history = self.stats['history'],
         )
 
-        # find the column name of the engine score
-        last_eng_node = self.meta_unodes[last_engine]
-        last_search_engine_colname = \
-            last_eng_node.DEFAULT_PARAMS.get('validation_score_field', None)
+        # translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        last_search_engine_colname = self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][last_engine]
+
+        # # find the column name of the engine score
+        # last_eng_node = self.meta_unodes[last_engine]
+        # last_search_engine_colname = \
+        #     last_eng_node.DEFAULT_PARAMS.get('validation_score_field', None)
 
         unify_csv_main(
             input_file     = input_file,

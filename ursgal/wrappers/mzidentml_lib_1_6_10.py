@@ -166,7 +166,6 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
             ]
 
             for translated_key, translation_dict in sorted(translations.items()):
-                print(translated_key)
                 if translated_key == '-Xmx':
                     self.params[ 'command_list' ].insert(1,'{0}{1}'.format(
                         translated_key,

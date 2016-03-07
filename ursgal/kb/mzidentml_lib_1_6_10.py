@@ -35,26 +35,26 @@
 #     # },
 # }
 
-DEFAULT_PARAMS = {
-'mzidentml_outputFragmentation' : False,
-'mzidentml_compress'            : False,
-'mzidentml_exportType'          :'exportPSMs',
-'mzidentml_verboseOutput'       : False,
-}
+# DEFAULT_PARAMS = {
+# 'mzidentml_outputFragmentation' : False,
+# 'mzidentml_compress'            : False,
+# 'mzidentml_exportType'          :'exportPSMs',
+# 'mzidentml_verboseOutput'       : False,
+# }
 
-USEARCH_PARAM_VALUE_TRANSLATIONS = {
-    False : 'false',
-    True  : 'true',
-}
+# USEARCH_PARAM_VALUE_TRANSLATIONS = {
+#     False : 'false',
+#     True  : 'true',
+# }
 
-USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
-}
+# USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
+# }
 
-USED_USEARCH_PARAMS = set([
-    'java_-Xmx',
-    'decoy_tag',
-    'mzidentml_outputFragmentation',
-    'mzidentml_compress',
-    'mzidentml_exportType',
-    'mzidentml_verboseOutput',
-    ])
+# USED_USEARCH_PARAMS = set([
+#     'java_-Xmx',
+#     'decoy_tag',
+#     'mzidentml_outputFragmentation',
+#     'mzidentml_compress',
+#     'mzidentml_exportType',
+#     'mzidentml_verboseOutput',
+#     ])

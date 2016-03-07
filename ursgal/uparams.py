@@ -18,6 +18,31 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
+    'aa_exception_dict' : {
+        'available_in_unode' : [
+            'unify_csv_1_0_0',
+        ],
+        'default_value' : {
+            'J' : {
+                'original_aa' : 'L',
+            },
+            'U' : {
+                'original_aa' : 'C',
+                'unimod_name' : 'Delta:S(-1)Se(1)',
+                'unimod_name_with_cam' : 'SecCarbamidomethyl',
+            },
+        },
+        'description' :  ''' Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'unify_csv_style_1' : 'aa_exception_dict',
+        },
+        'utag' : [
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "dict",
+    },
     'batch_size' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
@@ -958,17 +983,20 @@ ursgal_params = {
     },
     'max_num_mods' : {
         'available_in_unode' : [
+            'msgfplus_v9979',
         ],
-        'default_value' : "2",
+        'default_value' : 2,
         'description' :  ''' Maximal number of modifications per peptide ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'msgfplus_style_1' : 'NumMods',
         },
         'utag' : [
+            'modifications',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'max_num_per_mod' : {
         'available_in_unode' : [
@@ -2476,18 +2504,27 @@ Example:
         'available_in_unode' : [
             'percolator_2_08',
             'qvality_2_02',
+            'unify_csv_1_0_0',
         ],
-        'default_value' : "",
+        'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'percolator_style_1' : 'validation_score_field',
+            'qvality_style_1' : 'validation_score_field',
+            'unify_csv_style_1' : 'validation_score_field',
         },
         'utag' : [
             'validation',
         ],
         'uvalue_translation' : {
             'percolator_style_1' : {
+                'msgfplus_style_1' : 'MS-GF:SpecEValue',
                 'omssa_style_1' : 'OMSSA:pvalue',
+            },
+            'unify_csv_style_1' : {
+                'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'omssa_2_1_9' : 'OMSSA:pvalue',
             },
         },
         'uvalue_type' : "",
