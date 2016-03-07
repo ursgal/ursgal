@@ -133,6 +133,6 @@ class msgfplus_v9979( ursgal.UNode ):
                 exit(1)
         for k, v in command_dict.items():
             self.params[ 'command_list' ].extend((k, v))
-        print( ' '.join(self.params[ 'command_list' ]) )
+        # print( ' '.join(self.params[ 'command_list' ]) )
 
         return self.params

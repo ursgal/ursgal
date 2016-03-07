@@ -41,9 +41,9 @@ def main():
         msamanda = 'msamanda_1_0_0_5243'
 
     engine_list = [
-        'omssa',
+        # 'omssa',
         # xtandem,
-        # 'msgf',
+        'msgf',
         # msamanda,
     ]
 

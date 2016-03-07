@@ -12,7 +12,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
     'Reisinger F, Krishna R, Ghali F, Ríos D, Hermjakob H, Vizcaíno JA, Jones AR. (2012)
     jmzIdentML API: A Java interface to the mzIdentML standard for peptide and protein identification data.'
 
-    Java program to convert resulta to .mzIdentML and .mzIdentML to .csv
+    Java program to convert results to .mzIdentML and .mzIdentML to .csv
 
     """
     META_INFO = {
@@ -47,7 +47,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
     def __init__(self, *args, **kwargs):
         super(mzidentml_lib_1_6_10, self).__init__(*args, **kwargs)
 
-    def raw2mzid( self, search_engine=None ):
+    def raw2mzid( self, search_engine=None, translations=None ):
         '''
         Convert raw result files into .mzid result files
         '''
@@ -56,15 +56,6 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         else:
             self.params['mzidentml_compress'] = False
 
-        tmp_options = [
-            self.exe,
-            '-outputFragmentation',
-            '{mzidentml_output_fragmentation}'.format(**self.params),
-            '-decoyRegex',
-            '{decoy_tag}'.format(**self.params),
-            '-compress', '{mzidentml_compress}'.format(**self.params),
-        ]
-
         if 'tandem' in search_engine:
             tmp_options += [
                 '-databaseFileFormatID', 'MS:1001348',
@@ -72,23 +63,38 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                 '-idsStartAtZero', 'false'
             ]
             converter_mode = 'Tandem2mzid'
+            translations['mzidentml_function']['mzidentml_function'] = converter_mode
             self.print_info('Executing xtandem xml to mzid conversion')
         else:
             self.print_info('''
     Do not know how to convert search results from {input_file} to mzid
             '''.format( **self.params ),caller='Warning')
             sys.exit(1)
+
         tmp_command_list = [
-            'java', '-Xmx{java_-Xmx}'.format( **self.params),
-            '-jar', self.exe,
-            converter_mode,
-            os.path.join(
-                self.params['input_dir_path'],
-                self.params['input_file']
-            ),
-            self.params['input_fileds'],
+            'java',
+            '-jar', 
+            self.exe,
         ]
 
+        for translated_key, translation_dict in sorted(translations.items()):
+                print(translated_key)
+                if translated_key == '-Xmx':
+                    self.params[ 'command_list' ].insert(1,'{0}{1}'.format(
+                        translated_key,
+                        list(translation_dict.values())[0]
+                    ))
+                elif translated_key == 'mzidentml_function':
+                    self.params[ 'command_list' ].insert(4, list(translation_dict.values())[0])
+                elif translated_key == 'output_file_incl_path':
+                    self.params[ 'command_list' ].insert(6, list(translation_dict.values())[0])
+                elif len(translation_dict) == 1:
+                    self.params['command_list'].extend((translated_key, str(list(translation_dict.values())[0])))
+                else:
+                    print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
+                    print(translation_dict)
+                    exit(1)
+            
         tmp_command_list += tmp_options
         proc = subprocess.Popen(
             tmp_command_list,
@@ -106,6 +112,18 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         For X!Tandem result files first need to be converted into .mzid
         with raw2mzid
         '''
+
+        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        # import pprint
+        # pprint.pprint(translations)
+        # exit(1)
+
+        self.params['output_file_incl_path'] = os.path.join(
+            self.params['output_dir_path'],
+            self.params['output_file']
+        )
+        translations['output_file_incl_path']['output_file_incl_path'] = self.params['output_file_incl_path']
+
         search_engine = self.get_last_search_engine(
             history = self.stats['history']
         )
@@ -122,7 +140,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         )
         if 'tandem' in search_engine:
             # xtandem uses xml output which has first to be converted to .mzid
-            self.raw2mzid( search_engine=search_engine)
+            self.raw2mzid( search_engine=search_engine, translations=translations)
             run_mz_ident_2_csv = True
         elif 'omssa' in search_engine:
             run_mz_ident_2_csv = False
@@ -141,18 +159,31 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
             '''.format( FULL_INPUT_PATH )
 
             self.params[ 'command_list' ] = [
-                'java', '-Xmx{-xmx}'.format( **self.params),
-                '-jar', self.exe,
-                'Mzid2Csv',
+                'java',
+                '-jar', 
+                self.exe,
                 FULL_INPUT_PATH,
-                os.path.join(
-                    self.params['output_dir_path'],
-                    self.params['output_file']
-                ),
-                '-exportType'    , '{mzidentml_export_type}'.format(**self.params),
-                '-verboseOutput' , '{mzidentml_verbose_output}'.format(**self.params),
-                '-compress'      , '{mzidentml_compress}'.format(**self.params),
             ]
+
+            for translated_key, translation_dict in sorted(translations.items()):
+                print(translated_key)
+                if translated_key == '-Xmx':
+                    self.params[ 'command_list' ].insert(1,'{0}{1}'.format(
+                        translated_key,
+                        list(translation_dict.values())[0]
+                    ))
+                elif translated_key == 'mzidentml_function':
+                    self.params[ 'command_list' ].insert(4, list(translation_dict.values())[0])
+                elif translated_key == 'output_file_incl_path':
+                    self.params[ 'command_list' ].insert(6, list(translation_dict.values())[0])
+                elif len(translation_dict) == 1:
+                    self.params['command_list'].extend((translated_key, str(list(translation_dict.values())[0])))
+                else:
+                    print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
+                    print(translation_dict)
+                    exit(1)
+            # print( ' '.join(self.params[ 'command_list' ]) )
+
         else:
             #OMSSA and MS amanda does not need a conversion
             self.params['command_list'] = []

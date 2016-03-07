@@ -1057,7 +1057,7 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : <class 'int'>,
+        'uvalue_type' : "int",
     },
     'maximum_pep_for_ident_csv' : {
         'available_in_unode' : [
@@ -1292,6 +1292,33 @@ Example:
             'exportProteinsOnly',
             'exportProteoAnnotator',
             'exportRepProteinPerPAGOnly',
+        ],
+    },
+    'mzidentml_function' : {
+        'available_in_unode' : [
+            'mzidentml_lib_1_6_10',
+        ],
+        'default_value' : "Mzid2Csv",
+        'description' :  ''' Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'mzidentml_style_1' : 'mzidentml_function',
+        },
+        'utag' : [
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : [
+            'AddEmpaiToMzid',
+            'CreateRestrictedFASTADatabase',
+            'Csv2mzid',
+            'FalseDiscoveryRate',
+            'InsertMetaDataFromFasta',
+            'Mzid2Csv',
+            'Omssa2mzid',
+            'ProteoGrouper',
+            'Tandem2mzid',
+            'Threshold',
         ],
     },
     'mzidentml_output_fragmentation' : {
@@ -1533,12 +1560,14 @@ Example:
     'output_file_incl_path' : {
         'available_in_unode' : [
             'msgfplus_v9979',
+            'mzidentml_lib_1_6_10',
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-o',
+            'mzidentml_style_1' : 'output_file_incl_path',
         },
         'utag' : [
             'output',
