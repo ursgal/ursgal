@@ -16,9 +16,9 @@ class filter_csv_1_0_0( ursgal.UNode ):
         'output_extension' : '.csv',
         'output_suffix'    : 'accepted',
         'input_types'      : ['.csv'],
-        'in_development'   : True,
+        'in_development'   : False,
         'rejected_output_suffix': 'rejected',
-
+        'utranslation_style'    : 'filter_csv_style_1',
         'include_in_git'   : True,
 
         'engine': {
@@ -170,11 +170,11 @@ class filter_csv_1_0_0( ursgal.UNode ):
         if self.params['write_unfiltered_results'] is False:
             output_file_unfiltered = None
         else:
-            file_extension = self.meta_unodes[ self.engine ].META_INFO.get(
+            file_extension = self.META_INFO.get(
                 'output_suffix',
                 None
             )
-            new_file_extension = self.meta_unodes[ self.engine ].META_INFO.get(
+            new_file_extension = self.META_INFO.get(
                 'rejected_output_suffix',
                 None
             )

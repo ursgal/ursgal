@@ -19,17 +19,17 @@
 #     },
 # }
 
-DEFAULT_PARAMS = {
-    'write_unfiltered_results' : False,
-    'csv_filter_rules'         : None,
+# DEFAULT_PARAMS = {
+#     'write_unfiltered_results' : False,
+#     'csv_filter_rules'         : None,
 
-}
+# }
 
-USEARCH_PARAM_VALUE_TRANSLATIONS = {}
+# USEARCH_PARAM_VALUE_TRANSLATIONS = {}
 
-USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {}
+# USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {}
 
-USED_USEARCH_PARAMS = set([
-    'write_unfiltered_results',
-    'csv_filter_rules'
-])
+# USED_USEARCH_PARAMS = set([
+#     'write_unfiltered_results',
+#     'csv_filter_rules'
+# ])

@@ -15,7 +15,7 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         'output_extension' : '.fasta',
         'output_suffix'    : 'target_decoy',
         'input_types'      : [''],
-        'in_development'   : True,
+        'in_development'   : False,
         'include_in_git'   : True,
         'utranslation_style'    : 'generate_target_decoy_style_1',
         'engine': {

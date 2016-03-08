@@ -21,7 +21,7 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
         'output_extension'       : '.mgf',
         'output_suffix'          : None,
         'input_types'            : ['.mzml', '.mzml.gz'],
-    'in_development'            : True,
+        'in_development'            : False,
         'include_in_git'         : True,
 
         'engine': {

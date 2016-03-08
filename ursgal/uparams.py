@@ -215,17 +215,20 @@ ursgal_params = {
     },
     'csv_filter_rules' : {
         'available_in_unode' : [
+            'filter_csv_1_0_0'
         ],
-        'default_value' : "None",
+        'default_value' : None,
         'description' :  ''' Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'filter_csv_style_1' : 'filter_rules'
         },
         'utag' : [
+            'conversion'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "list",
     },
     'database' : {
         'available_in_unode' : [
@@ -259,7 +262,7 @@ ursgal_params = {
         'description' :  ''' Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein). ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'generate_target_decoy_style_1' : 'decoy_generation_mode',
+            'generate_target_decoy_style_1' : 'mode',
         },
         'utag' : [
             'database'
@@ -2876,16 +2879,19 @@ Example:
     },
     'write_unfiltered_results' : {
         'available_in_unode' : [
+            'filter_csv_1_0_0'
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' writes rejected results if True ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'filter_csv_style_1' : 'write_unfiltered_results',
         },
         'utag' : [
+            'conversion'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
 }
