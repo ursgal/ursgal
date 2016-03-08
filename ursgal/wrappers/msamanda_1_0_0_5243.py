@@ -78,10 +78,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         '''
 
         translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
-        # import pprint
-        # pprint.pprint(translations)
-        # pprint.pprint(self.params)
-        # exit(1)
 
         self.params['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
@@ -139,16 +135,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             considered_charges.append( '+{0}'.format(charge) )
         self.params['considered_charges'] = ', '.join( considered_charges )
 
-        # if self.params['semi_enzyme'] == True:
-        #     self.params['semi_enzyme'] = 'Semi'
-        # else:
-        #     self.params['semi_enzyme'] = 'Full'
-
-        # if self.params['precursor_mass_type'] == 'monoisotopic':
-        #     self.params['monoisotopic_precursor'] = 'true'
-        # else:
-        #     self.params['monoisotopic_precursor'] = 'false'
-
         if self.params['label'] == '15N':
             for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
                 existing = False
@@ -165,7 +151,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                                                          'mass': N15_Diff }
                                                       )
         self.params['enzyme_name'] = self.ORIGINAL_PARAMS['enzyme']
-        self.params['enzyme_cleavage'], self.params['enzyme_position'], self.params['enzyme_inhibitors'] = self.params['enzyme']
+        self.params['enzyme_cleavage'], self.params['enzyme_position'], self.params['enzyme_inhibitors'] = self.params['enzyme'].split(';')
 
         modifications = [ ]
         for t in [ 'fix', 'opt' ]:
@@ -230,7 +216,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             translated_headers = []
             for header in headers:
                 translated_headers.append(
-                    self.USEARCH_PARAM_VALUE_TRANSLATIONS.get(header, header)
+                    self.TRANSLATIONS['header_translations']['uvalue_style_translation'].get(header, header)
                 )
             translated_headers += [
                 'Is decoy',
@@ -268,7 +254,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             for cache_pos, m in enumerate(cached_msamanada_output):
                 tmp = {}
                 for header in headers:
-                    translated_header = self.USEARCH_PARAM_VALUE_TRANSLATIONS.get(header, header)
+                    translated_header = self.TRANSLATIONS['header_translations']['uvalue_style_translation'].get(header, header)
                     tmp[ translated_header ] = m[ header ]
                 tmp['Sequence'] = tmp['Sequence'].upper()
 
@@ -372,14 +358,14 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         <ms1_tol unit="{precursor_mass_tolerance_unit}">{precursor_mass_tolerance}</ms1_tol>
         <ms2_tol unit="{frag_mass_tolerance_unit}">{frag_mass_tolerance}</ms2_tol>
         <max_rank>{num_match_spec}</max_rank>
-        <generate_decoy>false</generate_decoy>
+        <generate_decoy>{engine_internal_decoy_generation}</generate_decoy>
     </search_settings>
 
   <basic_settings>
     <instruments_file>{output_file_incl_path}_instrument.xml</instruments_file>
     <unimod_file>{unimod_file_incl_path}</unimod_file>
     <enzyme_file>{output_file_incl_path}_enzymes.xml</enzyme_file>
-    <monoisotopic>{monoisotopic_precursor}</monoisotopic>
+    <monoisotopic>{precursor_mass_type}</monoisotopic>
     <considered_charges>{considered_charges}</considered_charges>
   </basic_settings>
 </settings>
@@ -399,29 +385,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
     <cleavage_sites>{enzyme_cleavage}</cleavage_sites>
     <inhibitors>{enzyme_inhibitors}</inhibitors>
     <position>{enzyme_position}</position>
-  </enzyme>
-<enzyme>
-    <name>Trypsin/P</name>
-    <cleavage_sites>KR</cleavage_sites>
-    <position>after</position>
-  </enzyme>
-  <enzyme>
-    <name>LysC</name>
-    <cleavage_sites>K</cleavage_sites>
-    <position>after</position>
-  </enzyme>
-  <enzyme>
-    <name>GluC</name>
-    <cleavage_sites>DE</cleavage_sites>
-    <position>after</position>
-  </enzyme>
-  <enzyme>
-    <name>No-Enzyme</name>
-    <cleavage_sites>X</cleavage_sites>
-  </enzyme>
-  <enzyme>
-    <name>No-Cleavage</name>
-    <cleavage_sites></cleavage_sites>
   </enzyme>
 </enzymes>'''.format(**self.params),
             }

@@ -269,12 +269,15 @@ ursgal_params = {
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'mzidentml_style_1' : '-decoyRegex',
+            'msamanda_style_1' : 'decoy_tag'
         },
         'utag' : [
             'database',
@@ -303,7 +306,8 @@ ursgal_params = {
     },
     'engine_internal_decoy_generation' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -323,6 +327,10 @@ ursgal_params = {
             'input',
         ],
         'uvalue_translation' : {
+            'msamanda_style_1' : {
+                False : 'false',
+                True : 'true',
+            },
             'msgfplus_style_1' : {
                 False : '0',
                 True : '1',
@@ -332,8 +340,8 @@ ursgal_params = {
     },
     'enzyme' : {
         'available_in_unode' : [
-            'msamanda_1_0_0_5243',
             'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
@@ -383,6 +391,31 @@ ursgal_params = {
             'protein',
         ],
         'uvalue_translation' : {
+            'msamanda_style_1' : {
+                'argc' : 'R;after;P',
+                'aspn' : 'D;before;',
+                'chymotrypsin' : 'FMWY;after;P',
+                'chymotrypsin_p' : 'FMWY;after;',
+                'clostripain' : 'R;after;',
+                'cnbr' : 'M;after;P',
+                'elastase' : 'AGILV;after;P',
+                'formic_acid' : 'D;after;P',
+                'gluc' : 'DE;after;P',
+                'gluc_bicarb' : 'E;after;P',
+                'iodosobenzoate' : 'W;after;',
+                'lysc' : 'K;after;P',
+                'lysc_p' : 'K;after;',
+                'lysn' : 'K;before;',
+                'lysn_promisc' : 'AKRS;before;',
+                'nonspecific' : ';;',
+                'pepsina' : 'FL;after;',
+                'protein_endopeptidase' : 'P;after;',
+                'staph_protease' : 'E;after;',
+                'trypsin' : 'KR;after;P',
+                'trypsin_cnbr' : 'KRM;after;P',
+                'trypsin_gluc' : 'DEKR;after;P',
+                'trypsin_p' : 'KR;after;',
+            },
             'msgfplus_style_1' : {
                 'alpha_lp' : '8',
                 'argc' : '6',
@@ -445,31 +478,6 @@ ursgal_params = {
                 'trypsin_cnbr' : '[KR]|{P},[M]|{P}',
                 'trypsin_gluc' : '[DEKR]|{P}',
                 'trypsin_p' : '[RK]|[X]',
-            },
-            'msamanda_style_1' : {
-                'argc' :            ('R', 'after', 'P'),
-                'aspn' :            ('D', 'before', ''),
-                'chymotrypsin' :    ('FMWY', 'after', 'P'),
-                'chymotrypsin_p' :  ('FMWY', 'after', ''),
-                'clostripain' :     ('R', 'after', ''),
-                'cnbr' :            ('M', 'after', 'P'),
-                'elastase' :        ('AGILV', 'after', 'P'),
-                'formic_acid' :     ('D', 'after', 'P'),
-                'gluc' :            ('DE', 'after', 'P'),
-                'gluc_bicarb' :     ('E', 'after', 'P'),
-                'iodosobenzoate' :  ('W', 'after', ''),
-                'lysc' :            ('K', 'after', 'P'),
-                'lysc_p' :          ('K', 'after', ''),
-                'lysn' :            ('K', 'before', ''),
-                'lysn_promisc' :    ('AKRS', 'before', ''),
-                'pepsina' :         ('FL', 'after', ''),
-                'protein_endopeptidase' : ('P', 'after', ''),
-                'staph_protease' :  ('E', 'after', ''),
-                'trypsin' :         ('KR', 'after', 'P'),
-                'trypsin_p' :       ('KR', 'after', ''),
-                'trypsin_cnbr' :    ('KRM', 'after', 'P'),
-                'trypsin_gluc' :    ('DEKR', 'after', 'P'),
-                'nonspecific' :     ('', '', ''),
             },
         },
         'uvalue_type' : [
@@ -554,6 +562,8 @@ ursgal_params = {
     },
     'frag_mass_tolerance' : {
         'available_in_unode' : [
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -561,40 +571,83 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "monoisotopic",
-        'description' :  ''' Fragment mass type: monoisotopic or average ''',
+        'default_value' : 5,
+        'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'msamanda_style_1' : 'ms2_tol',
             'omssa_style_1' : '-to',
             'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error',
         },
         'utag' : [
+            'fragment',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'frag_mass_tolerance_unit' : {
         'available_in_unode' : [
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243'
         ],
         'default_value' : "ppm",
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'msamanda_style_1' : 'ms2_tol unit',
             'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error units',
         },
         'utag' : [
+            'fragment',
         ],
         'uvalue_translation' : {
+            'msamanda_style_1' : {
+                'da' : 'Da',
+            },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : [
+            'da',
+            'mmu',
+            'ppm',
+        ],
+    },
+    'header_translations' : {
+        'available_in_unode' : [
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
+        ],
+        'default_value' : "",
+        'description' :  ''' Translate output headers into Ursgal unify_csv style headers''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'msamanda_style_1' : 'header_translations',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+            'msamanda_style_1' : {
+                'Scan Number'        : 'Spectrum ID',
+                'Title'              : 'Spectrum Title',
+                'Sequence'           : 'Sequence',
+                'Protein Accessions' : 'proteinacc_start_stop_pre_post_;',
+                'Modifications'      : 'Modifications',
+                'Charge'             : 'Charge',
+                'm/z'                : 'Exp m/z',
+                'Amanda Score'       : 'Amanda:Score',
+                'Weighted Probability' : 'Amanda:Weighted Probability',
+                'Filename'           : 'Filename',
+                'RT'                 : 'Retention Time (s)',
+                'Rank'               : 'Rank',
+            },
+        },
+        'uvalue_type' : '',
     },
     'frag_mass_type' : {
         'available_in_unode' : [
@@ -936,17 +989,21 @@ ursgal_params = {
         'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'msamanda_style_1' : 'label',
+            'msgfplus_style_1' : 'label',
             'omssa_style_1' : '-tem / -tom',
             'xtandem_style_1' : 'protein, modified residue mass file',
-            'msgfplus_style_1' : 'label',
-            'msamanda_style_1' :'label'
         },
         'utag' : [
-            'label', 'modifications'
+            'label',
+            'modifications',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : ['14N', '15N'],
+        'uvalue_type' : [
+            '14N',
+            '15N',
+        ],
     },
     'log_enabled' : {
         'available_in_unode' : [
@@ -1120,7 +1177,7 @@ ursgal_params = {
             'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
         },
         'utag' : [
-            'protein'
+            'protein',
         ],
         'uvalue_translation' : {
         },
@@ -1227,8 +1284,8 @@ ursgal_params = {
     },
     'modifications' : {
         'available_in_unode' : [
-            'msamanda_1_0_0_5243',
             'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
@@ -1278,7 +1335,7 @@ Example:
             'xtandem_style_1' : 'protein, C-terminal residue modification mass',
         },
         'utag' : [
-            'modifications'
+            'modifications',
         ],
         'uvalue_translation' : {
         },
@@ -1557,7 +1614,8 @@ Example:
     },
     'num_match_spec' : {
         'available_in_unode' : [
-            'msamanda',
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
@@ -1566,7 +1624,7 @@ Example:
         'description' :  ''' Maximum number of peptide spectrum matches to report for each spectrum ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'msamanda_style_1' : 'Specify the number of matches to report for each spectrum',
+            'msamanda_style_1' : 'max_rank',
             'msgfplus_style_1' : '-n',
             'myrimatch_style_1' : 'This parameter sets the maximum rank of peptide-spectrum-matches to report for each spectrum',
             'omssa_style_1' : '-hc',
@@ -1636,20 +1694,20 @@ Example:
     },
     'output_file_incl_path' : {
         'available_in_unode' : [
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
             'venndiagram_1_0_0',
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'msamanda_style_1' : 'output_file_incl_path',
             'msgfplus_style_1' : '-o',
             'mzidentml_style_1' : 'output_file_incl_path',
-            'msamanda_style_1' : 'output_file_incl_path',
             'venndiagram_style_1' : 'output_file_incl_path',
         },
         'utag' : [
@@ -1802,11 +1860,11 @@ Example:
             'precursor',
         ],
         'uvalue_translation' : {
-            'msgfplus_style_1' : {
-                'da' : 'Da'
-            },
             'msamanda_style_1' : {
-                'da' : 'Da'
+                'da' : 'Da',
+            },
+            'msgfplus_style_1' : {
+                'da' : 'Da',
             },
         },
         'uvalue_type' : [
@@ -1834,13 +1892,13 @@ Example:
             'precursor',
         ],
         'uvalue_translation' : {
-            'omssa_style_1' : {
-                'average' : '1',
-                'monoisotopic' : '0',
-            },
             'msamanda_style_1' : {
                 'average' : 'false',
                 'monoisotopic' : 'true',
+            },
+            'omssa_style_1' : {
+                'average' : '1',
+                'monoisotopic' : '0',
             },
         },
         'uvalue_type' : [
@@ -2043,7 +2101,7 @@ Example:
             'msamanda_style_1' : 'series',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2061,7 +2119,7 @@ Example:
             'msamanda_style_1' : 'series',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2069,8 +2127,8 @@ Example:
     },
     'score_a_ions' : {
         'available_in_unode' : [
-            'msamanda_1_0_0_5243',
             'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2087,7 +2145,7 @@ Example:
             'xtandem_style_1' : 'scoring, a ions',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2121,8 +2179,8 @@ Example:
     },
     'score_c_ions' : {
         'available_in_unode' : [
-            'msamanda_1_0_0_5243',
             'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2139,7 +2197,7 @@ Example:
             'xtandem_style_1' : 'scoring, c ions',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2157,7 +2215,7 @@ Example:
             'msamanda_style_1' : 'series',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2175,7 +2233,7 @@ Example:
             'msamanda_style_1' : 'series',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2201,7 +2259,7 @@ Example:
             'xtandem_style_1' : 'scoring, x ions',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2227,7 +2285,7 @@ Example:
             'xtandem_style_1' : 'scoring, y ions',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2245,7 +2303,7 @@ Example:
             'msamanda_style_1' : 'series',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2263,7 +2321,7 @@ Example:
             'msamanda_style_1' : 'series',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2289,7 +2347,7 @@ Example:
             'xtandem_style_1' : 'scoring, z ions',
         },
         'utag' : [
-            'scoring'
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -2334,8 +2392,8 @@ Example:
     },
     'semi_enzyme' : {
         'available_in_unode' : [
-            'msamanda_1_0_0_5243',
             'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
@@ -2359,13 +2417,13 @@ Example:
             'protein',
         ],
         'uvalue_translation' : {
-            'msgfplus_style_1' : {
-                False : '2',
-                True : '1',
-            },
             'msamanda_style_1' : {
                 False : 'Full',
                 True : 'Semi',
+            },
+            'msgfplus_style_1' : {
+                False : '2',
+                True : '1',
             },
         },
         'uvalue_type' : "bool",
@@ -2569,24 +2627,6 @@ Example:
         },
         'uvalue_type' : "str",
     },
-    # 'unimod_file_incl_path' : {
-    #     'available_in_unode' : [
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #     ],
-    #     'default_value' : "",
-    #     'description' :  ''' Path to unimod.xml file ''',
-    #     'trigger_rerun' : True,
-    #     'ukey_translation' : {
-    #         'msamanda_style_1' : 'unimod_file_incl_path',
-    #     },
-    #     'utag' : [
-    #         'input',
-    #     ],
-    #     'uvalue_translation' : {
-    #     },
-    #     'uvalue_type' : "str",
-    # },
     'use_refine' : {
         'available_in_unode' : [
         ],
@@ -2623,6 +2663,7 @@ Example:
             'percolator_2_08',
             'qvality_2_02',
             'unify_csv_1_0_0',
+            'ucontroller'
         ],
         'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator ''',
@@ -2631,6 +2672,7 @@ Example:
             'percolator_style_1' : 'validation_score_field',
             'qvality_style_1' : 'validation_score_field',
             'unify_csv_style_1' : 'validation_score_field',
+            'ucontroller_style_1' : 'validation_score_field'
         },
         'utag' : [
             'validation',
@@ -2639,10 +2681,19 @@ Example:
             'percolator_style_1' : {
                 'msgfplus_style_1' : 'MS-GF:SpecEValue',
                 'omssa_style_1' : 'OMSSA:pvalue',
+                'msamanda_style_1': 'Amanda:Score',
             },
             'unify_csv_style_1' : {
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
                 'omssa_2_1_9' : 'OMSSA:pvalue',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msamanda_1_0_0_5242' : 'Amanda:Score'
+            },
+            'ucontroller_style_1' :{
+                'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'omssa_2_1_9' : 'OMSSA:pvalue',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msamanda_1_0_0_5242' : 'Amanda:Score'
             },
         },
         'uvalue_type' : "",
@@ -2658,7 +2709,7 @@ Example:
         'description' :  ''' The specified csv column names are used for the visualization. E.g. for a Venn diagram the entries of these columns are used (merged) to determine overlapping results. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'venndiagram_style_1' : 'visualize_column_names',
+            'venndiagram_style_1' : 'visualization_column_names',
         },
         'utag' : [
             'visualization',
@@ -2710,7 +2761,7 @@ Example:
         'description' :  ''' Specifies labels for the datasets that should be visualized. Needs to be given in the same order as the datasets. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'venndiagram_style_1' : 'visualize_label_list',
+            'venndiagram_style_1' : 'visualization_label_list',
         },
         'utag' : [
             'visualization',
