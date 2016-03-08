@@ -24,7 +24,7 @@ from collections import defaultdict as ddict
 import ursgal
 
 
-def main( input_files=None, output_file=None, enzyme=None, mode='shuffle_peptide' ):
+def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', mode='shuffle_peptide' ):
     # first do the redundancy check of aa seqeucnes...
     sequenceFastaDict = ddict(list)
     print("Checking for redundancy of protein sequences...", file = sys.stderr)
@@ -58,6 +58,7 @@ def main( input_files=None, output_file=None, enzyme=None, mode='shuffle_peptide
 
     final_output = {}
 
+    cleavage_aa, site, inhibitor = enzyme.split(';')
     counter = 0
     for sequence, fastaIDList in sequenceFastaDict.items():
         fastaID = generateMergedFastaKey(fastaIDList)
@@ -95,7 +96,7 @@ def main( input_files=None, output_file=None, enzyme=None, mode='shuffle_peptide
         elif mode == 'shuffle_peptide':
             peptideList = ursgal.ucore.digest(
                 sequence,
-                enzyme,
+                (cleavage_aa, site),
                 no_missed_cleavages = True
             )
             fastaDict[fastaID] = {
@@ -104,20 +105,28 @@ def main( input_files=None, output_file=None, enzyme=None, mode='shuffle_peptide
                 'lengthOfDecoyablePetides' : 1
             }
 
-            for peptide in peptideList:
-                if enzyme[1] == 'C':
-                    if peptide[-1] in enzyme[0]:
-                        character_to_preserve    = peptide[-1]
-                        peptideWithoutCleavageAA = peptide[ :-1 ]
+            for n, peptide in enumerate(peptideList):
+                character_to_preserve_C = ''
+                character_to_preserve_N = ''
+                if site == 'C':
+                    if peptide[-1] in cleavage_aa:
+                        character_to_preserve_C  = peptide[-1]
+                        if peptide[0] in inhibitor and n != 0:
+                            character_to_preserve_N = peptide[0]
+                            peptideWithoutCleavageAA = peptide[ 1 :-1 ]
+                        else:
+                            peptideWithoutCleavageAA = peptide[ :-1 ]
                     else:
-                        character_to_preserve    = ''
                         peptideWithoutCleavageAA = peptide
-                elif enzyme[1] == 'N':
-                    if peptide[0] in enzyme[0]:
-                        character_to_preserve    = peptide[ 0 ]
-                        peptideWithoutCleavageAA = peptide[ 1: ]
+                elif site == 'N':
+                    if peptide[0] in cleavage_aa:
+                        character_to_preserve_N    = peptide[ 0 ]
+                        if peptide[-1] in inhibitor:
+                            character_to_preserve_C = peptide[-1]
+                            peptideWithoutCleavageAA = peptide[ 1 :-1 ]
+                        else:
+                            peptideWithoutCleavageAA = peptide[ 1: ]
                     else:
-                        character_to_preserve    = ''
                         peptideWithoutCleavageAA = peptide
                 else:
                     print('Where does your enzyme cleave?',enzyme)
@@ -135,13 +144,7 @@ def main( input_files=None, output_file=None, enzyme=None, mode='shuffle_peptide
                 if len(peptide) < 8:
                     if perDict[ aaString ]['permutated'] is False:
                         for permutation in itertools.permutations(peptideWithoutCleavageAA, len(peptideWithoutCleavageAA)):
-                            if enzyme[1] == 'C':
-                                permutedSequence = '{0}{1}'.format( ''.join(permutation) , character_to_preserve )
-                            elif enzyme[1] == 'N':
-                                permutedSequence = '{0}{1}'.format( character_to_preserve, ''.join(permutation) )
-                            else:
-                                print('Where does your enzyme cleave?', enzyme)
-                                exit()
+                            permutedSequence = '{0}{1}{2}'.format( character_to_preserve_N, ''.join(permutation) , character_to_preserve_C )
                             perDict[ aaString ]['permutations'].append( permutedSequence )
 
                         perDict[ aaString ]['permutations'] = list(
@@ -160,14 +163,7 @@ def main( input_files=None, output_file=None, enzyme=None, mode='shuffle_peptide
                         list2shuffle = list(peptideWithoutCleavageAA)
                         while a:
                             random.shuffle(list2shuffle)
-                            if enzyme[1] == 'C':
-                                # permutedSequence = '{0}{1}'.format( ''.join(permutation) , character_to_preserve )
-                                shuffled_peptide = '{0}{1}'.format( ''.join(list2shuffle) , character_to_preserve )
-                            elif enzyme[1] == 'N':
-                                shuffled_peptide = '{0}{1}'.format( character_to_preserve, ''.join(list2shuffle) )
-                            else:
-                                print('Where does your enzyme cleave?',enzyme)
-                                exit()
+                            shuffled_peptide = '{0}{1}{2}'.format( character_to_preserve_N, ''.join(list2shuffle) , character_to_preserve_C )
                             if shuffled_peptide != peptide:
                                 if shuffled_peptide not in perDict[ aaString ]['permutations']:
                                     perDict[ aaString ]['permutations'].append( shuffled_peptide )
@@ -234,7 +230,7 @@ def main( input_files=None, output_file=None, enzyme=None, mode='shuffle_peptide
                 )
             peptideList = ursgal.ucore.digest(
                 sequence,
-                enzyme,
+                (cleavage_aa, site),
                 no_missed_cleavages = True
             )
             originalSequence    = []
@@ -329,7 +325,7 @@ def main( input_files=None, output_file=None, enzyme=None, mode='shuffle_peptide
                 print(file = opened_output_file, end = line_ending)
         print( '', file = opened_output_file, end = line_ending)
         #decoy, print the shuffled peptides
-        print(">decoy_{0}".format(fastaID), file = opened_output_file, end = line_ending)
+        print(">{0}{1}".format(decoy_tag, fastaID), file = opened_output_file, end = line_ending)
         for pos, _ in enumerate( new_sequence_decoy ):
             print(_, end = "", file = opened_output_file)
             if (pos+1) % 80 == 0:

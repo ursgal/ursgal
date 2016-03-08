@@ -129,15 +129,16 @@ def digest(sequence , enzyme, no_missed_cleavages = False):
     tmp = ''
     result = []
     additionals = list()
-    for aa in sequence:
+    cleavage_aa, site = enzyme
+    for p, aa in enumerate(sequence):
         if aa == '*':
             continue
         tmp += aa
-        if aa in enzyme[0]:
-            if enzyme[1] == 'C':
+        if aa in cleavage_aa:
+            if site == 'C':
                 result.append(tmp)
                 tmp = ''
-            elif enzyme[1] == 'N':
+            elif site == 'N':
                 result.append(tmp[0:len(tmp) - 1])
                 tmp = ''
                 tmp += aa

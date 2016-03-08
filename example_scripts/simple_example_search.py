@@ -64,7 +64,6 @@ def main():
             mzML_file
         )
 
-    # exit('Wow')
     unified_file_list = []
 
     for engine in engine_list:

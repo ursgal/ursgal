@@ -63,8 +63,6 @@ class venndiagram_1_0_0( ursgal.UNode ):
         venndiagram_main = self.import_engine_as_python_function()
 
         venn_params = {}
-            # 'opacity' : self.params['opacity']
-            # }
 
         translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
 
@@ -105,13 +103,9 @@ class venndiagram_1_0_0( ursgal.UNode ):
                 exit(1)
 
         column_sets = {}
-
         default_label = ['label_A','label_B','label_C','label_D','label_E','label_F']
-
         input_file_dicts = self.params['input_file_dicts']
-
         data = []
-
         for result_file in input_file_dicts:
             data_field = (
                 result_file['last_engine'],
@@ -124,8 +118,6 @@ class venndiagram_1_0_0( ursgal.UNode ):
 
         all_are_csv = all( [f[1].upper().endswith('.CSV') for f in data] )
         assert all_are_csv == True, "VennDiagram input files all have to be .csv"
-
-
         assert len(data) <= 5, '''
             ERROR: input_file_list can only contain two to five result files,
             you can merge files before, if you need. 

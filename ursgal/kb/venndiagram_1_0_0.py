@@ -35,20 +35,20 @@
 #     'opacity'             : 0.35,
 # }
 
-USED_USEARCH_PARAMS = [
-    # used to be AVAILABLE PARAMS ..
-    # Only these will be translated ...
-    # Only those will trigger a re-run if changed!!
-]
+# USED_USEARCH_PARAMS = [
+#     # used to be AVAILABLE PARAMS ..
+#     # Only these will be translated ...
+#     # Only those will trigger a re-run if changed!!
+# ]
 
-USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
-    # USED TO BE UBER_SPECIFIC_TRANSLATIONS
-    # params['mega_flag'] of 5 is translated to 'monster peanut' for unode
-    # because Gnome Chompski
-    # Note: only USED_USEARCH_PARAMS are actually translated !!
-    }
+# USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
+#     # USED TO BE UBER_SPECIFIC_TRANSLATIONS
+#     # params['mega_flag'] of 5 is translated to 'monster peanut' for unode
+#     # because Gnome Chompski
+#     # Note: only USED_USEARCH_PARAMS are actually translated !!
+#     }
 
-USEARCH_PARAM_VALUE_TRANSLATIONS = {
-    # USED TO BE UBER_UBER_VALUE_TRANSLATIONS
-    # USearch value is not known to the node but can be mapped 1 to 1
-}
+# USEARCH_PARAM_VALUE_TRANSLATIONS = {
+#     # USED TO BE UBER_UBER_VALUE_TRANSLATIONS
+#     # USearch value is not known to the node but can be mapped 1 to 1
+# }

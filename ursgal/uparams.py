@@ -253,17 +253,23 @@ ursgal_params = {
     },
     'decoy_generation_mode' : {
         'available_in_unode' : [
+            'generate_target_decoy_1_0_0',
         ],
         'default_value' : "shuffle_peptide",
         'description' :  ''' Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein). ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'generate_target_decoy_style_1' : 'decoy_generation_mode',
         },
         'utag' : [
+            'database'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : [
+            'shuffle_peptide',
+            'reverse_protein'
+        ]
     },
     'decoy_tag' : {
         'available_in_unode' : [
@@ -271,13 +277,15 @@ ursgal_params = {
             'mzidentml_lib_1_6_11',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'generate_target_decoy_1_0_0',
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'mzidentml_style_1' : '-decoyRegex',
-            'msamanda_style_1' : 'decoy_tag'
+            'msamanda_style_1' : 'decoy_tag',
+            'generate_target_decoy_style_1' : 'decoy_tag',
         },
         'utag' : [
             'database',
@@ -350,6 +358,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'generate_target_decoy_1_0_0',
         ],
         'default_value' : "trypsin",
         'description' :  ''' Enzyme: Rule of protein cleavage
@@ -386,9 +395,10 @@ ursgal_params = {
             'myrimatch_style_1' : '-CleavageRules<str>',
             'omssa_style_1' : '-e',
             'xtandem_style_1' : 'protein, cleavage site',
+            'generate_target_decoy_style_1' : 'enzyme',
         },
         'utag' : [
-            'protein',
+            'protein', 'database'
         ],
         'uvalue_translation' : {
             'msamanda_style_1' : {
@@ -415,6 +425,30 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;after;P',
                 'trypsin_gluc' : 'DEKR;after;P',
                 'trypsin_p' : 'KR;after;',
+            },
+            'generate_target_decoy_style_1' : {
+                'argc' : 'R;C;P',
+                'aspn' : 'D;N;',
+                'chymotrypsin' : 'FMWY;C;P',
+                'chymotrypsin_p' : 'FMWY;C;',
+                'clostripain' : 'R;C;',
+                'cnbr' : 'M;C;P',
+                'elastase' : 'AGILV;C;P',
+                'formic_acid' : 'D;C;P',
+                'gluc' : 'DE;C;P',
+                'gluc_bicarb' : 'E;C;P',
+                'iodosobenzoate' : 'W;C;',
+                'lysc' : 'K;C;P',
+                'lysc_p' : 'K;C;',
+                'lysn' : 'K;N;',
+                'lysn_promisc' : 'AKRS;N;',
+                'pepsina' : 'FL;C;',
+                'protein_endopeptidase' : 'P;C;',
+                'staph_protease' : 'E;C;',
+                'trypsin' : 'KR;C;P',
+                'trypsin_cnbr' : 'KRM;C;P',
+                'trypsin_gluc' : 'DEKR;C;P',
+                'trypsin_p' : 'KR;C;',
             },
             'msgfplus_style_1' : {
                 'alpha_lp' : '8',
@@ -1700,6 +1734,7 @@ Example:
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
             'venndiagram_1_0_0',
+            'generate_target_decoy_1_0_0'
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
@@ -1709,6 +1744,7 @@ Example:
             'msgfplus_style_1' : '-o',
             'mzidentml_style_1' : 'output_file_incl_path',
             'venndiagram_style_1' : 'output_file',
+            'generate_target_decoy_style_1' : 'output_file_incl_path'
         },
         'utag' : [
             'output',

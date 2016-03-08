@@ -17,7 +17,7 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         'input_types'      : [''],
         'in_development'   : True,
         'include_in_git'   : True,
-
+        'utranslation_style'    : 'generate_target_decoy_style_1',
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
@@ -112,16 +112,28 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
                 )
             )
 
-        self.params['output_file_name'] = os.path.join(
-                    self.io['output']['finfo']['dir'],
-                    self.io['output']['finfo']['file']
-                )
+        self.params['output_file_incl_path'] = os.path.join(
+            self.params['output_dir_path'],
+            self.params['output_file']
+        )
+
+        # self.params['output_file_name'] = os.path.join(
+        #             self.io['output']['finfo']['dir'],
+        #             self.io['output']['finfo']['file']
+        #         )
+
+        # translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        # import pprint
+        # pprint.pprint(translations)
+        # exit(1)
+
         generate_target_decoy_main(
             input_files = input_files,
-            output_file = self.params['output_file_name'],
+            output_file = self.params['output_file_incl_path'],
             enzyme      = self.params['enzyme'],
-            mode        = self.params['decoy_generation_mode']
+            mode        = self.params['decoy_generation_mode'],
+            decoy_tag   = self.params['decoy_tag']
         )
 
         self.print_execution_time(tag='execution')
-        return self.params['output_file_name']
+        return self.params['output_file_incl_path']
