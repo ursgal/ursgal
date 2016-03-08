@@ -86,15 +86,11 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         base of generate_target_decoy_1_0_0.
 
         '''
-        #       TO DO:
-        # * include other enzymes
-        # * reverse/shuffle protein
+        
         print('[ -ENGINE- ] Executing conversion ..')
         self.time_point(tag = 'execution')
         generate_target_decoy_main = self.import_engine_as_python_function()
-        # pprint.pprint(self.params)
-        # pprint.pprint(self.io)
-        # exit()
+
         input_files = []
         if 'input_file_dicts' in self.params.keys():
             for input_file_dict in self.params['input_file_dicts']:
@@ -116,16 +112,6 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
             self.params['output_dir_path'],
             self.params['output_file']
         )
-
-        # self.params['output_file_name'] = os.path.join(
-        #             self.io['output']['finfo']['dir'],
-        #             self.io['output']['finfo']['file']
-        #         )
-
-        # translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
-        # import pprint
-        # pprint.pprint(translations)
-        # exit(1)
 
         generate_target_decoy_main(
             input_files = input_files,

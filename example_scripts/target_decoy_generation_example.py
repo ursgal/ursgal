@@ -16,7 +16,7 @@ def main():
     '''
     params = {
         'enzyme'                : 'trypsin',
-        'decoy_generation_mode' : 'shuffle_peptide',
+        'decoy_generation_mode' : 'reverse_protein',
     }
 
     fasta_database_list = [
