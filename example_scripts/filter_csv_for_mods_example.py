@@ -29,7 +29,7 @@ def main():
         os.pardir,
         'example_data',
         'misc',
-        'BSA1_msgfplus_v9979_unified.csv'
+        'filter_csv_for_mods_example_omssa_2_1_9_unified.csv'
     )
     uc = ursgal.UController(
         params = params
