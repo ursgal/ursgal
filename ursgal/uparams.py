@@ -1708,7 +1708,7 @@ Example:
             'msamanda_style_1' : 'output_file_incl_path',
             'msgfplus_style_1' : '-o',
             'mzidentml_style_1' : 'output_file_incl_path',
-            'venndiagram_style_1' : 'output_file_incl_path',
+            'venndiagram_style_1' : 'output_file',
         },
         'utag' : [
             'output',
@@ -2812,7 +2812,7 @@ Example:
         'description' :  ''' Size of visualiyation plots (e.g. Venn diagram), given as tuple (width, height) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'venndiagram_style_1' : 'stroke-width',
+            'venndiagram_style_1' : 'visualization_size',
         },
         'utag' : [
             'visualization',

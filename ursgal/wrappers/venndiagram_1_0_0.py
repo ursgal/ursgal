@@ -67,9 +67,42 @@ class venndiagram_1_0_0( ursgal.UNode ):
             # }
 
         translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
-        import pprint
-        pprint.pprint(translations)
-        exit(1)
+
+        output_file_name = os.path.join(
+            self.params['output_dir_path'],
+            self.params['output_file']
+        )
+
+        if output_file_name == None:
+            head, tail = self.determine_common_common_head_tail_part_of_names( input_file_dicts=input_file_dicts)
+            output_file_name = head + tail
+
+        translations['output_file']['output_file_incl_path'] = output_file_name
+
+        for translated_key, translation_dict in translations.items():
+            if translated_key in [
+                'visualization_column_names',
+                'visualization_label_list',
+            ]:
+                continue
+            elif translated_key == 'visualization_font':
+                venn_params['font'] = translation_dict['visualization_font'][0]
+                venn_params['label font-size header'] = translation_dict['visualization_font'][1]
+                venn_params['label font-size major'] = translation_dict['visualization_font'][2]
+                venn_params['label font-size minor'] = translation_dict['visualization_font'][3]
+                venn_params['label font-size venn'] = translation_dict['visualization_font'][3]
+            elif translated_key == 'visualization_scaling_factors' :
+                venn_params['cx'] = translation_dict['visualization_scaling_factors'][0]
+                venn_params['cy'] = translation_dict['visualization_scaling_factors'][1]
+            elif translated_key == 'visualization_size' :
+                venn_params['width'] = translation_dict['visualization_size'][0]
+                venn_params['height'] = translation_dict['visualization_size'][1]
+            elif len(translation_dict) == 1:
+                venn_params[translated_key] = list(translation_dict.values())[0]
+            else:
+                print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
+                print(translation_dict)
+                exit(1)
 
         column_sets = {}
 
@@ -92,22 +125,6 @@ class venndiagram_1_0_0( ursgal.UNode ):
         all_are_csv = all( [f[1].upper().endswith('.CSV') for f in data] )
         assert all_are_csv == True, "VennDiagram input files all have to be .csv"
 
-        # output_file_name = os.path.join(
-        #     self.params['output_dir_path'],
-        #     self.params['output_file']
-        # )
-        # self.params['output_file_incl_path'] = output_file_name
-
-        # if output_file_name == None:
-        #     head, tail = self.determine_common_common_head_tail_part_of_names( input_file_dicts=input_file_dicts)
-        #     output_file_name = head + tail
-
-        # output_file_dir = self.params['output_dir_path']
-
-        # output_incl_path = os.path.join(
-        #     output_file_dir,
-        #     output_file_name
-        # )
 
         assert len(data) <= 5, '''
             ERROR: input_file_list can only contain two to five result files,
@@ -117,10 +134,10 @@ class venndiagram_1_0_0( ursgal.UNode ):
         used_labels = []
 
         for n, (engine, file_path) in enumerate(data):
-            if self.params['label_list'] == None:
+            if self.params['visualization_label_list'] == []:
                 label = engine
             else:
-                label = self.params['label_list'][n]
+                label = self.params['visualization_label_list'][n]
             venn_params[default_label[n]] = label
             column_sets[ label ]     = set()
             used_labels.append(label)
@@ -136,7 +153,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
             )
             for line_dict in csv_input:
                 value = ''
-                for column_name in self.params['column_names']:
+                for column_name in self.params['visualization_column_names']:
                     value += '||{0}'.format( line_dict[column_name] )
                 column_sets[ label ].add( value )
 
@@ -146,7 +163,6 @@ class venndiagram_1_0_0( ursgal.UNode ):
 
         return_dict = venndiagram_main(
             *in_sets,
-            output_file = output_incl_path,
             **venn_params
             )
 

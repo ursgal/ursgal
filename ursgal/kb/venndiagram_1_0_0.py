@@ -21,19 +21,19 @@
 #     },
 
 #     # 'engine_exe'          : {
-#     #     'arc_independent' : 'venndiagram_1_0_0.py',
-#     # },
+# #     #     'arc_independent' : 'venndiagram_1_0_0.py',
+# #     # },
 
+# # }
+
+# DEFAULT_PARAMS = {
+#     'column_names'        : ['Sequence', 'Modifications'],
+#     'cutoff_column_name'  : 'PEP',
+#     'cutoff_column_value' : 0.05 ,
+#     'header'              : None,
+#     'label_list'          : None,
+#     'opacity'             : 0.35,
 # }
-
-DEFAULT_PARAMS = {
-    'column_names'        : ['Sequence', 'Modifications'],
-    'cutoff_column_name'  : 'PEP',
-    'cutoff_column_value' : 0.05 ,
-    'header'              : None,
-    'label_list'          : None,
-    'opacity'             : 0.35,
-}
 
 USED_USEARCH_PARAMS = [
     # used to be AVAILABLE PARAMS ..
