@@ -43,8 +43,8 @@ def main():
     engine_list = [
         # 'omssa',
         # xtandem,
-        'msgf',
-        # msamanda,
+        # 'msgf',
+        msamanda,
     ]
 
     mzML_file = os.path.join(

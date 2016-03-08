@@ -22,9 +22,9 @@ class mzidentml_lib_1_6_11( ml ):
             'Hermjakob H, Vizcaíno JA, Jones AR. (2012) jmzIdentML API: '\
             'A Java interface to the mzIdentML standard for peptide and '\
             'protein identification data.',
-    'in_development'            : True,
+        'in_development'            : True,
         'include_in_git'            : False,
-
+        'utranslation_style'    : 'mzidentml_style_1',
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {

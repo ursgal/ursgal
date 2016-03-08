@@ -21,7 +21,8 @@ class msamanda_1_0_0_5242( msamanda ):
             'tandem mass spectra.',
         'include_in_git'            : None,
         'cannot_distribute'         : True,
-        'in_development'            : True,
+        'in_development'            : False,
+        'utranslation_style'        : 'msamanda_style_1',
         'engine': {
             'win32' : {
                 '64bit' : {

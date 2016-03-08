@@ -74,11 +74,6 @@ Could not load RT lookup dict from this location: {0}
         # translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
         last_search_engine_colname = self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][last_engine]
 
-        # # find the column name of the engine score
-        # last_eng_node = self.meta_unodes[last_engine]
-        # last_search_engine_colname = \
-        #     last_eng_node.DEFAULT_PARAMS.get('validation_score_field', None)
-
         unify_csv_main(
             input_file     = input_file,
             output_file    = output_file,

@@ -29,7 +29,9 @@ class UnimodMapper( object ):
             unimodXML = os.path.normpath(
                 os.path.join(
                     os.path.dirname(__file__),
-                    'kb',
+                    'resources',
+                    'platform_independent',
+                    'arc_independent',
                     'ext',
                     'unimod.xml'
                 ))
@@ -39,7 +41,9 @@ class UnimodMapper( object ):
             userdefined_unimodXML = os.path.normpath(
                 os.path.join(
                     os.path.dirname(__file__),
-                    'kb',
+                    'resources',
+                    'platform_independent',
+                    'arc_independent',
                     'ext',
                     'userdefined_unimod.xml'
                 ))

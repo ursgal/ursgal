@@ -28,7 +28,8 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             'tandem mass spectra.',
         'include_in_git'            : None,
         'cannot_distribute'         : True,
-        'in_development'            : True,
+        'in_development'            : False,
+        'utranslation_style'        : 'msamanda_style_1',
         'engine': {
             'linux' : {
                 '64bit' : {
@@ -75,22 +76,33 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         Returns:
                 self.params(dict)
         '''
+
+        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        # import pprint
+        # pprint.pprint(translations)
+        # pprint.pprint(self.params)
+        # exit(1)
+
         self.params['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
-            self.params['file_root'] + '.mgf'
+            self.params['input_file']
         )
 
         self.params['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
+
+        # if translations['unimod_file_incl_path']['unimod_file_incl_path'] == '' :
         self.params['unimod_file_incl_path'] = os.path.join(
-                    os.path.dirname(__file__),
-                    '..',
-                    'kb',
-                    'ext',
-                    'unimod.xml'
-                )
+            os.path.dirname(__file__),
+            '..',
+            'resources',
+            'platform_independent',
+            'arc_independent',
+            'ext',
+            'unimod.xml'
+        )
 
         # building command_list !
         #
@@ -99,7 +111,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         else:
             self.params['command_list'] = ['mono']
         self.params['command_list'] += [
-
             self.exe,
             '{mgf_input_file}'.format(**self.params),
             '{database}'.format(**self.params),
@@ -107,9 +118,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             '{output_file_incl_path}'.format(**self.params)
         ]
         self.created_tmp_files.append(self.params['output_file_incl_path'] + '_settings.xml')
-
-        #
-        # ----------------------
 
         score_ions = []
         instruments_file_input = []
@@ -131,15 +139,15 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             considered_charges.append( '+{0}'.format(charge) )
         self.params['considered_charges'] = ', '.join( considered_charges )
 
-        if self.params['semi_enzyme'] == True:
-            self.params['semi_enzyme'] = 'Semi'
-        else:
-            self.params['semi_enzyme'] = 'Full'
+        # if self.params['semi_enzyme'] == True:
+        #     self.params['semi_enzyme'] = 'Semi'
+        # else:
+        #     self.params['semi_enzyme'] = 'Full'
 
-        if self.params['precursor_mass_type'] == 'monoisotopic':
-            self.params['monoisotopic_precursor'] = 'true'
-        else:
-            self.params['monoisotopic_precursor'] = 'false'
+        # if self.params['precursor_mass_type'] == 'monoisotopic':
+        #     self.params['monoisotopic_precursor'] = 'true'
+        # else:
+        #     self.params['monoisotopic_precursor'] = 'false'
 
         if self.params['label'] == '15N':
             for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
@@ -156,6 +164,8 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                                                          'name': '15N_{0}'.format(aminoacid),
                                                          'mass': N15_Diff }
                                                       )
+        self.params['enzyme_name'] = self.ORIGINAL_PARAMS['enzyme']
+        self.params['enzyme_cleavage'], self.params['enzyme_position'], self.params['enzyme_inhibitors'] = self.params['enzyme']
 
         modifications = [ ]
         for t in [ 'fix', 'opt' ]:
@@ -385,12 +395,12 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         '_enzymes.xml' : '''<?xml version="1.0" encoding="utf-8" ?>
 <enzymes>
   <enzyme>
-    <name>Trypsin</name>
-    <cleavage_sites>KR</cleavage_sites>
-    <inhibitors>P</inhibitors>
-    <position>after</position>
+    <name>{enzyme_name}</name>
+    <cleavage_sites>{enzyme_cleavage}</cleavage_sites>
+    <inhibitors>{enzyme_inhibitors}</inhibitors>
+    <position>{enzyme_position}</position>
   </enzyme>
-  <enzyme>
+<enzyme>
     <name>Trypsin/P</name>
     <cleavage_sites>KR</cleavage_sites>
     <position>after</position>
@@ -413,6 +423,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
     <name>No-Cleavage</name>
     <cleavage_sites></cleavage_sites>
   </enzyme>
-</enzymes>'''.format(),
+</enzymes>'''.format(**self.params),
             }
         return templates

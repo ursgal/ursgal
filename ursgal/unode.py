@@ -1228,12 +1228,12 @@ class UNode(object, metaclass=Meta_UNode):
         # so we can check which parameters are used during
         # run time or which one lead to a crash
 
-        original_params = self.params.copy()
+        self.ORIGINAL_PARAMS = self.params.copy()
         #
         # We use original params for second and final dump
         #
-        if 'command_list' in original_params:
-            del original_params['command_list']
+        if 'command_list' in self.ORIGINAL_PARAMS:
+            del self.ORIGINAL_PARAMS['command_list']
 
         translated_params = self.translate_params( self.params )
         self.params.update( translated_params )
@@ -1309,7 +1309,7 @@ class UNode(object, metaclass=Meta_UNode):
                     f_out.writelines(f_in)
             self.created_tmp_files.append( raw_output )
 
-        self.params.update( original_params )
+        self.params.update( self.ORIGINAL_PARAMS )
 
         if self.params['remove_temporary_files']:
             for tmp_file in self.created_tmp_files:
