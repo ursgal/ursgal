@@ -1144,6 +1144,23 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
+    'max_num_of_ions_per_series_to_search' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 0,
+        'description' :  ''' max number of ions in each series being searched (0=all) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-sp',
+        },
+        'utag' : [
+            'search',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
     'max_num_mods' : {
         'available_in_unode' : [
             'msgfplus_v9979',
@@ -2297,6 +2314,10 @@ Example:
             'scoring',
         ],
         'uvalue_translation' : {
+            'omssa_style_1' : {
+                True : '0',
+                False : ''
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -2323,6 +2344,10 @@ Example:
             'scoring',
         ],
         'uvalue_translation' : {
+            'omssa_style_1' : {
+                True : '1',
+                False : ''
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -2349,6 +2374,10 @@ Example:
             'scoring',
         ],
         'uvalue_translation' : {
+            'omssa_style_1' : {
+                True : '2',
+                False : ''
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -2411,6 +2440,10 @@ Example:
             'scoring',
         ],
         'uvalue_translation' : {
+            'omssa_style_1' : {
+                True : '3',
+                False : ''
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -2437,6 +2470,10 @@ Example:
             'scoring',
         ],
         'uvalue_translation' : {
+            'omssa_style_1' : {
+                True : '4',
+                False : ''
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -2499,6 +2536,52 @@ Example:
             'scoring',
         ],
         'uvalue_translation' : {
+            'omssa_style_1' : {
+                True : '5',
+                False : ''
+            }
+        },
+        'uvalue_type' : "bool",
+    },
+    'search_for_b1_ions' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : False,
+        'description' :  ''' should first forward (b1) product ions be in search (1=no) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-sb1',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+            'omssa_style_1' : {
+                True : '0',
+                False : '1'
+            }
+        },
+        'uvalue_type' : "bool",
+    },
+    'search_c_terminal_ions' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : True,
+        'description' :  ''' search c terminal ions? ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-sct',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+            'omssa_style_1' : {
+                True : '0',
+                False : '1'
+            }
         },
         'uvalue_type' : "bool",
     },

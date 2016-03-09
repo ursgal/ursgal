@@ -34,7 +34,7 @@ class omssa_2_1_9( ursgal.UNode ):
         'input_types'           : ['.mgf'],
         'output_extension'      : '.csv',
         'create_own_folder'     : True,
-        'in_development'            : False,
+        'in_development'        : False,
 
         'include_in_git'        : False,
         'utranslation_style'    : 'omssa_style_1',
@@ -161,7 +161,6 @@ class omssa_2_1_9( ursgal.UNode ):
 
         # building command_list !
         translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
-
         blastdb_suffixes = [ '.phr', '.pin', '.psq' ]
         blastdb_present = True
         for blastdb_suffix in blastdb_suffixes:
@@ -192,7 +191,7 @@ class omssa_2_1_9( ursgal.UNode ):
         else:
             self.params['omssa_label'] = '0'
 
-        # Modidications
+        # Modifications
         # ------------------------
 
         for param_key in ['fixed_mods', 'opt_mods']:
@@ -242,7 +241,6 @@ class omssa_2_1_9( ursgal.UNode ):
                 translations['-e']['enzyme'] = '24'
 
         # define the ions to search
-
         self.params['omssa_ions_to_search'] = []
         for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
             ion_2_add = translations['-i'].get('score_{0}_ions'.format(ion), '')
@@ -279,6 +277,9 @@ class omssa_2_1_9( ursgal.UNode ):
         import pprint
         pprint.pprint( self.params )
         pprint.pprint(  self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] )
+        pprint.pprint( translations )
+        print( self.params['omssa_ions_to_search'] )
+        exit(1)
         exit('break it <<<<')
         # print( translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] )
         # exit(1)
@@ -368,9 +369,9 @@ class omssa_2_1_9( ursgal.UNode ):
             '-x', '{x}'.format(**self.params),  # default, all taxids, we dont want to change this
 
             # ions
-            '-sct', '{sct}'.format(**self.params),   # search c terminal ions?, same as sGUI default, 0=yes, 1=no
-            '-sb1', '{sb1}'.format(**self.params),   # should first forward (b1) product ions be in search (1=no)
-            '-sp', '{sp}'.format(**self.params),  # max number of ions in each series being searched (0=all)
+            '{search_c_terminal_ions_key}'.format(**self.params), '{search_c_terminal_ions}'.format(**self.params),   # search c terminal ions?, same as sGUI default, 0=yes, 1=no
+            '{search_for_b1_ions_key}'.format(**self.params), '{search_for_b1_ions}'.format(**self.params),   # should first forward (b1) product ions be in search (1=no)
+            '{max_num_of_ions_per_series_to_search_key}', '{max_num_of_ions_per_series_to_search}'.format(**self.params),  # max number of ions in each series being searched (0=all)
 
             # precursor
             '-z1', '{z1}'.format(**self.params),  # default, fraction of peaks below precursor used to determine if spectrum is charge 1
