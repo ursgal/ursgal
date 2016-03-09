@@ -14,6 +14,7 @@ by
 Johannes Barth
 Daniel Jaeger
 Christian Fufezan
+Stefan Schulze
 """
 
 from __future__ import print_function

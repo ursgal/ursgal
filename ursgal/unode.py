@@ -680,9 +680,14 @@ class UNode(object, metaclass=Meta_UNode):
             assert search_engine, 'Can\'t convert results from no specified search engine.'
             assert 'multiple engines:' not in search_engine, 'Can\'t convert merged results from multiple different engines.'
 
-            DEFAULT_PARAMS = self.meta_unodes[search_engine].DEFAULT_PARAMS
-            for k, v in DEFAULT_PARAMS.items():
-                self.params[ k ] = v
+            # import pprint
+            # pprint.pprint(self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'])
+            # pprint.pprint(self.params)
+            # exit(1)
+
+            # DEFAULT_PARAMS = self.meta_unodes[search_engine].DEFAULT_PARAMS
+            # for k, v in DEFAULT_PARAMS.items():
+            #     self.params[ k ] = v
 
         grouped_psms = ddict(list)
         opened_file = open( input_file, 'r')
@@ -690,14 +695,16 @@ class UNode(object, metaclass=Meta_UNode):
             row for row in opened_file if not row.startswith('#')
         )
         n = 0
+        validation_score_field = self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][search_engine]
         for n, line_dict in enumerate(csv_dict_reader_object):
-            assert self.params['validation_score_field'] in line_dict.keys(), \
-                'defined validation_score_field in search engine kb is not found'
+            assert validation_score_field in line_dict.keys(), \
+                '''defined validation_score_field for {0} is not found, 
+                please check/add it to uparams.py['validation_score_field']'''.format(search_engine)
 
             grouped_psms[ line_dict[ 'Spectrum Title' ] ].append(
                 (
                     float(
-                        line_dict[ self.params['validation_score_field'] ]
+                        line_dict[ validation_score_field ]
                     ),
                     line_dict
                 )
@@ -705,7 +712,7 @@ class UNode(object, metaclass=Meta_UNode):
         for spectrum_title in grouped_psms.keys():
             grouped_psms[ spectrum_title ].sort(
                 key     = operator.itemgetter(0),
-                reverse = self.params['bigger_scores_better']
+                reverse = self.TRANSLATIONS['bigger_scores_better']['uvalue_style_translation'][search_engine]
             )
         print(
             "[ GROUPING ] Grouped {0} PSMs into {1} unique spectrum titles".format(

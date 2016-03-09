@@ -37,16 +37,16 @@ def main(folder=None, profile=None, target_decoy_database=None):
     # We specify all search engines and validation engines that we want to use in a list
     # (version numbers might differ on windows or mac):
     search_engines  = [
-        'omssa',
-        'xtandem_piledriver',
+        # 'omssa',
+        # 'xtandem_piledriver',
         'msgf',
-        # 'msamanda_1_0_0_5243',
+        'msamanda_1_0_0_5243',
         # 'myrimatch_2_1_138',
     ]
 
     validation_engines = [
-        'percolator_2_08',
         'qvality',
+        'percolator_2_08',
     ]
 
     # Modifications that should be included in the search

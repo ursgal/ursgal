@@ -14,6 +14,7 @@ class merge_csvs_1_0_0( ursgal.UNode ):
         'input_types'            : ['.csv'],
         'include_in_git'            : True,
         'in_development'            : True,
+        'utranslation_style'    : 'merge_csvs_style_1',
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {

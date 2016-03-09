@@ -35,7 +35,8 @@ class qvality_2_02( ursgal.UNode ):
             'probabilities.',
         'include_in_git'            : False,
         'group_psms'                : True,
-        'in_development'            : True,
+        'in_development'            : False,
+        'utranslation_style'        : 'qvality_style_1',
         'engine': {
             'darwin' : {
                 '64bit' : {

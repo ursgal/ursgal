@@ -65,6 +65,35 @@ ursgal_params = {
         },
         'uvalue_type' : "int",
     },
+    'bigger_scores_better' : {
+        'available_in_unode' : [
+            'percolator_2_08',
+            'qvality_2_02',
+        ],
+        'default_value' : "",
+        'description' :  ''' Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'qvality_style_1' : '-r',
+        },
+        'utag' : [
+            'scoring',
+            'validation',
+        ],
+        'uvalue_translation' : {
+            'percolator_style_1' : {
+                'msamanda_1_0_0_5242' : True,
+                'msamanda_1_0_0_5243' : True,
+                'msgfplus_v9979' : False,
+            },
+            'qvality_style_1' : {
+                'msamanda_1_0_0_5242' : True,
+                'msamanda_1_0_0_5243' : True,
+                'msgfplus_v9979' : False,
+            },
+        },
+        'uvalue_type' : "",
+    },
     'cleavage_cterm_mass_change' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
@@ -215,16 +244,16 @@ ursgal_params = {
     },
     'csv_filter_rules' : {
         'available_in_unode' : [
-            'filter_csv_1_0_0'
+            'filter_csv_1_0_0',
         ],
         'default_value' : None,
         'description' :  ''' Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'filter_csv_style_1' : 'filter_rules'
+            'filter_csv_style_1' : 'filter_rules',
         },
         'utag' : [
-            'conversion'
+            'conversion',
         ],
         'uvalue_translation' : {
         },
@@ -265,30 +294,32 @@ ursgal_params = {
             'generate_target_decoy_style_1' : 'mode',
         },
         'utag' : [
-            'database'
+            'database',
         ],
         'uvalue_translation' : {
         },
         'uvalue_type' : [
+            'reverse_protein',
             'shuffle_peptide',
-            'reverse_protein'
-        ]
+        ],
     },
     'decoy_tag' : {
         'available_in_unode' : [
-            'mzidentml_lib_1_6_10',
-            'mzidentml_lib_1_6_11',
+            'generate_target_decoy_1_0_0',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
-            'generate_target_decoy_1_0_0',
+            'mzidentml_lib_1_6_10',
+            'mzidentml_lib_1_6_11',
+            'qvality_2_02',
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'mzidentml_style_1' : '-decoyRegex',
-            'msamanda_style_1' : 'decoy_tag',
             'generate_target_decoy_style_1' : 'decoy_tag',
+            'msamanda_style_1' : 'decoy_tag',
+            'mzidentml_style_1' : '-decoyRegex',
+            'qvality_style_1' : 'decoy_tag',
         },
         'utag' : [
             'database',
@@ -351,6 +382,7 @@ ursgal_params = {
     },
     'enzyme' : {
         'available_in_unode' : [
+            'generate_target_decoy_1_0_0',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
@@ -361,7 +393,6 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'generate_target_decoy_1_0_0',
         ],
         'default_value' : "trypsin",
         'description' :  ''' Enzyme: Rule of protein cleavage
@@ -393,17 +424,42 @@ ursgal_params = {
                 # Note not all search engines support all enzymes ! :) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'generate_target_decoy_style_1' : 'enzyme',
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-e',
             'myrimatch_style_1' : '-CleavageRules<str>',
             'omssa_style_1' : '-e',
             'xtandem_style_1' : 'protein, cleavage site',
-            'generate_target_decoy_style_1' : 'enzyme',
         },
         'utag' : [
-            'protein', 'database'
+            'database',
+            'protein',
         ],
         'uvalue_translation' : {
+            'generate_target_decoy_style_1' : {
+                'argc' : 'R;C;P',
+                'aspn' : 'D;N;',
+                'chymotrypsin' : 'FMWY;C;P',
+                'chymotrypsin_p' : 'FMWY;C;',
+                'clostripain' : 'R;C;',
+                'cnbr' : 'M;C;P',
+                'elastase' : 'AGILV;C;P',
+                'formic_acid' : 'D;C;P',
+                'gluc' : 'DE;C;P',
+                'gluc_bicarb' : 'E;C;P',
+                'iodosobenzoate' : 'W;C;',
+                'lysc' : 'K;C;P',
+                'lysc_p' : 'K;C;',
+                'lysn' : 'K;N;',
+                'lysn_promisc' : 'AKRS;N;',
+                'pepsina' : 'FL;C;',
+                'protein_endopeptidase' : 'P;C;',
+                'staph_protease' : 'E;C;',
+                'trypsin' : 'KR;C;P',
+                'trypsin_cnbr' : 'KRM;C;P',
+                'trypsin_gluc' : 'DEKR;C;P',
+                'trypsin_p' : 'KR;C;',
+            },
             'msamanda_style_1' : {
                 'argc' : 'R;after;P',
                 'aspn' : 'D;before;',
@@ -428,30 +484,6 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;after;P',
                 'trypsin_gluc' : 'DEKR;after;P',
                 'trypsin_p' : 'KR;after;',
-            },
-            'generate_target_decoy_style_1' : {
-                'argc' : 'R;C;P',
-                'aspn' : 'D;N;',
-                'chymotrypsin' : 'FMWY;C;P',
-                'chymotrypsin_p' : 'FMWY;C;',
-                'clostripain' : 'R;C;',
-                'cnbr' : 'M;C;P',
-                'elastase' : 'AGILV;C;P',
-                'formic_acid' : 'D;C;P',
-                'gluc' : 'DE;C;P',
-                'gluc_bicarb' : 'E;C;P',
-                'iodosobenzoate' : 'W;C;',
-                'lysc' : 'K;C;P',
-                'lysc_p' : 'K;C;',
-                'lysn' : 'K;N;',
-                'lysn_promisc' : 'AKRS;N;',
-                'pepsina' : 'FL;C;',
-                'protein_endopeptidase' : 'P;C;',
-                'staph_protease' : 'E;C;',
-                'trypsin' : 'KR;C;P',
-                'trypsin_cnbr' : 'KRM;C;P',
-                'trypsin_gluc' : 'DEKR;C;P',
-                'trypsin_p' : 'KR;C;',
             },
             'msgfplus_style_1' : {
                 'alpha_lp' : '8',
@@ -654,38 +686,6 @@ ursgal_params = {
             'ppm',
         ],
     },
-    'header_translations' : {
-        'available_in_unode' : [
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-        ],
-        'default_value' : "",
-        'description' :  ''' Translate output headers into Ursgal unify_csv style headers''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'header_translations',
-        },
-        'utag' : [
-            'conversion',
-        ],
-        'uvalue_translation' : {
-            'msamanda_style_1' : {
-                'Scan Number'        : 'Spectrum ID',
-                'Title'              : 'Spectrum Title',
-                'Sequence'           : 'Sequence',
-                'Protein Accessions' : 'proteinacc_start_stop_pre_post_;',
-                'Modifications'      : 'Modifications',
-                'Charge'             : 'Charge',
-                'm/z'                : 'Exp m/z',
-                'Amanda Score'       : 'Amanda:Score',
-                'Weighted Probability' : 'Amanda:Weighted Probability',
-                'Filename'           : 'Filename',
-                'RT'                 : 'Retention Time (s)',
-                'Rank'               : 'Rank',
-            },
-        },
-        'uvalue_type' : '',
-    },
     'frag_mass_type' : {
         'available_in_unode' : [
             'omssa_2_1_9',
@@ -874,6 +874,38 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+    },
+    'header_translations' : {
+        'available_in_unode' : [
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
+        ],
+        'default_value' : "",
+        'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'msamanda_style_1' : 'header_translations',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+            'msamanda_style_1' : {
+                'Amanda Score' : 'Amanda:Score',
+                'Charge' : 'Charge',
+                'Filename' : 'Filename',
+                'Modifications' : 'Modifications',
+                'Protein Accessions' : 'proteinacc_start_stop_pre_post_;',
+                'RT' : 'Retention Time (s)',
+                'Rank' : 'Rank',
+                'Scan Number' : 'Spectrum ID',
+                'Sequence' : 'Sequence',
+                'Title' : 'Spectrum Title',
+                'Weighted Probability' : 'Amanda:Weighted Probability',
+                'm/z' : 'Exp m/z',
+            },
+        },
+        'uvalue_type' : "",
     },
     'helper_extension' : {
         'available_in_unode' : [
@@ -1425,7 +1457,7 @@ Example:
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : "mzidentml_lib_1_6_11",
+        'default_value' : "mzidentml_lib_1_6_10",
         'description' :  ''' mzidentml converter version: version name ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1731,23 +1763,25 @@ Example:
     },
     'output_file_incl_path' : {
         'available_in_unode' : [
+            'generate_target_decoy_1_0_0',
+            'merge_csv_1_0_0',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
             'venndiagram_1_0_0',
-            'generate_target_decoy_1_0_0'
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'generate_target_decoy_style_1' : 'output_file',
+            'merge_csv_style_1' : 'output',
             'msamanda_style_1' : 'output_file_incl_path',
             'msgfplus_style_1' : '-o',
             'mzidentml_style_1' : 'output_file_incl_path',
             'venndiagram_style_1' : 'output_file',
-            'generate_target_decoy_style_1' : 'output_file_incl_path'
         },
         'utag' : [
             'output',
@@ -2701,8 +2735,8 @@ Example:
         'available_in_unode' : [
             'percolator_2_08',
             'qvality_2_02',
+            'ucontroller',
             'unify_csv_1_0_0',
-            'ucontroller'
         ],
         'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator ''',
@@ -2710,29 +2744,36 @@ Example:
         'ukey_translation' : {
             'percolator_style_1' : 'validation_score_field',
             'qvality_style_1' : 'validation_score_field',
+            'ucontroller_style_1' : 'validation_score_field',
             'unify_csv_style_1' : 'validation_score_field',
-            'ucontroller_style_1' : 'validation_score_field'
         },
         'utag' : [
             'validation',
         ],
         'uvalue_translation' : {
             'percolator_style_1' : {
-                'msgfplus_style_1' : 'MS-GF:SpecEValue',
-                'omssa_style_1' : 'OMSSA:pvalue',
-                'msamanda_style_1': 'Amanda:Score',
+                'msamanda_1_0_0_5242' : 'Amanda:Score',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'omssa_2_1_9' : 'OMSSA:pvalue',
+            },
+            'qvality_style_1' : {
+                'msamanda_1_0_0_5242' : 'Amanda:Score',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'omssa_2_1_9' : 'OMSSA:pvalue',
+            },
+            'ucontroller_style_1' : {
+                'msamanda_1_0_0_5242' : 'Amanda:Score',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'omssa_2_1_9' : 'OMSSA:pvalue',
             },
             'unify_csv_style_1' : {
+                'msamanda_1_0_0_5242' : 'Amanda:Score',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
                 'omssa_2_1_9' : 'OMSSA:pvalue',
-                'msamanda_1_0_0_5243' : 'Amanda:Score',
-                'msamanda_1_0_0_5242' : 'Amanda:Score'
-            },
-            'ucontroller_style_1' :{
-                'msgfplus_v9979' : 'MS-GF:SpecEValue',
-                'omssa_2_1_9' : 'OMSSA:pvalue',
-                'msamanda_1_0_0_5243' : 'Amanda:Score',
-                'msamanda_1_0_0_5242' : 'Amanda:Score'
             },
         },
         'uvalue_type' : "",
@@ -2879,7 +2920,7 @@ Example:
     },
     'write_unfiltered_results' : {
         'available_in_unode' : [
-            'filter_csv_1_0_0'
+            'filter_csv_1_0_0',
         ],
         'default_value' : False,
         'description' :  ''' writes rejected results if True ''',
@@ -2888,7 +2929,7 @@ Example:
             'filter_csv_style_1' : 'write_unfiltered_results',
         },
         'utag' : [
-            'conversion'
+            'conversion',
         ],
         'uvalue_translation' : {
         },
