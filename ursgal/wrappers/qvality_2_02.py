@@ -79,10 +79,15 @@ class qvality_2_02( ursgal.UNode ):
         '''
         Formating the command line to via self.params
         '''
-        self.params['tmp_output_file_incl_path'] = os.path.join(
+        self.params['last_engine'] = self.get_last_search_engine( history = self.stats['history'] )
+
+        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+
+        self.params['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
+        translations['-o']['output_file_incl_path'] = self.params['output_file_incl_path']
 
         self._generate_qvality_input_files()
 
@@ -93,28 +98,35 @@ class qvality_2_02( ursgal.UNode ):
 
         self.params['command_list'] =[
             self.exe,
-            '-n','{qvality_number_of_bins}'.format(**self.params), #number of bins
-            '-v','{qvality_verbose}'.format(**self.params),#medium verbose
-            '-s','{qvality_epsilon_step}'.format(**self.params),#epsilon step #The relative step size used as treshhold before cross validation error is calculated, qvality determines step size automatically when set to 0
-            '-c','{qvality_cross_validation}'.format(**self.params),#cross validation, The relative crossvalidation step size used as treshhold before ending the iterations, qvality determines step size automatically when set to 0commandLine: -c
-            '-o', '{tmp_output_file_incl_path}'.format(**self.params),
         ]
 
-        if self.params['bigger_scores_better'] == False:
+        for translated_key, translation_dict in translations.items():
+            if list(translation_dict.values())[0] == None:
+                continue
+            elif translated_key in ['validation_minimum_score', 'validation_score_field', 'decoy_tag']:
+                continue
+            elif len(translation_dict) == 1:
+                self.params['command_list'].extend((translated_key, str(list(translation_dict.values())[0])))
+            else:
+                print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
+                print(translation_dict)
+                exit(1)
+
+        if self.TRANSLATIONS['bigger_scores_better']['uvalue_style_translation'][self.params['last_engine']] == False:
             self.params['command_list'].append('-r') #False: lower scores are better e.g.OMSSA, scores have to be reversed for qvality
-        if self.params['validation_generalized']:
-            self.params['command_list'].append('-g')  # '-g','False',#Generalized target decoy competition, situations where PSMs known to more frequently be incorrect are mixed in with the correct PSMs
         self.params['command_list'] += [
             self.params['target']['path'],
             self.params['decoy']['path'],
         ]
+
+        print( ' '.join(self.params[ 'command_list' ]) )
 
     def postflight( self ):
         '''
         Parse the qvality output and merge it back into the csv file
         '''
         score_2_pep_and_qvalue_lookup = {}
-        with open( self.params['tmp_output_file_incl_path'], 'r' ) as qvio:
+        with open( self.params['output_file_incl_path'], 'r' ) as qvio:
             qvio.readline() # header gone ...
             for line in qvio:
                 if line.strip() != '':
@@ -126,6 +138,7 @@ class qvality_2_02( ursgal.UNode ):
                         score_2_pep_and_qvalue_lookup[ formatted_score ] = ( pep, qvalue )
                     else:
                         pass
+        qvio.close()
         opened_file = open(
             os.path.join(
                 self.params['input_dir_path'],
@@ -141,20 +154,14 @@ class qvality_2_02( ursgal.UNode ):
         csv_input = csv.DictReader( row for row in opened_file if not row.startswith('#') )
 
         csv_output = csv.DictWriter(
-            open(
-                os.path.join(
-                    self.params['output_dir_path'],
-                    self.params['output_file']
-                )
-                , 'w' ),
+            open( self.params['output_file_incl_path'], 'w' ),
             csv_input.fieldnames + ['PEP','q-value'],
             **csv_kwargs
         )
 
-
         csv_output.writeheader()
         for line_dict in csv_input:
-            #we skip all decoys
+            #we skip all decoys ... not anymore
             # if line_dict['Is decoy'].upper() == 'TRUE':
             #     continue
             # if self.params['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
@@ -162,7 +169,7 @@ class qvality_2_02( ursgal.UNode ):
             formatted_score = FLOAT_FORMAT_STRING.format(
                 float(
                     line_dict[
-                        self.params['validation_score_field']
+                        self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][self.params['last_engine']]
                     ]
                 )
             )
@@ -170,7 +177,6 @@ class qvality_2_02( ursgal.UNode ):
                 pep, qvalue              = score_2_pep_and_qvalue_lookup[ formatted_score ]
                 line_dict['PEP']         = pep
                 line_dict['q-value']     = qvalue
-                # print(line_dict)
                 csv_output.writerow( line_dict )
             else:
                 pass
@@ -213,8 +219,10 @@ class qvality_2_02( ursgal.UNode ):
                 tag = 'decoy'
             else:
                 tag = 'target'
-            if score_2_write < self.params[ 'validation_minimum_score' ]:
-                score_2_write = self.params[ 'validation_minimum_score' ]
+
+            min_score = self.TRANSLATIONS['validation_minimum_score']['uvalue_style_translation'][self.params['last_engine']]
+            if score_2_write < min_score:
+                score_2_write = min_score
             print(
                 score_2_write,
                 file = crazy_tmp_files[ tag ]

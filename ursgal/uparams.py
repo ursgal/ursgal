@@ -70,7 +70,7 @@ ursgal_params = {
             'percolator_2_08',
             'qvality_2_02',
         ],
-        'default_value' : "",
+        'default_value' : None,
         'description' :  ''' Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1770,6 +1770,7 @@ Example:
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'qvality_2_02',
             'venndiagram_1_0_0',
         ],
         'default_value' : None,
@@ -1781,6 +1782,7 @@ Example:
             'msamanda_style_1' : 'output_file_incl_path',
             'msgfplus_style_1' : '-o',
             'mzidentml_style_1' : 'output_file_incl_path',
+            'qvality_style_1' : '-o',
             'venndiagram_style_1' : 'output_file',
         },
         'utag' : [
@@ -2078,6 +2080,80 @@ Example:
         'uvalue_translation' : {
         },
         'uvalue_type' : "",
+    },
+    'qvality_cross_validation' : {
+        'available_in_unode' : [
+            'qvality_2_02',
+        ],
+        'default_value' : 0,
+        'description' :  ''' The relative crossvalidation step size used as treshhold before ending the iterations, qvality determines step size automatically when set to 0 ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'qvality_style_1' : '-c',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'qvality_epsilon_step' : {
+        'available_in_unode' : [
+            'qvality_2_02',
+        ],
+        'default_value' : 0,
+        'description' :  ''' The relative step size used as treshhold before cross validation error is calculated, qvality determines step size automatically when set to 0 ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'qvality_style_1' : '-s',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'qvality_number_of_bins' : {
+        'available_in_unode' : [
+            'qvality_2_02',
+        ],
+        'default_value' : 500,
+        'description' :  ''' Number of bins used in qvality ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'qvality_style_1' : '-n',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'qvality_verbose' : {
+        'available_in_unode' : [
+            'qvality_2_02',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Verbose qvality output (range from 0 = no processing info to 5 = all) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'qvality_style_1' : '-v',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : [
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+        ],
     },
     'raw_ident_csv_suffix' : {
         'available_in_unode' : [
@@ -2730,6 +2806,50 @@ Example:
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+    },
+    'validation_generalized' : {
+        'available_in_unode' : [
+            'qvality_2_02',
+        ],
+        'default_value' : False,
+        'description' :  ''' Generalized target decoy competition, situations where PSMs known to more frequently be incorrect are mixed in with the correct PSMs ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'qvality_style_1' : '-g',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_translation' : {
+            'qvality_style_1' : {
+            False: None,
+            True: '',
+            },
+        },
+        'uvalue_type' : "bool",
+    },
+    'validation_minimum_score' : {
+        'available_in_unode' : [
+            'qvality_2_02',
+        ],
+        'default_value' : "",
+        'description' :  ''' Defines the minimum score used fo validation. If scores lower than this are produced, they are set to the minimum score. This is used to avoid huge gaps/jumps in the score distribution ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'qvality_style_1' : 'validation_minimum_score',
+        },
+        'utag' : [
+            'scoring',
+            'validation',
+        ],
+        'uvalue_translation' : {
+            'qvality_style_1' : {
+                'msamanda_1_0_0_5242' : 0,
+                'msamanda_1_0_0_5243' : 0,
+                'msgfplus_v9979' : 1e-100,
+            },
+        },
+        'uvalue_type' : "",
     },
     'validation_score_field' : {
         'available_in_unode' : [

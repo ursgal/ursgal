@@ -59,7 +59,7 @@ if __name__ == '__main__':
                         for k3, v3 in sorted(urgsal_dict[param][k][k2].items()):
                             if k3 in [True, False]:
                                 print('''                {0} : '{1}','''.format(k3,v3), file=output_file)
-                            elif v3 in [True, False]:
+                            elif type(v3) != str:
                                 print('''                '{0}' : {1},'''.format(k3,v3), file=output_file)
                             else:
                                 print('''                '{0}' : '{1}','''.format(k3,v3), file=output_file)
