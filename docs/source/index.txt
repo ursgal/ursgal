@@ -31,6 +31,7 @@ Contents
    ucontroller
    unode
    ucore
+   umapmaster
    chemical_compositions
    unimod_mapper
 
@@ -63,23 +64,10 @@ How to extend and create new engines ?
 Parameter
 =========
 
-A detailed excel-sheet of parameters can be found here: /ursgal/docs/source/ursgal_params.xls
-
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   parameter2
-
-
-Parameter2
-=========
-
-A detailed excel-sheet of parameters can be found here: /ursgal/docs/source/ursgal_params.xls
-
-.. toctree::
-   :maxdepth: 2
-
-   parameter3
+   parameter_new
 
 
 Examples

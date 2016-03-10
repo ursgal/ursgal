@@ -7,16 +7,24 @@
     :licence: BSD, see LISCENSE for more details
 
 """
+import ursgal
 from ursgal.uparams import ursgal_params as urgsal_dict
 from collections import defaultdict as ddict
 
 
 class UParamMapper( dict ):
     '''
+    UParamMapper class offers interface to ursgal.uparams
+
+    Be default, the ursgal.uparams are parsed and the UParamMapper class
+    is set with the ursgal_params dictionary.
     '''
     version = '0.2.0'
 
-    def __init__( self, *args ):
+    def __init__( self, *args, **kwargs):
+        # kwargs['engine_path'] = ursgal.__file__
+        super(UParamMapper, self).__init__(*args, **kwargs)
+
         assert len(args) <= 1, 'Can only be initialized with max one argument'
         if len(args) == 0:
             params_dict = urgsal_dict
@@ -79,30 +87,33 @@ class UParamMapper( dict ):
         Additionally, consistency check is performed to guarantee that each
         engine is mapping only on one style.
 
-        The lookup build and returned looks like
+        The lookup build and returned looks like::
 
-        lookup = {
-            'style_2_engine' : {
-                'xtandem_style_1' : [
-                    'xtandem_sledgehamer',
-                    'xtandem_cylone',
-                    ...
-                ],
-                'omssa_style_1' ...
+            lookup = {
+                'style_2_engine' : {
+                    'xtandem_style_1' : [
+                        'xtandem_sledgehamer',
+                        'xtandem_cylone',
+                        ...
+                    ],
+                    'omssa_style_1' ...
+                },
+                # This is done during uNode initializations
+                # each unode will register its style with umapmaster
+                #
+                'engine_2_style' : {
+                    'xtandem_sledgehamer' : 'xtandem_style_1', ...
+                },
+                'engine_2_params' : {
+                    'xtandem_sledgehamer' : [ uparam1, uparam2, ...], ...
+                },
+                'style_2_params' : {
+                    'xtandem_style_1' : [ uparam1, uparam2, ... ], ...
+                },
+                'params_triggering_rerun' : {
+                    'xtandem_style_1' : [ uparam1, uparam2 .... ]
+                }
             }
-            'engine_2_style' : {
-                'xtandem_sledgehamer' : 'xtandem_style_1', ...
-            },
-            'engine_2_params' : {
-                'xtandem_sledgehamer' : [ uparam1, uparam2, ...], ...
-            },
-            'style_2_params' : {
-                'xtandem_style_1' : [ uparam1, uparam2, ... ], ...
-            },
-            'params_triggering_rerun' : {
-                'xtandem_style_1' : [ uparam1, uparam2 .... ]
-            }
-        }
         '''
         lookup = {
             'style_2_engine' : ddict(set),
@@ -138,7 +149,7 @@ class UParamMapper( dict ):
                     # this style 2 engine lookup is not quite right ...
                     # This function requires unode meta info for proper
                     # mapping ....
-                    lookup['style_2_engine'][ style ].add( engine )
+                    # lookup['style_2_engine'][ style ].add( engine )
                     lookup['engine_2_params'][ engine ].append( uparam )
 
                     if style not in styles_seen:
@@ -159,7 +170,7 @@ class UParamMapper( dict ):
                             )
         return lookup
 
-    def show_params_overview( self, engine=None):
+    def _show_params_overview( self, engine=None):
         self._assert_engine( engine )
         # This can be done differently with the lookups now ...
         for param in sorted(self.get_all_params( engine=engine)):

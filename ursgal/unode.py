@@ -70,6 +70,15 @@ class Meta_UNode(type):
             if mDict['triggers_rerun']:
                 initd_klass.PARAMS_TRIGGERING_RERUN.add( mDict['ukey'] )
 
+        translation_style = initd_klass.META_INFO.get(
+            'utranslation_style',
+            None
+        )
+        if translation_style is not None:
+            Meta_UNode._uparam_mapper.lookup['style_2_engine'][ translation_style ].add(
+                engine
+            )
+
         initd_klass.exe = kwargs['engine_path']
 
         obligatory_methods = [
@@ -698,7 +707,7 @@ class UNode(object, metaclass=Meta_UNode):
         validation_score_field = self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][search_engine]
         for n, line_dict in enumerate(csv_dict_reader_object):
             assert validation_score_field in line_dict.keys(), \
-                '''defined validation_score_field for {0} is not found, 
+                '''defined validation_score_field for {0} is not found,
                 please check/add it to uparams.py['validation_score_field']'''.format(search_engine)
 
             grouped_psms[ line_dict[ 'Spectrum Title' ] ].append(

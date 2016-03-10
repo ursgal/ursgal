@@ -47,8 +47,8 @@
 	    ]
 	
 	    validation_engines = [
-	        'qvality',
 	        'percolator_2_08',
+	        'qvality',
 	    ]
 	
 	    # Modifications that should be included in the search

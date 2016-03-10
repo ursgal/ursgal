@@ -7,7 +7,7 @@ Other Engines
 Combine FDR 0_1
 ---------------
 
-.. autoclass:: ursgal.engines.combine_FDR_0_1.combine_FDR_0_1
+.. autoclass:: ursgal.wrappers.combine_FDR_0_1.combine_FDR_0_1
    :members:
    :private-members:
 
@@ -15,7 +15,7 @@ Combine FDR 0_1
 Combine PEP 1_0_0
 ---------------
 
-.. autoclass:: ursgal.engines.combine_pep_1_0_0.combine_pep_1_0_0
+.. autoclass:: ursgal.wrappers.combine_pep_1_0_0.combine_pep_1_0_0
    :members:
    :private-members:
 
@@ -23,7 +23,7 @@ Combine PEP 1_0_0
 Filter CSV 1_0_0
 ----------------
 
-.. autoclass:: ursgal.engines.filter_csv_1_0_0.filter_csv_1_0_0
+.. autoclass:: ursgal.wrappers.filter_csv_1_0_0.filter_csv_1_0_0
    :members:
    :private-members:
 
@@ -34,7 +34,7 @@ Filter CSV 1_0_0
 Generate Target Decoy 1_0_0
 ---------------------------
 
-.. autoclass:: ursgal.engines.generate_target_decoy_1_0_0.generate_target_decoy_1_0_0
+.. autoclass:: ursgal.wrappers.generate_target_decoy_1_0_0.generate_target_decoy_1_0_0
    :members:
    :private-members:
 
@@ -44,7 +44,7 @@ Generate Target Decoy 1_0_0
 Merge CSVS 1_0_0
 ----------------
 
-.. autoclass:: ursgal.engines.merge_csvs_1_0_0.merge_csvs_1_0_0
+.. autoclass:: ursgal.wrappers.merge_csvs_1_0_0.merge_csvs_1_0_0
    :members:
    :private-members:
 
@@ -54,22 +54,22 @@ Merge CSVS 1_0_0
 MzidLib 1_6_10
 --------------
 
-.. autoclass:: ursgal.engines.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
    :members:
 
 MzidLib 1_6_11
 --------------
 
-.. autoclass:: ursgal.engines.mzidentml_lib_1_6_11.mzidentml_lib_1_6_11
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_11.mzidentml_lib_1_6_11
    :members:
 
-.. autoclass:: ursgal.engines.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
    :members:
 
 mzml2mgf 1_0_0
 --------------
 
-.. autoclass:: ursgal.engines.mzml2mgf_1_0_0.mzml2mgf_1_0_0
+.. autoclass:: ursgal.wrappers.mzml2mgf_1_0_0.mzml2mgf_1_0_0
    :members:
 
 .. autoclass:: ursgal.resources.platform_independent.arc_independent.mzml2mgf_1_0_0.mzml2mgf_1_0_0.main
@@ -78,19 +78,19 @@ mzml2mgf 1_0_0
 Percolator 2_08
 ---------------
 
-.. autoclass:: ursgal.engines.percolator_2_08.percolator_2_08
+.. autoclass:: ursgal.wrappers.percolator_2_08.percolator_2_08
    :members:
 
 qvality 2_02
 ------------
 
-.. autoclass:: ursgal.engines.qvality_2_02.qvality_2_02
+.. autoclass:: ursgal.wrappers.qvality_2_02.qvality_2_02
    :members:
 
 Unify CSV v1_0_0
 ----------------
 
-.. autoclass:: ursgal.engines.unify_csv_1_0_0.unify_csv_1_0_0
+.. autoclass:: ursgal.wrappers.unify_csv_1_0_0.unify_csv_1_0_0
    :members:
    :private-members:
 
@@ -101,7 +101,7 @@ Unify CSV v1_0_0
 Venn Diagram v1_0_0
 -------------------
 
-.. autoclass:: ursgal.engines.venndiagram_1_0_0.venndiagram_1_0_0
+.. autoclass:: ursgal.wrappers.venndiagram_1_0_0.venndiagram_1_0_0
    :members:
    :private-members:
 
@@ -112,7 +112,7 @@ Venn Diagram v1_0_0
 xtandem2csv 1_0_0
 -----------------
 
-.. autoclass:: ursgal.engines.xtandem2csv_1_0_0.xtandem2csv_1_0_0
+.. autoclass:: ursgal.wrappers.xtandem2csv_1_0_0.xtandem2csv_1_0_0
    :members:
 
 .. autoclass:: ursgal.resources.platform_independent.arc_independent.xtandem2csv_1_0_0.xtandem2csv_1_0_0.main

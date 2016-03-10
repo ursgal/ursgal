@@ -12,7 +12,7 @@ _table_headers = ['style', 'translation', 'translated value', 'ursgal value']
 
 minimal_width = max([ len(t) for t in _table_headers])
 
-PARAMS_FILE = open('source/parameter3.txt', 'w')
+PARAMS_FILE = open('source/parameter_new.txt', 'w')
 
 def create_format_string( number_of_columns = 1 ):
     fmt = ''
@@ -35,6 +35,12 @@ def determine_longest_string( fdict ):
                 len_longest = len_in_nested
         elif isinstance(value, bool):
             pass
+        elif value is None:
+            pass
+        elif isinstance(value, float):
+            pass
+        elif isinstance(value, int):
+            pass
         else:
             if len(value) > len_longest:
                 len_longest = len(value)
@@ -52,6 +58,9 @@ def print_error( udict, syntax_error_at='unkown' ):
 
 
 if __name__ == '__main__':
+    print(
+        'Converting ursgal.uparams to sphinx. [ source/parameter_new.txt ] '
+    )
     uprint('''
 .. _parameters:
 
@@ -64,7 +73,7 @@ Ursgal to Engine Parameters overview
         #     continue
         uprint('''
 
-{0}
+[ uparam ] {0}
 {1}
 
 
@@ -75,7 +84,7 @@ Ursgal to Engine Parameters overview
 :triggers rerun: {rerun}
             '''.format(
             ursgal_param,
-            '#' * len(ursgal_param),
+            '#' * (len(ursgal_param) + 11),
             desc = udict['description'].strip(),
             default_value = str(udict['default_value']).strip(),
             type = udict.get('uvalue_type', ''),
@@ -141,6 +150,8 @@ Ursgal key translations
             try:
                 for uvalue_unformated, translated_value in sorted(fdict.items()):
                     # header_text_3.append( '{0: <{1}}'.format(uvalue_unformated, len_longest) )
+                    if translated_value is None:
+                        translated_value = 'None'
                     uvalue = '{0: <{1}}'.format(uvalue_unformated, len_longest)
                     if uvalue not in row_predicts.keys():
                         row_predicts[ uvalue ] = {
@@ -151,6 +162,16 @@ Ursgal key translations
                     )
             except:
                 print_error( udict, syntax_error_at = 'uvalue_translation' )
+                # for uvalue_unformated, translated_value in sorted(fdict.items()):
+                #     # header_text_3.append( '{0: <{1}}'.format(uvalue_unformated, len_longest) )
+                #     uvalue = '{0: <{1}}'.format(uvalue_unformated, len_longest)
+                #     if uvalue not in row_predicts.keys():
+                #         row_predicts[ uvalue ] = {
+                #             s : 'n/t' for s in udict['uvalue_translation'].keys()
+                #         }
+                #     row_predicts[ uvalue ][ style ] = '{0: <{1}}'.format(
+                #         translated_value, len_longest
+                #     )
                 exit(1)
         uprint( fmt.format(*delimiter_text, width=len_longest))
         uprint( fmt.format(*header_text_1, width=len_longest))
