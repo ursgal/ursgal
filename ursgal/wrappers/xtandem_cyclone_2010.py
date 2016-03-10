@@ -10,14 +10,15 @@ class xtandem_cyclone_2010( tandem ):
             'search_engine' : True,
         },
         'output_extension'  : '.xml',
-        'input_types'       : ['.mgf'],
+        'input_types'       : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
         'create_own_folder' : True,
         'compress_raw_search_results' : True,
 
         'citation'          : 'Craig R, Beavis RC. (2004) TANDEM: matching '\
             'proteins with tandem mass spectra.',
         'include_in_git'    : False,
-    'in_development'            : True,
+        'in_development'    : False,
+        'utranslation_style': 'xtandem_style_1',
         'engine': {
             'darwin' : {
                 '64bit' : {

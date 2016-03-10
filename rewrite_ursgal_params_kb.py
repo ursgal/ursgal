@@ -25,7 +25,7 @@ if __name__ == '__main__':
                 if param not in params:
                     params.add(param)
                 else:
-                    duplicates.appnd(param)
+                    duplicates.append(param)
     if duplicates == []:
         print('no duplicates were found')
     else:

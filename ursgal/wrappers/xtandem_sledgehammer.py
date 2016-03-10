@@ -17,14 +17,15 @@ class xtandem_sledgehammer( ursgal.UNode ):
         'engine_type' : {
             'search_engine' : True,
         },
-        'in_development'            : True,
+        'in_development'            : False,
         'output_extension'          : '.xml',
-        'input_types'               : ['.mgf'],
+        'input_types'               : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
         'create_own_folder'         : True,
         'compress_raw_search_results' : True,
         'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
             'matching proteins with tandem mass spectra.',
         'include_in_git'            : False,
+        'utranslation_style'        : 'xtandem_style_1',
         'engine': {
             'darwin' : {
                 '64bit' : {
@@ -252,7 +253,7 @@ class xtandem_sledgehammer( ursgal.UNode ):
             'taxonomy.xml' : \
 '''<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml label="x! taxon-to-file matching list">
-      <taxon label="all">
+      <taxon label="{database_taxonomy}">
        <file URL="{database}" format="peptide" />
      </taxon>
     </bioml>
@@ -309,7 +310,7 @@ class xtandem_sledgehammer( ursgal.UNode ):
     <note type="heading">
         Protein general
     </note>
-    <note type="input" label="protein, taxon">all</note>
+    <note type="input" label="protein, taxon">{database_taxonomy}</note>
     <note type="input" label="protein, cleavage site">{enzyme}</note>
     <note type="input" label="protein, cleavage C-terminal mass change">{cleavage_cterm_mass_change}</note>
     <note type="input" label="protein, cleavage N-terminal mass change">{cleavage_nterm_mass_change}</note>
@@ -318,8 +319,8 @@ class xtandem_sledgehammer( ursgal.UNode ):
     <note type="input" label="protein, C-terminal residue modification mass">{Prot-C-term}</note>
     <note type="input" label="protein, quick acetyl" >{acetyl_N_term}</note>
     <note type="input" label="protein, quick pyrolidone" >{pyro_glu}</note>
-    <note type="input" label="protein, saps" >xxx</note>
-    <note type="input" label="protein, stP bias" >{stp_bias}</note>
+    <note type="input" label="protein, saps" >{search_for_saps}</note>
+    <note type="input" label="protein, stP bias" >{xtandem_stp_bias}</note>
     {15N_default_input_addon}
     <note type="heading">
         Scoring
@@ -330,14 +331,14 @@ class xtandem_sledgehammer( ursgal.UNode ):
     <note type="input" label="scoring, minimum ion count">{mininimal_required_matched_peaks}</note>
     <note type="input" label="scoring, maximum missed cleavage sites">{maximum_missed_cleavages}</note>
     <note type="input" label="scoring, cyclic permutations" >{compensate_small_fasta}</note>
-    <note type="input" label="scoring, include reverse" >no</note>
+    <note type="input" label="scoring, include reverse" >{engine_internal_decoy_generation}</note>
     <note type="input" label="scoring, x ions" >{score_x_ions}</note>
     <note type="input" label="scoring, y ions" >{score_y_ions}</note>
     <note type="input" label="scoring, z ions" >{score_z_ions}</note>
     <note type="heading">
         Model refinement parameters
     </note>
-    <note type="input" label="refine">{use_refine}</note>
+    <note type="input" label="refine">{use_refinement}</note>
     <note type="input" label="refine, spectrum synthesis">no</note>
     <note type="input" label="refine, maximum valid expectation value">0.1</note>
     <note type="input" label="refine, potential N-terminus modifications"></note>
@@ -357,7 +358,7 @@ class xtandem_sledgehammer( ursgal.UNode ):
     <note type="input" label="output, proteins">yes</note>
     <note type="input" label="output, sequences">yes</note>
     <note type="input" label="output, results">all</note>
-    <note type="input" label="output, maximum valid expectation value">1.0</note>
+    <note type="input" label="output, maximum valid expectation value">{max_output_e_value}</note>
     <note type="input" label="output, histogram column width">30</note>
     </bioml>'''.format(**self.params)
             }
