@@ -112,14 +112,14 @@ class qvality_2_02( ursgal.UNode ):
                 print(translation_dict)
                 exit(1)
 
-        if self.TRANSLATIONS['bigger_scores_better']['uvalue_style_translation'][self.params['last_engine']] == False:
+        if self.TRANSLATIONS['bigger_scores_better']['uvalue_style_translation'][self.params['last_engine']] is False:
             self.params['command_list'].append('-r') #False: lower scores are better e.g.OMSSA, scores have to be reversed for qvality
         self.params['command_list'] += [
             self.params['target']['path'],
             self.params['decoy']['path'],
         ]
 
-        print( ' '.join(self.params[ 'command_list' ]) )
+        # print( ' '.join(self.params[ 'command_list' ]) )
 
     def postflight( self ):
         '''
@@ -161,7 +161,7 @@ class qvality_2_02( ursgal.UNode ):
 
         csv_output.writeheader()
         for line_dict in csv_input:
-            #we skip all decoys ... not anymore
+            #we skip all decoys ... not anymore, please use the filter functon instead
             # if line_dict['Is decoy'].upper() == 'TRUE':
             #     continue
             # if self.params['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:

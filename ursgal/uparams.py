@@ -74,6 +74,7 @@ ursgal_params = {
         'description' :  ''' Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'percolator_style_1' : 'bigger_scores_better',
             'qvality_style_1' : '-r',
         },
         'utag' : [
@@ -1144,23 +1145,6 @@ ursgal_params = {
         },
         'uvalue_type' : "",
     },
-    'max_num_of_ions_per_series_to_search' : {
-        'available_in_unode' : [
-            'omssa_2_1_9',
-        ],
-        'default_value' : 0,
-        'description' :  ''' max number of ions in each series being searched (0=all) ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'omssa_style_1' : '-sp',
-        },
-        'utag' : [
-            'search',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "bool",
-    },
     'max_num_mods' : {
         'available_in_unode' : [
             'msgfplus_v9979',
@@ -1177,6 +1161,23 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+    },
+    'max_num_of_ions_per_series_to_search' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 0,
+        'description' :  ''' max number of ions in each series being searched (0=all) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-sp',
+        },
+        'utag' : [
+            'search',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
     },
     'max_num_per_mod' : {
         'available_in_unode' : [
@@ -1787,6 +1788,7 @@ Example:
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'percolator_2_08',
             'qvality_2_02',
             'venndiagram_1_0_0',
         ],
@@ -1799,6 +1801,7 @@ Example:
             'msamanda_style_1' : 'output_file_incl_path',
             'msgfplus_style_1' : '-o',
             'mzidentml_style_1' : 'output_file_incl_path',
+            'percolator_style_1' : 'output_file_incl_path',
             'qvality_style_1' : '-o',
             'venndiagram_style_1' : 'output_file',
         },
@@ -2315,9 +2318,9 @@ Example:
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
+                False : '',
                 True : '0',
-                False : ''
-            }
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2345,9 +2348,9 @@ Example:
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
+                False : '',
                 True : '1',
-                False : ''
-            }
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2375,9 +2378,9 @@ Example:
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
+                False : '',
                 True : '2',
-                False : ''
-            }
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2441,9 +2444,9 @@ Example:
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
+                False : '',
                 True : '3',
-                False : ''
-            }
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2471,9 +2474,9 @@ Example:
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
+                False : '',
                 True : '4',
-                False : ''
-            }
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2537,30 +2540,9 @@ Example:
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
+                False : '',
                 True : '5',
-                False : ''
-            }
-        },
-        'uvalue_type' : "bool",
-    },
-    'search_for_b1_ions' : {
-        'available_in_unode' : [
-            'omssa_2_1_9',
-        ],
-        'default_value' : False,
-        'description' :  ''' should first forward (b1) product ions be in search (1=no) ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'omssa_style_1' : '-sb1',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-            'omssa_style_1' : {
-                True : '0',
-                False : '1'
-            }
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2579,9 +2561,9 @@ Example:
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
+                False : '1',
                 True : '0',
-                False : '1'
-            }
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2599,6 +2581,27 @@ Example:
             'file_handling',
         ],
         'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'search_for_b1_ions' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : False,
+        'description' :  ''' should first forward (b1) product ions be in search (1=no) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-sb1',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+            'omssa_style_1' : {
+                False : '1',
+                True : '0',
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -2905,7 +2908,7 @@ Example:
         ],
         'uvalue_translation' : {
             'qvality_style_1' : {
-                False : 'None',
+                False : None,
                 True : '',
             },
         },

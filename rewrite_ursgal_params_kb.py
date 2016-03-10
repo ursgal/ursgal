@@ -58,12 +58,17 @@ if __name__ == '__main__':
                         print('''            '{0}' : {1}'''.format(k2, '{'), file=output_file)
                         for k3, v3 in sorted(urgsal_dict[param][k][k2].items()):
                             if k3 in [True, False]:
-                                print('''                {0} : '{1}','''.format(k3,v3), file=output_file)
+                                if type(v3) != str:
+                                    print('''                {0} : {1},'''.format(k3,v3), file=output_file)
+                                else:
+                                    print('''                {0} : '{1}','''.format(k3,v3), file=output_file)
                             elif type(v3) != str:
                                 print('''                '{0}' : {1},'''.format(k3,v3), file=output_file)
                             else:
                                 print('''                '{0}' : '{1}','''.format(k3,v3), file=output_file)
                         print('            },', file=output_file)
+                    elif type(v2) != str:
+                        print('''            '{0}' : {1},'''.format(k2,v2), file=output_file)
                     else:
                         print('''            '{0}' : '{1}','''.format(k2,v2), file=output_file)
                 print('        },', file=output_file)

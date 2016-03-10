@@ -13,7 +13,7 @@ class merge_csvs_1_0_0( ursgal.UNode ):
         'output_suffix'          : 'merged',
         'input_types'            : ['.csv'],
         'include_in_git'            : True,
-        'in_development'            : True,
+        'in_development'            : False,
         'utranslation_style'    : 'merge_csvs_style_1',
         'engine': {
             'platform_independent' : {

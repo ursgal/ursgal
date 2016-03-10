@@ -5,6 +5,7 @@ import csv
 import bisect
 import os
 from collections import defaultdict as ddict
+from collections import OrderedDict
 import sys
 
 PROTON = 1.00727646677
@@ -51,7 +52,8 @@ class percolator_2_08( ursgal.UNode ):
             'identification from shotgun proteomics datasets.',
         'include_in_git'            : False,
         'group_psms'                : True,
-    'in_development'            : True,
+        'in_development'            : False,
+        'utranslation_style'        : 'percolator_style_1',        
         'engine': {
             'darwin' : {
                 '64bit' : {
@@ -95,9 +97,217 @@ class percolator_2_08( ursgal.UNode ):
         Formating the command line to via self.params
         '''
 
+        PERCOLATOR_FIELDS = OrderedDict([
+            (
+                'SpecId', {
+                    'csv_field': 'Spectrum Title',
+                    'DefaultDirection': 'DefaultDirection'
+                }
+            ),
+            (
+                'Label', {
+                    'csv_field': '',
+                    'DefaultDirection': '-'
+                }
+            ),
+            (
+                'ScanNr', {
+                    'csv_field': 'Spectrum ID',
+                    'DefaultDirection': '-'
+                }
+            ),
+            (
+                'lnrSp', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': \
+                'The natural logarithm of the rank of the match based on the Sp score'
+                }
+            ),
+            (
+                'deltLCn', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': \
+                "The difference between this PSM's XCorr and the XCorr of the last-ranked \
+                PSM for this spectrum, divided by this PSM's XCorr or 1, whichever is larger."
+                }
+            ),
+            (
+                'deltCn', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': \
+                    "The difference between this PSM's XCorr and the XCorr of the next-ranked \
+                PSM for this spectrum, divided by this PSM's XCorr or 1, whichever is larger. \
+                Note that this definition differs from that of the standard delta Cn reported \
+                by SEQUEST®"
+                        }
+            ),
+            (
+                'Xcorr', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': \
+                        "The SEQUEST cross-correlation score"
+                        }
+            ),
+            (
+                'Sp', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': \
+                "The preliminary SEQUEST score."
+                        }
+            ),
+            (
+                'IonFrac', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': \
+                "The fraction of b and y ions theoretical ions matched to the spectrum"
+                        }
+            ),
+            (
+                'Mass',    {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': \
+                "The observed mass [M+H]+"
+                        }
+            ),
+            (
+                'PepLen',  {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': \
+                "The length of the matched peptide, in residues"
+                }
+            ),
+            (
+                'Charge1', {
+                    'csv_field': '',
+                    'DefaultDirection': 0
+                }
+            ),
+            (
+                'Charge2', {
+                    'csv_field': '',
+                    'DefaultDirection': 0
+                }
+            ),
+            (
+                'Charge3', {
+                    'csv_field': '',
+                    'DefaultDirection': 0
+                }
+            ),
+            (
+                'Charge4', {
+                    'csv_field': '',
+                    'DefaultDirection': 0
+                }
+            ),
+            (
+                'Charge5', {
+                    'csv_field': '',
+                    'DefaultDirection': 0
+                }
+            ),
+            (
+                'Charge6', {
+                    'csv_field': '',
+                    'DefaultDirection': 0
+                }
+            ),
+            (
+                'Charge7', {
+                    'csv_field': '',
+                    'DefaultDirection': 0
+                }
+            ),
+            (
+                'Charge8', {
+                    'csv_field': '',
+                    'DefaultDirection': 0
+                }
+            ),
+            (
+                'Charge9', {
+                    'csv_field': '',
+                    'DefaultDirection': 0
+                }
+            ),
+            (
+                'Charge10', {
+                    'csv_field': '',
+                    'DefaultDirection': 0
+                }
+            ),
+            (
+                'enzN', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': "Is the peptide preceded by an enzymatic (tryptic) site?"
+                }
+            ),
+            (
+                'enzC', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': "Does the peptide have an enzymatic (tryptic) C-terminus?"
+                }
+            ),
+            (
+                'enzInt', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': "Number of missed internal enzymatic (tryptic) sites"
+                }
+            ),
+            (
+                'lnNumSP', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': "The natural logarithm of the number of database peptides within the \
+                    specified precursor range"
+                }
+            ),
+            (
+                'dM', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': "The difference between the calculated and observed mass"
+                }
+            ),
+            (
+                'absdM', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': "The absolute value of the difference between the calculated and \
+                    observed mass"
+                }
+            ),
+            (
+                'Peptide', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': ""
+                }
+            ),
+            (
+                'Proteins', {
+                    'csv_field': 'proteinacc_start_stop_pre_post_;',
+                    'DefaultDirection': 0,
+                    'description': ""
+                }
+            ),
+        ])
+
+
         self.params['csv_input_file'] = os.path.join(
             self.params['input_dir_path'],
-            self.params['file_root'] + '.csv'
+            self.params['input_file']
         )
 
         self.params['output_file_incl_path'] = os.path.join(
@@ -123,7 +333,7 @@ class percolator_2_08( ursgal.UNode ):
         o = open( self.params['percolator_in'], 'w')
         writer = csv.DictWriter(
             o,
-            list(self._kb.PERCOLATOR_FIELDS.keys()),
+            list(PERCOLATOR_FIELDS.keys()),
             delimiter='\t',
             extrasaction='ignore'
         )
@@ -146,12 +356,9 @@ class percolator_2_08( ursgal.UNode ):
             history = self.stats['history']
         )
         self.params['_score_list'] = self.generating_score_list()
-        # if "omssa" not in last_search_engine:
-        #     print(last_search_engine)
-        #     print(self.params['_score_list'])
-        #     exit()
         minimum_score = None
-        if self.params['bigger_scores_better'] is False:
+        bigger_scores_better = self.TRANSLATIONS['bigger_scores_better']['uvalue_style_translation'][last_search_engine]
+        if bigger_scores_better is False:
             for p, _score in enumerate(self.params['_score_list']):
                 if _score <= 0:
                     # jumping over truely zero or negative values ...
@@ -173,14 +380,14 @@ class percolator_2_08( ursgal.UNode ):
             best_score = self.params['grouped_psms'][ spectrum_title ][0][0]
             worst_score = self.params['grouped_psms'][ spectrum_title ][ -1 ][0]
 
-            if self.params['bigger_scores_better'] is False:
+            if bigger_scores_better is False:
                 best_score = transform_score(best_score, minimum_score)
                 worst_score = transform_score(worst_score, minimum_score)
 
             for m, (score, line_dict) in enumerate(
                     self.params['grouped_psms'][ spectrum_title ]):
                 t = {}
-                if self.params['bigger_scores_better'] is True:
+                if bigger_scores_better is True:
                     rank_of_score = bisect.bisect_right(
                         self.params['_score_list'],
                         score
@@ -201,7 +408,7 @@ class percolator_2_08( ursgal.UNode ):
                 t['Mass']   = ( exp_mz * charge ) - ( charge - 1 ) * PROTON
                 #
                 t['Xcorr'] = score
-                if self.params['bigger_scores_better'] is False:
+                if bigger_scores_better is False:
                     t['Xcorr'] = transform_score(t['Xcorr'], minimum_score)
 
                 t['PepLen'] = len( line_dict['Sequence'] )
@@ -217,7 +424,7 @@ class percolator_2_08( ursgal.UNode ):
                 else:
                     deltLCn = (t['Xcorr'] - worst_score) / normalization
                     next_score = self.params['grouped_psms'][ spectrum_title ][m + 1][0]
-                    if self.params['bigger_scores_better'] is False:
+                    if bigger_scores_better is False:
                         next_score = transform_score(next_score, minimum_score)
 
                     deltCn = (t['Xcorr'] - next_score ) / normalization
@@ -260,8 +467,8 @@ class percolator_2_08( ursgal.UNode ):
                     post_aa,
                     **line_dict
                 )
-                for per_key in self._kb.PERCOLATOR_FIELDS.keys():
-                    mapped_key = self._kb.PERCOLATOR_FIELDS[ per_key ]['csv_field']
+                for per_key in PERCOLATOR_FIELDS.keys():
+                    mapped_key = PERCOLATOR_FIELDS[ per_key ]['csv_field']
                     if 'Charge' in per_key:
                         if per_key not in t.keys():
                             t[ per_key ] = 0
