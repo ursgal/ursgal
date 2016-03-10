@@ -55,6 +55,12 @@ stp_bias
 	| Interpretation of peptide phosphorylation models.
 	| default: *False*
 
+search_for_saps
+^^^^^^^^^^^^^^^
+
+	| search for potential single amino acid polymorphisms
+	| default: *False*
+
 modifications
 ^^^^^^^^^^^^^
 
@@ -93,6 +99,24 @@ max_num_mods
 
 	| Maximal number of modifications per peptide
 	| default: *2.0*
+
+max_num_per_mod
+^^^^^^^^^^^^^^^
+
+	| Maximal number of modification sites per peptide for a specific modification, given as a dictionary: {unimod_name : number}
+	| default: *{}*
+
+max_mod_alternatives
+^^^^^^^^^^^^^^^^^^^^
+
+	| Maximal number of variable modification alternatives, given as C in 2^C
+	| default: *6.0*
+
+forbidden_cterm_mods
+^^^^^^^^^^^^^^^^^^^^
+
+	| List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide
+	| default: *[]*
 
 database
 ^^^^^^^^

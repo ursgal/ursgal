@@ -68,8 +68,18 @@ A detailed excel-sheet of parameters can be found here: /ursgal/docs/source/ursg
 .. toctree::
    :maxdepth: 2
 
-   parameter
+   parameter2
 
+
+Parameter2
+=========
+
+A detailed excel-sheet of parameters can be found here: /ursgal/docs/source/ursgal_params.xls
+
+.. toctree::
+   :maxdepth: 2
+
+   parameter3
 
 
 Examples

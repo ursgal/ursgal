@@ -2209,11 +2209,11 @@ Example:
         'description' :  ''' Precursor offset in ppm ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'mzml2mgf_style_1' : 'precursor_ppm_offset',
         },
         'utag' : [
         ],
         'uvalue_translation' : {
-            'mzml2mgf_style_1' : 'precursor_ppm_offset',
         },
         'uvalue_type' : "",
     },

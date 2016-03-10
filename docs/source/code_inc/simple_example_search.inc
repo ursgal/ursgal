@@ -29,12 +29,12 @@
 	                'M,opt,any,Oxidation',        # Met oxidation
 	                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
 	                '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
-	            ]
+	            ],
 	        }
 	    )
 	
 	    if sys.maxsize > 2**32:
-	        xtandem = 'xtandem_piledriver'
+	        xtandem = 'xtandem_vengeance'
 	    else:
 	        xtandem = 'xtandem_sledgehammer'
 	    if sys.platform == 'win32':
@@ -44,9 +44,9 @@
 	
 	    engine_list = [
 	        'omssa',
-	        xtandem,
-	        'msgf',
-	        # msamanda
+	        # xtandem,
+	    #     'msgf',
+	    #     msamanda,
 	    ]
 	
 	    mzML_file = os.path.join(

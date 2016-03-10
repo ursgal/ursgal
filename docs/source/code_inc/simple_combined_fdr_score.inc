@@ -94,8 +94,9 @@
 	    combined_results = uc.combine_search_results(
 	        input_files     = validated_files_list,
 	        engine          = 'combine_FDR_0_1',
+	        # use combine_pep_1_0_0 for combined PEP :)
 	    )
-	    print('\n\tCombined FDR Score results can be found here:')
+	    print('\n\tCombined results can be found here:')
 	    print(combined_results)
 	    return
 	
