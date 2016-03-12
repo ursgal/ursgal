@@ -21,9 +21,9 @@ class myrimatch_2_2_140( myri ):
         'citation'                  : 'Tabb DL, Fernando CG, Chambers MC. '\
             '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
             'identification by multivariate hypergeometric analysis.',
-        'in_development'            : True,
+        'in_development'            : False,
         'include_in_git'            : False,
-
+        'utranslation_style'        : 'myrimatch_style_1',
         'engine': {
             'win32' : {
                 '64bit' : {

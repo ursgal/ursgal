@@ -27,8 +27,8 @@ class myrimatch_2_1_138( ursgal.UNode ):
         'citation'                  : 'Tabb DL, Fernando CG, Chambers MC. '\
             '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
             'identification by multivariate hypergeometric analysis.',
-
-        'in_development'            : True,
+        'utranslation_style'        : 'myrimatch_style_1',
+        'in_development'            : False,
         'engine': {
             'linux' : {
                 '64bit' : {
@@ -138,17 +138,17 @@ class myrimatch_2_1_138( ursgal.UNode ):
                 continue
             self.params['myrimatch_dynamic_mods'] += '{0} {1} {2} '.format( mod[ 'aa' ], characters[ n ], mod[ 'mass' ] )
 
-
-# MinResultScore = "9.9999999999999995e-08" original
-# MaxPeptideLength: 30, was 75
+        self.params['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
+                                                    float(self.params['precursor_mass_tolerance_minus']) ) \
+                                                / 2.0
 
         # temporary fix: # this should not be required anymore :)
         self.params['database'] = os.path.abspath( self.params['database'] )
 
-        print('''AvgPrecursorMzTolerance = "1.5m/z"
-ClassSizeMultiplier = "2"
+        print('''
+ClassSizeMultiplier = "{myrimatch_class_size_multiplier}"
 CleavageRules = "{enzyme}"
-ComputeXCorr = "1"
+ComputeXCorr = "{compute_xcorr}"
 DecoyPrefix = "{decoy_tag}"
 DynamicMods = "{myrimatch_dynamic_mods}"
 EstimateSearchTimeOnly = "0"
@@ -156,37 +156,33 @@ FragmentMzTolerance = "{frag_mass_tolerance}{frag_mass_tolerance_unit}"
 FragmentationAutoRule = "false"
 FragmentationRule = "{myrimatch_ions_to_search}"
 KeepUnadjustedPrecursorMz = "0"
-MaxDynamicMods = "10"
-MaxFragmentChargeState = "0"
-MaxMissedCleavages = "-{maximum_missed_cleavages}"
+MaxDynamicMods = "{max_num_mods}"
+MaxMissedCleavages = "{maximum_missed_cleavages}"
 MaxPeakCount = "{maximal_accounted_observed_peaks}"
 MaxPeptideLength = "{max_pep_length}"
-MaxPeptideMass = "10000 Da"
-MaxPeptideVariants = "1000000"
+MaxPeptideMass = "{precursor_max_mass} Da"
+MaxPeptideVariants = "{max_pep_var}"
 MaxResultRank = "{num_match_spec}"
-MinMatchedFragments = "5"
+MinMatchedFragments = "{mininimal_required_matched_peaks}"
 MinPeptideLength = "{min_pep_length}"
 MinPeptideMass = "{precursor_min_mass}"
-MinResultScore = "9.9999999999999995e-08"
+MinResultScore = "{min_output_score}"
 MinTerminiCleavages = "{semi_enzyme}"
-MonoPrecursorMzTolerance = "{precursor_mass_tolerance_minus}{precursor_mass_tolerance_unit}"
+MonoPrecursorMzTolerance = "{precursor_mass_tolerance}{precursor_mass_tolerance_unit}"
 MonoisotopeAdjustmentSet = "{precursor_isotope_range}"
-NumBatches = "50"
+NumBatches = "{batch_size}"
 NumChargeStates = "{precursor_max_charge}"
-NumIntensityClasses = "3"
-NumMzFidelityClasses = "3"
+NumIntensityClasses = "{myrimatch_num_int_classes}"
+NumMzFidelityClasses = "{myrimatch_num_mz_fidelity_classes}"
 OutputSuffix = ""
 PrecursorMzToleranceRule = "{precursor_mass_type}"
-PreferIntenseComplements = "1"
 ProteinDatabase = "{database}"
-ProteinListFilters = ""
-ProteinSamplingTime = "15"
-ResultsPerBatch = "{batch_size}"
+ProteinSamplingTime = "{myrimatch_prot_sampl_time}"
 SpectrumListFilters = "peakPicking true 2-"
 StaticMods = "{myrimatch_static_mods}"
 StatusUpdateFrequency = "5"
-TicCutoffPercentage = "0.97999999999999998"
-UseSmartPlusThreeModel = "1"
+TicCutoffPercentage = "{myrimatch_tic_cutoff}"
+UseSmartPlusThreeModel = "{myrimatch_smart_plus_three}"
     '''.format( **self.params ), file=config_file)
         config_file.close()
         return

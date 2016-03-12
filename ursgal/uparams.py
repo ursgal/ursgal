@@ -51,12 +51,15 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_140',
+            'myrimatch_2_1_138',
         ],
         'default_value' : 100000,
         'description' :  ''' sets the number of sequences loaded in as a batch from the database file ''',
         'trigger_rerun' : False,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, sequence batch size',
+            'myrimatch_style_1' : 'NumBatches'
         },
         'utag' : [
             'hardware_resources',
@@ -282,7 +285,8 @@ ursgal_params = {
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
-            'myrimatch',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -296,7 +300,7 @@ ursgal_params = {
         'ukey_translation' : {
             'msamanda_style_1' : 'database',
             'msgfplus_style_1' : '-d',
-            'myrimatch_style_1' : '-ProteinDatabase <string>',
+            'myrimatch_style_1' : 'ProteinDatabase',
             'omssa_style_1' : '-d',
             'xtandem_style_1' : 'file URL',
         },
@@ -358,6 +362,8 @@ ursgal_params = {
             'mzidentml_lib_1_6_11',
             'qvality_2_02',
             'xtandem2csv_1_0_0',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
@@ -368,6 +374,7 @@ ursgal_params = {
             'mzidentml_style_1' : '-decoyRegex',
             'qvality_style_1' : 'decoy_tag',
             'xtandem2csv_style_1' : 'decoy_tag',
+            'myrimatch_style_1' : 'DecoyPrefix',
         },
         'utag' : [
             'database',
@@ -438,7 +445,8 @@ ursgal_params = {
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
-            'myrimatch',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -479,7 +487,7 @@ ursgal_params = {
             'generate_target_decoy_style_1' : 'enzyme',
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-e',
-            'myrimatch_style_1' : '-CleavageRules<str>',
+            'myrimatch_style_1' : 'CleavageRules',
             'omssa_style_1' : '-e',
             'xtandem_style_1' : 'protein, cleavage site',
         },
@@ -597,6 +605,19 @@ ursgal_params = {
                 'trypsin_gluc' : '[DEKR]|{P}',
                 'trypsin_p' : '[RK]|[X]',
             },
+            'myrimatch_style_1': {
+                'trypsin' :'Trypsin/P',
+                'trypsin_p'             :'Trypsin',
+                'chymotrypsin'          :'Chymotrypsin',
+                'lysc'                  :'Lys-C',
+                'trypsin_chymotrypsin' : 'TrypChymo',
+                'lysc'                 : 'Lys-C/P',
+                'lysc_p'                : 'Lys-C',
+                'aspn'                  : 'Asp-N',
+                'pepsina'               : 'PepsinA',
+                'cnbr'                  : 'CNBr',
+                'formic_acid'          : 'Formic_acid',
+            },
         },
         'uvalue_type' : [
             'argc',
@@ -691,6 +712,8 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : 5,
         'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
@@ -699,6 +722,7 @@ ursgal_params = {
             'msamanda_style_1' : 'ms2_tol',
             'omssa_style_1' : '-to',
             'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error',
+            'myrimatch_style_1' : 'FragmentMzTolerance'
         },
         'utag' : [
             'fragment',
@@ -1205,12 +1229,15 @@ ursgal_params = {
     'max_num_mods' : {
         'available_in_unode' : [
             'msgfplus_v9979',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
-        'default_value' : 2,
+        'default_value' : 3,
         'description' :  ''' Maximal number of modifications per peptide ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : 'NumMods',
+            'myrimatch_style_1' : 'MaxDynamicMods'
         },
         'utag' : [
             'Modifications',
@@ -1263,7 +1290,7 @@ ursgal_params = {
             'xtandem_vengeance',
         ],
         'default_value' : 1.0,
-        'description' :  ''' Highest e-value for recorded peptides ''',
+        'description' :  ''' Highest e-value for reported peptides ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'output, maximum valid expectation value',
@@ -1276,10 +1303,30 @@ ursgal_params = {
         },
         'uvalue_type' : "float",
     },
+     'min_output_score' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_140',
+            'myrimatch_2_1_138',
+        ],
+        'default_value' : 10e-08,
+        'description' :  ''' Lowest score for reported peptides ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'myrimatch_style_1' : 'MinResultScore',
+        },
+        'utag' : [
+            'output',
+            'scoring',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
     'max_pep_length' : {
         'available_in_unode' : [
             'msgfplus_v9979',
-            'myrimatch',
+            'myrimatch_2_1_140',
+            'myrimatch_2_1_138',
             'omssa_2_1_9',
         ],
         'default_value' : 40,
@@ -1287,7 +1334,27 @@ ursgal_params = {
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-maxLength',
-            'myrimatch_style_1' : '-MaxPeptideLength<int>',
+            'myrimatch_style_1' : 'MaxPeptideLength',
+            'omssa_style_1' : '-nox',
+        },
+        'utag' : [
+            'peptide',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'max_pep_var' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_140',
+            'myrimatch_2_1_138',
+        ],
+        'default_value' : 1000000,
+        'description' :  ''' Maximal peptide variants ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'msgfplus_style_1' : '-maxLength',
+            'myrimatch_style_1' : 'MaxPeptideVariants',
             'omssa_style_1' : '-nox',
         },
         'utag' : [
@@ -1304,13 +1371,16 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
-        'default_value' : 50,
+        'default_value' : 100,
         'description' :  ''' Maximum number of peaks from a spectrum used. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : '-MaxPeakCount',
             'xtandem_style_1' : 'spectrum, total peaks',
+            'myrimatch_style_1' : 'MaxPeakCount',
         },
         'utag' : [
             'MS2',
@@ -1324,7 +1394,8 @@ ursgal_params = {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
-            'myrimatch',
+            'myrimatch_2_1_140',
+            'myrimatch_2_1_138',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1340,6 +1411,7 @@ ursgal_params = {
             'myrimatch_style_1' : '-MaxMissedCleavages<int>',
             'omssa_style_1' : '-v',
             'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
+            'myrimatch_style_1' : 'MaxMissedCleavages'
         },
         'utag' : [
             'protein',
@@ -1391,7 +1463,8 @@ ursgal_params = {
     'min_pep_length' : {
         'available_in_unode' : [
             'msgfplus_v9979',
-            'myrimatch',
+            'myrimatch_2_1_140',
+            'myrimatch_2_1_138',
             'omssa_2_1_9',
         ],
         'default_value' : 6,
@@ -1399,7 +1472,7 @@ ursgal_params = {
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-minLength',
-            'myrimatch_style_1' : '-MinPeptideLength<int>',
+            'myrimatch_style_1' : 'MinPeptideLength',
             'omssa_style_1' : '-no',
         },
         'utag' : [
@@ -1417,6 +1490,8 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_140',
+            'myrimatch_2_1_138',
         ],
         'default_value' : 4,
         'description' :  ''' Mimimum number of matched ions required for a peptide to be scored ''',
@@ -1424,6 +1499,7 @@ ursgal_params = {
         'ukey_translation' : {
             'omssa_style_1' : '-hm',
             'xtandem_style_1' : 'scoring, minimum ion count',
+            'myrimatch_style_1' : 'MinMatchedFragments'
         },
         'utag' : [
             'fragment',
@@ -1461,7 +1537,8 @@ ursgal_params = {
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
-            'myrimatch',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1504,7 +1581,7 @@ Example:
         'ukey_translation' : {
             'msamanda_style_1' : 'modifications',
             'msgfplus_style_1' : '-mod',
-            'myrimatch_style_1' : '-StaticMods<str>',
+            'myrimatch_style_1' : ('DynamicMods','StaticMods')
             'omssa_style_1' : '-mv',
             'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
         },
@@ -1801,7 +1878,8 @@ Example:
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
-            'myrimatch',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
             'omssa_2_1_9',
         ],
         'default_value' : 10,
@@ -1810,7 +1888,7 @@ Example:
         'ukey_translation' : {
             'msamanda_style_1' : 'max_rank',
             'msgfplus_style_1' : '-n',
-            'myrimatch_style_1' : 'This parameter sets the maximum rank of peptide-spectrum-matches to report for each spectrum',
+            'myrimatch_style_1' : 'MaxResultRank',
             'omssa_style_1' : '-hc',
         },
         'utag' : [
@@ -1976,6 +2054,8 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : "0,1",
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
@@ -1983,6 +2063,7 @@ Example:
         'ukey_translation' : {
             'msgfplus_style_1' : '-ti',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
+            'myrimatch_style_1' : 'MonoisotopeAdjustmentSet',
         },
         'utag' : [
             'precursor',
@@ -1992,6 +2073,11 @@ Example:
                 '0' : 'no',
                 '0,1' : 'yes',
                 '0,2' : 'yes',
+            },
+            'myrimatch_style_1'   : {
+                '0'     : '[0,]',
+                '0,1'   : '[0,1]',
+                '0,1,2' : '[0,1,2]'
             },
         },
         'uvalue_type' : [
@@ -2005,7 +2091,8 @@ Example:
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
-            'myrimatch',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2019,7 +2106,7 @@ Example:
         'ukey_translation' : {
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
-            'myrimatch_style_1' : '-MonoPrecursorMzTolerance',
+            'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
             'omssa_style_1' : '-te',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
         },
@@ -2041,6 +2128,8 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
@@ -2050,6 +2139,7 @@ Example:
             'msgfplus_style_1' : '-t',
             'omssa_style_1' : '-te',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
+            'myrimatch_style_1' : 'MonoPrecursorMzTolerance'
         },
         'utag' : [
             'precursor',
@@ -2092,6 +2182,9 @@ Example:
             'xtandem_style_1' : {
                 'da' : 'Daltons',
             },
+            'myrimatch_style_1' : {
+                'da' : 'Da'
+            },
         },
         'uvalue_type' : [
             'da',
@@ -2103,7 +2196,8 @@ Example:
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
-            'myrimatch',
+            'myrimatch_2_1_140',
+            'myrimatch_2_1_138',
             'omssa_2_1_9',
         ],
         'default_value' : "monoisotopic",
@@ -2111,7 +2205,7 @@ Example:
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'monoisotopic',
-            'myrimatch_style_1' : '-PrecursorMzToleranceRule <str>',
+            'myrimatch_style_1' : 'PrecursorMzToleranceRule',
             'omssa_style_1' : '-tem',
         },
         'utag' : [
@@ -2126,6 +2220,10 @@ Example:
                 'average' : '1',
                 'monoisotopic' : '0',
             },
+            'myrimatch_style_1' : {
+                'average' : 'average',
+                'monoisotopic' : 'mono',
+            },
         },
         'uvalue_type' : [
             'average',
@@ -2139,6 +2237,8 @@ Example:
             'msgfplus_v9979',
             'myrimatch',
             'omssa_2_1_9',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : 5,
         'description' :  ''' Maximal accepted parent ion charge ''',
@@ -2146,7 +2246,7 @@ Example:
         'ukey_translation' : {
             'msamanda_style_1' : 'considered_charges',
             'msgfplus_style_1' : '-maxCharge',
-            'myrimatch_style_1' : '-NumChargeStates <interger>',
+            'myrimatch_style_1' : 'NumChargeStates',
             'omssa_style_1' : '-zh',
         },
         'utag' : [
@@ -2180,7 +2280,8 @@ Example:
     },
     'precursor_min_mass' : {
         'available_in_unode' : [
-            'myrimatch',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -2191,7 +2292,26 @@ Example:
         'description' :  ''' Minimal parent ion mass ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'myrimatch_style_1' : '-MinPeptideMass <real>',
+            'myrimatch_style_1' : 'MinPeptideMass',
+            'xtandem_style_1' : 'spectrum, minimum parent m+h',
+        },
+        'utag' : [
+            'Precursor',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'precursor_max_mass' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+        ],
+        'default_value' : 10000,
+        'description' :  ''' Maximal parent ion mass ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'myrimatch_style_1' : 'MaxPeptideMass',
             'xtandem_style_1' : 'spectrum, minimum parent m+h',
         },
         'utag' : [
@@ -2436,6 +2556,8 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, a ions are used in algorithm ''',
@@ -2444,6 +2566,7 @@ Example:
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, a ions',
+            'myrimatch_style_1' : 'FragmentationRule'
         },
         'utag' : [
             'scoring',
@@ -2470,6 +2593,8 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : True,
         'description' :  ''' Spectrum: if true, b ions are used in algorithm ''',
@@ -2478,6 +2603,7 @@ Example:
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, b ions',
+            'myrimatch_style_1' : 'FragmentationRule'
         },
         'utag' : [
             'scoring',
@@ -2504,6 +2630,8 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, c ions are used in algorithm ''',
@@ -2512,6 +2640,7 @@ Example:
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, c ions',
+            'myrimatch_style_1' : 'FragmentationRule',
         },
         'utag' : [
             'scoring',
@@ -2574,6 +2703,8 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, x ions are used in algorithm ''',
@@ -2582,6 +2713,7 @@ Example:
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, x ions',
+            'myrimatch_style_1' : 'FragmentationRule'
         },
         'utag' : [
             'scoring',
@@ -2608,6 +2740,8 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : True,
         'description' :  ''' Spectrum: if true, y ions are used in algorithm ''',
@@ -2616,6 +2750,7 @@ Example:
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, y ions',
+            'myrimatch_style_1' : 'FragmentationRule',
         },
         'utag' : [
             'scoring',
@@ -2678,6 +2813,8 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, z ions are used in algorithm ''',
@@ -2686,6 +2823,7 @@ Example:
             'msamanda_style_1' : 'series',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, z ions',
+            'myrimatch_style_1' : 'FragmentationRule'
         },
         'utag' : [
             'scoring',
@@ -2699,6 +2837,134 @@ Example:
                 False : 'no',
                 True : 'yes',
             },
+        },
+        'uvalue_type' : "bool",
+    },
+    'myrimatch_class_size_multiplier' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Myrimatch ClassSizeMultiplier ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'myrimatch_style_1' : 'ClassSizeMultiplier'
+        },
+        'utag' : [
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'myrimatch_num_int_classes' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+        ],
+        'default_value' : 3,
+        'description' :  ''' Myrimatch NumIntensityClasses ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'myrimatch_style_1' : 'NumIntensityClasses'
+        },
+        'utag' : [
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'myrimatch_prot_sampl_time' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+        ],
+        'default_value' : 15,
+        'description' :  ''' Myrimatch ProteinSamplingTime ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'myrimatch_style_1' : 'ProteinSamplingTime'
+        },
+        'utag' : [
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'myrimatch_tic_cutoff' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+        ],
+        'default_value' : 0.98,
+        'description' :  ''' Myrimatch TicCutoffPercentage ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'myrimatch_style_1' : 'TicCutoffPercentage'
+        },
+        'utag' : [
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'myrimatch_smart_plus_three' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+        ],
+        'default_value' : True,
+        'description' :  ''' Use Myrimatch UseSmartPlusThreeModel ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'myrimatch_style_1' : 'UseSmartPlusThreeModel'
+        },
+        'utag' : [
+        ],
+        'uvalue_translation' : {
+            'myrimatch_style_1' : {
+                False : 0,
+                True : 1,
+            },
+        },
+        'uvalue_type' : "float",
+    },
+    'myrimatch_num_mz_fidelity_classes' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+        ],
+        'default_value' : 3,
+        'description' :  ''' Myrimatch NumMzFidelityClasses ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'myrimatch_style_1' : 'NumMzFidelityClasses'
+        },
+        'utag' : [
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'compute_xcorr' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+        ],
+        'default_value' : False,
+        'description' :  ''' Compute xcorr ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'myrimatch_style_1' : 'ComputeXCorr'
+        },
+        'utag' : [
+            'scoring'
+        ],
+        'uvalue_translation' : {
+            'myrimatch_style_1' : {
+                True : 1,
+                False: 0,
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -2791,7 +3057,8 @@ Example:
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
-            'myrimatch',
+            'myrimatch_2_1_140',
+            'myrimatch_2_1_138',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2805,7 +3072,7 @@ Example:
         'ukey_translation' : {
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-ntt',
-            'myrimatch_style_1' : '-MinTerminiCleavages<int>',
+            'myrimatch_style_1' : 'MinTerminiCleavages',
             'omssa_style_1' : 'semi_enzyme',
             'xtandem_style_1' : 'protein, cleavage semi',
         },
@@ -2818,13 +3085,17 @@ Example:
                 True : 'Semi',
             },
             'msgfplus_style_1' : {
-                False : '2',
-                True : '1',
+                False : 2,
+                True : 1,
             },
             'xtandem_style_1' : {
                 False : 'no',
                 True : 'yes',
             },
+            'myrimatch_style_1' : {
+                False : 2,
+                True : 1,
+            }
         },
         'uvalue_type' : "bool",
     },
