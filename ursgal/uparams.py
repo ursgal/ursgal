@@ -3500,4 +3500,54 @@ Example:
         },
         'uvalue_type' : "",
     },
+    'test_param1': {
+        'available_in_unode' : [
+            '_test_node'
+        ],
+        'default_value' : 'b',
+        'description' : ''' TEST/DEBUG: Internal Ursgal parameter 1 for debugging and testing. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            '_test_node_style_1' : 'test_param1',
+        },
+        'utag' : [
+            'testing',
+            'debugging',
+        ],
+        'uvalue_translation' : {
+            '_test_node_style_1' : {
+                'a'     : 'A',
+                'b'     : 'B',
+                'c'     : 'C',
+                'd'     : 'D',
+                'e'     : 'E',
+            },
+        },
+        'uvalue_type' : "str",
+    },
+    'test_param2': {
+        'available_in_unode' : [
+            '_test_node'
+        ],
+        'default_value' : 'three',
+        'description' : ''' TEST/DEBUG: Internal Ursgal parameter 2 for debugging and testing. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            '_test_node_style_1' : 'test_param2',
+        },
+        'utag' : [
+            'testing',
+            'debugging',
+        ],
+        'uvalue_translation' : {
+            '_test_node_style_1' : {
+                'one'   : 1,
+                'two'   : 2,
+                'three' : 3,
+                'four'  : 4,
+                'five'  : 5,
+            },
+        },
+        'uvalue_type' : "str",
+    },
 }

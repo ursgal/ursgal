@@ -2114,6 +2114,7 @@ class UController(ursgal.UNode):
         Returns:
             str: Path of the output file
         '''
+        self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.csv'] )
         return self.execute_unode(
             input_file       = input_file,
             engine           = self.params['unify_csv_converter_version'],
