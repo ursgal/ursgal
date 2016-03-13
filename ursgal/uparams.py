@@ -1581,7 +1581,7 @@ Example:
         'ukey_translation' : {
             'msamanda_style_1' : 'modifications',
             'msgfplus_style_1' : '-mod',
-            'myrimatch_style_1' : ('DynamicMods','StaticMods')
+            'myrimatch_style_1' : ('DynamicMods','StaticMods'),
             'omssa_style_1' : '-mv',
             'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
         },
