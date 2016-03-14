@@ -23,7 +23,6 @@ class myrimatch_2_1_138( ursgal.UNode ):
         'input_types'               : ['.mzML'],
         'create_own_folder'         : True,
         'compress_raw_search_results' : True,
-
         'citation'                  : 'Tabb DL, Fernando CG, Chambers MC. '\
             '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
             'identification by multivariate hypergeometric analysis.',
@@ -49,6 +48,11 @@ class myrimatch_2_1_138( ursgal.UNode ):
         '''
         Formatting the command line
         '''
+        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        # import pprint
+        # pprint.pprint(translations)
+        # exit(1)
+
         input_file = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
@@ -75,9 +79,8 @@ class myrimatch_2_1_138( ursgal.UNode ):
 
         self.params['myrimatch_ions_to_search'] = []
         for ion in ['a','b','c','x','y','z']:
-            ion_2_add = self.params['score_{0}_ions'.format(ion)]
-            if ion_2_add != '':
-                self.params['myrimatch_ions_to_search'].append( ion_2_add )
+            if self.params['score_{0}_ions'.format(ion)] is True:
+                self.params['myrimatch_ions_to_search'].append( ion )
         self.params['myrimatch_ions_to_search'] = 'manual:'+','.join(self.params['myrimatch_ions_to_search'] )
 
         self.params['myrimatch_config_file_path'] = \
@@ -91,11 +94,7 @@ class myrimatch_2_1_138( ursgal.UNode ):
             '{mzml_input_file}'.format(**self.params),
             '-workdir', "{output_dir_path}".format( **self.params ),
             '-cpus', '{cpus}'.format( **self.params ),
-            '-OutputFormat', 'mzIdentML',
-            # '-OutputSuffix', '_{0}'.format( self.engine ),
             # '-dump'
-            '-FragmentationAutoRule', 'false' #it should be false,
-            #If true, MyriMatch will automatically choose the fragmentation rule based on the activation type of each MSn spectrum.
         ]
 
 
@@ -175,6 +174,7 @@ NumChargeStates = "{precursor_max_charge}"
 NumIntensityClasses = "{myrimatch_num_int_classes}"
 NumMzFidelityClasses = "{myrimatch_num_mz_fidelity_classes}"
 OutputSuffix = ""
+OutputFormat = "mzIdentML"
 PrecursorMzToleranceRule = "{precursor_mass_type}"
 ProteinDatabase = "{database}"
 ProteinSamplingTime = "{myrimatch_prot_sampl_time}"

@@ -38,10 +38,10 @@ def main(folder=None, profile=None, target_decoy_database=None):
     # (version numbers might differ on windows or mac):
     search_engines  = [
         # 'omssa',
-        'xtandem_sledgehammer',
-        'msgf',
-        'msamanda_1_0_0_5243',
-        # 'myrimatch_2_1_138',
+        'xtandem_vengeance',
+        # 'msgf',
+        # 'msamanda_1_0_0_5243',
+        'myrimatch_2_1_138',
     ]
 
     validation_engines = [
