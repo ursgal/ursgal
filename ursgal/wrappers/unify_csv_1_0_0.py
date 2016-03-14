@@ -71,7 +71,6 @@ Could not load RT lookup dict from this location: {0}
         history = self.stats['history'],
         )
 
-        # translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
         last_search_engine_colname = self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][last_engine]
 
         unify_csv_main(

@@ -106,9 +106,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     # already_seen_protein_pep = {}
 
     use15N = False
-    if params['label'] == '15N':
-        use15N = True
-
+    if 'label' in params.keys():
+        if params['label'] == '15N':
+            use15N = True
+    else:
+        params['label'] = '14N'
     aa_exception_dict = params['aa_exception_dict']
     n_term_replacement = {
         'Ammonia-loss' : None,

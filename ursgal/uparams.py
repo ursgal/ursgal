@@ -39,10 +39,28 @@ ursgal_params = {
             'unify_csv_style_1' : 'aa_exception_dict',
         },
         'utag' : [
+            'conversion'
         ],
         'uvalue_translation' : {
         },
         'uvalue_type' : "dict",
+    },
+    'forbidden_residues' : {
+        'available_in_unode' : [
+            'novor_1_1beta',
+        ],
+        'default_value' : 'I,U',
+        'description' :  ''' Aminoacids that are not allowed during/taken into account during denovo searches. Given as a string of comma seperated aminoacids (single letter code) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'novor_style_1' : 'forbiddenResidues',
+        },
+        'utag' : [
+            'denovo'
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
     },
     'batch_size' : {
         'available_in_unode' : [
@@ -480,6 +498,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'novor_1_1beta',
         ],
         'default_value' : "trypsin",
         'description' :  ''' Enzyme: Rule of protein cleavage
@@ -517,6 +536,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'CleavageRules',
             'omssa_style_1' : '-e',
             'xtandem_style_1' : 'protein, cleavage site',
+            'novor_style_1' : 'enzyme',
         },
         'utag' : [
             'database',
@@ -546,6 +566,9 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
+            },
+            'novor_style_1' : {
+                'trypsin'    : 'Trypsin',
             },
             'msamanda_style_1' : {
                 'argc' : 'R;after;P',
@@ -740,6 +763,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'novor_1_1beta',
         ],
         'default_value' : 5,
         'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
@@ -749,6 +773,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'FragmentMzTolerance',
             'omssa_style_1' : '-to',
             'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error',
+            'novor_style_1' : 'fragmentIonErrorTol',
         },
         'utag' : [
             'fragment',
@@ -768,6 +793,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'myrimatch_2_1_140',
             'myrimatch_2_1_138',
+            'novor_1_1beta',
         ],
         'default_value' : "ppm",
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
@@ -776,6 +802,7 @@ ursgal_params = {
             'msamanda_style_1' : 'ms2_tol unit',
             'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error units',
             'myrimatch_style_1' : 'FragmentMzTolerance',
+            'novor_style_1' : 'fragmentIonErrorTol',
         },
         'utag' : [
             'fragment',
@@ -788,6 +815,9 @@ ursgal_params = {
                 'da' : 'Daltons',
             },
             'myrimatch_style_1' : {
+                'da' : 'Da',
+            },
+            'novor_style_1' : {
                 'da' : 'Da',
             },
         },
@@ -826,14 +856,14 @@ ursgal_params = {
     'frag_method' : {
         'available_in_unode' : [
             'msgfplus_v9979',
-            'myrimatch',
+            'novor_1_1beta'
         ],
         'default_value' : "hcd",
         'description' :  ''' Used fragmentation method, e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-m',
-            'myrimatch_style_1' : '-FragmentationRule<str>',
+            'novor_style_1' : 'fragmentation',
         },
         'utag' : [
         ],
@@ -842,6 +872,10 @@ ursgal_params = {
                 'cid' : '1',
                 'etd' : '2',
                 'hcd' : '3',
+            },
+            'novor_style_1' : {
+                'cid' : 'CID',
+                'hcd' : 'HCD',
             },
         },
         'uvalue_type' : [
@@ -996,12 +1030,14 @@ ursgal_params = {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'novor_1_1beta',
         ],
         'default_value' : "",
         'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'header_translations',
+            'novor_style_1' : 'header_translations'
         },
         'utag' : [
             'conversion',
@@ -1020,6 +1056,19 @@ ursgal_params = {
                 'Title' : 'Spectrum Title',
                 'Weighted Probability' : 'Amanda:Weighted Probability',
                 'm/z' : 'Exp m/z',
+            },
+            'novor_style_1' : {
+                ' scanNum'               : 'Spectrum ID',
+                ' peptide'               : 'Sequence',
+                ' score'                 : 'Novor:score',
+                ' mz(data)'              : 'Exp m/z',
+                ' RT'                    : 'Retention Time (s)',
+                ' z'                     : 'Charge',
+                '# id'                   : 'Novor:id',
+                ' pepMass(denovo)'       : 'Calc mass',
+                ' err(data-denovo)'      : 'Error (exp-calc)',
+                ' ppm(1e6*err/(mz*z))'   : 'Error (ppm)',
+                ' aaScore'               : 'Novor:aaScore',
             },
         },
         'uvalue_type' : "",
@@ -1100,12 +1149,14 @@ ursgal_params = {
     'instrument' : {
         'available_in_unode' : [
             'msgfplus_v9979',
+            'novor_1_1beta',
         ],
         'default_value' : "q_exactive",
         'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-inst',
+            'novor_style_1' : 'massAnalyzer'
         },
         'utag' : [
             'scoring',
@@ -1116,6 +1167,12 @@ ursgal_params = {
                 'low_res_ltq' : '0',
                 'q_exactive' : '3',
                 'tof' : '2',
+            },
+            'novor_style_1' : {
+                'low_res_ltq'            : 'Trap',
+                'high_res_ltq'           : 'Trap',
+                'tof'                    : 'TOF',
+                'q_exactive'             : 'FT',
             },
         },
         'uvalue_type' : [
@@ -1458,6 +1515,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'novor_1_1beta',
         ],
         'default_value' : None,
         'description' :  ''' Path to input .mgf file ''',
@@ -1466,6 +1524,7 @@ ursgal_params = {
             'msamanda_style_1' : 'mgf_input_file',
             'msgfplus_style_1' : '-s',
             'xtandem_style_1' : 'spectrum, path',
+            'novor_style_1' : '-f',
         },
         'utag' : [
             'input',
@@ -1578,6 +1637,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'novor_1_1beta',
         ],
         'default_value' : [
             '*,opt,Prot-N-term,Acetyl',
@@ -1617,6 +1677,7 @@ Example:
             'myrimatch_style_1' : ('DynamicMods', 'StaticMods'),
             'omssa_style_1' : '-mv',
             'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
+            'novor_style_1' : ('variableModifications', 'fixedModifications'),
         },
         'utag' : [
             'Modifications',
@@ -2110,6 +2171,9 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+            'novor_1_1beta',
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
@@ -2124,6 +2188,8 @@ Example:
             'qvality_style_1' : '-o',
             'venndiagram_style_1' : 'output_file',
             'xtandem_style_1' : 'output, path',
+            'myrimatch_style_1' : 'output_file_incl_path',
+            'novor_style_1' : 'output_file_incl_path',
         },
         'utag' : [
             'output',
@@ -2238,6 +2304,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'novor_1_1beta',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
@@ -2248,6 +2315,7 @@ Example:
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
             'omssa_style_1' : '-te',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
+            'novor_style_1' : 'precursorErrorTol',
         },
         'utag' : [
             'precursor',
@@ -2269,6 +2337,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'novor_1_1beta',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
@@ -2279,6 +2348,7 @@ Example:
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
             'omssa_style_1' : '-te',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
+            'novor_style_1' : 'precursorErrorTol'
         },
         'utag' : [
             'precursor',
@@ -2300,6 +2370,7 @@ Example:
             'xtandem_vengeance',
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
+            'novor_1_1beta',
         ],
         'default_value' : "ppm",
         'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
@@ -2310,6 +2381,7 @@ Example:
             'omssa_style_1' : '-teppm',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error units',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
+            'novor_style_1' : 'precursorErrorTol'
         },
         'utag' : [
             'precursor',
@@ -2326,6 +2398,9 @@ Example:
             },
             'xtandem_style_1' : {
                 'da' : 'Daltons',
+            },
+            'novor_style_1' : {
+                'da' : 'Da',
             },
         },
         'uvalue_type' : [
@@ -3349,6 +3424,7 @@ Example:
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
                 'myrimatch_2_1_140' : 'MyriMatch:MVH',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
@@ -3362,6 +3438,7 @@ Example:
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
                 'myrimatch_2_1_140' : 'MyriMatch:MVH',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
@@ -3375,6 +3452,7 @@ Example:
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
                 'myrimatch_2_1_140' : 'MyriMatch:MVH',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
@@ -3388,6 +3466,7 @@ Example:
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
                 'myrimatch_2_1_140' : 'MyriMatch:MVH',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
             },
         },
         'uvalue_type' : "",

@@ -48,11 +48,6 @@ class myrimatch_2_1_138( ursgal.UNode ):
         '''
         Formatting the command line
         '''
-        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
-        # import pprint
-        # pprint.pprint(translations)
-        # exit(1)
-
         input_file = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']

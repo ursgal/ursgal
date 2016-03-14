@@ -33,7 +33,8 @@ class novor_1_1beta( ursgal.UNode ):
                 }
             },
         },
-        'in_development'            : True,
+        'utranslation_style'        : 'novor_style_1',
+        'in_development'            : False,
         'output_extension'          : '.csv',
         'input_types'               : ['.mgf'],
         'create_own_folder'         : True,
@@ -59,27 +60,27 @@ class novor_1_1beta( ursgal.UNode ):
 
         self.params['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
-            self.params['file_root'] + '.mgf'
+            self.params['input_file']
         )
 
         self.params['mgf_new_input_file'] = os.path.join(
             self.params['input_dir_path'],
             self.params['file_root'] + '_tmp.mgf'
         )
-        self.created_tmp_files.append( self.params['mgf_new_input_file'] )
+        # self.created_tmp_files.append( self.params['mgf_new_input_file'] )
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['tmp_output_file_incl_path'] = os.path.join(
             self.params['mgf_new_input_file'] + '.csv'
         )
-        self.created_tmp_files.append( self.params['output_file_incl_path'] )
+        # self.created_tmp_files.append( self.params['tmp_output_file_incl_path'] )
 
         self.params['params_file'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file'] + '_Params.txt'
         )
-        self.created_tmp_files.append( self.params['params_file'])
+        # self.created_tmp_files.append( self.params['params_file'])
 
-        self.params['new_output_file_incl_path'] = os.path.join(
+        self.params['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
@@ -103,7 +104,7 @@ class novor_1_1beta( ursgal.UNode ):
             # 'Dehydrated (N-term C)',
             'Dioxidation (M)',
             'Methyl (C-term)',
-            # 'Methyl (DE)',
+            'Methyl (DE)',
             'Oxidation (M)',
             'Oxidation (HW)',
             'Phospho (ST)',
@@ -112,44 +113,39 @@ class novor_1_1beta( ursgal.UNode ):
             'Pyro-Glu (E)',
             'Pyro-Glu (Q)',
             'Sodium (C-term)',
-            # 'Sodium (DE)',
-            # 'Sulfo (STY)',
-            # 'Trimethyl (RK)',
+            'Sodium (DE)',
+            'Sulfo (STY)',
+            'Trimethyl (RK)',
         ]
 
-        # need to adapt for more than one aa with same mod
-        # check with mass
-        potential_mods = []
-        fixed_mods = []
-        for mod in self.params[ 'mods' ][ 'fix' ]:
-            if 'N-term' in mod['pos']:
-                mod[ 'aa' ] = 'N-term'
-            if 'C-term' in mod['pos']:
-                mod[ 'aa' ] = 'C-term'
-            if '{0} ({1})'.format(mod['name'], mod['aa']) not in available_mods:
-                print('''
-        [ WARNING ] Novor does not support your given modification
-        [ WARNING ] Continue without modification {0} '''.format(mod)
-                    )
-                continue
-            fixed_mods.append('{0} ({1})'.format(mod[ 'name' ], mod[ 'aa' ] ))
+        # need to check with mass
+        potential_mods = {'tag': 'opt', 'mods' : []}
+        fixed_mods = {'tag': 'fix', 'mods' : []}
+        for mod_type in [potential_mods, fixed_mods]:
+            not_available_mods = {}
+            for mod in self.params[ 'mods' ][ mod_type['tag'] ]:
+                if 'N-term' in mod['pos']:
+                    mod[ 'aa' ] = 'N-term'
+                if 'C-term' in mod['pos']:
+                    mod[ 'aa' ] = 'C-term'
+                if '{0} ({1})'.format(mod['name'], mod['aa']) not in available_mods:
+                    if mod['name'] not in not_available_mods.keys():
+                        not_available_mods[mod['name']] = []
+                    not_available_mods[mod['name']].append(mod['aa'])
+                mod_type['mods'].append('{0} ({1})'.format(mod[ 'name' ], mod[ 'aa' ] ))
 
-        for mod in self.params[ 'mods' ][ 'opt' ]:
-            if 'N-term' in mod['pos']:
-                mod[ 'aa' ] = 'N-term'
-            if 'C-term' in mod['pos']:
-                mod[ 'aa' ] = 'C-term'
-            if '{0} ({1})'.format(mod['name'], mod['aa']) not in available_mods:
-                print('''
-        [ WARNING ] Novor does not support your given modification
-        [ WARNING ] Continue without modification {0} '''.format(mod)
-                    )
-                continue
-            potential_mods.append(
-                '{0} ({1})'.format(mod[ 'name' ], mod[ 'aa' ] )
-            )
-        self.params['fixed_modifications'] =  ','.join( fixed_mods )
-        self.params['potential_modifications'] = ','.join( potential_mods )
+            for mod in not_available_mods.keys():
+                if '{0} ({1})'.format(mod, ''.join(sorted(not_available_modsp[mod]))) not in available_mods:
+                    print('''
+            # [ WARNING ] Novor does not support your given modification
+            # [ WARNING ] Continue without modification {0} ({1})'''.format(mod, ''.join(sorted(not_available_modsp[mod])))
+                        )
+                    continue
+                else:
+                    mod_type['mods'].append('{0} ({1})'.format(mod, ''.join(sorted(not_available_modsp[mod]))))
+
+        self.params['fixed_modifications'] =  ','.join( fixed_mods['mods'] )
+        self.params['potential_modifications'] = ','.join( potential_mods['mods'] )
 
         params_file = open( self.params['params_file'], 'w', encoding = 'UTF-8' )
         params2write = [
@@ -160,7 +156,7 @@ class novor_1_1beta( ursgal.UNode ):
             'precursorErrorTol = {precursor_mass_tolerance}{precursor_mass_tolerance_unit}'.format(**self.params),
             'variableModifications = {potential_modifications}'.format(**self.params),
             'fixedModifications = {fixed_modifications}'.format(**self.params),
-            'forbiddenResidues = {novor_forbidden_residues}'.format(**self.params),
+            'forbiddenResidues = {forbidden_residues}'.format(**self.params),
         ]
         for param in params2write:
             print( param, file = params_file )
@@ -185,7 +181,6 @@ class novor_1_1beta( ursgal.UNode ):
             self.params['mgf_new_input_file'], '-f',
         ]
 
-
         return self.params
 
     def postflight( self ):
@@ -205,12 +200,20 @@ class novor_1_1beta( ursgal.UNode ):
             ('\(Carbamyl\)','Carbamyl'),
             ('\(Carboxymethyl\)','Carboxymethyl'),
             ('\(Phospho\)','Phospho'),
-
+            ('\(Deamidated\)', 'Deamidated'),
+            ('\(Dioxidation\)', 'Dioxidation'),
+            ('\[Methyl\]','Methyl'),
+            ('\(Methyl\)','Methyl'),
+            ('\(Pyro-Glu\)','Pyro-Glu'),
+            ('\[Sodium\]','Sodium'),
+            ('\(Sodium\)','Sodium'),
+            ('\(Sulfo\)','Sulfo'),
+            ('\(Trimethyl\)','Trimethyl'),
         ]
 
         cached_novor_output = []
         headers = None
-        result_file = open( self.params['output_file_incl_path'], 'r')
+        result_file = open( self.params['tmp_output_file_incl_path'], 'r')
         for line in result_file:
             if line.startswith('#'):
                 if line.startswith('# id'):
@@ -226,12 +229,13 @@ class novor_1_1beta( ursgal.UNode ):
         )
         # extend and tanslate headers
         translated_headers = []
+        header_translations = self.TRANSLATIONS['header_translations']['uvalue_style_translation']
         for header in headers:
             if header == '':
                 continue
             translated_headers.append(
-                self.USEARCH_PARAM_VALUE_TRANSLATIONS.get(header, header)
-            )
+                    header_translations.get(header, header)
+                )
         translated_headers += [
             'Spectrum Title',
             'Modifications',
@@ -244,7 +248,7 @@ class novor_1_1beta( ursgal.UNode ):
             for k, v in line_dict.items():
                 if v is None:
                     continue
-                if self.USEARCH_PARAM_VALUE_TRANSLATIONS[k] == 'Sequence':
+                if header_translations[k] == 'Sequence':
                     formated_peptide = v
                     for regex_pattern, unimod_name in regex_list:
                         formated_peptide = ursgal.ucore.reformat_peptide(
@@ -258,11 +262,11 @@ class novor_1_1beta( ursgal.UNode ):
                     except:
                         new_line_dict['Modifications'] = ''
                     continue
-                new_line_dict[ self.USEARCH_PARAM_VALUE_TRANSLATIONS[k] ] = v.strip()
+                new_line_dict[ header_translations[k] ] = v.strip()
             new_line_dict['Raw data location'] = self.params['mgf_input_file']
             new_line_dict_list.append(new_line_dict)
 
-        new_result_file = open( self.params['new_output_file_incl_path'], 'w')
+        new_result_file = open( self.params['output_file_incl_path'], 'w')
         csv_dict_writer_object = csv.DictWriter(
             new_result_file,
             fieldnames = translated_headers
