@@ -34,7 +34,7 @@ def main():
 
     engine_list = [
         'novor',
-        # 'pepnovo',    
+        'pepnovo',    
     ]
 
     mzML_file = os.path.join(

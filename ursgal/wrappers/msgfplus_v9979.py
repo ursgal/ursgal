@@ -128,13 +128,12 @@ class msgfplus_v9979( ursgal.UNode ):
             elif translated_key in ['label', 'NumMods']:
                 continue
             elif len(translation_dict) == 1:
-                command_dict[translated_key] = str((list(translation_dict.values())[0]))
+                command_dict[translated_key] = str(list(translation_dict.values())[0])
             else:
                 print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
                 exit(1)
         for k, v in command_dict.items():
             self.params[ 'command_list' ].extend((k, v))
-        # print( ' '.join(self.params[ 'command_list' ]) )
 
         return self.params

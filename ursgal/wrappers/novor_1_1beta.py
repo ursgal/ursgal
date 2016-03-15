@@ -137,8 +137,8 @@ class novor_1_1beta( ursgal.UNode ):
             for mod in not_available_mods.keys():
                 if '{0} ({1})'.format(mod, ''.join(sorted(not_available_modsp[mod]))) not in available_mods:
                     print('''
-            # [ WARNING ] Novor does not support your given modification
-            # [ WARNING ] Continue without modification {0} ({1})'''.format(mod, ''.join(sorted(not_available_modsp[mod])))
+            [ WARNING ] Novor does not support your given modification
+            [ WARNING ] Continue without modification {0} ({1})'''.format(mod, ''.join(sorted(not_available_modsp[mod])))
                         )
                     continue
                 else:

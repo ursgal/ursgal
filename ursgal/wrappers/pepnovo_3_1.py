@@ -8,13 +8,12 @@ import csv
 class pepnovo_3_1( ursgal.UNode ):
     """
     PepNovo v3.1 UNode
-    http://proteomics.ucsd.edu/Software/UniNovo/
-
+    http://proteomics.ucsd.edu/Software/PepNovo/
+    
     Reference:
     Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing and Identification with Precision Mass Spectrometry, J. Proteome Res. 6:114-123.
     """
     META_INFO = {
-        # see http://proteomics.ucsd.edu/Software/UniNovo/#Downloads
         'engine_type' : {
             'denovo_engine' : True,
         },
@@ -38,8 +37,9 @@ class pepnovo_3_1( ursgal.UNode ):
                 }
             },
         },
+        'utranslation_style'        : 'pepnovo_style_1',
         'input_types'               : ['.mgf'],
-        'in_development'            : True,
+        'in_development'            : False,
         'output_extension'          : '.csv',
         'create_own_folder'         : True,
         'citation'   : 'Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing and Identification with Precision Mass Spectrometry, J. Proteome Res. 6:114-123.',
@@ -50,8 +50,8 @@ class pepnovo_3_1( ursgal.UNode ):
         super(pepnovo_3_1, self).__init__(*args, **kwargs)
         self.available_mods = {
                     'Carbamidomethyl': {'fix': ('C', '+57'),
-                                       'opt': ('HDE', '+57'),
-                                       'N-term': 'NT+CAM'},
+                                       'opt': ('HDE', '+57')},
+                                       # 'N-term': 'NT+CAM'},
                     'Trp->Kynurenin': {'opt': ('W', '+4')},
                     'Cation:K': {'opt': ('SKNPLRVIEMDGA', '+38')},
                     'Cation:Na': {'opt': ('QVPNYTHDESFAMILG', '+22')},
@@ -82,19 +82,18 @@ class pepnovo_3_1( ursgal.UNode ):
         Returns:
                 dict: self.params
         '''
-
         self.params['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
-            self.params['file_root'] + '.mgf'
+            self.params['input_file']
         )
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['tmp_output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file'] + '.tmp'
         )
-        self.created_tmp_files.append( self.params['output_file_incl_path'])
+        self.created_tmp_files.append( self.params['tmp_output_file_incl_path'])
 
-        self.params['new_output_file_incl_path'] = os.path.join(
+        self.params['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
@@ -123,21 +122,35 @@ class pepnovo_3_1( ursgal.UNode ):
 
         modifications = []
         for mod in self.params[ 'mods' ][ 'fix' ]:
+            mod_available = False
             if mod['name'] in self.available_mods.keys():
                 if 'fix' in self.available_mods[ mod['name'] ].keys():
                     if mod['aa'] in self.available_mods[ mod['name'] ]['fix'][0]:
                         modifications.append(mod['aa'] + self.available_mods[ mod['name'] ]['fix'][1])
+                        mod_available = True
+            if mod_available == False:
+                print('''
+                    [ WARNING ] PepNovo does not support your given modification
+                    [ WARNING ] Continue without modification {0}'''.format(mod)
+                    )
 
         for mod in self.params[ 'mods' ][ 'opt' ]:
+            mod_available = False
             if mod['name'] in self.available_mods.keys():
                 for term in ['N-term', 'C-term']:
                     if term in mod['pos']:
                         if term in self.available_mods[ mod['name'] ].keys():
                             modifications.append(self.available_mods[ mod['name'] ][term])
+                            mod_available = True
                 if 'opt' in self.available_mods[ mod['name'] ].keys():
                     if mod['aa'] in self.available_mods[ mod['name'] ]['opt'][0]:
                         modifications.append(mod['aa'] + self.available_mods[ mod['name'] ]['opt'][1])
-
+                        mod_available = True
+            if mod_available == False:
+                print('''
+                    [ WARNING ] PepNovo does not support your given modification
+                    [ WARNING ] Continue without modification {0}'''.format(mod)
+                    )
 
         self.params[ 'command_list' ] = [
             self.exe, # path 2 executable
@@ -156,28 +169,29 @@ class pepnovo_3_1( ursgal.UNode ):
                     '-tag_length', '{pepnovo_tag_length}'.format(**self.params)
                     ]) # < 3-6> - returns peptide sequence of the specified length (only lengths 3-6 are allowed).
 
+        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
         for param in [
-            'output_cum_probs',
-            'output_aa_probs',
-            'prm',
-            'prm_norm',
-            'correct_pm',
-            'use_spectrum_charge',
-            'use_spectrum_mz',
-            'no_quality_filter',
+            '-output_cum_probs',
+            '-output_aa_probs',
+            '-prm',
+            '-prm_norm',
+            '-use_spectrum_charge',
+            '-use_spectrum_mz',
+            '-no_quality_filter',
         ]:
-            if self.params[param] == True:
-                self.params[ 'command_list' ].append( '-{0}'.format(param) )
+            if list(translations[param].values())[0] == True:
+                self.params[ 'command_list' ].append( param )
 
-        if self.params['min_filter_prob'] >= 0 and self.params['min_filter_prob'] <= 1.0:
-            self.params[ 'command_list' ].extend([ '-min_filter_prob', '{min_filter_prob}'.format(**self.params) ])
+        if self.params['precursor_isotope_range'] != '0' :
+            self.params[ 'command_list' ].append( '-correct_pm' )
+
+        if self.params['min_output_score'] >= 0 and self.params['min_output_score'] <= 1.0:
+            self.params[ 'command_list' ].extend([ '-min_filter_prob', '{min_output_score}'.format(**self.params) ])
 
         return self.params
 
     def _execute(self):
         if len(self.params['command_list']) != 0:
-            # print(self.params['command_list'])
-            # exit()
             proc = subprocess.Popen(
                 self.params['command_list'],
                 stdout = subprocess.PIPE,
@@ -189,7 +203,7 @@ class pepnovo_3_1( ursgal.UNode ):
             self.execute_return_code = 500
 
         if proc is not None:
-            output_file = open(self.params['output_file_incl_path'], 'w')
+            output_file = open(self.params['tmp_output_file_incl_path'], 'w')
             # pint('Printing output to file, this can take a while ...')
             for line in proc.stdout:
                 if line.startswith(b'>>'):
@@ -223,7 +237,7 @@ class pepnovo_3_1( ursgal.UNode ):
         '''
         Reformats the PepNovo output file
         '''
-        filepath = self.params['output_file_incl_path']
+        filepath = self.params['tmp_output_file_incl_path']
 
         print('[ PARSING  ] Loading unformatted Pepnovo results ...')
 
@@ -246,12 +260,13 @@ class pepnovo_3_1( ursgal.UNode ):
                     save_headers = False
 
         #extend and translate headers
+        header_translations = self.TRANSLATIONS['header_translations']['uvalue_style_translation']
         translated_headers = []
         for header in headers:
             if header == '':
                 continue
             translated_headers.append(
-                self.USEARCH_PARAM_VALUE_TRANSLATIONS.get(header, header)
+                header_translations.get(header, header)
             )
         translated_headers.append('output_aa_probs')
         translated_headers.append('Spectrum Title')
@@ -398,7 +413,7 @@ class pepnovo_3_1( ursgal.UNode ):
         translated_PTMs = translated_PTMs_new
 
         #in this section the new reorganized pepnovo outputfile gets written from the collected information
-        pepnovo_outputfile_new = open(self.params['new_output_file_incl_path'],'w')
+        pepnovo_outputfile_new = open(self.params['output_file_incl_path'],'w')
         for header in translated_headers:
             pepnovo_outputfile_new.write(header+',')
         pepnovo_outputfile_new.write('\n')
