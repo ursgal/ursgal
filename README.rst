@@ -148,15 +148,6 @@ as common practice in science, never trust a blackbox :)
 Copyrights
 ***********
 
-<<<<<<< HEAD
-Copyright 2014-2015 by authors and contributors
-
-* Lukas P. M. Kremer,
-* Johannes Leufken,
-* Stefan Schulze,
-* Purevdulam Oyunchimeg,
-* Christian Fufezan
-=======
 Copyright 2014-2015 by authors and contributors in alphabetical order
 
 * Christian Fufezan,
@@ -166,7 +157,6 @@ Copyright 2014-2015 by authors and contributors in alphabetical order
 * Purevdulam Oyunchimeg
 * Stefan Schulze
 * Lukas Vaut
->>>>>>> 5f9654d9d5e0fe62cf373fea0bd575fb6ab02228
 
 Contact
 *******
