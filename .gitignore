@@ -7,3 +7,5 @@ tests/data/myrimatch_2_1_138/test_BSA1_myrimatch_2_1_138_unified.csv
 tests/data/novor_1_1beta/test_BSA1_novor_1_1beta_unified.csv
 tests/data/omssa_2_1_9/test_BSA1_omssa_2_1_9_unified.csv
 tests/data/xtandem_sledgehammer/test_BSA1_xtandem_sledgehammer_unified.csv
+tests/data/xtandem_sledgehammer/test_BSA1_xtandem_sledgehammer_unified.csv
+tests/data/omssa_2_1_9/test_BSA1_omssa_2_1_9_unified.csv
