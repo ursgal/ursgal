@@ -37,7 +37,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
     # We specify all search engines and validation engines that we want to use in a list
     # (version numbers might differ on windows or mac):
     search_engines  = [
-        # 'omssa',
+        'omssa',
         'xtandem_vengeance',
         # 'msgf',
         # 'msamanda_1_0_0_5243',

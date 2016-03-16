@@ -48,173 +48,173 @@
 #     'include_in_git'            : False,
 # }
 
-DEFAULT_PARAMS = {
-    'validation_score_field'    : 'OMSSA:pvalue',
-    'evalue_field'              : 'OMSSA:evalue',
-    'validation_minimum_score'  : 1e-30,
-    'bigger_scores_better'      : False,  # lower score are better p-value,
+# DEFAULT_PARAMS = {
+    # 'validation_score_field'    : 'OMSSA:pvalue',
+    # 'evalue_field'              : 'OMSSA:evalue',
+    # 'validation_minimum_score'  : 1e-30,
+    # 'bigger_scores_better'      : False,  # lower score are better p-value,
     # ---------------------------------------------------------------------
     # the following parameters are not changeable, e.g. default
     # protein/taxon
-    'x': '0',  # default, all taxids, we dont want to change this
-    'omssa_output_type' : '-oc',
-    # ions
-    'sct': '0',   # search c terminal ions?, same as sGUI default, 0=yes, 1=no
-    'sb1': '1',   # should first forward (b1) product ions be in search (1=no)
-    'sp': '0',  # max number of ions in each series being searched (0=all)
+    # 'x': '0',  # default, all taxids, we dont want to change this
+    # 'omssa_output_type' : '-oc',
+    # # ions
+    # 'sct': '0',   # search c terminal ions?, same as sGUI default, 0=yes, 1=no
+    # 'sb1': '1',   # should first forward (b1) product ions be in search (1=no)
+    # 'sp': '0',  # max number of ions in each series being searched (0=all)
 
-    # precursor
-    'z1': '0.95',  # default, fraction of peaks below precursor used to determine if spectrum is charge 1
-    'zcc': '2',  # how should precursor charges be determined?, use a range
-    'tez': '1',  # defautl is 0 (disabled), charge dependency of precursor mass tolerance (0 = none, 1 = linear)
-    'pc': '1',  # minimum number of precursors that match a spectrum
+    # # precursor
+    # 'z1': '0.95',  # default, fraction of peaks below precursor used to determine if spectrum is charge 1
+    # 'zcc': '2',  # how should precursor charges be determined?, use a range
+    # 'tez': '1',  # defautl is 0 (disabled), charge dependency of precursor mass tolerance (0 = none, 1 = linear)
+    # 'pc': '1',  # minimum number of precursors that match a spectrum
 
-    # product
-    'zoh': '4',  # maximum product charge to search, default is 2, sGUI:2
-    'zt': '3',  # default,minimum precursor charge to start considering multiply charged products
+    # # product
+    # 'zoh': '4',  # maximum product charge to search, default is 2, sGUI:2
+    # 'zt': '3',  # default,minimum precursor charge to start considering multiply charged products
 
-    # charge
-    'zc': '1',  # should charge plus one be determined algorithmically? (1=yes)
+    # # charge
+    # 'zc': '1',  # should charge plus one be determined algorithmically? (1=yes)
 
-    # scoring
-    'scorr': '0',  # turn off correlation correction to score (1=off, 0=use correlation)
-    'scorp': '0.5',  # same as sGUI, probability of consecutive ion (used in correlation correction)
-    'he': '1.0',  # the maximum evalue allowed in the hit list, cant find in search GUI
+    # # scoring
+    # 'scorr': '0',  # turn off correlation correction to score (1=off, 0=use correlation)
+    # 'scorp': '0.5',  # same as sGUI, probability of consecutive ion (used in correlation correction)
+    # 'he': '1.0',  # the maximum evalue allowed in the hit list, cant find in search GUI
 
-    # spectrum
-    'ht': '6',  # number of m/z values corresponding to the most intense peaks that must include one match to the theoretical peptide
-    'cl': '0.0',  # low intensity cutoff as a fraction of max peak,
-    'cp': '0',  # eliminate charge reduced precursors in spectra (0=no, 1=yes)
+    # # spectrum
+    # 'ht': '6',  # number of m/z values corresponding to the most intense peaks that must include one match to the theoretical peptide
+    # 'cl': '0.0',  # low intensity cutoff as a fraction of max peak,
+    # 'cp': '0',  # eliminate charge reduced precursors in spectra (0=no, 1=yes)
 
-    # window
-    'h2': '2',  # number of peaks allowed in double charge window
-    'h1': '2',  # number of peaks allowed in single charge window (0 = number of ion species)
-    'w1': '27',   # default is 27, also in sGUI, single charge window in Da
-    'w2': '14',  # double charge window in Da, default
+    # # window
+    # 'h2': '2',  # number of peaks allowed in double charge window
+    # 'h1': '2',  # number of peaks allowed in single charge window (0 = number of ion species)
+    # 'w1': '27',   # default is 27, also in sGUI, single charge window in Da
+    # 'w2': '14',  # double charge window in Da, default
 
     # mass
-    'ta': '1.0',  # default value, cant find in sGUI self.params, automatic mass tolerance adjustment fraction
-    'tex': '1446.94',  # threshold in Da above which the mass of neutron should be added in exact   mass search
-    'mm': '128',  # the maximum number of mass ladders to generate per database peptide
-    'hl':'30',
+    # 'ta': '1.0',  # default value, cant find in sGUI self.params, automatic mass tolerance adjustment fraction
+    # 'tex': '1446.94',  # threshold in Da above which the mass of neutron should be added in exact   mass search
+    # 'mm': '128',  # the maximum number of mass ladders to generate per database peptide
+    # 'hl':'30',
 
-}
+# }
 
-USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
-    'score_a_ions'           : {True : '0', False : ''},
-    'score_b_ions'           : {True : '1', False : ''},
-    'score_c_ions'           : {True : '2', False : ''},
-    'score_x_ions'           : {True : '3', False : ''},
-    'score_y_ions'           : {True : '4', False : ''},
-    'score_z_ions'           : {True : '5', False : ''},
+# USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
+#     'score_a_ions'           : {True : '0', False : ''},
+#     'score_b_ions'           : {True : '1', False : ''},
+#     'score_c_ions'           : {True : '2', False : ''},
+#     'score_x_ions'           : {True : '3', False : ''},
+#     'score_y_ions'           : {True : '4', False : ''},
+#     'score_z_ions'           : {True : '5', False : ''},
 
-    'search_c_terminal_ions' : {True : '1', False : '0'},
-    'search_first_b1_ion'    : {True : '0', False : '1'},
-    'precursor_isotope_range': {'0':'0','0,1':'1','0,2':'2'}
-}
+#     'search_c_terminal_ions' : {True : '1', False : '0'},
+#     'search_first_b1_ion'    : {True : '0', False : '1'},
+#     'precursor_isotope_range': {'0':'0','0,1':'1','0,2':'2'}
+# }
 
-USEARCH_PARAM_VALUE_TRANSLATIONS = {
-    #enzymes
-    'trypsin'              : '0',
-    'argc'                 : '1',
-    'cnbr'                 : '2',
-    'chymotrypsin'         : '3',
-    'formic_acid'          : '4',
-    'lysc'                 : '5',
-    'lysc_p'               : '6',
-    'pepsina'              : '7',
-    'trypsin_cnbr'         : '8',
-    'trypsin_chymotrypsin' : '9',
-    'trypsin_p'            : '10',
-    'no_cleavage'          : '11',
-    'aspn'                 : '12',
-    'gluc'                 : '13',
-    'aspn_gluc'            : '14',
-    'top_down'             : '15',
-    'semi_tryptic'         : '16',
-    'nonspecific'          : '17',
-    'chymotrypsin_p'       : '18',
-    'lysn'                 : '21',
-    'thermolysin_p'        : '22',
-    'semi_chymotrypsin'    : '23',
-    'semi_gluc'            : '24',
+# USEARCH_PARAM_VALUE_TRANSLATIONS = {
+#     #enzymes
+#     'trypsin'              : '0',
+#     'argc'                 : '1',
+#     'cnbr'                 : '2',
+#     'chymotrypsin'         : '3',
+#     'formic_acid'          : '4',
+#     'lysc'                 : '5',
+#     'lysc_p'               : '6',
+#     'pepsina'              : '7',
+#     'trypsin_cnbr'         : '8',
+#     'trypsin_chymotrypsin' : '9',
+#     'trypsin_p'            : '10',
+#     'no_cleavage'          : '11',
+#     'aspn'                 : '12',
+#     'gluc'                 : '13',
+#     'aspn_gluc'            : '14',
+#     'top_down'             : '15',
+#     'semi_tryptic'         : '16',
+#     'nonspecific'          : '17',
+#     'chymotrypsin_p'       : '18',
+#     'lysn'                 : '21',
+#     'thermolysin_p'        : '22',
+#     'semi_chymotrypsin'    : '23',
+#     'semi_gluc'            : '24',
 
     #label
     # '15N'                : '2',
     # '14N'                : '0',
     # OMSSA CSV Header madness
-    'Spectrum number'      : 'Spectrum ID',
-    ' Filename/id'         : 'Spectrum Title',
-    ' Peptide'             : 'Sequence',
-    ' E-value'             : 'OMSSA:evalue',
-    ' Mass'                : 'Exp m/z',
-    ' gi'                  : 'gi',
-    ' Accession'           : 'Accession',
-    ' Start'               : 'Start',
-    ' Stop'                : 'Stop',
-    ' Defline'             : 'proteinacc_start_stop_pre_post_;',
-    ' Mods'                : 'Modifications',
-    ' Charge'              : 'Charge',
-    ' Theo Mass'           : 'Calc m/z',
-    ' P-value'             : 'OMSSA:pvalue',
-    ' NIST score'          : 'NIST score',
+    # 'Spectrum number'      : 'Spectrum ID',
+    # ' Filename/id'         : 'Spectrum Title',
+    # ' Peptide'             : 'Sequence',
+    # ' E-value'             : 'OMSSA:evalue',
+    # ' Mass'                : 'Exp m/z',
+    # ' gi'                  : 'gi',
+    # ' Accession'           : 'Accession',
+    # ' Start'               : 'Start',
+    # ' Stop'                : 'Stop',
+    # ' Defline'             : 'proteinacc_start_stop_pre_post_;',
+    # ' Mods'                : 'Modifications',
+    # ' Charge'              : 'Charge',
+    # ' Theo Mass'           : 'Calc m/z',
+    # ' P-value'             : 'OMSSA:pvalue',
+    # ' NIST score'          : 'NIST score',
 
-}
+# }
 
-USED_USEARCH_PARAMS = set([
-    'database',
-    'modifications',
-    'num_match_spec',
-    'precursor_min_charge',
-    'precursor_max_charge',
-    'maximum_missed_cleavages',
-    'precursor_mass_tolerance_minus',
-    'precursor_mass_tolerance_plus',
-    'frag_mass_tolerance',
-    'frag_mass_tolerance_unit',
-    'enzyme',
-    'score_a_ions',
-    'score_b_ions',
-    'score_c_ions',
-    'score_x_ions',
-    'score_y_ions',
-    'score_z_ions',
-    'mininimal_required_observed_peaks',
-    'precursor_isotope_range',
-    'label',
-    'validation_score_field',
-    'evalue_field',
-    'validation_minimum_score',
-    'bigger_scores_better',
-    'x',
-    'omssa_output_type',
-    'sct',
-    'sb1',
-    'sp',
-    'z1',
-    'zcc',
-    'tez',
-    'pc',
-    'zoh',
-    'zt',
-    'zc',
-    'scorr',
-    'scorp',
-    'he',
-    'ht',
-    'cl',
-    'cp',
-    'h2',
-    'h1',
-    'w1',
-    'w2',
-    'ta',
-    'tex',
-    'mm',
-    'hl',
-    'semi_enzyme',
-    'base_mz'
-])
+# USED_USEARCH_PARAMS = set([
+#     'database',
+#     'modifications',
+#     'num_match_spec',
+#     'precursor_min_charge',
+#     'precursor_max_charge',
+#     'maximum_missed_cleavages',
+#     'precursor_mass_tolerance_minus',
+#     'precursor_mass_tolerance_plus',
+#     'frag_mass_tolerance',
+#     'frag_mass_tolerance_unit',
+#     'enzyme',
+#     'score_a_ions',
+#     'score_b_ions',
+#     'score_c_ions',
+#     'score_x_ions',
+#     'score_y_ions',
+#     'score_z_ions',
+#     'mininimal_required_observed_peaks',
+#     'precursor_isotope_range',
+#     'label',
+#     'validation_score_field',
+#     'evalue_field',
+#     'validation_minimum_score',
+#     'bigger_scores_better',
+#     'x',
+#     'omssa_output_type',
+#     'sct',
+#     'sb1',
+#     'sp',
+#     'z1',
+#     'zcc',
+#     'tez',
+#     'pc',
+#     'zoh',
+#     'zt',
+#     'zc',
+#     'scorr',
+#     'scorp',
+#     'he',
+#     'ht',
+#     'cl',
+#     'cp',
+#     'h2',
+#     'h1',
+#     'w1',
+#     'w2',
+#     'ta',
+#     'tex',
+#     'mm',
+#     'hl',
+#     'semi_enzyme',
+#     'base_mz'
+# ])
 
 
     #  Trypsin: 0

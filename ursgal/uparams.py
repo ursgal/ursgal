@@ -39,28 +39,31 @@ ursgal_params = {
             'unify_csv_style_1' : 'aa_exception_dict',
         },
         'utag' : [
-            'conversion'
+            'conversion',
         ],
         'uvalue_translation' : {
         },
         'uvalue_type' : "dict",
     },
-    'forbidden_residues' : {
+    'base_mz' : {
         'available_in_unode' : [
-            'novor_1_1beta',
+            'omssa_2_1_9',
+            'pepnovo_3_1',
         ],
-        'default_value' : 'I,U',
-        'description' :  ''' Aminoacids that are not allowed during/taken into account during denovo searches. Given as a string of comma seperated aminoacids (single letter code) ''',
+        'default_value' : 1000,
+        'description' :  ''' m/z value that is used as basis for the conversion from ppm to Da ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'novor_style_1' : 'forbiddenResidues',
+            'omssa_style_1' : 'base_mz',
+            'pepnovo_style_1' : 'base_mz',
         },
         'utag' : [
-            'denovo'
+            'Fragment',
+            'Precursor',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "str",
+        'uvalue_type' : "int",
     },
     'batch_size' : {
         'available_in_unode' : [
@@ -107,25 +110,27 @@ ursgal_params = {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
                 'msgfplus_v9979' : False,
+                'myrimatch_2_1_138' : True,
+                'myrimatch_2_1_140' : True,
+                'omssa_2_1_9' : False,
                 'xtandem_cyclone_2010' : True,
                 'xtandem_jackhammer' : True,
                 'xtandem_piledriver' : True,
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance' : True,
-                'myrimatch_2_1_140' : True,
-                'myrimatch_2_1_138' : True,
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
                 'msgfplus_v9979' : False,
+                'myrimatch_2_1_138' : True,
+                'myrimatch_2_1_140' : True,
+                'omssa_2_1_9' : False,
                 'xtandem_cyclone_2010' : True,
                 'xtandem_jackhammer' : True,
                 'xtandem_piledriver' : True,
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance' : True,
-                'myrimatch_2_1_140' : True,
-                'myrimatch_2_1_138' : True,
             },
         },
         'uvalue_type' : "",
@@ -280,11 +285,28 @@ ursgal_params = {
         },
         'uvalue_type' : "bool",
     },
+    'consecutive_ion_prob' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 0.5,
+        'description' :  ''' Probability of consecutive ion (used in correlation correction) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-scorp',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
     'cpus' : {
         'available_in_unode' : [
             'msgfplus_v9979',
-            'myrimatch_2_1_140',
             'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -410,6 +432,7 @@ ursgal_params = {
             'myrimatch_2_1_140',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'omssa_2_1_9',
             'qvality_2_02',
             'xtandem2csv_1_0_0',
         ],
@@ -421,6 +444,7 @@ ursgal_params = {
             'msamanda_style_1' : 'decoy_tag',
             'myrimatch_style_1' : 'DecoyPrefix',
             'mzidentml_style_1' : '-decoyRegex',
+            'omssa_style_1' : 'decoy_tag',
             'qvality_style_1' : 'decoy_tag',
             'xtandem2csv_style_1' : 'decoy_tag',
         },
@@ -495,14 +519,14 @@ ursgal_params = {
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
+            'novor_1_1beta',
             'omssa_2_1_9',
+            'pepnovo_3_1',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'novor_1_1beta',
-            'pepnovo_3_1',
         ],
         'default_value' : "trypsin",
         'description' :  ''' Enzyme: Rule of protein cleavage
@@ -538,10 +562,10 @@ ursgal_params = {
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-e',
             'myrimatch_style_1' : 'CleavageRules',
-            'omssa_style_1' : '-e',
-            'xtandem_style_1' : 'protein, cleavage site',
             'novor_style_1' : 'enzyme',
+            'omssa_style_1' : '-e',
             'pepnovo_style_1' : '-digest',
+            'xtandem_style_1' : 'protein, cleavage site',
         },
         'utag' : [
             'database',
@@ -571,13 +595,6 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
-            },
-            'novor_style_1' : {
-                'trypsin'    : 'Trypsin',
-            },
-            'pepnovo_style_1' : {
-                'nonspecific' : 'NON_SPECIFIC',
-                'trypsin'     : 'TRYPSIN',
             },
             'msamanda_style_1' : {
                 'argc' : 'R;after;P',
@@ -628,6 +645,9 @@ ursgal_params = {
                 'trypsin_chymotrypsin' : 'TrypChymo',
                 'trypsin_p' : 'Trypsin',
             },
+            'novor_style_1' : {
+                'trypsin' : 'Trypsin',
+            },
             'omssa_style_1' : {
                 'argc' : '1',
                 'aspn' : '12',
@@ -649,6 +669,10 @@ ursgal_params = {
                 'trypsin_chymotrypsin' : '9',
                 'trypsin_cnbr' : '8',
                 'trypsin_p' : '10',
+            },
+            'pepnovo_style_1' : {
+                'nonspecific' : 'NON_SPECIFIC',
+                'trypsin' : 'TRYPSIN',
             },
             'xtandem_style_1' : {
                 'argc' : '[R]|{P}',
@@ -744,6 +768,23 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
     },
+    'forbidden_residues' : {
+        'available_in_unode' : [
+            'novor_1_1beta',
+        ],
+        'default_value' : "I,U",
+        'description' :  ''' Aminoacids that are not allowed during/taken into account during denovo searches. Given as a string of comma seperated aminoacids (single letter code) ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'novor_style_1' : 'forbiddenResidues',
+        },
+        'utag' : [
+            'denovo',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'force' : {
         'available_in_unode' : [
             'ucontroller',
@@ -766,14 +807,14 @@ ursgal_params = {
             'msamanda_1_0_0_5243',
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
+            'novor_1_1beta',
             'omssa_2_1_9',
+            'pepnovo_3_1',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'novor_1_1beta',
-            'pepnovo_3_1',
         ],
         'default_value' : 5,
         'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
@@ -781,10 +822,10 @@ ursgal_params = {
         'ukey_translation' : {
             'msamanda_style_1' : 'ms2_tol',
             'myrimatch_style_1' : 'FragmentMzTolerance',
-            'omssa_style_1' : '-to',
-            'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error',
             'novor_style_1' : 'fragmentIonErrorTol',
+            'omssa_style_1' : '-to',
             'pepnovo_style_1' : '-fragment_tolerance',
+            'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error',
         },
         'utag' : [
             'fragment',
@@ -797,27 +838,27 @@ ursgal_params = {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+            'novor_1_1beta',
+            'omssa_2_1_9',
+            'pepnovo_3_1',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'myrimatch_2_1_140',
-            'myrimatch_2_1_138',
-            'novor_1_1beta',
-            'pepnovo_3_1',
-            'omssa_2_1_9',
         ],
         'default_value' : "ppm",
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'ms2_tol unit',
-            'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error units',
             'myrimatch_style_1' : 'FragmentMzTolerance',
             'novor_style_1' : 'fragmentIonErrorTol',
+            'omssa_style_1' : 'frag_mass_tolerance_unit',
             'pepnovo_style_1' : 'frag_mass_tolerance_unit',
-            'omssa_style_1' : '-to',
+            'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error units',
         },
         'utag' : [
             'fragment',
@@ -826,14 +867,14 @@ ursgal_params = {
             'msamanda_style_1' : {
                 'da' : 'Da',
             },
-            'xtandem_style_1' : {
-                'da' : 'Daltons',
-            },
             'myrimatch_style_1' : {
                 'da' : 'Da',
             },
             'novor_style_1' : {
                 'da' : 'Da',
+            },
+            'xtandem_style_1' : {
+                'da' : 'Daltons',
             },
         },
         'uvalue_type' : [
@@ -862,16 +903,38 @@ ursgal_params = {
             'fragment',
         ],
         'uvalue_translation' : {
+            'omssa_style_1' : {
+                'average' : '1',
+                'monoisotopic' : '0',
+            },
         },
         'uvalue_type' : [
             'average',
             'monoisotopic',
         ],
     },
+    'frag_max_charge' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 4,
+        'description' :  ''' Maximum fragment ion charge to search. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-zoh',
+        },
+        'utag' : [
+            'MS2',
+            'fragment',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
     'frag_method' : {
         'available_in_unode' : [
             'msgfplus_v9979',
-            'novor_1_1beta'
+            'novor_1_1beta',
         ],
         'default_value' : "hcd",
         'description' :  ''' Used fragmentation method, e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
@@ -1046,6 +1109,7 @@ ursgal_params = {
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'novor_1_1beta',
+            'omssa_2_1_9',
             'pepnovo_3_1',
         ],
         'default_value' : None,
@@ -1054,10 +1118,11 @@ ursgal_params = {
         'ukey_translation' : {
             'msamanda_style_1' : 'header_translations',
             'novor_style_1' : 'header_translations',
+            'omssa_style_1' : 'header_translations',
             'pepnovo_style_1' : 'header_translations',
         },
         'utag' : [
-            'conversion',
+            'Conversion',
         ],
         'uvalue_translation' : {
             'msamanda_style_1' : {
@@ -1075,27 +1140,44 @@ ursgal_params = {
                 'm/z' : 'Exp m/z',
             },
             'novor_style_1' : {
-                ' scanNum'               : 'Spectrum ID',
-                ' peptide'               : 'Sequence',
-                ' score'                 : 'Novor:score',
-                ' mz(data)'              : 'Exp m/z',
-                ' RT'                    : 'Retention Time (s)',
-                ' z'                     : 'Charge',
-                '# id'                   : 'Novor:id',
-                ' pepMass(denovo)'       : 'Calc mass',
-                ' err(data-denovo)'      : 'Error (exp-calc)',
-                ' ppm(1e6*err/(mz*z))'   : 'Error (ppm)',
-                ' aaScore'               : 'Novor:aaScore',
+                ' RT' : 'Retention Time (s)',
+                ' aaScore' : 'Novor:aaScore',
+                ' err(data-denovo)' : 'Error (exp-calc)',
+                ' mz(data)' : 'Exp m/z',
+                ' pepMass(denovo)' : 'Calc mass',
+                ' peptide' : 'Sequence',
+                ' ppm(1e6*err/(mz*z))' : 'Error (ppm)',
+                ' scanNum' : 'Spectrum ID',
+                ' score' : 'Novor:score',
+                ' z' : 'Charge',
+                '# id' : 'Novor:id',
             },
-            'pepnovo_style_1': {
-                '#Index'                 : 'Pepnovo:id',
-                'RnkScr'                 : 'Pepnovo:RnkScr',
-                'CumProb'                : 'Pepnovo:CumProb',
-                'PnvScr'                 : 'Pepnovo:PnvScr',
-                'N-Gap'                  : 'Pepnovo:N-Gap',
-                'C-Gap'                  : 'Pepnovo:C-Gap',
-                '[M+H]'                  : 'Calc mass(Da)',
-                'output_aa_probs'        : 'Pepnovo:aaScore'
+            'omssa_style_1' : {
+                ' Accession' : 'Accession',
+                ' Charge' : 'Charge',
+                ' Defline' : 'proteinacc_start_stop_pre_post_;',
+                ' E-value' : 'OMSSA:evalue',
+                ' Filename/id' : 'Spectrum Title',
+                ' Mass' : 'Exp m/z',
+                ' Mods' : 'Modifications',
+                ' NIST score' : 'NIST score',
+                ' P-value' : 'OMSSA:pvalue',
+                ' Peptide' : 'Sequence',
+                ' Start' : 'Start',
+                ' Stop' : 'Stop',
+                ' Theo Mass' : 'Calc m/z',
+                ' gi' : 'gi',
+                'Spectrum number' : 'Spectrum ID',
+            },
+            'pepnovo_style_1' : {
+                '#Index' : 'Pepnovo:id',
+                'C-Gap' : 'Pepnovo:C-Gap',
+                'CumProb' : 'Pepnovo:CumProb',
+                'N-Gap' : 'Pepnovo:N-Gap',
+                'PnvScr' : 'Pepnovo:PnvScr',
+                'RnkScr' : 'Pepnovo:RnkScr',
+                '[M+H]' : 'Calc mass(Da)',
+                'output_aa_probs' : 'Pepnovo:aaScore',
             },
         },
         'uvalue_type' : "",
@@ -1183,7 +1265,7 @@ ursgal_params = {
         'trigger_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-inst',
-            'novor_style_1' : 'massAnalyzer'
+            'novor_style_1' : 'massAnalyzer',
         },
         'utag' : [
             'scoring',
@@ -1196,10 +1278,10 @@ ursgal_params = {
                 'tof' : '2',
             },
             'novor_style_1' : {
-                'low_res_ltq'            : 'Trap',
-                'high_res_ltq'           : 'Trap',
-                'tof'                    : 'TOF',
-                'q_exactive'             : 'FT',
+                'high_res_ltq' : 'Trap',
+                'low_res_ltq' : 'Trap',
+                'q_exactive' : 'FT',
+                'tof' : 'TOF',
             },
         },
         'uvalue_type' : [
@@ -1209,22 +1291,23 @@ ursgal_params = {
             'tof',
         ],
     },
-    'java_-Xmx' : {
+
+    'intensity_cutoff' : {
         'available_in_unode' : [
-            'msgfplus_v9979',
+            'omssa_2_1_9',
         ],
-        'default_value' : "13312m",
-        'description' :  ''' Set maximum Java heap size (used RAM) ''',
-        'trigger_rerun' : False,
+        'default_value' : 0.0,
+        'description' :  ''' Low intensity cutoff as a fraction of max peak ''',
+        'trigger_rerun' : True,
         'ukey_translation' : {
-            'msgfplus_style_1' : '-Xmx',
+            'omssa_style_1' : '-cl',
         },
         'utag' : [
-            'hardware_resources',
+            'Spectrum',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "str",
+        'uvalue_type' : "float",
     },
     'json_extension' : {
         'available_in_unode' : [
@@ -1248,14 +1331,14 @@ ursgal_params = {
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'myrimatch_2_1_138',
-            'myrimatch_2_1_140',
         ],
         'default_value' : "14N",
         'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
@@ -1263,9 +1346,9 @@ ursgal_params = {
         'ukey_translation' : {
             'msamanda_style_1' : 'label',
             'msgfplus_style_1' : 'label',
-            'omssa_style_1' : '-tem / -tom',
-            'xtandem_style_1' : 'protein, modified residue mass file',
             'myrimatch_style_1' : 'label',
+            'omssa_style_1' : ('-tem', '-tom'),
+            'xtandem_style_1' : 'protein, modified residue mass file',
         },
         'utag' : [
             'Modifications',
@@ -1369,7 +1452,7 @@ ursgal_params = {
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
-        'default_value' : 'all',
+        'default_value' : "all",
         'description' :  ''' Max number of ions in each series being searched (0=all) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1405,6 +1488,7 @@ ursgal_params = {
     },
     'max_output_e_value' : {
         'available_in_unode' : [
+            'omssa_2_1_9',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -1415,11 +1499,12 @@ ursgal_params = {
         'description' :  ''' Highest e-value for reported peptides ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'omssa_style_1' : '-he',
             'xtandem_style_1' : 'output, maximum valid expectation value',
         },
         'utag' : [
-            'output',
-            'scoring',
+            'Output',
+            'Scoring',
         ],
         'uvalue_translation' : {
         },
@@ -1540,14 +1625,14 @@ ursgal_params = {
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
+            'novor_1_1beta',
+            'omssa_2_1_9',
+            'pepnovo_3_1',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'novor_1_1beta',
-            'pepnovo_3_1',
-            'omssa_2_1_9',
         ],
         'default_value' : None,
         'description' :  ''' Path to input .mgf file ''',
@@ -1555,10 +1640,10 @@ ursgal_params = {
         'ukey_translation' : {
             'msamanda_style_1' : 'mgf_input_file',
             'msgfplus_style_1' : '-s',
-            'xtandem_style_1' : 'spectrum, path',
             'novor_style_1' : '-f',
-            'pepnovo_style_1' : '-file',
             'omssa_style_1' : '-fm',
+            'pepnovo_style_1' : '-file',
+            'xtandem_style_1' : 'spectrum, path',
         },
         'utag' : [
             'input',
@@ -1573,7 +1658,7 @@ ursgal_params = {
             'myrimatch_2_1_140',
             'pepnovo_3_1',
         ],
-        'default_value' : 'default',
+        'default_value' : "default",
         'description' :  ''' Lowest score for reported peptides. If set to 'default', default values fo each engine will be used. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -1616,6 +1701,24 @@ ursgal_params = {
         },
         'uvalue_type' : "int",
     },
+    'min_precursor_matches' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 1,
+        'description' :  ''' Minimum number of precursors that match a spectrum. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-pc',
+        },
+        'utag' : [
+            'Precursor',
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
     'mininimal_required_matched_peaks' : {
         'available_in_unode' : [
             'myrimatch_2_1_138',
@@ -1636,7 +1739,8 @@ ursgal_params = {
             'xtandem_style_1' : 'scoring, minimum ion count',
         },
         'utag' : [
-            'Fragment', 'Spectrum'
+            'Fragment',
+            'Spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -1659,8 +1763,8 @@ ursgal_params = {
             'xtandem_style_1' : 'spectrum, minimum peaks',
         },
         'utag' : [
-            'Spectrum',
             'Fragment',
+            'Spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -1673,14 +1777,14 @@ ursgal_params = {
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
+            'novor_1_1beta',
             'omssa_2_1_9',
+            'pepnovo_3_1',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'novor_1_1beta',
-            'pepnovo_3_1',
         ],
         'default_value' : [
             '*,opt,Prot-N-term,Acetyl',
@@ -1718,10 +1822,10 @@ Example:
             'msamanda_style_1' : 'modifications',
             'msgfplus_style_1' : '-mod',
             'myrimatch_style_1' : ('DynamicMods', 'StaticMods'),
-            'omssa_style_1' : ('-mv','mf'),
-            'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
             'novor_style_1' : ('variableModifications', 'fixedModifications'),
-            'pepnovo_style_1' : '-PTMs'
+            'omssa_style_1' : ('-mv', 'mf'),
+            'pepnovo_style_1' : '-PTMs',
+            'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
         },
         'utag' : [
             'Modifications',
@@ -2179,6 +2283,277 @@ Example:
         },
         'uvalue_type' : "int",
     },
+    'omssa_cp' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : True,
+        'description' :  ''' Omssa: eliminate charge reduced precursors in spectra ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-cp',
+        },
+        'utag' : [
+            'Precursor',
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+            'omssa_style_1' : {
+                False : 0,
+                True : 1,
+            },
+        },
+        'uvalue_type' : "bool",
+    },
+    'omssa_h1' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Omssa: number of peaks allowed in single charge window ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-h1',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'omssa_h2' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Omssa: number of peaks allowed in double charge window ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-h2',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'omssa_ht' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 6,
+        'description' :  ''' Omssa: number of m/z values corresponding to the most intense peaks that must include one match to the theoretical peptide ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-ht',
+        },
+        'utag' : [
+            'Spectrum',
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'omssa_mm' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 128,
+        'description' :  ''' Omssa: the maximum number of mass ladders to generate per database peptide ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-mm',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'omssa_ta' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 1.0,
+        'description' :  ''' Omssa: automatic mass tolerance adjustment fraction ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-ta',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'omssa_tex' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 1446.94,
+        'description' :  ''' Omssa: threshold in Da above which the mass of neutron should be added in exact mass search ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-tex',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'omssa_verbose' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : False,
+        'description' :  ''' Omssa: verbose info print ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-ni',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+            'omssa_style_1' : {
+                False : '',
+                True : '-ni',
+            },
+        },
+        'uvalue_type' : "bool",
+    },
+    'omssa_w1' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 27,
+        'description' :  ''' Omssa: single charge window in Da ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-w1',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'omssa_w2' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 14,
+        'description' :  ''' Omssa: double charge window in Da ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-w2',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'omssa_z1' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 0.95,
+        'description' :  ''' Omssa: fraction of peaks below precursor used to determine if spectrum is charge 1 ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-z1',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'omssa_zc' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : True,
+        'description' :  ''' Should charge plus one be determined algorithmically? ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-zc',
+        },
+        'utag' : [
+            'Precursor',
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+            'omssa_style_1' : {
+                False : 0,
+                True : 1,
+            },
+        },
+        'uvalue_type' : "bool",
+    },
+    'omssa_zcc' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Omssa: how should precursor charges be determined?, use a range ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-zcc',
+        },
+        'utag' : [
+            'Precursor',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'omssa_zt' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Minimum precursor charge to start considering multiply charged products ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-zt',
+        },
+        'utag' : [
+            'Precursor',
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'output_aa_probs' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : True,
+        'description' :  ''' Output probabilities for each amino acid. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1' : '-output_aa_probs',
+        },
+        'utag' : [
+            'Output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
     'output_add_features' : {
         'available_in_unode' : [
             'msgfplus_v9979',
@@ -2200,6 +2575,23 @@ Example:
         },
         'uvalue_type' : "bool",
     },
+    'output_cum_probs' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : True,
+        'description' :  ''' Output cumulative probabilities. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1' : '-output_cum_probs',
+        },
+        'utag' : [
+            'Output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
     'output_file_incl_path' : {
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
@@ -2207,8 +2599,13 @@ Example:
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'novor_1_1beta',
+            'omssa_style_1',
+            'pepnovo_3_1',
             'percolator_2_08',
             'qvality_2_02',
             'venndiagram_1_0_0',
@@ -2217,11 +2614,6 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'myrimatch_2_1_138',
-            'myrimatch_2_1_140',
-            'novor_1_1beta',
-            'pepnovo_3_1',
-            'omssa_style_1',
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
@@ -2231,15 +2623,15 @@ Example:
             'merge_csv_style_1' : 'output',
             'msamanda_style_1' : 'output_file_incl_path',
             'msgfplus_style_1' : '-o',
+            'myrimatch_style_1' : 'output_file_incl_path',
             'mzidentml_style_1' : 'output_file_incl_path',
+            'novor_style_1' : 'output_file_incl_path',
+            'omssa_style_1' : 'output_file_incl_path',
+            'pepnovo_style_1' : 'output_file_incl_path',
             'percolator_style_1' : 'output_file_incl_path',
             'qvality_style_1' : '-o',
             'venndiagram_style_1' : 'output_file',
             'xtandem_style_1' : 'output, path',
-            'myrimatch_style_1' : 'output_file_incl_path',
-            'novor_style_1' : 'output_file_incl_path',
-            'pepnovo_style_1' : 'output_file_incl_path',
-            'omssa_style_1' : 'output_file_incl_path',
         },
         'utag' : [
             'output',
@@ -2261,48 +2653,82 @@ Example:
         'description' :  ''' Output file type. If set to 'default', default output file tzpes for each engine are used. Note: not every file type is supported by every engine and usin non-default types might cause problems during conversion to .csv. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'omssa_style_1' : ('-oc', '-ox')
+            'omssa_style_1' : ('-oc', '-ox'),
             'xtandem_style_1' : 'output, mzid',
         },
         'utag' : [
-            'Output'
+            'Output',
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
-                'default' : '-oc',
+                '.csv' : '-oc',
                 '.omx' : '-ox',
-                '.csv'  : '-oc',
+                'default' : '-oc',
             },
             'xtandem_style_1' : {
-                'default' : False,
                 '.mzid' : True,
+                'default' : False,
             },
         },
         'uvalue_type' : [
-            'default',
-            '.omx',
             '.csv',
             '.mzid',
+            '.omx',
+            'default',
         ],
     },
-    'base_mz' : {
+    'output_prm' : {
         'available_in_unode' : [
             'pepnovo_3_1',
-            'omssa_2_1_9',
         ],
-        'default_value' : 1000,
-        'description' :  ''' m/z value that is used as basis for the conversion from ppm to Da''',
+        'default_value' : False,
+        'description' :  ''' Only print spectrum graph nodes with scores. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'omssa_style_1' : 'base_mz',
-            'pepnovo_style_1': 'base_mz',
+            'pepnovo_style_1' : '-prm',
         },
         'utag' : [
-            'Precursor', 'Fragment',
+            'Output',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "bool",
+    },
+    'output_prm_norm' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : False,
+        'description' :  ''' Prints spectrum graph scores after normalization and removal of negative scores. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1' : '-prm_norm',
+        },
+        'utag' : [
+            'Output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'pepnovo_model' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : "CID_IT_TRYP",
+        'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1' : '-model',
+        },
+        'utag' : [
+            'Model',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : [
+            'CID_IT_TRYP',
+        ],
     },
     'pepnovo_model_dir' : {
         'available_in_unode' : [
@@ -2312,7 +2738,7 @@ Example:
         'description' :  ''' Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1 ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'pepnovo_style_1': '-model_dir',
+            'pepnovo_style_1' : '-model_dir',
         },
         'utag' : [
             'Model',
@@ -2326,10 +2752,10 @@ Example:
             'pepnovo_3_1',
         ],
         'default_value' : None,
-        'description' :  '''Returns peptide sequences of the specified length (only lengths 3-6 are allowed) ''',
+        'description' :  ''' Returns peptide sequences of the specified length (only lengths 3-6 are allowed) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'pepnovo_style_1': '-tag_length',
+            'pepnovo_style_1' : '-tag_length',
         },
         'utag' : [
             'peptide',
@@ -2338,157 +2764,42 @@ Example:
         },
         'uvalue_type' : "int",
     },
-    'pepnovo_model' : {
+    'precursor_charge_dependency' : {
         'available_in_unode' : [
-            'pepnovo_3_1',
+            'omssa_2_1_9',
         ],
-        'default_value' : 'CID_IT_TRYP',
-        'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
+        'default_value' : "linear",
+        'description' :  ''' charge dependency of precursor mass tolerance (none or linear) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'pepnovo_style_1': '-model',
-        },
-        'utag' : [
-            'Model',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : ['CID_IT_TRYP'],
-    },
-    'use_spectrum_charge' : {
-        'available_in_unode' : [
-            'pepnovo_3_1',
-        ],
-        'default_value' : True,
-        'description' :  ''' Does not correct precusor charge. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'pepnovo_style_1': '-use_spectrum_charge',
+            'omssa_style_1' : '-tez',
         },
         'utag' : [
             'Precursor',
         ],
         'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
-    },
-    'output_cum_probs' : {
-        'available_in_unode' : [
-            'pepnovo_3_1',
-        ],
-        'default_value' : True,
-        'description' :  ''' Output cumulative probabilities. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'pepnovo_style_1': '-output_cum_probs',
-        },
-        'utag' : [
-            'Output',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
-    },
-    'output_prm' : {
-        'available_in_unode' : [
-            'pepnovo_3_1',
-        ],
-        'default_value' : False,
-        'description' :  '''Only print spectrum graph nodes with scores. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'pepnovo_style_1': '-prm',
-        },
-        'utag' : [
-            'Output',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
-    },
-    'output_prm_norm' : {
-        'available_in_unode' : [
-            'pepnovo_3_1',
-        ],
-        'default_value' : False,
-        'description' :  ''' Prints spectrum graph scores after normalization and removal of negative scores. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'pepnovo_style_1': '-prm_norm',
-        },
-        'utag' : [
-            'Output',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
-    },
-    'output_aa_probs' : {
-        'available_in_unode' : [
-            'pepnovo_3_1',
-        ],
-        'default_value' : True,
-        'description' :  ''' Output probabilities for each amino acid. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'pepnovo_style_1': '-output_aa_probs',
-        },
-        'utag' : [
-            'Output',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
-    },
-    'use_quality_filter' : {
-        'available_in_unode' : [
-            'pepnovo_3_1',
-        ],
-        'default_value' : True,
-        'description' :  ''' Does remove low quality filter. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'pepnovo_style_1': '-no_quality_filter',
-        },
-        'utag' : [
-            'Spectrum',
-        ],
-        'uvalue_translation' : {
-            'pepnovo_style_1' : {
-                True : False,
-                False : True,
+            'omssa_style_1' : {
+                'linear' : 1,
+                'none' : 0,
             },
         },
-        'uvalue_type' : 'bool',
-    },
-    'use_spectrum_mz' : {
-        'available_in_unode' : [
-            'pepnovo_3_1',
+        'uvalue_type' : [
+            'linear',
+            'none',
         ],
-        'default_value' : True,
-        'description' :  ''' Does not correct precusor m/z. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'pepnovo_style_1': '-use_spectrum_mz',
-        },
-        'utag' : [
-            'Precursor',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
     },
     'precursor_isotope_range' : {
         'available_in_unode' : [
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
+            'omssa_2_1_9',
+            'pepnovo_3_1',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'pepnovo_3_1',
         ],
         'default_value' : "0,1",
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
@@ -2496,8 +2807,9 @@ Example:
         'ukey_translation' : {
             'msgfplus_style_1' : '-ti',
             'myrimatch_style_1' : 'MonoisotopeAdjustmentSet',
-            'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
+            'omssa_style_1' : '-ti',
             'pepnovo_style_1' : '-correct_pm',
+            'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
         },
         'utag' : [
             'Precursor',
@@ -2507,6 +2819,11 @@ Example:
                 '0' : '[0,]',
                 '0,1' : '[0,1]',
                 '0,1,2' : '[0,1,2]',
+            },
+            'omssa_style_1' : {
+                '0' : '0',
+                '0,1' : '1',
+                '0,2' : '2',
             },
             'xtandem_style_1' : {
                 '0' : 'no',
@@ -2527,14 +2844,14 @@ Example:
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
+            'novor_1_1beta',
             'omssa_2_1_9',
+            'pepnovo_3_1',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'novor_1_1beta',
-            'pepnovo_3_1',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
@@ -2543,10 +2860,10 @@ Example:
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
-            'omssa_style_1' : '-te',
-            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
             'novor_style_1' : 'precursorErrorTol',
-            'pepnovo_style_1': '-pm_tolerance',
+            'omssa_style_1' : '-te',
+            'pepnovo_style_1' : '-pm_tolerance',
+            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
         },
         'utag' : [
             'precursor',
@@ -2562,14 +2879,14 @@ Example:
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
+            'novor_1_1beta',
             'omssa_2_1_9',
+            'pepnovo_3_1',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'novor_1_1beta',
-            'pepnovo_3_1',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
@@ -2578,10 +2895,10 @@ Example:
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
-            'omssa_style_1' : '-te',
-            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
             'novor_style_1' : 'precursorErrorTol',
-            'pepnovo_style_1': '-pm_tolerance',
+            'omssa_style_1' : '-te',
+            'pepnovo_style_1' : '-pm_tolerance',
+            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
         },
         'utag' : [
             'precursor',
@@ -2595,16 +2912,16 @@ Example:
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msgfplus_v9979',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+            'novor_1_1beta',
             'omssa_2_1_9',
+            'pepnovo_3_1',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'myrimatch_2_1_138',
-            'myrimatch_2_1_140',
-            'novor_1_1beta',
-            'pepnovo_3_1',
         ],
         'default_value' : "ppm",
         'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
@@ -2612,11 +2929,11 @@ Example:
         'ukey_translation' : {
             'msamanda_style_1' : 'ms1_tol unit',
             'msgfplus_style_1' : '-t',
-            'omssa_style_1' : '-teppm',
-            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error units',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
             'novor_style_1' : 'precursorErrorTol',
+            'omssa_style_1' : '-teppm',
             'pepnovo_style_1' : 'precursor_mass_tolerance_unit',
+            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error units',
         },
         'utag' : [
             'precursor',
@@ -2631,15 +2948,15 @@ Example:
             'myrimatch_style_1' : {
                 'da' : 'Da',
             },
-            'xtandem_style_1' : {
-                'da' : 'Daltons',
-            },
             'novor_style_1' : {
                 'da' : 'Da',
             },
             'omssa_style_1' : {
-                'ppm' : '-teppm',
                 'da' : '',
+                'ppm' : '-teppm',
+            },
+            'xtandem_style_1' : {
+                'da' : 'Daltons',
             },
         },
         'uvalue_type' : [
@@ -3039,6 +3356,27 @@ Example:
         },
         'uvalue_type' : "bool",
     },
+    'score_b1_ions' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : False,
+        'description' :  ''' first forward (b1) product ions inclued in search ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-sb1',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+            'omssa_style_1' : {
+                False : '1',
+                True : '0',
+            },
+        },
+        'uvalue_type' : "bool",
+    },
     'score_b_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
@@ -3109,6 +3447,48 @@ Example:
             'xtandem_style_1' : {
                 False : 'no',
                 True : 'yes',
+            },
+        },
+        'uvalue_type' : "bool",
+    },
+    'score_c_terminal_ions' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : True,
+        'description' :  ''' Score c terminal ions ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-sct',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+            'omssa_style_1' : {
+                False : '1',
+                True : '0',
+            },
+        },
+        'uvalue_type' : "bool",
+    },
+    'score_correlation_corr' : {
+        'available_in_unode' : [
+            'omssa_2_1_9',
+        ],
+        'default_value' : True,
+        'description' :  ''' Use correlation correction to score? ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'omssa_style_1' : '-scorr',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+            'omssa_style_1' : {
+                False : 1,
+                True : 0,
             },
         },
         'uvalue_type' : "bool",
@@ -3296,27 +3676,6 @@ Example:
         },
         'uvalue_type' : "bool",
     },
-    'score_c_terminal_ions' : {
-        'available_in_unode' : [
-            'omssa_2_1_9',
-        ],
-        'default_value' : True,
-        'description' :  ''' Score c terminal ions ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'omssa_style_1' : '-sct',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-            'omssa_style_1' : {
-                False : '1',
-                True : '0',
-            },
-        },
-        'uvalue_type' : "bool",
-    },
     'search_engines_create_folders' : {
         'available_in_unode' : [
             'ucontroller',
@@ -3331,27 +3690,6 @@ Example:
             'file_handling',
         ],
         'uvalue_translation' : {
-        },
-        'uvalue_type' : "bool",
-    },
-    'score_b1_ions' : {
-        'available_in_unode' : [
-            'omssa_2_1_9',
-        ],
-        'default_value' : False,
-        'description' :  ''' first forward (b1) product ions inclued in search ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'omssa_style_1' : '-sb1',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-            'omssa_style_1' : {
-                False : '1',
-                True : '0',
-            },
         },
         'uvalue_type' : "bool",
     },
@@ -3401,7 +3739,7 @@ Example:
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-ntt',
             'myrimatch_style_1' : 'MinTerminiCleavages',
-            'omssa_style_1' : '-e',
+            'omssa_style_1' : 'semi_enzyme',
             'xtandem_style_1' : 'protein, cleavage semi',
         },
         'utag' : [
@@ -3532,6 +3870,27 @@ Example:
         },
         'uvalue_type' : "str",
     },
+    'use_quality_filter' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : True,
+        'description' :  ''' Does remove low quality filter. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1' : '-no_quality_filter',
+        },
+        'utag' : [
+            'Spectrum',
+        ],
+        'uvalue_translation' : {
+            'pepnovo_style_1' : {
+                False : True,
+                True : False,
+            },
+        },
+        'uvalue_type' : "bool",
+    },
     'use_refinement' : {
         'available_in_unode' : [
             'xtandem_cyclone_2010',
@@ -3554,6 +3913,40 @@ Example:
                 False : 'no',
                 True : 'yes',
             },
+        },
+        'uvalue_type' : "bool",
+    },
+    'use_spectrum_charge' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : True,
+        'description' :  ''' Does not correct precusor charge. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1' : '-use_spectrum_charge',
+        },
+        'utag' : [
+            'Precursor',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'use_spectrum_mz' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : True,
+        'description' :  ''' Does not correct precusor m/z. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1' : '-use_spectrum_mz',
+        },
+        'utag' : [
+            'Precursor',
+        ],
+        'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
     },
@@ -3614,13 +4007,14 @@ Example:
                 'msamanda_1_0_0_5242' : 0,
                 'msamanda_1_0_0_5243' : 0,
                 'msgfplus_v9979' : 1e-100,
+                'myrimatch_2_1_138' : 0,
+                'myrimatch_2_1_140' : 0,
+                'omssa_2_1_9' : 1e-30,
                 'xtandem_cyclone_2010' : 0,
                 'xtandem_jackhammer' : 0,
                 'xtandem_piledriver' : 0,
                 'xtandem_sledgehammer' : 0,
                 'xtandem_vengeance' : 0,
-                'myrimatch_2_1_138' : 0,
-                'myrimatch_2_1_140' : 0,
             },
         },
         'uvalue_type' : "",
@@ -3631,11 +4025,6 @@ Example:
             'qvality_2_02',
             'ucontroller',
             'unify_csv_1_0_0',
-            # 'xtandem_cyclone_2010',
-            # 'xtandem_jackhammer',
-            # 'xtandem_piledriver',
-            # 'xtandem_sledgehammer',
-            # 'xtandem_vengeance',
         ],
         'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator ''',
@@ -3645,7 +4034,6 @@ Example:
             'qvality_style_1' : 'validation_score_field',
             'ucontroller_style_1' : 'validation_score_field',
             'unify_csv_style_1' : 'validation_score_field',
-            # 'xtandem_style_1' : 'validation_score_field',
         },
         'utag' : [
             'validation',
@@ -3655,61 +4043,61 @@ Example:
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'myrimatch_2_1_140' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
                 'omssa_2_1_9' : 'OMSSA:pvalue',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
                 'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
                 'xtandem_piledriver' : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
-                'myrimatch_2_1_140' : 'MyriMatch:MVH',
-                'myrimatch_2_1_138' : 'MyriMatch:MVH',
-                'novor_1_1beta' : 'Novor:score',
-                'pepnovo_3_1' : 'Pepnovo:PnvScr',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'myrimatch_2_1_140' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
                 'omssa_2_1_9' : 'OMSSA:pvalue',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
                 'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
                 'xtandem_piledriver' : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
-                'myrimatch_2_1_140' : 'MyriMatch:MVH',
-                'myrimatch_2_1_138' : 'MyriMatch:MVH',
-                'novor_1_1beta' : 'Novor:score',
-                'pepnovo_3_1' : 'Pepnovo:PnvScr',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'myrimatch_2_1_140' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
                 'omssa_2_1_9' : 'OMSSA:pvalue',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
                 'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
                 'xtandem_piledriver' : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
-                'myrimatch_2_1_140' : 'MyriMatch:MVH',
-                'myrimatch_2_1_138' : 'MyriMatch:MVH',
-                'novor_1_1beta' : 'Novor:score',
-                'pepnovo_3_1' : 'Pepnovo:PnvScr',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'myrimatch_2_1_140' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
                 'omssa_2_1_9' : 'OMSSA:pvalue',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
                 'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
                 'xtandem_piledriver' : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
-                'myrimatch_2_1_140' : 'MyriMatch:MVH',
-                'myrimatch_2_1_138' : 'MyriMatch:MVH',
-                'novor_1_1beta' : 'Novor:score',
-                'pepnovo_3_1' : 'Pepnovo:PnvScr',
             },
         },
         'uvalue_type' : "",

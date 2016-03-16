@@ -161,6 +161,7 @@ class omssa_2_1_9( ursgal.UNode ):
 
         # building command_list !
         translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+
         blastdb_suffixes = [ '.phr', '.pin', '.psq' ]
         blastdb_present = True
         for blastdb_suffix in blastdb_suffixes:
@@ -185,11 +186,10 @@ class omssa_2_1_9( ursgal.UNode ):
             )
             for line in proc.stdout:
                 print(line.strip().decode('utf'))
-        #
+
         if self.params['label'] == '15N':
-            self.params['omssa_label'] = '2'
-        else:
-            self.params['omssa_label'] = '0'
+            translations['-tem']['precursor_mass_type'] = '2'
+            translations['-tom']['frag_mass_type'] = '2'
 
         # Modifications
         # ------------------------
@@ -240,24 +240,12 @@ class omssa_2_1_9( ursgal.UNode ):
             elif translations['-e']['enzyme'] == '13':
                 translations['-e']['enzyme'] = '24'
 
-        # define the ions to search
-        self.params['omssa_ions_to_search'] = []
-        for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
-            ion_2_add = translations['-i'].get('score_{0}_ions'.format(ion), '')
-            if ion_2_add != '':
-                self.params['omssa_ions_to_search'].append( ion_2_add )
-        self.params['omssa_ions_to_search'] = ','.join(
-            self.params['omssa_ions_to_search']
-        )
-
         if self.params['frag_mass_tolerance_unit'] == 'ppm':
             self.params['frag_mass_tolerance'] = \
                 ursgal.ucore.convert_ppm_to_dalton(
                     self.params['frag_mass_tolerance'],
                     base_mz=self.params['base_mz']
                 )
-
-        # 5ppm precursor error
 
         self.params['omssa_precursor_error'] = (
             float(self.params['precursor_mass_tolerance_plus']) + \
@@ -274,178 +262,81 @@ class omssa_2_1_9( ursgal.UNode ):
             self.params['output_dir_path'],
             self.params['output_file']
         )
-        import pprint
-        pprint.pprint( self.params )
-        pprint.pprint(  self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] )
-        pprint.pprint( translations )
-        print( self.params['omssa_ions_to_search'] )
-        exit(1)
-        exit('break it <<<<')
-        # print( translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] )
-        # exit(1)
-        self.params['command_list'] = [
-            # ---------------------------------------------------------------------
-            # general
-            self.exe,  # path 2 omssa executable
-            # ---------------------------------------------------------------------
-            # changeable params:
-            # --- INPUT: ---
-            '-d', '{database}'.format(**self.params),
-            # path 2 database, has to be processed by formatdb from
-            # BLAST package
-
-            # -- OUTPUT: ---
-            '{output_file_type}'.format(**self.params), '{tmp_output_file_incl_path}'.format(**self.params), # -oc for csv, -ox for omx
-            '-w',
-            # include search spetra and self.params in results,
-            # is required for mzid conversion, if omx is used, but omx files
-            # are huge ...
-            '{num_match_spec_key}'.format(**self.params),
-            '{num_match_spec}'.format(**self.params),
-
-            '{num_hits_retain_spec_key}'.format(**self.params), '{num_hits_retain_spec}'.format(**self.params),
-            # was 30 before, smaller output files?
-            # maximum number of hits retained per precursor charge state per
-            # spectrum during the search
-
-            # --- MODS: ---
-            '-mv', '{opt_mods}'.format(**self.params),
-            # mods, oxidation of M
-            '-mf', '{fixed_mods}'.format(**self.params),
-            # carbamidomethylation, index 3
-
-            # precursor:
-            '-tem', '{omssa_label}'.format(**self.params),
-            # variable, precursor ion search type
-            # (0 = mono, 1 = avg, 2 = N15, 3 = exact, 4 = multiisotope)
-            '-te', '{omssa_precursor_error}'.format(**self.params),
-            # precursor ion m/z tolerance in Da (or ppm if -teppm flag set)
-            '{precursor_mass_tolerance_unit}'.format(**self.params)
-
-            # '-teppm',
-            # search precursor masses in units of ppm - this set above!
-            '{precursor_min_charge_key}'.format(**self.params), '{precursor_min_charge}'.format(**self.params),
-            # minimum precursor charge to search when not 1+
-            '{precursor_max_charge_key}'.format(**self.params), '{precursor_max_charge}'.format(**self.params),
-            # maximum precursor charge max 5
-
-            # PRODUCT
-            '-tom', '{omssa_label}'.format(**self.params),
-            # product ion search type, 14N or 15N
-            '{frag_mass_tolerance_key}'.format(**self.params), '{frag_mass_tolerance}'.format(**self.params),
-            # 20 ppm, QExactive, product ion tolerance
-
-            # --- IONS ---
-            '-i', '{omssa_ions_to_search}'.format(**self.params),
-            # ids of ions to search (comma delimited, no spaces) b and y ions
-
-            # --- ENZYME ---
-            '{enzyme_key}'.format(**self.params), '{enzyme}'.format(**self.params),
-            # enzyme is trypsin-p
-            '{maximum_missed_cleavages_key}'.format(**self.params), '{maximum_missed_cleavages}'.format(**self.params),
-            #  missed cleavages
-            '{min_pep_length_key}'.format(**self.params), '{min_pep_length}'.format(**self.params),
-            # minimum size of peptides for no-enzyme and semi-tryptic searches
-            '{max_pep_length_key}'.format(**self.params), '{max_pep_length}'.format(**self.params),
-            # sGUI has 30,maximum size of peptides for no-enzyme and
-            # semi-tryptic searches (0=none)
-
-            # --- COMPUTATIONAL AND SPEED ---
-            '{cpu_key}'.format(**self.params), '{cpus}'.format(**self.params),
-            # number of horses
-
-            # --- SPECTRUM ---
-            '{mininimal_required_observed_peaks_key}'.format(**self.params), '{mininimal_required_observed_peaks}'.format(**self.params),
-            # the minimum number of m/z values a spectrum must have to be
-            # searched
-
-            # --- SCORING ---
-            '{mininimal_required_matched_peaks_key}'.format(**self.params), '{mininimal_required_matched_peaks}'.format(**self.params),
-            # the minimum number of m/z matches a sequence library peptide must
-            # have for the hit to the peptide to be recorded
-
-            # ---------------------------------------------------------------------
-            # the following parameters are not changeable, e.g. default
-            # protein/taxon
-            '-x', '{database_taxonomy}'.format(**self.params),  # default, all taxids, we dont want to change this
-
-            # ions
-            '{score_c_terminal_ions_key}'.format(**self.params), '{score_c_terminal_ions}'.format(**self.params),   # search c terminal ions?, same as sGUI default, 0=yes, 1=no
-            '{score_b1_ions_key}'.format(**self.params), '{score_b1_ions}'.format(**self.params),   # should first forward (b1) product ions be in search (1=no)
-            '{max_num_of_ions_per_series_to_search_key}', '{max_num_of_ions_per_series_to_search}'.format(**self.params),  # max number of ions in each series being searched (0=all)
-
-            # precursor
-            '-z1', '{z1}'.format(**self.params),  # default, fraction of peaks below precursor used to determine if spectrum is charge 1
-            '-zcc', '{zcc}'.format(**self.params),  # how should precursor charges be determined?, use a range
-            '-tez', '{tez}'.format(**self.params),  # defautl is 0 (disabled), charge dependency of precursor mass tolerance (0 = none, 1 = linear)
-            '-pc', '{pc}'.format(**self.params),  # minimum number of precursors that match a spectrum
-            '-ti', '{precursor_isotope_range}'.format(**self.params),  # anticipate carbon isotope parent ion assignment errors
-
-            # product
-            '-zoh', '{zoh}'.format(**self.params),  # maximum product charge to search, default is 2, sGUI:2
-            '-zt', '{zt}'.format(**self.params),  # default,minimum precursor charge to start considering multiply charged products
-
-            # charge
-            '-zc', '{zc}'.format(**self.params),  # should charge plus one be determined algorithmically? (1=yes)
-
-            # scoring
-            '-scorr', '{scorr}'.format(**self.params),  # turn off correlation correction to score (1=off, 0=use correlation)
-            '-scorp', '{scorp}'.format(**self.params),  # sam as sGUI, probability of consecutive ion (used in correlation correction)
-            '-he', '{he}'.format(**self.params),  # the maximum evalue allowed in the hit list, cant find in search GUI
-
-            # spectrum
-            '-ht', '{ht}'.format(**self.params),  # number of m/z values corresponding to the most intense peaks that must include one match to the theoretical peptide
-            '-cl', '{cl}'.format(**self.params),  # low intensity cutoff as a fraction of max peak,
-            '-cp', '{cp}'.format(**self.params),  # eliminate charge reduced precursors in spectra (0=no, 1=yes)
-
-
-            # window
-            '-h2', '{h2}'.format(**self.params),  # number of peaks allowed in double charge window
-            '-h1', '{h1}'.format(**self.params),  # number of peaks allowed in single charge window (0 = number of ion species)
-            '-w1', '{w1}'.format(**self.params),  # default is 27, also in sGUI, single charge window in Da
-            '-w2', '{w2}'.format(**self.params),  # double charge window in Da, default
-
-            # mass
-            '-ta', '{ta}'.format(**self.params),  # default value, cant find in sGUI self.params, automatic mass tolerance adjustment fraction
-            '-tex', '{tex}'.format(**self.params),  # threshold in Da above which the mass of neutron should be added in exact   mass search
-            '-mm', '{mm}'.format(**self.params),  # the maximum number of mass ladders to generate per database peptide
-
-            # '-ni', #verbose info print
-        ]
-
-        # input
         self.params['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
+        translations['-fm']['mgf_input_file'] = self.params['mgf_input_file']
+
         assert os.path.exists( self.params['mgf_input_file']  ), '''
         OMSSA requires .mgf input (which should have been generated
         automatically ...)
         '''
-        self.params['command_list'].append( '-fm')
-        self.params['command_list'].append( self.params['mgf_input_file'] )
 
-        # if self.params['precursor_mass_tolerance_unit'] == 'ppm':
-        #     self.params['command_list'].append('-teppm')
-        # else:
-        #     pass #without this flag dalton is used
+        self.params['command_list'] = [
+            self.exe,  # path 2 omssa executable
+            '-w',
+        ]
+
+        for translated_key, translation_dict in translations.items():
+            translated_value = str(list(translation_dict.values())[0])
+            if translated_key == ('-oc', '-ox'):
+                self.params['command_list'].extend( (translated_value, self.params['tmp_output_file_incl_path']) )
+                continue
+            elif translated_key == '-te':
+                self.params['command_list'].extend( (translated_key, str(self.params['omssa_precursor_error'])) )
+                continue
+            elif translated_key in ['-teppm', '-ni']:
+                if translated_value != '':
+                    self.params['command_list'].append(translated_value)
+                else:
+                    continue
+            elif translated_key == ('-mv', 'mf'):
+                if self.params['opt_mods'] != '':
+                    self.params['command_list'].extend( ('-mv', self.params['opt_mods']) )
+                if self.params['fixed_mods'] != '':  
+                    self.params['command_list'].extend( ('-mf', self.params['fixed_mods']) )
+                continue
+            elif translated_key == '-i':
+                ions_2_add = []
+                for k, v in translations['-i'].items():
+                    if v != '':
+                        ions_2_add.append(v)
+                self.params['command_list'].extend( ('-i', ','.join(sorted(ions_2_add)) ) )
+                continue
+            elif translated_key in [
+                ('-tem','-tom'),
+                'label',
+                'semi_enzyme',
+                'base_mz',
+                'header_translations',
+                'frag_mass_tolerance_unit',
+                'decoy_tag',
+            ]:
+                continue
+            elif len(translation_dict) == 1:
+                self.params['command_list'].extend( (translated_key, translated_value) )
+            else:
+                print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
+                print(translation_dict)
+                exit(1)
 
     def postflight( self ):
         '''
         Will correct the OMSSA headers and add the column retention time to the
         csv file
         '''
-        # exit()
         cached_omssa_output = []
         result_file = open( self.params['tmp_output_file_incl_path'], 'r')
         csv_dict_reader_object = csv.DictReader(
             row for row in result_file if not row.startswith('#')
         )
         headers = csv_dict_reader_object.fieldnames
+        header_translations = self.TRANSLATIONS['header_translations']['uvalue_style_translation']
         translated_headers = []
         for header in headers:
             translated_headers.append(
-                self.USEARCH_PARAM_VALUE_TRANSLATIONS.get(header, header)
+                header_translations.get(header, header)
             )
         translated_headers += [
             'Is decoy',
@@ -471,7 +362,7 @@ class omssa_2_1_9( ursgal.UNode ):
         for m in cached_omssa_output:
             tmp = {}
             for header in headers:
-                translated_header = self.USEARCH_PARAM_VALUE_TRANSLATIONS.get(
+                translated_header = header_translations.get(
                     header,
                     header
                 )
@@ -520,7 +411,6 @@ class omssa_2_1_9( ursgal.UNode ):
                     else:
                         already_seen_protein_scan_start_stop_combos.add(protein_scan_start_stop)
 
-
                     tmp['Start'] = start
                     tmp['Stop'] = stop
 
@@ -531,8 +421,6 @@ class omssa_2_1_9( ursgal.UNode ):
                         pre_aa,
                         post_aa
                     )
-
-
 
                     if self.params['decoy_tag'] in tmp['proteinacc_start_stop_pre_post_;']:
                         tmp['Is decoy'] = 'true'
