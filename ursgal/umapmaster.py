@@ -78,7 +78,7 @@ class UParamMapper( dict ):
             else:
                 translated_value = sup['default_value']
 
-            if '_uevaluation_req' in sup['uvalue_type']:
+            if '_uevaluation_req' in sup.get('uvalue_type',''):
                 re_evaluated_value = self._eval_default_value(
                     uparam,
                     translated_value
