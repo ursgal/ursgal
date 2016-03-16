@@ -39,8 +39,8 @@ def main(folder=None, profile=None, target_decoy_database=None):
     search_engines  = [
         'omssa',
         'xtandem_vengeance',
-        # 'msgf',
-        # 'msamanda_1_0_0_5243',
+        'msgf',
+        'msamanda_1_0_0_5243',
         'myrimatch_2_1_138',
     ]
 
@@ -51,7 +51,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
 
     # Modifications that should be included in the search
     all_mods = [
-        # 'C,fix,any,Carbamidomethyl',
+        'C,fix,any,Carbamidomethyl',
         'M,opt,any,Oxidation',
         # 'N,opt,any,Deamidated',
         # 'Q,opt,any,Deamidated',

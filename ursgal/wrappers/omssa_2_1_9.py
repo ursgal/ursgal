@@ -241,7 +241,7 @@ class omssa_2_1_9( ursgal.UNode ):
                 translations['-e']['enzyme'] = '24'
 
         if self.params['frag_mass_tolerance_unit'] == 'ppm':
-            self.params['frag_mass_tolerance'] = \
+            translations['-to']['frag_mass_tolerance'] = \
                 ursgal.ucore.convert_ppm_to_dalton(
                     self.params['frag_mass_tolerance'],
                     base_mz=self.params['base_mz']
