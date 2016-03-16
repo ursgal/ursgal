@@ -39,11 +39,11 @@
 	    # We specify all search engines and validation engines that we want to use in a list
 	    # (version numbers might differ on windows or mac):
 	    search_engines  = [
-	        # 'omssa',
-	        # 'xtandem_piledriver',
+	        'omssa',
+	        'xtandem_vengeance',
 	        'msgf',
 	        'msamanda_1_0_0_5243',
-	        # 'myrimatch_2_1_138',
+	        'myrimatch_2_1_138',
 	    ]
 	
 	    validation_engines = [
@@ -53,7 +53,7 @@
 	
 	    # Modifications that should be included in the search
 	    all_mods = [
-	        # 'C,fix,any,Carbamidomethyl',
+	        'C,fix,any,Carbamidomethyl',
 	        'M,opt,any,Oxidation',
 	        # 'N,opt,any,Deamidated',
 	        # 'Q,opt,any,Deamidated',

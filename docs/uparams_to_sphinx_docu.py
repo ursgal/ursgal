@@ -41,6 +41,8 @@ def determine_longest_string( fdict ):
             pass
         elif isinstance(value, int):
             pass
+        elif isinstance(value, tuple):
+            pass
         else:
             if len(value) > len_longest:
                 len_longest = len(value)
@@ -113,7 +115,11 @@ Ursgal value translations for *{0}*
         uprint( fmt.format('Style', 'Translation', width=len_longest))
         uprint( fmt.format(*delimiter_text, width=len_longest))
         for style, translation in sorted(udict['ukey_translation'].items()):
-            uprint( fmt.format(style, translation, width=len_longest))
+            try:
+                uprint( fmt.format(style, '{0}'.format(translation), width=len_longest))
+            except:
+                print( fmt , style, translation, len_longest )
+                exit(1)
         uprint( fmt.format(*delimiter_text, width=len_longest))
 
         if len( udict['uvalue_translation'] ) == 0:
