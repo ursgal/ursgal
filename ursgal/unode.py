@@ -14,7 +14,6 @@ import subprocess
 import re
 import pprint
 import gzip
-import multiprocessing
 
 
 class Meta_UNode(type):
@@ -241,19 +240,9 @@ class UNode(object, metaclass=Meta_UNode):
         self.postflight_answer   = None
         self.dependencies_ok     = True
         #self.loaded_json = False  # not used?
-        self._eval_functions = {
-            'cpus' : {
-                'max'     : multiprocessing.cpu_count(),
-                'max - 1' : multiprocessing.cpu_count() - 1,
-            }
-        }
 
-    def _eval_default_value( self, ukey, uvalue ):
-        rvalue = None
-        if ukey in self._eval_functions.keys():
-            if uvalue in self._eval_functions[ ukey ].keys():
-                rvalue = self._eval_functions[ ukey ][ uvalue ]
-        return rvalue
+
+
 
     def _regenerate_default_stats( self ):
         stats = {
