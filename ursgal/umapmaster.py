@@ -10,6 +10,7 @@
 import ursgal
 from ursgal.uparams import ursgal_params as urgsal_dict
 from collections import defaultdict as ddict
+import multiprocessing
 
 
 class UParamMapper( dict ):
@@ -33,10 +34,23 @@ class UParamMapper( dict ):
 
         self.update( params_dict )
         self.lookup = self.group_styles()
+        self._eval_functions = {
+            'cpus' : {
+                'max'     : multiprocessing.cpu_count(),
+                'max - 1' : multiprocessing.cpu_count() - 1,
+            }
+        }
 
     def _assert_engine(self, engine):
         assert engine is not None, 'must define engine!'
         return
+
+    def _eval_default_value( self, ukey, uvalue ):
+        rvalue = None
+        if ukey in self._eval_functions.keys():
+            if uvalue in self._eval_functions[ ukey ].keys():
+                rvalue = self._eval_functions[ ukey ][ uvalue ]
+        return rvalue
 
     def mapping_dicts( self, engine_or_engine_style):
         '''yields all mapping dicts'''
@@ -63,6 +77,15 @@ class UParamMapper( dict ):
                 )
             else:
                 translated_value = sup['default_value']
+
+            if '_uevaluation_req' in sup['uvalue_type']:
+                re_evaluated_value = self._eval_default_value(
+                    uparam,
+                    translated_value
+                )
+                if re_evaluated_value is not None:
+                    translated_value = re_evaluated_value
+
             yield {
                 'style'                    : style,
                 'ukey'                     : uparam,

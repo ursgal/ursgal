@@ -98,6 +98,7 @@ class UController(ursgal.UNode):
         self.determine_availability_of_unodes()
         # verbose = kwargs.get('verbose', True)
         self.show_unode_overview()
+
         # input_file = kwargs.get('input_file', None)
         # if input_file is not None:
         #     self.set_target( kwargs['input_file'] )

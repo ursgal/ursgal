@@ -313,22 +313,25 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'ucontroller',
         ],
-        'default_value' : 4,
-        'description' :  ''' Number of used cpus/threads ''',
+        'default_value' : 'max - 1',
+        # but will be evaluated during meta node init
+        'description' : ''' Number of used cpus/threads ''',
         'trigger_rerun' : False,
         'ukey_translation' : {
             'msgfplus_style_1' : '-thread',
             'myrimatch_style_1' : '-cpus',
             'omssa_style_1' : '-nt',
             'xtandem_style_1' : 'spectrum, threads',
+            'ucontroller_style_1': 'cpus'
         },
         'utag' : [
             'hardware_resources',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "int _uevaluation_req",
     },
     'csv_filter_rules' : {
         'available_in_unode' : [
