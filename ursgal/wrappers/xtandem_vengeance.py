@@ -382,7 +382,7 @@ class xtandem_vengeance( ursgal.UNode ):
     <note type="input" label="output, results">all</note>
     <note type="input" label="output, maximum valid expectation value">{max_output_e_value}</note>
     <note type="input" label="output, histogram column width">30</note>
-    <note type="input" label="output, mzid">{output_mzid}</note>
+    <note type="input" label="output, mzid">{output_file_type}</note>
     </bioml>'''.format(**self.params)
             }
         return templates

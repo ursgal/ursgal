@@ -295,7 +295,7 @@ class omssa_2_1_9( ursgal.UNode ):
             # BLAST package
 
             # -- OUTPUT: ---
-            '{omssa_output_type}'.format(**self.params), '{tmp_output_file_incl_path}'.format(**self.params), # -oc for csv, -ox for omx
+            '{output_file_type}'.format(**self.params), '{tmp_output_file_incl_path}'.format(**self.params), # -oc for csv, -ox for omx
             '-w',
             # include search spetra and self.params in results,
             # is required for mzid conversion, if omx is used, but omx files
@@ -320,6 +320,7 @@ class omssa_2_1_9( ursgal.UNode ):
             # (0 = mono, 1 = avg, 2 = N15, 3 = exact, 4 = multiisotope)
             '-te', '{omssa_precursor_error}'.format(**self.params),
             # precursor ion m/z tolerance in Da (or ppm if -teppm flag set)
+            '{precursor_mass_tolerance_unit}'.format(**self.params)
 
             # '-teppm',
             # search precursor masses in units of ppm - this set above!
@@ -366,11 +367,11 @@ class omssa_2_1_9( ursgal.UNode ):
             # ---------------------------------------------------------------------
             # the following parameters are not changeable, e.g. default
             # protein/taxon
-            '-x', '{x}'.format(**self.params),  # default, all taxids, we dont want to change this
+            '-x', '{database_taxonomy}'.format(**self.params),  # default, all taxids, we dont want to change this
 
             # ions
-            '{search_c_terminal_ions_key}'.format(**self.params), '{search_c_terminal_ions}'.format(**self.params),   # search c terminal ions?, same as sGUI default, 0=yes, 1=no
-            '{search_for_b1_ions_key}'.format(**self.params), '{search_for_b1_ions}'.format(**self.params),   # should first forward (b1) product ions be in search (1=no)
+            '{score_c_terminal_ions_key}'.format(**self.params), '{score_c_terminal_ions}'.format(**self.params),   # search c terminal ions?, same as sGUI default, 0=yes, 1=no
+            '{score_b1_ions_key}'.format(**self.params), '{score_b1_ions}'.format(**self.params),   # should first forward (b1) product ions be in search (1=no)
             '{max_num_of_ions_per_series_to_search_key}', '{max_num_of_ions_per_series_to_search}'.format(**self.params),  # max number of ions in each series being searched (0=all)
 
             # precursor
@@ -424,10 +425,10 @@ class omssa_2_1_9( ursgal.UNode ):
         self.params['command_list'].append( '-fm')
         self.params['command_list'].append( self.params['mgf_input_file'] )
 
-        if self.params['precursor_mass_tolerance_unit'] == 'ppm':
-            self.params['command_list'].append('-teppm')
-        else:
-            pass #without this flag dalton is used
+        # if self.params['precursor_mass_tolerance_unit'] == 'ppm':
+        #     self.params['command_list'].append('-teppm')
+        # else:
+        #     pass #without this flag dalton is used
 
     def postflight( self ):
         '''

@@ -300,7 +300,7 @@ class xtandem_piledriver( ursgal.UNode ):
         Protein general
 
     </note>
-    <note type="input" label="protein, taxon">all</note>
+    <note type="input" label="protein, taxon">{database_taxonomy}</note>
     <note type="input" label="protein, cleavage site">{enzyme}</note>
     <note type="input" label="protein, cleavage C-terminal mass change">{cleavage_cterm_mass_change}</note>
     <note type="input" label="protein, cleavage N-terminal mass change">{cleavage_nterm_mass_change}</note>
@@ -356,7 +356,7 @@ class xtandem_piledriver( ursgal.UNode ):
     <note type="input" label="output, results">all</note>
     <note type="input" label="output, maximum valid expectation value">{max_output_e_value}</note>
     <note type="input" label="output, histogram column width">30</note>
-    <note type="input" label="output, mzid">no</note>
+    <note type="input" label="output, mzid">{output_file_type}</note>
     </bioml>'''.format(**self.params)
             }
         return templates
