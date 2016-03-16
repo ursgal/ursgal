@@ -1,0 +1,4 @@
+Spectrum ID,Spectrum Title,Retention Time (s),Charge,Sequence,Modifications,proteinacc_start_stop_pre_post_;,Is decoy,,Expected Spectrum ID,Expected Spectrum Title,Expected Retention Time (s),Expected Modifications,Expected Is decoy
+,BSA1.2458.2458.3 RTINSECONDS=1554.4921875,,3,SHCIAEVEK,57.02147:3,decoy_A_1_5_K_T;,True,,2458,BSA1.2458.2458.3,1554.4921875,Carbamidomethyl:3,True
+,BSA1.2506.2506.3 RTINSECONDS=1682.93103027344,,3,SACDCTCHDGGTR,57.02147:3;57.02147:5;57.02147:7;42.01057:1,B_1_5_K_T;,True,,2506,BSA1.2506.2506.3,1682.9310302734,Acetyl:0;Carbamidomethyl:3;Carbamidomethyl:5;Carbamidomethyl:7,False
+,BSA1.2532.2532.2 RTINSECONDS=1717.00671386719,,2,MMTAADERR,15.99492:1;15.99492:2;42.01057:1,C_1_5_K_T;,True,,2532,BSA1.2532.2532.2,1717.0067138672,Acetyl:0;Oxidation:1;Oxidation:2,False

@@ -1,0 +1,49 @@
+.. _available-engines:
+
+Available Search Engines
+========================
+
+MS Amanda
+-------------------
+
+.. autoclass:: ursgal.engines.msamanda_1_0_0_5242.msamanda_1_0_0_5242
+   :members:
+
+.. autoclass:: ursgal.engines.msamanda_1_0_0_5243.msamanda_1_0_0_5243
+   :members:
+
+MS-GF+
+-----------
+
+.. autoclass:: ursgal.engines.msgfplus_v9979.msgfplus_v9979
+   :members:
+
+MyriMatch
+-----------------
+
+.. autoclass:: ursgal.engines.myrimatch_2_1_138.myrimatch_2_1_138
+   :members:
+
+.. autoclass:: ursgal.engines.myrimatch_2_2_140.myrimatch_2_2_140
+   :members:
+
+OMSSA
+-----------
+
+.. autoclass:: ursgal.engines.omssa_2_1_9.omssa_2_1_9
+   :members:
+
+X!Tandem
+---------------------
+
+.. autoclass:: ursgal.engines.xtandem_cyclone_2010.xtandem_cyclone_2010
+   :members:
+
+.. autoclass:: ursgal.engines.xtandem_jackhammer.xtandem_jackhammer
+   :members:
+
+.. autoclass:: ursgal.engines.xtandem_piledriver.xtandem_piledriver
+   :members:
+
+.. autoclass:: ursgal.engines.xtandem_sledgehammer.xtandem_sledgehammer
+   :members:

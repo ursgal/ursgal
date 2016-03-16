@@ -1,0 +1,120 @@
+.. ursgal documentation master file, created by
+   sphinx-quickstart on Mon Sep 14 09:56:34 2015.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to ursgal's documentation!
+===================================
+The latest Documentation was generated on: |today|
+
+.. toctree::
+   :maxdepth: 2
+
+   intro
+
+
+Quick Start Tutorial
+--------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   quick_start
+
+
+Contents
+========
+
+.. toctree::
+   :maxdepth: 1
+
+   ucontroller
+   unode
+   ucore
+   chemical_compositions
+   unimod_mapper
+
+
+Engines
+=======
+
+Ursgal allows existing programs to be incorporated with ease. We call those
+programs or scripts engines. Currently ursgal comes with these engines:
+
+Included engines
+----------------
+.. toctree::
+   :maxdepth: 2
+
+   available_engines
+   available_de_novo_engines
+   other_engines
+   general_structure
+
+How to extend and create new engines ?
+--------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   create_your_own_engine
+
+
+Parameter
+=========
+
+A detailed excel-sheet of parameters can be found here: /ursgal/docs/source/ursgal_params.xls
+
+.. toctree::
+   :maxdepth: 2
+
+   parameter
+
+
+
+Examples
+========
+
+Ursgal comes with mupltiple example script which can be used to test the
+fucntionality and can be used as templates for own scripts.
+
+.. toctree::
+   :maxdepth: 2
+
+   example_scripts
+
+Changelog
+=========
+
+Record of released Ursgal versions with all notable changes
+
+.. toctree::
+   :maxdepth: 1
+
+   changelog
+
+
+
+FAQ
+===
+
+.. toctree::
+   :maxdepth: 1
+
+   faq
+
+
+Known Issues
+============
+
+.. toctree::
+   :maxdepth: 1
+
+   known_issues
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+Changelog
+=========
+
+Version 0.3.4 (02.2016)
+^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Implementation of de novo search engines: Novor, PepNovo
+#. X!Tandem version Vengeance included
