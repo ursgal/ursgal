@@ -1,0 +1,11 @@
+.. ucontroller:
+
+.. default-domain:: py
+
+###########
+UController
+###########
+
+.. autoclass:: ursgal.ucontroller.UController
+   :members:
+

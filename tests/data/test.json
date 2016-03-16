@@ -1,0 +1,146 @@
+[
+  {
+    "batch_size": "100000",
+    "cleavage_cterm_mass_change": "+17.00305",
+    "cleavage_nterm_mass_change": "+1.00794",
+    "compensate_small_fasta": false,
+    "compress_after_post_flight": false,
+    "compress_ext_exculsion": [
+      ".csv"
+    ],
+    "compress_output": false,
+    "cpus": 7,
+    "database": "/Volumes/YesInDeed.fasta",
+    "decoy_tag": "decoy_",
+    "del_from_params_before_json_dump": [
+      "grouped_psms"
+    ],
+    "enzyme": "trypsin",
+    "executable_path": "/Volumes/Chompski/tests/ursgal/__init__.py",
+    "file_info": {
+      "file_root": "JB_18072012_2-3_A_pH5",
+      "input_dir_path": "/Volumes/Chompski/tests",
+      "input_file": "JB_18072012_2-3_A_pH5.mzML.gz",
+      "input_file_extention": ".mzML",
+      "input_full": "/Volumes/Chompski/tests/JB_18072012_2-3_A_pH5.mzML.gz",
+      "input_is_compressed": true,
+      "input_json": "JB_18072012_2-3_A_pH5.mzML.gz.us.json",
+      "input_json_exists": true,
+      "output_dir_path": "/Volumes/Chompski/tests",
+      "output_file": "/Volumes/Chompski/tests/JB_18072012_2-3_A_pH5.mgf",
+      "output_json": "/Volumes/Chompski/tests/JB_18072012_2-3_A_pH5.mgf.us.json",
+      "output_json_exists": true,
+      "scan_rt_lookup_path": "/Volumes/Chompski/tests/_ursgal_lookup.pkl"
+    },
+    "force": false,
+    "frag_mass_tolerance": 20,
+    "frag_mass_tolerance_unit": "ppm",
+    "frag_mass_type": "monoisotopic",
+    "frag_method": "hcd",
+    "frag_min_mz": "150",
+    "ident_csv_suffix": "idents.csv",
+    "input_file_type": null,
+    "instrument": "high_res_LTQ",
+    "java_-Xmx": "13312m",
+    "label": "14N",
+    "log_enabled": false,
+    "log_file_name": null,
+    "max_pep_length": 40,
+    "maximal_accounted_observed_peaks": "50",
+    "maximum_missed_cleavages": 2,
+    "maximum_pep_for_ident_csv": 0.1,
+    "min_pep_length": 6,
+    "mininimal_required_matched_peaks": "4",
+    "mininimal_required_observed_peaks": "5",
+    "modifications": [
+      "M,opt,any,Oxidation",
+      "C,fix,any,Carbamidomethyl",
+      "*,opt,Prot-N-term,Acetyl"
+    ],
+    "multi_engine_csv_suffix": "summary.csv",
+    "mzidentml_converter_version": "mzidentml_lib_1_6_10",
+    "mzml2mgf_converter_version": "mzml2mgf_1_0_0",
+    "neutral_loss_enabled": false,
+    "neutral_loss_mass": "0",
+    "neutral_loss_window": "0",
+    "noise_suppression_enabled": false,
+    "num_match_spec": 10,
+    "number_of_i_decimals": 3,
+    "number_of_mz_decimals": 5,
+    "output_file_type": null,
+    "output_suffix": "",
+    "precursor_isotope_range": "0,1",
+    "precursor_mass_tolerance_minus": 5,
+    "precursor_mass_tolerance_plus": 5,
+    "precursor_mass_tolerance_unit": "ppm",
+    "precursor_mass_type": "monoisotopic",
+    "precursor_max_charge": 5,
+    "precursor_min_charge": 1,
+    "precursor_min_mass": 400,
+    "raw_ident_csv_suffix": ".csv",
+    "remove_temporary_files": true,
+    "rm_config_files": false,
+    "rm_tmp_files": false,
+    "score_-h2o_ions": false,
+    "score_-nh3_ions": false,
+    "score_a_ions": true,
+    "score_b_ions": true,
+    "score_c_ions": false,
+    "score_imm_ions": false,
+    "score_int_ions": false,
+    "score_x_ions": false,
+    "score_y_ions": true,
+    "score_z+1_ions": false,
+    "score_z+2_ions": false,
+    "score_z_ions": false,
+    "search_engines_create_folders": true,
+    "semi_enzyme": false,
+    "show_unodes_in_development": false,
+    "spec_dynamic_range": 10000,
+    "stp_bias": false,
+    "validated_ident_csv_suffix": "validated.csv"
+  },
+  {
+    "history": [
+      {
+        "engine": "ucontroller",
+        "file_info": {
+          "file_root": "JB_18072012_2-3_A_pH5",
+          "input_dir_path": "/Volumes/Chompski/tests",
+          "input_file": "JB_18072012_2-3_A_pH5.mzML.gz",
+          "input_file_extention": ".mzML",
+          "input_full": "/Volumes/Chompski/tests/JB_18072012_2-3_A_pH5.mzML.gz",
+          "input_is_compressed": true,
+          "input_json": "JB_18072012_2-3_A_pH5.mzML.gz.us.json",
+          "input_json_exists": false,
+          "output_dir_path": "/Volumes/Chompski/tests",
+          "output_file": "JB_18072012_2-3_A_pH5.mzML.gz",
+          "output_json": "JB_18072012_2-3_A_pH5.mzML.gz.us.json",
+          "output_json_exists": false,
+          "scan_rt_lookup_path": "/Volumes/Chompski/tests/_ursgal_lookup.pkl"
+        },
+        "input_md5": "79a52272cf021c_____430e0c1f12429",
+        "meta": {
+          "engine_type": {
+            "controller": true,
+            "converter": false,
+            "meta_engine": false,
+            "search_engine": false,
+            "validation_engine": false
+          },
+          "included_engine_name_in_filename": false
+        },
+        "startups": [],
+        "status": "completed"
+      }
+    ],
+    "processed_files": {},
+    "startup": [],
+    "status": "idle",
+    "time_points": {
+      "init": {
+        "start": 1441902161.593784
+      }
+    }
+  }
+]
