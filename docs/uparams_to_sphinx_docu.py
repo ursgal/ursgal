@@ -12,7 +12,7 @@ _table_headers = ['style', 'translation', 'translated value', 'ursgal value']
 
 minimal_width = max([ len(t) for t in _table_headers])
 
-PARAMS_FILE = open('source/parameter_new.txt', 'w')
+PARAMS_FILE = open('source/parameter.txt', 'w')
 
 def create_format_string( number_of_columns = 1 ):
     fmt = ''
@@ -74,8 +74,11 @@ Ursgal to Engine Parameters overview
         # if len(udict['available_in_unode']) <= 5:
         #     continue
         uprint('''
+.. raw:: html
 
-[ uparam ] {0}
+      <hr />
+
+{0}
 {1}
 
 

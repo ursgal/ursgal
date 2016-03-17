@@ -3,8 +3,12 @@
 General Structure
 =================
 
-Each UNode requires a **resource**, **knowledge base (kb)** and **engine** file to
-be declared properly (see Schematic Overview A below).
+Each UNode requires a **resource** and a **wrapper** file
+be declared properly. Additionally, the Unode parameters have to be
+declared in the ursgal/**uparams.py** file, which holds the grouped and universal
+ursgal parameters including specific translations to the different engine
+parameters, their description, default values and value types
+(see Schematic Overview A below).
 
 Schematic Overview
 ------------------
@@ -20,10 +24,12 @@ The **resources/** directory contains the main code of each UNode, i.e.:
 
     #.  executables (i.e. .exe or .jar)
     #.  standalone Python scripts
+    #.  any additional files that are required by the engine
 
-Compared to the original standalone applications, this code is completely
+Compared to the original standalone applications, the folder structure is
 unchanged. Integration into Ursgal is achieved by Python wrappers around
-the executables ("engines", see below) and a knowledgebase ("kb", see below).
+the executables ("wrappers", see below) and entries in the general
+**ursgal/uparams.py** file.
 The resources directory path depends on the platform dependencies of
 the UNode:
 
@@ -35,76 +41,40 @@ the UNode:
         conventions, **but all lowercase**. For more details in the naming
         convention see `PEP 3131`_.
 
-Knowledge base (kb)
---------------
-
-Each engine has to have a knowledge base file located in
-<installation path of ursgal>\ **/kb/**, ( e.g. ursgal/kb/mzml2mgf_1_0_0.py).
-The kb contains such as default parameters, parameter translations and
-valid input file types of the UNode. This information is stored in Python
-dictionaries such as META_INFO ::
-
-    META_INFO = {
-        'engine_type' : {
-            'search_engine' : True,
-        },
-        'output_suffix'             : '.xml',
-        'input_types'               : ['.mgf'],
-        'create_own_folder'         : True,
-        'include_engine_in_name'    : True,
-        'engine': {
-            'darwin' : {
-                '64bit' : {
-                    'exe'            : 'tandem',
-                    'url'            : '',
-                    'zip_md5'        : '261dce3746481d1cc4223bccb6bf265e',
-                    'additional_exe' : [],
-                },
-            },
-            'linux' : {
-                '64bit' : {
-                    'exe'            : 'tandem.exe',
-                    'url'            : '',
-                    'zip_md5'        : 'af307fea9f2b954f1a9a3652c14a5742',
-                    'additional_exe' : [],
-                },
-            },
-            'win32' : {
-                '64bit' : {
-                    'exe'            : 'tandem.exe',
-                    'url'            : '',
-                    'zip_md5'        : '16c3b766e02690386f280515175cdc90',
-                    'additional_exe' : [],
-                },
-            },
-        },
-        'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
-            matching proteins with tandem mass spectra.',
-    }
-
-The META_INFO dictionary declares:
-
-    #. What kind of type the engine is (engine_type).
-    #. What is the executable name of the engine for different platforms
-       ('engine': 'darwin', 'win32', 'linux')
-    #. Citation of the third party tool that was incorporated into Ursgal.
-       This information is printed at runtime.
-
 .. _PEP 3131:
     https://www.python.org/dev/peps/pep-3131/
 
-Engine Python class
--------------------
 
-The engine inherits from the uNode, which during initialization injects
-the knowledge base data into the class. Thus, those dictionaries (e.g. self.META_INFO)
-are available as attribute of each engine.
+Wrapper Python class
+--------------------
 
-The default structure of the engine is::
+The wrapper inherits from ursgal.UNode. During the instantiation,
+the default parameters are injects into the class. The default
+parameters are all collected and grouped in ursgal.uparams. Therefore,
+it is imperative that all parameters are listed in the uparams.py file.
+(see blow).
 
-    class mzml2mgf_1_0_0(ursgal.UNode):
+The default structure of a wrapper is::
+
+    #!/usr/bin/env python3.4
+    import ursgal
+
+    class omssa_2_1_9( ursgal.UNode ):
+        """
+        omssa_2_1_9 UNode
+
+        Parameter options at http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/asn_spec/omssa.asn.html
+
+        2.1.9 parameters at http://proteomicsresource.washington.edu/protocols06/omssa.php
+
+        Reference:
+        Geer LY, Markey SP, Kowalak JA, Wagner L, Xu M, Maynard DM, Yang X, Shi W, Bryant SH (2004) Open Mass Spectrometry Search Algorithm.
+
+        """
+        META_INFO = { ... }
+
         def __init__(self, *args, **kwargs):
-                super(mzml2mgf_1_0_0, self).__init__(*args, **kwargs)
+            super(omssa_2_1_9, self).__init__(*args, **kwargs)
 
         def preflight(self):
             # code that should be run before the UNode is executed
@@ -117,5 +87,193 @@ The default structure of the engine is::
             return
 
 
+
+It is important that the super class is called with the wrappers name.
+Default parameters are collected from uparams.py using this name (see below).
 The special methods `preflight()` and `postflight()` are automatically called
 by Ursgal's UController when a UNode is run.
+
+The META INFO
+^^^^^^^^^^^^^
+
+The META_INFO class attributed is most important for proper function. The
+META_INFO entries are described below; for more examples, please refer to the
+wrapper folder.
+
+
+Engine_type
+"""""""""""
+
+Engine Type will define were the engine is grouped into. The groups are shown
+after ucontroller instantiation. Additionally, the wrapper register the engines
+to certain controller functionality, e.g. engine_type['search_engine'] : True
+will allow ucontroller.search(engine='omssa_2_1_9') to be executed::
+
+        META_INFO = {
+
+            'engine_type'            : {
+                'controller'        : False,
+                'converter'         : False,
+                'validation_engine' : False,
+                'search_engine'     : True,
+                'meta_engine'       : False
+            },
+
+            ...
+        }
+
+
+Citation
+""""""""
+
+Please enter the proper citation for each engine you are wrapping so users can
+be reminded to cite the proper work. In an academic world, this is the only
+credit that one can hope for ;) For example::
+
+        META_INFO = {
+            ...
+            'citation'              : 'Geer LY, Markey SP, Kowalak JA, '\
+                'Wagner L, Xu M, Maynard DM, Yang X, Shi W, Bryant SH (2004) '\
+                'Open Mass Spectrometry Search Algorithm.',
+            ...
+        }
+
+
+
+Input types
+"""""""""""
+
+Input types are currently not used but the next iteration will included this.
+For example::
+
+        META_INFO = {
+            ...
+            'input_types'           : ['.mgf'],
+            ...
+        }
+
+
+
+Output Extension
+""""""""""""""""
+
+The output extension is required to auto-generate the output file name.
+For example::
+
+        META_INFO = {
+            ...
+            'output_extension'      : '.csv',
+            ...
+        }
+
+
+Create own folder
+"""""""""""""""""
+
+This option allows all files and results for this engine to be placed in its
+own folder. The engine will defined the folder name, here omssa_2_1_9.
+The master switch for all unodes to create their folder (if it is specified in
+the META_INFO is the ucontroler param **<Check diz>**)
+
+For example::
+
+        META_INFO = {
+            ...
+            'create_own_folder'     : True,
+            ...
+        }
+
+
+
+In Development
+""""""""""""""
+
+In development will hide the wrapper from the controller overview, however
+the node will be instantiated during start and is therefore nevertheless
+available.
+For example::
+
+        META_INFO = {
+            ...
+            'in_development'        : False,
+            ...
+        }
+
+
+Include in GIT
+""""""""""""""
+
+For example::
+
+        META_INFO = {
+            ...
+            'include_in_git'        : False,
+            ...
+        }
+
+
+UTranslation Style
+""""""""""""""""""
+
+Since ursgal translates the general to engine parameters and multiple versions
+of one engines can be available in ursgal (see e.g. 4+ X! Tandem versions), we
+define translation styles, thus all X! Tandem versions share (up to now) all
+parameter translation rules, defined as xtandem_style_1. Which translation style
+is used for which wrapper is defined by this META info::
+
+        META_INFO = {
+            ...
+            'utranslation_style'    : 'omssa_style_1',
+            ...
+        }
+
+Download information
+""""""""""""""""""""
+
+The download information is required for the install_resources.py script to
+function.::
+
+        META_INFO = {
+            ...
+            ### Below are the download information ###
+            'engine': {
+                'darwin' : {
+                    '64bit' : {
+                        'exe'            : 'omssacl',
+                        'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.macos.tar.gz',
+                        'zip_md5'        : '9cb92a98c4d96c34cc925b9336cbaec7',
+                        'additional_exe' : ['makeblastdb'],
+                    },
+                },
+                'linux' : {
+                    '64bit' : {
+                        'exe'            : 'omssacl',
+                        'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.linux.tar.gz',
+                        'zip_md5'        : '921e01df9cd2a99d21e9a336b5b862c1',
+                        'additional_exe' : ['makeblastdb'],
+                    },
+                },
+                'win32' : {
+                    '64bit' : {
+                        'exe'            : 'omssacl.exe',
+                        'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
+                        'zip_md5'        : 'b9d9a8aec3cfe77c48ce0f5752aba8f9',
+                        'additional_exe' : ['makeblastdb'],
+                    },
+                    '32bit' : {
+                        'exe'            : 'omssacl.exe',
+                        'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
+                        'zip_md5'        : 'a05a5cdd45fd8abcfc75b1236f8a2390',
+                        'additional_exe' : ['makeblastdb'],
+                    },
+                },
+            },
+            ...
+        }
+
+
+
+Grouped parameters - uparams.py
+-------------------------------
+
+Some more text here ....

@@ -13,8 +13,8 @@ The latest Documentation was generated on: |today|
    intro
 
 
-Quick Start Tutorial
---------------------------------------
+Quick Start
+-----------
 
 .. toctree::
    :maxdepth: 2
@@ -22,8 +22,18 @@ Quick Start Tutorial
    quick_start
 
 
-Contents
-========
+
+Module structure
+----------------
+.. toctree::
+   :maxdepth: 2
+
+   general_structure
+
+
+
+Ursgal module contents
+======================
 
 .. toctree::
    :maxdepth: 1
@@ -50,7 +60,6 @@ Included engines
    available_engines
    available_de_novo_engines
    other_engines
-   general_structure
 
 How to extend and create new engines ?
 --------------------------------------
@@ -67,7 +76,7 @@ Parameter
 .. toctree::
    :maxdepth: 1
 
-   parameter_new
+   parameter
 
 
 Examples
