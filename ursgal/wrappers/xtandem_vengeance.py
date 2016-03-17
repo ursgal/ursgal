@@ -305,12 +305,12 @@ class xtandem_vengeance( ursgal.UNode ):
 
     </note>
     <note type="input" label="spectrum, dynamic range">{spec_dynamic_range}</note>
-    <note type="input" label="spectrum, total peaks">{maximal_accounted_observed_peaks}</note>
+    <note type="input" label="spectrum, total peaks">{max_accounted_observed_peaks}</note>
     <note type="input" label="spectrum, use neutral loss window">{neutral_loss_enabled}</note>
     <note type="input" label="spectrum, neutral loss window">{neutral_loss_window}</note>
     <note type="input" label="spectrum, neutral loss mass">{neutral_loss_mass}</note>
     <note type="input" label="spectrum, minimum fragment mz">{frag_min_mz}</note>
-    <note type="input" label="spectrum, minimum peaks">{mininimal_required_observed_peaks}</note>
+    <note type="input" label="spectrum, minimum peaks">{min_required_observed_peaks}</note>
     <note type="input" label="spectrum, threads">{cpus}</note>
     <note type="input" label="spectrum, sequence batch size" >{batch_size}</note>
     <note type="heading">
@@ -346,8 +346,8 @@ class xtandem_vengeance( ursgal.UNode ):
     <note type="input" label="scoring, a ions">{score_a_ions}</note>
     <note type="input" label="scoring, b ions">{score_b_ions}</note>
     <note type="input" label="scoring, c ions" >{score_c_ions}</note>
-    <note type="input" label="scoring, minimum ion count">{mininimal_required_matched_peaks}</note>
-    <note type="input" label="scoring, maximum missed cleavage sites">{maximum_missed_cleavages}</note>
+    <note type="input" label="scoring, minimum ion count">{min_required_matched_peaks}</note>
+    <note type="input" label="scoring, maximum missed cleavage sites">{max_missed_cleavages}</note>
     <note type="input" label="scoring, cyclic permutations" >{compensate_small_fasta}</note>
     <note type="input" label="scoring, include reverse" >{engine_internal_decoy_generation}</note>
     <note type="input" label="scoring, x ions" >{score_x_ions}</note>

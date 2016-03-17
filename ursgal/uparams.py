@@ -58,8 +58,8 @@ ursgal_params = {
             'pepnovo_style_1' : 'base_mz',
         },
         'utag' : [
-            'Fragment',
-            'Precursor',
+            'fragment',
+            'precursor',
         ],
         'uvalue_translation' : {
         },
@@ -202,50 +202,6 @@ ursgal_params = {
         },
         'uvalue_type' : "bool",
     },
-    'compress_after_post_flight' : {
-        'available_in_unode' : [
-        ],
-        'default_value' : "False",
-        'description' :  ''' Compress after post flight: True or False to .GZ  NOTE: This is old stuff, init ? ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
-    'compress_ext_exculsion' : {
-        'available_in_unode' : [
-        ],
-        'default_value' : [
-            '.csv',
-        ],
-        'description' :  ''' file type excluded from compression ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
-    'compress_output' : {
-        'available_in_unode' : [
-        ],
-        'default_value' : "False",
-        'description' :  ''' Compress output: True or False to .GZ ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
-    },
     'compress_raw_search_results_if_possible' : {
         'available_in_unode' : [
             'ucontroller',
@@ -308,23 +264,22 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
             'omssa_2_1_9',
+            'ucontroller',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'ucontroller',
         ],
-        'default_value' : 'max - 1',
-        # but will be evaluated during meta node init
-        'description' : ''' Number of used cpus/threads ''',
+        'default_value' : "max - 1",
+        'description' :  ''' Number of used cpus/threads ''',
         'trigger_rerun' : False,
         'ukey_translation' : {
             'msgfplus_style_1' : '-thread',
             'myrimatch_style_1' : '-cpus',
             'omssa_style_1' : '-nt',
+            'ucontroller_style_1' : 'cpus',
             'xtandem_style_1' : 'spectrum, threads',
-            'ucontroller_style_1': 'cpus'
         },
         'utag' : [
             'hardware_resources',
@@ -471,10 +426,50 @@ ursgal_params = {
             'ucontroller_style_1' : 'del_from_params_before_json_dump',
         },
         'utag' : [
+            'file_handling',
         ],
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
+    },
+    'denovo_model' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : "cid_trypsin",
+        'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1' : '-model',
+        },
+        'utag' : [
+            'model',
+        ],
+        'uvalue_translation' : {
+            'pepnovo_style_1' : {
+                'cid_trypsin' : 'CID_IT_TRYP',
+            },
+        },
+        'uvalue_type' : [
+            'cid_trypsin',
+        ],
+    },
+    'denovo_model_dir' : {
+        'available_in_unode' : [
+            'pepnovo_3_1',
+        ],
+        'default_value' : None,
+        'description' :  ''' Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1 ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'pepnovo_style_1' : '-model_dir',
+        },
+        'utag' : [
+            'model',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
     },
     'engine_internal_decoy_generation' : {
         'available_in_unode' : [
@@ -496,6 +491,7 @@ ursgal_params = {
             'xtandem_style_1' : 'scoring, include reverse',
         },
         'utag' : [
+            'database',
             'input',
         ],
         'uvalue_translation' : {
@@ -765,7 +761,7 @@ ursgal_params = {
             'xtandem_style_1' : 'residue, potential modification mass',
         },
         'utag' : [
-            'Modifications',
+            'modifications',
         ],
         'uvalue_translation' : {
         },
@@ -782,7 +778,7 @@ ursgal_params = {
             'novor_style_1' : 'forbiddenResidues',
         },
         'utag' : [
-            'denovo',
+            'de_novo',
         ],
         'uvalue_translation' : {
         },
@@ -792,13 +788,14 @@ ursgal_params = {
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' If set 'True', engines are forced to re-run although no node-related parameters have changed ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'force',
         },
         'utag' : [
+            'file_handling',
         ],
         'uvalue_translation' : {
         },
@@ -904,6 +901,7 @@ ursgal_params = {
         },
         'utag' : [
             'fragment',
+            'spectrum',
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
@@ -927,8 +925,8 @@ ursgal_params = {
             'omssa_style_1' : '-zoh',
         },
         'utag' : [
-            'MS2',
             'fragment',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -947,6 +945,7 @@ ursgal_params = {
             'novor_style_1' : 'fragmentation',
         },
         'utag' : [
+            'instrument',
         ],
         'uvalue_translation' : {
             'msgfplus_style_1' : {
@@ -981,8 +980,8 @@ ursgal_params = {
             'xtandem_style_1' : 'spectrum, minimum fragment mz',
         },
         'utag' : [
-            'MS2',
             'fragment',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -1196,7 +1195,7 @@ ursgal_params = {
             'ucontroller_style_1' : 'helper_extension',
         },
         'utag' : [
-            'file_extension',
+            'file_handling',
         ],
         'uvalue_translation' : {
         },
@@ -1223,11 +1222,9 @@ ursgal_params = {
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
-
         'default_value' : None,
         'description' :  ''' http download URL, will fail if it is not set by the user ''',
         'trigger_rerun' : True,
-
         'ukey_translation' : {
             'get_http_style_1' : 'http_url',
         },
@@ -1237,26 +1234,6 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-    },
-    'input_file_type' : {
-        'available_in_unode' : [
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : "None",
-        'description' :  ''' Input file type ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'xtandem_style_1' : 'spectrum, path type',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
     },
     'instrument' : {
         'available_in_unode' : [
@@ -1271,7 +1248,7 @@ ursgal_params = {
             'novor_style_1' : 'massAnalyzer',
         },
         'utag' : [
-            'scoring',
+            'instrument',
         ],
         'uvalue_translation' : {
             'msgfplus_style_1' : {
@@ -1294,7 +1271,6 @@ ursgal_params = {
             'tof',
         ],
     },
-
     'intensity_cutoff' : {
         'available_in_unode' : [
             'omssa_2_1_9',
@@ -1306,7 +1282,7 @@ ursgal_params = {
             'omssa_style_1' : '-cl',
         },
         'utag' : [
-            'Spectrum',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -1323,7 +1299,7 @@ ursgal_params = {
             'ucontroller_style_1' : 'json_extension',
         },
         'utag' : [
-            'file_extension',
+            'file_handling',
         ],
         'uvalue_translation' : {
         },
@@ -1354,8 +1330,8 @@ ursgal_params = {
             'xtandem_style_1' : 'protein, modified residue mass file',
         },
         'utag' : [
-            'Modifications',
             'label',
+            'modifications',
         ],
         'uvalue_translation' : {
         },
@@ -1364,55 +1340,77 @@ ursgal_params = {
             '15N',
         ],
     },
-    'log_enabled' : {
-        'available_in_unode' : [
-            'ucontroller',
-        ],
-        'default_value' : "False",
-        'description' :  ''' Will redirect sys.stdout to the logfile, default name: ursgal.log ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'ucontroller_style_1' : 'log_enabled',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "bool",
-    },
-    'log_file_name' : {
-        'available_in_unode' : [
-            'ucontroller',
-        ],
-        'default_value' : "None",
-        'description' :  ''' This can be used to specify a different log file path ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'ucontroller_style_1' : 'log_file_name',
-        },
-        'utag' : [
-            'file_handling',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "str",
-    },
     'machine_offset_in_ppm' : {
         'available_in_unode' : [
-            'mzml2mgf_1_0_0'
+            'mzml2mgf_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' Machine offset ''',
+        'default_value' : 0.0,
+        'description' :  ''' Machine offset, m/z values will be corected/shifted by the given value. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'mzml2mgf_style_1' : 'machine_offset_in_ppm'
+            'mzml2mgf_style_1' : 'machine_offset_in_ppm',
         },
         'utag' : [
-            'converter'
+            'converter',
+            'instrument',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "float",
+    },
+    'max_accounted_observed_peaks' : {
+        'available_in_unode' : [
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
+        ],
+        'default_value' : 100,
+        'description' :  ''' Maximum number of peaks from a spectrum used. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'myrimatch_style_1' : 'MaxPeakCount',
+            'xtandem_style_1' : 'spectrum, total peaks',
+        },
+        'utag' : [
+            'MS2',
+            'fragment',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'max_missed_cleavages' : {
+        'available_in_unode' : [
+            'msamanda_1_0_0_5242',
+            'msamanda_1_0_0_5243',
+            'myrimatch_2_1_138',
+            'myrimatch_2_1_140',
+            'omssa_2_1_9',
+            'xtandem_cyclone_2010',
+            'xtandem_jackhammer',
+            'xtandem_piledriver',
+            'xtandem_sledgehammer',
+            'xtandem_vengeance',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Maximum number of missed cleavages per peptide ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'msamanda_style_1' : 'missed_cleavages',
+            'myrimatch_style_1' : 'MaxMissedCleavages',
+            'omssa_style_1' : '-v',
+            'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
+        },
+        'utag' : [
+            'protein',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
     },
     'max_mod_alternatives' : {
         'available_in_unode' : [
@@ -1425,7 +1423,7 @@ ursgal_params = {
             'xtandem_style_1' : 'protein, ptm complexity',
         },
         'utag' : [
-            'Modifications',
+            'modifications',
         ],
         'uvalue_translation' : {
         },
@@ -1445,7 +1443,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'MaxDynamicMods',
         },
         'utag' : [
-            'Modifications',
+            'modifications',
         ],
         'uvalue_translation' : {
         },
@@ -1483,7 +1481,7 @@ ursgal_params = {
             'xtandem_style_1' : 'residue, potential modification mass',
         },
         'utag' : [
-            'Modifications',
+            'modifications',
         ],
         'uvalue_translation' : {
         },
@@ -1506,8 +1504,8 @@ ursgal_params = {
             'xtandem_style_1' : 'output, maximum valid expectation value',
         },
         'utag' : [
-            'Output',
-            'Scoring',
+            'output',
+            'scoring',
         ],
         'uvalue_translation' : {
         },
@@ -1529,7 +1527,7 @@ ursgal_params = {
             'omssa_style_1' : '-nox',
         },
         'utag' : [
-            'Peptide',
+            'peptide',
         ],
         'uvalue_translation' : {
         },
@@ -1554,74 +1552,6 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-    },
-    'maximal_accounted_observed_peaks' : {
-        'available_in_unode' : [
-            'myrimatch_2_1_138',
-            'myrimatch_2_1_140',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : 100,
-        'description' :  ''' Maximum number of peaks from a spectrum used. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'myrimatch_style_1' : 'MaxPeakCount',
-            'xtandem_style_1' : 'spectrum, total peaks',
-        },
-        'utag' : [
-            'MS2',
-            'fragment',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-    },
-    'maximum_missed_cleavages' : {
-        'available_in_unode' : [
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'myrimatch_2_1_138',
-            'myrimatch_2_1_140',
-            'omssa_2_1_9',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-        ],
-        'default_value' : 2,
-        'description' :  ''' Maximum number of missed cleavages per peptide ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'missed_cleavages',
-            'myrimatch_style_1' : 'MaxMissedCleavages',
-            'omssa_style_1' : '-v',
-            'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
-        },
-        'utag' : [
-            'protein',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-    },
-    'maximum_pep_for_ident_csv' : {
-        'available_in_unode' : [
-        ],
-        'default_value' : "0.1",
-        'description' :  ''' Maximum value for PEP (posterior error probability): Threshold for identifications put in CSV-files. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
     },
     'mgf_input_file' : {
         'available_in_unode' : [
@@ -1698,7 +1628,7 @@ ursgal_params = {
             'omssa_style_1' : '-no',
         },
         'utag' : [
-            'Peptide',
+            'peptide',
         ],
         'uvalue_translation' : {
         },
@@ -1715,14 +1645,14 @@ ursgal_params = {
             'omssa_style_1' : '-pc',
         },
         'utag' : [
-            'Precursor',
-            'Spectrum',
+            'precursor',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
     },
-    'mininimal_required_matched_peaks' : {
+    'min_required_matched_peaks' : {
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_1_140',
@@ -1742,14 +1672,14 @@ ursgal_params = {
             'xtandem_style_1' : 'scoring, minimum ion count',
         },
         'utag' : [
-            'Fragment',
-            'Spectrum',
+            'fragment',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
     },
-    'mininimal_required_observed_peaks' : {
+    'min_required_observed_peaks' : {
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -1766,8 +1696,8 @@ ursgal_params = {
             'xtandem_style_1' : 'spectrum, minimum peaks',
         },
         'utag' : [
-            'Fragment',
-            'Spectrum',
+            'fragment',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -1831,7 +1761,7 @@ Example:
             'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
         },
         'utag' : [
-            'Modifications',
+            'modifications',
         ],
         'uvalue_translation' : {
         },
@@ -2131,8 +2061,8 @@ Example:
             'xtandem_style_1' : 'spectrum, use neutral loss window',
         },
         'utag' : [
-            'MS2',
             'fragment',
+            'spectrum',
         ],
         'uvalue_translation' : {
             'xtandem_style_1' : {
@@ -2157,8 +2087,8 @@ Example:
             'xtandem_style_1' : 'spectrum, neutral loss mass',
         },
         'utag' : [
-            'MS2',
             'fragment',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2179,8 +2109,8 @@ Example:
             'xtandem_style_1' : 'spectrum, neutral loss window',
         },
         'utag' : [
-            'MS2',
             'fragment',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2192,19 +2122,23 @@ Example:
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
-            'xtandem_vengeance',
         ],
-        'default_value' : "False",
-        'description' :  ''' used for noise suppresssion ''',
+        'default_value' : False,
+        'description' :  ''' Used noise suppresssion ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, use noise suppression',
         },
         'utag' : [
+            'spectrum',
         ],
         'uvalue_translation' : {
+            'xtandem_style_1' : {
+                False : 'no',
+                True : 'yes',
+            },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'num_hits_retain_spec' : {
         'available_in_unode' : [
@@ -2254,33 +2188,33 @@ Example:
     },
     'number_of_i_decimals' : {
         'available_in_unode' : [
-            'mzml2mgf_1_0_0'
+            'mzml2mgf_1_0_0',
         ],
         'default_value' : 5,
         'description' :  ''' Number of decimals for intensity (peak) ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'mzml2mgf_style_1' : 'number_of_i_decimals'
+            'mzml2mgf_style_1' : 'number_of_i_decimals',
         },
         'utag' : [
-            'converter'
+            'converter',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'number_of_mz_decimals' : {
         'available_in_unode' : [
-            'mzml2mgf_1_0_0'
+            'mzml2mgf_1_0_0',
         ],
         'default_value' : 5,
         'description' :  ''' Number of decimals for m/z mass ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'mzml2mgf_style_1' : 'number_of_mz_decimals'
+            'mzml2mgf_style_1' : 'number_of_mz_decimals',
         },
         'utag' : [
-            'converter'
+            'converter',
         ],
         'uvalue_translation' : {
         },
@@ -2297,8 +2231,8 @@ Example:
             'omssa_style_1' : '-cp',
         },
         'utag' : [
-            'Precursor',
-            'Spectrum',
+            'precursor',
+            'spectrum',
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
@@ -2319,7 +2253,7 @@ Example:
             'omssa_style_1' : '-h1',
         },
         'utag' : [
-            'Spectrum',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2336,7 +2270,7 @@ Example:
             'omssa_style_1' : '-h2',
         },
         'utag' : [
-            'Spectrum',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2353,8 +2287,7 @@ Example:
             'omssa_style_1' : '-ht',
         },
         'utag' : [
-            'Spectrum',
-            'Spectrum',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2371,11 +2304,11 @@ Example:
             'omssa_style_1' : '-mm',
         },
         'utag' : [
-            'Spectrum',
+            'scoring',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "float",
+        'uvalue_type' : "int",
     },
     'omssa_ta' : {
         'available_in_unode' : [
@@ -2388,7 +2321,7 @@ Example:
             'omssa_style_1' : '-ta',
         },
         'utag' : [
-            'Spectrum',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2405,7 +2338,7 @@ Example:
             'omssa_style_1' : '-tex',
         },
         'utag' : [
-            'Spectrum',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2422,7 +2355,7 @@ Example:
             'omssa_style_1' : '-ni',
         },
         'utag' : [
-            'Spectrum',
+            'output',
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
@@ -2443,7 +2376,7 @@ Example:
             'omssa_style_1' : '-w1',
         },
         'utag' : [
-            'Spectrum',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2460,7 +2393,7 @@ Example:
             'omssa_style_1' : '-w2',
         },
         'utag' : [
-            'Spectrum',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2477,7 +2410,7 @@ Example:
             'omssa_style_1' : '-z1',
         },
         'utag' : [
-            'Spectrum',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2494,8 +2427,8 @@ Example:
             'omssa_style_1' : '-zc',
         },
         'utag' : [
-            'Precursor',
-            'Spectrum',
+            'precursor',
+            'spectrum',
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
@@ -2516,7 +2449,7 @@ Example:
             'omssa_style_1' : '-zcc',
         },
         'utag' : [
-            'Precursor',
+            'precursor',
         ],
         'uvalue_translation' : {
         },
@@ -2533,8 +2466,8 @@ Example:
             'omssa_style_1' : '-zt',
         },
         'utag' : [
-            'Precursor',
-            'Spectrum',
+            'precursor',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2551,7 +2484,7 @@ Example:
             'pepnovo_style_1' : '-output_aa_probs',
         },
         'utag' : [
-            'Output',
+            'output',
         ],
         'uvalue_translation' : {
         },
@@ -2589,7 +2522,7 @@ Example:
             'pepnovo_style_1' : '-output_cum_probs',
         },
         'utag' : [
-            'Output',
+            'output',
         ],
         'uvalue_translation' : {
         },
@@ -2660,7 +2593,7 @@ Example:
             'xtandem_style_1' : 'output, mzid',
         },
         'utag' : [
-            'Output',
+            'output',
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
@@ -2691,7 +2624,7 @@ Example:
             'pepnovo_style_1' : '-prm',
         },
         'utag' : [
-            'Output',
+            'output',
         ],
         'uvalue_translation' : {
         },
@@ -2708,47 +2641,11 @@ Example:
             'pepnovo_style_1' : '-prm_norm',
         },
         'utag' : [
-            'Output',
+            'output',
         ],
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-    },
-    'pepnovo_model' : {
-        'available_in_unode' : [
-            'pepnovo_3_1',
-        ],
-        'default_value' : "CID_IT_TRYP",
-        'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'pepnovo_style_1' : '-model',
-        },
-        'utag' : [
-            'Model',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : [
-            'CID_IT_TRYP',
-        ],
-    },
-    'pepnovo_model_dir' : {
-        'available_in_unode' : [
-            'pepnovo_3_1',
-        ],
-        'default_value' : None,
-        'description' :  ''' Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1 ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'pepnovo_style_1' : '-model_dir',
-        },
-        'utag' : [
-            'Model',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "str",
     },
     'pepnovo_tag_length' : {
         'available_in_unode' : [
@@ -2778,7 +2675,7 @@ Example:
             'omssa_style_1' : '-tez',
         },
         'utag' : [
-            'Precursor',
+            'precursor',
         ],
         'uvalue_translation' : {
             'omssa_style_1' : {
@@ -2815,7 +2712,7 @@ Example:
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
         },
         'utag' : [
-            'Precursor',
+            'precursor',
         ],
         'uvalue_translation' : {
             'myrimatch_style_1' : {
@@ -3026,7 +2923,7 @@ Example:
             'omssa_style_1' : '-zh',
         },
         'utag' : [
-            'Precursor',
+            'precursor',
         ],
         'uvalue_translation' : {
         },
@@ -3045,7 +2942,7 @@ Example:
             'xtandem_style_1' : 'spectrum, minimum parent m+h',
         },
         'utag' : [
-            'Precursor',
+            'precursor',
         ],
         'uvalue_translation' : {
         },
@@ -3067,7 +2964,7 @@ Example:
             'omssa_style_1' : '-zl',
         },
         'utag' : [
-            'Precursor',
+            'precursor',
         ],
         'uvalue_translation' : {
         },
@@ -3091,27 +2988,11 @@ Example:
             'xtandem_style_1' : 'spectrum, minimum parent m+h',
         },
         'utag' : [
-            'Precursor',
+            'precursor',
         ],
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-    },
-    'precursor_ppm_offset' : {
-        'available_in_unode' : [
-            'mzml2mgf_1_0_0',
-        ],
-        'default_value' : None,
-        'description' :  ''' Precursor offset in ppm ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'mzml2mgf_style_1' : 'precursor_ppm_offset',
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "",
     },
     'prefix' : {
         'available_in_unode' : [
@@ -3124,6 +3005,7 @@ Example:
             'ucontroller_style_1' : 'prefix',
         },
         'utag' : [
+            'file_handling',
         ],
         'uvalue_translation' : {
         },
@@ -3214,7 +3096,7 @@ Example:
             'ucontroller_style_1' : 'raw_ident_csv_suffix',
         },
         'utag' : [
-            'file_extension',
+            'file_handling',
         ],
         'uvalue_translation' : {
         },
@@ -3248,43 +3130,46 @@ Example:
             'ucontroller_style_1' : 'rt_pickle_name',
         },
         'utag' : [
+            'file_handling',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "str",
     },
     'scan_exclusion_list' : {
         'available_in_unode' : [
-            'mzml2mgf_1_0_0'
+            'mzml2mgf_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' spectra rejected during mzml2mgf conversion ''',
+        'default_value' : [
+        ],
+        'description' :  ''' Spectra rejected during mzml2mgf conversion ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'mzml2mgf_style_1' : 'scan_exclusion_list'
+            'mzml2mgf_style_1' : 'scan_exclusion_list',
         },
         'utag' : [
-            'converter'
+            'converter',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "list",
     },
     'scan_skip_modulo_step' : {
         'available_in_unode' : [
-            'mzml2mgf_1_0_0'
+            'mzml2mgf_1_0_0',
         ],
         'default_value' : None,
-        'description' :  ''' include only the n'th spectrum during mzml2mgf conversion ''',
+        'description' :  ''' Include only the n'th spectrum during mzml2mgf conversion ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'mzml2mgf_style_1' : 'scan_skip_modulo_step'
+            'mzml2mgf_style_1' : 'scan_skip_modulo_step',
         },
         'utag' : [
+            'converter',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "int",
     },
     'score_-h2o_ions' : {
         'available_in_unode' : [
@@ -3683,7 +3568,7 @@ Example:
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : "True",
+        'default_value' : True,
         'description' :  ''' Create folders for search engines. True or False ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
@@ -3799,8 +3684,8 @@ Example:
             'xtandem_style_1' : 'spectrum, dynamic range',
         },
         'utag' : [
-            'MS2',
             'fragment',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -3878,13 +3763,13 @@ Example:
             'pepnovo_3_1',
         ],
         'default_value' : True,
-        'description' :  ''' Does remove low quality filter. ''',
+        'description' :  ''' Use filter for low quality spectra. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-no_quality_filter',
         },
         'utag' : [
-            'Spectrum',
+            'spectrum',
         ],
         'uvalue_translation' : {
             'pepnovo_style_1' : {
@@ -3930,7 +3815,7 @@ Example:
             'pepnovo_style_1' : '-use_spectrum_charge',
         },
         'utag' : [
-            'Precursor',
+            'precursor',
         ],
         'uvalue_translation' : {
         },
@@ -3947,7 +3832,7 @@ Example:
             'pepnovo_style_1' : '-use_spectrum_mz',
         },
         'utag' : [
-            'Precursor',
+            'precursor',
         ],
         'uvalue_translation' : {
         },
@@ -4277,7 +4162,7 @@ Example:
             'xtandem_style_1' : 'protein, stP bias',
         },
         'utag' : [
-            'Modifications',
+            'modifications',
         ],
         'uvalue_translation' : {
             'xtandem_style_1' : {
@@ -4285,6 +4170,6 @@ Example:
                 True : 'yes',
             },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
 }

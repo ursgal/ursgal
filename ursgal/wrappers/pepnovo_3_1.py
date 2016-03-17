@@ -114,8 +114,8 @@ class pepnovo_3_1( ursgal.UNode ):
         if self.params['frag_mass_tolerance_unit'] == 'ppm':
             self.params['frag_mass_tolerance'] = ursgal.ucore.convert_ppm_to_dalton( self.params['frag_mass_tolerance'], base_mz=self.params['base_mz'] )
 
-        if self.params['pepnovo_model_dir'] == None:
-            self.params['pepnovo_model_dir'] = os.path.join(
+        if self.params['denovo_model_dir'] == None:
+            self.params['denovo_model_dir'] = os.path.join(
                 os.path.dirname(self.exe),
                 'Models'
             )
@@ -155,12 +155,12 @@ class pepnovo_3_1( ursgal.UNode ):
         self.params[ 'command_list' ] = [
             self.exe, # path 2 executable
             '-file', '{mgf_input_file}'.format( **self.params), # SpectrumFile (*.mzXML, *.mgf, *.ms2)
-            '-model', '{pepnovo_model}'.format( **self.params), # (currently only CID_IT_TRYP is available)
+            '-model', '{denovo_model}'.format( **self.params), # (currently only CID_IT_TRYP is available)
             '-fragment_tolerance', '{frag_mass_tolerance}'.format(**self.params), # ion tolerances (in Da)
             '-pm_tolerance', '{precursor_mass_tolerance}'.format(**self.params), # precursor ion tolerance (in Da)
             '-digest', '{enzyme}'.format(**self.params),
             '-num_solutions', '{num_match_spec}'.format(**self.params),
-            '-model_dir', '{pepnovo_model_dir}'.format(**self.params),  # - directory where model files are kept (default ./Models)
+            '-model_dir', '{denovo_model_dir}'.format(**self.params),  # - directory where model files are kept (default ./Models)
             '-PTMs', ':'.join(modifications),  # - separated by a colons (no spaces) e.g., M+16:S+80:N+1
         ]
         if self.params['pepnovo_tag_length']:

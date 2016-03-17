@@ -350,7 +350,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
 <settings>
     <search_settings>
         <enzyme specificity="{semi_enzyme}">{enzyme}</enzyme>
-        <missed_cleavages>{maximum_missed_cleavages}</missed_cleavages>
+        <missed_cleavages>{max_missed_cleavages}</missed_cleavages>
         <modifications>
             {modifications}
         </modifications>
