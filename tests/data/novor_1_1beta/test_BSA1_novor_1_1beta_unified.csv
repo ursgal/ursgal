@@ -1,4 +1,0 @@
-Spectrum ID,Retention Time (s),Charge,Sequence,Spectrum Title,Modifications,Expected Spectrum ID,Raw data location,Expected Retention Time (s),Expected Charge,Expected Sequence,Expected Spectrum Title,Expected Modifications,uCalc m/z,uCalc m/z
-2442,1503.96166992188,2,GPEWGQAK,BSA1.2442.2442.2,Acetyl:0,2442,/home/stefan/ursgal-dev/ursgal/example_data/BSA_simple_de_novo_search/BSA1.mgf,1503.9616699219,2,GPEWGQAK,BSA1.2442.2442.2,Acetyl:0,457.72196696866996,457.72196696866996
-2443,1508.63952636719,3,GEMTDDHSSAAEAK,BSA1.2443.2443.3,,2443,/home/stefan/ursgal-dev/ursgal/example_data/BSA_simple_de_novo_search/BSA1.mgf,1508.6395263672,3,GEMTDDHSSAAEAK,BSA1.2443.2443.3,,483.5367888760366,483.5367888760366
-2444,1509.01611328125,2,AHCDHGWRR,BSA1.2444.2444.2,Acetyl:0;Carbamidomethyl:3,2444,/home/stefan/ursgal-dev/ursgal/example_data/BSA_simple_de_novo_search/BSA1.mgf,1509.0161132813,2,AHCDHGWRR,BSA1.2444.2444.2,Acetyl:0;Carbamidomethyl:3,618.77560511107,618.77560511107

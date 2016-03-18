@@ -9,5 +9,7 @@ tests/data/omssa_2_1_9/test_BSA1_omssa_2_1_9_unified.csv
 tests/data/xtandem_sledgehammer/test_BSA1_xtandem_sledgehammer_unified.csv
 tests/data/_ursgal_lookup.pkl
 docs/build/
+docs/source/parameter.txt
+# ^--- auto generated during sphinx make
 tests/data/test_Creinhardtii_target_decoy.fasta.*
 
