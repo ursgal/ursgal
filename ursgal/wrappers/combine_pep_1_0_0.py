@@ -53,13 +53,13 @@ class combine_pep_1_0_0(ursgal.UNode):
             'search_engine'     : False,
             'meta_engine'       : True,
         },
-        'in_development'            : True,
         'input_types'               : ['.csv'],
         'output_extension'          : '.csv',
         'create_own_folder'         : False,
         #'citation' : 'Combines PEP scores from different search engines.',
         'include_in_git'            : True,
-
+        'in_development'            : False,
+        'utranslation_style'        : 'combine_pep_style_1',
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
@@ -113,9 +113,9 @@ class combine_pep_1_0_0(ursgal.UNode):
             'input_sep': ',',  # input csv separating char
             'output_sep': ',',  # output csv separating char
             'join_sep': ';',  # char to join multiple values in same field
-            'pep_colname': self.params['cPEP:pep_colname'],
+            'pep_colname': 'PEP',
             # The size of the sliding window for PEP calculation:
-            'window_size': self.params['cPEP:window_size'],
+            'window_size': self.params['window_size'],
         }
 
     def _execute( self ):
