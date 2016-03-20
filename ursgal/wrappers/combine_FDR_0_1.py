@@ -28,7 +28,7 @@ class combine_FDR_0_1( ursgal.UNode ):
             'search_engine'     : False,
             'meta_engine'       : True,
         },
-        'in_development'        : True,
+        'in_development'        : False,
         'input_types'           : ['.csv'],
         'output_extension'      : '.csv',
         'create_own_folder'     : False,
@@ -37,7 +37,7 @@ class combine_FDR_0_1( ursgal.UNode ):
             'Improving sensitivity in proteome studies by analysis of false '\
             'discovery rates for multiple search engines.',
         'include_in_git'            : True,
-
+        'utranslation_style'    : 'combine_FDR_style_1',
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
@@ -98,12 +98,10 @@ class combine_FDR_0_1( ursgal.UNode ):
 
         self.command_dict = {
             "input_file_list" : input_file_list_for_cFDR_script,
-            "cutoff"          : self.params['combined_FDR_cutoff'],
+            "cutoff"          : None,
             "directory"       : self.params['output_dir_path'],
             "file_info"       : file_info_for_cFDR_script,
             "output_filename" : self.params['output_file'],
-            "filter_decoys"   : self.params['filter_decoys'],
-            "filter_cutoff"   : self.params['apply_combined_FDR_cutoff'],
         }
 
 
@@ -132,9 +130,6 @@ Executing main() function from {scriptpath}.py with the following parameters:
 ...
 ...     directory       = {directory},
 ...     output_filename = {output_filename},
-...     cutoff          = {cutoff},
-...     filter_cutoff   = {filter_cutoff},
-...     filter_decoys   = {filter_decoys},
 ... )
 
         '''.format(
@@ -148,10 +143,10 @@ Executing main() function from {scriptpath}.py with the following parameters:
         combine_FDR_main(
             input_file_list = self.command_dict["input_file_list"],
             file_info       = self.command_dict["file_info"],
-            cutoff          = self.command_dict["cutoff"],
+            cutoff          = 0.01,  # only for printing
             directory       = self.command_dict["directory"],
             output_filename = self.command_dict["output_filename"],
-            filter_decoys   = self.command_dict["filter_decoys"],
-            filter_cutoff   = self.command_dict["filter_cutoff"],
+            filter_decoys   = False,  # we have filter_csv for that purpose :)
+            filter_cutoff   = False,  # we have filter_csv for that purpose :)
         )
     #self.execute_answer = self.command_dict["output_filename"]

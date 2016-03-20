@@ -1211,7 +1211,7 @@ class UController(ursgal.UNode):
                     if last_engine is not None:
                         last_engine_meta_node = self.meta_unodes[ last_engine ]
 
-                        last_search_engine_colname = \
+                        last_engine_colname = \
                             self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][last_engine]
                         # old translation style:
                         # last_engine_colname = \

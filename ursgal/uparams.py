@@ -4200,29 +4200,6 @@ Example:
         },
         'uvalue_type' : "int",
     },
-    # combined PEP:
-    'window_size': {
-        'available_in_unode' : [
-            'combine_pep_1_0_0',
-        ],
-        'default_value' : 249,
-        'description' : ''' Combined PEPs are computed by
-    iterating a sliding window over the sorted PSMs. Each PSM receives
-    a PEP based on the target/decoy ratio of the surrounding PEPs. 
-    This parameter defines the window size. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'combine_pep_style_1' : 'window_size',
-        },
-        'utag' : [
-            'statistics',
-            'combining_search_results',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-    },
-
 
 
 
