@@ -47,7 +47,7 @@ class percolator_2_08( ursgal.UNode ):
         'output_suffix'             : 'percolator_validated',
         'input_types'               : ['.csv'],
         'create_own_folder'         : False,
-        'citation'   : 'Käll L, Canterbury JD, Weston J, Noble WS, '\
+        'citation'   : 'Kall L, Canterbury JD, Weston J, Noble WS, '\
             'MacCoss MJ. (2007) Semi-supervised learning for peptide '\
             'identification from shotgun proteomics datasets.',
         'include_in_git'            : False,
