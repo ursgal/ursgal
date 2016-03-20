@@ -26,7 +26,7 @@ class naive_bayes_1_0_0( ursgal.UNode ):
             'using naive Bayes (see i.e. '\
             'http://www.paulgraham.com/naivebayes.html)',
         'include_in_git'            : True,
-        'in_development'            : True,
+        'in_development'            : False,
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
@@ -60,7 +60,7 @@ class naive_bayes_1_0_0( ursgal.UNode ):
                 input_file_dict['file']
             )
             input_file_list_for_bayes.append(input_file_path)
-            search_engine = input_file_dict["last_search_engine"]
+            search_engine = input_file_dict["last_engine"]
             search_engine_list_for_bayes.append(search_engine)
 
         features_that_define_unique_psm = \
