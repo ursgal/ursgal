@@ -50,7 +50,7 @@ Engines
 =======
 
 Ursgal allows existing programs to be incorporated with ease. We call those
-programs or scripts engines. Currently ursgal comes with these engines:
+programs or scripts engines. Currently, ursgal comes with these engines:
 
 Included engines
 ----------------
@@ -82,8 +82,8 @@ Parameter
 Examples
 ========
 
-Ursgal comes with mupltiple example script which can be used to test the
-fucntionality and can be used as templates for own scripts.
+Ursgal comes with multiple example scripts which can be used to test its functionality.
+Example scripts can also be used as templates for your own scripts.
 
 .. toctree::
    :maxdepth: 2
