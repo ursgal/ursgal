@@ -11,10 +11,11 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         'engine_type' : {
             'converter'  : True
         },
-        'in_development'            : True,
+        'in_development'   : False,
         'input_types'      : ['.csv'],
         'output_extension' : '.csv',
         'output_suffix'    : 'withFDR',
+        'utranslation_style' : 'add_estimated_fdr_style_1',
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
@@ -24,7 +25,7 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         },
         'citation' : \
             'An implementation of the target/decoy FDR estimation '\
-            'method described in: Lukas Käll, John D. Storey, Michael J. '\
+            'method described in: Lukas Kall, John D. Storey, Michael J. '\
             'MacCoss and William Stafford Noble (2007) Assigning significance '\
             'to peptides identified by tandem mass spectrometry using decoy '\
             'databases.' ,
@@ -44,26 +45,23 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         if self.params['input_file'].lower().endswith('.csv') is False:
             raise ValueError('add_estimated_fdr_1 input file must be a CSV file!')
 
-        assert 'validation_score_field' in self.params and \
-            isinstance( self.params['validation_score_field'], str), '''
-  add_estimated_fdr requires a quality criterion (score) to calculate estimated FDRs.
-  Please define the column name of that score using this syntax:
+
+
+        last_search_engine = self.get_last_search_engine(
+            history = self.stats['history']
+        )
+        assert last_search_engine or (
+            'validation_score_field' in self.params and 
+            'bigger_scores_better' in self.params), '''
+  Could not detect which search engine produced the input file.
+  "add_estimated_fdr" requires a quality criterion (score) to calculate estimated FDRs.
+  Please make sure your input file has a proper ursgal u.json file, or define the
+  column name of that score using this syntax:
   >>> uc.params['validation_score_field'] = 'my_score_column'
   >>> uc.params['bigger_scores_better'] = False  # or True!
         '''
-
-        score_field = self.params['validation_score_field']
-        if 'bigger_scores_better' not in self.params:
-            bigger_is_better = False
-            print('''
-  WARNING! You did not specify "bigger_scores_better" (True/False)
-  in the UController params! By default, add_estimated_fdr assumes
-  that small score values indicate PSMs of high quality.
-  If you specified a score column where large values are better,
-  the following FDR estimation will definitely lead to wrong results!
-            ''')
-        else:
-            bigger_is_better = self.params['bigger_scores_better']
+        score_field = self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][last_search_engine]
+        bigger_is_better = self.TRANSLATIONS['bigger_scores_better']['uvalue_style_translation'][last_search_engine]
 
         output_file = os.path.join(
                 self.params['output_dir_path'],

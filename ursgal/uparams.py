@@ -93,11 +93,13 @@ ursgal_params = {
         'available_in_unode' : [
             'percolator_2_08',
             'qvality_2_02',
+            'add_estimated_fdr_1_0_0',
         ],
         'default_value' : None,
         'description' :  ''' Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
+            'add_estimated_fdr_style_1' : 'bigger_scores_better',
             'percolator_style_1' : 'bigger_scores_better',
             'qvality_style_1' : '-r',
         },
@@ -106,6 +108,19 @@ ursgal_params = {
             'validation',
         ],
         'uvalue_translation' : {
+            'add_estimated_fdr_style_1' : {
+                'msamanda_1_0_0_5242' : True,
+                'msamanda_1_0_0_5243' : True,
+                'msgfplus_v9979' : False,
+                'myrimatch_2_1_138' : True,
+                'myrimatch_2_1_140' : True,
+                'omssa_2_1_9' : False,
+                'xtandem_cyclone_2010' : True,
+                'xtandem_jackhammer' : True,
+                'xtandem_piledriver' : True,
+                'xtandem_sledgehammer' : True,
+                'xtandem_vengeance' : True,
+            },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
@@ -133,7 +148,7 @@ ursgal_params = {
                 'xtandem_vengeance' : True,
             },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "bool",
     },
     'cleavage_cterm_mass_change' : {
         'available_in_unode' : [
@@ -3913,6 +3928,7 @@ Example:
             'qvality_2_02',
             'ucontroller',
             'unify_csv_1_0_0',
+            'add_estimated_fdr_1_0_0',
         ],
         'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator ''',
@@ -3922,6 +3938,7 @@ Example:
             'qvality_style_1' : 'validation_score_field',
             'ucontroller_style_1' : 'validation_score_field',
             'unify_csv_style_1' : 'validation_score_field',
+            'add_estimated_fdr_style_1' : 'validation_score_field',
         },
         'utag' : [
             'validation',
@@ -3973,6 +3990,21 @@ Example:
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
             },
             'unify_csv_style_1' : {
+                'msamanda_1_0_0_5242' : 'Amanda:Score',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'myrimatch_2_1_140' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
+                'omssa_2_1_9' : 'OMSSA:pvalue',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
+                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
+                'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
+                'xtandem_piledriver' : 'X\!Tandem:hyperscore',
+                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
+                'xtandem_vengeance' : 'X\!Tandem:hyperscore',
+            },
+            'add_estimated_fdr_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
@@ -4130,6 +4162,27 @@ Example:
         },
         'uvalue_type' : "float",
     },
+    'window_size': {
+        'available_in_unode' : [
+            'combine_pep_1_0_0',
+        ],
+        'default_value' : 249,
+        'description' : ''' Combined PEPs are computed by
+    iterating a sliding window over the sorted PSMs. Each PSM receives
+    a PEP based on the target/decoy ratio of the surrounding PEPs. 
+    This parameter defines the window size. ''',
+        'trigger_rerun' : True,
+        'ukey_translation' : {
+            'combine_pep_style_1' : 'window_size',
+        },
+        'utag' : [
+            'statistics',
+            'combining_search_results',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
     'write_unfiltered_results' : {
         'available_in_unode' : [
             'filter_csv_1_0_0',
@@ -4172,43 +4225,4 @@ Example:
         },
         'uvalue_type' : "bool",
     },
-
-
-
-
-
-    # Lukas WIP stuff, will be sorted alphabetically later:
-    # combined PEP:
-    'window_size': {
-        'available_in_unode' : [
-            'combine_pep_1_0_0',
-        ],
-        'default_value' : 249,
-        'description' : ''' Combined PEPs are computed by
-    iterating a sliding window over the sorted PSMs. Each PSM receives
-    a PEP based on the target/decoy ratio of the surrounding PEPs. 
-    This parameter defines the window size. ''',
-        'trigger_rerun' : True,
-        'ukey_translation' : {
-            'combine_pep_style_1' : 'window_size',
-        },
-        'utag' : [
-            'statistics',
-            'combining_search_results',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-    },
-
-
-
-
-
-
-
-
-
-
-
 }
