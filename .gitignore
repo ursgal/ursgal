@@ -12,4 +12,7 @@ docs/build/
 docs/source/parameter.txt
 # ^--- auto generated during sphinx make
 tests/data/test_Creinhardtii_target_decoy.fasta.*
+build/
+ursgal/resources/win32/
+ursgal/resources/platform_independent/arc_independent/msgfplus_v9979
 
