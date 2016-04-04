@@ -1380,7 +1380,11 @@ class UNode(object, metaclass=Meta_UNode):
             - v0.4
         '''
         # print( self.DEFAULT_PARAMS )
-        translated_params = {}
+        translated_params = {
+            '_translated_keys': {},
+            '_translated_values': {},
+
+        }
         GROUPED_TRANSLATIONS = {}
         for ukey, mDict in self.TRANSLATIONS.items():
             pvalue = params.get( ukey, mDict['default_value'] )
@@ -1401,6 +1405,8 @@ class UNode(object, metaclass=Meta_UNode):
 
             translated_params[ mDict['ukey'] ] = translated_value
             translated_params[ '{ukey}_key'.format(**mDict) ] = ukey_t
+
+            translated_params[ '_translated_values' ][ mDict['ukey'] ] = pvalue
 
             if ukey_t not in GROUPED_TRANSLATIONS.keys():
                 GROUPED_TRANSLATIONS[ ukey_t ] = {}
