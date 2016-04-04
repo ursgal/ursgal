@@ -1249,16 +1249,22 @@ class UNode(object, metaclass=Meta_UNode):
         # so we can check which parameters are used during
         # run time or which one lead to a crash
 
-        self.original_params = copy.deepcopy( self.params )
+        # self.original_params = copy.deepcopy( self.params )
 
 
         # We use original params for second and final dump
         #
-        if 'command_list' in self.original_params:
-            del self.original_params['command_list']
+        # if 'command_list' in self.original_params:
+        #     del self.original_params['command_list']
 
-        translated_params = self.translate_params( self.params )
-        self.params.update( translated_params )
+        if 'translations' in self.params:
+            del self.params['translations']
+
+
+        untranslated_params, translated_params = \
+            self.collect_and_translate_params( self.params )
+        self.params.update( untranslated_params )
+        self.params['translations'] = translated_params
         import pprint
         print('org')
         pprint.pprint(self.params)
@@ -1360,7 +1366,7 @@ class UNode(object, metaclass=Meta_UNode):
         self.params.update( params )
         return
 
-    def translate_params(self, params):
+    def collect_and_translate_params(self, params):
         '''
         Translates ursgal parameters into uNode specific syntax.
 
@@ -1380,13 +1386,11 @@ class UNode(object, metaclass=Meta_UNode):
             - v0.4
         '''
         # print( self.DEFAULT_PARAMS )
-        translated_params = {
-            '_translated_keys': {},
-            '_translated_values': {},
-
-        }
+        translated_params = {}
         GROUPED_TRANSLATIONS = {}
+        untranslated_params = {}
         for ukey, mDict in self.TRANSLATIONS.items():
+
             pvalue = params.get( ukey, mDict['default_value'] )
             ukey_t = mDict['ukey_translated']
 
@@ -1403,10 +1407,10 @@ class UNode(object, metaclass=Meta_UNode):
                         pvalue
                     )
 
+            untranslated_params[ ukey ] = pvalue
+
             translated_params[ mDict['ukey'] ] = translated_value
             translated_params[ '{ukey}_key'.format(**mDict) ] = ukey_t
-
-            translated_params[ '_translated_values' ][ mDict['ukey'] ] = pvalue
 
             if ukey_t not in GROUPED_TRANSLATIONS.keys():
                 GROUPED_TRANSLATIONS[ ukey_t ] = {}
@@ -1415,10 +1419,10 @@ class UNode(object, metaclass=Meta_UNode):
                     mDict['ukey'] : translated_value
                 }
             )
-        translated_params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'] = \
+        translated_params['_grouped_by_translated_key'] = \
             GROUPED_TRANSLATIONS
 
-        return translated_params
+        return untranslated_params, translated_params
 
 
         # exit("Translation is not done yet ....")

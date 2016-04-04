@@ -891,6 +891,9 @@ ursgal_params = {
             'xtandem_style_1' : {
                 'da' : 'Daltons',
             },
+            'omssa_style_1' : {
+                'da' : 'Da',
+            },
         },
         'uvalue_type' : [
             'da',
@@ -4169,7 +4172,7 @@ Example:
         'default_value' : 249,
         'description' : ''' Combined PEPs are computed by
     iterating a sliding window over the sorted PSMs. Each PSM receives
-    a PEP based on the target/decoy ratio of the surrounding PEPs. 
+    a PEP based on the target/decoy ratio of the surrounding PEPs.
     This parameter defines the window size. ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
