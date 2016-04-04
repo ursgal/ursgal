@@ -31,7 +31,11 @@ class venndiagram_1_0_0( ursgal.UNode ):
                 },
             },
         },
-
+        'citation'                  : 'Kremer, L. P. M., Leufken, J., '\
+            'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
+            'Ursgal, Universal Python Module Combining Common Bottom-Up '\
+            'Proteomics Tools for Large-Scale Analysis. '\
+            'J. Proteome res. 15, 788–794.',
     }
     def __init__(self, *args, **kwargs):
         super(venndiagram_1_0_0, self).__init__(*args, **kwargs)
@@ -120,7 +124,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
         assert all_are_csv == True, "VennDiagram input files all have to be .csv"
         assert len(data) <= 5, '''
             ERROR: input_file_list can only contain two to five result files,
-            you can merge files before, if you need. 
+            you can merge files before, if you need.
             Current number of files: {0}'''.format(len(data))
 
         used_labels = []
