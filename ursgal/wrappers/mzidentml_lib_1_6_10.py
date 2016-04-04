@@ -28,7 +28,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
             'Hermjakob H, Vizcaíno JA, Jones AR. (2012) jmzIdentML API: '\
             'A Java interface to the mzIdentML standard for peptide and '\
             'protein identification data.',
-        'in_development'            : True,
+        'in_development'            : False,
         'include_in_git'            : False,
         'utranslation_style'    : 'mzidentml_lib_1_6_10',
 
@@ -73,7 +73,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
 
         tmp_command_list = [
             'java',
-            '-jar', 
+            '-jar',
             self.exe,
         ]
 
@@ -94,7 +94,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                     print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
                     print(translation_dict)
                     exit(1)
-            
+
         tmp_command_list += tmp_options
         proc = subprocess.Popen(
             tmp_command_list,
@@ -160,7 +160,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
 
             self.params[ 'command_list' ] = [
                 'java',
-                '-jar', 
+                '-jar',
                 self.exe,
                 FULL_INPUT_PATH,
             ]

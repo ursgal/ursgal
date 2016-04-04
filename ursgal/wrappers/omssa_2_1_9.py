@@ -294,7 +294,7 @@ class omssa_2_1_9( ursgal.UNode ):
             elif translated_key == ('-mv', 'mf'):
                 if self.params['opt_mods'] != '':
                     self.params['command_list'].extend( ('-mv', self.params['opt_mods']) )
-                if self.params['fixed_mods'] != '':  
+                if self.params['fixed_mods'] != '':
                     self.params['command_list'].extend( ('-mf', self.params['fixed_mods']) )
                 continue
             elif translated_key == '-i':
@@ -427,6 +427,9 @@ class omssa_2_1_9( ursgal.UNode ):
                     else:
                         tmp['Is decoy'] = 'false'
                     csv_dict_writer_object.writerow( tmp )
+        # import pprint
+        # pprint.pprint( self.original_params )
+        # exit('<><><><>')
         return
 
 

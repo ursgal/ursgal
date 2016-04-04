@@ -14,6 +14,7 @@ import subprocess
 import re
 import pprint
 import gzip
+import copy
 
 
 class Meta_UNode(type):
@@ -298,11 +299,11 @@ class UNode(object, metaclass=Meta_UNode):
                 d.update(buf)
         return d.hexdigest()
 
-    def check_if_all_default_params_are_in_params(self):
-        for default_param_key, default_param_value in self.DEFAULT_PARAMS.items():
-            if default_param_key not in self.params.keys():
-                self.params[ default_param_key ] = default_param_value
-        return
+    # def check_if_all_default_params_are_in_params(self):
+    #     for default_param_key, default_param_value in self.DEFAULT_PARAMS.items():
+    #         if default_param_key not in self.params.keys():
+    #             self.params[ default_param_key ] = default_param_value
+    #     return
 
 
     def determine_common_top_level_folder( self, input_files=None ):
@@ -1228,14 +1229,14 @@ class UNode(object, metaclass=Meta_UNode):
             tag=tag
         )
         if self.io['output']['finfo']['is_compressed']:
-            self.params['output_file'] = self.params['output_file'].replace('.gz','')
+            self.params['output_file'] = self.params['output_file'].replace('.gz', '')
             self.print_info(
                 'Will compress output {output_file} on the fly ... renamed temporarily params["output_file"]'
             .format( **self.params ))
 
         # DEFAULT PARAMS ARE INCLUDED HERE :)
         # self.params = self.DEFAULT_PARAMS.copy()
-        self.check_if_all_default_params_are_in_params()
+        # self.check_if_all_default_params_are_in_params()
         self.time_point(tag = 'run')
         self.stats['history'] = self.update_history_status(
             history = self.stats['history']
@@ -1248,19 +1249,20 @@ class UNode(object, metaclass=Meta_UNode):
         # so we can check which parameters are used during
         # run time or which one lead to a crash
 
-        self.ORIGINAL_PARAMS = self.params.copy()
-        # import pprint
-        # print('>>>>>>>>>>>>org')
-        # pprint.pprint(self.ORIGINAL_PARAMS)
-        # exit(1)
-        #
+        self.original_params = copy.deepcopy( self.params )
+
+
         # We use original params for second and final dump
         #
-        if 'command_list' in self.ORIGINAL_PARAMS:
-            del self.ORIGINAL_PARAMS['command_list']
+        if 'command_list' in self.original_params:
+            del self.original_params['command_list']
 
         translated_params = self.translate_params( self.params )
         self.params.update( translated_params )
+        import pprint
+        print('org')
+        pprint.pprint(self.params)
+        exit(1)
 
         is_search_engine = self.META_INFO['engine_type'].get(
             'search_engine',
@@ -1333,7 +1335,7 @@ class UNode(object, metaclass=Meta_UNode):
                     f_out.writelines(f_in)
             self.created_tmp_files.append( raw_output )
 
-        self.params.update( self.ORIGINAL_PARAMS )
+        self.params.update( self.original_params )
 
         if self.params['remove_temporary_files']:
             for tmp_file in self.created_tmp_files:
