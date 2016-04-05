@@ -76,6 +76,8 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
                     pass
                 else:
                     if rule == 'lte':
+                        if line_dict[dict_key] == '':
+                            continue
                         if float(line_dict[dict_key]) <= value:
                             write_row_bools.add(True)
                         else:
@@ -124,6 +126,18 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
                     elif rule =='regex':
                         if re.search(value, line_dict[dict_key]) is not None:
                             write_row_bools.add(True)
+                        else:
+                            write_row_bools.add(False)
+                    elif rule == 'contains_glycosite':
+                        if re.search(value, line_dict[dict_key]) is not None:
+                            write_row_bools.add(True)
+                        elif line_dict[dict_key][-2] == 'N' and line_dict[dict_key][-1] != 'P':
+                            for protein in line_dict['proteinacc_start_stop_pre_post_;'].split('<|>'):
+                                if line_dict['proteinacc_start_stop_pre_post_;'][-1] in ['S','T']:
+                                    write_row_bools.add(True)
+                                    break
+                                else:
+                                    write_row_bools.add(False)
                         else:
                             write_row_bools.add(False)
                     else:

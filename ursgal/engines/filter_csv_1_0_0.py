@@ -36,6 +36,7 @@ class filter_csv_1_0_0( ursgal.UNode ):
             * equals
             * equals_not
             * regex
+            * contains_glycosite
 
         Example:
 
@@ -117,6 +118,13 @@ class filter_csv_1_0_0( ursgal.UNode ):
 
             Any regular expression matching is possible E.g. CT and CD motif
             search ['Sequence','regex','C[T|D]']
+
+        contains_glycosite
+
+            Checks if the Sequence contains a glycosylation site using the
+            regex function and checking for the post amino acid if the glycosite
+            is at the end of the sequence 
+            ['Sequence','contains_glycosite', 'N.[ST]']
 
 
         Note:

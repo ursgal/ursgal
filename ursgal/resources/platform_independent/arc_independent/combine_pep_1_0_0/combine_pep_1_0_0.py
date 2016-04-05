@@ -6,7 +6,9 @@ import functools
 import operator
 import itertools
 import collections
+import sys
 
+# csv.field_size_limit(sys.maxsize)
 
 def adjust_window_size(desired_window_size, iter_len, minimum=29):
     '''
@@ -189,6 +191,8 @@ class CombinedPEP(object):
             # For every PSM, use naive Bayes to calculate the combined PEP
             # ('Bayes PEP') among all engines and add it to self.score_dict:
 
+            if len(all_PSMs_of_combo_engines) == 0:
+                continue
             decoy_count_of_intersection = 0
             psm_count_of_intersection = 0
             for PSM_key in all_PSMs_of_combo_engines:
@@ -278,7 +282,10 @@ class CombinedPEP(object):
                     out_row['engines'] = self.join_sep.join(engine_combo)
                     # add columns with Bayes PEP and combined PEP:
                     for score_field in new_scores:
-                        out_row[score_field] = score_dict_val[score_field]
+                        try:
+                            out_row[score_field] = score_dict_val[score_field]
+                        except:
+                            continue
                     writer.writerow(out_row)
         return
 

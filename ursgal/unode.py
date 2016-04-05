@@ -550,7 +550,7 @@ class UNode(object, metaclass=Meta_UNode):
                     if len( merged_engines ) == 1:
                         last_engine = list(merged_engines)[0]
                     elif multiple_engines == True:
-                        last_engine = merged_engines
+                        last_engine = list(merged_engines)
                     else:
                         assert last_engine != None, '''
                         last_engine cannot be determined, since multiple engines have been used.
