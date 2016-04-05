@@ -172,10 +172,15 @@ class CombinedPEP(object):
 
     def generate_psm_to_scores_dict(self, input_engines):
         for engine_combo in self.all_combinations(input_engines):
-            engines_not_in_combo = {e for e in input_engines if e not in engine_combo}
+            engines_not_in_combo = \
+                {e for e in input_engines if e not in engine_combo}
 
-            print("\nCombo:", engine_combo)
-            print("not in Combo:", engines_not_in_combo)
+            print('\nScoring {0} PSMs that were found by {1}, '\
+                'but not by {2}...'.format(
+                    len(all_PSMs_of_combo_engines),
+                    ' & '.join(engine_combo),
+                    ' or '.join(engines_not_in_combo),
+            )
 
             self.score_dict[engine_combo] = {}
 
@@ -186,13 +191,13 @@ class CombinedPEP(object):
             # remove all PSMs that are found by other engines:
             for other_eng in engines_not_in_combo:
                 all_PSMs_of_combo_engines -= set(self.psm_dicts[other_eng].keys())
-            print('# of PSMs in this combo:', len(all_PSMs_of_combo_engines))
+
+            if not all_PSMs_of_combo_engines:  # nothing to do here...
+                continue
 
             # For every PSM, use naive Bayes to calculate the combined PEP
             # ('Bayes PEP') among all engines and add it to self.score_dict:
 
-            if len(all_PSMs_of_combo_engines) == 0:
-                continue
             decoy_count_of_intersection = 0
             psm_count_of_intersection = 0
             for PSM_key in all_PSMs_of_combo_engines:
