@@ -8,37 +8,55 @@ class combine_pep_1_0_0(ursgal.UNode):
     '''
     combine_pep_1_0_0 UNode
 
-    Combine_PEP is a variation of the combined FDR score algorithm
-    (Jones et al., 2009). Instead of sorting PSMs by the average FDR
-    score (AFS), PSMs are sorted by their multi-engine PEP as computed
-    from the single-engine PEPs using Bayes’ theorem.
-    For instance, consider a PSM that received three different PEPs
-    (a, b and c) from three different search engines. The multi-engine
-    PEP can then be computed:
+    Combining Multiengine Search Results with "Combined PEP"
+    
+    "Combined PEP" is a hybrid approach combining elements of the
+    "combined FDR" approach (Jones et al., 2009), elements of PeptideShaker,
+    and elements of Bayes' theorem. Similar to "combined FDR", "combined PEP"
+    groups the PSMs. For each search engine, the reported PSMs are treated
+    as a set and the logical combinations of all sets are treated separately
+    as done in the "combined FDR" approach. For instance, three search engines
+    would result in seven PSM groups, which can be visualized by the seven
+    intersections of a three-set Venn diagram. Typically, a PSM group that is
+    shared by multiple engines contains fewer decoy hits and thus represents a
+    higher quality subset and thus its PSMs receive a higher score. This
+    approach is based on the assumption that the search engines agree on the
+    decoys and false-positives as they agree on the targets.
 
-                                a*b*c
-    multi-engine PEP = -------------------------
-                       a*b*c + (1-a)*(1-b)*(1-c)
+    The combined PEP approach uses Bayes' theorem to calculate a multiengine
+    PEP (MEP) for each PSM based on the PEPs reported by, for example,
+    Percolator for different search engines, that is
+    
+    .. image:: http://pubs.acs.org/appl/literatum/publisher/achs/journals/content/jprobs/2016/jprobs.2016.15.issue-3/acs.jproteome.5b00860/20160229/images/pr-2015-00860d_m001.gif
+       :target: http://pubs.acs.org/doi/full/10.1021/acs.jproteome.5b00860#_i2
+       :align: center
 
-    For each combination of search engines, all PSMs that were found
-    by these engines are then scored separately. First, they are sorted
-    by their multi-engine PEP. Then their combined PEPs are computed by
-    iterating a sliding window over the sorted PSMs. Each PSM receives
-    a PEP based on the target/decoy ratio of the surrounding PEPs:
+    This is done for each PSM group separately.
 
-    PEP = (2 * number_of_decoys_in_window) / number_of_total_PSMs_in_window
+    Then, the combined PEP (the final score) is computed similar to PeptideShaker
+    using a sliding window over all PSMs within each group (sorted by MEP). Each
+    PSM receives a PEP based on the target/decoy ratio of the surrounding PSMs.
 
-    The window_size can be defined by adjusting the Ursgal parameter
-    'cPEP:window_size', default is 249.
+    .. image:: http://pubs.acs.org/appl/literatum/publisher/achs/journals/content/jprobs/2016/jprobs.2016.15.issue-3/acs.jproteome.5b00860/20160229/images/pr-2015-00860d_m002.gif
+       :target: http://pubs.acs.org/doi/full/10.1021/acs.jproteome.5b00860#_i2
+       :align: center
+
+    Finally, all groups are merged and the results reported in one output,
+    including all the search result scores from the individual search engines
+    as well as the FDR based on the "combined PEP".
+
+
+    The sliding window size can be defined by adjusting the Ursgal parameter
+    "window_size" (default is 249).
 
     Input should be multiple CSV files from different search engines. Each
     CSV requires a PEP column, for instance by post-processing with Percolator.
 
     Returns a merged CSV file with all PSMs that were found and two added
     columns:
-    - column 'Bayes PEP':
+    - column "Bayes PEP":
         The multi-engine PEP, see explanation above
-    - column 'combined PEP':
+    - column "combined PEP":
         The PEP as computed within the engine combination PSMs
 
     For optimal ranking, PSMs should be sorted by combined PEP.
