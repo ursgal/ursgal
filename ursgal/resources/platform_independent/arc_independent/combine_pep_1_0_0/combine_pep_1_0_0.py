@@ -189,11 +189,11 @@ class CombinedPEP(object):
                 continue
 
             print('\nScoring {0} PSMs that were found by\n{1}, '\
-                'but not by\n{2}...'.format(
+                '\nbut not by\n{2}...'.format(
                     len(all_PSMs_of_combo_engines),
                     ' & '.join(engine_combo),
                     ' or '.join(engines_not_in_combo),
-            )
+            ))
             # For every PSM, use naive Bayes to calculate the combined PEP
             # ('Bayes PEP') among all engines and add it to self.score_dict:
 
@@ -225,7 +225,7 @@ class CombinedPEP(object):
                     'Is decoy' : PSM_is_decoy,
                 }
 
-            print('{:.3%}% of these PSMs are decoys.'.format(
+            print('{:.1%} of these PSMs are decoys.'.format(
                 decoy_count_of_intersection / psm_count_of_intersection
             ))
 
