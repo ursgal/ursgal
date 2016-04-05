@@ -28,7 +28,7 @@ class get_http_files_1_0_0( ursgal.UNode ):
             },
         },
         'utranslation_style'        : 'get_http_style_1',
-        'in_development'            : True,
+        'in_development'            : False,
         'input_types'    : '',
         'output_suffix'  : None,
         'include_in_git' : True,
@@ -37,7 +37,6 @@ class get_http_files_1_0_0( ursgal.UNode ):
             'Ursgal, Universal Python Module Combining Common Bottom-Up '\
             'Proteomics Tools for Large-Scale Analysis. '\
             'J. Proteome res. 15, 788–794.',
-        # 'in_development' : True
     }
 
     def __init__(self, *args, **kwargs):

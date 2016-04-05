@@ -31,7 +31,7 @@ class _test_node( ursgal.UNode ):
 
         in_path = os.path.join(
             self.params['input_dir_path'],
-            self.params['file_root'] + '.csv'
+            self.params['input_file']
         )
 
         out_path = os.path.join(
@@ -48,9 +48,9 @@ class _test_node( ursgal.UNode ):
             '-o',
             out_path,
             '-t1',
-            '{test_param1}'.format(**self.params),
+            '{test_param1}'.format(**self.params['translations']),
             '-t2',
-            '{test_param2}'.format(**self.params),
+            '{test_param2}'.format(**self.params['translations']),
         ]
         print("\nTest UNode: preflight() was executed!\n")
 

@@ -160,7 +160,7 @@ class omssa_2_1_9( ursgal.UNode ):
             self._load_omssa_xml()
 
         # building command_list !
-        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        translations = self.params['translations']['_grouped_by_translated_key']
 
         blastdb_suffixes = [ '.phr', '.pin', '.psq' ]
         blastdb_present = True
@@ -194,8 +194,8 @@ class omssa_2_1_9( ursgal.UNode ):
         # Modifications
         # ------------------------
 
-        for param_key in ['fixed_mods', 'opt_mods']:
-            mod_type = param_key[:3]
+        for param_key in ['_fixed_mods', '_opt_mods']:
+            mod_type = param_key[1:4]
             modifications = ''
             self.params[ param_key ] = ''
             for mod in self.params[ 'mods' ][ mod_type ]:
@@ -247,16 +247,16 @@ class omssa_2_1_9( ursgal.UNode ):
                     base_mz=self.params['base_mz']
                 )
 
-        self.params['omssa_precursor_error'] = (
+        self.params['_omssa_precursor_error'] = (
             float(self.params['precursor_mass_tolerance_plus']) + \
             float(self.params['precursor_mass_tolerance_minus']) \
         ) / 2.0
 
-        self.params['tmp_output_file_incl_path'] = os.path.join(
+        self.params['_tmp_output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file'] + '_tmp'
         )
-        self.created_tmp_files.append( self.params['tmp_output_file_incl_path'] )
+        self.created_tmp_files.append( self.params['_tmp_output_file_incl_path'] )
 
         self.params['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
@@ -281,10 +281,10 @@ class omssa_2_1_9( ursgal.UNode ):
         for translated_key, translation_dict in translations.items():
             translated_value = str(list(translation_dict.values())[0])
             if translated_key == ('-oc', '-ox'):
-                self.params['command_list'].extend( (translated_value, self.params['tmp_output_file_incl_path']) )
+                self.params['command_list'].extend( (translated_value, self.params['_tmp_output_file_incl_path']) )
                 continue
             elif translated_key == '-te':
-                self.params['command_list'].extend( (translated_key, str(self.params['omssa_precursor_error'])) )
+                self.params['command_list'].extend( (translated_key, str(self.params['_omssa_precursor_error'])) )
                 continue
             elif translated_key in ['-teppm', '-ni']:
                 if translated_value != '':
@@ -292,10 +292,10 @@ class omssa_2_1_9( ursgal.UNode ):
                 else:
                     continue
             elif translated_key == ('-mv', 'mf'):
-                if self.params['opt_mods'] != '':
-                    self.params['command_list'].extend( ('-mv', self.params['opt_mods']) )
-                if self.params['fixed_mods'] != '':
-                    self.params['command_list'].extend( ('-mf', self.params['fixed_mods']) )
+                if self.params['_opt_mods'] != '':
+                    self.params['command_list'].extend( ('-mv', self.params['_opt_mods']) )
+                if self.params['_fixed_mods'] != '':
+                    self.params['command_list'].extend( ('-mf', self.params['_fixed_mods']) )
                 continue
             elif translated_key == '-i':
                 ions_2_add = []
@@ -327,7 +327,7 @@ class omssa_2_1_9( ursgal.UNode ):
         csv file
         '''
         cached_omssa_output = []
-        result_file = open( self.params['tmp_output_file_incl_path'], 'r')
+        result_file = open( self.params['_tmp_output_file_incl_path'], 'r')
         csv_dict_reader_object = csv.DictReader(
             row for row in result_file if not row.startswith('#')
         )

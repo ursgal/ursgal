@@ -2204,7 +2204,7 @@ Example:
         },
         'uvalue_type' : "int",
     },
-    'number_of_i_decimals' : {
+    'num_i_decimals' : {
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -2221,7 +2221,7 @@ Example:
         },
         'uvalue_type' : "int",
     },
-    'number_of_mz_decimals' : {
+    'num_mz_decimals' : {
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],

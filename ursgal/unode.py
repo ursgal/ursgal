@@ -485,6 +485,10 @@ class UNode(object, metaclass=Meta_UNode):
         for param_key in list(j_content[2].keys()):
             if param_key.startswith('_'):
                 del j_content[2][ param_key ]
+            elif isinstance(j_content[2][ param_key ], dict):
+                for sub_param_key in list(j_content[2][ param_key ].keys()):
+                    if sub_param_key.startswith('_'):
+                        del j_content[2][ param_key ][sub_param_key]
 
         with open( json_file , 'w') as file_object:
             json.dump(
@@ -1341,7 +1345,7 @@ class UNode(object, metaclass=Meta_UNode):
                     f_out.writelines(f_in)
             self.created_tmp_files.append( raw_output )
 
-        self.params.update( self.original_params )
+        # self.params.update( self.original_params )
 
         if self.params['remove_temporary_files']:
             for tmp_file in self.created_tmp_files:

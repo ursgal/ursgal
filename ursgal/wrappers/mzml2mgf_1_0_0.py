@@ -56,8 +56,8 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
                     self.io['output']['finfo']['dir'],
                     self.io['output']['finfo']['file']
                 ),
-                i_decimals            = self.params['number_of_i_decimals'],
-                mz_decimals           = self.params['number_of_mz_decimals'],
+                i_decimals            = self.params['num_i_decimals'],
+                mz_decimals           = self.params['num_mz_decimals'],
                 machine_offset_in_ppm = self.params['machine_offset_in_ppm'],
                 scan_exclusion_list   = self.params['scan_exclusion_list'],
                 prefix                = self.params.get('prefix',None),
