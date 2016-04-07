@@ -67,8 +67,9 @@ class venndiagram_1_0_0( ursgal.UNode ):
         venndiagram_main = self.import_engine_as_python_function()
 
         venn_params = {}
-
-        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        import pprint
+        pprint.pprint(self.params)
+        translations = self.params['translations']['_grouped_by_translated_key']
 
         output_file_name = os.path.join(
             self.params['output_dir_path'],
@@ -130,10 +131,10 @@ class venndiagram_1_0_0( ursgal.UNode ):
         used_labels = []
 
         for n, (engine, file_path) in enumerate(data):
-            if self.params['visualization_label_list'] == []:
+            if self.params['translations']['visualization_label_list'] == []:
                 label = engine
             else:
-                label = self.params['visualization_label_list'][n]
+                label = self.params['translations']['visualization_label_list'][n]
             venn_params[default_label[n]] = label
             column_sets[ label ]     = set()
             used_labels.append(label)
@@ -149,7 +150,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
             )
             for line_dict in csv_input:
                 value = ''
-                for column_name in self.params['visualization_column_names']:
+                for column_name in self.params['translations']['visualization_column_names']:
                     value += '||{0}'.format( line_dict[column_name] )
                 column_sets[ label ].add( value )
 

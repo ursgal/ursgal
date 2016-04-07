@@ -59,15 +59,15 @@ class Meta_UNode(type):
             engine = all_parts[ -2 ]
 
         initd_klass.DEFAULT_PARAMS = {}
-        initd_klass.TRANSLATIONS = {}
-        initd_klass.TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY = {}
+        initd_klass.UNODE_UPARAMS = {}
+        # initd_klass.TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY = {}
         initd_klass.PARAMS_TRIGGERING_RERUN = set()
         for mDict in Meta_UNode._uparam_mapper.mapping_dicts( engine ):
 
             initd_klass.DEFAULT_PARAMS[ mDict['ukey'] ] = \
                 mDict['default_value_translated']
 
-            initd_klass.TRANSLATIONS[ mDict['ukey'] ] = mDict
+            initd_klass.UNODE_UPARAMS[ mDict['ukey'] ] = mDict
 
             if mDict['triggers_rerun']:
                 initd_klass.PARAMS_TRIGGERING_RERUN.add( mDict['ukey'] )
@@ -127,14 +127,14 @@ class Meta_UNode(type):
         #     engine = all_parts[ -2 ]
 
         # initd_klass.DEFAULT_PARAMS = {}
-        # initd_klass.TRANSLATIONS = {}
+        # initd_klass.UNODE_UPARAMS = {}
         # for mDict in Meta_UNode.upama.mapping_dicts( engine ):
         #     translated_value = mDict['uvalue_style_translation'].get(
         #         mDict['default_value'],
         #         mDict['default_value']
         #     )
         #     initd_klass.DEFAULT_PARAMS[ mDict['ukey_translated'] ] = translated_value
-        #     initd_klass.TRANSLATIONS[ mDict['ukey'] ] = mDict
+        #     initd_klass.UNODE_UPARAMS[ mDict['ukey'] ] = mDict
         # initd_klass.exe = kwargs['engine_path']
         # # obligatory_methods = [
         # #     'preflight',
@@ -713,7 +713,7 @@ class UNode(object, metaclass=Meta_UNode):
             row for row in opened_file if not row.startswith('#')
         )
         n = 0
-        validation_score_field = self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][search_engine]
+        validation_score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][search_engine]
         for n, line_dict in enumerate(csv_dict_reader_object):
             assert validation_score_field in line_dict.keys(), \
                 '''defined validation_score_field for {0} is not found,
@@ -730,7 +730,7 @@ class UNode(object, metaclass=Meta_UNode):
         for spectrum_title in grouped_psms.keys():
             grouped_psms[ spectrum_title ].sort(
                 key     = operator.itemgetter(0),
-                reverse = self.TRANSLATIONS['bigger_scores_better']['uvalue_style_translation'][search_engine]
+                reverse = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][search_engine]
             )
         print(
             "[ GROUPING ] Grouped {0} PSMs into {1} unique spectrum titles".format(
@@ -1393,7 +1393,7 @@ class UNode(object, metaclass=Meta_UNode):
         translated_params = {}
         GROUPED_TRANSLATIONS = {}
         untranslated_params = {}
-        for ukey, mDict in self.TRANSLATIONS.items():
+        for ukey, mDict in self.UNODE_UPARAMS.items():
 
             pvalue = params.get( ukey, mDict['default_value'] )
             ukey_t = mDict['ukey_translated']

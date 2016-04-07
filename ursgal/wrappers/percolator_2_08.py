@@ -305,32 +305,32 @@ class percolator_2_08( ursgal.UNode ):
         ])
 
 
-        self.params['csv_input_file'] = os.path.join(
+        self.params['translations']['csv_input_file'] = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
 
         # this file will contain the decoys only (we need it for fdr calculations and such)
-        self.params['decoy_output_file_incl_path'] = os.path.join(
+        self.params['translations']['decoy_output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             "decoysOnly_" + self.params['output_file']
         )
 
-        self.params['percolator_in'] = \
+        self.params['translations']['percolator_in'] = \
             '{output_file_incl_path}.tsv'.format(
-                **self.params
+                **self.params['translations']
         )
 
-        self.params['percolator_out'] = \
-            '{output_file_incl_path}.psms'.format(**self.params)
+        self.params['translations']['percolator_out'] = \
+            '{output_file_incl_path}.psms'.format(**self.params['translations'])
 
         # writing the Percolator input file (tab separated format)
-        o = open( self.params['percolator_in'], 'w')
+        o = open( self.params['translations']['percolator_in'], 'w')
         writer = csv.DictWriter(
             o,
             list(PERCOLATOR_FIELDS.keys()),
@@ -339,17 +339,17 @@ class percolator_2_08( ursgal.UNode ):
         )
         writer.writeheader()
 
-        self.params['percolator_decoy_out'] = \
-            '{decoy_output_file_incl_path}.psms'.format(**self.params)
+        self.params['translations']['percolator_decoy_out'] = \
+            '{decoy_output_file_incl_path}.psms'.format(**self.params['translations'])
         self.params['command_list'] = [
             # percolator -X pout.xml pin.tab >| yeast-01.psms
             self.exe,
             '--only-psms',
-            '{percolator_in}'.format(**self.params),
+            '{percolator_in}'.format(**self.params['translations']),
             '--results-psms',
-            '{percolator_out}'.format(**self.params),
+            '{percolator_out}'.format(**self.params['translations']),
             '--decoy-results-psms',
-            '{percolator_decoy_out}'.format(**self.params)
+            '{percolator_decoy_out}'.format(**self.params['translations'])
         ]
 
         last_search_engine = self.get_last_search_engine(
@@ -357,7 +357,7 @@ class percolator_2_08( ursgal.UNode ):
         )
         self.params['_score_list'] = self.generating_score_list()
         minimum_score = None
-        bigger_scores_better = self.TRANSLATIONS['bigger_scores_better']['uvalue_style_translation'][last_search_engine]
+        bigger_scores_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][last_search_engine]
         if bigger_scores_better is False:
             for p, _score in enumerate(self.params['_score_list']):
                 if _score <= 0:
@@ -435,7 +435,7 @@ class percolator_2_08( ursgal.UNode ):
                 else:
                     t['Label'] = 1
 
-                if self.params['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
+                if self.params['translations']['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
                     # bug mzIdentML msgf+ convert
                     t['Label'] = -1
 
@@ -480,10 +480,10 @@ class percolator_2_08( ursgal.UNode ):
 
         # marking temporary files for deletion:
         self.created_tmp_files += [
-            self.params['decoy_output_file_incl_path'],
-            # self.params['percolator_in'],
-            '{output_file_incl_path}.psms'.format( **self.params ),
-            '{output_file_incl_path}.peptides'.format( **self.params ),
+            self.params['translations']['decoy_output_file_incl_path'],
+            self.params['translations']['percolator_in'],
+            '{output_file_incl_path}.psms'.format( **self.params['translations'] ),
+            '{output_file_incl_path}.peptides'.format( **self.params['translations'] ),
         ]
 
 
@@ -492,23 +492,23 @@ class percolator_2_08( ursgal.UNode ):
         read the output and merge in back to the ident csv
         '''
 
-        potential_buggy_percolator_output = self.params['percolator_out'] + '.psms'
+        potential_buggy_percolator_output = self.params['translations']['percolator_out'] + '.psms'
         if os.path.exists( potential_buggy_percolator_output ):
             print('WTF Percolator ?')
             print('Renaming: \n{percolator_out}.psms ->> {percolator_out}'.format(
-                **self.params
+                **self.params['translations']
             ))
             os.rename(
-                self.params['output_file_incl_path'] + '.psms.psms',
-                self.params['output_file_incl_path'] + '.psms'
+                self.params['translations']['output_file_incl_path'] + '.psms.psms',
+                self.params['translations']['output_file_incl_path'] + '.psms'
             )
             os.rename(
-                self.params['decoy_output_file_incl_path'] + '.psms.psms',
-                self.params['decoy_output_file_incl_path'] + '.psms'
+                self.params['translations']['decoy_output_file_incl_path'] + '.psms.psms',
+                self.params['translations']['decoy_output_file_incl_path'] + '.psms'
             )
             os.rename(
-                self.params['output_file_incl_path'] + '.psms.peptides',
-                self.params['output_file_incl_path'] + '.peptides'
+                self.params['translations']['output_file_incl_path'] + '.psms.peptides',
+                self.params['translations']['output_file_incl_path'] + '.peptides'
             )
 
         s2l = {
@@ -519,7 +519,7 @@ class percolator_2_08( ursgal.UNode ):
 
             percolator_output_dict_reader = csv.DictReader(
                 open(
-                    self.params[ p_out ],
+                    self.params['translations'][ p_out ],
                     'r'
                 ),
                 delimiter='\t'
@@ -535,7 +535,7 @@ class percolator_2_08( ursgal.UNode ):
                     s2l[ pkey ][ psmid_pep_key ] = line_dict
 
 
-        opened_file = open( self.params[ 'csv_input_file' ], 'r' )
+        opened_file = open( self.params['translations'][ 'csv_input_file' ], 'r' )
         csv_input = csv.DictReader( row for row in opened_file if not row.startswith('#') )
 
         if "PEP" not in csv_input.fieldnames and "q-value" not in csv_input.fieldnames:
@@ -548,7 +548,7 @@ class percolator_2_08( ursgal.UNode ):
             csv_kwargs['lineterminator'] = '\r\n'
 
         csv_output = csv.DictWriter(
-            open( self.params['output_file_incl_path'], 'w' ),
+            open( self.params['translations']['output_file_incl_path'], 'w' ),
             csv_input.fieldnames,
             **csv_kwargs
         )
@@ -561,7 +561,7 @@ class percolator_2_08( ursgal.UNode ):
             psm_type = "target"
             if line_dict['Is decoy'].upper() == 'TRUE':
                 psm_type = "decoy"
-            if self.params['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
+            if self.params['translations']['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
                 line_dict['Is decoy'] = "true"
                 psm_type = "decoy"
 

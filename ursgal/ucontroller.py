@@ -1212,7 +1212,7 @@ class UController(ursgal.UNode):
                         last_engine_meta_node = self.meta_unodes[ last_engine ]
 
                         last_engine_colname = \
-                            self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][last_engine]
+                            self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]
                         # old translation style:
                         # last_engine_colname = \
                         #     last_engine_meta_node.DEFAULT_PARAMS['validation_score_field'].split(":")[0]
@@ -1587,11 +1587,11 @@ class UController(ursgal.UNode):
                         )
                         break
                 else:
-                    default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(
-                        used_param,
-                        None
-                    )
-                    default_value = self.meta_unodes[engine].DEFAULT_PARAMS[ used_param ]
+                    # default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(
+                    #     used_param,
+                    #     None
+                    # )
+                    default_value = self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value']
 
                     if used_param not in o_params.keys():
                         reasons.append(
@@ -1606,6 +1606,10 @@ class UController(ursgal.UNode):
                             'has been added compared to the last output '\
                             '...'.format(used_param)
                         )
+                        # print('default:',default_value)
+                        # print('used',o_params[used_param])
+                        # print(self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value'])
+                        # exit(1)
                         break
 
         if self.io['output']['finfo']['json_exists']:

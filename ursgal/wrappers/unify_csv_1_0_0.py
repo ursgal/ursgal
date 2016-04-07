@@ -75,7 +75,11 @@ Could not load RT lookup dict from this location: {0}
         history = self.stats['history'],
         )
 
-        last_search_engine_colname = self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][last_engine]
+        # import pprint
+        # pprint.pprint(self.TRANSLATIONS)
+        # exit()
+
+        last_search_engine_colname = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]
 
         unify_csv_main(
             input_file     = input_file,

@@ -408,6 +408,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'qvality_2_02',
             'xtandem2csv_1_0_0',
+            'percolator_2_08',
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
@@ -420,6 +421,7 @@ ursgal_params = {
             'omssa_style_1' : 'decoy_tag',
             'qvality_style_1' : 'decoy_tag',
             'xtandem2csv_style_1' : 'decoy_tag',
+            'percolator_style_1' : 'decoy_tag',
         },
         'utag' : [
             'database',
@@ -3934,7 +3936,7 @@ Example:
             'add_estimated_fdr_1_0_0',
         ],
         'default_value' : None,
-        'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator ''',
+        'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator. If None is defined, default values are used ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'percolator_style_1' : 'validation_score_field',

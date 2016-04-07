@@ -69,60 +69,59 @@ class xtandem_piledriver( ursgal.UNode ):
             dict: self.params
         '''
 
-        self.params['mgf_input_file'] = os.path.join(
+        self.params['translations']['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
-            self.params['file_root'] + '.mgf'
+            self.params['input_file']
         )
-        file_info = self.params
         xml_required = [
             'default_input.xml',
             'taxonomy.xml',
             '15N-masses.xml',
             'input.xml'
         ]
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
         for file_name in xml_required:
             file_info_key = file_name.replace('.xml','')
             xml_file_path = os.path.join(
-                file_info['output_dir_path'],
+                self.params['output_dir_path'],
                 file_name
             )
-            self.params[ file_info_key ] = xml_file_path
+            self.params['translations'][ file_info_key ] = xml_file_path
             self.created_tmp_files.append( xml_file_path )
         #
         # building command_list !
         #
         self.params['command_list'] =[
             self.exe,
-            '{input}'.format(**self.params),
+            '{input}'.format(**self.params['translations']),
         ]
 
-        if self.params['label'] == '15N':
-            self.params['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">{15N-masses}</note>'.format(**self.params)
+        if self.params['translations']['label'] == '15N':
+            self.params['translations']['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">{15N-masses}</note>'.format(**self.params['translations'])
         else:
-            self.params['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">no</note>'
+            self.params['translations']['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">no</note>'
 
         # modifications
         potential_mods = []
         refine_potential_mods = []
         fixed_mods = []
-        self.params['Prot-N-term'] = 0.0
-        self.params['Prot-C-term'] = 0.0
+        self.params['translations']['Prot-N-term'] = 0.0
+        self.params['translations']['Prot-C-term'] = 0.0
         for mod in self.params[ 'mods' ][ 'fix' ]:
             fixed_mods.append(
                 '{0}@{1}'.format(mod[ 'mass' ], mod[ 'aa' ] )
             )
 
-        self.params['acetyl_N_term'] = 'no'
-        self.params['pyro_glu'] = 'no'
+        self.params['translations']['acetyl_N_term'] = 'no'
+        self.params['translations']['pyro_glu'] = 'no'
         pyro_glu = 0
         potentially_modified_aa = set()
         for mod in self.params[ 'mods' ][ 'opt' ]:
             if mod[ 'aa' ] == '*' and mod[ 'name' ] == 'Acetyl' and mod[ 'pos' ] == 'Prot-N-term' :
-                self.params['acetyl_N_term'] = 'yes'
+                self.params['translations']['acetyl_N_term'] = 'yes'
                 continue
             if mod[ 'aa' ] == '*' and mod[ 'name' ] == 'Gln->pyro-Glu' and mod[ 'pos' ] == 'Pep-N-term' :
                 pyro_glu += 1
@@ -133,7 +132,7 @@ class xtandem_piledriver( ursgal.UNode ):
             for term in ['Prot-N-term', 'Prot-C-term']:
                 if mod[ 'pos' ] == term:
                     if mod[ 'aa' ] == '*':
-                        if self.params[term] != 0.0:
+                        if self.params['translations'][term] != 0.0:
                             print(
                                 '''
             [ WARNING ] X!Tandem does not allow two mods on the same position {1}
@@ -141,7 +140,7 @@ class xtandem_piledriver( ursgal.UNode ):
                             )
                             continue
                         else:
-                            self.params[term] = mod[ 'mass' ]
+                            self.params['translations'][term] = mod[ 'mass' ]
                     else:
                         print(
                                 '''
@@ -163,20 +162,20 @@ class xtandem_piledriver( ursgal.UNode ):
                 potentially_modified_aa.add( mod['aa'] )
 
         if pyro_glu == 2:
-            self.params['pyro_glu'] = 'yes'
+            self.params['translations']['pyro_glu'] = 'yes'
         if pyro_glu == 1:
             print('''
     [ WARNING ] X!Tandem looks for Gln->pyro-Glu and Glu->pyro-Glu
     [ WARNING ] at the same time, please include both or none
     [ WARNING ] Continue without modification {0} '''.format(mod, **mod)
             )
-        self.params['fixed_modifications'] =  ','.join( fixed_mods )
-        self.params['potential_modifications'] = ','.join( potential_mods )
-        self.params['refine_potential_modifications'] = ','.join( refine_potential_mods )
+        self.params['translations']['fixed_modifications'] =  ','.join( fixed_mods )
+        self.params['translations']['potential_modifications'] = ','.join( potential_mods )
+        self.params['translations']['refine_potential_modifications'] = ','.join( refine_potential_mods )
 
         templates = self.format_templates( )
         for file_name, content in templates.items():
-            if file_name == '15N-masses.xml' and self.params['label'] == '14N':
+            if file_name == '15N-masses.xml' and self.params['translations']['label'] == '14N':
                 continue
             xml_file_path = os.path.join(
                 self.params['output_dir_path'],
@@ -245,7 +244,7 @@ class xtandem_piledriver( ursgal.UNode ):
        <file URL="{database}" format="peptide" />
      </taxon>
     </bioml>
-'''.format(**self.params),
+'''.format(**self.params['translations']),
             # -------------------------
             # -------------------------
             'input.xml' : '''<?xml version='1.0' encoding='iso-8859-1'?>
@@ -254,7 +253,7 @@ class xtandem_piledriver( ursgal.UNode ):
       <note label="list path, taxonomy information" type="input">{taxonomy}</note>
       <note label="spectrum, path" type="input">{mgf_input_file}</note>
       <note label="output, path" type="input">{output_file_incl_path}</note>
-    </bioml>'''.format( **self.params ),
+    </bioml>'''.format( **self.params['translations'] ),
 
         'default_input.xml' : '''<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml label="ursgal">
@@ -358,6 +357,6 @@ class xtandem_piledriver( ursgal.UNode ):
     <note type="input" label="output, maximum valid expectation value">{max_output_e_value}</note>
     <note type="input" label="output, histogram column width">30</note>
     <note type="input" label="output, mzid">{output_file_type}</note>
-    </bioml>'''.format(**self.params)
+    </bioml>'''.format(**self.params['translations'])
             }
         return templates

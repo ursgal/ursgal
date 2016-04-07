@@ -167,7 +167,7 @@ class filter_csv_1_0_0( ursgal.UNode ):
                 self.params['input_file']
             )
 
-        if self.params['write_unfiltered_results'] is False:
+        if self.params['translations']['write_unfiltered_results'] is False:
             output_file_unfiltered = None
         else:
             file_extension = self.META_INFO.get(
@@ -192,7 +192,7 @@ class filter_csv_1_0_0( ursgal.UNode ):
         filter_csv_main(
             input_file     = input_file,
             output_file    = output_file,
-            filter_rules   = self.params['csv_filter_rules'],
+            filter_rules   = self.params['translations']['csv_filter_rules'],
             output_file_unfiltered = output_file_unfiltered,
         )
 

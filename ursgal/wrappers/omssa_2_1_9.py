@@ -332,7 +332,7 @@ class omssa_2_1_9( ursgal.UNode ):
             row for row in result_file if not row.startswith('#')
         )
         headers = csv_dict_reader_object.fieldnames
-        header_translations = self.TRANSLATIONS['header_translations']['uvalue_style_translation']
+        header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
         translated_headers = []
         for header in headers:
             translated_headers.append(
