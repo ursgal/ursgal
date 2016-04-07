@@ -21,6 +21,18 @@ TESTS = [
     },
 
     {
+        'iterable': [1,0,0,1,1],
+        'window_len': 3,
+        'out_windows': [
+            (1, [1, 0]),
+            (0, [1, 0, 0]),
+            (0, [0, 0, 1]),
+            (1, [0, 1, 1]),
+            (1, [1, 1]),
+        ],
+    },
+
+    {
         'iterable': [1,2,3,4,5],
         'window_len': 2,
         'out_windows': [
@@ -101,6 +113,7 @@ TESTS = [
             (1, [1]),
         ],
     },
+
 ]
 
 
@@ -110,6 +123,7 @@ def check_sliding_window_test():
 
 
 def check_sliding_window( test_dict ):
+    print('\nInput list:', str(test_dict['iterable']), '; win_size:', test_dict['window_len'])
     window_slider = cpep.sliding_window(
         test_dict['iterable'],
         test_dict['window_len'],
@@ -118,18 +132,18 @@ def check_sliding_window( test_dict ):
     expected_results = test_dict['out_windows']
     i = -1
     for i, win_center_tuple in enumerate(window_slider):
-        window = list(win_center_tuple[0])
+        windowsum = win_center_tuple[0]
         center = win_center_tuple[1]
         expected_window = expected_results[i][1]
         expected_center = expected_results[i][0]
 
-        error_str = '\n  Expected:\n\t{0}\t{1}\n  Got:\n\t{2}\t{3}'.format(
-            expected_center, expected_window,
-            center, window
+        error_str = '\n  Expected:\n\t{0}\t{1}\t{2}\n  Got:\n\t{3}\t{4}'.format(
+            expected_center, sum(expected_window), expected_window,
+            center, windowsum
         )
         assert center == expected_center, error_str
-        assert window == expected_window, error_str
-        print(center, window)
+        assert windowsum == sum(expected_window), error_str
+        print(center, windowsum)
     assert i+1 == len(expected_results), '''\n
     Sliding window yielded {0} iterations,
     but {1} iterations were expected.\n

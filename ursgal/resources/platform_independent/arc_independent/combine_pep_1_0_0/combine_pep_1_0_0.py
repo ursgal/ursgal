@@ -8,7 +8,9 @@ import itertools
 import collections
 import sys
 
+
 # csv.field_size_limit(sys.maxsize)
+
 
 def adjust_window_size(desired_window_size, iter_len, minimum=29):
     '''
@@ -23,16 +25,19 @@ def adjust_window_size(desired_window_size, iter_len, minimum=29):
         if adjusted_window_size < minimum:
             adjusted_window_size = minimum
     if adjusted_window_size != desired_window_size:
-        print('Adjusted window size from {0} to {1} because the '\
-              'total number of values is only {2}.'.format(
+        print('Adjusted window size from {0} to {1} because there '\
+              'are only {2} PSMs.'.format(
                   desired_window_size, adjusted_window_size, iter_len
               ))
     return adjusted_window_size
 
 
-def sliding_window(iterable, window_size, flexible=True):
-    '''Sliding window generator'''
-
+def sliding_window_slow(iterable, window_size, flexible=True):
+    '''
+    Sliding window generator:
+    Slow but readable version using list slicing
+    currently not used.
+    '''
     if flexible:
         window_size = adjust_window_size(
             window_size, len(iterable)
@@ -44,49 +49,69 @@ def sliding_window(iterable, window_size, flexible=True):
               '.'.format(window_size, window_size+1))
         window_size += 1
 
-    iterable = iter(iterable)
     half_window_size = int((window_size-1)/2)
-    win = collections.deque(maxlen=window_size)
+    for center_i, center_value in enumerate(iterable):
+        start_i = center_i - half_window_size
+        if start_i < 0:
+            start_i = 0
+        stop_i = center_i + half_window_size + 1
+        yield iterable[start_i:stop_i], center_value
 
-    try:
 
-        # collect first bin (half the size of window_len)
-        for __ in range(half_window_size):
-            try:
-                win.append(iterable.__next__())
-            except StopIteration:
-                continue
+def sliding_window(elements, window_size, flexible=True):
+    '''
+    Sliding window generator.
+    Gives you sliding window functionality without using container
+    types (list, deque etc.) to speed it up. Only works for lists
+    numbers. Yields the length of the sliding window and the sum of
+    all elements in the sliding window (for PEP calculation).
+    '''
+    if flexible:
+        window_size = adjust_window_size(
+            window_size, len(elements)
+        )
 
-        # the first few values cannot get full bins since there are few values
-        # to the left, so their bins are smaller and contain fewer values to the
-        # left:
-        iter_terminated = False
-        for i in range(half_window_size):
-            try:
-                win.append(iterable.__next__())
-            except StopIteration:
-                # this would terminate the whole function...
-                iter_terminated = True
-                pass
-            yield win, win[i]
+    if window_size % 2 == 0:
+        print('Warning! Window size must be uneven (to determine a '\
+              'central value). Adjusted window size from {0} to {1}'\
+              '.'.format(window_size, window_size+1))
+        window_size += 1
 
-        if iter_terminated:
-            yield win, win[i+1]
+    half_window_size = int((window_size-1)/2)
 
-        # windows from the center of the iterable, all have the full-length:
-        for e in iterable:
-            win.append(e)
-            yield win, win[half_window_size]
+    start_gen, stop_gen = itertools.tee(elements)  # get 2 generators, one that tells
+        # us which number to subtract from the back and another one that tells us
+        # which number to add at the front of the sliding window
 
-        # the last few values also cannot get full bins since there are few values
-        # to the right, so their bins are smaller and contain fewer values to the
-        # right:
-        for __ in range(half_window_size):
-            win.popleft()
-            yield win, win[half_window_size]
+    n_decoys = 0  # keep track of the number of decoys in current sliding window
+    current_win_size = 0  # keep track of current window size
+    previous_start_i, previous_stop_i = 0, 0  # remember where our sliding window
+        # was one iteration earlier (start and stop positions of the sliding window)
 
-    except IndexError:
-        raise StopIteration
+    for center_i, center_value in enumerate(elements):
+        start_i = center_i - half_window_size
+        if start_i < 0:
+            start_i = 0
+        stop_i = center_i + half_window_size + 1
+
+        if start_i != previous_start_i:
+            # I have to substract a number! (the number behind (=left) of the
+            # sliding window)
+            n_decoys -= next(start_gen)
+            current_win_size -= 1
+            
+        if stop_i != previous_stop_i:
+            # I have to add a number! (the next number, the one in front
+            # (=right) of the sliding window)
+            for i in range(stop_i - previous_stop_i):
+                try:
+                    n_decoys += next(stop_gen)
+                    current_win_size += 1
+                except StopIteration:
+                    break  # cause StopIteration silently ends for-loops, thanks Python!
+
+        previous_start_i, previous_stop_i = start_i, stop_i
+        yield n_decoys, center_value, current_win_size
 
 
 class CombinedPEP(object):
@@ -175,28 +200,33 @@ class CombinedPEP(object):
             engines_not_in_combo = \
                 {e for e in input_engines if e not in engine_combo}
 
+            if engines_not_in_combo:
+                print('\nScoring PSMs that were found by\n  {0}'\
+                    '\nbut not by\n  {1}'.format(
+                    ' & '.join(engine_combo),
+                    ' or '.join(engines_not_in_combo),
+                ))
+            else:
+                print('\nScoring PSMs that were found by\n  all {0} '\
+                    'engines'.format(len(engine_combo)))
+
             self.score_dict[engine_combo] = {}
 
             # get all shared PSMs:
             all_PSMs_of_combo_engines = set.intersection(
                 *(set(self.psm_dicts[engine].keys()) for engine in engine_combo)
             )
+
             # remove all PSMs that are found by other engines:
             for other_eng in engines_not_in_combo:
                 all_PSMs_of_combo_engines -= set(self.psm_dicts[other_eng].keys())
 
             if not all_PSMs_of_combo_engines:  # nothing to do here...
+                print('There are no PSMs that are unique to this engine combination.')
                 continue
 
-            print('\nScoring {0} PSMs that were found by\n{1}, '\
-                '\nbut not by\n{2}...'.format(
-                    len(all_PSMs_of_combo_engines),
-                    ' & '.join(engine_combo),
-                    ' or '.join(engines_not_in_combo),
-            ))
             # For every PSM, use naive Bayes to calculate the combined PEP
             # ('Bayes PEP') among all engines and add it to self.score_dict:
-
             decoy_count_of_intersection = 0
             psm_count_of_intersection = 0
             for PSM_key in all_PSMs_of_combo_engines:
@@ -225,43 +255,40 @@ class CombinedPEP(object):
                     'Is decoy' : PSM_is_decoy,
                 }
 
-            print('{:.1%} of these PSMs are decoys.'.format(
-                decoy_count_of_intersection / psm_count_of_intersection
+            print('This set contains {0} PSMs, {1:.1%} of which are decoy.'.format(
+                len(all_PSMs_of_combo_engines),
+                decoy_count_of_intersection / psm_count_of_intersection,
             ))
-
 
             # Use the Bayes PEP to sort all PSMs that are shared by the current
             # combination of engines. Compute the PEP (similar to localized FDR)
             # for each PSM and store it in score_dict:
 
-            sorted_score_dict_items = sorted(
+            psms_sorted_by_bayes_pep = sorted(
                 self.score_dict[engine_combo].items(),
                 key = lambda kv: kv[1]['Bayes PEP']
             )
+            sorted_decoy_bools = [
+                kv_tuple[1]['Is decoy'] for kv_tuple in psms_sorted_by_bayes_pep
+            ]
 
-            sliding_window_rows = sliding_window(
-                sorted_score_dict_items, self.window_size)
+            for i, (n_decoys, psm_info_tup, current_win_size) in enumerate(
+                sliding_window(sorted_decoy_bools, self.window_size)):
 
-            for window_tup, central_tup in sliding_window_rows:
-                n_false_positives = 2 * sum(
-                    key_val[1]['Is decoy'] for key_val in window_tup
-                )
-                n_PSMs = len(window_tup)
-                
-                ##assertion, used for debugging! This makes sure that only PMSs
-                ##from the correct combination of engines are used!
-                #for w in window_tup:
-                    #row_key = w[0]
-                    #for eng in engine_combo:
-                        #assert row_key in self.psm_dicts[eng], '{0} is not in {1}'.format(row_key, eng)
-
-                intersection_PEP = n_false_positives / n_PSMs
-                current_PSM_key = central_tup[0]
+                n_false_positives = 2 * n_decoys
+                intersection_PEP = n_false_positives / current_win_size
+                current_PSM_key = psms_sorted_by_bayes_pep[i][0]
                 self.score_dict[engine_combo][current_PSM_key]['combined PEP'] = \
                     intersection_PEP
+
+            assert i + 1 == len(sorted_decoy_bools), ('sliding_window() '
+                'did not return a sliding window for all PSMs!')
         return
 
+
     def write_output_csv(self, output_csv_path):
+        print('\n========== DONE! ===========\nWriting output CSV with combined PEPs '\
+            'and Bayes PEPs to\n{} ...\n'.format(os.path.relpath(output_csv_path)))
         new_scores = ['combined PEP', 'Bayes PEP']
         fieldnames = list(self.input_csv_fieldnames) + new_scores + ['engines']
         with open(output_csv_path, 'w', encoding='utf8') as out_obj:
@@ -286,10 +313,7 @@ class CombinedPEP(object):
                     out_row['engines'] = self.join_sep.join(engine_combo)
                     # add columns with Bayes PEP and combined PEP:
                     for score_field in new_scores:
-                        try:
-                            out_row[score_field] = score_dict_val[score_field]
-                        except:
-                            continue
+                        out_row[score_field] = score_dict_val[score_field]
                     writer.writerow(out_row)
         return
 
