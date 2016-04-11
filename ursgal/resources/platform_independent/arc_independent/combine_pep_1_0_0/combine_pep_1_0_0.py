@@ -5,8 +5,6 @@ import os
 import functools
 import operator
 import itertools
-import collections
-import sys
 
 
 # csv.field_size_limit(sys.maxsize)
@@ -14,9 +12,9 @@ import sys
 
 def adjust_window_size(desired_window_size, iter_len, minimum=29):
     '''
-    Dynamically adjusts the window size depending on the total length
-    of values. When there are few values (below 1/5 of the window size),
-    the window size is decreased.
+    Dynamically adjusts the sliding window size depending on the total
+    length of values. When there are few values (below 1/5 of the
+    window size), the window size is decreased.
     '''
     if desired_window_size < iter_len // 5:
         adjusted_window_size = desired_window_size
@@ -62,9 +60,12 @@ def sliding_window(elements, window_size, flexible=True):
     '''
     Sliding window generator.
     Gives you sliding window functionality without using container
-    types (list, deque etc.) to speed it up. Only works for lists
-    numbers. Yields the length of the sliding window and the sum of
-    all elements in the sliding window (for PEP calculation).
+    types (list, deque etc.) to speed it up. Only works for lists of
+    numbers. Yields the sum of all numbers in the sliding window
+    (= the number of decoys in the sliding window in our case), and
+    the current length of the sliding window (= total number of PSMs
+    in the sliding window). Used for PEP calculation:
+    PEP_of_PSM = (n_decoys_in_window * 2) / n_total_PSMs_in_window
     '''
     if flexible:
         window_size = adjust_window_size(
@@ -108,10 +109,10 @@ def sliding_window(elements, window_size, flexible=True):
                     n_decoys += next(stop_gen)
                     current_win_size += 1
                 except StopIteration:
-                    break  # cause StopIteration silently ends for-loops, thanks Python!
+                    break  # cause StopIteration silently ends for-loops, will be fixed in py3.6 :)
 
         previous_start_i, previous_stop_i = start_i, stop_i
-        yield n_decoys, center_value, current_win_size
+        yield n_decoys, current_win_size
 
 
 class CombinedPEP(object):
@@ -272,7 +273,7 @@ class CombinedPEP(object):
                 kv_tuple[1]['Is decoy'] for kv_tuple in psms_sorted_by_bayes_pep
             ]
 
-            for i, (n_decoys, psm_info_tup, current_win_size) in enumerate(
+            for i, (n_decoys, current_win_size) in enumerate(
                 sliding_window(sorted_decoy_bools, self.window_size)):
 
                 n_false_positives = 2 * n_decoys
@@ -282,7 +283,8 @@ class CombinedPEP(object):
                     intersection_PEP
 
             assert i + 1 == len(sorted_decoy_bools), ('sliding_window() '
-                'did not return a sliding window for all PSMs!')
+                'did not return a sliding window for all PSMs! This '
+                'should never happen!')
         return
 
 
