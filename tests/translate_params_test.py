@@ -8,7 +8,8 @@ import unittest
 class TestRun(unittest.TestCase):
     def setUp(self):
         self.uc = ursgal.UController()
-        self.uc.TRANSLATIONS.update(
+        self.uc.params['translations'] = {}
+        self.uc.UNODE_UPARAMS.update(
             {
                 'test_ions' : {
                     'style'                    : 'test_style_1',
@@ -47,7 +48,7 @@ class TestRun(unittest.TestCase):
         )
 
     def test_key_and_value_translation(self):
-        translated_params = self.uc.translate_params(
+        untranslated_params, translated_params = self.uc.collect_and_translate_params(
             {
                 'test_ions' : 'No',
             }
@@ -61,7 +62,7 @@ class TestRun(unittest.TestCase):
 
 
     def test_bool_translation(self):
-        translated_params = self.uc.translate_params(
+        untranslated_params, translated_params = self.uc.collect_and_translate_params(
             {
                 'score_test_ions' : False,
             }
@@ -70,12 +71,12 @@ class TestRun(unittest.TestCase):
             translated_params['score_test_ions'], 'No please leave me alone'
         )
     def test_empty_translation_return_default(self):
-        translated_params = self.uc.translate_params({})
+        untranslated_params, translated_params = self.uc.collect_and_translate_params({})
         self.assertEqual(
             translated_params['score_test_ions'], 'Please yes translate'
         )
     def test_list_ov_values_is_kept(self):
-        translated_params = self.uc.translate_params(
+        untranslated_params, translated_params = self.uc.collect_and_translate_params(
             {'list_of_things' : [False, False, False]}
         )
         self.assertEqual(
@@ -83,12 +84,13 @@ class TestRun(unittest.TestCase):
         )
 
     def test_grouping_on_translated_keys(self):
-        translated_params = self.uc.translate_params({})
+        untranslated_params, translated_params = self.uc.collect_and_translate_params({})
         self.assertEqual(
             len(
-                translated_params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']['__test_00000_ions']
+                translated_params['_grouped_by_translated_key']['__test_00000_ions']
             ),
             2
         )
+
 if __name__ == '__main__':
     unittest.main()

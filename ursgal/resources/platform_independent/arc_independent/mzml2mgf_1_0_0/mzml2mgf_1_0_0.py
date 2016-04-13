@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 '''
 Converts mzML to mgf
 
@@ -18,6 +18,7 @@ from __future__ import print_function
 import sys
 import os
 import argparse
+import pymzml
 
 
 def _determine_mzml_name_base( file_name, prefix ):
@@ -43,7 +44,6 @@ def main(
         prefix                = None,
         scan_skip_modulo_step = None
     ):
-    import pymzml
     print('Converting file:\n\tmzml : {0}\n\tto\n\tmgf : {1}'.format(
         mzml,
         mgf,
@@ -69,7 +69,7 @@ def main(
     if machine_offset_in_ppm is not None:
         mz_correction_factor = machine_offset_in_ppm
     else:
-        mz_correction_factor = 0 
+        mz_correction_factor = 0
 
     for n, spec in enumerate(run):
         if n % 500 == 0:
@@ -124,7 +124,7 @@ def main(
             file = oof
         )
         precursor_mz = spec['precursors'][0]['mz']
-        
+
         precursor_mz += precursor_mz * mz_correction_factor
         print(
             'PEPMASS={0}'.format(

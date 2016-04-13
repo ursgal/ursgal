@@ -1,11 +1,11 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 # encoding: utf-8
 
 import ursgal
 import csv
 import os
 
-TESTS =[
+TESTS = [
     {'peptide': 'STGGAAGMLGGARSQRVVR'},
     {'peptide': 'FTMADGGSIEPQENTSGEAFVEELIR'},
     {'peptide': 'AAGGAIPHHTYAAACIDTEDVEAAAAACR'},
@@ -47,7 +47,7 @@ R = ursgal.UController(
     profile = 'LTQ XL low res',
     params = {
         'database': 'tests/data/test_Creinhardtii_target_decoy.fasta',
-        'modifications':[
+        'modifications' : [
             '*,opt,Prot-N-term,Acetyl'    # N-Acteylation[]
         ]
     },
@@ -80,6 +80,7 @@ def compare_peptide_test():
 
 def compare_peptide( test_dict ):
     assert test_dict['peptide'] in peptides_set
+
 
 def number_of_peptides_test():
     test_peptides = set()
