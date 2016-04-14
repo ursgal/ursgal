@@ -3584,15 +3584,15 @@ Example:
         },
         'uvalue_type' : "bool",
     },
-    'search_engines_create_folders' : {
+    'engines_create_folders' : {
         'available_in_unode' : [
             'ucontroller',
         ],
         'default_value' : True,
-        'description' :  ''' Create folders for search engines. True or False ''',
+        'description' :  ''' Create folders for the output of engines that allow this option in their META_INFO ('create_own_folder' : True). True or False ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
-            'ucontroller_style_1' : 'search_engines_create_folders',
+            'ucontroller_style_1' : 'engines_create_folders',
         },
         'utag' : [
             'file_handling',
@@ -4193,7 +4193,7 @@ Example:
             'filter_csv_1_0_0',
         ],
         'default_value' : False,
-        'description' :  ''' writes rejected results if True ''',
+        'description' :  ''' Writes rejected results if True ''',
         'trigger_rerun' : True,
         'ukey_translation' : {
             'filter_csv_style_1' : 'write_unfiltered_results',

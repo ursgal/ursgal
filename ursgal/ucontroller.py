@@ -1534,7 +1534,7 @@ class UController(ursgal.UNode):
         engine_creates_folder = self.meta_unodes[ engine ].META_INFO.get(
             'create_own_folder', False
         )
-        if engine_creates_folder == True:
+        if engine_creates_folder == True and self.params['engines_create_folders'] == True:
             engine_folder = os.path.join(
                 self.io['input']['finfo']['dir'],
                 engine

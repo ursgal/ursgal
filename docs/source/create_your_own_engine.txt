@@ -48,177 +48,101 @@ Note:
         * <ursgal_path>\ **/resources/**\platform_independent/arc_independent/msgfplus_v9979/MSGFPlus.jar
 
 
-2. Integration into the knowledge base (kb)
---------------------------------------
+2. Integration into uparams.py
+------------------------------
 
-Each engine has to have a knowledge base file located in:
+Each parameter that is used by an engine needs to be included in uparams.py.
+This is a dictionary containing all parameters that are available in ursgal, its structure is explained here **insert link**.
 
- * <ursgal_path>\ **/kb/** <unode_name>.py
+For every parameter that can be used by a new engine, it should be checked if a corresponding parameter is already present in uparams.py.
+If this is the case, the new engine (unode name) needs to be included in 'available_in_unode'. Furthermore, 'ukey_translation' needs to contain
+the utranslation_style that is defined in the engines META_INFO (see General Structure) translating the ursgal parameter into the engine specific
+parameter name. The parameter values can be translated in 'uvalue_translation' using the utranslation_style as well (only if a translation is necessary).
 
-**Examples**:
+**Example**: include the parameter '-e' for MS-GF+ ::
+  
+    # -e defines the enzyme that has been used for digestion. This is called 'enzyme' in ursgal.
+    'enzyme' : {
+        # include msgfplus_v9979 in available_in_unode
+        'available_in_unode' : [
+            xtandem_vengeance',
+            'msgfplus_v9979',
+        ],
+        # default_value, description, trigger_rerun, utag and uvalue_type don't need to be changed
+        'default_value' : "trypsin",
+        'description' :  ''' Enzyme: Rule of protein cleavage
+            Possible cleavages are ...
+        'trigger_rerun' : True,
+        # Translate the ursgal parameter name ('enzyme') to the MS-GF+ parameter name ('-e') using the translation style (msgfplus_style_1) in ukey_translation
+        'ukey_translation' : {
+            'msgfplus_style_1' : '-e',
+            'xtandem_style_1' : 'protein, cleavage site',
+        },
+        # Translate the ursgal parameter values (e.g. 'trypsin') to the MS-GF+ parameter value (e.g. '1') using the translation style (msgfplus_style_1) in uvalue_translation
+        'uvalue_translation' : {
+            'msgfplus_style_1' : {
+                'alpha_lp' : '8',
+                'argc' : '6',
+                'aspn' : '7',
+                'chymotrypsin' : '2',
+                'glutamyl_endopeptidase' : '5',
+                'lysc' : '3',
+                'lysn' : '4',
+                'no_cleavage' : '9',
+                'nonspecific' : '0',
+                'trypsin' : '1',
+            },
+            'xtandem_style_1' : {
+                'argc' : '[R]|{P}',
+                'aspn' : '[X]|[D]',
+                'chymotrypsin' : '[FMWY]|{P}',
+                'chymotrypsin_p' : '[FMWY]|[X]',
+                'clostripain' : '[R]|[X]',
+                'cnbr' : '[M]|{P}',
+                'elastase' : '[AGILV]|{P}',
+                'formic_acid' : '[D]|{P}',
+                'gluc' : '[DE]|{P}',
+                'gluc_bicarb' : '[E]|{P}',
+                'iodosobenzoate' : '[W]|[X]',
+                'lysc' : '[K]|{P}',
+                'lysc_p' : '[K]|[X]',
+                'lysn' : '[X]|[K]',
+                'lysn_promisc' : '[X]|[AKRS]',
+                'nonspecific' : '[X]|[X]',
+                'pepsina' : '[FL]|[X]',
+                'protein_endopeptidase' : '[P]|[X]',
+                'staph_protease' : '[E]|[X]',
+                'tca' : '[FMWY]|{P},[KR]|{P},[X]|[D]',
+                'trypsin' : '[KR]|{P}',
+                'trypsin_cnbr' : '[KR]|{P},[M]|{P}',
+                'trypsin_gluc' : '[DEKR]|{P}',
+                'trypsin_p' : '[RK]|[X]',
+            },
 
- * <ursgal_path>\ **/kb/** filter_csv_1_0_0.py
- * <ursgal_path>\ **/kb/** msgfplus_v9979.py
 
-The file must contain at least the Python dictionary META_INFO.
-There, one declares:
+If a parameter is not yet present in uparams.py, you can add a new paramter containing all necessary informations.
 
-    #. **engine_type**: What kind of type the UNode is (i.e. search_engine).
-    #. **output_extension**: The file extension of the output file (i.e. '.csv')
-    #. **output_suffix**: A suffix that will be added to the filename. If not defined, the engine's name will automatically be formatted into the output file name. If None, no suffix will be added.
-    #. **input_types**: A list of input types (file extensions) that are supported by the engine.
-    #. **engine**: A dict describing the path to the engine executable (see below).
-    #. **citation**: Citing the authors of engines is important. Please include this information as it will be displayed during run time.
-    #. **create_own_folder**: A boolean indicating whether the engine should create a subfolder or not.
-    #. **include_in_git**: A boolean indicating whether the engine executable should be uploaded to the Ursgal GitHub repository or not. This should be True for lightweight Python UNodes and False for binary executables. If you wish to include a UNode with binary executables, contact the Ursgal team so we can host it on our download server, or enter your own download URL (see MS-GF+ example below).
+**Example** add write_unfiltered_results for filter_csv_1_0_0 ::
 
+    'write_unfiltered_results' : {
+            'available_in_unode' : [
+                'filter_csv_1_0_0',
+            ],
+            'default_value' : False,
+            'description' :  ''' writes rejected results if True ''',
+            'trigger_rerun' : True,
+            'ukey_translation' : {
+                'filter_csv_style_1' : 'write_unfiltered_results',
+            },
+            'utag' : [
+                'conversion',
+            ],
+            'uvalue_translation' : {
+            },
+            'uvalue_type' : "bool",
+        },
 
-**Example**: ursgal/kb/filter_csv_1_0_0.py ::
-
-
-   META_INFO = {
-       'engine_type' : {
-           'controller'        : False,
-           'converter'         : True,
-           'validation_engine' : False,
-           'search_engine'     : False,
-           'meta_engine'       : False,
-       },
-       'output_extension' : '.csv',
-       'output_suffix'    : 'accepted',
-       'input_types'      : ['.csv'],
-
-       'rejected_output_suffix': 'rejected',  # this entry is specific to filter_csv
-       'include_in_git'        : True,
-
-       'engine': {
-           'platform_independent' : {
-               'arc_independent'  : {
-                   'exe'     : 'filter_csv_1_0_0.py',
-               },
-           },
-       },
-   }
-
-   DEFAULT_PARAMS = {
-       'write_unfiltered_results' : False,
-       'csv_filter_rules'         : None,
-   }
-
-   USEARCH_PARAM_VALUE_TRANSLATIONS = {}
-
-   USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {}
-
-   USED_USEARCH_PARAMS = set([
-       'write_unfiltered_results',
-       'csv_filter_rules'
-   ])
-
-
-Furthermore, the following dictionaries can be defined:
-
-    #. **DEFAULT_PARAMS**:
-       These default parameters are used by the search engine,
-       if not changed before execution
-    #. **USEARCH_PARAM_VALUE_TRANSLATIONS**:
-       Parameters can be used by several engines (e.g. 'enzyme'),
-       but their values might be engine specific and need o be translated.
-       E.g. the enzyme 'trypsin' is '0' in OMSSA but '1' in MS-GF+
-    #. **USEARCH_PARAM_KEY_VALUE_TRANSLATOR**:
-       Similar to the previous one, but values are only translated for specific
-       keys.
-    #. **USED_USEARCH_PARAMS**:
-       Set of parameters that this engine shares with other engines.
-
-A table with all parameters of the different engines (including shared parameters)
-can be found in the documentation (:ref:`Parameters<parameters>`) and in the Ursgal directory
-(<ursgal_path>/docs/source/ursgal_params.xls).
-Please enter variable and shared parameters for your engine here as well.
-We adopted a convention that parameters that are not shared should contain the
-engine as prefix, e.g. http_url and ftp_url.
-
-**Example**: ursgal/kb/msgfplus_v9979.py ::
-
-   META_INFO = {
-       'engine_type' : {
-           'search_engine' : True,
-       },
-       'engine': {
-           'platform_independent' : {
-               'arc_independent' : {
-                   'exe'            : 'MSGFPlus.jar',
-                   'url'            : 'http://proteomics.ucsd.edu/Software/MSGFPlus/MSGFPlus.zip',
-                   'zip_md5'        : '82a3e2204ff698e260ac9f89d3880b59',
-                   'additional_exe' : [],
-               },
-           },
-       },
-       'output_extension'          : '.mzid',
-       'input_types'               : ['.mgf', '.mzML'],
-       'create_own_folder'         : True,
-       'citation'                  : 'Kim S, Mischerikow N, Bandeira N, '\
-           'Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) '\
-           'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
-           'Tandem Mass Spectra: Applications to Database Search.',
-
-       'include_in_git'            : False,
-   }
-
-   DEFAULT_PARAMS = {
-       'validation_score_field'    : 'MS-GF:SpecEValue',
-       'evalue_field'              : 'MS-GF:SpecEValue',
-       'validation_minimum_score'  : 1e-100,
-       'bigger_scores_better'      : False,
-       'max_num_mods'              : 2,
-   }
-
-   USEARCH_PARAM_VALUE_TRANSLATIONS = {
-       'nonspecific'            : 0,
-       'trypsin'                : 1,
-       'chymotrypsin'           : 2,
-       'lys_c'                  : 3,
-       'lys_n'                  : 4,
-       'glutamyl_endopeptidase' : 5,
-       'arg_c'                  : 6,
-       'asp_n'                  : 7,
-       'alpha_lp'               : 8,
-       'no_cleavage'            : 9,
-       'cid'                    : 1,
-       'etd'                    : 2,
-       'hcd'                    : 3,
-       'da'                     : 'Da',
-       'low_res_LTQ'            : 0,
-       'high_res_LTQ'           : 1,
-       'tof'                    : 2,
-       'q_exactive'             : 3,
-   }
-
-   USEARCH_PARAM_KEY_VALUE_TRANSLATOR = {
-       'semi_enzyme' : {
-           True : 1,
-           False : 2
-       }
-   }
-
-   USED_USEARCH_PARAMS = set( [
-       'modifications',
-       'semi_enzyme',
-       'enzyme',
-       'precursor_mass_tolerance_unit',
-       'precursor_mass_tolerance_minus',
-       'precursor_mass_tolerance_plus',
-       'precursor_isotope_range',
-       'instrument',
-       'cpus',
-       'database',
-       'max_pep_length',
-       'min_pep_length',
-       'num_match_spec',
-       'frag_method',
-       'precursor_min_charge',
-       'precursor_max_charge',
-   ] )
-
+After changing uparams.py, please run rewrite_uparams.py to ckeck for duplicates/errors and to sort the dictionary.
 
 
 3. Implementation into Engines
@@ -226,15 +150,15 @@ engine as prefix, e.g. http_url and ftp_url.
 
 Each UNode has to have a Python wrapper file located in:
 
- * <ursgal_path>\ **/engines/** <unode_name>.py
+ * <ursgal_path>\ **/wrappers/** <unode_name>.py
 
 The UNode has to inherit from the UNode class, which during initialization injects
-the knowledge base data into the class. Thus those dictionaries (e.g. self.META_INFO)
-are available as attribute of each UNode.
+the node related data into the class.
 
 The default structure of the UNode class has to be::
 
     class my_unode_1_0_0(ursgal.UNode):
+        META_INFO = {}
         def __init__(self, *args, **kwargs):
             super(my_unode_1_0_0, self).__init__(*args, **kwargs)
 
@@ -248,19 +172,21 @@ The default structure of the UNode class has to be::
             # i.e. formatting the output file
             return
 
-where `my_unode_1_0_0` is the name of the UNode. One can define `preflight()` and `postflight()`
-methods that will be executed by the uNode during preflight and postflight (= before execution of the
-main executable and after execution).
+where `my_unode_1_0_0` is the name of the UNode. The META_INFO is explained here **insert link** and is available as attribute of each UNode.
+One can define `preflight()` and `postflight()` methods that will be executed by the uNode during preflight and postflight
+(= before execution of the main executable and after execution).
 
 3.1 Implementaion of an engine from a command line tool
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
 For binary executable UNodes, one has to create a command line list (see `subprocess`_) in
 the `preflight()` method. The command list is used to run the UNode's executable with the
 appropriate command line parameters. It should include the executable path of the engine
-(accessible via self.exe) and all relevant parameters, available via self.params.
-
+(accessible via self.exe) and all relevant parameters, available via self.params, containing the 
+original parameters and values. self.params['translations'] contains translated values for all 
+node-related parameters. Furthermore self.params['translations']['_grouped_by_translated_key']
+is a dictionary containing all node-related parameters and their corresponding
+ursgal parameters with the translated values.
 
 The command list is stored in self.params['command_list']. This list should be constructed
 in the UNode class `preflight()` method like this::
@@ -288,9 +214,9 @@ in the UNode class `preflight()` method like this::
                 '-i',
                 input_file,
                 '--some_parameter',
-                '{some_param_in_ursgal}'.format(**self.params),
+                '{some_param_in_ursgal}'.format(**self.params['translations']),
                 '--another_parameter',
-                '{another_param}'.format(**self.params),
+                '{another_param}'.format(**self.params['translations']),
             ]
 
 
@@ -307,6 +233,8 @@ a postflight function was defined as part of the class), e.g.::
         def postflight(self):
             convert_xtandemXML_to_identcsv( self.params )
 
+
+**Example needs to be exchanged**
 
 **Example**: ursgal/engines/msgfplus_v9979.py ::
 
@@ -454,7 +382,7 @@ filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
            # Sometimes, engine-specific code is required! For instance,
            # filter_csv() can produce a second output file with the columns
            # that were removed:
-           if self.params['write_unfiltered_results'] is False:
+           if self.params['translations']['write_unfiltered_results'] is False:
                output_file_unfiltered = None
            else:
                file_extension = self.meta_unodes[ self.engine ].META_INFO.get(
@@ -480,7 +408,7 @@ filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
            filter_csv_main(
                input_file     = input_file,
                output_file    = output_file,
-               filter_rules   = self.params['csv_filter_rules'],
+               filter_rules   = self.params['translations']['csv_filter_rules'],
                output_file_unfiltered = output_file_unfiltered,
            )
 

@@ -5,11 +5,27 @@ import csv
 import sys
 import re
 import pprint
+import os
 
 
-if __name__ == '__main__':
-    input_file_name = sys.argv[1]
-    output_file_name = sys.argv[2]
+def main():
+    '''
+    Rewrites uparams.py, thereby checking for duplicates and sorting the dictionary.
+    Note:
+        uparams.py will be overwritten, if you are not sure, if your changes to uparams.py are correct, you can use another output_file_name
+
+    Usage:
+        ./rewrite_uparams.py <output_file_name(optional)>
+    '''
+
+    input_file_name = os.path.join(
+        'ursgal',
+        'uparams.py'
+    )
+    try:
+        output_file_name = sys.argv[1]
+    except:
+        output_file_name = input_file_name
 
     print('''
         Testing params dict for duplicates
@@ -84,3 +100,6 @@ if __name__ == '__main__':
         print('    },', file=output_file)
     print('}', file=output_file)
     output_file.close()
+
+if __name__ == '__main__':
+    main()

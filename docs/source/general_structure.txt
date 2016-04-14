@@ -49,7 +49,7 @@ Wrapper Python class
 --------------------
 
 The wrapper inherits from ursgal.UNode. During the instantiation,
-the default parameters are injects into the class. The default
+the default parameters are injected into the class. The default
 parameters are all collected and grouped in ursgal.uparams. Therefore,
 it is imperative that all parameters are listed in the uparams.py file.
 (see blow).
@@ -105,7 +105,7 @@ Engine_type
 """""""""""
 
 Engine Type will define were the engine is grouped into. The groups are shown
-after ucontroller instantiation. Additionally, the wrapper register the engines
+after ucontroller instantiation. Additionally, the wrapper registers the engines
 to certain controller functionality, e.g. engine_type['search_engine'] : True
 will allow ucontroller.search(engine='omssa_2_1_9') to be executed::
 
@@ -143,7 +143,7 @@ credit that one can hope for ;) For example::
 Input types
 """""""""""
 
-Input types are currently not used but the next iteration will included this.
+Input types are currently not used but the next iteration will include this.
 For example::
 
         META_INFO = {
@@ -171,9 +171,9 @@ Create own folder
 """""""""""""""""
 
 This option allows all files and results for this engine to be placed in its
-own folder. The engine will defined the folder name, here omssa_2_1_9.
+own folder. The engine will define the folder name, here omssa_2_1_9.
 The master switch for all unodes to create their folder (if it is specified in
-the META_INFO is the ucontroler param **<Check diz>**)
+the META_INFO) is the ucontroler param **engines_create_folders**)
 
 For example::
 
