@@ -63,31 +63,31 @@ class novor_1_1beta( ursgal.UNode ):
             self.params['input_file']
         )
 
-        self.params['mgf_new_input_file'] = os.path.join(
+        self.params['translations']['mgf_new_input_file'] = os.path.join(
             self.params['input_dir_path'],
             self.params['file_root'] + '_tmp.mgf'
         )
-        # self.created_tmp_files.append( self.params['mgf_new_input_file'] )
+        self.created_tmp_files.append( self.params['translations']['mgf_new_input_file'] )
 
-        self.params['tmp_output_file_incl_path'] = os.path.join(
+        self.params['translations']['tmp_output_file_incl_path'] = os.path.join(
             self.params['mgf_new_input_file'] + '.csv'
         )
-        # self.created_tmp_files.append( self.params['tmp_output_file_incl_path'] )
+        self.created_tmp_files.append( self.params['translations']['tmp_output_file_incl_path'] )
 
-        self.params['params_file'] = os.path.join(
+        self.params['translations']['params_file'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file'] + '_Params.txt'
         )
-        # self.created_tmp_files.append( self.params['params_file'])
+        self.created_tmp_files.append( self.params['params_file'])
 
         self.params['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
 
-        self.params['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
-                                                    float(self.params['precursor_mass_tolerance_minus']) ) \
-                                                / 2.0
+        self.params['translations']['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
+                                                            float(self.params['precursor_mass_tolerance_minus']) ) \
+                                                            / 2.0
 
         available_mods =[
             'Acetyl (K)',
@@ -144,19 +144,19 @@ class novor_1_1beta( ursgal.UNode ):
                 else:
                     mod_type['mods'].append('{0} ({1})'.format(mod, ''.join(sorted(not_available_modsp[mod]))))
 
-        self.params['fixed_modifications'] =  ','.join( fixed_mods['mods'] )
-        self.params['potential_modifications'] = ','.join( potential_mods['mods'] )
+        self.params['translations']['fixed_modifications'] =  ','.join( fixed_mods['mods'] )
+        self.params['translations']['potential_modifications'] = ','.join( potential_mods['mods'] )
 
-        params_file = open( self.params['params_file'], 'w', encoding = 'UTF-8' )
+        params_file = open( self.params['translations']['params_file'], 'w', encoding = 'UTF-8' )
         params2write = [
-            'enzyme = {enzyme}'.format(**self.params),
-            'fragmentation = {frag_method}'.format(**self.params),
-            'massAnalyzer = {instrument}'.format(**self.params),
-            'fragmentIonErrorTol = {frag_mass_tolerance}{frag_mass_tolerance_unit}'.format(**self.params),
-            'precursorErrorTol = {precursor_mass_tolerance}{precursor_mass_tolerance_unit}'.format(**self.params),
-            'variableModifications = {potential_modifications}'.format(**self.params),
-            'fixedModifications = {fixed_modifications}'.format(**self.params),
-            'forbiddenResidues = {forbidden_residues}'.format(**self.params),
+            'enzyme = {enzyme}'.format(**self.params['translations']),
+            'fragmentation = {frag_method}'.format(**self.params['translations']),
+            'massAnalyzer = {instrument}'.format(**self.params['translations']),
+            'fragmentIonErrorTol = {frag_mass_tolerance}{frag_mass_tolerance_unit}'.format(**self.params['translations']),
+            'precursorErrorTol = {precursor_mass_tolerance}{precursor_mass_tolerance_unit}'.format(**self.params['translations']),
+            'variableModifications = {potential_modifications}'.format(**self.params['translations']),
+            'fixedModifications = {fixed_modifications}'.format(**self.params['translations']),
+            'forbiddenResidues = {forbidden_residues}'.format(**self.params['translations']),
         ]
         for param in params2write:
             print( param, file = params_file )
@@ -166,7 +166,7 @@ class novor_1_1beta( ursgal.UNode ):
         lines = mgf_org_input_file.readlines()
         mgf_org_input_file.close()
 
-        mgf_new_input_file = open( self.params['mgf_new_input_file'], 'w', encoding = 'UTF-8')
+        mgf_new_input_file = open( self.params['translations']['mgf_new_input_file'], 'w', encoding = 'UTF-8')
         for line in lines:
             if line.startswith('CHARGE'):
                 charge = line.split('=')[1]
@@ -177,8 +177,8 @@ class novor_1_1beta( ursgal.UNode ):
 
         self.params[ 'command_list' ] = [
             self.exe,
-            '-p', '{params_file}'.format(**self.params),
-            self.params['mgf_new_input_file'], '-f',
+            '-p', '{params_file}'.format(**self.params['translations']),
+            self.params['translations']['mgf_new_input_file'], '-f',
         ]
 
         return self.params
@@ -213,7 +213,7 @@ class novor_1_1beta( ursgal.UNode ):
 
         cached_novor_output = []
         headers = None
-        result_file = open( self.params['tmp_output_file_incl_path'], 'r')
+        result_file = open( self.params['translations']['tmp_output_file_incl_path'], 'r')
         for line in result_file:
             if line.startswith('#'):
                 if line.startswith('# id'):
@@ -229,7 +229,7 @@ class novor_1_1beta( ursgal.UNode ):
         )
         # extend and tanslate headers
         translated_headers = []
-        header_translations = self.TRANSLATIONS['header_translations']['uvalue_style_translation']
+        header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
         for header in headers:
             if header == '':
                 continue

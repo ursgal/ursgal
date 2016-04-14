@@ -87,35 +87,38 @@ class pepnovo_3_1( ursgal.UNode ):
             self.params['input_file']
         )
 
-        self.params['tmp_output_file_incl_path'] = os.path.join(
+        self.params['translations']['tmp_output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file'] + '.tmp'
         )
-        self.created_tmp_files.append( self.params['tmp_output_file_incl_path'])
+        self.created_tmp_files.append( self.params['translations']['tmp_output_file_incl_path'])
 
         self.params['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
 
-        if self.params['precursor_mass_tolerance_unit'] == 'ppm':
-            self.params['precursor_mass_tolerance_plus'] = ursgal.ucore.convert_ppm_to_dalton(
-                self.params['precursor_mass_tolerance_plus'],
-                base_mz=self.params['base_mz']
+        if self.params['translations']['precursor_mass_tolerance_unit'] == 'ppm':
+            self.params['translations']['precursor_mass_tolerance_plus'] = ursgal.ucore.convert_ppm_to_dalton(
+                self.params['translations']['precursor_mass_tolerance_plus'],
+                base_mz=self.params['translations']['base_mz']
             )
-            self.params['precursor_mass_tolerance_minus'] = ursgal.ucore.convert_ppm_to_dalton(
-                self.params['precursor_mass_tolerance_minus'],
-                base_mz=self.params['base_mz']
+            self.params['translations']['precursor_mass_tolerance_minus'] = ursgal.ucore.convert_ppm_to_dalton(
+                self.params['translations']['precursor_mass_tolerance_minus'],
+                base_mz=self.params['translations']['base_mz']
             )
-        self.params['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
-                                                    float(self.params['precursor_mass_tolerance_minus']) ) \
+        self.params['translations']['precursor_mass_tolerance'] = ( float(self.params['translations']['precursor_mass_tolerance_plus']) + \
+                                                    float(self.params['translations']['precursor_mass_tolerance_minus']) ) \
                                                 / 2.0
 
-        if self.params['frag_mass_tolerance_unit'] == 'ppm':
-            self.params['frag_mass_tolerance'] = ursgal.ucore.convert_ppm_to_dalton( self.params['frag_mass_tolerance'], base_mz=self.params['base_mz'] )
+        if self.params['translations']['frag_mass_tolerance_unit'] == 'ppm':
+            self.params['translations']['frag_mass_tolerance'] = ursgal.ucore.convert_ppm_to_dalton( 
+                self.params['translations']['frag_mass_tolerance'], 
+                base_mz=self.params['base_mz'] 
+            )
 
-        if self.params['denovo_model_dir'] == None:
-            self.params['denovo_model_dir'] = os.path.join(
+        if self.params['translations']['denovo_model_dir'] == None:
+            self.params['translations']['denovo_model_dir'] = os.path.join(
                 os.path.dirname(self.exe),
                 'Models'
             )
@@ -154,22 +157,22 @@ class pepnovo_3_1( ursgal.UNode ):
 
         self.params[ 'command_list' ] = [
             self.exe, # path 2 executable
-            '-file', '{mgf_input_file}'.format( **self.params), # SpectrumFile (*.mzXML, *.mgf, *.ms2)
-            '-model', '{denovo_model}'.format( **self.params), # (currently only CID_IT_TRYP is available)
-            '-fragment_tolerance', '{frag_mass_tolerance}'.format(**self.params), # ion tolerances (in Da)
-            '-pm_tolerance', '{precursor_mass_tolerance}'.format(**self.params), # precursor ion tolerance (in Da)
-            '-digest', '{enzyme}'.format(**self.params),
-            '-num_solutions', '{num_match_spec}'.format(**self.params),
-            '-model_dir', '{denovo_model_dir}'.format(**self.params),  # - directory where model files are kept (default ./Models)
+            '-file', '{mgf_input_file}'.format( **self.params['translations']), # SpectrumFile (*.mzXML, *.mgf, *.ms2)
+            '-model', '{denovo_model}'.format( **self.params['translations']), # (currently only CID_IT_TRYP is available)
+            '-fragment_tolerance', '{frag_mass_tolerance}'.format(**self.params['translations']), # ion tolerances (in Da)
+            '-pm_tolerance', '{precursor_mass_tolerance}'.format(**self.params['translations']), # precursor ion tolerance (in Da)
+            '-digest', '{enzyme}'.format(**self.params['translations']),
+            '-num_solutions', '{num_match_spec}'.format(**self.params['translations']),
+            '-model_dir', '{denovo_model_dir}'.format(**self.params['translations']),  # - directory where model files are kept (default ./Models)
             '-PTMs', ':'.join(modifications),  # - separated by a colons (no spaces) e.g., M+16:S+80:N+1
         ]
-        if self.params['pepnovo_tag_length']:
-            if self.params['pepnovo_tag_length'] >= 3 and self.params['pepnovo_tag_length'] <= 6:
+        if self.params['translations']['pepnovo_tag_length']:
+            if self.params['translations']['pepnovo_tag_length'] >= 3 and self.params['translations']['pepnovo_tag_length'] <= 6:
                 self.params[ 'command_list' ].extend([
-                    '-tag_length', '{pepnovo_tag_length}'.format(**self.params)
+                    '-tag_length', '{pepnovo_tag_length}'.format(**self.params['translations'])
                     ]) # < 3-6> - returns peptide sequence of the specified length (only lengths 3-6 are allowed).
 
-        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        translations = self.params['translations']['_grouped_by_translated_key']
         for param in [
             '-output_cum_probs',
             '-output_aa_probs',
@@ -182,11 +185,11 @@ class pepnovo_3_1( ursgal.UNode ):
             if list(translations[param].values())[0] == True:
                 self.params[ 'command_list' ].append( param )
 
-        if self.params['precursor_isotope_range'] != '0' :
+        if self.params['translations']['precursor_isotope_range'] != '0' :
             self.params[ 'command_list' ].append( '-correct_pm' )
 
-        if self.params['min_output_score'] >= 0 and self.params['min_output_score'] <= 1.0:
-            self.params[ 'command_list' ].extend([ '-min_filter_prob', '{min_output_score}'.format(**self.params) ])
+        if self.params['translations']['min_output_score'] >= 0 and self.params['translations']['min_output_score'] <= 1.0:
+            self.params[ 'command_list' ].extend([ '-min_filter_prob', '{min_output_score}'.format(**self.params['translations']) ])
 
         return self.params
 
@@ -203,7 +206,7 @@ class pepnovo_3_1( ursgal.UNode ):
             self.execute_return_code = 500
 
         if proc is not None:
-            output_file = open(self.params['tmp_output_file_incl_path'], 'w')
+            output_file = open(self.params['translations']['tmp_output_file_incl_path'], 'w')
             # pint('Printing output to file, this can take a while ...')
             for line in proc.stdout:
                 if line.startswith(b'>>'):
@@ -237,7 +240,7 @@ class pepnovo_3_1( ursgal.UNode ):
         '''
         Reformats the PepNovo output file
         '''
-        filepath = self.params['tmp_output_file_incl_path']
+        filepath = self.params['translations']['tmp_output_file_incl_path']
 
         print('[ PARSING  ] Loading unformatted Pepnovo results ...')
 
@@ -260,7 +263,7 @@ class pepnovo_3_1( ursgal.UNode ):
                     save_headers = False
 
         #extend and translate headers
-        header_translations = self.TRANSLATIONS['header_translations']['uvalue_style_translation']
+        header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
         translated_headers = []
         for header in headers:
             if header == '':
