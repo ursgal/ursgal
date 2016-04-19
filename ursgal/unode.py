@@ -60,9 +60,14 @@ class Meta_UNode(type):
 
         initd_klass.DEFAULT_PARAMS = {}
         initd_klass.UNODE_UPARAMS = {}
+        initd_klass.UNODE_UPARAMS_GROUPED_BY_TAG = ddict(list)
         # initd_klass.TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY = {}
         initd_klass.PARAMS_TRIGGERING_RERUN = set()
         for mDict in Meta_UNode._uparam_mapper.mapping_dicts( engine ):
+            for tag in mDict['utag']:
+                initd_klass.UNODE_UPARAMS_GROUPED_BY_TAG[ tag ].append(
+                    mDict['ukey']
+                )
 
             initd_klass.DEFAULT_PARAMS[ mDict['ukey'] ] = \
                 mDict['default_value_translated']
