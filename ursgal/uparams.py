@@ -7,7 +7,7 @@ ursgal_params = {
         ],
         'default_value' : "13312m",
         'description' :  ''' Set maximum Java heap size (used RAM) ''',
-        'trigger_rerun' : False,
+        'triggers_rerun' : False,
         'ukey_translation' : {
             'msgfplus_style_1' : '-Xmx',
             'mzidentml_style_1' : '-Xmx',
@@ -37,7 +37,7 @@ ursgal_params = {
             },
         },
         'description' :  ''' Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'unify_csv_style_1' : 'aa_exception_dict',
         },
@@ -57,7 +57,7 @@ ursgal_params = {
         ],
         'default_value' : 1000,
         'description' :  ''' m/z value that is used as basis for the conversion from ppm to Da ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : 'base_mz',
             'pepnovo_style_1' : 'base_mz',
@@ -87,7 +87,7 @@ ursgal_params = {
         ],
         'default_value' : 100000,
         'description' :  ''' sets the number of sequences loaded in as a batch from the database file ''',
-        'trigger_rerun' : False,
+        'triggers_rerun' : False,
         'ukey_translation' : {
             'myrimatch_style_1' : 'NumBatches',
             'xtandem_style_1' : 'spectrum, sequence batch size',
@@ -112,7 +112,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'add_estimated_fdr_style_1' : 'bigger_scores_better',
             'percolator_style_1' : 'bigger_scores_better',
@@ -177,7 +177,7 @@ ursgal_params = {
         ],
         'default_value' : 17.00305,
         'description' :  ''' The mass added to the peptide C-terminus by protein cleavage ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, cleavage C-terminal mass change',
         },
@@ -204,7 +204,7 @@ ursgal_params = {
         ],
         'default_value' : 1.00794,
         'description' :  ''' The mass added to the peptide N-terminus bz protein cleavage ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, cleavage N-terminal mass change',
         },
@@ -231,7 +231,7 @@ ursgal_params = {
         ],
         'default_value' : False,
         'description' :  ''' Compensate for very small database files. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'scoring, cyclic permutation',
         },
@@ -254,7 +254,7 @@ ursgal_params = {
         ],
         'default_value' : True,
         'description' :  ''' Compress raw search result to .gz: True or False ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'compress_raw_search_results_if_possible',
         },
@@ -274,7 +274,7 @@ ursgal_params = {
         ],
         'default_value' : False,
         'description' :  ''' Compute xcorr ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'ComputeXCorr',
         },
@@ -297,7 +297,7 @@ ursgal_params = {
         ],
         'default_value' : 0.5,
         'description' :  ''' Probability of consecutive ion (used in correlation correction) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-scorp',
         },
@@ -308,10 +308,10 @@ ursgal_params = {
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
+            'min'       : 0,           # default = |default_value * 100| * -1
+            # 'max'       : 10000000,    # default = |default_value * 100|
+            'updownval' : 0.01,  # default = 10^int(log10(default_value)) or unit
+            'unit'      : 0.00001,    # default = 10^int(log10(default_value))
         },
     },
     'cpus' : {
@@ -329,7 +329,7 @@ ursgal_params = {
         ],
         'default_value' : "max - 1",
         'description' :  ''' Number of used cpus/threads ''',
-        'trigger_rerun' : False,
+        'triggers_rerun' : False,
         'ukey_translation' : {
             'msgfplus_style_1' : '-thread',
             'myrimatch_style_1' : '-cpus',
@@ -354,7 +354,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'filter_csv_style_1' : 'filter_rules',
         },
@@ -386,7 +386,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' Path to database file containing protein sequences in fasta format ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'database',
             'msgfplus_style_1' : '-d',
@@ -415,7 +415,7 @@ ursgal_params = {
         ],
         'default_value' : "all",
         'description' :  ''' If a taxonomy ID is specified, only the corresponding protein sequences from the fasta database are included in the search. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'taxon label',
         },
@@ -438,7 +438,7 @@ ursgal_params = {
         ],
         'default_value' : "shuffle_peptide",
         'description' :  ''' Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein). ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'mode',
         },
@@ -475,7 +475,7 @@ ursgal_params = {
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'decoy_tag',
             'msamanda_style_1' : 'decoy_tag',
@@ -504,7 +504,7 @@ ursgal_params = {
             'grouped_psms',
         ],
         'description' :  ''' List of parameters that are deleted before .json is dumped (to not overload the .json with unimportant informations) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'del_from_params_before_json_dump',
         },
@@ -526,7 +526,7 @@ ursgal_params = {
         ],
         'default_value' : "cid_trypsin",
         'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-model',
         },
@@ -555,7 +555,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1 ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-model_dir',
         },
@@ -582,7 +582,7 @@ ursgal_params = {
         ],
         'default_value' : False,
         'description' :  ''' Engine creates an own decoy database. Not recommended, because a target decoy database should be generated independently from the search engine, e.g. by using the uNode generate_target_decoy_1_0_0 ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'generate_decoy',
             'msgfplus_style_1' : '-tda',
@@ -655,7 +655,7 @@ ursgal_params = {
                 'trypsin_cnbr'
                 'trypsin_p'
                 # Note not all search engines support all enzymes ! :) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'enzyme',
             'msamanda_style_1' : 'enzyme specificity',
@@ -845,7 +845,7 @@ ursgal_params = {
         ],
         'default_value' : "filter_csv_1_0_0",
         'description' :  ''' filter csv converter version: version name ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'filter_csv_converter_version',
         },
@@ -866,7 +866,7 @@ ursgal_params = {
         'default_value' : [
         ],
         'description' :  ''' List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide, e.g. ['GG'] ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'residue, potential modification mass',
         },
@@ -888,7 +888,7 @@ ursgal_params = {
         ],
         'default_value' : "I,U",
         'description' :  ''' Aminoacids that are not allowed during/taken into account during denovo searches. Given as a string of comma seperated aminoacids (single letter code) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'novor_style_1' : 'forbiddenResidues',
         },
@@ -908,7 +908,7 @@ ursgal_params = {
         ],
         'default_value' : False,
         'description' :  ''' If set 'True', engines are forced to re-run although no node-related parameters have changed ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'force',
         },
@@ -938,7 +938,7 @@ ursgal_params = {
         ],
         'default_value' : 5,
         'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'ms2_tol',
             'myrimatch_style_1' : 'FragmentMzTolerance',
@@ -976,7 +976,7 @@ ursgal_params = {
         ],
         'default_value' : "ppm",
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'ms2_tol unit',
             'myrimatch_style_1' : 'FragmentMzTolerance',
@@ -1029,7 +1029,7 @@ ursgal_params = {
         ],
         'default_value' : "monoisotopic",
         'description' :  ''' Fragment mass type: monoisotopic or average ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-tom',
             'xtandem_style_1' : 'spectrum, fragment mass type',
@@ -1062,7 +1062,7 @@ ursgal_params = {
         ],
         'default_value' : 4,
         'description' :  ''' Maximum fragment ion charge to search. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-zoh',
         },
@@ -1086,7 +1086,7 @@ ursgal_params = {
         ],
         'default_value' : "hcd",
         'description' :  ''' Used fragmentation method, e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-m',
             'novor_style_1' : 'fragmentation',
@@ -1129,7 +1129,7 @@ ursgal_params = {
         ],
         'default_value' : 150,
         'description' :  ''' Minimal considered fragment ion m/z ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, minimum fragment mz',
         },
@@ -1152,7 +1152,7 @@ ursgal_params = {
         ],
         'default_value' : 1024,
         'description' :  ''' Blocksize for ftp download ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_blocksize',
         },
@@ -1172,7 +1172,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' ftp folder that should be downloaded ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_folder',
         },
@@ -1192,7 +1192,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' Only files with the defined file extension are downloaded with ftp download ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_include_ext',
         },
@@ -1212,7 +1212,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' Maximum number of files that will be downloaded ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_max_number_of_files',
         },
@@ -1232,7 +1232,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' Default ftp download path ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_output_folder',
         },
@@ -1252,7 +1252,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' ftp download password ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_password',
         },
@@ -1272,7 +1272,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' ftp download URL, will fail if it is not set by the user ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_url',
         },
@@ -1296,7 +1296,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'header_translations',
             'novor_style_1' : 'header_translations',
@@ -1372,7 +1372,7 @@ ursgal_params = {
         ],
         'default_value' : ".u.json",
         'description' :  ''' Exension for helper files ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'helper_extension',
         },
@@ -1392,7 +1392,7 @@ ursgal_params = {
         ],
         'default_value' : "None",
         'description' :  ''' Default http download path ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'http_output_folder',
         },
@@ -1412,7 +1412,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' http download URL, will fail if it is not set by the user ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'http_url',
         },
@@ -1433,7 +1433,7 @@ ursgal_params = {
         ],
         'default_value' : "q_exactive",
         'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-inst',
             'novor_style_1' : 'massAnalyzer',
@@ -1475,7 +1475,7 @@ ursgal_params = {
         ],
         'default_value' : 0.0,
         'description' :  ''' Low intensity cutoff as a fraction of max peak ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-cl',
         },
@@ -1498,7 +1498,7 @@ ursgal_params = {
         ],
         'default_value' : ".u.json",
         'description' :  ''' Exension for .json files ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'json_extension',
         },
@@ -1528,7 +1528,7 @@ ursgal_params = {
         ],
         'default_value' : "14N",
         'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'label',
             'msgfplus_style_1' : 'label',
@@ -1560,7 +1560,7 @@ ursgal_params = {
         ],
         'default_value' : 0.0,
         'description' :  ''' Machine offset, m/z values will be corected/shifted by the given value. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'mzml2mgf_style_1' : 'machine_offset_in_ppm',
         },
@@ -1590,7 +1590,7 @@ ursgal_params = {
         ],
         'default_value' : 100,
         'description' :  ''' Maximum number of peaks from a spectrum used. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'MaxPeakCount',
             'xtandem_style_1' : 'spectrum, total peaks',
@@ -1623,7 +1623,7 @@ ursgal_params = {
         ],
         'default_value' : 2,
         'description' :  ''' Maximum number of missed cleavages per peptide ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'missed_cleavages',
             'myrimatch_style_1' : 'MaxMissedCleavages',
@@ -1648,7 +1648,7 @@ ursgal_params = {
         ],
         'default_value' : 6,
         'description' :  ''' Maximal number of variable modification alternatives, given as C in 2^C ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, ptm complexity',
         },
@@ -1672,7 +1672,7 @@ ursgal_params = {
         ],
         'default_value' : 3,
         'description' :  ''' Maximal number of modifications per peptide ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : 'NumMods',
             'myrimatch_style_1' : 'MaxDynamicMods',
@@ -1695,7 +1695,7 @@ ursgal_params = {
         ],
         'default_value' : "all",
         'description' :  ''' Max number of ions in each series being searched (0=all) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-sp',
         },
@@ -1721,7 +1721,7 @@ ursgal_params = {
         'default_value' : {
         },
         'description' :  ''' Maximal number of modification sites per peptide for a specific modification, given as a dictionary: {unimod_name : number} ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'residue, potential modification mass',
         },
@@ -1745,7 +1745,7 @@ ursgal_params = {
         ],
         'default_value' : 1.0,
         'description' :  ''' Highest e-value for reported peptides ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-he',
             'xtandem_style_1' : 'output, maximum valid expectation value',
@@ -1773,7 +1773,7 @@ ursgal_params = {
         ],
         'default_value' : 40,
         'description' :  ''' Maximal length of a peptide ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-maxLength',
             'myrimatch_style_1' : 'MaxPeptideLength',
@@ -1798,7 +1798,7 @@ ursgal_params = {
         ],
         'default_value' : 1000000,
         'description' :  ''' Maximal peptide variants ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-maxLength',
             'myrimatch_style_1' : 'MaxPeptideVariants',
@@ -1832,7 +1832,7 @@ ursgal_params = {
         ],
         'default_value' : None,
         'description' :  ''' Path to input .mgf file ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'mgf_input_file',
             'msgfplus_style_1' : '-s',
@@ -1859,7 +1859,7 @@ ursgal_params = {
         ],
         'default_value' : "default",
         'description' :  ''' Lowest score for reported peptides. If set to 'default', default values fo each engine will be used. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'MinResultScore',
             'pepnovo_style_1' : '-min_filter_prob',
@@ -1893,7 +1893,7 @@ ursgal_params = {
         ],
         'default_value' : 6,
         'description' :  ''' Minimal length of a peptide ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-minLength',
             'myrimatch_style_1' : 'MinPeptideLength',
@@ -1917,7 +1917,7 @@ ursgal_params = {
         ],
         'default_value' : 1,
         'description' :  ''' Minimum number of precursors that match a spectrum. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-pc',
         },
@@ -1947,7 +1947,7 @@ ursgal_params = {
         ],
         'default_value' : 4,
         'description' :  ''' Mimimum number of matched ions required for a peptide to be scored ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'MinMatchedFragments',
             'omssa_style_1' : '-hm',
@@ -1977,7 +1977,7 @@ ursgal_params = {
         ],
         'default_value' : 5,
         'description' :  ''' Mimimum number of peaks in the spectrum to be considered. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-hs',
             'xtandem_style_1' : 'spectrum, minimum peaks',
@@ -2042,7 +2042,7 @@ Additionally, userdefined modifications can be given and are written to a userde
 Example:
 
  [ 'S,opt,any,New_mod,C2H5N1O3' ] ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'modifications',
             'msgfplus_style_1' : '-mod',
@@ -2070,7 +2070,7 @@ Example:
         ],
         'default_value' : 0,
         'description' :  ''' MS-GF+ specific protocol identifier. Protocols are used to enable scoring parameters for enriched and/or labeled samples. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-protocol',
         },
@@ -2099,7 +2099,7 @@ Example:
         ],
         'default_value' : 2,
         'description' :  ''' Myrimatch ClassSizeMultiplier ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'ClassSizeMultiplier',
         },
@@ -2121,7 +2121,7 @@ Example:
         ],
         'default_value' : 3,
         'description' :  ''' Myrimatch NumIntensityClasses ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'NumIntensityClasses',
         },
@@ -2143,7 +2143,7 @@ Example:
         ],
         'default_value' : 3,
         'description' :  ''' Myrimatch NumMzFidelityClasses ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'NumMzFidelityClasses',
         },
@@ -2165,7 +2165,7 @@ Example:
         ],
         'default_value' : 15,
         'description' :  ''' Myrimatch ProteinSamplingTime ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'ProteinSamplingTime',
         },
@@ -2187,7 +2187,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Use Myrimatch UseSmartPlusThreeModel ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'UseSmartPlusThreeModel',
         },
@@ -2214,7 +2214,7 @@ Example:
         ],
         'default_value' : 0.98,
         'description' :  ''' Myrimatch TicCutoffPercentage ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'TicCutoffPercentage',
         },
@@ -2237,7 +2237,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Compress mzidentml_lib output files ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'mzidentml_style_1' : '-compress',
         },
@@ -2260,7 +2260,7 @@ Example:
         ],
         'default_value' : "mzidentml_lib_1_6_10",
         'description' :  ''' mzidentml converter version: version name ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'mzidentml_converter_version',
         },
@@ -2281,7 +2281,7 @@ Example:
         ],
         'default_value' : "exportPSMs",
         'description' :  ''' Defines which paramters shoul be exporte by mzidentml_lib ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'mzidentml_style_1' : '-exportType',
         },
@@ -2312,7 +2312,7 @@ Example:
         ],
         'default_value' : "Mzid2Csv",
         'description' :  ''' Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'mzidentml_style_1' : 'mzidentml_function',
         },
@@ -2347,7 +2347,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Include fragmentation in mzidentml_lib output ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'mzidentml_style_1' : '-outputFragmentation',
         },
@@ -2371,7 +2371,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Verbose mzidentml_lib output ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'mzidentml_style_1' : '-verboseOutput',
         },
@@ -2394,7 +2394,7 @@ Example:
         ],
         'default_value' : "mzml2mgf_1_0_0",
         'description' :  ''' mzml to mgf converter version: version name ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'mzml2mgf_converter_version',
         },
@@ -2418,7 +2418,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Neutral losses enabled for spectrum algorithm: set  True or False ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, use neutral loss window',
         },
@@ -2446,7 +2446,7 @@ Example:
         ],
         'default_value' : 0,
         'description' :  ''' Sets the centre of the window for ignoring neutral molecule losses. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, neutral loss mass',
         },
@@ -2473,7 +2473,7 @@ Example:
         ],
         'default_value' : 0,
         'description' :  ''' Neutral loss window: sets the width of the window for ignoring neutral molecule losses. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, neutral loss window',
         },
@@ -2499,7 +2499,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Used noise suppresssion ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, use noise suppression',
         },
@@ -2522,7 +2522,7 @@ Example:
         ],
         'default_value' : 30,
         'description' :  ''' Maximum number of hits retained per precursor charge state per spectrum during the search ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-hl',
         },
@@ -2551,7 +2551,7 @@ Example:
         ],
         'default_value' : 10,
         'description' :  ''' Maximum number of peptide spectrum matches to report for each spectrum ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'max_rank',
             'msgfplus_style_1' : '-n',
@@ -2578,7 +2578,7 @@ Example:
         ],
         'default_value' : 5,
         'description' :  ''' Number of decimals for intensity (peak) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'mzml2mgf_style_1' : 'number_of_i_decimals',
         },
@@ -2600,7 +2600,7 @@ Example:
         ],
         'default_value' : 5,
         'description' :  ''' Number of decimals for m/z mass ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'mzml2mgf_style_1' : 'number_of_mz_decimals',
         },
@@ -2622,7 +2622,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Omssa: eliminate charge reduced precursors in spectra ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-cp',
         },
@@ -2646,7 +2646,7 @@ Example:
         ],
         'default_value' : 2,
         'description' :  ''' Omssa: number of peaks allowed in single charge window ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-h1',
         },
@@ -2668,7 +2668,7 @@ Example:
         ],
         'default_value' : 2,
         'description' :  ''' Omssa: number of peaks allowed in double charge window ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-h2',
         },
@@ -2690,7 +2690,7 @@ Example:
         ],
         'default_value' : 6,
         'description' :  ''' Omssa: number of m/z values corresponding to the most intense peaks that must include one match to the theoretical peptide ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-ht',
         },
@@ -2712,7 +2712,7 @@ Example:
         ],
         'default_value' : 128,
         'description' :  ''' Omssa: the maximum number of mass ladders to generate per database peptide ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-mm',
         },
@@ -2734,7 +2734,7 @@ Example:
         ],
         'default_value' : 1.0,
         'description' :  ''' Omssa: automatic mass tolerance adjustment fraction ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-ta',
         },
@@ -2757,7 +2757,7 @@ Example:
         ],
         'default_value' : 1446.94,
         'description' :  ''' Omssa: threshold in Da above which the mass of neutron should be added in exact mass search ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-tex',
         },
@@ -2780,7 +2780,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Omssa: verbose info print ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-ni',
         },
@@ -2803,7 +2803,7 @@ Example:
         ],
         'default_value' : 27,
         'description' :  ''' Omssa: single charge window in Da ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-w1',
         },
@@ -2825,7 +2825,7 @@ Example:
         ],
         'default_value' : 14,
         'description' :  ''' Omssa: double charge window in Da ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-w2',
         },
@@ -2847,7 +2847,7 @@ Example:
         ],
         'default_value' : 0.95,
         'description' :  ''' Omssa: fraction of peaks below precursor used to determine if spectrum is charge 1 ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-z1',
         },
@@ -2870,7 +2870,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Should charge plus one be determined algorithmically? ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-zc',
         },
@@ -2894,7 +2894,7 @@ Example:
         ],
         'default_value' : 2,
         'description' :  ''' Omssa: how should precursor charges be determined?, use a range ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-zcc',
         },
@@ -2916,7 +2916,7 @@ Example:
         ],
         'default_value' : 2,
         'description' :  ''' Minimum precursor charge to start considering multiply charged products ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-zt',
         },
@@ -2939,7 +2939,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Output probabilities for each amino acid. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-output_aa_probs',
         },
@@ -2958,7 +2958,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Number of decimals for intensity (peak) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-addFeatures',
         },
@@ -2981,7 +2981,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Output cumulative probabilities. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-output_cum_probs',
         },
@@ -3019,7 +3019,7 @@ Example:
         ],
         'default_value' : None,
         'description' :  ''' Path to output file ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'output_file',
             'merge_csv_style_1' : 'output',
@@ -3056,7 +3056,7 @@ Example:
         ],
         'default_value' : "default",
         'description' :  ''' Output file type. If set to 'default', default output file tzpes for each engine are used. Note: not every file type is supported by every engine and usin non-default types might cause problems during conversion to .csv. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : ('-oc', '-ox'),
             'xtandem_style_1' : 'output, mzid',
@@ -3095,7 +3095,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Only print spectrum graph nodes with scores. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-prm',
         },
@@ -3114,7 +3114,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Prints spectrum graph scores after normalization and removal of negative scores. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-prm_norm',
         },
@@ -3133,7 +3133,7 @@ Example:
         ],
         'default_value' : None,
         'description' :  ''' Returns peptide sequences of the specified length (only lengths 3-6 are allowed) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-tag_length',
         },
@@ -3155,7 +3155,7 @@ Example:
         ],
         'default_value' : "linear",
         'description' :  ''' charge dependency of precursor mass tolerance (none or linear) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-tez',
         },
@@ -3195,7 +3195,7 @@ Example:
         ],
         'default_value' : "0,1",
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-ti',
             'myrimatch_style_1' : 'MonoisotopeAdjustmentSet',
@@ -3254,7 +3254,7 @@ Example:
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
@@ -3294,7 +3294,7 @@ Example:
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
@@ -3334,7 +3334,7 @@ Example:
         ],
         'default_value' : "ppm",
         'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'ms1_tol unit',
             'msgfplus_style_1' : '-t',
@@ -3391,7 +3391,7 @@ Example:
         ],
         'default_value' : "monoisotopic",
         'description' :  ''' Precursor mass type: monoisotopic or average ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'monoisotopic',
             'myrimatch_style_1' : 'PrecursorMzToleranceRule',
@@ -3438,7 +3438,7 @@ Example:
         ],
         'default_value' : 5,
         'description' :  ''' Maximal accepted parent ion charge ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'considered_charges',
             'msgfplus_style_1' : '-maxCharge',
@@ -3464,7 +3464,7 @@ Example:
         ],
         'default_value' : 10000,
         'description' :  ''' Maximal parent ion mass ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'MaxPeptideMass',
             'xtandem_style_1' : 'spectrum, minimum parent m+h',
@@ -3490,7 +3490,7 @@ Example:
         ],
         'default_value' : 1,
         'description' :  ''' Minimal accepted parent ion charge ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'considered_charges',
             'msgfplus_style_1' : '-minCharge',
@@ -3520,7 +3520,7 @@ Example:
         ],
         'default_value' : 400,
         'description' :  ''' Minimal parent ion mass ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'MinPeptideMass',
             'xtandem_style_1' : 'spectrum, minimum parent m+h',
@@ -3543,7 +3543,7 @@ Example:
         ],
         'default_value' : None,
         'description' :  '''  ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'prefix',
         },
@@ -3562,7 +3562,7 @@ Example:
         ],
         'default_value' : 0,
         'description' :  ''' The relative crossvalidation step size used as treshhold before ending the iterations, qvality determines step size automatically when set to 0 ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'qvality_style_1' : '-c',
         },
@@ -3584,7 +3584,7 @@ Example:
         ],
         'default_value' : 0,
         'description' :  ''' The relative step size used as treshhold before cross validation error is calculated, qvality determines step size automatically when set to 0 ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'qvality_style_1' : '-s',
         },
@@ -3606,7 +3606,7 @@ Example:
         ],
         'default_value' : 500,
         'description' :  ''' Number of bins used in qvality ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'qvality_style_1' : '-n',
         },
@@ -3628,7 +3628,7 @@ Example:
         ],
         'default_value' : 2,
         'description' :  ''' Verbose qvality output (range from 0 = no processing info to 5 = all) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'qvality_style_1' : '-v',
         },
@@ -3658,7 +3658,7 @@ Example:
         ],
         'default_value' : ".csv",
         'description' :  ''' CSV suffix of raw indentification: this is the conversion result after CSV conversion but before adding retention time ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'raw_ident_csv_suffix',
         },
@@ -3678,7 +3678,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' Remove temporary files: True or False ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'remove_temporary_files',
         },
@@ -3697,7 +3697,7 @@ Example:
         ],
         'default_value' : "_ursgal_lookup.pkl",
         'description' :  ''' name of the pickle that is used to map the retention time ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'rt_pickle_name',
         },
@@ -3718,7 +3718,7 @@ Example:
         'default_value' : [
         ],
         'description' :  ''' Spectra rejected during mzml2mgf conversion ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'mzml2mgf_style_1' : 'scan_exclusion_list',
         },
@@ -3740,7 +3740,7 @@ Example:
         ],
         'default_value' : None,
         'description' :  ''' Include only the n'th spectrum during mzml2mgf conversion ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'mzml2mgf_style_1' : 'scan_skip_modulo_step',
         },
@@ -3763,7 +3763,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, ions loss of H2O are respected in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -3783,7 +3783,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, ions loss of NH3 are respected in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -3811,7 +3811,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, a ions are used in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
@@ -3841,7 +3841,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' first forward (b1) product ions inclued in search ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-sb1',
         },
@@ -3873,7 +3873,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Spectrum: if true, b ions are used in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
@@ -3912,7 +3912,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, c ions are used in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
@@ -3942,7 +3942,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Score c terminal ions ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-sct',
         },
@@ -3965,7 +3965,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Use correlation correction to score? ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-scorr',
         },
@@ -3989,7 +3989,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, immonium ions are respected in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -4009,7 +4009,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, internal fragment ions are respect in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -4037,7 +4037,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, x ions are used in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
@@ -4076,7 +4076,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Spectrum: if true, y ions are used in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
@@ -4107,7 +4107,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, z ion plus 1 Da mass are used in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -4127,7 +4127,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true z ion plus 2 Da mass are used in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
         },
@@ -4155,7 +4155,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, z ions are used in algorithm ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
@@ -4185,7 +4185,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Create folders for the output of engines that allow this option in their META_INFO ('create_own_folder' : True). True or False ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'engines_create_folders',
         },
@@ -4208,7 +4208,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Search for potential single amino acid polymorphisms. 'True' might cause problems in the downstream processing of th result files (unify_csv, ...) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, saps',
         },
@@ -4241,7 +4241,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Allows semi-enzymatic peptide ends ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-ntt',
@@ -4280,7 +4280,7 @@ Example:
         ],
         'default_value' : "False",
         'description' :  ''' Show ursgal nodes that are in development: False or True ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'show_unodes_in_development',
         },
@@ -4302,7 +4302,7 @@ Example:
         ],
         'default_value' : 100,
         'description' :  ''' Internal normalization for MS/MS spectrum: The highest peak (intensity) within a spectrum is set to given value and all other peaks are normalized to this peak. If the normalized value is less than 1 the peak is rejected. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, dynamic range',
         },
@@ -4325,7 +4325,7 @@ Example:
         ],
         'default_value' : "b",
         'description' :  ''' TEST/DEBUG: Internal Ursgal parameter 1 for debugging and testing. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             '_test_node_style_1' : 'test_param1',
         },
@@ -4353,7 +4353,7 @@ Example:
         ],
         'default_value' : "three",
         'description' :  ''' TEST/DEBUG: Internal Ursgal parameter 2 for debugging and testing. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             '_test_node_style_1' : 'test_param2',
         },
@@ -4381,7 +4381,7 @@ Example:
         ],
         'default_value' : "unify_csv_1_0_0",
         'description' :  ''' unify csv converter version: version name ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'unify_csv_converter_version',
         },
@@ -4401,7 +4401,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Use filter for low quality spectra. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-no_quality_filter',
         },
@@ -4428,7 +4428,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' X! TANDEM can use 'refinement' to improve the speed and accuracy of peptide modelling. This is not included in Ursgal, yet. See further: http://www.thegpm.org/TANDEM/api/refine.html ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'refine',
         },
@@ -4451,7 +4451,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Does not correct precusor charge. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-use_spectrum_charge',
         },
@@ -4470,7 +4470,7 @@ Example:
         ],
         'default_value' : True,
         'description' :  ''' Does not correct precusor m/z. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-use_spectrum_mz',
         },
@@ -4489,7 +4489,7 @@ Example:
         ],
         'default_value' : "validated.csv",
         'description' :  ''' CSV suffix of validated identification files: string, CSV-file which contains PSMs validated with validation tools ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'validated_ident_csv_suffix',
         },
@@ -4509,7 +4509,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Generalized target decoy competition, situations where PSMs known to more frequently be incorrect are mixed in with the correct PSMs ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'qvality_style_1' : '-g',
         },
@@ -4532,7 +4532,7 @@ Example:
         ],
         'default_value' : None,
         'description' :  ''' Defines the minimum score used fo validation. If scores lower than this are produced, they are set to the minimum score. This is used to avoid huge gaps/jumps in the score distribution ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'qvality_style_1' : 'validation_minimum_score',
         },
@@ -4569,7 +4569,7 @@ Example:
         ],
         'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator. If None is defined, default values are used ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'percolator_style_1' : 'validation_score_field',
             'qvality_style_1' : 'validation_score_field',
@@ -4670,7 +4670,7 @@ Example:
             'Sequence',
         ],
         'description' :  ''' The specified csv column names are used for the visualization. E.g. for a Venn diagram the entries of these columns are used (merged) to determine overlapping results. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'venndiagram_style_1' : 'visualization_column_names',
         },
@@ -4692,7 +4692,7 @@ Example:
         ],
         'default_value' : ('Helvetica', 31, 25, 20, 20),
         'description' :  ''' Font used for visualiyation plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'venndiagram_style_1' : 'visualization_font',
         },
@@ -4711,7 +4711,7 @@ Example:
         ],
         'default_value' : "ursgal Venn Diagram",
         'description' :  ''' Header of visualization output (e.g. Venn diagram) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'venndiagram_style_1' : 'header',
         },
@@ -4732,7 +4732,7 @@ Example:
         'default_value' : [
         ],
         'description' :  ''' Specifies labels for the datasets that should be visualized. Needs to be given in the same order as the datasets. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'venndiagram_style_1' : 'visualization_label_list',
         },
@@ -4754,7 +4754,7 @@ Example:
         ],
         'default_value' : 0.35,
         'description' :  ''' Opacity used in visualiyation plots (e.g. Venn diagram) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'venndiagram_style_1' : 'opacity',
         },
@@ -4777,7 +4777,7 @@ Example:
         ],
         'default_value' : (600, 400),
         'description' :  ''' Scaling factor for visualiyation plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'venndiagram_style_1' : 'visualization_scaling_factors',
         },
@@ -4796,7 +4796,7 @@ Example:
         ],
         'default_value' : (1200, 800),
         'description' :  ''' Size of visualiyation plots (e.g. Venn diagram), given as tuple (width, height) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'venndiagram_style_1' : 'visualization_size',
         },
@@ -4815,7 +4815,7 @@ Example:
         ],
         'default_value' : 2.0,
         'description' :  ''' Stroke width used in visualiyation plots (e.g. Venn diagram) ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'venndiagram_style_1' : 'stroke-width',
         },
@@ -4841,7 +4841,7 @@ Example:
     iterating a sliding window over the sorted PSMs. Each PSM receives
     a PEP based on the target/decoy ratio of the surrounding PEPs.
     This parameter defines the window size. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'combine_pep_style_1' : 'window_size',
         },
@@ -4864,7 +4864,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Writes rejected results if True ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'filter_csv_style_1' : 'write_unfiltered_results',
         },
@@ -4887,7 +4887,7 @@ Example:
         ],
         'default_value' : False,
         'description' :  ''' Interpretation of peptide phosphorylation models. ''',
-        'trigger_rerun' : True,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, stP bias',
         },

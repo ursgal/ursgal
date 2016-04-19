@@ -86,15 +86,22 @@ class UParamMapper( dict ):
                 if re_evaluated_value is not None:
                     translated_value = re_evaluated_value
 
-            yield {
-                'style'                    : style,
-                'ukey'                     : uparam,
-                'ukey_translated'          : sup['ukey_translation'][ style ],
-                'default_value'            : sup['default_value'],
-                'default_value_translated' : translated_value,
-                'uvalue_style_translation' : uvalue_style_translation,
-                'triggers_rerun'           : sup.get('triggers_rerun', True)
-            }
+            template = sup.copy()
+            keys_to_delete = ['ukey_translation', 'uvalue_translation', 'available_in_unode']
+            for k in keys_to_delete:
+                del template[ k ]
+            template.update(
+                {
+                    'style'                    : style,
+                    'ukey'                     : uparam,
+                    'ukey_translated'          : sup['ukey_translation'][ style ],
+                    'default_value_translated' : translated_value,
+                    'uvalue_style_translation' : uvalue_style_translation,
+                    'triggers_rerun'           : sup.get('triggers_rerun', True)
+                }
+            )
+
+            yield template
 
     def get_all_params( self, engine=None):
         self._assert_engine( engine )
