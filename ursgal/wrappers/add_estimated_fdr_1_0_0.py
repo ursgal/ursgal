@@ -60,8 +60,8 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
   >>> uc.params['validation_score_field'] = 'my_score_column'
   >>> uc.params['bigger_scores_better'] = False  # or True!
         '''
-        score_field = self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][last_search_engine]
-        bigger_is_better = self.TRANSLATIONS['bigger_scores_better']['uvalue_style_translation'][last_search_engine]
+        score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_search_engine]
+        bigger_is_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][last_search_engine]
 
         output_file = os.path.join(
                 self.params['output_dir_path'],

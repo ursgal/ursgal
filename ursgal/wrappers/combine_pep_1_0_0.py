@@ -133,7 +133,7 @@ class combine_pep_1_0_0(ursgal.UNode):
             'join_sep': ';',  # char to join multiple values in same field
             'pep_colname': 'PEP',
             # The size of the sliding window for PEP calculation:
-            'window_size': self.params['window_size'],
+            'window_size': self.params['translations']['window_size'],
         }
 
     def _execute( self ):

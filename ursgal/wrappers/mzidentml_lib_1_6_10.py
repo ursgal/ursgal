@@ -52,9 +52,9 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         Convert raw result files into .mzid result files
         '''
         if self.io['input']['finfo']['is_compressed']:
-            self.params['mzidentml_compress'] = True
+            self.params['translations']['mzidentml_compress'] = True
         else:
-            self.params['mzidentml_compress'] = False
+            self.params['translations']['mzidentml_compress'] = False
 
         if 'tandem' in search_engine:
             tmp_options += [
@@ -113,16 +113,16 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         with raw2mzid
         '''
 
-        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        translations = self.params['translations']['_grouped_by_translated_key']
         # import pprint
         # pprint.pprint(translations)
         # exit(1)
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
-        translations['output_file_incl_path']['output_file_incl_path'] = self.params['output_file_incl_path']
+        translations['output_file_incl_path']['output_file_incl_path'] = self.params['translations']['output_file_incl_path']
 
         search_engine = self.get_last_search_engine(
             history = self.stats['history']

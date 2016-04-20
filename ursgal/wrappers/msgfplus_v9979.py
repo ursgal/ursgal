@@ -52,7 +52,7 @@ class msgfplus_v9979( ursgal.UNode ):
                 dict: self.params
         '''
 
-        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        translations = self.params['translations']['_grouped_by_translated_key']
         # import pprint
         # pprint.pprint(translations)
         # exit(1)
@@ -63,31 +63,31 @@ class msgfplus_v9979( ursgal.UNode ):
             self.exe,
         ]
 
-        self.params['mgf_input_file'] = os.path.join(
+        self.params['translations']['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
-        translations['-s']['mgf_input_file'] = self.params['mgf_input_file']
+        translations['-s']['mgf_input_file'] = self.params['translations']['mgf_input_file']
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
-        translations['-o']['output_file_incl_path'] = self.params['output_file_incl_path']
+        translations['-o']['output_file_incl_path'] = self.params['translations']['output_file_incl_path']
 
-        self.params['modification_file'] = os.path.join(
+        self.params['translations']['modification_file'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file'] + '_Mods.txt'
         )
-        self.created_tmp_files.append( self.params['modification_file'] )
-        translations['-mod']['modifications'] = self.params['modification_file']
+        self.created_tmp_files.append( self.params['translations']['modification_file'] )
+        translations['-mod']['modifications'] = self.params['translations']['modification_file']
 
-        mods_file = open( self.params['modification_file'], 'w', encoding = 'UTF-8' )
+        mods_file = open( self.params['translations']['modification_file'], 'w', encoding = 'UTF-8' )
         modifications = []
 
         print('NumMods={0}'.format(translations['NumMods']['max_num_mods']), file = mods_file)
 
-        if self.params['label'] == '15N':
+        if self.params['translations']['label'] == '15N':
             for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
                 existing = False
                 for mod in self.params[ 'mods' ][ 'fix' ]:

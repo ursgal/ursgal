@@ -116,9 +116,9 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         generate_target_decoy_main(
             input_files = input_files,
             output_file = self.params['output_file_incl_path'],
-            enzyme      = self.params['enzyme'],
-            mode        = self.params['decoy_generation_mode'],
-            decoy_tag   = self.params['decoy_tag']
+            enzyme      = self.params['translations']['enzyme'],
+            mode        = self.params['translations']['decoy_generation_mode'],
+            decoy_tag   = self.params['translations']['decoy_tag']
         )
 
         self.print_execution_time(tag='execution')

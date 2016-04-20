@@ -16,7 +16,7 @@ class xtandem2csv_1_0_0( ursgal.UNode ):
         'output_suffix'     : None,
         'input_types'       : ['.xml', '.xml.gz' ],
         'include_in_git' : True,
-    'in_development'            : True,
+        'in_development' : False,
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
@@ -57,7 +57,7 @@ class xtandem2csv_1_0_0( ursgal.UNode ):
         xtandem2csv_main(
             input_file     = input_file,
             output_file    = output_file,
-            decoy_tag      = self.params['decoy_tag'],
+            decoy_tag      = self.params['translations']['decoy_tag'],
         )
 
         self.print_execution_time(tag='execution')

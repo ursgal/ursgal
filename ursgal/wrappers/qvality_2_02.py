@@ -81,7 +81,7 @@ class qvality_2_02( ursgal.UNode ):
         '''
         self.params['last_engine'] = self.get_last_search_engine( history = self.stats['history'] )
 
-        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        translations = self.params['translations']['_grouped_by_translated_key']
 
         self.params['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
@@ -92,8 +92,8 @@ class qvality_2_02( ursgal.UNode ):
         self._generate_qvality_input_files()
 
         self.created_tmp_files += [
-            self.params['target']['path'],
-            self.params['decoy']['path'],
+            self.params['translations']['target']['path'],
+            self.params['translations']['decoy']['path'],
         ]
 
         self.params['command_list'] =[
@@ -112,14 +112,12 @@ class qvality_2_02( ursgal.UNode ):
                 print(translation_dict)
                 exit(1)
 
-        if self.TRANSLATIONS['bigger_scores_better']['uvalue_style_translation'][self.params['last_engine']] is False:
+        if self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][self.params['last_engine']] is False:
             self.params['command_list'].append('-r') #False: lower scores are better e.g.OMSSA, scores have to be reversed for qvality
         self.params['command_list'] += [
-            self.params['target']['path'],
-            self.params['decoy']['path'],
+            self.params['translations']['target']['path'],
+            self.params['translations']['decoy']['path'],
         ]
-
-        # print( ' '.join(self.params[ 'command_list' ]) )
 
     def postflight( self ):
         '''
@@ -169,7 +167,7 @@ class qvality_2_02( ursgal.UNode ):
             formatted_score = FLOAT_FORMAT_STRING.format(
                 float(
                     line_dict[
-                        self.TRANSLATIONS['validation_score_field']['uvalue_style_translation'][self.params['last_engine']]
+                        self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][self.params['last_engine']]
                     ]
                 )
             )
@@ -203,24 +201,24 @@ class qvality_2_02( ursgal.UNode ):
         '''
         crazy_tmp_files = {}
         for tag in [ 'target', 'decoy' ]:
-            self.params[tag] = {}
-            self.params[tag]['path'] = '{0}_{1}_scores.txt'.format(
+            self.params['translations'][tag] = {}
+            self.params['translations'][tag]['path'] = '{0}_{1}_scores.txt'.format(
                 os.path.join(
                     self.params['output_dir_path'],
                     self.params['file_root']
                     ),
                 tag,
             )
-            crazy_tmp_files[ tag ] = open(self.params[tag]['path'], 'w')
+            crazy_tmp_files[ tag ] = open(self.params['translations'][tag]['path'], 'w')
         defline_key = 'proteinacc_start_stop_pre_post_;'
         for spectrum_title, grouped_psm_list in self.params['grouped_psms'].items():
             score_2_write, psm_dict = grouped_psm_list[0]
-            if self.params['decoy_tag'] in psm_dict[ defline_key ]:
+            if self.params['translations']['decoy_tag'] in psm_dict[ defline_key ]:
                 tag = 'decoy'
             else:
                 tag = 'target'
 
-            min_score = self.TRANSLATIONS['validation_minimum_score']['uvalue_style_translation'][self.params['last_engine']]
+            min_score = self.UNODE_UPARAMS['validation_minimum_score']['uvalue_style_translation'][self.params['last_engine']]
             if score_2_write < min_score:
                 score_2_write = min_score
             print(

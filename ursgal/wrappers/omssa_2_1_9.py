@@ -178,7 +178,7 @@ class omssa_2_1_9( ursgal.UNode ):
                         os.path.dirname( self.exe ),
                         'makeblastdb'
                     ),
-                    '-in', self.params['database'],
+                    '-in', self.params['translations']['database'],
                     '-dbtype', 'prot',
                     '-input_type', 'fasta',
                 ],
@@ -187,7 +187,7 @@ class omssa_2_1_9( ursgal.UNode ):
             for line in proc.stdout:
                 print(line.strip().decode('utf'))
 
-        if self.params['label'] == '15N':
+        if self.params['translations']['label'] == '15N':
             translations['-tem']['precursor_mass_type'] = '2'
             translations['-tom']['frag_mass_type'] = '2'
 
@@ -232,7 +232,7 @@ class omssa_2_1_9( ursgal.UNode ):
 
 
         # semi-enyzmatic cleavage --> translation into omssa enzyme number
-        if self.params['semi_enzyme'] is True:
+        if self.params['translations']['semi_enzyme'] is True:
             if translations['-e']['enzyme'] == '0':
                 translations['-e']['enzyme'] = '16'
             elif translations['-e']['enzyme'] == '3':
@@ -240,16 +240,16 @@ class omssa_2_1_9( ursgal.UNode ):
             elif translations['-e']['enzyme'] == '13':
                 translations['-e']['enzyme'] = '24'
 
-        if self.params['frag_mass_tolerance_unit'] == 'ppm':
+        if self.params['translations']['frag_mass_tolerance_unit'] == 'ppm':
             translations['-to']['frag_mass_tolerance'] = \
                 ursgal.ucore.convert_ppm_to_dalton(
-                    self.params['frag_mass_tolerance'],
-                    base_mz=self.params['base_mz']
+                    self.params['translations']['frag_mass_tolerance'],
+                    base_mz=self.params['translations']['base_mz']
                 )
 
         self.params['_omssa_precursor_error'] = (
-            float(self.params['precursor_mass_tolerance_plus']) + \
-            float(self.params['precursor_mass_tolerance_minus']) \
+            float(self.params['translations']['precursor_mass_tolerance_plus']) + \
+            float(self.params['translations']['precursor_mass_tolerance_minus']) \
         ) / 2.0
 
         self.params['_tmp_output_file_incl_path'] = os.path.join(
@@ -258,17 +258,17 @@ class omssa_2_1_9( ursgal.UNode ):
         )
         self.created_tmp_files.append( self.params['_tmp_output_file_incl_path'] )
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
-        self.params['mgf_input_file'] = os.path.join(
+        self.params['translations']['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
-        translations['-fm']['mgf_input_file'] = self.params['mgf_input_file']
+        translations['-fm']['mgf_input_file'] = self.params['translations']['mgf_input_file']
 
-        assert os.path.exists( self.params['mgf_input_file']  ), '''
+        assert os.path.exists( self.params['translations']['mgf_input_file']  ), '''
         OMSSA requires .mgf input (which should have been generated
         automatically ...)
         '''
@@ -349,7 +349,7 @@ class omssa_2_1_9( ursgal.UNode ):
         result_file.close()
 
         #
-        result_file = open( self.params['output_file_incl_path'], 'w')
+        result_file = open( self.params['translations']['output_file_incl_path'], 'w')
         csv_dict_writer_object = csv.DictWriter(
             result_file,
             fieldnames = translated_headers
@@ -358,7 +358,7 @@ class omssa_2_1_9( ursgal.UNode ):
         #
         # self.parse_fasta()
         already_seen_protein_scan_start_stop_combos = set()
-        database = self.params['database']
+        database = self.params['translations']['database']
         for m in cached_omssa_output:
             tmp = {}
             for header in headers:
@@ -427,9 +427,6 @@ class omssa_2_1_9( ursgal.UNode ):
                     else:
                         tmp['Is decoy'] = 'false'
                     csv_dict_writer_object.writerow( tmp )
-        # import pprint
-        # pprint.pprint( self.original_params )
-        # exit('<><><><>')
         return
 
 
