@@ -67,8 +67,6 @@ class venndiagram_1_0_0( ursgal.UNode ):
         venndiagram_main = self.import_engine_as_python_function()
 
         venn_params = {}
-        import pprint
-        pprint.pprint(self.params)
         translations = self.params['translations']['_grouped_by_translated_key']
 
         output_file_name = os.path.join(

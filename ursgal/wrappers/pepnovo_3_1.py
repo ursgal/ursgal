@@ -82,7 +82,7 @@ class pepnovo_3_1( ursgal.UNode ):
         Returns:
                 dict: self.params
         '''
-        self.params['mgf_input_file'] = os.path.join(
+        self.params['translations']['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
@@ -93,7 +93,7 @@ class pepnovo_3_1( ursgal.UNode ):
         )
         self.created_tmp_files.append( self.params['translations']['tmp_output_file_incl_path'])
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
@@ -416,7 +416,7 @@ class pepnovo_3_1( ursgal.UNode ):
         translated_PTMs = translated_PTMs_new
 
         #in this section the new reorganized pepnovo outputfile gets written from the collected information
-        pepnovo_outputfile_new = open(self.params['output_file_incl_path'],'w')
+        pepnovo_outputfile_new = open(self.params['translations']['output_file_incl_path'],'w')
         for header in translated_headers:
             pepnovo_outputfile_new.write(header+',')
         pepnovo_outputfile_new.write('\n')
@@ -435,7 +435,7 @@ class pepnovo_3_1( ursgal.UNode ):
                         mods = translated_PTMs[result_dict[spec_id][a][8]][1]
                     pepnovo_outputfile_new.write(spectrumtitle_list[x]+',')
                     pepnovo_outputfile_new.write(mods+',')
-                    pepnovo_outputfile_new.write(self.params['mgf_input_file']+',')
+                    pepnovo_outputfile_new.write(self.params['translations']['mgf_input_file']+',')
                     pepnovo_outputfile_new.write('False')
                     pepnovo_outputfile_new.write('\n')
 

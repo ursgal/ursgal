@@ -83,11 +83,11 @@ class qvality_2_02( ursgal.UNode ):
 
         translations = self.params['translations']['_grouped_by_translated_key']
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
-        translations['-o']['output_file_incl_path'] = self.params['output_file_incl_path']
+        translations['-o']['output_file_incl_path'] = self.params['translations']['output_file_incl_path']
 
         self._generate_qvality_input_files()
 
@@ -124,7 +124,7 @@ class qvality_2_02( ursgal.UNode ):
         Parse the qvality output and merge it back into the csv file
         '''
         score_2_pep_and_qvalue_lookup = {}
-        with open( self.params['output_file_incl_path'], 'r' ) as qvio:
+        with open( self.params['translations']['output_file_incl_path'], 'r' ) as qvio:
             qvio.readline() # header gone ...
             for line in qvio:
                 if line.strip() != '':
@@ -152,7 +152,7 @@ class qvality_2_02( ursgal.UNode ):
         csv_input = csv.DictReader( row for row in opened_file if not row.startswith('#') )
 
         csv_output = csv.DictWriter(
-            open( self.params['output_file_incl_path'], 'w' ),
+            open( self.params['translations']['output_file_incl_path'], 'w' ),
             csv_input.fieldnames + ['PEP','q-value'],
             **csv_kwargs
         )

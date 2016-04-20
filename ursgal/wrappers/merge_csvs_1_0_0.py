@@ -52,7 +52,7 @@ class merge_csvs_1_0_0( ursgal.UNode ):
                 )
             )
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
@@ -60,7 +60,7 @@ class merge_csvs_1_0_0( ursgal.UNode ):
         merge_csv_main = self.import_engine_as_python_function()
         merged_csv_output_path = merge_csv_main(
             csv_files = csv_files,
-            output    = self.params['output_file_incl_path'],
+            output    = self.params['translations']['output_file_incl_path'],
         )
         self.print_execution_time(tag='execution')
         return merged_csv_output_path

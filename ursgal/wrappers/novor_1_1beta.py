@@ -80,7 +80,7 @@ class novor_1_1beta( ursgal.UNode ):
         )
         self.created_tmp_files.append( self.params['params_file'])
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
@@ -266,7 +266,7 @@ class novor_1_1beta( ursgal.UNode ):
             new_line_dict['Raw data location'] = self.params['mgf_input_file']
             new_line_dict_list.append(new_line_dict)
 
-        new_result_file = open( self.params['output_file_incl_path'], 'w')
+        new_result_file = open( self.params['translations']['output_file_incl_path'], 'w')
         csv_dict_writer_object = csv.DictWriter(
             new_result_file,
             fieldnames = translated_headers

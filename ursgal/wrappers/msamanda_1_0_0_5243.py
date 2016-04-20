@@ -77,20 +77,20 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                 self.params(dict)
         '''
 
-        translations = self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY']
+        translations = self.params['translations']['_grouped_by_translated_key']
 
-        self.params['mgf_input_file'] = os.path.join(
+        self.params['translations']['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
 
         # if translations['unimod_file_incl_path']['unimod_file_incl_path'] == '' :
-        self.params['unimod_file_incl_path'] = os.path.join(
+        self.params['translations']['unimod_file_incl_path'] = os.path.join(
             os.path.dirname(__file__),
             '..',
             'resources',
@@ -108,34 +108,34 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             self.params['command_list'] = ['mono']
         self.params['command_list'] += [
             self.exe,
-            '{mgf_input_file}'.format(**self.params),
-            '{database}'.format(**self.params),
-            '{0}'.format( self.params['output_file_incl_path'] + '_settings.xml' ),
-            '{output_file_incl_path}'.format(**self.params)
+            '{mgf_input_file}'.format(**self.params['translations']),
+            '{database}'.format(**self.params['translations']),
+            '{0}'.format( self.params['translations']['output_file_incl_path'] + '_settings.xml' ),
+            '{output_file_incl_path}'.format(**self.params['translations'])
         ]
-        self.created_tmp_files.append(self.params['output_file_incl_path'] + '_settings.xml')
+        self.created_tmp_files.append(self.params['translations']['output_file_incl_path'] + '_settings.xml')
 
         score_ions = []
         instruments_file_input = []
         for ion in [ "a", "b", "c", "x", "y", "z", "-H2O", "-NH3", "Imm", "z+1", "z+2", "INT" ]:
-            if self.params[ 'score_{0}_ions'.format( ion.lower() ) ] == True:
+            if self.params['translations'][ 'score_{0}_ions'.format( ion.lower() ) ] == True:
                 score_ions.append( ion )
                 instruments_file_input.append('''<series>{0}</series>'''.format(ion))
         instruments_file_input.append('''</setting>''')
         instruments_file_input.append('''</instruments>''')
-        self.params['score_ions'] = ', '.join( score_ions )
-        self.params['instruments_file_input'] = ''.join( instruments_file_input )
+        self.params['translations']['score_ions'] = ', '.join( score_ions )
+        self.params['translations']['instruments_file_input'] = ''.join( instruments_file_input )
 
-        self.params['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
-                                                    float(self.params['precursor_mass_tolerance_minus']) ) \
+        self.params['translations']['precursor_mass_tolerance'] = ( float(self.params['translations']['precursor_mass_tolerance_plus']) + \
+                                                    float(self.params['translations']['precursor_mass_tolerance_minus']) ) \
                                                 / 2.0
 
         considered_charges = []
-        for charge in range( int(self.params[ 'precursor_min_charge' ]), int(self.params[ 'precursor_max_charge' ])+1 ):
+        for charge in range( int(self.params['translations'][ 'precursor_min_charge' ]), int(self.params['translations'][ 'precursor_max_charge' ])+1 ):
             considered_charges.append( '+{0}'.format(charge) )
-        self.params['considered_charges'] = ', '.join( considered_charges )
+        self.params['translations']['considered_charges'] = ', '.join( considered_charges )
 
-        if self.params['label'] == '15N':
+        if self.params['translations']['label'] == '15N':
             for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
                 existing = False
                 for mod in self.params[ 'mods' ][ 'fix' ]:
@@ -150,8 +150,8 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                                                          'name': '15N_{0}'.format(aminoacid),
                                                          'mass': N15_Diff }
                                                       )
-        self.params['enzyme_name'] = self.ORIGINAL_PARAMS['enzyme']
-        self.params['enzyme_cleavage'], self.params['enzyme_position'], self.params['enzyme_inhibitors'] = self.params['enzyme'].split(';')
+        self.params['translations']['enzyme_name'] = self.params['enzyme']
+        self.params['translations']['enzyme_cleavage'], self.params['translations']['enzyme_position'], self.params['translations']['enzyme_inhibitors'] = self.params['translations']['enzyme'].split(';')
 
         modifications = [ ]
         for t in [ 'fix', 'opt' ]:
@@ -184,17 +184,17 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                                     fix, protein, n_term, c_term, mod[ 'mass' ], mod['name'], mod[ 'aa' ] )
                                 )
 
-        self.params['modifications'] = ''.join( modifications )
+        self.params['translations']['modifications'] = ''.join( modifications )
 
         templates = self.format_templates( )
         for file_name, content in templates.items():
             with open(
-              self.params['output_file_incl_path'] + file_name,
+              self.params['translations']['output_file_incl_path'] + file_name,
               'w') as out:
                 print(content, file=out)
                 print('  wrote input file {0}'.format( file_name))
                 self.created_tmp_files.append(
-                    self.params['output_file_incl_path'] + file_name
+                    self.params['translations']['output_file_incl_path'] + file_name
                     )
         return self.params
 
@@ -203,11 +203,11 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         Convert .tsv result files to .csv
         '''
         self.meta_unodes['ucontroller'].verify_engine_produced_an_output_file(
-            self.params['output_file_incl_path'], 'MSAmanda'
+            self.params['translations']['output_file_incl_path'], 'MSAmanda'
         )
 
         cached_msamanada_output = []
-        with open(self.params['output_file_incl_path'], 'r') as result_file:
+        with open(self.params['translations']['output_file_incl_path'], 'r') as result_file:
             csv_dict_reader_object = csv.DictReader(
                 (row for row in result_file if not row.startswith('#')),
                 delimiter = '\t'
@@ -216,7 +216,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             translated_headers = []
             for header in headers:
                 translated_headers.append(
-                    self.TRANSLATIONS['header_translations']['uvalue_style_translation'].get(header, header)
+                    self.UNODE_UPARAMS['header_translations']['uvalue_style_translation'].get(header, header)
                 )
             translated_headers += [
                 'Is decoy',
@@ -246,7 +246,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             )
             csv_dict_writer_object.writeheader()
             print('[ INFO  ] Writing MS Amanda results, this can take a while...')
-            database = self.params['database']
             csv_write_list = []
 
             total_docs =len(cached_msamanada_output)
@@ -254,7 +253,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
             for cache_pos, m in enumerate(cached_msamanada_output):
                 tmp = {}
                 for header in headers:
-                    translated_header = self.TRANSLATIONS['header_translations']['uvalue_style_translation'].get(header, header)
+                    translated_header = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation'].get(header, header)
                     tmp[ translated_header ] = m[ header ]
                 tmp['Sequence'] = tmp['Sequence'].upper()
 
@@ -302,7 +301,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                 for protein_id in protein_id_list:
 
                     returned_peptide_regex_list = self.peptide_regex(
-                        self.params['database'],
+                        self.params['translations']['database'],
                         protein_id,
                         tmp['Sequence']
                     )
@@ -322,7 +321,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                                 post_aa
                             )
 
-                            if self.params['decoy_tag'] in dict_2_write['proteinacc_start_stop_pre_post_;']:
+                            if self.params['translations']['decoy_tag'] in dict_2_write['proteinacc_start_stop_pre_post_;']:
                                 dict_2_write['Is decoy'] = 'true'
                             else:
                                 dict_2_write['Is decoy'] = 'false'
@@ -343,7 +342,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
 
 
     def format_templates( self ):
-        self.params['exe_dir_path'] = os.path.dirname(self.exe)
+        self.params['translations']['exe_dir_path'] = os.path.dirname(self.exe)
 
         templates = {
             '_settings.xml' : '''<?xml version="1.0" encoding="utf-8" ?>
@@ -369,14 +368,14 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
     <considered_charges>{considered_charges}</considered_charges>
   </basic_settings>
 </settings>
-'''.format(**self.params),
+'''.format(**self.params['translations']),
 
         '_instrument.xml' : '''<?xml version="1.0"?>
 <!-- possible values are "a", "b", "c", "x", "y", "z", "H2O", "NH3", "IMM", "z+1", "z+2", "INT" (for internal fragments) -->
 <instruments>
   <setting name="{score_ions}">
 {instruments_file_input}
-'''.format(**self.params),
+'''.format(**self.params['translations']),
 
         '_enzymes.xml' : '''<?xml version="1.0" encoding="utf-8" ?>
 <enzymes>
@@ -386,6 +385,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
     <inhibitors>{enzyme_inhibitors}</inhibitors>
     <position>{enzyme_position}</position>
   </enzyme>
-</enzymes>'''.format(**self.params),
+</enzymes>'''.format(**self.params['translations']),
             }
         return templates

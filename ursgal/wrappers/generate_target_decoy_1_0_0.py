@@ -108,14 +108,14 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
                 )
             )
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
 
         generate_target_decoy_main(
             input_files = input_files,
-            output_file = self.params['output_file_incl_path'],
+            output_file = self.params['translations']['output_file_incl_path'],
             enzyme      = self.params['translations']['enzyme'],
             mode        = self.params['translations']['decoy_generation_mode'],
             decoy_tag   = self.params['translations']['decoy_tag']
