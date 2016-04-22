@@ -18,8 +18,8 @@ class mzidentml_lib_1_6_11( ml ):
         'output_suffix'     : None,
         'input_types'       : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
         # 'can_gz': True,
-        'citation'       : 'Reisinger F, Krishna R, Ghali F, Ríos D, '\
-            'Hermjakob H, Vizcaíno JA, Jones AR. (2012) jmzIdentML API: '\
+        'citation'       : 'Reisinger F, Krishna R, Ghali F, Rios D, '\
+            'Hermjakob H, Vizcaino JA, Jones AR. (2012) jmzIdentML API: '\
             'A Java interface to the mzIdentML standard for peptide and '\
             'protein identification data.',
         'include_in_git'            : False,

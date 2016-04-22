@@ -30,7 +30,7 @@ class qvality_2_02( ursgal.UNode ):
         'output_suffix'             : 'qvality_validated',
         'input_types'               : ['.csv'],
         'create_own_folder'         : False,
-        'citation'   : 'Käll L, Storey JD, Noble WS (2009) QVALITY: '\
+        'citation'   : 'Kall L, Storey JD, Noble WS (2009) QVALITY: '\
             'non-parametric estimation of q-values and posterior error '\
             'probabilities.',
         'include_in_git'            : False,

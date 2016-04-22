@@ -36,7 +36,7 @@ class get_http_files_1_0_0( ursgal.UNode ):
             'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
             'Ursgal, Universal Python Module Combining Common Bottom-Up '\
             'Proteomics Tools for Large-Scale Analysis. '\
-            'J. Proteome res. 15, 788–794.',
+            'J. Proteome res. 15, 788-794.',
     }
 
     def __init__(self, *args, **kwargs):
