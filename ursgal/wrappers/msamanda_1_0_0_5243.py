@@ -152,6 +152,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                                                       )
         self.params['translations']['enzyme_name'] = self.params['enzyme']
         self.params['translations']['enzyme_cleavage'], self.params['translations']['enzyme_position'], self.params['translations']['enzyme_inhibitors'] = self.params['translations']['enzyme'].split(';')
+        self.params['translations']['enzyme'] = self.params['enzyme']
 
         modifications = [ ]
         for t in [ 'fix', 'opt' ]:

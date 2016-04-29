@@ -28,7 +28,6 @@ def main():
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
             ],
-            # 'enzyme' : 'chymotrypsin'
         }
     )
 
@@ -45,7 +44,7 @@ def main():
         'omssa',
         xtandem,
         'msgf',
-    #     msamanda,
+        # msamanda,
     ]
 
     mzML_file = os.path.join(

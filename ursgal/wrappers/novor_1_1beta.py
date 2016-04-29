@@ -70,7 +70,7 @@ class novor_1_1beta( ursgal.UNode ):
         self.created_tmp_files.append( self.params['translations']['mgf_new_input_file'] )
 
         self.params['translations']['tmp_output_file_incl_path'] = os.path.join(
-            self.params['mgf_new_input_file'] + '.csv'
+            self.params['translations']['mgf_new_input_file'] + '.csv'
         )
         self.created_tmp_files.append( self.params['translations']['tmp_output_file_incl_path'] )
 
@@ -78,7 +78,7 @@ class novor_1_1beta( ursgal.UNode ):
             self.params['output_dir_path'],
             self.params['output_file'] + '_Params.txt'
         )
-        self.created_tmp_files.append( self.params['params_file'])
+        self.created_tmp_files.append( self.params['translations']['params_file'])
 
         self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
