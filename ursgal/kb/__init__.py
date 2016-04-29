@@ -1,1 +1,0 @@
-from ursgal.kb import *
