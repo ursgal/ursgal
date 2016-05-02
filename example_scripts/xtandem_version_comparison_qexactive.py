@@ -12,12 +12,13 @@ def main(folder):
     data from Bruderer et al.
 
     usage:
-        ./xtandem_version_comparison.py
+        ./xtandem_version_comparison.py <folder containing B_D140314_SGSDSsample1_R01_MSG_T0.mzML>
 
 
     This is a simple example file to show the straightforward comparison of
-    different program versions of X!Tandem when analyzing hish resolution data
-    whihc can be better handled by version newer than Jackhammer. One gains
+    different program versions of X!Tandem, similar to the example script 
+    'xtandem_version_comparison', but analyzing high resolution data
+    which can be better handled by version newer than Jackhammer. One gains
     approximately 10 percent more peptides with newer versions of X!Tandem.
 
     Creates a Venn diagram with the peptides obtained by the different versions.

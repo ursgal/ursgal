@@ -164,7 +164,7 @@ class Meta_UNode(type):
         # #     '''.format( field, engine )
 
         # # initd_klass.META_INFO = {}
-        # # # initd_klass.META_INFO.update( ursgal.kb.ursgal.META_INFO )
+        # # # initd_klass.META_INFO.update( ursgal.ursgal_kb.META_INFO )
         # # initd_klass.META_INFO.update( initd_klass._kb.META_INFO )
         # # initd_klass.DEFAULT_PARAMS = initd_klass._kb.DEFAULT_PARAMS
         # # # initd_klass.available_params = initd_klass._kb.AVAILABLE_PARAMS

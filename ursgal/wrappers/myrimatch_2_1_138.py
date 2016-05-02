@@ -48,47 +48,49 @@ class myrimatch_2_1_138( ursgal.UNode ):
         '''
         Formatting the command line
         '''
+        import pprint
+        pprint.pprint(self.params)
         input_file = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
         if input_file.lower().endswith('.mzml') or \
             input_file.lower().endswith('.mzml.gz'):
-            self.params['mzml_input_file'] = input_file
+            self.params['translations']['mzml_input_file'] = input_file
         elif input_file.lower().endswith('.mgf'):
             # use dark magic to find the mzml file that corresponds to the mgf:
-            self.params['mzml_input_file'] = \
+            self.params['translations']['mzml_input_file'] = \
                 self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( input_file )
             self.print_info(
                 ('Since MyriMatch cannot read MGF input files, the '
                  'corresponding mzML file {0} will be used instead.'
-                ).format( os.path.relpath(self.params['mzml_input_file']) ),
+                ).format( os.path.relpath(self.params['translations']['mzml_input_file']) ),
                 caller="INFO" )
         else:
             raise Exception('MyriMatch input spec file must be in mzML format!')
 
-        self.params['output_file_incl_path'] = os.path.join(
+        self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
         )
 
-        self.params['myrimatch_ions_to_search'] = []
+        self.params['translations']['myrimatch_ions_to_search'] = []
         for ion in ['a','b','c','x','y','z']:
-            if self.params['score_{0}_ions'.format(ion)] is True:
-                self.params['myrimatch_ions_to_search'].append( ion )
-        self.params['myrimatch_ions_to_search'] = 'manual:'+','.join(self.params['myrimatch_ions_to_search'] )
+            if self.params['translations']['score_{0}_ions'.format(ion)] is True:
+                self.params['translations']['myrimatch_ions_to_search'].append( ion )
+        self.params['translations']['myrimatch_ions_to_search'] = 'manual:'+','.join(self.params['translations']['myrimatch_ions_to_search'] )
 
-        self.params['myrimatch_config_file_path'] = \
-            '{output_file_incl_path}_myrimatch_params.cfg'.format( **self.params )
-        self.created_tmp_files.append( self.params['myrimatch_config_file_path'] )
+        self.params['translations']['myrimatch_config_file_path'] = \
+            '{output_file_incl_path}_myrimatch_params.cfg'.format( **self.params['translations'] )
+        self.created_tmp_files.append( self.params['translations']['myrimatch_config_file_path'] )
         self.write_param_file( )
 
         self.params['command_list'] = [
             self.exe,
-            '-cfg', '{myrimatch_config_file_path}'.format(**self.params),
-            '{mzml_input_file}'.format(**self.params),
+            '-cfg', '{myrimatch_config_file_path}'.format(**self.params['translations']),
+            '{mzml_input_file}'.format(**self.params['translations']),
             '-workdir', "{output_dir_path}".format( **self.params ),
-            '-cpus', '{cpus}'.format( **self.params ),
+            '-cpus', '{cpus}'.format( **self.params['translations'] ),
             # '-dump'
         ]
 
@@ -96,12 +98,12 @@ class myrimatch_2_1_138( ursgal.UNode ):
     def write_param_file( self ):
         ''' Writes a file containing all parameters for the search '''
 
-        config_file= open(self.params['myrimatch_config_file_path'], 'w') #param file must be in execution folder
-        self.params['myrimatch_static_mods'] = ''
-        self.params['myrimatch_dynamic_mods'] = ''
+        config_file= open(self.params['translations']['myrimatch_config_file_path'], 'w') #param file must be in execution folder
+        self.params['translations']['myrimatch_static_mods'] = ''
+        self.params['translations']['myrimatch_dynamic_mods'] = ''
 
-        if self.params['label'] == '15N':
-            for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
+        if self.params['translations']['label'] == '15N':
+            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
                 existing = False
                 for mod in self.params[ 'mods' ][ 'fix' ]:
                     if aminoacid == mod[ 'aa' ]:
@@ -109,10 +111,10 @@ class myrimatch_2_1_138( ursgal.UNode ):
                         existing = True
                 if existing == True:
                     continue
-                self.params['myrimatch_static_mods']+= '{0} {1} '.format( aminoacid, N15_Diff )
+                self.params['translations']['myrimatch_static_mods']+= '{0} {1} '.format( aminoacid, N15_Diff )
 
         for mod in self.params[ 'mods' ][ 'fix' ]:
-            self.params['myrimatch_static_mods'] += '{0} {1} '.format( mod[ 'aa' ], mod[ 'mass' ] )
+            self.params['translations']['myrimatch_static_mods'] += '{0} {1} '.format( mod[ 'aa' ], mod[ 'mass' ] )
 
         characters = ['$', '%', '^', '&', '*', '_', '<', '>', '|', ':', ';' ]
         for n, mod in enumerate( self.params[ 'mods' ][ 'opt' ] ):
@@ -130,14 +132,14 @@ class myrimatch_2_1_138( ursgal.UNode ):
                     [ WARNING ] Continues without modification: {0}'''.format(mod)
                 )
                 continue
-            self.params['myrimatch_dynamic_mods'] += '{0} {1} {2} '.format( mod[ 'aa' ], characters[ n ], mod[ 'mass' ] )
+            self.params['translations']['myrimatch_dynamic_mods'] += '{0} {1} {2} '.format( mod[ 'aa' ], characters[ n ], mod[ 'mass' ] )
 
-        self.params['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
-                                                    float(self.params['precursor_mass_tolerance_minus']) ) \
+        self.params['translations']['precursor_mass_tolerance'] = ( float(self.params['translations']['precursor_mass_tolerance_plus']) + \
+                                                    float(self.params['translations']['precursor_mass_tolerance_minus']) ) \
                                                 / 2.0
 
         # temporary fix: # this should not be required anymore :)
-        self.params['database'] = os.path.abspath( self.params['database'] )
+        self.params['translations']['database'] = os.path.abspath( self.params['translations']['database'] )
 
         print('''
 ClassSizeMultiplier = "{myrimatch_class_size_multiplier}"
@@ -151,7 +153,7 @@ FragmentationAutoRule = "false"
 FragmentationRule = "{myrimatch_ions_to_search}"
 KeepUnadjustedPrecursorMz = "0"
 MaxDynamicMods = "{max_num_mods}"
-MaxMissedCleavages = "{maximum_missed_cleavages}"
+MaxMissedCleavages = "{max_missed_cleavages}"
 MaxPeakCount = "{max_accounted_observed_peaks}"
 MaxPeptideLength = "{max_pep_length}"
 MaxPeptideMass = "{precursor_max_mass} Da"
@@ -178,7 +180,7 @@ StaticMods = "{myrimatch_static_mods}"
 StatusUpdateFrequency = "5"
 TicCutoffPercentage = "{myrimatch_tic_cutoff}"
 UseSmartPlusThreeModel = "{myrimatch_smart_plus_three}"
-    '''.format( **self.params ), file=config_file)
+    '''.format( **self.params['translations'] ), file=config_file)
         config_file.close()
         return
 

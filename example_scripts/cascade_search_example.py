@@ -25,7 +25,7 @@ search_engines  = [
     'xtandem_piledriver',
     'msgf',
     # 'myrimatch_2_1_138',
-    'msamanda_1_0_0_5243',
+    # 'msamanda_1_0_0_5243',
 ]
 
 validation_engines = [

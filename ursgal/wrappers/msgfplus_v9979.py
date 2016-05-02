@@ -88,7 +88,7 @@ class msgfplus_v9979( ursgal.UNode ):
         print('NumMods={0}'.format(translations['NumMods']['max_num_mods']), file = mods_file)
 
         if self.params['translations']['label'] == '15N':
-            for aminoacid, N15_Diff in ursgal.kb.ursgal.DICT_15N_DIFF.items():
+            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
                 existing = False
                 for mod in self.params[ 'mods' ][ 'fix' ]:
                     if aminoacid == mod[ 'aa' ]:

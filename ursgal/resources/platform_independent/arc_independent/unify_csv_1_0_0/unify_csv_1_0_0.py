@@ -15,7 +15,7 @@ import os
 import pickle
 import csv
 import ursgal
-import ursgal.kb.ursgal
+# import ursgal.ursgal_kb
 import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
@@ -24,7 +24,7 @@ from copy import deepcopy as dc
 # does not work under windows
 # csv.field_size_limit(sys.maxsize)
 
-DIFFERENCE_14N_15N = ursgal.kb.ursgal.DIFFERENCE_14N_15N
+DIFFERENCE_14N_15N = ursgal.ursgal_kb.DIFFERENCE_14N_15N
 
 
 def main(input_file=None, output_file=None, scan_rt_lookup=None,
