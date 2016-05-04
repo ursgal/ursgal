@@ -61,13 +61,18 @@ def print_error( udict, syntax_error_at='unkown' ):
 
 if __name__ == '__main__':
     print(
-        'Converting ursgal.uparams to sphinx. [ source/parameter_new.txt ] '
+        'Converting ursgal.uparams to sphinx. [ source/parameter.txt ] '
     )
     uprint('''
 .. _parameters:
 
 Ursgal to Engine Parameters overview
 ************************************
+
+.. note:: This sphinx source file was **auto-generate** using
+    ursgal/docs/uparams_to_sphinx_docu.py, which parses ursgal/ursgal/uparams.py
+    Please **do not** modify this file directly, but commit changes to ursgal.uparams.
+
 
 ''')
     for ursgal_param, udict in sorted(ursgal_params.items()):
