@@ -194,4 +194,17 @@ Ursgal key translations
                 row.append( v )
             uprint( fmt.format(*row, width=len_longest))
         uprint( fmt.format(*delimiter_text, width=len_longest))
+uprint('''
 
+.. params ending on _ are links ... one can escape them with \_ but well well
+
+.. _score:
+   http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
+
+.. _proteinacc_start_stop_pre_post:
+    http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
+
+.. _decoy:
+    http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
+
+    ''')

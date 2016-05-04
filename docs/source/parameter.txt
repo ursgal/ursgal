@@ -6226,3 +6226,17 @@ Ursgal key translations
  0                no              
  1                yes             
  ================ ================
+
+
+.. params ending on _ are links ... one can escape them with \_ but well well
+
+.. _score:
+   http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
+
+.. _proteinacc_start_stop_pre_post:
+    http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
+
+.. _decoy:
+    http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
+
+    
