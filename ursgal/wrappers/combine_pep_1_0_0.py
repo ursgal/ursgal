@@ -9,7 +9,7 @@ class combine_pep_1_0_0(ursgal.UNode):
     combine_pep_1_0_0 UNode
 
     Combining Multiengine Search Results with "Combined PEP"
-    
+
     "Combined PEP" is a hybrid approach combining elements of the
     "combined FDR" approach (Jones et al., 2009), elements of PeptideShaker,
     and elements of Bayes' theorem. Similar to "combined FDR", "combined PEP"
@@ -26,7 +26,7 @@ class combine_pep_1_0_0(ursgal.UNode):
     The combined PEP approach uses Bayes' theorem to calculate a multiengine
     PEP (MEP) for each PSM based on the PEPs reported by, for example,
     Percolator for different search engines, that is
-    
+
     .. image:: http://pubs.acs.org/appl/literatum/publisher/achs/journals/content/jprobs/2016/jprobs.2016.15.issue-3/acs.jproteome.5b00860/20160229/images/pr-2015-00860d_m001.gif
        :target: http://pubs.acs.org/doi/full/10.1021/acs.jproteome.5b00860#_i2
        :align: center
@@ -45,7 +45,6 @@ class combine_pep_1_0_0(ursgal.UNode):
     including all the search result scores from the individual search engines
     as well as the FDR based on the "combined PEP".
 
-
     The sliding window size can be defined by adjusting the Ursgal parameter
     "window_size" (default is 249).
 
@@ -54,6 +53,7 @@ class combine_pep_1_0_0(ursgal.UNode):
 
     Returns a merged CSV file with all PSMs that were found and two added
     columns:
+
     - column "Bayes PEP":
         The multi-engine PEP, see explanation above
     - column "combined PEP":

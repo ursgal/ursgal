@@ -37,7 +37,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
-    'sphinxcontrib.exceltable',
+    # 'sphinxcontrib.exceltable',
     'sphinx.ext.viewcode'
 ]
 

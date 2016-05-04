@@ -19,6 +19,7 @@ from collections import defaultdict as ddict
 import copy
 import ursgal
 
+
 class ChemicalComposition(dict):
     '''
     Chemical composition class. The actual sequence or formula can be reset
@@ -31,18 +32,17 @@ class ChemicalComposition(dict):
 
     Keyword argument examples:
 
-        * **sequence** - Currently this can for example
-          be::
+        **sequence** - Currently this can for example be::
               [
-                  '+H2O2H2-OH',
-                  '+{0}'.format('H2O'),
-                  '{peptide}'.format(pepitde='ELVISLIVES'),
-                  '{peptide}+{0}'.format('PO3', peptide='ELVISLIVES'),
-                  '{peptide}#{unimod}:{pos}'.format(
-                      peptide = 'ELVISLIVES',
-                      unimod = 'Oxidation',
-                      pos = 1
-                  )
+              '+H2O2H2-OH',
+              '+{0}'.format('H2O'),
+              '{peptide}'.format(pepitde='ELVISLIVES'),
+              '{peptide}+{0}'.format('PO3', peptide='ELVISLIVES'),
+              '{peptide}#{unimod}:{pos}'.format(
+                  peptide = 'ELVISLIVES',
+                  unimod = 'Oxidation',
+                  pos = 1
+              )
               ]
 
     Examples::
@@ -69,8 +69,8 @@ class ChemicalComposition(dict):
         {'O': 2, 'H': 1}
 
     Note:
-        We did not include mass calculation, since pyQms will do it much
-        more accurately using unimod and other element enrichments.
+        We did not include mass calculation, since pyQms will calculate masses
+        much more accurately using unimod and other element enrichments.
 
     '''
     def __init__(self, sequence=None, aa_compositions=None,

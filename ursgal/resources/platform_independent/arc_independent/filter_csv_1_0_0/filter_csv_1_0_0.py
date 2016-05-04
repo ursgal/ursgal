@@ -20,8 +20,7 @@ import re
 
 def main( input_file=None, output_file=None, filter_rules=None, output_file_unfiltered = None):
     '''
-
-
+    Filters csvs
     '''
     if filter_rules is None:
         print('No filter rules defined! Exiting now...')

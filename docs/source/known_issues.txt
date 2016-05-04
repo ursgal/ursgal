@@ -25,8 +25,8 @@ Windows 10
 MONO
 ####
 
-Mono is the .NET replacement under *nix systems, since .NET is not directly
-ported by Microsoft to other systems than windows.
-Unfortunately mono is not as stable as the official .NET build. Therefore:
+    * Mono is the .NET replacement under *nix systems, since .NET is not directly
+        ported by Microsoft to other systems than windows.
+        Unfortunately mono is not as stable as the official .NET build. Therefore:
 
-    * MS Amanda crashes randomly under *nix systems (e.g. Linux or OS X)
+        |    MS Amanda crashes randomly under *nix systems (e.g. Linux or OS X)
