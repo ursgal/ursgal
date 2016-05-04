@@ -9,7 +9,7 @@ Introduction
    :target: https://travis-ci.org/ursgal/ursgal
    :alt: Travis CI status
 
-.. |doc-status| image:: https://readthedocs.org/projects/ursgal/badge/?version=latest
+.. |doc-status| image:: http://readthedocs.org/projects/ursgal/badge/?version=latest
    :target: http://ursgal.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 

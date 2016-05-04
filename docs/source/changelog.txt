@@ -11,7 +11,7 @@ Version 0.4.0rc1 (05.2016)
 #. Added more information to the unique parameters, such as description and
    default value types.
 #. Included script to auto-generate documentation from uparams file.
-#. Updated documentation to reflect the changes above
+#. Updated documentation to reflect the changes above.
 
 
 Version 0.3.4 (02.2016)
