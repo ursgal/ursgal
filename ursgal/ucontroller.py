@@ -48,6 +48,7 @@ class UController(ursgal.UNode):
         ...)
 
     '''
+
     META_INFO = {
         'engine_type'            : {
             'controller'        : True,
@@ -58,6 +59,7 @@ class UController(ursgal.UNode):
         'utranslation_style'        : 'ucontroller_style_1',
         'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis. J. Proteome res. acs.jproteome.5b00860 (2015). doi:10.1021/acs.jproteome.5b00860'
     }
+
 
     def __init__( self, *args, **kwargs):
         # kwargs['engine_path'] = ursgal.__file__
@@ -93,11 +95,13 @@ class UController(ursgal.UNode):
         self.params = {}
         self.init_kwargs = kwargs
         self.reset_controller()
+
         self.unodes = self._collect_all_unode_wrappers()
         # self.unodes = self.collect_all_unodes_from_kb()
         self.determine_availability_of_unodes()
         # verbose = kwargs.get('verbose', True)
         self.show_unode_overview()
+
 
         # input_file = kwargs.get('input_file', None)
         # if input_file is not None:
@@ -168,6 +172,7 @@ class UController(ursgal.UNode):
         # # if self.params
         # self.print_info('Ucontroller resetted {0}...'.format( addon_text ))
         return
+
 
     def _collect_all_unode_wrappers( self ):
         '''
@@ -567,6 +572,7 @@ class UController(ursgal.UNode):
             )
         ]
         for platform_key, arc_key, engine_folder in engine_folders:
+
             for engine in sorted( self.unodes.keys() ):
                 if engine.startswith('_'):
                     # we skip _by_meta_type and _engine_type dicts ...
@@ -581,12 +587,14 @@ class UController(ursgal.UNode):
                 #     continue
 
                 kb_engine_entry = kb_info.get( 'engine', None )
+
                 if kb_engine_entry is None:
                     continue
                 if platform_key not in kb_engine_entry.keys():
                     continue
                 if arc_key not in kb_engine_entry[ platform_key ].keys():
                     continue
+
                 exe_name = kb_engine_entry[ platform_key ][ arc_key ].get(
                     'exe',
                     None
@@ -1208,7 +1216,7 @@ class UController(ursgal.UNode):
                     last_engine = self.get_last_engine(
                             history = json_content[3]['history'],
                         )
-                    if last_engine is not None:
+                    if last_engine is not None and type(last_engine) != list:
                         last_engine_meta_node = self.meta_unodes[ last_engine ]
 
                         last_engine_colname = \
@@ -1216,6 +1224,7 @@ class UController(ursgal.UNode):
                         # old translation style:
                         # last_engine_colname = \
                         #     last_engine_meta_node.DEFAULT_PARAMS['validation_score_field'].split(":")[0]
+
 
                 # write all the information we just collected to a dict for that file:
                 file_dict = {}
@@ -1534,7 +1543,9 @@ class UController(ursgal.UNode):
         engine_creates_folder = self.meta_unodes[ engine ].META_INFO.get(
             'create_own_folder', False
         )
+
         if engine_creates_folder == True and self.params['engines_create_folders'] == True:
+
             engine_folder = os.path.join(
                 self.io['input']['finfo']['dir'],
                 engine
@@ -1578,6 +1589,7 @@ class UController(ursgal.UNode):
                 # # changing the amount of CPUs should not trigger re-run:
                 # if used_param == 'cpus':
                 #     continue
+
                 if used_param in o_params.keys() and used_param in i_params.keys():
                     if o_params[ used_param ] != i_params[ used_param ]:
                         reasons.append(
@@ -1610,6 +1622,7 @@ class UController(ursgal.UNode):
                         # print('used',o_params[used_param])
                         # print(self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value'])
                         # exit(1)
+
                         break
 
         if self.io['output']['finfo']['json_exists']:
@@ -1925,6 +1938,7 @@ class UController(ursgal.UNode):
         for meta_type in sorted(self.unodes['_by_meta_type'].keys()):
             if meta_type == 'in_development':
                 continue
+
             number_of_no_dev_nodes = 0
             for engine in sorted(self.unodes['_by_meta_type'][ meta_type ]):
                 if self.unodes[ engine ]['in_development'] is False:
@@ -1933,13 +1947,16 @@ class UController(ursgal.UNode):
             if number_of_no_dev_nodes == 0:
                 continue
 
+
             print('\t{BOLD}{0}{ENDC}(s):'.format(
                 meta_type.upper(),
                 **ursgal.COLORS
             ))
             for engine in sorted(self.unodes['_by_meta_type'][ meta_type ]):
+
                 if self.unodes[ engine ]['in_development']:
                     continue
+
                 node_status = self.unodes[ engine ].get(
                     'import_status',
                     'n/a'
@@ -2119,7 +2136,9 @@ class UController(ursgal.UNode):
         Returns:
             str: Path of the output file
         '''
+
         # self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.csv'] )
+
         return self.execute_unode(
             input_file       = input_file,
             engine           = self.params['unify_csv_converter_version'],

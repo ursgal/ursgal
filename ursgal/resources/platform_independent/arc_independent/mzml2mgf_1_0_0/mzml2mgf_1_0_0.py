@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.4
 '''
 Converts mzML to mgf
 
@@ -19,6 +19,7 @@ import sys
 import os
 import argparse
 import pymzml
+
 
 
 def _determine_mzml_name_base( file_name, prefix ):
@@ -44,6 +45,7 @@ def main(
         prefix                = None,
         scan_skip_modulo_step = None
     ):
+
     print('Converting file:\n\tmzml : {0}\n\tto\n\tmgf : {1}'.format(
         mzml,
         mgf,

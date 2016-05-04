@@ -16,10 +16,12 @@ The latest Documentation was generated on: |today|
 Quick Start
 -----------
 
+
 .. toctree::
    :maxdepth: 2
 
    quick_start
+
 
 
 
@@ -34,6 +36,7 @@ Module structure
 
 Ursgal module contents
 ======================
+
 
 .. toctree::
    :maxdepth: 1
@@ -52,6 +55,7 @@ Engines
 Ursgal allows existing programs to be incorporated with ease. We call those
 programs or scripts engines. Currently, ursgal comes with these engines:
 
+
 Included engines
 ----------------
 .. toctree::
@@ -60,6 +64,7 @@ Included engines
    available_engines
    available_de_novo_engines
    other_engines
+
 
 How to extend and create new engines ?
 --------------------------------------
@@ -73,10 +78,13 @@ How to extend and create new engines ?
 Parameter
 =========
 
+
 .. toctree::
    :maxdepth: 1
 
+
    parameter
+
 
 
 Examples

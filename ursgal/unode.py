@@ -17,6 +17,7 @@ import gzip
 import copy
 
 
+
 class Meta_UNode(type):
     """Metaclass for our UNode
 
@@ -27,9 +28,11 @@ class Meta_UNode(type):
     are read and set.
     """
     XX_meta_collected_nodes = {}
+
     _collected_initialized_unodes = {}
 
     _uparam_mapper = ursgal.UParamMapper()
+
 
     def __new__(cls, cls_name, cls_bases, cls_dict ):
         new_class = super(
@@ -88,10 +91,12 @@ class Meta_UNode(type):
 
         initd_klass.exe = kwargs['engine_path']
 
+
         obligatory_methods = [
             'preflight',
             'postflight',
         ]
+
         for method in obligatory_methods:
             engine_method  = getattr( initd_klass, method, None)
             assert callable(engine_method), '''
@@ -215,6 +220,7 @@ class Meta_UNode(type):
         # if hasattr( initd_klass, '_run_after_meta_init'):
         #     initd_klass._after_init_meta_callback( *args, **kwargs )
 
+
         return initd_klass
 
 
@@ -235,6 +241,7 @@ class UNode(object, metaclass=Meta_UNode):
             # 'executable_path' : self.exe,
             'file_info': {}
         }
+
         self.stats               = self._regenerate_default_stats()
         # This can be updated during __init__
         self.created_tmp_files   = []
@@ -246,9 +253,6 @@ class UNode(object, metaclass=Meta_UNode):
         self.postflight_answer   = None
         self.dependencies_ok     = True
         #self.loaded_json = False  # not used?
-
-
-
 
     def _regenerate_default_stats( self ):
         stats = {
@@ -309,7 +313,6 @@ class UNode(object, metaclass=Meta_UNode):
     #         if default_param_key not in self.params.keys():
     #             self.params[ default_param_key ] = default_param_value
     #     return
-
 
     def determine_common_top_level_folder( self, input_files=None ):
         '''
@@ -490,6 +493,7 @@ class UNode(object, metaclass=Meta_UNode):
         for param_key in list(j_content[2].keys()):
             if param_key.startswith('_'):
                 del j_content[2][ param_key ]
+
             elif isinstance(j_content[2][ param_key ], dict):
                 for sub_param_key in list(j_content[2][ param_key ].keys()):
                     if sub_param_key.startswith('_'):
@@ -634,7 +638,9 @@ class UNode(object, metaclass=Meta_UNode):
                     if len( merged_engines ) == 1:
                         last_engine = list(merged_engines)[0]
                     elif multiple_engines == True:
-                        last_engine = merged_engines
+
+                        last_engine = list(merged_engines)
+
                     else:
                         assert last_engine != None, '''
                         last_engine cannot be determined, since multiple engines have been used.
@@ -712,17 +718,20 @@ class UNode(object, metaclass=Meta_UNode):
             # for k, v in DEFAULT_PARAMS.items():
             #     self.params[ k ] = v
 
+
         grouped_psms = ddict(list)
         opened_file = open( input_file, 'r')
         csv_dict_reader_object = csv.DictReader(
             row for row in opened_file if not row.startswith('#')
         )
         n = 0
+
         validation_score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][search_engine]
         for n, line_dict in enumerate(csv_dict_reader_object):
             assert validation_score_field in line_dict.keys(), \
                 '''defined validation_score_field for {0} is not found,
                 please check/add it to uparams.py['validation_score_field']'''.format(search_engine)
+
 
             grouped_psms[ line_dict[ 'Spectrum Title' ] ].append(
                 (
@@ -1238,14 +1247,18 @@ class UNode(object, metaclass=Meta_UNode):
             tag=tag
         )
         if self.io['output']['finfo']['is_compressed']:
+
             self.params['output_file'] = self.params['output_file'].replace('.gz', '')
+
             self.print_info(
                 'Will compress output {output_file} on the fly ... renamed temporarily params["output_file"]'
             .format( **self.params ))
 
         # DEFAULT PARAMS ARE INCLUDED HERE :)
         # self.params = self.DEFAULT_PARAMS.copy()
+
         # self.check_if_all_default_params_are_in_params()
+
         self.time_point(tag = 'run')
         self.stats['history'] = self.update_history_status(
             history = self.stats['history']
@@ -1278,6 +1291,7 @@ class UNode(object, metaclass=Meta_UNode):
         # print('org')
         # pprint.pprint(self.params)
         # exit(1)
+
 
         is_search_engine = self.META_INFO['engine_type'].get(
             'search_engine',
@@ -1375,13 +1389,13 @@ class UNode(object, metaclass=Meta_UNode):
         self.params.update( params )
         return
 
+
     def collect_and_translate_params(self, params):
         '''
         Translates ursgal parameters into uNode specific syntax.
 
         1) Each unode.USED_SEARCH_PARAMS contains params that have
         to be passed to the uNode.
-
         2) params values are not translated is they [] or {}
         3) params values are translated using
               uNode.USEARCH_PARAM_VALUE_TRANSLATIONS
@@ -1390,6 +1404,7 @@ class UNode(object, metaclass=Meta_UNode):
               > translating only key:value pairs to key:newValue
 
         Those lookups are found in kb/{engine}.py
+
 
         TAG:
             - v0.4
@@ -1487,6 +1502,7 @@ class UNode(object, metaclass=Meta_UNode):
         #                 translated_value = ursgal_value
         #     translated_params[ mapped_unode_param ] = translated_value
         # return translated_params
+
 
     def time_point( self, tag=None, diff=True, format_time=False, stop=False ):
         '''

@@ -26,12 +26,14 @@ class ResetController(unittest.TestCase):
     def test_profile_was_set2( self ):
         self.R.reset_controller()
         self.R.set_profile( 'LTQ XL low res' )
+
         self.assertEqual(self.R.params['instrument'] , 'low_res_ltq')
 
     def test_profile_was_set3( self ):
         self.R.reset_controller()
         self.R.set_profile( 'LTQ XL low res' )
         self.R.reset_controller()
+
         self.assertEqual(self.R.params['instrument'] , 'low_res_ltq')
 
     def test_reset_none_default_params(self):

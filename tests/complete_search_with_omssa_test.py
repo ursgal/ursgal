@@ -1,11 +1,14 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.4
+
 # encoding: utf-8
 
 import ursgal
 import csv
 import os
 
+
 TESTS = [
+
     {'peptide': 'STGGAAGMLGGARSQRVVR'},
     {'peptide': 'FTMADGGSIEPQENTSGEAFVEELIR'},
     {'peptide': 'AAGGAIPHHTYAAACIDTEDVEAAAAACR'},
@@ -47,7 +50,7 @@ R = ursgal.UController(
     profile = 'LTQ XL low res',
     params = {
         'database': 'tests/data/test_Creinhardtii_target_decoy.fasta',
-        'modifications' : [
+        'modifications':[
             '*,opt,Prot-N-term,Acetyl'    # N-Acteylation[]
         ]
     },

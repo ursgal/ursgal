@@ -16,6 +16,7 @@ import pickle
 import csv
 import ursgal
 # import ursgal.ursgal_kb
+
 import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
@@ -24,7 +25,9 @@ from copy import deepcopy as dc
 # does not work under windows
 # csv.field_size_limit(sys.maxsize)
 
+
 DIFFERENCE_14N_15N = ursgal.ursgal_kb.DIFFERENCE_14N_15N
+
 
 
 def main(input_file=None, output_file=None, scan_rt_lookup=None,
@@ -106,11 +109,13 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     # already_seen_protein_pep = {}
 
     use15N = False
+
     if 'label' in params.keys():
         if params['label'] == '15N':
             use15N = True
     else:
         params['label'] = '14N'
+
     aa_exception_dict = params['aa_exception_dict']
     n_term_replacement = {
         'Ammonia-loss' : None,

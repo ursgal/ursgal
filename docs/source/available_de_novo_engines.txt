@@ -6,11 +6,14 @@ Available De Novo Engines
 Novor
 -----
 
+
 .. autoclass:: ursgal.wrappers.novor_1_1beta.novor_1_1beta
    :members:
 
 PepNovo
 -------
 
+
 .. autoclass:: ursgal.wrappers.pepnovo_3_1.pepnovo_3_1
    :members:
+

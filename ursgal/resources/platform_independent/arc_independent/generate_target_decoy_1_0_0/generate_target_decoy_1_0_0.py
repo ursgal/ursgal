@@ -15,6 +15,7 @@ Johannes Barth
 Daniel Jaeger
 Christian Fufezan
 Stefan Schulze
+
 """
 
 from __future__ import print_function
@@ -26,6 +27,7 @@ import ursgal
 
 
 def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', mode='shuffle_peptide' ):
+
     # first do the redundancy check of aa seqeucnes...
     sequenceFastaDict = ddict(list)
     print("Checking for redundancy of protein sequences...", file = sys.stderr)
@@ -59,7 +61,9 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
 
     final_output = {}
 
+
     cleavage_aa, site, inhibitor = enzyme.split(';')
+
     counter = 0
     for sequence, fastaIDList in sequenceFastaDict.items():
         fastaID = generateMergedFastaKey(fastaIDList)
@@ -145,7 +149,11 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
                 if len(peptide) < 8:
                     if perDict[ aaString ]['permutated'] is False:
                         for permutation in itertools.permutations(peptideWithoutCleavageAA, len(peptideWithoutCleavageAA)):
-                            permutedSequence = '{0}{1}{2}'.format( character_to_preserve_N, ''.join(permutation) , character_to_preserve_C )
+                            permutedSequence = '{0}{1}{2}'.format(
+                                character_to_preserve_N,
+                                ''.join(permutation),
+                                character_to_preserve_C
+                            )
                             perDict[ aaString ]['permutations'].append( permutedSequence )
 
                         perDict[ aaString ]['permutations'] = list(
@@ -164,7 +172,13 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
                         list2shuffle = list(peptideWithoutCleavageAA)
                         while a:
                             random.shuffle(list2shuffle)
-                            shuffled_peptide = '{0}{1}{2}'.format( character_to_preserve_N, ''.join(list2shuffle) , character_to_preserve_C )
+
+                            shuffled_peptide = '{0}{1}{2}'.format(
+                                character_to_preserve_N,
+                                ''.join(list2shuffle),
+                                character_to_preserve_C
+                            )
+
                             if shuffled_peptide != peptide:
                                 if shuffled_peptide not in perDict[ aaString ]['permutations']:
                                     perDict[ aaString ]['permutations'].append( shuffled_peptide )
@@ -326,7 +340,9 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
                 print(file = opened_output_file, end = line_ending)
         print( '', file = opened_output_file, end = line_ending)
         #decoy, print the shuffled peptides
+
         print(">{0}{1}".format(decoy_tag, fastaID), file = opened_output_file, end = line_ending)
+
         for pos, _ in enumerate( new_sequence_decoy ):
             print(_, end = "", file = opened_output_file)
             if (pos+1) % 80 == 0:

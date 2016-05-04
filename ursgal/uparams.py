@@ -936,7 +936,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : 5,
+        'default_value' : 20,
         'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2620,7 +2620,7 @@ Example:
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
-        'default_value' : True,
+        'default_value' : False,
         'description' :  ''' Omssa: eliminate charge reduced precursors in spectra ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2914,7 +2914,7 @@ Example:
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
-        'default_value' : 2,
+        'default_value' : 3,
         'description' :  ''' Minimum precursor charge to start considering multiply charged products ''',
         'triggers_rerun' : True,
         'ukey_translation' : {

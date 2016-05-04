@@ -28,7 +28,6 @@ PROFILES = {
         'score_imm_ions'            : True, # only MSAmanda
         'score_int_ions'            : True, # only MSAmanda
         'instrument'                : 'q_exactive',
-
     },
 }
 

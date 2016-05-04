@@ -3,6 +3,7 @@
 AUTO_GEN1 = /usr/bin/env python3 parse_example_scripts.py
 AUTO_GEN2 = /usr/bin/env python3 uparams_to_sphinx_docu.py
 
+
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = $(AUTO_GEN1);$(AUTO_GEN2);sphinx-build

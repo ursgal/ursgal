@@ -27,7 +27,7 @@ executable_list = [
 if sys.platform in ['win32']:
     class my_install_lib(distutils.command.install_lib.install_lib):
         pass
-else:
+else:    
     class my_install_lib(distutils.command.install_lib.install_lib):
         def run(self):
             distutils.command.install_lib.install_lib.run(self)
@@ -58,9 +58,7 @@ setup(
     package_data = {
         'ursgal' : [
             'version.txt',
-            'kb/*.py',
             'wrappers/*.py',
-            'kb/ext/unimod.xml',
             'resources/*/*/*',
             'resources/*/*/*/*',
             'resources/*/*/*/*/*',

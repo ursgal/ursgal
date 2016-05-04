@@ -155,10 +155,13 @@ Each UNode has to have a Python wrapper file located in:
 The UNode has to inherit from the UNode class, which during initialization injects
 the node related data into the class.
 
+
 The default structure of the UNode class has to be::
 
     class my_unode_1_0_0(ursgal.UNode):
+
         META_INFO = {}
+
         def __init__(self, *args, **kwargs):
             super(my_unode_1_0_0, self).__init__(*args, **kwargs)
 
@@ -176,6 +179,7 @@ where `my_unode_1_0_0` is the name of the UNode. The META_INFO is explained here
 One can define `preflight()` and `postflight()` methods that will be executed by the uNode during preflight and postflight
 (= before execution of the main executable and after execution).
 
+
 3.1 Implementaion of an engine from a command line tool
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -187,6 +191,7 @@ original parameters and values. self.params['translations'] contains translated 
 node-related parameters. Furthermore self.params['translations']['_grouped_by_translated_key']
 is a dictionary containing all node-related parameters and their corresponding
 ursgal parameters with the translated values.
+
 
 The command list is stored in self.params['command_list']. This list should be constructed
 in the UNode class `preflight()` method like this::
@@ -217,6 +222,7 @@ in the UNode class `preflight()` method like this::
                 '{some_param_in_ursgal}'.format(**self.params['translations']),
                 '--another_parameter',
                 '{another_param}'.format(**self.params['translations']),
+
             ]
 
 
@@ -235,6 +241,7 @@ a postflight function was defined as part of the class), e.g.::
 
 
 **Example needs to be exchanged**
+
 
 **Example**: ursgal/engines/msgfplus_v9979.py ::
 
@@ -382,7 +389,9 @@ filter_csv_1_0_0.py, get_ftp_files_1_0_0.py and many others.
            # Sometimes, engine-specific code is required! For instance,
            # filter_csv() can produce a second output file with the columns
            # that were removed:
+
            if self.params['translations']['write_unfiltered_results'] is False:
+
                output_file_unfiltered = None
            else:
                file_extension = self.meta_unodes[ self.engine ].META_INFO.get(

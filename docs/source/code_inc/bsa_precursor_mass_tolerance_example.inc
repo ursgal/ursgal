@@ -33,7 +33,7 @@
 	    ]
 	
 	    engine_list = [
-	        'xtandem_sledgehammer'
+	        'xtandem_vengeance'
 	    ]
 	
 	    R = ursgal.UController(
@@ -59,13 +59,15 @@
 	        'BSA1.mzML'
 	    )
 	    if os.path.exists(mzML_file) is False:
+	
 	        R.params['http_url'] = 'http://sourceforge.net/p/open-ms/code/HEAD/tree/OpenMS/share/OpenMS/examples/BSA/BSA1.mzML?format=raw'
+	
 	        R.params['http_output_folder'] = os.path.dirname(mzML_file)
 	        R.fetch_file(
 	            engine     = 'get_http_files_1_0_0'
 	        )
 	        shutil.move(
-	            '{0}?format=raw'.format(mzML_file),
+	           '{0}?format=raw'.format(mzML_file),
 	            mzML_file
 	        )
 	

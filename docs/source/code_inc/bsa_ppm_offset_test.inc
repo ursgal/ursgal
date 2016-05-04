@@ -48,7 +48,7 @@
 	    ]
 	
 	    engine_list = [
-	        'xtandem_sledgehammer'
+	        'xtandem_vengeance'
 	    ]
 	
 	    R = ursgal.UController(

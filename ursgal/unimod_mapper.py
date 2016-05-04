@@ -1,7 +1,9 @@
 #!/usr/bin/env python3.4
 # encoding: utf-8
 """
+
     Ursgal MappOrs
+
 
     :copyright: (c) 2014 by C. Fufezan, S. Schulze
     :licence: BSD, see LISCENSE for more details
@@ -19,6 +21,7 @@ class UnimodMapper( object ):
     UnimodMapper class that creates lookup to the unimod.xml and
     userdefined_unimod.xml found located in ursgal/kb/ext and
     offers several helper methods described below :
+
     '''
     def __init__( self ):
         self.data_list = self._parseXML()
@@ -433,6 +436,7 @@ class UnimodMapper( object ):
 
         Args:
             modification_dict (dict): dictionary containing at least
+
             'mass' (mass of the modification),
             'name' (name of the modificaton),
             'composition' (chmical composition of the modification as a Hill notation)

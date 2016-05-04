@@ -3,6 +3,7 @@
 General Structure
 =================
 
+
 Each UNode requires a **resource** and a **wrapper** file
 be declared properly. Additionally, the Unode parameters have to be
 declared in the ursgal/**uparams.py** file, which holds the grouped and universal
@@ -30,6 +31,7 @@ Compared to the original standalone applications, the folder structure is
 unchanged. Integration into Ursgal is achieved by Python wrappers around
 the executables ("wrappers", see below) and entries in the general
 **ursgal/uparams.py** file.
+
 The resources directory path depends on the platform dependencies of
 the UNode:
 
@@ -88,6 +90,7 @@ The default structure of a wrapper is::
 
 
 
+
 It is important that the super class is called with the wrappers name.
 Default parameters are collected from uparams.py using this name (see below).
 The special methods `preflight()` and `postflight()` are automatically called
@@ -107,20 +110,22 @@ Engine_type
 Engine Type will define were the engine is grouped into. The groups are shown
 after ucontroller instantiation. Additionally, the wrapper registers the engines
 to certain controller functionality, e.g. engine_type['search_engine'] : True
-will allow ucontroller.search(engine='omssa_2_1_9') to be executed::
+will allow ucontroller.search(engine='omssa_2_1_9') to be executed.
 
-        META_INFO = {
+.. code-block:: python
 
-            'engine_type'            : {
-                'controller'        : False,
-                'converter'         : False,
-                'validation_engine' : False,
-                'search_engine'     : True,
-                'meta_engine'       : False
-            },
+    META_INFO = {
+        'engine_type'            : {
+          'controller'        : False,
+          'converter'         : False,
+          'validation_engine' : False,
+          'search_engine'     : True,
+          'meta_engine'       : False
+        },
+        ...
+    }
 
-            ...
-        }
+    
 
 
 Citation
@@ -128,15 +133,17 @@ Citation
 
 Please enter the proper citation for each engine you are wrapping so users can
 be reminded to cite the proper work. In an academic world, this is the only
-credit that one can hope for ;) For example::
+credit that one can hope for ;) For example.
 
-        META_INFO = {
-            ...
-            'citation'              : 'Geer LY, Markey SP, Kowalak JA, '\
-                'Wagner L, Xu M, Maynard DM, Yang X, Shi W, Bryant SH (2004) '\
-                'Open Mass Spectrometry Search Algorithm.',
-            ...
-        }
+.. code-block:: python
+
+    META_INFO = {
+        ...
+        'citation' : 'Geer LY, Markey SP, Kowalak JA, '\
+            'Wagner L, Xu M, Maynard DM, Yang X, Shi W, Bryant SH (2004) '\
+            'Open Mass Spectrometry Search Algorithm.',
+        ...
+    }
 
 
 
@@ -144,13 +151,15 @@ Input types
 """""""""""
 
 Input types are currently not used but the next iteration will include this.
-For example::
+For example.
 
-        META_INFO = {
-            ...
-            'input_types'           : ['.mgf'],
-            ...
-        }
+.. code-block:: python
+
+    META_INFO = {
+        ...
+        'input_types'           : ['.mgf'],
+        ...
+    }
 
 
 
@@ -158,13 +167,15 @@ Output Extension
 """"""""""""""""
 
 The output extension is required to auto-generate the output file name.
-For example::
+For example:
 
-        META_INFO = {
-            ...
-            'output_extension'      : '.csv',
-            ...
-        }
+.. code-block:: python
+
+    META_INFO = {
+        ...
+        'output_extension'      : '.csv',
+        ...
+    }
 
 
 Create own folder
@@ -175,13 +186,13 @@ own folder. The engine will define the folder name, here omssa_2_1_9.
 The master switch for all unodes to create their folder (if it is specified in
 the META_INFO) is the ucontroler param **engines_create_folders**)
 
-For example::
+.. code-block:: python
 
-        META_INFO = {
-            ...
-            'create_own_folder'     : True,
-            ...
-        }
+    META_INFO = {
+        ...
+        'create_own_folder'     : True,
+        ...
+    }
 
 
 
@@ -191,25 +202,26 @@ In Development
 In development will hide the wrapper from the controller overview, however
 the node will be instantiated during start and is therefore nevertheless
 available.
-For example::
 
-        META_INFO = {
-            ...
-            'in_development'        : False,
-            ...
-        }
+.. code-block:: python
+
+    META_INFO = {
+        ...
+        'in_development'        : False,
+        ...
+    }
 
 
 Include in GIT
 """"""""""""""
 
-For example::
+.. code-block:: python
 
-        META_INFO = {
-            ...
-            'include_in_git'        : False,
-            ...
-        }
+    META_INFO = {
+        ...
+        'include_in_git'        : False,
+        ...
+    }
 
 
 UTranslation Style
@@ -219,61 +231,151 @@ Since ursgal translates the general to engine parameters and multiple versions
 of one engines can be available in ursgal (see e.g. 4+ X! Tandem versions), we
 define translation styles, thus all X! Tandem versions share (up to now) all
 parameter translation rules, defined as xtandem_style_1. Which translation style
-is used for which wrapper is defined by this META info::
+is used for which wrapper is defined by this META info.
 
-        META_INFO = {
-            ...
-            'utranslation_style'    : 'omssa_style_1',
-            ...
-        }
+.. code-block:: python
+
+    META_INFO = {
+        ...
+        'utranslation_style'    : 'omssa_style_1',
+        ...
+    }
 
 Download information
 """"""""""""""""""""
 
 The download information is required for the install_resources.py script to
-function.::
+function. 
 
-        META_INFO = {
-            ...
-            ### Below are the download information ###
-            'engine': {
-                'darwin' : {
-                    '64bit' : {
-                        'exe'            : 'omssacl',
-                        'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.macos.tar.gz',
-                        'zip_md5'        : '9cb92a98c4d96c34cc925b9336cbaec7',
-                        'additional_exe' : ['makeblastdb'],
-                    },
-                },
-                'linux' : {
-                    '64bit' : {
-                        'exe'            : 'omssacl',
-                        'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.linux.tar.gz',
-                        'zip_md5'        : '921e01df9cd2a99d21e9a336b5b862c1',
-                        'additional_exe' : ['makeblastdb'],
-                    },
-                },
-                'win32' : {
-                    '64bit' : {
-                        'exe'            : 'omssacl.exe',
-                        'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
-                        'zip_md5'        : 'b9d9a8aec3cfe77c48ce0f5752aba8f9',
-                        'additional_exe' : ['makeblastdb'],
-                    },
-                    '32bit' : {
-                        'exe'            : 'omssacl.exe',
-                        'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
-                        'zip_md5'        : 'a05a5cdd45fd8abcfc75b1236f8a2390',
-                        'additional_exe' : ['makeblastdb'],
-                    },
+.. code-block:: python
+
+    META_INFO = {
+        ...
+        ### Below are the download information ###
+        'engine': {
+            'darwin' : {
+                '64bit' : {
+                    'exe'            : 'omssacl',
+                    'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.macos.tar.gz',
+                    'zip_md5'        : '9cb92a98c4d96c34cc925b9336cbaec7',
+                    'additional_exe' : ['makeblastdb'],
                 },
             },
-            ...
-        }
+            'linux' : {
+                '64bit' : {
+                    'exe'            : 'omssacl',
+                    'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.linux.tar.gz',
+                    'zip_md5'        : '921e01df9cd2a99d21e9a336b5b862c1',
+                    'additional_exe' : ['makeblastdb'],
+                },
+            },
+            'win32' : {
+                '64bit' : {
+                    'exe'            : 'omssacl.exe',
+                    'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
+                    'zip_md5'        : 'b9d9a8aec3cfe77c48ce0f5752aba8f9',
+                    'additional_exe' : ['makeblastdb'],
+                },
+                '32bit' : {
+                    'exe'            : 'omssacl.exe',
+                    'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
+                    'zip_md5'        : 'a05a5cdd45fd8abcfc75b1236f8a2390',
+                    'additional_exe' : ['makeblastdb'],
+                },
+            },
+        },
+        ...
+    }
 
 
 
 Grouped parameters - uparams.py
 -------------------------------
+The uparams file holds all parameter information avialaible in ursgal. All
+default parameters for all nodes are stored here, can be accessed and modified.
+THis file contains one Python dictionary with keys representing the ursgal
+parameter.
 
-Some more text here ....
+Entries:
+
+    * 'availaible_in_unode' 
+        Defines in which nodes this parameter is used. Complete engine names are
+        given.
+    * 'default_value'
+        Defines the preset value for this parameter. Please note
+        that these can be adjusted via parameters or profiles
+    * 'description' 
+        Provides a short explanatory text for the parameter
+    * 'triggers_rerun' 
+        Defines if a change in this parameter will cause the correspoding 
+        engines defined in 'available_in_unode' to be executed,
+        independent if there are alredy result files present. This ensures that if
+        parameters are changed, result file represent the latest parameter set
+        defined. Since not all parameter changes reuqire re-execution, this ensures
+        minimal total runtimes for pipelines.
+    * 'ukey_translation'
+        Defines how the ursgal paramter name is translated into
+        the name in the corresponding engine. The unified parameter name in ursgal
+        helps the user to group the parameter names from different engines and
+        simplifies the parameter handling for the user.
+    * 'utag'
+        Helps to sort and group parameters
+    * 'uvalue_translation'
+        Defines how the ursgal parameter value is translated
+        into the value of the corresponding engines. Please note that the value type
+        can change when its translated, in order to be functional for the engine.
+    * 'uvalue_type'
+        Defines the type in ursgal of this parameter.
+    * 'uvalue_option'
+        Provides information for possible parameter value ranges
+        and step sizes.
+
+The following example shows the parameter dict for the 'frag_mass_tolerance'
+parameter.
+
+.. code-block:: python
+
+    ursgal_params = {
+        'frag_mass_tolerance' : {
+                'available_in_unode' : [
+                    'msamanda_1_0_0_5242',
+                    'msamanda_1_0_0_5243',
+                    'myrimatch_2_1_138',
+                    'myrimatch_2_2_140',
+                    'novor_1_1beta',
+                    'omssa_2_1_9',
+                    'pepnovo_3_1',
+                    'xtandem_cyclone_2010',
+                    'xtandem_jackhammer',
+                    'xtandem_piledriver',
+                    'xtandem_sledgehammer',
+                    'xtandem_vengeance',
+                ],
+                'default_value' : 20,
+                'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
+                'triggers_rerun' : True,
+                'ukey_translation' : {
+                    'msamanda_style_1' : 'ms2_tol',
+                    'myrimatch_style_1' : 'FragmentMzTolerance',
+                    'novor_style_1' : 'fragmentIonErrorTol',
+                    'omssa_style_1' : '-to',
+                    'pepnovo_style_1' : '-fragment_tolerance',
+                    'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error',
+                },
+                'utag' : [
+                    'fragment',
+                ],
+                'uvalue_translation' : {
+                },
+                'uvalue_type' : "int",
+                'uvalue_option' : {
+                    'min': 0,        # default = |default_value * 100| * -1
+                    'max': 100000,   # default = |default_value * 100|
+                    'updownval': 1,  # default = 1
+            },
+        },
+        ...
+    }
+
+
+

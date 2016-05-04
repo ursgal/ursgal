@@ -139,6 +139,7 @@ def digest(sequence , enzyme, no_missed_cleavages = False):
                 result.append(tmp)
                 tmp = ''
             elif site == 'N':
+
                 result.append(tmp[0:len(tmp) - 1])
                 tmp = ''
                 tmp += aa
