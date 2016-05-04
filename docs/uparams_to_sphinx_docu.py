@@ -69,7 +69,7 @@ if __name__ == '__main__':
 Ursgal to Engine Parameters overview
 ************************************
 
-.. note:: This sphinx source file was **auto-generate** using
+.. note:: This sphinx source file was **auto-generated** using
     ursgal/docs/uparams_to_sphinx_docu.py, which parses ursgal/ursgal/uparams.py
     Please **do not** modify this file directly, but commit changes to ursgal.uparams.
 

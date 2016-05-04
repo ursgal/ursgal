@@ -4,12 +4,12 @@ General Structure
 =================
 
 
-Each UNode requires a **resource** and a **wrapper** file
+Each UNode requires a **resource** and a **wrapper** file to
 be declared properly. Additionally, the Unode parameters have to be
 declared in the ursgal/**uparams.py** file, which holds the grouped and universal
 ursgal parameters including specific translations to the different engine
 parameters, their description, default values and value types
-(see Schematic Overview A below).
+(see schematic overview A below).
 
 Schematic Overview
 ------------------
@@ -21,16 +21,16 @@ Schematic Overview
 Resources
 ---------
 
-The **resources/** directory contains the main code of each UNode, i.e.:
+The **resources/** directory contains the main code for each UNode, e.g.:
 
     #.  executables (i.e. .exe or .jar)
     #.  standalone Python scripts
     #.  any additional files that are required by the engine
 
 Compared to the original standalone applications, the folder structure is
-unchanged. Integration into Ursgal is achieved by Python wrappers around
-the executables ("wrappers", see below) and entries in the general
-**ursgal/uparams.py** file.
+unchanged. Integration of standalone applications into Ursgal is achieved
+by Python wrappers around the executables ("wrappers", see below) and entries
+in the general **ursgal/uparams.py** file.
 
 The resources directory path depends on the platform dependencies of
 the UNode:
@@ -52,9 +52,9 @@ Wrapper Python class
 
 The wrapper inherits from ursgal.UNode. During the instantiation,
 the default parameters are injected into the class. The default
-parameters are all collected and grouped in ursgal.uparams. Therefore,
-it is imperative that all parameters are listed in the uparams.py file.
-(see blow).
+parameters are collected using the umapmaster class, which parses the grouped
+parameters listed in ursgal.uparams. Therefore, it is imperative that all
+parameters are listed in the uparams.py file (see blow).
 
 The default structure of a wrapper is::
 
@@ -80,21 +80,21 @@ The default structure of a wrapper is::
 
         def preflight(self):
             # code that should be run before the UNode is executed
-            # i.e. writing a config file
+            # e.g. writing a config file
+            # Note: not mandatory
             return
 
         def postflight(self):
             # code that should be run after the UNode is executed
-            # i.e. formatting the output file
+            # e.g. formatting the output file
+            # Note: not mandatory
             return
 
 
-
-
-It is important that the super class is called with the wrappers name.
+It is important that the super class is called with the wrapper's name.
 Default parameters are collected from uparams.py using this name (see below).
 The special methods `preflight()` and `postflight()` are automatically called
-by Ursgal's UController when a UNode is run.
+by Ursgal's UController when a UNode is launched.
 
 The META INFO
 ^^^^^^^^^^^^^
@@ -125,8 +125,6 @@ will allow ucontroller.search(engine='omssa_2_1_9') to be executed.
         ...
     }
 
-    
-
 
 Citation
 """"""""
@@ -146,7 +144,6 @@ credit that one can hope for ;) For example.
     }
 
 
-
 Input types
 """""""""""
 
@@ -160,7 +157,6 @@ For example.
         'input_types'           : ['.mgf'],
         ...
     }
-
 
 
 Output Extension
@@ -199,7 +195,7 @@ the META_INFO) is the ucontroler param **engines_create_folders**)
 In Development
 """"""""""""""
 
-In development will hide the wrapper from the controller overview, however
+In development flag will hide the wrapper from the controller overview, however
 the node will be instantiated during start and is therefore nevertheless
 available.
 
@@ -215,6 +211,11 @@ available.
 Include in GIT
 """"""""""""""
 
+The standalone executable can be distributed via the ursgal git.
+
+.. note:: Big executables are distributed via the ./install_resources.py
+   script, thus refrain overloading ursgal.git too much :)
+
 .. code-block:: python
 
     META_INFO = {
@@ -227,11 +228,12 @@ Include in GIT
 UTranslation Style
 """"""""""""""""""
 
-Since ursgal translates the general to engine parameters and multiple versions
-of one engines can be available in ursgal (see e.g. 4+ X! Tandem versions), we
-define translation styles, thus all X! Tandem versions share (up to now) all
-parameter translation rules, defined as xtandem_style_1. Which translation style
-is used for which wrapper is defined by this META info.
+Since ursgal translates the general ursgal parameters to engine specific
+parameters and multiple versions of one engines can be available in ursgal
+(see e.g. 4+ X! Tandem versions), we define translation styles.
+Therefore all X! Tandem versions share (up to now) all parameter translation
+rules, defined as xtandem_style_1. Which translation style is used for
+which wrapper is defined by this entry in the META info.
 
 .. code-block:: python
 
@@ -245,7 +247,7 @@ Download information
 """"""""""""""""""""
 
 The download information is required for the install_resources.py script to
-function. 
+function.
 
 .. code-block:: python
 
@@ -288,44 +290,41 @@ function.
     }
 
 
-
 Grouped parameters - uparams.py
 -------------------------------
-The uparams file holds all parameter information avialaible in ursgal. All
-default parameters for all nodes are stored here, can be accessed and modified.
-THis file contains one Python dictionary with keys representing the ursgal
+The ursgal/uparams.py file holds all parameter information available in ursgal.
+All default parameters for all nodes are stored there, can be accessed and modified.
+This file contains one Python dictionary with keys representing the ursgal
 parameter.
 
 Entries:
 
-    * 'availaible_in_unode' 
-        Defines in which nodes this parameter is used. Complete engine names are
+    * 'availaible_in_unode'
+        Defines which nodes use this parameter. Complete engine names are
         given.
     * 'default_value'
-        Defines the preset value for this parameter. Please note
-        that these can be adjusted via parameters or profiles
-    * 'description' 
-        Provides a short explanatory text for the parameter
-    * 'triggers_rerun' 
-        Defines if a change in this parameter will cause the correspoding 
-        engines defined in 'available_in_unode' to be executed,
-        independent if there are alredy result files present. This ensures that if
-        parameters are changed, result file represent the latest parameter set
-        defined. Since not all parameter changes reuqire re-execution, this ensures
-        minimal total runtimes for pipelines.
+        Defines the default value for this parameter. Please note
+        that these can be adjusted via parameters or profiles.
+    * 'description'
+        Provides a short explanatory text for the parameter.
+    * 'triggers_rerun'
+        Defines if a change in this parameter will cause the unode
+        to be executed, independently if there are already result files present.
+        Since not all parameter changes require re-execution, this ensures
+        minimal total runtime for pipelines.
     * 'ukey_translation'
-        Defines how the ursgal paramter name is translated into
+        Defines how the ursgal parameter name is translated into
         the name in the corresponding engine. The unified parameter name in ursgal
         helps the user to group the parameter names from different engines and
         simplifies the parameter handling for the user.
     * 'utag'
-        Helps to sort and group parameters
+        Helps to sort and group parameters.
     * 'uvalue_translation'
         Defines how the ursgal parameter value is translated
         into the value of the corresponding engines. Please note that the value type
         can change when its translated, in order to be functional for the engine.
     * 'uvalue_type'
-        Defines the type in ursgal of this parameter.
+        Defines the uvalue type of this parameter.
     * 'uvalue_option'
         Provides information for possible parameter value ranges
         and step sizes.
