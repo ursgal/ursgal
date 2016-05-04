@@ -1,6 +1,19 @@
 Changelog
 =========
 
+Version 0.4.0rc1 (05.2016)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. renamed engine folder to wrappers
+#. combined all files from the kb folder into one single file, **uparams.py**
+   which is parsed during unode initialization. Advantage is to see all params
+   grouped together.
+#. Added more information to the unique parameters, such as description and
+   default value types.
+#. Included script to auto-generate documentation from uparams file.
+#. Updated documentation to reflect the changes above
+
+
 Version 0.3.4 (02.2016)
 ^^^^^^^^^^^^^^^^^^^^^^^
 
