@@ -10,8 +10,8 @@ Introduction
    :alt: Travis CI status
 
 .. |doc-status| image:: https://readthedocs.org/projects/ursgal/badge/?version=latest
-    :target: http://ursgal.readthedocs.org/en/latest/?badge=latest
-    :alt: Documentation Status
+   :target: http://ursgal.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
 
 .. |Gitter| image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
    :alt: Join the chat at https://gitter.im/ursgal/ursgal

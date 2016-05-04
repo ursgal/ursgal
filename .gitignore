@@ -19,11 +19,12 @@ tests/data/msgfplus_v9979/test_BSA1_msgfplus_v9979_unified.csv
 tests/data/myrimatch_2_1_138/test_BSA1_myrimatch_2_1_138_unified.csv
 tests/data/novor_1_1beta/test_BSA1_novor_1_1beta_unified.csv
 tests/data/omssa_2_1_9/test_BSA1_omssa_2_1_9_unified.csv
+tests/data/omssa_2_1_9/test_Creinhardtii_QE_pH8_omssa_2_1_9*
 tests/data/test_Creinhardtii_target_decoy.fasta.*
+tests/data/*.mgf*
 tests/data/xtandem_sledgehammer/test_BSA1_xtandem_sledgehammer_unified.csv
 ursgal/resources/platform_independent/arc_independent/msgfplus_v9979
 ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_10
 ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_11
 ursgal/resources/win32/
 example_scripts/logs/
-
