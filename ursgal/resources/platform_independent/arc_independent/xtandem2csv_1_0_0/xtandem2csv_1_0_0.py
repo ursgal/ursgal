@@ -21,7 +21,8 @@ from xml.etree import cElementTree
 from collections import defaultdict as ddict
 import codecs
 
-# csv.field_size_limit(sys.maxsize)
+if sys.platform != 'win32':
+    csv.field_size_limit(sys.maxsize)
 
 def main(input_file = None, decoy_tag = None, output_file = None):
     '''

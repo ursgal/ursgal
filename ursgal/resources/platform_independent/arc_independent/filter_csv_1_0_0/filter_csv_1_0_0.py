@@ -15,7 +15,8 @@ import csv
 import ursgal
 import re
 
-# csv.field_size_limit(sys.maxsize)
+if sys.platform != 'win32':
+    csv.field_size_limit(sys.maxsize)
 
 
 def main( input_file=None, output_file=None, filter_rules=None, output_file_unfiltered = None):

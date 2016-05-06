@@ -23,7 +23,8 @@ from copy import deepcopy as dc
 
 # increase the field size limit to avoid crash if protein merge tags become too long
 # does not work under windows
-# csv.field_size_limit(sys.maxsize)
+if sys.platform != 'win32':
+    csv.field_size_limit(sys.maxsize)
 
 
 DIFFERENCE_14N_15N = ursgal.ursgal_kb.DIFFERENCE_14N_15N
