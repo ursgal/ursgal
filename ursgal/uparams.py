@@ -15,12 +15,12 @@ ursgal_params = {
         'utag' : [
             'hardware_resources',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'aa_exception_dict' : {
         'available_in_unode' : [
@@ -44,11 +44,11 @@ ursgal_params = {
         'utag' : [
             'conversion',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "dict",
-        'uvalue_option' : {
-        },
     },
     'base_mz' : {
         'available_in_unode' : [
@@ -66,14 +66,14 @@ ursgal_params = {
             'fragment',
             'precursor',
         ],
+        'uvalue_option' : {
+            'max' : 100000,
+            'min' : 0,
+            'updownval' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,        # default = |default_value * 100| * -1
-            'max': 100000,   # default = |default_value * 100|
-            'updownval': 1,  # default = 1
-        },
     },
     'batch_size' : {
         'available_in_unode' : [
@@ -95,20 +95,20 @@ ursgal_params = {
         'utag' : [
             'hardware_resources',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'bigger_scores_better' : {
         'available_in_unode' : [
+            'add_estimated_fdr_1_0_0',
             'percolator_2_08',
             'qvality_2_02',
-            'add_estimated_fdr_1_0_0',
         ],
         'default_value' : None,
         'description' :  ''' Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality ''',
@@ -122,10 +122,14 @@ ursgal_params = {
             'scoring',
             'validation',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'add_estimated_fdr_style_1' : {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
+                'msamanda_1_0_0_6299' : True,
+                'msamanda_1_0_0_6300' : True,
                 'msgfplus_v9979' : False,
                 'myrimatch_2_1_138' : True,
                 'myrimatch_2_2_140' : True,
@@ -139,6 +143,8 @@ ursgal_params = {
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
+                'msamanda_1_0_0_6299' : True,
+                'msamanda_1_0_0_6300' : True,
                 'msgfplus_v9979' : False,
                 'myrimatch_2_1_138' : True,
                 'myrimatch_2_2_140' : True,
@@ -152,6 +158,8 @@ ursgal_params = {
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
+                'msamanda_1_0_0_6299' : True,
+                'msamanda_1_0_0_6300' : True,
                 'msgfplus_v9979' : False,
                 'myrimatch_2_1_138' : True,
                 'myrimatch_2_2_140' : True,
@@ -164,8 +172,6 @@ ursgal_params = {
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'cleavage_cterm_mass_change' : {
         'available_in_unode' : [
@@ -184,15 +190,15 @@ ursgal_params = {
         'utag' : [
             'protein',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'cleavage_nterm_mass_change' : {
         'available_in_unode' : [
@@ -211,15 +217,15 @@ ursgal_params = {
         'utag' : [
             'protein',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'compensate_small_fasta' : {
         'available_in_unode' : [
@@ -238,6 +244,8 @@ ursgal_params = {
         'utag' : [
             'database',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'xtandem_style_1' : {
                 False : 'no',
@@ -245,8 +253,6 @@ ursgal_params = {
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'compress_raw_search_results_if_possible' : {
         'available_in_unode' : [
@@ -261,11 +267,11 @@ ursgal_params = {
         'utag' : [
             'file_handling',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'compute_xcorr' : {
         'available_in_unode' : [
@@ -281,6 +287,8 @@ ursgal_params = {
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'myrimatch_style_1' : {
                 False : 0,
@@ -288,8 +296,6 @@ ursgal_params = {
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'consecutive_ion_prob' : {
         'available_in_unode' : [
@@ -304,15 +310,14 @@ ursgal_params = {
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min'       : 0,           # default = |default_value * 100| * -1
-            # 'max'       : 10000000,    # default = |default_value * 100|
-            'updownval' : 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit'      : 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'cpus' : {
         'available_in_unode' : [
@@ -340,13 +345,13 @@ ursgal_params = {
         'utag' : [
             'hardware_resources',
         ],
+        'uvalue_option' : {
+            'max' : '_uevaluation_req',
+            'min' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int _uevaluation_req",
-        'uvalue_option' : {
-            'min': 1,                   # default = 1
-            'max': "_uevaluation_req",  # default = _uevaluation_req
-        },
     },
     'csv_filter_rules' : {
         'available_in_unode' : [
@@ -361,19 +366,21 @@ ursgal_params = {
         'utag' : [
             'conversion',
         ],
+        'uvalue_option' : {
+            'initialValue' : [],
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
-        'uvalue_option' : {
-            'initialValue': [],           # default = default_value
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 1,  # default = 0, 0 = infinity.
-        },
     },
     'database' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -398,12 +405,12 @@ ursgal_params = {
             'database',
             'input',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'database_taxonomy' : {
         'available_in_unode' : [
@@ -422,15 +429,15 @@ ursgal_params = {
         'utag' : [
             'database',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 'all' : 0,
             },
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'decoy_generation_mode' : {
         'available_in_unode' : [
@@ -445,33 +452,32 @@ ursgal_params = {
         'utag' : [
             'database',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['reverse_protein', 'shuffle_peptide'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'reverse_protein',
-                'shuffle_peptide',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'decoy_tag' : {
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
             'omssa_2_1_9',
+            'percolator_2_08',
             'qvality_2_02',
             'xtandem2csv_1_0_0',
-            'percolator_2_08',
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
@@ -482,19 +488,19 @@ ursgal_params = {
             'myrimatch_style_1' : 'DecoyPrefix',
             'mzidentml_style_1' : '-decoyRegex',
             'omssa_style_1' : 'decoy_tag',
+            'percolator_style_1' : 'decoy_tag',
             'qvality_style_1' : 'decoy_tag',
             'xtandem2csv_style_1' : 'decoy_tag',
-            'percolator_style_1' : 'decoy_tag',
         },
         'utag' : [
             'database',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'del_from_params_before_json_dump' : {
         'available_in_unode' : [
@@ -511,14 +517,14 @@ ursgal_params = {
         'utag' : [
             'file_handling',
         ],
+        'uvalue_option' : {
+            'initialValue' : [],
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
-        'uvalue_option' : {
-            'initialValue': [],           # default = default_value
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 1,  # default = 0, 0 = infinity.
-        },
     },
     'denovo_model' : {
         'available_in_unode' : [
@@ -533,21 +539,19 @@ ursgal_params = {
         'utag' : [
             'model',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['cid_trypsin'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'pepnovo_style_1' : {
                 'cid_trypsin' : 'CID_IT_TRYP',
             },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'cid_trypsin',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'denovo_model_dir' : {
         'available_in_unode' : [
@@ -562,17 +566,19 @@ ursgal_params = {
         'utag' : [
             'model',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'engine_internal_decoy_generation' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -592,6 +598,8 @@ ursgal_params = {
             'database',
             'input',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'msamanda_style_1' : {
                 False : 'false',
@@ -607,14 +615,33 @@ ursgal_params = {
             },
         },
         'uvalue_type' : "bool",
+    },
+    'engines_create_folders' : {
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : True,
+        'description' :  ''' Create folders for the output of engines that allow this option in their META_INFO ('create_own_folder' : True). True or False ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'engines_create_folders',
+        },
+        'utag' : [
+            'file_handling',
+        ],
         'uvalue_option' : {
         },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
     },
     'enzyme' : {
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -670,6 +697,13 @@ ursgal_params = {
             'database',
             'protein',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['argc', 'aspn', 'aspn_gluc', 'chymotrypsin', 'chymotrypsin_p', 'clostripain', 'cnbr', 'elastase', 'formic_acid', 'gluc', 'gluc_bicarb', 'iodosobenzoate', 'lysc', 'lysc_p', 'lysn', 'lysn_promisc', 'no_cleavage', 'nonspecific', 'pepsina', 'protein_endopeptidase', 'staph_protease', 'tca', 'thermolysin_p', 'top_down', 'trypsin', 'trypsin_chymotrypsin', 'trypsin_cnbr', 'trypsin_gluc', 'trypsin_p'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'generate_target_decoy_style_1' : {
                 'argc' : 'R;C;P',
@@ -800,44 +834,7 @@ ursgal_params = {
                 'trypsin_p' : '[RK]|[X]',
             },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'argc',
-                'aspn',
-                'aspn_gluc',
-                'chymotrypsin',
-                'chymotrypsin_p',
-                'clostripain',
-                'cnbr',
-                'elastase',
-                'formic_acid',
-                'gluc',
-                'gluc_bicarb',
-                'iodosobenzoate',
-                'lysc',
-                'lysc_p',
-                'lysn',
-                'lysn_promisc',
-                'no_cleavage',
-                'nonspecific',
-                'pepsina',
-                'protein_endopeptidase',
-                'staph_protease',
-                'tca',
-                'thermolysin_p',
-                'top_down',
-                'trypsin',
-                'trypsin_chymotrypsin',
-                'trypsin_cnbr',
-                'trypsin_gluc',
-                'trypsin_p',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'filter_csv_converter_version' : {
         'available_in_unode' : [
@@ -852,12 +849,12 @@ ursgal_params = {
         'utag' : [
             'converter_version',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'forbidden_cterm_mods' : {
         'available_in_unode' : [
@@ -873,14 +870,14 @@ ursgal_params = {
         'utag' : [
             'modifications',
         ],
+        'uvalue_option' : {
+            'initialValue' : [],
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
-        'uvalue_option' : {
-            'initialValue': [],           # default = default_value
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 1,  # default = 0, 0 = infinity.
-        },
     },
     'forbidden_residues' : {
         'available_in_unode' : [
@@ -895,12 +892,12 @@ ursgal_params = {
         'utag' : [
             'de_novo',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'force' : {
         'available_in_unode' : [
@@ -915,16 +912,18 @@ ursgal_params = {
         'utag' : [
             'file_handling',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'frag_mass_tolerance' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
@@ -950,19 +949,21 @@ ursgal_params = {
         'utag' : [
             'fragment',
         ],
+        'uvalue_option' : {
+            'max' : 100000,
+            'min' : 0,
+            'updownval' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,        # default = |default_value * 100| * -1
-            'max': 100000,   # default = |default_value * 100|
-            'updownval': 1,  # default = 1
-        },
     },
     'frag_mass_tolerance_unit' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
@@ -988,6 +989,13 @@ ursgal_params = {
         'utag' : [
             'fragment',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['da', 'mmu', 'ppm'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'msamanda_style_1' : {
                 'da' : 'Da',
@@ -998,25 +1006,14 @@ ursgal_params = {
             'novor_style_1' : {
                 'da' : 'Da',
             },
-            'xtandem_style_1' : {
-                'da' : 'Daltons',
-            },
             'omssa_style_1' : {
                 'da' : 'Da',
             },
+            'xtandem_style_1' : {
+                'da' : 'Daltons',
+            },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'da',
-                'mmu',
-                'ppm',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'frag_mass_type' : {
         'available_in_unode' : [
@@ -1038,23 +1035,20 @@ ursgal_params = {
             'fragment',
             'spectrum',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['average', 'monoisotopic'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 'average' : '1',
                 'monoisotopic' : '0',
             },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'average',
-                'monoisotopic',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'frag_max_charge' : {
         'available_in_unode' : [
@@ -1070,14 +1064,14 @@ ursgal_params = {
             'fragment',
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 100000,
+            'min' : 0,
+            'updownval' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,        # default = |default_value * 100| * -1
-            'max': 100000,   # default = |default_value * 100|
-            'updownval': 1,  # default = 1
-        },
     },
     'frag_method' : {
         'available_in_unode' : [
@@ -1094,6 +1088,13 @@ ursgal_params = {
         'utag' : [
             'instrument',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['cid', 'ecd', 'etd', 'hcd'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'msgfplus_style_1' : {
                 'cid' : '1',
@@ -1105,19 +1106,7 @@ ursgal_params = {
                 'hcd' : 'HCD',
             },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'cid',
-                'ecd',
-                'etd',
-                'hcd',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'frag_min_mz' : {
         'available_in_unode' : [
@@ -1137,14 +1126,14 @@ ursgal_params = {
             'fragment',
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 100000,
+            'min' : 0,
+            'updownval' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,        # default = |default_value * 100| * -1
-            'max': 100000,   # default = |default_value * 100|
-            'updownval': 1,  # default = 1
-        },
     },
     'ftp_blocksize' : {
         'available_in_unode' : [
@@ -1159,12 +1148,12 @@ ursgal_params = {
         'utag' : [
             'download',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'ftp_folder' : {
         'available_in_unode' : [
@@ -1179,12 +1168,12 @@ ursgal_params = {
         'utag' : [
             'download',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'ftp_include_ext' : {
         'available_in_unode' : [
@@ -1199,12 +1188,12 @@ ursgal_params = {
         'utag' : [
             'download',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'ftp_max_number_of_files' : {
         'available_in_unode' : [
@@ -1219,12 +1208,12 @@ ursgal_params = {
         'utag' : [
             'download',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'ftp_output_folder' : {
         'available_in_unode' : [
@@ -1239,12 +1228,12 @@ ursgal_params = {
         'utag' : [
             'download',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'ftp_password' : {
         'available_in_unode' : [
@@ -1259,12 +1248,12 @@ ursgal_params = {
         'utag' : [
             'download',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'ftp_url' : {
         'available_in_unode' : [
@@ -1279,17 +1268,19 @@ ursgal_params = {
         'utag' : [
             'download',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'header_translations' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
@@ -1306,6 +1297,8 @@ ursgal_params = {
         'utag' : [
             'Conversion',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'msamanda_style_1' : {
                 'Amanda Score' : 'Amanda:Score',
@@ -1363,8 +1356,6 @@ ursgal_params = {
             },
         },
         'uvalue_type' : "",
-        'uvalue_option' : {
-        },
     },
     'helper_extension' : {
         'available_in_unode' : [
@@ -1379,12 +1370,12 @@ ursgal_params = {
         'utag' : [
             'file_handling',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'http_output_folder' : {
         'available_in_unode' : [
@@ -1399,12 +1390,12 @@ ursgal_params = {
         'utag' : [
             'download',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'http_url' : {
         'available_in_unode' : [
@@ -1419,12 +1410,12 @@ ursgal_params = {
         'utag' : [
             'download',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'instrument' : {
         'available_in_unode' : [
@@ -1441,6 +1432,13 @@ ursgal_params = {
         'utag' : [
             'instrument',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['high_res_ltq', 'low_res_ltq', 'q_exactive', 'tof'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'msgfplus_style_1' : {
                 'high_res_ltq' : '1',
@@ -1455,19 +1453,7 @@ ursgal_params = {
                 'tof' : 'TOF',
             },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'high_res_ltq',
-                'low_res_ltq',
-                'q_exactive',
-                'tof',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'intensity_cutoff' : {
         'available_in_unode' : [
@@ -1482,15 +1468,15 @@ ursgal_params = {
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'json_extension' : {
         'available_in_unode' : [
@@ -1505,17 +1491,19 @@ ursgal_params = {
         'utag' : [
             'file_handling',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'label' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -1540,19 +1528,16 @@ ursgal_params = {
             'label',
             'modifications',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['14N', '15N'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                '14N',
-                '15N',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'machine_offset_in_ppm' : {
         'available_in_unode' : [
@@ -1568,15 +1553,15 @@ ursgal_params = {
             'converter',
             'instrument',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'max_accounted_observed_peaks' : {
         'available_in_unode' : [
@@ -1599,19 +1584,21 @@ ursgal_params = {
             'MS2',
             'fragment',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'max_missed_cleavages' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -1633,14 +1620,14 @@ ursgal_params = {
         'utag' : [
             'protein',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'max_mod_alternatives' : {
         'available_in_unode' : [
@@ -1655,14 +1642,14 @@ ursgal_params = {
         'utag' : [
             'modifications',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'max_num_mods' : {
         'available_in_unode' : [
@@ -1680,14 +1667,14 @@ ursgal_params = {
         'utag' : [
             'modifications',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'max_num_of_ions_per_series_to_search' : {
         'available_in_unode' : [
@@ -1702,17 +1689,17 @@ ursgal_params = {
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 'all' : 0,
             },
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'max_num_per_mod' : {
         'available_in_unode' : [
@@ -1728,11 +1715,11 @@ ursgal_params = {
         'utag' : [
             'modifications',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "dict",
-        'uvalue_option' : {
-        },
     },
     'max_output_e_value' : {
         'available_in_unode' : [
@@ -1754,15 +1741,15 @@ ursgal_params = {
             'output',
             'scoring',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'max_pep_length' : {
         'available_in_unode' : [
@@ -1782,14 +1769,14 @@ ursgal_params = {
         'utag' : [
             'peptide',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'max_pep_var' : {
         'available_in_unode' : [
@@ -1807,19 +1794,21 @@ ursgal_params = {
         'utag' : [
             'peptide',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'mgf_input_file' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'novor_1_1beta',
             'omssa_2_1_9',
@@ -1844,12 +1833,12 @@ ursgal_params = {
         'utag' : [
             'input',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'min_output_score' : {
         'available_in_unode' : [
@@ -1868,6 +1857,12 @@ ursgal_params = {
             'output',
             'scoring',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
             'myrimatch_style_1' : {
                 'default' : 1e-07,
@@ -1877,12 +1872,6 @@ ursgal_params = {
             },
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'min_pep_length' : {
         'available_in_unode' : [
@@ -1902,14 +1891,14 @@ ursgal_params = {
         'utag' : [
             'peptide',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'min_precursor_matches' : {
         'available_in_unode' : [
@@ -1925,14 +1914,14 @@ ursgal_params = {
             'precursor',
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'min_required_matched_peaks' : {
         'available_in_unode' : [
@@ -1957,14 +1946,14 @@ ursgal_params = {
             'fragment',
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'min_required_observed_peaks' : {
         'available_in_unode' : [
@@ -1986,19 +1975,21 @@ ursgal_params = {
             'fragment',
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'modifications' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -2055,14 +2046,14 @@ Example:
         'utag' : [
             'modifications',
         ],
+        'uvalue_option' : {
+            'initialValue' : [],
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
-        'uvalue_option' : {
-            'initialValue': [],           # default = default_value
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 1,  # default = 0, 0 = infinity.
-        },
     },
     'msgfplus_protocol_id' : {
         'available_in_unode' : [
@@ -2076,21 +2067,16 @@ Example:
         },
         'utag' : [
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['0', '1', '2', '3'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                '0',
-                '1',
-                '2',
-                '3',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'myrimatch_class_size_multiplier' : {
         'available_in_unode' : [
@@ -2105,14 +2091,14 @@ Example:
         },
         'utag' : [
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'myrimatch_num_int_classes' : {
         'available_in_unode' : [
@@ -2127,14 +2113,14 @@ Example:
         },
         'utag' : [
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'myrimatch_num_mz_fidelity_classes' : {
         'available_in_unode' : [
@@ -2149,14 +2135,14 @@ Example:
         },
         'utag' : [
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'myrimatch_prot_sampl_time' : {
         'available_in_unode' : [
@@ -2171,14 +2157,14 @@ Example:
         },
         'utag' : [
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'myrimatch_smart_plus_three' : {
         'available_in_unode' : [
@@ -2193,6 +2179,12 @@ Example:
         },
         'utag' : [
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
             'myrimatch_style_1' : {
                 False : 0,
@@ -2200,12 +2192,6 @@ Example:
             },
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'myrimatch_tic_cutoff' : {
         'available_in_unode' : [
@@ -2220,15 +2206,15 @@ Example:
         },
         'utag' : [
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'mzidentml_compress' : {
         'available_in_unode' : [
@@ -2244,6 +2230,8 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'mzidentml_style_1' : {
                 False : 'false',
@@ -2251,8 +2239,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'mzidentml_converter_version' : {
         'available_in_unode' : [
@@ -2267,12 +2253,12 @@ Example:
         'utag' : [
             'converter_version',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'mzidentml_export_type' : {
         'available_in_unode' : [
@@ -2288,22 +2274,16 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['exportPSMs', 'exportProteinGroups', 'exportProteinsOnly', 'exportProteoAnnotator', 'exportRepProteinPerPAGOnly'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'exportPSMs',
-                'exportProteinGroups',
-                'exportProteinsOnly',
-                'exportProteoAnnotator',
-                'exportRepProteinPerPAGOnly',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'mzidentml_function' : {
         'available_in_unode' : [
@@ -2318,27 +2298,16 @@ Example:
         },
         'utag' : [
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['AddEmpaiToMzid', 'CreateRestrictedFASTADatabase', 'Csv2mzid', 'FalseDiscoveryRate', 'InsertMetaDataFromFasta', 'Mzid2Csv', 'Omssa2mzid', 'ProteoGrouper', 'Tandem2mzid', 'Threshold'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'AddEmpaiToMzid',
-                'CreateRestrictedFASTADatabase',
-                'Csv2mzid',
-                'FalseDiscoveryRate',
-                'InsertMetaDataFromFasta',
-                'Mzid2Csv',
-                'Omssa2mzid',
-                'ProteoGrouper',
-                'Tandem2mzid',
-                'Threshold',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'mzidentml_output_fragmentation' : {
         'available_in_unode' : [
@@ -2354,6 +2323,8 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'mzidentml_style_1' : {
                 False : 'false',
@@ -2361,8 +2332,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'mzidentml_verbose_output' : {
         'available_in_unode' : [
@@ -2378,6 +2347,8 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'mzidentml_style_1' : {
                 False : 'false',
@@ -2385,8 +2356,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'mzml2mgf_converter_version' : {
         'available_in_unode' : [
@@ -2401,12 +2370,12 @@ Example:
         'utag' : [
             'converter_version',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'neutral_loss_enabled' : {
         'available_in_unode' : [
@@ -2426,6 +2395,8 @@ Example:
             'fragment',
             'spectrum',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'xtandem_style_1' : {
                 False : 'no',
@@ -2433,8 +2404,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'neutral_loss_mass' : {
         'available_in_unode' : [
@@ -2454,14 +2423,14 @@ Example:
             'fragment',
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'neutral_loss_window' : {
         'available_in_unode' : [
@@ -2481,14 +2450,14 @@ Example:
             'fragment',
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'noise_suppression_enabled' : {
         'available_in_unode' : [
@@ -2506,6 +2475,8 @@ Example:
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'xtandem_style_1' : {
                 False : 'no',
@@ -2513,8 +2484,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'num_hits_retain_spec' : {
         'available_in_unode' : [
@@ -2530,19 +2499,43 @@ Example:
             'output',
             'scoring',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
+    },
+    'num_i_decimals' : {
+        'available_in_unode' : [
+            'mzml2mgf_1_0_0',
+        ],
+        'default_value' : 5,
+        'description' :  ''' Number of decimals for intensity (peak) ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'mzml2mgf_style_1' : 'number_of_i_decimals',
         },
+        'utag' : [
+            'converter',
+        ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
     },
     'num_match_spec' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -2563,36 +2556,14 @@ Example:
             'output',
             'scoring',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
-    },
-    'num_i_decimals' : {
-        'available_in_unode' : [
-            'mzml2mgf_1_0_0',
-        ],
-        'default_value' : 5,
-        'description' :  ''' Number of decimals for intensity (peak) ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'mzml2mgf_style_1' : 'number_of_i_decimals',
-        },
-        'utag' : [
-            'converter',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'num_mz_decimals' : {
         'available_in_unode' : [
@@ -2607,14 +2578,14 @@ Example:
         'utag' : [
             'converter',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'omssa_cp' : {
         'available_in_unode' : [
@@ -2630,6 +2601,8 @@ Example:
             'precursor',
             'spectrum',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : 0,
@@ -2637,8 +2610,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'omssa_h1' : {
         'available_in_unode' : [
@@ -2653,14 +2624,14 @@ Example:
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'omssa_h2' : {
         'available_in_unode' : [
@@ -2675,14 +2646,14 @@ Example:
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'omssa_ht' : {
         'available_in_unode' : [
@@ -2697,14 +2668,14 @@ Example:
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'omssa_mm' : {
         'available_in_unode' : [
@@ -2719,14 +2690,14 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'omssa_ta' : {
         'available_in_unode' : [
@@ -2741,15 +2712,15 @@ Example:
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'omssa_tex' : {
         'available_in_unode' : [
@@ -2764,15 +2735,15 @@ Example:
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'omssa_verbose' : {
         'available_in_unode' : [
@@ -2787,6 +2758,8 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : '',
@@ -2794,8 +2767,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'omssa_w1' : {
         'available_in_unode' : [
@@ -2810,14 +2781,14 @@ Example:
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'omssa_w2' : {
         'available_in_unode' : [
@@ -2832,14 +2803,14 @@ Example:
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'omssa_z1' : {
         'available_in_unode' : [
@@ -2854,15 +2825,15 @@ Example:
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'omssa_zc' : {
         'available_in_unode' : [
@@ -2878,6 +2849,8 @@ Example:
             'precursor',
             'spectrum',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : 0,
@@ -2885,8 +2858,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'omssa_zcc' : {
         'available_in_unode' : [
@@ -2901,14 +2872,14 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'omssa_zt' : {
         'available_in_unode' : [
@@ -2924,14 +2895,14 @@ Example:
             'precursor',
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'output_aa_probs' : {
         'available_in_unode' : [
@@ -2946,11 +2917,11 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'output_add_features' : {
         'available_in_unode' : [
@@ -2965,6 +2936,8 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'msgfplus_style_1' : {
                 False : '0',
@@ -2972,8 +2945,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'output_cum_probs' : {
         'available_in_unode' : [
@@ -2988,11 +2959,11 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'output_file_incl_path' : {
         'available_in_unode' : [
@@ -3000,6 +2971,8 @@ Example:
             'merge_csv_1_0_0',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3038,12 +3011,12 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'output_file_type' : {
         'available_in_unode' : [
@@ -3064,6 +3037,13 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['.csv', '.mzid', '.omx', 'default'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 '.csv' : '-oc',
@@ -3075,19 +3055,7 @@ Example:
                 'default' : False,
             },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                '.csv',
-                '.mzid',
-                '.omx',
-                'default',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'output_prm' : {
         'available_in_unode' : [
@@ -3102,11 +3070,11 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'output_prm_norm' : {
         'available_in_unode' : [
@@ -3121,11 +3089,11 @@ Example:
         'utag' : [
             'output',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'pepnovo_tag_length' : {
         'available_in_unode' : [
@@ -3140,14 +3108,14 @@ Example:
         'utag' : [
             'peptide',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'precursor_charge_dependency' : {
         'available_in_unode' : [
@@ -3162,23 +3130,20 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['linear', 'none'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 'linear' : 1,
                 'none' : 0,
             },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'linear',
-                'none',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'precursor_isotope_range' : {
         'available_in_unode' : [
@@ -3206,6 +3171,13 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['0', '0,1', '0,2'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'myrimatch_style_1' : {
                 '0' : '[0,]',
@@ -3223,23 +3195,14 @@ Example:
                 '0,2' : 'yes',
             },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                '0',
-                '0,1',
-                '0,2',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'precursor_mass_tolerance_minus' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3267,19 +3230,21 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'precursor_mass_tolerance_plus' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3307,19 +3272,21 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'precursor_mass_tolerance_unit' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3347,6 +3314,13 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['da', 'mmu', 'ppm'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'msamanda_style_1' : {
                 'da' : 'Da',
@@ -3368,23 +3342,14 @@ Example:
                 'da' : 'Daltons',
             },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'da',
-                'mmu',
-                'ppm',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'precursor_mass_type' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -3400,6 +3365,13 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['average', 'monoisotopic'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
             'msamanda_style_1' : {
                 'average' : 'false',
@@ -3414,22 +3386,14 @@ Example:
                 'monoisotopic' : '0',
             },
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                'average',
-                'monoisotopic',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'precursor_max_charge' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch',
             'myrimatch_2_1_138',
@@ -3448,14 +3412,14 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'precursor_max_mass' : {
         'available_in_unode' : [
@@ -3472,19 +3436,21 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'precursor_min_charge' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'omssa_2_1_9',
         ],
@@ -3499,14 +3465,14 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'precursor_min_mass' : {
         'available_in_unode' : [
@@ -3528,14 +3494,14 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'prefix' : {
         'available_in_unode' : [
@@ -3550,11 +3516,11 @@ Example:
         'utag' : [
             'file_handling',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "",
-        'uvalue_option' : {
-        },
     },
     'qvality_cross_validation' : {
         'available_in_unode' : [
@@ -3569,14 +3535,14 @@ Example:
         'utag' : [
             'validation',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'qvality_epsilon_step' : {
         'available_in_unode' : [
@@ -3591,14 +3557,14 @@ Example:
         'utag' : [
             'validation',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'qvality_number_of_bins' : {
         'available_in_unode' : [
@@ -3613,14 +3579,14 @@ Example:
         'utag' : [
             'validation',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'qvality_verbose' : {
         'available_in_unode' : [
@@ -3635,22 +3601,16 @@ Example:
         'utag' : [
             'validation',
         ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['1', '2', '3', '4', '5'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'initialValue': [
-                '1',
-                '2',
-                '3',
-                '4',
-                '5',
-            ],                            # default = [default_value]
-            'comboBox': True,             # default = comboBox
-            'radioButton': False,         # default = comboBox
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 0,  # default = 0, 0 = infinity
-        },
+        'uvalue_type' : "select",
     },
     'raw_ident_csv_suffix' : {
         'available_in_unode' : [
@@ -3665,12 +3625,12 @@ Example:
         'utag' : [
             'file_handling',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'remove_temporary_files' : {
         'available_in_unode' : [
@@ -3685,11 +3645,11 @@ Example:
         'utag' : [
             'file_handling',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'rt_pickle_name' : {
         'available_in_unode' : [
@@ -3704,12 +3664,12 @@ Example:
         'utag' : [
             'file_handling',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'scan_exclusion_list' : {
         'available_in_unode' : [
@@ -3725,14 +3685,14 @@ Example:
         'utag' : [
             'converter',
         ],
+        'uvalue_option' : {
+            'initialValue' : [],
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
-        'uvalue_option' : {
-            'initialValue': [],           # default = default_value
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 1,  # default = 0, 0 = infinity.
-        },
     },
     'scan_skip_modulo_step' : {
         'available_in_unode' : [
@@ -3747,19 +3707,21 @@ Example:
         'utag' : [
             'converter',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'score_-h2o_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, ions loss of H2O are respected in algorithm ''',
@@ -3770,16 +3732,18 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_-nh3_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, ions loss of NH3 are respected in algorithm ''',
@@ -3790,16 +3754,18 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_a_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -3821,6 +3787,8 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : '',
@@ -3832,8 +3800,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_b1_ions' : {
         'available_in_unode' : [
@@ -3848,6 +3814,8 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : '1',
@@ -3855,13 +3823,13 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_b_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -3883,6 +3851,8 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : '',
@@ -3894,13 +3864,13 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_c_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -3922,6 +3892,8 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : '',
@@ -3933,8 +3905,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_c_terminal_ions' : {
         'available_in_unode' : [
@@ -3949,6 +3919,8 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : '1',
@@ -3956,8 +3928,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_correlation_corr' : {
         'available_in_unode' : [
@@ -3972,6 +3942,8 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : 1,
@@ -3979,13 +3951,13 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_imm_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, immonium ions are respected in algorithm ''',
@@ -3996,16 +3968,18 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_int_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, internal fragment ions are respect in algorithm ''',
@@ -4016,16 +3990,18 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_x_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -4047,6 +4023,8 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : '',
@@ -4058,13 +4036,13 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_y_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -4086,6 +4064,8 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : '',
@@ -4097,13 +4077,13 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_z+1_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, z ion plus 1 Da mass are used in algorithm ''',
@@ -4114,16 +4094,18 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_z+2_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true z ion plus 2 Da mass are used in algorithm ''',
@@ -4134,16 +4116,18 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'score_z_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -4165,6 +4149,8 @@ Example:
         'utag' : [
             'scoring',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 False : '',
@@ -4176,27 +4162,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
-    },
-    'engines_create_folders' : {
-        'available_in_unode' : [
-            'ucontroller',
-        ],
-        'default_value' : True,
-        'description' :  ''' Create folders for the output of engines that allow this option in their META_INFO ('create_own_folder' : True). True or False ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'ucontroller_style_1' : 'engines_create_folders',
-        },
-        'utag' : [
-            'file_handling',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'search_for_saps' : {
         'available_in_unode' : [
@@ -4215,6 +4180,8 @@ Example:
         'utag' : [
             'protein',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'xtandem_style_1' : {
                 False : 'no',
@@ -4222,13 +4189,13 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'semi_enzyme' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
+            'msamanda_1_0_0_6299',
+            'msamanda_1_0_0_6300',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4252,6 +4219,8 @@ Example:
         'utag' : [
             'protein',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'msamanda_style_1' : {
                 False : 'Full',
@@ -4271,8 +4240,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'show_unodes_in_development' : {
         'available_in_unode' : [
@@ -4286,11 +4253,11 @@ Example:
         },
         'utag' : [
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'spec_dynamic_range' : {
         'available_in_unode' : [
@@ -4310,14 +4277,14 @@ Example:
             'fragment',
             'spectrum',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'test_param1' : {
         'available_in_unode' : [
@@ -4333,6 +4300,9 @@ Example:
             'debugging',
             'testing',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
             '_test_node_style_1' : {
                 'a' : 'A',
@@ -4343,9 +4313,6 @@ Example:
             },
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'test_param2' : {
         'available_in_unode' : [
@@ -4361,6 +4328,9 @@ Example:
             'debugging',
             'testing',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
             '_test_node_style_1' : {
                 'five' : 5,
@@ -4371,9 +4341,6 @@ Example:
             },
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'unify_csv_converter_version' : {
         'available_in_unode' : [
@@ -4388,12 +4355,12 @@ Example:
         'utag' : [
             'converter_version',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'use_quality_filter' : {
         'available_in_unode' : [
@@ -4408,6 +4375,8 @@ Example:
         'utag' : [
             'spectrum',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'pepnovo_style_1' : {
                 False : True,
@@ -4415,8 +4384,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'use_refinement' : {
         'available_in_unode' : [
@@ -4435,6 +4402,8 @@ Example:
         'utag' : [
             'refinement',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'xtandem_style_1' : {
                 False : 'no',
@@ -4442,8 +4411,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'use_spectrum_charge' : {
         'available_in_unode' : [
@@ -4458,11 +4425,11 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'use_spectrum_mz' : {
         'available_in_unode' : [
@@ -4477,11 +4444,11 @@ Example:
         'utag' : [
             'precursor',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'validated_ident_csv_suffix' : {
         'available_in_unode' : [
@@ -4496,12 +4463,12 @@ Example:
         'utag' : [
             'file_extension',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'validation_generalized' : {
         'available_in_unode' : [
@@ -4516,6 +4483,8 @@ Example:
         'utag' : [
             'validation',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'qvality_style_1' : {
                 False : None,
@@ -4523,8 +4492,6 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'validation_minimum_score' : {
         'available_in_unode' : [
@@ -4540,10 +4507,14 @@ Example:
             'scoring',
             'validation',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242' : 0,
                 'msamanda_1_0_0_5243' : 0,
+                'msamanda_1_0_0_6299' : 0,
+                'msamanda_1_0_0_6300' : 0,
                 'msgfplus_v9979' : 1e-100,
                 'myrimatch_2_1_138' : 0,
                 'myrimatch_2_2_140' : 0,
@@ -4556,34 +4527,53 @@ Example:
             },
         },
         'uvalue_type' : "",
-        'uvalue_option' : {
-        },
     },
     'validation_score_field' : {
         'available_in_unode' : [
+            'add_estimated_fdr_1_0_0',
             'percolator_2_08',
             'qvality_2_02',
             'ucontroller',
             'unify_csv_1_0_0',
-            'add_estimated_fdr_1_0_0',
         ],
         'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator. If None is defined, default values are used ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'add_estimated_fdr_style_1' : 'validation_score_field',
             'percolator_style_1' : 'validation_score_field',
             'qvality_style_1' : 'validation_score_field',
             'ucontroller_style_1' : 'validation_score_field',
             'unify_csv_style_1' : 'validation_score_field',
-            'add_estimated_fdr_style_1' : 'validation_score_field',
         },
         'utag' : [
             'validation',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
+            'add_estimated_fdr_style_1' : {
+                'msamanda_1_0_0_5242' : 'Amanda:Score',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msamanda_1_0_0_6299' : 'Amanda:Score',
+                'msamanda_1_0_0_6300' : 'Amanda:Score',
+                'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'myrimatch_2_2_140' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
+                'omssa_2_1_9' : 'OMSSA:pvalue',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
+                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
+                'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
+                'xtandem_piledriver' : 'X\!Tandem:hyperscore',
+                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
+                'xtandem_vengeance' : 'X\!Tandem:hyperscore',
+            },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msamanda_1_0_0_6299' : 'Amanda:Score',
+                'msamanda_1_0_0_6300' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
                 'myrimatch_2_2_140' : 'MyriMatch:MVH',
@@ -4599,6 +4589,8 @@ Example:
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msamanda_1_0_0_6299' : 'Amanda:Score',
+                'msamanda_1_0_0_6300' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
                 'myrimatch_2_2_140' : 'MyriMatch:MVH',
@@ -4614,6 +4606,8 @@ Example:
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msamanda_1_0_0_6299' : 'Amanda:Score',
+                'msamanda_1_0_0_6300' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
                 'myrimatch_2_2_140' : 'MyriMatch:MVH',
@@ -4629,21 +4623,8 @@ Example:
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
-                'msgfplus_v9979' : 'MS-GF:SpecEValue',
-                'myrimatch_2_1_138' : 'MyriMatch:MVH',
-                'myrimatch_2_2_140' : 'MyriMatch:MVH',
-                'novor_1_1beta' : 'Novor:score',
-                'omssa_2_1_9' : 'OMSSA:pvalue',
-                'pepnovo_3_1' : 'Pepnovo:PnvScr',
-                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
-                'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
-                'xtandem_piledriver' : 'X\!Tandem:hyperscore',
-                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
-                'xtandem_vengeance' : 'X\!Tandem:hyperscore',
-            },
-            'add_estimated_fdr_style_1' : {
-                'msamanda_1_0_0_5242' : 'Amanda:Score',
-                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msamanda_1_0_0_6299' : 'Amanda:Score',
+                'msamanda_1_0_0_6300' : 'Amanda:Score',
                 'msgfplus_v9979' : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138' : 'MyriMatch:MVH',
                 'myrimatch_2_2_140' : 'MyriMatch:MVH',
@@ -4658,8 +4639,6 @@ Example:
             },
         },
         'uvalue_type' : "",
-        'uvalue_option' : {
-        },
     },
     'visualization_column_names' : {
         'available_in_unode' : [
@@ -4677,14 +4656,14 @@ Example:
         'utag' : [
             'visualization',
         ],
+        'uvalue_option' : {
+            'initialValue' : [],
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
-        'uvalue_option' : {
-            'initialValue': [],           # default = default_value
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 1,  # default = 0, 0 = infinity.
-        },
     },
     'visualization_font' : {
         'available_in_unode' : [
@@ -4699,11 +4678,11 @@ Example:
         'utag' : [
             'visualization',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "tuple",
-        'uvalue_option' : {
-        },
     },
     'visualization_header' : {
         'available_in_unode' : [
@@ -4718,12 +4697,12 @@ Example:
         'utag' : [
             'visualization',
         ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-        'uvalue_option' : {
-            'multipleLine': False,  # default = False
-        },
     },
     'visualization_label_list' : {
         'available_in_unode' : [
@@ -4739,14 +4718,14 @@ Example:
         'utag' : [
             'visualization',
         ],
+        'uvalue_option' : {
+            'initialValue' : [],
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 1,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
-        'uvalue_option' : {
-            'initialValue': [],           # default = default_value
-            'userCustomValues': False,    # default = True
-            'userCustomValuesMaxNum': 1,  # default = 0, 0 = infinity.
-        },
     },
     'visualization_opacity' : {
         'available_in_unode' : [
@@ -4761,15 +4740,15 @@ Example:
         'utag' : [
             'visualization',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
     'visualization_scaling_factors' : {
         'available_in_unode' : [
@@ -4784,11 +4763,11 @@ Example:
         'utag' : [
             'visualization',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "tuple",
-        'uvalue_option' : {
-        },
     },
     'visualization_size' : {
         'available_in_unode' : [
@@ -4803,11 +4782,11 @@ Example:
         'utag' : [
             'visualization',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "tuple",
-        'uvalue_option' : {
-        },
     },
     'visualization_stroke_width' : {
         'available_in_unode' : [
@@ -4822,22 +4801,22 @@ Example:
         'utag' : [
             'visualization',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : 1e-05,
+            'updownval' : 0.01,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
-        'uvalue_option' : {
-            'min': 0,           # default = |default_value * 100| * -1
-            'max': 10000000,    # default = |default_value * 100|
-            'updownval': 0.01,  # default = 10^int(log10(default_value)) or unit
-            'unit': 0.00001,    # default = 10^int(log10(default_value))
-        },
     },
-    'window_size': {
+    'window_size' : {
         'available_in_unode' : [
             'combine_pep_1_0_0',
         ],
         'default_value' : 249,
-        'description' : ''' Combined PEPs are computed by
+        'description' :  ''' Combined PEPs are computed by
     iterating a sliding window over the sorted PSMs. Each PSM receives
     a PEP based on the target/decoy ratio of the surrounding PEPs.
     This parameter defines the window size. ''',
@@ -4846,17 +4825,17 @@ Example:
             'combine_pep_style_1' : 'window_size',
         },
         'utag' : [
-            'statistics',
             'combining_search_results',
+            'statistics',
         ],
+        'uvalue_option' : {
+            'max' : 10000000,
+            'min' : 0,
+            'updownval' : 100,
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-        'uvalue_option' : {
-            'min': 0,          # default = |default_value * 100| * -1
-            'max': 10000000,   # default = |default_value * 100|
-            'updownval': 100,  # default = 1
-        },
     },
     'write_unfiltered_results' : {
         'available_in_unode' : [
@@ -4871,11 +4850,11 @@ Example:
         'utag' : [
             'conversion',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
     'xtandem_stp_bias' : {
         'available_in_unode' : [
@@ -4894,6 +4873,8 @@ Example:
         'utag' : [
             'modifications',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_translation' : {
             'xtandem_style_1' : {
                 False : 'no',
@@ -4901,7 +4882,5 @@ Example:
             },
         },
         'uvalue_type' : "bool",
-        'uvalue_option' : {
-        },
     },
 }
