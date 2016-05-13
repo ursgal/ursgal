@@ -76,6 +76,7 @@ class UController(ursgal.UNode):
         self.params               = {}
         self.init_kwargs          = {}
         self._run_after_meta_init = True
+        self.verbose              = True
         # self.update_user_params   = False
 
         # Second init is initialized after the Meta_class has returned the
@@ -99,9 +100,10 @@ class UController(ursgal.UNode):
         self.unodes = self._collect_all_unode_wrappers()
         # self.unodes = self.collect_all_unodes_from_kb()
         self.determine_availability_of_unodes()
-        # verbose = kwargs.get('verbose', True)
-        self.show_unode_overview()
+        self.verbose = kwargs.get('verbose', True)
 
+        if self.verbose:
+            self.show_unode_overview()
 
         # input_file = kwargs.get('input_file', None)
         # if input_file is not None:

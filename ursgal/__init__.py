@@ -24,6 +24,8 @@ if not hasattr(sys, "version_info") or sys.version_info < (3, 4):
 
 
 from .umapmaster import UParamMapper
+from .umapmaster import UPeptideMapper
+
 from .unode import Meta_UNode
 from .unode import UNode
 

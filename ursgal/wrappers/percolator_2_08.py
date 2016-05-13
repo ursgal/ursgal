@@ -53,7 +53,8 @@ class percolator_2_08( ursgal.UNode ):
         'include_in_git'            : False,
         'group_psms'                : True,
         'in_development'            : False,
-        'utranslation_style'        : 'percolator_style_1',        
+        'cpu_usage'                 : 1,
+        'utranslation_style'        : 'percolator_style_1',
         'engine': {
             'darwin' : {
                 '64bit' : {

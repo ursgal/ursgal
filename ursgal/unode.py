@@ -32,7 +32,7 @@ class Meta_UNode(type):
     _collected_initialized_unodes = {}
 
     _uparam_mapper = ursgal.UParamMapper()
-
+    _upeptide_mapper = ursgal.UPeptideMapper()
 
     def __new__(cls, cls_name, cls_bases, cls_dict ):
         new_class = super(
@@ -107,118 +107,12 @@ class Meta_UNode(type):
         Meta_UNode._collected_initialized_unodes[ engine ] = initd_klass
         initd_klass.meta_unodes = Meta_UNode._collected_initialized_unodes
         initd_klass.uparam_mapper = Meta_UNode._uparam_mapper
+        initd_klass.upeptide_mapper = Meta_UNode._upeptide_mapper
+
         if hasattr( initd_klass, '_run_after_meta_init'):
             initd_klass._after_init_meta_callback( *args, **kwargs )
 
 
-        # v0.3.4 below
-        # engine_path = kwargs.get('engine_path', None)
-        # if engine_path is None:
-        #     # This happens only when we call our Controller
-        #     engine = 'ucontroller'
-        #     kwargs['engine_path'] = __file__
-        #     # try:
-        #     #     class_default_params = importlib.__import__(
-        #     #         "ursgal.default_params.{0}".format( engine ),
-        #     #         fromlist = ['ursgal.default_params']
-        #     #     )
-        #     # except:
-        #     #     print("""
-        #     # [ Import failed ]
-        #     # [ Import failed ]\tYou have a syntax error in ursgal.default_params.{0}
-        #     # [ Import failed ] """.format( engine ))
-        #     #     exit(1)
-        #     # assert hasattr(class_default_params, 'DEFAULT_PARAMS'), '''
-        #     #     DEFAULT_PARAMS dict has to be define in default_params/{0}.py'
-        #     #     '''.format( engine )
-        #     # initd_klass.DEFAULT_PARAMS = getattr(class_default_params, 'DEFAULT_PARAMS')
-        # else:
-        #     all_parts = os.path.abspath( kwargs['engine_path'] ).split(os.sep)
-        #     engine = all_parts[ -2 ]
-
-        # initd_klass.DEFAULT_PARAMS = {}
-        # initd_klass.UNODE_UPARAMS = {}
-        # for mDict in Meta_UNode.upama.mapping_dicts( engine ):
-        #     translated_value = mDict['uvalue_style_translation'].get(
-        #         mDict['default_value'],
-        #         mDict['default_value']
-        #     )
-        #     initd_klass.DEFAULT_PARAMS[ mDict['ukey_translated'] ] = translated_value
-        #     initd_klass.UNODE_UPARAMS[ mDict['ukey'] ] = mDict
-        # initd_klass.exe = kwargs['engine_path']
-        # # obligatory_methods = [
-        # #     'preflight',
-        # #     'postflight',
-        # # ]
-
-        # # for method in obligatory_methods:
-        # #     engine_method  = getattr( initd_klass, method, None)
-        # #     assert callable(engine_method), '''
-        # #     {0} class requires {1} method to be defined
-        # #     '''.format( engine, method )
-        # initd_klass.engine = engine
-
-        # # OBLIGATORY_FIELDS = [
-        # #     'DEFAULT_PARAMS',
-        # #     'META_INFO',
-        # # ]
-
-        # # for field in OBLIGATORY_FIELDS:
-        # #     assert hasattr(initd_klass._kb, field), '''
-        # #     {0} dict has to be define in kb/{1}.py'
-        # #     '''.format( field, engine )
-
-        # # initd_klass.META_INFO = {}
-        # # # initd_klass.META_INFO.update( ursgal.ursgal_kb.META_INFO )
-        # # initd_klass.META_INFO.update( initd_klass._kb.META_INFO )
-        # # initd_klass.DEFAULT_PARAMS = initd_klass._kb.DEFAULT_PARAMS
-        # # # initd_klass.available_params = initd_klass._kb.AVAILABLE_PARAMS
-
-        # # if hasattr(initd_klass._kb, 'AVAILABLE_PARAMS'):
-        # #     initd_klass.AVAILABLE_PARAMS = initd_klass._kb.AVAILABLE_PARAMS
-        # # else:
-        # #     initd_klass.AVAILABLE_PARAMS = initd_klass._kb.DEFAULT_PARAMS
-
-        # # OPTIONAL_FIELDS = [
-        # #     'VALUE_TRANSLATIONS',
-        # #     'SPECIFIC_TRANSLATIONS',
-        # #     'DEFAULT_PARAMS'
-        # # ]
-
-        # # for field in OPTIONAL_FIELDS:
-        # #     if hasattr(initd_klass._kb, field):
-        # #         o = getattr( initd_klass._kb, field)
-        # #         setattr( initd_klass, field, o )
-        # #     else:
-        # #         setattr( initd_klass, field, {} )
-
-        # # NEW_FIELDS = [
-        # #     'USED_USEARCH_PARAMS',
-        # #     'USEARCH_PARAM_KEY_VALUE_TRANSLATOR',
-        # #     'USEARCH_PARAM_VALUE_TRANSLATIONS'
-        # # ]
-
-        # # for field in NEW_FIELDS:
-        # #     if hasattr(initd_klass._kb, field):
-        # #         o = getattr( initd_klass._kb, field)
-        # #         setattr( initd_klass, field, o )
-        # #     else:
-        # #         setattr( initd_klass, field, {} )
-
-        # # # essential_default_params = {
-        # # #     'output_suffix'   : '',
-        # # #     'rm_tmp_files'    : False,
-        # # #     'rm_config_files' : False,
-        # # # }
-        # # # for k, v in essential_default_params.items():
-        # # #     if k not in initd_klass.default_params.keys():
-        # # #         initd_klass.default_params[ k ] = v
-
-        # Meta_UNode.XX_meta_collected_nodes[ engine ] = initd_klass
-        # initd_klass.meta_unodes = Meta_UNode.XX_meta_collected_nodes
-        # initd_klass.upama = Meta_UNode.upama
-        # if hasattr( initd_klass, '_run_after_meta_init'):
-        #     initd_klass._after_init_meta_callback( *args, **kwargs )
 
 
         return initd_klass

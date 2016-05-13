@@ -11,7 +11,9 @@ import ursgal
 from ursgal.uparams import ursgal_params as urgsal_dict
 from collections import defaultdict as ddict
 import multiprocessing
-
+import re
+import os
+import time
 
 class UParamMapper( dict ):
     '''
@@ -230,6 +232,120 @@ class UParamMapper( dict ):
 
                 print('Failed on: ' , param)
 
+
+class UPeptideMapper( dict ):
+    def __init__(self, word_len=6 ):
+        self.fasta_sequences = {}
+        self.word_len = word_len
+        self.hits = {'fcache': 0, 'regex': 0}
+        pass
+
+    def build_lookup_from_file( self, path_to_fasta_file):
+        assert os.path.exists( path_to_fasta_file ), 'file {0} not found'.format(
+            path_to_fasta_file
+        )
+        internal_name = os.path.basename(path_to_fasta_file)
+        with open( path_to_fasta_file, 'r') as io:
+            self.build_lookup(
+                fasta_name = internal_name,
+                fasta_stream = io.readlines()
+            )
+        return internal_name
+
+    def build_lookup( self, fasta_name=None, fasta_stream=None ):
+        if fasta_name not in self.keys():
+            self[ fasta_name ] = {}
+            self.fasta_sequences[ fasta_name ] = {}
+            start_time = time.time()
+            for id, seq in ursgal.ucore.parseFasta( fasta_stream ):
+                self.fasta_sequences[ fasta_name ][ id ] = seq
+                self._create_fcache(
+                    id         = id,
+                    seq        = seq,
+                    fasta_name = fasta_name
+                )
+
+    def _create_fcache(self, id=None, seq=None, fasta_name=None):
+        for pos in range(len( seq ) - self.word_len + 1):
+            pep = seq[ pos : pos + self.word_len ]
+            try:
+                self[ fasta_name ][ pep ].add( (id, pos + 1) )
+            except:
+                self[ fasta_name ][ pep ] = set([ (id, pos + 1) ])
+
+    def map_peptide(self, peptide=None, fasta_name=None, force_regex=False):
+        mappings = []
+        if len(peptide) < self.word_len or force_regex:
+            self.hits['regex'] += 1
+            pattern = re.compile( r'''{0}'''.format( peptide ))
+            # we have to through it by hand ...
+            # for fasta
+            for id, seq in self.fasta_sequences[ fasta_name ].items():
+                for match in pattern.finditer( seq ):
+                    start = match.start() + 1
+                    end   = match.end()
+                    hit = self._format_hit_dict(  seq, start, end, id )
+                    mappings.append( hit )
+        else:
+            self.hits['fcache'] += 1
+            tmp_hits = {}
+            # m = []
+            for pos in range(len( peptide ) - self.word_len + 1):
+                pep = peptide[ pos : pos + self.word_len ]
+                # print( pep, peptide )
+                fasta_set = self[ fasta_name ].get(pep, set())
+                for id, id_pos in fasta_set:
+                    try:
+                        tmp_hits[ id ].add( id_pos )
+                    except:
+                        tmp_hits[ id ] = set([id_pos ])
+            for id, pos_set in tmp_hits.items():
+                in_one_peace     = True
+                sorted_positions = sorted(pos_set)
+                start            = sorted_positions[0]
+                end              = sorted_positions[0] + len(peptide) - 1
+
+                for n, pos in enumerate( sorted_positions[:-1] ):
+                    if pos + 1 != sorted_positions[ n + 1]:
+                        in_one_peace = False
+                seq = self.fasta_sequences[ fasta_name ][ id ]
+
+                if in_one_peace:
+                    for aa_pos, aa in enumerate(peptide):
+                        try:
+                            if seq[ aa_pos + start - 1] != aa:
+                                in_one_peace = False
+                        except:
+                            in_one_peace = False
+
+                if in_one_peace:
+                    mappings.append(
+                        self._format_hit_dict(  seq, start, end, id )
+                    )
+
+        return mappings
+
+    def _format_hit_dict( self, seq, start, end, id ):
+        if start == 1:
+            pre_aa = '-'
+        else:
+            pre_aa = seq[ start - 2]
+        if end >= len(seq):
+            post_aa = '-'
+        else:
+            post_aa = seq[ end ]
+        hit = {
+            'start' : start,
+            'end'  : end,
+            'id' : id,
+            'pre': pre_aa ,
+            'post': post_aa,
+        }
+        return hit
+
+    def purge_fasta_info( self, fasta_name ):
+        del self.fasta_sequences[ fasta_name ]
+        del self[ fasta_name ]
 
 if __name__ == '__main__':
     print('Yes!')
