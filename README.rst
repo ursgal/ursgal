@@ -1,7 +1,7 @@
 Introduction
 ############
 
-*Ursgal - universal Python module combining common bottom-up proteomics tools for large-scale analysis*
+*Ursgal - Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
 
 |build-status| |doc-status| |Gitter|
 
@@ -35,9 +35,10 @@ Abstract
 
 Proteomics data integration has become a broad field with a variety of programs offering innovative algorithms to analyze increasing amounts of data. Unfortunately, this software diversity leads to many problems as soon as the data is analyzed using more than one algorithm for the same task. Although it was shown that the combination of multiple peptide identification algorithms yields more robust results (Nahnsen et al. 2011, Vaudel et al. 2015, Kwon et al. 2011), it is only recently that unified approaches are emerging (Vaudel et al. 2011, Wen et al. 2015); however, workflows that, for example, aim to optimize search parameters or that employ cascaded style searches6 can only be made accessible if data analysis becomes not only unified but also and most importantly scriptable. Here we introduce Ursgal, a Python interface to many commonly used bottom-up proteomics tools and to additional auxiliary programs. Complex workflows can thus be composed using the Python scripting language using a few lines of code. Ursgal is easily extensible, and we have made several database search engines (X!Tandem (Craig and Beavis 2004), OMSSA (Geer et al. 2004), MS-GF+ (Kim et al. 2010), Myrimatch (Tabb et al. 2008), MS Amanda (Dorfer et al. 2014)), statistical postprocessing algorithms (qvality (Käll et al. 2009), Percolator(Käll et al. 2008)), and one algorithm that combines statistically postprocessed outputs from multiple search engines (“combined FDR” (Jones et al. 2009)) accessible as an interface in Python. Furthermore, we have implemented a new algorithm (“combined PEP”) that combines multiple search engines employing elements of “combined FDR” (Jones et al. 2009), PeptideShaker (Vaudel et al. 2015), and Bayes’ theorem.
 
-*Kremer et al. (2015): Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis, Journal of Proteome Research 12/2015, DOI:10.1021/acs.jproteome.5b00860.*
+*Kremer et al. (2015):* |publicationtitle|_ *, Journal of Proteome research, DOI:10.1021/acs.jproteome.5b00860*
 
-
+.. _publicationtitle: http://dx.doi.org/10.1021/acs.jproteome.5b00860
+.. |publicationtitle| replace:: *Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
 .. _download:
 
 Download
@@ -63,14 +64,14 @@ Installation
 
 Ursgal requires `Python`_ 3.4 or higher.
 
-Download ursgal using `Github`_ **or** the zip file:
+Download ursgal using `GitHub`_ **or** the zip file:
 
-* Github version: Starting with this the easiest way is to clone the GitHub repo.::
+* GitHub version: Starting with this the easiest way is to clone the GitHub repo.::
 
    user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
 
 
-* ZIP version: Download and extract the `ursgalzip`_ file
+* ZIP version: Alternatively, download and extract the `ursgal zip file`_
 
 .. _Python:
    https://www.python.org/downloads/
@@ -78,7 +79,7 @@ Download ursgal using `Github`_ **or** the zip file:
 .. _GitHub:
    https://github.com/ursgal/ursgal
 
-.. _ursgalzip:
+.. _ursgal zip file:
    https://github.com/ursgal/ursgal/archive/master.zip
 
 Install requirements::
@@ -116,9 +117,9 @@ start the command line with administrator privileges.)
 Tests
 *****
 
-Run nosetests in root folder. You might need to install `nose`_ first::
+Run nosetests in root folder. You might need to install `nose`_ for Python3 first::
 
-    user@localhost:~/ursgal$ nosetests
+    user@localhost:~/ursgal$ nosetests3
 
 .. _nose:
     https://nose.readthedocs.org/en/latest/
@@ -177,7 +178,9 @@ Citation
 
 Ursgal citation
 
-Lukas P. M. Kremer, Johannes Leufken, Purevdulam Oyunchimeg, Stefan Schulze, and Christian Fufezan (2015): Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis, Journal of Proteome research, DOI:10.1021/acs.jproteome.5b00860
+Lukas P. M. Kremer, Johannes Leufken, Purevdulam Oyunchimeg, Stefan Schulze, and Christian Fufezan (2015): `Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis`_, Journal of Proteome research, DOI:10.1021/acs.jproteome.5b00860
+
+.. _Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis: http://dx.doi.org/10.1021/acs.jproteome.5b00860
 
 .. note::
     Please cite every tool you use in ursgal. During runtime the references of
