@@ -301,6 +301,19 @@ class UPeptideMapper( dict ):
                 self[ fasta_name ][ pep ] = set([ (id, pos + 1) ])
 
     def map_peptide(self, peptide=None, fasta_name=None, force_regex=False):
+        '''
+        Maps a peptide to a fasta database.
+
+        Returns a list of single hits which look for example like this::
+
+            {
+                'start' : 12,
+                'end'   : 18,
+                'id'    : 'Protein Id passed to the function',
+                'pre'   : 'A',
+                'post'  : 'V',
+            }
+        '''
         mappings = []
         if len(peptide) < self.word_len or force_regex:
             self.hits['regex'] += 1
@@ -345,7 +358,7 @@ class UPeptideMapper( dict ):
                         except:
                             in_one_piece = False
 
-                if in_one_peace:
+                if in_one_piece:
                     mappings.append(
                         self._format_hit_dict(  seq, start, end, id )
                     )
