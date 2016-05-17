@@ -339,29 +339,31 @@ class UPeptideMapper( dict ):
                         tmp_hits[ id ].add( id_pos )
                     except:
                         tmp_hits[ id ] = set([id_pos ])
+
+
+
             for id, pos_set in tmp_hits.items():
                 in_one_piece     = True
                 sorted_positions = sorted(pos_set)
-                start            = sorted_positions[0]
-                end              = sorted_positions[0] + len(peptide) - 1
+                seq              = self.fasta_sequences[ fasta_name ][ id ]
+                print( sorted_positions )
+
+                required_hits    = len(peptide) - self.word_len
 
                 for n, pos in enumerate( sorted_positions[:-1] ):
-                    if pos + 1 != sorted_positions[ n + 1]:
-                        in_one_piece = False
-                seq = self.fasta_sequences[ fasta_name ][ id ]
+                    start = sorted_positions[n]
+                    end   = sorted_positions[n] + len(peptide) - 1
 
-                if in_one_piece:
-                    for aa_pos, aa in enumerate(peptide):
-                        try:
-                            if seq[ aa_pos + start - 1] != aa:
-                                in_one_piece = False
-                        except:
-                            in_one_piece = False
+                    if  n + required_hits >= len( sorted_positions):
+                        break
 
-                if in_one_piece:
-                    mappings.append(
-                        self._format_hit_dict(  seq, start, end, id )
-                    )
+                    expected_number = pos + required_hits
+                    observed_number = sorted_positions[ n + required_hits  ]
+
+                    if expected_number == observed_number:
+                        mappings.append(
+                            self._format_hit_dict(  seq, start, end, id )
+                        )
 
         return mappings
 
