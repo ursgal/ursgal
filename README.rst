@@ -154,7 +154,6 @@ Copyright 2014-2015 by authors and contributors in alphabetical order
 * Christian Fufezan,
 * Lukas P. M. Kremer
 * Johannes Leufken
-* Stefan Schulze
 * Purevdulam Oyunchimeg
 * Stefan Schulze
 * Lukas Vaut
