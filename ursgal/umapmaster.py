@@ -234,6 +234,25 @@ class UParamMapper( dict ):
 
 
 class UPeptideMapper( dict ):
+    '''
+    UPeptideMapper class offers ultra fast peptide to sequence mapping using
+    a fast cache, hereafter referred to fcache.
+
+    The fcache is build using the `build_lookup_from_file` or `build_lookup`
+    functions. The fcache can be queried using the UPeptideMapper.map_peptide()
+    function.
+
+    Note::
+        The UPeptideMapper is initialized during UNode instantiation thus all
+        UNodes can access the mapper via self.upeptide_mapper.
+
+    Warning::
+        Ursgal keeps one upeptide_mapper alive during code execution and
+        because the fcache requires a significant amount of memory, it is
+        recommended that the user takes care of purging the mapper if not
+        needed anymore, using the `UPeptideMapper.purge_fasta_info()` function.
+
+    '''
     def __init__(self, word_len=6 ):
         self.fasta_sequences = {}
         self.word_len = word_len
@@ -241,6 +260,9 @@ class UPeptideMapper( dict ):
         pass
 
     def build_lookup_from_file( self, path_to_fasta_file):
+        '''
+        Builds the fast cache and regular sequence dict from a fasta stream
+        '''
         assert os.path.exists( path_to_fasta_file ), 'file {0} not found'.format(
             path_to_fasta_file
         )
@@ -253,10 +275,12 @@ class UPeptideMapper( dict ):
         return internal_name
 
     def build_lookup( self, fasta_name=None, fasta_stream=None ):
+        '''
+        Builds the fast cache and regular sequence dict from a fasta stream
+        '''
         if fasta_name not in self.keys():
             self[ fasta_name ] = {}
             self.fasta_sequences[ fasta_name ] = {}
-            start_time = time.time()
             for id, seq in ursgal.ucore.parseFasta( fasta_stream ):
                 self.fasta_sequences[ fasta_name ][ id ] = seq
                 self._create_fcache(
@@ -266,6 +290,9 @@ class UPeptideMapper( dict ):
                 )
 
     def _create_fcache(self, id=None, seq=None, fasta_name=None):
+        '''
+        Updates the fast cache with a given sequence
+        '''
         for pos in range(len( seq ) - self.word_len + 1):
             pep = seq[ pos : pos + self.word_len ]
             try:
@@ -274,6 +301,19 @@ class UPeptideMapper( dict ):
                 self[ fasta_name ][ pep ] = set([ (id, pos + 1) ])
 
     def map_peptide(self, peptide=None, fasta_name=None, force_regex=False):
+        '''
+        Maps a peptide to a fasta database.
+
+        Returns a list of single hits which look for example like this::
+
+            {
+                'start' : 12,
+                'end'   : 18,
+                'id'    : 'Protein Id passed to the function',
+                'pre'   : 'A',
+                'post'  : 'V',
+            }
+        '''
         mappings = []
         if len(peptide) < self.word_len or force_regex:
             self.hits['regex'] += 1
@@ -300,25 +340,25 @@ class UPeptideMapper( dict ):
                     except:
                         tmp_hits[ id ] = set([id_pos ])
             for id, pos_set in tmp_hits.items():
-                in_one_peace     = True
+                in_one_piece     = True
                 sorted_positions = sorted(pos_set)
                 start            = sorted_positions[0]
                 end              = sorted_positions[0] + len(peptide) - 1
 
                 for n, pos in enumerate( sorted_positions[:-1] ):
                     if pos + 1 != sorted_positions[ n + 1]:
-                        in_one_peace = False
+                        in_one_piece = False
                 seq = self.fasta_sequences[ fasta_name ][ id ]
 
-                if in_one_peace:
+                if in_one_piece:
                     for aa_pos, aa in enumerate(peptide):
                         try:
                             if seq[ aa_pos + start - 1] != aa:
-                                in_one_peace = False
+                                in_one_piece = False
                         except:
-                            in_one_peace = False
+                            in_one_piece = False
 
-                if in_one_peace:
+                if in_one_piece:
                     mappings.append(
                         self._format_hit_dict(  seq, start, end, id )
                     )
@@ -326,6 +366,24 @@ class UPeptideMapper( dict ):
         return mappings
 
     def _format_hit_dict( self, seq, start, end, id ):
+        '''
+        Creates a formated dictionary from a single mapping hit. At the same
+        time evaluating pre and pos amino acids from the given sequence
+        Final output looks for example like this::
+
+            {
+                'start' : 12,
+                'end'   : 18,
+                'id'    : 'Protein Id passed to the function',
+                'pre'   : 'A',
+                'post'  : 'V',
+            }
+
+        Note::
+            If the pre or post amino acids are N- or C-terminal, respectively,
+            then the reported amino acid will be '-'
+
+        '''
         if start == 1:
             pre_aa = '-'
         else:
@@ -344,6 +402,9 @@ class UPeptideMapper( dict ):
         return hit
 
     def purge_fasta_info( self, fasta_name ):
+        '''
+        Purges regular sequence lookup and fcache for a given fasta_name
+        '''
         del self.fasta_sequences[ fasta_name ]
         del self[ fasta_name ]
 
