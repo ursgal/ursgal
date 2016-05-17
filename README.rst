@@ -35,7 +35,9 @@ Abstract
 
 Proteomics data integration has become a broad field with a variety of programs offering innovative algorithms to analyze increasing amounts of data. Unfortunately, this software diversity leads to many problems as soon as the data is analyzed using more than one algorithm for the same task. Although it was shown that the combination of multiple peptide identification algorithms yields more robust results (Nahnsen et al. 2011, Vaudel et al. 2015, Kwon et al. 2011), it is only recently that unified approaches are emerging (Vaudel et al. 2011, Wen et al. 2015); however, workflows that, for example, aim to optimize search parameters or that employ cascaded style searches6 can only be made accessible if data analysis becomes not only unified but also and most importantly scriptable. Here we introduce Ursgal, a Python interface to many commonly used bottom-up proteomics tools and to additional auxiliary programs. Complex workflows can thus be composed using the Python scripting language using a few lines of code. Ursgal is easily extensible, and we have made several database search engines (X!Tandem (Craig and Beavis 2004), OMSSA (Geer et al. 2004), MS-GF+ (Kim et al. 2010), Myrimatch (Tabb et al. 2008), MS Amanda (Dorfer et al. 2014)), statistical postprocessing algorithms (qvality (Käll et al. 2009), Percolator(Käll et al. 2008)), and one algorithm that combines statistically postprocessed outputs from multiple search engines (“combined FDR” (Jones et al. 2009)) accessible as an interface in Python. Furthermore, we have implemented a new algorithm (“combined PEP”) that combines multiple search engines employing elements of “combined FDR” (Jones et al. 2009), PeptideShaker (Vaudel et al. 2015), and Bayes’ theorem.
 
-*Kremer et al. (2015):* |publicationtitle|_ *, Journal of Proteome research, DOI:10.1021/acs.jproteome.5b00860*
+*Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. and Fufezan, C.
+(2015):* |publicationtitle|_ *, Journal of Proteome research, 15, 788-.
+DOI:10.1021/acs.jproteome.5b00860*
 
 .. _publicationtitle: http://dx.doi.org/10.1021/acs.jproteome.5b00860
 .. |publicationtitle| replace:: *Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
@@ -64,7 +66,7 @@ Installation
 
 Ursgal requires `Python`_ 3.4 or higher.
 
-Download ursgal using `GitHub`_ **or** the zip file:
+Download Ursgal using `GitHub`_ **or** the zip file:
 
 * GitHub version: Starting with this the easiest way is to clone the GitHub repo.::
 
@@ -89,9 +91,11 @@ Install requirements::
 
 .. note::
 
-    Pip is included in Python 3.4 and higher. However, it might not be included in in your system's PATH environment variable.
-    If this is the case, you can either add the python Scripts directory to you PATH or use the path to the pip.exe
-    directly for the installation, e.g.: ~/Python34/Scripts/pip.exe install -r requirements.txt
+    Pip is included in Python 3.4 and higher. However, it might not be
+    included in in your system's PATH environment variable.
+    If this is the case, you can either add the Python scripts directory to your
+    PATH env variable or use the path to the pip.exe directly for the
+    installation, e.g.: ~/Python34/Scripts/pip.exe install -r requirements.txt
 
 Install third party engines::
 
@@ -105,7 +109,7 @@ Install Ursgal::
 
 .. note::
 
-    Under Linux it may be required to change the permission in the
+    Under Linux, it may be required to change the permission in the
     python3.4 site-package folder so that all files are executable
 
 (You might need administrator privileges to write in the Python site-package folder.
@@ -117,12 +121,17 @@ start the command line with administrator privileges.)
 Tests
 *****
 
-Run nosetests in root folder. You might need to install `nose`_ for Python3 first::
+Run nosetests in root folder. You might need to install `nose`_ for Python3 first
+although it is in the requirements.txt (above) thus pip3.4 install -r requirements
+should have installed it already. Then just execute::
 
     user@localhost:~/ursgal$ nosetests3
 
+to test the package.
+
 .. _nose:
     https://nose.readthedocs.org/en/latest/
+
 
 
 Participate
@@ -182,10 +191,10 @@ Lukas P. M. Kremer, Johannes Leufken, Purevdulam Oyunchimeg, Stefan Schulze, and
 .. _Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis: http://dx.doi.org/10.1021/acs.jproteome.5b00860
 
 .. note::
-    Please cite every tool you use in ursgal. During runtime the references of
+    Please cite every tool you use in Ursgal. During runtime the references of
     the tools you were using are shown.
 
-Full list of tools with proper citations that are integrated into ursgal are:
+Full list of tools with proper citations that are integrated into Ursgal are:
 
     * Craig, R.; Beavis, R. C. TANDEM: matching proteins with tandem mass spectra. Bioinformatics 2004, 20 (9), 1466–1467.
     * Dorfer, V.; Pichler, P.; Stranzl, T.; Stadlmann, J.; Taus, T.; Winkler, S.; Mechtler, K. MS Amanda, a Universal Identification Algorithm Optimised for High Accuracy Tandem Mass Spectra. J. Proteome res. 2014.
