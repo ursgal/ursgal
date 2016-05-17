@@ -10,7 +10,7 @@ To get started, make sure you have :ref:`installed Ursgal<installation>`.
 --------------------------------
 
 Once you installed Ursgal, you should be able to import it in your Python3 scripts like this: ::
-    
+
     import ursgal
 
 To get an overview over the engines that are available on your computer, initialize the Ursgal UController class.
@@ -47,7 +47,7 @@ This will produce a .csv file containing the peptide-spectrum-matches (PSMs) fou
 
 If you used OMSSA or any other search engine before, you will know that there are a lot of search parameters and settings that can be defined. For instance, depending on the mass spectrometer that was used, you might want to set the fragment mass tolerance unit to Dalton or ppm.
 In Ursgal, there are two ways to adjust such parameters: ::
-    
+
     # 1) define parameters at UController initialization:
     uc = ursgal.UController(
         params = {
@@ -56,7 +56,7 @@ In Ursgal, there are two ways to adjust such parameters: ::
             'frag_mass_tolerance_unit': 'da',
         }
     )
-    
+
     # 2) change parameters after UController is already initialized:
     uc.params['database'] = 'my_other_database.fasta'
     uc.params['frag_mass_tolerance']      = 15
@@ -66,7 +66,7 @@ The second method allows you to re-adjust parameters at different points of your
 
 For a list of available ursgal parameters, see :ref:`Parameters<parameters>`. Ursgal also includes pre-defined sets of parameters for different mass spectrometers. These are called profiles. Currently, three profiles are available: 'LTQ XL low res', 'LTQ XL high res' and 'QExactive+'.
 Profiles can be used like this: ::
-    
+
     uc = ursgal.UController(
         params  = {'database': 'my_database.fasta'},
         profile = 'QExactive+'
@@ -109,18 +109,18 @@ Currently, the following UController workflow functions are available:
         Visualization of results
 
 
-5. Building Custom Workflows
---------------------------------
+5. Building Custom workflows
+----------------------------
 
 The above functions can be used in conjunction with standard Python control flow tools such as loops and if-statements.
 This makes it possible to define complex and highly customizable workflows. For instance, imagine you have multiple mzML files and you want to use all available search engines with them: ::
-    
+
     spec_files     = ['fileA.mzML', 'fileB.mzML']
     search_engines = ['omssa_2_1_9', 'xtandem_piledriver', 'msgfplus',
                       'msamanda_1_0_0_5243', 'myrimatch_2_1_138']
 
 This task can be easily achieved with the power of nested for-loops: ::
-    
+
     results = []
     for spec_file in spec_files:
         for search_engine in search_engines:

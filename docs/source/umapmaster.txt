@@ -1,11 +1,19 @@
 .. umapmaster:
 
-.. default-domain:: py
+UMapMaster
+==========
 
-############
+Mapping classes of Ursgal
+
 UParamMapper
-############
+------------
 
 .. autoclass:: ursgal.umapmaster.UParamMapper
    :members:
+
+UPeptideMapper
+--------------
+
+.. autoclass:: ursgal.umapmaster.UPeptideMapper
+  :members:
 

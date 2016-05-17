@@ -242,11 +242,13 @@ class UPeptideMapper( dict ):
     functions. The fcache can be queried using the UPeptideMapper.map_peptide()
     function.
 
-    Note::
+    Note:
+
         The UPeptideMapper is initialized during UNode instantiation thus all
         UNodes can access the mapper via self.upeptide_mapper.
 
-    Warning::
+    Warning:
+
         Ursgal keeps one upeptide_mapper alive during code execution and
         because the fcache requires a significant amount of memory, it is
         recommended that the user takes care of purging the mapper if not

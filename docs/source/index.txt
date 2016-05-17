@@ -16,7 +16,6 @@ The latest Documentation was generated on: |today|
 Quick Start
 -----------
 
-
 .. toctree::
    :maxdepth: 2
 
@@ -86,7 +85,6 @@ Parameter
    parameter
 
 
-
 Examples
 ========
 
@@ -107,7 +105,6 @@ Record of released Ursgal versions with all notable changes
    :maxdepth: 1
 
    changelog
-
 
 
 FAQ
