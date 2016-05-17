@@ -54,13 +54,14 @@ unify_csv_main(
         ],
         'label' : '',
         'decoy_tag': 'decoy_',
-        'enzyme' : 'trypsin',
+        'enzyme' : 'KR;C;P',
         'semi_enzyme' : False,
         'database': os.path.join(
             'tests',
             'data',
             'BSA.fasta'
         ),
+        'protein_delimiter' : '<|>',
     },
     search_engine  = 'msamanda_1_0_0_5243',
 )

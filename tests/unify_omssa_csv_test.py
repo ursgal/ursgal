@@ -66,14 +66,15 @@ unify_csv_main(
             'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
             '*,opt,Prot-N-term,Acetyl',    # N-Acteylation
             # '*,opt,any,Deamidated:18O(1)'  # test case for ':' in unimod, is Deamidated:18O(1), with heavy oxygen, but this fails right now!!!
-            'R,opt,any,Label:13C(5)15N(1)', # we have to test SILAC!!!!
-            'R,opt,any,Label:13C(6)15N(2)' # we have to test SILAC!!!!
+            'K,opt,any,Label:13C(5)15N(1)', # we have to test SILAC!!!!
+            'K,opt,any,Label:13C(6)15N(2)' # we have to test SILAC!!!!
         ],
         'label' : '',
         'decoy_tag': 'decoy_',
-        'enzyme' : 'trypsin',
+        'enzyme' : 'KR;C;P',
         'semi_enzyme' : False,
         'database': os.path.join( 'tests', 'data', 'BSA.fasta'),
+        'protein_delimiter' : '<|>',
     },
     search_engine  = 'omssa_2_1_9',
 )
@@ -99,7 +100,11 @@ def unify_omssa( test_dict ):
             'uCalc m/z',
             'Sequence',
             'Is decoy',
-            'proteinacc_start_stop_pre_post_;',
+            'Protein ID',
+            'Sequence Start',
+            'Sequence Stop',
+            'Sequence Pre AA',
+            'Sequence Post AA',
             'some_other_value',
         ]:
         test_value = test_dict[key]

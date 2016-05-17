@@ -54,13 +54,14 @@ unify_csv_main(
         ],
         'label' : '15N',
         'decoy_tag': 'decoy_',
-        'enzyme' : 'trypsin',
+        'enzyme' : 'KR;C;P',
         'semi_enzyme' : False,
         'database': os.path.join(
             'tests',
             'data',
             'BSA.fasta'
         ),
+        'protein_delimiter' : '<|>',
     },
     search_engine  = 'myrimatch_2_1_138',
 )

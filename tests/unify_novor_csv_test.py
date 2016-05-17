@@ -55,8 +55,9 @@ unify_csv_main(
             '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
         ],
         'label' : '',
-        'enzyme' : 'trypsin',
+        'enzyme' : 'KR;C;P',
         'semi_enzyme' : False,
+        'protein_delimiter' : '<|>',
     },
     search_engine  = 'novor_1_1beta',
 )

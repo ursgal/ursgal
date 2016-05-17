@@ -390,6 +390,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'unify_csv_1_0_0',
         ],
         'default_value' : None,
         'description' :  ''' Path to database file containing protein sequences in fasta format ''',
@@ -400,6 +401,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'ProteinDatabase',
             'omssa_style_1' : '-d',
             'xtandem_style_1' : 'file URL',
+            'unify_csv_style_1' : 'database',
         },
         'utag' : [
             'database',
@@ -478,6 +480,7 @@ ursgal_params = {
             'percolator_2_08',
             'qvality_2_02',
             'xtandem2csv_1_0_0',
+            'unify_csv_1_0_0',
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
@@ -491,6 +494,7 @@ ursgal_params = {
             'percolator_style_1' : 'decoy_tag',
             'qvality_style_1' : 'decoy_tag',
             'xtandem2csv_style_1' : 'decoy_tag',
+            'unify_csv_style_1' : 'decoy_tag',
         },
         'utag' : [
             'database',
@@ -653,6 +657,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'unify_csv_1_0_0',
         ],
         'default_value' : "trypsin",
         'description' :  ''' Enzyme: Rule of protein cleavage
@@ -692,6 +697,7 @@ ursgal_params = {
             'omssa_style_1' : '-e',
             'pepnovo_style_1' : '-digest',
             'xtandem_style_1' : 'protein, cleavage site',
+            'unify_csv_style_1' : 'enzyme',
         },
         'utag' : [
             'database',
@@ -706,6 +712,30 @@ ursgal_params = {
         },
         'uvalue_translation' : {
             'generate_target_decoy_style_1' : {
+                'argc' : 'R;C;P',
+                'aspn' : 'D;N;',
+                'chymotrypsin' : 'FMWY;C;P',
+                'chymotrypsin_p' : 'FMWY;C;',
+                'clostripain' : 'R;C;',
+                'cnbr' : 'M;C;P',
+                'elastase' : 'AGILV;C;P',
+                'formic_acid' : 'D;C;P',
+                'gluc' : 'DE;C;P',
+                'gluc_bicarb' : 'E;C;P',
+                'iodosobenzoate' : 'W;C;',
+                'lysc' : 'K;C;P',
+                'lysc_p' : 'K;C;',
+                'lysn' : 'K;N;',
+                'lysn_promisc' : 'AKRS;N;',
+                'pepsina' : 'FL;C;',
+                'protein_endopeptidase' : 'P;C;',
+                'staph_protease' : 'E;C;',
+                'trypsin' : 'KR;C;P',
+                'trypsin_cnbr' : 'KRM;C;P',
+                'trypsin_gluc' : 'DEKR;C;P',
+                'trypsin_p' : 'KR;C;',
+            },
+            'unify_csv_style_1' : {
                 'argc' : 'R;C;P',
                 'aspn' : 'D;N;',
                 'chymotrypsin' : 'FMWY;C;P',
@@ -2001,6 +2031,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'unify_csv_1_0_0',
         ],
         'default_value' : [
             '*,opt,Prot-N-term,Acetyl',
@@ -2041,6 +2072,7 @@ Example:
             'novor_style_1' : ('variableModifications', 'fixedModifications'),
             'omssa_style_1' : ('-mv', 'mf'),
             'pepnovo_style_1' : '-PTMs',
+            'unify_csv_style_1': 'modifications',
             'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
         },
         'utag' : [
@@ -4190,6 +4222,25 @@ Example:
         },
         'uvalue_type' : "bool",
     },
+    'protein_delimiter': {
+        'available_in_unode' : [
+            'unify_csv_1_0_0',
+        ],
+        'default_value' : '<|>',
+        'description' :  ''' This delimiter seperates protein IDs/names in the unified csv ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'unify_csv_style_1' : 'protein_delimiter',
+        },
+        'utag' : [
+            'protein',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'semi_enzyme' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
@@ -4205,6 +4256,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'unify_csv_1_0_0',
         ],
         'default_value' : False,
         'description' :  ''' Allows semi-enzymatic peptide ends ''',
@@ -4215,6 +4267,7 @@ Example:
             'myrimatch_style_1' : 'MinTerminiCleavages',
             'omssa_style_1' : 'semi_enzyme',
             'xtandem_style_1' : 'protein, cleavage semi',
+            'unify_csv_style_1': 'semi_enzyme',
         },
         'utag' : [
             'protein',
