@@ -610,11 +610,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         )
                     )
                     line_dict['Is decoy'] = 'true'
-                # elif len(tmp_decoy) == 0:
-                #     print(line_dict)
-                #     print(upeptide_maps)
-                #     print(add_protein)
-                #     exit()
+                elif len(tmp_decoy) == 0:
+                    print(line_dict)
+                    print(upeptide_maps)
+                    print(add_protein)
+                    exit()
                 else:
                     line_dict['Is decoy'] = list(tmp_decoy)[0]
 
