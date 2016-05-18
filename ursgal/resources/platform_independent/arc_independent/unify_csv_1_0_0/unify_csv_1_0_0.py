@@ -525,7 +525,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             params['database']
                         )
                 # for protein in line_dict['proteinacc_start_stop_pre_post_;'].split('<|>'):
+                # if line_dict["Sequence"] != 'LIGDTSSSDDDGNDGAGAGGAGGAAAAAAGGAK':
+                #     continue
                 for protein in upeptide_maps:
+                    # print('>>>>>>>')
+                    # print(protein)
                     allowed_aa = params['enzyme'].split(';')[0] + '-'
                     cleavage_site = params['enzyme'].split(';')[1]
                     inhibitor_aa = params['enzyme'].split(';')[2]
@@ -533,27 +537,31 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     nterm_correct = False
                     cterm_correct = False
                     if cleavage_site == 'C':
-                        if protein['pre'] in allowed_aa:
+                        if protein['pre'] in allowed_aa\
+                            or protein['start'] in [1,2]:
                             if line_dict['Sequence'][0] not in inhibitor_aa\
-                                or protein['pre'] == '-':
+                                or protein['start'] in [1,2]:
                                 nterm_correct = True
+                                # print('nterm_correct')
                         if protein['post'] not in inhibitor_aa:
                             if line_dict['Sequence'][-1] in allowed_aa\
                                 or protein['post'] == '-':
                                 cterm_correct = True
+                                # print('cterm_correct')
                         if params['semi_enzyme'] == True:
                             if cterm_correct == True or nterm_correct == True:
                                 add_protein = True
                         elif cterm_correct == True and nterm_correct == True:
                             add_protein = True
-                    if cleavage_site == 'N':
+                    elif cleavage_site == 'N':
                         if protein['post'] in allowed_aa:
                             if line_dict['Sequence'][-1] not in inhibitor_aa\
                                 or protein['post'] == '-':
                                 cterm_correct = True
-                        if protein['pre'] not in inhibitor_aa:
+                        if protein['pre'] not in inhibitor_aa\
+                            or protein['start'] in [1,2]:
                             if line_dict['Sequence'][0] in allowed_aa\
-                                or protein['pre'] == '-':
+                                or protein['start'] in [1,2]:
                                 nterm_correct = True
                         if params['semi_enzyme'] == True:
                             if cterm_correct == True or nterm_correct == True:

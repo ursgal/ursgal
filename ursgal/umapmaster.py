@@ -368,9 +368,10 @@ class UPeptideMapper( dict ):
                         break
                         
                     if expected_number == observed_number or required_hits == 0:
-                        mappings.append(
-                            self._format_hit_dict(  seq, start, end, id )
-                        )
+                        if seq[ start - 1 : end] == peptide:
+                            mappings.append(
+                                self._format_hit_dict(  seq, start, end, id )
+                            )
 
         return mappings
 

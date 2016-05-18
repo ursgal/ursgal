@@ -298,7 +298,7 @@ class percolator_2_08( ursgal.UNode ):
             ),
             (
                 'Proteins', {
-                    'csv_field': 'proteinacc_start_stop_pre_post_;',
+                    'csv_field': 'Protein ID',
                     'DefaultDirection': 0,
                     'description': ""
                 }
@@ -436,26 +436,51 @@ class percolator_2_08( ursgal.UNode ):
                 else:
                     t['Label'] = 1
 
-                if self.params['translations']['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
-                    # bug mzIdentML msgf+ convert
-                    t['Label'] = -1
+                # if self.params['translations']['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
+                #     # bug mzIdentML msgf+ convert
+                #     t['Label'] = -1
 
                 # this - is - sparta (or, if you like mzIdentML) ...
-                splitted = line_dict['proteinacc_start_stop_pre_post_;'].split('_')
+                # splitted = line_dict['proteinacc_start_stop_pre_post_;'].split('_')
                 # aka http://imgur.com/WjiX9
-                pre_aa = splitted[-2]
-                post_aa = splitted[-1]
-                if pre_aa in ['R', 'K', '-']:
-                    t['enzN'] = 1
-                else:
-                    t['enzN'] = 0
-                if line_dict['Sequence'][-1] in ['R', 'K'] or post_aa == '-':
-                    t['enzC'] = 1
-                else:
-                    t['enzC'] = 0
+                pre_aa = []
+                for prot_pre_aa in line_dict['Sequence Pre AA'].split(self.params['translations']['protein_delimiter']):
+                    for p_pre_aa in prot_pre_aa.split(';'):
+                        pre_aa.append(p_pre_aa)
+                post_aa = []
+                for prot_post_aa in line_dict['Sequence Post AA'].split(self.params['translations']['protein_delimiter']):
+                    for p_post_aa in prot_post_aa.split(';'):
+                        post_aa.append(p_post_aa)
+                allowed_aa = set(self.params['translations']['enzyme'].split(';')[0] + '-')
+                cleavage_site = self.params['translations']['enzyme'].split(';')[1]
+                inhibitor_aa = self.params['translations']['enzyme'].split(';')[2]
+                final_pre_aa = pre_aa[0]
+                final_post_aa = post_aa[0]
+                t['enzN'] = 0
+                t['enzC'] = 0
+                if cleavage_site == 'C':
+                    for i, aa in enumerate(pre_aa):
+                        if aa in allowed_aa  \
+                            or line_dict['Sequence Start'] in ['1','2']:
+                            t['enzN'] = 1
+                            final_pre_aa = aa
+                            final_post_aa = post_aa[i]
+                        if line_dict['Sequence'][-1] in allowed_aa\
+                            or post_aa == '-':
+                            t['enzC'] = 1
+                elif cleavage_site == 'N':
+                    for i, aa in enumerate(post_aa):
+                        if aa in allowed_aa:
+                            t['enzC'] = 1
+                            final_post_aa = aa
+                            final_pre_aa = pre_aa[i]
+                        if line_dict['Sequence'][0] in allowed_aa\
+                            or line_dict['Sequence Start'] in ['1','2']:
+                            t['enzN'] = 1
+
                 t['enzInt'] = 0
                 for aa in line_dict['Sequence'][:-1]:
-                    if aa in ['R', 'K']:
+                    if aa in allowed_aa:
                         t['enzInt'] += 1
 
                 t['dM'] = float(line_dict['Calc m/z']) - float(line_dict['Exp m/z'])
@@ -463,9 +488,9 @@ class percolator_2_08( ursgal.UNode ):
 
                 mods = line_dict['Modifications']
                 t['Peptide'] = '{0}.{Sequence}#{1}.{2}'.format(
-                    pre_aa,
+                    sorted(pre_aa)[0],
                     mods,
-                    post_aa,
+                    sorted(post_aa)[0],
                     **line_dict
                 )
                 for per_key in PERCOLATOR_FIELDS.keys():
@@ -562,9 +587,9 @@ class percolator_2_08( ursgal.UNode ):
             psm_type = "target"
             if line_dict['Is decoy'].upper() == 'TRUE':
                 psm_type = "decoy"
-            if self.params['translations']['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
-                line_dict['Is decoy'] = "true"
-                psm_type = "decoy"
+            # if self.params['translations']['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
+            #     line_dict['Is decoy'] = "true"
+            #     psm_type = "decoy"
 
             seq_and_mods = '#'.join( [line_dict['Sequence'], line_dict['Modifications']] )
             _psmid_pep_key = (
