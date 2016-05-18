@@ -295,38 +295,38 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
 
                 protein_id = tmp['proteinacc_start_stop_pre_post_;']
 
-                if ';' in protein_id:
-                    protein_id_list = protein_id.split(';')
-                else:
-                    protein_id_list = [ protein_id ]
-                for protein_id in protein_id_list:
+                # if ';' in protein_id:
+                #     protein_id_list = protein_id.split(';')
+                # else:
+                #     protein_id_list = [ protein_id ]
+                # for protein_id in protein_id_list:
 
-                    returned_peptide_regex_list = self.peptide_regex(
-                        self.params['translations']['database'],
-                        protein_id,
-                        tmp['Sequence']
-                    )
-                    for protein in returned_peptide_regex_list:
-                        for pep_regex in protein:
-                            start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
-                    # for start, stop, pre_aa, post_aa, returned_protein_id in returned_peptide_regex_list:
-                            # dict_2_write['proteinacc_start_stop_pre_post_;'] = returned_protein_id
-                            dict_2_write['Start'] = start
-                            dict_2_write['Stop']  = stop
+                #     returned_peptide_regex_list = self.peptide_regex(
+                #         self.params['translations']['database'],
+                #         protein_id,
+                #         tmp['Sequence']
+                #     )
+                #     for protein in returned_peptide_regex_list:
+                #         for pep_regex in protein:
+                #             start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
+                #     # for start, stop, pre_aa, post_aa, returned_protein_id in returned_peptide_regex_list:
+                #             # dict_2_write['proteinacc_start_stop_pre_post_;'] = returned_protein_id
+                #             dict_2_write['Start'] = start
+                #             dict_2_write['Stop']  = stop
 
-                            dict_2_write['proteinacc_start_stop_pre_post_;'] = '{0}_{1}_{2}_{3}_{4}'.format(
-                                returned_protein_id,
-                                start,
-                                stop,
-                                pre_aa,
-                                post_aa
-                            )
+                #             dict_2_write['proteinacc_start_stop_pre_post_;'] = '{0}_{1}_{2}_{3}_{4}'.format(
+                #                 returned_protein_id,
+                #                 start,
+                #                 stop,
+                #                 pre_aa,
+                #                 post_aa
+                #             )
 
-                            if self.params['translations']['decoy_tag'] in dict_2_write['proteinacc_start_stop_pre_post_;']:
-                                dict_2_write['Is decoy'] = 'true'
-                            else:
-                                dict_2_write['Is decoy'] = 'false'
-                            csv_write_list.append( dict_2_write )
+                #             if self.params['translations']['decoy_tag'] in dict_2_write['proteinacc_start_stop_pre_post_;']:
+                #                 dict_2_write['Is decoy'] = 'true'
+                #             else:
+                #                 dict_2_write['Is decoy'] = 'false'
+                csv_write_list.append( dict_2_write )
             duplicity_buffer = set()
             for final_dict_2_write in csv_write_list:
                 duplicity_key = (

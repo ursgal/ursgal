@@ -24,6 +24,15 @@ scan_rt_lookup = pickle.load(
     )
 )
 
+R.upeptide_mapper.build_lookup(
+    fasta_name = 'BSA.fasta',
+    fasta_stream = [
+        '>Ze_new_one_ya',
+        'SHCIAEVEKKKSHCIAEVEKKK\n',
+    ]
+)
+
+
 unify_csv_main = R.unodes['unify_csv_1_0_0']['class'].import_engine_as_python_function()
 input_csv = os.path.join(
     'tests',
@@ -54,15 +63,18 @@ unify_csv_main(
         ],
         'label' : '15N',
         'decoy_tag': 'decoy_',
-        'enzyme' : 'trypsin',
+        'enzyme' : 'KR;C;P',
         'semi_enzyme' : False,
         'database': os.path.join(
             'tests',
             'data',
             'BSA.fasta'
         ),
+        'protein_delimiter' : '<|>',
+        'psm_merge_delimiter' : ';'
     },
     search_engine  = 'myrimatch_2_1_138',
+    upeptide_mapper = R.upeptide_mapper
 )
 # exit()
 ident_list = [ ]

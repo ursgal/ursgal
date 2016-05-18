@@ -360,8 +360,8 @@ class omssa_2_1_9( ursgal.UNode ):
         csv_dict_writer_object.writeheader()
         #
         # self.parse_fasta()
-        already_seen_protein_scan_start_stop_combos = set()
-        database = self.params['translations']['database']
+        # already_seen_protein_scan_start_stop_combos = set()
+        # database = self.params['translations']['database']
         for m in cached_omssa_output:
             tmp = {}
             for header in headers:
@@ -372,11 +372,11 @@ class omssa_2_1_9( ursgal.UNode ):
                 tmp[ translated_header ] = m[ header ]
             tmp['Sequence'] = tmp['Sequence'].upper()
 
-            returned_peptide_regex_list = self.peptide_regex(
-                self.params['database'],
-                tmp['proteinacc_start_stop_pre_post_;'],
-                tmp['Sequence']
-            )
+            # returned_peptide_regex_list = self.peptide_regex(
+            #     self.params['database'],
+            #     tmp['proteinacc_start_stop_pre_post_;'],
+            #     tmp['Sequence']
+            # )
 
             translated_mods = []
             if tmp['Modifications'] != '':
@@ -400,36 +400,36 @@ class omssa_2_1_9( ursgal.UNode ):
 
             tmp['Modifications'] = ';'.join( translated_mods )
 
-            for protein in returned_peptide_regex_list:
-                for pep_regex in protein:
-                    start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
-                    protein_scan_start_stop = (
-                        returned_protein_id,
-                        tmp['Spectrum Title'],
-                        start,
-                        stop
-                    )
-                    if protein_scan_start_stop in already_seen_protein_scan_start_stop_combos:
-                        continue
-                    else:
-                        already_seen_protein_scan_start_stop_combos.add(protein_scan_start_stop)
+            # for protein in returned_peptide_regex_list:
+            #     for pep_regex in protein:
+            #         start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
+            #         protein_scan_start_stop = (
+            #             returned_protein_id,
+            #             tmp['Spectrum Title'],
+            #             start,
+            #             stop
+            #         )
+            #         if protein_scan_start_stop in already_seen_protein_scan_start_stop_combos:
+            #             continue
+            #         else:
+            #             already_seen_protein_scan_start_stop_combos.add(protein_scan_start_stop)
 
-                    tmp['Start'] = start
-                    tmp['Stop'] = stop
+            #         tmp['Start'] = start
+            #         tmp['Stop'] = stop
 
-                    tmp['proteinacc_start_stop_pre_post_;'] = '{0}_{1}_{2}_{3}_{4}'.format(
-                        tmp['proteinacc_start_stop_pre_post_;'],
-                        start,
-                        stop,
-                        pre_aa,
-                        post_aa
-                    )
+            #         tmp['proteinacc_start_stop_pre_post_;'] = '{0}_{1}_{2}_{3}_{4}'.format(
+            #             tmp['proteinacc_start_stop_pre_post_;'],
+            #             start,
+            #             stop,
+            #             pre_aa,
+            #             post_aa
+            #         )
 
-                    if self.params['decoy_tag'] in tmp['proteinacc_start_stop_pre_post_;']:
-                        tmp['Is decoy'] = 'true'
-                    else:
-                        tmp['Is decoy'] = 'false'
-                    csv_dict_writer_object.writerow( tmp )
+            #         if self.params['decoy_tag'] in tmp['proteinacc_start_stop_pre_post_;']:
+            #             tmp['Is decoy'] = 'true'
+            #         else:
+            #             tmp['Is decoy'] = 'false'
+            csv_dict_writer_object.writerow( tmp )
         return
 
 

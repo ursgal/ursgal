@@ -14,7 +14,8 @@ TEST_FASTA = [
     '>Protein2\n',
     'KLEINERPENNER\n',
     '>Protein3\n',
-    'WHYISELVISHELEAVING\n',
+    'WHYISELVIS\n',
+    'HELEAVING\n',
     '>T1',
     'AAAAAAA___AAAAAAAAAA_____AAAAA__________AAAAAAAAAA',
     #----+----|----+----|----+----|----+----|----+----|
@@ -22,6 +23,10 @@ TEST_FASTA = [
     'GGGGGGGGGG',
 ]
 
+TEST_FASTA_TWO = [
+    '>Ze_other_protein2\n',
+    'KLEINERRETTER\n',
+]
 
 class UMapMaster(unittest.TestCase):
     def setUp(self):
@@ -30,6 +35,29 @@ class UMapMaster(unittest.TestCase):
             fasta_name = 'Test.fasta',
             fasta_stream = TEST_FASTA
         )
+        self.uc = ursgal.UController( verbose = False )
+
+
+    def test_incremental_fcache_buildup_and_global_access(self):
+        maps = self.uc.upeptide_mapper.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
+        self.assertEqual( len(maps), 0)
+
+        self.uc.unodes['merge_csvs_1_0_0']['class'].upeptide_mapper.build_lookup(
+            fasta_name = 'Test.fasta',
+            fasta_stream = TEST_FASTA
+        )
+
+        maps = self.uc.upeptide_mapper.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
+        self.assertEqual( len(maps), 1)
+
+        self.uc.unodes['generate_target_decoy_1_0_0']['class'].upeptide_mapper.build_lookup(
+            fasta_name = 'Test.fasta',
+            fasta_stream = TEST_FASTA_TWO
+        )
+
+        maps = self.uc.upeptide_mapper.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
+        self.assertEqual( len(maps), 2)
+
 
     def test_fasta_id_parsed_and_available(self):
         input_fastas = []
@@ -50,6 +78,14 @@ class UMapMaster(unittest.TestCase):
                 ('Protein3', 6)
             ])
         )
+    def test_peptide_eq_word_len_2(self):
+        maps = self.upapa_5.map_peptide( peptide='VISHE', fasta_name='Test.fasta')
+        self.assertEqual( len(maps), 1 )
+        for mapping in maps:
+                self.assertEqual(
+                    'Protein3',
+                    mapping['id']
+                )
 
     def test_peptide_lt_word_len(self):
         expected = {
@@ -78,7 +114,9 @@ class UMapMaster(unittest.TestCase):
                 'id'    : 'Protein1'
             }
         }
-        for mapping in self.upapa_5.map_peptide( peptide='VISLIVES', fasta_name='Test.fasta'):
+        maps = self.upapa_5.map_peptide( peptide='VISLIVES', fasta_name='Test.fasta')
+        self.assertEqual( len(maps), 1 )
+        for mapping in maps:
             if mapping['id'] == 'Protein1':
                 self.assertEqual(
                     expected['Protein1'],

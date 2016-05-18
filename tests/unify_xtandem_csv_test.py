@@ -62,11 +62,14 @@ unify_csv_main(
         ],
         'label':'',
         'decoy_tag': 'decoy_',
-        'enzyme' : 'trypsin',
+        'enzyme' : 'KR;C;P',
         'semi_enzyme' : False,
         'database': os.path.join( 'tests', 'data', 'BSA.fasta'),
+        'protein_delimiter' : '<|>',
+        'psm_merge_delimiter' : ';'
     },
     search_engine  = 'xtandem_sledgehammer',
+    # upeptide_mapper = R.upeptide_mapper
 )
 
 ident_list = [ ]
@@ -88,7 +91,6 @@ def unify_xtandem( test_dict ):
             'Spectrum ID',
             'Modifications',
             'Spectrum Title',
-            'Sequence'
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]

@@ -3,7 +3,7 @@
 Unifies the result csvs
 
 usage:
-    ./unify_csv_1_0_0.py <input_file> <output_file> <uberSearch_lookup.pkl>
+    ./unify_csv_1_0_0.py <input_file> <output_file> <uberSearch_lookup.pkl> <search_engine> <score_colname>
 
 Fixes are listed in the main function. Resulting csv have unified fields, which
 is most important for consitent modification formattting.
@@ -16,7 +16,6 @@ import pickle
 import csv
 import ursgal
 # import ursgal.ursgal_kb
-
 import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
@@ -32,8 +31,8 @@ DIFFERENCE_14N_15N = ursgal.ursgal_kb.DIFFERENCE_14N_15N
 
 
 def main(input_file=None, output_file=None, scan_rt_lookup=None,
-         peptide_regex_lookup=None, params=None, search_engine=None,
-         score_colname=None):
+         params=None, search_engine=None, score_colname=None,
+         upeptide_mapper=None):
     '''
     Arguments:
         input_file (str): input filename of csv which should be unified
@@ -57,6 +56,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
           there and sorted according to their position.
         * Fixed modifications are added in 'Modifications', if not reported
           by the engine.
+        * All peptide Sequences are remapped to their corresponding protein,
+          assuring correct start, stop, pre and post aminoacid. Thereby,
+          also correct enzymatic cleavage is checked.
         * Rows describing the same PSM (i.e. when two proteins share the
           same peptide) are merged to one row.
 
@@ -101,13 +103,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
     psm_defining_colnames = get_psm_defining_colnames(score_colname)
-
-    cc = ursgal.ChemicalComposition()
-    # un = ursgal.UNode()
-
-    # if peptide_regex_lookup == None:
-        # peptide_regex_lookup = {}
-    # already_seen_protein_pep = {}
+    joinchar = params['protein_delimiter']
 
     use15N = False
 
@@ -128,7 +124,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     modname2aa = {}
     cam = False
 
-    #mod pattern
+    # mod pattern
     mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
 
     for modification in params['modifications']:
@@ -148,6 +144,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         if 'C,fix,any,Carbamidomethyl' in modification:
             cam = True
 
+    cc = ursgal.ChemicalComposition()
     ursgal.GlobalUnimodMapper._reparseXML()
     de_novo_engines = ['novor', 'pepnovo', 'uninovo', 'unknown_engine']
     database_search_engines = ['msamanda', 'msgf', 'myrimatch', 'omssa', 'xtandem']
@@ -160,13 +157,30 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         if db_se in search_engine.lower():
             database_search = True
 
+    if upeptide_mapper is None:
+        upapa = ursgal.UPeptideMapper()
+        initialized = True
+    else:
+        upapa = upeptide_mapper
+        initialized = False
+
+    if database_search is True:
+        fasta_lookup_name = upapa.build_lookup_from_file(
+            params['database'],
+            force=False
+        )
+        # print( upapa['BSA.fasta'] )
+
     psm_counter = Counter()
     # if a PSM with multiple rows is found (i.e. in omssa results), the psm
     # rows are merged afterwards
 
-    output_file_object = open(output_file,'w')
+    output_file_object = open(output_file, 'w')
+    protein_id_output = open(output_file + '_full_protein_names.txt', 'w')
     mz_buffer = {}
-    csv_kwargs = {}
+    csv_kwargs = {
+        'extrasaction' : 'ignore'
+    }
     if sys.platform == 'win32':
         csv_kwargs['lineterminator'] = '\n'
     else:
@@ -175,9 +189,32 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         csv_input  = csv.DictReader(
             in_file
         )
+        output_fieldnames = list(csv_input.fieldnames)
+        for remove_fieldname in [
+            'proteinacc_start_stop_pre_post_;',
+            'Start',
+            'Stop',
+            'NIST score',
+            'gi',
+            'Accession',
+        ]:
+            if remove_fieldname not in output_fieldnames:
+                continue
+            output_fieldnames.remove(remove_fieldname)
+        new_fieldnames = [
+            'uCalc m/z',
+            'Protein ID',
+            'Sequence Start',
+            'Sequence Stop',
+            'Sequence Pre AA',
+            'Sequence Post AA',
+        ]
+        for new_fieldname in new_fieldnames:
+            if new_fieldname not in output_fieldnames:
+                output_fieldnames += [new_fieldname]
         csv_output = csv.DictWriter(
             output_file_object,
-            list(csv_input.fieldnames) + ['uCalc m/z'],
+            output_fieldnames,
             **csv_kwargs
         )
         csv_output.writeheader()
@@ -301,7 +338,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     pos = int( match.group('pos') )
                     mod = modification[ :match.start() ]
                     break
-                assert pos != None,'''
+                assert pos is not None, '''
                         The format of the modification {0}
                         is not recognized by ursgal'''.format(
                             modification
@@ -480,89 +517,125 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             # protein block, only for database search engine
 
-            if database_search == True:
+            if database_search is True:
 
-                # check if proteinacc_start_stop_pre_post is correct ... work in progress
+                # remap peptides to proteins, check correct enzymatic
+                # cleavage and decoy assignment
+
                 tmp_decoy = set()
                 tmp_proteinacc = []
-                for protein in line_dict['proteinacc_start_stop_pre_post_;'].split('<|>'):
-                    # match = re.search('_\d+_\d+_[A-Z-]_[A-Z-]', protein)
-                    # if match == None:
-                    #     id_stop = len(protein)
-                    # else:
-                    #     id_stop = match.start()
-                    # protein_id = protein[0:id_stop]
-                    # peptide = line_dict['Sequence']
-                    # protein_pep = '{0}_{1}'.format(protein_id, peptide)
-                    # database_protein_pep = '{0}_{1}'.format(
-                    #     params['database'],
-                    #     protein_id,
-                    #     peptide
-                    # )
+                tmp_protein_id = {}
 
-                    # allowed_aa = params['enzyme'][0] + '-'
-                    # cleavage_site = params['enzyme'][1] + '-'
+                upeptide_maps = upapa.map_peptide(
+                    peptide = line_dict['Sequence'],
+                    fasta_name = fasta_lookup_name
+                )
+                '''
+                <><><><><><><><><><><><><>
+                '''
+                assert upeptide_maps != [],'''
+                        The peptide {0} could not be mapped to the
+                        given database {1}
 
+                        {2}
 
-                    # if protein_pep not in already_seen_protein_pep:
-                        # if database_protein_pep not in peptide_regex_lookup:
-                        #     peptide_regex_lookup[database_protein_pep] = un.peptide_regex(
-                        #         params['database'],
-                        #         protein_id,
-                        #         peptide
-                        #     )
-                        # returned_peptide_regex_list = peptide_regex_lookup[database_protein_pep]
-                        
-                        # corr_proteinacc_start_stop_pre_post = []
-                        # for protein in returned_peptide_regex_list:
-                        #     for pep_regex in protein:
-                        #         print(pep_regex)
-                        #         nterm_correct = False
-                        #         cterm_correct = False
-                        #         start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
-                        #         proteinacc_start_stop_pre_post = '{0}_{1}_{2}_{3}_{4}'.format(
-                        #             returned_protein_id,
-                        #             start,
-                        #             stop,
-                        #             pre_aa,
-                        #             post_aa
-                        #         )
-    # 
-                    #             if cleavage_site == 'C':
-                    #                 if pre_aa in allowed_aa:
-                    #                     nterm_correct = True
-                                    # if peptide[-1] in allowed_aa:
-                                    #     cterm_correct = True
-                    #             elif cleavage_site == 'N':
-                                    # if peptide[0] in allowed_aa:
-                                    #     nterm_correct = True
-                    #                 if post_aa in allowed_aa:
-                    #                     cterm_correct = True
+                        '''.format(
+                            line_dict['Sequence'],
+                            fasta_lookup_name,
+                            ''
+                            # list(upapa['BSA.fasta'].keys())
+                        )
+                # for protein in line_dict['proteinacc_start_stop_pre_post_;'].split('<|>'):
+                for protein in upeptide_maps:
+                    allowed_aa = params['enzyme'].split(';')[0] + '-'
+                    cleavage_site = params['enzyme'].split(';')[1]
+                    inhibitor_aa = params['enzyme'].split(';')[2]
+                    add_protein = False
+                    nterm_correct = False
+                    cterm_correct = False
+                    if cleavage_site == 'C':
+                        if protein['pre'] in allowed_aa:
+                            if line_dict['Sequence'][0] not in inhibitor_aa\
+                                or protein['pre'] == '-':
+                                nterm_correct = True
+                        if protein['post'] not in inhibitor_aa:
+                            if line_dict['Sequence'][-1] in allowed_aa\
+                                or protein['post'] == '-':
+                                cterm_correct = True
+                        if params['semi_enzyme'] == True:
+                            if cterm_correct == True or nterm_correct == True:
+                                add_protein = True
+                        elif cterm_correct == True and nterm_correct == True:
+                            add_protein = True
+                    if cleavage_site == 'N':
+                        if protein['post'] in allowed_aa:
+                            if line_dict['Sequence'][-1] not in inhibitor_aa\
+                                or protein['post'] == '-':
+                                cterm_correct = True
+                        if protein['pre'] not in inhibitor_aa:
+                            if line_dict['Sequence'][0] in allowed_aa\
+                                or protein['pre'] == '-':
+                                nterm_correct = True
+                        if params['semi_enzyme'] == True:
+                            if cterm_correct == True or nterm_correct == True:
+                                add_protein = True
+                        elif cterm_correct == True and nterm_correct == True:
+                            add_protein = True
+                    if add_protein == True:
+                        if protein['id'] not in tmp_protein_id.keys():
+                            tmp_protein_id[protein['id']] = {
+                                'start' : [],
+                                'stop' : [],
+                                'pre' : [],
+                                'post' : [],
+                            }
+                        tmp_protein_id[protein['id']]['start'].append(str(protein['start']))
+                        tmp_protein_id[protein['id']]['stop'].append(str(protein['end']))
+                        tmp_protein_id[protein['id']]['pre'].append(protein['pre'])
+                        tmp_protein_id[protein['id']]['post'].append(protein['post'])
 
-                                # if params['semi_enzyme'] == True:
-                                #     if cterm_correct == True or nterm_correct == True:
-                                #         corr_proteinacc_start_stop_pre_post.append(proteinacc_start_stop_pre_post)
-                                # elif cterm_correct == True and nterm_correct == True:
-                                #     corr_proteinacc_start_stop_pre_post.append(proteinacc_start_stop_pre_post)
-                        # already_seen_protein_pep[protein_pep] = corr_proteinacc_start_stop_pre_post
-                    # corr_proteinacc_start_stop_pre_post = already_seen_protein_pep[protein_pep]
+                        # mzidentml-lib does not always set 'Is decoy' correctly
+                        # (it's always 'false' for MS-GF+ results), this is fixed here:
+                        if params['decoy_tag'] in protein['id']:
+                            tmp_decoy.add('true')
+                        else:
+                            tmp_decoy.add('false')
+                protein_id = []
+                start = []
+                stop = []
+                pre = []
+                post = []
+                for prot_id in sorted(tmp_protein_id.keys()):
+                    protein_id.append(prot_id)
+                    start.append(';'.join(tmp_protein_id[prot_id]['start']))
+                    stop.append(';'.join(tmp_protein_id[prot_id]['stop']))
+                    pre.append(';'.join(tmp_protein_id[prot_id]['pre']))
+                    post.append(';'.join(tmp_protein_id[prot_id]['post']))
+                protein_id = joinchar.join(protein_id)
+                if len(protein_id) >= 2000:
+                    print('{0}: {1}'.format(line_dict['Sequence'], protein_id), file = protein_id_output)
+                    protein_id = protein_id[:1990] + ' ...'
+                line_dict['Protein ID'] = protein_id
+                line_dict['Sequence Start'] = joinchar.join(start)
+                line_dict['Sequence Stop'] = joinchar.join(stop)
+                line_dict['Sequence Pre AA'] = joinchar.join(pre)
+                line_dict['Sequence Post AA'] = joinchar.join(post)
 
-                    # mzidentml-lib does not always set 'Is decoy' correctly
-                    # (it's always 'false' for MS-GF+ results), this is fixed here:
-                    if params['decoy_tag'] in protein:
-                        tmp_decoy.add('true')
-                    else:
-                        tmp_decoy.add('false')
                 if len(tmp_decoy) >= 2:
                     print(
                         '''
                         [ WARNING ] The following peptide occurs in a target as well as decoy protein
-                        [ WARNING ] {0} 
+                        [ WARNING ] {0}
                         [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
                             line_dict['Sequence'],
                         )
                     )
                     line_dict['Is decoy'] = 'true'
+                elif len(tmp_decoy) == 0:
+                    print(line_dict)
+                    print(upeptide_maps)
+                    print(add_protein)
+                    exit()
                 else:
                     line_dict['Is decoy'] = list(tmp_decoy)[0]
 
@@ -579,7 +652,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:
-            merge_duplicate_psm_rows(output_file, psm_counter, psm_defining_colnames)
+            merge_duplicate_psm_rows(output_file, psm_counter, psm_defining_colnames, params['psm_merge_delimiter'])
             '''
             to_be_written_csv_lines = merge_duplicate_psm_rows(
                 to_be_written_csv_lines,
@@ -589,7 +662,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         '''
         do output_file magic with to_be_written_csv_lines
         '''
-    return peptide_regex_lookup
+    if database_search == True:
+        upapa.purge_fasta_info( fasta_lookup_name )
+    return
 
 
 def get_psm_defining_colnames(score_colname):
@@ -622,8 +697,8 @@ def merge_rowdicts(list_of_rowdicts, joinchar, alt_joinchar='<|>'):
     for fieldname in fieldnames:
 
         joinchar_used = joinchar
-        if fieldname == 'proteinacc_start_stop_pre_post_;':
-            joinchar_used = alt_joinchar
+        # if fieldname == 'proteinacc_start_stop_pre_post_;':
+        #     joinchar_used = alt_joinchar
 
         values = {d[fieldname] for d in list_of_rowdicts}
         if len(values) == 1:
@@ -633,7 +708,7 @@ def merge_rowdicts(list_of_rowdicts, joinchar, alt_joinchar='<|>'):
     return merged_d
 
 
-def merge_duplicate_psm_rows(unified_csv_path, psm_counter, psm_defining_colnames):
+def merge_duplicate_psm_rows(unified_csv_path, psm_counter, psm_defining_colnames, joinchar):
     '''
     Rows describing the same PSM (i.e. when two proteins share the
     same peptide) are merged to one row.
@@ -662,7 +737,7 @@ def merge_duplicate_psm_rows(unified_csv_path, psm_counter, psm_defining_colname
         # finished parsing the old unmerged unified csv
         for rows_to_merge in rows_to_merge_dict.values():
             writer.writerow(
-                merge_rowdicts(rows_to_merge, joinchar=';')
+                merge_rowdicts(rows_to_merge, joinchar=joinchar)
             )
     os.remove(tmp_file)  # remove the old unified csv that contains duplicate rows
 
@@ -695,4 +770,6 @@ if __name__ == '__main__':
         output_file    = sys.argv[2],
         scan_rt_lookup = scan_rt_lookup,
         params         = params,
+        search_engine  = sys.argv[4],
+        score_colname  = sys.argv[5]
     )

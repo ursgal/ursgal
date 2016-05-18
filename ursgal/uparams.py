@@ -385,6 +385,7 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
+            'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -399,6 +400,7 @@ ursgal_params = {
             'msgfplus_style_1' : '-d',
             'myrimatch_style_1' : 'ProteinDatabase',
             'omssa_style_1' : '-d',
+            'unify_csv_style_1' : 'database',
             'xtandem_style_1' : 'file URL',
         },
         'utag' : [
@@ -477,6 +479,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'percolator_2_08',
             'qvality_2_02',
+            'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
         ],
         'default_value' : "decoy_",
@@ -490,6 +493,7 @@ ursgal_params = {
             'omssa_style_1' : 'decoy_tag',
             'percolator_style_1' : 'decoy_tag',
             'qvality_style_1' : 'decoy_tag',
+            'unify_csv_style_1' : 'decoy_tag',
             'xtandem2csv_style_1' : 'decoy_tag',
         },
         'utag' : [
@@ -648,6 +652,7 @@ ursgal_params = {
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -691,6 +696,7 @@ ursgal_params = {
             'novor_style_1' : 'enzyme',
             'omssa_style_1' : '-e',
             'pepnovo_style_1' : '-digest',
+            'unify_csv_style_1' : 'enzyme',
             'xtandem_style_1' : 'protein, cleavage site',
         },
         'utag' : [
@@ -806,6 +812,30 @@ ursgal_params = {
             'pepnovo_style_1' : {
                 'nonspecific' : 'NON_SPECIFIC',
                 'trypsin' : 'TRYPSIN',
+            },
+            'unify_csv_style_1' : {
+                'argc' : 'R;C;P',
+                'aspn' : 'D;N;',
+                'chymotrypsin' : 'FMWY;C;P',
+                'chymotrypsin_p' : 'FMWY;C;',
+                'clostripain' : 'R;C;',
+                'cnbr' : 'M;C;P',
+                'elastase' : 'AGILV;C;P',
+                'formic_acid' : 'D;C;P',
+                'gluc' : 'DE;C;P',
+                'gluc_bicarb' : 'E;C;P',
+                'iodosobenzoate' : 'W;C;',
+                'lysc' : 'K;C;P',
+                'lysc_p' : 'K;C;',
+                'lysn' : 'K;N;',
+                'lysn_promisc' : 'AKRS;N;',
+                'pepsina' : 'FL;C;',
+                'protein_endopeptidase' : 'P;C;',
+                'staph_protease' : 'E;C;',
+                'trypsin' : 'KR;C;P',
+                'trypsin_cnbr' : 'KRM;C;P',
+                'trypsin_gluc' : 'DEKR;C;P',
+                'trypsin_p' : 'KR;C;',
             },
             'xtandem_style_1' : {
                 'argc' : '[R]|{P}',
@@ -1996,6 +2026,7 @@ ursgal_params = {
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -2041,6 +2072,7 @@ Example:
             'novor_style_1' : ('variableModifications', 'fixedModifications'),
             'omssa_style_1' : ('-mv', 'mf'),
             'pepnovo_style_1' : '-PTMs',
+            'unify_csv_style_1' : 'modifications',
             'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
         },
         'utag' : [
@@ -3522,6 +3554,46 @@ Example:
         },
         'uvalue_type' : "",
     },
+    'protein_delimiter' : {
+        'available_in_unode' : [
+            'unify_csv_1_0_0',
+        ],
+        'default_value' : "<|>",
+        'description' :  ''' This delimiter seperates protein IDs/names in the unified csv ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'unify_csv_style_1' : 'protein_delimiter',
+        },
+        'utag' : [
+            'output',
+            'protein',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'psm_merge_delimiter' : {
+        'available_in_unode' : [
+            'unify_csv_1_0_0',
+        ],
+        'default_value' : ";",
+        'description' :  ''' This delimiter seperates differing values for merged rows in the unified csv ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'unify_csv_style_1' : 'psm_merge_delimiter',
+        },
+        'utag' : [
+            'output',
+            'protein',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'qvality_cross_validation' : {
         'available_in_unode' : [
             'qvality_2_02',
@@ -4200,6 +4272,7 @@ Example:
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
+            'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -4214,6 +4287,7 @@ Example:
             'msgfplus_style_1' : '-ntt',
             'myrimatch_style_1' : 'MinTerminiCleavages',
             'omssa_style_1' : 'semi_enzyme',
+            'unify_csv_style_1' : 'semi_enzyme',
             'xtandem_style_1' : 'protein, cleavage semi',
         },
         'utag' : [
