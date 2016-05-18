@@ -621,6 +621,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 line_dict['Sequence Pre AA'] = joinchar.join(pre)
                 line_dict['Sequence Post AA'] = joinchar.join(post)
 
+                assert len(tmp_decoy) != 0, '''
+                    The peptide {0} could not be mapped to the
+                    given database {1} with correct enzymatic cleavage sites'''.format(
+                    line_dict['Sequence'],
+                    params['database'])
                 if len(tmp_decoy) >= 2:
                     print(
                         '''
@@ -631,11 +636,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         )
                     )
                     line_dict['Is decoy'] = 'true'
-                elif len(tmp_decoy) == 0:
-                    print(line_dict)
-                    print(upeptide_maps)
-                    print(add_protein)
-                    exit()
                 else:
                     line_dict['Is decoy'] = list(tmp_decoy)[0]
 
