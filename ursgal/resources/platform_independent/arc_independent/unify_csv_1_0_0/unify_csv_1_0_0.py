@@ -604,8 +604,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     The peptide {0} could not be mapped to the
                     given database {1} with correct enzymatic cleavage sites'''.format(
                     line_dict['Sequence'],
-                    params['database']
-                    print(line_dict))
+                    params['database'])
                 if len(tmp_decoy) >= 2:
                     print(
                         '''
