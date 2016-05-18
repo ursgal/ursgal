@@ -62,6 +62,7 @@ unify_csv_main(
             'BSA.fasta'
         ),
         'protein_delimiter' : '<|>',
+        'psm_merge_delimiter' : ';'
     },
     search_engine  = 'msamanda_1_0_0_5243',
 )

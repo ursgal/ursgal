@@ -72,7 +72,7 @@ def unify_xtandem( test_dict, expected_dict ):
         'Modifications',
         'X\!Tandem:expect',
         'X\!Tandem:hyperscore',
-        'proteinacc_start_stop_pre_post_;',
+        'Protein ID;',
         'Is decoy',
         ]:
         test_value = test_dict[key]

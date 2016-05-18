@@ -14,7 +14,8 @@ TEST_FASTA = [
     '>Protein2\n',
     'KLEINERPENNER\n',
     '>Protein3\n',
-    'WHYISELVISHELEAVING\n',
+    'WHYISELVIS\n',
+    'HELEAVING\n',
     '>T1',
     'AAAAAAA___AAAAAAAAAA_____AAAAA__________AAAAAAAAAA',
     #----+----|----+----|----+----|----+----|----+----|
@@ -50,6 +51,14 @@ class UMapMaster(unittest.TestCase):
                 ('Protein3', 6)
             ])
         )
+    def test_peptide_eq_word_len_2(self):
+        maps = self.upapa_5.map_peptide( peptide='VISHE', fasta_name='Test.fasta')
+        self.assertEqual( len(maps), 1 )
+        for mapping in maps:
+                self.assertEqual(
+                    'Protein3',
+                    mapping['id']
+                )
 
     def test_peptide_lt_word_len(self):
         expected = {
@@ -78,7 +87,9 @@ class UMapMaster(unittest.TestCase):
                 'id'    : 'Protein1'
             }
         }
-        for mapping in self.upapa_5.map_peptide( peptide='VISLIVES', fasta_name='Test.fasta'):
+        maps = self.upapa_5.map_peptide( peptide='VISLIVES', fasta_name='Test.fasta')
+        self.assertEqual( len(maps), 1 )
+        for mapping in maps:
             if mapping['id'] == 'Protein1':
                 self.assertEqual(
                     expected['Protein1'],

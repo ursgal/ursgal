@@ -352,7 +352,9 @@ class UPeptideMapper( dict ):
 
                 required_hits    = len(peptide) - self.word_len
 
-                for n, pos in enumerate( sorted_positions[:-1] ):
+                     
+
+                for n, pos in enumerate( sorted_positions ):
                     start = sorted_positions[n]
                     end   = sorted_positions[n] + len(peptide) - 1
 
@@ -360,9 +362,12 @@ class UPeptideMapper( dict ):
                         break
 
                     expected_number = pos + required_hits
-                    observed_number = sorted_positions[ n + required_hits  ]
-
-                    if expected_number == observed_number:
+                    try:
+                        observed_number = sorted_positions[ n + required_hits  ]
+                    except:
+                        break
+                        
+                    if expected_number == observed_number or required_hits == 0:
                         mappings.append(
                             self._format_hit_dict(  seq, start, end, id )
                         )

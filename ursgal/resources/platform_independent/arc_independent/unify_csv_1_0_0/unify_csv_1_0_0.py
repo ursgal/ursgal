@@ -3,7 +3,7 @@
 Unifies the result csvs
 
 usage:
-    ./unify_csv_1_0_0.py <input_file> <output_file> <uberSearch_lookup.pkl>
+    ./unify_csv_1_0_0.py <input_file> <output_file> <uberSearch_lookup.pkl> <search_engine> <score_colname>
 
 Fixes are listed in the main function. Resulting csv have unified fields, which
 is most important for consitent modification formattting.
@@ -55,6 +55,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
           there and sorted according to their position.
         * Fixed modifications are added in 'Modifications', if not reported
           by the engine.
+        * All peptide Sequences are remapped to their corresponding protein,
+          assuring correct start, stop, pre and post aminoacid. Thereby,
+          also correct enzymatic cleavage is checked.
         * Rows describing the same PSM (i.e. when two proteins share the
           same peptide) are merged to one row.
 
@@ -96,9 +99,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             search_engine,
         )
     )
-
-    import pprint
-    pprint.pprint(params)
 
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
     psm_defining_colnames = get_psm_defining_colnames(score_colname)
@@ -508,7 +508,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             if database_search == True:
 
-                # check if proteinacc_start_stop_pre_post is correct ... work in progress
+                # remap peptides to proteins, check correct enzymatic cleavage and decoy assignment
 
                 tmp_decoy = set()
                 tmp_proteinacc = []
@@ -525,8 +525,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             params['database']
                         )
                 # for protein in line_dict['proteinacc_start_stop_pre_post_;'].split('<|>'):
-                # if line_dict['Sequence'] != 'ETYGDMADCCEK':
-                #     continue
                 for protein in upeptide_maps:
                     allowed_aa = params['enzyme'].split(';')[0] + '-'
                     cleavage_site = params['enzyme'].split(';')[1]
@@ -612,11 +610,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         )
                     )
                     line_dict['Is decoy'] = 'true'
-                elif len(tmp_decoy) == 0:
-                    print(line_dict)
-                    print(upeptide_maps)
-                    print(add_protein)
-                    exit()
+                # elif len(tmp_decoy) == 0:
+                #     print(line_dict)
+                #     print(upeptide_maps)
+                #     print(add_protein)
+                #     exit()
                 else:
                     line_dict['Is decoy'] = list(tmp_decoy)[0]
 
@@ -751,4 +749,6 @@ if __name__ == '__main__':
         output_file    = sys.argv[2],
         scan_rt_lookup = scan_rt_lookup,
         params         = params,
+        search_engine  = sys.argv[4], 
+        score_colname  = sys.argv[5]
     )
