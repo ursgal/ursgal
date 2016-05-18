@@ -87,7 +87,8 @@ def unify_xtandem( test_dict ):
             'Retention Time (s)',
             'Spectrum ID',
             'Modifications',
-            'Spectrum Title'
+            'Spectrum Title',
+            'Sequence'
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]

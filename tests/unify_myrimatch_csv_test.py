@@ -79,13 +79,15 @@ def unify_myrimtach_test():
 def unify_myrimtach( test_dict ):
     assert 'uCalc m/z' in test_dict.keys()
     assert 'scan=' not in test_dict['Spectrum ID']
+    fields_to_eval = [
+        'Retention Time (s)',
+        'Spectrum ID',
+        'Modifications',
+        'Spectrum Title',
+        'Sequence',
+    ]
 
-    for key in [
-            'Retention Time (s)',
-            'Spectrum ID',
-            'Modifications',
-            'Spectrum Title'
-        ]:
+    for key in fields_to_eval:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]
         if key == 'Retention Time (s)':
@@ -99,4 +101,3 @@ if __name__ == '__main__':
     print(__doc__)
     for test_id, test_dict in enumerate(ident_list):
         unify_myrimtach(test_dict)
-

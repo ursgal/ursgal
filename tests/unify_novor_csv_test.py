@@ -80,6 +80,7 @@ def unify_novor( test_dict ):
             'Charge',
             'Modifications',
             'Spectrum Title',
+            'Sequence'
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]

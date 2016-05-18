@@ -84,7 +84,8 @@ def unify_msamanda( test_dict ):
             'Spectrum ID',
             'Modifications',
             'Spectrum Title',
-            'Calc m/z'
+            'Calc m/z',
+            'Sequence',
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]
