@@ -97,6 +97,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         )
     )
 
+    import pprint
+    pprint.pprint(params)
+
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
     psm_defining_colnames = get_psm_defining_colnames(score_colname)
     joinchar = params['protein_delimiter']
@@ -583,13 +586,13 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 stop = []
                 pre = []
                 post = []
-                for prot_id in tmp_protein_id.keys():
+                for prot_id in sorted(tmp_protein_id.keys()):
                     protein_id.append(prot_id)
                     start.append(';'.join(tmp_protein_id[prot_id]['start']))
                     stop.append(';'.join(tmp_protein_id[prot_id]['stop']))
                     pre.append(';'.join(tmp_protein_id[prot_id]['pre']))
                     post.append(';'.join(tmp_protein_id[prot_id]['post']))
-                protein_id = joinchar.join(list(tmp_protein_id.keys()))
+                protein_id = joinchar.join(protein_id)
                 if len(protein_id) >= 2000:
                     print('{0}: {1}'.format(line_dict['Sequence'], protein_id), file = protein_id_output)
                     protein_id = protein_id[:1990] + ' ...'
@@ -630,7 +633,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:
-            merge_duplicate_psm_rows(output_file, psm_counter, psm_defining_colnames, joinchar)
+            merge_duplicate_psm_rows(output_file, psm_counter, psm_defining_colnames, params['psm_merge_delimiter'])
             '''
             to_be_written_csv_lines = merge_duplicate_psm_rows(
                 to_be_written_csv_lines,

@@ -348,7 +348,7 @@ class UPeptideMapper( dict ):
                 in_one_piece     = True
                 sorted_positions = sorted(pos_set)
                 seq              = self.fasta_sequences[ fasta_name ][ id ]
-                print( sorted_positions )
+                # print( sorted_positions )
 
                 required_hits    = len(peptide) - self.word_len
 
