@@ -15,25 +15,11 @@ TEST_FASTA = [
     'KLEINERPENNER\n',
     '>Protein3\n',
     'WHYISELVISHELEAVING\n',
-    '>Cre08.g373050.t1.1',
-    'MAGDVEVLPADAPAGPAPAAATSANGGPGGNGAAAAHGRTGSQSDSLFGAGSSSSSALHAALSGQGSAAARKAAAGGGGG',
-    'GGGGAGAPRRIPSLSKQLEQYVQELGGDRPIYSVLVANNGLAAVKFMRSVRSWASQALGNARAVSLVALATPDDMRINAE',
-    'HISLADQFVEVPGGTNNNNYANVELIVQIARRAGVDAVWPGWGHASENPELPSALAAHGVRFLGPPAGPMAALGDKIGST',
-    'LLAQAAGVPTLPWSGSGVEVSVEEVRAAGGAIPHHTYAAACIDTEDVEAAAAACRKVGYPVMLKASWGGGGKGIRKVSSD',
-    'EEVRSVFKQVAGEVPGSPLFAMKLAPQSRHLEVQLLADMHVEHPVTEGITGVNLPACQLLVGCGVPLTRIPYIRALYGRD',
-    'PRGAEPFDLETTPQRPPEGHVVAVRVTAEDAADGFKPTAGRIDELHFRPTPDVWGYFSVKSGGGIHQYSDSQFGHLFARG',
-    'ESREAALRSMAAALRDCVTVRGEIRTTTDYVLDLLATPELTGNAVHTGWLDSRIAARIKPGRPPWHISVIAGAVVKSAAA',
-    'VAAASSEYLGYLAKGQLPPPGISLMRLEHNMVIEGFKFCVSLVRRGPGLAAVGLNGRSVEVAYRKMGDGGFLLQVDGESH',
-    'VVHYEDEAAGTRLLVNGLTVLLAAEADPSRLTASSPGKLVRRLVPSGGRVERDQPYAEVEVMKMVMPLLSPAGGVLRWVV',
-    'PEGGVLGAGELLAQLELDAGAVVAAPEPYPGTFPELGPPQIKSGLVNAVLAEAQEAARAILAGFVGQPDEVVEQLVCCLD',
-    'SPALALMQWGAEFAVVRGRMPGALAAALEAAVAPHAADVAAAEDAAEAAAAAAEAAEAEAAAAAAEAGGVMSPGGGSTGD',
-    'GEEAGALAAAAALVRCGDFPSAAVLEVMERALQESSAADRAGLVAALEPLLRLARAHAGGRQAYARSVVGDMLESFLSVE',
-    'EAFTAARREGAGGAEAVDALRKRHAGKLSVVLDLVISHQGLALKSQLVLGLMARLVLPAPAQYRPLLRRLAALGGGGGGK',
-    'GLGELSARAAQLLEQSLLADLRSVVARALSGLDMFTTTTPGGAGSAGGGEAGGGGAAAAVASPGSAGGAALTRSTSRGGG',
-    'AAGVTSPAAVAAAAAAAGALMGSSPRSGGGFDMLGVLSPTSSSAAAGVTSPMGPGGGGGGGGGGGVVRRSTVAEGVFSGL',
-    'PVSSRGSVHVTSGLEAQVERLVGASAAVEDALAGLAVDAAGAPPPLRRRAALTYVKRLYSPFLLREPLVQNIHAAHAHGA',
-    'PGAAAAGGGDGSLLAVWMYDDPSLANTPAATQRLGALLLLDRLTALPPALTALGAVLEALRADAAATGGAPAVSTLHVAL',
-    'AAPPAGGAAAAAAGNGGGGVGGGGGGRHSRTPSLPGPSLITLGLGAGADEASAAALDALLPPAEQGVEASRATAADAAAA',
+    '>T1',
+    'AAAAAAA___AAAAAAAAAA_____AAAAA__________AAAAAAAAAA',
+    #----+----|----+----|----+----|----+----|----+----|
+    '>Overlapping',
+    'GGGGGGGGGG',
 ]
 
 
@@ -46,9 +32,14 @@ class UMapMaster(unittest.TestCase):
         )
 
     def test_fasta_id_parsed_and_available(self):
+        input_fastas = []
+        for line in TEST_FASTA:
+            if line.startswith('>'):
+                input_fastas.append( line[1:].strip() )
+
         self.assertEqual(
             sorted(self.upapa_5.fasta_sequences['Test.fasta'].keys()),
-            sorted(['Protein1', 'Protein2', 'Protein3', 'Cre08.g373050.t1.1'])
+            sorted( input_fastas )
         )
 
     def test_peptide_eq_word_len(self):
@@ -109,29 +100,40 @@ class UMapMaster(unittest.TestCase):
             []
         )
 
-    def test_peptide_ex(self):
-        expected = {
-            'Cre08.g373050.t1.1' : {
-                'pre'   : 'R',
-                'post'  : 'K',
-                'start' : 267,
-                'end'   : 295,
-                'id'    : 'Cre08.g373050.t1.1'
-            }
-        }
-        print(self.upapa_5.fasta_sequences['Test.fasta']['Cre08.g373050.t1.1'])
-        print(len(self.upapa_5.fasta_sequences['Test.fasta']['Cre08.g373050.t1.1']))
-        # self.assertNotEqual(
-        #     self.upapa_5.map_peptide( peptide='AAGGAIPHHTYAAACIDTEDVEAAAAACR', fasta_name='Test.fasta'),
-        #     []
-        # ) 
-        for mapping in self.upapa_5.map_peptide( peptide='AAGGAIPHHTYAAACIDTEDVEAAAAACR', fasta_name='Test.fasta'):
-            if mapping['id'] == 'Cre08.g373050.t1.1':
-                self.assertEqual(
-                    expected['Cre08.g373050.t1.1'],
-                    mapping
-                )
+    def test_multiple_occurrence_in_one_seq(self):
+        maps = self.upapa_5.map_peptide( peptide='AAAAAAAAAA', fasta_name='Test.fasta')
+        self.assertEqual( len(maps), 2 )
+        sorted_maps = sorted( maps, key= lambda x: x['start'])
+        self.assertEqual(
+            sorted( maps, key= lambda x: x['start']),
+            sorted(
+                [
+                    {
+                        'pre'   : '_',
+                        'post'  : '_',
+                        'start' : 11,
+                        'end'   : 20,
+                        'id'    : 'T1'
+                    },
+                    {
+                        'pre'   : '_',
+                        'post'  : '-',
+                        'start' : 41,
+                        'end'   : 50,
+                        'id'    : 'T1'
+                    }
 
+                ], key= lambda x: x['start']
+            )
+        )
+
+    def test_multiple_occurrence_with_opverlap_in_one_seq(self):
+        maps = self.upapa_5.map_peptide( peptide='GGGGGGG', fasta_name='Test.fasta')
+        self.assertEqual( len(maps), 4 )
+        self.assertEqual(
+            sorted([ m['start'] for m in maps] ),
+            [1,2,3,4]
+        )
 
 if __name__ == '__main__':
     unittest.main()

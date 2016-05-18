@@ -38,9 +38,9 @@
 	    else:
 	        xtandem = 'xtandem_sledgehammer'
 	    if sys.platform == 'win32':
-	        msamanda = 'msamanda_1_0_0_5242'
+	        msamanda = 'msamanda_1_0_0_6299'
 	    else:
-	        msamanda = 'msamanda_1_0_0_5243'
+	        msamanda = 'msamanda_1_0_0_6300'
 	
 	    engine_list = [
 	        'omssa',
