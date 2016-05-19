@@ -284,6 +284,8 @@ class UPeptideMapper( dict ):
             self[ fasta_name ] = {}
             self.fasta_sequences[ fasta_name ] = {}
             for id, seq in ursgal.ucore.parseFasta( fasta_stream ):
+                if seq.endswith('*'):
+                    seq = seq.strip('*')
                 self.fasta_sequences[ fasta_name ][ id ] = seq
                 self._create_fcache(
                     id         = id,

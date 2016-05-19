@@ -103,7 +103,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
     psm_defining_colnames = get_psm_defining_colnames(score_colname)
     joinchar = params['protein_delimiter']
-
+    do_not_delete = False
+    created_tmp_files = []
     use15N = False
 
     if 'label' in params.keys():
@@ -538,7 +539,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     cterm_correct = False
                     if cleavage_site == 'C':
                         if protein['pre'] in allowed_aa\
-                            or protein['start'] in [1,2]:
+                            or protein['start'] in [1,2,3]:
                             if line_dict['Sequence'][0] not in inhibitor_aa\
                                 or protein['start'] in [1,2]:
                                 nterm_correct = True
@@ -559,7 +560,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 or protein['post'] == '-':
                                 cterm_correct = True
                         if protein['pre'] not in inhibitor_aa\
-                            or protein['start'] in [1,2]:
+                            or protein['start'] in [1,2,3]:
                             if line_dict['Sequence'][0] in allowed_aa\
                                 or protein['start'] in [1,2]:
                                 nterm_correct = True
@@ -602,17 +603,22 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 if len(protein_id) >= 2000:
                     print('{0}: {1}'.format(line_dict['Sequence'], protein_id), file = protein_id_output)
                     protein_id = protein_id[:1990] + ' ...'
+                    do_not_delete = True
                 line_dict['Protein ID'] = protein_id
                 line_dict['Sequence Start'] = joinchar.join(start)
                 line_dict['Sequence Stop'] = joinchar.join(stop)
                 line_dict['Sequence Pre AA'] = joinchar.join(pre)
                 line_dict['Sequence Post AA'] = joinchar.join(post)
 
-                assert len(tmp_decoy) != 0, '''
-                    The peptide {0} could not be mapped to the
-                    given database {1} with correct enzymatic cleavage sites'''.format(
+                if len(tmp_decoy) == 0:
+                    print( '''
+                        [ WARNING ] The peptide {0} could not be mapped to the
+                        [ WARNING ] given database {1} 
+                        [ WARNING ] with correct enzymatic cleavage sites.
+                        [ WARNING ] This PSM will be skipped.'''.format(
                     line_dict['Sequence'],
-                    params['database'])
+                    params['database']))
+                    continue
                 if len(tmp_decoy) >= 2:
                     print(
                         '''
@@ -651,7 +657,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         '''
     if database_search == True:
         upapa.purge_fasta_info( fasta_lookup_name )
-    return
+    if do_not_delete == False:
+        created_tmp_files.append( output_file+'_full_protein_names.txt' )
+    return created_tmp_files
 
 
 def get_psm_defining_colnames(score_colname):
