@@ -219,6 +219,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             **csv_kwargs
         )
         csv_output.writeheader()
+        print('''[ unify_cs ] parsing csv''')
         for line_dict in csv_input:
             if line_dict['Spectrum Title'] != '':
                 '''
@@ -520,7 +521,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             if database_search is True:
 
-                print('''[ unify_cs ] mapping peptides to proteins''')
 
                 # remap peptides to proteins, check correct enzymatic
                 # cleavage and decoy assignment
