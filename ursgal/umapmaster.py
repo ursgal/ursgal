@@ -284,6 +284,10 @@ class UPeptideMapper( dict ):
         '''
         Builds the fast cache and regular sequence dict from a fasta stream
         '''
+        print('''
+[ ucontrol ] UPeptideMapper is building the fast cache and regular sequence dict from a fasta
+        ''')
+
         if fasta_name not in self.keys():
             force = True
 

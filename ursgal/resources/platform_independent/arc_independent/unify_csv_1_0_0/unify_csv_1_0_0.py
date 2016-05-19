@@ -160,10 +160,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     if upeptide_mapper is None:
         upapa = ursgal.UPeptideMapper()
-        initialized = True
     else:
         upapa = upeptide_mapper
-        initialized = False
 
     if database_search is True:
         target_decoy_peps = set()
@@ -172,7 +170,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             params['database'],
             force=False
         )
-        # print( upapa['BSA.fasta'] )
 
     psm_counter = Counter()
     # if a PSM with multiple rows is found (i.e. in omssa results), the psm
@@ -561,7 +558,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             cterm_correct = True
                         if line_dict['Sequence'][0] == 'P' and\
                             protein['pre'] == 'D':
-                            nterm_correct == True
+                            nterm_correct = True
                     if cleavage_site == 'C':
                         if protein['pre'] in allowed_aa\
                                 or protein['start'] in [1, 2, 3]:
