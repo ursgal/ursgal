@@ -158,6 +158,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             database_search = True
 
     if database_search == True:
+        target_decoy_peps = set()
+        non_enzymatic_peps = set()
         upapa = ursgal.UPeptideMapper()
         fasta_lookup_name = upapa.build_lookup_from_file( params['database'] )
 
@@ -525,18 +527,20 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             line_dict['Sequence'],
                             params['database']
                         )
-                # for protein in line_dict['proteinacc_start_stop_pre_post_;'].split('<|>'):
-                # if line_dict["Sequence"] != 'LIGDTSSSDDDGNDGAGAGGAGGAAAAAAGGAK':
-                #     continue
                 for protein in upeptide_maps:
-                    # print('>>>>>>>')
-                    # print(protein)
                     allowed_aa = params['enzyme'].split(';')[0] + '-'
                     cleavage_site = params['enzyme'].split(';')[1]
                     inhibitor_aa = params['enzyme'].split(';')[2]
                     add_protein = False
                     nterm_correct = False
                     cterm_correct = False
+                    if params['keep_asp_pro_broken_peps']:
+                        if line_dict['Sequence'][-1] == 'D' and\
+                            protein['post'] == 'P':
+                            cterm_correct == True
+                        if line_dict['Sequence'][0] == 'P' and\
+                            protein['pre'] == 'D':
+                            nterm_correct == True
                     if cleavage_site == 'C':
                         if protein['pre'] in allowed_aa\
                             or protein['start'] in [1,2,3]:
@@ -549,11 +553,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 or protein['post'] == '-':
                                 cterm_correct = True
                                 # print('cterm_correct')
-                        if params['semi_enzyme'] == True:
-                            if cterm_correct == True or nterm_correct == True:
-                                add_protein = True
-                        elif cterm_correct == True and nterm_correct == True:
-                            add_protein = True
                     elif cleavage_site == 'N':
                         if protein['post'] in allowed_aa:
                             if line_dict['Sequence'][-1] not in inhibitor_aa\
@@ -564,11 +563,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             if line_dict['Sequence'][0] in allowed_aa\
                                 or protein['start'] in [1,2]:
                                 nterm_correct = True
-                        if params['semi_enzyme'] == True:
-                            if cterm_correct == True or nterm_correct == True:
-                                add_protein = True
-                        elif cterm_correct == True and nterm_correct == True:
+                    if params['semi_enzyme'] == True:
+                        if cterm_correct == True or nterm_correct == True:
                             add_protein = True
+                    elif cterm_correct == True and nterm_correct == True:
+                        add_protein = True
                     if add_protein == True:
                         if protein['id'] not in tmp_protein_id.keys():
                             tmp_protein_id[protein['id']] = {
@@ -611,23 +610,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 line_dict['Sequence Post AA'] = joinchar.join(post)
 
                 if len(tmp_decoy) == 0:
-                    print( '''
-                        [ WARNING ] The peptide {0} could not be mapped to the
-                        [ WARNING ] given database {1} 
-                        [ WARNING ] with correct enzymatic cleavage sites.
-                        [ WARNING ] This PSM will be skipped.'''.format(
-                    line_dict['Sequence'],
-                    params['database']))
+                    non_enzymatic_peps.add(line_dict['Sequence'])
                     continue
                 if len(tmp_decoy) >= 2:
-                    print(
-                        '''
-                        [ WARNING ] The following peptide occurs in a target as well as decoy protein
-                        [ WARNING ] {0} 
-                        [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
-                            line_dict['Sequence'],
-                        )
-                    )
+                    target_decoy_peps.add(line_dict['Sequence'])
                     line_dict['Is decoy'] = 'true'
                 else:
                     line_dict['Is decoy'] = list(tmp_decoy)[0]
@@ -641,6 +627,25 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 to_be_written_csv_lines.append( line_dict )
             '''
     output_file_object.close()
+    if len(non_enzymatic_peps) != 0:
+        print( '''
+            [ WARNING ] The following peptides could not be mapped to the
+            [ WARNING ] given database {0} 
+            [ WARNING ] with correct enzymatic cleavage sites:
+            [ WARNING ] {1}
+            [ WARNING ] These PSMs were skipped.'''.format(
+        params['database'],
+        non_enzymatic_peps
+        ))
+    if len(target_decoy_peps) != 0:
+        print(
+            '''
+            [ WARNING ] The following peptides occured in a target as well as decoy protein
+            [ WARNING ] {0} 
+            [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
+                target_decoy_peps,
+            )
+        )
 
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
@@ -655,8 +660,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         '''
         do output_file magic with to_be_written_csv_lines
         '''
-    if database_search == True:
-        upapa.purge_fasta_info( fasta_lookup_name )
+    # if database_search == True:
+    #     upapa.purge_fasta_info( fasta_lookup_name )
     if do_not_delete == False:
         created_tmp_files.append( output_file+'_full_protein_names.txt' )
     return created_tmp_files

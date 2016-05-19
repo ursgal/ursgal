@@ -3600,6 +3600,25 @@ Example:
         },
         'uvalue_type' : "str",
     },
+    'keep_asp_pro_broken_peps' : {
+        'available_in_unode' : [
+            'unify_csv_1_0_0',
+        ],
+        'default_value' : True,
+        'description' :  ''' X!tandem searches for peptides broken between Asp (D) and Pro (P) for every enzyme. Therefore, it reports peptides that are not enzymatically cleaved. Specify, if those should be kept during unify_csv or removed.''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'unify_csv_style_1' : 'keep_asp_pro_broken_peps',
+        },
+        'utag' : [
+            'protein',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
     'psm_merge_delimiter' : {
         'available_in_unode' : [
             'unify_csv_1_0_0',
