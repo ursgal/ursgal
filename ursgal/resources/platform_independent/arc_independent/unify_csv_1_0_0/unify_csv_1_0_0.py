@@ -220,7 +220,16 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         )
         csv_output.writeheader()
         print('''[ unify_cs ] parsing csv''')
-        for line_dict in csv_input:
+        total_lines = len(list(csv_input))
+        for line_nr, line_dict in enumerate(csv_input):
+            if line_nr % 500 == 0:
+                    print(
+                        '[ INFO ] Processing line number:    {0}/{1}'.format(
+                            line_nr,
+                            total_lines
+                        ),
+                        end='\r'
+                    )
             if line_dict['Spectrum Title'] != '':
                 '''
                 Valid for:
