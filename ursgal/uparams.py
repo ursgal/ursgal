@@ -650,13 +650,13 @@ ursgal_params = {
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'percolator_2_08',
             'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'percolator_2_08',
         ],
         'default_value' : "trypsin",
         'description' :  ''' Enzyme: Rule of protein cleavage
@@ -695,9 +695,9 @@ ursgal_params = {
             'novor_style_1' : 'enzyme',
             'omssa_style_1' : '-e',
             'pepnovo_style_1' : '-digest',
+            'percolator_style_1' : 'enzyme',
             'unify_csv_style_1' : 'enzyme',
             'xtandem_style_1' : 'protein, cleavage site',
-            'percolator_style_1' : 'enzyme',
         },
         'utag' : [
             'database',
@@ -712,30 +712,6 @@ ursgal_params = {
         },
         'uvalue_translation' : {
             'generate_target_decoy_style_1' : {
-                'argc' : 'R;C;P',
-                'aspn' : 'D;N;',
-                'chymotrypsin' : 'FMWY;C;P',
-                'chymotrypsin_p' : 'FMWY;C;',
-                'clostripain' : 'R;C;',
-                'cnbr' : 'M;C;P',
-                'elastase' : 'AGILV;C;P',
-                'formic_acid' : 'D;C;P',
-                'gluc' : 'DE;C;P',
-                'gluc_bicarb' : 'E;C;P',
-                'iodosobenzoate' : 'W;C;',
-                'lysc' : 'K;C;P',
-                'lysc_p' : 'K;C;',
-                'lysn' : 'K;N;',
-                'lysn_promisc' : 'AKRS;N;',
-                'pepsina' : 'FL;C;',
-                'protein_endopeptidase' : 'P;C;',
-                'staph_protease' : 'E;C;',
-                'trypsin' : 'KR;C;P',
-                'trypsin_cnbr' : 'KRM;C;P',
-                'trypsin_gluc' : 'DEKR;C;P',
-                'trypsin_p' : 'KR;C;',
-            },
-            'percolator_style_1' : {
                 'argc' : 'R;C;P',
                 'aspn' : 'D;N;',
                 'chymotrypsin' : 'FMWY;C;P',
@@ -837,6 +813,30 @@ ursgal_params = {
             'pepnovo_style_1' : {
                 'nonspecific' : 'NON_SPECIFIC',
                 'trypsin' : 'TRYPSIN',
+            },
+            'percolator_style_1' : {
+                'argc' : 'R;C;P',
+                'aspn' : 'D;N;',
+                'chymotrypsin' : 'FMWY;C;P',
+                'chymotrypsin_p' : 'FMWY;C;',
+                'clostripain' : 'R;C;',
+                'cnbr' : 'M;C;P',
+                'elastase' : 'AGILV;C;P',
+                'formic_acid' : 'D;C;P',
+                'gluc' : 'DE;C;P',
+                'gluc_bicarb' : 'E;C;P',
+                'iodosobenzoate' : 'W;C;',
+                'lysc' : 'K;C;P',
+                'lysc_p' : 'K;C;',
+                'lysn' : 'K;N;',
+                'lysn_promisc' : 'AKRS;N;',
+                'pepsina' : 'FL;C;',
+                'protein_endopeptidase' : 'P;C;',
+                'staph_protease' : 'E;C;',
+                'trypsin' : 'KR;C;P',
+                'trypsin_cnbr' : 'KRM;C;P',
+                'trypsin_gluc' : 'DEKR;C;P',
+                'trypsin_p' : 'KR;C;',
             },
             'unify_csv_style_1' : {
                 'argc' : 'R;C;P',
@@ -1552,6 +1552,25 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+    },
+    'keep_asp_pro_broken_peps' : {
+        'available_in_unode' : [
+            'unify_csv_1_0_0',
+        ],
+        'default_value' : True,
+        'description' :  ''' X!tandem searches for peptides broken between Asp (D) and Pro (P) for every enzyme. Therefore, it reports peptides that are not enzymatically cleaved. Specify, if those should be kept during unify_csv or removed. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'unify_csv_style_1' : 'keep_asp_pro_broken_peps',
+        },
+        'utag' : [
+            'protein',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
     },
     'label' : {
         'available_in_unode' : [
@@ -3581,15 +3600,15 @@ Example:
     },
     'protein_delimiter' : {
         'available_in_unode' : [
-            'unify_csv_1_0_0',
             'percolator_2_08',
+            'unify_csv_1_0_0',
         ],
         'default_value' : "<|>",
         'description' :  ''' This delimiter seperates protein IDs/names in the unified csv ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'percolator_style_1' : 'protein_delimiter',
             'unify_csv_style_1' : 'protein_delimiter',
-            'percolator_style_1': 'protein_delimiter',
         },
         'utag' : [
             'output',
@@ -3600,25 +3619,6 @@ Example:
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
-    },
-    'keep_asp_pro_broken_peps' : {
-        'available_in_unode' : [
-            'unify_csv_1_0_0',
-        ],
-        'default_value' : True,
-        'description' :  ''' X!tandem searches for peptides broken between Asp (D) and Pro (P) for every enzyme. Therefore, it reports peptides that are not enzymatically cleaved. Specify, if those should be kept during unify_csv or removed.''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'unify_csv_style_1' : 'keep_asp_pro_broken_peps',
-        },
-        'utag' : [
-            'protein',
-        ],
-        'uvalue_option' : {
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "bool",
     },
     'psm_merge_delimiter' : {
         'available_in_unode' : [
