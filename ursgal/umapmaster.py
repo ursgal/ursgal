@@ -313,7 +313,6 @@ class UPeptideMapper( dict ):
 
         return
 
-
     def map_peptide(self, peptide=None, fasta_name=None, force_regex=False):
         '''
         Maps a peptide to a fasta database.

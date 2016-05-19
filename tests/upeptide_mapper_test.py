@@ -39,22 +39,24 @@ class UMapMaster(unittest.TestCase):
 
 
     def test_incremental_fcache_buildup_and_global_access(self):
+        # map with empty
         maps = self.uc.upeptide_mapper.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
         self.assertEqual( len(maps), 0)
 
+        # parse one fasta via a unode ..
         self.uc.unodes['merge_csvs_1_0_0']['class'].upeptide_mapper.build_lookup(
             fasta_name = 'Test.fasta',
             fasta_stream = TEST_FASTA
         )
-
+        # map with one parsed fasta
         maps = self.uc.upeptide_mapper.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
         self.assertEqual( len(maps), 1)
-
+        # parse another fasta via a different unode ..
         self.uc.unodes['generate_target_decoy_1_0_0']['class'].upeptide_mapper.build_lookup(
             fasta_name = 'Test.fasta',
             fasta_stream = TEST_FASTA_TWO
         )
-
+        # map with two parsed fastas
         maps = self.uc.upeptide_mapper.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
         self.assertEqual( len(maps), 2)
 

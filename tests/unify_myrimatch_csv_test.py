@@ -82,7 +82,6 @@ for line_dict in csv.DictReader(open(output_csv, 'r')):
     ident_list.append( line_dict )
 
 
-
 def unify_myrimtach_test():
     for test_id, test_dict in enumerate(ident_list):
         yield unify_myrimtach, test_dict
