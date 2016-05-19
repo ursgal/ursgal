@@ -21,6 +21,8 @@ TEST_FASTA = [
     #----+----|----+----|----+----|----+----|----+----|
     '>Overlapping',
     'GGGGGGGGGG',
+    '>ugly_fasta',
+    'FCKTHIS*'
 ]
 
 TEST_FASTA_TWO = [
@@ -97,12 +99,27 @@ class UMapMaster(unittest.TestCase):
                 'start' : 4,
                 'end'   : 5,
                 'id'    : 'Protein1'
-            }
+            },
+            'ugly_fasta': {
+                'pre'   : 'H',
+                'post'  : '-',
+                'start' : 6,
+                'end'   : 7,
+                'id'    : 'ugly_fasta'
+            },
+
         }
-        for mapping in self.upapa_5.map_peptide( peptide='IS', fasta_name='Test.fasta'):
+        maps = self.upapa_5.map_peptide( peptide='IS', fasta_name='Test.fasta')
+        self.assertEqual( len(maps), 4 )
+        for mapping in maps:
             if mapping['id'] == 'Protein1':
                 self.assertEqual(
                     expected['Protein1'],
+                    mapping
+                )
+            if mapping['id'] == 'ugly_fasta':
+                self.assertEqual(
+                    expected['ugly_fasta'],
                     mapping
                 )
 

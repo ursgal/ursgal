@@ -104,7 +104,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
     psm_defining_colnames = get_psm_defining_colnames(score_colname)
     joinchar = params['protein_delimiter']
-
+    do_not_delete = False
+    created_tmp_files = []
     use15N = False
 
     if 'label' in params.keys():
@@ -165,6 +166,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         initialized = False
 
     if database_search is True:
+        target_decoy_peps = set()
+        non_enzymatic_peps = set()
         fasta_lookup_name = upapa.build_lookup_from_file(
             params['database'],
             force=False
@@ -545,7 +548,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             ''
                             # list(upapa['BSA.fasta'].keys())
                         )
-                # for protein in line_dict['proteinacc_start_stop_pre_post_;'].split('<|>'):
                 for protein in upeptide_maps:
                     allowed_aa = params['enzyme'].split(';')[0] + '-'
                     cleavage_site = params['enzyme'].split(';')[1]
@@ -553,34 +555,38 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     add_protein = False
                     nterm_correct = False
                     cterm_correct = False
+                    if params['keep_asp_pro_broken_peps'] == True:
+                        if line_dict['Sequence'][-1] == 'D' and\
+                            protein['post'] == 'P':
+                            cterm_correct = True
+                        if line_dict['Sequence'][0] == 'P' and\
+                            protein['pre'] == 'D':
+                            nterm_correct == True
                     if cleavage_site == 'C':
-                        if protein['pre'] in allowed_aa:
+                        if protein['pre'] in allowed_aa\
+                                or protein['start'] in [1, 2, 3]:
                             if line_dict['Sequence'][0] not in inhibitor_aa\
-                                or protein['pre'] == '-':
+                                    or protein['start'] in [1, 2]:
                                 nterm_correct = True
                         if protein['post'] not in inhibitor_aa:
                             if line_dict['Sequence'][-1] in allowed_aa\
                                 or protein['post'] == '-':
                                 cterm_correct = True
-                        if params['semi_enzyme'] == True:
-                            if cterm_correct == True or nterm_correct == True:
-                                add_protein = True
-                        elif cterm_correct == True and nterm_correct == True:
-                            add_protein = True
-                    if cleavage_site == 'N':
+                    elif cleavage_site == 'N':
                         if protein['post'] in allowed_aa:
                             if line_dict['Sequence'][-1] not in inhibitor_aa\
                                 or protein['post'] == '-':
                                 cterm_correct = True
-                        if protein['pre'] not in inhibitor_aa:
+                        if protein['pre'] not in inhibitor_aa\
+                            or protein['start'] in [1,2,3]:
                             if line_dict['Sequence'][0] in allowed_aa\
-                                or protein['pre'] == '-':
+                                or protein['start'] in [1,2]:
                                 nterm_correct = True
-                        if params['semi_enzyme'] == True:
-                            if cterm_correct == True or nterm_correct == True:
-                                add_protein = True
-                        elif cterm_correct == True and nterm_correct == True:
+                    if params['semi_enzyme'] == True:
+                        if cterm_correct == True or nterm_correct == True:
                             add_protein = True
+                    elif cterm_correct == True and nterm_correct == True:
+                        add_protein = True
                     if add_protein == True:
                         if protein['id'] not in tmp_protein_id.keys():
                             tmp_protein_id[protein['id']] = {
@@ -615,26 +621,18 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 if len(protein_id) >= 2000:
                     print('{0}: {1}'.format(line_dict['Sequence'], protein_id), file = protein_id_output)
                     protein_id = protein_id[:1990] + ' ...'
+                    do_not_delete = True
                 line_dict['Protein ID'] = protein_id
                 line_dict['Sequence Start'] = joinchar.join(start)
                 line_dict['Sequence Stop'] = joinchar.join(stop)
                 line_dict['Sequence Pre AA'] = joinchar.join(pre)
                 line_dict['Sequence Post AA'] = joinchar.join(post)
 
-                assert len(tmp_decoy) != 0, '''
-                    The peptide {0} could not be mapped to the
-                    given database {1} with correct enzymatic cleavage sites'''.format(
-                    line_dict['Sequence'],
-                    params['database'])
+                if len(tmp_decoy) == 0:
+                    non_enzymatic_peps.add(line_dict['Sequence'])
+                    continue
                 if len(tmp_decoy) >= 2:
-                    print(
-                        '''
-                        [ WARNING ] The following peptide occurs in a target as well as decoy protein
-                        [ WARNING ] {0}
-                        [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
-                            line_dict['Sequence'],
-                        )
-                    )
+                    target_decoy_peps.add(line_dict['Sequence'])
                     line_dict['Is decoy'] = 'true'
                 else:
                     line_dict['Is decoy'] = list(tmp_decoy)[0]
@@ -649,6 +647,28 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             '''
     output_file_object.close()
 
+    if database_search == True:
+        # upapa.purge_fasta_info( fasta_lookup_name )
+        if len(non_enzymatic_peps) != 0:
+            print( '''
+                [ WARNING ] The following peptides could not be mapped to the
+                [ WARNING ] given database {0}
+                [ WARNING ] with correct enzymatic cleavage sites:
+                [ WARNING ] {1}
+                [ WARNING ] These PSMs were skipped.'''.format(
+            params['database'],
+            non_enzymatic_peps
+            ))
+        if len(target_decoy_peps) != 0:
+            print(
+                '''
+                [ WARNING ] The following peptides occured in a target as well as decoy protein
+                [ WARNING ] {0}
+                [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
+                    target_decoy_peps,
+                )
+            )
+
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:
@@ -662,9 +682,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         '''
         do output_file magic with to_be_written_csv_lines
         '''
-    if database_search == True:
-        upapa.purge_fasta_info( fasta_lookup_name )
-    return
+    if do_not_delete == False:
+        created_tmp_files.append( output_file+'_full_protein_names.txt' )
+    return created_tmp_files
 
 
 def get_psm_defining_colnames(score_colname):

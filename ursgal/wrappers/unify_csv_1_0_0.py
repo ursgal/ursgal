@@ -77,7 +77,7 @@ Could not load RT lookup dict from this location: {0}
 
         last_search_engine_colname = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]
 
-        unify_csv_main(
+        tmp_files = unify_csv_main(
             input_file      = input_file,
             output_file     = output_file,
             scan_rt_lookup  = scan_rt_lookup_dict,
@@ -86,6 +86,8 @@ Could not load RT lookup dict from this location: {0}
             score_colname   = last_search_engine_colname,
             upeptide_mapper = self.upeptide_mapper
         )
+        for tmp_file in tmp_files:
+            self.created_tmp_files.append(tmp_file)
 
         self.print_execution_time(tag='execution')
         return output_file
