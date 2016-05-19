@@ -795,6 +795,7 @@ ursgal_params = {
                 'no_cleavage' : '9',
                 'nonspecific' : '0',
                 'trypsin' : '1',
+                'trypsin_p' : '1',
             },
             'myrimatch_style_1' : {
                 'aspn' : 'Asp-N',

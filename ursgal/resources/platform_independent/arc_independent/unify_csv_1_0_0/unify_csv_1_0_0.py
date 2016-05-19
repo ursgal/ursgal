@@ -166,6 +166,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     if database_search is True:
         target_decoy_peps = set()
         non_enzymatic_peps = set()
+        pep_map_lookup = {}
         fasta_lookup_name = upapa.build_lookup_from_file(
             params['database'],
             force=False
@@ -519,90 +520,105 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             if database_search is True:
 
+                print('''[ unify_cs ] mapping peptides to proteins''')
+
                 # remap peptides to proteins, check correct enzymatic
                 # cleavage and decoy assignment
+                lookup_identifier = '{0}><{1}'.format(line_dict['Sequence'], fasta_lookup_name)
+                if lookup_identifier not in pep_map_lookup.keys():
+                    tmp_decoy = set()
+                    tmp_protein_id = {}
 
-                tmp_decoy = set()
-                tmp_proteinacc = []
-                tmp_protein_id = {}
+                    upeptide_maps = upapa.map_peptide(
+                        peptide = line_dict['Sequence'],
+                        fasta_name = fasta_lookup_name
+                    )
+                    '''
+                    <><><><><><><><><><><><><>
+                    '''
+                    # assert upeptide_maps != [],'''
+                    #         The peptide {0} could not be mapped to the
+                    #         given database {1}
 
-                upeptide_maps = upapa.map_peptide(
-                    peptide = line_dict['Sequence'],
-                    fasta_name = fasta_lookup_name
-                )
-                '''
-                <><><><><><><><><><><><><>
-                '''
-                assert upeptide_maps != [],'''
-                        The peptide {0} could not be mapped to the
-                        given database {1}
+                    #         {2}
 
-                        {2}
-
-                        '''.format(
-                            line_dict['Sequence'],
-                            fasta_lookup_name,
-                            ''
-                            # list(upapa['BSA.fasta'].keys())
-                        )
-                for protein in upeptide_maps:
-                    allowed_aa = params['enzyme'].split(';')[0] + '-'
-                    cleavage_site = params['enzyme'].split(';')[1]
-                    inhibitor_aa = params['enzyme'].split(';')[2]
-                    add_protein = False
-                    nterm_correct = False
-                    cterm_correct = False
-                    if params['keep_asp_pro_broken_peps'] == True:
-                        if line_dict['Sequence'][-1] == 'D' and\
-                            protein['post'] == 'P':
-                            cterm_correct = True
-                        if line_dict['Sequence'][0] == 'P' and\
-                            protein['pre'] == 'D':
-                            nterm_correct = True
-                    if cleavage_site == 'C':
-                        if protein['pre'] in allowed_aa\
+                    #         '''.format(
+                    #             line_dict['Sequence'],
+                    #             fasta_lookup_name,
+                    #             ''
+                    #         )
+                    if upeptide_maps == []:
+                        print('''
+                            [ WARNING ] The peptide {0} could not be mapped to the
+                            [ WARNING ] given database {1}
+                            [ WARNING ] {2}
+                            [ WARNING ] This PSM will be skipped.
+                            '''.format(
+                                line_dict['Sequence'],
+                                fasta_lookup_name,
+                                ''
+                            ))
+                    for protein in upeptide_maps:
+                        allowed_aa = params['enzyme'].split(';')[0] + '-'
+                        cleavage_site = params['enzyme'].split(';')[1]
+                        inhibitor_aa = params['enzyme'].split(';')[2]
+                        add_protein = False
+                        nterm_correct = False
+                        cterm_correct = False
+                        if params['keep_asp_pro_broken_peps'] == True:
+                            if line_dict['Sequence'][-1] == 'D' and\
+                                protein['post'] == 'P':
+                                cterm_correct = True
+                            if line_dict['Sequence'][0] == 'P' and\
+                                protein['pre'] == 'D':
+                                nterm_correct = True
+                        if cleavage_site == 'C':
+                            if protein['pre'] in allowed_aa\
+                                    or protein['start'] in [1, 2, 3]:
+                                if line_dict['Sequence'][0] not in inhibitor_aa\
+                                        or protein['start'] in [1, 2, 3]:
+                                    nterm_correct = True
+                            if protein['post'] not in inhibitor_aa:
+                                if line_dict['Sequence'][-1] in allowed_aa\
+                                    or protein['post'] == '-':
+                                    cterm_correct = True
+                        elif cleavage_site == 'N':
+                            if protein['post'] in allowed_aa:
+                                if line_dict['Sequence'][-1] not in inhibitor_aa\
+                                    or protein['post'] == '-':
+                                    cterm_correct = True
+                            if protein['pre'] not in inhibitor_aa\
                                 or protein['start'] in [1, 2, 3]:
-                            if line_dict['Sequence'][0] not in inhibitor_aa\
-                                    or protein['start'] in [1, 2]:
-                                nterm_correct = True
-                        if protein['post'] not in inhibitor_aa:
-                            if line_dict['Sequence'][-1] in allowed_aa\
-                                or protein['post'] == '-':
-                                cterm_correct = True
-                    elif cleavage_site == 'N':
-                        if protein['post'] in allowed_aa:
-                            if line_dict['Sequence'][-1] not in inhibitor_aa\
-                                or protein['post'] == '-':
-                                cterm_correct = True
-                        if protein['pre'] not in inhibitor_aa\
-                            or protein['start'] in [1,2,3]:
-                            if line_dict['Sequence'][0] in allowed_aa\
-                                or protein['start'] in [1,2]:
-                                nterm_correct = True
-                    if params['semi_enzyme'] == True:
-                        if cterm_correct == True or nterm_correct == True:
+                                if line_dict['Sequence'][0] in allowed_aa\
+                                    or protein['start'] in [1, 2, 3]:
+                                    nterm_correct = True
+                        if params['semi_enzyme'] == True:
+                            if cterm_correct == True or nterm_correct == True:
+                                add_protein = True
+                        elif cterm_correct == True and nterm_correct == True:
                             add_protein = True
-                    elif cterm_correct == True and nterm_correct == True:
-                        add_protein = True
-                    if add_protein == True:
-                        if protein['id'] not in tmp_protein_id.keys():
-                            tmp_protein_id[protein['id']] = {
-                                'start' : [],
-                                'stop' : [],
-                                'pre' : [],
-                                'post' : [],
-                            }
-                        tmp_protein_id[protein['id']]['start'].append(str(protein['start']))
-                        tmp_protein_id[protein['id']]['stop'].append(str(protein['end']))
-                        tmp_protein_id[protein['id']]['pre'].append(protein['pre'])
-                        tmp_protein_id[protein['id']]['post'].append(protein['post'])
+                        if add_protein == True:
+                            if protein['id'] not in tmp_protein_id.keys():
+                                tmp_protein_id[protein['id']] = {
+                                    'start' : [],
+                                    'stop' : [],
+                                    'pre' : [],
+                                    'post' : [],
+                                }
+                            tmp_protein_id[protein['id']]['start'].append(str(protein['start']))
+                            tmp_protein_id[protein['id']]['stop'].append(str(protein['end']))
+                            tmp_protein_id[protein['id']]['pre'].append(protein['pre'])
+                            tmp_protein_id[protein['id']]['post'].append(protein['post'])
 
-                        # mzidentml-lib does not always set 'Is decoy' correctly
-                        # (it's always 'false' for MS-GF+ results), this is fixed here:
-                        if params['decoy_tag'] in protein['id']:
-                            tmp_decoy.add('true')
-                        else:
-                            tmp_decoy.add('false')
+                            # mzidentml-lib does not always set 'Is decoy' correctly
+                            # (it's always 'false' for MS-GF+ results), this is fixed here:
+                            if params['decoy_tag'] in protein['id']:
+                                tmp_decoy.add('true')
+                            else:
+                                tmp_decoy.add('false')
+                    pep_map_lookup[lookup_identifier] = (tmp_protein_id, tmp_decoy)
+                else:
+                    tmp_protein_id, tmp_decoy = pep_map_lookup[lookup_identifier]
                 protein_id = []
                 start = []
                 stop = []
