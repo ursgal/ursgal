@@ -62,7 +62,8 @@ unify_csv_main(
             'BSA.fasta'
         ),
         'protein_delimiter' : '<|>',
-        'psm_merge_delimiter' : ';'
+        'psm_merge_delimiter' : ';',
+        'keep_asp_pro_broken_peps':True,
     },
     search_engine  = 'myrimatch_2_1_138',
 )

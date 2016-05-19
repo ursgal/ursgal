@@ -534,10 +534,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     add_protein = False
                     nterm_correct = False
                     cterm_correct = False
-                    if params['keep_asp_pro_broken_peps']:
+                    if params['keep_asp_pro_broken_peps'] == True:
                         if line_dict['Sequence'][-1] == 'D' and\
                             protein['post'] == 'P':
-                            cterm_correct == True
+                            cterm_correct = True
                         if line_dict['Sequence'][0] == 'P' and\
                             protein['pre'] == 'D':
                             nterm_correct == True
@@ -547,12 +547,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             if line_dict['Sequence'][0] not in inhibitor_aa\
                                 or protein['start'] in [1,2]:
                                 nterm_correct = True
-                                # print('nterm_correct')
                         if protein['post'] not in inhibitor_aa:
                             if line_dict['Sequence'][-1] in allowed_aa\
                                 or protein['post'] == '-':
                                 cterm_correct = True
-                                # print('cterm_correct')
                     elif cleavage_site == 'N':
                         if protein['post'] in allowed_aa:
                             if line_dict['Sequence'][-1] not in inhibitor_aa\
@@ -627,25 +625,28 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 to_be_written_csv_lines.append( line_dict )
             '''
     output_file_object.close()
-    if len(non_enzymatic_peps) != 0:
-        print( '''
-            [ WARNING ] The following peptides could not be mapped to the
-            [ WARNING ] given database {0} 
-            [ WARNING ] with correct enzymatic cleavage sites:
-            [ WARNING ] {1}
-            [ WARNING ] These PSMs were skipped.'''.format(
-        params['database'],
-        non_enzymatic_peps
-        ))
-    if len(target_decoy_peps) != 0:
-        print(
-            '''
-            [ WARNING ] The following peptides occured in a target as well as decoy protein
-            [ WARNING ] {0} 
-            [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
-                target_decoy_peps,
+    
+    if database_search == True:
+        # upapa.purge_fasta_info( fasta_lookup_name )
+        if len(non_enzymatic_peps) != 0:
+            print( '''
+                [ WARNING ] The following peptides could not be mapped to the
+                [ WARNING ] given database {0} 
+                [ WARNING ] with correct enzymatic cleavage sites:
+                [ WARNING ] {1}
+                [ WARNING ] These PSMs were skipped.'''.format(
+            params['database'],
+            non_enzymatic_peps
+            ))
+        if len(target_decoy_peps) != 0:
+            print(
+                '''
+                [ WARNING ] The following peptides occured in a target as well as decoy protein
+                [ WARNING ] {0} 
+                [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
+                    target_decoy_peps,
+                )
             )
-        )
 
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
@@ -660,8 +661,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         '''
         do output_file magic with to_be_written_csv_lines
         '''
-    # if database_search == True:
-    #     upapa.purge_fasta_info( fasta_lookup_name )
     if do_not_delete == False:
         created_tmp_files.append( output_file+'_full_protein_names.txt' )
     return created_tmp_files

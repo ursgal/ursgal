@@ -66,7 +66,8 @@ unify_csv_main(
         'semi_enzyme' : False,
         'database': os.path.join( 'tests', 'data', 'BSA.fasta'),
         'protein_delimiter' : '<|>',
-        'psm_merge_delimiter' : ';'
+        'psm_merge_delimiter' : ';',
+        'keep_asp_pro_broken_peps': True,
     },
     search_engine  = 'xtandem_sledgehammer',
 )
@@ -97,7 +98,10 @@ def unify_xtandem( test_dict ):
             test_value = round(float(test_value), 4)
             expected_value = round(float(expected_value), 4)
 
-        assert test_value == expected_value
+        assert test_value == expected_value, '''
+        test_value = {0}
+        expected_value = {1}
+        '''.format(test_value, expected_value)
 
 
 if __name__ == '__main__':
