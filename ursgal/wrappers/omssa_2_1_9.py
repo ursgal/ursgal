@@ -314,7 +314,6 @@ class omssa_2_1_9( ursgal.UNode ):
                 'base_mz',
                 'header_translations',
                 'frag_mass_tolerance_unit',
-                'decoy_tag',
             ]:
                 continue
             elif len(translation_dict) == 1:
@@ -338,12 +337,16 @@ class omssa_2_1_9( ursgal.UNode ):
         header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
         translated_headers = []
         for header in headers:
+            if header in [' E-value',' P-value']:
+                continue
             translated_headers.append(
                 header_translations.get(header, header)
             )
         translated_headers += [
             'Is decoy',
             'Retention Time (s)',
+            header_translations.get(' E-value', ' E-value'),
+            header_translations.get(' P-value', ' P-value'),
             # 'Raw data location'
         ]
         print('[ PARSING  ] Loading unformatted OMSSA results ...')
