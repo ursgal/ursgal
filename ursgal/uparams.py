@@ -468,16 +468,10 @@ ursgal_params = {
     'decoy_tag' : {
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
-            'omssa_2_1_9',
-            'qvality_2_02',
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
         ],
@@ -486,11 +480,8 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'decoy_tag',
-            'msamanda_style_1' : 'decoy_tag',
             'myrimatch_style_1' : 'DecoyPrefix',
             'mzidentml_style_1' : '-decoyRegex',
-            'omssa_style_1' : 'decoy_tag',
-            'qvality_style_1' : 'decoy_tag',
             'unify_csv_style_1' : 'decoy_tag',
             'xtandem2csv_style_1' : 'decoy_tag',
         },

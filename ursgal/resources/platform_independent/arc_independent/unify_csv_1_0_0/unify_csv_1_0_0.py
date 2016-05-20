@@ -186,6 +186,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         csv_kwargs['lineterminator'] = '\n'
     else:
         csv_kwargs['lineterminator'] = '\r\n'
+    total_lines = len(list(csv.reader(open(input_file,'r'))))
     with open( input_file, 'r' ) as in_file:
         csv_input  = csv.DictReader(
             in_file
@@ -220,16 +221,15 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         )
         csv_output.writeheader()
         print('''[ unify_cs ] parsing csv''')
-        total_lines = len(list(csv_input))
         for line_nr, line_dict in enumerate(csv_input):
             if line_nr % 500 == 0:
-                    print(
-                        '[ INFO ] Processing line number:    {0}/{1}'.format(
-                            line_nr,
-                            total_lines
-                        ),
-                        end='\r'
-                    )
+                print(
+                    '[ unify_cs ] Processing line number:    {0}/{1}'.format(
+                        line_nr,
+                        total_lines
+                    ),
+                    end='\r'
+                )
             if line_dict['Spectrum Title'] != '':
                 '''
                 Valid for:
