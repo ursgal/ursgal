@@ -213,7 +213,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         ]
         for new_fieldname in new_fieldnames:
             if new_fieldname not in output_fieldnames:
-                output_fieldnames += [new_fieldname]
+                output_fieldnames.insert(-5,new_fieldname)
         csv_output = csv.DictWriter(
             output_file_object,
             output_fieldnames,
