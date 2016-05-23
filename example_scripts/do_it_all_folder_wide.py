@@ -40,7 +40,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
         'omssa',
         'xtandem_vengeance',
         'msgf',
-        'msamanda_1_0_0_5243',
+        'msamanda_1_0_0_6300',
         'myrimatch_2_1_138',
 
     ]

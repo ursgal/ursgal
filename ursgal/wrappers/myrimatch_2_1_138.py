@@ -48,8 +48,6 @@ class myrimatch_2_1_138( ursgal.UNode ):
         '''
         Formatting the command line
         '''
-        import pprint
-        pprint.pprint(self.params)
         input_file = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']

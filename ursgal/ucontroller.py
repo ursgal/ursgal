@@ -1217,9 +1217,10 @@ class UController(ursgal.UNode):
                 if len(json_content) > 3 and 'history' in json_content[3]:
                     last_engine = self.get_last_engine(
                             history = json_content[3]['history'],
+                            multiple_engines = True,
                         )
                     if last_engine is not None and type(last_engine) != list:
-                        last_engine_meta_node = self.meta_unodes[ last_engine ]
+                        # last_engine_meta_node = self.meta_unodes[ last_engine ]
 
                         last_engine_colname = \
                             self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]

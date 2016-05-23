@@ -210,10 +210,10 @@ class qvality_2_02( ursgal.UNode ):
                 tag,
             )
             crazy_tmp_files[ tag ] = open(self.params['translations'][tag]['path'], 'w')
-        defline_key = 'proteinacc_start_stop_pre_post_;'
+        defline_key = 'Protein ID'
         for spectrum_title, grouped_psm_list in self.params['grouped_psms'].items():
             score_2_write, psm_dict = grouped_psm_list[0]
-            if self.params['translations']['decoy_tag'] in psm_dict[ defline_key ]:
+            if psm_dict[ 'Is decoy'].upper() == 'TRUE':
                 tag = 'decoy'
             else:
                 tag = 'target'
