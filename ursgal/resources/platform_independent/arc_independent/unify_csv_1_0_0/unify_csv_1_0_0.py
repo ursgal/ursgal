@@ -20,14 +20,13 @@ import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
 
-# increase the field size limit to avoid crash if protein merge tags become too long
-# does not work under windows
+# increase the field size limit to avoid crash if protein merge tags
+# become too long does not work under windows
 if sys.platform != 'win32':
     csv.field_size_limit(sys.maxsize)
 
 
 DIFFERENCE_14N_15N = ursgal.ursgal_kb.DIFFERENCE_14N_15N
-
 
 
 def main(input_file=None, output_file=None, scan_rt_lookup=None,
@@ -148,7 +147,13 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     cc = ursgal.ChemicalComposition()
     ursgal.GlobalUnimodMapper._reparseXML()
     de_novo_engines = ['novor', 'pepnovo', 'uninovo', 'unknown_engine']
-    database_search_engines = ['msamanda', 'msgf', 'myrimatch', 'omssa', 'xtandem']
+    database_search_engines = [
+        'msamanda',
+        'msgf',
+        'myrimatch',
+        'omssa',
+        'xtandem'
+    ]
     de_novo = False
     database_search = False
     for de_novo_engine in de_novo_engines:
@@ -241,8 +246,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 pure_input_file_name                = os.path.basename(
                     line_dict['Raw data location']
                 )
-                input_file_basename = pure_input_file_name.split(".")[0] # not
-                # using os.path.splitext because we could have multiple file
+                input_file_basename = pure_input_file_name.split(".")[0]
+                # not using os.path.splitext because we could have multiple file
                 # extensions (i.e. ".mzml.gz")
 
                 '''

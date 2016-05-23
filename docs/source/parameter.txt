@@ -1,0 +1,6317 @@
+
+.. _parameters:
+
+Ursgal to Engine Parameters overview
+************************************
+
+.. note:: This sphinx source file was **auto-generated** using
+    ursgal/docs/uparams_to_sphinx_docu.py, which parses ursgal/ursgal/uparams.py
+    Please **do not** modify this file directly, but commit changes to ursgal.uparams.
+
+
+
+
+.. raw:: html
+
+      <hr />
+
+-xmx
+###############
+
+
+Set maximum Java heap size (used RAM)
+
+:Default value: 13312m
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msgfplus_v9979
+* mzidentml_lib_1_6_10
+* mzidentml_lib_1_6_11
+
+Ursgal value translations for *-xmx*
+""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msgfplus_style_1  -Xmx             
+ mzidentml_style_1 -Xmx             
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+aa_exception_dict
+############################
+
+
+Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name
+
+:Default value: {'J': {'original_aa': 'L'}, 'U': {'unimod_name': 'Delta:S(-1)Se(1)', 'original_aa': 'C', 'unimod_name_with_cam': 'SecCarbamidomethyl'}}
+:type: dict
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* unify_csv_1_0_0
+
+Ursgal value translations for *aa_exception_dict*
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ unify_csv_style_1 aa_exception_dict
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+base_mz
+##################
+
+
+m/z value that is used as basis for the conversion from ppm to Da
+
+:Default value: 1000
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+* pepnovo_3_1
+
+Ursgal value translations for *base_mz*
+"""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    base_mz         
+ pepnovo_style_1  base_mz         
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+batch_size
+#####################
+
+
+sets the number of sequences loaded in as a batch from the database file
+
+:Default value: 100000
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *batch_size*
+""""""""""""""""""""""""""""""""""""""""""
+
+ ============================= =============================
+ Style                         Translation                  
+ ============================= =============================
+ myrimatch_style_1             NumBatches                   
+ xtandem_style_1               spectrum, sequence batch size
+ ============================= =============================
+
+.. raw:: html
+
+      <hr />
+
+bigger_scores_better
+###############################
+
+
+Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality
+
+:Default value: None
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* add_estimated_fdr_1_0_0
+* percolator_2_08
+* qvality_2_02
+
+Ursgal value translations for *bigger_scores_better*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ========================= =========================
+ Style                     Translation              
+ ========================= =========================
+ add_estimated_fdr_style_1 bigger_scores_better     
+ percolator_style_1        bigger_scores_better     
+ qvality_style_1           -r                       
+ ========================= =========================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ========================= ========================= ========================= =========================
+ Ursgal Value              Translated Value                                                             
+ ------------------------- -----------------------------------------------------------------------------
+ .                         add_estimated_fdr_style_1 percolator_style_1        qvality_style_1          
+ ========================= ========================= ========================= =========================
+ msamanda_1_0_0_5242       1                         1                         1                        
+ msamanda_1_0_0_5243       1                         1                         1                        
+ msamanda_1_0_0_6299       1                         1                         1                        
+ msamanda_1_0_0_6300       1                         1                         1                        
+ msgfplus_v9979            0                         0                         0                        
+ myrimatch_2_1_138         1                         1                         1                        
+ myrimatch_2_2_140         1                         1                         1                        
+ omssa_2_1_9               0                         0                         0                        
+ xtandem_cyclone_2010      1                         1                         1                        
+ xtandem_jackhammer        1                         1                         1                        
+ xtandem_piledriver        1                         1                         1                        
+ xtandem_sledgehammer      1                         1                         1                        
+ xtandem_vengeance         1                         1                         1                        
+ ========================= ========================= ========================= =========================
+
+.. raw:: html
+
+      <hr />
+
+cleavage_cterm_mass_change
+#####################################
+
+
+The mass added to the peptide C-terminus by protein cleavage
+
+:Default value: 17.00305
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *cleavage_cterm_mass_change*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================================== ========================================
+ Style                                    Translation                             
+ ======================================== ========================================
+ xtandem_style_1                          protein, cleavage C-terminal mass change
+ ======================================== ========================================
+
+.. raw:: html
+
+      <hr />
+
+cleavage_nterm_mass_change
+#####################################
+
+
+The mass added to the peptide N-terminus bz protein cleavage
+
+:Default value: 1.00794
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *cleavage_nterm_mass_change*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================================== ========================================
+ Style                                    Translation                             
+ ======================================== ========================================
+ xtandem_style_1                          protein, cleavage N-terminal mass change
+ ======================================== ========================================
+
+.. raw:: html
+
+      <hr />
+
+compensate_small_fasta
+#################################
+
+
+Compensate for very small database files.
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *compensate_small_fasta*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =========================== ===========================
+ Style                       Translation                
+ =========================== ===========================
+ xtandem_style_1             scoring, cyclic permutation
+ =========================== ===========================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                xtandem_style_1 
+ ================ ================
+ 0                no              
+ 1                yes             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+compress_raw_search_results_if_possible
+##################################################
+
+
+Compress raw search result to .gz: True or False
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *compress_raw_search_results_if_possible*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================================= =======================================
+ Style                                   Translation                            
+ ======================================= =======================================
+ ucontroller_style_1                     compress_raw_search_results_if_possible
+ ======================================= =======================================
+
+.. raw:: html
+
+      <hr />
+
+compute_xcorr
+########################
+
+
+Compute xcorr
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+
+Ursgal value translations for *compute_xcorr*
+"""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ myrimatch_style_1 ComputeXCorr     
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= =================
+ Ursgal Value      Translated Value 
+ ----------------- -----------------
+ .                 myrimatch_style_1
+ ================= =================
+ 0                 0                
+ 1                 1                
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+consecutive_ion_prob
+###############################
+
+
+Probability of consecutive ion (used in correlation correction)
+
+:Default value: 0.5
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *consecutive_ion_prob*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -scorp          
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+cpus
+###############
+
+
+Number of used cpus/threads
+
+:Default value: max - 1
+:type: int _uevaluation_req
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* ucontroller
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *cpus*
+""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ msgfplus_style_1    -thread            
+ myrimatch_style_1   -cpus              
+ omssa_style_1       -nt                
+ ucontroller_style_1 cpus               
+ xtandem_style_1     spectrum, threads  
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+csv_filter_rules
+###########################
+
+
+Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared
+
+:Default value: None
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* filter_csv_1_0_0
+
+Ursgal value translations for *csv_filter_rules*
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ filter_csv_style_1 filter_rules      
+ ================== ==================
+
+.. raw:: html
+
+      <hr />
+
+database
+###################
+
+
+Path to database file containing protein sequences in fasta format
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *database*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msamanda_style_1  database         
+ msgfplus_style_1  -d               
+ myrimatch_style_1 ProteinDatabase  
+ omssa_style_1     -d               
+ xtandem_style_1   file URL         
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+database_taxonomy
+############################
+
+
+If a taxonomy ID is specified, only the corresponding protein sequences from the fasta database are included in the search.
+
+:Default value: all
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *database_taxonomy*
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ xtandem_style_1  taxon label     
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                omssa_style_1   
+ ================ ================
+ all              0               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+decoy_generation_mode
+################################
+
+
+Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein).
+
+:Default value: shuffle_peptide
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* generate_target_decoy_1_0_0
+
+Ursgal value translations for *decoy_generation_mode*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================= =============================
+ Style                         Translation                  
+ ============================= =============================
+ generate_target_decoy_style_1 mode                         
+ ============================= =============================
+
+.. raw:: html
+
+      <hr />
+
+decoy_tag
+####################
+
+
+decoy-specific tag to differentiate between targets and decoys
+
+:Default value: decoy_
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* generate_target_decoy_1_0_0
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* mzidentml_lib_1_6_10
+* mzidentml_lib_1_6_11
+* omssa_2_1_9
+* percolator_2_08
+* qvality_2_02
+* xtandem2csv_1_0_0
+
+Ursgal value translations for *decoy_tag*
+"""""""""""""""""""""""""""""""""""""""""
+
+ ============================= =============================
+ Style                         Translation                  
+ ============================= =============================
+ generate_target_decoy_style_1 decoy_tag                    
+ msamanda_style_1              decoy_tag                    
+ myrimatch_style_1             DecoyPrefix                  
+ mzidentml_style_1             -decoyRegex                  
+ omssa_style_1                 decoy_tag                    
+ percolator_style_1            decoy_tag                    
+ qvality_style_1               decoy_tag                    
+ xtandem2csv_style_1           decoy_tag                    
+ ============================= =============================
+
+.. raw:: html
+
+      <hr />
+
+del_from_params_before_json_dump
+###########################################
+
+
+List of parameters that are deleted before .json is dumped (to not overload the .json with unimportant informations)
+
+:Default value: ['grouped_psms']
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *del_from_params_before_json_dump*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================================ ================================
+ Style                            Translation                     
+ ================================ ================================
+ ucontroller_style_1              del_from_params_before_json_dump
+ ================================ ================================
+
+.. raw:: html
+
+      <hr />
+
+denovo_model
+#######################
+
+
+PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available.
+
+:Default value: cid_trypsin
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pepnovo_3_1
+
+Ursgal value translations for *denovo_model*
+""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pepnovo_style_1  -model          
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                pepnovo_style_1 
+ ================ ================
+ cid_trypsin      CID_IT_TRYP     
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+denovo_model_dir
+###########################
+
+
+Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pepnovo_3_1
+
+Ursgal value translations for *denovo_model_dir*
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pepnovo_style_1  -model_dir      
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+engine_internal_decoy_generation
+###########################################
+
+
+Engine creates an own decoy database. Not recommended, because a target decoy database should be generated independently from the search engine, e.g. by using the uNode generate_target_decoy_1_0_0
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *engine_internal_decoy_generation*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================== ========================
+ Style                    Translation             
+ ======================== ========================
+ msamanda_style_1         generate_decoy          
+ msgfplus_style_1         -tda                    
+ xtandem_style_1          scoring, include reverse
+ ======================== ========================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================ ================ ================
+ Ursgal Value     Translated Value                                  
+ ---------------- --------------------------------------------------
+ .                msamanda_style_1 msgfplus_style_1 xtandem_style_1 
+ ================ ================ ================ ================
+ 0                false            0                no              
+ 1                true             1                yes             
+ ================ ================ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+engines_create_folders
+#################################
+
+
+Create folders for the output of engines that allow this option in their META_INFO ('create_own_folder' : True). True or False
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *engines_create_folders*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ====================== ======================
+ Style                  Translation           
+ ====================== ======================
+ ucontroller_style_1    engines_create_folders
+ ====================== ======================
+
+.. raw:: html
+
+      <hr />
+
+enzyme
+#################
+
+
+Enzyme: Rule of protein cleavage
+            Possible cleavages are :
+                'argc'           -> '[R]|{P}'
+                'aspn'           -> '[X]|[D]'
+                'aspn_gluc'
+                'chymotrypsin'   -> '[FMWY]|{P}'
+                'chymotrypsin_p' -> '[FMWY]|[X]'
+                'cnbr'           -> '[M]|{P}'
+                'elastase'       -> '[AGILV]|{P}'
+                'formic_acid'    -> '[D]|{P}'
+                'gluc'
+                'lysc'
+                'lysc_p'
+                'lysn'
+                'no_cleavage'
+                'nonspecific'
+                'pepsina'
+                'semi_chymotrypsin'
+                'semi_gluc'
+                'semi_tryptic'
+                'thermolysin_p'
+                'top_down'
+                'trypsin'
+                'trypsin_chymotrypsin
+                'trypsin_cnbr'
+                'trypsin_p'
+                # Note not all search engines support all enzymes ! :)
+
+:Default value: trypsin
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* generate_target_decoy_1_0_0
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* novor_1_1beta
+* omssa_2_1_9
+* pepnovo_3_1
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *enzyme*
+""""""""""""""""""""""""""""""""""""""
+
+ ============================= =============================
+ Style                         Translation                  
+ ============================= =============================
+ generate_target_decoy_style_1 enzyme                       
+ msamanda_style_1              enzyme specificity           
+ msgfplus_style_1              -e                           
+ myrimatch_style_1             CleavageRules                
+ novor_style_1                 enzyme                       
+ omssa_style_1                 -e                           
+ pepnovo_style_1               -digest                      
+ xtandem_style_1               protein, cleavage site       
+ ============================= =============================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+ Ursgal Value                  Translated Value                                                                                                                                                                                                                               
+ ----------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ .                             generate_target_decoy_style_1 msamanda_style_1              msgfplus_style_1              myrimatch_style_1             novor_style_1                 omssa_style_1                 pepnovo_style_1               xtandem_style_1              
+ ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+ alpha_lp                      n/t                           n/t                           8                             n/t                           n/t                           n/t                           n/t                           n/t                          
+ argc                          R;C;P                         R;after;P                     6                             n/t                           n/t                           1                             n/t                           [R]|{P}                      
+ aspn                          D;N;                          D;before;                     7                             Asp-N                         n/t                           12                            n/t                           [X]|[D]                      
+ aspn_gluc                     n/t                           n/t                           n/t                           n/t                           n/t                           14                            n/t                           n/t                          
+ chymotrypsin                  FMWY;C;P                      FMWY;after;P                  2                             Chymotrypsin                  n/t                           3                             n/t                           [FMWY]|{P}                   
+ chymotrypsin_p                FMWY;C;                       FMWY;after;                   n/t                           n/t                           n/t                           18                            n/t                           [FMWY]|[X]                   
+ clostripain                   R;C;                          R;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           [R]|[X]                      
+ cnbr                          M;C;P                         M;after;P                     n/t                           CNBr                          n/t                           2                             n/t                           [M]|{P}                      
+ elastase                      AGILV;C;P                     AGILV;after;P                 n/t                           n/t                           n/t                           n/t                           n/t                           [AGILV]|{P}                  
+ formic_acid                   D;C;P                         D;after;P                     n/t                           Formic_acid                   n/t                           4                             n/t                           [D]|{P}                      
+ gluc                          DE;C;P                        DE;after;P                    n/t                           n/t                           n/t                           13                            n/t                           [DE]|{P}                     
+ gluc_bicarb                   E;C;P                         E;after;P                     n/t                           n/t                           n/t                           n/t                           n/t                           [E]|{P}                      
+ glutamyl_endopeptidase        n/t                           n/t                           5                             n/t                           n/t                           n/t                           n/t                           n/t                          
+ iodosobenzoate                W;C;                          W;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           [W]|[X]                      
+ lysc                          K;C;P                         K;after;P                     3                             Lys-C/P                       n/t                           5                             n/t                           [K]|{P}                      
+ lysc_p                        K;C;                          K;after;                      n/t                           Lys-C                         n/t                           6                             n/t                           [K]|[X]                      
+ lysn                          K;N;                          K;before;                     4                             n/t                           n/t                           21                            n/t                           [X]|[K]                      
+ lysn_promisc                  AKRS;N;                       AKRS;before;                  n/t                           n/t                           n/t                           n/t                           n/t                           [X]|[AKRS]                   
+ no_cleavage                   n/t                           n/t                           9                             n/t                           n/t                           11                            n/t                           n/t                          
+ nonspecific                   n/t                           ;;                            0                             n/t                           n/t                           17                            NON_SPECIFIC                  [X]|[X]                      
+ pepsina                       FL;C;                         FL;after;                     n/t                           PepsinA                       n/t                           7                             n/t                           [FL]|[X]                     
+ protein_endopeptidase         P;C;                          P;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           [P]|[X]                      
+ staph_protease                E;C;                          E;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           [E]|[X]                      
+ tca                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           [FMWY]|{P},[KR]|{P},[X]|[D]  
+ thermolysin_p                 n/t                           n/t                           n/t                           n/t                           n/t                           22                            n/t                           n/t                          
+ top_down                      n/t                           n/t                           n/t                           n/t                           n/t                           15                            n/t                           n/t                          
+ trypsin                       KR;C;P                        KR;after;P                    1                             Trypsin/P                     Trypsin                       0                             TRYPSIN                       [KR]|{P}                     
+ trypsin_chymotrypsin          n/t                           n/t                           n/t                           TrypChymo                     n/t                           9                             n/t                           n/t                          
+ trypsin_cnbr                  KRM;C;P                       KRM;after;P                   n/t                           n/t                           n/t                           8                             n/t                           [KR]|{P},[M]|{P}             
+ trypsin_gluc                  DEKR;C;P                      DEKR;after;P                  n/t                           n/t                           n/t                           n/t                           n/t                           [DEKR]|{P}                   
+ trypsin_p                     KR;C;                         KR;after;                     n/t                           Trypsin                       n/t                           10                            n/t                           [RK]|[X]                     
+ ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+
+.. raw:: html
+
+      <hr />
+
+filter_csv_converter_version
+#######################################
+
+
+filter csv converter version: version name
+
+:Default value: filter_csv_1_0_0
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *filter_csv_converter_version*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================ ============================
+ Style                        Translation                 
+ ============================ ============================
+ ucontroller_style_1          filter_csv_converter_version
+ ============================ ============================
+
+.. raw:: html
+
+      <hr />
+
+forbidden_cterm_mods
+###############################
+
+
+List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide, e.g. ['GG']
+
+:Default value: []
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_vengeance
+
+Ursgal value translations for *forbidden_cterm_mods*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================================== ====================================
+ Style                                Translation                         
+ ==================================== ====================================
+ xtandem_style_1                      residue, potential modification mass
+ ==================================== ====================================
+
+.. raw:: html
+
+      <hr />
+
+forbidden_residues
+#############################
+
+
+Aminoacids that are not allowed during/taken into account during denovo searches. Given as a string of comma seperated aminoacids (single letter code)
+
+:Default value: I,U
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* novor_1_1beta
+
+Ursgal value translations for *forbidden_residues*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ novor_style_1     forbiddenResidues
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+force
+################
+
+
+If set 'True', engines are forced to re-run although no node-related parameters have changed
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *force*
+"""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ ucontroller_style_1 force              
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+frag_mass_tolerance
+##############################
+
+
+Mass tolerance of measured and calculated fragment ions
+
+:Default value: 20
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* novor_1_1beta
+* omssa_2_1_9
+* pepnovo_3_1
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *frag_mass_tolerance*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ========================================== ==========================================
+ Style                                      Translation                               
+ ========================================== ==========================================
+ msamanda_style_1                           ms2_tol                                   
+ myrimatch_style_1                          FragmentMzTolerance                       
+ novor_style_1                              fragmentIonErrorTol                       
+ omssa_style_1                              -to                                       
+ pepnovo_style_1                            -fragment_tolerance                       
+ xtandem_style_1                            spectrum, fragment monoisotopic mass error
+ ========================================== ==========================================
+
+.. raw:: html
+
+      <hr />
+
+frag_mass_tolerance_unit
+###################################
+
+
+Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit)
+
+:Default value: ppm
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* novor_1_1beta
+* omssa_2_1_9
+* pepnovo_3_1
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *frag_mass_tolerance_unit*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================================================ ================================================
+ Style                                            Translation                                     
+ ================================================ ================================================
+ msamanda_style_1                                 ms2_tol unit                                    
+ myrimatch_style_1                                FragmentMzTolerance                             
+ novor_style_1                                    fragmentIonErrorTol                             
+ omssa_style_1                                    frag_mass_tolerance_unit                        
+ pepnovo_style_1                                  frag_mass_tolerance_unit                        
+ xtandem_style_1                                  spectrum, fragment monoisotopic mass error units
+ ================================================ ================================================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= ================= ================= ================= ================= =================
+ Ursgal Value      Translated Value                                                                         
+ ----------------- -----------------------------------------------------------------------------------------
+ .                 msamanda_style_1  myrimatch_style_1 novor_style_1     omssa_style_1     xtandem_style_1  
+ ================= ================= ================= ================= ================= =================
+ da                Da                Da                Da                Da                Daltons          
+ ================= ================= ================= ================= ================= =================
+
+.. raw:: html
+
+      <hr />
+
+frag_mass_type
+#########################
+
+
+Fragment mass type: monoisotopic or average
+
+:Default value: monoisotopic
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *frag_mass_type*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================ ============================
+ Style                        Translation                 
+ ============================ ============================
+ omssa_style_1                -tom                        
+ xtandem_style_1              spectrum, fragment mass type
+ ============================ ============================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                omssa_style_1   
+ ================ ================
+ average          1               
+ monoisotopic     0               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+frag_max_charge
+##########################
+
+
+Maximum fragment ion charge to search.
+
+:Default value: 4
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *frag_max_charge*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -zoh            
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+frag_method
+######################
+
+
+Used fragmentation method, e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD)
+
+:Default value: hcd
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msgfplus_v9979
+* novor_1_1beta
+
+Ursgal value translations for *frag_method*
+"""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msgfplus_style_1 -m              
+ novor_style_1    fragmentation   
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================ ================
+ Ursgal Value     Translated Value                 
+ ---------------- ---------------------------------
+ .                msgfplus_style_1 novor_style_1   
+ ================ ================ ================
+ cid              1                CID             
+ etd              2                n/t             
+ hcd              3                HCD             
+ ================ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+frag_min_mz
+######################
+
+
+Minimal considered fragment ion m/z
+
+:Default value: 150
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *frag_min_mz*
+"""""""""""""""""""""""""""""""""""""""""""
+
+ ============================= =============================
+ Style                         Translation                  
+ ============================= =============================
+ xtandem_style_1               spectrum, minimum fragment mz
+ ============================= =============================
+
+.. raw:: html
+
+      <hr />
+
+ftp_blocksize
+########################
+
+
+Blocksize for ftp download
+
+:Default value: 1024
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* get_ftp_files_1_0_0
+
+Ursgal value translations for *ftp_blocksize*
+"""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ get_http_style_1 ftp_blocksize   
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+ftp_folder
+#####################
+
+
+ftp folder that should be downloaded
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* get_ftp_files_1_0_0
+
+Ursgal value translations for *ftp_folder*
+""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ get_http_style_1 ftp_folder      
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+ftp_include_ext
+##########################
+
+
+Only files with the defined file extension are downloaded with ftp download
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* get_ftp_files_1_0_0
+
+Ursgal value translations for *ftp_include_ext*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ get_http_style_1 ftp_include_ext 
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+ftp_max_number_of_files
+##################################
+
+
+Maximum number of files that will be downloaded
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* get_ftp_files_1_0_0
+
+Ursgal value translations for *ftp_max_number_of_files*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ get_http_style_1        ftp_max_number_of_files
+ ======================= =======================
+
+.. raw:: html
+
+      <hr />
+
+ftp_output_folder
+############################
+
+
+Default ftp download path
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* get_ftp_files_1_0_0
+
+Ursgal value translations for *ftp_output_folder*
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ get_http_style_1  ftp_output_folder
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+ftp_password
+#######################
+
+
+ftp download password
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* get_ftp_files_1_0_0
+
+Ursgal value translations for *ftp_password*
+""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ get_http_style_1 ftp_password    
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+ftp_url
+##################
+
+
+ftp download URL, will fail if it is not set by the user
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* get_ftp_files_1_0_0
+
+Ursgal value translations for *ftp_url*
+"""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ get_http_style_1 ftp_url         
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+header_translations
+##############################
+
+
+Translate output headers into Ursgal unify_csv style headers
+
+:Default value: None
+:type: 
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* novor_1_1beta
+* omssa_2_1_9
+* pepnovo_3_1
+
+Ursgal value translations for *header_translations*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ msamanda_style_1    header_translations
+ novor_style_1       header_translations
+ omssa_style_1       header_translations
+ pepnovo_style_1     header_translations
+ =================== ===================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================================ ================================ ================================ ================================ ================================
+ Ursgal Value                     Translated Value                                                                                                                   
+ -------------------------------- -----------------------------------------------------------------------------------------------------------------------------------
+ .                                msamanda_style_1                 novor_style_1                    omssa_style_1                    pepnovo_style_1                 
+ ================================ ================================ ================================ ================================ ================================
+  Accession                       n/t                              n/t                              Accession                        n/t                             
+  Charge                          n/t                              n/t                              Charge                           n/t                             
+  Defline                         n/t                              n/t                              proteinacc_start_stop_pre_post_; n/t                             
+  E-value                         n/t                              n/t                              OMSSA:evalue                     n/t                             
+  Filename/id                     n/t                              n/t                              Spectrum Title                   n/t                             
+  Mass                            n/t                              n/t                              Exp m/z                          n/t                             
+  Mods                            n/t                              n/t                              Modifications                    n/t                             
+  NIST score                      n/t                              n/t                              NIST score                       n/t                             
+  P-value                         n/t                              n/t                              OMSSA:pvalue                     n/t                             
+  Peptide                         n/t                              n/t                              Sequence                         n/t                             
+  RT                              n/t                              Retention Time (s)               n/t                              n/t                             
+  Start                           n/t                              n/t                              Start                            n/t                             
+  Stop                            n/t                              n/t                              Stop                             n/t                             
+  Theo Mass                       n/t                              n/t                              Calc m/z                         n/t                             
+  aaScore                         n/t                              Novor:aaScore                    n/t                              n/t                             
+  err(data-denovo)                n/t                              Error (exp-calc)                 n/t                              n/t                             
+  gi                              n/t                              n/t                              gi                               n/t                             
+  mz(data)                        n/t                              Exp m/z                          n/t                              n/t                             
+  pepMass(denovo)                 n/t                              Calc mass                        n/t                              n/t                             
+  peptide                         n/t                              Sequence                         n/t                              n/t                             
+  ppm(1e6*err/(mz*z))             n/t                              Error (ppm)                      n/t                              n/t                             
+  scanNum                         n/t                              Spectrum ID                      n/t                              n/t                             
+  score                           n/t                              Novor:score                      n/t                              n/t                             
+  z                               n/t                              Charge                           n/t                              n/t                             
+ # id                             n/t                              Novor:id                         n/t                              n/t                             
+ #Index                           n/t                              n/t                              n/t                              Pepnovo:id                      
+ Amanda Score                     Amanda:Score                     n/t                              n/t                              n/t                             
+ C-Gap                            n/t                              n/t                              n/t                              Pepnovo:C-Gap                   
+ Charge                           Charge                           n/t                              n/t                              n/t                             
+ CumProb                          n/t                              n/t                              n/t                              Pepnovo:CumProb                 
+ Filename                         Filename                         n/t                              n/t                              n/t                             
+ Modifications                    Modifications                    n/t                              n/t                              n/t                             
+ N-Gap                            n/t                              n/t                              n/t                              Pepnovo:N-Gap                   
+ PnvScr                           n/t                              n/t                              n/t                              Pepnovo:PnvScr                  
+ Protein Accessions               proteinacc_start_stop_pre_post_; n/t                              n/t                              n/t                             
+ RT                               Retention Time (s)               n/t                              n/t                              n/t                             
+ Rank                             Rank                             n/t                              n/t                              n/t                             
+ RnkScr                           n/t                              n/t                              n/t                              Pepnovo:RnkScr                  
+ Scan Number                      Spectrum ID                      n/t                              n/t                              n/t                             
+ Sequence                         Sequence                         n/t                              n/t                              n/t                             
+ Spectrum number                  n/t                              n/t                              Spectrum ID                      n/t                             
+ Title                            Spectrum Title                   n/t                              n/t                              n/t                             
+ Weighted Probability             Amanda:Weighted Probability      n/t                              n/t                              n/t                             
+ [M+H]                            n/t                              n/t                              n/t                              Calc mass(Da)                   
+ m/z                              Exp m/z                          n/t                              n/t                              n/t                             
+ output_aa_probs                  n/t                              n/t                              n/t                              Pepnovo:aaScore                 
+ ================================ ================================ ================================ ================================ ================================
+
+.. raw:: html
+
+      <hr />
+
+helper_extension
+###########################
+
+
+Exension for helper files
+
+:Default value: .u.json
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *helper_extension*
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ ucontroller_style_1 helper_extension   
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+http_output_folder
+#############################
+
+
+Default http download path
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* get_http_files_1_0_0
+
+Ursgal value translations for *http_output_folder*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ get_http_style_1   http_output_folder
+ ================== ==================
+
+.. raw:: html
+
+      <hr />
+
+http_url
+###################
+
+
+http download URL, will fail if it is not set by the user
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* get_http_files_1_0_0
+
+Ursgal value translations for *http_url*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ get_http_style_1 http_url        
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+instrument
+#####################
+
+
+Type of mass spectrometer (used to determine the scoring model)
+
+:Default value: q_exactive
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msgfplus_v9979
+* novor_1_1beta
+
+Ursgal value translations for *instrument*
+""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msgfplus_style_1 -inst           
+ novor_style_1    massAnalyzer    
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================ ================
+ Ursgal Value     Translated Value                 
+ ---------------- ---------------------------------
+ .                msgfplus_style_1 novor_style_1   
+ ================ ================ ================
+ high_res_ltq     1                Trap            
+ low_res_ltq      0                Trap            
+ q_exactive       3                FT              
+ tof              2                TOF             
+ ================ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+intensity_cutoff
+###########################
+
+
+Low intensity cutoff as a fraction of max peak
+
+:Default value: 0.0
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *intensity_cutoff*
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -cl             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+json_extension
+#########################
+
+
+Exension for .json files
+
+:Default value: .u.json
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *json_extension*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ ucontroller_style_1 json_extension     
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+label
+################
+
+
+15N if the corresponding amino acid labeling was applied
+
+:Default value: 14N
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *label*
+"""""""""""""""""""""""""""""""""""""
+
+ =================================== ===================================
+ Style                               Translation                        
+ =================================== ===================================
+ msamanda_style_1                    label                              
+ msgfplus_style_1                    label                              
+ myrimatch_style_1                   label                              
+ omssa_style_1                       ('-tem', '-tom')                   
+ xtandem_style_1                     protein, modified residue mass file
+ =================================== ===================================
+
+.. raw:: html
+
+      <hr />
+
+machine_offset_in_ppm
+################################
+
+
+Machine offset, m/z values will be corected/shifted by the given value.
+
+:Default value: 0.0
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzml2mgf_1_0_0
+
+Ursgal value translations for *machine_offset_in_ppm*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ===================== =====================
+ Style                 Translation          
+ ===================== =====================
+ mzml2mgf_style_1      machine_offset_in_ppm
+ ===================== =====================
+
+.. raw:: html
+
+      <hr />
+
+max_accounted_observed_peaks
+#######################################
+
+
+Maximum number of peaks from a spectrum used.
+
+:Default value: 100
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *max_accounted_observed_peaks*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ===================== =====================
+ Style                 Translation          
+ ===================== =====================
+ myrimatch_style_1     MaxPeakCount         
+ xtandem_style_1       spectrum, total peaks
+ ===================== =====================
+
+.. raw:: html
+
+      <hr />
+
+max_missed_cleavages
+###############################
+
+
+Maximum number of missed cleavages per peptide
+
+:Default value: 2
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *max_missed_cleavages*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ====================================== ======================================
+ Style                                  Translation                           
+ ====================================== ======================================
+ msamanda_style_1                       missed_cleavages                      
+ myrimatch_style_1                      MaxMissedCleavages                    
+ omssa_style_1                          -v                                    
+ xtandem_style_1                        scoring, maximum missed cleavage sites
+ ====================================== ======================================
+
+.. raw:: html
+
+      <hr />
+
+max_mod_alternatives
+###############################
+
+
+Maximal number of variable modification alternatives, given as C in 2^C
+
+:Default value: 6
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_vengeance
+
+Ursgal value translations for *max_mod_alternatives*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ xtandem_style_1         protein, ptm complexity
+ ======================= =======================
+
+.. raw:: html
+
+      <hr />
+
+max_num_mods
+#######################
+
+
+Maximal number of modifications per peptide
+
+:Default value: 3
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+
+Ursgal value translations for *max_num_mods*
+""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msgfplus_style_1  NumMods          
+ myrimatch_style_1 MaxDynamicMods   
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+max_num_of_ions_per_series_to_search
+###############################################
+
+
+Max number of ions in each series being searched (0=all)
+
+:Default value: all
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *max_num_of_ions_per_series_to_search*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -sp             
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                omssa_style_1   
+ ================ ================
+ all              0               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+max_num_per_mod
+##########################
+
+
+Maximal number of modification sites per peptide for a specific modification, given as a dictionary: {unimod_name : number}
+
+:Default value: {}
+:type: dict
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_vengeance
+
+Ursgal value translations for *max_num_per_mod*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================================== ====================================
+ Style                                Translation                         
+ ==================================== ====================================
+ xtandem_style_1                      residue, potential modification mass
+ ==================================== ====================================
+
+.. raw:: html
+
+      <hr />
+
+max_output_e_value
+#############################
+
+
+Highest e-value for reported peptides
+
+:Default value: 1.0
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *max_output_e_value*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================================= =======================================
+ Style                                   Translation                            
+ ======================================= =======================================
+ omssa_style_1                           -he                                    
+ xtandem_style_1                         output, maximum valid expectation value
+ ======================================= =======================================
+
+.. raw:: html
+
+      <hr />
+
+max_pep_length
+#########################
+
+
+Maximal length of a peptide
+
+:Default value: 40
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+
+Ursgal value translations for *max_pep_length*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msgfplus_style_1  -maxLength       
+ myrimatch_style_1 MaxPeptideLength 
+ omssa_style_1     -nox             
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+max_pep_var
+######################
+
+
+Maximal peptide variants
+
+:Default value: 1000000
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+
+Ursgal value translations for *max_pep_var*
+"""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ msgfplus_style_1   -maxLength        
+ myrimatch_style_1  MaxPeptideVariants
+ omssa_style_1      -nox              
+ ================== ==================
+
+.. raw:: html
+
+      <hr />
+
+mgf_input_file
+#########################
+
+
+Path to input .mgf file
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* novor_1_1beta
+* omssa_2_1_9
+* pepnovo_3_1
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *mgf_input_file*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msamanda_style_1 mgf_input_file  
+ msgfplus_style_1 -s              
+ novor_style_1    -f              
+ omssa_style_1    -fm             
+ pepnovo_style_1  -file           
+ xtandem_style_1  spectrum, path  
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+min_output_score
+###########################
+
+
+Lowest score for reported peptides. If set to 'default', default values fo each engine will be used.
+
+:Default value: default
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* pepnovo_3_1
+
+Ursgal value translations for *min_output_score*
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ myrimatch_style_1 MinResultScore   
+ pepnovo_style_1   -min_filter_prob 
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= ================= =================
+ Ursgal Value      Translated Value                   
+ ----------------- -----------------------------------
+ .                 myrimatch_style_1 pepnovo_style_1  
+ ================= ================= =================
+ default           1e-07             0.9              
+ ================= ================= =================
+
+.. raw:: html
+
+      <hr />
+
+min_pep_length
+#########################
+
+
+Minimal length of a peptide
+
+:Default value: 6
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+
+Ursgal value translations for *min_pep_length*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msgfplus_style_1  -minLength       
+ myrimatch_style_1 MinPeptideLength 
+ omssa_style_1     -no              
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+min_precursor_matches
+################################
+
+
+Minimum number of precursors that match a spectrum.
+
+:Default value: 1
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *min_precursor_matches*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -pc             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+min_required_matched_peaks
+#####################################
+
+
+Mimimum number of matched ions required for a peptide to be scored
+
+:Default value: 4
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *min_required_matched_peaks*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ========================== ==========================
+ Style                      Translation               
+ ========================== ==========================
+ myrimatch_style_1          MinMatchedFragments       
+ omssa_style_1              -hm                       
+ xtandem_style_1            scoring, minimum ion count
+ ========================== ==========================
+
+.. raw:: html
+
+      <hr />
+
+min_required_observed_peaks
+######################################
+
+
+Mimimum number of peaks in the spectrum to be considered.
+
+:Default value: 5
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *min_required_observed_peaks*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ omssa_style_1           -hs                    
+ xtandem_style_1         spectrum, minimum peaks
+ ======================= =======================
+
+.. raw:: html
+
+      <hr />
+
+modifications
+########################
+
+
+Modifications are given as a list of strings, each representing the modification of one amino acid. The string consists of four informations seperated by comma:
+
+'amino acid,type,position,unimod name'
+
+ amino acid : specify the modified amino acid as a single letter, use '*' if the amino acid is variable
+
+ type   : specify if it is a fixed (fix) or potential (opt) modification
+
+ position  : specify the position within the protein/peptide (Prot-N-term, Prot-C-term), use 'any' if the positon is variable
+
+ unimod name : specify the unimod PSI-MS Name (see unimod.org)
+
+Examples:
+
+ [ 'M,opt,any,Oxidation' ]   - potential oxidation of Met at any position within a peptide
+
+ [ '*,opt,Prot-N-term,Acetyl' ]  - potential acetylation of any amino acid at the N-terminus of a protein
+
+ [ 'S,opt,any,Phospho' ]   - potential phosphorylation of Serine at any position within a peptide
+
+ ['C,fix,any,Carbamidomethyl', 'N,opt,any,Deamidated', 'Q,opt,any,Deamidated'] - fixed carbamidomethylation of Cys and potential deamidation of Asn and/or Gln at any position within a peptide
+
+Additionally, userdefined modifications can be given and are written to a userdefined_unimod.xml in ursgal/kb/ext. Userdefined modifications need to have a unique name instead of the unimod name the chemical composition needs to be given as a Hill notation on the fifth position in the string
+
+Example:
+
+ [ 'S,opt,any,New_mod,C2H5N1O3' ]
+
+:Default value: ['*,opt,Prot-N-term,Acetyl', 'M,opt,any,Oxidation']
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* novor_1_1beta
+* omssa_2_1_9
+* pepnovo_3_1
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *modifications*
+"""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msamanda_style_1  modifications    
+ msgfplus_style_1  -mod             
+ myrimatch_style_1 ('DynamicMods', 'StaticMods')
+ novor_style_1     ('variableModifications', 'fixedModifications')
+ omssa_style_1     ('-mv', 'mf')    
+ pepnovo_style_1   -PTMs            
+ xtandem_style_1   ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone')
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+msgfplus_protocol_id
+###############################
+
+
+MS-GF+ specific protocol identifier. Protocols are used to enable scoring parameters for enriched and/or labeled samples.
+
+:Default value: 0
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msgfplus_v9979
+
+Ursgal value translations for *msgfplus_protocol_id*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msgfplus_style_1 -protocol       
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+myrimatch_class_size_multiplier
+##########################################
+
+
+Myrimatch ClassSizeMultiplier
+
+:Default value: 2
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+
+Ursgal value translations for *myrimatch_class_size_multiplier*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ myrimatch_style_1   ClassSizeMultiplier
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+myrimatch_num_int_classes
+####################################
+
+
+Myrimatch NumIntensityClasses
+
+:Default value: 3
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+
+Ursgal value translations for *myrimatch_num_int_classes*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ myrimatch_style_1   NumIntensityClasses
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+myrimatch_num_mz_fidelity_classes
+############################################
+
+
+Myrimatch NumMzFidelityClasses
+
+:Default value: 3
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+
+Ursgal value translations for *myrimatch_num_mz_fidelity_classes*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ myrimatch_style_1    NumMzFidelityClasses
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
+myrimatch_prot_sampl_time
+####################################
+
+
+Myrimatch ProteinSamplingTime
+
+:Default value: 15
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+
+Ursgal value translations for *myrimatch_prot_sampl_time*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ myrimatch_style_1   ProteinSamplingTime
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+myrimatch_smart_plus_three
+#####################################
+
+
+Use Myrimatch UseSmartPlusThreeModel
+
+:Default value: True
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+
+Ursgal value translations for *myrimatch_smart_plus_three*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ====================== ======================
+ Style                  Translation           
+ ====================== ======================
+ myrimatch_style_1      UseSmartPlusThreeModel
+ ====================== ======================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= =================
+ Ursgal Value      Translated Value 
+ ----------------- -----------------
+ .                 myrimatch_style_1
+ ================= =================
+ 0                 0                
+ 1                 1                
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+myrimatch_tic_cutoff
+###############################
+
+
+Myrimatch TicCutoffPercentage
+
+:Default value: 0.98
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+
+Ursgal value translations for *myrimatch_tic_cutoff*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ myrimatch_style_1   TicCutoffPercentage
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+mzidentml_compress
+#############################
+
+
+Compress mzidentml_lib output files
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzidentml_lib_1_6_10
+* mzidentml_lib_1_6_11
+
+Ursgal value translations for *mzidentml_compress*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ mzidentml_style_1 -compress        
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= =================
+ Ursgal Value      Translated Value 
+ ----------------- -----------------
+ .                 mzidentml_style_1
+ ================= =================
+ 0                 false            
+ 1                 true             
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+mzidentml_converter_version
+######################################
+
+
+mzidentml converter version: version name
+
+:Default value: mzidentml_lib_1_6_10
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *mzidentml_converter_version*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =========================== ===========================
+ Style                       Translation                
+ =========================== ===========================
+ ucontroller_style_1         mzidentml_converter_version
+ =========================== ===========================
+
+.. raw:: html
+
+      <hr />
+
+mzidentml_export_type
+################################
+
+
+Defines which paramters shoul be exporte by mzidentml_lib
+
+:Default value: exportPSMs
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzidentml_lib_1_6_10
+* mzidentml_lib_1_6_11
+
+Ursgal value translations for *mzidentml_export_type*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ mzidentml_style_1 -exportType      
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+mzidentml_function
+#############################
+
+
+Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far
+
+:Default value: Mzid2Csv
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzidentml_lib_1_6_10
+* mzidentml_lib_1_6_11
+
+Ursgal value translations for *mzidentml_function*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ mzidentml_style_1  mzidentml_function
+ ================== ==================
+
+.. raw:: html
+
+      <hr />
+
+mzidentml_output_fragmentation
+#########################################
+
+
+Include fragmentation in mzidentml_lib output
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzidentml_lib_1_6_10
+* mzidentml_lib_1_6_11
+
+Ursgal value translations for *mzidentml_output_fragmentation*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ mzidentml_style_1    -outputFragmentation
+ ==================== ====================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= =================
+ Ursgal Value      Translated Value 
+ ----------------- -----------------
+ .                 mzidentml_style_1
+ ================= =================
+ 0                 false            
+ 1                 true             
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+mzidentml_verbose_output
+###################################
+
+
+Verbose mzidentml_lib output
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzidentml_lib_1_6_10
+* mzidentml_lib_1_6_11
+
+Ursgal value translations for *mzidentml_verbose_output*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ mzidentml_style_1 -verboseOutput   
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= =================
+ Ursgal Value      Translated Value 
+ ----------------- -----------------
+ .                 mzidentml_style_1
+ ================= =================
+ 0                 false            
+ 1                 true             
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+mzml2mgf_converter_version
+#####################################
+
+
+mzml to mgf converter version: version name
+
+:Default value: mzml2mgf_1_0_0
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *mzml2mgf_converter_version*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ========================== ==========================
+ Style                      Translation               
+ ========================== ==========================
+ ucontroller_style_1        mzml2mgf_converter_version
+ ========================== ==========================
+
+.. raw:: html
+
+      <hr />
+
+neutral_loss_enabled
+###############################
+
+
+Neutral losses enabled for spectrum algorithm: set  True or False
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *neutral_loss_enabled*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================================= =================================
+ Style                             Translation                      
+ ================================= =================================
+ xtandem_style_1                   spectrum, use neutral loss window
+ ================================= =================================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                xtandem_style_1 
+ ================ ================
+ 0                no              
+ 1                yes             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+neutral_loss_mass
+############################
+
+
+Sets the centre of the window for ignoring neutral molecule losses.
+
+:Default value: 0
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *neutral_loss_mass*
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =========================== ===========================
+ Style                       Translation                
+ =========================== ===========================
+ xtandem_style_1             spectrum, neutral loss mass
+ =========================== ===========================
+
+.. raw:: html
+
+      <hr />
+
+neutral_loss_window
+##############################
+
+
+Neutral loss window: sets the width of the window for ignoring neutral molecule losses.
+
+:Default value: 0
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *neutral_loss_window*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================= =============================
+ Style                         Translation                  
+ ============================= =============================
+ xtandem_style_1               spectrum, neutral loss window
+ ============================= =============================
+
+.. raw:: html
+
+      <hr />
+
+noise_suppression_enabled
+####################################
+
+
+Used noise suppresssion
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+
+Ursgal value translations for *noise_suppression_enabled*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =============================== ===============================
+ Style                           Translation                    
+ =============================== ===============================
+ xtandem_style_1                 spectrum, use noise suppression
+ =============================== ===============================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                xtandem_style_1 
+ ================ ================
+ 0                no              
+ 1                yes             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+num_hits_retain_spec
+###############################
+
+
+Maximum number of hits retained per precursor charge state per spectrum during the search
+
+:Default value: 30
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *num_hits_retain_spec*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -hl             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+num_i_decimals
+#########################
+
+
+Number of decimals for intensity (peak)
+
+:Default value: 5
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzml2mgf_1_0_0
+
+Ursgal value translations for *num_i_decimals*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ mzml2mgf_style_1     number_of_i_decimals
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
+num_match_spec
+#########################
+
+
+Maximum number of peptide spectrum matches to report for each spectrum
+
+:Default value: 10
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* pepnovo_3_1
+
+Ursgal value translations for *num_match_spec*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msamanda_style_1  max_rank         
+ msgfplus_style_1  -n               
+ myrimatch_style_1 MaxResultRank    
+ omssa_style_1     -hc              
+ pepnovo_style_1   -num_solutions   
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+num_mz_decimals
+##########################
+
+
+Number of decimals for m/z mass
+
+:Default value: 5
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzml2mgf_1_0_0
+
+Ursgal value translations for *num_mz_decimals*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ===================== =====================
+ Style                 Translation          
+ ===================== =====================
+ mzml2mgf_style_1      number_of_mz_decimals
+ ===================== =====================
+
+.. raw:: html
+
+      <hr />
+
+omssa_cp
+###################
+
+
+Omssa: eliminate charge reduced precursors in spectra
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_cp*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -cp             
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                omssa_style_1   
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_h1
+###################
+
+
+Omssa: number of peaks allowed in single charge window
+
+:Default value: 2
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_h1*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -h1             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_h2
+###################
+
+
+Omssa: number of peaks allowed in double charge window
+
+:Default value: 2
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_h2*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -h2             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_ht
+###################
+
+
+Omssa: number of m/z values corresponding to the most intense peaks that must include one match to the theoretical peptide
+
+:Default value: 6
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_ht*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -ht             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_mm
+###################
+
+
+Omssa: the maximum number of mass ladders to generate per database peptide
+
+:Default value: 128
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_mm*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -mm             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_ta
+###################
+
+
+Omssa: automatic mass tolerance adjustment fraction
+
+:Default value: 1.0
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_ta*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -ta             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_tex
+####################
+
+
+Omssa: threshold in Da above which the mass of neutron should be added in exact mass search
+
+:Default value: 1446.94
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_tex*
+"""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -tex            
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_verbose
+########################
+
+
+Omssa: verbose info print
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_verbose*
+"""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -ni             
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                omssa_style_1   
+ ================ ================
+ 0                                
+ 1                -ni             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_w1
+###################
+
+
+Omssa: single charge window in Da
+
+:Default value: 27
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_w1*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -w1             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_w2
+###################
+
+
+Omssa: double charge window in Da
+
+:Default value: 14
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_w2*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -w2             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_z1
+###################
+
+
+Omssa: fraction of peaks below precursor used to determine if spectrum is charge 1
+
+:Default value: 0.95
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_z1*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -z1             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_zc
+###################
+
+
+Should charge plus one be determined algorithmically?
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_zc*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -zc             
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                omssa_style_1   
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_zcc
+####################
+
+
+Omssa: how should precursor charges be determined?, use a range
+
+:Default value: 2
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_zcc*
+"""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -zcc            
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+omssa_zt
+###################
+
+
+Minimum precursor charge to start considering multiply charged products
+
+:Default value: 3
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *omssa_zt*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -zt             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+output_aa_probs
+##########################
+
+
+Output probabilities for each amino acid.
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pepnovo_3_1
+
+Ursgal value translations for *output_aa_probs*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pepnovo_style_1  -output_aa_probs
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+output_add_features
+##############################
+
+
+Number of decimals for intensity (peak)
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msgfplus_v9979
+
+Ursgal value translations for *output_add_features*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msgfplus_style_1 -addFeatures    
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                msgfplus_style_1
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+output_cum_probs
+###########################
+
+
+Output cumulative probabilities.
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pepnovo_3_1
+
+Ursgal value translations for *output_cum_probs*
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ pepnovo_style_1   -output_cum_probs
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+output_file_incl_path
+################################
+
+
+Path to output file
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* generate_target_decoy_1_0_0
+* merge_csv_1_0_0
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* mzidentml_lib_1_6_10
+* mzidentml_lib_1_6_11
+* novor_1_1beta
+* omssa_style_1
+* pepnovo_3_1
+* percolator_2_08
+* qvality_2_02
+* venndiagram_1_0_0
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *output_file_incl_path*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================= =============================
+ Style                         Translation                  
+ ============================= =============================
+ generate_target_decoy_style_1 output_file                  
+ merge_csv_style_1             output                       
+ msamanda_style_1              output_file_incl_path        
+ msgfplus_style_1              -o                           
+ myrimatch_style_1             output_file_incl_path        
+ mzidentml_style_1             output_file_incl_path        
+ novor_style_1                 output_file_incl_path        
+ omssa_style_1                 output_file_incl_path        
+ pepnovo_style_1               output_file_incl_path        
+ percolator_style_1            output_file_incl_path        
+ qvality_style_1               -o                           
+ venndiagram_style_1           output_file                  
+ xtandem_style_1               output, path                 
+ ============================= =============================
+
+.. raw:: html
+
+      <hr />
+
+output_file_type
+###########################
+
+
+Output file type. If set to 'default', default output file tzpes for each engine are used. Note: not every file type is supported by every engine and usin non-default types might cause problems during conversion to .csv.
+
+:Default value: default
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *output_file_type*
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    ('-oc', '-ox')  
+ xtandem_style_1  output, mzid    
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================ ================
+ Ursgal Value     Translated Value                 
+ ---------------- ---------------------------------
+ .                omssa_style_1    xtandem_style_1 
+ ================ ================ ================
+ .csv             -oc              n/t             
+ .mzid            n/t              1               
+ .omx             -ox              n/t             
+ default          -oc              0               
+ ================ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+output_prm
+#####################
+
+
+Only print spectrum graph nodes with scores.
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pepnovo_3_1
+
+Ursgal value translations for *output_prm*
+""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pepnovo_style_1  -prm            
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+output_prm_norm
+##########################
+
+
+Prints spectrum graph scores after normalization and removal of negative scores.
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pepnovo_3_1
+
+Ursgal value translations for *output_prm_norm*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pepnovo_style_1  -prm_norm       
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+pepnovo_tag_length
+#############################
+
+
+Returns peptide sequences of the specified length (only lengths 3-6 are allowed)
+
+:Default value: None
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pepnovo_3_1
+
+Ursgal value translations for *pepnovo_tag_length*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pepnovo_style_1  -tag_length     
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+precursor_charge_dependency
+######################################
+
+
+charge dependency of precursor mass tolerance (none or linear)
+
+:Default value: linear
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *precursor_charge_dependency*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -tez            
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                omssa_style_1   
+ ================ ================
+ linear           1               
+ none             0               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+precursor_isotope_range
+##################################
+
+
+Error range for incorrect carbon isotope parent ion assignment
+
+:Default value: 0,1
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* pepnovo_3_1
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *precursor_isotope_range*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================================================ ================================================
+ Style                                            Translation                                     
+ ================================================ ================================================
+ msgfplus_style_1                                 -ti                                             
+ myrimatch_style_1                                MonoisotopeAdjustmentSet                        
+ omssa_style_1                                    -ti                                             
+ pepnovo_style_1                                  -correct_pm                                     
+ xtandem_style_1                                  spectrum, parent monoisotopic mass isotope error
+ ================================================ ================================================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= ================= ================= =================
+ Ursgal Value      Translated Value                                     
+ ----------------- -----------------------------------------------------
+ .                 myrimatch_style_1 omssa_style_1     xtandem_style_1  
+ ================= ================= ================= =================
+ 0                 [0,]              0                 no               
+ 0,1               [0,1]             1                 yes              
+ 0,1,2             [0,1,2]           n/t               n/t              
+ 0,2               n/t               2                 yes              
+ ================= ================= ================= =================
+
+.. raw:: html
+
+      <hr />
+
+precursor_mass_tolerance_minus
+#########################################
+
+
+Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H
+
+:Default value: 5
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* novor_1_1beta
+* omssa_2_1_9
+* pepnovo_3_1
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *precursor_mass_tolerance_minus*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================================== ==============================================
+ Style                                          Translation                                   
+ ============================================== ==============================================
+ msamanda_style_1                               ms1_tol                                       
+ msgfplus_style_1                               -t                                            
+ myrimatch_style_1                              MonoPrecursorMzTolerance                      
+ novor_style_1                                  precursorErrorTol                             
+ omssa_style_1                                  -te                                           
+ pepnovo_style_1                                -pm_tolerance                                 
+ xtandem_style_1                                spectrum, parent monoisotopic mass error minus
+ ============================================== ==============================================
+
+.. raw:: html
+
+      <hr />
+
+precursor_mass_tolerance_plus
+########################################
+
+
+Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H
+
+:Default value: 5
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* novor_1_1beta
+* omssa_2_1_9
+* pepnovo_3_1
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *precursor_mass_tolerance_plus*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================================= =============================================
+ Style                                         Translation                                  
+ ============================================= =============================================
+ msamanda_style_1                              ms1_tol                                      
+ msgfplus_style_1                              -t                                           
+ myrimatch_style_1                             MonoPrecursorMzTolerance                     
+ novor_style_1                                 precursorErrorTol                            
+ omssa_style_1                                 -te                                          
+ pepnovo_style_1                               -pm_tolerance                                
+ xtandem_style_1                               spectrum, parent monoisotopic mass error plus
+ ============================================= =============================================
+
+.. raw:: html
+
+      <hr />
+
+precursor_mass_tolerance_unit
+########################################
+
+
+Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit)
+
+:Default value: ppm
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* novor_1_1beta
+* omssa_2_1_9
+* pepnovo_3_1
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *precursor_mass_tolerance_unit*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================================== ==============================================
+ Style                                          Translation                                   
+ ============================================== ==============================================
+ msamanda_style_1                               ms1_tol unit                                  
+ msgfplus_style_1                               -t                                            
+ myrimatch_style_1                              MonoPrecursorMzTolerance                      
+ novor_style_1                                  precursorErrorTol                             
+ omssa_style_1                                  -teppm                                        
+ pepnovo_style_1                                precursor_mass_tolerance_unit                 
+ xtandem_style_1                                spectrum, parent monoisotopic mass error units
+ ============================================== ==============================================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= ================= ================= ================= ================= ================= =================
+ Ursgal Value      Translated Value                                                                                           
+ ----------------- -----------------------------------------------------------------------------------------------------------
+ .                 msamanda_style_1  msgfplus_style_1  myrimatch_style_1 novor_style_1     omssa_style_1     xtandem_style_1  
+ ================= ================= ================= ================= ================= ================= =================
+ da                Da                Da                Da                Da                                  Daltons          
+ ppm               n/t               n/t               n/t               n/t               -teppm            n/t              
+ ================= ================= ================= ================= ================= ================= =================
+
+.. raw:: html
+
+      <hr />
+
+precursor_mass_type
+##############################
+
+
+Precursor mass type: monoisotopic or average
+
+:Default value: monoisotopic
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+
+Ursgal value translations for *precursor_mass_type*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================== ========================
+ Style                    Translation             
+ ======================== ========================
+ msamanda_style_1         monoisotopic            
+ myrimatch_style_1        PrecursorMzToleranceRule
+ omssa_style_1            -tem                    
+ ======================== ========================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= ================= ================= =================
+ Ursgal Value      Translated Value                                     
+ ----------------- -----------------------------------------------------
+ .                 msamanda_style_1  myrimatch_style_1 omssa_style_1    
+ ================= ================= ================= =================
+ average           false             average           1                
+ monoisotopic      true              mono              0                
+ ================= ================= ================= =================
+
+.. raw:: html
+
+      <hr />
+
+precursor_max_charge
+###############################
+
+
+Maximal accepted parent ion charge
+
+:Default value: 5
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+
+Ursgal value translations for *precursor_max_charge*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ msamanda_style_1   considered_charges
+ msgfplus_style_1   -maxCharge        
+ myrimatch_style_1  NumChargeStates   
+ omssa_style_1      -zh               
+ ================== ==================
+
+.. raw:: html
+
+      <hr />
+
+precursor_max_mass
+#############################
+
+
+Maximal parent ion mass
+
+:Default value: 10000
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+
+Ursgal value translations for *precursor_max_mass*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================ ============================
+ Style                        Translation                 
+ ============================ ============================
+ myrimatch_style_1            MaxPeptideMass              
+ xtandem_style_1              spectrum, minimum parent m+h
+ ============================ ============================
+
+.. raw:: html
+
+      <hr />
+
+precursor_min_charge
+###############################
+
+
+Minimal accepted parent ion charge
+
+:Default value: 1
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* omssa_2_1_9
+
+Ursgal value translations for *precursor_min_charge*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ msamanda_style_1   considered_charges
+ msgfplus_style_1   -minCharge        
+ omssa_style_1      -zl               
+ ================== ==================
+
+.. raw:: html
+
+      <hr />
+
+precursor_min_mass
+#############################
+
+
+Minimal parent ion mass
+
+:Default value: 400
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *precursor_min_mass*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================ ============================
+ Style                        Translation                 
+ ============================ ============================
+ myrimatch_style_1            MinPeptideMass              
+ xtandem_style_1              spectrum, minimum parent m+h
+ ============================ ============================
+
+.. raw:: html
+
+      <hr />
+
+prefix
+#################
+
+
+
+
+:Default value: None
+:type: 
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *prefix*
+""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ ucontroller_style_1 prefix             
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+qvality_cross_validation
+###################################
+
+
+The relative crossvalidation step size used as treshhold before ending the iterations, qvality determines step size automatically when set to 0
+
+:Default value: 0
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* qvality_2_02
+
+Ursgal value translations for *qvality_cross_validation*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ qvality_style_1  -c              
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+qvality_epsilon_step
+###############################
+
+
+The relative step size used as treshhold before cross validation error is calculated, qvality determines step size automatically when set to 0
+
+:Default value: 0
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* qvality_2_02
+
+Ursgal value translations for *qvality_epsilon_step*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ qvality_style_1  -s              
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+qvality_number_of_bins
+#################################
+
+
+Number of bins used in qvality
+
+:Default value: 500
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* qvality_2_02
+
+Ursgal value translations for *qvality_number_of_bins*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ qvality_style_1  -n              
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+qvality_verbose
+##########################
+
+
+Verbose qvality output (range from 0 = no processing info to 5 = all)
+
+:Default value: 2
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* qvality_2_02
+
+Ursgal value translations for *qvality_verbose*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ qvality_style_1  -v              
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+raw_ident_csv_suffix
+###############################
+
+
+CSV suffix of raw indentification: this is the conversion result after CSV conversion but before adding retention time
+
+:Default value: .csv
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *raw_ident_csv_suffix*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ ucontroller_style_1  raw_ident_csv_suffix
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
+remove_temporary_files
+#################################
+
+
+Remove temporary files: True or False
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *remove_temporary_files*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ====================== ======================
+ Style                  Translation           
+ ====================== ======================
+ ucontroller_style_1    remove_temporary_files
+ ====================== ======================
+
+.. raw:: html
+
+      <hr />
+
+rt_pickle_name
+#########################
+
+
+name of the pickle that is used to map the retention time
+
+:Default value: _ursgal_lookup.pkl
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *rt_pickle_name*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ ucontroller_style_1 rt_pickle_name     
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+scan_exclusion_list
+##############################
+
+
+Spectra rejected during mzml2mgf conversion
+
+:Default value: []
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzml2mgf_1_0_0
+
+Ursgal value translations for *scan_exclusion_list*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ mzml2mgf_style_1    scan_exclusion_list
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+scan_skip_modulo_step
+################################
+
+
+Include only the n'th spectrum during mzml2mgf conversion
+
+:Default value: None
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzml2mgf_1_0_0
+
+Ursgal value translations for *scan_skip_modulo_step*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ===================== =====================
+ Style                 Translation          
+ ===================== =====================
+ mzml2mgf_style_1      scan_skip_modulo_step
+ ===================== =====================
+
+.. raw:: html
+
+      <hr />
+
+score_-h2o_ions
+##########################
+
+
+Spectrum: if true, ions loss of H2O are respected in algorithm
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+
+Ursgal value translations for *score_-h2o_ions*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msamanda_style_1 series          
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_-nh3_ions
+##########################
+
+
+Spectrum: if true, ions loss of NH3 are respected in algorithm
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+
+Ursgal value translations for *score_-nh3_ions*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msamanda_style_1 series          
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_a_ions
+#######################
+
+
+Spectrum: if true, a ions are used in algorithm
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *score_a_ions*
+""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msamanda_style_1  series           
+ myrimatch_style_1 FragmentationRule
+ omssa_style_1     -i               
+ xtandem_style_1   scoring, a ions  
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================ ================
+ Ursgal Value     Translated Value                 
+ ---------------- ---------------------------------
+ .                omssa_style_1    xtandem_style_1 
+ ================ ================ ================
+ 0                                 no              
+ 1                0                yes             
+ ================ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_b1_ions
+########################
+
+
+first forward (b1) product ions inclued in search
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *score_b1_ions*
+"""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -sb1            
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                omssa_style_1   
+ ================ ================
+ 0                1               
+ 1                0               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_b_ions
+#######################
+
+
+Spectrum: if true, b ions are used in algorithm
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *score_b_ions*
+""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msamanda_style_1  series           
+ myrimatch_style_1 FragmentationRule
+ omssa_style_1     -i               
+ xtandem_style_1   scoring, b ions  
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================ ================
+ Ursgal Value     Translated Value                 
+ ---------------- ---------------------------------
+ .                omssa_style_1    xtandem_style_1 
+ ================ ================ ================
+ 0                                 no              
+ 1                1                yes             
+ ================ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_c_ions
+#######################
+
+
+Spectrum: if true, c ions are used in algorithm
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *score_c_ions*
+""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msamanda_style_1  series           
+ myrimatch_style_1 FragmentationRule
+ omssa_style_1     -i               
+ xtandem_style_1   scoring, c ions  
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================ ================
+ Ursgal Value     Translated Value                 
+ ---------------- ---------------------------------
+ .                omssa_style_1    xtandem_style_1 
+ ================ ================ ================
+ 0                                 no              
+ 1                2                yes             
+ ================ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_c_terminal_ions
+################################
+
+
+Score c terminal ions
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *score_c_terminal_ions*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -sct            
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                omssa_style_1   
+ ================ ================
+ 0                1               
+ 1                0               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_correlation_corr
+#################################
+
+
+Use correlation correction to score?
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* omssa_2_1_9
+
+Ursgal value translations for *score_correlation_corr*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ omssa_style_1    -scorr          
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                omssa_style_1   
+ ================ ================
+ 0                1               
+ 1                0               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_imm_ions
+#########################
+
+
+Spectrum: if true, immonium ions are respected in algorithm
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+
+Ursgal value translations for *score_imm_ions*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msamanda_style_1 series          
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_int_ions
+#########################
+
+
+Spectrum: if true, internal fragment ions are respect in algorithm
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+
+Ursgal value translations for *score_int_ions*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msamanda_style_1 series          
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_x_ions
+#######################
+
+
+Spectrum: if true, x ions are used in algorithm
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *score_x_ions*
+""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msamanda_style_1  series           
+ myrimatch_style_1 FragmentationRule
+ omssa_style_1     -i               
+ xtandem_style_1   scoring, x ions  
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================ ================
+ Ursgal Value     Translated Value                 
+ ---------------- ---------------------------------
+ .                omssa_style_1    xtandem_style_1 
+ ================ ================ ================
+ 0                                 no              
+ 1                3                yes             
+ ================ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_y_ions
+#######################
+
+
+Spectrum: if true, y ions are used in algorithm
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *score_y_ions*
+""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msamanda_style_1  series           
+ myrimatch_style_1 FragmentationRule
+ omssa_style_1     -i               
+ xtandem_style_1   scoring, y ions  
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================ ================
+ Ursgal Value     Translated Value                 
+ ---------------- ---------------------------------
+ .                omssa_style_1    xtandem_style_1 
+ ================ ================ ================
+ 0                                 no              
+ 1                4                yes             
+ ================ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_z+1_ions
+#########################
+
+
+Spectrum: if true, z ion plus 1 Da mass are used in algorithm
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+
+Ursgal value translations for *score_z+1_ions*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msamanda_style_1 series          
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_z+2_ions
+#########################
+
+
+Spectrum: if true z ion plus 2 Da mass are used in algorithm
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+
+Ursgal value translations for *score_z+2_ions*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ msamanda_style_1 series          
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+score_z_ions
+#######################
+
+
+Spectrum: if true, z ions are used in algorithm
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *score_z_ions*
+""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ msamanda_style_1  series           
+ myrimatch_style_1 FragmentationRule
+ omssa_style_1     -i               
+ xtandem_style_1   scoring, z ions  
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================ ================
+ Ursgal Value     Translated Value                 
+ ---------------- ---------------------------------
+ .                omssa_style_1    xtandem_style_1 
+ ================ ================ ================
+ 0                                 no              
+ 1                5                yes             
+ ================ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+search_for_saps
+##########################
+
+
+Search for potential single amino acid polymorphisms. 'True' might cause problems in the downstream processing of th result files (unify_csv, ...)
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *search_for_saps*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ xtandem_style_1  protein, saps   
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                xtandem_style_1 
+ ================ ================
+ 0                no              
+ 1                yes             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+semi_enzyme
+######################
+
+
+Allows semi-enzymatic peptide ends
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msamanda_1_0_0_5242
+* msamanda_1_0_0_5243
+* msamanda_1_0_0_6299
+* msamanda_1_0_0_6300
+* msgfplus_v9979
+* myrimatch_2_1_138
+* myrimatch_2_2_140
+* omssa_2_1_9
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *semi_enzyme*
+"""""""""""""""""""""""""""""""""""""""""""
+
+ ====================== ======================
+ Style                  Translation           
+ ====================== ======================
+ msamanda_style_1       enzyme specificity    
+ msgfplus_style_1       -ntt                  
+ myrimatch_style_1      MinTerminiCleavages   
+ omssa_style_1          semi_enzyme           
+ xtandem_style_1        protein, cleavage semi
+ ====================== ======================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================= ================= ================= ================= =================
+ Ursgal Value      Translated Value                                                       
+ ----------------- -----------------------------------------------------------------------
+ .                 msamanda_style_1  msgfplus_style_1  myrimatch_style_1 xtandem_style_1  
+ ================= ================= ================= ================= =================
+ 0                 Full              2                 2                 no               
+ 1                 Semi              1                 1                 yes              
+ ================= ================= ================= ================= =================
+
+.. raw:: html
+
+      <hr />
+
+show_unodes_in_development
+#####################################
+
+
+Show ursgal nodes that are in development: False or True
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *show_unodes_in_development*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ========================== ==========================
+ Style                      Translation               
+ ========================== ==========================
+ ucontroller_style_1        show_unodes_in_development
+ ========================== ==========================
+
+.. raw:: html
+
+      <hr />
+
+spec_dynamic_range
+#############################
+
+
+Internal normalization for MS/MS spectrum: The highest peak (intensity) within a spectrum is set to given value and all other peaks are normalized to this peak. If the normalized value is less than 1 the peak is rejected.
+
+:Default value: 100
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *spec_dynamic_range*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ xtandem_style_1         spectrum, dynamic range
+ ======================= =======================
+
+.. raw:: html
+
+      <hr />
+
+test_param1
+######################
+
+
+TEST/DEBUG: Internal Ursgal parameter 1 for debugging and testing.
+
+:Default value: b
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* _test_node
+
+Ursgal value translations for *test_param1*
+"""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ _test_node_style_1 test_param1       
+ ================== ==================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================== ==================
+ Ursgal Value       Translated Value  
+ ------------------ ------------------
+ .                  _test_node_style_1
+ ================== ==================
+ a                  A                 
+ b                  B                 
+ c                  C                 
+ d                  D                 
+ e                  E                 
+ ================== ==================
+
+.. raw:: html
+
+      <hr />
+
+test_param2
+######################
+
+
+TEST/DEBUG: Internal Ursgal parameter 2 for debugging and testing.
+
+:Default value: three
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* _test_node
+
+Ursgal value translations for *test_param2*
+"""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ _test_node_style_1 test_param2       
+ ================== ==================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================== ==================
+ Ursgal Value       Translated Value  
+ ------------------ ------------------
+ .                  _test_node_style_1
+ ================== ==================
+ five               5                 
+ four               4                 
+ one                1                 
+ three              3                 
+ two                2                 
+ ================== ==================
+
+.. raw:: html
+
+      <hr />
+
+unify_csv_converter_version
+######################################
+
+
+unify csv converter version: version name
+
+:Default value: unify_csv_1_0_0
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *unify_csv_converter_version*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =========================== ===========================
+ Style                       Translation                
+ =========================== ===========================
+ ucontroller_style_1         unify_csv_converter_version
+ =========================== ===========================
+
+.. raw:: html
+
+      <hr />
+
+use_quality_filter
+#############################
+
+
+Use filter for low quality spectra.
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pepnovo_3_1
+
+Ursgal value translations for *use_quality_filter*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ pepnovo_style_1    -no_quality_filter
+ ================== ==================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                pepnovo_style_1 
+ ================ ================
+ 0                1               
+ 1                0               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+use_refinement
+#########################
+
+
+X! TANDEM can use 'refinement' to improve the speed and accuracy of peptide modelling. This is not included in Ursgal, yet. See further: http://www.thegpm.org/TANDEM/api/refine.html
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *use_refinement*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ xtandem_style_1  refine          
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                xtandem_style_1 
+ ================ ================
+ 0                no              
+ 1                yes             
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+use_spectrum_charge
+##############################
+
+
+Does not correct precusor charge.
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pepnovo_3_1
+
+Ursgal value translations for *use_spectrum_charge*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ pepnovo_style_1      -use_spectrum_charge
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
+use_spectrum_mz
+##########################
+
+
+Does not correct precusor m/z.
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pepnovo_3_1
+
+Ursgal value translations for *use_spectrum_mz*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pepnovo_style_1  -use_spectrum_mz
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+validated_ident_csv_suffix
+#####################################
+
+
+CSV suffix of validated identification files: string, CSV-file which contains PSMs validated with validation tools
+
+:Default value: validated.csv
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *validated_ident_csv_suffix*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ========================== ==========================
+ Style                      Translation               
+ ========================== ==========================
+ ucontroller_style_1        validated_ident_csv_suffix
+ ========================== ==========================
+
+.. raw:: html
+
+      <hr />
+
+validation_generalized
+#################################
+
+
+Generalized target decoy competition, situations where PSMs known to more frequently be incorrect are mixed in with the correct PSMs
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* qvality_2_02
+
+Ursgal value translations for *validation_generalized*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ qvality_style_1  -g              
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                qvality_style_1 
+ ================ ================
+ 0                None            
+ 1                                
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+validation_minimum_score
+###################################
+
+
+Defines the minimum score used fo validation. If scores lower than this are produced, they are set to the minimum score. This is used to avoid huge gaps/jumps in the score distribution
+
+:Default value: None
+:type: 
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* qvality_2_02
+
+Ursgal value translations for *validation_minimum_score*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================== ========================
+ Style                    Translation             
+ ======================== ========================
+ qvality_style_1          validation_minimum_score
+ ======================== ========================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ==================== ====================
+ Ursgal Value         Translated Value    
+ -------------------- --------------------
+ .                    qvality_style_1     
+ ==================== ====================
+ msamanda_1_0_0_5242  0                   
+ msamanda_1_0_0_5243  0                   
+ msamanda_1_0_0_6299  0                   
+ msamanda_1_0_0_6300  0                   
+ msgfplus_v9979       1e-100              
+ myrimatch_2_1_138    0                   
+ myrimatch_2_2_140    0                   
+ omssa_2_1_9          1e-30               
+ xtandem_cyclone_2010 0                   
+ xtandem_jackhammer   0                   
+ xtandem_piledriver   0                   
+ xtandem_sledgehammer 0                   
+ xtandem_vengeance    0                   
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
+validation_score_field
+#################################
+
+
+Name of the column that is used for validation, e.g. by qvality and percolator. If None is defined, default values are used
+
+:Default value: None
+:type: 
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* add_estimated_fdr_1_0_0
+* percolator_2_08
+* qvality_2_02
+* ucontroller
+* unify_csv_1_0_0
+
+Ursgal value translations for *validation_score_field*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ========================= =========================
+ Style                     Translation              
+ ========================= =========================
+ add_estimated_fdr_style_1 validation_score_field   
+ percolator_style_1        validation_score_field   
+ qvality_style_1           validation_score_field   
+ ucontroller_style_1       validation_score_field   
+ unify_csv_style_1         validation_score_field   
+ ========================= =========================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ========================= ========================= ========================= ========================= ========================= =========================
+ Ursgal Value              Translated Value                                                                                                                 
+ ------------------------- ---------------------------------------------------------------------------------------------------------------------------------
+ .                         add_estimated_fdr_style_1 percolator_style_1        qvality_style_1           ucontroller_style_1       unify_csv_style_1        
+ ========================= ========================= ========================= ========================= ========================= =========================
+ msamanda_1_0_0_5242       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
+ msamanda_1_0_0_5243       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
+ msamanda_1_0_0_6299       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
+ msamanda_1_0_0_6300       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
+ msgfplus_v9979            MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
+ myrimatch_2_1_138         MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH            
+ myrimatch_2_2_140         MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH            
+ novor_1_1beta             Novor:score               Novor:score               Novor:score               Novor:score               Novor:score              
+ omssa_2_1_9               OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue             
+ pepnovo_3_1               Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr           
+ xtandem_cyclone_2010      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
+ xtandem_jackhammer        X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
+ xtandem_piledriver        X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
+ xtandem_sledgehammer      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
+ xtandem_vengeance         X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
+ ========================= ========================= ========================= ========================= ========================= =========================
+
+.. raw:: html
+
+      <hr />
+
+visualization_column_names
+#####################################
+
+
+The specified csv column names are used for the visualization. E.g. for a Venn diagram the entries of these columns are used (merged) to determine overlapping results.
+
+:Default value: ['Modifications', 'Sequence']
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* venndiagram_1_0_0
+
+Ursgal value translations for *visualization_column_names*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ========================== ==========================
+ Style                      Translation               
+ ========================== ==========================
+ venndiagram_style_1        visualization_column_names
+ ========================== ==========================
+
+.. raw:: html
+
+      <hr />
+
+visualization_font
+#############################
+
+
+Font used for visualiyation plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn)
+
+:Default value: ('Helvetica', 31, 25, 20, 20)
+:type: tuple
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* venndiagram_1_0_0
+
+Ursgal value translations for *visualization_font*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ venndiagram_style_1 visualization_font 
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+visualization_header
+###############################
+
+
+Header of visualization output (e.g. Venn diagram)
+
+:Default value: ursgal Venn Diagram
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* venndiagram_1_0_0
+
+Ursgal value translations for *visualization_header*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ venndiagram_style_1 header             
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+visualization_label_list
+###################################
+
+
+Specifies labels for the datasets that should be visualized. Needs to be given in the same order as the datasets.
+
+:Default value: []
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* venndiagram_1_0_0
+
+Ursgal value translations for *visualization_label_list*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================== ========================
+ Style                    Translation             
+ ======================== ========================
+ venndiagram_style_1      visualization_label_list
+ ======================== ========================
+
+.. raw:: html
+
+      <hr />
+
+visualization_opacity
+################################
+
+
+Opacity used in visualiyation plots (e.g. Venn diagram)
+
+:Default value: 0.35
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* venndiagram_1_0_0
+
+Ursgal value translations for *visualization_opacity*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ venndiagram_style_1 opacity            
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+visualization_scaling_factors
+########################################
+
+
+Scaling factor for visualiyation plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor)
+
+:Default value: (600, 400)
+:type: tuple
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* venndiagram_1_0_0
+
+Ursgal value translations for *visualization_scaling_factors*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================= =============================
+ Style                         Translation                  
+ ============================= =============================
+ venndiagram_style_1           visualization_scaling_factors
+ ============================= =============================
+
+.. raw:: html
+
+      <hr />
+
+visualization_size
+#############################
+
+
+Size of visualiyation plots (e.g. Venn diagram), given as tuple (width, height)
+
+:Default value: (1200, 800)
+:type: tuple
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* venndiagram_1_0_0
+
+Ursgal value translations for *visualization_size*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ venndiagram_style_1 visualization_size 
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+visualization_stroke_width
+#####################################
+
+
+Stroke width used in visualiyation plots (e.g. Venn diagram)
+
+:Default value: 2.0
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* venndiagram_1_0_0
+
+Ursgal value translations for *visualization_stroke_width*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ venndiagram_style_1 stroke-width       
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+window_size
+######################
+
+
+Combined PEPs are computed by
+    iterating a sliding window over the sorted PSMs. Each PSM receives
+    a PEP based on the target/decoy ratio of the surrounding PEPs.
+    This parameter defines the window size.
+
+:Default value: 249
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* combine_pep_1_0_0
+
+Ursgal value translations for *window_size*
+"""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ combine_pep_style_1 window_size        
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+write_unfiltered_results
+###################################
+
+
+Writes rejected results if True
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* filter_csv_1_0_0
+
+Ursgal value translations for *write_unfiltered_results*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================== ========================
+ Style                    Translation             
+ ======================== ========================
+ filter_csv_style_1       write_unfiltered_results
+ ======================== ========================
+
+.. raw:: html
+
+      <hr />
+
+xtandem_stp_bias
+###########################
+
+
+Interpretation of peptide phosphorylation models.
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* xtandem_cyclone_2010
+* xtandem_jackhammer
+* xtandem_piledriver
+* xtandem_sledgehammer
+* xtandem_vengeance
+
+Ursgal value translations for *xtandem_stp_bias*
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ xtandem_style_1   protein, stP bias
+ ================= =================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                xtandem_style_1 
+ ================ ================
+ 0                no              
+ 1                yes             
+ ================ ================
+
+
+.. params ending on _ are links ... one can escape them with \_ but well well
+
+.. _score:
+   http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
+
+.. _proteinacc_start_stop_pre_post:
+    http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
+
+.. _decoy:
+    http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
+
+    

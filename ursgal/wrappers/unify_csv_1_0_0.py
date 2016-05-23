@@ -5,6 +5,7 @@ import os
 import sys
 import pickle
 
+
 class unify_csv_1_0_0( ursgal.UNode ):
     """unify_csv_1_0_0 UNode"""
     META_INFO = {
@@ -52,13 +53,13 @@ class unify_csv_1_0_0( ursgal.UNode ):
             raise ValueError('Trying to unify a non-csv file')
 
         output_file = os.path.join(
-                self.params['output_dir_path'],
-                self.params['output_file']
-            )
+            self.params['output_dir_path'],
+            self.params['output_file']
+        )
         input_file  = os.path.join(
-                self.params['input_dir_path'],
-                self.params['input_file']
-            )
+            self.params['input_dir_path'],
+            self.params['input_file']
+        )
 
         scan_rt_lookup_path = self.meta_unodes['ucontroller'].scan_rt_lookup_path
 
@@ -72,7 +73,7 @@ Could not load RT lookup dict from this location: {0}
 
         # find the last search/denovo engine:
         last_engine = self.get_last_engine(
-        history = self.stats['history'],
+            history = self.stats['history'],
         )
 
         last_search_engine_colname = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]
