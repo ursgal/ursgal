@@ -53,7 +53,7 @@ aa_exception_dict
 
 Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name
 
-:Default value: {'J': {'original_aa': 'L'}, 'U': {'unimod_name': 'Delta:S(-1)Se(1)', 'original_aa': 'C', 'unimod_name_with_cam': 'SecCarbamidomethyl'}}
+:Default value: {'U': {'original_aa': 'C', 'unimod_name_with_cam': 'SecCarbamidomethyl', 'unimod_name': 'Delta:S(-1)Se(1)'}, 'J': {'original_aa': 'L'}}
 :type: dict
 :triggers rerun: False
             
@@ -503,6 +503,7 @@ Available in unodes
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * omssa_2_1_9
+* unify_csv_1_0_0
 * xtandem_cyclone_2010
 * xtandem_jackhammer
 * xtandem_piledriver
@@ -519,6 +520,7 @@ Ursgal value translations for *database*
  msgfplus_style_1  -d               
  myrimatch_style_1 ProteinDatabase  
  omssa_style_1     -d               
+ unify_csv_style_1 database         
  xtandem_style_1   file URL         
  ================= =================
 
@@ -614,17 +616,11 @@ Available in unodes
 """""""""""""""""""
 
 * generate_target_decoy_1_0_0
-* msamanda_1_0_0_5242
-* msamanda_1_0_0_5243
-* msamanda_1_0_0_6299
-* msamanda_1_0_0_6300
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
-* omssa_2_1_9
-* percolator_2_08
-* qvality_2_02
+* unify_csv_1_0_0
 * xtandem2csv_1_0_0
 
 Ursgal value translations for *decoy_tag*
@@ -634,12 +630,9 @@ Ursgal value translations for *decoy_tag*
  Style                         Translation                  
  ============================= =============================
  generate_target_decoy_style_1 decoy_tag                    
- msamanda_style_1              decoy_tag                    
  myrimatch_style_1             DecoyPrefix                  
  mzidentml_style_1             -decoyRegex                  
- omssa_style_1                 decoy_tag                    
- percolator_style_1            decoy_tag                    
- qvality_style_1               decoy_tag                    
+ unify_csv_style_1             decoy_tag                    
  xtandem2csv_style_1           decoy_tag                    
  ============================= =============================
 
@@ -877,6 +870,8 @@ Available in unodes
 * novor_1_1beta
 * omssa_2_1_9
 * pepnovo_3_1
+* percolator_2_08
+* unify_csv_1_0_0
 * xtandem_cyclone_2010
 * xtandem_jackhammer
 * xtandem_piledriver
@@ -896,49 +891,51 @@ Ursgal value translations for *enzyme*
  novor_style_1                 enzyme                       
  omssa_style_1                 -e                           
  pepnovo_style_1               -digest                      
+ percolator_style_1            enzyme                       
+ unify_csv_style_1             enzyme                       
  xtandem_style_1               protein, cleavage site       
  ============================= =============================
 
 Ursgal key translations
 """""""""""""""""""""""
 
- ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
- Ursgal Value                  Translated Value                                                                                                                                                                                                                               
- ----------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- .                             generate_target_decoy_style_1 msamanda_style_1              msgfplus_style_1              myrimatch_style_1             novor_style_1                 omssa_style_1                 pepnovo_style_1               xtandem_style_1              
- ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
- alpha_lp                      n/t                           n/t                           8                             n/t                           n/t                           n/t                           n/t                           n/t                          
- argc                          R;C;P                         R;after;P                     6                             n/t                           n/t                           1                             n/t                           [R]|{P}                      
- aspn                          D;N;                          D;before;                     7                             Asp-N                         n/t                           12                            n/t                           [X]|[D]                      
- aspn_gluc                     n/t                           n/t                           n/t                           n/t                           n/t                           14                            n/t                           n/t                          
- chymotrypsin                  FMWY;C;P                      FMWY;after;P                  2                             Chymotrypsin                  n/t                           3                             n/t                           [FMWY]|{P}                   
- chymotrypsin_p                FMWY;C;                       FMWY;after;                   n/t                           n/t                           n/t                           18                            n/t                           [FMWY]|[X]                   
- clostripain                   R;C;                          R;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           [R]|[X]                      
- cnbr                          M;C;P                         M;after;P                     n/t                           CNBr                          n/t                           2                             n/t                           [M]|{P}                      
- elastase                      AGILV;C;P                     AGILV;after;P                 n/t                           n/t                           n/t                           n/t                           n/t                           [AGILV]|{P}                  
- formic_acid                   D;C;P                         D;after;P                     n/t                           Formic_acid                   n/t                           4                             n/t                           [D]|{P}                      
- gluc                          DE;C;P                        DE;after;P                    n/t                           n/t                           n/t                           13                            n/t                           [DE]|{P}                     
- gluc_bicarb                   E;C;P                         E;after;P                     n/t                           n/t                           n/t                           n/t                           n/t                           [E]|{P}                      
- glutamyl_endopeptidase        n/t                           n/t                           5                             n/t                           n/t                           n/t                           n/t                           n/t                          
- iodosobenzoate                W;C;                          W;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           [W]|[X]                      
- lysc                          K;C;P                         K;after;P                     3                             Lys-C/P                       n/t                           5                             n/t                           [K]|{P}                      
- lysc_p                        K;C;                          K;after;                      n/t                           Lys-C                         n/t                           6                             n/t                           [K]|[X]                      
- lysn                          K;N;                          K;before;                     4                             n/t                           n/t                           21                            n/t                           [X]|[K]                      
- lysn_promisc                  AKRS;N;                       AKRS;before;                  n/t                           n/t                           n/t                           n/t                           n/t                           [X]|[AKRS]                   
- no_cleavage                   n/t                           n/t                           9                             n/t                           n/t                           11                            n/t                           n/t                          
- nonspecific                   n/t                           ;;                            0                             n/t                           n/t                           17                            NON_SPECIFIC                  [X]|[X]                      
- pepsina                       FL;C;                         FL;after;                     n/t                           PepsinA                       n/t                           7                             n/t                           [FL]|[X]                     
- protein_endopeptidase         P;C;                          P;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           [P]|[X]                      
- staph_protease                E;C;                          E;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           [E]|[X]                      
- tca                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           [FMWY]|{P},[KR]|{P},[X]|[D]  
- thermolysin_p                 n/t                           n/t                           n/t                           n/t                           n/t                           22                            n/t                           n/t                          
- top_down                      n/t                           n/t                           n/t                           n/t                           n/t                           15                            n/t                           n/t                          
- trypsin                       KR;C;P                        KR;after;P                    1                             Trypsin/P                     Trypsin                       0                             TRYPSIN                       [KR]|{P}                     
- trypsin_chymotrypsin          n/t                           n/t                           n/t                           TrypChymo                     n/t                           9                             n/t                           n/t                          
- trypsin_cnbr                  KRM;C;P                       KRM;after;P                   n/t                           n/t                           n/t                           8                             n/t                           [KR]|{P},[M]|{P}             
- trypsin_gluc                  DEKR;C;P                      DEKR;after;P                  n/t                           n/t                           n/t                           n/t                           n/t                           [DEKR]|{P}                   
- trypsin_p                     KR;C;                         KR;after;                     n/t                           Trypsin                       n/t                           10                            n/t                           [RK]|[X]                     
- ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+ ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+ Ursgal Value                  Translated Value                                                                                                                                                                                                                                                                                           
+ ----------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ .                             generate_target_decoy_style_1 msamanda_style_1              msgfplus_style_1              myrimatch_style_1             novor_style_1                 omssa_style_1                 pepnovo_style_1               percolator_style_1            unify_csv_style_1             xtandem_style_1              
+ ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+ alpha_lp                      n/t                           n/t                           8                             n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                          
+ argc                          R;C;P                         R;after;P                     6                             n/t                           n/t                           1                             n/t                           R;C;P                         R;C;P                         [R]|{P}                      
+ aspn                          D;N;                          D;before;                     7                             Asp-N                         n/t                           12                            n/t                           D;N;                          D;N;                          [X]|[D]                      
+ aspn_gluc                     n/t                           n/t                           n/t                           n/t                           n/t                           14                            n/t                           n/t                           n/t                           n/t                          
+ chymotrypsin                  FMWY;C;P                      FMWY;after;P                  2                             Chymotrypsin                  n/t                           3                             n/t                           FMWY;C;P                      FMWY;C;P                      [FMWY]|{P}                   
+ chymotrypsin_p                FMWY;C;                       FMWY;after;                   n/t                           n/t                           n/t                           18                            n/t                           FMWY;C;                       FMWY;C;                       [FMWY]|[X]                   
+ clostripain                   R;C;                          R;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           R;C;                          R;C;                          [R]|[X]                      
+ cnbr                          M;C;P                         M;after;P                     n/t                           CNBr                          n/t                           2                             n/t                           M;C;P                         M;C;P                         [M]|{P}                      
+ elastase                      AGILV;C;P                     AGILV;after;P                 n/t                           n/t                           n/t                           n/t                           n/t                           AGILV;C;P                     AGILV;C;P                     [AGILV]|{P}                  
+ formic_acid                   D;C;P                         D;after;P                     n/t                           Formic_acid                   n/t                           4                             n/t                           D;C;P                         D;C;P                         [D]|{P}                      
+ gluc                          DE;C;P                        DE;after;P                    n/t                           n/t                           n/t                           13                            n/t                           DE;C;P                        DE;C;P                        [DE]|{P}                     
+ gluc_bicarb                   E;C;P                         E;after;P                     n/t                           n/t                           n/t                           n/t                           n/t                           E;C;P                         E;C;P                         [E]|{P}                      
+ glutamyl_endopeptidase        n/t                           n/t                           5                             n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                          
+ iodosobenzoate                W;C;                          W;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           W;C;                          W;C;                          [W]|[X]                      
+ lysc                          K;C;P                         K;after;P                     3                             Lys-C                         n/t                           5                             n/t                           K;C;P                         K;C;P                         [K]|{P}                      
+ lysc_p                        K;C;                          K;after;                      n/t                           Lys-C/P                       n/t                           6                             n/t                           K;C;                          K;C;                          [K]|[X]                      
+ lysn                          K;N;                          K;before;                     4                             n/t                           n/t                           21                            n/t                           K;N;                          K;N;                          [X]|[K]                      
+ lysn_promisc                  AKRS;N;                       AKRS;before;                  n/t                           n/t                           n/t                           n/t                           n/t                           AKRS;N;                       AKRS;N;                       [X]|[AKRS]                   
+ no_cleavage                   n/t                           n/t                           9                             n/t                           n/t                           11                            n/t                           n/t                           n/t                           n/t                          
+ nonspecific                   n/t                           ;;                            0                             n/t                           n/t                           17                            NON_SPECIFIC                  n/t                           n/t                           [X]|[X]                      
+ pepsina                       FL;C;                         FL;after;                     n/t                           PepsinA                       n/t                           7                             n/t                           FL;C;                         FL;C;                         [FL]|[X]                     
+ protein_endopeptidase         P;C;                          P;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           P;C;                          P;C;                          [P]|[X]                      
+ staph_protease                E;C;                          E;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           E;C;                          E;C;                          [E]|[X]                      
+ tca                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           [FMWY]|{P},[KR]|{P},[X]|[D]  
+ thermolysin_p                 n/t                           n/t                           n/t                           n/t                           n/t                           22                            n/t                           n/t                           n/t                           n/t                          
+ top_down                      n/t                           n/t                           n/t                           n/t                           n/t                           15                            n/t                           n/t                           n/t                           n/t                          
+ trypsin                       KR;C;P                        KR;after;P                    1                             Trypsin                       Trypsin                       0                             TRYPSIN                       KR;C;P                        KR;C;P                        [KR]|{P}                     
+ trypsin_chymotrypsin          n/t                           n/t                           n/t                           TrypChymo                     n/t                           9                             n/t                           n/t                           n/t                           n/t                          
+ trypsin_cnbr                  KRM;C;P                       KRM;after;P                   n/t                           n/t                           n/t                           8                             n/t                           KRM;C;P                       KRM;C;P                       [KR]|{P},[M]|{P}             
+ trypsin_gluc                  DEKR;C;P                      DEKR;after;P                  n/t                           n/t                           n/t                           n/t                           n/t                           DEKR;C;P                      DEKR;C;P                      [DEKR]|{P}                   
+ trypsin_p                     KR;C;                         KR;after;                     1                             Trypsin/P                     n/t                           10                            n/t                           KR;C;                         KR;C;                         [RK]|[X]                     
+ ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
 
 .. raw:: html
 
@@ -1805,6 +1802,35 @@ Ursgal value translations for *json_extension*
 
       <hr />
 
+keep_asp_pro_broken_peps
+###################################
+
+
+X!tandem searches for peptides broken between Asp (D) and Pro (P) for every enzyme. Therefore, it reports peptides that are not enzymatically cleaved. Specify, if those should be kept during unify_csv or removed.
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* unify_csv_1_0_0
+
+Ursgal value translations for *keep_asp_pro_broken_peps*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================== ========================
+ Style                    Translation             
+ ======================== ========================
+ unify_csv_style_1        keep_asp_pro_broken_peps
+ ======================== ========================
+
+.. raw:: html
+
+      <hr />
+
 label
 ################
 
@@ -2464,6 +2490,7 @@ Available in unodes
 * novor_1_1beta
 * omssa_2_1_9
 * pepnovo_3_1
+* unify_csv_1_0_0
 * xtandem_cyclone_2010
 * xtandem_jackhammer
 * xtandem_piledriver
@@ -2482,6 +2509,7 @@ Ursgal value translations for *modifications*
  novor_style_1     ('variableModifications', 'fixedModifications')
  omssa_style_1     ('-mv', 'mf')    
  pepnovo_style_1   -PTMs            
+ unify_csv_style_1 modifications    
  xtandem_style_1   ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone')
  ================= =================
 
@@ -4453,6 +4481,66 @@ Ursgal value translations for *prefix*
 
       <hr />
 
+protein_delimiter
+############################
+
+
+This delimiter seperates protein IDs/names in the unified csv
+
+:Default value: <|>
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* percolator_2_08
+* unify_csv_1_0_0
+
+Ursgal value translations for *protein_delimiter*
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ percolator_style_1 protein_delimiter 
+ unify_csv_style_1  protein_delimiter 
+ ================== ==================
+
+.. raw:: html
+
+      <hr />
+
+psm_merge_delimiter
+##############################
+
+
+This delimiter seperates differing values for merged rows in the unified csv
+
+:Default value: ;
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* unify_csv_1_0_0
+
+Ursgal value translations for *psm_merge_delimiter*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ unify_csv_style_1   psm_merge_delimiter
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
 qvality_cross_validation
 ###################################
 
@@ -5426,6 +5514,7 @@ Available in unodes
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * omssa_2_1_9
+* unify_csv_1_0_0
 * xtandem_cyclone_2010
 * xtandem_jackhammer
 * xtandem_piledriver
@@ -5442,6 +5531,7 @@ Ursgal value translations for *semi_enzyme*
  msgfplus_style_1       -ntt                  
  myrimatch_style_1      MinTerminiCleavages   
  omssa_style_1          semi_enzyme           
+ unify_csv_style_1      semi_enzyme           
  xtandem_style_1        protein, cleavage semi
  ====================== ======================
 
