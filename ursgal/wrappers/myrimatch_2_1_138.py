@@ -73,7 +73,7 @@ class myrimatch_2_1_138( ursgal.UNode ):
         )
 
         self.params['translations']['myrimatch_ions_to_search'] = []
-        for ion in ['a','b','c','x','y','z']:
+        for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
             if self.params['translations']['score_{0}_ions'.format(ion)] is True:
                 self.params['translations']['myrimatch_ions_to_search'].append( ion )
         self.params['translations']['myrimatch_ions_to_search'] = 'manual:'+','.join(self.params['translations']['myrimatch_ions_to_search'] )
@@ -188,7 +188,10 @@ UseSmartPlusThreeModel = "{myrimatch_smart_plus_three}"
         '''
         out_file_root = os.path.join(
             self.params['output_dir_path'],
-            self.params['file_root']
+            self.params['file_root'].replace(
+                self.params['prefix'] + '_',
+                ''
+            )
         )
 
         # when the input file is gzipped,
