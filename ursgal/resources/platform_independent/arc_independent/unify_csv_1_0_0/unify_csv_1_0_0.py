@@ -257,6 +257,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 line_dict['Spectrum Title'] = line_2_split
 
                 input_file_basename, spectrum_id, _spectrum_id, charge = line_2_split.split('.')
+                pure_input_file_name = ''
 
             elif 'scan=' in line_dict['Spectrum ID']:
                 pure_input_file_name                = os.path.basename(
@@ -276,6 +277,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     spectrum_id,
                     line_dict['Charge']
                 )
+
             elif line_dict['Spectrum Title'] == '':
                 '''
                 Valid for:
@@ -295,6 +297,18 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 raise Exception( 'New csv format present for engine {0}'.format( engine ) )
             line_dict['Spectrum ID'] = spectrum_id
             #we should check if data has minute format or second format...
+
+            if 'mzml' in pure_input_file_name.lower():
+                # OMG Thank you soo much ...
+                prefix = params.get('prefix', '')
+                if prefix is not None:
+                    if input_file_basename.startswith( prefix ) is False:
+                        input_file_basename = '{prefix}_{0}'.format(
+                            input_file_basename,
+                            **params
+                        )
+
+
             try:
                 retention_time_in_minutes = \
                     scan_rt_lookup[ input_file_basename ][ 'scan_2_rt' ]\
@@ -553,17 +567,13 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     # ms amanda does not return calculated mz values
                     line_dict_update['Calc m/z'] = calc_mz
 
-                #
-                # Buffer end
-                #
+                # ------------
+                # BUFFER END
+                # -----------
                 ze_only_buffer[ _ze_ultra_buffer_key_ ] = line_dict_update
 
             line_dict_update = ze_only_buffer[ _ze_ultra_buffer_key_ ]
             line_dict.update( line_dict_update )
-
-
-
-
 
             # protein block, only for database search engine
             if database_search is True:

@@ -26,7 +26,7 @@ class unify_csv_1_0_0( ursgal.UNode ):
                 },
             },
         },
-        'citation'                  : 'Kremer, L. P. M., Leufken, J., '\
+        'citation'          : 'Kremer, L. P. M., Leufken, J., '\
             'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
             'Ursgal, Universal Python Module Combining Common Bottom-Up '\
             'Proteomics Tools for Large-Scale Analysis. '\
@@ -77,6 +77,8 @@ Could not load RT lookup dict from this location: {0}
         )
 
         last_search_engine_colname = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]
+
+        self.params['translations']['prefix'] = self.params.get('prefix', None)
 
         tmp_files = unify_csv_main(
             input_file      = input_file,
