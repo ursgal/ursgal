@@ -255,10 +255,11 @@ class UPeptideMapper( dict ):
         needed anymore, using the `UPeptideMapper.purge_fasta_info()` function.
 
     '''
-    def __init__(self, word_len=6 ):
+    def __init__(self, word_len = 6 ):
         self.fasta_sequences = {}
         self.word_len = word_len
         self.hits = {'fcache': 0, 'regex': 0}
+        self.query_length = ddict(int)
         pass
 
     def build_lookup_from_file( self, path_to_fasta_file, force=True):
@@ -284,10 +285,7 @@ class UPeptideMapper( dict ):
         '''
         Builds the fast cache and regular sequence dict from a fasta stream
         '''
-        print('''
-[ ucontrol ] UPeptideMapper is building the fast cache and regular sequence dict from a fasta
-        ''')
-
+        print('[   upapa  ] UPeptideMapper is building the fast cache and regular sequence dict from a fasta')
         if fasta_name not in self.keys():
             force = True
 
@@ -333,6 +331,7 @@ class UPeptideMapper( dict ):
                 'post'  : 'V',
             }
         '''
+        self.query_length[ len(peptide) ] += 1
         mappings = []
         if fasta_name in self.keys():
             if len(peptide) < self.word_len or force_regex:
@@ -382,10 +381,8 @@ class UPeptideMapper( dict ):
                             if seq[ start - 1 : end ] == peptide:
                                 # double check
                                 mappings.append(
-                                    self._format_hit_dict(  seq, start, end, id )
+                                    self._format_hit_dict( seq, start, end, id)
                                 )
-
-
         return mappings
 
     def _format_hit_dict( self, seq, start, end, id ):
