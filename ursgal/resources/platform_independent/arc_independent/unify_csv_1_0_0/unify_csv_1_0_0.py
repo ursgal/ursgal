@@ -194,6 +194,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     total_lines = len(list(csv.reader(open(input_file,'r'))))
     ze_only_buffer = {}
 
+    allowed_aa, cleavage_site, inhibitor_aa = params['enzyme'].split(';')
+    allowed_aa += '-'
+
     with open( input_file, 'r' ) as in_file:
         csv_input  = csv.DictReader(
             in_file
@@ -341,9 +344,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             # if aminoacid == aa:
                             name = fixed_mods[ aminoacid ]
                             tmp = '{0}:{1}'.format(
-                                            name,
-                                            pos + 1
-                                        )
+                                name,
+                                pos + 1
+                            )
                             if tmp in line_dict['Modifications']:
                                 # everything is ok :)
                                 pass
@@ -582,7 +585,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 lookup_identifier = '{0}><{1}'.format(line_dict['Sequence'], fasta_lookup_name)
                 if lookup_identifier not in pep_map_lookup.keys():
                     tmp_decoy = set()
-                    tmp_protein_id = {}
+                    # tmp_protein_id = {}
 
                     upeptide_maps = upapa.map_peptide(
                         peptide = line_dict['Sequence'],
@@ -604,29 +607,40 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     #         )
                     if upeptide_maps == []:
                         print('''
-                            [ WARNING ] The peptide {0} could not be mapped to the
-                            [ WARNING ] given database {1}
-                            [ WARNING ] {2}
-                            [ WARNING ] This PSM will be skipped.
+[ WARNING ] The peptide {0} could not be mapped to the
+[ WARNING ] given database {1}
+[ WARNING ] {2}
+[ WARNING ] This PSM will be skipped.
                             '''.format(
                                 line_dict['Sequence'],
                                 fasta_lookup_name,
                                 ''
-                            ))
-                    for protein in upeptide_maps:
-                        allowed_aa = params['enzyme'].split(';')[0] + '-'
-                        cleavage_site = params['enzyme'].split(';')[1]
-                        inhibitor_aa = params['enzyme'].split(';')[2]
-                        add_protein = False
+                            )
+                        )
+                        continue
+
+                    protein_mapping_dict = {}
+                    sorted_upeptide_maps = [ protein_dict for protein_dict in sorted( upeptide_maps, key=lambda x: x['id'] ) ]
+                    # sorted(bacterial_protein_collector[race].items(),key=lambda x: x[1]['psm_count'])
+                    # print()
+                    # print(line_dict['Sequence'])
+                    # print(sorted_upeptide_maps)
+                    protein_mapping_dict = None
+                    last_protein_id = None
+                    for protein in sorted_upeptide_maps:
+                        # print(line_dict)
+                        # print(protein)
+                        add_protein   = False
                         nterm_correct = False
                         cterm_correct = False
-                        if params['keep_asp_pro_broken_peps'] == True:
+                        if params['keep_asp_pro_broken_peps'] is True:
                             if line_dict['Sequence'][-1] == 'D' and\
                                 protein['post'] == 'P':
                                 cterm_correct = True
                             if line_dict['Sequence'][0] == 'P' and\
                                 protein['pre'] == 'D':
                                 nterm_correct = True
+
                         if cleavage_site == 'C':
                             if protein['pre'] in allowed_aa\
                                     or protein['start'] in [1, 2, 3]:
@@ -637,6 +651,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 if line_dict['Sequence'][-1] in allowed_aa\
                                     or protein['post'] == '-':
                                     cterm_correct = True
+
                         elif cleavage_site == 'N':
                             if protein['post'] in allowed_aa:
                                 if line_dict['Sequence'][-1] not in inhibitor_aa\
@@ -647,64 +662,71 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 if line_dict['Sequence'][0] in allowed_aa\
                                     or protein['start'] in [1, 2, 3]:
                                     nterm_correct = True
-                        if params['semi_enzyme'] == True:
-                            if cterm_correct == True or nterm_correct == True:
+                        
+                        if params['semi_enzyme'] is True:
+                            if cterm_correct is True or nterm_correct is True:
                                 add_protein = True
-                        elif cterm_correct == True and nterm_correct == True:
+                        elif cterm_correct is True and nterm_correct is True:
                             add_protein = True
-                        if add_protein == True:
-                            if protein['id'] not in tmp_protein_id.keys():
-                                tmp_protein_id[protein['id']] = {
-                                    'start' : [],
-                                    'stop' : [],
-                                    'pre' : [],
-                                    'post' : [],
+                        
+                        if add_protein is True:
+                            # print(add_protein)
+                            # print(cterm_correct, nterm_correct)
+                            if protein_mapping_dict is None:
+                                protein_mapping_dict = {
+                                    'Protein ID'       : protein['id'],
+                                    'Sequence Start'   : str(protein['start']),
+                                    'Sequence Stop'    : str(protein['end']),
+                                    'Sequence Pre AA'  : protein['pre'],
+                                    'Sequence Post AA' : protein['post'],
                                 }
-                            tmp_protein_id[protein['id']]['start'].append(str(protein['start']))
-                            tmp_protein_id[protein['id']]['stop'].append(str(protein['end']))
-                            tmp_protein_id[protein['id']]['pre'].append(protein['pre'])
-                            tmp_protein_id[protein['id']]['post'].append(protein['post'])
+                            else:
+                                if protein['id'] == last_protein_id:
+                                    tmp_join_char = ';'
+                                else:
+                                    tmp_join_char = joinchar
 
+                                    protein_mapping_dict['Protein ID' ] += '{0}{1}'.format(tmp_join_char, protein['id'])
+
+                                protein_mapping_dict['Sequence Start'   ] += '{0}{1}'.format(tmp_join_char, str(protein['start']))
+                                protein_mapping_dict['Sequence Stop'    ] += '{0}{1}'.format(tmp_join_char, str(protein['end']))
+                                protein_mapping_dict['Sequence Pre AA'  ] += '{0}{1}'.format(tmp_join_char, protein['pre'])
+                                protein_mapping_dict['Sequence Post AA' ] += '{0}{1}'.format(tmp_join_char, protein['post'])
+
+                            # print(protein_mapping_dict['Protein ID' ])
+                            last_protein_id = protein['id']
+    
                             # mzidentml-lib does not always set 'Is decoy' correctly
                             # (it's always 'false' for MS-GF+ results), this is fixed here:
                             if params['decoy_tag'] in protein['id']:
                                 tmp_decoy.add('true')
                             else:
                                 tmp_decoy.add('false')
-                    pep_map_lookup[lookup_identifier] = (tmp_protein_id, tmp_decoy)
-                else:
-                    tmp_protein_id, tmp_decoy = pep_map_lookup[lookup_identifier]
-                protein_id = []
-                start = []
-                stop = []
-                pre = []
-                post = []
-                for prot_id in sorted(tmp_protein_id.keys()):
-                    protein_id.append(prot_id)
-                    start.append(';'.join(tmp_protein_id[prot_id]['start']))
-                    stop.append(';'.join(tmp_protein_id[prot_id]['stop']))
-                    pre.append(';'.join(tmp_protein_id[prot_id]['pre']))
-                    post.append(';'.join(tmp_protein_id[prot_id]['post']))
-                protein_id = joinchar.join(protein_id)
-                if len(protein_id) >= 2000:
-                    print('{0}: {1}'.format(line_dict['Sequence'], protein_id), file = protein_id_output)
-                    protein_id = protein_id[:1990] + ' ...'
-                    do_not_delete = True
-                line_dict['Protein ID'] = protein_id
-                line_dict['Sequence Start'] = joinchar.join(start)
-                line_dict['Sequence Stop'] = joinchar.join(stop)
-                line_dict['Sequence Pre AA'] = joinchar.join(pre)
-                line_dict['Sequence Post AA'] = joinchar.join(post)
 
-                if len(tmp_decoy) == 0:
-                    non_enzymatic_peps.add(line_dict['Sequence'])
-                    continue
-                if len(tmp_decoy) >= 2:
-                    target_decoy_peps.add(line_dict['Sequence'])
-                    line_dict['Is decoy'] = 'true'
-                else:
-                    line_dict['Is decoy'] = list(tmp_decoy)[0]
+                    if len(protein_mapping_dict['Protein ID']) >= 2000:
+                        print(
+                            '{0}: {1}'.format(
+                                line_dict['Sequence'],
+                                protein_mapping_dict['Protein ID']
+                            ),
+                            file = protein_id_output
+                        )
+                        protein_mapping_dict['Protein ID'] = protein_mapping_dict['Protein ID'][:1990] + ' ...'
+                        do_not_delete = True
 
+                    if len(tmp_decoy) == 0:
+                        non_enzymatic_peps.add(line_dict['Sequence'])
+                        continue
+                    if len(tmp_decoy) >= 2:
+                        target_decoy_peps.add(line_dict['Sequence'])
+                        protein_mapping_dict['Is decoy'] = 'true'
+                    else:
+                        protein_mapping_dict['Is decoy'] = list(tmp_decoy)[0]
+
+                    pep_map_lookup[ lookup_identifier ] = protein_mapping_dict
+
+                buffered_protein_mapping_dict = pep_map_lookup[lookup_identifier]
+                line_dict.update( buffered_protein_mapping_dict )
                 # count each PSM occurence to check whether row-merging is needed:
                 psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 psm_counter[psm] += 1
@@ -849,9 +871,20 @@ if __name__ == '__main__':
         'modifications' : [
             'M,opt,any,Oxidation',        # Met oxidation
             'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-            '*,opt,Prot-N-term,Acetyl'    # N-Acteylation[]
+            '*,opt,Prot-N-term,Acetyl',    # N-Acteylation[]
+            'K,opt,any,Label:13C(5)15N(1)',
+            'K,opt,any,Label:13C(6)15N(2)',
         ],
-        'label' : '',
+        'label'                    : '',
+        'protein_delimiter'        : '<|>',
+        # 'database'                 : '/Volumes/fUBe/joe/Dev/ursgal/tests/data/BSA.fasta',
+        'database'                 : '/media/plan-f/Shared/databases/Chlamydomonas_reinhardtii/v5.5/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
+
+        'enzyme'                   : 'KR;C;P',
+        'keep_asp_pro_broken_peps' : False,
+        'semi_enzyme'              : False,
+        'decoy_tag'                : 'decoy_',
+        'psm_merge_delimiter'      : ';'
     }
     main(
         input_file     = sys.argv[1],
