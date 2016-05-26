@@ -481,8 +481,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 # ^^--------- REPLACED MODIFICATIONS! ---------------^
                 #
                 for unimod_name in n_term_replacement.keys():
-                    if '{0}:1'.format(unimod_name) in line_dict_update['Modifications']:
-                        replace = False
+                    if '{0}:1'.format(unimod_name) in line_dict_update['Modifications'].split(';'):
                         if unimod_name in modname2aa.keys():
                             aa = modname2aa[unimod_name]
                             if aa != ['*']:
@@ -634,10 +633,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         cterm_correct = False
                         if params['keep_asp_pro_broken_peps'] is True:
                             if line_dict['Sequence'][-1] == 'D' and\
-                                protein['post'] == 'P':
+                                    protein['post'] == 'P':
                                 cterm_correct = True
                             if line_dict['Sequence'][0] == 'P' and\
-                                protein['pre'] == 'D':
+                                    protein['pre'] == 'D':
                                 nterm_correct = True
 
                         if cleavage_site == 'C':
@@ -648,13 +647,13 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                     nterm_correct = True
                             if protein['post'] not in inhibitor_aa:
                                 if line_dict['Sequence'][-1] in allowed_aa\
-                                    or protein['post'] == '-':
+                                     or protein['post'] == '-':
                                     cterm_correct = True
 
                         elif cleavage_site == 'N':
                             if protein['post'] in allowed_aa:
                                 if line_dict['Sequence'][-1] not in inhibitor_aa\
-                                    or protein['post'] == '-':
+                                        or protein['post'] == '-':
                                     cterm_correct = True
                             if protein['pre'] not in inhibitor_aa\
                                 or protein['start'] in [1, 2, 3]:
