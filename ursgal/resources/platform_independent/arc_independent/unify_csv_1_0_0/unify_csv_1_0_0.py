@@ -485,8 +485,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         replace = False
                         if unimod_name in modname2aa.keys():
                             aa = modname2aa[unimod_name]
-                            if aa != '*':
-                                if line_dict['Sequence'][0] == aa:
+                            if aa != ['*']:
+                                if line_dict['Sequence'][0] in aa:
                                     continue
                         line_dict_update['Modifications'] = line_dict_update['Modifications'].replace(
                             '{0}:1'.format( unimod_name ),
@@ -619,7 +619,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         )
                         continue
 
-                    protein_mapping_dict = {}
                     sorted_upeptide_maps = [ protein_dict for protein_dict in sorted( upeptide_maps, key=lambda x: x['id'] ) ]
                     # sorted(bacterial_protein_collector[race].items(),key=lambda x: x[1]['psm_count'])
                     # print()
@@ -703,6 +702,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             else:
                                 tmp_decoy.add('false')
 
+                    if protein_mapping_dict is None:
+                        non_enzymatic_peps.add(line_dict['Sequence'])
+                        continue
+
                     if len(protein_mapping_dict['Protein ID']) >= 2000:
                         print(
                             '{0}: {1}'.format(
@@ -714,9 +717,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         protein_mapping_dict['Protein ID'] = protein_mapping_dict['Protein ID'][:1990] + ' ...'
                         do_not_delete = True
 
-                    if len(tmp_decoy) == 0:
-                        non_enzymatic_peps.add(line_dict['Sequence'])
-                        continue
                     if len(tmp_decoy) >= 2:
                         target_decoy_peps.add(line_dict['Sequence'])
                         protein_mapping_dict['Is decoy'] = 'true'
