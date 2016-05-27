@@ -500,12 +500,11 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 # ^^--------- REPLACED MODIFICATIONS! ---------------^
                 #
                 for unimod_name in n_term_replacement.keys():
-                    if '{0}:1'.format(unimod_name) in line_dict_update['Modifications']:
-                        replace = False
+                    if '{0}:1'.format(unimod_name) in line_dict_update['Modifications'].split(';'):
                         if unimod_name in modname2aa.keys():
                             aa = modname2aa[unimod_name]
-                            if aa != '*':
-                                if line_dict['Sequence'][0] == aa:
+                            if aa != ['*']:
+                                if line_dict['Sequence'][0] in aa:
                                     continue
                         line_dict_update['Modifications'] = line_dict_update['Modifications'].replace(
                             '{0}:1'.format( unimod_name ),
@@ -638,7 +637,6 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                         )
                         continue
 
-                    protein_mapping_dict = {}
                     sorted_upeptide_maps = [ protein_dict for protein_dict in sorted( upeptide_maps, key=lambda x: x['id'] ) ]
                     # sorted(bacterial_protein_collector[race].items(),key=lambda x: x[1]['psm_count'])
                     # print()
@@ -654,10 +652,10 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                         cterm_correct = False
                         if params['keep_asp_pro_broken_peps'] is True:
                             if line_dict['Sequence'][-1] == 'D' and\
-                                protein['post'] == 'P':
+                                    protein['post'] == 'P':
                                 cterm_correct = True
                             if line_dict['Sequence'][0] == 'P' and\
-                                protein['pre'] == 'D':
+                                    protein['pre'] == 'D':
                                 nterm_correct = True
 
                         if cleavage_site == 'C':
@@ -668,13 +666,13 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     nterm_correct = True
                             if protein['post'] not in inhibitor_aa:
                                 if line_dict['Sequence'][-1] in allowed_aa\
-                                    or protein['post'] == '-':
+                                     or protein['post'] == '-':
                                     cterm_correct = True
 
                         elif cleavage_site == 'N':
                             if protein['post'] in allowed_aa:
                                 if line_dict['Sequence'][-1] not in inhibitor_aa\
-                                    or protein['post'] == '-':
+                                        or protein['post'] == '-':
                                     cterm_correct = True
                             if protein['pre'] not in inhibitor_aa\
                                 or protein['start'] in [1, 2, 3]:
@@ -722,6 +720,10 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                             else:
                                 tmp_decoy.add('false')
 
+                    if protein_mapping_dict is None:
+                        non_enzymatic_peps.add(line_dict['Sequence'])
+                        continue
+
                     if len(protein_mapping_dict['Protein ID']) >= 2000:
                         print(
                             '{0}: {1}'.format(
@@ -733,9 +735,6 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                         protein_mapping_dict['Protein ID'] = protein_mapping_dict['Protein ID'][:1990] + ' ...'
                         do_not_delete = True
 
-                    if len(tmp_decoy) == 0:
-                        non_enzymatic_peps.add(line_dict['Sequence'])
-                        continue
                     if len(tmp_decoy) >= 2:
                         target_decoy_peps.add(line_dict['Sequence'])
                         protein_mapping_dict['Is decoy'] = 'true'

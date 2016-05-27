@@ -178,7 +178,7 @@ StaticMods = "{myrimatch_static_mods}"
 StatusUpdateFrequency = "5"
 TicCutoffPercentage = "{myrimatch_tic_cutoff}"
 UseSmartPlusThreeModel = "{myrimatch_smart_plus_three}"
-    '''.format( **self.params['translations'] ), file=config_file)
+    '''.format(**self.params['translations']), file=config_file)
         config_file.close()
         return
 
@@ -186,13 +186,19 @@ UseSmartPlusThreeModel = "{myrimatch_smart_plus_three}"
         '''
         renaming MyriMatch's output file to our desired output file name
         '''
-        out_file_root = os.path.join(
-            self.params['output_dir_path'],
-            self.params['file_root'].replace(
-                self.params['prefix'] + '_',
-                ''
+        if self.params['prefix'] is None:
+            out_file_root = os.path.join(
+                self.params['output_dir_path'],
+                self.params['file_root']
             )
-        )
+        else:
+            out_file_root = os.path.join(
+                self.params['output_dir_path'],
+                self.params['file_root'].replace(
+                    self.params['prefix'] + '_',
+                    ''
+                )
+            )
 
         # when the input file is gzipped,
         # myrimatch does not trim the "mzml"-part of
@@ -211,7 +217,7 @@ UseSmartPlusThreeModel = "{myrimatch_smart_plus_three}"
         )
 
         for possible_outfile in possible_outfiles:
-            if os.path.exists( possible_outfile ):
+            if os.path.exists(possible_outfile):
                 os.rename(
                     possible_outfile,
                     desired_output_name
