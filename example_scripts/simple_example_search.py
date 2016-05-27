@@ -22,7 +22,11 @@ def main():
     uc = ursgal.UController(
         profile = 'LTQ XL low res',
         params = {
-            'database' : os.path.join( os.pardir, 'example_data', 'BSA.fasta' ),
+            'database' : os.path.join(
+                os.pardir,
+                'example_data',
+                'BSA.fasta'
+            ),
             'modifications' : [
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
@@ -31,7 +35,7 @@ def main():
         }
     )
 
-    if sys.maxsize > 2**32:
+    if sys.maxsize > 2 ** 32:
         xtandem = 'xtandem_vengeance'
     else:
         xtandem = 'xtandem_sledgehammer'

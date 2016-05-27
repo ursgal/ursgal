@@ -331,10 +331,13 @@ class UPeptideMapper( dict ):
                 'post'  : 'V',
             }
         '''
-        l_peptide = len(peptide)
-        required_hits    = l_peptide - self.word_len
-        self.query_length[ len(peptide) ] += 1
-        mappings = []
+
+        l_peptide                        = len(peptide)
+        mappings                         = []
+        required_hits                    = l_peptide - self.word_len
+
+        self.query_length[ l_peptide ] += 1
+
         if fasta_name in self.keys():
             if l_peptide < self.word_len or force_regex:
                 self.hits['regex'] += 1
@@ -351,7 +354,7 @@ class UPeptideMapper( dict ):
                 self.hits['fcache'] += 1
                 tmp_hits = {}
                 # m = []
-                for pos in range(len( peptide ) - self.word_len + 1):
+                for pos in range( l_peptide - self.word_len + 1):
                     pep = peptide[ pos : pos + self.word_len ]
                     # print( pep, peptide )
                     fasta_set = self[ fasta_name ].get(pep, None)
@@ -367,7 +370,6 @@ class UPeptideMapper( dict ):
                 for id, pos_set in tmp_hits.items():
                     sorted_positions = sorted(pos_set)
                     seq              = self.fasta_sequences[ fasta_name ][ id ]
-                    
 
                     for n, pos in enumerate( sorted_positions ):
                         start = sorted_positions[n]
