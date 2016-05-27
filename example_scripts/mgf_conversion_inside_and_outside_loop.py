@@ -38,10 +38,16 @@ def main():
         R.fetch_file(
             engine = 'get_http_files_1_0_0'
         )
-        shutil.move(
-            '{0}format=raw'.format(mzML_file),
-            mzML_file
-        )
+        try:
+            shutil.move(
+                '{0}?format=raw'.format(mzML_file),
+                mzML_file
+            )
+        except:
+            shutil.move(
+                '{0}format=raw'.format(mzML_file),
+                mzML_file
+            )
 
     # First method: Convert to MGF outside of the loop:
     # (saves some time cause the MGF conversion is not always re-run)

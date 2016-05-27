@@ -39,17 +39,19 @@ def main():
         xtandem = 'xtandem_vengeance'
     else:
         xtandem = 'xtandem_sledgehammer'
-    if sys.platform == 'win32':
-        msamanda = 'msamanda_1_0_0_6299'
-    else:
-        msamanda = 'msamanda_1_0_0_6300'
 
     engine_list = [
-        # 'omssa',
+        'omssa',
         xtandem,
-        # 'msgf',
+        'msgf',
         # msamanda,
     ]
+    if sys.platform == 'win32':
+        engine_list.append( 'msamanda_1_0_0_6299' )
+    elif sys.platform == 'darwin':
+        pass
+    else:
+        engine_list.append( 'msamanda_1_0_0_6300' )
 
     mzML_file = os.path.join(
         os.pardir,
@@ -63,10 +65,16 @@ def main():
         uc.fetch_file(
             engine     = 'get_http_files_1_0_0',
         )
-        shutil.move(
-            '{0}format=raw'.format(mzML_file),
-            mzML_file
-        )
+        try:
+            shutil.move(
+                '{0}?format=raw'.format(mzML_file),
+                mzML_file
+            )
+        except:
+            shutil.move(
+                '{0}format=raw'.format(mzML_file),
+                mzML_file
+            )
 
     unified_file_list = []
 

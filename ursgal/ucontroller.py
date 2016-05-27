@@ -1824,7 +1824,7 @@ class UController(ursgal.UNode):
         raw_search_results = self.search_mgf(
             input_file = mgf_file,
             engine     = engine,
-            force      = False,
+            force      = force,
         )
         # exit( raw_search_results )
 
@@ -1832,14 +1832,14 @@ class UController(ursgal.UNode):
         # 3. Convert search result to CSV if required (mzidentml-lib):
         csv_search_results = self.convert_results_to_csv(
             input_file = raw_search_results,
-            force      = False,
+            force      = force,
         )
 
         # 4. Convert csv to unified ursgal csv format:
         unified_search_results = self.unify_csv(
             input_file       = csv_search_results,
             output_file_name = output_file_name,
-            force            = True,
+            force            = force,
         )
         return unified_search_results
 
