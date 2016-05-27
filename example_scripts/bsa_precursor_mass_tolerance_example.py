@@ -64,11 +64,16 @@ def main():
         R.fetch_file(
             engine     = 'get_http_files_1_0_0'
         )
-        shutil.move(
-           '{0}?format=raw'.format(mzML_file),
-            mzML_file
-        )
-
+        try:
+            shutil.move(
+                '{0}?format=raw'.format(mzML_file),
+                mzML_file
+            )
+        except:
+            shutil.move(
+                '{0}format=raw'.format(mzML_file),
+                mzML_file
+            )
     # Convert mzML to MGF outside the loop, so this step is not repeated in the loop
     mgf_file = R.convert_to_mgf_and_update_rt_lookup(
         input_file = mzML_file

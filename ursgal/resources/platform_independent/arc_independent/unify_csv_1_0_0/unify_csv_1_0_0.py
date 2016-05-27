@@ -244,7 +244,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     ),
                     end='\r'
                 )
-            tmp_d = []
 
             if line_dict['Spectrum Title'] != '':
                 '''
@@ -298,28 +297,48 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 )
             else:
                 raise Exception( 'New csv format present for engine {0}'.format( engine ) )
+
+            #update spectrum ID from block above
             line_dict['Spectrum ID'] = spectrum_id
-            #we should check if data has minute format or second format...
 
-            if 'mzml' in pure_input_file_name.lower():
-                # OMG Thank you soo much ...
-                prefix = params.get('prefix', '')
-                if prefix is not None:
-                    if input_file_basename.startswith( prefix ) is False:
-                        input_file_basename = '{prefix}_{0}'.format(
-                            input_file_basename,
-                            **params
+
+            # now check for the basename in the scan rt lookup
+            # possible cases:
+            #   - input_file_basename
+            #   - input_file_basename + prefix
+            #   - input_file_basename - prefix
+
+            input_file_basename_for_rt_lookup = None
+            if input_file_basename in scan_rt_lookup.keys():
+                input_file_basename_for_rt_lookup = input_file_basename
+            else:
+                basename_with_prefix = '{0}_{1}'.format(
+                    params['prefix'],
+                    input_file_basename
+                )
+                basename_without_prefix  = input_file_basename.replace(
+                    params['prefix'],
+                    ''
+                )
+                if basename_with_prefix in scan_rt_lookup.keys():
+                    input_file_basename_for_rt_lookup = basename_with_prefix
+                elif basename_without_prefix in scan_rt_lookup.keys():
+                    input_file_basename_for_rt_lookup = basename_without_prefix
+                else:
+                    print(
+                        '''
+Could not find scan ID {0} in scan_rt_lookup[ {1} ]
+                        '''.format(
+                            spectrum_id,
+                            input_file_basename
                         )
+                    )
 
+            retention_time_in_minutes = \
+                scan_rt_lookup[ input_file_basename_for_rt_lookup ][ 'scan_2_rt' ]\
+                    [ spectrum_id ]
 
-            try:
-                retention_time_in_minutes = \
-                    scan_rt_lookup[ input_file_basename ][ 'scan_2_rt' ]\
-                        [ spectrum_id ]
-            except KeyError as e:
-                error_msg = ''' Could not find scan ID {0} in scan_rt_lookup[ {1} ]
-                '''.format( spectrum_id, input_file_basename )
-                raise KeyError( error_msg ) from e
+            #we should check if data has minute format or second format...
             if scan_rt_lookup[ input_file_basename ]['unit'] == 'second':
                 rt_corr_factor = 1
             else:
