@@ -331,10 +331,12 @@ class UPeptideMapper( dict ):
                 'post'  : 'V',
             }
         '''
+        l_peptide = len(peptide)
+        required_hits    = l_peptide - self.word_len
         self.query_length[ len(peptide) ] += 1
         mappings = []
         if fasta_name in self.keys():
-            if len(peptide) < self.word_len or force_regex:
+            if l_peptide < self.word_len or force_regex:
                 self.hits['regex'] += 1
                 pattern = re.compile( r'''{0}'''.format( peptide ))
                 # we have to through it by hand ...
@@ -352,7 +354,10 @@ class UPeptideMapper( dict ):
                 for pos in range(len( peptide ) - self.word_len + 1):
                     pep = peptide[ pos : pos + self.word_len ]
                     # print( pep, peptide )
-                    fasta_set = self[ fasta_name ].get(pep, set())
+                    fasta_set = self[ fasta_name ].get(pep, None)
+                    if fasta_set is None:
+                        continue
+
                     for id, id_pos in fasta_set:
                         try:
                             tmp_hits[ id ].add( id_pos )
@@ -362,11 +367,11 @@ class UPeptideMapper( dict ):
                 for id, pos_set in tmp_hits.items():
                     sorted_positions = sorted(pos_set)
                     seq              = self.fasta_sequences[ fasta_name ][ id ]
-                    required_hits    = len(peptide) - self.word_len
+                    
 
                     for n, pos in enumerate( sorted_positions ):
                         start = sorted_positions[n]
-                        end   = sorted_positions[n] + len(peptide) - 1
+                        end   = sorted_positions[n] + l_peptide - 1
 
                         if n + required_hits >= len( sorted_positions):
                             break

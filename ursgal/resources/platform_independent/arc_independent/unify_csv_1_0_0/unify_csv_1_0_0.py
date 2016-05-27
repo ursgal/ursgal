@@ -566,7 +566,11 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                     )
 
                 # calculate m/z
-                cc.use('{Sequence}#{Modifications}'.format( **line_dict_update ))
+                cc.use(
+                    '{Sequence}#{Modifications}'.format(
+                        **line_dict_update
+                    )
+                )
                 if use15N:
                     number_N = dc( cc['N'] )
                     cc['15N'] = number_N
@@ -606,7 +610,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                     # tmp_protein_id = {}
 
                     upeptide_maps = upapa.map_peptide(
-                        peptide = line_dict['Sequence'],
+                        peptide    = line_dict['Sequence'],
                         fasta_name = fasta_lookup_name
                     )
                     '''
