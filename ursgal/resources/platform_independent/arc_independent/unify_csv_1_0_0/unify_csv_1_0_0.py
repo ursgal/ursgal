@@ -112,7 +112,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             use15N = True
     else:
         params['label'] = '14N'
-
+    # print(use15N)
+    # exit() 
     aa_exception_dict = params['aa_exception_dict']
     n_term_replacement = {
         'Ammonia-loss' : None,
@@ -450,7 +451,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 {0} {1}
                                 maybe an unknown modification with terminal position was given?
                                 '''.format(
-                                    line_dict_update['Sequence'], modification
+                                    line_dict['Sequence'], modification
                                 )
                     else:
                         try:
