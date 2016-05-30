@@ -445,7 +445,9 @@ class UnimodMapper( object ):
             xmlFile = os.path.normpath(
                 os.path.join(
                     os.path.dirname(__file__),
-                    'kb',
+                    'resources',
+                    'platform_independent',
+                    'arc_independent',
                     'ext',
                     'userdefined_unimod.xml'
                 ))
