@@ -48,26 +48,29 @@ unify_csv_main(
     output_file    = output_csv,
     scan_rt_lookup = scan_rt_lookup,
     params = {
-        'aa_exception_dict' : {
-            'U' : {
-                'unimod_name' : 'Delta:S(-1)Se(1)',
-                'original_aa' : 'C',
-                'unimod_name_with_cam': 'SecCarbamidomethyl',
+        'translations' : {
+            'aa_exception_dict' : {
+                'U' : {
+                    'unimod_name' : 'Delta:S(-1)Se(1)',
+                    'original_aa' : 'C',
+                    'unimod_name_with_cam': 'SecCarbamidomethyl',
+                },
             },
+            'modifications' : [
+                'M,opt,any,Oxidation',        # Met oxidation
+                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+                '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
+            ],
+            'decoy_tag': 'decoy_',
+            'enzyme' : 'KR;C;P',
+            'semi_enzyme' : False,
+            'database': os.path.join( 'tests', 'data', 'BSA.fasta'),
+            'protein_delimiter' : '<|>',
+            'psm_merge_delimiter' : ';',
+            'keep_asp_pro_broken_peps': True,
         },
-        'modifications' : [
-            'M,opt,any,Oxidation',        # Met oxidation
-            'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-            '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
-        ],
-        'label':'',
-        'decoy_tag': 'decoy_',
-        'enzyme' : 'KR;C;P',
-        'semi_enzyme' : False,
-        'database': os.path.join( 'tests', 'data', 'BSA.fasta'),
-        'protein_delimiter' : '<|>',
-        'psm_merge_delimiter' : ';',
-        'keep_asp_pro_broken_peps': True,
+        'label' : '',
+
     },
     search_engine  = 'xtandem_sledgehammer',
     # upeptide_mapper = R.upeptide_mapper

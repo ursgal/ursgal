@@ -42,22 +42,24 @@ unify_csv_main(
     output_file    = output_csv,
     scan_rt_lookup = scan_rt_lookup,
     params = {
-        'aa_exception_dict' : {
-            'U' : {
-                'unimod_name' : 'Delta:S(-1)Se(1)',
-                'original_aa' : 'C',
-                'unimod_name_with_cam': 'SecCarbamidomethyl',
+        'translations' : {
+            'aa_exception_dict' : {
+                'U' : {
+                    'unimod_name' : 'Delta:S(-1)Se(1)',
+                    'original_aa' : 'C',
+                    'unimod_name_with_cam': 'SecCarbamidomethyl',
+                },
             },
+            'modifications' : [
+                'M,opt,any,Oxidation',        # Met oxidation
+                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+                '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
+            ],
+            'enzyme' : 'KR;C;P',
+            'semi_enzyme' : False,
+            'protein_delimiter' : '<|>',
         },
-        'modifications' : [
-            'M,opt,any,Oxidation',        # Met oxidation
-            'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-            '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
-        ],
         'label' : '',
-        'enzyme' : 'KR;C;P',
-        'semi_enzyme' : False,
-        'protein_delimiter' : '<|>',
     },
     search_engine  = 'novor_1_1beta',
 )

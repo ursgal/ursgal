@@ -102,10 +102,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
     psm_defining_colnames = get_psm_defining_colnames(score_colname)
-    joinchar = params['protein_delimiter']
-    do_not_delete = False
-    created_tmp_files = []
-    use15N = False
+    joinchar              = params['translations']['protein_delimiter']
+    do_not_delete         = False
+    created_tmp_files     = []
+    use15N                = False
 
     if 'label' in params.keys():
         if params['label'] == '15N':
@@ -114,21 +114,21 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         params['label'] = '14N'
     # print(use15N)
     # exit() 
-    aa_exception_dict = params['aa_exception_dict']
+    aa_exception_dict = params['translations']['aa_exception_dict']
     n_term_replacement = {
         'Ammonia-loss' : None,
         'Trimethyl'    : None,
         'Gly->Val'     : None,
     }
     fixed_mods = {}
-    opt_mods = {}
+    opt_mods   = {}
     modname2aa = {}
-    cam = False
+    cam        = False
 
     # mod pattern
     mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
 
-    for modification in params['modifications']:
+    for modification in params['translations']['modifications']:
         aa = modification.split(',')[0]
         mod_type = modification.split(',')[1]
         pos = modification.split(',')[2]
@@ -174,7 +174,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         non_enzymatic_peps = set()
         pep_map_lookup = {}
         fasta_lookup_name = upapa.build_lookup_from_file(
-            params['database'],
+            params['translations']['database'],
             force=False
         )
 
@@ -195,7 +195,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     total_lines = len(list(csv.reader(open(input_file,'r'))))
     ze_only_buffer = {}
 
-    allowed_aa, cleavage_site, inhibitor_aa = params['enzyme'].split(';')
+    allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')
     allowed_aa += '-'
 
     with open( input_file, 'r' ) as in_file:
@@ -438,7 +438,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 '''.format(
                                     mod,
                                     aa,
-                                    params['modifications']
+                                    params['translations']['modifications']
                                 )
                     elif 'unknown modification' == mod:
                         modification_known = False
@@ -464,7 +464,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 unify_csv cannot deal with this, please check your parameters and engine output
                                 reported modification: {0}
                                 modifications in parameters: {1}
-                                '''.format(mod, params['modifications'])
+                                '''.format(mod, params['translations']['modifications'])
                             )
                             raise Exception('unify_csv failed because a '\
                                 'modification was reported that was not '\
@@ -493,7 +493,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     mod,
                                     name_list,
                                     aa,
-                                    params['modifications']
+                                    params['translations']['modifications']
                                 )
                     tmp_mods.append(modification)
                 line_dict_update['Modifications'] = ';'.join( tmp_mods )
@@ -655,7 +655,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                         add_protein   = False
                         nterm_correct = False
                         cterm_correct = False
-                        if params['keep_asp_pro_broken_peps'] is True:
+                        if params['translations']['keep_asp_pro_broken_peps'] is True:
                             if line_dict['Sequence'][-1] == 'D' and\
                                     protein['post'] == 'P':
                                 cterm_correct = True
@@ -685,7 +685,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     or protein['start'] in [1, 2, 3]:
                                     nterm_correct = True
                         
-                        if params['semi_enzyme'] is True:
+                        if params['translations']['semi_enzyme'] is True:
                             if cterm_correct is True or nterm_correct is True:
                                 add_protein = True
                         elif cterm_correct is True and nterm_correct is True:
@@ -720,7 +720,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
     
                             # mzidentml-lib does not always set 'Is decoy' correctly
                             # (it's always 'false' for MS-GF+ results), this is fixed here:
-                            if params['decoy_tag'] in protein['id']:
+                            if params['translations']['decoy_tag'] in protein['id']:
                                 tmp_decoy.add('true')
                             else:
                                 tmp_decoy.add('false')
@@ -769,7 +769,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 [ WARNING ] with correct enzymatic cleavage sites:
                 [ WARNING ] {1}
                 [ WARNING ] These PSMs were skipped.'''.format(
-            params['database'],
+            params['translations']['database'],
             non_enzymatic_peps
             ))
         if len(target_decoy_peps) != 0:
@@ -785,7 +785,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:
-            merge_duplicate_psm_rows(output_file, psm_counter, psm_defining_colnames, params['psm_merge_delimiter'])
+            merge_duplicate_psm_rows(output_file, psm_counter, psm_defining_colnames, params['translations']['psm_merge_delimiter'])
             '''
             to_be_written_csv_lines = merge_duplicate_psm_rows(
                 to_be_written_csv_lines,
@@ -884,30 +884,33 @@ if __name__ == '__main__':
     scan_rt_lookup = pickle.load(open(sys.argv[3], 'rb'))
 
     params = {
-        'aa_exception_dict' : {
-            'U' : {
-                'unimod_name' : 'Delta:S(-1)Se(1)',
-                'original_aa' : 'C',
-                'unimod_name_with_cam': 'SecCarbamidomethyl',
+        'translations' : {
+            'aa_exception_dict' : {
+                'U' : {
+                    'unimod_name' : 'Delta:S(-1)Se(1)',
+                    'original_aa' : 'C',
+                    'unimod_name_with_cam': 'SecCarbamidomethyl',
+                },
             },
-        },
-        'modifications' : [
-            'M,opt,any,Oxidation',        # Met oxidation
-            'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-            '*,opt,Prot-N-term,Acetyl',    # N-Acteylation[]
-            'K,opt,any,Label:13C(5)15N(1)',
-            'K,opt,any,Label:13C(6)15N(2)',
-        ],
-        'label'                    : '',
-        'protein_delimiter'        : '<|>',
-        # 'database'                 : '/Volumes/fUBe/joe/Dev/ursgal/tests/data/BSA.fasta',
-        'database'                 : '/media/plan-f/Shared/databases/Chlamydomonas_reinhardtii/v5.5/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
+            'modifications' : [
+                'M,opt,any,Oxidation',        # Met oxidation
+                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+                '*,opt,Prot-N-term,Acetyl',    # N-Acteylation[]
+                'K,opt,any,Label:13C(5)15N(1)',
+                'K,opt,any,Label:13C(6)15N(2)',
+            ],
+            'protein_delimiter'        : '<|>',
+            # 'database'                 : '/Volumes/fUBe/joe/Dev/ursgal/tests/data/BSA.fasta',
+            'database'                 : '/media/plan-f/Shared/databases/Chlamydomonas_reinhardtii/v5.5/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
 
-        'enzyme'                   : 'KR;C;P',
-        'keep_asp_pro_broken_peps' : False,
-        'semi_enzyme'              : False,
-        'decoy_tag'                : 'decoy_',
-        'psm_merge_delimiter'      : ';'
+            'enzyme'                   : 'KR;C;P',
+            'keep_asp_pro_broken_peps' : False,
+            'semi_enzyme'              : False,
+            'decoy_tag'                : 'decoy_',
+            'psm_merge_delimiter'      : ';'
+        },
+        'label'                    : '15N',
+        'prefix'                   : None
     }
     main(
         input_file     = sys.argv[1],

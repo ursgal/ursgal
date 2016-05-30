@@ -78,15 +78,11 @@ Could not load RT lookup dict from this location: {0}
 
         last_search_engine_colname = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]
 
-        self.params['translations']['prefix'] = self.params.get('prefix', None)
-        # fugly hack but unify should use full params and not just the
-        # 'translations' subset
-
         tmp_files = unify_csv_main(
             input_file      = input_file,
             output_file     = output_file,
             scan_rt_lookup  = scan_rt_lookup_dict,
-            params          = self.params['translations'],
+            params          = self.params,
             search_engine   = last_engine,
             score_colname   = last_search_engine_colname,
             upeptide_mapper = self.upeptide_mapper

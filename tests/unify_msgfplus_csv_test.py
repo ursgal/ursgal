@@ -42,29 +42,31 @@ unify_csv_main(
     output_file    = output_csv,
     scan_rt_lookup = scan_rt_lookup,
     params = {
-        'aa_exception_dict' : {
-            'U' : {
-                'unimod_name' : 'Delta:S(-1)Se(1)',
-                'original_aa' : 'C',
-                'unimod_name_with_cam': 'SecCarbamidomethyl',
+        'translations' : {
+            'aa_exception_dict' : {
+                'U' : {
+                    'unimod_name' : 'Delta:S(-1)Se(1)',
+                    'original_aa' : 'C',
+                    'unimod_name_with_cam': 'SecCarbamidomethyl',
+                },
             },
+            'modifications' : [
+                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+                'Y,opt,any,Phospho',
+            ],
+            'decoy_tag': 'decoy_',
+            'enzyme' : 'KR;C;P',
+            'semi_enzyme' : False,
+            'database': os.path.join(
+                'tests',
+                'data',
+                'BSA.fasta'
+            ),
+            'protein_delimiter' : '<|>',
+            'psm_merge_delimiter' : ';',
+            'keep_asp_pro_broken_peps':True,
         },
-        'modifications' : [
-            'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-            'Y,opt,any,Phospho',
-        ],
         'label' : '15N',
-        'decoy_tag': 'decoy_',
-        'enzyme' : 'KR;C;P',
-        'semi_enzyme' : False,
-        'database': os.path.join(
-            'tests',
-            'data',
-            'BSA.fasta'
-        ),
-        'protein_delimiter' : '<|>',
-        'psm_merge_delimiter' : ';',
-        'keep_asp_pro_broken_peps':True,
     },
     search_engine  = 'msgfplus_v9979',
 )
