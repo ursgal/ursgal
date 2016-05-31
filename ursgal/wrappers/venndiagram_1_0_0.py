@@ -109,9 +109,10 @@ class venndiagram_1_0_0( ursgal.UNode ):
         default_label = ['label_A','label_B','label_C','label_D','label_E','label_F']
         input_file_dicts = self.params['input_file_dicts']
         data = []
-        for result_file in input_file_dicts:
+        for result_pos, result_file in enumerate(input_file_dicts):
+            label_for_venn =result_file.get('last_engine',str(result_pos))
             data_field = (
-                result_file['last_engine'],
+                label_for_venn,
                 os.path.join(
                     result_file['dir'],
                     result_file['file']
