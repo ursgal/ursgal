@@ -756,7 +756,7 @@ ursgal_params = {
                 'argc' : '6',
                 'aspn' : '7',
                 'chymotrypsin' : '2',
-                'glutamyl_endopeptidase' : '5',
+                'gluc' : '5',
                 'lysc' : '3',
                 'lysn' : '4',
                 'no_cleavage' : '9',
