@@ -40,18 +40,19 @@ def main():
     else:
         xtandem = 'xtandem_sledgehammer'
 
+    if sys.platform == 'win32':
+        msamanda = 'msamanda_1_0_0_6299'
+    elif sys.platform == 'darwin':
+        pass
+    else:
+        msamanda = 'msamanda_1_0_0_6300'
+
     engine_list = [
         'omssa',
         xtandem,
         'msgf',
         # msamanda,
     ]
-    if sys.platform == 'win32':
-        engine_list.append( 'msamanda_1_0_0_6299' )
-    elif sys.platform == 'darwin':
-        pass
-    else:
-        engine_list.append( 'msamanda_1_0_0_6300' )
 
     mzML_file = os.path.join(
         os.pardir,
