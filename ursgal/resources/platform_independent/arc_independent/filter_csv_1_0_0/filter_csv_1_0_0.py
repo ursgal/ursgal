@@ -135,12 +135,11 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
                         if re.search(value, line_dict[dict_key]) is not None:
                             write_row_bools.add(True)
                         elif line_dict[dict_key][-2] == 'N' and line_dict[dict_key][-1] != 'P':
-                            for protein in line_dict['proteinacc_start_stop_pre_post_;'].split('<|>'):
-                                if line_dict['proteinacc_start_stop_pre_post_;'][-1] in ['S','T']:
-                                    write_row_bools.add(True)
-                                    break
-                                else:
-                                    write_row_bools.add(False)
+                            if 'S' in line_dict['Sequence Post AA'] or 'T' in line_dict['Sequence Post AA']:
+                                write_row_bools.add(True)
+                                break
+                            else:
+                                write_row_bools.add(False)
                         else:
                             write_row_bools.add(False)
                     else:
