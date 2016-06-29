@@ -298,8 +298,8 @@ class pepnovo_3_1( ursgal.UNode ):
                     for elem in line_list:
                         if any(c.isalpha() for c in elem) == True:
                             nr_aa = 0
-                            if spectrum_count == 1:
-                                seq_index = line_list.index(elem) #specifying seq_index for the next section, but only one time
+                            # if spectrum_count == 1:
+                            seq_index = line_list.index(elem) #specifying seq_index for the next section, but only one time
                             for char in elem:
                                 if char.isalpha():
                                     nr_aa +=1
