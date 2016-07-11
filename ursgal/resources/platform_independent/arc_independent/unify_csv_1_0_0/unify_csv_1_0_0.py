@@ -456,7 +456,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                     else:
                         try:
                             name_list = ursgal.GlobalUnimodMapper.appMass2name_list(
-                                round(float(mod), 4), decimal_places = 4
+                                round(float(mod), 3), decimal_places = 3
                             )
                         except:
                             print('''
