@@ -3745,7 +3745,7 @@ Example:
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : "False",
+        'default_value' : False,
         'description' :  ''' Remove temporary files: True or False ''',
         'triggers_rerun' : True,
         'ukey_translation' : {

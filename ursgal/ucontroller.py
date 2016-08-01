@@ -1486,7 +1486,6 @@ class UController(ursgal.UNode):
         # add uNodes name as defined in kb
         # if there is no entry called 'output_suffix', the engine/node
         # name is used instead; if it's None, no suffix is added
-
         output_suffix = self.meta_unodes[ engine ].META_INFO.get(
             'output_suffix', engine
         )
