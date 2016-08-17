@@ -22,11 +22,11 @@ def main():
     uc = ursgal.UController(
         profile = 'LTQ XL low res',
         params = {
-            'database' : os.path.abspath(os.path.join(
+            'database' : os.path.join(
                 os.pardir,
                 'example_data',
                 'BSA.fasta'
-            )),
+            ),
             'modifications' : [
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
