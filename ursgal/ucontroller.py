@@ -2788,7 +2788,7 @@ True
         )
 
 
-    def visualize(self, input_files, engine, force=None, output_file_name=None):
+    def visualize(self, input_files, engine, force=None, output_file_name=None, multi=True):
         '''
         The ucontroller function for visualization
 
@@ -2828,7 +2828,7 @@ True
             str: Path of the output file
         '''
         engine_name = self.engine_sanity_check( engine )
-        self.input_file_sanity_check( input_files, engine=engine_name, multi=True )
+        self.input_file_sanity_check( input_files, engine=engine_name, multi=multi )
         answer = self.prepare_unode_run(
             input_files,
             output_file = output_file_name,

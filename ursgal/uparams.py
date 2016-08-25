@@ -4994,4 +4994,113 @@ Example:
         },
         'uvalue_type' : "bool",
     },
+
+    'heatmap_object_field_name' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : 'Protein',
+        'description' :  ''' The name of the object to plot in the heatmap ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_object_field_name',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : { },
+        'uvalue_translation' : { },
+        'uvalue_type' : "str",
+    },
+
+    'heatmap_annotation_field_name' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : 'Protein',
+        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_annotation_field_name',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : { },
+        'uvalue_translation' : { },
+        'uvalue_type' : "str",
+    },
+
+    'heatmap_min_value' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : -3,
+        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_min_value',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : { },
+        'uvalue_translation' : { },
+        'uvalue_type' : "int",
+    },
+
+    'heatmap_max_value' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : 3,
+        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_max_value',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : { },
+        'uvalue_translation' : { },
+        'uvalue_type' : "int",
+    },
+
+    'heatmap_color_gradient' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : 'Spectral',
+        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_color_gradient',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : { },
+        'uvalue_translation' : { },
+        'uvalue_type' : "str",
+    },
+
+    'heatmap_box_style' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : 'classic',
+        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_box_style',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : { },
+        'uvalue_translation' : { },
+        'uvalue_type' : "int",
+    },
+
 }
