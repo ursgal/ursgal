@@ -38,7 +38,10 @@ def main(input_file=None, output_file=None, params=None):
             except:
                 continue
         identifiers.append(line_name)
-        params['additional_labels'][ line_name ] = [' ', line_dict[params['heatmap_annotation_field_name']]]
+        try:
+            params['additional_labels'][ line_name ] = [' ', line_dict[params['heatmap_annotation_field_name']]]
+        except:
+            pass
     cluster                      = pyGCluster.Cluster()
     folder                       = os.path.dirname(output_file)
     cluster['Working directory'] = folder
