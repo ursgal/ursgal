@@ -320,18 +320,21 @@ class ChemicalComposition(dict):
     def _chemical_formula_to_dict(self, chemical_formula):
         if isinstance( chemical_formula, ursgal.ChemicalComposition):
             chem_dict = chemical_formula
+        elif '(' in chemical_formula:
+            pattern = re.compile(r'(?P<element>[0-9]*[A-z]*)(?P<count>[()][0-9]*[)])')
         else:
-            chem_dict = {}
-            # print( chemical_formula , type( chemical_formula ))
             pattern = re.compile(r'(?P<element>[A-Z][a-z]*)(?P<count>[0-9]*)')
-            for match in pattern.finditer(chemical_formula):
-                if match.group('count') == '':
-                    count = 1
-                else:
-                    count = int(match.group('count'))
-                if match.group('element') not in chem_dict.keys():
-                    chem_dict[match.group('element')] = 0
-                chem_dict[match.group('element')] += count
+        chem_dict = {}
+        # print( chemical_formula , type( chemical_formula ))
+        for match in pattern.finditer(chemical_formula):
+            if match.group('count') == '':
+                count = 1
+            else:
+
+                count = int(match.group('count').strip('(').strip(')'))
+            if match.group('element') not in chem_dict.keys():
+                chem_dict[match.group('element')] = 0
+            chem_dict[match.group('element')] += count
         return chem_dict
 
     def hill_notation(self, include_ones=False, cc=None):
@@ -439,6 +442,13 @@ class ChemicalComposition(dict):
                 isotope_mass = self.isotopic_distributions[ element ][0][0]
             except:
                 # we check for 15N or 13C or other isotopes
+                assert element in self.isotope_mass_lookup.keys(), '''
+                The given element {0}
+                is not included yet. Please add it to the isotopic_distributions
+                dictionary in ursgal/chemical_composition_kb.py.
+                Isotopic masses and distributions can be found at
+                http://ciaaw.org/atomic-masses.html
+                '''.format( element )
                 isotope_mass = self.isotope_mass_lookup[ element ]
             mass += count * isotope_mass
 

@@ -318,7 +318,10 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
         output_file,
         'w'
     )
-    line_ending = '\r\n'
+    if sys.platform == 'win32':
+        line_ending = '\n'
+    else:
+        line_ending = '\r\n'
     total_sequences_2_write = len(final_output.keys())
     for n, (fastaID, sequence_dict) in enumerate(final_output.items()):
         if n % 100 == 0:

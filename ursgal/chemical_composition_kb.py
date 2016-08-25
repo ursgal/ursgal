@@ -56,7 +56,6 @@ isotopic_distributions = {
            (79.916522   ,  0.4961  ), (81.916700    , 0.0873   ) ]
 }
 
-
 aa_compositions = {
     'A': 'C3H5NO',
     'C': 'C3H5NOS',
