@@ -37,7 +37,7 @@ class plot_pygcluster_heatmap_from_csv_1_0_0( ursgal.UNode ):
     def _execute( self ):
         '''
         '''
-        print('[ -ENGINE- ] Executing conversion ..')
+        print('[ -ENGINE- ] Executing plotting ..')
         self.time_point(tag = 'execution')
         unify_csv_main = self.import_engine_as_python_function()
         output_file = os.path.join(
