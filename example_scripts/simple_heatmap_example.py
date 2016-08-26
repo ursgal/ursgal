@@ -5,14 +5,26 @@ import ursgal
 import sys
 import os
 
+
 def main():
     '''
+    Please visit pyGCluster documentation for more information on this plotting
+    function:
+        http://pygcluster.github.io/usage.html#clustered-data-visualization
+
+        - color gradients
+        - box styles
+
+    Please do not forget to cite pyGCluster and Ursgal when using this node.
+
+    Usage:
+
+        ./simple_heatmap_example.py <path_to_csv_file>
 
     '''
     uc = ursgal.UController(
         profile = 'LTQ XL low res',
         params = {
-
             'heatmap_annotation_field_name' : 'map to uniprot',
             'heatmap_object_field_name'     : 'Protein',
             'heatmap_max_value'             : 3,
@@ -31,4 +43,7 @@ def main():
 
 
 if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        print(main.__doc__)
+        exit()
     main()
