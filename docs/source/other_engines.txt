@@ -143,3 +143,17 @@ xtandem2csv 1_0_0
 
 .. autoclass:: ursgal.resources.platform_independent.arc_independent.xtandem2csv_1_0_0.xtandem2csv_1_0_0.main
    :members:
+
+
+plot_pygcluster_heatmap_from_csv_1_0_0
+--------------------------------------
+
+
+.. autoclass:: ursgal.wrappers.plot_pygcluster_heatmap_from_csv_1_0_0.plot_pygcluster_heatmap_from_csv_1_0_0
+
+   :members:
+   :private-members:
+
+.. autoclass:: ursgal.resources.platform_independent.arc_independent.plot_pygcluster_heatmap_from_csv_1_0_0.plot_pygcluster_heatmap_from_csv_1_0_0.main
+   :members:
+   :private-members:

@@ -24,7 +24,11 @@
 	    uc = ursgal.UController(
 	        profile = 'LTQ XL low res',
 	        params = {
-	            'database' : os.path.join( os.pardir, 'example_data', 'BSA.fasta' ),
+	            'database' : os.path.join(
+	                os.pardir,
+	                'example_data',
+	                'BSA.fasta'
+	            ),
 	            'modifications' : [
 	                'M,opt,any,Oxidation',        # Met oxidation
 	                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
@@ -33,14 +37,17 @@
 	        }
 	    )
 	
-	    if sys.maxsize > 2**32:
+	    if sys.maxsize > 2 ** 32:
 	        xtandem = 'xtandem_vengeance'
 	    else:
 	        xtandem = 'xtandem_sledgehammer'
+	
 	    if sys.platform == 'win32':
-	        msamanda = 'msamanda_1_0_0_6299'
+	        msamanda = 'msamanda_1_0_0_7503'
+	    elif sys.platform == 'darwin':
+	        pass
 	    else:
-	        msamanda = 'msamanda_1_0_0_6300'
+	        msamanda = 'msamanda_1_0_0_7504'
 	
 	    engine_list = [
 	        'omssa',
@@ -61,10 +68,16 @@
 	        uc.fetch_file(
 	            engine     = 'get_http_files_1_0_0',
 	        )
-	        shutil.move(
-	            '{0}format=raw'.format(mzML_file),
-	            mzML_file
-	        )
+	        try:
+	            shutil.move(
+	                '{0}?format=raw'.format(mzML_file),
+	                mzML_file
+	            )
+	        except:
+	            shutil.move(
+	                '{0}format=raw'.format(mzML_file),
+	                mzML_file
+	            )
 	
 	    unified_file_list = []
 	

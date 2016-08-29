@@ -113,8 +113,8 @@
 	
 	        if len(result_files) > 1:
 	            results_all_files = uc.merge_csvs(
-	                    input_files = result_files,
-	                )
+	                input_files = result_files,
+	            )
 	
 	if __name__ == '__main__':
 	    if len(sys.argv) < 3:

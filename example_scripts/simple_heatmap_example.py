@@ -26,10 +26,10 @@ def main():
         profile = 'LTQ XL low res',
         params = {
             'heatmap_annotation_field_name' : 'map to uniprot',
-            'heatmap_object_field_name'     : 'Protein',
+            'heatmap_identifier_field_name' : 'Protein',
             'heatmap_max_value'             : 3,
             'heatmap_min_value'             : -3,
-            'heatmap_color_gradient'        : 'Spectral',
+            'heatmap_color_gradient'        : 'RdBu',
             'heatmap_box_style'             : 'classic'
         }
     )

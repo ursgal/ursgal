@@ -5075,12 +5075,12 @@ Example:
         'uvalue_type' : "bool",
     },
 
-    'heatmap_object_field_name' : {
+    'heatmap_identifier_field_name' : {
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
         'default_value' : 'Protein',
-        'description' :  ''' The name of the object to plot in the heatmap ''',
+        'description' :  ''' The name of the identifier to plot in the heatmap ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_object_field_name',
@@ -5116,7 +5116,7 @@ Example:
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
         'default_value' : -3,
-        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'description' :  ''' Minimum vaue for the color gradient ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_min_value',
@@ -5134,7 +5134,7 @@ Example:
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
         'default_value' : 3,
-        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'description' :  ''' Maximum value for the color gradient ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_max_value',
@@ -5152,7 +5152,7 @@ Example:
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
         'default_value' : 'Spectral',
-        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'description' :  ''' Color gradient for the heatmap ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_color_gradient',
@@ -5170,7 +5170,7 @@ Example:
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
         'default_value' : 'classic',
-        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'description' :  ''' Box style for the heatmap ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_box_style',

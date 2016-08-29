@@ -79,10 +79,16 @@
 	        R.fetch_file(
 	            engine     = 'get_http_files_1_0_0'
 	        )
-	        shutil.move(
-	            '{0}format=raw'.format(mzML_file),
-	            mzML_file
-	        )
+	        try:
+	            shutil.move(
+	                '{0}?format=raw'.format(mzML_file),
+	                mzML_file
+	            )
+	        except:
+	            shutil.move(
+	                '{0}format=raw'.format(mzML_file),
+	                mzML_file
+	            )
 	
 	    for engine in engine_list:
 	        for ( ppm_offset, prefix) in ppm_offsets:

@@ -25,7 +25,7 @@ def main(input_file=None, output_file=None, params=None):
 
 
     Available parameters for heatmap
-        * heatmap_object_field_name defines the fieldname in the csv to
+        * heatmap_identifier_field_name defines the fieldname in the csv to
           appear directly right of the heatmap rows. Tipically the gene or
           protein name (Default: 'Protein')
         * heatmap_annotation_field_name defines the fieldname for an additional
@@ -59,7 +59,7 @@ def main(input_file=None, output_file=None, params=None):
     plot_collector = {}
     identifiers    = []
     for line_dict in csv_reader:
-        line_name = line_dict[params['heatmap_object_field_name']]
+        line_name = line_dict[params['heatmap_identifier_field_name']]
 
         plot_collector[ line_name ] = {}
 

@@ -8,6 +8,7 @@
 	import os
 	import glob
 	import math
+	from collections import defaultdict as ddict
 	
 	params = {
 	    'database' : os.path.join(
