@@ -155,5 +155,6 @@ plot_pygcluster_heatmap_from_csv_1_0_0
    :private-members:
 
 .. autoclass:: ursgal.resources.platform_independent.arc_independent.plot_pygcluster_heatmap_from_csv_1_0_0.plot_pygcluster_heatmap_from_csv_1_0_0.main
+
    :members:
    :private-members:
