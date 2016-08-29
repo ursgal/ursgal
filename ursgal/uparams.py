@@ -5083,7 +5083,7 @@ Example:
         'description' :  ''' The name of the identifier to plot in the heatmap ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'heatmap_style_1' : 'heatmap_object_field_name',
+            'heatmap_style_1' : 'heatmap_identifier_field_name',
         },
         'utag' : [
             '',
