@@ -63,7 +63,10 @@ unify_csv_main(
             ),
             'protein_delimiter' : '<|>',
             'psm_merge_delimiter' : ';',
-            'keep_asp_pro_broken_peps':True
+            'keep_asp_pro_broken_peps':True,
+            'precursor_mass_tolerance_minus': 5,
+            'precursor_mass_tolerance_plus' : 5,
+            'precursor_isotope_range' : "0,1",
         },
         'label' : '',
     },

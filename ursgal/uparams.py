@@ -3254,6 +3254,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'unify_csv_1_0_0',
         ],
         'default_value' : "0,1",
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
@@ -3264,6 +3265,7 @@ Example:
             'omssa_style_1' : '-ti',
             'pepnovo_style_1' : '-correct_pm',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
+            'unify_csv_style_1' : 'precursor_isotope_range',
         },
         'utag' : [
             'precursor',
@@ -3313,6 +3315,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'unify_csv_1_0_0',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
@@ -3325,6 +3328,7 @@ Example:
             'omssa_style_1' : '-te',
             'pepnovo_style_1' : '-pm_tolerance',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
+            'unify_csv_style_1': 'precursor_mass_tolerance_minus',
         },
         'utag' : [
             'precursor',
@@ -3357,6 +3361,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'unify_csv_1_0_0',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
@@ -3369,6 +3374,7 @@ Example:
             'omssa_style_1' : '-te',
             'pepnovo_style_1' : '-pm_tolerance',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
+            'unify_csv_style_1' : ' precursor_mass_tolerance_minus',
         },
         'utag' : [
             'precursor',

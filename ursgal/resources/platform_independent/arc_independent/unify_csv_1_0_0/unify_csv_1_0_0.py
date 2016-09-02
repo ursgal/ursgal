@@ -55,6 +55,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
           there and sorted according to their position.
         * Fixed modifications are added in 'Modifications', if not reported
           by the engine.
+        * The monoisotopic m/z for for each line is calculated (uCalc m/z), 
+          since not all engines report the monoisotopic m/z
+        * Mass accuracy calculation (in ppm), also taking into account that
+          not always the monoisotopic peak is picked
         * All peptide Sequences are remapped to their corresponding protein,
           assuring correct start, stop, pre and post aminoacid. Thereby,
           also correct enzymatic cleavage is checked.
@@ -217,6 +221,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             output_fieldnames.remove(remove_fieldname)
         new_fieldnames = [
             'uCalc m/z',
+            'Accuracy (ppm)',
             'Protein ID',
             'Sequence Start',
             'Sequence Stop',
@@ -592,6 +597,25 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 if 'msamanda' in search_engine.lower():
                     # ms amanda does not return calculated mz values
                     line_dict_update['Calc m/z'] = calc_mz
+
+                line_dict_update['Accuracy (ppm)'] = \
+                    (float(line_dict['Exp m/z']) - line_dict_update['uCalc m/z'])/line_dict_update['uCalc m/z'] * 1e6
+                prec_m_accuracy = (params['translations']['precursor_mass_tolerance_minus'] + params['translations']['precursor_mass_tolerance_plus'])/2
+                i = 0
+                while abs(line_dict_update['Accuracy (ppm)']) > prec_m_accuracy:
+                    i += 1
+                    if i > len(params['translations']['precursor_isotope_range'].split(','))-1:
+                        break
+                    isotope = params['translations']['precursor_isotope_range'].split(',')[i]
+                    isotope = int(isotope)
+                    if isotope == 0:
+                        continue
+                    calc_mz = ursgal.ucore.calculate_mz(
+                        mass + isotope*1.008664904,
+                        line_dict['Charge']
+                    )
+                    line_dict_update['Accuracy (ppm)'] = \
+                        (float(line_dict['Exp m/z']) - calc_mz)/calc_mz * 1e6
 
                 # ------------
                 # BUFFER END
