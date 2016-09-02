@@ -3969,6 +3969,28 @@ Example:
         },
         'uvalue_type' : "list",
     },
+    'scan_inclusion_list' : {
+        'available_in_unode' : [
+            'mzml2mgf_1_0_0',
+        ],
+        'default_value' : None,
+        'description' :  ''' Exclusively spectra included during mzml2mgf conversion ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'mzml2mgf_style_1' : 'scan_inclusion_list',
+        },
+        'utag' : [
+            'converter',
+        ],
+        'uvalue_option' : {
+            'initialValue' : [],
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 1,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
+    },
     'scan_skip_modulo_step' : {
         'available_in_unode' : [
             'mzml2mgf_1_0_0',

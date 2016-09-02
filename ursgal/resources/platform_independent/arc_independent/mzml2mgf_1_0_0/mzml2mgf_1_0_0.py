@@ -42,6 +42,7 @@ def main(
         mz_decimals           = 5,
         machine_offset_in_ppm = None,
         scan_exclusion_list   = None,
+        scan_inclusion_list   = None,
         prefix                = None,
         scan_skip_modulo_step = None
     ):
@@ -89,6 +90,9 @@ def main(
             continue
         scan_time, unit = spec['scan time']
         spectrum_id = spec['id']
+        if scan_inclusion_list != None:
+            if int(spectrum_id) not in scan_inclusion_list:
+                continue
 
         if int(spectrum_id) in scan_exclusion_list:
             continue

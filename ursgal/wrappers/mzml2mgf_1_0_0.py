@@ -60,6 +60,7 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
                 mz_decimals           = self.params['translations']['num_mz_decimals'],
                 machine_offset_in_ppm = self.params['translations']['machine_offset_in_ppm'],
                 scan_exclusion_list   = self.params['translations']['scan_exclusion_list'],
+                scan_inclusion_list   = self.params['translations']['scan_inclusion_list'],
                 prefix                = self.params.get('prefix',None),
                 scan_skip_modulo_step = self.params['translations']['scan_skip_modulo_step']
             )
