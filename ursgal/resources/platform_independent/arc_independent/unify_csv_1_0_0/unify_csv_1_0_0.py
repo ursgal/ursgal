@@ -525,7 +525,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 if aa == aa_to_replace:
                                     index_of_U = r_pos + 1
                                     unimod_name = replace_dict['unimod_name']
-                                    if cam:
+                                    if cam and replace_dict['original_aa'] == 'C':
                                         unimod_name = replace_dict['unimod_name_with_cam']
                                     new_mod = '{0}:{1}'.format(
                                         unimod_name,

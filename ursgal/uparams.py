@@ -30,6 +30,10 @@ ursgal_params = {
             'J' : {
                 'original_aa' : 'L',
             },
+            'O' : {
+                'original_aa' : 'K',
+                'unimod_name' : 'Methylpyrroline',
+            },
             'U' : {
                 'original_aa' : 'C',
                 'unimod_name' : 'Delta:S(-1)Se(1)',
@@ -1420,6 +1424,120 @@ ursgal_params = {
             },
         },
         'uvalue_type' : "",
+    },
+    'heatmap_annotation_field_name' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : "Protein",
+        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_annotation_field_name',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'heatmap_box_style' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : "classic",
+        'description' :  ''' Box style for the heatmap ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_box_style',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'heatmap_color_gradient' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : "Spectral",
+        'description' :  ''' Color gradient for the heatmap ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_color_gradient',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'heatmap_identifier_field_name' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : "Protein",
+        'description' :  ''' The name of the identifier to plot in the heatmap ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_identifier_field_name',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'heatmap_max_value' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : 3,
+        'description' :  ''' Maximum value for the color gradient ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_max_value',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'heatmap_min_value' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : -3,
+        'description' :  ''' Minimum vaue for the color gradient ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_min_value',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
     },
     'helper_extension' : {
         'available_in_unode' : [
@@ -3249,12 +3367,12 @@ Example:
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'unify_csv_1_0_0',
         ],
         'default_value' : "0,1",
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
@@ -3264,8 +3382,8 @@ Example:
             'myrimatch_style_1' : 'MonoisotopeAdjustmentSet',
             'omssa_style_1' : '-ti',
             'pepnovo_style_1' : '-correct_pm',
-            'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
             'unify_csv_style_1' : 'precursor_isotope_range',
+            'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
         },
         'utag' : [
             'precursor',
@@ -3310,12 +3428,12 @@ Example:
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'unify_csv_1_0_0',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
@@ -3327,8 +3445,8 @@ Example:
             'novor_style_1' : 'precursorErrorTol',
             'omssa_style_1' : '-te',
             'pepnovo_style_1' : '-pm_tolerance',
+            'unify_csv_style_1' : 'precursor_mass_tolerance_minus',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
-            'unify_csv_style_1': 'precursor_mass_tolerance_minus',
         },
         'utag' : [
             'precursor',
@@ -3356,12 +3474,12 @@ Example:
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'unify_csv_1_0_0',
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
@@ -3373,8 +3491,8 @@ Example:
             'novor_style_1' : 'precursorErrorTol',
             'omssa_style_1' : '-te',
             'pepnovo_style_1' : '-pm_tolerance',
-            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
             'unify_csv_style_1' : ' precursor_mass_tolerance_minus',
+            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
         },
         'utag' : [
             'precursor',
@@ -5080,113 +5198,4 @@ Example:
         },
         'uvalue_type' : "bool",
     },
-
-    'heatmap_identifier_field_name' : {
-        'available_in_unode' : [
-            'plot_pygcluster_heatmap_from_csv_1_0_0',
-        ],
-        'default_value' : 'Protein',
-        'description' :  ''' The name of the identifier to plot in the heatmap ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'heatmap_style_1' : 'heatmap_identifier_field_name',
-        },
-        'utag' : [
-            '',
-        ],
-        'uvalue_option' : { },
-        'uvalue_translation' : { },
-        'uvalue_type' : "str",
-    },
-
-    'heatmap_annotation_field_name' : {
-        'available_in_unode' : [
-            'plot_pygcluster_heatmap_from_csv_1_0_0',
-        ],
-        'default_value' : 'Protein',
-        'description' :  ''' The name of the annotation to plot in the heatmap ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'heatmap_style_1' : 'heatmap_annotation_field_name',
-        },
-        'utag' : [
-            '',
-        ],
-        'uvalue_option' : { },
-        'uvalue_translation' : { },
-        'uvalue_type' : "str",
-    },
-
-    'heatmap_min_value' : {
-        'available_in_unode' : [
-            'plot_pygcluster_heatmap_from_csv_1_0_0',
-        ],
-        'default_value' : -3,
-        'description' :  ''' Minimum vaue for the color gradient ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'heatmap_style_1' : 'heatmap_min_value',
-        },
-        'utag' : [
-            '',
-        ],
-        'uvalue_option' : { },
-        'uvalue_translation' : { },
-        'uvalue_type' : "int",
-    },
-
-    'heatmap_max_value' : {
-        'available_in_unode' : [
-            'plot_pygcluster_heatmap_from_csv_1_0_0',
-        ],
-        'default_value' : 3,
-        'description' :  ''' Maximum value for the color gradient ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'heatmap_style_1' : 'heatmap_max_value',
-        },
-        'utag' : [
-            '',
-        ],
-        'uvalue_option' : { },
-        'uvalue_translation' : { },
-        'uvalue_type' : "int",
-    },
-
-    'heatmap_color_gradient' : {
-        'available_in_unode' : [
-            'plot_pygcluster_heatmap_from_csv_1_0_0',
-        ],
-        'default_value' : 'Spectral',
-        'description' :  ''' Color gradient for the heatmap ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'heatmap_style_1' : 'heatmap_color_gradient',
-        },
-        'utag' : [
-            '',
-        ],
-        'uvalue_option' : { },
-        'uvalue_translation' : { },
-        'uvalue_type' : "str",
-    },
-
-    'heatmap_box_style' : {
-        'available_in_unode' : [
-            'plot_pygcluster_heatmap_from_csv_1_0_0',
-        ],
-        'default_value' : 'classic',
-        'description' :  ''' Box style for the heatmap ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'heatmap_style_1' : 'heatmap_box_style',
-        },
-        'utag' : [
-            '',
-        ],
-        'uvalue_option' : { },
-        'uvalue_translation' : { },
-        'uvalue_type' : "int",
-    },
-
 }
