@@ -467,6 +467,8 @@ class UController(ursgal.UNode):
             )
             if 'xtandem' in last_engine:
                 engine_name = 'xtandem2csv_1_0_0'
+            elif 'msgfplus_v2016_09_16' in last_engine:
+                engine_name = 'msgfplus2csv_v2016_09_16'
             else:
                 engine_name = self.params['mzidentml_converter_version']
 
