@@ -7,7 +7,7 @@ import pickle
 import csv
 import copy
 import re
-import pprint   
+import pprint
 
 class msgfplus2csv_v2016_09_16( ursgal.UNode ):
     """
@@ -25,14 +25,15 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
         'output_extension'  : '.csv',
         'output_suffix'     : None,
         'input_types'       : ['.mzid', ],
-        'include_in_git' : True,
-        'in_development' : False,
+        'include_in_git'    : False,
+        'in_development'    : False,
         'utranslation_style'    : 'msgfplus_style_1',
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
                     'url'            : 'https://omics.pnl.gov/sites/default/files/MSGFPlus.zip',
+                    'zip_md5'        : '80ba46ae6fd3b99a1599ff665d683f6f',
                 },
             },
         },
@@ -136,7 +137,7 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
             print('[ INFO  ] Writing MS-GF+ results')
             csv_write_list = []
 
-            total_docs =len(cached_msgfplus_output)
+            total_docs = len(cached_msgfplus_output)
 
             for cache_pos, m in enumerate(cached_msgfplus_output):
                 tmp = {}
