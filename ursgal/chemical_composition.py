@@ -321,7 +321,7 @@ class ChemicalComposition(dict):
         if isinstance( chemical_formula, ursgal.ChemicalComposition):
             chem_dict = chemical_formula
         elif '(' in chemical_formula:
-            pattern = re.compile(r'(?P<element>[0-9]*[A-z]*)(?P<count>[()][0-9]*[)])')
+            pattern = re.compile(r'(?P<element>[0-9]*[A-z]*)(?P<count>[(][0-9]*[)])')
         else:
             pattern = re.compile(r'(?P<element>[A-Z][a-z]*)(?P<count>[0-9]*)')
         chem_dict = {}
