@@ -600,8 +600,10 @@ class percolator_2_08( ursgal.UNode ):
             # if self.params['translations']['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
             #     line_dict['Is decoy'] = "true"
             #     psm_type = "decoy"
-
-            seq_and_mods = '#'.join( [line_dict['Sequence'], line_dict['Modifications']] )
+            if line_dict['Modifications'].strip() != '':
+                seq_and_mods = '#'.join( [line_dict['Sequence'], line_dict['Modifications']] )
+            else:
+                seq_and_mods = line_dict['Sequence']
             _psmid_pep_key = (
                 line_dict['Spectrum Title'],
                 seq_and_mods,
