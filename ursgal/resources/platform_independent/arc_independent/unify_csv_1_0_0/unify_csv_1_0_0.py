@@ -181,7 +181,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             params['translations']['database'],
             force=False
         )
-
+    # print('Cached!')
+    # input()
     psm_counter = Counter()
     # if a PSM with multiple rows is found (i.e. in omssa results), the psm
     # rows are merged afterwards
@@ -629,7 +630,10 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
             if database_search is True:
                 # remap peptides to proteins, check correct enzymatic
                 # cleavage and decoy assignment
-                lookup_identifier = '{0}><{1}'.format(line_dict['Sequence'], fasta_lookup_name)
+                lookup_identifier = '{0}><{1}'.format(
+                    line_dict['Sequence'],
+                    fasta_lookup_name
+                )
                 if lookup_identifier not in pep_map_lookup.keys():
                     tmp_decoy = set()
                     # tmp_protein_id = {}
