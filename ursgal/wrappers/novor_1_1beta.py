@@ -162,7 +162,7 @@ class novor_1_1beta( ursgal.UNode ):
             print( param, file = params_file )
         params_file.close()
 
-        mgf_org_input_file = open( self.params['mgf_input_file'], 'r', encoding = 'UTF-8' )
+        mgf_org_input_file = open( self.params['translations']['mgf_input_file'], 'r', encoding = 'UTF-8' )
         lines = mgf_org_input_file.readlines()
         mgf_org_input_file.close()
 
