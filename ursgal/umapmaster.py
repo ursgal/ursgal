@@ -289,11 +289,10 @@ class UPeptideMapper( dict ):
         print('[   upapa  ] UPeptideMapper is building the fast cache and regular sequence dict from a fasta')
         if fasta_name not in self.keys():
             force = True
-
-        if fasta_name not in self.keys():
             self[ fasta_name ] = {}
             self.fasta_sequences[ fasta_name ] = {}
-            self.master_buffer[ fasta_name ] = {}
+
+        self.master_buffer[ fasta_name ] = {}
 
         if force:
             for id, seq in ursgal.ucore.parseFasta( fasta_stream ):
@@ -312,7 +311,7 @@ class UPeptideMapper( dict ):
         '''
         for pos in range(len( seq ) - self.word_len + 1):
             pep = seq[ pos : pos + self.word_len ]
-            pep = pep.encode()
+            # pep = pep.encode()
             try:
                 self[ fasta_name ][ pep ].add( (id, pos + 1) )
             except:
@@ -363,7 +362,7 @@ class UPeptideMapper( dict ):
                     # m = []
                     for pos in range( l_peptide - self.word_len + 1):
                         pep = peptide[ pos : pos + self.word_len ]
-                        pep = pep.encode()
+                        # pep = pep.encode()
                         # print( pep, peptide )
                         fasta_set = self[ fasta_name ].get(pep, None)
                         if fasta_set is None:

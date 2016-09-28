@@ -3302,8 +3302,8 @@ Example:
                 'default' : '-oc',
             },
             'xtandem_style_1' : {
-                '.mzid' : True,
-                'default' : False,
+                '.mzid' : 'yes',
+                'default' : 'no',
             },
         },
         'uvalue_type' : "select",

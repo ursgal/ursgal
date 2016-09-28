@@ -59,7 +59,9 @@ class UMapMaster(unittest.TestCase):
             fasta_stream = TEST_FASTA_TWO
         )
         # map with two parsed fastas
+
         maps = self.uc.upeptide_mapper.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
+        print(maps)
         self.assertEqual( len(maps), 2)
 
 

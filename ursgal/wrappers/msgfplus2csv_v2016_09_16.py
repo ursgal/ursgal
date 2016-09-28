@@ -90,14 +90,17 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
             headers = []
             for h in result_file.readline()[1:].split('\t'):
                 headers.append(h.strip())
-            # csv_dict_reader_object = csv.DictReader(
-            #     result_file,
-            #     # (row for row in result_file if not row.startswith('#')),
-            #     delimiter = '\t'
-            # )
+            ignore_columns = [
+                'SpecID',
+                'FragMethod',
+                'IsotopeError',
+                'PrecursorError(ppm)',
+            ]
 
             translated_headers = []
             for header in headers:
+                if header in ignore_columns:
+                    continue
                 translated_headers.append(
                     self.UNODE_UPARAMS['header_translations']['uvalue_style_translation'].get(header, header)
                 )
@@ -142,12 +145,7 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
             for cache_pos, m in enumerate(cached_msgfplus_output):
                 tmp = {}
                 for header in headers:
-                    if header in [
-                        'SpecID',
-                        'FragMethod',
-                        'IsotopeError',
-                        'PrecursorError(ppm)',
-                    ]:
+                    if header in ignore_columns:
                         continue
                     translated_header = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation'].get(header, header)
                     tmp[ translated_header ] = m[ header ]
@@ -161,8 +159,10 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
                         end='\r'
                     )
                 dict_2_write = copy.deepcopy( tmp )
-                extracted_mods = []
 
+                dict_2_write['Raw data location'] = os.path.abspath(dict_2_write['Raw data location'])
+
+                extracted_mods = []
                 mod_pattern = re.compile( r'''[+-][0-9]{1,},[0-9]{1,}''' )
 
                 match = mod_pattern.search(dict_2_write['Sequence'])
