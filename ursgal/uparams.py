@@ -4753,6 +4753,25 @@ Example:
         },
         'uvalue_type' : "str",
     },
+    'ursgal_resource_url' : {
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/',
+        'description' :  ''' URL that is used to install and prepare_resources.py ''',
+        'triggers_rerun' : False,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'ursgal_resource_url',
+        },
+        'utag' : [
+            'installation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'use_quality_filter' : {
         'available_in_unode' : [
             'pepnovo_3_1',

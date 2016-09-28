@@ -20,7 +20,7 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
                     'url'            : 'https://omics.pnl.gov/sites/default/files/MSGFPlus.zip',
-                    'zip_md5'        : '',
+                    'zip_md5'        : '80ba46ae6fd3b99a1599ff665d683f6f',
                     'additional_exe' : [],
                 },
             },
@@ -35,9 +35,9 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
             'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
             'Tandem Mass Spectra: Applications to Database Search.',
         'in_development'            : False,
-        'include_in_git'            : True,
+        'include_in_git'            : False,
     }
-    
+
     def __init__(self, *args, **kwargs):
         super(msgfplus_v2016_09_16, self).__init__(*args, **kwargs)
         pass
