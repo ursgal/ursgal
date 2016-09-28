@@ -260,6 +260,7 @@ class UPeptideMapper( dict ):
         self.word_len = word_len
         self.hits = {'fcache': 0, 'regex': 0}
         self.query_length = ddict(int)
+        self.master_buffer = {}
         pass
 
     def build_lookup_from_file( self, path_to_fasta_file, force=True):
@@ -292,6 +293,7 @@ class UPeptideMapper( dict ):
         if fasta_name not in self.keys():
             self[ fasta_name ] = {}
             self.fasta_sequences[ fasta_name ] = {}
+            self.master_buffer[ fasta_name ] = {}
 
         if force:
             for id, seq in ursgal.ucore.parseFasta( fasta_stream ):
@@ -310,6 +312,7 @@ class UPeptideMapper( dict ):
         '''
         for pos in range(len( seq ) - self.word_len + 1):
             pep = seq[ pos : pos + self.word_len ]
+            pep = pep.encode()
             try:
                 self[ fasta_name ][ pep ].add( (id, pos + 1) )
             except:
@@ -338,58 +341,64 @@ class UPeptideMapper( dict ):
 
         self.query_length[ l_peptide ] += 1
 
+
         if fasta_name in self.keys():
-            if l_peptide < self.word_len or force_regex:
-                self.hits['regex'] += 1
-                pattern = re.compile( r'''{0}'''.format( peptide ))
-                # we have to through it by hand ...
-                # for fasta
-                for id, seq in self.fasta_sequences[ fasta_name ].items():
-                    for match in pattern.finditer( seq ):
-                        start = match.start() + 1
-                        end   = match.end()
-                        hit = self._format_hit_dict(  seq, start, end, id )
-                        mappings.append( hit )
+            if peptide in self.master_buffer[fasta_name].keys():
+                mappings = self.master_buffer[fasta_name][peptide]
             else:
-                self.hits['fcache'] += 1
-                tmp_hits = {}
-                # m = []
-                for pos in range( l_peptide - self.word_len + 1):
-                    pep = peptide[ pos : pos + self.word_len ]
-                    # print( pep, peptide )
-                    fasta_set = self[ fasta_name ].get(pep, None)
-                    if fasta_set is None:
-                        continue
+                if l_peptide < self.word_len or force_regex:
+                    self.hits['regex'] += 1
+                    pattern = re.compile( r'''{0}'''.format( peptide ))
+                    # we have to through it by hand ...
+                    # for fasta
+                    for id, seq in self.fasta_sequences[ fasta_name ].items():
+                        for match in pattern.finditer( seq ):
+                            start = match.start() + 1
+                            end   = match.end()
+                            hit = self._format_hit_dict(  seq, start, end, id )
+                            mappings.append( hit )
+                else:
+                    self.hits['fcache'] += 1
+                    tmp_hits = {}
+                    # m = []
+                    for pos in range( l_peptide - self.word_len + 1):
+                        pep = peptide[ pos : pos + self.word_len ]
+                        pep = pep.encode()
+                        # print( pep, peptide )
+                        fasta_set = self[ fasta_name ].get(pep, None)
+                        if fasta_set is None:
+                            continue
 
-                    for id, id_pos in fasta_set:
-                        try:
-                            tmp_hits[ id ].add( id_pos )
-                        except:
-                            tmp_hits[ id ] = set([id_pos ])
+                        for id, id_pos in fasta_set:
+                            try:
+                                tmp_hits[ id ].add( id_pos )
+                            except:
+                                tmp_hits[ id ] = set([id_pos ])
 
-                for id, pos_set in tmp_hits.items():
-                    sorted_positions = sorted(pos_set)
-                    seq              = self.fasta_sequences[ fasta_name ][ id ]
+                    for id, pos_set in tmp_hits.items():
+                        sorted_positions = sorted(pos_set)
+                        seq              = self.fasta_sequences[ fasta_name ][ id ]
 
-                    for n, pos in enumerate( sorted_positions ):
-                        start = sorted_positions[n]
-                        end   = sorted_positions[n] + l_peptide - 1
+                        for n, pos in enumerate( sorted_positions ):
+                            start = sorted_positions[n]
+                            end   = sorted_positions[n] + l_peptide - 1
 
-                        if n + required_hits >= len( sorted_positions):
-                            break
+                            if n + required_hits >= len( sorted_positions):
+                                break
 
-                        expected_number = pos + required_hits
-                        try:
-                            observed_number = sorted_positions[ n + required_hits ]
-                        except:
-                            break
+                            expected_number = pos + required_hits
+                            try:
+                                observed_number = sorted_positions[ n + required_hits ]
+                            except:
+                                break
 
-                        if expected_number == observed_number or required_hits == 0:
-                            if seq[ start - 1 : end ] == peptide:
-                                # double check
-                                mappings.append(
-                                    self._format_hit_dict( seq, start, end, id)
-                                )
+                            if expected_number == observed_number or required_hits == 0:
+                                if seq[ start - 1 : end ] == peptide:
+                                    # double check
+                                    mappings.append(
+                                        self._format_hit_dict( seq, start, end, id)
+                                    )
+                self.master_buffer[fasta_name][peptide] = mappings
         return mappings
 
     def _format_hit_dict( self, seq, start, end, id ):
