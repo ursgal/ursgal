@@ -366,8 +366,6 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 if fixed_mods != {}:
                     for pos, aminoacid in enumerate(line_dict['Sequence']):
                         if aminoacid in fixed_mods.keys():
-                        # for aa, name in fixed_mods.items():
-                            # if aminoacid == aa:
                             name = fixed_mods[ aminoacid ]
                             tmp = '{0}:{1}'.format(
                                 name,
@@ -386,12 +384,14 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 # Note: masses are checked below to avoid any mismatch
                 if use15N:
                     if 'myrimatch' in search_engine.lower() or \
-                            'msgf' in search_engine.lower():
-                        line_dict['Modifications'] = re.sub(
-                            'unknown modification:[0-9]*',
-                            '',
-                            line_dict['Modifications']
-                        )
+                            'msgfplus_v9979' in search_engine.lower():
+                        for p in range(1,len(line_dict['Sequence'])+1):
+                                line_dict['Modifications'] = \
+                                    line_dict['Modifications'].replace(
+                                        'unknown modification:{0}'.format(p),
+                                        '',
+                                        1,
+                                    )
                     if 'myrimatch' in search_engine.lower():
                         if 'Carboxymethyl' in line_dict['Modifications'] and cam == True:
                             line_dict['Modifications'] = line_dict['Modifications'].replace(
@@ -407,35 +407,39 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 tmp_mods = []
                 for modification in line_dict['Modifications'].split(';'):
                     Nterm = False
+                    Cterm = False
+                    skip_mod = False
                     if modification == '':
                         continue
                     pos, mod = None, None
-                    for match in mod_pattern.finditer( modification ):
-                        pos = int( match.group('pos') )
-                        mod = modification[ :match.start() ]
-                        break
+                    match = mod_pattern.search( modification )
+                    pos = int( match.group('pos') )
+                    mod = modification[ :match.start() ]
                     assert pos is not None, '''
                             The format of the modification {0}
                             is not recognized by ursgal'''.format(
                                 modification
                             )
-
-                    # old version, does not work with ':' in modification
-                    # mod = modification.split(':')[0]
-                    # pos = int(modification.split(':')[1])
-
                     if pos <= 1:
                         Nterm = True
                         pos = 1
-                    aa = line_dict['Sequence'][ pos - 1 ]
+                    elif pos > len(line_dict['Sequence']):
+                        Cterm = True
+                        pos = len(line_dict['Sequence'])
+                    aa = line_dict['Sequence'][ pos - 1 ].upper()
+                    # if aa in fixed_mods.keys():
+                    #     fixed_mods[ aminoacid ]
+                    #     # fixed mods are corrected/added already
+                    #     continue
                     if mod in modname2aa.keys():
                         correct_mod = False
                         if aa in modname2aa[mod]:
                             # everything is ok
                             correct_mod = True
-                        elif Nterm and '*' in modname2aa[mod]:
-                            correct_mod = True
-                            # still is ok
+                        elif Nterm or Cterm:
+                            if '*' in modname2aa[mod]:
+                                correct_mod = True
+                                # still is ok
                         assert correct_mod is True,'''
                                 A modification was reported for an aminoacid for which it was not defined
                                 unify_csv cannot deal with this, please check your parameters and engine output
@@ -454,12 +458,14 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                             modification_known = True
                         assert modification_known == True,'''
                                 unify csv does not work for the given unknown modification for
-                                {0} {1}
+                                {0} {1} aa: {2}
                                 maybe an unknown modification with terminal position was given?
                                 '''.format(
-                                    line_dict['Sequence'], modification
+                                    line_dict['Sequence'], modification, aa
                                 )
                     else:
+                        if aa in fixed_mods.keys() and use15N:
+                            mod = float(mod) - ursgal.ursgal_kb.DICT_15N_DIFF[aa]
                         try:
                             name_list = ursgal.GlobalUnimodMapper.appMass2name_list(
                                 round(float(mod), 3), decimal_places = 3
@@ -475,6 +481,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                             raise Exception('unify_csv failed because a '\
                                 'modification was reported that was not '\
                                 'given in params.'
+                                '{0}'.format(modification)
                             )
                         mapped_mod = False
                         for name in name_list:
@@ -487,9 +494,18 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     mapped_mod = True
                                 else:
                                     continue
+                            elif use15N and name in [
+                                'Label:15N(1)',
+                                'Label:15N(2)',
+                                'Label:15N(3)',
+                                'Label:15N(4)' 
+                            ]:
+                                mapped_mod = True
+                                skip_mod = True
+                                break
                         assert mapped_mod is True, '''
                                 A mass was reported that does not map on any unimod or userdefined modification
-                                or the modified aminoacid is no the specified one
+                                or the modified aminoacid is not the specified one
                                 unify_csv cannot deal with this, please check your parameters and engine output
                                 reported mass: {0}
                                 maps on: {1}
@@ -501,6 +517,8 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     aa,
                                     params['translations']['modifications']
                                 )
+                    if modification in tmp_mods or skip_mod is True:
+                        continue
                     tmp_mods.append(modification)
                 line_dict_update['Modifications'] = ';'.join( tmp_mods )
                 #
