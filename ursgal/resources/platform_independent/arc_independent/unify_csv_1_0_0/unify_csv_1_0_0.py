@@ -515,6 +515,8 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     aa,
                                     params['translations']['modifications']
                                 )
+                    if modification in line_dict_update['Modifications']:
+                        continue
                     tmp_mods.append(modification)
                 line_dict_update['Modifications'] = ';'.join( tmp_mods )
                 #
