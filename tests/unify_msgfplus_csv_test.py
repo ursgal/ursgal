@@ -53,6 +53,7 @@ unify_csv_main(
             'modifications' : [
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 'Y,opt,any,Phospho',
+                '*,opt,Prot-C-term,Amidated',
             ],
             'decoy_tag': 'decoy_',
             'enzyme' : 'KR;C;P',
