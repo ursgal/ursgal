@@ -50,7 +50,7 @@ def main():
     engine_list = [
         'omssa',
         xtandem,
-        'msgf',
+        'msgfplus_v2016_09_16',
         # msamanda,
     ]
 

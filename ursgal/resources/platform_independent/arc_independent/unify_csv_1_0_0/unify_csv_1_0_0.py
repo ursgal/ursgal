@@ -55,7 +55,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
           there and sorted according to their position.
         * Fixed modifications are added in 'Modifications', if not reported
           by the engine.
-        * The monoisotopic m/z for for each line is calculated (uCalc m/z), 
+        * The monoisotopic m/z for for each line is calculated (uCalc m/z),
           since not all engines report the monoisotopic m/z
         * Mass accuracy calculation (in ppm), also taking into account that
           not always the monoisotopic peak is picked
@@ -117,7 +117,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     else:
         params['label'] = '14N'
     # print(use15N)
-    # exit() 
+    # exit()
     aa_exception_dict = params['translations']['aa_exception_dict']
     n_term_replacement = {
         'Ammonia-loss' : None,
@@ -181,7 +181,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             params['translations']['database'],
             force=False
         )
-
+    # print('Cached!')
+    # input()
     psm_counter = Counter()
     # if a PSM with multiple rows is found (i.e. in omssa results), the psm
     # rows are merged afterwards
@@ -608,8 +609,9 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 # mz_buffer[ buffer_key ] = calc_mz
 
                 line_dict_update['uCalc m/z'] = calc_mz
-                if 'msamanda' in search_engine.lower():
+                # if 'msamanda' in search_engine.lower():
                     # ms amanda does not return calculated mz values
+                if line_dict['Calc m/z'] == '':
                     line_dict_update['Calc m/z'] = calc_mz
 
                 line_dict_update['Accuracy (ppm)'] = \
@@ -643,7 +645,10 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
             if database_search is True:
                 # remap peptides to proteins, check correct enzymatic
                 # cleavage and decoy assignment
-                lookup_identifier = '{0}><{1}'.format(line_dict['Sequence'], fasta_lookup_name)
+                lookup_identifier = '{0}><{1}'.format(
+                    line_dict['Sequence'],
+                    fasta_lookup_name
+                )
                 if lookup_identifier not in pep_map_lookup.keys():
                     tmp_decoy = set()
                     # tmp_protein_id = {}
@@ -722,13 +727,13 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 if line_dict['Sequence'][0] in allowed_aa\
                                     or protein['start'] in [1, 2, 3]:
                                     nterm_correct = True
-                        
+
                         if params['translations']['semi_enzyme'] is True:
                             if cterm_correct is True or nterm_correct is True:
                                 add_protein = True
                         elif cterm_correct is True and nterm_correct is True:
                             add_protein = True
-                        
+
                         if add_protein is True:
                             # print(add_protein)
                             # print(cterm_correct, nterm_correct)
@@ -755,7 +760,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
 
                             # print(protein_mapping_dict['Protein ID' ])
                             last_protein_id = protein['id']
-    
+
                             # mzidentml-lib does not always set 'Is decoy' correctly
                             # (it's always 'false' for MS-GF+ results), this is fixed here:
                             if params['translations']['decoy_tag'] in protein['id']:

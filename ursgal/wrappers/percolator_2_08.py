@@ -362,7 +362,7 @@ class percolator_2_08( ursgal.UNode ):
         if bigger_scores_better is False:
             for p, _score in enumerate(self.params['_score_list']):
                 if _score <= 0:
-                    # jumping over truely zero or negative values ...
+                    # jumping over truly zero or negative values ...
                     continue
                 else:
                     s = -1 * math.log( _score, 10 )
@@ -487,12 +487,22 @@ class percolator_2_08( ursgal.UNode ):
                 t['absdM'] = abs(t['dM'])
 
                 mods = line_dict['Modifications']
-                t['Peptide'] = '{0}.{Sequence}#{1}.{2}'.format(
-                    sorted(pre_aa)[0],
-                    mods,
-                    sorted(post_aa)[0],
-                    **line_dict
-                )
+                if mods.strip() == '':
+                    t['Peptide'] = '{0}.{Sequence}.{1}'.format(
+                        sorted(pre_aa)[0],
+                        sorted(post_aa)[0],
+                        **line_dict
+                    )
+                else:
+                    t['Peptide'] = '{0}.{Sequence}#{1}.{2}'.format(
+                        sorted(pre_aa)[0],
+                        mods,
+                        sorted(post_aa)[0],
+                        **line_dict
+                    )
+                # although peptides without mod ill have # at their end,
+                # mapping further down will still work ...
+
                 for per_key in PERCOLATOR_FIELDS.keys():
                     mapped_key = PERCOLATOR_FIELDS[ per_key ]['csv_field']
                     if 'Charge' in per_key:
@@ -590,20 +600,22 @@ class percolator_2_08( ursgal.UNode ):
             # if self.params['translations']['decoy_tag'] in line_dict['proteinacc_start_stop_pre_post_;']:
             #     line_dict['Is decoy'] = "true"
             #     psm_type = "decoy"
-
-            seq_and_mods = '#'.join( [line_dict['Sequence'], line_dict['Modifications']] )
+            if line_dict['Modifications'].strip() != '':
+                seq_and_mods = '#'.join( [line_dict['Sequence'], line_dict['Modifications']] )
+            else:
+                seq_and_mods = line_dict['Sequence']
             _psmid_pep_key = (
                 line_dict['Spectrum Title'],
                 seq_and_mods,
             )
             if _psmid_pep_key in s2l[ psm_type ].keys():
-                line_dict['PEP']     =  s2l[ psm_type ][ _psmid_pep_key ]['posterior_error_prob']
-                line_dict['q-value'] =  s2l[ psm_type ][ _psmid_pep_key ]['q-value']
+                line_dict['PEP']     = s2l[ psm_type ][ _psmid_pep_key ]['posterior_error_prob']
+                line_dict['q-value'] = s2l[ psm_type ][ _psmid_pep_key ]['q-value']
                 # write all results including decoy into the full csv:
                 csv_output.writerow( line_dict )
             else:
                 print(
-                    'WARNING! The key {0} has no entry in s2l dict'.format(
+                    'Original PSM :{0} could not be found in percolator output file, most probably because PSM was filtered by percolator, (multiple peptides to one spectrum match)'.format(
                         _psmid_pep_key
                     )
                 )

@@ -10,10 +10,10 @@ def main():
 
     '''
     uc = ursgal.UController()
-    downloaded_zips = uc.download_resources(
-        http_url_root = 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/'
-    )
+    downloaded_zips = uc.download_resources()
+    # uses uc.params['ursgal_resource_url']  :)
     print()
+
     if len(downloaded_zips) == 0:
         print('[ INFO ] No engines were downloaded, all should be available')
     else:
