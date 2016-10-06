@@ -408,6 +408,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 for modification in line_dict['Modifications'].split(';'):
                     Nterm = False
                     Cterm = False
+                    skip_mod = False
                     if modification == '':
                         continue
                     pos, mod = None, None
@@ -464,7 +465,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 )
                     else:
                         if aa in fixed_mods.keys() and use15N:
-                            mod = float(mod) - ursgal.ursgal_kb.DICT_15N_DIFF(aa)
+                            mod = float(mod) - ursgal.ursgal_kb.DICT_15N_DIFF[aa]
                         try:
                             name_list = ursgal.GlobalUnimodMapper.appMass2name_list(
                                 round(float(mod), 3), decimal_places = 3
@@ -500,7 +501,8 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 'Label:15N(4)' 
                             ]:
                                 mapped_mod = True
-                                continue
+                                skip_mod = True
+                                break
                         assert mapped_mod is True, '''
                                 A mass was reported that does not map on any unimod or userdefined modification
                                 or the modified aminoacid is not the specified one
@@ -515,7 +517,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     aa,
                                     params['translations']['modifications']
                                 )
-                    if modification in tmp_mods:
+                    if modification in tmp_mods or skip_mod is True:
                         continue
                     tmp_mods.append(modification)
                 line_dict_update['Modifications'] = ';'.join( tmp_mods )
