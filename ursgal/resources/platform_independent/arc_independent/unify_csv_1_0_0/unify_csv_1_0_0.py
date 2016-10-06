@@ -466,7 +466,8 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     line_dict['Sequence'], modification, aa
                                 )
                     else:
-                        if aa in fixed_mods.keys() and use15N:
+                        if aa in fixed_mods.keys() and use15N \
+                            and 'msgfplus' in search_engine.lower():
                             if pos != 0:
                                 mod = float(mod) - ursgal.ursgal_kb.DICT_15N_DIFF[aa]
                         try:
