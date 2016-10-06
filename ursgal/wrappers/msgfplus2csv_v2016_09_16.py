@@ -26,13 +26,8 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
         'output_extension'  : '.csv',
         'output_suffix'     : None,
         'input_types'       : ['.mzid', ],
-<<<<<<< HEAD
         'include_in_git' : False,
         'in_development' : False,
-=======
-        'include_in_git'    : False,
-        'in_development'    : False,
->>>>>>> 29c6ec4da0941175ecf88132a8940ee92b520172
         'utranslation_style'    : 'msgfplus_style_1',
         'engine': {
             'platform_independent' : {
