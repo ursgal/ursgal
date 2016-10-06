@@ -11,6 +11,7 @@ __pycache__
 __pycache__/*
 build/
 docs/build/
+docs/source/code_inc
 example_data/BSA_simple_example_search
 tests/data/_ursgal_lookup.pkl
 tests/data/msamanda_1_0_0_5243/test_BSA1_msamanda_1_0_0_5243_unified.csv
@@ -32,4 +33,5 @@ ursgal/resources/platform_independent/arc_independent/msgfplus_v9979
 ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_10
 ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_11
 ursgal/resources/win32/
+ursgal/resources/darwin/
 example_scripts/logs/

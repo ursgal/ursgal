@@ -7,11 +7,12 @@ import pickle
 import csv
 import copy
 import re
-import pprint   
+import pprint
+
 
 class msgfplus2csv_v2016_09_16( ursgal.UNode ):
     """
-    msgfplus2csv_1_0_0 UNode
+    msgfplus2csv_v2016_09_16 UNode
     Parameter options at https://omics.pnl.gov/software/ms-gf
 
     Reference:
@@ -25,18 +26,24 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
         'output_extension'  : '.csv',
         'output_suffix'     : None,
         'input_types'       : ['.mzid', ],
+<<<<<<< HEAD
         'include_in_git' : False,
         'in_development' : False,
+=======
+        'include_in_git'    : False,
+        'in_development'    : False,
+>>>>>>> 29c6ec4da0941175ecf88132a8940ee92b520172
         'utranslation_style'    : 'msgfplus_style_1',
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
                     'url'            : 'https://omics.pnl.gov/sites/default/files/MSGFPlus.zip',
+                    'zip_md5'        : '80ba46ae6fd3b99a1599ff665d683f6f',
                 },
             },
         },
-
+        'citation' : 'Kim S, Mischerikow N, Bandeira N, Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) The Generating Function of CID, ETD, and CID/ETD Pairs of Tandem Mass Spectra: Applications to Database Search.'
     }
 
     def __init__(self, *args, **kwargs):
@@ -119,6 +126,8 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
                 cached_msgfplus_output.append( line_dict )
         print('[ PARSING  ] Done')
 
+        mod_pattern = re.compile( r'''[+-][0-9]{1,}[\.,][0-9]{1,}''' )
+
         with open(
             os.path.join(
                 self.params['output_dir_path'],
@@ -139,7 +148,7 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
             print('[ INFO  ] Writing MS-GF+ results')
             csv_write_list = []
 
-            total_docs =len(cached_msgfplus_output)
+            total_docs = len(cached_msgfplus_output)
 
             for cache_pos, m in enumerate(cached_msgfplus_output):
                 tmp = {}
@@ -155,22 +164,35 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
                             cache_pos,
                             total_docs
                         ),
-                        end='\r'
+                        end = '\r'
                     )
                 dict_2_write = copy.deepcopy( tmp )
 
-                dict_2_write['Raw data location'] = os.path.abspath(dict_2_write['Raw data location'])
+                for k in [
+                    'Charge',
+                    'MS-GF:DeNovoScore',
+                    'MS-GF:EValue',
+                    'MS-GF:RawScore',
+                    'Exp m/z',
+                    'MS-GF:SpecEValue',
+                ]:
+                    dict_2_write[k] = dict_2_write[k].replace(',', '.')
+
+                dict_2_write['Raw data location'] = os.path.abspath(
+                    #hahahahha
+                    dict_2_write['Raw data location']
+                )
 
                 extracted_mods = []
-                mod_pattern = re.compile( r'''[+-][0-9]{1,},[0-9]{1,}''' )
 
                 match = mod_pattern.search(dict_2_write['Sequence'])
                 while match != None:
                     start, stop = match.span()
-                    mod = dict_2_write['Sequence'][start:stop].replace(',','.')
-                    extracted_mods.append('{0}:{1}'.format(mod,start))
+                    mod = dict_2_write['Sequence'][start:stop].replace(',', '.')
+                    extracted_mods.append('{0}:{1}'.format(mod, start))
                     dict_2_write['Sequence'] = \
-                        dict_2_write['Sequence'][:start] + dict_2_write['Sequence'][stop:]
+                        dict_2_write['Sequence'][:start] \
+                        + dict_2_write['Sequence'][stop:]
                     match = mod_pattern.search(dict_2_write['Sequence'])
 
                 dict_2_write['Modifications'] = ';'.join( extracted_mods )
