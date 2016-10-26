@@ -89,7 +89,11 @@ class UParamMapper( dict ):
                     translated_value = re_evaluated_value
 
             template = sup.copy()
-            keys_to_delete = ['ukey_translation', 'uvalue_translation', 'available_in_unode']
+            keys_to_delete = [
+                'ukey_translation',
+                'uvalue_translation',
+                'available_in_unode'
+            ]
             for k in keys_to_delete:
                 del template[ k ]
             template.update(
@@ -104,6 +108,32 @@ class UParamMapper( dict ):
             )
 
             yield template
+
+    def get_masked_params( self, mask = None):
+        '''
+        Lists all uparams and the fields specified in the mask
+
+        e.g. upapa.get_masked_params( mask = ['uvalue_type'])
+        will return
+        {
+            '-xmx' : {
+                'uvalue_type' : "str",
+            },
+            'aa_exception_dict' : {
+                'uvalue_type' : "dict",
+            },
+            ...
+        }
+        '''
+        if mask is None:
+            mask = []
+        masked_params = {}
+        for key, value in self.items():
+            masked_params[ key ] = {}
+            for mkey in mask:
+                masked_params[ key ][ mkey ] = value.get(mkey, None)
+        return masked_params
+
 
     def get_all_params( self, engine=None):
         self._assert_engine( engine )
