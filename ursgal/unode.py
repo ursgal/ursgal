@@ -484,6 +484,18 @@ class UNode(object, metaclass=Meta_UNode):
                 caller ='Caching'
             )
 
+    def flatten_list(self, multi_list=[]):
+        '''
+        The unode get_last_engine function
+
+        Reduces a multidimensional list of lists to a flat list including all elements
+        '''
+        if multi_list == []:
+            return multi_list
+        if isinstance(multi_list[0], list):
+            return self.flatten_list(multi_list[0]) + self.flatten_list(multi_list[1:])
+        return multi_list[:1] + self.flatten_list(multi_list[1:])
+
     def get_last_engine(self, history=None, engine_types=None, multiple_engines=False ):
         '''
         The unode get_last_engine function
@@ -528,11 +540,12 @@ class UNode(object, metaclass=Meta_UNode):
         else:
             for history_event in history[::-1]:
                 if history_event['engine'] == 'merge_csvs_1_0_0':
-                    merged_engines = set( history_event['history_addon']['search_engines_of_merged_files'] )
+                    merged_engines = set()
+                    for element in self.flatten_list(history_event['history_addon']['search_engines_of_merged_files']):
+                        merged_engines.add(element)
                     if len( merged_engines ) == 1:
                         last_engine = list(merged_engines)[0]
                     elif multiple_engines == True:
-
                         last_engine = list(merged_engines)
 
                     else:
