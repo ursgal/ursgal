@@ -422,11 +422,13 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                             )
                     if pos <= 1:
                         Nterm = True
-                        pos = 1
+                        new_pos = 1
                     elif pos > len(line_dict['Sequence']):
                         Cterm = True
-                        pos = len(line_dict['Sequence'])
-                    aa = line_dict['Sequence'][ pos - 1 ].upper()
+                        new_pos = len(line_dict['Sequence'])
+                    else:
+                        new_pos = pos
+                    aa = line_dict['Sequence'][ new_pos - 1 ].upper()
                     # if aa in fixed_mods.keys():
                     #     fixed_mods[ aminoacid ]
                     #     # fixed mods are corrected/added already
@@ -454,7 +456,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                         modification_known = False
                         if aa in opt_mods.keys():
                             # fixed mods are corrected/added already
-                            modification = '{0}:{1}'.format(opt_mods[aa],pos)
+                            modification = '{0}:{1}'.format(opt_mods[aa],new_pos)
                             modification_known = True
                         assert modification_known == True,'''
                                 unify csv does not work for the given unknown modification for
@@ -464,8 +466,10 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     line_dict['Sequence'], modification, aa
                                 )
                     else:
-                        if aa in fixed_mods.keys() and use15N:
-                            mod = float(mod) - ursgal.ursgal_kb.DICT_15N_DIFF[aa]
+                        if aa in fixed_mods.keys() and use15N \
+                            and 'msgfplus' in search_engine.lower():
+                            if pos != 0:
+                                mod = float(mod) - ursgal.ursgal_kb.DICT_15N_DIFF[aa]
                         try:
                             name_list = ursgal.GlobalUnimodMapper.appMass2name_list(
                                 round(float(mod), 3), decimal_places = 3
@@ -487,7 +491,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                         for name in name_list:
                             if name in modname2aa.keys():
                                 if aa in modname2aa[name]:
-                                    modification = '{0}:{1}'.format(name,pos)
+                                    modification = '{0}:{1}'.format(name,new_pos)
                                     mapped_mod = True
                                 elif Nterm and '*' in modname2aa[name]:
                                     modification = '{0}:{1}'.format(name,0)

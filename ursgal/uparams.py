@@ -701,7 +701,7 @@ ursgal_params = {
                 'trypsin_chymotrypsin
                 'trypsin_cnbr'
                 'trypsin_p'
-                # Note not all search engines support all enzymes ! :) ''',
+        ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'enzyme',
