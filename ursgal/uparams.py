@@ -115,6 +115,7 @@ ursgal_params = {
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
             'qvality_2_02',
+            'sanitize_csv_1_0_0',
         ],
         'default_value' : None,
         'description' :  ''' Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality ''',
@@ -123,6 +124,7 @@ ursgal_params = {
             'add_estimated_fdr_style_1' : 'bigger_scores_better',
             'percolator_style_1' : 'bigger_scores_better',
             'qvality_style_1' : '-r',
+            'sanitize_csv_style_1' : 'bigger_scores_better',
         },
         'utag' : [
             'scoring',
@@ -168,6 +170,24 @@ ursgal_params = {
                 'xtandem_vengeance' : True,
             },
             'qvality_style_1' : {
+                'msamanda_1_0_0_5242' : True,
+                'msamanda_1_0_0_5243' : True,
+                'msamanda_1_0_0_6299' : True,
+                'msamanda_1_0_0_6300' : True,
+                'msamanda_1_0_0_7503' : True,
+                'msamanda_1_0_0_7504' : True,
+                'msgfplus_v2016_09_16' : False,
+                'msgfplus_v9979' : False,
+                'myrimatch_2_1_138' : True,
+                'myrimatch_2_2_140' : True,
+                'omssa_2_1_9' : False,
+                'xtandem_cyclone_2010' : True,
+                'xtandem_jackhammer' : True,
+                'xtandem_piledriver' : True,
+                'xtandem_sledgehammer' : True,
+                'xtandem_vengeance' : True,
+            },
+            'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
                 'msamanda_1_0_0_6299' : True,
@@ -916,6 +936,26 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'filter_csv_converter_version',
+        },
+        'utag' : [
+            'converter_version',
+        ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'sanitize_csv_converter_version' : {
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : "sanitize_csv_1_0_0",
+        'description' :  ''' sanitize csv converter version: version name ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'sanitize_csv_converter_version',
         },
         'utag' : [
             'converter_version',
@@ -3952,6 +3992,108 @@ Example:
         },
         'uvalue_type' : "select",
     },
+    'score_diff_threshold' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Minimum score difference between the best PSM and the first rejected PSM of one spectrum, default: 0.01 ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'score_diff_threshold',
+        },
+        'utag' : [
+            'validation',
+            'scoring'
+        ],
+        'uvalue_option' : {
+            'max' : 1000,
+            'min' : 0,
+            'updownval' : 1,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'num_compared_psms' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Maximum number of PSMs (sorted by score, starting with the best scoring PSM) that are compared ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'num_compared_psms',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+            'max' : 100,
+            'min' : 1,
+            'updownval' : 1,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'accept_conflicting_psms' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : False,
+        'description' :  ''' If True, multiple PSMs for one spectrum can be reported if their score difference is below the threshold. If False, all PSMs for one spectrum are removed if the score difference between the best and secondbest PSM is not above the threshold, i.e. if there are conflicting PSMs with similar scores. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'accept_conflicting_psms',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'threshold_is_log10' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : True,
+        'description' :  ''' True, if log10 scale has been used for score_diff_threshold. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'threshold_is_log10',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'remove_redundant_psms' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : True,
+        'description' :  ''' If True, redundant PSMs (e.g. the same identification reported by multiple engined) for the same spectrum are removed. An identification is defined by the combination of 'Sequence', 'Modifications' and 'Charge'. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'remove_redundant_psms',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
     'raw_ident_csv_suffix' : {
         'available_in_unode' : [
             'ucontroller',
@@ -4948,6 +5090,7 @@ Example:
             'qvality_2_02',
             'ucontroller',
             'unify_csv_1_0_0',
+            'sanitize_csv_1_0_0'
         ],
         'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator. If None is defined, default values are used ''',
@@ -4958,6 +5101,7 @@ Example:
             'qvality_style_1' : 'validation_score_field',
             'ucontroller_style_1' : 'validation_score_field',
             'unify_csv_style_1' : 'validation_score_field',
+            'sanitize_csv_style_1' : 'validation_score_field',
         },
         'utag' : [
             'validation',
@@ -5006,6 +5150,26 @@ Example:
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
             },
             'qvality_style_1' : {
+                'msamanda_1_0_0_5242' : 'Amanda:Score',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msamanda_1_0_0_6299' : 'Amanda:Score',
+                'msamanda_1_0_0_6300' : 'Amanda:Score',
+                'msamanda_1_0_0_7503' : 'Amanda:Score',
+                'msamanda_1_0_0_7504' : 'Amanda:Score',
+                'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'myrimatch_2_2_140' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
+                'omssa_2_1_9' : 'OMSSA:pvalue',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
+                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
+                'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
+                'xtandem_piledriver' : 'X\!Tandem:hyperscore',
+                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
+                'xtandem_vengeance' : 'X\!Tandem:hyperscore',
+            },
+            'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msamanda_1_0_0_6299' : 'Amanda:Score',
