@@ -37,7 +37,7 @@ params = {
 search_engines  = [
     'omssa',
     'xtandem_piledriver',
-    'msgf',
+    'msgfplus_v9979',
     # 'myrimatch_2_1_138',
     'msamanda_1_0_0_5243',
 ]

@@ -39,7 +39,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
     search_engines  = [
         'omssa',
         'xtandem_vengeance',
-        'msgf',
+        'msgfplus_v2016_09_16',
         'msamanda_1_0_0_6300',
         'myrimatch_2_1_138',
 
