@@ -42,8 +42,10 @@ def main():
 
     if sys.platform == 'win32':
         msamanda = 'msamanda_1_0_0_7503'
+    
     elif sys.platform == 'darwin':
-        pass
+        #mono needs to be installed
+        msamanda = 'msamanda_1_0_0_7504'
     else:
         msamanda = 'msamanda_1_0_0_7504'
 

@@ -52,6 +52,9 @@ class UParamMapper( dict ):
         if ukey in self._eval_functions.keys():
             if uvalue in self._eval_functions[ ukey ].keys():
                 rvalue = self._eval_functions[ ukey ][ uvalue ]
+                if ukey == 'cpus' and rvalue == 0:
+                    rvalue = 1
+
         return rvalue
 
     def mapping_dicts( self, engine_or_engine_style):
