@@ -1209,7 +1209,11 @@ class UNode(object, metaclass=Meta_UNode):
             'denovo_engine',
             False
         )
-        if is_search_engine or is_denovo_engine:
+        is_crosslink_engine = self.META_INFO['engine_type'].get(
+            'cross_link_engine',
+            False
+        )
+        if is_search_engine or is_denovo_engine or is_crosslink_engine:
             self.map_mods()
 
         self.stats['history'] = self.update_history_status(
