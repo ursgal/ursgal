@@ -2,18 +2,19 @@
 import ursgal
 import os
 import shutil
-import pprint
 
 
 class kojak_1_5_3( ursgal.UNode ):
     """
     Kojak UNode
-    Parameter options at http://www.thegpm.org/TANDEM/api/
+    Parameter options at http://www.kojak-ms.org/param/index.html
 
     Reference:
     Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient analysis of chemically cross-linked protein complexes. J Proteome Res 14: 2190–2198
     
-    Please note that at the moment Kojak has to be installed manually!
+    Note:
+    
+        Kojak has to be installed manually at the moment!
 
     """
     META_INFO = {
@@ -29,14 +30,24 @@ class kojak_1_5_3( ursgal.UNode ):
         },
         'in_development'            : False,
         'output_extension'          : '.kojak.txt',
+        'all_extensions'            : [
+            '.kojak.txt',
+            '.pep.xml',
+            '.perc.inter.txt',
+            '.perc.intra.txt',
+            '.perc.loop.txt',
+            '.perc.single.txt',
+        ],
         'input_types'               : ['.mzML', '.mzXML'],
         'create_own_folder'         : True,
         'compress_raw_search_results' : False,
-        'citation'                  : 'Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient analysis of chemically cross-linked protein complexes. J Proteome Res 14: 2190–2198',
+        'citation'                  : '''Hoopmann MR, Zelter A, Johnson RS, 
+        Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient 
+        analysis of chemically cross-linked protein complexes. 
+        J Proteome Res 14: 2190–2198''',
         'include_in_git'            : False,
         'utranslation_style'        : 'kojak_style_1',
         'engine': {
-            
             'linux' : {
                 '64bit' : {
                     'exe'            : 'kojak',
@@ -44,22 +55,15 @@ class kojak_1_5_3( ursgal.UNode ):
                     'zip_md5'        : '',
                     'additional_exe' : [],
                 },
-                
             },
-            # 'win32' : {
-            #     '64bit' : {
-            #         'exe'            : 'tandem.exe',
-            #         'url'            : '',
-            #         'zip_md5'        : '01c6da9cf976916888c212e4baf45a99',
-            #         'additional_exe' : [],
-            #     },
-            #     '32bit' : {
-            #         'exe'            : 'tandem.exe',
-            #         'url'            : '',
-            #         'zip_md5'        : '86b78ea31389ab7d2634d0272ea6371f',
-            #         'additional_exe' : [],
-            #     },
-            # },
+            'win32' : {
+                '64bit' : {
+                    'exe'            : 'kojak',
+                    'url'            : '',
+                    'zip_md5'        : '',
+                    'additional_exe' : [],
+                }
+            },
         },
     }
     def __init__(self, *args, **kwargs):
@@ -71,17 +75,7 @@ class kojak_1_5_3( ursgal.UNode ):
         '''
         Formatting the command line via self.params
 
-        Input files from format_templates are created in the output folder
-        and added to self.created_tmp_files (can be deleted)
-
-        Returns:
-            dict: self.params
         '''
-
-        # self.params['translations']['mgf_input_file'] = os.path.join(
-        #     self.params['input_dir_path'],
-        #     self.params['input_file']
-        # )
 
         self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
@@ -92,10 +86,8 @@ class kojak_1_5_3( ursgal.UNode ):
             self.params['input_file']
         )
         self.params['translations']['mzml_input_file'] = input_file
-        # pprint.pprint(self.params)
-        # pprint.pprint(self.params['translations'])
-        # print(self.META_INFO)
-        # exit()
+
+
         # remap modifications to adapt to kojak format
         self.params['translations']['kojak_fix_modifications'] = ''
         self.params['translations']['kojak_opt_modifications'] = ''
@@ -126,7 +118,6 @@ class kojak_1_5_3( ursgal.UNode ):
         # building command_list !
 
         templates = self.format_templates( )
-        # for file_name, content in templates.items():
         config_file_path = os.path.join(
             self.params['output_dir_path'],
             'Kojak.conf'
@@ -137,8 +128,6 @@ class kojak_1_5_3( ursgal.UNode ):
                 file = out
             )
             self.print_info('wrote input file {0}'.format( config_file_path ))
-        # exit()
-           # self.created_tmp_files.append( xml_file_path )
         self.params['command_list'] =[
             self.exe,
             '{0}'.format(config_file_path)
@@ -149,17 +138,18 @@ class kojak_1_5_3( ursgal.UNode ):
 
     def postflight( self ):
         '''
-        Move the files to the Kojak folder
+        Move the result files to the Kojak folder, since the output files can
+        not be specified manually.
         '''
-        kojak_extensions = [
-            '.kojak.txt',
-            '.pep.xml',
-            '.perc.inter.txt',
-            '.perc.intra.txt',
-            '.perc.loop.txt',
-            '.perc.single.txt',
-        ]
-        for extension in kojak_extensions:
+        # kojak_extensions = [
+        #     '.kojak.txt',
+        #     '.pep.xml',
+        #     '.perc.inter.txt',
+        #     '.perc.intra.txt',
+        #     '.perc.loop.txt',
+        #     '.perc.single.txt',
+        # ]
+        for extension in self.META_INFO['all_extensions']:
             org_path = os.path.join(
                 self.params['input_dir_path'],
                 '{0}{1}'.format(
@@ -185,9 +175,9 @@ class kojak_1_5_3( ursgal.UNode ):
 
     def format_templates( self ):
         '''
-        Returns formatted input files
+        Returns formatted input files as a dict.
 
-        The formating is taken from self.params
+        The standard parametern file is used and adjustes.
 
         Returns:
             dict: keys are the names of the three templates (15N-masses.xml, taxonomy.xml, input.xml)
