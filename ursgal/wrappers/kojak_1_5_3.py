@@ -114,7 +114,8 @@ class kojak_1_5_3( ursgal.UNode ):
 
         if len(self.params['translations']['mono_link_definition']) > 0:
             for mono_link in self.params['translations']['mono_link_definition']:
-                self.params['translations']['formatted_mono_link'] += 'mono_link = {0}\n'.format(mono_link)
+                if mono_link not in [None, '']:
+                    self.params['translations']['formatted_mono_link'] += 'mono_link = {0}\n'.format(mono_link)
 
         # building command_list !
 
