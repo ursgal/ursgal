@@ -55,7 +55,7 @@ aa_exception_dict
 
 Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name
 
-:Default value: {'O': {'unimod_name': 'Methylpyrroline', 'original_aa': 'K'}, 'J': {'original_aa': 'L'}, 'U': {'unimod_name': 'Delta:S(-1)Se(1)', 'original_aa': 'C', 'unimod_name_with_cam': 'SecCarbamidomethyl'}}
+:Default value: {'U': {'original_aa': 'C', 'unimod_name_with_cam': 'SecCarbamidomethyl', 'unimod_name': 'Delta:S(-1)Se(1)'}, 'J': {'original_aa': 'L'}, 'O': {'original_aa': 'K', 'unimod_name': 'Methylpyrroline'}}
 :type: dict
 :triggers rerun: False
             
@@ -1634,84 +1634,92 @@ Available in unodes
 * novor_1_1beta
 * omssa_2_1_9
 * pepnovo_3_1
+* kojak_percolator_2_08
 
 Ursgal value translations for *header_translations*
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
- =================== ===================
- Style               Translation        
- =================== ===================
- msamanda_style_1    header_translations
- msgfplus_style_1    header_translations
- novor_style_1       header_translations
- omssa_style_1       header_translations
- pepnovo_style_1     header_translations
- =================== ===================
+ ======================== ========================
+ Style                    Translation             
+ ======================== ========================
+ kojak_percolator_style_1 header_translations     
+ msamanda_style_1         header_translations     
+ msgfplus_style_1         header_translations     
+ novor_style_1            header_translations     
+ omssa_style_1            header_translations     
+ pepnovo_style_1          header_translations     
+ ======================== ========================
 
 Ursgal key translations
 """""""""""""""""""""""
 
- ================================ ================================ ================================ ================================ ================================ ================================
- Ursgal Value                     Translated Value                                                                                                                                                    
- -------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
- .                                msamanda_style_1                 msgfplus_style_1                 novor_style_1                    omssa_style_1                    pepnovo_style_1                 
- ================================ ================================ ================================ ================================ ================================ ================================
-  Accession                       n/t                              n/t                              n/t                              Accession                        n/t                             
-  Charge                          n/t                              n/t                              n/t                              Charge                           n/t                             
-  Defline                         n/t                              n/t                              n/t                              proteinacc_start_stop_pre_post_; n/t                             
-  E-value                         n/t                              n/t                              n/t                              OMSSA:evalue                     n/t                             
-  Filename/id                     n/t                              n/t                              n/t                              Spectrum Title                   n/t                             
-  Mass                            n/t                              n/t                              n/t                              Exp m/z                          n/t                             
-  Mods                            n/t                              n/t                              n/t                              Modifications                    n/t                             
-  NIST score                      n/t                              n/t                              n/t                              NIST score                       n/t                             
-  P-value                         n/t                              n/t                              n/t                              OMSSA:pvalue                     n/t                             
-  Peptide                         n/t                              n/t                              n/t                              Sequence                         n/t                             
-  RT                              n/t                              n/t                              Retention Time (s)               n/t                              n/t                             
-  Start                           n/t                              n/t                              n/t                              Start                            n/t                             
-  Stop                            n/t                              n/t                              n/t                              Stop                             n/t                             
-  Theo Mass                       n/t                              n/t                              n/t                              Calc m/z                         n/t                             
-  aaScore                         n/t                              n/t                              Novor:aaScore                    n/t                              n/t                             
-  err(data-denovo)                n/t                              n/t                              Error (exp-calc)                 n/t                              n/t                             
-  gi                              n/t                              n/t                              n/t                              gi                               n/t                             
-  mz(data)                        n/t                              n/t                              Exp m/z                          n/t                              n/t                             
-  pepMass(denovo)                 n/t                              n/t                              Calc mass                        n/t                              n/t                             
-  peptide                         n/t                              n/t                              Sequence                         n/t                              n/t                             
-  ppm(1e6*err/(mz*z))             n/t                              n/t                              Error (ppm)                      n/t                              n/t                             
-  scanNum                         n/t                              n/t                              Spectrum ID                      n/t                              n/t                             
-  score                           n/t                              n/t                              Novor:score                      n/t                              n/t                             
-  z                               n/t                              n/t                              Charge                           n/t                              n/t                             
- # id                             n/t                              n/t                              Novor:id                         n/t                              n/t                             
- #Index                           n/t                              n/t                              n/t                              n/t                              Pepnovo:id                      
- Amanda Score                     Amanda:Score                     n/t                              n/t                              n/t                              n/t                             
- C-Gap                            n/t                              n/t                              n/t                              n/t                              Pepnovo:C-Gap                   
- Charge                           Charge                           Charge                           n/t                              n/t                              n/t                             
- CumProb                          n/t                              n/t                              n/t                              n/t                              Pepnovo:CumProb                 
- DeNovoScore                      n/t                              MS-GF:DeNovoScore                n/t                              n/t                              n/t                             
- EValue                           n/t                              MS-GF:EValue                     n/t                              n/t                              n/t                             
- Filename                         Filename                         n/t                              n/t                              n/t                              n/t                             
- MSGFScore                        n/t                              MS-GF:RawScore                   n/t                              n/t                              n/t                             
- Modifications                    Modifications                    n/t                              n/t                              n/t                              n/t                             
- N-Gap                            n/t                              n/t                              n/t                              n/t                              Pepnovo:N-Gap                   
- Peptide                          n/t                              Sequence                         n/t                              n/t                              n/t                             
- PnvScr                           n/t                              n/t                              n/t                              n/t                              Pepnovo:PnvScr                  
- Precursor                        n/t                              Exp m/z                          n/t                              n/t                              n/t                             
- Protein                          n/t                              proteinacc_start_stop_pre_post_; n/t                              n/t                              n/t                             
- Protein Accessions               proteinacc_start_stop_pre_post_; n/t                              n/t                              n/t                              n/t                             
- RT                               Retention Time (s)               n/t                              n/t                              n/t                              n/t                             
- Rank                             Rank                             n/t                              n/t                              n/t                              n/t                             
- RnkScr                           n/t                              n/t                              n/t                              n/t                              Pepnovo:RnkScr                  
- Scan Number                      Spectrum ID                      n/t                              n/t                              n/t                              n/t                             
- ScanNum                          n/t                              Spectrum ID                      n/t                              n/t                              n/t                             
- Sequence                         Sequence                         n/t                              n/t                              n/t                              n/t                             
- SpecEValue                       n/t                              MS-GF:SpecEValue                 n/t                              n/t                              n/t                             
- SpecFile                         n/t                              Raw data location                n/t                              n/t                              n/t                             
- Spectrum number                  n/t                              n/t                              n/t                              Spectrum ID                      n/t                             
- Title                            Spectrum Title                   Spectrum Title                   n/t                              n/t                              n/t                             
- Weighted Probability             Amanda:Weighted Probability      n/t                              n/t                              n/t                              n/t                             
- [M+H]                            n/t                              n/t                              n/t                              n/t                              Calc mass(Da)                   
- m/z                              Exp m/z                          n/t                              n/t                              n/t                              n/t                             
- output_aa_probs                  n/t                              n/t                              n/t                              n/t                              Pepnovo:aaScore                 
- ================================ ================================ ================================ ================================ ================================ ================================
+ ================================ ================================ ================================ ================================ ================================ ================================ ================================
+ Ursgal Value                     Translated Value                                                                                                                                                                                     
+ -------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ .                                kojak_percolator_style_1         msamanda_style_1                 msgfplus_style_1                 novor_style_1                    omssa_style_1                    pepnovo_style_1                 
+ ================================ ================================ ================================ ================================ ================================ ================================ ================================
+  Accession                       n/t                              n/t                              n/t                              n/t                              Accession                        n/t                             
+  Charge                          n/t                              n/t                              n/t                              n/t                              Charge                           n/t                             
+  Defline                         n/t                              n/t                              n/t                              n/t                              proteinacc_start_stop_pre_post_; n/t                             
+  E-value                         n/t                              n/t                              n/t                              n/t                              OMSSA:evalue                     n/t                             
+  Filename/id                     n/t                              n/t                              n/t                              n/t                              Spectrum Title                   n/t                             
+  Mass                            n/t                              n/t                              n/t                              n/t                              Exp m/z                          n/t                             
+  Mods                            n/t                              n/t                              n/t                              n/t                              Modifications                    n/t                             
+  NIST score                      n/t                              n/t                              n/t                              n/t                              NIST score                       n/t                             
+  P-value                         n/t                              n/t                              n/t                              n/t                              OMSSA:pvalue                     n/t                             
+  Peptide                         n/t                              n/t                              n/t                              n/t                              Sequence                         n/t                             
+  RT                              n/t                              n/t                              n/t                              Retention Time (s)               n/t                              n/t                             
+  Start                           n/t                              n/t                              n/t                              n/t                              Start                            n/t                             
+  Stop                            n/t                              n/t                              n/t                              n/t                              Stop                             n/t                             
+  Theo Mass                       n/t                              n/t                              n/t                              n/t                              Calc m/z                         n/t                             
+  aaScore                         n/t                              n/t                              n/t                              Novor:aaScore                    n/t                              n/t                             
+  err(data-denovo)                n/t                              n/t                              n/t                              Error (exp-calc)                 n/t                              n/t                             
+  gi                              n/t                              n/t                              n/t                              n/t                              gi                               n/t                             
+  mz(data)                        n/t                              n/t                              n/t                              Exp m/z                          n/t                              n/t                             
+  pepMass(denovo)                 n/t                              n/t                              n/t                              Calc mass                        n/t                              n/t                             
+  peptide                         n/t                              n/t                              n/t                              Sequence                         n/t                              n/t                             
+  ppm(1e6*err/(mz*z))             n/t                              n/t                              n/t                              Error (ppm)                      n/t                              n/t                             
+  scanNum                         n/t                              n/t                              n/t                              Spectrum ID                      n/t                              n/t                             
+  score                           n/t                              n/t                              n/t                              Novor:score                      n/t                              n/t                             
+  z                               n/t                              n/t                              n/t                              Charge                           n/t                              n/t                             
+ # id                             n/t                              n/t                              n/t                              Novor:id                         n/t                              n/t                             
+ #Index                           n/t                              n/t                              n/t                              n/t                              n/t                              Pepnovo:id                      
+ Amanda Score                     n/t                              Amanda:Score                     n/t                              n/t                              n/t                              n/t                             
+ C-Gap                            n/t                              n/t                              n/t                              n/t                              n/t                              Pepnovo:C-Gap                   
+ Charge                           n/t                              Charge                           Charge                           n/t                              n/t                              n/t                             
+ CumProb                          n/t                              n/t                              n/t                              n/t                              n/t                              Pepnovo:CumProb                 
+ DeNovoScore                      n/t                              n/t                              MS-GF:DeNovoScore                n/t                              n/t                              n/t                             
+ EValue                           n/t                              n/t                              MS-GF:EValue                     n/t                              n/t                              n/t                             
+ Filename                         n/t                              Filename                         n/t                              n/t                              n/t                              n/t                             
+ MSGFScore                        n/t                              n/t                              MS-GF:RawScore                   n/t                              n/t                              n/t                             
+ Modifications                    n/t                              Modifications                    n/t                              n/t                              n/t                              n/t                             
+ N-Gap                            n/t                              n/t                              n/t                              n/t                              n/t                              Pepnovo:N-Gap                   
+ PSMId                            PSMId                            n/t                              n/t                              n/t                              n/t                              n/t                             
+ Peptide                          n/t                              n/t                              Sequence                         n/t                              n/t                              n/t                             
+ PnvScr                           n/t                              n/t                              n/t                              n/t                              n/t                              Pepnovo:PnvScr                  
+ Precursor                        n/t                              n/t                              Exp m/z                          n/t                              n/t                              n/t                             
+ Protein                          n/t                              n/t                              proteinacc_start_stop_pre_post_; n/t                              n/t                              n/t                             
+ Protein Accessions               n/t                              proteinacc_start_stop_pre_post_; n/t                              n/t                              n/t                              n/t                             
+ RT                               n/t                              Retention Time (s)               n/t                              n/t                              n/t                              n/t                             
+ Rank                             n/t                              Rank                             n/t                              n/t                              n/t                              n/t                             
+ RnkScr                           n/t                              n/t                              n/t                              n/t                              n/t                              Pepnovo:RnkScr                  
+ Scan Number                      n/t                              Spectrum ID                      n/t                              n/t                              n/t                              n/t                             
+ ScanNum                          n/t                              n/t                              Spectrum ID                      n/t                              n/t                              n/t                             
+ Sequence                         n/t                              Sequence                         n/t                              n/t                              n/t                              n/t                             
+ SpecEValue                       n/t                              n/t                              MS-GF:SpecEValue                 n/t                              n/t                              n/t                             
+ SpecFile                         n/t                              n/t                              Raw data location                n/t                              n/t                              n/t                             
+ Spectrum number                  n/t                              n/t                              n/t                              n/t                              Spectrum ID                      n/t                             
+ Title                            n/t                              Spectrum Title                   Spectrum Title                   n/t                              n/t                              n/t                             
+ Weighted Probability             n/t                              Amanda:Weighted Probability      n/t                              n/t                              n/t                              n/t                             
+ [M+H]                            n/t                              n/t                              n/t                              n/t                              n/t                              Calc mass(Da)                   
+ m/z                              n/t                              Exp m/z                          n/t                              n/t                              n/t                              n/t                             
+ output_aa_probs                  n/t                              n/t                              n/t                              n/t                              n/t                              Pepnovo:aaScore                 
+ peptide                          Sequence                         n/t                              n/t                              n/t                              n/t                              n/t                             
+ posterior_error_prob             PEP                              n/t                              n/t                              n/t                              n/t                              n/t                             
+ proteinIds                       Protein ID                       n/t                              n/t                              n/t                              n/t                              n/t                             
+ q-value                          q-value                          n/t                              n/t                              n/t                              n/t                              n/t                             
+ score                            Kojak:score                      n/t                              n/t                              n/t                              n/t                              n/t                             
+ ================================ ================================ ================================ ================================ ================================ ================================ ================================
 
 .. raw:: html
 

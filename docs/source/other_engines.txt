@@ -82,6 +82,7 @@ Percolator 2_08
 .. autoclass:: ursgal.wrappers.percolator_2_08.percolator_2_08
    :members:
 
+
 qvality 2_02
 ------------
 
@@ -144,3 +145,10 @@ plot_pygcluster_heatmap_from_csv_1_0_0
 
    :members:
    :private-members:
+
+
+Kojak tailored Percolator 2_08
+------------------------------
+
+.. autoclass:: ursgal.wrappers.kojak_percolator_2_08.kojak_percolator_2_08
+   :members:

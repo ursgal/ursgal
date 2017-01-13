@@ -1417,16 +1417,18 @@ ursgal_params = {
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'kojak_percolator_2_08'
         ],
         'default_value' : None,
         'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'msamanda_style_1' : 'header_translations',
-            'msgfplus_style_1' : 'header_translations',
-            'novor_style_1' : 'header_translations',
-            'omssa_style_1' : 'header_translations',
-            'pepnovo_style_1' : 'header_translations',
+            'msamanda_style_1'      : 'header_translations',
+            'msgfplus_style_1'      : 'header_translations',
+            'novor_style_1'         : 'header_translations',
+            'omssa_style_1'         : 'header_translations',
+            'pepnovo_style_1'       : 'header_translations',
+            'kojak_percolator_style_1' : 'header_translations',
         },
         'utag' : [
             'Conversion',
@@ -1500,6 +1502,14 @@ ursgal_params = {
                 'RnkScr' : 'Pepnovo:RnkScr',
                 '[M+H]' : 'Calc mass(Da)',
                 'output_aa_probs' : 'Pepnovo:aaScore',
+            },
+            'kojak_percolator_style_1' : {
+                'q-value'              : 'q-value',
+                'PSMId'                : 'PSMId',
+                'posterior_error_prob' : 'PEP',
+                'score'                : 'Kojak:score',
+                'peptide'              : 'Sequence',
+                'proteinIds'          : 'Protein ID'
             },
         },
         'uvalue_type' : "",
