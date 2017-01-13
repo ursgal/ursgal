@@ -14,7 +14,8 @@ class kojak_1_5_3( ursgal.UNode ):
     
     Note:
     
-        Kojak has to be installed manually at the moment!
+        Kojak has to be installed manually at the moment! Use folder name:
+        'kojak_1_5_3' in the resources folder.
 
     """
     META_INFO = {
@@ -180,7 +181,7 @@ class kojak_1_5_3( ursgal.UNode ):
         The standard parametern file is used and adjustes.
 
         Returns:
-            dict: keys are the names of the three templates (15N-masses.xml, taxonomy.xml, input.xml)
+            dict: keys are the names of the parametern template file
 
         '''
         templates = {
