@@ -727,7 +727,8 @@ ursgal_params = {
                 'trypsin'
                 'trypsin_chymotrypsin
                 'trypsin_cnbr'
-                'trypsin_p'
+                'trypsin_p',
+                'lysc_gluc',
         ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -778,6 +779,7 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
+                'lysc_gluc' : 'DEK;C;P',
             },
             'msamanda_style_1' : {
                 'argc' : 'R;after;P',
@@ -803,6 +805,7 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;after;P',
                 'trypsin_gluc' : 'DEKR;after;P',
                 'trypsin_p' : 'KR;after;',
+                'lysc_gluc' : 'DEK;after;P',
             },
             'msgfplus_style_1' : {
                 'alpha_lp' : '8',
@@ -881,6 +884,7 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
+                'lysc_gluc' : 'DEK;C;P',
             },
             'unify_csv_style_1' : {
                 'argc' : 'R;C;P',
@@ -905,6 +909,7 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
+                'lysc_gluc' : 'DEK;C;P',
             },
             'xtandem_style_1' : {
                 'argc' : '[R]|{P}',
@@ -931,12 +936,15 @@ ursgal_params = {
                 'trypsin_cnbr' : '[KR]|{P},[M]|{P}',
                 'trypsin_gluc' : '[DEKR]|{P}',
                 'trypsin_p' : '[RK]|[X]',
+                'lysc_gluc' : '[DEK]|[X]|{P}',
             },
             'kojak_style_1' : {
                 'gluc'      : '[DE]|{P}',
                 'lysn'      : '|[K]',
                 'trypsin'   : '[KR]|{P}',
                 'trypsin_p' : '[RK]|',
+                'lysc_gluc' : '[DEK]|{P}',
+
             } 
         },
         'uvalue_type' : "select",
