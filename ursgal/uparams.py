@@ -58,6 +58,7 @@ ursgal_params = {
     },
     'base_mz' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'omssa_2_1_9',
             'pepnovo_3_1',
         ],
@@ -65,6 +66,7 @@ ursgal_params = {
         'description' :  ''' m/z value that is used as basis for the conversion from ppm to Da ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'base_mz',
             'omssa_style_1' : 'base_mz',
             'pepnovo_style_1' : 'base_mz',
         },
@@ -393,6 +395,7 @@ ursgal_params = {
     },
     'database' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -415,6 +418,7 @@ ursgal_params = {
         'description' :  ''' Path to database file containing protein sequences in fasta format ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'Fasta',
             'msamanda_style_1' : 'database',
             'msgfplus_style_1' : '-d',
             'myrimatch_style_1' : 'ProteinDatabase',
@@ -653,6 +657,7 @@ ursgal_params = {
     'enzyme' : {
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -705,6 +710,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'enzyme',
+            'moda_style_1' : 'Enzyme',
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-e',
             'myrimatch_style_1' : 'CleavageRules',
@@ -750,6 +756,31 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
+            },
+            'moda_style_1' : {
+                'argc' : 'argc, R/C',
+                'aspn' : 'aspn, D/N;',
+                'chymotrypsin' : 'chymotrypsin, FMWY/C',
+                'chymotrypsin_p' : 'chymotrypsin, FMWY/C',
+                'clostripain' : 'clostripain, R/C',
+                'cnbr' : 'cnbr, M/C',
+                'elastase' : 'elastase, AGILV/C',
+                'formic_acid' : 'formic_acid, D/C',
+                'gluc' : 'gluc, DE/C',
+                'gluc_bicarb' : 'gluc_bicarb, E/C',
+                'iodosobenzoate' : 'iodosobenzoate, W/C',
+                'lysc' : 'lysc, K/C',
+                'lysc_p' : 'lysc_p, K/C',
+                'lysn' : 'lysn, K/N',
+                'lysn_promisc' : 'lysn_promisc, AKRS/N',
+                'no_cleavage' : 'NONE',
+                'pepsina' : 'pepsina, FL/C',
+                'protein_endopeptidase' : 'protein_endopeptidase, P/C',
+                'staph_protease' : 'staph_protease, E/C',
+                'trypsin' : 'trypsin, KR/C',
+                'trypsin_cnbr' : 'trypsin_cnbr, KRM/C',
+                'trypsin_gluc' : 'trypsin_gluc, DEKR/C',
+                'trypsin_p' : 'trypsin_p, KR/C',
             },
             'msamanda_style_1' : {
                 'argc' : 'R;after;P',
@@ -991,6 +1022,7 @@ ursgal_params = {
     },
     'frag_mass_tolerance' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -1012,6 +1044,7 @@ ursgal_params = {
         'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'FragTolerance',
             'msamanda_style_1' : 'ms2_tol',
             'myrimatch_style_1' : 'FragmentMzTolerance',
             'novor_style_1' : 'fragmentIonErrorTol',
@@ -1033,6 +1066,7 @@ ursgal_params = {
     },
     'frag_mass_tolerance_unit' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -1054,6 +1088,7 @@ ursgal_params = {
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'FragTolerance',
             'msamanda_style_1' : 'ms2_tol unit',
             'myrimatch_style_1' : 'FragmentMzTolerance',
             'novor_style_1' : 'fragmentIonErrorTol',
@@ -1626,6 +1661,7 @@ ursgal_params = {
     },
     'instrument' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
             'novor_1_1beta',
@@ -1634,6 +1670,7 @@ ursgal_params = {
         'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'Instrument',
             'msgfplus_style_1' : '-inst',
             'novor_style_1' : 'massAnalyzer',
         },
@@ -1648,6 +1685,12 @@ ursgal_params = {
             'userCustomValuesMaxNum' : 0,
         },
         'uvalue_translation' : {
+            'moda_style_1' : {
+                'high_res_ltq' : 'ESI-TRAP',
+                'low_res_ltq' : 'ESI-TRAP',
+                'q_exactive' : 'ESI-TRAP',
+                'tof' : 'ESI-QTOF',
+            },
             'msgfplus_style_1' : {
                 'high_res_ltq' : '1',
                 'low_res_ltq' : '0',
@@ -1727,6 +1770,7 @@ ursgal_params = {
     },
     'label' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -1748,6 +1792,7 @@ ursgal_params = {
         'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'label',
             'msamanda_style_1' : 'label',
             'msgfplus_style_1' : 'label',
             'myrimatch_style_1' : 'label',
@@ -1825,6 +1870,7 @@ ursgal_params = {
     },
     'max_missed_cleavages' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -1844,6 +1890,7 @@ ursgal_params = {
         'description' :  ''' Maximum number of missed cleavages per peptide ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'MissedCleavage',
             'msamanda_style_1' : 'missed_cleavages',
             'myrimatch_style_1' : 'MaxMissedCleavages',
             'omssa_style_1' : '-v',
@@ -1878,6 +1925,28 @@ ursgal_params = {
             'max' : 10000000,
             'min' : 0,
             'updownval' : 100,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'max_mod_size' : {
+        'available_in_unode' : [
+            'moda_v1_51',
+        ],
+        'default_value' : 200,
+        'description' :  ''' Minimum modification size to consider (in Da) ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'moda_style_1' : 'MaxModSize',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'max' : 10000,
+            'min' : -10000,
+            'updownval' : 10,
         },
         'uvalue_translation' : {
         },
@@ -2039,6 +2108,7 @@ ursgal_params = {
     },
     'mgf_input_file' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2060,6 +2130,7 @@ ursgal_params = {
         'description' :  ''' Path to input .mgf file ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'Spectra',
             'msamanda_style_1' : 'mgf_input_file',
             'msgfplus_style_1' : '-s',
             'novor_style_1' : '-f',
@@ -2076,6 +2147,28 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+    },
+    'min_mod_size' : {
+        'available_in_unode' : [
+            'moda_v1_51',
+        ],
+        'default_value' : -200,
+        'description' :  ''' Minimum modification size to consider (in Da) ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'moda_style_1' : 'MinModSize',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'max' : 10000,
+            'min' : -10000,
+            'updownval' : 10,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
     },
     'min_output_score' : {
         'available_in_unode' : [
@@ -2222,8 +2315,79 @@ ursgal_params = {
         },
         'uvalue_type' : "int",
     },
+    'moda_blind_mode' : {
+        'available_in_unode' : [
+            'moda_v1_51',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Allowed number of modifications per peptide. '0' = no modification, '1' = one modification, '2' = no limit ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'moda_style_1' : 'BlindMode',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'max' : 2,
+            'min' : 0,
+            'updownval' : 1,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'moda_high_res' : {
+        'available_in_unode' : [
+            'moda_v1_51',
+        ],
+        'default_value' : True,
+        'description' :  ''' If True, fragment tolerance is set as the same as precursor tolerance, when the peptide mass is significantly small, such that fragment tolerance is larger than precursor tolerance ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'moda_style_1' : 'HighResolution',
+        },
+        'utag' : [
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+            'moda_style_1' : {
+                False : 'OFF',
+                True : 'ON',
+            },
+        },
+        'uvalue_type' : "bool",
+    },
+    'moda_protocol_id' : {
+        'available_in_unode' : [
+            'moda_v1_51',
+        ],
+        'default_value' : None,
+        'description' :  ''' MODa specific protocol to enable scoring parameters for labeled samples. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'moda_style_1' : 'Protocol',
+        },
+        'utag' : [
+        ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : [None, 'iTRAQ4plex', 'iTRAQ8plex', 'TMT2plex', 'TMT6plex'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
+        'uvalue_translation' : {
+            'moda_style_1' : {
+                'None' : 'NONE',
+            },
+        },
+        'uvalue_type' : "select",
+    },
     'modifications' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2277,6 +2441,7 @@ Example:
  [ 'S,opt,any,New_mod,C2H5N1O3' ] ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'ADD',
             'msamanda_style_1' : 'modifications',
             'msgfplus_style_1' : '-mod',
             'myrimatch_style_1' : ('DynamicMods', 'StaticMods'),
@@ -2424,10 +2589,6 @@ Example:
         'utag' : [
         ],
         'uvalue_option' : {
-            'max' : 10000000,
-            'min' : 0,
-            'unit' : 1e-05,
-            'updownval' : 0.01,
         },
         'uvalue_translation' : {
             'myrimatch_style_1' : {
@@ -2435,7 +2596,7 @@ Example:
                 True : 1,
             },
         },
-        'uvalue_type' : "float",
+        'uvalue_type' : "bool",
     },
     'myrimatch_tic_cutoff' : {
         'available_in_unode' : [
@@ -3217,6 +3378,7 @@ Example:
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'merge_csv_1_0_0',
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3247,6 +3409,7 @@ Example:
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'output_file',
             'merge_csv_style_1' : 'output',
+            'moda_style_1' : '-o',
             'msamanda_style_1' : 'output_file_incl_path',
             'msgfplus_style_1' : '-o',
             'myrimatch_style_1' : 'output_file_incl_path',
@@ -3476,6 +3639,7 @@ Example:
     },
     'precursor_mass_tolerance_minus' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3500,6 +3664,7 @@ Example:
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'PPMTolerance',
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
@@ -3523,6 +3688,7 @@ Example:
     },
     'precursor_mass_tolerance_plus' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3547,6 +3713,7 @@ Example:
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'PPMTolerance',
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
@@ -3570,6 +3737,7 @@ Example:
     },
     'precursor_mass_tolerance_unit' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3593,6 +3761,7 @@ Example:
         'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'PPMTolerance',
             'msamanda_style_1' : 'ms1_tol unit',
             'msgfplus_style_1' : '-t',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
@@ -3976,7 +4145,7 @@ Example:
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : True,
+        'default_value' : False,
         'description' :  ''' Remove temporary files: True or False ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4578,6 +4747,7 @@ Example:
     },
     'semi_enzyme' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4600,6 +4770,7 @@ Example:
         'description' :  ''' Allows semi-enzymatic peptide ends ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'enzyme_constraint_min_number_termini',
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-ntt',
             'myrimatch_style_1' : 'MinTerminiCleavages',
@@ -4613,6 +4784,10 @@ Example:
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'moda_style_1' : {
+                False : 2,
+                True : 1,
+            },
             'msamanda_style_1' : {
                 False : 'Full',
                 True : 'Semi',
@@ -4753,25 +4928,6 @@ Example:
         },
         'uvalue_type' : "str",
     },
-    'ursgal_resource_url' : {
-        'available_in_unode' : [
-            'ucontroller',
-        ],
-        'default_value' : 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/',
-        'description' :  ''' URL that is used to install and prepare_resources.py ''',
-        'triggers_rerun' : False,
-        'ukey_translation' : {
-            'ucontroller_style_1' : 'ursgal_resource_url',
-        },
-        'utag' : [
-            'installation',
-        ],
-        'uvalue_option' : {
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "str",
-    },
     'use_quality_filter' : {
         'available_in_unode' : [
             'pepnovo_3_1',
@@ -4843,12 +4999,14 @@ Example:
     },
     'use_spectrum_mz' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'pepnovo_3_1',
         ],
         'default_value' : True,
         'description' :  ''' Does not correct precusor m/z. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'AutoPMCorrection',
             'pepnovo_style_1' : '-use_spectrum_mz',
         },
         'utag' : [
@@ -4857,6 +5015,10 @@ Example:
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'moda_style_1' : {
+                False : '1',
+                True : '0',
+            },
         },
         'uvalue_type' : "bool",
     },
