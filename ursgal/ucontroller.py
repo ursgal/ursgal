@@ -2479,7 +2479,7 @@ Nothing to do here...
                             engine
                         )
                     )
-                    cannot_distribute = self.unodes[engine].get(
+                    cannot_distribute = self.unodes[engine]['META_INFO'].get(
                         'cannot_distribute',
                         None
                     )

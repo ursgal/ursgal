@@ -46,7 +46,8 @@ class kojak_1_5_3( ursgal.UNode ):
         Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient 
         analysis of chemically cross-linked protein complexes. 
         J Proteome Res 14: 2190–2198''',
-        'include_in_git'            : False,
+        'include_in_git'            : None,
+        'cannot_distribute'         : True,
         'utranslation_style'        : 'kojak_style_1',
         'engine': {
             'linux' : {

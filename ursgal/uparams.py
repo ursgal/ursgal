@@ -944,7 +944,6 @@ ursgal_params = {
                 'trypsin'   : '[KR]|{P}',
                 'trypsin_p' : '[RK]|',
                 'lysc_gluc' : '[DEK]|{P}',
-
             } 
         },
         'uvalue_type' : "select",

@@ -41,7 +41,8 @@ class kojak_percolator_2_08( ursgal.UNode ):
         'citation'   : 'Kall L, Canterbury JD, Weston J, Noble WS, '\
             'MacCoss MJ. (2007) Semi-supervised learning for peptide '\
             'identification from shotgun proteomics datasets.',
-        'include_in_git'            : False,
+        'include_in_git'            : None,
+        'cannot_distribute'         : True,
         'group_psms'                : False,
         'in_development'            : False,
         'cpu_usage'                 : 1,
@@ -51,7 +52,7 @@ class kojak_percolator_2_08( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'percolator_2_08',
                     'url'            : '',
-                    'zip_md5'        : 'ecaa830a570f4bd8f010b5beda1c1b7c',
+                    'zip_md5'        : '',
                     'additional_exe' : [],
                 },
             },
@@ -59,7 +60,7 @@ class kojak_percolator_2_08( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'percolator',
                     'url'            : '',
-                    'zip_md5'        : 'b03bf30ef4c4bdda1725de4c70351842',
+                    'zip_md5'        : '',
                     'additional_exe' : [],
                 },
             },
@@ -67,13 +68,13 @@ class kojak_percolator_2_08( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'percolator.exe',
                     'url'            : '',
-                    'zip_md5'        : 'ca267a3104cedc20887698a499f58859',
+                    'zip_md5'        : '',
                     'additional_exe' : [],
                 },
                 '32bit' : {
                     'exe'            : 'percolator.exe',
                     'url'            : '',
-                    'zip_md5'        : '8b1387860c15d07e938a517ddd2cfffa',
+                    'zip_md5'        : '',
                     'additional_exe' : [],
                 },
             },
