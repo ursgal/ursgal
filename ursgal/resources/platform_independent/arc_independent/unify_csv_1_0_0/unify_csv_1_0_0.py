@@ -179,7 +179,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         pep_map_lookup = {}
         fasta_lookup_name = upapa.build_lookup_from_file(
             params['translations']['database'],
-            force=False
+            force  = False,
         )
     # print('Cached!')
     # input()
@@ -928,7 +928,7 @@ def merge_duplicate_psm_rows(unified_csv_path, psm_counter, psm_defining_colname
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 6:
+    if len(sys.argv) < 7:
         print(__doc__)
         exit()
 
@@ -951,18 +951,20 @@ if __name__ == '__main__':
                 'K,opt,any,Label:13C(6)15N(2)',
             ],
             'protein_delimiter'        : '<|>',
-            # 'database'                 : '/Volumes/fUBe/joe/Dev/ursgal/tests/data/BSA.fasta',
-            'database'                 : '/media/plan-f/Shared/databases/Chlamydomonas_reinhardtii/v5.5/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
-
             'enzyme'                   : 'KR;C;P',
             'keep_asp_pro_broken_peps' : False,
             'semi_enzyme'              : False,
             'decoy_tag'                : 'decoy_',
-            'psm_merge_delimiter'      : ';'
+            'psm_merge_delimiter'      : ';',
+            'precursor_mass_tolerance_plus':5,
+            'precursor_mass_tolerance_minus':5,
+            'precursor_isotope_range': '0,1'
         },
-        'label'                    : '15N',
+        # 'label'                    : '15N',
+        'label' : '',
         'prefix'                   : None
     }
+    params['database'] = sys.argv[7]
     main(
         input_file     = sys.argv[1],
         output_file    = sys.argv[2],

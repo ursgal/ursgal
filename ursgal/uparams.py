@@ -1540,6 +1540,44 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
+    'heatmap_value_suffix' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : "_mean",
+        'description' :  ''' The suffix to identify the value columns, which should be plotted ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_value_suffix',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'heatmap_error_suffix' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : "_std",
+        'description' :  ''' The suffix to identify the value error holding columns ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_error_suffix',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'heatmap_box_style' : {
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
