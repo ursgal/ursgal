@@ -1578,6 +1578,25 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
+    'heatmap_column_order' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : [],
+        'description' :  ''' The plot order of the columns ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_column_order',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
+    },
     'heatmap_box_style' : {
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',

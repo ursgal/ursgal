@@ -44,6 +44,7 @@ def main(input_file=None, output_file=None, params=None):
           holding a value (Default: '_mean')
         * heatmap_error_suffix is the suffix of the column name for columns
           holding the error to the value (Default: '_std')
+        * heatmap_column_order defines the order of the columns for plotting
 
     Please do not forget to cite pyGCluster and Ursgal when using this node.
 
@@ -51,18 +52,20 @@ def main(input_file=None, output_file=None, params=None):
     csv_reader =  csv.DictReader(
         open(input_file, 'r')
     )
-    params['all_conditions']    = set()
     params['additional_labels'] = {}
-
-    for fieldname in csv_reader.fieldnames:
-        if fieldname.endswith(params['heatmap_value_suffix']):
-            params['all_conditions'].add(
-                fieldname.replace(
-                    params['heatmap_value_suffix'],
-                    ''
-                ) # this tag could also go into params
-            )
-    params['all_conditions'] = sorted(list(params['all_conditions']))
+    if params['heatmap_column_order'] == []:
+        params['all_conditions']    = set()
+        for fieldname in csv_reader.fieldnames:
+            if fieldname.endswith(params['heatmap_value_suffix']):
+                params['all_conditions'].add(
+                    fieldname.replace(
+                        params['heatmap_value_suffix'],
+                        ''
+                    ) # this tag could also go into params
+                )
+        params['all_conditions'] = sorted(list(params['all_conditions']))
+    else:
+        params['all_conditions'] = params['heatmap_column_order']
     plot_collector = {}
     identifiers    = []
     forbidden_character_list = [ '>', '<' ]
