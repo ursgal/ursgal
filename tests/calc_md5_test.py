@@ -3,17 +3,24 @@
 
 import ursgal
 import os
+import sys
 
 R = ursgal.UController()
 
 TESTS = [
     {
         'input' : os.path.join('tests', 'data', 'test.json'),
-        'output' : '379450895e2c116886b2e92dfcd68b2b'
+        'output' : {
+            'unix' : '379450895e2c116886b2e92dfcd68b2b',
+            'win32': '54c19ed069413037dc857a0130dd2527'
+        }
     },
     {
         'input' : os.path.join('tests', 'data', 'test_without_database.json'),
-        'output' : 'deb20d01ff369188a583decf203cf769'
+        'output' : {
+            'unix' : 'deb20d01ff369188a583decf203cf769',
+            'win32': '26cc3e0850d3ab95c74e4cf680475335'
+        }
     }
 ]
 
@@ -26,7 +33,11 @@ def check_md5_test():
 def check_md5( test_dict ):
     out_put = R.calc_md5( test_dict['input'] )
     print( out_put , test_dict)
-    assert out_put == test_dict['output'], '''
+    platform = sys.platform
+    if sys.platform != 'win32':
+        platform = 'unix'
+
+    assert out_put == test_dict['output'][platform], '''
         MD5 {0} failed
         output: {1}'''.format(
             test_dict,
