@@ -200,7 +200,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     total_lines = len(list(csv.reader(open(input_file,'r'))))
     ze_only_buffer = {}
 
-    allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')
+    if params['translations']['enzyme'] != 'nonspecific':
+        allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')
+    else:
+        allowed_aa    = ''.join( list( ursgal.ursgal_kb.NITROGENS.keys() ) )
+        cleavage_site = 'C'
+        inhibitor_aa  = ''
     allowed_aa += '-'
 
     with open( input_file, 'r' ) as in_file:
