@@ -34,6 +34,7 @@ Available in unodes
 * msgfplus_v9979
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
+* mzidentml_lib_1_7
 
 Ursgal value translations for *-xmx*
 """"""""""""""""""""""""""""""""""""
@@ -55,7 +56,7 @@ aa_exception_dict
 
 Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name
 
-:Default value: {'U': {'original_aa': 'C', 'unimod_name_with_cam': 'SecCarbamidomethyl', 'unimod_name': 'Delta:S(-1)Se(1)'}, 'J': {'original_aa': 'L'}, 'O': {'original_aa': 'K', 'unimod_name': 'Methylpyrroline'}}
+:Default value: {'J': {'original_aa': 'L'}, 'O': {'unimod_name': 'Methylpyrroline', 'original_aa': 'K'}, 'U': {'unimod_name': 'Delta:S(-1)Se(1)', 'original_aa': 'C', 'unimod_name_with_cam': 'SecCarbamidomethyl'}}
 :type: dict
 :triggers rerun: False
             
@@ -699,6 +700,7 @@ Available in unodes
 * myrimatch_2_2_140
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
+* mzidentml_lib_1_7
 * unify_csv_1_0_0
 * xtandem2csv_1_0_0
 * kojak_1_5_3
@@ -932,7 +934,8 @@ Enzyme: Rule of protein cleavage
                 'trypsin'
                 'trypsin_chymotrypsin
                 'trypsin_cnbr'
-                'trypsin_p'
+                'trypsin_p',
+                'lysc_gluc',
 
 :Default value: trypsin
 :type: select
@@ -1006,6 +1009,7 @@ Ursgal key translations
  gluc_bicarb                   E;C;P                         n/t                           E;after;P                     n/t                           n/t                           n/t                           n/t                           n/t                           E;C;P                         E;C;P                         [E]|{P}                      
  iodosobenzoate                W;C;                          n/t                           W;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           W;C;                          W;C;                          [W]|[X]                      
  lysc                          K;C;P                         n/t                           K;after;P                     3                             Lys-C                         n/t                           5                             n/t                           K;C;P                         K;C;P                         [K]|{P}                      
+ lysc_gluc                     DEK;C;P                       [DEK]|{P}                     DEK;after;P                   n/t                           n/t                           n/t                           n/t                           n/t                           DEK;C;P                       DEK;C;P                       [DEK]|[X]|{P}                
  lysc_p                        K;C;                          n/t                           K;after;                      n/t                           Lys-C/P                       n/t                           6                             n/t                           K;C;                          K;C;                          [K]|[X]                      
  lysn                          K;N;                          |[K]                          K;before;                     4                             n/t                           n/t                           21                            n/t                           K;N;                          K;N;                          [X]|[K]                      
  lysn_promisc                  AKRS;N;                       n/t                           AKRS;before;                  n/t                           n/t                           n/t                           n/t                           n/t                           AKRS;N;                       AKRS;N;                       [X]|[AKRS]                   
@@ -1812,6 +1816,64 @@ Ursgal value translations for *heatmap_color_gradient*
 
       <hr />
 
+heatmap_column_order
+###############################
+
+
+The plot order of the columns
+
+:Default value: []
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* plot_pygcluster_heatmap_from_csv_1_0_0
+
+Ursgal value translations for *heatmap_column_order*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ heatmap_style_1      heatmap_column_order
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
+heatmap_error_suffix
+###############################
+
+
+The suffix to identify the value error holding columns
+
+:Default value: _std
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* plot_pygcluster_heatmap_from_csv_1_0_0
+
+Ursgal value translations for *heatmap_error_suffix*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ heatmap_style_1      heatmap_error_suffix
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
 heatmap_identifier_field_name
 ########################################
 
@@ -1894,6 +1956,35 @@ Ursgal value translations for *heatmap_min_value*
  ================= =================
  heatmap_style_1   heatmap_min_value
  ================= =================
+
+.. raw:: html
+
+      <hr />
+
+heatmap_value_suffix
+###############################
+
+
+The suffix to identify the value columns, which should be plotted
+
+:Default value: _mean
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* plot_pygcluster_heatmap_from_csv_1_0_0
+
+Ursgal value translations for *heatmap_value_suffix*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ heatmap_style_1      heatmap_value_suffix
+ ==================== ====================
 
 .. raw:: html
 
@@ -3613,6 +3704,7 @@ Available in unodes
 
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
+* mzidentml_lib_1_7
 
 Ursgal value translations for *mzidentml_compress*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -3684,6 +3776,7 @@ Available in unodes
 
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
+* mzidentml_lib_1_7
 
 Ursgal value translations for *mzidentml_export_type*
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3714,6 +3807,7 @@ Available in unodes
 
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
+* mzidentml_lib_1_7
 
 Ursgal value translations for *mzidentml_function*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -3744,6 +3838,7 @@ Available in unodes
 
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
+* mzidentml_lib_1_7
 
 Ursgal value translations for *mzidentml_output_fragmentation*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3786,6 +3881,7 @@ Available in unodes
 
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
+* mzidentml_lib_1_7
 
 Ursgal value translations for *mzidentml_verbose_output*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -4726,6 +4822,7 @@ Available in unodes
 * myrimatch_2_2_140
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
+* mzidentml_lib_1_7
 * novor_1_1beta
 * omssa_style_1
 * pepnovo_3_1

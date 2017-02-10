@@ -64,7 +64,15 @@ MzidLib 1_6_11
    :members:
 
 .. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
+   :members:
 
+MzidLib 1_7
+-----------
+
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_7.mzidentml_lib_1_7
+   :members:
+
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
    :members:
 
 mzml2mgf 1_0_0

@@ -6,6 +6,7 @@ ursgal_params = {
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : "13312m",
         'description' :  ''' Set maximum Java heap size (used RAM) ''',
@@ -515,6 +516,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
             'kojak_1_5_3'
@@ -2608,6 +2610,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : False,
         'description' :  ''' Compress mzidentml_lib output files ''',
@@ -2652,6 +2655,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : "exportPSMs",
         'description' :  ''' Defines which paramters shoul be exporte by mzidentml_lib ''',
@@ -2677,6 +2681,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : "Mzid2Csv",
         'description' :  ''' Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far ''',
@@ -2701,6 +2706,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : False,
         'description' :  ''' Include fragmentation in mzidentml_lib output ''',
@@ -2725,6 +2731,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : False,
         'description' :  ''' Verbose mzidentml_lib output ''',
@@ -3373,6 +3380,7 @@ Example:
             'myrimatch_2_2_140',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
             'novor_1_1beta',
             'omssa_style_1',
             'pepnovo_3_1',
