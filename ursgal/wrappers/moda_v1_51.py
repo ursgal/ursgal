@@ -32,7 +32,7 @@ class moda_v1_51( ursgal.UNode ):
         'create_own_folder'         : True,
         'citation'                  : 'Na S, Bandeira N, Paek E. (2012) '\
             'Fast multi-blind modification search through tandem mass spectrometry.',
-        'in_development'            : False,
+        'in_development'            : True,
         'include_in_git'            : False,
     }
     
