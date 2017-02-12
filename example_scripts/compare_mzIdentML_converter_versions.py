@@ -9,14 +9,6 @@ import shutil
 
 def main():
     '''
-    Executes a search with OMSSA, XTandem and MS-GF+ on the BSA1.mzML
-    input_file
-
-    usage:
-        ./simple_example_search.py
-
-    Note:
-        myrimatch does not work with this file in this case
 
     '''
     uc = ursgal.UController(
@@ -35,31 +27,10 @@ def main():
         }
     )
 
-    if sys.maxsize > 2 ** 32:
-        xtandem = 'xtandem_vengeance'
-    else:
-        xtandem = 'xtandem_sledgehammer'
-
-    if sys.platform == 'win32':
-        msamanda = 'msamanda_1_0_0_7503'
-    
-    elif sys.platform == 'darwin':
-        #mono needs to be installed
-        msamanda = 'msamanda_1_0_0_7504'
-    else:
-        msamanda = 'msamanda_1_0_0_7504'
-
-    engine_list = [
-        'omssa',
-        xtandem,
-        'msgfplus_v2016_09_16',
-        # msamanda,
-    ]
-
     mzML_file = os.path.join(
         os.pardir,
         'example_data',
-        'BSA_simple_example_search',
+        'mzid_lib_comparison',
         'BSA1.mzML'
     )
     if os.path.exists(mzML_file) is False:
@@ -79,20 +50,30 @@ def main():
                 mzML_file
             )
 
-    unified_file_list = []
 
-    for engine in engine_list:
+    converter_engine_list = [
+        'mzidentml_lib_1_7',
+        'mzidentml_lib_1_6_10',
+        'mzidentml_lib_1_6_11',
+    ]
+    uc.params['visualization_label_list' ] = converter_engine_list
+
+    unified_file_list = []
+    for conveter_engine in converter_engine_list:
+        uc.params['mzidentml_converter_version'] = conveter_engine
+        uc.params['prefix'] = conveter_engine
         unified_search_result_file = uc.search(
             input_file = mzML_file,
-            engine     = engine,
+            engine     = 'msgfplus_v9979',
             force      = False
         )
         unified_file_list.append(unified_search_result_file)
-
+    uc.params['prefix'] = None
     uc.visualize(
         input_files    = unified_file_list,
         engine         = 'venndiagram',
     )
+
     return
 
 

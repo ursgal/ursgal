@@ -2186,6 +2186,44 @@ class UController(ursgal.UNode):
             output_file_name = output_file_name
         )
 
+    def sanitize_csv(self, input_file, force=False, output_file_name=None):
+        '''
+        The UController sanitize_csv function
+
+        Result files (.csv) are sanitized following defined parameters.
+        That means, for each spectrum PSMs are compared and the
+        best spectrum (spectra) is (are) chosen.
+
+        Keyword Arguments:
+            input_file (str): The complete path to the input, input file has
+                currently to be a .csv file.
+            force (bool): (Re)do the analysis, even if output file
+                already exists.
+            output_file_name (str or None): Desired output file name
+                excluding path (optional). If None, output file name will
+                be auto-generated.
+
+        The parameters have to be defined in the params. See the engine
+        documentation for further information ( :meth:`.sanitize_csv_1_0_0._execute` ).
+
+        Example:
+
+            >>> # Only the best PSM for one spectrum is retained
+            >>> # and only if its PEP is differing from the secondbest by
+            >>> # two orders of magnitude
+            >>> uc.params['validation_score_field'] = 'PEP'
+            >>> uc.params['bigger_scores_better'] = False
+            >>> uc.params['score_diff_threshold'] = 2
+            >>> uc.params['threshold_is_log10'] = True
+            >>> uc.sanitize_csv( 'my_results.csv' )
+        '''
+        return self.execute_unode(
+            input_file       = input_file,
+            engine           = self.params['sanitize_csv_converter_version'],
+            force            = force,
+            output_file_name = output_file_name
+        )
+
 
     def prepare_resources(self, root_zip_target_folder):
         '''
@@ -2441,7 +2479,7 @@ Nothing to do here...
                             engine
                         )
                     )
-                    cannot_distribute = self.unodes[engine].get(
+                    cannot_distribute = self.unodes[engine]['META_INFO'].get(
                         'cannot_distribute',
                         None
                     )

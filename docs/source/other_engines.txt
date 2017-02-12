@@ -64,7 +64,15 @@ MzidLib 1_6_11
    :members:
 
 .. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
+   :members:
 
+MzidLib 1_7
+-----------
+
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_7.mzidentml_lib_1_7
+   :members:
+
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
    :members:
 
 mzml2mgf 1_0_0
@@ -81,6 +89,7 @@ Percolator 2_08
 
 .. autoclass:: ursgal.wrappers.percolator_2_08.percolator_2_08
    :members:
+
 
 qvality 2_02
 ------------
@@ -144,3 +153,10 @@ plot_pygcluster_heatmap_from_csv_1_0_0
 
    :members:
    :private-members:
+
+
+Kojak tailored Percolator 2_08
+------------------------------
+
+.. autoclass:: ursgal.wrappers.kojak_percolator_2_08.kojak_percolator_2_08
+   :members:

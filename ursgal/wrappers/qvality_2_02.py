@@ -103,7 +103,7 @@ class qvality_2_02( ursgal.UNode ):
         for translated_key, translation_dict in translations.items():
             if list(translation_dict.values())[0] == None:
                 continue
-            elif translated_key in ['validation_minimum_score', 'validation_score_field', 'decoy_tag']:
+            elif translated_key in ['validation_minimum_score', 'validation_score_field', 'decoy_tag', '-r']:
                 continue
             elif len(translation_dict) == 1:
                 self.params['command_list'].extend((translated_key, str(list(translation_dict.values())[0])))

@@ -52,6 +52,9 @@ class UParamMapper( dict ):
         if ukey in self._eval_functions.keys():
             if uvalue in self._eval_functions[ ukey ].keys():
                 rvalue = self._eval_functions[ ukey ][ uvalue ]
+                if ukey == 'cpus' and rvalue == 0:
+                    rvalue = 1
+
         return rvalue
 
     def mapping_dicts( self, engine_or_engine_style):
@@ -89,7 +92,11 @@ class UParamMapper( dict ):
                     translated_value = re_evaluated_value
 
             template = sup.copy()
-            keys_to_delete = ['ukey_translation', 'uvalue_translation', 'available_in_unode']
+            keys_to_delete = [
+                'ukey_translation',
+                'uvalue_translation',
+                'available_in_unode'
+            ]
             for k in keys_to_delete:
                 del template[ k ]
             template.update(
@@ -104,6 +111,32 @@ class UParamMapper( dict ):
             )
 
             yield template
+
+    def get_masked_params( self, mask = None):
+        '''
+        Lists all uparams and the fields specified in the mask
+
+        e.g. upapa.get_masked_params( mask = ['uvalue_type'])
+        will return
+        {
+            '-xmx' : {
+                'uvalue_type' : "str",
+            },
+            'aa_exception_dict' : {
+                'uvalue_type' : "dict",
+            },
+            ...
+        }
+        '''
+        if mask is None:
+            mask = []
+        masked_params = {}
+        for key, value in self.items():
+            masked_params[ key ] = {}
+            for mkey in mask:
+                masked_params[ key ][ mkey ] = value.get(mkey, None)
+        return masked_params
+
 
     def get_all_params( self, engine=None):
         self._assert_engine( engine )
@@ -261,6 +294,7 @@ class UPeptideMapper( dict ):
         self.hits = {'fcache': 0, 'regex': 0}
         self.query_length = ddict(int)
         self.master_buffer = {}
+
         pass
 
     def build_lookup_from_file( self, path_to_fasta_file, force=True):
@@ -278,7 +312,7 @@ class UPeptideMapper( dict ):
             self.build_lookup(
                 fasta_name   = internal_name,
                 fasta_stream = io.readlines(),
-                force        = force
+                force        = force,
             )
         return internal_name
 
@@ -293,7 +327,6 @@ class UPeptideMapper( dict ):
             self.fasta_sequences[ fasta_name ] = {}
 
         self.master_buffer[ fasta_name ] = {}
-
         if force:
             for id, seq in ursgal.ucore.parseFasta( fasta_stream ):
                 if seq.endswith('*'):
@@ -302,7 +335,7 @@ class UPeptideMapper( dict ):
                 self._create_fcache(
                     id         = id,
                     seq        = seq,
-                    fasta_name = fasta_name
+                    fasta_name = fasta_name,
                 )
 
     def _create_fcache(self, id=None, seq=None, fasta_name=None):
@@ -312,6 +345,7 @@ class UPeptideMapper( dict ):
         for pos in range(len( seq ) - self.word_len + 1):
             pep = seq[ pos : pos + self.word_len ]
             # pep = pep.encode()
+
             try:
                 self[ fasta_name ][ pep ].add( (id, pos + 1) )
             except:
@@ -429,10 +463,10 @@ class UPeptideMapper( dict ):
             post_aa = seq[ end ]
         hit = {
             'start' : start,
-            'end'  : end,
-            'id' : id,
-            'pre': pre_aa ,
-            'post': post_aa,
+            'end'   : end,
+            'id'    : id,
+            'pre'   : pre_aa ,
+            'post'  : post_aa,
         }
         return hit
 

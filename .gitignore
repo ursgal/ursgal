@@ -30,6 +30,8 @@ tests/data/novor_1_1beta/test_BSA1_novor_1_1beta_unified.csv_full_protein_names.
 tests/data/omssa_2_1_9/test_BSA1_omssa_2_1_9_unified.csv_full_protein_names.txt
 tests/data/xtandem_sledgehammer/test_BSA1_xtandem_sledgehammer_unified.csv_full_protein_names.txt
 ursgal/resources/platform_independent/arc_independent/msgfplus_v9979
+ursgal/resources/platform_independent/arc_independent/msgfplus2csv_v2016_09_16/
+ursgal/resources/platform_independent/arc_independent/msgfplus_v2016_09_16/
 ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_10
 ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_11
 ursgal/resources/win32/

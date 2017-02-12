@@ -23,7 +23,7 @@ params = {
 search_engines  = [
     'omssa',
     'xtandem_piledriver',
-    'msgf',
+    'msgfplus_v9979',
     # 'myrimatch_2_1_138',
     # 'msamanda_1_0_0_5243',
 ]
@@ -257,7 +257,7 @@ def analyze(collector):
             'psm'  : ddict(set),
             'pep'  : ddict(set)
         }
-        grouped_psms = uc._group_psms( result_file, dev_mode = True )
+        grouped_psms = uc._group_psms( result_file, validation_score_field='PEP', bigger_scores_better=False )
         for spec_title, grouped_psm_list in grouped_psms.items():
             best_score, best_line_dict = grouped_psm_list[0]
             if len(grouped_psm_list) > 1:

@@ -59,5 +59,22 @@ class UMapMaster(unittest.TestCase):
             ])
         )
 
+    def test_get_masked_params( self ):
+        mask = ['default_value', 'description']
+        masked_params = self.umama_small.get_masked_params(mask=mask)
+        self.assertEqual(
+            len(masked_params.keys()),
+            len(TEST_DICT.keys())
+        )
+        self.assertEqual(
+             len(masked_params['enzyme'].keys()), len(mask)
+        )
+        self.assertEqual(
+            list(sorted(masked_params['enzyme'].keys())), sorted(mask)
+        )
+
+
+
+
 if __name__ == '__main__':
     unittest.main()

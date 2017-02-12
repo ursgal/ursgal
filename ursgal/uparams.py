@@ -6,6 +6,7 @@ ursgal_params = {
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : "13312m",
         'description' :  ''' Set maximum Java heap size (used RAM) ''',
@@ -117,6 +118,7 @@ ursgal_params = {
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
             'qvality_2_02',
+            'sanitize_csv_1_0_0',
         ],
         'default_value' : None,
         'description' :  ''' Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality ''',
@@ -125,6 +127,7 @@ ursgal_params = {
             'add_estimated_fdr_style_1' : 'bigger_scores_better',
             'percolator_style_1' : 'bigger_scores_better',
             'qvality_style_1' : '-r',
+            'sanitize_csv_style_1' : 'bigger_scores_better',
         },
         'utag' : [
             'scoring',
@@ -170,6 +173,24 @@ ursgal_params = {
                 'xtandem_vengeance' : True,
             },
             'qvality_style_1' : {
+                'msamanda_1_0_0_5242' : True,
+                'msamanda_1_0_0_5243' : True,
+                'msamanda_1_0_0_6299' : True,
+                'msamanda_1_0_0_6300' : True,
+                'msamanda_1_0_0_7503' : True,
+                'msamanda_1_0_0_7504' : True,
+                'msgfplus_v2016_09_16' : False,
+                'msgfplus_v9979' : False,
+                'myrimatch_2_1_138' : True,
+                'myrimatch_2_2_140' : True,
+                'omssa_2_1_9' : False,
+                'xtandem_cyclone_2010' : True,
+                'xtandem_jackhammer' : True,
+                'xtandem_piledriver' : True,
+                'xtandem_sledgehammer' : True,
+                'xtandem_vengeance' : True,
+            },
+            'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
                 'msamanda_1_0_0_6299' : True,
@@ -349,6 +370,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3',
         ],
         'default_value' : "max - 1",
         'description' :  ''' Number of used cpus/threads ''',
@@ -359,6 +381,7 @@ ursgal_params = {
             'omssa_style_1' : '-nt',
             'ucontroller_style_1' : 'cpus',
             'xtandem_style_1' : 'spectrum, threads',
+            'kojak_style_1' : 'cpus',
         },
         'utag' : [
             'hardware_resources',
@@ -413,6 +436,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3',
         ],
         'default_value' : None,
         'description' :  ''' Path to database file containing protein sequences in fasta format ''',
@@ -420,10 +444,11 @@ ursgal_params = {
         'ukey_translation' : {
             'moda_style_1' : 'Fasta',
             'msamanda_style_1' : 'database',
-            'msgfplus_style_1' : '-d',
-            'myrimatch_style_1' : 'ProteinDatabase',
-            'omssa_style_1' : '-d',
             'unify_csv_style_1' : 'database',
+            'kojak_style_1' : 'database',
+            'msgfplus_style_1' : '-d',
+            'omssa_style_1' : '-d',
+            'myrimatch_style_1' : 'ProteinDatabase',
             'xtandem_style_1' : 'file URL',
         },
         'utag' : [
@@ -495,8 +520,10 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
+            'kojak_1_5_3'
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
@@ -507,6 +534,7 @@ ursgal_params = {
             'mzidentml_style_1' : '-decoyRegex',
             'unify_csv_style_1' : 'decoy_tag',
             'xtandem2csv_style_1' : 'decoy_tag',
+            'kojak_style_1' : 'decoy_tag',
         },
         'utag' : [
             'database',
@@ -678,6 +706,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : "trypsin",
         'description' :  ''' Enzyme: Rule of protein cleavage
@@ -705,21 +734,23 @@ ursgal_params = {
                 'trypsin'
                 'trypsin_chymotrypsin
                 'trypsin_cnbr'
-                'trypsin_p'
-                # Note not all search engines support all enzymes ! :) ''',
+                'trypsin_p',
+                'lysc_gluc',
+        ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'enzyme',
             'moda_style_1' : 'Enzyme',
-            'msamanda_style_1' : 'enzyme specificity',
-            'msgfplus_style_1' : '-e',
-            'myrimatch_style_1' : 'CleavageRules',
-            'novor_style_1' : 'enzyme',
-            'omssa_style_1' : '-e',
-            'pepnovo_style_1' : '-digest',
-            'percolator_style_1' : 'enzyme',
-            'unify_csv_style_1' : 'enzyme',
-            'xtandem_style_1' : 'protein, cleavage site',
+            'msamanda_style_1'              : 'enzyme specificity',
+            'msgfplus_style_1'              : '-e',
+            'myrimatch_style_1'             : 'CleavageRules',
+            'novor_style_1'                 : 'enzyme',
+            'omssa_style_1'                 : '-e',
+            'pepnovo_style_1'               : '-digest',
+            'percolator_style_1'            : 'enzyme',
+            'unify_csv_style_1'             : 'enzyme',
+            'xtandem_style_1'               : 'protein, cleavage site',
+            'kojak_style_1'                 : 'enzyme',
         },
         'utag' : [
             'database',
@@ -756,6 +787,7 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
+                'lysc_gluc' : 'DEK;C;P',
             },
             'moda_style_1' : {
                 'argc' : 'argc, R/C',
@@ -806,6 +838,7 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;after;P',
                 'trypsin_gluc' : 'DEKR;after;P',
                 'trypsin_p' : 'KR;after;',
+                'lysc_gluc' : 'DEK;after;P',
             },
             'msgfplus_style_1' : {
                 'alpha_lp' : '8',
@@ -884,6 +917,7 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
+                'lysc_gluc' : 'DEK;C;P',
             },
             'unify_csv_style_1' : {
                 'argc' : 'R;C;P',
@@ -908,6 +942,7 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
+                'lysc_gluc' : 'DEK;C;P',
             },
             'xtandem_style_1' : {
                 'argc' : '[R]|{P}',
@@ -934,7 +969,15 @@ ursgal_params = {
                 'trypsin_cnbr' : '[KR]|{P},[M]|{P}',
                 'trypsin_gluc' : '[DEKR]|{P}',
                 'trypsin_p' : '[RK]|[X]',
+                'lysc_gluc' : '[DEK]|[X]|{P}',
             },
+            'kojak_style_1' : {
+                'gluc'      : '[DE]|{P}',
+                'lysn'      : '|[K]',
+                'trypsin'   : '[KR]|{P}',
+                'trypsin_p' : '[RK]|',
+                'lysc_gluc' : '[DEK]|{P}',
+            } 
         },
         'uvalue_type' : "select",
     },
@@ -947,6 +990,26 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'filter_csv_converter_version',
+        },
+        'utag' : [
+            'converter_version',
+        ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'sanitize_csv_converter_version' : {
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : "sanitize_csv_1_0_0",
+        'description' :  ''' sanitize csv converter version: version name ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'sanitize_csv_converter_version',
         },
         'utag' : [
             'converter_version',
@@ -1398,16 +1461,18 @@ ursgal_params = {
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'kojak_percolator_2_08'
         ],
         'default_value' : None,
         'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'msamanda_style_1' : 'header_translations',
-            'msgfplus_style_1' : 'header_translations',
-            'novor_style_1' : 'header_translations',
-            'omssa_style_1' : 'header_translations',
-            'pepnovo_style_1' : 'header_translations',
+            'msamanda_style_1'      : 'header_translations',
+            'msgfplus_style_1'      : 'header_translations',
+            'novor_style_1'         : 'header_translations',
+            'omssa_style_1'         : 'header_translations',
+            'pepnovo_style_1'       : 'header_translations',
+            'kojak_percolator_style_1' : 'header_translations',
         },
         'utag' : [
             'Conversion',
@@ -1482,6 +1547,14 @@ ursgal_params = {
                 '[M+H]' : 'Calc mass(Da)',
                 'output_aa_probs' : 'Pepnovo:aaScore',
             },
+            'kojak_percolator_style_1' : {
+                'q-value'              : 'q-value',
+                'PSMId'                : 'PSMId',
+                'posterior_error_prob' : 'PEP',
+                'score'                : 'Kojak:score',
+                'peptide'              : 'Sequence',
+                'proteinIds'          : 'Protein ID'
+            },
         },
         'uvalue_type' : "",
     },
@@ -1503,6 +1576,63 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+    },
+    'heatmap_value_suffix' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : "_mean",
+        'description' :  ''' The suffix to identify the value columns, which should be plotted ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_value_suffix',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'heatmap_error_suffix' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : "_std",
+        'description' :  ''' The suffix to identify the value error holding columns ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_error_suffix',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'heatmap_column_order' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : [],
+        'description' :  ''' The plot order of the columns ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_column_order',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
     },
     'heatmap_box_style' : {
         'available_in_unode' : [
@@ -1665,6 +1795,7 @@ ursgal_params = {
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
             'novor_1_1beta',
+            'kojak_1_5_3'
         ],
         'default_value' : "q_exactive",
         'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
@@ -1673,6 +1804,7 @@ ursgal_params = {
             'moda_style_1' : 'Instrument',
             'msgfplus_style_1' : '-inst',
             'novor_style_1' : 'massAnalyzer',
+            'kojak_style_1' : 'instrument',
         },
         'utag' : [
             'instrument',
@@ -1703,6 +1835,12 @@ ursgal_params = {
                 'q_exactive' : 'FT',
                 'tof' : 'TOF',
             },
+            'kojak_style_1' : {
+                'high_res_ltq' : '0',
+                'low_res_ltq'  : '0',
+                'q_exactive'   : '0',
+                'FTICR'        : '1',
+            }
         },
         'uvalue_type' : "select",
     },
@@ -1847,6 +1985,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : 100,
         'description' :  ''' Maximum number of peaks from a spectrum used. ''',
@@ -1854,6 +1993,7 @@ ursgal_params = {
         'ukey_translation' : {
             'myrimatch_style_1' : 'MaxPeakCount',
             'xtandem_style_1' : 'spectrum, total peaks',
+            'kojak_style_1' : 'max_accounted_observed_peaks',
         },
         'utag' : [
             'MS2',
@@ -1885,6 +2025,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : 2,
         'description' :  ''' Maximum number of missed cleavages per peptide ''',
@@ -1893,8 +2034,9 @@ ursgal_params = {
             'moda_style_1' : 'MissedCleavage',
             'msamanda_style_1' : 'missed_cleavages',
             'myrimatch_style_1' : 'MaxMissedCleavages',
-            'omssa_style_1' : '-v',
-            'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
+            'omssa_style_1'     : '-v',
+            'xtandem_style_1'   : 'scoring, maximum missed cleavage sites',
+            'kojak_style_1'     : 'max_missed_cleavages',
         },
         'utag' : [
             'protein',
@@ -1958,6 +2100,7 @@ ursgal_params = {
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
+            'kojak_1_5_3'
         ],
         'default_value' : 3,
         'description' :  ''' Maximal number of modifications per peptide ''',
@@ -1965,6 +2108,7 @@ ursgal_params = {
         'ukey_translation' : {
             'msgfplus_style_1' : 'NumMods',
             'myrimatch_style_1' : 'MaxDynamicMods',
+            'kojak_style_1':'max_num_mods'
         },
         'utag' : [
             'modifications',
@@ -2407,6 +2551,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : [
             '*,opt,Prot-N-term,Acetyl',
@@ -2445,11 +2590,12 @@ Example:
             'msamanda_style_1' : 'modifications',
             'msgfplus_style_1' : '-mod',
             'myrimatch_style_1' : ('DynamicMods', 'StaticMods'),
-            'novor_style_1' : ('variableModifications', 'fixedModifications'),
-            'omssa_style_1' : ('-mv', 'mf'),
-            'pepnovo_style_1' : '-PTMs',
+            'novor_style_1'     : ('variableModifications', 'fixedModifications'),
+            'omssa_style_1'     : ('-mv', 'mf'),
+            'pepnovo_style_1'   : '-PTMs',
             'unify_csv_style_1' : 'modifications',
-            'xtandem_style_1' : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
+            'xtandem_style_1'   : ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone'),
+            'kojak_style_1'       : 'modifications'
         },
         'utag' : [
             'modifications',
@@ -2625,6 +2771,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : False,
         'description' :  ''' Compress mzidentml_lib output files ''',
@@ -2669,6 +2816,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : "exportPSMs",
         'description' :  ''' Defines which paramters shoul be exporte by mzidentml_lib ''',
@@ -2694,6 +2842,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : "Mzid2Csv",
         'description' :  ''' Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far ''',
@@ -2718,6 +2867,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : False,
         'description' :  ''' Include fragmentation in mzidentml_lib output ''',
@@ -2742,6 +2892,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : False,
         'description' :  ''' Verbose mzidentml_lib output ''',
@@ -3391,6 +3542,7 @@ Example:
             'myrimatch_2_2_140',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
             'novor_1_1beta',
             'omssa_style_1',
             'pepnovo_3_1',
@@ -3596,6 +3748,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : "0,1",
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
@@ -3607,6 +3760,7 @@ Example:
             'pepnovo_style_1' : '-correct_pm',
             'unify_csv_style_1' : 'precursor_isotope_range',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
+            'kojak_style_1' : 'precursor_isotope_range',
         },
         'utag' : [
             'precursor',
@@ -3634,6 +3788,11 @@ Example:
                 '0,1' : 'yes',
                 '0,2' : 'yes',
             },
+            'kojak_style_1' : {
+                '0' : '0',
+                '0,1' : '1',
+                '0,2' : '2',
+            },
         },
         'uvalue_type' : "select",
     },
@@ -3659,6 +3818,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
@@ -3668,11 +3828,12 @@ Example:
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
-            'novor_style_1' : 'precursorErrorTol',
-            'omssa_style_1' : '-te',
-            'pepnovo_style_1' : '-pm_tolerance',
+            'novor_style_1'     : 'precursorErrorTol',
+            'omssa_style_1'     : '-te',
+            'pepnovo_style_1'   : '-pm_tolerance',
             'unify_csv_style_1' : 'precursor_mass_tolerance_minus',
-            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
+            'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error minus',
+            'kojak_style_1'     : 'ppm_tolerance_pre'
         },
         'utag' : [
             'precursor',
@@ -3708,6 +3869,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : 5,
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
@@ -3717,11 +3879,12 @@ Example:
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
-            'novor_style_1' : 'precursorErrorTol',
-            'omssa_style_1' : '-te',
-            'pepnovo_style_1' : '-pm_tolerance',
+            'novor_style_1'     : 'precursorErrorTol',
+            'omssa_style_1'     : '-te',
+            'pepnovo_style_1'   : '-pm_tolerance',
             'unify_csv_style_1' : ' precursor_mass_tolerance_minus',
-            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error plus',
+            'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error plus',
+            'kojak_style_1'     : 'ppm_tolerance_pre'
         },
         'utag' : [
             'precursor',
@@ -3769,6 +3932,7 @@ Example:
             'omssa_style_1' : '-teppm',
             'pepnovo_style_1' : 'precursor_mass_tolerance_unit',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error units',
+
         },
         'utag' : [
             'precursor',
@@ -3889,6 +4053,7 @@ Example:
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
+            'kojak_1_5_3'
         ],
         'default_value' : 10000,
         'description' :  ''' Maximal parent ion mass ''',
@@ -3896,6 +4061,7 @@ Example:
         'ukey_translation' : {
             'myrimatch_style_1' : 'MaxPeptideMass',
             'xtandem_style_1' : 'spectrum, minimum parent m+h',
+            'kojak_style_1' : 'precursor_max_mass'
         },
         'utag' : [
             'precursor',
@@ -3950,6 +4116,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : 400,
         'description' :  ''' Minimal parent ion mass ''',
@@ -3957,6 +4124,7 @@ Example:
         'ukey_translation' : {
             'myrimatch_style_1' : 'MinPeptideMass',
             'xtandem_style_1' : 'spectrum, minimum parent m+h',
+            'kojak_style_1' : 'precursor_min_mass'
         },
         'utag' : [
             'precursor',
@@ -4120,6 +4288,108 @@ Example:
         'uvalue_translation' : {
         },
         'uvalue_type' : "select",
+    },
+    'score_diff_threshold' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Minimum score difference between the best PSM and the first rejected PSM of one spectrum, default: 0.01 ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'score_diff_threshold',
+        },
+        'utag' : [
+            'validation',
+            'scoring'
+        ],
+        'uvalue_option' : {
+            'max' : 1000,
+            'min' : 0,
+            'updownval' : 1,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'num_compared_psms' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Maximum number of PSMs (sorted by score, starting with the best scoring PSM) that are compared ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'num_compared_psms',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+            'max' : 100,
+            'min' : 1,
+            'updownval' : 1,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'accept_conflicting_psms' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : False,
+        'description' :  ''' If True, multiple PSMs for one spectrum can be reported if their score difference is below the threshold. If False, all PSMs for one spectrum are removed if the score difference between the best and secondbest PSM is not above the threshold, i.e. if there are conflicting PSMs with similar scores. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'accept_conflicting_psms',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'threshold_is_log10' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : True,
+        'description' :  ''' True, if log10 scale has been used for score_diff_threshold. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'threshold_is_log10',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'remove_redundant_psms' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : True,
+        'description' :  ''' If True, redundant PSMs (e.g. the same identification reported by multiple engined) for the same spectrum are removed. An identification is defined by the combination of 'Sequence', 'Modifications' and 'Charge'. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'remove_redundant_psms',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
     },
     'raw_ident_csv_suffix' : {
         'available_in_unode' : [
@@ -4311,15 +4581,17 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, a ions are used in algorithm ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'msamanda_style_1' : 'series',
+            'msamanda_style_1'  : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
-            'omssa_style_1' : '-i',
-            'xtandem_style_1' : 'scoring, a ions',
+            'omssa_style_1'     : '-i',
+            'xtandem_style_1'   : 'scoring, a ions',
+            'kojak_style_1'     : 'ion_series_A'
         },
         'utag' : [
             'scoring',
@@ -4335,6 +4607,10 @@ Example:
                 False : 'no',
                 True : 'yes',
             },
+            'kojak_style_1'  :{
+                True  : '1',
+                False : '0'
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -4377,6 +4653,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : True,
         'description' :  ''' Spectrum: if true, b ions are used in algorithm ''',
@@ -4386,6 +4663,7 @@ Example:
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, b ions',
+            'kojak_style_1'     : 'ion_series_B'
         },
         'utag' : [
             'scoring',
@@ -4401,6 +4679,10 @@ Example:
                 False : 'no',
                 True : 'yes',
             },
+            'kojak_style_1'  :{
+                True  : '1',
+                False : '0'
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -4420,6 +4702,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, c ions are used in algorithm ''',
@@ -4429,6 +4712,7 @@ Example:
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, c ions',
+            'kojak_style_1'     : 'ion_series_C'
         },
         'utag' : [
             'scoring',
@@ -4444,6 +4728,10 @@ Example:
                 False : 'no',
                 True : 'yes',
             },
+            'kojak_style_1'  :{
+                True  : '1',
+                False : '0'
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -4557,6 +4845,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, x ions are used in algorithm ''',
@@ -4566,6 +4855,7 @@ Example:
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, x ions',
+            'kojak_style_1'     : 'ion_series_X'
         },
         'utag' : [
             'scoring',
@@ -4581,6 +4871,10 @@ Example:
                 False : 'no',
                 True : 'yes',
             },
+            'kojak_style_1'  :{
+                True  : '1',
+                False : '0'
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -4600,6 +4894,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : True,
         'description' :  ''' Spectrum: if true, y ions are used in algorithm ''',
@@ -4609,6 +4904,7 @@ Example:
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, y ions',
+            'kojak_style_1'     : 'ion_series_Y'
         },
         'utag' : [
             'scoring',
@@ -4624,6 +4920,10 @@ Example:
                 False : 'no',
                 True : 'yes',
             },
+            'kojak_style_1'  :{
+                True  : '1',
+                False : '0'
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -4691,6 +4991,7 @@ Example:
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'kojak_1_5_3'
         ],
         'default_value' : False,
         'description' :  ''' Spectrum: if true, z ions are used in algorithm ''',
@@ -4700,6 +5001,7 @@ Example:
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
             'xtandem_style_1' : 'scoring, z ions',
+            'kojak_style_1'     : 'ion_series_Z'
         },
         'utag' : [
             'scoring',
@@ -4715,6 +5017,10 @@ Example:
                 False : 'no',
                 True : 'yes',
             },
+            'kojak_style_1'  :{
+                True  : '1',
+                False : '0'
+            }
         },
         'uvalue_type' : "bool",
     },
@@ -4983,7 +5289,7 @@ Example:
             'pepnovo_3_1',
         ],
         'default_value' : True,
-        'description' :  ''' Does not correct precusor charge. ''',
+        'description' :  ''' Does not correct precursor charge. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-use_spectrum_charge',
@@ -5110,6 +5416,7 @@ Example:
             'qvality_2_02',
             'ucontroller',
             'unify_csv_1_0_0',
+            'sanitize_csv_1_0_0'
         ],
         'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator. If None is defined, default values are used ''',
@@ -5120,6 +5427,7 @@ Example:
             'qvality_style_1' : 'validation_score_field',
             'ucontroller_style_1' : 'validation_score_field',
             'unify_csv_style_1' : 'validation_score_field',
+            'sanitize_csv_style_1' : 'validation_score_field',
         },
         'utag' : [
             'validation',
@@ -5168,6 +5476,26 @@ Example:
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
             },
             'qvality_style_1' : {
+                'msamanda_1_0_0_5242' : 'Amanda:Score',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msamanda_1_0_0_6299' : 'Amanda:Score',
+                'msamanda_1_0_0_6300' : 'Amanda:Score',
+                'msamanda_1_0_0_7503' : 'Amanda:Score',
+                'msamanda_1_0_0_7504' : 'Amanda:Score',
+                'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'myrimatch_2_2_140' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
+                'omssa_2_1_9' : 'OMSSA:pvalue',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
+                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
+                'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
+                'xtandem_piledriver' : 'X\!Tandem:hyperscore',
+                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
+                'xtandem_vengeance' : 'X\!Tandem:hyperscore',
+            },
+            'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msamanda_1_0_0_6299' : 'Amanda:Score',
@@ -5472,5 +5800,395 @@ Example:
             },
         },
         'uvalue_type' : "bool",
+    },
+    'kojak_percolator_version' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : '2.08',
+        'description' :  ''' Defines the output format of Kojak for Percolator ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_percolator_version'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'kojak_export_percolator' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 1,
+        'description' :  ''' Activate (1) or deactivate (0) output for percolator ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_export_percolator'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_export_pepXML' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 1,
+        'description' :  ''' Activate (1) or deactivate (0) output as pepXML ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_export_pepXML'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_enrichment' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  '''Values between 0 and 1 to describe 18O APE 
+        For example, 0.25 equals 25 APE''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_enrichment'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_MS1_centroid' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  '''MS1 centroided data yes (1) or no (0)''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_MS1_centroid'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_MS2_centroid' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 1,
+        'description' :  '''MS2 centroided data yes (1) or no (0)''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_MS2_centroid'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_MS1_resolution' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 30000,
+        'description' :  '''MS1 resolution''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_MS1_resolution'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_MS2_resolution' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 25000,
+        'description' :  '''MS2 resolution''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_MS2_resolution'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'cross_link_definition' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 'nK  nK  138.0680742 BS3',
+        'description' :  '''Cross-link and mono-link masses allowed. 
+            May have more than one of each parameter.
+            Format for cross_link is: 
+                [amino acids] [amino acids] [mass mod] [identifier]
+            One or more amino acids (uppercase only!!) can be specified for 
+            each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
+            N-terminus or C-terminus''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'cross_link_definition'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'mono_link_definition' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 'nK  156.0786',
+        'description' :  '''Cross-link and mono-link masses allowed. 
+            May have more than one of each parameter.
+            Format for mono_link is:
+                [amino acids] [mass mod]
+            One or more amino acids (uppercase only!!) can be specified for 
+            each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
+            N-terminus or C-terminus''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'mono_link_definition'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'kojak_diff_mods_on_xl' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  '''To search differential modifications on cross-linked 
+        peptides: diff_mods_on_xl = 1''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_diff_mods_on_xl'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_mono_links_on_xl' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  '''To search for mono-linked cross-linker on
+        cross-linked peptides: mono_links_on_xl = 1''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_mono_links_on_xl'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_fragment_bin_offset' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0.4,
+        'description' :  ''' fragment_bin_offset and fragment_bin_size
+            influence algorithm precision and memory usage.
+            They should be set appropriately for the data analyzed.
+            For ion trap ms/ms:  1.0005 size, 0.4 offset
+            For high res ms/ms:    0.03 size, 0.0 offset''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_fragment_bin_offset'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'kojak_fragment_bin_size' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 1.005,
+        'description' :  ''' fragment_bin_offset and fragment_bin_size
+            influence algorithm precision and memory usage.
+            They should be set appropriately for the data analyzed.
+            For ion trap ms/ms:  1.0005 size, 0.4 offset
+            For high res ms/ms:    0.03 size, 0.0 offset''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_fragment_bin_size'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'kojak_prefer_precursor_pred' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 2,
+        'description' :  '''prefer precursor mono mass predicted by 
+        instrument software. 
+          0 = ignore previous predictions
+          1 = use only previous predictions
+          2 = supplement predictions with additional analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_prefer_precursor_pred'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'kojak_spectrum_processing' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  '''0=no, 1=yes''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_spectrum_processing'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_top_count' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 300,
+        'description' :  '''number of top scoring single peptides to combine 
+            in relaxed analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_top_count'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_truncate_prot_names' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  '''Max protein name character to export, 0=off''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_truncate_prot_names'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_turbo_button' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  '''Generally speeds up analysis. Special cases cause reverse
+            effect, thus this is allowed to be disabled. 0=off''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1': 'kojak_turbo_button'
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
     },
 }

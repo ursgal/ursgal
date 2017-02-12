@@ -62,7 +62,7 @@ class myrimatch_2_1_138( ursgal.UNode ):
             self.print_info(
                 ('Since MyriMatch cannot read MGF input files, the '
                  'corresponding mzML file {0} will be used instead.'
-                ).format( os.path.relpath(self.params['translations']['mzml_input_file']) ),
+                ).format( os.path.abspath(self.params['translations']['mzml_input_file']) ),
                 caller="INFO" )
         else:
             raise Exception('MyriMatch input spec file must be in mzML format!')
