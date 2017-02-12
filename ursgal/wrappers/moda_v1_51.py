@@ -49,8 +49,8 @@ class moda_v1_51( ursgal.UNode ):
         '''
 
         translations = self.params['translations']['_grouped_by_translated_key']
-        import pprint
-        pprint.pprint(translations)
+        # import pprint
+        # pprint.pprint(translations)
         # exit(1)
 
         self.params['translations']['params_input_file'] = os.path.join(
@@ -133,6 +133,7 @@ class moda_v1_51( ursgal.UNode ):
         else:
             translations['FragTolerance'] = \
                 translations['FragTolerance']['frag_mass_tolerance']
+                
         for translated_key, translation_dict in translations.items():
             if translated_key == '-Xmx':
                 self.params[ 'command_list' ].insert(1,'{0}{1}'.format(
