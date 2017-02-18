@@ -96,6 +96,9 @@ Default parameters are collected from uparams.py using this name (see below).
 The special methods `preflight()` and `postflight()` are automatically called
 by Ursgal's UController when a UNode is launched.
 
+
+.. _metainfo:
+
 The META INFO
 ^^^^^^^^^^^^^
 
