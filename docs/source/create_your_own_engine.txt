@@ -21,7 +21,7 @@ executable.
 
 Note:
     The UNodes' **resources/** subfolder, **engine/** class and **kb/** file should all have the same name
-    (lowercase and underscores instead of spaces, i.e. 'msgfplus_v9979' or 'filter_csv_1_0_0').
+    (lowercase and underscores instead of spaces, e.g. 'msgfplus_v9979' or 'filter_csv_1_0_0').
 
 
     #. Platfom dependent engines need to be placed according to the platform:
@@ -167,15 +167,15 @@ The default structure of the UNode class has to be::
 
         def preflight(self):
             # code that should be run before the UNode is executed
-            # i.e. writing a config file
+            # e.g. writing a config file
             return
 
         def postflight(self):
             # code that should be run after the UNode is executed
-            # i.e. formatting the output file
+            # e.g. formatting the output file
             return
 
-where `my_unode_1_0_0` is the name of the UNode. The META_INFO is explained here **insert link** and is available as attribute of each UNode.
+where `my_unode_1_0_0` is the name of the UNode. The META_INFO is explained :ref:`here<metainfo>` and is available as attribute of each UNode.
 One can define `preflight()` and `postflight()` methods that will be executed by the uNode during preflight and postflight
 (= before execution of the main executable and after execution).
 
