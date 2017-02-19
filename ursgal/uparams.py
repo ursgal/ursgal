@@ -1,4 +1,72 @@
 ursgal_params = {
+        'svm_c_param' : {
+        'available_in_unode' : [
+            'svm_1_0_0',
+        ],
+        'default_value' : 1.0,
+        'description' :  ''' Penalty parameter C of the error
+    term of the post-processing SVM. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'svm_style_1' : 'c',
+        },
+        'utag' : [
+            'validation',
+            'statistics',
+            'scoring',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+        'fdr_cutoff' : {
+        'available_in_unode' : [
+            'svm_1_0_0',
+        ],
+        'default_value' : 0.01,
+        'description' :  ''' Target PSMs with a lower FDR than
+    this threshold will be used as a positive training set for
+    SVM post-processing. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'svm_style_1' : 'fdr_cutoff',
+        },
+        'utag' : [
+            'validation',
+            'statistics',
+            'scoring',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'kernel' : {
+        'available_in_unode' : [
+            'svm_1_0_0',
+        ],
+        'default_value' : 'rbf',
+        'description' :  ''' The kernel function of the support
+    vector machine used for PSM post-processing ("rbf", "linear",
+    "poly" or "sigmoid"). ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'svm_style_1' : 'kernel',
+        },
+        'utag' : [
+            'validation',
+            'statistics',
+            'scoring',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     '-xmx' : {
         'available_in_unode' : [
             'msgfplus2csv_v2016_09_16',
