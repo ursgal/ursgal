@@ -43,16 +43,18 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         self.time_point(tag = 'execution')
         add_fdr_main = self.import_engine_as_python_function()
         if self.params['input_file'].lower().endswith('.csv') is False:
-            raise ValueError('add_estimated_fdr_1 input file must be a CSV file!')
+            raise ValueError('add_estimated_fdr_1_0_0 input file must be a CSV file!')
 
-
-
-        last_search_engine = self.get_last_search_engine(
-            history = self.stats['history']
-        )
-        assert last_search_engine or (
-            'validation_score_field' in self.params and 
-            'bigger_scores_better' in self.params), '''
+        # if the user specified a specific score to use for FDR estimation, use that:
+        if self.params['validation_score_field'] is not None and self.params['bigger_scores_better'] is not None:
+            score_field = self.params['validation_score_field']
+            bigger_is_better = self.params['bigger_scores_better']
+        # otherwise, estimate the FDR based on the score of the last search engine:
+        else:
+            last_search_engine = self.get_last_search_engine(
+                history = self.stats['history']
+            )
+            assert last_search_engine, '''
   Could not detect which search engine produced the input file.
   "add_estimated_fdr" requires a quality criterion (score) to calculate estimated FDRs.
   Please make sure your input file has a proper ursgal u.json file, or define the
@@ -60,8 +62,12 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
   >>> uc.params['validation_score_field'] = 'my_score_column'
   >>> uc.params['bigger_scores_better'] = False  # or True!
         '''
-        score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_search_engine]
-        bigger_is_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][last_search_engine]
+            print('Estimating FDR based on the raw "{}" scores since '
+                '"validation_score_field" and "bigger_scores_better" '
+                'were not manually specified in the UController.params.'.format(
+                    last_search_engine))
+            score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_search_engine]
+            bigger_is_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][last_search_engine]
 
         output_file = os.path.join(
                 self.params['output_dir_path'],

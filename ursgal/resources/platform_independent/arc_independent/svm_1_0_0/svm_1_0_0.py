@@ -6,12 +6,9 @@
     i.e. :
         svm.py omssa_2_1_6_unified.csv 'OMSSA:pvalue'
 
-    Writes a new file with added column self._prob_name which is the
-    estimated probability of a PSM to be false positive (in %), as estimated
-    with a Percolator-like support vector machine.
+    Writes a new file with added column "SVMscore" which is the distance to
+    the separating hyperplane of a Percolator-like support vector machine.
 '''
-from pprint import pprint
-
 import numpy as np
 import sklearn
 from sklearn import svm
@@ -21,11 +18,9 @@ from collections import Counter, defaultdict
 from random import random
 from pymzml.spec import Spectrum
 import csv
-import sys
+import re
 import os
 import argparse
-#import PeptideFragmentor
-#import ursgal
 import time
 import itertools
 import shelve
@@ -36,31 +31,14 @@ from misc import get_score_colname_and_order, field_to_float, naive_bayes, unify
 
 
 
-#IN_PATH = args['input_csv']
-#if len(IN_PATH) == 1:
-    #MULTI_MODE = False
-#else:
-    #MULTI_MODE = True
-#OUT_PATH = args['output_csv']
-#KERNEL = args['kernel']  # percolator uses linear kernel that yields good results at all possible FDR cutoffs.
-           ## rbf kernel seems to be better at low FDR cutoffs (around 0.01), but linear is better when using high cutoffs (i.e. 0.3)
-#C = args['c']  # this thing might do something important but I have no idea, 1 seems to be good
-#self['fdr_cutoff'] = args['self['fdr_cutoff']']  # 0.01 works well (for humanBR omssa/xtandem/msgfplus results at least...)
-#self['bigger_scores_better'] = args.get('self['bigger_scores_better']', False)
-#self['columns_as_features'] = args['columns_as_features']
-#self['mb_ram'] = args['self['mb_ram']']
 
-
-
-SCALER = sklearn.preprocessing.RobustScaler()  # RobustScaler() seems to be most robust, duh
+SCALER = sklearn.preprocessing.RobustScaler()  # RobustScaler() seems to be most robust ;)
 PROTON = 1.00727646677
 
 
 class SVMWrapper(dict):
-
-
     def __init__(self):
-        self._prob_name = 'SVMProb'
+        self._svm_score_name = 'SVMscore'
         self.counter = {  # counting the # of possible training PSMs
             'target': 0,
             'decoy': 0,
@@ -84,16 +62,8 @@ class SVMWrapper(dict):
         self.used_extra_fields = set()
         self.decoy_train_prob = None  # probability to include decoy PSMs as negative training examples
         self.maximum_proteins_per_line = 0
-
-        if self.get('count_frag_ions', False):
-            frag_ion_shelve_dir = os.path.dirname(os.path.realpath(__file__))
-            frag_ion_shelve_path = os.path.join(
-                frag_ion_shelve_dir,
-                hash_input_filenames(self['count_frag_ions']) + '.shelve'
-            )
-            print('Opening frag ion shelve', frag_ion_shelve_path)
-            self.frag_ion_shelve = shelve.open(frag_ion_shelve_path, writeback=True)
-            #self.frag_ion_shelve = {}
+        self.tryptic_aas = set(['R', 'K', '-'])
+        self.delim_regex = re.compile(r'<\|>|\;')  # regex to split a line by both ";" and "<|>"
         return
 
 
@@ -116,7 +86,7 @@ class SVMWrapper(dict):
             help='Penalty parameter C of the error term')
         parser.add_argument(
             '-g', '--gamma', type=str, default='auto',
-            help='Penalty parameter C of the error term')
+            help='Gamma parameter of the SVM.')
         parser.add_argument(
             '-r', '--mb_ram', type=float, default=4000,
             help='Available RAM in megabytes, for SVM calculation')
@@ -137,25 +107,20 @@ class SVMWrapper(dict):
             ],
             help='Columns that should be used as a feature directly '\
                 '(e.g. secondary scores). Will be converted to float')
-        #parser.add_argument(
-        #    '-cf', '--count_frag_ions', type=str, nargs='+', required=False,
-        #    help='Compare theoretical and observed fragment ions and derived '\
-        #         'features. Requires specification of one of more MGF files.')
         parser.add_argument(
             '-d', '--dump_svm_matrix', type=str, default=False,
             help='Dump SVM matrix in PIN format to the specified path.')
 
         arg_dict = vars(parser.parse_args())  # convert to dict
         self.update(arg_dict)
-        if len(self['input_csv']) == 1:
-            self['multi_mode'] = False
-        else:
-            self['multi_mode'] = True
+        if len(self['input_csv']) > 1:
+            raise NotImplementedError('Multi-mode not implemented yet, sorry!')
+        self['multi_mode'] = False
         try:
             self['gamma'] = float(self['gamma'])
         except ValueError:
             assert self['gamma'] == 'auto', 'Invalid gamma param: '\
-                '{0}'.format(self['gamma'])
+                '"{0}", using "auto" instead.'.format(self['gamma'])
 
 
     def set_input_csv(self):
@@ -225,131 +190,6 @@ class SVMWrapper(dict):
         return
 
 
-    def buffer_mgf(self, mgf_path, precision=10e-5):  #10e-6
-        self.mgf_precision = precision
-        print('Buffering MGF file {0} (precision: {1})'.format(mgf_path, precision))
-        with open(mgf_path, 'r') as mgf:
-            for line in mgf:
-                if line.startswith('TITLE='):
-                    peak_list = []
-                    #spec_id = int(line.strip().split('.')[-2])
-                    spec_id = line.strip().split('=')[-1]
-                    #spec_id_2 = int(line.strip().split('.')[-3])
-                    #assert spec_id == spec_id_2, 'MGF specID1 != specID2: ' + spec_id + ' & ' + spec_id_2
-                elif 'END IONS' in line:
-                    #self.mgf_lookup[spec_id] = pymzml.spec.Spectrum(measuredPrecision=precision)
-                    #self.mgf_lookup[spec_id].peaks = peak_list
-                    self.mgf_lookup[spec_id] = peak_list
-                else:
-                    try:
-                        mz, intensity = [float(val) for val in line.split()]
-                    except ValueError:
-                        continue
-                    peak_list.append(
-                        (mz, intensity)
-                    )
-                    
-    
-
-    def predict_ions(self, peptide):
-        if peptide in self.pep_to_mz:
-            # read peptide from buffer, if previously calculated
-            ions_to_mz = self.pep_to_mz[peptide]
-        else:
-            ions_to_mz = defaultdict(set)
-            frags = PeptideFragmentor.the_all_new_pf(
-                peptide, cc_factory=self._chemical_composition
-            )
-            for ion_type_subdict in frags.values():
-                for ion_subdict in ion_type_subdict.values():
-                    try:
-                        ion_letter = ion_subdict['type']
-                        ion_pos = str(ion_subdict['pos'])
-                        ion_type = ion_letter + ion_pos
-                    except KeyError:
-                        continue
-                    ions_to_mz[ion_type].add(ion_subdict['mz'])
-            self.pep_to_mz[peptide] = ions_to_mz
-        return ions_to_mz
-
-    '''
-    # same as above, but using the old PeptideFragmentor
-    # it's faster, but cannot handle UniMod
-    def predict_ions(self, peptide):
-        if peptide in self.pep_to_mz:
-            ions_to_mz = self.pep_to_mz[peptide]
-        else:
-            ions_to_mz = defaultdict(set)
-            frags = PeptideFragmentor.PeptideFragmentator(
-                peptide.split("#")[0]
-            )[0]
-            for ion_name, theoretical_mz in frags.items():
-                ion_letter = ion_name[0]
-                ions_to_mz[ion_letter].add(theoretical_mz[0])
-            self.pep_to_mz[peptide] = ions_to_mz
-        return ions_to_mz
-    '''
-
-    '''
-    def __OLD_match_frag_ions(self, peptide, spec_id):
-        theoretical_ions = self.predict_ions(peptide)
-        observed_peaks = self.mgf_lookup[spec_id]
-        observed_spec = Spectrum(measuredPrecision=self.mgf_precision)
-        observed_spec.peaks = observed_peaks
-
-        ion_stats = {'a': [0, 0], 'b': [0, 0], 'y': [0, 0], 'MH': [0, 0]}
-
-        for ion_letter, possible_mzs in theoretical_ions.items():
-            for mz in possible_mzs:
-
-                ion_found = bool(observed_spec.hasPeak(mz)) #  using pymzml
-
-                ion_stats[ion_letter][1] += 1
-                if ion_found:
-                    ion_stats[ion_letter][0] += 1
-        return ion_stats
-    '''
-
-
-    def match_frag_ions(self, peptide, spec_id):
-        psm_str = '&'.join([peptide, str(spec_id)])  # for shelving
-        if psm_str in self.frag_ion_shelve:
-            # load frag-ion-match from shelve if it's already there
-            matched_ions, max_i = self.frag_ion_shelve[psm_str]
-        else:
-            # compute frag-ion-match if not found in shelve:
-            theoretical_ions = self.predict_ions(peptide)
-            observed_peaks = self.mgf_lookup[spec_id]
-            observed_spec = Spectrum(measuredPrecision=self.mgf_precision)
-            observed_spec.peaks = observed_peaks
-
-            max_i = sum(observed_spec.i)
-            matched_ions = {}
-
-            for ion_type, theoretical_mzs in theoretical_ions.items():
-                matched_ions[ion_type] = []
-                for theo_mz in theoretical_mzs:
-
-                    observed_mz_int = observed_spec.hasPeak(theo_mz)  #  using pymzml
-                    if observed_mz_int:  # if the peak was found
-                        matched_ions[ion_type].append(observed_mz_int[0][1])
-
-            # dump frag-ion-match to shelve:
-            self.frag_ion_shelve[psm_str] = (matched_ions, max_i)
-        return matched_ions, max_i
-
-    '''
-    def has_peak(self, theoretical_mz, observed_spec_dict):
-        intensity = Nonect
-        accepted_mz_values_within_error = \
-            self.get_surrounding_transformed_mz_set(theoretical_mz)
-        for theo_t_mz in accepted_mz_values_within_error:
-            if theo_t_mz in observed_spec_dict:
-                intensity = observed_spec_dict[theo_t_mz]
-                break
-        return intensity
-    '''
-
     def determine_csv_sorting(self):
         if self.get('multi_mode', False):
             self['bigger_scores_better'] = False
@@ -359,8 +199,8 @@ class SVMWrapper(dict):
                 reader = csv.DictReader(in_file)
                 self.col_for_sorting, self['bigger_scores_better'] = \
                     get_score_colname_and_order(reader.fieldnames)
-            if self.col_for_sorting == self._prob_name:
-                self._prob_name = self._prob_name + '2'
+            if self.col_for_sorting == self._svm_score_name:
+                self._svm_score_name = self._svm_score_name + '2'
 
         print('CSV will be sorted by column {0} (reverse={1}'\
               ')'.format(self.col_for_sorting, self['bigger_scores_better']))
@@ -377,34 +217,16 @@ class SVMWrapper(dict):
         spec_title = rowdict['Spectrum Title']
         return (spec_title, score)
 
-
-    ''' possibly not required with the new unified CSV format
+    
     @staticmethod
-    def parse_protein_ids(acc):
-        # Turns the unified CSV column "Protein ID" into
-        # the protein accession.
-        acc_clean = acc.replace('decoy_', '').strip()
-        #if '<|>' in acc:
-        sep = '<|>'
-        #else:
-            #sep = ';'  # backwards compatability
-        accessions = acc_clean.split(sep)
-        # remove the _start_stop_pre_post; because it's not part of the proteinID:
-        protein_IDs = set()
-        for a in accessions:
-            pid = []
-            for e in a.split('_'):
-                if len(e.strip()) <=1:
-                    continue
-                try:
-                    __ = float(e)
-                except ValueError:
-                    pid.append(e)
-            protein_IDs.add(''.join(pid))
-        protein_IDs.discard('')
-        assert len(protein_IDs) >= 1, 'Could not determine protein IDs: {0}'.format(acc)
-        return protein_IDs
-    '''
+    def parse_protein_ids(csv_field, sep='<|>'):
+        '''
+        Turns the unified CSV column "Protein ID"
+        into a set of all protein IDs.
+        '''
+        clean = csv_field.replace('decoy_', '').strip()
+        prot_id_set = set(clean.split(sep))
+        return prot_id_set
 
 
     def count_intra_set_features(self):
@@ -501,24 +323,27 @@ class SVMWrapper(dict):
         #calc_mz = field_to_float( row['Calc m/z'] )  # calc m/z or uCalc?
         #exp_mz = field_to_float( row['Exp m/z'] )
 
-        proteinacc = row['proteinacc_start_stop_pre_post_;'].split('_')
-        pre_aa = proteinacc[-2]
-        post_aa = proteinacc[-1]
-        if pre_aa in ['R', 'K', '-']:
-            enzN = 1
-        else:
-            enzN = 0
-        if sequence[-1] in ['R', 'K'] or post_aa == '-':
-            enzC = 1
-        else:
-            enzC = 0
+        pre_aa_field = row['Sequence Pre AA']
+        post_aa_field = row['Sequence Post AA']
+        all_pre_aas = set(re.split(self.delim_regex, pre_aa_field))
+        all_post_aas = set(re.split(self.delim_regex, post_aa_field))
 
-        n_missed_cleavages = len([aa for aa in sequence[:-1] if aa in ['R', 'K']])# / len(sequence)
+        if any(pre_aa not in self.tryptic_aas for pre_aa in all_pre_aas):
+            enzN = 0
+        else:
+            enzN = 1
+
+        if any(post_aa not in self.tryptic_aas for post_aa in all_post_aas):
+            enzC = 0
+        else:
+            enzC = 1
+
+        n_missed_cleavages = len([aa for aa in sequence[:-1] if aa in ['R', 'K']])  # / len(sequence)
 
         missed_cleavages = [0] * 6
         try:
             missed_cleavages[n_missed_cleavages] = 1
-        except IndexError:  # if a peptide has more than 10 missed cleavages
+        except IndexError:  # if a peptide has more than 6 missed cleavages
             missed_cleavages[-1] = 2
 
         spectrum = row['Spectrum Title'].strip()
@@ -530,7 +355,7 @@ class SVMWrapper(dict):
         peptide = (sequence, row['Modifications'])
         psm = (peptide, spectrum)
         proteins = self.parse_protein_ids(
-            row['proteinacc_start_stop_pre_post_;']
+            row['Protein ID']
         )
         num_pep = self.num_pep[peptide]
         pep_charge_states = len(self.pep_charge_states[peptide])
@@ -613,75 +438,7 @@ class SVMWrapper(dict):
         for charge_n in self.observed_charges:
             features.append(charges[charge_n])
 
-        ion_features = []
-        if self['count_frag_ions']:
-            # time estimation:
-            if not hasattr(self, 'start_time'):
-                self.start_time = time.time()
-                elapsed_time = 'N/A'
-                psms_per_sec = 0
-            else:
-                elapsed_time = time.time() - self.start_time
-                psms_per_sec = self.counter['parsed PSMs'] / elapsed_time
-            self.counter['parsed PSMs'] += 1
-
-            matched_ions, max_i = self.match_frag_ions(
-                peptide='#'.join(peptide),
-                spec_id=spectrum,
-            )
-            # sum up all the matched ion intensities:
-            explained_i = sum(itertools.chain(*list(matched_ions.values())))
-            i_ratio = explained_i / max_i
-            ion_features.append(i_ratio)
-
-            ion_features.append(
-                count_ion_partners(matched_ions, pep_len) / pep_len
-            )
-
-            ion_dict = {}
-            for ion_letter in ('a', 'b', 'y', 'M', 'all'):
-                ion_dict[ion_letter] = {
-                    'count': 0,
-                    'total': 0,
-                }
-
-            for ion_type, intensities in matched_ions.items():
-                ion_letter = ion_type[0]
-                ion_dict[ion_letter]['total'] += 1
-                ion_dict['all']['total'] += 1
-                if intensities:
-                    ion_dict[ion_letter]['count'] += 1
-                    ion_dict['all']['count'] += 1
-
-            for ion_letter in ('a', 'b', 'y', 'M', 'all'):
-                try:
-                    ion_dict[ion_letter]['ratio'] = \
-                        ion_dict[ion_letter]['count'] / ion_dict[ion_letter]['total']
-                except ZeroDivisionError:
-                    ion_dict[ion_letter]['ratio'] = np.nan
-
-                #ion_features.append(ion_dict[ion_letter]['count'])
-                ion_features.append(ion_dict[ion_letter]['ratio'])
-
-            #if self.counter['parsed PSMs'] % 1000 == 0:
-                #ion_stat_str = '''PSM {psm_n} of {psm_total} ({psm_per_s:.3f} per second):
-
-#Explained intensity: {i_ratio:.3f}% ({i_x:.3f} of {i_t:.3f})
-#Matched ions:
-    #a-ions:  {d[a][ratio]:.3f} ({d[a][count]: >3} of {d[a][total]: >3})
-    #b-ions:  {d[b][ratio]:.3f} ({d[b][count]: >3} of {d[b][total]: >3})
-    #y-ions:  {d[y][ratio]:.3f} ({d[y][count]: >3} of {d[y][total]: >3})
-    #MH-ions: {d[M][ratio]:.3f} ({d[M][count]: >3} of {d[M][total]: >3})
-#all ions:    {d[all][ratio]:.3f} ({d[all][count]: >3} of {d[all][total]: >3})
-                #'''.format(
-                    #i_ratio=i_ratio, i_t=max_i, i_x=explained_i,
-                    #d=ion_dict, psm_n=self.counter['parsed PSMs'],
-                    #psm_total=self.counter['target'] + self.counter['decoy'],
-                    #psm_per_s=psms_per_sec
-                #)
-                #print(ion_stat_str)
-
-        return features + ion_features + user_specified_features
+        return features + user_specified_features
 
 
     def collect_data(self):
@@ -719,8 +476,10 @@ class SVMWrapper(dict):
                 categories.append(category)
 
                 if self['dump_svm_matrix']:
+                    raise NotImplementedError('"--dump_svm_matrix" it not yet updated '
+                        'to the new unify CSV format!')
                     label = -1 if row_is_decoy(row) else 1
-                    splitted = row['proteinacc_start_stop_pre_post_;'].strip().split('_')
+                    splitted = row['Protein ID'].strip().split('_')
                     pre_aa = splitted[-2]
                     post_aa = splitted[-1]
                     sequence = '{0}.{1}#{2}.{3}'.format(
@@ -734,7 +493,7 @@ class SVMWrapper(dict):
                         'label': label,
                         'scannr': row['Spectrum Title'].strip().split('.')[-2],
                         'peptide': sequence,
-                        'proteins': self.parse_protein_ids(row['proteinacc_start_stop_pre_post_;']),
+                        'proteins': self.parse_protein_ids(row['Protein ID']),
                     })
 
                 if i % 1000 == 0:
@@ -786,8 +545,6 @@ class SVMWrapper(dict):
         from misc import FEATURE_NAMES
         colnames = ['PSMId', 'label', 'scannr'] + FEATURE_NAMES
         colnames += ["charge{0}".format(c) for c in self.observed_charges]
-        if self['count_frag_ions']:
-            colnames += ["i_ratio", "a_ratio", "b_ratio", "y_ratio", "MH_ratio"]
         for extra_field in sorted(self.used_extra_fields):
             colnames += [extra_field]
         colnames += ['peptide']
@@ -868,7 +625,7 @@ class SVMWrapper(dict):
         classifier = svm.SVC(
             C           = self['c'],
             kernel      = self['kernel'],
-            probability = True,  # we want to get probabilities later on
+            probability = False,  # we don't want to get probabilities later on -> faster
             cache_size  = self['mb_ram'],  # available RAM in megabytes
             #decision_function_shape = 'ovr',  # doesn't seem to matter
             #class_weight= 'balanced',  # doesn't seem to matter
@@ -886,21 +643,22 @@ class SVMWrapper(dict):
         msg = 'Classifying {0} PSMs...'.format(len(psm_matrix))
         print(msg, end = '\r')
         for i, row in enumerate(psm_matrix):
-            prob = classifier.predict_proba(np.array([row]))[0][0]*100  # multiply by 100 to get longer floats?
+            #prob = classifier.predict_proba(np.array([row]))[0][0]*100  # multiply by 100 to get longer floats?
+            svm_score = classifier.decision_function(np.array([row]))[0]
 
             category = psm_categories[i]
 
             features = tuple(row)
             if features not in self.results:
-                self.results[features] = prob
+                self.results[features] = svm_score
             else:
                 print(
                     'Warning! This combination of features already has a predicted probability! '\
-                    'Previous prob: {0:f} - Current prob: {1:f}'\
-                    ''.format( self.results[tuple(row)], prob )
+                    'Previous svm_score: {0:f} - Current svm_score: {1:f}'\
+                    ''.format( self.results[tuple(row)], svm_score )
                 )
-                # take the mean value, no idea how to handle this better, but it happens super rarely anyways...
-                self.results[features] = (self.results[features] + prob)/2.0
+                # take the mean value, no idea how to handle this better, but it never happened so far...
+                self.results[features] = (self.results[features] + svm_score) / 2.0
         print(msg + ' done!')
         return
 
@@ -910,17 +668,17 @@ class SVMWrapper(dict):
 
         with open(self['output_csv'], 'w', newline='') as out_csv, open(self.csv_path, 'r') as in_csv:
             reader = csv.DictReader(in_csv)
-            writer = csv.DictWriter(out_csv, reader.fieldnames + [self._prob_name])
+            writer = csv.DictWriter(out_csv, reader.fieldnames + [self._svm_score_name])
             writer.writeheader()
             for i, row in enumerate(reader):
                 if i % 1000 == 0:
                     print(msg.format(os.path.basename(self['output_csv']), i), end='\r')
-                features = self.nan_replacer.transform( np.array([ self.row_to_features(row) ]) )
+                features = self.nan_replacer.transform(
+                    np.array([ self.row_to_features(row) ])
+                )
                 features_scaled = tuple(list(self.scaler.transform(features)[0]))
-                SVMProb = self.results[features_scaled]
-                #if SVMProb >= 0.05:  # filtering output csv
-                    #continue
-                row[self._prob_name] = SVMProb
+                SVMScore = self.results[features_scaled]
+                row[self._svm_score_name] = SVMScore
                 writer.writerow(row)
         print('\n')
         return
@@ -937,17 +695,9 @@ class SVMWrapper(dict):
 
 
 if __name__ == '__main__':
-
-    #MGF_PATH = '/media/plan-f/mzML/Lukas_Kremer/pypercolator_testing/humanBR/120813OTc1_NQL-AU-0314-LFQ-LCM-SG-02_025.mgf'
-    #MGF_PATH = '/media/plan-f/mzML/Lukas_Kremer/pypercolator_testing/technical_rep1/qExactive00189.mgf'
-
     s = SVMWrapper()
 
     print(s)  # print parameter/settings overview
-
-    if s.get('count_frag_ions', False):
-        for mgf_path in s['count_frag_ions']:
-            s.buffer_mgf(mgf_path)
 
     s.determine_csv_sorting()
     s.find_shitty_decoys()
@@ -984,7 +734,7 @@ if __name__ == '__main__':
             s.categories[test_index]
         )
         if s['kernel'].lower() == 'linear':
-            print()
+            print()  # print SVM coefficients (only works for linear kernel)
             print(svm_classifier.coef_)
             print()
 
