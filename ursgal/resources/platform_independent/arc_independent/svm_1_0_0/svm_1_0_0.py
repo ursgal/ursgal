@@ -16,16 +16,14 @@ from sklearn.cross_validation import StratifiedKFold
 from sklearn.preprocessing import Imputer
 from collections import Counter, defaultdict
 from random import random
-from pymzml.spec import Spectrum
 import csv
 import re
 import os
 import argparse
-import time
-import itertools
-import shelve
 
-from misc import get_score_colname_and_order, field_to_float, naive_bayes, unify_sequence, calc_FDR, scale_scores, row_is_decoy, count_ion_partners, field_to_bayes_float, get_mz_values, hash_input_filenames
+from misc import (get_score_colname_and_order, field_to_float,
+                  unify_sequence,calc_FDR, scale_scores, row_is_decoy,
+                  field_to_bayes_float, get_mz_values)
 
 
 
@@ -51,12 +49,10 @@ class SVMWrapper(dict):
         self.shitty_decoy_seqs = set()  # is overwritten by find_shitty_decoys()
         self.mgf_lookup = {}
         self.pep_to_mz = {}
-        #self._chemical_composition = ursgal.ChemicalComposition()
 
         if __name__ == '__main__':
             self.parse_options()  # parse command line args and set options
-            self.set_input_csv()  # either single csv, or in case of multiple
-                              # input files, a merged csv is generated
+            self.set_input_csv()
 
         self.observed_charges = set()
         self.used_extra_fields = set()
@@ -106,16 +102,15 @@ class SVMWrapper(dict):
                 'X\!Tandem:hyperscore',
             ],
             help='Columns that should be used as a feature directly '\
-                '(e.g. secondary scores). Will be converted to float')
+                 '(e.g. secondary scores). Will be converted to float')
         parser.add_argument(
             '-d', '--dump_svm_matrix', type=str, default=False,
-            help='Dump SVM matrix in PIN format to the specified path.')
+            help='Dump SVM matrix in PIN (Percolator input) format '
+                 'to the specified path, mostly for debugging '
+                 'and benchmarking.')
 
         arg_dict = vars(parser.parse_args())  # convert to dict
         self.update(arg_dict)
-        if len(self['input_csv']) > 1:
-            raise NotImplementedError('Multi-mode not implemented yet, sorry!')
-        self['multi_mode'] = False
         try:
             self['gamma'] = float(self['gamma'])
         except ValueError:
@@ -129,27 +124,10 @@ class SVMWrapper(dict):
         sets the single csv as input, or merges all csvs and sets
         the merged csv as input.
         '''
-        if self['multi_mode']:
-            from merge_unified_csvs import main as merge_unified_csvs
-            print('Merging unified CSVs from multiple engines...')
-
-            features_that_define_unique_psms = \
-                ['Sequence', 'Modifications', 'Spectrum Title', 'Is decoy']  #'Charge'?
-
-            fname, ext = os.path.splitext(self['output_csv'])
-            merged_out_path = fname + '_mergedSVMcsv' + ext
-
-            self.csv_path = merge_unified_csvs(
-                empty_value='', input_csvs=self['input_csv'],
-                output_csv=merged_out_path, input_sep=',', 
-                join_sep=';', join_sep2=';', output_sep=',',
-                columns_for_grouping=features_that_define_unique_psms,
-                estimate_fdr=True, float_precision=10, fdr_cutoff=0.8
-            )
-            print('Generated merged unified CSV file at', self.csv_path)
-        else:
-            self.csv_path = self['input_csv'][0]
-            print('Using single input file', self.csv_path)
+        if len(self['input_csv']) > 1:
+            raise Exception('You must only specify *one* unified CSV file!')
+        self.csv_path = self['input_csv'][0]
+        print('Using input file', self.csv_path)
 
 
     def find_shitty_decoys(self):
@@ -167,9 +145,7 @@ class SVMWrapper(dict):
 
             sorted_reader = sorted(
                 reader, reverse=self['bigger_scores_better'],
-                key=lambda d: naive_bayes(
-                    [float(s) for s in d[self.col_for_sorting].split(';')]
-                )
+                key=lambda d: float(d[self.col_for_sorting])
             )
 
             for row in sorted_reader:
@@ -191,16 +167,12 @@ class SVMWrapper(dict):
 
 
     def determine_csv_sorting(self):
-        if self.get('multi_mode', False):
-            self['bigger_scores_better'] = False
-            self.col_for_sorting = 'estimated_FDR'
-        else:
-            with open(self.csv_path, 'r') as in_file:
-                reader = csv.DictReader(in_file)
-                self.col_for_sorting, self['bigger_scores_better'] = \
-                    get_score_colname_and_order(reader.fieldnames)
-            if self.col_for_sorting == self._svm_score_name:
-                self._svm_score_name = self._svm_score_name + '2'
+        with open(self.csv_path, 'r') as in_file:
+            reader = csv.DictReader(in_file)
+            self.col_for_sorting, self['bigger_scores_better'] = \
+                get_score_colname_and_order(reader.fieldnames)
+        if self.col_for_sorting == self._svm_score_name:
+            self._svm_score_name = self._svm_score_name + '2'
 
         print('CSV will be sorted by column {0} (reverse={1}'\
               ')'.format(self.col_for_sorting, self['bigger_scores_better']))
@@ -211,13 +183,11 @@ class SVMWrapper(dict):
 
 
     def sort_by_rank(self, rowdict):
-        score = naive_bayes(
-            [float(s) for s in rowdict[self.col_for_sorting].split(';')]
-        )
+        score = float(rowdict[self.col_for_sorting])
         spec_title = rowdict['Spectrum Title']
         return (spec_title, score)
 
-    
+
     @staticmethod
     def parse_protein_ids(csv_field, sep='<|>'):
         '''
@@ -276,7 +246,6 @@ class SVMWrapper(dict):
                         #print("\t".join([
                             #str(rank), line['Spectrum Title'], line[self.col_for_sorting]
                         #]))
-                        score = field_to_bayes_float(line[self.col_for_sorting])
                         uni_sequence = unify_sequence(line['Sequence'])
                         peptide = (uni_sequence, line['Modifications'])
 
@@ -315,7 +284,6 @@ class SVMWrapper(dict):
         '''
         Converts a unified CSV row to a SVM feature matrix (numbers only!)
         '''
-        mods = row['Modifications']
         sequence = unify_sequence(row['Sequence'])
         charge = field_to_float( row['Charge'] )
         score = field_to_bayes_float( row[self.col_for_sorting] )
@@ -349,11 +317,10 @@ class SVMWrapper(dict):
         spectrum = row['Spectrum Title'].strip()
         mass = (exp_mz * charge) - (charge - 1) * PROTON
         pep_len = len(sequence)
-        delta_mz = calc_mz - exp_mz
+        #delta_mz = calc_mz - exp_mz
         delta_mass = calc_mass - exp_mass
 
         peptide = (sequence, row['Modifications'])
-        psm = (peptide, spectrum)
         proteins = self.parse_protein_ids(
             row['Protein ID']
         )
@@ -367,10 +334,6 @@ class SVMWrapper(dict):
         pep_site = sum(
             (len(self.pep_site[protein]) for protein in proteins)
         )
-        #print('num_prot: {0}, pep_site: {1}, #prot: {2}'.format(
-                #num_prot, pep_site, len(proteins)
-            #)
-        #)
 
         user_specified_features = []
         for feat in self.used_extra_fields:
@@ -460,9 +423,8 @@ class SVMWrapper(dict):
 
             for i, row in enumerate(
                 sorted(reader, reverse=self['bigger_scores_better'],
-                       key=lambda d: naive_bayes(
-                           [float(s) for s in d[self.col_for_sorting].split(';')]
-                ))):
+                       key=lambda d: float(d[self.col_for_sorting])
+                )):
 
                 features = self.row_to_features(row)
 
@@ -476,17 +438,12 @@ class SVMWrapper(dict):
                 categories.append(category)
 
                 if self['dump_svm_matrix']:
-                    raise NotImplementedError('"--dump_svm_matrix" it not yet updated '
-                        'to the new unify CSV format!')
                     label = -1 if row_is_decoy(row) else 1
-                    splitted = row['Protein ID'].strip().split('_')
-                    pre_aa = splitted[-2]
-                    post_aa = splitted[-1]
                     sequence = '{0}.{1}#{2}.{3}'.format(
-                        pre_aa,
+                        row['Sequence Pre AA'].strip(),
                         row['Sequence'].strip(),
                         row['Modifications'].strip(),
-                        post_aa,
+                        row['Sequence Post AA'].strip(),
                     )
                     additional_matrix_info.append({
                         'psm_id': row['Spectrum Title'].strip(),
@@ -497,15 +454,11 @@ class SVMWrapper(dict):
                     })
 
                 if i % 1000 == 0:
-                    score_val = naive_bayes(
-                        [float(s) for s in row[self.col_for_sorting].split(';')]
-                    )
+                    score_val = float(row[self.col_for_sorting])
                     msg = 'Generating feature matrix from input csv '\
                           '(line ~{0}) with score {1} and FDR '\
                           '{2}'.format(i, score_val, psm_FDR)
-                    #msg = 'Generating feature matrix from input csv (line ~{0})...'.format(i)
                     print(msg, end = '\r')
-                    #print(msg)
 
 
         # All data points are collected in one big matrix, to make standardization possible
@@ -639,14 +592,12 @@ class SVMWrapper(dict):
         return classifier
 
 
-    def classify(self, classifier, psm_matrix, psm_categories):
+    def classify(self, classifier, psm_matrix):
         msg = 'Classifying {0} PSMs...'.format(len(psm_matrix))
         print(msg, end = '\r')
         for i, row in enumerate(psm_matrix):
-            #prob = classifier.predict_proba(np.array([row]))[0][0]*100  # multiply by 100 to get longer floats?
+            # get the distance to the separating SVM hyperplane and use it as a score:
             svm_score = classifier.decision_function(np.array([row]))[0]
-
-            category = psm_categories[i]
 
             features = tuple(row)
             if features not in self.results:
@@ -664,6 +615,8 @@ class SVMWrapper(dict):
 
 
     def add_scores_to_csv(self):
+        outfname = os.path.basename(self['output_csv'])
+        print('Writing output csv {0} ...'.format(outfname))
         msg = 'Writing output csv {0} (line ~{1})...'
 
         with open(self['output_csv'], 'w', newline='') as out_csv, open(self.csv_path, 'r') as in_csv:
@@ -672,7 +625,7 @@ class SVMWrapper(dict):
             writer.writeheader()
             for i, row in enumerate(reader):
                 if i % 1000 == 0:
-                    print(msg.format(os.path.basename(self['output_csv']), i), end='\r')
+                    print(msg.format(outfname, i), end='\r')
                 features = self.nan_replacer.transform(
                     np.array([ self.row_to_features(row) ])
                 )
@@ -731,7 +684,6 @@ if __name__ == '__main__':
         s.classify(
             svm_classifier,
             s.X[test_index],
-            s.categories[test_index]
         )
         if s['kernel'].lower() == 'linear':
             print()  # print SVM coefficients (only works for linear kernel)

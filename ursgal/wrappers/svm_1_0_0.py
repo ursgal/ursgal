@@ -32,11 +32,19 @@ class svm_1_0_0( ursgal.UNode ):
     def __init__(self, *args, **kwargs):
         super(svm_1_0_0, self).__init__(*args, **kwargs)
 
-
     def preflight(self):
+        '''
+        Building the list of parameters that will be passed to the
+        svm_1_0_0 main function.
+
+        These parameters are stored in self.params['command_list']
+
+        Returns:
+                None
+        '''
         if not self.params['input_file'].lower().endswith('.csv'):
             raise ValueError(
-                '\nSVM input file must be a unified CSV file, '\
+                '\nSVM input file must be a unified CSV file, '
                 'but you specified: ' + self.params['input_file']
             )
 
@@ -64,8 +72,8 @@ class svm_1_0_0( ursgal.UNode ):
             str(self.params['fdr_cutoff']),
             '-c',
             str(self.params['translations']['svm_c_param']),
-            #'--mb_ram',
-            #str(self.params['available_RAM_in_MB']),
+            #  '--mb_ram',
+            #  str(self.params['available_RAM_in_MB']),
         ]
 
         if self.params.get('columns_as_features', False):
@@ -75,6 +83,7 @@ class svm_1_0_0( ursgal.UNode ):
             self.params['command_list'].append(
                 ' '.join(self.params['columns_as_features'])
             )
+        return
 
     def postflight(self):
         return
