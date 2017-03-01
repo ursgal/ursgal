@@ -1,4 +1,4 @@
-#!/bin/python3.4
+#!/usr/bin/env python3
 '''
 collection of misc. functions and data that is imported into svm.py
 '''
