@@ -957,7 +957,7 @@ if __name__ == '__main__':
             ],
             'protein_delimiter'        : '<|>',
             'enzyme'                   : 'KR;C;P',
-            'keep_asp_pro_broken_peps' : False,
+            'keep_asp_pro_broken_peps' : True,
             'semi_enzyme'              : False,
             'decoy_tag'                : 'decoy_',
             'psm_merge_delimiter'      : ';',
@@ -969,7 +969,7 @@ if __name__ == '__main__':
         'label' : '',
         'prefix'                   : None
     }
-    params['database'] = sys.argv[7]
+    params['translations']['database'] = sys.argv[6]
     main(
         input_file     = sys.argv[1],
         output_file    = sys.argv[2],
