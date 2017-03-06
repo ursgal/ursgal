@@ -30,6 +30,7 @@ TEST_FASTA_TWO = [
     'KLEINERRETTER\n',
 ]
 
+
 class UMapMaster(unittest.TestCase):
     def setUp(self):
         self.upapa_5 = umama.UPeptideMapper( word_len=5 )
@@ -38,7 +39,6 @@ class UMapMaster(unittest.TestCase):
             fasta_stream = TEST_FASTA
         )
         self.uc = ursgal.UController( verbose = False )
-
 
     def test_incremental_fcache_buildup_and_global_access(self):
         # map with empty
@@ -64,7 +64,6 @@ class UMapMaster(unittest.TestCase):
         print(maps)
         self.assertEqual( len(maps), 2)
 
-
     def test_fasta_id_parsed_and_available(self):
         input_fastas = []
         for line in TEST_FASTA:
@@ -77,13 +76,21 @@ class UMapMaster(unittest.TestCase):
         )
 
     def test_peptide_eq_word_len(self):
+        # print( self.upapa_5['Test.fasta'].keys())
+        # print( ''.join(sorted('ELVIS')))
+        # print( self.upapa_5['Test.fasta'][''.join(sorted('ELVIS'))] )
         self.assertEqual(
-            self.upapa_5['Test.fasta']['ELVIS'],
+            self.upapa_5['Test.fasta'][''.join(sorted('ELVIS'))],
             set([
                 ('Protein1', 1),
+                ('Protein1', 5), # new srted algorithm to reduce mem print :)
+                ('Protein1', 6),
+                ('Protein3', 4),
+                ('Protein3', 5),
                 ('Protein3', 6)
             ])
         )
+
     def test_peptide_eq_word_len_2(self):
         maps = self.upapa_5.map_peptide( peptide='VISHE', fasta_name='Test.fasta')
         self.assertEqual( len(maps), 1 )
