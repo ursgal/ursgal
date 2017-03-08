@@ -5,7 +5,7 @@ import ursgal
 import unittest
 import pprint
 from ursgal import umapmaster as umama
-
+import pprint
 
 TEST_FASTA = [
     '>Protein1\n',
@@ -22,13 +22,20 @@ TEST_FASTA = [
     '>Overlapping',
     'GGGGGGGGGG',
     '>ugly_fasta',
-    'FCKTHIS*'
+    'FCKTHIS*',
+    '>SortingPepCorrect_1',
+    'FORWARDKKK',
+    '>SortingPepCorrect_2',
+    'DRAWROFKKK',
+    '>SortingPepCorrect_3',
+    'FROWARDKKK',
 ]
 
 TEST_FASTA_TWO = [
     '>Ze_other_protein2\n',
     'KLEINERRETTER\n',
 ]
+
 
 class UMapMaster(unittest.TestCase):
     def setUp(self):
@@ -38,7 +45,6 @@ class UMapMaster(unittest.TestCase):
             fasta_stream = TEST_FASTA
         )
         self.uc = ursgal.UController( verbose = False )
-
 
     def test_incremental_fcache_buildup_and_global_access(self):
         # map with empty
@@ -64,7 +70,6 @@ class UMapMaster(unittest.TestCase):
         print(maps)
         self.assertEqual( len(maps), 2)
 
-
     def test_fasta_id_parsed_and_available(self):
         input_fastas = []
         for line in TEST_FASTA:
@@ -77,13 +82,21 @@ class UMapMaster(unittest.TestCase):
         )
 
     def test_peptide_eq_word_len(self):
+        # print( self.upapa_5['Test.fasta'].keys())
+        # print( ''.join(sorted('ELVIS')))
+        # print( self.upapa_5['Test.fasta'][''.join(sorted('ELVIS'))] )
         self.assertEqual(
-            self.upapa_5['Test.fasta']['ELVIS'],
+            self.upapa_5['Test.fasta'][''.join(sorted('ELVIS'))],
             set([
                 ('Protein1', 1),
+                ('Protein1', 5), # new srted algorithm to reduce mem print :)
+                ('Protein1', 6),
+                ('Protein3', 4),
+                ('Protein3', 5),
                 ('Protein3', 6)
             ])
         )
+
     def test_peptide_eq_word_len_2(self):
         maps = self.upapa_5.map_peptide( peptide='VISHE', fasta_name='Test.fasta')
         self.assertEqual( len(maps), 1 )
@@ -193,6 +206,35 @@ class UMapMaster(unittest.TestCase):
             sorted([ m['start'] for m in maps] ),
             [1,2,3,4]
         )
+
+    def test_sort_independece(self):
+        map_1 = self.upapa_5.map_peptide(
+            peptide    = 'FORWARD',
+            fasta_name = 'Test.fasta'
+        )
+        map_2 = self.upapa_5.map_peptide(
+            peptide    = 'DRAWROF',
+            fasta_name = 'Test.fasta'
+        )
+        map_3 = self.upapa_5.map_peptide(
+            peptide    = 'FORWA',
+            fasta_name = 'Test.fasta'
+        )
+        map_4 = self.upapa_5.map_peptide(
+            peptide    = 'AWROF',
+            fasta_name = 'Test.fasta'
+        )
+        map_5 = self.upapa_5.map_peptide(
+            peptide    = 'AORRW',
+            fasta_name = 'Test.fasta'
+        ) # should not work..
+
+        self.assertEqual(len(map_1), 1)
+        self.assertEqual(len(map_2), 1)
+        self.assertEqual(len(map_3), 1)
+        self.assertEqual(len(map_4), 1)
+        self.assertEqual(len(map_5), 0)
+
 
 if __name__ == '__main__':
     unittest.main()

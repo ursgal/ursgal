@@ -158,7 +158,7 @@ Another useful keyword argument is 'output_file_name', which allows you to defin
 
 
 7. Example Scripts
---------------------------------
+------------------
 
 Now that we covered all the basics of Ursgal, you should be able to write a basic Ursgal script. Make sure to check out the :ref:`example scripts<examplescripts>` folder ("ursgal/example_scripts") which contains a variety of basic and advanced Ursgal scripts that are ready to execute.
 Example scripts will automatically download the required files before execution.

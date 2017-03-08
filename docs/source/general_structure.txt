@@ -54,7 +54,7 @@ The wrapper inherits from ursgal.UNode. During the instantiation,
 the default parameters are injected into the class. The default
 parameters are collected using the umapmaster class, which parses the grouped
 parameters listed in ursgal.uparams. Therefore, it is imperative that all
-parameters are listed in the uparams.py file (see blow).
+parameters are listed in the uparams.py file (see below).
 
 The default structure of a wrapper is::
 
@@ -95,6 +95,9 @@ It is important that the super class is called with the wrapper's name.
 Default parameters are collected from uparams.py using this name (see below).
 The special methods `preflight()` and `postflight()` are automatically called
 by Ursgal's UController when a UNode is launched.
+
+
+.. _metainfo:
 
 The META INFO
 ^^^^^^^^^^^^^
@@ -290,6 +293,8 @@ function.
     }
 
 
+.. _uparams:
+
 Grouped parameters - uparams.py
 -------------------------------
 The ursgal/uparams.py file holds all parameter information available in ursgal.
@@ -299,7 +304,7 @@ parameter.
 
 Entries:
 
-    * 'availaible_in_unode'
+    * 'available_in_unode'
         Defines which nodes use this parameter. Complete engine names are
         given.
     * 'default_value'
@@ -307,7 +312,7 @@ Entries:
         that these can be adjusted via parameters or profiles.
     * 'description'
         Provides a short explanatory text for the parameter.
-    * 'triggers_rerun'
+    * 'trigger_rerun'
         Defines if a change in this parameter will cause the unode
         to be executed, independently if there are already result files present.
         Since not all parameter changes require re-execution, this ensures
