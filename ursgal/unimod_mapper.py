@@ -14,6 +14,7 @@ import sys
 import os
 import xml.etree.ElementTree as ET
 import xml.dom.minidom as xmldom
+import ursgal
 
 
 class UnimodMapper( object ):
@@ -28,7 +29,7 @@ class UnimodMapper( object ):
         self.mapper    = self._initialize_mapper()
 
     def _parseXML(self, xmlFile = None):
-        if xmlFile == None:
+        if xmlFile is None:
             unimodXML = os.path.normpath(
                 os.path.join(
                     os.path.dirname(__file__),
@@ -38,7 +39,7 @@ class UnimodMapper( object ):
                     'ext',
                     'unimod.xml'
                 ))
-            if unimodXML == None:
+            if unimodXML is None:
                 print("No unimod.xml file found.")
                 sys.exit(1)
             userdefined_unimodXML = os.path.normpath(
@@ -418,9 +419,15 @@ class UnimodMapper( object ):
 
     def _map_key_2_index_2_value(self, map_key, return_key):
         ''''''
-        index = self.mapper.get(map_key, None)
+        index = self.mapper.get( map_key.strip(), None)
         if index is None:
-            print('Cant map', map_key , file=sys.stderr)
+            ursgal.UNode.print_info(
+                'Cannot return {0} via map {1}'.format( \
+                    return_key,
+                    map_key,
+                ),
+                caller='WARNING'
+            )
             return_value = None
         else:
             return_value = self._data_list_2_value(index, return_key)

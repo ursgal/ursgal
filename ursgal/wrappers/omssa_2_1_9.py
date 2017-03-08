@@ -266,7 +266,7 @@ class omssa_2_1_9( ursgal.UNode ):
 
             self.params[ param_key ] = modifications.strip(',')
 
-
+        # exit(1)
         # semi-enyzmatic cleavage --> translation into omssa enzyme number
         if self.params['translations']['semi_enzyme'] is True:
             if translations['-e']['enzyme'] == '0':
