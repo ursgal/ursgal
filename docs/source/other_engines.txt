@@ -137,13 +137,8 @@ msgfplus2csv_v2016_09_16 1_0_0
 .. autoclass:: ursgal.wrappers.msgfplus2csv_v2016_09_16.msgfplus2csv_v2016_09_16
    :members:
 
-.. autoclass:: ursgal.resources.platform_independent.arc_independent.msgfplus2csv_v2016_09_16.msgfplus2csv_v2016_09_16.main
-   :members:
-
-
 plot_pygcluster_heatmap_from_csv_1_0_0
 --------------------------------------
-
 
 .. autoclass:: ursgal.wrappers.plot_pygcluster_heatmap_from_csv_1_0_0.plot_pygcluster_heatmap_from_csv_1_0_0
    :members:
