@@ -8,6 +8,7 @@ M = ursgal.unimod_mapper.UnimodMapper()
 
 UNIMODMAPPER_FUNCTIONS = [
     M.name2mass,
+    M.name2mass,
     M.name2composition,
     M.name2id,
     M.id2mass,
@@ -31,6 +32,12 @@ TESTS = [
             },
             'out': 494.30142
         },  # First test : ursgal.UnimodMapper.name2mass,
+        {
+            'in' : {
+                'args': [' ICAT-G:2H(8)']
+            },
+            'out': 494.30142
+        },  # second test that passes to many whitespaces :),
         {
             'in' : {
                 'args': ['ICAT-G:2H(8)']
@@ -105,13 +112,13 @@ TESTS = [
                 'args': ['C(2)H(3)N(1)O(1)'],
             },
             'out': ['Carbamidomethyl', 'Ala->Gln', 'Gly->Asn', 'Gly']
-        }, 
+        },
         {
             'in' : {
                 'args': [ 'C(22)H(30)2H(8)N(4)O(6)S(1)'],
             },
             'out': ['9']
-        }, 
+        },
 
 
 
@@ -120,7 +127,7 @@ TESTS = [
 ]
 
 
-def test_set_integirty_test():
+def test_set_integrity_test():
     for test_id, list_of_test in enumerate(TESTS):
         yield input_list_check, list_of_test
 

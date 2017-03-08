@@ -327,8 +327,17 @@ class UPeptideMapper( dict ):
             self.fasta_sequences[ fasta_name ] = {}
 
         self.master_buffer[ fasta_name ] = {}
+        # self.word_len = 6
         if force:
-            for id, seq in ursgal.ucore.parseFasta( fasta_stream ):
+            for upapa_id, (id, seq) in enumerate(
+                    ursgal.ucore.parseFasta( fasta_stream )):
+                print(
+                    '[   upapa  ] Indexing sequence #{0} with word_len {1}'.format(
+                        upapa_id,
+                        self.word_len
+                    ),
+                    end = '\r'
+                )
                 if seq.endswith('*'):
                     seq = seq.strip('*')
                 self.fasta_sequences[ fasta_name ][ id ] = seq
@@ -337,6 +346,11 @@ class UPeptideMapper( dict ):
                     seq        = seq,
                     fasta_name = fasta_name,
                 )
+                # if upapa_id > 10000:
+                #     break
+            print()
+        # input('bp')
+        # exit(1)
 
     def _create_fcache(self, id=None, seq=None, fasta_name=None):
         '''
@@ -346,10 +360,47 @@ class UPeptideMapper( dict ):
             pep = seq[ pos : pos + self.word_len ]
             # pep = pep.encode()
 
+            # Raw 6.3GB
+            # try:
+            #     self[ fasta_name ][ pep ].add( (id, pos + 1) )
+            # except:
+            #     self[ fasta_name ][ pep ] = set([ (id, pos + 1) ])
+
+            # sorted 3.8GB
+            s_pep = ''.join(sorted(pep))
+            # print(s_pep, type(s_pep))
             try:
-                self[ fasta_name ][ pep ].add( (id, pos + 1) )
+                self[ fasta_name ][ s_pep ].add( (id, pos + 1) )
             except:
-                self[ fasta_name ][ pep ] = set([ (id, pos + 1) ])
+                self[ fasta_name ][ s_pep ] = set([ (id, pos + 1) ])
+
+            # tree like ... 3.8 GB
+            # current_depth = self[ fasta_name ]
+            # for aa in sorted(pep):
+            #     try:
+            #         current_depth[ ord(aa) ]
+            #     except:
+            #         current_depth[ ord(aa) ] = {}
+            #     current_depth = current_depth[ ord(aa) ]
+            # try:
+            #     current_depth['_'].add( (id, pos + 1) )
+            # except:
+            #     current_depth['_'] = set([ (id, pos + 1) ])
+
+            # Counter compression 4.1 GB
+            # current_depth = self[ fasta_name ]
+            # # for aa in sorted(pep):
+            # for aa, count in Counter(pep).items():
+            #     aa_key = '{0}{1}'.format(aa, count)
+            #     try:
+            #         current_depth[ aa_key ]
+            #     except:
+            #         current_depth[ aa_key ] = {}
+            #     current_depth = current_depth[ aa_key ]
+            # try:
+            #     current_depth['_'].add( (id, pos + 1) )
+            # except:
+            #     current_depth['_'] = set([ (id, pos + 1) ])
 
         return
 
@@ -398,7 +449,9 @@ class UPeptideMapper( dict ):
                         pep = peptide[ pos : pos + self.word_len ]
                         # pep = pep.encode()
                         # print( pep, peptide )
-                        fasta_set = self[ fasta_name ].get(pep, None)
+                        s_pep = ''.join(sorted(pep))
+
+                        fasta_set = self[ fasta_name ].get(s_pep, None)
                         if fasta_set is None:
                             continue
 
