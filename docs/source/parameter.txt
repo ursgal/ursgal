@@ -55,7 +55,7 @@ aa_exception_dict
 
 Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name
 
-:Default value: {'U': {'original_aa': 'C', 'unimod_name_with_cam': 'SecCarbamidomethyl', 'unimod_name': 'Delta:S(-1)Se(1)'}, 'J': {'original_aa': 'L'}, 'O': {'original_aa': 'K', 'unimod_name': 'Methylpyrroline'}}
+:Default value: {'J': {'original_aa': 'L'}, 'U': {'unimod_name': 'Delta:S(-1)Se(1)', 'original_aa': 'C', 'unimod_name_with_cam': 'SecCarbamidomethyl'}, 'O': {'unimod_name': 'Methylpyrroline', 'original_aa': 'K'}}
 :type: dict
 :triggers rerun: False
             
@@ -495,13 +495,13 @@ cross_link_definition
 ################################
 
 
-Cross-link and mono-link masses allowed. 
-            May have more than one of each parameter.
-            Format for cross_link is: 
-                [amino acids] [amino acids] [mass mod] [identifier]
-            One or more amino acids (uppercase only!!) can be specified for 
-            each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
-            N-terminus or C-terminus
+Cross-link and mono-link masses allowed.
+May have more than one of each parameter.
+Format for cross_link is:
+**[amino acids] [amino acids] [mass mod] [identifier]**
+One or more amino acids (uppercase only!!) can be specified for
+each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
+N-terminus or C-terminus
 
 :Default value: nK  nK  138.0680742 BS3
 :type: str
@@ -932,7 +932,8 @@ Enzyme: Rule of protein cleavage
                 'trypsin'
                 'trypsin_chymotrypsin
                 'trypsin_cnbr'
-                'trypsin_p'
+                'trypsin_p',
+                'lysc_gluc',
 
 :Default value: trypsin
 :type: select
@@ -1006,6 +1007,7 @@ Ursgal key translations
  gluc_bicarb                   E;C;P                         n/t                           E;after;P                     n/t                           n/t                           n/t                           n/t                           n/t                           E;C;P                         E;C;P                         [E]|{P}                      
  iodosobenzoate                W;C;                          n/t                           W;after;                      n/t                           n/t                           n/t                           n/t                           n/t                           W;C;                          W;C;                          [W]|[X]                      
  lysc                          K;C;P                         n/t                           K;after;P                     3                             Lys-C                         n/t                           5                             n/t                           K;C;P                         K;C;P                         [K]|{P}                      
+ lysc_gluc                     DEK;C;P                       [DEK]|{P}                     DEK;after;P                   n/t                           n/t                           n/t                           n/t                           n/t                           DEK;C;P                       DEK;C;P                       [DEK]|[X]|{P}                
  lysc_p                        K;C;                          n/t                           K;after;                      n/t                           Lys-C/P                       n/t                           6                             n/t                           K;C;                          K;C;                          [K]|[X]                      
  lysn                          K;N;                          |[K]                          K;before;                     4                             n/t                           n/t                           21                            n/t                           K;N;                          K;N;                          [X]|[K]                      
  lysn_promisc                  AKRS;N;                       n/t                           AKRS;before;                  n/t                           n/t                           n/t                           n/t                           n/t                           AKRS;N;                       AKRS;N;                       [X]|[AKRS]                   
@@ -1812,6 +1814,64 @@ Ursgal value translations for *heatmap_color_gradient*
 
       <hr />
 
+heatmap_column_order
+###############################
+
+
+The plot order of the columns
+
+:Default value: []
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* plot_pygcluster_heatmap_from_csv_1_0_0
+
+Ursgal value translations for *heatmap_column_order*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ heatmap_style_1      heatmap_column_order
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
+heatmap_error_suffix
+###############################
+
+
+The suffix to identify the value error holding columns
+
+:Default value: _std
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* plot_pygcluster_heatmap_from_csv_1_0_0
+
+Ursgal value translations for *heatmap_error_suffix*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ heatmap_style_1      heatmap_error_suffix
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
 heatmap_identifier_field_name
 ########################################
 
@@ -1894,6 +1954,35 @@ Ursgal value translations for *heatmap_min_value*
  ================= =================
  heatmap_style_1   heatmap_min_value
  ================= =================
+
+.. raw:: html
+
+      <hr />
+
+heatmap_value_suffix
+###############################
+
+
+The suffix to identify the value columns, which should be plotted
+
+:Default value: _mean
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* plot_pygcluster_heatmap_from_csv_1_0_0
+
+Ursgal value translations for *heatmap_value_suffix*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ heatmap_style_1      heatmap_value_suffix
+ ==================== ====================
 
 .. raw:: html
 
@@ -2242,7 +2331,7 @@ kojak_diff_mods_on_xl
 ################################
 
 
-To search differential modifications on cross-linked 
+To search differential modifications on cross-linked
         peptides: diff_mods_on_xl = 1
 
 :Default value: 0
@@ -2272,7 +2361,7 @@ kojak_enrichment
 ###########################
 
 
-Values between 0 and 1 to describe 18O APE 
+Values between 0 and 1 to describe 18O APE
         For example, 0.25 equals 25 APE
 
 :Default value: 0
@@ -2485,8 +2574,8 @@ kojak_prefer_precursor_pred
 ######################################
 
 
-prefer precursor mono mass predicted by 
-        instrument software. 
+prefer precursor mono mass predicted by
+        instrument software.
           0 = ignore previous predictions
           1 = use only previous predictions
           2 = supplement predictions with additional analysis
@@ -2547,7 +2636,7 @@ kojak_top_count
 ##########################
 
 
-number of top scoring single peptides to combine 
+number of top scoring single peptides to combine
             in relaxed analysis
 
 :Default value: 300
@@ -3344,13 +3433,13 @@ mono_link_definition
 ###############################
 
 
-Cross-link and mono-link masses allowed. 
-            May have more than one of each parameter.
-            Format for mono_link is:
-                [amino acids] [mass mod]
-            One or more amino acids (uppercase only!!) can be specified for 
-            each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
-            N-terminus or C-terminus
+Cross-link and mono-link masses allowed.
+May have more than one of each parameter.
+Format for mono_link is:
+[amino acids] [mass mod]
+One or more amino acids (uppercase only!!) can be specified for
+each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
+N-terminus or C-terminus
 
 :Default value: nK  156.0786
 :type: str

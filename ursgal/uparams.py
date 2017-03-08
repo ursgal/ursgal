@@ -944,7 +944,7 @@ ursgal_params = {
                 'trypsin'   : '[KR]|{P}',
                 'trypsin_p' : '[RK]|',
                 'lysc_gluc' : '[DEK]|{P}',
-            } 
+            }
         },
         'uvalue_type' : "select",
     },
@@ -5693,7 +5693,7 @@ Example:
             'kojak_1_5_3',
         ],
         'default_value' : 0,
-        'description' :  '''Values between 0 and 1 to describe 18O APE 
+        'description' :  '''Values between 0 and 1 to describe 18O APE
         For example, 0.25 equals 25 APE''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5789,13 +5789,13 @@ Example:
             'kojak_1_5_3',
         ],
         'default_value' : 'nK  nK  138.0680742 BS3',
-        'description' :  '''Cross-link and mono-link masses allowed. 
-            May have more than one of each parameter.
-            Format for cross_link is: 
-                [amino acids] [amino acids] [mass mod] [identifier]
-            One or more amino acids (uppercase only!!) can be specified for 
-            each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
-            N-terminus or C-terminus''',
+        'description' :  '''Cross-link and mono-link masses allowed.
+May have more than one of each parameter.
+Format for cross_link is:
+**[amino acids] [amino acids] [mass mod] [identifier]**
+One or more amino acids (uppercase only!!) can be specified for
+each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
+N-terminus or C-terminus''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1': 'cross_link_definition'
@@ -5814,13 +5814,13 @@ Example:
             'kojak_1_5_3',
         ],
         'default_value' : 'nK  156.0786',
-        'description' :  '''Cross-link and mono-link masses allowed. 
-            May have more than one of each parameter.
-            Format for mono_link is:
-                [amino acids] [mass mod]
-            One or more amino acids (uppercase only!!) can be specified for 
-            each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
-            N-terminus or C-terminus''',
+        'description' :  '''Cross-link and mono-link masses allowed.
+May have more than one of each parameter.
+Format for mono_link is:
+[amino acids] [mass mod]
+One or more amino acids (uppercase only!!) can be specified for
+each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
+N-terminus or C-terminus''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1': 'mono_link_definition'
@@ -5839,7 +5839,7 @@ Example:
             'kojak_1_5_3',
         ],
         'default_value' : 0,
-        'description' :  '''To search differential modifications on cross-linked 
+        'description' :  '''To search differential modifications on cross-linked
         peptides: diff_mods_on_xl = 1''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5925,8 +5925,8 @@ Example:
             'kojak_1_5_3',
         ],
         'default_value' : 2,
-        'description' :  '''prefer precursor mono mass predicted by 
-        instrument software. 
+        'description' :  '''prefer precursor mono mass predicted by
+        instrument software.
           0 = ignore previous predictions
           1 = use only previous predictions
           2 = supplement predictions with additional analysis''',
@@ -5967,7 +5967,7 @@ Example:
             'kojak_1_5_3',
         ],
         'default_value' : 300,
-        'description' :  '''number of top scoring single peptides to combine 
+        'description' :  '''number of top scoring single peptides to combine
             in relaxed analysis''',
         'triggers_rerun' : True,
         'ukey_translation' : {
