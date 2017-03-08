@@ -8,6 +8,7 @@ the :ref:`General structure<general_structure>` of Ursgal.
 This page will explain how to integrate a standalone executable or Python
 script into Ursgal's structure of **resources**, **wrappers**
 and **uparams.py**, based on two examples:
+
     * A Python script: filter_csv_1_0_0.py
     * A standalone search engine: MS-GF+ v9979
 
