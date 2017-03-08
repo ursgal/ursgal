@@ -74,6 +74,31 @@ class omssa_2_1_9( ursgal.UNode ):
                 },
             },
         },
+        'mods_to_unimod_correction' : {
+            # this dict holds corrections of wrong OMSSA to unimod assignments
+            'TMT 6-plex on K' : {
+                'unimod_id'       : '737',
+                'ommsa_unimod_id' : '738', # this is TMT duplex in unimod
+                'unimod_name'     : 'TMT6plex',
+            },
+            'TMT 6-plex on n-term peptide' : {
+                'unimod_id'       : '737',
+                'ommsa_unimod_id' : '738', # this is TMT duplex in unimod
+                'unimod_name'     : 'TMT6plex',
+                'aa_targets'      : ['N-term'] # override 'X' in OMSSA mods xml
+            },
+            'TMT duplex on K': {
+                'unimod_id'       : '738',
+                'ommsa_unimod_id' : '738', # this is TMT duplex in unimod
+                'unimod_name'     : 'TMT2plex'
+            },
+            'TMT duplex on n-term peptide': {
+                'unimod_id'       : '738',
+                'ommsa_unimod_id' : '738', # this is TMT duplex in unimod
+                'unimod_name'     : 'TMT2plex',
+                'aa_targets'      : ['N-term'] # override 'X' in OMSSA mods xml
+            }
+        }
     }
 
     def __init__(self, *args, **kwargs):
@@ -138,7 +163,11 @@ class omssa_2_1_9( ursgal.UNode ):
                         )
                         tmp['aa_targets'] = []
                         continue
-
+                    if tmp['omssa_name'] in self.META_INFO['mods_to_unimod_correction'].keys():
+                        l_value = self.META_INFO['mods_to_unimod_correction'][tmp['omssa_name']]['unimod_id']
+                        # for TMT mods OMSSA writes an 'X' as amino acid target, this breaks later code...
+                        if 'aa_targets' in self.META_INFO['mods_to_unimod_correction'][tmp['omssa_name']].keys():
+                            tmp['aa_targets'] = self.META_INFO['mods_to_unimod_correction'][tmp['omssa_name']]['aa_targets']
                     if l_value not in \
                             self.omssa_mod_Mapper.keys():
                         self.omssa_mod_Mapper[ l_value ] = {}
@@ -204,6 +233,8 @@ class omssa_2_1_9( ursgal.UNode ):
             for mod in self.params[ 'mods' ][ mod_type ]:
                 unimod_id_does_not_exist = False
                 aa_can_not_be_mapped = True
+                # print(mod['id'])
+                # print(self.omssa_mod_Mapper.keys())
                 if mod[ 'id' ] not in self.omssa_mod_Mapper.keys():
                     unimod_id_does_not_exist = True
                 else:
@@ -222,6 +253,8 @@ class omssa_2_1_9( ursgal.UNode ):
                                 'omssa_id'   : omssa_id,
                                 'id'         : mod['id']
                             }
+                # print(unimod_id_does_not_exist)
+                # print(aa_can_not_be_mapped)
                 if unimod_id_does_not_exist or aa_can_not_be_mapped:
                     self.print_info( '''
     The combination of modification name and aminoacid is not supported by

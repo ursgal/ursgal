@@ -120,7 +120,7 @@ TESTS = [
 ]
 
 
-def test_set_integirty_test():
+def test_set_integrity_test():
     for test_id, list_of_test in enumerate(TESTS):
         yield input_list_check, list_of_test
 
