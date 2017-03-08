@@ -61,7 +61,7 @@ the utranslation_style that is defined in the engines :ref:`META_INFO<metainfo>`
 parameter name. The parameter values can be translated in 'uvalue_translation' using the utranslation_style as well (only if a translation is necessary).
 
 **Example**: include the parameter '-e' for MS-GF+ ::
-  
+
     # -e defines the enzyme that has been used for digestion. This is called 'enzyme' in ursgal.
     'enzyme' : {
         # include msgfplus_v9979 in available_in_unode
@@ -147,7 +147,7 @@ After changing uparams.py, please run rewrite_uparams.py to check for duplicates
 
 
 3. Implementation of the wrapper class
-------------------------------
+--------------------------------------
 
 Each UNode has to have a Python wrapper file located in:
 
@@ -182,13 +182,13 @@ One can define `preflight()` and `postflight()` methods that will be executed by
 
 
 3.1 Implementation of an engine from a command line tool
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For binary executable UNodes, one has to create a command line list (see `subprocess`_) in
 the `preflight()` method. The command list is used to run the UNode's executable with the
 appropriate command line parameters. It should include the executable path of the engine
-(accessible via self.exe) and all relevant parameters, available via self.params, containing the 
-original parameters and values. self.params['translations'] contains translated values for all 
+(accessible via self.exe) and all relevant parameters, available via self.params, containing the
+original parameters and values. self.params['translations'] contains translated values for all
 node-related parameters. Furthermore self.params['translations']['_grouped_by_translated_key']
 is a dictionary containing all node-related parameters and their corresponding
 ursgal parameters with the translated values.
@@ -340,7 +340,7 @@ a postflight function was defined as part of the class), e.g.::
 
 
 3.2 Implementation of a UNode from Python code
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Using sys.argv or the argparse module, any Python code can be executed like a command line tool.
 Thus, it is possible to include pure Python UNodes using the steps described above.
