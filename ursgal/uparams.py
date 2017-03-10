@@ -5755,6 +5755,25 @@ Example:
         },
         'uvalue_type' : "int",
     },
+    'word_len' : {
+        'available_in_unode' : [
+            'upeptide_mapper_1_0_0',
+        ],
+        'default_value' : 8,
+        'description' :  '''NOTE: This can only be changed using the params dict if UPeptideMapper has become a UNode. !!! word length used to index peptide mapper, smaller word len requires more memory''',
+        'triggers_rerun' : False,
+        'ukey_translation' : {
+            'upeptide_mapper_style_1' : 'word_len',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
     'write_unfiltered_results' : {
         'available_in_unode' : [
             'filter_csv_1_0_0',

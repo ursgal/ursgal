@@ -8,12 +8,12 @@
 
 """
 import ursgal
-from ursgal.uparams import ursgal_params as urgsal_dict
 from collections import defaultdict as ddict
 import multiprocessing
 import re
 import os
 import time
+
 
 class UParamMapper( dict ):
     '''
@@ -30,7 +30,8 @@ class UParamMapper( dict ):
 
         assert len(args) <= 1, 'Can only be initialized with max one argument'
         if len(args) == 0:
-            params_dict = urgsal_dict
+            params_dict = ursgal.uparams.ursgal_params
+            # urgsal_dict
         else:
             params_dict = args[0]
 
@@ -40,6 +41,7 @@ class UParamMapper( dict ):
             'cpus' : {
                 'max'     : multiprocessing.cpu_count(),
                 'max - 1' : multiprocessing.cpu_count() - 1,
+                'max-1'   : multiprocessing.cpu_count() - 1,
             }
         }
 
@@ -290,13 +292,23 @@ class UPeptideMapper( dict ):
         needed anymore, using the `UPeptideMapper.purge_fasta_info()` function.
 
     '''
-    def __init__(self, word_len = 6 ):
+    def __init__(self, word_len = None ):
+        if word_len is None:
+            word_len = ursgal.uparams.ursgal_params['word_len'].get(
+                'default_value', 8
+            )
+            '''Ultimately this will be passed over by the wrapper
+            if this class is its own standalone script / UNode
+            '''
         self.fasta_sequences = {}
         self.word_len = word_len
         self.hits = {'fcache': 0, 'regex': 0}
         self.query_length = ddict(int)
         self.master_buffer = {}
-
+        # print(ursgal._ursgal_params)
+        # print( )
+        # exit(dir(ursgal)) #.Meta_UNode._upeptide_mapper)#['word_len'])
+        # exit(ursgal.uparams.ursgal_params['word_len'])
         pass
 
     def build_lookup_from_file( self, path_to_fasta_file, force=True):
@@ -426,8 +438,6 @@ class UPeptideMapper( dict ):
         required_hits                    = l_peptide - self.word_len
 
         self.query_length[ l_peptide ] += 1
-
-
         if fasta_name in self.keys():
             if peptide in self.master_buffer[fasta_name].keys():
                 mappings = self.master_buffer[fasta_name][peptide]
@@ -465,7 +475,7 @@ class UPeptideMapper( dict ):
 
                     for id, pos_set in tmp_hits.items():
                         sorted_positions = sorted(pos_set)
-                        seq              = self.fasta_sequences[ fasta_name ][ id ]
+                        seq = self.fasta_sequences[ fasta_name ][ id ]
 
                         for n, pos in enumerate( sorted_positions ):
                             start = sorted_positions[n]
@@ -484,7 +494,9 @@ class UPeptideMapper( dict ):
                                 if seq[ start - 1 : end ] == peptide:
                                     # double check
                                     mappings.append(
-                                        self._format_hit_dict( seq, start, end, id)
+                                        self._format_hit_dict(
+                                            seq, start, end, id
+                                        )
                                     )
                 self.master_buffer[fasta_name][peptide] = mappings
         return mappings
@@ -531,6 +543,7 @@ class UPeptideMapper( dict ):
         '''
         del self.fasta_sequences[ fasta_name ]
         del self[ fasta_name ]
+
 
 if __name__ == '__main__':
     print('Yes!')
