@@ -5371,6 +5371,49 @@ Example:
         },
         'uvalue_type' : "bool",
     },
+    'ssl_score_column_name' : {
+        'available_in_unode' : [
+            'csv2ssl_1_0_0',
+        ],
+        'default_value' : 'q-value',
+        'description' :  ''' Name of the column that includes the scores that should be used for the .ssl file ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2ssl_style_1' : 'score_column_name',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'ssl_score_type' : {
+        'available_in_unode' : [
+            'csv2ssl_1_0_0',
+        ],
+        'default_value' : 'PERCOLATOR QVALUE',
+        'description' :  ''' Type of scores used for the .ssl file ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2ssl_style_1' : 'score_type',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : ['UNKNOWN', 'PERCOLATOR QVALUE', 'TANDEM EXPECTATION VALUE', 'OMSSA EXPECTATION SCORE'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "select",
+    },
     'validation_minimum_score' : {
         'available_in_unode' : [
             'qvality_2_02',

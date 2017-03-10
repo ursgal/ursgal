@@ -392,7 +392,7 @@ class ChemicalComposition(dict):
 
         Returns:
             str: Hill notation format including unimod format rules of self.
-                For exmaple::
+                For example::
                     C(50)H(88)N(10)O(17)
 
         '''

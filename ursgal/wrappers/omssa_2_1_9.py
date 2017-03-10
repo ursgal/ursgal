@@ -380,7 +380,7 @@ class omssa_2_1_9( ursgal.UNode ):
             'Retention Time (s)',
             header_translations.get(' E-value', ' E-value'),
             header_translations.get(' P-value', ' P-value'),
-            # 'Raw data location'
+            'Raw data location',
         ]
         print('[ PARSING  ] Loading unformatted OMSSA results ...')
         for line_dict in csv_dict_reader_object:
@@ -435,6 +435,7 @@ class omssa_2_1_9( ursgal.UNode ):
                     )
 
             tmp['Modifications'] = ';'.join( translated_mods )
+            tmp['Raw data location'] = self.params['translations']['mgf_input_file']
 
             # for protein in returned_peptide_regex_list:
             #     for pep_regex in protein:
