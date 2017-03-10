@@ -1310,16 +1310,16 @@ class UNode(object, metaclass=Meta_UNode):
         Translates ursgal parameters into uNode specific syntax.
 
         1) Each unode.USED_SEARCH_PARAMS contains params that have
-        to be passed to the uNode.
+            to be passed to the uNode.
         2) params values are not translated is they [] or {}
-        3) params values are translated using
-              uNode.USEARCH_PARAM_VALUE_TRANSLATIONS
-              > translating only values, regardless of key
-              uNode.USEARCH_PARAM_KEY_VALUE_TRANSLATOR
-              > translating only key:value pairs to key:newValue
+        3) params values are translated using::
+
+            uNode.USEARCH_PARAM_VALUE_TRANSLATIONS
+            > translating only values, regardless of key
+            uNode.USEARCH_PARAM_KEY_VALUE_TRANSLATOR
+            > translating only key:value pairs to key:newValue
 
         Those lookups are found in kb/{engine}.py
-
 
         TAG:
             - v0.4

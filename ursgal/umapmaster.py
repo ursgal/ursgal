@@ -116,17 +116,19 @@ class UParamMapper( dict ):
         '''
         Lists all uparams and the fields specified in the mask
 
-        e.g. upapa.get_masked_params( mask = ['uvalue_type'])
-        will return
-        {
-            '-xmx' : {
-                'uvalue_type' : "str",
-            },
-            'aa_exception_dict' : {
-                'uvalue_type' : "dict",
-            },
-            ...
-        }
+        For example::
+
+            upapa.get_masked_params( mask = ['uvalue_type']) will return::
+                {
+                    '-xmx' : {
+                        'uvalue_type' : "str",
+                    },
+                    'aa_exception_dict' : {
+                        'uvalue_type' : "dict",
+                    },
+                    ...
+                }
+
         '''
         if mask is None:
             mask = []

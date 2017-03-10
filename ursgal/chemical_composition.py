@@ -39,9 +39,9 @@ class ChemicalComposition(dict):
               '{peptide}'.format(pepitde='ELVISLIVES'),
               '{peptide}+{0}'.format('PO3', peptide='ELVISLIVES'),
               '{peptide}#{unimod}:{pos}'.format(
-                  peptide = 'ELVISLIVES',
-                  unimod = 'Oxidation',
-                  pos = 1
+              peptide = 'ELVISLIVES',
+              unimod = 'Oxidation',
+              pos = 1
               )
               ]
 

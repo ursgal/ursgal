@@ -36,6 +36,7 @@ class UController(ursgal.UNode):
         profile (str): Profiles key for faster parameter selection. This
             idea is adapted from MS-GF+ and translated to all search engines.
             Currently available profiles are:
+
                 * 'QExactive+'
                 * 'LTQ XL high res'
                 * 'LTQ XL low res'.
@@ -749,7 +750,9 @@ class UController(ursgal.UNode):
 
         Parses a target/decoy search result file and adds a column called
         "estimated_FDR".
+
         The CSV must contain:
+
             * a column with a quality score for each PSM (e-value, error probability etc.)
             * a column called "Is decoy" indicating whether a PSM is decoy or target.
 
@@ -1767,7 +1770,6 @@ class UController(ursgal.UNode):
                 be auto-generated.
 
         Example::
-
             >>> uc = ursgal.UController(
             ...    profile = 'LTQ XL high res',
             ...    params  = {'database': 'BSA.fasta'}
@@ -1789,6 +1791,7 @@ class UController(ursgal.UNode):
         Note:
             This function calls four search-related ursgal functions
             in succession, all of which can also be called individually:
+
                 * :meth:`.convert_to_mgf_and_update_rt_lookup` (if required)
                 * :meth:`.search_mgf`
                 * :meth:`.convert_results_to_csv`
