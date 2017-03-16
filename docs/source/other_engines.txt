@@ -27,8 +27,7 @@ Filter CSV 1_0_0
    :members:
    :private-members:
 
-.. autoclass:: ursgal.resources.platform_independent.arc_independent.filter_csv_1_0_0.filter_csv_1_0_0.main
-   :members:
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.filter_csv_1_0_0.filter_csv_1_0_0.main
 
 
 Generate Target Decoy 1_0_0
@@ -38,8 +37,7 @@ Generate Target Decoy 1_0_0
    :members:
    :private-members:
 
-.. autoclass:: ursgal.resources.platform_independent.arc_independent.generate_target_decoy_1_0_0.generate_target_decoy_1_0_0.main
-   :members:
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.generate_target_decoy_1_0_0.generate_target_decoy_1_0_0.main
 
 Merge CSVS 1_0_0
 ----------------
@@ -48,8 +46,7 @@ Merge CSVS 1_0_0
    :members:
    :private-members:
 
-.. autoclass:: ursgal.resources.platform_independent.arc_independent.merge_csvs_1_0_0.merge_csvs_1_0_0.main
-   :members:
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.merge_csvs_1_0_0.merge_csvs_1_0_0.main
 
 MzidLib 1_6_10
 --------------
@@ -66,23 +63,13 @@ MzidLib 1_6_11
 .. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
    :members:
 
-MzidLib 1_7
------------
-
-.. autoclass:: ursgal.wrappers.mzidentml_lib_1_7.mzidentml_lib_1_7
-   :members:
-
-.. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
-   :members:
-
 mzml2mgf 1_0_0
 --------------
 
 .. autoclass:: ursgal.wrappers.mzml2mgf_1_0_0.mzml2mgf_1_0_0
    :members:
 
-.. autoclass:: ursgal.resources.platform_independent.arc_independent.mzml2mgf_1_0_0.mzml2mgf_1_0_0.main
-   :members:
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.mzml2mgf_1_0_0.mzml2mgf_1_0_0.main
 
 Percolator 2_08
 ---------------
@@ -102,25 +89,19 @@ Unify CSV v1_0_0
 ----------------
 
 .. autoclass:: ursgal.wrappers.unify_csv_1_0_0.unify_csv_1_0_0
-
    :members:
    :private-members:
 
-.. autoclass:: ursgal.resources.platform_independent.arc_independent.unify_csv_1_0_0.unify_csv_1_0_0.main
-   :members:
-   :private-members:
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.unify_csv_1_0_0.unify_csv_1_0_0.main
 
 Venn Diagram v1_0_0
 -------------------
 
 .. autoclass:: ursgal.wrappers.venndiagram_1_0_0.venndiagram_1_0_0
-
    :members:
    :private-members:
 
-.. autoclass:: ursgal.resources.platform_independent.arc_independent.venndiagram_1_0_0.venndiagram_1_0_0.main
-   :members:
-   :private-members:
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.venndiagram_1_0_0.venndiagram_1_0_0.main
 
 xtandem2csv 1_0_0
 -----------------
@@ -128,8 +109,7 @@ xtandem2csv 1_0_0
 .. autoclass:: ursgal.wrappers.xtandem2csv_1_0_0.xtandem2csv_1_0_0
    :members:
 
-.. autoclass:: ursgal.resources.platform_independent.arc_independent.xtandem2csv_1_0_0.xtandem2csv_1_0_0.main
-   :members:
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.xtandem2csv_1_0_0.xtandem2csv_1_0_0.main
 
 msgfplus2csv_v2016_09_16 1_0_0
 ------------------------------
@@ -137,19 +117,14 @@ msgfplus2csv_v2016_09_16 1_0_0
 .. autoclass:: ursgal.wrappers.msgfplus2csv_v2016_09_16.msgfplus2csv_v2016_09_16
    :members:
 
-
 plot_pygcluster_heatmap_from_csv_1_0_0
 --------------------------------------
-
 
 .. autoclass:: ursgal.wrappers.plot_pygcluster_heatmap_from_csv_1_0_0.plot_pygcluster_heatmap_from_csv_1_0_0
    :members:
    :private-members:
 
-.. autoclass:: ursgal.resources.platform_independent.arc_independent.plot_pygcluster_heatmap_from_csv_1_0_0.plot_pygcluster_heatmap_from_csv_1_0_0.main
-
-   :members:
-   :private-members:
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.plot_pygcluster_heatmap_from_csv_1_0_0.plot_pygcluster_heatmap_from_csv_1_0_0.main
 
 
 Kojak tailored Percolator 2_08

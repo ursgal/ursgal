@@ -36,6 +36,7 @@ class UController(ursgal.UNode):
         profile (str): Profiles key for faster parameter selection. This
             idea is adapted from MS-GF+ and translated to all search engines.
             Currently available profiles are:
+
                 * 'QExactive+'
                 * 'LTQ XL high res'
                 * 'LTQ XL low res'.
@@ -59,7 +60,6 @@ class UController(ursgal.UNode):
         'utranslation_style'        : 'ucontroller_style_1',
         'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis. J. Proteome res. acs.jproteome.5b00860 (2015). doi:10.1021/acs.jproteome.5b00860'
     }
-
 
     def __init__( self, *args, **kwargs):
         # kwargs['engine_path'] = ursgal.__file__
@@ -175,7 +175,6 @@ class UController(ursgal.UNode):
         # self.print_info('Ucontroller resetted {0}...'.format( addon_text ))
         return
 
-
     def _collect_all_unode_wrappers( self ):
         '''
         The ucontroller function to collect all unode wrappers
@@ -186,10 +185,12 @@ class UController(ursgal.UNode):
             dict: Dictionary of unodes
         '''
         unodes = {
-            '_by_meta_type' : {}, # groups e.g. all search engines
-            '_engine_type' : {}   # groups e.g. all XTandem
+            '_by_meta_type' : {},  # groups e.g. all search engines
+            '_engine_type' : {}    # groups e.g. all XTandem
         }
-        wrappers_path_glob = os.path.join( ursgal.base_dir, 'wrappers', '*.py' )
+        wrappers_path_glob = os.path.join(
+            ursgal.base_dir, 'wrappers', '*.py'
+        )
         for wrapper_file in glob.glob( wrappers_path_glob ):
             filename = os.path.basename( wrapper_file )
             # if 'omssa' not in wrapper_file:
@@ -749,7 +750,9 @@ class UController(ursgal.UNode):
 
         Parses a target/decoy search result file and adds a column called
         "estimated_FDR".
+
         The CSV must contain:
+
             * a column with a quality score for each PSM (e-value, error probability etc.)
             * a column called "Is decoy" indicating whether a PSM is decoy or target.
 
@@ -1767,7 +1770,6 @@ class UController(ursgal.UNode):
                 be auto-generated.
 
         Example::
-
             >>> uc = ursgal.UController(
             ...    profile = 'LTQ XL high res',
             ...    params  = {'database': 'BSA.fasta'}
@@ -1789,6 +1791,7 @@ class UController(ursgal.UNode):
         Note:
             This function calls four search-related ursgal functions
             in succession, all of which can also be called individually:
+
                 * :meth:`.convert_to_mgf_and_update_rt_lookup` (if required)
                 * :meth:`.search_mgf`
                 * :meth:`.convert_results_to_csv`

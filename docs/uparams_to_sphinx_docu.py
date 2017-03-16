@@ -78,6 +78,10 @@ Ursgal to Engine Parameters overview
     for ursgal_param, udict in sorted(ursgal_params.items()):
         # if len(udict['available_in_unode']) <= 5:
         #     continue
+        if isinstance(udict['default_value'], dict):
+            default_value = str(sorted(udict['default_value'])).strip()
+        else:
+            default_value = str(udict['default_value']).strip()
         uprint('''
 .. raw:: html
 
@@ -96,7 +100,7 @@ Ursgal to Engine Parameters overview
             ursgal_param,
             '#' * (len(ursgal_param) + 11),
             desc = udict['description'].strip(),
-            default_value = str(udict['default_value']).strip(),
+            default_value = default_value,
             type = udict.get('uvalue_type', ''),
             rerun = udict.get('trigger_rerun', 'False')
         ))

@@ -18,13 +18,15 @@ def main(input_file=None, output_file=None, params=None):
         params (dict): params as passed by ursgal
 
     Please visit pyGCluster documentation for more information on this plotting
-    function
+    function::
+
          * http://pygcluster.github.io/usage.html#clustered-data-visualization
          * color gradients
          * box styles
 
 
-    Available parameters for heatmap
+    Available parameters for heatmap::
+
         * heatmap_identifier_field_name defines the fieldname in the csv to
           appear directly right of the heatmap rows. Tipically the gene or
           protein name (Default: 'Protein')
