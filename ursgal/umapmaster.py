@@ -11,9 +11,18 @@ import ursgal
 from ursgal.uparams import ursgal_params as urgsal_dict
 from collections import defaultdict as ddict
 import multiprocessing
-import re
 import os
 import time
+
+try:
+    import regex as regex
+    finditer_kwargs = { 'overlapped' : True }
+except:
+    print('[ WARNING  ] Standard re module cannot find overlapping pattern')
+    print('[   INFO   ] Consider installing the regex module')
+    print('[   INFO   ] pip install -r requirements.txt')
+    import re as regex
+    finditer_kwargs = {}
 
 class UParamMapper( dict ):
     '''
@@ -432,11 +441,11 @@ class UPeptideMapper( dict ):
             else:
                 if l_peptide < self.word_len or force_regex:
                     self.hits['regex'] += 1
-                    pattern = re.compile( r'''{0}'''.format( peptide ))
+                    pattern = regex.compile( r'''{0}'''.format( peptide ))
                     # we have to through it by hand ...
                     # for fasta
                     for id, seq in self.fasta_sequences[ fasta_name ].items():
-                        for match in pattern.finditer( seq ):
+                        for match in pattern.finditer( seq, **finditer_kwargs ):
                             start = match.start() + 1
                             end   = match.end()
                             hit = self._format_hit_dict(  seq, start, end, id )

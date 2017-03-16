@@ -942,10 +942,17 @@ if __name__ == '__main__':
     params = {
         'translations' : {
             'aa_exception_dict' : {
+                'J' : {
+                'original_aa' : 'L',
+                },
+                'O' : {
+                    'original_aa' : 'K',
+                    'unimod_name' : 'Methylpyrroline',
+                },
                 'U' : {
-                    'unimod_name' : 'Delta:S(-1)Se(1)',
                     'original_aa' : 'C',
-                    'unimod_name_with_cam': 'SecCarbamidomethyl',
+                    'unimod_name' : 'Delta:S(-1)Se(1)',
+                    'unimod_name_with_cam' : 'SecCarbamidomethyl',
                 },
             },
             'modifications' : [

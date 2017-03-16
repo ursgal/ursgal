@@ -7,6 +7,14 @@ import pprint
 from ursgal import umapmaster as umama
 import pprint
 
+try:
+    import regex
+    regex_module_installed = True
+except:
+    regex_module_installed = False
+    
+
+
 TEST_FASTA = [
     '>Protein1\n',
     'ELVISLIVES\n',
@@ -200,12 +208,22 @@ class UMapMaster(unittest.TestCase):
         )
 
     def test_multiple_occurrence_with_opverlap_in_one_seq(self):
-        maps = self.upapa_5.map_peptide( peptide='GGGGGGG', fasta_name='Test.fasta')
+        maps = self.upapa_5.map_peptide(
+            peptide='GGGGGGG',
+            fasta_name='Test.fasta'
+        )
         self.assertEqual( len(maps), 4 )
         self.assertEqual(
             sorted([ m['start'] for m in maps] ),
             [1,2,3,4]
         )
+        if regex_module_installed:
+            #test short sequence, regex does not work with overlap
+            maps = self.upapa_5.map_peptide(
+                peptide='GGGG',
+                fasta_name='Test.fasta'
+            )
+            self.assertEqual( len(maps), 7 )
 
     def test_sort_independece(self):
         map_1 = self.upapa_5.map_peptide(
