@@ -8,12 +8,21 @@
 
 """
 import ursgal
-from ursgal.uparams import ursgal_params as urgsal_dict
 from collections import defaultdict as ddict
 import multiprocessing
-import re
 import os
 import time
+
+try:
+    import regex as regex
+    finditer_kwargs = { 'overlapped' : True }
+except:
+    print('[ WARNING  ] Standard re module cannot find overlapping pattern')
+    print('[   INFO   ] Consider installing the regex module')
+    print('[   INFO   ] pip install -r requirements.txt')
+    import re as regex
+    finditer_kwargs = {}
+
 
 class UParamMapper( dict ):
     '''
@@ -30,7 +39,8 @@ class UParamMapper( dict ):
 
         assert len(args) <= 1, 'Can only be initialized with max one argument'
         if len(args) == 0:
-            params_dict = urgsal_dict
+            params_dict = ursgal.uparams.ursgal_params
+            # urgsal_dict
         else:
             params_dict = args[0]
 
@@ -40,6 +50,7 @@ class UParamMapper( dict ):
             'cpus' : {
                 'max'     : multiprocessing.cpu_count(),
                 'max - 1' : multiprocessing.cpu_count() - 1,
+                'max-1'   : multiprocessing.cpu_count() - 1,
             }
         }
 
@@ -52,6 +63,9 @@ class UParamMapper( dict ):
         if ukey in self._eval_functions.keys():
             if uvalue in self._eval_functions[ ukey ].keys():
                 rvalue = self._eval_functions[ ukey ][ uvalue ]
+                if ukey == 'cpus' and rvalue == 0:
+                    rvalue = 1
+
         return rvalue
 
     def mapping_dicts( self, engine_or_engine_style):
@@ -113,17 +127,19 @@ class UParamMapper( dict ):
         '''
         Lists all uparams and the fields specified in the mask
 
-        e.g. upapa.get_masked_params( mask = ['uvalue_type'])
-        will return
-        {
-            '-xmx' : {
-                'uvalue_type' : "str",
-            },
-            'aa_exception_dict' : {
-                'uvalue_type' : "dict",
-            },
-            ...
-        }
+        For example::
+
+            upapa.get_masked_params( mask = ['uvalue_type']) will return::
+                {
+                    '-xmx' : {
+                        'uvalue_type' : "str",
+                    },
+                    'aa_exception_dict' : {
+                        'uvalue_type' : "dict",
+                    },
+                    ...
+                }
+
         '''
         if mask is None:
             mask = []
@@ -285,12 +301,23 @@ class UPeptideMapper( dict ):
         needed anymore, using the `UPeptideMapper.purge_fasta_info()` function.
 
     '''
-    def __init__(self, word_len = 6 ):
+    def __init__(self, word_len = None ):
+        if word_len is None:
+            word_len = ursgal.uparams.ursgal_params['word_len'].get(
+                'default_value', 8
+            )
+            '''Ultimately this will be passed over by the wrapper
+            if this class is its own standalone script / UNode
+            '''
         self.fasta_sequences = {}
         self.word_len = word_len
         self.hits = {'fcache': 0, 'regex': 0}
         self.query_length = ddict(int)
         self.master_buffer = {}
+        # print(ursgal._ursgal_params)
+        # print( )
+        # exit(dir(ursgal)) #.Meta_UNode._upeptide_mapper)#['word_len'])
+        # exit(ursgal.uparams.ursgal_params['word_len'])
         pass
 
     def build_lookup_from_file( self, path_to_fasta_file, force=True):
@@ -308,7 +335,7 @@ class UPeptideMapper( dict ):
             self.build_lookup(
                 fasta_name   = internal_name,
                 fasta_stream = io.readlines(),
-                force        = force
+                force        = force,
             )
         return internal_name
 
@@ -323,17 +350,30 @@ class UPeptideMapper( dict ):
             self.fasta_sequences[ fasta_name ] = {}
 
         self.master_buffer[ fasta_name ] = {}
-
+        # self.word_len = 6
         if force:
-            for id, seq in ursgal.ucore.parseFasta( fasta_stream ):
+            for upapa_id, (id, seq) in enumerate(
+                    ursgal.ucore.parseFasta( fasta_stream )):
+                print(
+                    '[   upapa  ] Indexing sequence #{0} with word_len {1}'.format(
+                        upapa_id,
+                        self.word_len
+                    ),
+                    end = '\r'
+                )
                 if seq.endswith('*'):
                     seq = seq.strip('*')
                 self.fasta_sequences[ fasta_name ][ id ] = seq
                 self._create_fcache(
                     id         = id,
                     seq        = seq,
-                    fasta_name = fasta_name
+                    fasta_name = fasta_name,
                 )
+                # if upapa_id > 10000:
+                #     break
+            print()
+        # input('bp')
+        # exit(1)
 
     def _create_fcache(self, id=None, seq=None, fasta_name=None):
         '''
@@ -342,10 +382,48 @@ class UPeptideMapper( dict ):
         for pos in range(len( seq ) - self.word_len + 1):
             pep = seq[ pos : pos + self.word_len ]
             # pep = pep.encode()
+
+            # Raw 6.3GB
+            # try:
+            #     self[ fasta_name ][ pep ].add( (id, pos + 1) )
+            # except:
+            #     self[ fasta_name ][ pep ] = set([ (id, pos + 1) ])
+
+            # sorted 3.8GB
+            s_pep = ''.join(sorted(pep))
+            # print(s_pep, type(s_pep))
             try:
-                self[ fasta_name ][ pep ].add( (id, pos + 1) )
+                self[ fasta_name ][ s_pep ].add( (id, pos + 1) )
             except:
-                self[ fasta_name ][ pep ] = set([ (id, pos + 1) ])
+                self[ fasta_name ][ s_pep ] = set([ (id, pos + 1) ])
+
+            # tree like ... 3.8 GB
+            # current_depth = self[ fasta_name ]
+            # for aa in sorted(pep):
+            #     try:
+            #         current_depth[ ord(aa) ]
+            #     except:
+            #         current_depth[ ord(aa) ] = {}
+            #     current_depth = current_depth[ ord(aa) ]
+            # try:
+            #     current_depth['_'].add( (id, pos + 1) )
+            # except:
+            #     current_depth['_'] = set([ (id, pos + 1) ])
+
+            # Counter compression 4.1 GB
+            # current_depth = self[ fasta_name ]
+            # # for aa in sorted(pep):
+            # for aa, count in Counter(pep).items():
+            #     aa_key = '{0}{1}'.format(aa, count)
+            #     try:
+            #         current_depth[ aa_key ]
+            #     except:
+            #         current_depth[ aa_key ] = {}
+            #     current_depth = current_depth[ aa_key ]
+            # try:
+            #     current_depth['_'].add( (id, pos + 1) )
+            # except:
+            #     current_depth['_'] = set([ (id, pos + 1) ])
 
         return
 
@@ -369,19 +447,17 @@ class UPeptideMapper( dict ):
         required_hits                    = l_peptide - self.word_len
 
         self.query_length[ l_peptide ] += 1
-
-
         if fasta_name in self.keys():
             if peptide in self.master_buffer[fasta_name].keys():
                 mappings = self.master_buffer[fasta_name][peptide]
             else:
                 if l_peptide < self.word_len or force_regex:
                     self.hits['regex'] += 1
-                    pattern = re.compile( r'''{0}'''.format( peptide ))
+                    pattern = regex.compile( r'''{0}'''.format( peptide ))
                     # we have to through it by hand ...
                     # for fasta
                     for id, seq in self.fasta_sequences[ fasta_name ].items():
-                        for match in pattern.finditer( seq ):
+                        for match in pattern.finditer( seq, **finditer_kwargs ):
                             start = match.start() + 1
                             end   = match.end()
                             hit = self._format_hit_dict(  seq, start, end, id )
@@ -394,7 +470,9 @@ class UPeptideMapper( dict ):
                         pep = peptide[ pos : pos + self.word_len ]
                         # pep = pep.encode()
                         # print( pep, peptide )
-                        fasta_set = self[ fasta_name ].get(pep, None)
+                        s_pep = ''.join(sorted(pep))
+
+                        fasta_set = self[ fasta_name ].get(s_pep, None)
                         if fasta_set is None:
                             continue
 
@@ -406,7 +484,7 @@ class UPeptideMapper( dict ):
 
                     for id, pos_set in tmp_hits.items():
                         sorted_positions = sorted(pos_set)
-                        seq              = self.fasta_sequences[ fasta_name ][ id ]
+                        seq = self.fasta_sequences[ fasta_name ][ id ]
 
                         for n, pos in enumerate( sorted_positions ):
                             start = sorted_positions[n]
@@ -425,7 +503,9 @@ class UPeptideMapper( dict ):
                                 if seq[ start - 1 : end ] == peptide:
                                     # double check
                                     mappings.append(
-                                        self._format_hit_dict( seq, start, end, id)
+                                        self._format_hit_dict(
+                                            seq, start, end, id
+                                        )
                                     )
                 self.master_buffer[fasta_name][peptide] = mappings
         return mappings
@@ -459,10 +539,10 @@ class UPeptideMapper( dict ):
             post_aa = seq[ end ]
         hit = {
             'start' : start,
-            'end'  : end,
-            'id' : id,
-            'pre': pre_aa ,
-            'post': post_aa,
+            'end'   : end,
+            'id'    : id,
+            'pre'   : pre_aa ,
+            'post'  : post_aa,
         }
         return hit
 
@@ -472,6 +552,7 @@ class UPeptideMapper( dict ):
         '''
         del self.fasta_sequences[ fasta_name ]
         del self[ fasta_name ]
+
 
 if __name__ == '__main__':
     print('Yes!')

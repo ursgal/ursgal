@@ -6,7 +6,7 @@ import glob
 import os
 
 def main(folder=None, profile=None, target_decoy_database=None):
-    ''' 
+    '''
     An example test script to search all mzML files which are present in the
     specified folder. The search is currently performed on 4 search engines
     and 2 validation engines.
@@ -40,9 +40,8 @@ def main(folder=None, profile=None, target_decoy_database=None):
         'omssa',
         'xtandem_vengeance',
         'msgfplus_v2016_09_16',
-        'msamanda_1_0_0_6300',
-        'myrimatch_2_1_138',
-
+        # 'msamanda_1_0_0_6300',
+        # 'myrimatch_2_1_138',
     ]
 
     validation_engines = [
@@ -52,7 +51,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
 
     # Modifications that should be included in the search
     all_mods = [
-        # 'C,fix,any,Carbamidomethyl',
+        'C,fix,any,Carbamidomethyl',
         'M,opt,any,Oxidation',
         # 'N,opt,any,Deamidated',
         # 'Q,opt,any,Deamidated',
@@ -63,7 +62,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
         # 'S,opt,any,Phospho',
         # 'T,opt,any,Phospho',
         # 'N,opt,any,HexNAc'
-        ]
+    ]
 
     # Initializing the Ursgal UController class with
     # our specified modifications and mass spectrometer

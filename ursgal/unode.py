@@ -608,7 +608,7 @@ class UNode(object, metaclass=Meta_UNode):
         mapping to a sorted list of tuples containing each
         a) score (from validation_score_field) and
         b) the whole line dict
-        
+
         Keyword Arguments:
             validation_score_field (str): fieldname of the column that should be used as validation score
                 for sorting of PSMs. If None, get_last_search_engine is used to get the validation_score_field
@@ -752,12 +752,11 @@ class UNode(object, metaclass=Meta_UNode):
                 sorted( self.params[ 'modifications' ] )):
             mod_params  = mod.split( ',' )
             if len(mod_params) >=6 or len(mod_params) <=3:
-                print( '''
-                    [ WARNING ] For modifications, please use the ursgal_style:
-                    [ WARNING ] 'amino_acid,opt/fix,position,Unimod PSI-MS Name'
-                    [ WARNING ] or
-                    [ WARNING ] 'amino_acid,opt/fix,position,name,chemical_composition'
-                    [ WARNING ] Continue without modification {0} '''.format( mod )
+                print('''[ WARNING ] For modifications, please use the ursgal_style:
+[ WARNING ] 'amino_acid,opt/fix,position,Unimod PSI-MS Name'
+[ WARNING ] or
+[ WARNING ] 'amino_acid,opt/fix,position,name,chemical_composition'
+[ WARNING ] Continue without modification {0} '''.format( mod )
                 )
                 print(mod_params)
                 continue
@@ -773,15 +772,14 @@ class UNode(object, metaclass=Meta_UNode):
                 mass = ursgal.GlobalUnimodMapper.name2mass( unimod_name )
                 composition = ursgal.GlobalUnimodMapper.name2composition( unimod_name )
                 if unimod_id is None:
-                    print (    '''
-                        [ WARNING ] '{1}' is not a Unimod modification
-                        [ WARNING ] please change it to a valid PSI-MS unimod_Name
-                        [ WARNING ] or add the chemical composition hill notation (including 1)
-                        [ WARNING ] e.g.: H-1N1O2
-                        [ WARNING ] ursgal_style: 'amino_acid,opt/fix,position,name,chemical_composition'
-                        [ WARNING ] Continue without modification {0} '''.format(
-                            mod,
-                            unimod_name
+                    print('''[ WARNING ] '{1}' is not a Unimod modification
+[ WARNING ] please change it to a valid PSI-MS unimod_Name
+[ WARNING ] or add the chemical composition hill notation (including 1)
+[ WARNING ] e.g.: H-1N1O2
+[ WARNING ] ursgal_style: 'amino_acid,opt/fix,position,name,chemical_composition'
+[ WARNING ] Continue without modification {0} '''.format(
+                        mod,
+                        unimod_name
                     ))
                     continue
                 unimod = True
@@ -1028,10 +1026,13 @@ class UNode(object, metaclass=Meta_UNode):
         )
         self.print_info(  msg, caller=tag )
 
-    def print_info( self, msg, caller=None ):
+    @classmethod
+    def print_info( cls, msg, caller=None ):
         if caller is None:
-            caller = self.engine
-
+            if hasattr(cls, 'engine'):
+                caller = cls.engine
+            else:
+                caller = ''
         if len(caller) > 7:
             caller = caller[:8]
 
@@ -1209,7 +1210,11 @@ class UNode(object, metaclass=Meta_UNode):
             'denovo_engine',
             False
         )
-        if is_search_engine or is_denovo_engine:
+        is_crosslink_engine = self.META_INFO['engine_type'].get(
+            'cross_link_engine',
+            False
+        )
+        if is_search_engine or is_denovo_engine or is_crosslink_engine:
             self.map_mods()
 
         self.stats['history'] = self.update_history_status(
@@ -1305,16 +1310,16 @@ class UNode(object, metaclass=Meta_UNode):
         Translates ursgal parameters into uNode specific syntax.
 
         1) Each unode.USED_SEARCH_PARAMS contains params that have
-        to be passed to the uNode.
+            to be passed to the uNode.
         2) params values are not translated is they [] or {}
-        3) params values are translated using
-              uNode.USEARCH_PARAM_VALUE_TRANSLATIONS
-              > translating only values, regardless of key
-              uNode.USEARCH_PARAM_KEY_VALUE_TRANSLATOR
-              > translating only key:value pairs to key:newValue
+        3) params values are translated using::
+
+            uNode.USEARCH_PARAM_VALUE_TRANSLATIONS
+            > translating only values, regardless of key
+            uNode.USEARCH_PARAM_KEY_VALUE_TRANSLATOR
+            > translating only key:value pairs to key:newValue
 
         Those lookups are found in kb/{engine}.py
-
 
         TAG:
             - v0.4

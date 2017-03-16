@@ -41,10 +41,9 @@
 	    search_engines  = [
 	        'omssa',
 	        'xtandem_vengeance',
-	        'msgf',
-	        'msamanda_1_0_0_6300',
-	        'myrimatch_2_1_138',
-	
+	        'msgfplus_v2016_09_16',
+	        # 'msamanda_1_0_0_6300',
+	        # 'myrimatch_2_1_138',
 	    ]
 	
 	    validation_engines = [
@@ -54,7 +53,7 @@
 	
 	    # Modifications that should be included in the search
 	    all_mods = [
-	        # 'C,fix,any,Carbamidomethyl',
+	        'C,fix,any,Carbamidomethyl',
 	        'M,opt,any,Oxidation',
 	        # 'N,opt,any,Deamidated',
 	        # 'Q,opt,any,Deamidated',
@@ -65,7 +64,7 @@
 	        # 'S,opt,any,Phospho',
 	        # 'T,opt,any,Phospho',
 	        # 'N,opt,any,HexNAc'
-	        ]
+	    ]
 	
 	    # Initializing the Ursgal UController class with
 	    # our specified modifications and mass spectrometer

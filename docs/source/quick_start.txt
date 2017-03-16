@@ -7,7 +7,7 @@ This tutorial will explain the basic usage of Ursgal using simple examples.
 To get started, make sure you have :ref:`installed Ursgal<installation>`.
 
 1. Getting Started
---------------------------------
+------------------
 
 Once you installed Ursgal, you should be able to import it in your Python3 scripts like this: ::
 
@@ -21,12 +21,14 @@ This should print a list of engines to your screen, sorted by category: ::
 The UController controls, manages and executes the tools that are available in Ursgal. These tools are called UNodes. Some UNodes (especially search engines) require binary executable files, which are not included in Ursgal by default. If the UController overview shows a lot of missing search engines, you probably have not executed the script 'install_resources.py' in the Ursgal directory (see: :ref:`Installation<installation>`). This script automatically downloads third-party tools. 'install_resources.py' should be executed before 'setup.py'. If you did it the other way around, you have to re-run 'setup.py' once again.
 
 2. Running a Simple Search
---------------------------------
+---------------------------
 
 One of the key features of Ursgal is peptide spectrum matching with up to five search engines.
 To perform a search, you need:
+
     * a peptide database (.fasta) that will be searched
     * one or more mass spectrometer output files (.mzML or .mgf)
+
 Once you have these files, you are ready to execute a full search with Ursgal: ::
 
     import ursgal
@@ -43,7 +45,7 @@ This will produce a .csv file containing the peptide-spectrum-matches (PSMs) fou
 
 
 3. Adjusting Parameters
---------------------------------
+-----------------------
 
 If you used OMSSA or any other search engine before, you will know that there are a lot of search parameters and settings that can be defined. For instance, depending on the mass spectrometer that was used, you might want to set the fragment mass tolerance unit to Dalton or ppm.
 In Ursgal, there are two ways to adjust such parameters: ::
@@ -74,7 +76,7 @@ Profiles can be used like this: ::
 
 
 4. Available Workflow Functions
---------------------------------
+-------------------------------
 
 You have already seen the :meth:`.UController.search` function in section 2. :meth:`.UController.search` is only one of many UController functions that you can use to define custom workflows. A commonly used procedure is to post-process search engine results with tools such as `Percolator <http://www.per-colator.com/>`_ or `qvality <http://noble.gs.washington.edu/proj/qvality/>`_. These tools can be accessed using the :meth:`.UController.validate` function. In this example, we use Percolator to discriminate correct from incorrect peptide-spectrum matches and calculate posterior error probabilities: ::
 
@@ -141,7 +143,7 @@ The above script will generate ten output files (search results of two mzML file
 
 
 6. JSONs, Force and File Names
---------------------------------
+------------------------------
 
 If you execute the same Ursgal script twice, you will notice that the UNodes are not executed in the second run. This is because Ursgal notes down the input file (md5) and relevant parameters of each UNode execution. If these factors did not change, re-running your script will not execute the UNode again.
 This makes it possible to cancel Ursgal scripts and resume them later without losing progress, for instance to add an additional search engine. Information about each run is stored in files ending with .u.json. Since the JSON format is human-readable, these files also act as log files that contain all relevant parameters and file paths.
@@ -158,7 +160,7 @@ Another useful keyword argument is 'output_file_name', which allows you to defin
 
 
 7. Example Scripts
---------------------------------
+------------------
 
 Now that we covered all the basics of Ursgal, you should be able to write a basic Ursgal script. Make sure to check out the :ref:`example scripts<examplescripts>` folder ("ursgal/example_scripts") which contains a variety of basic and advanced Ursgal scripts that are ready to execute.
 Example scripts will automatically download the required files before execution.

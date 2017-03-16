@@ -6,8 +6,9 @@ Create/Implement your own UNode
 Before implementing your own UNode, make sure that you have read about
 the :ref:`General structure<general_structure>` of Ursgal.
 This page will explain how to integrate a standalone executable or Python
-script into Ursgal's structure of **resources**, **knowledge base (kb)**
-and **engines**, based on two examples:
+script into Ursgal's structure of **resources**, **wrappers**
+and **uparams.py**, based on two examples:
+
     * A Python script: filter_csv_1_0_0.py
     * A standalone search engine: MS-GF+ v9979
 
@@ -20,8 +21,9 @@ Each UNode requires its own subfolder in the **resources/** folder, which contai
 executable.
 
 Note:
-    The UNodes' **resources/** subfolder, **engine/** class and **kb/** file should all have the same name
-    (lowercase and underscores instead of spaces, i.e. 'msgfplus_v9979' or 'filter_csv_1_0_0').
+    The UNodes' **resources/** subfolder, **wrapper/** file and **wrapper/** file Python class
+    should all have the same name (lowercase and underscores instead of spaces, e.g.
+    'msgfplus_v9979' or 'filter_csv_1_0_0').
 
 
     #. Platfom dependent engines need to be placed according to the platform:
@@ -51,16 +53,16 @@ Note:
 2. Integration into uparams.py
 ------------------------------
 
-Each parameter that is used by an engine needs to be included in uparams.py.
-This is a dictionary containing all parameters that are available in ursgal, its structure is explained here **insert link**.
+Each parameter that is used by an engine needs to be included in the file <ursgal_path>/ursgal/uparams.py.
+This is a dictionary containing all parameters that are available in ursgal, its structure is explained :ref:`here<uparams>`.
 
 For every parameter that can be used by a new engine, it should be checked if a corresponding parameter is already present in uparams.py.
 If this is the case, the new engine (unode name) needs to be included in 'available_in_unode'. Furthermore, 'ukey_translation' needs to contain
-the utranslation_style that is defined in the engines META_INFO (see General Structure) translating the ursgal parameter into the engine specific
+the utranslation_style that is defined in the engines :ref:`META_INFO<metainfo>` translating the ursgal parameter into the engine-specific
 parameter name. The parameter values can be translated in 'uvalue_translation' using the utranslation_style as well (only if a translation is necessary).
 
 **Example**: include the parameter '-e' for MS-GF+ ::
-  
+
     # -e defines the enzyme that has been used for digestion. This is called 'enzyme' in ursgal.
     'enzyme' : {
         # include msgfplus_v9979 in available_in_unode
@@ -120,7 +122,7 @@ parameter name. The parameter values can be translated in 'uvalue_translation' u
             },
 
 
-If a parameter is not yet present in uparams.py, you can add a new paramter containing all necessary informations.
+If a parameter is not yet present in uparams.py, you can add a new parameter containing all necessary information.
 
 **Example** add write_unfiltered_results for filter_csv_1_0_0 ::
 
@@ -142,11 +144,11 @@ If a parameter is not yet present in uparams.py, you can add a new paramter cont
             'uvalue_type' : "bool",
         },
 
-After changing uparams.py, please run rewrite_uparams.py to ckeck for duplicates/errors and to sort the dictionary.
+After changing uparams.py, please run rewrite_uparams.py to check for duplicates/errors and to sort the dictionary.
 
 
-3. Implementation into Engines
-------------------------------
+3. Implementation of the wrapper class
+--------------------------------------
 
 Each UNode has to have a Python wrapper file located in:
 
@@ -167,27 +169,27 @@ The default structure of the UNode class has to be::
 
         def preflight(self):
             # code that should be run before the UNode is executed
-            # i.e. writing a config file
+            # e.g. writing a config file
             return
 
         def postflight(self):
             # code that should be run after the UNode is executed
-            # i.e. formatting the output file
+            # e.g. formatting the output file
             return
 
-where `my_unode_1_0_0` is the name of the UNode. The META_INFO is explained here **insert link** and is available as attribute of each UNode.
+where `my_unode_1_0_0` is the name of the UNode. The META_INFO is explained :ref:`here<metainfo>` and is available as attribute of each UNode.
 One can define `preflight()` and `postflight()` methods that will be executed by the uNode during preflight and postflight
 (= before execution of the main executable and after execution).
 
 
-3.1 Implementaion of an engine from a command line tool
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3.1 Implementation of an engine from a command line tool
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For binary executable UNodes, one has to create a command line list (see `subprocess`_) in
 the `preflight()` method. The command list is used to run the UNode's executable with the
 appropriate command line parameters. It should include the executable path of the engine
-(accessible via self.exe) and all relevant parameters, available via self.params, containing the 
-original parameters and values. self.params['translations'] contains translated values for all 
+(accessible via self.exe) and all relevant parameters, available via self.params, containing the
+original parameters and values. self.params['translations'] contains translated values for all
 node-related parameters. Furthermore self.params['translations']['_grouped_by_translated_key']
 is a dictionary containing all node-related parameters and their corresponding
 ursgal parameters with the translated values.
@@ -339,7 +341,7 @@ a postflight function was defined as part of the class), e.g.::
 
 
 3.2 Implementation of a UNode from Python code
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Using sys.argv or the argparse module, any Python code can be executed like a command line tool.
 Thus, it is possible to include pure Python UNodes using the steps described above.

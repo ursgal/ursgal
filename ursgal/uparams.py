@@ -6,6 +6,7 @@ ursgal_params = {
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : "13312m",
         'description' :  ''' Set maximum Java heap size (used RAM) ''',
@@ -56,8 +57,28 @@ ursgal_params = {
         },
         'uvalue_type' : "dict",
     },
+    'accept_conflicting_psms' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : False,
+        'description' :  ''' If True, multiple PSMs for one spectrum can be reported if their score difference is below the threshold. If False, all PSMs for one spectrum are removed if the score difference between the best and secondbest PSM is not above the threshold, i.e. if there are conflicting PSMs with similar scores. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1' : 'accept_conflicting_psms',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
     'base_mz' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'omssa_2_1_9',
             'pepnovo_3_1',
         ],
@@ -65,6 +86,7 @@ ursgal_params = {
         'description' :  ''' m/z value that is used as basis for the conversion from ppm to Da ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'base_mz',
             'omssa_style_1' : 'base_mz',
             'pepnovo_style_1' : 'base_mz',
         },
@@ -356,6 +378,7 @@ ursgal_params = {
     },
     'cpus' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
@@ -372,6 +395,7 @@ ursgal_params = {
         'description' :  ''' Number of used cpus/threads ''',
         'triggers_rerun' : False,
         'ukey_translation' : {
+            'kojak_style_1' : 'cpus',
             'msgfplus_style_1' : '-thread',
             'myrimatch_style_1' : '-cpus',
             'omssa_style_1' : '-nt',
@@ -388,6 +412,31 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "int _uevaluation_req",
+    },
+    'cross_link_definition' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : "nK  nK  138.0680742 BS3",
+        'description' :  ''' Cross-link and mono-link masses allowed.
+May have more than one of each parameter.
+Format for cross_link is:
+**[amino acids] [amino acids] [mass mod] [identifier]**
+One or more amino acids (uppercase only!!) can be specified for
+each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
+N-terminus or C-terminus ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'cross_link_definition',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
     },
     'csv_filter_rules' : {
         'available_in_unode' : [
@@ -413,6 +462,8 @@ ursgal_params = {
     },
     'database' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -435,6 +486,8 @@ ursgal_params = {
         'description' :  ''' Path to database file containing protein sequences in fasta format ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'database',
+            'moda_style_1' : 'Fasta',
             'msamanda_style_1' : 'database',
             'msgfplus_style_1' : '-d',
             'myrimatch_style_1' : 'ProteinDatabase',
@@ -507,10 +560,12 @@ ursgal_params = {
     'decoy_tag' : {
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
+            'kojak_1_5_3',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
         ],
@@ -519,6 +574,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'decoy_tag',
+            'kojak_style_1' : 'decoy_tag',
             'myrimatch_style_1' : 'DecoyPrefix',
             'mzidentml_style_1' : '-decoyRegex',
             'unify_csv_style_1' : 'decoy_tag',
@@ -673,6 +729,8 @@ ursgal_params = {
     'enzyme' : {
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
+            'kojak_1_5_3',
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -720,11 +778,13 @@ ursgal_params = {
                 'trypsin'
                 'trypsin_chymotrypsin
                 'trypsin_cnbr'
-                'trypsin_p'
-        ''',
+                'trypsin_p',
+                'lysc_gluc', ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'enzyme',
+            'kojak_style_1' : 'enzyme',
+            'moda_style_1' : 'Enzyme',
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-e',
             'myrimatch_style_1' : 'CleavageRules',
@@ -760,6 +820,7 @@ ursgal_params = {
                 'gluc_bicarb' : 'E;C;P',
                 'iodosobenzoate' : 'W;C;',
                 'lysc' : 'K;C;P',
+                'lysc_gluc' : 'DEK;C;P',
                 'lysc_p' : 'K;C;',
                 'lysn' : 'K;N;',
                 'lysn_promisc' : 'AKRS;N;',
@@ -770,6 +831,38 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
+            },
+            'kojak_style_1' : {
+                'gluc' : '[DE]|{P}',
+                'lysc_gluc' : '[DEK]|{P}',
+                'lysn' : '|[K]',
+                'trypsin' : '[KR]|{P}',
+                'trypsin_p' : '[RK]|',
+            },
+            'moda_style_1' : {
+                'argc' : 'argc, R/C',
+                'aspn' : 'aspn, D/N;',
+                'chymotrypsin' : 'chymotrypsin, FMWY/C',
+                'chymotrypsin_p' : 'chymotrypsin, FMWY/C',
+                'clostripain' : 'clostripain, R/C',
+                'cnbr' : 'cnbr, M/C',
+                'elastase' : 'elastase, AGILV/C',
+                'formic_acid' : 'formic_acid, D/C',
+                'gluc' : 'gluc, DE/C',
+                'gluc_bicarb' : 'gluc_bicarb, E/C',
+                'iodosobenzoate' : 'iodosobenzoate, W/C',
+                'lysc' : 'lysc, K/C',
+                'lysc_p' : 'lysc_p, K/C',
+                'lysn' : 'lysn, K/N',
+                'lysn_promisc' : 'lysn_promisc, AKRS/N',
+                'no_cleavage' : 'NONE',
+                'pepsina' : 'pepsina, FL/C',
+                'protein_endopeptidase' : 'protein_endopeptidase, P/C',
+                'staph_protease' : 'staph_protease, E/C',
+                'trypsin' : 'trypsin, KR/C',
+                'trypsin_cnbr' : 'trypsin_cnbr, KRM/C',
+                'trypsin_gluc' : 'trypsin_gluc, DEKR/C',
+                'trypsin_p' : 'trypsin_p, KR/C',
             },
             'msamanda_style_1' : {
                 'argc' : 'R;after;P',
@@ -784,6 +877,7 @@ ursgal_params = {
                 'gluc_bicarb' : 'E;after;P',
                 'iodosobenzoate' : 'W;after;',
                 'lysc' : 'K;after;P',
+                'lysc_gluc' : 'DEK;after;P',
                 'lysc_p' : 'K;after;',
                 'lysn' : 'K;before;',
                 'lysn_promisc' : 'AKRS;before;',
@@ -863,6 +957,7 @@ ursgal_params = {
                 'gluc_bicarb' : 'E;C;P',
                 'iodosobenzoate' : 'W;C;',
                 'lysc' : 'K;C;P',
+                'lysc_gluc' : 'DEK;C;P',
                 'lysc_p' : 'K;C;',
                 'lysn' : 'K;N;',
                 'lysn_promisc' : 'AKRS;N;',
@@ -887,6 +982,7 @@ ursgal_params = {
                 'gluc_bicarb' : 'E;C;P',
                 'iodosobenzoate' : 'W;C;',
                 'lysc' : 'K;C;P',
+                'lysc_gluc' : 'DEK;C;P',
                 'lysc_p' : 'K;C;',
                 'lysn' : 'K;N;',
                 'lysn_promisc' : 'AKRS;N;',
@@ -911,6 +1007,7 @@ ursgal_params = {
                 'gluc_bicarb' : '[E]|{P}',
                 'iodosobenzoate' : '[W]|[X]',
                 'lysc' : '[K]|{P}',
+                'lysc_gluc' : '[DEK]|[X]|{P}',
                 'lysc_p' : '[K]|[X]',
                 'lysn' : '[X]|[K]',
                 'lysn_promisc' : '[X]|[AKRS]',
@@ -936,26 +1033,6 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'filter_csv_converter_version',
-        },
-        'utag' : [
-            'converter_version',
-        ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "str",
-    },
-    'sanitize_csv_converter_version' : {
-        'available_in_unode' : [
-            'ucontroller',
-        ],
-        'default_value' : "sanitize_csv_1_0_0",
-        'description' :  ''' sanitize csv converter version: version name ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'ucontroller_style_1' : 'sanitize_csv_converter_version',
         },
         'utag' : [
             'converter_version',
@@ -1031,6 +1108,7 @@ ursgal_params = {
     },
     'frag_mass_tolerance' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -1052,6 +1130,7 @@ ursgal_params = {
         'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'FragTolerance',
             'msamanda_style_1' : 'ms2_tol',
             'myrimatch_style_1' : 'FragmentMzTolerance',
             'novor_style_1' : 'fragmentIonErrorTol',
@@ -1073,6 +1152,7 @@ ursgal_params = {
     },
     'frag_mass_tolerance_unit' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -1094,6 +1174,7 @@ ursgal_params = {
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'FragTolerance',
             'msamanda_style_1' : 'ms2_tol unit',
             'myrimatch_style_1' : 'FragmentMzTolerance',
             'novor_style_1' : 'fragmentIonErrorTol',
@@ -1393,6 +1474,7 @@ ursgal_params = {
     },
     'header_translations' : {
         'available_in_unode' : [
+            'kojak_percolator_2_08',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -1408,6 +1490,7 @@ ursgal_params = {
         'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_percolator_style_1' : 'header_translations',
             'msamanda_style_1' : 'header_translations',
             'msgfplus_style_1' : 'header_translations',
             'novor_style_1' : 'header_translations',
@@ -1420,6 +1503,14 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_percolator_style_1' : {
+                'PSMId' : 'PSMId',
+                'peptide' : 'Sequence',
+                'posterior_error_prob' : 'PEP',
+                'proteinIds' : 'Protein ID',
+                'q-value' : 'q-value',
+                'score' : 'Kojak:score',
+            },
             'msamanda_style_1' : {
                 'Amanda Score' : 'Amanda:Score',
                 'Charge' : 'Charge',
@@ -1547,6 +1638,45 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
+    'heatmap_column_order' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : [
+        ],
+        'description' :  ''' The plot order of the columns ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_column_order',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
+    },
+    'heatmap_error_suffix' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : "_std",
+        'description' :  ''' The suffix to identify the value error holding columns ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_error_suffix',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'heatmap_identifier_field_name' : {
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
@@ -1603,6 +1733,25 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+    },
+    'heatmap_value_suffix' : {
+        'available_in_unode' : [
+            'plot_pygcluster_heatmap_from_csv_1_0_0',
+        ],
+        'default_value' : "_mean",
+        'description' :  ''' The suffix to identify the value columns, which should be plotted ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'heatmap_style_1' : 'heatmap_value_suffix',
+        },
+        'utag' : [
+            '',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
     },
     'helper_extension' : {
         'available_in_unode' : [
@@ -1666,6 +1815,8 @@ ursgal_params = {
     },
     'instrument' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
+            'moda_v1_51',
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
             'novor_1_1beta',
@@ -1674,6 +1825,8 @@ ursgal_params = {
         'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'instrument',
+            'moda_style_1' : 'Instrument',
             'msgfplus_style_1' : '-inst',
             'novor_style_1' : 'massAnalyzer',
         },
@@ -1688,6 +1841,18 @@ ursgal_params = {
             'userCustomValuesMaxNum' : 0,
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                'FTICR' : '1',
+                'high_res_ltq' : '0',
+                'low_res_ltq' : '0',
+                'q_exactive' : '0',
+            },
+            'moda_style_1' : {
+                'high_res_ltq' : 'ESI-TRAP',
+                'low_res_ltq' : 'ESI-TRAP',
+                'q_exactive' : 'ESI-TRAP',
+                'tof' : 'ESI-QTOF',
+            },
             'msgfplus_style_1' : {
                 'high_res_ltq' : '1',
                 'low_res_ltq' : '0',
@@ -1765,8 +1930,349 @@ ursgal_params = {
         },
         'uvalue_type' : "bool",
     },
+    'kojak_MS1_centroid' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  ''' MS1 centroided data yes (1) or no (0) ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS1_centroid',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_MS1_resolution' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 30000,
+        'description' :  ''' MS1 resolution ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS1_resolution',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_MS2_centroid' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 1,
+        'description' :  ''' MS2 centroided data yes (1) or no (0) ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS2_centroid',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_MS2_resolution' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 25000,
+        'description' :  ''' MS2 resolution ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS2_resolution',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_diff_mods_on_xl' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  ''' To search differential modifications on cross-linked
+        peptides: diff_mods_on_xl = 1 ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_diff_mods_on_xl',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_enrichment' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  ''' Values between 0 and 1 to describe 18O APE
+        For example, 0.25 equals 25 APE ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_enrichment',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_export_pepXML' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 1,
+        'description' :  ''' Activate (1) or deactivate (0) output as pepXML ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_export_pepXML',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_export_percolator' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 1,
+        'description' :  ''' Activate (1) or deactivate (0) output for percolator ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_export_percolator',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_fragment_bin_offset' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0.4,
+        'description' :  ''' fragment_bin_offset and fragment_bin_size
+            influence algorithm precision and memory usage.
+            They should be set appropriately for the data analyzed.
+            For ion trap ms/ms:  1.0005 size, 0.4 offset
+            For high res ms/ms:    0.03 size, 0.0 offset ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_fragment_bin_offset',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'kojak_fragment_bin_size' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 1.005,
+        'description' :  ''' fragment_bin_offset and fragment_bin_size
+            influence algorithm precision and memory usage.
+            They should be set appropriately for the data analyzed.
+            For ion trap ms/ms:  1.0005 size, 0.4 offset
+            For high res ms/ms:    0.03 size, 0.0 offset ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_fragment_bin_size',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'kojak_mono_links_on_xl' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  ''' To search for mono-linked cross-linker on
+        cross-linked peptides: mono_links_on_xl = 1 ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_mono_links_on_xl',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_percolator_version' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : "2.08",
+        'description' :  ''' Defines the output format of Kojak for Percolator ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_percolator_version',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'kojak_prefer_precursor_pred' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 2,
+        'description' :  ''' prefer precursor mono mass predicted by
+        instrument software.
+          0 = ignore previous predictions
+          1 = use only previous predictions
+          2 = supplement predictions with additional analysis ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_prefer_precursor_pred',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'kojak_spectrum_processing' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  ''' 0=no, 1=yes ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_spectrum_processing',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_top_count' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 300,
+        'description' :  ''' number of top scoring single peptides to combine
+            in relaxed analysis ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_top_count',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_truncate_prot_names' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  ''' Max protein name character to export, 0=off ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_truncate_prot_names',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'kojak_turbo_button' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 0,
+        'description' :  ''' Generally speeds up analysis. Special cases cause reverse
+            effect, thus this is allowed to be disabled. 0=off ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_turbo_button',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
     'label' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -1788,6 +2294,7 @@ ursgal_params = {
         'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'label',
             'msamanda_style_1' : 'label',
             'msgfplus_style_1' : 'label',
             'myrimatch_style_1' : 'label',
@@ -1835,6 +2342,7 @@ ursgal_params = {
     },
     'max_accounted_observed_peaks' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'xtandem_cyclone_2010',
@@ -1847,6 +2355,7 @@ ursgal_params = {
         'description' :  ''' Maximum number of peaks from a spectrum used. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'max_accounted_observed_peaks',
             'myrimatch_style_1' : 'MaxPeakCount',
             'xtandem_style_1' : 'spectrum, total peaks',
         },
@@ -1865,6 +2374,8 @@ ursgal_params = {
     },
     'max_missed_cleavages' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -1884,6 +2395,8 @@ ursgal_params = {
         'description' :  ''' Maximum number of missed cleavages per peptide ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'max_missed_cleavages',
+            'moda_style_1' : 'MissedCleavage',
             'msamanda_style_1' : 'missed_cleavages',
             'myrimatch_style_1' : 'MaxMissedCleavages',
             'omssa_style_1' : '-v',
@@ -1923,8 +2436,31 @@ ursgal_params = {
         },
         'uvalue_type' : "int",
     },
+    'max_mod_size' : {
+        'available_in_unode' : [
+            'moda_v1_51',
+        ],
+        'default_value' : 200,
+        'description' :  ''' Minimum modification size to consider (in Da) ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'moda_style_1' : 'MaxModSize',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'max' : 10000,
+            'min' : -10000,
+            'updownval' : 10,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
     'max_num_mods' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
@@ -1934,6 +2470,7 @@ ursgal_params = {
         'description' :  ''' Maximal number of modifications per peptide ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'max_num_mods',
             'msgfplus_style_1' : 'NumMods',
             'myrimatch_style_1' : 'MaxDynamicMods',
         },
@@ -2079,6 +2616,7 @@ ursgal_params = {
     },
     'mgf_input_file' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2100,6 +2638,7 @@ ursgal_params = {
         'description' :  ''' Path to input .mgf file ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'Spectra',
             'msamanda_style_1' : 'mgf_input_file',
             'msgfplus_style_1' : '-s',
             'novor_style_1' : '-f',
@@ -2116,6 +2655,28 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+    },
+    'min_mod_size' : {
+        'available_in_unode' : [
+            'moda_v1_51',
+        ],
+        'default_value' : -200,
+        'description' :  ''' Minimum modification size to consider (in Da) ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'moda_style_1' : 'MinModSize',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'max' : 10000,
+            'min' : -10000,
+            'updownval' : 10,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
     },
     'min_output_score' : {
         'available_in_unode' : [
@@ -2262,8 +2823,80 @@ ursgal_params = {
         },
         'uvalue_type' : "int",
     },
+    'moda_blind_mode' : {
+        'available_in_unode' : [
+            'moda_v1_51',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Allowed number of modifications per peptide. '0' = no modification, '1' = one modification, '2' = no limit ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'moda_style_1' : 'BlindMode',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'max' : 2,
+            'min' : 0,
+            'updownval' : 1,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'moda_high_res' : {
+        'available_in_unode' : [
+            'moda_v1_51',
+        ],
+        'default_value' : True,
+        'description' :  ''' If True, fragment tolerance is set as the same as precursor tolerance, when the peptide mass is significantly small, such that fragment tolerance is larger than precursor tolerance ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'moda_style_1' : 'HighResolution',
+        },
+        'utag' : [
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+            'moda_style_1' : {
+                False : 'OFF',
+                True : 'ON',
+            },
+        },
+        'uvalue_type' : "bool",
+    },
+    'moda_protocol_id' : {
+        'available_in_unode' : [
+            'moda_v1_51',
+        ],
+        'default_value' : None,
+        'description' :  ''' MODa specific protocol to enable scoring parameters for labeled samples. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'moda_style_1' : 'Protocol',
+        },
+        'utag' : [
+        ],
+        'uvalue_option' : {
+            'comboBox' : True,
+            'initialValue' : [None, 'iTRAQ4plex', 'iTRAQ8plex', 'TMT2plex', 'TMT6plex'],
+            'radioButton' : False,
+            'userCustomValues' : False,
+            'userCustomValuesMaxNum' : 0,
+        },
+        'uvalue_translation' : {
+            'moda_style_1' : {
+                'None' : 'NONE',
+            },
+        },
+        'uvalue_type' : "select",
+    },
     'modifications' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2317,6 +2950,8 @@ Example:
  [ 'S,opt,any,New_mod,C2H5N1O3' ] ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'modifications',
+            'moda_style_1' : 'ADD',
             'msamanda_style_1' : 'modifications',
             'msgfplus_style_1' : '-mod',
             'myrimatch_style_1' : ('DynamicMods', 'StaticMods'),
@@ -2337,6 +2972,31 @@ Example:
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
+    },
+    'mono_link_definition' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : "nK  156.0786",
+        'description' :  ''' Cross-link and mono-link masses allowed.
+May have more than one of each parameter.
+Format for mono_link is:
+[amino acids] [mass mod]
+One or more amino acids (uppercase only!!) can be specified for
+each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
+N-terminus or C-terminus ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'mono_link_definition',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
     },
     'msgfplus_protocol_id' : {
         'available_in_unode' : [
@@ -2464,10 +3124,6 @@ Example:
         'utag' : [
         ],
         'uvalue_option' : {
-            'max' : 10000000,
-            'min' : 0,
-            'unit' : 1e-05,
-            'updownval' : 0.01,
         },
         'uvalue_translation' : {
             'myrimatch_style_1' : {
@@ -2475,7 +3131,7 @@ Example:
                 True : 1,
             },
         },
-        'uvalue_type' : "float",
+        'uvalue_type' : "bool",
     },
     'myrimatch_tic_cutoff' : {
         'available_in_unode' : [
@@ -2504,6 +3160,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : False,
         'description' :  ''' Compress mzidentml_lib output files ''',
@@ -2548,6 +3205,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : "exportPSMs",
         'description' :  ''' Defines which paramters shoul be exporte by mzidentml_lib ''',
@@ -2573,6 +3231,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : "Mzid2Csv",
         'description' :  ''' Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far ''',
@@ -2597,6 +3256,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : False,
         'description' :  ''' Include fragmentation in mzidentml_lib output ''',
@@ -2621,6 +3281,7 @@ Example:
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
         ],
         'default_value' : False,
         'description' :  ''' Verbose mzidentml_lib output ''',
@@ -2768,6 +3429,28 @@ Example:
             },
         },
         'uvalue_type' : "bool",
+    },
+    'num_compared_psms' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Maximum number of PSMs (sorted by score, starting with the best scoring PSM) that are compared ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1' : 'num_compared_psms',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+            'max' : 100,
+            'min' : 1,
+            'updownval' : 1,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
     },
     'num_hits_retain_spec' : {
         'available_in_unode' : [
@@ -3257,6 +3940,7 @@ Example:
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'merge_csv_1_0_0',
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3269,6 +3953,7 @@ Example:
             'myrimatch_2_2_140',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
+            'mzidentml_lib_1_7',
             'novor_1_1beta',
             'omssa_style_1',
             'pepnovo_3_1',
@@ -3287,6 +3972,7 @@ Example:
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'output_file',
             'merge_csv_style_1' : 'output',
+            'moda_style_1' : '-o',
             'msamanda_style_1' : 'output_file_incl_path',
             'msgfplus_style_1' : '-o',
             'myrimatch_style_1' : 'output_file_incl_path',
@@ -3461,6 +4147,7 @@ Example:
     },
     'precursor_isotope_range' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
@@ -3478,6 +4165,7 @@ Example:
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'precursor_isotope_range',
             'msgfplus_style_1' : '-ti',
             'myrimatch_style_1' : 'MonoisotopeAdjustmentSet',
             'omssa_style_1' : '-ti',
@@ -3496,6 +4184,11 @@ Example:
             'userCustomValuesMaxNum' : 0,
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                '0' : '0',
+                '0,1' : '1',
+                '0,2' : '2',
+            },
             'myrimatch_style_1' : {
                 '0' : '[0,]',
                 '0,1' : '[0,1]',
@@ -3516,6 +4209,8 @@ Example:
     },
     'precursor_mass_tolerance_minus' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3540,6 +4235,8 @@ Example:
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'ppm_tolerance_pre',
+            'moda_style_1' : 'PPMTolerance',
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
@@ -3563,6 +4260,8 @@ Example:
     },
     'precursor_mass_tolerance_plus' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3587,6 +4286,8 @@ Example:
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'ppm_tolerance_pre',
+            'moda_style_1' : 'PPMTolerance',
             'msamanda_style_1' : 'ms1_tol',
             'msgfplus_style_1' : '-t',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
@@ -3610,6 +4311,7 @@ Example:
     },
     'precursor_mass_tolerance_unit' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3633,6 +4335,7 @@ Example:
         'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'PPMTolerance',
             'msamanda_style_1' : 'ms1_tol unit',
             'msgfplus_style_1' : '-t',
             'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
@@ -3758,6 +4461,7 @@ Example:
     },
     'precursor_max_mass' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
         ],
@@ -3765,6 +4469,7 @@ Example:
         'description' :  ''' Maximal parent ion mass ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'precursor_max_mass',
             'myrimatch_style_1' : 'MaxPeptideMass',
             'xtandem_style_1' : 'spectrum, minimum parent m+h',
         },
@@ -3814,6 +4519,7 @@ Example:
     },
     'precursor_min_mass' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'xtandem_cyclone_2010',
@@ -3826,6 +4532,7 @@ Example:
         'description' :  ''' Minimal parent ion mass ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'precursor_min_mass',
             'myrimatch_style_1' : 'MinPeptideMass',
             'xtandem_style_1' : 'spectrum, minimum parent m+h',
         },
@@ -3992,108 +4699,6 @@ Example:
         },
         'uvalue_type' : "select",
     },
-    'score_diff_threshold' : {
-        'available_in_unode' : [
-            'sanitize_csv_1_0_0',
-        ],
-        'default_value' : 2,
-        'description' :  ''' Minimum score difference between the best PSM and the first rejected PSM of one spectrum, default: 0.01 ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'sanitize_csv_style_1': 'score_diff_threshold',
-        },
-        'utag' : [
-            'validation',
-            'scoring'
-        ],
-        'uvalue_option' : {
-            'max' : 1000,
-            'min' : 0,
-            'updownval' : 1,
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "float",
-    },
-    'num_compared_psms' : {
-        'available_in_unode' : [
-            'sanitize_csv_1_0_0',
-        ],
-        'default_value' : 2,
-        'description' :  ''' Maximum number of PSMs (sorted by score, starting with the best scoring PSM) that are compared ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'sanitize_csv_style_1': 'num_compared_psms',
-        },
-        'utag' : [
-            'validation',
-        ],
-        'uvalue_option' : {
-            'max' : 100,
-            'min' : 1,
-            'updownval' : 1,
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-    },
-    'accept_conflicting_psms' : {
-        'available_in_unode' : [
-            'sanitize_csv_1_0_0',
-        ],
-        'default_value' : False,
-        'description' :  ''' If True, multiple PSMs for one spectrum can be reported if their score difference is below the threshold. If False, all PSMs for one spectrum are removed if the score difference between the best and secondbest PSM is not above the threshold, i.e. if there are conflicting PSMs with similar scores. ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'sanitize_csv_style_1': 'accept_conflicting_psms',
-        },
-        'utag' : [
-            'validation',
-        ],
-        'uvalue_option' : {
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "bool",
-    },
-    'threshold_is_log10' : {
-        'available_in_unode' : [
-            'sanitize_csv_1_0_0',
-        ],
-        'default_value' : True,
-        'description' :  ''' True, if log10 scale has been used for score_diff_threshold. ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'sanitize_csv_style_1': 'threshold_is_log10',
-        },
-        'utag' : [
-            'validation',
-        ],
-        'uvalue_option' : {
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "bool",
-    },
-    'remove_redundant_psms' : {
-        'available_in_unode' : [
-            'sanitize_csv_1_0_0',
-        ],
-        'default_value' : True,
-        'description' :  ''' If True, redundant PSMs (e.g. the same identification reported by multiple engined) for the same spectrum are removed. An identification is defined by the combination of 'Sequence', 'Modifications' and 'Charge'. ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'sanitize_csv_style_1': 'remove_redundant_psms',
-        },
-        'utag' : [
-            'validation',
-        ],
-        'uvalue_option' : {
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "bool",
-    },
     'raw_ident_csv_suffix' : {
         'available_in_unode' : [
             'ucontroller',
@@ -4113,6 +4718,25 @@ Example:
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+    },
+    'remove_redundant_psms' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : True,
+        'description' :  ''' If True, redundant PSMs (e.g. the same identification reported by multiple engined) for the same spectrum are removed. An identification is defined by the combination of 'Sequence', 'Modifications' and 'Charge'. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1' : 'remove_redundant_psms',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
     },
     'remove_temporary_files' : {
         'available_in_unode' : [
@@ -4145,6 +4769,26 @@ Example:
         },
         'utag' : [
             'file_handling',
+        ],
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'sanitize_csv_converter_version' : {
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : "sanitize_csv_1_0_0",
+        'description' :  ''' sanitize csv converter version: version name ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'sanitize_csv_converter_version',
+        },
+        'utag' : [
+            'converter_version',
         ],
         'uvalue_option' : {
             'multipleLine' : False,
@@ -4270,6 +4914,7 @@ Example:
     },
     'score_a_ions' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4289,6 +4934,7 @@ Example:
         'description' :  ''' Spectrum: if true, a ions are used in algorithm ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'ion_series_A',
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
@@ -4300,6 +4946,10 @@ Example:
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : '0',
+                True : '1',
+            },
             'omssa_style_1' : {
                 False : '',
                 True : '0',
@@ -4336,6 +4986,7 @@ Example:
     },
     'score_b_ions' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4355,6 +5006,7 @@ Example:
         'description' :  ''' Spectrum: if true, b ions are used in algorithm ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'ion_series_B',
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
@@ -4366,6 +5018,10 @@ Example:
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : '0',
+                True : '1',
+            },
             'omssa_style_1' : {
                 False : '',
                 True : '1',
@@ -4379,6 +5035,7 @@ Example:
     },
     'score_c_ions' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4398,6 +5055,7 @@ Example:
         'description' :  ''' Spectrum: if true, c ions are used in algorithm ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'ion_series_C',
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
@@ -4409,6 +5067,10 @@ Example:
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : '0',
+                True : '1',
+            },
             'omssa_style_1' : {
                 False : '',
                 True : '2',
@@ -4466,6 +5128,29 @@ Example:
         },
         'uvalue_type' : "bool",
     },
+    'score_diff_threshold' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Minimum score difference between the best PSM and the first rejected PSM of one spectrum, default: 0.01 ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1' : 'score_diff_threshold',
+        },
+        'utag' : [
+            'scoring',
+            'validation',
+        ],
+        'uvalue_option' : {
+            'max' : 1000,
+            'min' : 0,
+            'updownval' : 1,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
     'score_imm_ions' : {
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
@@ -4516,6 +5201,7 @@ Example:
     },
     'score_x_ions' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4535,6 +5221,7 @@ Example:
         'description' :  ''' Spectrum: if true, x ions are used in algorithm ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'ion_series_X',
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
@@ -4546,6 +5233,10 @@ Example:
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : '0',
+                True : '1',
+            },
             'omssa_style_1' : {
                 False : '',
                 True : '3',
@@ -4559,6 +5250,7 @@ Example:
     },
     'score_y_ions' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4578,6 +5270,7 @@ Example:
         'description' :  ''' Spectrum: if true, y ions are used in algorithm ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'ion_series_Y',
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
@@ -4589,6 +5282,10 @@ Example:
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : '0',
+                True : '1',
+            },
             'omssa_style_1' : {
                 False : '',
                 True : '4',
@@ -4650,6 +5347,7 @@ Example:
     },
     'score_z_ions' : {
         'available_in_unode' : [
+            'kojak_1_5_3',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4669,6 +5367,7 @@ Example:
         'description' :  ''' Spectrum: if true, z ions are used in algorithm ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'kojak_style_1' : 'ion_series_Z',
             'msamanda_style_1' : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
             'omssa_style_1' : '-i',
@@ -4680,6 +5379,10 @@ Example:
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : '0',
+                True : '1',
+            },
             'omssa_style_1' : {
                 False : '',
                 True : '5',
@@ -4720,6 +5423,7 @@ Example:
     },
     'semi_enzyme' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4742,6 +5446,7 @@ Example:
         'description' :  ''' Allows semi-enzymatic peptide ends ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'enzyme_constraint_min_number_termini',
             'msamanda_style_1' : 'enzyme specificity',
             'msgfplus_style_1' : '-ntt',
             'myrimatch_style_1' : 'MinTerminiCleavages',
@@ -4755,6 +5460,10 @@ Example:
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'moda_style_1' : {
+                False : 2,
+                True : 1,
+            },
             'msamanda_style_1' : {
                 False : 'Full',
                 True : 'Semi',
@@ -4875,6 +5584,25 @@ Example:
         },
         'uvalue_type' : "str",
     },
+    'threshold_is_log10' : {
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'default_value' : True,
+        'description' :  ''' True, if log10 scale has been used for score_diff_threshold. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1' : 'threshold_is_log10',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
     'unify_csv_converter_version' : {
         'available_in_unode' : [
             'ucontroller',
@@ -4899,7 +5627,7 @@ Example:
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/',
+        'default_value' : "http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/",
         'description' :  ''' URL that is used to install and prepare_resources.py ''',
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -4969,7 +5697,7 @@ Example:
             'pepnovo_3_1',
         ],
         'default_value' : True,
-        'description' :  ''' Does not correct precusor charge. ''',
+        'description' :  ''' Does not correct precursor charge. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-use_spectrum_charge',
@@ -4985,12 +5713,14 @@ Example:
     },
     'use_spectrum_mz' : {
         'available_in_unode' : [
+            'moda_v1_51',
             'pepnovo_3_1',
         ],
         'default_value' : True,
         'description' :  ''' Does not correct precusor m/z. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
+            'moda_style_1' : 'AutoPMCorrection',
             'pepnovo_style_1' : '-use_spectrum_mz',
         },
         'utag' : [
@@ -4999,6 +5729,10 @@ Example:
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'moda_style_1' : {
+                False : '1',
+                True : '0',
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -5088,9 +5822,9 @@ Example:
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
             'qvality_2_02',
+            'sanitize_csv_1_0_0',
             'ucontroller',
             'unify_csv_1_0_0',
-            'sanitize_csv_1_0_0'
         ],
         'default_value' : None,
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator. If None is defined, default values are used ''',
@@ -5099,9 +5833,9 @@ Example:
             'add_estimated_fdr_style_1' : 'validation_score_field',
             'percolator_style_1' : 'validation_score_field',
             'qvality_style_1' : 'validation_score_field',
+            'sanitize_csv_style_1' : 'validation_score_field',
             'ucontroller_style_1' : 'validation_score_field',
             'unify_csv_style_1' : 'validation_score_field',
-            'sanitize_csv_style_1' : 'validation_score_field',
         },
         'utag' : [
             'validation',
@@ -5424,6 +6158,25 @@ Example:
             'max' : 10000000,
             'min' : 0,
             'updownval' : 100,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'word_len' : {
+        'available_in_unode' : [
+            'upeptide_mapper_1_0_0',
+        ],
+        'default_value' : 8,
+        'description' :  ''' NOTE: This can only be changed using the params dict if UPeptideMapper has become a UNode. !!! word length used to index peptide mapper, smaller word len requires more memory ''',
+        'triggers_rerun' : False,
+        'ukey_translation' : {
+            'upeptide_mapper_style_1' : 'word_len',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_option' : {
         },
         'uvalue_translation' : {
         },
