@@ -429,11 +429,23 @@ class UNode(object, metaclass=Meta_UNode):
         proc = None
 
         if len(self.params['command_list']) != 0:
-            proc = subprocess.Popen(
-                self.params['command_list'],
-                stdout = subprocess.PIPE,
-                # shell = True
-            )
+            mswindows = ( sys.platform == "win32" )
+            if mswindows is True:
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                startupinfo.wShowWindow = subprocess.SW_HIDE
+                proc = subprocess.Popen(
+                    self.params['command_list'],
+                    stdout = subprocess.PIPE,
+                    shell = False,
+                    startupinfo=startupinfo,
+                )
+            else:
+                proc = subprocess.Popen(
+                    self.params['command_list'],
+                    stdout = subprocess.PIPE,
+                    # shell = True
+                )
         else:
             print('Command list is empty, nothing to do here...')
             print('_execute failed ....', self.params['command_list'])
@@ -500,7 +512,7 @@ class UNode(object, metaclass=Meta_UNode):
         '''
         The unode get_last_engine function
 
-        Note: returns None if the specified engine type was used yet.
+        Note: returns None if the specified engine type was not used yet.
 
         Keyword Arguments:
             history (list): A list of path unodes, timestamps and parameters
@@ -573,7 +585,7 @@ class UNode(object, metaclass=Meta_UNode):
         '''
         The unode get_last_search_engine function
 
-        Note: returns None if no search engine was used yet.
+        Note: returns None if no search engine was not used yet.
 
         Keyword Arguments:
             history (list): A list of path unodes, timestamps and parameters
@@ -602,29 +614,31 @@ class UNode(object, metaclass=Meta_UNode):
         last_search_engine = self.get_last_engine( history=history, engine_types=['search_engine'], multiple_engines=multiple_engines)
         return last_search_engine
 
-    def _group_psms(self, input_file, dev_mode = False):
+    def _group_psms(self, input_file, validation_score_field=None, bigger_scores_better=None):
         '''
-        reads an input csv and returns a defaultdict with the spectrum title
+        Reads an input csv and returns a defaultdict with the spectrum title
         mapping to a sorted list of tuples containing each
         a) score (from validation_score_field) and
         b) the whole line dict
+
+        Keyword Arguments:
+            validation_score_field (str): fieldname of the column that should be used as validation score
+                for sorting of PSMs. If None, get_last_search_engine is used to get the validation_score_field
+                defined for the last used search engine.
+            bigger_scores_better (bool): defines if in the validation score are increasing (True) or decreasing
+                (False) with their quality. If None, get_last_search_engine is used to get  bigger_scores_better
+                defined for the last used search engine.
         '''
         print('[ GROUPING ] Parsing {0}'.format( input_file ))
 
-        if dev_mode is False:
+        if validation_score_field is None:
             search_engine = self.get_last_search_engine( history = self.stats['history'] )
             assert search_engine, 'Can\'t convert results from no specified search engine.'
             assert 'multiple engines:' not in search_engine, 'Can\'t convert merged results from multiple different engines.'
+            validation_score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][search_engine]
 
-            # import pprint
-            # pprint.pprint(self.params['_TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY'])
-            # pprint.pprint(self.params)
-            # exit(1)
-
-            # DEFAULT_PARAMS = self.meta_unodes[search_engine].DEFAULT_PARAMS
-            # for k, v in DEFAULT_PARAMS.items():
-            #     self.params[ k ] = v
-
+        if bigger_scores_better is None:
+            bigger_scores_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][search_engine]
 
         grouped_psms = ddict(list)
         opened_file = open( input_file, 'r')
@@ -633,11 +647,10 @@ class UNode(object, metaclass=Meta_UNode):
         )
         n = 0
 
-        validation_score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][search_engine]
         for n, line_dict in enumerate(csv_dict_reader_object):
             assert validation_score_field in line_dict.keys(), \
-                '''defined validation_score_field for {0} is not found,
-                please check/add it to uparams.py['validation_score_field']'''.format(search_engine)
+                '''defined validation_score_field {0} is not found,
+                please check/add it to uparams.py['validation_score_field']'''.format(validation_score_field)
 
 
             grouped_psms[ line_dict[ 'Spectrum Title' ] ].append(
@@ -651,7 +664,7 @@ class UNode(object, metaclass=Meta_UNode):
         for spectrum_title in grouped_psms.keys():
             grouped_psms[ spectrum_title ].sort(
                 key     = operator.itemgetter(0),
-                reverse = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][search_engine]
+                reverse = bigger_scores_better
             )
         print(
             "[ GROUPING ] Grouped {0} PSMs into {1} unique spectrum titles".format(
@@ -751,12 +764,11 @@ class UNode(object, metaclass=Meta_UNode):
                 sorted( self.params[ 'modifications' ] )):
             mod_params  = mod.split( ',' )
             if len(mod_params) >=6 or len(mod_params) <=3:
-                print( '''
-                    [ WARNING ] For modifications, please use the ursgal_style:
-                    [ WARNING ] 'amino_acid,opt/fix,position,Unimod PSI-MS Name'
-                    [ WARNING ] or
-                    [ WARNING ] 'amino_acid,opt/fix,position,name,chemical_composition'
-                    [ WARNING ] Continue without modification {0} '''.format( mod )
+                print('''[ WARNING ] For modifications, please use the ursgal_style:
+[ WARNING ] 'amino_acid,opt/fix,position,Unimod PSI-MS Name'
+[ WARNING ] or
+[ WARNING ] 'amino_acid,opt/fix,position,name,chemical_composition'
+[ WARNING ] Continue without modification {0} '''.format( mod )
                 )
                 print(mod_params)
                 continue
@@ -772,15 +784,14 @@ class UNode(object, metaclass=Meta_UNode):
                 mass = ursgal.GlobalUnimodMapper.name2mass( unimod_name )
                 composition = ursgal.GlobalUnimodMapper.name2composition( unimod_name )
                 if unimod_id is None:
-                    print (    '''
-                        [ WARNING ] '{1}' is not a Unimod modification
-                        [ WARNING ] please change it to a valid PSI-MS unimod_Name
-                        [ WARNING ] or add the chemical composition hill notation (including 1)
-                        [ WARNING ] e.g.: H-1N1O2
-                        [ WARNING ] ursgal_style: 'amino_acid,opt/fix,position,name,chemical_composition'
-                        [ WARNING ] Continue without modification {0} '''.format(
-                            mod,
-                            unimod_name
+                    print('''[ WARNING ] '{1}' is not a Unimod modification
+[ WARNING ] please change it to a valid PSI-MS unimod_Name
+[ WARNING ] or add the chemical composition hill notation (including 1)
+[ WARNING ] e.g.: H-1N1O2
+[ WARNING ] ursgal_style: 'amino_acid,opt/fix,position,name,chemical_composition'
+[ WARNING ] Continue without modification {0} '''.format(
+                        mod,
+                        unimod_name
                     ))
                     continue
                 unimod = True
@@ -1027,10 +1038,13 @@ class UNode(object, metaclass=Meta_UNode):
         )
         self.print_info(  msg, caller=tag )
 
-    def print_info( self, msg, caller=None ):
+    @classmethod
+    def print_info( cls, msg, caller=None ):
         if caller is None:
-            caller = self.engine
-
+            if hasattr(cls, 'engine'):
+                caller = cls.engine
+            else:
+                caller = ''
         if len(caller) > 7:
             caller = caller[:8]
 
@@ -1208,7 +1222,11 @@ class UNode(object, metaclass=Meta_UNode):
             'denovo_engine',
             False
         )
-        if is_search_engine or is_denovo_engine:
+        is_crosslink_engine = self.META_INFO['engine_type'].get(
+            'cross_link_engine',
+            False
+        )
+        if is_search_engine or is_denovo_engine or is_crosslink_engine:
             self.map_mods()
 
         self.stats['history'] = self.update_history_status(
@@ -1229,7 +1247,9 @@ class UNode(object, metaclass=Meta_UNode):
                 os.path.join(
                     self.params['input_dir_path'],
                     self.params['input_file']
-                )
+                ),
+                validation_score_field = self.params['translations']['validation_score_field'],
+                bigger_scores_better = self.params['translations']['bigger_scores_better']
             )
             self.print_execution_time(tag = 'group_psms')
 
@@ -1302,16 +1322,16 @@ class UNode(object, metaclass=Meta_UNode):
         Translates ursgal parameters into uNode specific syntax.
 
         1) Each unode.USED_SEARCH_PARAMS contains params that have
-        to be passed to the uNode.
+            to be passed to the uNode.
         2) params values are not translated is they [] or {}
-        3) params values are translated using
-              uNode.USEARCH_PARAM_VALUE_TRANSLATIONS
-              > translating only values, regardless of key
-              uNode.USEARCH_PARAM_KEY_VALUE_TRANSLATOR
-              > translating only key:value pairs to key:newValue
+        3) params values are translated using::
+
+            uNode.USEARCH_PARAM_VALUE_TRANSLATIONS
+            > translating only values, regardless of key
+            uNode.USEARCH_PARAM_KEY_VALUE_TRANSLATOR
+            > translating only key:value pairs to key:newValue
 
         Those lookups are found in kb/{engine}.py
-
 
         TAG:
             - v0.4
