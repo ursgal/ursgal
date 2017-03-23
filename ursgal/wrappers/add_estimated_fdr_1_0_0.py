@@ -43,8 +43,7 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         self.time_point(tag = 'execution')
         add_fdr_main = self.import_engine_as_python_function()
         if self.params['input_file'].lower().endswith('.csv') is False:
-            raise ValueError('add_estimated_fdr_1 input file must be a CSV file!')
-
+            raise ValueError('add_estimated_fdr_1_0_0 input file must be a CSV file!')
 
         # if the user specified a specific score to use for FDR estimation, use that:
         if self.params['validation_score_field'] is not None and self.params['bigger_scores_better'] is not None:
@@ -69,7 +68,6 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
                     last_search_engine))
             score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_search_engine]
             bigger_is_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][last_search_engine]
-
 
         output_file = os.path.join(
                 self.params['output_dir_path'],
