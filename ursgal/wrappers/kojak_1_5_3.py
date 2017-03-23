@@ -78,7 +78,6 @@ class kojak_1_5_3( ursgal.UNode ):
         Formatting the command line via self.params
 
         '''
-
         self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
@@ -207,7 +206,7 @@ threads     =   {cpus} #Increase to use more cores/nodes
 #
 database            =   {database}
 export_percolator   =   {kojak_export_percolator}
-export_pepXML       =   {kojak_export_pepXML}
+export_pepXML       =   {kojak_export_pepxml}
 MS_data_file        =   {mzml_input_file}
 percolator_version  =   {kojak_percolator_version}
 # output_file       =   {output_file_incl_path}
@@ -219,11 +218,11 @@ percolator_version  =   {kojak_percolator_version}
 enrichment      =   {kojak_enrichment}       #Values between 0 and 1 to describe 18O APE. 
                             #For example, 0.25 equals 25 APE.
 instrument      =   {instrument}       #Values are: 0=Orbitrap, 1=FTICR (such as Thermo LTQ-FT)
-MS1_centroid    =   {kojak_MS1_centroid}       #0=no, 1=yes
-MS2_centroid    =   {kojak_MS2_centroid}        #0=no, 1=yes
-MS1_resolution  =   {kojak_MS1_resolution}    #Resolution at 400 m/z, value ignored if data are 
+MS1_centroid    =   {ms1_centroided}       #0=no, 1=yes
+MS2_centroid    =   {ms2_centroided}        #0=no, 1=yes
+MS1_resolution  =   {ms1_resolution}    #Resolution at 400 m/z, value ignored if data are 
                             #already centroided
-MS2_resolution  =   {kojak_MS2_resolution}    #Resolution at 400 m/z, value ignored if data are 
+MS2_resolution  =   {ms2_resolution}    #Resolution at 400 m/z, value ignored if data are 
                             #already centroided
 
                             

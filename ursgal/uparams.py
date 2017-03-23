@@ -1930,82 +1930,6 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "bool",
     },
-    'kojak_MS1_centroid' : {
-        'available_in_unode' : [
-            'kojak_1_5_3',
-        ],
-        'default_value' : 0,
-        'description' :  ''' MS1 centroided data yes (1) or no (0) ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'kojak_style_1' : 'kojak_MS1_centroid',
-        },
-        'utag' : [
-            'cross-linking',
-        ],
-        'uvalue_option' : {
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-    },
-    'kojak_MS1_resolution' : {
-        'available_in_unode' : [
-            'kojak_1_5_3',
-        ],
-        'default_value' : 30000,
-        'description' :  ''' MS1 resolution ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'kojak_style_1' : 'kojak_MS1_resolution',
-        },
-        'utag' : [
-            'cross-linking',
-        ],
-        'uvalue_option' : {
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-    },
-    'kojak_MS2_centroid' : {
-        'available_in_unode' : [
-            'kojak_1_5_3',
-        ],
-        'default_value' : 1,
-        'description' :  ''' MS2 centroided data yes (1) or no (0) ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'kojak_style_1' : 'kojak_MS2_centroid',
-        },
-        'utag' : [
-            'cross-linking',
-        ],
-        'uvalue_option' : {
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-    },
-    'kojak_MS2_resolution' : {
-        'available_in_unode' : [
-            'kojak_1_5_3',
-        ],
-        'default_value' : 25000,
-        'description' :  ''' MS2 resolution ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'kojak_style_1' : 'kojak_MS2_resolution',
-        },
-        'utag' : [
-            'cross-linking',
-        ],
-        'uvalue_option' : {
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int",
-    },
     'kojak_diff_mods_on_xl' : {
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -2046,12 +1970,12 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
     },
-    'kojak_export_pepXML' : {
+    'kojak_export_pepxml' : {
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 1,
-        'description' :  ''' Activate (1) or deactivate (0) output as pepXML ''',
+        'default_value' : True,
+        'description' :  ''' Activate (True) or deactivate (False) output as pepXML ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_export_pepXML',
@@ -2062,6 +1986,10 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
         },
         'uvalue_type' : "int",
     },
@@ -2069,8 +1997,8 @@ N-terminus or C-terminus ''',
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 1,
-        'description' :  ''' Activate (1) or deactivate (0) output for percolator ''',
+        'default_value' : True,
+        'description' :  ''' Activate (True) or deactivate (False) output for percolator ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_export_percolator',
@@ -2081,6 +2009,10 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
         },
         'uvalue_type' : "int",
     },
@@ -2196,8 +2128,8 @@ N-terminus or C-terminus ''',
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 0,
-        'description' :  ''' 0=no, 1=yes ''',
+        'default_value' : False,
+        'description' :  ''' True if spectrum should be processed by kojak ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_spectrum_processing',
@@ -2208,6 +2140,10 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
         },
         'uvalue_type' : "int",
     },
@@ -2254,9 +2190,9 @@ N-terminus or C-terminus ''',
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 0,
+        'default_value' : False,
         'description' :  ''' Generally speeds up analysis. Special cases cause reverse
-            effect, thus this is allowed to be disabled. 0=off ''',
+            effect, thus this is allowed to be disabled. True if it should be used. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_turbo_button',
@@ -2267,6 +2203,10 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
         },
         'uvalue_type' : "int",
     },
@@ -2997,6 +2937,90 @@ N-terminus or C-terminus ''',
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+    },
+    'ms1_centroided' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : False,
+        'description' :  ''' MS1 data are centroided: True or False ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS1_centroid',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
+        },
+        'uvalue_type' : "int",
+    },
+    'ms1_resolution' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 30000,
+        'description' :  ''' MS1 resolution ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS1_resolution',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'ms2_centroided' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : True,
+        'description' :  ''' MS2 data are centroided: True or False ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS2_centroid',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
+        },
+        'uvalue_type' : "int",
+    },
+    'ms2_resolution' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 25000,
+        'description' :  ''' MS2 resolution ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS2_resolution',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
     },
     'msgfplus_protocol_id' : {
         'available_in_unode' : [
