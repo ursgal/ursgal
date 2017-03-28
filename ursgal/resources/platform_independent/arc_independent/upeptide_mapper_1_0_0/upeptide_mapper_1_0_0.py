@@ -520,11 +520,17 @@ class UPeptideMapper_v3( dict ):
         self.peptide_2_protein_mappings = {}
         self.total_sequence_string      = {}
         self.fasta_lookup_name          = os.path.basename(os.path.abspath( fasta_database ))
-        counter                         = 0
+        self.fasta_counter                         = defaultdict(int)
         self.total_sequence_list        = defaultdict(list)
         self.len_total_sequence_string  = defaultdict(int)
         for protein_id, seq in ursgal.ucore.parseFasta(open(fasta_database,'r').readlines()):
-            print( 'Buffering protein #{0}'.format(counter), end ='\r' )
+            print(
+                'Buffering protein #{0} of database {1}'.format(
+                    self.fasta_counter[fasta_lookup_name],
+                    fasta_database
+                ),
+                end ='\r' 
+            )
             len_seq             = len(seq)
             
             self.protein_indices[protein_id] = {
@@ -536,7 +542,7 @@ class UPeptideMapper_v3( dict ):
             self.protein_list += [protein_id] * len_seq
             self.protein_sequences[protein_id] = seq
             self.len_total_sequence_string[self.fasta_lookup_name] += len_seq
-            counter += 1
+            self.fasta_counter[] += fasta_lookup_name1
         print()
         print('Joining protein sequences')
         self.total_sequence_string[self.fasta_lookup_name] = ''.join( self.total_sequence_list[self.fasta_lookup_name] )
