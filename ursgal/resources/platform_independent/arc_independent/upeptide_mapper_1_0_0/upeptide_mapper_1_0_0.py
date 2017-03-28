@@ -511,6 +511,14 @@ class UPeptideMapper_v3( dict ):
     '''
     UPeptideMapper V3
 
+    New improved version which is fater and consumes less memory than earlier
+    versions.
+
+    Use the implementation of Aho-Corasick algorithm pyahocorasick
+    See: https://pypi.python.org/pypi/pyahocorasick/
+    
+
+
     '''
     def __init__(self, fasta_database ):
         
@@ -520,13 +528,13 @@ class UPeptideMapper_v3( dict ):
         self.peptide_2_protein_mappings = {}
         self.total_sequence_string      = {}
         self.fasta_lookup_name          = os.path.basename(os.path.abspath( fasta_database ))
-        self.fasta_counter                         = defaultdict(int)
+        self.fasta_counter              = defaultdict(int)
         self.total_sequence_list        = defaultdict(list)
         self.len_total_sequence_string  = defaultdict(int)
         for protein_id, seq in ursgal.ucore.parseFasta(open(fasta_database,'r').readlines()):
             print(
                 'Buffering protein #{0} of database {1}'.format(
-                    self.fasta_counter[fasta_lookup_name],
+                    self.fasta_counter[self.fasta_lookup_name],
                     fasta_database
                 ),
                 end ='\r' 
@@ -539,10 +547,10 @@ class UPeptideMapper_v3( dict ):
             }
             # self.total_sequence_string += seq
             self.total_sequence_list[self.fasta_lookup_name].append(seq)
-            self.protein_list += [protein_id] * len_seq
-            self.protein_sequences[protein_id] = seq
+            self.protein_list += [ protein_id ] * len_seq
+            self.protein_sequences[ protein_id ] = seq
             self.len_total_sequence_string[self.fasta_lookup_name] += len_seq
-            self.fasta_counter[] += fasta_lookup_name1
+            self.fasta_counter[self.fasta_lookup_name] += 1
         print()
         print('Joining protein sequences')
         self.total_sequence_string[self.fasta_lookup_name] = ''.join( self.total_sequence_list[self.fasta_lookup_name] )

@@ -4,9 +4,9 @@
 import ursgal
 import unittest
 import pprint
-from ursgal import umapmaster as umama
+# from ursgal import umapmaster as umama
 import pprint
-
+import os
 try:
     import regex
     regex_module_installed = True
@@ -47,34 +47,49 @@ TEST_FASTA_TWO = [
 
 class UMapMaster(unittest.TestCase):
     def setUp(self):
-        self.upapa_5 = umama.UPeptideMapper( word_len=5 )
-        self.upapa_5.build_lookup(
+        self.uc = ursgal.UController( verbose = False )
+        self.uc.exe = os.path.join(
+            self.uc.unodes['upeptide_mapper_1_0_0']['resource_folder'],
+            self.uc.unodes['upeptide_mapper_1_0_0']['engine']['platform_independent']['arc_independent']['exe']
+        )
+        # print(self.uc.exe)
+        # exit()
+        self.uc.engine = 'upeptide_mapper_1_0_0'
+        upapa_class =  self.uc.import_engine_as_python_function('UPeptideMapper_v2')
+        # print(upapa_class)
+        self.upapa_class = upapa_class( word_len=5 )
+        self.upapa_class.build_lookup(
             fasta_name = 'Test.fasta',
             fasta_stream = TEST_FASTA
         )
-        self.uc = ursgal.UController( verbose = False )
 
     def test_incremental_fcache_buildup_and_global_access(self):
+        '''
+        This is not longer relevant, we have no global access on the peptide
+        mapper any more
+        '''
         # map with empty
-        maps = self.uc.upeptide_mapper.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
+        self.upapa_class.purge_fasta_info('Test.fasta')
+        maps = self.upapa_class.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
+        # print(maps)
         self.assertEqual( len(maps), 0)
 
         # parse one fasta via a unode ..
-        self.uc.unodes['merge_csvs_1_0_0']['class'].upeptide_mapper.build_lookup(
+        self.upapa_class.build_lookup(
             fasta_name = 'Test.fasta',
             fasta_stream = TEST_FASTA
         )
         # map with one parsed fasta
-        maps = self.uc.upeptide_mapper.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
+        maps = self.upapa_class.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
         self.assertEqual( len(maps), 1)
         # parse another fasta via a different unode ..
-        self.uc.unodes['generate_target_decoy_1_0_0']['class'].upeptide_mapper.build_lookup(
+        self.upapa_class.build_lookup(
             fasta_name = 'Test.fasta',
             fasta_stream = TEST_FASTA_TWO
         )
         # map with two parsed fastas
 
-        maps = self.uc.upeptide_mapper.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
+        maps = self.upapa_class.map_peptide( peptide='KLEINER', fasta_name='Test.fasta')
         print(maps)
         self.assertEqual( len(maps), 2)
 
@@ -85,16 +100,16 @@ class UMapMaster(unittest.TestCase):
                 input_fastas.append( line[1:].strip() )
 
         self.assertEqual(
-            sorted(self.upapa_5.fasta_sequences['Test.fasta'].keys()),
+            sorted(self.upapa_class.fasta_sequences['Test.fasta'].keys()),
             sorted( input_fastas )
         )
 
     def test_peptide_eq_word_len(self):
-        # print( self.upapa_5['Test.fasta'].keys())
+        # print( self.upapa_class['Test.fasta'].keys())
         # print( ''.join(sorted('ELVIS')))
-        # print( self.upapa_5['Test.fasta'][''.join(sorted('ELVIS'))] )
+        # print( self.upapa_class['Test.fasta'][''.join(sorted('ELVIS'))] )
         self.assertEqual(
-            self.upapa_5['Test.fasta'][''.join(sorted('ELVIS'))],
+            self.upapa_class['Test.fasta'][''.join(sorted('ELVIS'))],
             set([
                 ('Protein1', 1),
                 ('Protein1', 5), # new srted algorithm to reduce mem print :)
@@ -106,7 +121,7 @@ class UMapMaster(unittest.TestCase):
         )
 
     def test_peptide_eq_word_len_2(self):
-        maps = self.upapa_5.map_peptide( peptide='VISHE', fasta_name='Test.fasta')
+        maps = self.upapa_class.map_peptide( peptide='VISHE', fasta_name='Test.fasta')
         self.assertEqual( len(maps), 1 )
         for mapping in maps:
                 self.assertEqual(
@@ -132,7 +147,7 @@ class UMapMaster(unittest.TestCase):
             },
 
         }
-        maps = self.upapa_5.map_peptide( peptide='IS', fasta_name='Test.fasta')
+        maps = self.upapa_class.map_peptide( peptide='IS', fasta_name='Test.fasta')
         self.assertEqual( len(maps), 4 )
         for mapping in maps:
             if mapping['id'] == 'Protein1':
@@ -156,7 +171,7 @@ class UMapMaster(unittest.TestCase):
                 'id'    : 'Protein1'
             }
         }
-        maps = self.upapa_5.map_peptide( peptide='VISLIVES', fasta_name='Test.fasta')
+        maps = self.upapa_class.map_peptide( peptide='VISLIVES', fasta_name='Test.fasta')
         self.assertEqual( len(maps), 1 )
         for mapping in maps:
             if mapping['id'] == 'Protein1':
@@ -166,14 +181,14 @@ class UMapMaster(unittest.TestCase):
                 )
 
     def test_purge_fasta(self):
-        self.upapa_5.purge_fasta_info( 'Test.fasta')
+        self.upapa_class.purge_fasta_info( 'Test.fasta')
         self.assertFalse(
-            'Test.fasta' in self.upapa_5.keys()
+            'Test.fasta' in self.upapa_class.keys()
         )
 
     def test_peptide_gt_word_but_not_continous(self):
         self.assertEqual(
-            self.upapa_5.map_peptide(
+            self.upapa_class.map_peptide(
                 peptide='WHYELVIS',
                 fasta_name='Test.fasta'
             ),
@@ -181,7 +196,7 @@ class UMapMaster(unittest.TestCase):
         )
 
     def test_multiple_occurrence_in_one_seq(self):
-        maps = self.upapa_5.map_peptide( peptide='AAAAAAAAAA', fasta_name='Test.fasta')
+        maps = self.upapa_class.map_peptide( peptide='AAAAAAAAAA', fasta_name='Test.fasta')
         self.assertEqual( len(maps), 2 )
         sorted_maps = sorted( maps, key= lambda x: x['start'])
         self.assertEqual(
@@ -208,7 +223,7 @@ class UMapMaster(unittest.TestCase):
         )
 
     def test_multiple_occurrence_with_opverlap_in_one_seq(self):
-        maps = self.upapa_5.map_peptide(
+        maps = self.upapa_class.map_peptide(
             peptide='GGGGGGG',
             fasta_name='Test.fasta'
         )
@@ -219,30 +234,30 @@ class UMapMaster(unittest.TestCase):
         )
         if regex_module_installed:
             #test short sequence, regex does not work with overlap
-            maps = self.upapa_5.map_peptide(
+            maps = self.upapa_class.map_peptide(
                 peptide='GGGG',
                 fasta_name='Test.fasta'
             )
             self.assertEqual( len(maps), 7 )
 
     def test_sort_independece(self):
-        map_1 = self.upapa_5.map_peptide(
+        map_1 = self.upapa_class.map_peptide(
             peptide    = 'FORWARD',
             fasta_name = 'Test.fasta'
         )
-        map_2 = self.upapa_5.map_peptide(
+        map_2 = self.upapa_class.map_peptide(
             peptide    = 'DRAWROF',
             fasta_name = 'Test.fasta'
         )
-        map_3 = self.upapa_5.map_peptide(
+        map_3 = self.upapa_class.map_peptide(
             peptide    = 'FORWA',
             fasta_name = 'Test.fasta'
         )
-        map_4 = self.upapa_5.map_peptide(
+        map_4 = self.upapa_class.map_peptide(
             peptide    = 'AWROF',
             fasta_name = 'Test.fasta'
         )
-        map_5 = self.upapa_5.map_peptide(
+        map_5 = self.upapa_class.map_peptide(
             peptide    = 'AORRW',
             fasta_name = 'Test.fasta'
         ) # should not work..

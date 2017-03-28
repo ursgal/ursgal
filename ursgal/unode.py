@@ -674,7 +674,7 @@ class UNode(object, metaclass=Meta_UNode):
         )
         return grouped_psms
 
-    def import_engine_as_python_function( self ):
+    def import_engine_as_python_function( self, function_name = None ):
         '''
         The unode import_engine_as_python_function function
 
@@ -706,11 +706,13 @@ class UNode(object, metaclass=Meta_UNode):
         module_dir_name = os.path.dirname( self.exe )
         sys.path.insert( 1, module_dir_name )
         imported_module = importlib.import_module( self.engine )
-        assert hasattr(imported_module, 'main'), '''
+        if function_name is None:
+            function_name = 'main'
+        assert hasattr(imported_module, function_name), '''
         Can not import main() function from engine
         {0}
         '''.format( self.exe )
-        main_function = getattr( imported_module, "main" )
+        main_function = getattr( imported_module, function_name)
         return main_function
 
     def load_json( self, finfo=None, json_path=None):
