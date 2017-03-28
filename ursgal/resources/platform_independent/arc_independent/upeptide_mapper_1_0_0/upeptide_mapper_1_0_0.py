@@ -3,20 +3,26 @@
 usage:
     ./upeptide_mapper_1_0_0.py <input_file> <output_file>
 
-Fixes are listed in the main function. Resulting csv have unified fields, which
-is most important for consitent modification formattting.
+
 '''
 
 from __future__ import print_function
 import sys
 import os
-import pickle
 import csv
 import ursgal
-# import ursgal.ursgal_kb
 import re
 from collections import Counter, defaultdict
-from copy import deepcopy as dc
+try:
+    import regex as regex
+    finditer_kwargs = { 'overlapped' : True }
+except:
+    print('[ WARNING  ] Standard re module cannot find overlapping pattern')
+    print('[   INFO   ] Consider installing the regex module')
+    print('[   INFO   ] pip install -r requirements.txt')
+    import re as regex
+    finditer_kwargs = {}
+import ahocorasick
 
 # increase the field size limit to avoid crash if protein merge tags
 # become too long does not work under windows
@@ -25,73 +31,42 @@ if sys.platform != 'win32':
 
 
 
-def main(input_file=None, output_file=None, params=None, search_engine=None):
+def main(input_file=None, output_file=None, params=None):
     '''
     Arguments:
-        input_file (str): input filename of csv which should be unified
-        output_file (str): output filename of csv after unifying
-        search_engine(str): the search engine the csv file stems from
+        input_file (str): input filename of csv
+        output_file (str): output filename
  
-
-
-
-
     '''
-#     print(
-#         '''
-# [ unifycsv ] Converting {0} of engine {1} to unified CSV format...
-#         '''.format(
-#             os.path.basename(input_file),
-#             search_engine,
-#         )
-#     )
-
-    aa_exception_dict = params['translations']['aa_exception_dict']
-    
-    de_novo_engines = [
-        'novor',
-        'pepnovo',
-        'uninovo',
-        'unknown_engine'
-    ]
-    database_search_engines = [
-        'msamanda',
-        'msgf',
-        'myrimatch',
-        'omssa',
-        'xtandem'
-    ]
-    de_novo = False
-    database_search = False
-    for de_novo_engine in de_novo_engines:
-        if de_novo_engine in search_engine.lower():
-            de_novo = True
-    for db_se in database_search_engines:
-        if db_se in search_engine.lower():
-            database_search = True
-
-
-    if database_search is True:
-        target_decoy_peps = set()
-        non_enzymatic_peps = set()
-        pep_map_lookup = {}
-
-        if params['translations']['peptide_mapper_version'] == 'upapa_v2':
-            upapa = UPeptideMapper_v2()
-            fasta_lookup_name = upapa.build_lookup_from_file(
-                params['translations']['database'],
-                force  = False,
-            )
-        else:
-            #silent default :)
-            upapa = UPeptideMapper_v3()
-            fasta_lookup_name = upapa.fasta_lookup_name
-
-        print(
-            '''[ map_peps ] Using peptide mapper version: {0}'''.format(
-                params['translations']['peptide_mapper_version']
-            )
+    print(
+        '''[ pep_maps ] Mapping peptides from file {0}'''.format(
+            os.path.basename(input_file),
         )
+    )
+    do_not_delete      = False
+    created_tmp_files  = []
+    target_decoy_peps  = set()
+    non_enzymatic_peps = set()
+    pep_map_lookup     = {}
+    joinchar           = params['translations']['protein_delimiter']
+
+    if params['translations']['peptide_mapper_version'] == 'upapa_v2':
+        upapa = UPeptideMapper_v2( word_len = params['translations']['word_len'])
+        fasta_lookup_name = upapa.build_lookup_from_file(
+            params['translations']['database'],
+            force  = False,
+        )
+    else:
+        #silent default :)
+        upapa = UPeptideMapper_v3( params['translations']['database'] )
+        fasta_lookup_name = upapa.fasta_lookup_name
+
+    print(
+        '''[ map_peps ] Using peptide mapper version: {0}'''.format(
+            params['translations']['peptide_mapper_version']
+        )
+    )
+ 
 
 
     output_file_object = open(output_file, 'w')
@@ -121,6 +96,8 @@ def main(input_file=None, output_file=None, params=None, search_engine=None):
             'Stop',
             'gi',
             'Accession',
+            'proteinacc_start_stop_pre_post_;'
+
         ]:
             if remove_fieldname not in output_fieldnames:
                 continue
@@ -142,12 +119,12 @@ def main(input_file=None, output_file=None, params=None, search_engine=None):
             **csv_kwargs
         )
         csv_output.writeheader()
-        print('''[  ] Parsing and buffering csv''')
+        print('''[ map_peps ] Parsing and buffering csv''')
         import time
         csv_file_buffer = []
         tmp_peptide_set = set()
         for line_dict in csv_input:
-            for aa_to_replace, replace_dict in aa_exception_dict.items():
+            for aa_to_replace, replace_dict in params['translations']['aa_exception_dict'].items():
                 if aa_to_replace in line_dict['Sequence']:
                     #change mods only if unimod has to be changed...
                     if 'unimod_name' in replace_dict.keys():
@@ -167,23 +144,21 @@ def main(input_file=None, output_file=None, params=None, search_engine=None):
                     )
             csv_file_buffer.append(line_dict)
             tmp_peptide_set.add( line_dict['Sequence'] )
-        # old version:
+
+        num_peptides = len(tmp_peptide_set)
         print('''[ map_peps ] Parsing and buffering csv done''')
         print(
             '''[ map_peps ] Mapping {0} peptides using mapper {1}'''.format(
                 num_peptides,
-
-
+                params['translations']['peptide_mapper_version']
             )
         )
-        num_peptides = len(tmp_peptide_set)
-        print('Mapping peptide {0}/{1}'.format(pos, num_peptides))
         p2p_mappings  = upapa.map_peptides(
-            list(tmp_peptide_set)
+            list(tmp_peptide_set),
+            fasta_lookup_name
         )        
-        print()
         print('''[ map_peps ] Mapping peptides done''')
-        
+        total_lines = len(csv_file_buffer)
         assert len(p2p_mappings.keys()) == len(tmp_peptide_set)
         for line_nr, line_dict in enumerate(csv_file_buffer):
             if line_nr % 500 == 0:
@@ -194,101 +169,97 @@ def main(input_file=None, output_file=None, params=None, search_engine=None):
                     ),
                     end='\r'
                 )
-            # protein block, only for database search engine
-            if database_search is True:
-                # remap peptides to proteins, check correct enzymatic
-                # cleavage and decoy assignment
-                lookup_identifier = '{0}><{1}'.format(
-                    line_dict['Sequence'],
-                    fasta_lookup_name
-                )
-                if lookup_identifier not in pep_map_lookup.keys():
-                    tmp_decoy = set()
-                    upeptide_maps = p2p_mappings[line_dict['Sequence']]
+            # remap peptides to proteins, check correct enzymatic
+            # cleavage and decoy assignment
+            lookup_identifier = '{0}><{1}'.format(
+                line_dict['Sequence'],
+                fasta_lookup_name
+            )
+            if lookup_identifier not in pep_map_lookup.keys():
+                tmp_decoy = set()
+                upeptide_maps = p2p_mappings[line_dict['Sequence']]
 
-                    if upeptide_maps == []:
-                        print('''
+                if upeptide_maps == []:
+                    print('''
 [ WARNING ] The peptide {0} could not be mapped to the
 [ WARNING ] given database {1}
 [ WARNING ] {2}
 [ WARNING ] This PSM will be skipped.
-                            '''.format(
-                                line_dict['Sequence'],
-                                fasta_lookup_name,
-                                ''
-                            )
+                        '''.format(
+                            line_dict['Sequence'],
+                            fasta_lookup_name,
+                            ''
                         )
-                        continue
+                    )
+                    continue
 
-                    sorted_upeptide_maps = [ protein_dict for protein_dict in sorted( upeptide_maps, key=lambda x: x['id'] ) ]
-  
-                    protein_mapping_dict = None
-                    last_protein_id      = None
-                    for protein in sorted_upeptide_maps:
-                        if protein_mapping_dict is None:
-                            protein_mapping_dict = {
-                                'Protein ID'       : protein['id'],
-                                'Sequence Start'   : str(protein['start']),
-                                'Sequence Stop'    : str(protein['end']),
-                                'Sequence Pre AA'  : protein['pre'],
-                                'Sequence Post AA' : protein['post'],
-                            }
-                        else:
-                            if protein['id'] == last_protein_id:
-                                tmp_join_char = ';'
-                            else:
-                                tmp_join_char = joinchar
-                                protein_mapping_dict['Protein ID' ] += '{0}{1}'.format(tmp_join_char, protein['id'])
+                sorted_upeptide_maps = [ protein_dict for protein_dict in sorted( upeptide_maps, key=lambda x: x['id'] ) ]
 
-                            protein_mapping_dict['Sequence Start'   ] += '{0}{1}'.format(tmp_join_char, str(protein['start']))
-                            protein_mapping_dict['Sequence Stop'    ] += '{0}{1}'.format(tmp_join_char, str(protein['end']))
-                            protein_mapping_dict['Sequence Pre AA'  ] += '{0}{1}'.format(tmp_join_char, protein['pre'])
-                            protein_mapping_dict['Sequence Post AA' ] += '{0}{1}'.format(tmp_join_char, protein['post'])
-
-                        last_protein_id = protein['id']
-
-                        # mzidentml-lib does not always set 'Is decoy' correctly
-                        # (it's always 'false' for MS-GF+ results), this is fixed here:
-                        if params['translations']['decoy_tag'] in protein['id']:
-                            tmp_decoy.add('true')
-                        else:
-                            tmp_decoy.add('false')
-
-                    if len(protein_mapping_dict['Protein ID']) >= 2000:
-                        print(
-                            '{0}: {1}'.format(
-                                line_dict['Sequence'],
-                                protein_mapping_dict['Protein ID']
-                            ),
-                            file = protein_id_output
-                        )
-                        protein_mapping_dict['Protein ID'] = protein_mapping_dict['Protein ID'][:1990] + ' ...'
-                        do_not_delete = True
-
-                    if len(tmp_decoy) >= 2:
-                        target_decoy_peps.add(line_dict['Sequence'])
-                        protein_mapping_dict['Is decoy'] = 'true'
+                protein_mapping_dict = None
+                last_protein_id      = None
+                for protein in sorted_upeptide_maps:
+                    if protein_mapping_dict is None:
+                        protein_mapping_dict = {
+                            'Protein ID'       : protein['id'],
+                            'Sequence Start'   : str(protein['start']),
+                            'Sequence Stop'    : str(protein['end']),
+                            'Sequence Pre AA'  : protein['pre'],
+                            'Sequence Post AA' : protein['post'],
+                        }
                     else:
-                        protein_mapping_dict['Is decoy'] = list(tmp_decoy)[0]
+                        if protein['id'] == last_protein_id:
+                            tmp_join_char = ';'
+                        else:
+                            tmp_join_char = joinchar
+                            protein_mapping_dict['Protein ID' ] += '{0}{1}'.format(tmp_join_char, protein['id'])
 
-                    pep_map_lookup[ lookup_identifier ] = protein_mapping_dict
+                        protein_mapping_dict['Sequence Start'   ] += '{0}{1}'.format(tmp_join_char, str(protein['start']))
+                        protein_mapping_dict['Sequence Stop'    ] += '{0}{1}'.format(tmp_join_char, str(protein['end']))
+                        protein_mapping_dict['Sequence Pre AA'  ] += '{0}{1}'.format(tmp_join_char, protein['pre'])
+                        protein_mapping_dict['Sequence Post AA' ] += '{0}{1}'.format(tmp_join_char, protein['post'])
 
-                buffered_protein_mapping_dict = pep_map_lookup[lookup_identifier]
-                line_dict.update( buffered_protein_mapping_dict )
+                    last_protein_id = protein['id']
+
+                    # mzidentml-lib does not always set 'Is decoy' correctly
+                    # (it's always 'false' for MS-GF+ results), this is fixed here:
+                    if params['translations']['decoy_tag'] in protein['id']:
+                        tmp_decoy.add('true')
+                    else:
+                        tmp_decoy.add('false')
+
+                if len(protein_mapping_dict['Protein ID']) >= 2000:
+                    print(
+                        '{0}: {1}'.format(
+                            line_dict['Sequence'],
+                            protein_mapping_dict['Protein ID']
+                        ),
+                        file = protein_id_output
+                    )
+                    protein_mapping_dict['Protein ID'] = protein_mapping_dict['Protein ID'][:1990] + ' ...'
+                    do_not_delete = True
+
+                if len(tmp_decoy) >= 2:
+                    target_decoy_peps.add(line_dict['Sequence'])
+                    protein_mapping_dict['Is decoy'] = 'true'
+                else:
+                    protein_mapping_dict['Is decoy'] = list(tmp_decoy)[0]
+
+                pep_map_lookup[ lookup_identifier ] = protein_mapping_dict
+
+            line_dict.update( pep_map_lookup[lookup_identifier] )
 
             csv_output.writerow(line_dict)
     output_file_object.close()
 
-    if database_search is True:
-        if len(target_decoy_peps) != 0:
-            print(
-                '''
-                [ WARNING ] The following peptides occured in a target as well as decoy protein
-                [ WARNING ] {0}
-                [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
-                    target_decoy_peps,
-                )
+    if len(target_decoy_peps) != 0:
+        print(
+            '''
+            [ WARNING ] The following peptides occured in a target as well as decoy protein
+            [ WARNING ] {0}
+            [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
+                target_decoy_peps,
             )
+        )
 
    
     if do_not_delete is False:
@@ -319,23 +290,12 @@ class UPeptideMapper_v2( dict ):
 
     '''
     def __init__(self, word_len = None ):
-        if word_len is None:
-            word_len = ursgal.uparams.ursgal_params['word_len'].get(
-                'default_value', 8
-            )
-            '''Ultimately this will be passed over by the wrapper
-            if this class is its own standalone script / UNode
-            '''
         self.fasta_sequences = {}
         self.word_len = word_len
         self.hits = {'fcache': 0, 'regex': 0}
-        self.query_length = ddict(int)
+        self.query_length = defaultdict(int)
         self.master_buffer = {}
         self.peptide_2_protein_mappings = {}
-        # print(ursgal._ursgal_params)
-        # print( )
-        # exit(dir(ursgal)) #.Meta_UNode._upeptide_mapper)#['word_len'])
-        # exit(ursgal.uparams.ursgal_params['word_len'])
         pass
 
     def build_lookup_from_file( self, path_to_fasta_file, force=True):
@@ -399,55 +359,18 @@ class UPeptideMapper_v2( dict ):
         '''
         for pos in range(len( seq ) - self.word_len + 1):
             pep = seq[ pos : pos + self.word_len ]
-            # pep = pep.encode()
-
-            # Raw 6.3GB
-            # try:
-            #     self[ fasta_name ][ pep ].add( (id, pos + 1) )
-            # except:
-            #     self[ fasta_name ][ pep ] = set([ (id, pos + 1) ])
-
             # sorted 3.8GB
             s_pep = ''.join(sorted(pep))
-            # print(s_pep, type(s_pep))
             try:
                 self[ fasta_name ][ s_pep ].add( (id, pos + 1) )
             except:
                 self[ fasta_name ][ s_pep ] = set([ (id, pos + 1) ])
 
-            # tree like ... 3.8 GB
-            # current_depth = self[ fasta_name ]
-            # for aa in sorted(pep):
-            #     try:
-            #         current_depth[ ord(aa) ]
-            #     except:
-            #         current_depth[ ord(aa) ] = {}
-            #     current_depth = current_depth[ ord(aa) ]
-            # try:
-            #     current_depth['_'].add( (id, pos + 1) )
-            # except:
-            #     current_depth['_'] = set([ (id, pos + 1) ])
-
-            # Counter compression 4.1 GB
-            # current_depth = self[ fasta_name ]
-            # # for aa in sorted(pep):
-            # for aa, count in Counter(pep).items():
-            #     aa_key = '{0}{1}'.format(aa, count)
-            #     try:
-            #         current_depth[ aa_key ]
-            #     except:
-            #         current_depth[ aa_key ] = {}
-            #     current_depth = current_depth[ aa_key ]
-            # try:
-            #     current_depth['_'].add( (id, pos + 1) )
-            # except:
-            #     current_depth['_'] = set([ (id, pos + 1) ])
-
         return
 
     def map_peptides(self, peptide_list, fasta_name = None, force_regex = False ):
         if fasta_name not in self.peptide_2_protein_mappings.keys():
-            self.peptide_2_protein_mappings[fasta_name] = ddict(list)
+            self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
         for peptide in peptide_list:
             self.peptide_2_protein_mappings[fasta_name][peptide] = self.map_peptide(
                 peptide,
@@ -595,42 +518,42 @@ class UPeptideMapper_v3( dict ):
         self.protein_indices            = {}
         self.protein_sequences          = {}
         self.peptide_2_protein_mappings = {}
-        self.total_sequence_string      = ''
+        self.total_sequence_string      = {}
         self.fasta_lookup_name          = os.path.basename(os.path.abspath( fasta_database ))
         counter                         = 0
-        self.total_sequence_list        = []
-        self.len_total_sequence_string  = 0
+        self.total_sequence_list        = defaultdict(list)
+        self.len_total_sequence_string  = defaultdict(int)
         for protein_id, seq in ursgal.ucore.parseFasta(open(fasta_database,'r').readlines()):
             print( 'Buffering protein #{0}'.format(counter), end ='\r' )
             len_seq             = len(seq)
             
             self.protein_indices[protein_id] = {
-                'start': self.len_total_sequence_string,
-                'stop' : self.len_total_sequence_string + len_seq
+                'start': self.len_total_sequence_string[self.fasta_lookup_name],
+                'stop' : self.len_total_sequence_string[self.fasta_lookup_name] + len_seq
             }
             # self.total_sequence_string += seq
-            self.total_sequence_list.append(seq)
+            self.total_sequence_list[self.fasta_lookup_name].append(seq)
             self.protein_list += [protein_id] * len_seq
             self.protein_sequences[protein_id] = seq
-            self.len_total_sequence_string += len_seq
+            self.len_total_sequence_string[self.fasta_lookup_name] += len_seq
             counter += 1
         print()
         print('Joining protein sequences')
-        self.total_sequence_string = ''.join( self.total_sequence_list )
+        self.total_sequence_string[self.fasta_lookup_name] = ''.join( self.total_sequence_list[self.fasta_lookup_name] )
         print('Joining protein sequences done')
 
 
     def map_peptides(self, peptide_list, fasta_name):
-        import ahocorasick
-        if fasta_name not in self.peptide_2_protein_mappings.keys():
-            self.peptide_2_protein_mappings[fasta_name] = ddict(list)
 
-        # self.peptide_2_protein_mappings = ddict(list)
+        if fasta_name not in self.peptide_2_protein_mappings.keys():
+            self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
+
+        # self.peptide_2_protein_mappings = defaultdict(list)
         A = ahocorasick.Automaton()
         for idx, peptide in enumerate(peptide_list):
             A.add_word(peptide, (idx, peptide))
         A.make_automaton()
-        for match in A.iter(self.total_sequence_string):
+        for match in A.iter(self.total_sequence_string[fasta_name]):
             idx, (p_idx, m_peptide) = match
             len_m_peptide = len(m_peptide)
             protein_name_end_index = self.protein_list[idx]
@@ -699,11 +622,12 @@ if __name__ == '__main__':
             },
             'protein_delimiter'        : '<|>',
             'decoy_tag'                : 'decoy_',
+            'word_len'                 : 6
         },
         'prefix' : None
     }
-    params['translations']['database']           = sys.argv[3]
-    params['translations']['peptide_map_engine'] = sys.argv[4]
+    params['translations']['database']               = sys.argv[3]
+    params['translations']['peptide_mapper_version'] = sys.argv[4]
 
     main(
         input_file     = sys.argv[1],

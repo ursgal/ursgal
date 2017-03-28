@@ -58,19 +58,11 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
             self.params['input_file']
         )
 
-        scan_rt_lookup_path = self.meta_unodes['ucontroller'].scan_rt_lookup_path
-
-        # find the last search/denovo engine:
-        last_engine = self.get_last_engine(
-            history = self.stats['history'],
-        )
-
 
         tmp_files = upeptide_mapper_main(
             input_file      = input_file,
             output_file     = output_file,
             params          = self.params,
-            search_engine   = last_engine,
         )
         for tmp_file in tmp_files:
             self.created_tmp_files.append(tmp_file)

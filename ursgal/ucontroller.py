@@ -1839,9 +1839,30 @@ class UController(ursgal.UNode):
             force      = force,
         )
 
+        #insert peptide mapping here inlcuding the classification as a db engine
+        database_search_engines = [
+            'msamanda',
+            'msgf',
+            'myrimatch',
+            'omssa',
+            'xtandem'
+        ]
+        database_search = False
+        for db_se in database_search_engines:
+            if db_se in search_engine.lower():
+                database_search = True
+        if database_search:
+            mapped_csv_search_results = self.map_peptides(
+                input_file       = csv_search_results,
+                output_file_name = output_file_name,
+                force            = force,
+            )
+        else:
+            mapped_csv_search_results = csv_search_results
+
         # 4. Convert csv to unified ursgal csv format:
         unified_search_results = self.unify_csv(
-            input_file       = csv_search_results,
+            input_file       = mapped_csv_search_results,
             output_file_name = output_file_name,
             force            = force,
         )
@@ -2149,6 +2170,35 @@ class UController(ursgal.UNode):
         return self.execute_unode(
             input_file       = input_file,
             engine           = self.params['unify_csv_converter_version'],
+            force            = force,
+            output_file_name = output_file_name
+        )
+
+    def map_peptides(self, input_file, force=False, output_file_name=None):
+        '''
+        The ucontroller map peptides function
+
+  
+
+        Keyword Arguments:
+            input_file (str): The complete path to the input, input file has
+                currently to be a .csv file.
+            force (bool): (Re)do the analysis, even if output file
+                already exists.
+            output_file_name (str or None): Desired output file name
+                excluding path (optional). If None, output file name will
+                be auto-generated.
+
+     
+
+        Returns:
+            str: Path of the output file
+        '''
+
+
+        return self.execute_unode(
+            input_file       = input_file,
+            engine           = self.params['peptide_mapper_version'],
             force            = force,
             output_file_name = output_file_name
         )

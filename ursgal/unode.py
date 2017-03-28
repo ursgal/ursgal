@@ -32,7 +32,7 @@ class Meta_UNode(type):
     _collected_initialized_unodes = {}
 
     _uparam_mapper = ursgal.UParamMapper()
-    _upeptide_mapper = ursgal.UPeptideMapper()
+    # _upeptide_mapper = ursgal.UPeptideMapper()
 
     def __new__(cls, cls_name, cls_bases, cls_dict ):
         new_class = super(
@@ -107,7 +107,7 @@ class Meta_UNode(type):
         Meta_UNode._collected_initialized_unodes[ engine ] = initd_klass
         initd_klass.meta_unodes = Meta_UNode._collected_initialized_unodes
         initd_klass.uparam_mapper = Meta_UNode._uparam_mapper
-        initd_klass.upeptide_mapper = Meta_UNode._upeptide_mapper
+        # initd_klass.upeptide_mapper = Meta_UNode._upeptide_mapper
 
         if hasattr( initd_klass, '_run_after_meta_init'):
             initd_klass._after_init_meta_callback( *args, **kwargs )
