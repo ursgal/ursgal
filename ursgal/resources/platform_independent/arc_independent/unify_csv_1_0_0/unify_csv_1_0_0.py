@@ -19,7 +19,7 @@ import ursgal
 import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
-
+# import time
 # increase the field size limit to avoid crash if protein merge tags
 # become too long does not work under windows
 if sys.platform != 'win32':
@@ -168,11 +168,25 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         if db_se in search_engine.lower():
             database_search = True
 
+
+    if params['translations']['enzyme'] != 'nonspecific':
+        allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')
+    else:
+        allowed_aa    = ''.join( list( ursgal.ursgal_kb.NITROGENS.keys() ) )
+        cleavage_site = 'C'
+        inhibitor_aa  = ''
+    allowed_aa += '-'
+
+    # old version
     if upeptide_mapper is None:
         upapa = ursgal.UPeptideMapper()
     else:
         upapa = upeptide_mapper
-
+    # from  ursgal.ucore import NUPeptideMapper
+    #new_version
+    # upapa = ursgal.umapmaster.NUPeptideMapper(params['translations']['database'])
+    # fasta_lookup_name = upapa.fasta_lookup_name
+    
     if database_search is True:
         target_decoy_peps = set()
         non_enzymatic_peps = set()
@@ -180,6 +194,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         fasta_lookup_name = upapa.build_lookup_from_file(
             params['translations']['database'],
             force  = False,
+            # enzyme = (allowed_aa, cleavage_site)
         )
     # print('Cached!')
     # input()
@@ -200,13 +215,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     total_lines = len(list(csv.reader(open(input_file,'r'))))
     ze_only_buffer = {}
 
-    if params['translations']['enzyme'] != 'nonspecific':
-        allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')
-    else:
-        allowed_aa    = ''.join( list( ursgal.ursgal_kb.NITROGENS.keys() ) )
-        cleavage_site = 'C'
-        inhibitor_aa  = ''
-    allowed_aa += '-'
+
 
     with open( input_file, 'r' ) as in_file:
         csv_input  = csv.DictReader(
@@ -247,7 +256,54 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         csv_output.writeheader()
         print('''[ unify_cs ] parsing csv''')
         import time
-        for line_nr, line_dict in enumerate(csv_input):
+        csv_file_buffer = []
+        tmp_peptide_set = set()
+        for line_dict in csv_input:
+            for aa_to_replace, replace_dict in aa_exception_dict.items():
+                if aa_to_replace in line_dict['Sequence']:
+                    #change mods only if unimod has to be changed...
+                    if 'unimod_name' in replace_dict.keys():
+                        for r_pos, aa in enumerate(line_dict['Sequence']):
+                            if aa == aa_to_replace:
+                                index_of_U = r_pos + 1
+                                unimod_name = replace_dict['unimod_name']
+                                if cam and replace_dict['original_aa'] == 'C':
+                                    unimod_name = replace_dict['unimod_name_with_cam']
+                                new_mod = '{0}:{1}'.format(
+                                    unimod_name,
+                                    index_of_U
+                                )
+                                # if line_dict_update['Modifications'] == '':
+                                #     line_dict_update['Modifications'] += new_mod
+                                # else:
+                                #     line_dict_update['Modifications'] += ';{0}'.format(
+                                #         new_mod
+                                #     )
+                    line_dict['Sequence'] = line_dict['Sequence'].replace(
+                        aa_to_replace,
+                        replace_dict['original_aa']
+                    )
+            csv_file_buffer.append(line_dict)
+            tmp_peptide_set.add( line_dict['Sequence'] )
+        # old version:
+        print('''[ unify_cs ] parsing csv done''')
+        # import time
+        p2p_mappings = {}
+        print('''[ unify_cs ] mapping peptides''')
+        num_peptides = len(tmp_peptide_set)
+        for pos, peptide in enumerate(list(tmp_peptide_set)):
+            print('Mapping peptide {0}/{1}'.format(pos, num_peptides), end='\r')
+            p2p_mappings[peptide] = upapa.map_peptide(
+                peptide    = peptide,
+                fasta_name = fasta_lookup_name
+            )
+        print()
+        print('''[ unify_cs ] mapping peptides done''')
+        #new version
+        # p2p_mappings  = upapa.new_map_peptides( list(tmp_peptide_set) )        
+        
+        assert len(p2p_mappings.keys()) == len(tmp_peptide_set)
+        for line_nr, line_dict in enumerate(csv_file_buffer):
             if line_nr % 500 == 0:
                 print(
                     '[ unify_cs ] Processing line number: {0}/{1} .. '.format(
@@ -565,10 +621,10 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                         line_dict_update['Modifications'] += ';{0}'.format(
                                             new_mod
                                         )
-                        line_dict['Sequence'] = line_dict['Sequence'].replace(
-                            aa_to_replace,
-                            replace_dict['original_aa']
-                        )
+                #         line_dict['Sequence'] = line_dict['Sequence'].replace(
+                #             aa_to_replace,
+                #             replace_dict['original_aa']
+                #         )
 
                 line_dict_update['Sequence'] = line_dict['Sequence']
                 #
@@ -666,10 +722,9 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                     tmp_decoy = set()
                     # tmp_protein_id = {}
 
-                    upeptide_maps = upapa.map_peptide(
-                        peptide    = line_dict['Sequence'],
-                        fasta_name = fasta_lookup_name
-                    )
+                    upeptide_maps = p2p_mappings[line_dict['Sequence']]
+
+                   
                     '''
                     <><><><><><><><><><><><><>
                     '''
@@ -977,6 +1032,7 @@ if __name__ == '__main__':
         'prefix'                   : None
     }
     params['translations']['database'] = sys.argv[6]
+    # start_time = time.time()
     main(
         input_file     = sys.argv[1],
         output_file    = sys.argv[2],
@@ -984,4 +1040,6 @@ if __name__ == '__main__':
         params         = params,
         search_engine  = sys.argv[4],
         score_colname  = sys.argv[5]
-    )
+    )    # end_time = time.time()
+    # print(end_time-start_time)
+    # input()

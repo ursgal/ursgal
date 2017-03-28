@@ -4279,6 +4279,25 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
     },
+    'peptide_mapper_version' : {
+        'available_in_unode' : [
+            'upeptide_mapper_1_0_0',
+        ],
+        'default_value' : 'upapa_v3',
+        'description' :  '''version 3 is the fastest and memory efficient version, version 2 is the classic approach ''',
+        'triggers_rerun' : False,
+        'ukey_translation' : {
+            'upeptide_mapper_style_1' : 'peptide_mapper_version',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'precursor_charge_dependency' : {
         'available_in_unode' : [
             'omssa_2_1_9',
