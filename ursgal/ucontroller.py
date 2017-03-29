@@ -1849,7 +1849,7 @@ class UController(ursgal.UNode):
         ]
         database_search = False
         for db_se in database_search_engines:
-            if db_se in search_engine.lower():
+            if db_se in engine.lower():
                 database_search = True
         if database_search:
             mapped_csv_search_results = self.map_peptides(
@@ -2195,10 +2195,10 @@ class UController(ursgal.UNode):
             str: Path of the output file
         '''
 
-
+        pprint.pprint(self.params)
         return self.execute_unode(
             input_file       = input_file,
-            engine           = self.params['peptide_mapper_version'],
+            engine           = self.params['peptide_mapper_converter_version'],
             force            = force,
             output_file_name = output_file_name
         )

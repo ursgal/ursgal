@@ -58,7 +58,6 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
             self.params['input_file']
         )
 
-
         tmp_files = upeptide_mapper_main(
             input_file      = input_file,
             output_file     = output_file,

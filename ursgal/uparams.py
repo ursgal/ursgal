@@ -28,6 +28,7 @@ ursgal_params = {
     'aa_exception_dict' : {
         'available_in_unode' : [
             'unify_csv_1_0_0',
+            'upeptide_mapper_1_0_0',
         ],
         'default_value' : {
             'J' : {
@@ -47,6 +48,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'unify_csv_style_1' : 'aa_exception_dict',
+            'upeptide_mapper_style_1' : 'decoy_tag',
         },
         'utag' : [
             'conversion',
@@ -501,6 +503,7 @@ N-terminus or C-terminus ''',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'upeptide_mapper_1_0_0'
         ],
         'default_value' : None,
         'description' :  ''' Path to database file containing protein sequences in fasta format ''',
@@ -514,6 +517,7 @@ N-terminus or C-terminus ''',
             'omssa_style_1' : '-d',
             'unify_csv_style_1' : 'database',
             'xtandem_style_1' : 'file URL',
+            'upeptide_mapper_style_1' : 'decoy_tag',
         },
         'utag' : [
             'database',
@@ -588,6 +592,7 @@ N-terminus or C-terminus ''',
             'mzidentml_lib_1_7',
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
+            'upeptide_mapper_1_0_0'
         ],
         'default_value' : "decoy_",
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
@@ -599,6 +604,7 @@ N-terminus or C-terminus ''',
             'mzidentml_style_1' : '-decoyRegex',
             'unify_csv_style_1' : 'decoy_tag',
             'xtandem2csv_style_1' : 'decoy_tag',
+            'upeptide_mapper_style_1' : 'decoy_tag',
         },
         'utag' : [
             'database',
@@ -2463,11 +2469,13 @@ N-terminus or C-terminus ''',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
+            'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+
         ],
         'default_value' : 2,
         'description' :  ''' Maximum number of missed cleavages per peptide ''',
@@ -2479,6 +2487,7 @@ N-terminus or C-terminus ''',
             'myrimatch_style_1' : 'MaxMissedCleavages',
             'omssa_style_1' : '-v',
             'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
+            'unify_csv_style_1' : 'max_missed_cleavages',
         },
         'utag' : [
             'protein',
@@ -4279,20 +4288,40 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
     },
-    'peptide_mapper_version' : {
+    'peptide_mapper_class_version' : {
         'available_in_unode' : [
             'upeptide_mapper_1_0_0',
         ],
         'default_value' : 'upapa_v3',
-        'description' :  '''version 3 is the fastest and memory efficient version, version 2 is the classic approach ''',
+        'description' :  '''version 3 is the fastest and memory efficient class version, version 2 is the classic approach ''',
         'triggers_rerun' : False,
         'ukey_translation' : {
-            'upeptide_mapper_style_1' : 'peptide_mapper_version',
+            'upeptide_mapper_style_1' : 'peptide_mapper_class_version',
         },
         'utag' : [
             'conversion',
         ],
         'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'peptide_mapper_converter_version' : {
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : 'upeptide_mapper_1_0_0',
+        'description' :  ''' determines which upeptide mapper class should be used''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'upeptide_mapper_1_0_0',
+        },
+        'utag' : [
+            'converter_version',
+        ],
+        'uvalue_option' : {
+            'multipleLine' : False,
         },
         'uvalue_translation' : {
         },
@@ -4752,6 +4781,7 @@ N-terminus or C-terminus ''',
         'available_in_unode' : [
             'percolator_2_08',
             'unify_csv_1_0_0',
+            'upeptide_mapper_1_0_0'
         ],
         'default_value' : "<|>",
         'description' :  ''' This delimiter seperates protein IDs/names in the unified csv ''',
@@ -4759,6 +4789,7 @@ N-terminus or C-terminus ''',
         'ukey_translation' : {
             'percolator_style_1' : 'protein_delimiter',
             'unify_csv_style_1' : 'protein_delimiter',
+            'upeptide_mapper_style_1' : 'protein_delimiter',
         },
         'utag' : [
             'output',

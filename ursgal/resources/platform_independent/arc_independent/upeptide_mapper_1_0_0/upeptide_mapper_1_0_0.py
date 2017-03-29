@@ -13,6 +13,8 @@ import csv
 import ursgal
 import re
 from collections import Counter, defaultdict
+import itertools
+from copy import deepcopy
 try:
     import regex as regex
     finditer_kwargs = { 'overlapped' : True }
@@ -36,21 +38,27 @@ def main(input_file=None, output_file=None, params=None):
     Arguments:
         input_file (str): input filename of csv
         output_file (str): output filename
+
+    Fixes:
+        * All peptide Sequences are remapped to their corresponding protein,
+          assuring correct start, stop, pre and post aminoacid. Thereby,
+          also correct enzymatic cleavage is checked.
+
  
     '''
     print(
-        '''[ pep_maps ] Mapping peptides from file {0}'''.format(
+        '''[ map_peps ] Mapping peptides from file {0}'''.format(
             os.path.basename(input_file),
         )
     )
     do_not_delete      = False
     created_tmp_files  = []
     target_decoy_peps  = set()
-    non_enzymatic_peps = set()
+    non_mappable_peps = set()
     pep_map_lookup     = {}
     joinchar           = params['translations']['protein_delimiter']
 
-    if params['translations']['peptide_mapper_version'] == 'upapa_v2':
+    if params['translations']['peptide_mapper_class_version'] == 'upapa_v2':
         upapa = UPeptideMapper_v2( word_len = params['translations']['word_len'])
         fasta_lookup_name = upapa.build_lookup_from_file(
             params['translations']['database'],
@@ -63,10 +71,13 @@ def main(input_file=None, output_file=None, params=None):
 
     print(
         '''[ map_peps ] Using peptide mapper version: {0}'''.format(
-            params['translations']['peptide_mapper_version']
+            params['translations']['peptide_mapper_class_version']
         )
     )
- 
+    cam = False
+    for modification in params['translations']['modifications']:
+        if 'C,fix,any,Carbamidomethyl' in modification:
+            cam = True
 
 
     output_file_object = open(output_file, 'w')
@@ -124,42 +135,92 @@ def main(input_file=None, output_file=None, params=None):
         csv_file_buffer = []
         tmp_peptide_set = set()
         for line_dict in csv_input:
-            for aa_to_replace, replace_dict in params['translations']['aa_exception_dict'].items():
+            # we should add here all the J to I and L variants of MSAmanda...
+            appended = False
+            for aa_to_replace, replace_dict in sorted(params['translations']['aa_exception_dict'].items(), reverse=True):
                 if aa_to_replace in line_dict['Sequence']:
-                    #change mods only if unimod has to be changed...
-                    if 'unimod_name' in replace_dict.keys():
-                        for r_pos, aa in enumerate(line_dict['Sequence']):
+                    if aa_to_replace in ['U', 'O']:
+                        if aa_to_replace == 'U':
+                            # print(line_dict['Sequence'])
+                            csv_file_buffer.append(deepcopy(line_dict))
+                            tmp_peptide_set.add(line_dict['Sequence'])
+                        #change mods only if unimod has to be changed...
+                        if 'unimod_name' in replace_dict.keys():
+                            for r_pos, aa in enumerate(line_dict['Sequence']):
+                                if aa == aa_to_replace:
+                                    index_of_aa = r_pos + 1
+                                    unimod_name = replace_dict['unimod_name']
+                                    if cam and 'C' in replace_dict['original_aa']:
+                                        unimod_name = replace_dict['unimod_name_with_cam']
+                                    new_mod = '{0}:{1}'.format(
+                                        unimod_name,
+                                        index_of_aa
+                                    )
+                                    if line_dict['Modifications'] == '':
+                                        line_dict['Modifications'] += new_mod
+                                    else:
+                                        line_dict['Modifications'] += ';{0}'.format(
+                                            new_mod
+                                        )
+                        if len(replace_dict['original_aa']) == 1:
+                            line_dict['Sequence'] = line_dict['Sequence'].replace(
+                                aa_to_replace,
+                                replace_dict['original_aa'][0]
+                            )
+                    elif aa_to_replace in ['J']:
+                        repeat_count = line_dict['Sequence'].count(aa_to_replace)
+                        #we need to do all combos for the positions of I and L in the seq...
+                        positions = []
+                        for index_of_aa, aa in enumerate(line_dict['Sequence']):
                             if aa == aa_to_replace:
-                                index_of_U = r_pos + 1
-                                unimod_name = replace_dict['unimod_name']
-                                if cam and replace_dict['original_aa'] == 'C':
-                                    unimod_name = replace_dict['unimod_name_with_cam']
-                                new_mod = '{0}:{1}'.format(
-                                    unimod_name,
-                                    index_of_U
+                                positions.append( index_of_aa )
+                        product_combos = []
+                        new_peptides = set()
+                        for combo_tuple in itertools.product(replace_dict['original_aa'],repeat=repeat_count):
+                            # product_combos.append(n)
+                            for pos, new_aa in enumerate(combo_tuple):
+                                index_of_aa = positions[pos]
+                                # text[:1] + 'Z' + text[2:]
+                                remapped_peptide = '{0}{1}{2}'.format(
+                                    line_dict['Sequence'][:index_of_aa],
+                                    new_aa,
+                                    line_dict['Sequence'][index_of_aa+1:],
                                 )
-                    line_dict['Sequence'] = line_dict['Sequence'].replace(
-                        aa_to_replace,
-                        replace_dict['original_aa']
-                    )
-            csv_file_buffer.append(line_dict)
+                                tmp_peptide_set.add( 
+                                    remapped_peptide
+                                )
+                                line_dict['Sequence'] = remapped_peptide
+                                csv_file_buffer.append( deepcopy(line_dict) )
+                                appended = True
+                    else:
+                        print(
+                            '''
+                            [ WARNING ] New not covered case of aa: "{0}" 
+                            [ WARNING ] Please adjust upeptide_mapper accordingly
+                            '''.format(aa_to_replace)
+                        )
+                        exit()
+            if appended is False:
+                csv_file_buffer.append(line_dict)
             tmp_peptide_set.add( line_dict['Sequence'] )
-
         num_peptides = len(tmp_peptide_set)
         print('''[ map_peps ] Parsing and buffering csv done''')
         print(
             '''[ map_peps ] Mapping {0} peptides using mapper {1}'''.format(
                 num_peptides,
-                params['translations']['peptide_mapper_version']
+                params['translations']['peptide_mapper_class_version']
             )
         )
         p2p_mappings  = upapa.map_peptides(
             list(tmp_peptide_set),
             fasta_lookup_name
-        )        
+        ) 
         print('''[ map_peps ] Mapping peptides done''')
         total_lines = len(csv_file_buffer)
-        assert len(p2p_mappings.keys()) == len(tmp_peptide_set)
+        #this assertion works for all but MSAmanda sinc J instaead of I or L is reported
+        # print(set(tmp_peptide_set)-set(p2p_mappings.keys()))
+        # print(len(set(tmp_peptide_set)-set(p2p_mappings.keys())))
+        # assert len(p2p_mappings.keys()) == len(tmp_peptide_set)
         for line_nr, line_dict in enumerate(csv_file_buffer):
             if line_nr % 500 == 0:
                 print(
@@ -179,7 +240,7 @@ def main(input_file=None, output_file=None, params=None):
                 tmp_decoy = set()
                 upeptide_maps = p2p_mappings[line_dict['Sequence']]
 
-                if upeptide_maps == []:
+                if upeptide_maps  == []:
                     print('''
 [ WARNING ] The peptide {0} could not be mapped to the
 [ WARNING ] given database {1}
@@ -191,6 +252,7 @@ def main(input_file=None, output_file=None, params=None):
                             ''
                         )
                     )
+                    non_mappable_peps.add(line_dict['Sequence'])
                     continue
 
                 sorted_upeptide_maps = [ protein_dict for protein_dict in sorted( upeptide_maps, key=lambda x: x['id'] ) ]
@@ -254,13 +316,69 @@ def main(input_file=None, output_file=None, params=None):
     if len(target_decoy_peps) != 0:
         print(
             '''
-            [ WARNING ] The following peptides occured in a target as well as decoy protein
             [ WARNING ] {0}
+            [ WARNING ] These {1} peptides above occured in a target as well as decoy protein
             [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
                 target_decoy_peps,
+                len(target_decoy_peps)
             )
         )
+    if len(non_mappable_peps) != 0:
+        print(
+            '''
+            [ WARNING ] {0}
+            [ WARNING ] These {1} peptides above could not be mapped to the database
+            [ WARNING ] Check Search and Database if neccesary'''.format(
+                sorted(list(non_mappable_peps)),
+                len(non_mappable_peps)
+            )
+        )
+        #recheck these peptides if sequence has a 'X'
+        print('[ map_peps ] Attempting re-map of non-mappable peptides')
+        peptide_has_X_in_sequence = set()
+        mappable_after_all = set()
+        for non_mappable_peptide in non_mappable_peps:
+            variants  = set()
+            for pos, aa in enumerate(non_mappable_peptide):
+                variants.add(
+                    '{0}{1}{2}'.format(
+                        non_mappable_peptide[:pos],
+                        'X',
+                        non_mappable_peptide[pos+1:],
+                    )
 
+                )
+            # reset buffer...
+            upapa.peptide_2_protein_mappings[fasta_lookup_name] = defaultdict(list)
+            p2p_mappings  = upapa.map_peptides(
+                list(variants),
+                fasta_lookup_name
+            )
+            if len(p2p_mappings.keys()) != 0:
+                for p_with_x, maps in p2p_mappings.items():
+                    if maps != []:
+                        peptide_has_X_in_sequence.add( p_with_x )
+                        mappable_after_all.add( non_mappable_peptide )
+        print(
+            '''
+            [ WARNING ] {0}
+            [ WARNING ] These {1} not mappable peptides have "X" in their sequence
+            [ WARNING ] {2} are part of the non-mappable peptides'''.format(
+                sorted(list(peptide_has_X_in_sequence)),
+                len(peptide_has_X_in_sequence),
+                len(mappable_after_all)
+            )
+        )
+        not_mappable_after_all = non_mappable_peps - mappable_after_all
+        print(
+            '''
+            [ WARNING ] {0}
+            [ WARNING ] These {1} peptides are indeed not mappable
+            [ WARNING ] Protein sequence could contain e.g. U instead of C'''.format(
+                not_mappable_after_all,
+                len(not_mappable_after_all),
+            )
+        )
    
     if do_not_delete is False:
         created_tmp_files.append( output_file + '_full_protein_names.txt' )
@@ -521,7 +639,6 @@ class UPeptideMapper_v3( dict ):
 
     '''
     def __init__(self, fasta_database ):
-        
         self.protein_list               = []
         self.protein_indices            = {}
         self.protein_sequences          = {}
@@ -563,11 +680,13 @@ class UPeptideMapper_v3( dict ):
             self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
 
         # self.peptide_2_protein_mappings = defaultdict(list)
-        A = ahocorasick.Automaton()
+        self.A = ahocorasick.Automaton()
         for idx, peptide in enumerate(peptide_list):
-            A.add_word(peptide, (idx, peptide))
-        A.make_automaton()
-        for match in A.iter(self.total_sequence_string[fasta_name]):
+            #integrated buffering of peptides
+            if peptide not in self.peptide_2_protein_mappings[fasta_name].keys():
+                self.A.add_word(peptide, (idx, peptide))
+        self.A.make_automaton()
+        for match in self.A.iter(self.total_sequence_string[fasta_name]):
             idx, (p_idx, m_peptide) = match
             len_m_peptide = len(m_peptide)
             protein_name_end_index = self.protein_list[idx]
@@ -620,16 +739,21 @@ if __name__ == '__main__':
 
     params = {
         'translations' : {
+            'modifications' : [
+                'M,opt,any,Oxidation',        # Met oxidation
+                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+                '*,opt,Prot-N-term,Acetyl',    # N-Acteylation[]
+            ],
             'aa_exception_dict' : {
                 'J' : {
-                'original_aa' : 'L',
+                    'original_aa' : ['I', 'L'],
                 },
                 'O' : {
-                    'original_aa' : 'K',
+                    'original_aa' : ['K'],
                     'unimod_name' : 'Methylpyrroline',
                 },
                 'U' : {
-                    'original_aa' : 'C',
+                    'original_aa' : ['C'],
                     'unimod_name' : 'Delta:S(-1)Se(1)',
                     'unimod_name_with_cam' : 'SecCarbamidomethyl',
                 },
@@ -641,7 +765,7 @@ if __name__ == '__main__':
         'prefix' : None
     }
     params['translations']['database']               = sys.argv[3]
-    params['translations']['peptide_mapper_version'] = sys.argv[4]
+    params['translations']['peptide_mapper_class_version'] = sys.argv[4]
 
     main(
         input_file     = sys.argv[1],

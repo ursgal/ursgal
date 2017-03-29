@@ -15,6 +15,7 @@ import os
 import pickle
 import csv
 import ursgal
+import pprint
 # import ursgal.ursgal_kb
 import re
 from collections import Counter, defaultdict
@@ -30,8 +31,7 @@ DIFFERENCE_14N_15N = ursgal.ursgal_kb.DIFFERENCE_14N_15N
 
 
 def main(input_file=None, output_file=None, scan_rt_lookup=None,
-         params=None, search_engine=None, score_colname=None,
-         upeptide_mapper=None):
+         params=None, search_engine=None, score_colname=None):
     '''
     Arguments:
         input_file (str): input filename of csv which should be unified
@@ -59,9 +59,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
           since not all engines report the monoisotopic m/z
         * Mass accuracy calculation (in ppm), also taking into account that
           not always the monoisotopic peak is picked
-        * All peptide Sequences are remapped to their corresponding protein,
-          assuring correct start, stop, pre and post aminoacid. Thereby,
-          also correct enzymatic cleavage is checked.
         * Rows describing the same PSM (i.e. when two proteins share the
           same peptide) are merged to one row.
 
@@ -90,9 +87,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         * Selenocystein is not reported with the correct unimod modification
         * multiple protein ID per peptide are splitted in two entries.
           (is done in MS-Amanda postflight)
-        * short protein IDs are mapped to the full protein ID, it is checked
-          which peptides map on which protein ID (is done in MS-Amanda
-          postflight)
 
     '''
     print(
@@ -151,7 +145,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     cc = ursgal.ChemicalComposition()
     ursgal.GlobalUnimodMapper._reparseXML()
-    de_novo_engines = ['novor', 'pepnovo', 'uninovo', 'unknown_engine']
+    de_novo_engines = [
+        'novor',
+        'pepnovo',
+        'uninovo',
+        'unknown_engine'
+    ]
     database_search_engines = [
         'msamanda',
         'msgf',
@@ -177,51 +176,45 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         inhibitor_aa  = ''
     allowed_aa += '-'
 
-    # old version
-    if upeptide_mapper is None:
-        upapa = ursgal.UPeptideMapper()
-    else:
-        upapa = upeptide_mapper
-    # from  ursgal.ucore import NUPeptideMapper
-    #new_version
-    # upapa = ursgal.umapmaster.NUPeptideMapper(params['translations']['database'])
-    # fasta_lookup_name = upapa.fasta_lookup_name
-    
     if database_search is True:
-        target_decoy_peps = set()
         non_enzymatic_peps = set()
-        pep_map_lookup = {}
-        fasta_lookup_name = upapa.build_lookup_from_file(
-            params['translations']['database'],
-            force  = False,
-            # enzyme = (allowed_aa, cleavage_site)
+        peptide_complies_search_criteria_lookup = defaultdict(set)
+        fasta_lookup_name = os.path.basename( 
+            os.path.abspath(
+                params['translations']['database']
+            ) 
         )
-    # print('Cached!')
-    # input()
+        upeptide_map_sort_key   = 'Protein ID' 
+        upeptide_map_other_keys = [
+            'Sequence Start',  
+            'Sequence Stop',   
+            'Sequence Pre AA', 
+            'Sequence Post AA',
+        ]
     psm_counter = Counter()
     # if a PSM with multiple rows is found (i.e. in omssa results), the psm
     # rows are merged afterwards
 
     output_file_object = open(output_file, 'w')
-    protein_id_output = open(output_file + '_full_protein_names.txt', 'w')
-    mz_buffer = {}
-    csv_kwargs = {
+    protein_id_output  = open(output_file + '_full_protein_names.txt', 'w')
+    mz_buffer          = {}
+    csv_kwargs         = {
         'extrasaction' : 'ignore'
     }
     if sys.platform == 'win32':
         csv_kwargs['lineterminator'] = '\n'
     else:
         csv_kwargs['lineterminator'] = '\r\n'
-    total_lines = len(list(csv.reader(open(input_file,'r'))))
+
     ze_only_buffer = {}
-
-
 
     with open( input_file, 'r' ) as in_file:
         csv_input  = csv.DictReader(
             in_file
         )
-
+        # recheck if fieldnames are correct. These are corrected in the upeptide
+        # mapper but if the search engine is a de novo engine then the fields
+        # might be incorrect
         output_fieldnames = list(csv_input.fieldnames)
         for remove_fieldname in [
             'proteinacc_start_stop_pre_post_;',
@@ -242,67 +235,24 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Sequence Stop',
             'Sequence Pre AA',
             'Sequence Post AA',
+            'Complies search criteria'
         ]
-
 
         for new_fieldname in new_fieldnames:
             if new_fieldname not in output_fieldnames:
-                output_fieldnames.insert(-5,new_fieldname)
+                output_fieldnames.insert( -5, new_fieldname )
         csv_output = csv.DictWriter(
             output_file_object,
             output_fieldnames,
             **csv_kwargs
         )
         csv_output.writeheader()
-        print('''[ unify_cs ] parsing csv''')
-        import time
+        print('''[ unify_cs ] Buffering csv file''')
         csv_file_buffer = []
-        tmp_peptide_set = set()
         for line_dict in csv_input:
-            for aa_to_replace, replace_dict in aa_exception_dict.items():
-                if aa_to_replace in line_dict['Sequence']:
-                    #change mods only if unimod has to be changed...
-                    if 'unimod_name' in replace_dict.keys():
-                        for r_pos, aa in enumerate(line_dict['Sequence']):
-                            if aa == aa_to_replace:
-                                index_of_U = r_pos + 1
-                                unimod_name = replace_dict['unimod_name']
-                                if cam and replace_dict['original_aa'] == 'C':
-                                    unimod_name = replace_dict['unimod_name_with_cam']
-                                new_mod = '{0}:{1}'.format(
-                                    unimod_name,
-                                    index_of_U
-                                )
-                                # if line_dict_update['Modifications'] == '':
-                                #     line_dict_update['Modifications'] += new_mod
-                                # else:
-                                #     line_dict_update['Modifications'] += ';{0}'.format(
-                                #         new_mod
-                                #     )
-                    line_dict['Sequence'] = line_dict['Sequence'].replace(
-                        aa_to_replace,
-                        replace_dict['original_aa']
-                    )
             csv_file_buffer.append(line_dict)
-            tmp_peptide_set.add( line_dict['Sequence'] )
-        # old version:
-        print('''[ unify_cs ] parsing csv done''')
-        # import time
-        p2p_mappings = {}
-        print('''[ unify_cs ] mapping peptides''')
-        num_peptides = len(tmp_peptide_set)
-        for pos, peptide in enumerate(list(tmp_peptide_set)):
-            print('Mapping peptide {0}/{1}'.format(pos, num_peptides), end='\r')
-            p2p_mappings[peptide] = upapa.map_peptide(
-                peptide    = peptide,
-                fasta_name = fasta_lookup_name
-            )
-        print()
-        print('''[ unify_cs ] mapping peptides done''')
-        #new version
-        # p2p_mappings  = upapa.new_map_peptides( list(tmp_peptide_set) )        
-        
-        assert len(p2p_mappings.keys()) == len(tmp_peptide_set)
+        total_lines = len(csv_file_buffer)
+        print('''[ unify_cs ] Buffering csv file done''')
         for line_nr, line_dict in enumerate(csv_file_buffer):
             if line_nr % 500 == 0:
                 print(
@@ -310,7 +260,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         line_nr,
                         total_lines,
                     ),
-                    end='\r'
+                    end = '\r'
                 )
 
             if line_dict['Spectrum Title'] != '':
@@ -600,27 +550,27 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                             '{0}:1'.format( unimod_name ),
                             '{0}:0'.format( unimod_name )
                             )
-
-                for aa_to_replace, replace_dict in aa_exception_dict.items():
-                    if aa_to_replace in line_dict['Sequence']:
-                        #change mods only if unimod has to be changed...
-                        if 'unimod_name' in replace_dict.keys():
-                            for r_pos, aa in enumerate(line_dict['Sequence']):
-                                if aa == aa_to_replace:
-                                    index_of_U = r_pos + 1
-                                    unimod_name = replace_dict['unimod_name']
-                                    if cam and replace_dict['original_aa'] == 'C':
-                                        unimod_name = replace_dict['unimod_name_with_cam']
-                                    new_mod = '{0}:{1}'.format(
-                                        unimod_name,
-                                        index_of_U
-                                    )
-                                    if line_dict_update['Modifications'] == '':
-                                        line_dict_update['Modifications'] += new_mod
-                                    else:
-                                        line_dict_update['Modifications'] += ';{0}'.format(
-                                            new_mod
-                                        )
+                #has been moved to upeptide mapperm to get correct sequences for mapping
+                # for aa_to_replace, replace_dict in aa_exception_dict.items():
+                #     if aa_to_replace in line_dict['Sequence']:
+                #         #change mods only if unimod has to be changed...
+                #         if 'unimod_name' in replace_dict.keys():
+                #             for r_pos, aa in enumerate(line_dict['Sequence']):
+                #                 if aa == aa_to_replace:
+                #                     index_of_U = r_pos + 1
+                #                     unimod_name = replace_dict['unimod_name']
+                #                     if cam and replace_dict['original_aa'] == 'C':
+                #                         unimod_name = replace_dict['unimod_name_with_cam']
+                #                     new_mod = '{0}:{1}'.format(
+                #                         unimod_name,
+                #                         index_of_U
+                #                     )
+                #                     if line_dict_update['Modifications'] == '':
+                #                         line_dict_update['Modifications'] += new_mod
+                #                     else:
+                #                         line_dict_update['Modifications'] += ';{0}'.format(
+                #                             new_mod
+                #                         )
                 #         line_dict['Sequence'] = line_dict['Sequence'].replace(
                 #             aa_to_replace,
                 #             replace_dict['original_aa']
@@ -712,34 +662,30 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
 
             # protein block, only for database search engine
             if database_search is True:
-                # remap peptides to proteins, check correct enzymatic
-                # cleavage and decoy assignment
+                # check for correct cleavage sites and set a new field to 
+                # verify correct enzyme performance
                 lookup_identifier = '{0}><{1}'.format(
                     line_dict['Sequence'],
                     fasta_lookup_name
                 )
-                if lookup_identifier not in pep_map_lookup.keys():
-                    tmp_decoy = set()
-                    # tmp_protein_id = {}
-
-                    upeptide_maps = p2p_mappings[line_dict['Sequence']]
-
-                   
-                    '''
-                    <><><><><><><><><><><><><>
-                    '''
-                    # assert upeptide_maps != [],'''
-                    #         The peptide {0} could not be mapped to the
-                    #         given database {1}
-
-                    #         {2}
-
-                    #         '''.format(
-                    #             line_dict['Sequence'],
-                    #             fasta_lookup_name,
-                    #             ''
-                    #         )
-                    if upeptide_maps == []:
+                if lookup_identifier not in peptide_complies_search_criteria_lookup.keys():
+                    split_collector = { }
+                    for key in [ upeptide_map_sort_key ] + upeptide_map_other_keys:
+                        split_collector[ key ] = line_dict[key].split(joinchar)
+                    sorted_upeptide_maps = []
+                    for pos, protein_id in enumerate(sorted( split_collector[ upeptide_map_sort_key ] ) ):
+                        dict_2_append = {
+                            upeptide_map_sort_key : protein_id
+                        }
+                        for key in upeptide_map_other_keys:
+                            dict_2_append[key] = split_collector[key][pos]
+                        sorted_upeptide_maps.append(
+                            dict_2_append
+                        ) 
+                    # pprint.pprint(line_dict)
+                    # print(sorted_upeptide_maps)
+                    # exit()
+                    if sorted_upeptide_maps == []:
                         print('''
 [ WARNING ] The peptide {0} could not be mapped to the
 [ WARNING ] given database {1}
@@ -747,124 +693,97 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
 [ WARNING ] This PSM will be skipped.
                             '''.format(
                                 line_dict['Sequence'],
-                                fasta_lookup_name,
-                                ''
+                                params['translations']['database'],
                             )
                         )
                         continue
-
-                    sorted_upeptide_maps = [ protein_dict for protein_dict in sorted( upeptide_maps, key=lambda x: x['id'] ) ]
-                    # sorted(bacterial_protein_collector[race].items(),key=lambda x: x[1]['psm_count'])
-                    # print()
-                    # print(line_dict['Sequence'])
-                    # print(sorted_upeptide_maps)
-                    protein_mapping_dict = None
+                    peptide_fullfills_enzyme_specificity = False
                     last_protein_id = None
-                    for protein in sorted_upeptide_maps:
+                    for protein_info_dict in sorted_upeptide_maps:
                         # print(line_dict)
                         # print(protein)
-                        add_protein   = False
+                        protein_specifically_cleaved   = False
                         nterm_correct = False
                         cterm_correct = False
+                        '''
+                            'Sequence Start',
+                            'Sequence Stop',
+                            'Sequence Pre AA',
+                            'Sequence Post AA',
+
+                        '''
                         if params['translations']['keep_asp_pro_broken_peps'] is True:
                             if line_dict['Sequence'][-1] == 'D' and\
-                                    protein['post'] == 'P':
+                                    protein_info_dict['Sequence Post AA'] == 'P':
                                 cterm_correct = True
                             if line_dict['Sequence'][0] == 'P' and\
-                                    protein['pre'] == 'D':
+                                    protein_info_dict['Sequence Pre AA'] == 'D':
                                 nterm_correct = True
 
                         if cleavage_site == 'C':
-                            if protein['pre'] in allowed_aa\
-                                    or protein['start'] in [1, 2, 3]:
+                            if protein_info_dict['Sequence Pre AA'] in allowed_aa\
+                                    or protein_info_dict['Sequence Start'] in [1, 2, 3]:
                                 if line_dict['Sequence'][0] not in inhibitor_aa\
-                                        or protein['start'] in [1, 2, 3]:
+                                        or protein_info_dict['Sequence Start'] in [1, 2, 3]:
                                     nterm_correct = True
-                            if protein['post'] not in inhibitor_aa:
+                            if protein_info_dict['Sequence Post AA'] not in inhibitor_aa:
                                 if line_dict['Sequence'][-1] in allowed_aa\
-                                     or protein['post'] == '-':
+                                     or protein_info_dict['Sequence Post AA'] == '-':
                                     cterm_correct = True
 
                         elif cleavage_site == 'N':
-                            if protein['post'] in allowed_aa:
+                            if protein_info_dict['Sequence Post AA'] in allowed_aa:
                                 if line_dict['Sequence'][-1] not in inhibitor_aa\
-                                        or protein['post'] == '-':
+                                        or protein_info_dict['Sequence Post AA'] == '-':
                                     cterm_correct = True
-                            if protein['pre'] not in inhibitor_aa\
-                                or protein['start'] in [1, 2, 3]:
+                            if protein_info_dict['Sequence Pre AA'] not in inhibitor_aa\
+                                or protein_info_dict['Sequence Start'] in [1, 2, 3]:
                                 if line_dict['Sequence'][0] in allowed_aa\
-                                    or protein['start'] in [1, 2, 3]:
+                                    or protein_info_dict['Sequence Start'] in [1, 2, 3]:
                                     nterm_correct = True
 
                         if params['translations']['semi_enzyme'] is True:
                             if cterm_correct is True or nterm_correct is True:
-                                add_protein = True
+                                protein_specifically_cleaved = True
                         elif cterm_correct is True and nterm_correct is True:
-                            add_protein = True
+                            protein_specifically_cleaved = True
 
-                        if add_protein is True:
-                            # print(add_protein)
-                            # print(cterm_correct, nterm_correct)
-                            if protein_mapping_dict is None:
-                                protein_mapping_dict = {
-                                    'Protein ID'       : protein['id'],
-                                    'Sequence Start'   : str(protein['start']),
-                                    'Sequence Stop'    : str(protein['end']),
-                                    'Sequence Pre AA'  : protein['pre'],
-                                    'Sequence Post AA' : protein['post'],
-                                }
-                            else:
-                                if protein['id'] == last_protein_id:
-                                    tmp_join_char = ';'
-                                else:
-                                    tmp_join_char = joinchar
-
-                                    protein_mapping_dict['Protein ID' ] += '{0}{1}'.format(tmp_join_char, protein['id'])
-
-                                protein_mapping_dict['Sequence Start'   ] += '{0}{1}'.format(tmp_join_char, str(protein['start']))
-                                protein_mapping_dict['Sequence Stop'    ] += '{0}{1}'.format(tmp_join_char, str(protein['end']))
-                                protein_mapping_dict['Sequence Pre AA'  ] += '{0}{1}'.format(tmp_join_char, protein['pre'])
-                                protein_mapping_dict['Sequence Post AA' ] += '{0}{1}'.format(tmp_join_char, protein['post'])
-
-                            # print(protein_mapping_dict['Protein ID' ])
-                            last_protein_id = protein['id']
-
-                            # mzidentml-lib does not always set 'Is decoy' correctly
-                            # (it's always 'false' for MS-GF+ results), this is fixed here:
-                            if params['translations']['decoy_tag'] in protein['id']:
-                                tmp_decoy.add('true')
-                            else:
-                                tmp_decoy.add('false')
-
-                    if protein_mapping_dict is None:
-                        non_enzymatic_peps.add(line_dict['Sequence'])
-                        continue
-
-                    if len(protein_mapping_dict['Protein ID']) >= 2000:
-                        print(
-                            '{0}: {1}'.format(
-                                line_dict['Sequence'],
-                                protein_mapping_dict['Protein ID']
-                            ),
-                            file = protein_id_output
+                        if protein_specifically_cleaved is True:
+                            peptide_fullfills_enzyme_specificity = True
+                            last_protein_id = protein_info_dict['Protein ID']
+                    # we may test for further criteria to set this flag/fieldname
+                    # e.g. the missed cleavage count etc.
+                    if peptide_fullfills_enzyme_specificity is False:
+                        non_enzymatic_peps.add( line_dict['Sequence'] )
+                        peptide_complies_search_criteria_lookup[lookup_identifier].add(
+                            False
                         )
-                        protein_mapping_dict['Protein ID'] = protein_mapping_dict['Protein ID'][:1990] + ' ...'
-                        do_not_delete = True
-
-                    if len(tmp_decoy) >= 2:
-                        target_decoy_peps.add(line_dict['Sequence'])
-                        protein_mapping_dict['Is decoy'] = 'true'
                     else:
-                        protein_mapping_dict['Is decoy'] = list(tmp_decoy)[0]
+                        peptide_complies_search_criteria_lookup[lookup_identifier].add(
+                            True
+                        )
 
-                    pep_map_lookup[ lookup_identifier ] = protein_mapping_dict
+                    #check here if missed cleavage count is correct...
+                    missed_cleavage_counter = 0
+                    for aa in allowed_aa:
+                        missed_cleavage_counter += line_dict['Sequence'].count( aa )
+                    if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
+                        peptide_complies_search_criteria_lookup[lookup_identifier].add(False)
+                    else:
+                        peptide_complies_search_criteria_lookup[lookup_identifier].add(True)
 
-                buffered_protein_mapping_dict = pep_map_lookup[lookup_identifier]
-                line_dict.update( buffered_protein_mapping_dict )
                 # count each PSM occurence to check whether row-merging is needed:
                 psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 psm_counter[psm] += 1
 
+                if all(peptide_complies_search_criteria_lookup[lookup_identifier]):
+                    # all True
+                    line_dict['Complies search criteria'] = 'True'
+                else:
+                    line_dict['Complies search criteria'] = 'False'
+                    # print(line_dict['Sequence'])
+                    # exit()
+            
             csv_output.writerow(line_dict)
             '''
                 to_be_written_csv_lines.append( line_dict )
@@ -883,15 +802,6 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
             params['translations']['database'],
             non_enzymatic_peps
             ))
-        if len(target_decoy_peps) != 0:
-            print(
-                '''
-                [ WARNING ] The following peptides occured in a target as well as decoy protein
-                [ WARNING ] {0}
-                [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
-                    target_decoy_peps,
-                )
-            )
 
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
@@ -1025,7 +935,8 @@ if __name__ == '__main__':
             'psm_merge_delimiter'      : ';',
             'precursor_mass_tolerance_plus':5,
             'precursor_mass_tolerance_minus':5,
-            'precursor_isotope_range': '0,1'
+            'precursor_isotope_range': '0,1',
+            'max_missed_cleavages' : 2
         },
         # 'label'                    : '15N',
         'label' : '',

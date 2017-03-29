@@ -53,7 +53,7 @@ def main():
         'omssa',
         xtandem,
         'msgfplus_v2016_09_16',
-        # msamanda,
+        msamanda,
     ]
 
     mzML_file = os.path.join(

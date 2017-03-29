@@ -85,7 +85,6 @@ Could not load RT lookup dict from this location: {0}
             params          = self.params,
             search_engine   = last_engine,
             score_colname   = last_search_engine_colname,
-            upeptide_mapper = self.upeptide_mapper
         )
         for tmp_file in tmp_files:
             self.created_tmp_files.append(tmp_file)
