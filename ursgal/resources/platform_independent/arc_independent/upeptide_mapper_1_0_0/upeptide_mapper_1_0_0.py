@@ -35,14 +35,27 @@ if sys.platform != 'win32':
 
 def main(input_file=None, output_file=None, params=None):
     '''
+    Peptide mapping implementation as Unode.
+
     Arguments:
         input_file (str): input filename of csv
         output_file (str): output filename
+        params (dict): dictionary containing ursgal params
 
-    Fixes:
+
+    Results and fixes
         * All peptide Sequences are remapped to their corresponding protein,
           assuring correct start, stop, pre and post aminoacid. Thereby,
           also correct enzymatic cleavage is checked.
+        * It is determined if the corresponding proteins are decoy proteins.
+          These peptides are reported after the mapping process.
+        * Non-mappable peptides are reported. This can e.g. due to 'X' in
+          protein sequences in the fasta file or other non-standard amino acids.
+          These are sometimes replaced/interpreted/interpolated by the search
+          engine.
+          A recheck is performed if the peptides can be mapped containing an 'X'
+          at any position. These peptides are also reported. If peptides can
+          still not be mapped after re-mapping, these are reported as well.
 
  
     '''
@@ -54,7 +67,7 @@ def main(input_file=None, output_file=None, params=None):
     do_not_delete      = False
     created_tmp_files  = []
     target_decoy_peps  = set()
-    non_mappable_peps = set()
+    non_mappable_peps  = set()
     pep_map_lookup     = {}
     joinchar           = params['translations']['protein_delimiter']
 
@@ -335,6 +348,7 @@ def main(input_file=None, output_file=None, params=None):
             )
         )
         #recheck these peptides if sequence has a 'X'
+        # this is done by the peptide regex function in the unode... Use this instead?
         print('[ map_peps ] Attempting re-map of non-mappable peptides')
         peptide_has_X_in_sequence = set()
         mappable_after_all = set()
@@ -398,15 +412,9 @@ class UPeptideMapper_v2( dict ):
 
     Note:
 
-        The UPeptideMapper is initialized during UNode instantiation thus all
-        UNodes can access the mapper via self.upeptide_mapper.
-
-    Warning:
-
-        Ursgal keeps one upeptide_mapper alive during code execution and
-        because the fcache requires a significant amount of memory, it is
-        recommended that the user takes care of purging the mapper if not
-        needed anymore, using the `UPeptideMapper.purge_fasta_info()` function.
+        This is the deprectaed version of the peptide mapper which can be used
+        by setting the parameter 'peptide_mapper_class_version' to 'upapa_v2'.
+        Otherwise the new mapper class version ('upapa_v3') is used as default.
 
     '''
     def __init__(self, word_len = None ):
@@ -489,6 +497,15 @@ class UPeptideMapper_v2( dict ):
         return
 
     def map_peptides(self, peptide_list, fasta_name = None, force_regex = False ):
+        '''
+        Wrapper function to map a given peptide list in one batch.
+
+        Args:
+            peptide_list (list): list with peptides to be mapped
+            fasta_name (str): name of the database
+
+
+        '''
         if fasta_name not in self.peptide_2_protein_mappings.keys():
             self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
         for peptide in peptide_list:
@@ -596,7 +613,7 @@ class UPeptideMapper_v2( dict ):
                 'post'  : 'V',
             }
 
-        Note::
+        Note:
             If the pre or post amino acids are N- or C-terminal, respectively,
             then the reported amino acid will be '-'
 
@@ -627,56 +644,97 @@ class UPeptideMapper_v2( dict ):
 
 
 
-class UPeptideMapper_v3( dict ):
+class UPeptideMapper_v3():
     '''
     UPeptideMapper V3
 
-    New improved version which is fater and consumes less memory than earlier
-    versions.
+    New improved version which is faster and consumes less memory than earlier
+    versions. Is the new default version for peptide mapping.
+    
+    Note:
+        Uses the implementation of Aho-Corasick algorithm pyahocorasick
+        See: https://pypi.python.org/pypi/pyahocorasick/
 
-    Use the implementation of Aho-Corasick algorithm pyahocorasick
-    See: https://pypi.python.org/pypi/pyahocorasick/
+    Warning:
+        The new implementation is still in beta/testing phase. Please use, check
+        and iterpret accordingly
     
 
 
     '''
     def __init__(self, fasta_database ):
-        self.protein_list               = []
-        self.protein_indices            = {}
-        self.protein_sequences          = {}
+        self.fasta_name                 = os.path.basename(os.path.abspath( fasta_database ))
+        
+        self.protein_indices            = defaultdict(dict)
+        self.protein_sequences          = defaultdict(dict)
+
+        self.total_sequence_list        = defaultdict(list)
+        self.protein_list               = defaultdict(list)
+        
+        self.fasta_counter              = defaultdict(int)
+        self.len_total_sequence_string  = defaultdict(int)
+        
         self.peptide_2_protein_mappings = {}
         self.total_sequence_string      = {}
-        self.fasta_lookup_name          = os.path.basename(os.path.abspath( fasta_database ))
-        self.fasta_counter              = defaultdict(int)
-        self.total_sequence_list        = defaultdict(list)
-        self.len_total_sequence_string  = defaultdict(int)
+        
         for protein_id, seq in ursgal.ucore.parseFasta(open(fasta_database,'r').readlines()):
             print(
                 'Buffering protein #{0} of database {1}'.format(
-                    self.fasta_counter[self.fasta_lookup_name],
+                    self.fasta_counter[self.fasta_name],
                     fasta_database
                 ),
                 end ='\r' 
             )
             len_seq             = len(seq)
             
-            self.protein_indices[protein_id] = {
-                'start': self.len_total_sequence_string[self.fasta_lookup_name],
-                'stop' : self.len_total_sequence_string[self.fasta_lookup_name] + len_seq
+            self.protein_indices[self.fasta_name][protein_id] = {
+                'start': self.len_total_sequence_string[self.fasta_name],
+                'stop' : self.len_total_sequence_string[self.fasta_name] + len_seq
             }
             # self.total_sequence_string += seq
-            self.total_sequence_list[self.fasta_lookup_name].append(seq)
-            self.protein_list += [ protein_id ] * len_seq
-            self.protein_sequences[ protein_id ] = seq
-            self.len_total_sequence_string[self.fasta_lookup_name] += len_seq
-            self.fasta_counter[self.fasta_lookup_name] += 1
+            self.total_sequence_list[self.fasta_name].append(seq)
+            self.protein_list[self.fasta_name] += [ protein_id ] * len_seq
+            self.protein_sequences[self.fasta_name][ protein_id ] = seq
+            self.len_total_sequence_string[self.fasta_name] += len_seq
+            self.fasta_counter[self.fasta_name] += 1
         print()
         print('Joining protein sequences')
-        self.total_sequence_string[self.fasta_lookup_name] = ''.join( self.total_sequence_list[self.fasta_lookup_name] )
+        self.total_sequence_string[self.fasta_name] = ''.join( self.total_sequence_list[self.fasta_name] )
         print('Joining protein sequences done')
 
 
     def map_peptides(self, peptide_list, fasta_name):
+        ''' 
+        Function to map a given peptide list in one batch.
+
+        Args:
+            peptide_list (list): list with peptides to be mapped
+            fasta_name (str): name of the database
+
+
+        Returns:
+            peptide_2_protein_mappings(dict): Dictionary containing
+                peptides as keys and lists of protein mappings as values of the 
+                given fasta_name
+
+
+        Note:
+            Based on the number of peptides the returned mapping dictionary
+            can become very large.
+
+
+        Examples::
+
+            peptide_2_protein_mappings['BSA1']  = [
+                {
+                    'start' : 1,
+                    'end'   : 10,
+                    'pre'   : 'K',
+                    'post'  : 'D',
+                    'id'    : 'BSA'
+                }
+            ]
+        '''
 
         if fasta_name not in self.peptide_2_protein_mappings.keys():
             self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
@@ -691,8 +749,8 @@ class UPeptideMapper_v3( dict ):
         for match in self.A.iter(self.total_sequence_string[fasta_name]):
             idx, (p_idx, m_peptide) = match
             len_m_peptide = len(m_peptide)
-            protein_name_end_index = self.protein_list[idx]
-            protein_name_start_index = self.protein_list[idx-len_m_peptide+1]
+            protein_name_end_index = self.protein_list[fasta_name][idx]
+            protein_name_start_index = self.protein_list[fasta_name][idx-len_m_peptide+1]
             if protein_name_end_index != protein_name_start_index:
                 #overlap between end and start of next sequence!!!
                 # print(m_peptide)
@@ -700,12 +758,12 @@ class UPeptideMapper_v3( dict ):
                 # print(protein_name_end_index)
                 # exit()
                 continue
-            protein_start_in_sequence_string = self.protein_indices[protein_name_end_index]['start']
-            protein_stop_in_sequence_string  = self.protein_indices[protein_name_end_index]['stop']
+            protein_start_in_sequence_string = self.protein_indices[fasta_name][protein_name_end_index]['start']
+            protein_stop_in_sequence_string  = self.protein_indices[fasta_name][protein_name_end_index]['stop']
 
-            protein_seq = self.protein_sequences[protein_name_end_index]
+            protein_seq = self.protein_sequences[fasta_name][protein_name_end_index]
             # protein_seq = self.total_sequence_string[protein_start_in_sequence_string:protein_stop_in_sequence_string]
-            # assert protein_seq == self.protein_sequences[protein_name_end_index]
+            # assert protein_seq == self.protein_sequences[fasta_name][protein_name_end_index]
             stop_in_protein = idx - protein_start_in_sequence_string + 1
             start_in_protein = stop_in_protein - len(m_peptide)
             # print(m_peptide, start_in_protein, stop_in_protein)
@@ -733,6 +791,19 @@ class UPeptideMapper_v3( dict ):
 
         return self.peptide_2_protein_mappings[fasta_name]
 
+    def purge_fasta_info( self, fasta_name ):
+        '''
+        Purges regular sequence lookup and fcache for a given fasta_name
+        '''
+        del self.protein_list[fasta_name]               
+        del self.protein_indices[fasta_name]            
+        del self.protein_sequences[fasta_name]          
+        del self.total_sequence_string[fasta_name]      
+        del self.fasta_counter[fasta_name]              
+        del self.total_sequence_list[fasta_name]        
+        del self.len_total_sequence_string[fasta_name] 
+        if fasta_name in self.peptide_2_protein_mappings.keys():
+            del self.peptide_2_protein_mappings[fasta_name]
 
 if __name__ == '__main__':
     if len(sys.argv) < 5:
@@ -754,11 +825,6 @@ if __name__ == '__main__':
                     'original_aa' : ['K'],
                     'unimod_name' : 'Methylpyrroline',
                 },
-                # 'U' : {
-                #     'original_aa' : ['C'],
-                #     'unimod_name' : 'Delta:S(-1)Se(1)',
-                #     'unimod_name_with_cam' : 'SecCarbamidomethyl',
-                # },
             },
             'protein_delimiter'        : '<|>',
             'decoy_tag'                : 'decoy_',
@@ -766,7 +832,7 @@ if __name__ == '__main__':
         },
         'prefix' : None
     }
-    params['translations']['database']               = sys.argv[3]
+    params['translations']['database']                     = sys.argv[3]
     params['translations']['peptide_mapper_class_version'] = sys.argv[4]
 
     main(

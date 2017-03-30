@@ -854,6 +854,9 @@ class UNode(object, metaclass=Meta_UNode):
 
     def peptide_regex(self, database, protein_id, peptide):
         '''
+        Note:
+            This function is not longer used at the moment.
+
         The unode peptide_regex function
 
         Args:

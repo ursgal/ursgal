@@ -2176,9 +2176,20 @@ class UController(ursgal.UNode):
 
     def map_peptides(self, input_file, force=False, output_file_name=None):
         '''
-        The ucontroller map peptides function
+        The ucontroller function to call the upeptide_mapper node.
 
-  
+        Note:
+            Different converter versions can be used (see parameter 
+            'peptide_mapper_converter_version') as well as different classes
+            inside the converter node (see parameter 
+            'peptide_mapper_class_version' )
+        
+        Available converter nodes
+            * upeptide_mapper_1_0_0
+
+        Available converter classef of upeptide_mapper_1_0_0
+            * upapa_v3 (default)
+            * upapa_v2
 
         Keyword Arguments:
             input_file (str): The complete path to the input, input file has
@@ -2189,13 +2200,10 @@ class UController(ursgal.UNode):
                 excluding path (optional). If None, output file name will
                 be auto-generated.
 
-     
-
         Returns:
             str: Path of the output file
         '''
 
-        pprint.pprint(self.params)
         return self.execute_unode(
             input_file       = input_file,
             engine           = self.params['peptide_mapper_converter_version'],

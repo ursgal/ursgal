@@ -6,7 +6,7 @@ Example Scripts
 
 .. _simpleexamplesearch:
 
-simple example search
+Simple example search
 ---------------------
 
 .. autofunction:: simple_example_search.main
@@ -16,7 +16,7 @@ simple example search
 
 .. _simpleexamplecombinedfdr:
 
-simple example using combined fdr (or pep)
+Simple example using combined fdr (or pep)
 ------------------------------------------
 
 .. autofunction:: simple_combined_fdr_score.main
@@ -27,7 +27,7 @@ simple example using combined fdr (or pep)
 
 .. _doitall:
 
-do it all folder wide
+Do it all folder wide
 ----------------------
 
 .. autofunction:: do_it_all_folder_wide.main
@@ -56,8 +56,8 @@ BSA machine ppm offset example
 
 
 
-Bruderer high resolution machine ppm offset example
----------------------------------------------------
+Bruderer et al. (2015) high resolution machine ppm offset example
+-----------------------------------------------------------------
 
 .. autofunction:: qexactive_xtandem_version_comparison.main
 
@@ -69,7 +69,7 @@ Bruderer high resolution machine ppm offset example
 
 .. _targetdecoygen:
 
-target decoy generation
+Target decoy generation
 -----------------------
 
 .. autofunction:: target_decoy_generation_example.main
@@ -79,7 +79,7 @@ target decoy generation
 
 
 
-precursor mass tolerance example
+Precursor mass tolerance example
 --------------------------------
 
 .. autofunction:: bsa_precursor_mass_tolerance_example.main
@@ -88,7 +88,7 @@ precursor mass tolerance example
 .. include:: code_inc/bsa_precursor_mass_tolerance_example.inc
 
 
-fragment mass tolerance example
+Fragment mass tolerance example
 --------------------------------
 
 .. autofunction:: bsa_fragment_mass_tolerance_example.main
@@ -98,10 +98,10 @@ fragment mass tolerance example
 
 
 
-filter csv examples
+Filter csv examples
 -------------------
 
-filter for modifications
+Filter for modifications
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autofunction:: filter_csv_for_mods_example.main
@@ -111,7 +111,7 @@ filter for modifications
 
 
 
-filter validated results
+Filter validated results
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autofunction:: filter_csv_validation_example.main
@@ -150,11 +150,11 @@ Large scale data analysis
 
 
 
-cascade search
+Cascade search
 --------------
 
 
-cascade search example
+Cascade search example
 ^^^^^^^^^^^^^^^^^^^^^^
 
 .. autofunction:: cascade_search_example.search
@@ -166,8 +166,8 @@ cascade search example
 .. include:: code_inc/cascade_search_example.inc
 
 
-ungouped search for comparison
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Ungrouped search for comparison
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autofunction:: ungrouped_search_example.search
 
@@ -178,7 +178,7 @@ ungouped search for comparison
 .. include:: code_inc/ungrouped_search_example.inc
 
 
-grouped search for comparison
+Grouped search for comparison
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autofunction:: grouped_search_example.search
@@ -245,7 +245,7 @@ Complete workflow for human BR dataset analysis
 
 
 
-mgf conversion loop examples
+Mgf conversion loop examples
 ----------------------------
 
 .. autofunction:: mgf_conversion_inside_and_outside_loop.main

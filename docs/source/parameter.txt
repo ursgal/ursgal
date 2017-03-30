@@ -54,9 +54,12 @@ aa_exception_dict
 ############################
 
 
-Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name
+Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0),
+            but reported by some engines. Given as a dictionary mapping on he 
+            original_aa as well as it's unimod modification name.
+            U is now accepted as regular amino acid (2017/03/30)
 
-:Default value: ['J', 'O', 'U']
+:Default value: ['J', 'O']
 :type: dict
 :triggers rerun: False
             
@@ -65,15 +68,17 @@ Available in unodes
 """""""""""""""""""
 
 * unify_csv_1_0_0
+* upeptide_mapper_1_0_0
 
 Ursgal value translations for *aa_exception_dict*
 """""""""""""""""""""""""""""""""""""""""""""""""
 
- ================= =================
- Style             Translation      
- ================= =================
- unify_csv_style_1 aa_exception_dict
- ================= =================
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ unify_csv_style_1       aa_exception_dict      
+ upeptide_mapper_style_1 decoy_tag              
+ ======================= =======================
 
 .. raw:: html
 
@@ -195,6 +200,7 @@ Available in unodes
 * percolator_2_08
 * qvality_2_02
 * sanitize_csv_1_0_0
+* svm_1_0_0
 
 Ursgal value translations for *bigger_scores_better*
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -206,33 +212,34 @@ Ursgal value translations for *bigger_scores_better*
  percolator_style_1        bigger_scores_better     
  qvality_style_1           -r                       
  sanitize_csv_style_1      bigger_scores_better     
+ svm_style_1               bigger_scores_better     
  ========================= =========================
 
 Ursgal key translations
 """""""""""""""""""""""
 
- ========================= ========================= ========================= ========================= =========================
- Ursgal Value              Translated Value                                                                                       
- ------------------------- -------------------------------------------------------------------------------------------------------
- .                         add_estimated_fdr_style_1 percolator_style_1        qvality_style_1           sanitize_csv_style_1     
- ========================= ========================= ========================= ========================= =========================
- msamanda_1_0_0_5242       1                         1                         1                         1                        
- msamanda_1_0_0_5243       1                         1                         1                         1                        
- msamanda_1_0_0_6299       1                         1                         1                         1                        
- msamanda_1_0_0_6300       1                         1                         1                         1                        
- msamanda_1_0_0_7503       1                         1                         1                         1                        
- msamanda_1_0_0_7504       1                         1                         1                         1                        
- msgfplus_v2016_09_16      0                         0                         0                         0                        
- msgfplus_v9979            0                         0                         0                         0                        
- myrimatch_2_1_138         1                         1                         1                         1                        
- myrimatch_2_2_140         1                         1                         1                         1                        
- omssa_2_1_9               0                         0                         0                         0                        
- xtandem_cyclone_2010      1                         1                         1                         1                        
- xtandem_jackhammer        1                         1                         1                         1                        
- xtandem_piledriver        1                         1                         1                         1                        
- xtandem_sledgehammer      1                         1                         1                         1                        
- xtandem_vengeance         1                         1                         1                         1                        
- ========================= ========================= ========================= ========================= =========================
+ ========================= ========================= ========================= ========================= ========================= =========================
+ Ursgal Value              Translated Value                                                                                                                 
+ ------------------------- ---------------------------------------------------------------------------------------------------------------------------------
+ .                         add_estimated_fdr_style_1 percolator_style_1        qvality_style_1           sanitize_csv_style_1      svm_style_1              
+ ========================= ========================= ========================= ========================= ========================= =========================
+ msamanda_1_0_0_5242       1                         1                         1                         1                         1                        
+ msamanda_1_0_0_5243       1                         1                         1                         1                         1                        
+ msamanda_1_0_0_6299       1                         1                         1                         1                         1                        
+ msamanda_1_0_0_6300       1                         1                         1                         1                         1                        
+ msamanda_1_0_0_7503       1                         1                         1                         1                         1                        
+ msamanda_1_0_0_7504       1                         1                         1                         1                         1                        
+ msgfplus_v2016_09_16      0                         0                         0                         0                         0                        
+ msgfplus_v9979            0                         0                         0                         0                         0                        
+ myrimatch_2_1_138         1                         1                         1                         1                         1                        
+ myrimatch_2_2_140         1                         1                         1                         1                         1                        
+ omssa_2_1_9               0                         0                         0                         0                         0                        
+ xtandem_cyclone_2010      1                         1                         1                         1                         1                        
+ xtandem_jackhammer        1                         1                         1                         1                         1                        
+ xtandem_piledriver        1                         1                         1                         1                         1                        
+ xtandem_sledgehammer      1                         1                         1                         1                         1                        
+ xtandem_vengeance         1                         1                         1                         1                         1                        
+ ========================= ========================= ========================= ========================= ========================= =========================
 
 .. raw:: html
 
@@ -591,22 +598,24 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* upeptide_mapper_1_0_0
 
 Ursgal value translations for *database*
 """"""""""""""""""""""""""""""""""""""""
 
- ================= =================
- Style             Translation      
- ================= =================
- kojak_style_1     database         
- moda_style_1      Fasta            
- msamanda_style_1  database         
- msgfplus_style_1  -d               
- myrimatch_style_1 ProteinDatabase  
- omssa_style_1     -d               
- unify_csv_style_1 database         
- xtandem_style_1   file URL         
- ================= =================
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ kojak_style_1           database               
+ moda_style_1            Fasta                  
+ msamanda_style_1        database               
+ msgfplus_style_1        -d                     
+ myrimatch_style_1       ProteinDatabase        
+ omssa_style_1           -d                     
+ unify_csv_style_1       database               
+ upeptide_mapper_style_1 decoy_tag              
+ xtandem_style_1         file URL               
+ ======================= =======================
 
 .. raw:: html
 
@@ -708,6 +717,7 @@ Available in unodes
 * mzidentml_lib_1_7
 * unify_csv_1_0_0
 * xtandem2csv_1_0_0
+* upeptide_mapper_1_0_0
 
 Ursgal value translations for *decoy_tag*
 """""""""""""""""""""""""""""""""""""""""
@@ -720,6 +730,7 @@ Ursgal value translations for *decoy_tag*
  myrimatch_style_1             DecoyPrefix                  
  mzidentml_style_1             -decoyRegex                  
  unify_csv_style_1             decoy_tag                    
+ upeptide_mapper_style_1       decoy_tag                    
  xtandem2csv_style_1           decoy_tag                    
  ============================= =============================
 
@@ -1033,6 +1044,35 @@ Ursgal key translations
  trypsin_gluc                  DEKR;C;P                      n/t                           trypsin_gluc, DEKR/C          DEKR;after;P                  n/t                           n/t                           n/t                           n/t                           n/t                           DEKR;C;P                      DEKR;C;P                      [DEKR]|{P}                   
  trypsin_p                     KR;C;                         [RK]|                         trypsin_p, KR/C               KR;after;                     1                             Trypsin/P                     n/t                           10                            n/t                           KR;C;                         KR;C;                         [RK]|[X]                     
  ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+
+.. raw:: html
+
+      <hr />
+
+fdr_cutoff
+#####################
+
+
+Target PSMs with a lower FDR than this threshold will be used as a positive training set for SVM post-processing
+
+:Default value: 0.01
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* svm_1_0_0
+
+Ursgal value translations for *fdr_cutoff*
+""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ svm_style_1      fdr_cutoff      
+ ================ ================
 
 .. raw:: html
 
@@ -2225,6 +2265,35 @@ Ursgal value translations for *keep_asp_pro_broken_peps*
 
       <hr />
 
+kernel
+#################
+
+
+The kernel function of the support vector machine used for PSM post-processing ("rbf", "linear", "poly" or "sigmoid")
+
+:Default value: rbf
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* svm_1_0_0
+
+Ursgal value translations for *kernel*
+""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ svm_style_1      kernel          
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
 kojak_MS1_centroid
 #############################
 
@@ -2401,13 +2470,13 @@ Ursgal value translations for *kojak_enrichment*
 
       <hr />
 
-kojak_export_pepXML
+kojak_export_pepxml
 ##############################
 
 
-Activate (1) or deactivate (0) output as pepXML
+Activate (True) or deactivate (False) output as pepXML
 
-:Default value: 1
+:Default value: True
 :type: int
 :triggers rerun: False
             
@@ -2417,7 +2486,7 @@ Available in unodes
 
 * kojak_1_5_3
 
-Ursgal value translations for *kojak_export_pepXML*
+Ursgal value translations for *kojak_export_pepxml*
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
  =================== ===================
@@ -2425,6 +2494,18 @@ Ursgal value translations for *kojak_export_pepXML*
  =================== ===================
  kojak_style_1       kojak_export_pepXML
  =================== ===================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
 
 .. raw:: html
 
@@ -2434,9 +2515,9 @@ kojak_export_percolator
 ##################################
 
 
-Activate (1) or deactivate (0) output for percolator
+Activate (True) or deactivate (False) output for percolator
 
-:Default value: 1
+:Default value: True
 :type: int
 :triggers rerun: False
             
@@ -2454,6 +2535,18 @@ Ursgal value translations for *kojak_export_percolator*
  ======================= =======================
  kojak_style_1           kojak_export_percolator
  ======================= =======================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
 
 .. raw:: html
 
@@ -2621,9 +2714,9 @@ kojak_spectrum_processing
 ####################################
 
 
-0=no, 1=yes
+True if spectrum should be processed by kojak
 
-:Default value: 0
+:Default value: False
 :type: int
 :triggers rerun: False
             
@@ -2641,6 +2734,18 @@ Ursgal value translations for *kojak_spectrum_processing*
  ========================= =========================
  kojak_style_1             kojak_spectrum_processing
  ========================= =========================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
 
 .. raw:: html
 
@@ -2710,9 +2815,9 @@ kojak_turbo_button
 
 
 Generally speeds up analysis. Special cases cause reverse
-            effect, thus this is allowed to be disabled. 0=off
+            effect, thus this is allowed to be disabled. True if it should be used.
 
-:Default value: 0
+:Default value: False
 :type: int
 :triggers rerun: False
             
@@ -2730,6 +2835,18 @@ Ursgal value translations for *kojak_turbo_button*
  ================== ==================
  kojak_style_1      kojak_turbo_button
  ================== ==================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
 
 .. raw:: html
 
@@ -2877,6 +2994,8 @@ Available in unodes
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * omssa_2_1_9
+* unify_csv_1_0_0
+* upeptide_mapper_1_0_0
 * xtandem_cyclone_2010
 * xtandem_jackhammer
 * xtandem_piledriver
@@ -2894,6 +3013,8 @@ Ursgal value translations for *max_missed_cleavages*
  msamanda_style_1                       missed_cleavages                      
  myrimatch_style_1                      MaxMissedCleavages                    
  omssa_style_1                          -v                                    
+ unify_csv_style_1                      max_missed_cleavages                  
+ upeptide_mapper_style_1                max_missed_cleavages                  
  xtandem_style_1                        scoring, maximum missed cleavage sites
  ====================================== ======================================
 
@@ -3591,6 +3712,7 @@ Available in unodes
 * omssa_2_1_9
 * pepnovo_3_1
 * unify_csv_1_0_0
+* upeptide_mapper_1_0_0
 * xtandem_cyclone_2010
 * xtandem_jackhammer
 * xtandem_piledriver
@@ -3600,20 +3722,21 @@ Available in unodes
 Ursgal value translations for *modifications*
 """""""""""""""""""""""""""""""""""""""""""""
 
- ================= =================
- Style             Translation      
- ================= =================
- kojak_style_1     modifications    
- moda_style_1      ADD              
- msamanda_style_1  modifications    
- msgfplus_style_1  -mod             
- myrimatch_style_1 ('DynamicMods', 'StaticMods')
- novor_style_1     ('variableModifications', 'fixedModifications')
- omssa_style_1     ('-mv', 'mf')    
- pepnovo_style_1   -PTMs            
- unify_csv_style_1 modifications    
- xtandem_style_1   ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone')
- ================= =================
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ kojak_style_1           modifications          
+ moda_style_1            ADD                    
+ msamanda_style_1        modifications          
+ msgfplus_style_1        -mod                   
+ myrimatch_style_1       ('DynamicMods', 'StaticMods')
+ novor_style_1           ('variableModifications', 'fixedModifications')
+ omssa_style_1           ('-mv', 'mf')          
+ pepnovo_style_1         -PTMs                  
+ unify_csv_style_1       modifications          
+ upeptide_mapper_style_1 modifications          
+ xtandem_style_1         ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone')
+ ======================= =======================
 
 .. raw:: html
 
@@ -3648,6 +3771,146 @@ Ursgal value translations for *mono_link_definition*
  Style                Translation         
  ==================== ====================
  kojak_style_1        mono_link_definition
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
+ms1_centroided
+#########################
+
+
+MS1 data are centroided: True or False
+
+:Default value: False
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* kojak_1_5_3
+
+Ursgal value translations for *ms1_centroided*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ kojak_style_1      kojak_MS1_centroid
+ ================== ==================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+ms1_resolution
+#########################
+
+
+MS1 resolution
+
+:Default value: 30000
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* kojak_1_5_3
+
+Ursgal value translations for *ms1_resolution*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ kojak_style_1        kojak_MS1_resolution
+ ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
+ms2_centroided
+#########################
+
+
+MS2 data are centroided: True or False
+
+:Default value: True
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* kojak_1_5_3
+
+Ursgal value translations for *ms2_centroided*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ kojak_style_1      kojak_MS2_centroid
+ ================== ==================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+ms2_resolution
+#########################
+
+
+MS2 resolution
+
+:Default value: 25000
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* kojak_1_5_3
+
+Ursgal value translations for *ms2_resolution*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ kojak_style_1        kojak_MS2_resolution
  ==================== ====================
 
 .. raw:: html
@@ -5227,6 +5490,64 @@ Ursgal value translations for *pepnovo_tag_length*
 
       <hr />
 
+peptide_mapper_class_version
+#######################################
+
+
+version 3 is the fastest and memory efficient class version, version 2 is the classic approach
+
+:Default value: upapa_v3
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* upeptide_mapper_1_0_0
+
+Ursgal value translations for *peptide_mapper_class_version*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================ ============================
+ Style                        Translation                 
+ ============================ ============================
+ upeptide_mapper_style_1      peptide_mapper_class_version
+ ============================ ============================
+
+.. raw:: html
+
+      <hr />
+
+peptide_mapper_converter_version
+###########################################
+
+
+determines which upeptide mapper class should be used
+
+:Default value: upeptide_mapper_1_0_0
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *peptide_mapper_converter_version*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ===================== =====================
+ Style                 Translation          
+ ===================== =====================
+ ucontroller_style_1   upeptide_mapper_1_0_0
+ ===================== =====================
+
+.. raw:: html
+
+      <hr />
+
 precursor_charge_dependency
 ######################################
 
@@ -5760,16 +6081,18 @@ Available in unodes
 
 * percolator_2_08
 * unify_csv_1_0_0
+* upeptide_mapper_1_0_0
 
 Ursgal value translations for *protein_delimiter*
 """""""""""""""""""""""""""""""""""""""""""""""""
 
- ================== ==================
- Style              Translation       
- ================== ==================
- percolator_style_1 protein_delimiter 
- unify_csv_style_1  protein_delimiter 
- ================== ==================
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ percolator_style_1      protein_delimiter      
+ unify_csv_style_1       protein_delimiter      
+ upeptide_mapper_style_1 protein_delimiter      
+ ======================= =======================
 
 .. raw:: html
 
@@ -7033,6 +7356,35 @@ Ursgal value translations for *spec_dynamic_range*
 
       <hr />
 
+svm_c_param
+######################
+
+
+Penalty parameter C of the error term of the post-processing SVM
+
+:Default value: 1.0
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* svm_1_0_0
+
+Ursgal value translations for *svm_c_param*
+"""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ svm_style_1      c               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
 test_param1
 ######################
 
@@ -7509,6 +7861,7 @@ Available in unodes
 * percolator_2_08
 * qvality_2_02
 * sanitize_csv_1_0_0
+* svm_1_0_0
 * ucontroller
 * unify_csv_1_0_0
 
@@ -7522,6 +7875,7 @@ Ursgal value translations for *validation_score_field*
  percolator_style_1        validation_score_field   
  qvality_style_1           validation_score_field   
  sanitize_csv_style_1      validation_score_field   
+ svm_style_1               validation_score_field   
  ucontroller_style_1       validation_score_field   
  unify_csv_style_1         validation_score_field   
  ========================= =========================
@@ -7529,30 +7883,30 @@ Ursgal value translations for *validation_score_field*
 Ursgal key translations
 """""""""""""""""""""""
 
- ========================= ========================= ========================= ========================= ========================= ========================= =========================
- Ursgal Value              Translated Value                                                                                                                                           
- ------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------
- .                         add_estimated_fdr_style_1 percolator_style_1        qvality_style_1           sanitize_csv_style_1      ucontroller_style_1       unify_csv_style_1        
- ========================= ========================= ========================= ========================= ========================= ========================= =========================
- msamanda_1_0_0_5242       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
- msamanda_1_0_0_5243       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
- msamanda_1_0_0_6299       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
- msamanda_1_0_0_6300       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
- msamanda_1_0_0_7503       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
- msamanda_1_0_0_7504       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
- msgfplus_v2016_09_16      MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
- msgfplus_v9979            MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
- myrimatch_2_1_138         MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH            
- myrimatch_2_2_140         MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH            
- novor_1_1beta             Novor:score               Novor:score               Novor:score               Novor:score               Novor:score               Novor:score              
- omssa_2_1_9               OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue             
- pepnovo_3_1               Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr           
- xtandem_cyclone_2010      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
- xtandem_jackhammer        X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
- xtandem_piledriver        X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
- xtandem_sledgehammer      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
- xtandem_vengeance         X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
- ========================= ========================= ========================= ========================= ========================= ========================= =========================
+ ========================= ========================= ========================= ========================= ========================= ========================= ========================= =========================
+ Ursgal Value              Translated Value                                                                                                                                                                     
+ ------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ .                         add_estimated_fdr_style_1 percolator_style_1        qvality_style_1           sanitize_csv_style_1      svm_style_1               ucontroller_style_1       unify_csv_style_1        
+ ========================= ========================= ========================= ========================= ========================= ========================= ========================= =========================
+ msamanda_1_0_0_5242       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
+ msamanda_1_0_0_5243       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
+ msamanda_1_0_0_6299       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
+ msamanda_1_0_0_6300       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
+ msamanda_1_0_0_7503       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
+ msamanda_1_0_0_7504       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
+ msgfplus_v2016_09_16      MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
+ msgfplus_v9979            MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
+ myrimatch_2_1_138         MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH            
+ myrimatch_2_2_140         MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH            
+ novor_1_1beta             Novor:score               Novor:score               Novor:score               Novor:score               Novor:score               Novor:score               Novor:score              
+ omssa_2_1_9               OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue             
+ pepnovo_3_1               Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr           
+ xtandem_cyclone_2010      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
+ xtandem_jackhammer        X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
+ xtandem_piledriver        X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
+ xtandem_sledgehammer      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
+ xtandem_vengeance         X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
+ ========================= ========================= ========================= ========================= ========================= ========================= ========================= =========================
 
 .. raw:: html
 
@@ -7828,7 +8182,7 @@ word_len
 
 NOTE: This can only be changed using the params dict if UPeptideMapper has become a UNode. !!! word length used to index peptide mapper, smaller word len requires more memory
 
-:Default value: 8
+:Default value: 6
 :type: int
 :triggers rerun: False
             

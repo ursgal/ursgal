@@ -48,15 +48,7 @@ TEST_FASTA_TWO = [
 class UMapMaster(unittest.TestCase):
     def setUp(self):
         self.uc = ursgal.UController( verbose = False )
-        self.uc.exe = os.path.join(
-            self.uc.unodes['upeptide_mapper_1_0_0']['resource_folder'],
-            self.uc.unodes['upeptide_mapper_1_0_0']['engine']['platform_independent']['arc_independent']['exe']
-        )
-        # print(self.uc.exe)
-        # exit()
-        self.uc.engine = 'upeptide_mapper_1_0_0'
-        upapa_class =  self.uc.import_engine_as_python_function('UPeptideMapper_v2')
-        # print(upapa_class)
+        upapa_class = self.uc.unodes['upeptide_mapper_1_0_0']['class'].import_engine_as_python_function('UPeptideMapper_v2')
         self.upapa_class = upapa_class( word_len=5 )
         self.upapa_class.build_lookup(
             fasta_name = 'Test.fasta',

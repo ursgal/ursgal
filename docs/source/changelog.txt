@@ -1,6 +1,27 @@
 Changelog
 =========
 
+Version 0.5.0    (03.2017)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. New branch: upapa_v3. This branch will soon be merged into the master after
+   rigid testing and evaluation.
+#. New improved peptide mapper version in terms of RAM usage and speed. Peptide
+   mapping is now a standalone unode. Classes for mapping can be imported from
+   anywhere from the undoe. Input for standalone node is a not-unified csv file.
+   Branch: upapa_v3
+#. Unify csv is now placed after the upeptide_mapper node if a database search
+   engine (e.g. OMSSA, X!Tandem etc.) is used.
+   Branch: upapa_v3
+#. Unify csv was adjusted to meet the new requirements of the separated peptide
+   mapping node. Please also note, that the default behaviour of remapping
+   amino acid 'U' to 'C' is not longer performed.
+#. Test script update
+#. Documentation update
+#. Implementation of a customizable SVM for PSM post-processing
+#. Smaller fixes and improvements (please check git log)
+
+
 Version 0.4.0rc1 (05.2016)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -13,6 +34,7 @@ Version 0.4.0rc1 (05.2016)
    default value types.
 #. Included script to auto-generate documentation from uparams file.
 #. Updated documentation to reflect the changes above.
+
 
 
 Version 0.3.4 (02.2016)
