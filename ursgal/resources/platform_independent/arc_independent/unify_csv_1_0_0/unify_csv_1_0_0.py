@@ -142,6 +142,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             opt_mods[aa] = name
         if 'C,fix,any,Carbamidomethyl' in modification:
             cam = True
+            # allow also Carbamidomnethyl on U, since the mod name gets changed
+            # already in upeptide_mapper
+            # According to unimod, the mnodification is also on Selenocystein
+            # otherwise we should change that back so that it is skipped...
+            modname2aa['Carbamidomethyl'] += ['U']
+            fixed_mods['U'] = 'Carbamidomethyl'
 
     cc = ursgal.ChemicalComposition()
     ursgal.GlobalUnimodMapper._reparseXML()
@@ -495,8 +501,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                             )
                             raise Exception('unify_csv failed because a '\
                                 'modification was reported that was not '\
-                                'given in params.'
-                                '{0}'.format(modification)
+                                'given in params: {0}'.format(modification)
                             )
                         mapped_mod = False
                         for name in name_list:

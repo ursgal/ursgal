@@ -77,4 +77,5 @@ aa_compositions = {
     'V': 'C5H9NO',
     'W': 'C11H10N2O',
     'Y': 'C9H9NO2',
+    'U': 'C3H5NOSe' # Selenocystein
 }
