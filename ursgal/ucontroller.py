@@ -61,7 +61,6 @@ class UController(ursgal.UNode):
         'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis. J. Proteome res. acs.jproteome.5b00860 (2015). doi:10.1021/acs.jproteome.5b00860'
     }
 
-
     def __init__( self, *args, **kwargs):
         # kwargs['engine_path'] = ursgal.__file__
         super(UController, self).__init__(*args, **kwargs)
@@ -176,7 +175,6 @@ class UController(ursgal.UNode):
         # self.print_info('Ucontroller resetted {0}...'.format( addon_text ))
         return
 
-
     def _collect_all_unode_wrappers( self ):
         '''
         The ucontroller function to collect all unode wrappers
@@ -187,10 +185,12 @@ class UController(ursgal.UNode):
             dict: Dictionary of unodes
         '''
         unodes = {
-            '_by_meta_type' : {}, # groups e.g. all search engines
-            '_engine_type' : {}   # groups e.g. all XTandem
+            '_by_meta_type' : {},  # groups e.g. all search engines
+            '_engine_type' : {}    # groups e.g. all XTandem
         }
-        wrappers_path_glob = os.path.join( ursgal.base_dir, 'wrappers', '*.py' )
+        wrappers_path_glob = os.path.join(
+            ursgal.base_dir, 'wrappers', '*.py'
+        )
         for wrapper_file in glob.glob( wrappers_path_glob ):
             filename = os.path.basename( wrapper_file )
             # if 'omssa' not in wrapper_file:

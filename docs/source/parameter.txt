@@ -56,7 +56,7 @@ aa_exception_dict
 
 Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name
 
-:Default value: {'U': {'unimod_name_with_cam': 'SecCarbamidomethyl', 'original_aa': 'C', 'unimod_name': 'Delta:S(-1)Se(1)'}, 'J': {'original_aa': 'L'}, 'O': {'original_aa': 'K', 'unimod_name': 'Methylpyrroline'}}
+:Default value: ['J', 'O', 'U']
 :type: dict
 :triggers rerun: False
             
@@ -463,6 +463,7 @@ Number of used cpus/threads
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * msgfplus_v2016_09_16
 * msgfplus_v9979
 * myrimatch_2_1_138
@@ -474,7 +475,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *cpus*
 """"""""""""""""""""""""""""""""""""
@@ -572,6 +572,7 @@ Path to database file containing protein sequences in fasta format
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * moda_v1_51
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
@@ -590,7 +591,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *database*
 """"""""""""""""""""""""""""""""""""""""
@@ -700,6 +700,7 @@ Available in unodes
 """""""""""""""""""
 
 * generate_target_decoy_1_0_0
+* kojak_1_5_3
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * mzidentml_lib_1_6_10
@@ -707,7 +708,6 @@ Available in unodes
 * mzidentml_lib_1_7
 * unify_csv_1_0_0
 * xtandem2csv_1_0_0
-* kojak_1_5_3
 
 Ursgal value translations for *decoy_tag*
 """""""""""""""""""""""""""""""""""""""""
@@ -950,6 +950,7 @@ Available in unodes
 """""""""""""""""""
 
 * generate_target_decoy_1_0_0
+* kojak_1_5_3
 * moda_v1_51
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
@@ -971,7 +972,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *enzyme*
 """"""""""""""""""""""""""""""""""""""
@@ -1638,6 +1638,7 @@ Translate output headers into Ursgal unify_csv style headers
 Available in unodes
 """""""""""""""""""
 
+* kojak_percolator_2_08
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -1648,7 +1649,6 @@ Available in unodes
 * novor_1_1beta
 * omssa_2_1_9
 * pepnovo_3_1
-* kojak_percolator_2_08
 
 Ursgal value translations for *header_translations*
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -2101,11 +2101,11 @@ Type of mass spectrometer (used to determine the scoring model)
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * moda_v1_51
 * msgfplus_v2016_09_16
 * msgfplus_v9979
 * novor_1_1beta
-* kojak_1_5_3
 
 Ursgal value translations for *instrument*
 """"""""""""""""""""""""""""""""""""""""""
@@ -2828,6 +2828,7 @@ Maximum number of peaks from a spectrum used.
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * xtandem_cyclone_2010
@@ -2835,7 +2836,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *max_accounted_observed_peaks*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -2866,6 +2866,7 @@ Maximum number of missed cleavages per peptide
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * moda_v1_51
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
@@ -2881,7 +2882,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *max_missed_cleavages*
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -2973,11 +2973,11 @@ Maximal number of modifications per peptide
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * msgfplus_v2016_09_16
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
-* kojak_1_5_3
 
 Ursgal value translations for *max_num_mods*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -3040,7 +3040,7 @@ max_num_per_mod
 
 Maximal number of modification sites per peptide for a specific modification, given as a dictionary: {unimod_name : number}
 
-:Default value: {}
+:Default value: []
 :type: dict
 :triggers rerun: False
             
@@ -3575,6 +3575,7 @@ Example:
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * moda_v1_51
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
@@ -3595,7 +3596,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *modifications*
 """""""""""""""""""""""""""""""""""""""""""""
@@ -5282,6 +5282,7 @@ Error range for incorrect carbon isotope parent ion assignment
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * msgfplus_v2016_09_16
 * msgfplus_v9979
 * myrimatch_2_1_138
@@ -5294,7 +5295,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *precursor_isotope_range*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5343,6 +5343,7 @@ Precursor mass tolerance: lower mass tolerance of measured and calculated parent
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * moda_v1_51
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
@@ -5363,7 +5364,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *precursor_mass_tolerance_minus*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5401,6 +5401,7 @@ Precursor mass tolerance: higher mass tolerance of measured and calculated paren
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * moda_v1_51
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
@@ -5421,7 +5422,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *precursor_mass_tolerance_plus*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5619,9 +5619,9 @@ Maximal parent ion mass
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * myrimatch_2_1_138
 * myrimatch_2_2_140
-* kojak_1_5_3
 
 Ursgal value translations for *precursor_max_mass*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -5691,6 +5691,7 @@ Minimal parent ion mass
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * xtandem_cyclone_2010
@@ -5698,7 +5699,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *precursor_min_mass*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -5984,7 +5984,7 @@ remove_temporary_files
 
 Remove temporary files: True or False
 
-:Default value: False
+:Default value: True
 :type: bool
 :triggers rerun: False
             
@@ -6234,6 +6234,7 @@ Spectrum: if true, a ions are used in algorithm
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -6248,7 +6249,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *score_a_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -6334,6 +6334,7 @@ Spectrum: if true, b ions are used in algorithm
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -6348,7 +6349,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *score_b_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -6393,6 +6393,7 @@ Spectrum: if true, c ions are used in algorithm
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -6407,7 +6408,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *score_c_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -6631,6 +6631,7 @@ Spectrum: if true, x ions are used in algorithm
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -6645,7 +6646,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *score_x_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -6690,6 +6690,7 @@ Spectrum: if true, y ions are used in algorithm
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -6704,7 +6705,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *score_y_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -6817,6 +6817,7 @@ Spectrum: if true, z ions are used in algorithm
 Available in unodes
 """""""""""""""""""
 
+* kojak_1_5_3
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -6831,7 +6832,6 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
-* kojak_1_5_3
 
 Ursgal value translations for *score_z_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -7179,6 +7179,35 @@ Ursgal value translations for *unify_csv_converter_version*
 
       <hr />
 
+ursgal_resource_url
+##############################
+
+
+URL that is used to install and prepare_resources.py
+
+:Default value: http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *ursgal_resource_url*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ ucontroller_style_1 ursgal_resource_url
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
 use_quality_filter
 #############################
 
@@ -7479,9 +7508,9 @@ Available in unodes
 * add_estimated_fdr_1_0_0
 * percolator_2_08
 * qvality_2_02
+* sanitize_csv_1_0_0
 * ucontroller
 * unify_csv_1_0_0
-* sanitize_csv_1_0_0
 
 Ursgal value translations for *validation_score_field*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -7788,6 +7817,35 @@ Ursgal value translations for *window_size*
  =================== ===================
  combine_pep_style_1 window_size        
  =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+word_len
+###################
+
+
+NOTE: This can only be changed using the params dict if UPeptideMapper has become a UNode. !!! word length used to index peptide mapper, smaller word len requires more memory
+
+:Default value: 8
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* upeptide_mapper_1_0_0
+
+Ursgal value translations for *word_len*
+""""""""""""""""""""""""""""""""""""""""
+
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ upeptide_mapper_style_1 word_len               
+ ======================= =======================
 
 .. raw:: html
 
