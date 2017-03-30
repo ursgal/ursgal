@@ -32,10 +32,10 @@ ursgal_params = {
         ],
         'default_value' : {
             'J' : {
-                'original_aa' : 'L',
+                'original_aa' : ['L','I'],
             },
             'O' : {
-                'original_aa' : 'K',
+                'original_aa' : ['K'],
                 'unimod_name' : 'Methylpyrroline',
             },
             # 'U' : {

@@ -80,7 +80,7 @@ def main(input_file=None, output_file=None, params=None):
     else:
         #silent default :)
         upapa = UPeptideMapper_v3( params['translations']['database'] )
-        fasta_lookup_name = upapa.fasta_lookup_name
+        fasta_lookup_name = upapa.fasta_name
 
     print(
         '''[ map_peps ] Using peptide mapper version: {0}'''.format(
@@ -127,6 +127,7 @@ def main(input_file=None, output_file=None, params=None):
                 continue
             output_fieldnames.remove(remove_fieldname)
         new_fieldnames = [
+            'Is decoy',
             'Protein ID',
             'Sequence Start',
             'Sequence Stop',
