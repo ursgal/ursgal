@@ -112,7 +112,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         params['label'] = '14N'
     # print(use15N)
     # exit()
-    aa_exception_dict = params['translations']['aa_exception_dict']
+    # aa_exception_dict = params['translations']['aa_exception_dict']
     n_term_replacement = {
         'Ammonia-loss' : None,
         'Trimethyl'    : None,
@@ -911,20 +911,15 @@ if __name__ == '__main__':
 
     params = {
         'translations' : {
-            'aa_exception_dict' : {
-                'J' : {
-                'original_aa' : 'L',
-                },
-                'O' : {
-                    'original_aa' : 'K',
-                    'unimod_name' : 'Methylpyrroline',
-                },
-                'U' : {
-                    'original_aa' : 'C',
-                    'unimod_name' : 'Delta:S(-1)Se(1)',
-                    'unimod_name_with_cam' : 'SecCarbamidomethyl',
-                },
-            },
+            # 'aa_exception_dict' : {
+            #     'J' : {
+            #     'original_aa' : 'L',
+            #     },
+            #     'O' : {
+            #         'original_aa' : 'K',
+            #         'unimod_name' : 'Methylpyrroline',
+            #     },
+            # },
             'modifications' : [
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation

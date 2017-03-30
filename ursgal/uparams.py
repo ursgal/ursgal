@@ -38,13 +38,18 @@ ursgal_params = {
                 'original_aa' : 'K',
                 'unimod_name' : 'Methylpyrroline',
             },
-            'U' : {
-                'original_aa' : 'C',
-                'unimod_name' : 'Delta:S(-1)Se(1)',
-                'unimod_name_with_cam' : 'SecCarbamidomethyl',
-            },
+            # 'U' : {
+            #     'original_aa' : 'C',
+            #     'unimod_name' : 'Delta:S(-1)Se(1)',
+            #     'unimod_name_with_cam' : 'SecCarbamidomethyl',
+            # },
         },
-        'description' :  ''' Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name ''',
+        'description' :  '''
+            Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0),
+            but reported by some engines. Given as a dictionary mapping on he 
+            original_aa as well as it's unimod modification name.
+            U is now accepted as regular amino acid (2017/03/30)
+        ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'unify_csv_style_1' : 'aa_exception_dict',

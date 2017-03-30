@@ -139,19 +139,20 @@ def main(input_file=None, output_file=None, params=None):
             appended = False
             for aa_to_replace, replace_dict in sorted(params['translations']['aa_exception_dict'].items(), reverse=True):
                 if aa_to_replace in line_dict['Sequence']:
-                    if aa_to_replace in ['U', 'O']:
-                        if aa_to_replace == 'U':
-                            # print(line_dict['Sequence'])
-                            csv_file_buffer.append(deepcopy(line_dict))
-                            tmp_peptide_set.add(line_dict['Sequence'])
+                    if aa_to_replace in ['O']:
+                        # if aa_to_replace == 'U':
+                        #     # print(line_dict['Sequence'])
+                        #     csv_file_buffer.append(deepcopy(line_dict))
+                        #     tmp_peptide_set.add(line_dict['Sequence'])
                         #change mods only if unimod has to be changed...
                         if 'unimod_name' in replace_dict.keys():
                             for r_pos, aa in enumerate(line_dict['Sequence']):
                                 if aa == aa_to_replace:
                                     index_of_aa = r_pos + 1
                                     unimod_name = replace_dict['unimod_name']
-                                    if cam and 'C' in replace_dict['original_aa']:
-                                        unimod_name = replace_dict['unimod_name_with_cam']
+                                    #this was to U and CAM replacement, we shoulkd not do this
+                                    # if cam and 'C' in replace_dict['original_aa']:
+                                    #     unimod_name = replace_dict['unimod_name_with_cam']
                                     new_mod = '{0}:{1}'.format(
                                         unimod_name,
                                         index_of_aa
@@ -370,15 +371,16 @@ def main(input_file=None, output_file=None, params=None):
             )
         )
         not_mappable_after_all = non_mappable_peps - mappable_after_all
-        print(
-            '''
-            [ WARNING ] {0}
-            [ WARNING ] These {1} peptides are indeed not mappable
-            [ WARNING ] Protein sequence could contain e.g. U instead of C'''.format(
-                not_mappable_after_all,
-                len(not_mappable_after_all),
+        if len(not_mappable_after_all) != 0:
+            print(
+                '''
+                [ WARNING ] {0}
+                [ WARNING ] These {1} peptides are indeed not mappable
+                [ WARNING ] Check of Search parameters and database is strongly recommended'''.format(
+                    not_mappable_after_all,
+                    len(not_mappable_after_all),
+                )
             )
-        )
    
     if do_not_delete is False:
         created_tmp_files.append( output_file + '_full_protein_names.txt' )
@@ -752,11 +754,11 @@ if __name__ == '__main__':
                     'original_aa' : ['K'],
                     'unimod_name' : 'Methylpyrroline',
                 },
-                'U' : {
-                    'original_aa' : ['C'],
-                    'unimod_name' : 'Delta:S(-1)Se(1)',
-                    'unimod_name_with_cam' : 'SecCarbamidomethyl',
-                },
+                # 'U' : {
+                #     'original_aa' : ['C'],
+                #     'unimod_name' : 'Delta:S(-1)Se(1)',
+                #     'unimod_name_with_cam' : 'SecCarbamidomethyl',
+                # },
             },
             'protein_delimiter'        : '<|>',
             'decoy_tag'                : 'decoy_',

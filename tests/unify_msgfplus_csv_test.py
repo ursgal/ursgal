@@ -43,13 +43,6 @@ unify_csv_main(
     scan_rt_lookup = scan_rt_lookup,
     params = {
         'translations' : {
-            'aa_exception_dict' : {
-                'U' : {
-                    'unimod_name' : 'Delta:S(-1)Se(1)',
-                    'original_aa' : 'C',
-                    'unimod_name_with_cam': 'SecCarbamidomethyl',
-                },
-            },
             'modifications' : [
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 'Y,opt,any,Phospho',
@@ -64,12 +57,13 @@ unify_csv_main(
                 'data',
                 'BSA.fasta'
             ),
-            'protein_delimiter' : '<|>',
-            'psm_merge_delimiter' : ';',
-            'keep_asp_pro_broken_peps':True,
-            'precursor_mass_tolerance_minus': 5,
-            'precursor_mass_tolerance_plus' : 5,
-            'precursor_isotope_range' : "0,1",
+            'protein_delimiter'              : '<|>',
+            'psm_merge_delimiter'            : ';',
+            'keep_asp_pro_broken_peps'       : True,
+            'precursor_mass_tolerance_minus' : 5,
+            'precursor_mass_tolerance_plus'  : 5,
+            'precursor_isotope_range'        : "0,1",
+            'max_missed_cleavages'           : 2
         },
         'label' : '15N',
     },
