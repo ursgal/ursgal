@@ -34,7 +34,7 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
         'utranslation_style'    : 'get_ftp_style_1',
         'input_types': '',
         'output_suffix' :  None,
-        'in_development' : True,
+        'in_development' : False,
         'include_in_git' : True,
         'citation'                  : 'Kremer, L. P. M., Leufken, J., '\
             'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
