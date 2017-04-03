@@ -753,13 +753,12 @@ class UPeptideMapper_v3():
         self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
 
         # self.peptide_2_protein_mappings = defaultdict(list)
-        if fasta_name not in self.automatons.keys():
-            self.automatons[fasta_name] = ahocorasick.Automaton()
-            for idx, peptide in enumerate(peptide_list):
-                #integrated buffering of peptides
-                if peptide not in self.peptide_2_protein_mappings[fasta_name].keys():
-                    self.automatons[fasta_name].add_word(peptide, (idx, peptide))
-            self.automatons[fasta_name].make_automaton()
+        self.automatons[fasta_name] = ahocorasick.Automaton()
+        for idx, peptide in enumerate(peptide_list):
+            #integrated buffering of peptides
+            if peptide not in self.peptide_2_protein_mappings[fasta_name].keys():
+                self.automatons[fasta_name].add_word(peptide, (idx, peptide))
+        self.automatons[fasta_name].make_automaton()
         for match in self.automatons[fasta_name].iter(self.total_sequence_string[fasta_name]):
             idx, (p_idx, m_peptide) = match
             len_m_peptide = len(m_peptide)
