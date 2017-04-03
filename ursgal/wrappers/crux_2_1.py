@@ -10,11 +10,18 @@ class crux_2_1( ursgal.UNode ):
     """
 
     META_INFO = {
+        'edit_version'     : 1.00,                                              # flot, inclease number if something is changed (kaz)
+        'name'             : 'Crux',                                            # str, Software name (kaz)
+        'version'          : '2.1',                                             # str, Software version name (kaz)
+        'release_date'     : None,                                              # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'search_engine' : True,
         },
-        'in_development' : True,
-        'include_in_git' : None,
+        'input_types'      : [],                                                # list, extensions without a dot (kaz)
+        'multiple_files'   : False,                                             # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension' : [],                                                # list, extensions without a dot (kaz)
+        'in_development'   : True,
+        'include_in_git'   : None,
     }
 
 

@@ -8,20 +8,25 @@ import pprint
 class generate_target_decoy_1_0_0( ursgal.UNode ):
     """Generate Target Decoy 1_0_0 UNode"""
     META_INFO = {
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'Generate Target Decoy',                         # str, Software name (kaz)
+        'version'            : '1.0.0',                                         # str, Software version name (kaz)
+        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'search_engine' : False,
             'converter'     : True
         },
-        'output_extension' : '.fasta',
-        'output_suffix'    : 'target_decoy',
-        'input_types'      : [''],
-        'in_development'   : False,
-        'include_in_git'   : True,
-        'utranslation_style'    : 'generate_target_decoy_style_1',
-        'engine': {
+        'input_types'        : [],                                              # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['fasta'],                                       # list, extensions without a dot (kaz)
+        'output_suffix'      : 'target_decoy',
+        'in_development'     : False,
+        'include_in_git'     : True,
+        'utranslation_style' : 'generate_target_decoy_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'generate_target_decoy_1_0_0.py',
+                    'exe' : 'generate_target_decoy_1_0_0.py',
                 },
             },
         },
@@ -86,7 +91,7 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         base of generate_target_decoy_1_0_0.
 
         '''
-        
+
         print('[ -ENGINE- ] Executing conversion ..')
         self.time_point(tag = 'execution')
         generate_target_decoy_main = self.import_engine_as_python_function()

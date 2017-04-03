@@ -21,7 +21,11 @@ class combine_FDR_0_1( ursgal.UNode ):
     '''
 
     META_INFO = {
-        'engine_type'    : {
+        'edit_version'          : 1.00,                                         # flot, inclease number if something is changed (kaz)
+        'name'                  : 'combine FDR',                                # str, Software name (kaz)
+        'version'               : '0.1',                                        # str, Software version name (kaz)
+        'release_date'          : '2009-5-1',                                   # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'engine_type' : {
             'controller'        : False,
             'converter'         : False,
             'validation_engine' : False,
@@ -29,8 +33,9 @@ class combine_FDR_0_1( ursgal.UNode ):
             'meta_engine'       : True,
         },
         'in_development'        : False,
-        'input_types'           : ['.csv'],
-        'output_extension'      : '.csv',
+        'input_types'           : ['csv'],                                      # list, extensions without a dot (kaz)
+        'multiple_files'        : False,                                        # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'      : ['csv'],                                      # list, extensions without a dot (kaz)
         'create_own_folder'     : False,
         'citation' : 'An implementation of the "combined FDR Score" algorithm, '\
             'as described in: Jones AR, Siepen JA, Hubbard SJ, Paton NW (2009) '\

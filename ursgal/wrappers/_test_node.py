@@ -6,22 +6,28 @@ import os
 class _test_node( ursgal.UNode ):
     """_test_node UNode"""
     META_INFO = {
-        'in_development' : True,  # do not show in UNode overview
+        'edit_version'     : 1.00,                                              # flot, inclease number if something is changed (kaz)
+        'name'             : 'test node',                                       # str, Software name (kaz)
+        'version'          : 'alpha',                                           # str, Software version name (kaz)
+        'release_date'     : None,                                              # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'in_development'   : True,  # do not show in UNode overview
         'engine_type' : {
-            'converter'  : True
+            'converter' : True
         },
-        'input_types'      : ['.txt', '.csv', '.fasta', '.mzml'],
-        'output_extension' : '.csv',
+        'input_types'      : ['txt', 'csv', 'fasta', 'mzml'],                   # list, extensions without a dot (kaz)
+        'multiple_files'   : False,                                             # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension' : ['csv'],                                           # list, extensions without a dot (kaz)
         'output_suffix'    : 'test_node',
-        'engine': {
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe' : 'test_node_exe.py',
                 },
             },
         },
-        'citation' : 'TEST/DEBUG: Internal Ursgal UNode for debugging and testing.',
-        'include_in_git' : True,
+        'citation'         : \
+            'TEST/DEBUG: Internal Ursgal UNode for debugging nd testing.',
+        'include_in_git'   : True,
     }
 
     def __init__(self, *args, **kwargs):

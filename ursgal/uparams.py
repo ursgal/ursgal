@@ -1,5 +1,6 @@
 ursgal_params = {
     '-xmx' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus2csv_v2016_09_16',
             'msgfplus_v2016_09_16',
@@ -26,6 +27,7 @@ ursgal_params = {
         'uvalue_type' : "str",
     },
     'aa_exception_dict' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
@@ -58,6 +60,7 @@ ursgal_params = {
         'uvalue_type' : "dict",
     },
     'accept_conflicting_psms' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -77,6 +80,7 @@ ursgal_params = {
         'uvalue_type' : "bool",
     },
     'base_mz' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'omssa_2_1_9',
@@ -104,6 +108,7 @@ ursgal_params = {
         'uvalue_type' : "int",
     },
     'batch_size' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -133,6 +138,7 @@ ursgal_params = {
         'uvalue_type' : "int",
     },
     'bigger_scores_better' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -251,6 +257,7 @@ ursgal_params = {
         'uvalue_type' : "bool",
     },
     'cleavage_cterm_mass_change' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -278,6 +285,7 @@ ursgal_params = {
         'uvalue_type' : "float",
     },
     'cleavage_nterm_mass_change' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -305,6 +313,7 @@ ursgal_params = {
         'uvalue_type' : "float",
     },
     'compensate_small_fasta' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -332,6 +341,7 @@ ursgal_params = {
         'uvalue_type' : "bool",
     },
     'compress_raw_search_results_if_possible' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -351,6 +361,7 @@ ursgal_params = {
         'uvalue_type' : "bool",
     },
     'compute_xcorr' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -375,6 +386,7 @@ ursgal_params = {
         'uvalue_type' : "bool",
     },
     'consecutive_ion_prob' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -397,6 +409,7 @@ ursgal_params = {
         'uvalue_type' : "float",
     },
     'cpus' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
@@ -434,6 +447,7 @@ ursgal_params = {
         'uvalue_type' : "int _uevaluation_req",
     },
     'cross_link_definition' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -459,6 +473,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'csv_filter_rules' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'filter_csv_1_0_0',
         ],
@@ -481,6 +496,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
     },
     'database' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -518,7 +534,10 @@ N-terminus or C-terminus ''',
         'utag' : [
             'database',
             'input',
+            'input_files',                                                      # 'input_files' of utag becomes input file(s) on ogawa automatically (kaz)
         ],
+        'input_types' : ['fa', 'fasta'],                                        # list, extensions without a dot (kaz)
+        'multiple_input' : False,                                               # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'uvalue_option' : {
             'multipleLine' : False,
         },
@@ -527,6 +546,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'database_taxonomy' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -554,6 +574,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'decoy_generation_mode' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
         ],
@@ -578,6 +599,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'decoy_tag' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'kojak_1_5_3',
@@ -611,6 +633,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'del_from_params_before_json_dump' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -635,6 +658,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
     },
     'denovo_model' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -662,6 +686,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'denovo_model_dir' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -682,6 +707,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'engine_internal_decoy_generation' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -728,6 +754,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'engines_create_folders' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -747,6 +774,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'enzyme' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'kojak_1_5_3',
@@ -1045,6 +1073,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'fdr_cutoff' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'svm_1_0_0',
         ],
@@ -1066,6 +1095,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'filter_csv_converter_version' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1086,6 +1116,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'forbidden_cterm_mods' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_vengeance',
         ],
@@ -1109,6 +1140,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
     },
     'forbidden_residues' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'novor_1_1beta',
         ],
@@ -1129,6 +1161,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'force' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1148,6 +1181,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'frag_mass_tolerance' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -1192,6 +1226,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'frag_mass_tolerance_unit' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -1253,6 +1288,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'frag_mass_type' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -1288,6 +1324,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'frag_max_charge' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -1311,6 +1348,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'frag_method' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -1347,6 +1385,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'frag_min_mz' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1374,6 +1413,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'ftp_blocksize' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1394,6 +1434,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'ftp_folder' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1414,6 +1455,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'ftp_include_ext' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1434,6 +1476,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'ftp_max_number_of_files' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1454,6 +1497,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'ftp_output_folder' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1474,6 +1518,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'ftp_password' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1494,6 +1539,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'ftp_url' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1514,6 +1560,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'header_translations' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_percolator_2_08',
             'msamanda_1_0_0_5242',
@@ -1623,6 +1670,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "",
     },
     'heatmap_annotation_field_name' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1642,6 +1690,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'heatmap_box_style' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1661,6 +1710,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'heatmap_color_gradient' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1680,6 +1730,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'heatmap_column_order' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1700,6 +1751,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
     },
     'heatmap_error_suffix' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1719,6 +1771,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'heatmap_identifier_field_name' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1738,6 +1791,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'heatmap_max_value' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1757,6 +1811,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'heatmap_min_value' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1776,6 +1831,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'heatmap_value_suffix' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1795,6 +1851,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'helper_extension' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1815,6 +1872,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'http_output_folder' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
@@ -1835,6 +1893,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'http_url' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
@@ -1855,6 +1914,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'instrument' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -1910,6 +1970,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'intensity_cutoff' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -1933,6 +1994,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'json_extension' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1953,6 +2015,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'keep_asp_pro_broken_peps' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
@@ -1972,6 +2035,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'kernel' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'svm_1_0_0',
         ],
@@ -1993,6 +2057,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'kojak_MS1_centroid' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2012,6 +2077,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_MS1_resolution' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2031,6 +2097,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_MS2_centroid' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2050,6 +2117,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_MS2_resolution' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2069,6 +2137,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_diff_mods_on_xl' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2089,6 +2158,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_enrichment' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2109,6 +2179,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_export_pepxml' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2132,6 +2203,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_export_percolator' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2155,6 +2227,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_fragment_bin_offset' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2178,6 +2251,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'kojak_fragment_bin_size' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2201,6 +2275,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'kojak_mono_links_on_xl' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2221,6 +2296,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_percolator_version' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2240,6 +2316,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'kojak_prefer_precursor_pred' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2263,6 +2340,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'kojak_spectrum_processing' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2286,6 +2364,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_top_count' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2306,6 +2385,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_truncate_prot_names' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2325,6 +2405,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'kojak_turbo_button' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2349,6 +2430,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'label' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -2395,6 +2477,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'machine_offset_in_ppm' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -2419,6 +2502,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'max_accounted_observed_peaks' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -2451,6 +2535,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'max_missed_cleavages' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -2493,6 +2578,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'max_mod_alternatives' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_vengeance',
         ],
@@ -2515,6 +2601,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'max_mod_size' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -2537,6 +2624,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'max_num_mods' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
@@ -2565,6 +2653,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'max_num_of_ions_per_series_to_search' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -2590,6 +2679,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'max_num_per_mod' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_vengeance',
         ],
@@ -2610,6 +2700,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "dict",
     },
     'max_output_e_value' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -2640,6 +2731,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'max_pep_length' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -2668,6 +2760,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'max_pep_var' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -2693,6 +2786,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'mgf_input_file' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -2726,7 +2820,10 @@ N-terminus or C-terminus ''',
         },
         'utag' : [
             'input',
+            'input_files',                                                      # 'input_files' of utag becomes input file(s) on ogawa automatically (kaz)
         ],
+        'input_types' : ['mgf'],                                                # list, extensions without a dot (kaz)
+        'multiple_input' : False,                                               # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'uvalue_option' : {
             'multipleLine' : False,
         },
@@ -2735,6 +2832,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'min_mod_size' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -2757,6 +2855,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'min_output_score' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -2790,6 +2889,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'min_pep_length' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -2818,6 +2918,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'min_precursor_matches' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -2841,6 +2942,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'min_required_matched_peaks' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -2873,6 +2975,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'min_required_observed_peaks' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -2902,6 +3005,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'moda_blind_mode' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -2924,6 +3028,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'moda_high_res' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -2946,6 +3051,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'moda_protocol_id' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -2972,6 +3078,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'modifications' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -3052,6 +3159,7 @@ Example:
         'uvalue_type' : "list",
     },
     'mono_link_definition' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3077,6 +3185,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'ms1_centroided' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3100,6 +3209,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'ms1_resolution' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3119,6 +3229,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'ms2_centroided' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3142,6 +3253,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'ms2_resolution' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3161,6 +3273,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'msgfplus_protocol_id' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -3185,6 +3298,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'myrimatch_class_size_multiplier' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3207,6 +3321,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'myrimatch_num_int_classes' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3229,6 +3344,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'myrimatch_num_mz_fidelity_classes' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3251,6 +3367,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'myrimatch_prot_sampl_time' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3273,6 +3390,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'myrimatch_smart_plus_three' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3296,6 +3414,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'myrimatch_tic_cutoff' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3319,6 +3438,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'mzidentml_compress' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -3344,6 +3464,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'mzidentml_converter_version' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -3364,6 +3485,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'mzidentml_export_type' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -3390,6 +3512,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'mzidentml_function' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -3415,6 +3538,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'mzidentml_output_fragmentation' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -3440,6 +3564,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'mzidentml_verbose_output' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -3465,6 +3590,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'mzml2mgf_converter_version' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -3485,6 +3611,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'neutral_loss_enabled' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -3513,6 +3640,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'neutral_loss_mass' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -3540,6 +3668,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'neutral_loss_window' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -3567,6 +3696,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'noise_suppression_enabled' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -3593,6 +3723,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'num_compared_psms' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -3615,6 +3746,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'num_hits_retain_spec' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3638,6 +3770,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'num_i_decimals' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -3660,6 +3793,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'num_match_spec' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -3698,6 +3832,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'num_mz_decimals' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -3720,6 +3855,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'omssa_cp' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3744,6 +3880,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'omssa_h1' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3766,6 +3903,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'omssa_h2' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3788,6 +3926,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'omssa_ht' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3810,6 +3949,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'omssa_mm' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3832,6 +3972,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'omssa_ta' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3855,6 +3996,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'omssa_tex' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3878,6 +4020,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'omssa_verbose' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3901,6 +4044,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'omssa_w1' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3923,6 +4067,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'omssa_w2' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3945,6 +4090,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'omssa_z1' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3968,6 +4114,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'omssa_zc' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3992,6 +4139,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'omssa_zcc' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4014,6 +4162,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'omssa_zt' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4037,6 +4186,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'output_aa_probs' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -4056,6 +4206,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'output_add_features' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -4080,6 +4231,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'output_cum_probs' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -4099,6 +4251,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'output_file_incl_path' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'merge_csv_1_0_0',
@@ -4158,6 +4311,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'output_file_type' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -4197,6 +4351,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'output_prm' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -4216,6 +4371,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'output_prm_norm' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -4235,6 +4391,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'output_q_values' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus2csv_v2016_09_16',
         ],
@@ -4258,6 +4415,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'pepnovo_tag_length' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -4280,6 +4438,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'precursor_charge_dependency' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4308,6 +4467,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'precursor_isotope_range' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
@@ -4370,6 +4530,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'precursor_mass_tolerance_minus' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -4421,6 +4582,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'precursor_mass_tolerance_plus' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -4472,6 +4634,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'precursor_mass_tolerance_unit' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -4540,6 +4703,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'precursor_mass_type' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -4586,6 +4750,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'precursor_max_charge' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -4622,6 +4787,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'precursor_max_mass' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -4648,6 +4814,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'precursor_min_charge' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -4680,6 +4847,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'precursor_min_mass' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -4711,6 +4879,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'prefix' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -4730,6 +4899,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "",
     },
     'protein_delimiter' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'percolator_2_08',
             'unify_csv_1_0_0',
@@ -4752,6 +4922,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'psm_merge_delimiter' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
@@ -4772,6 +4943,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'qvality_cross_validation' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -4794,6 +4966,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'qvality_epsilon_step' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -4816,6 +4989,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'qvality_number_of_bins' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -4838,6 +5012,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'qvality_verbose' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -4862,6 +5037,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "select",
     },
     'raw_ident_csv_suffix' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -4882,6 +5058,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'remove_redundant_psms' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -4901,6 +5078,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'remove_temporary_files' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -4920,6 +5098,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'rt_pickle_name' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -4940,6 +5119,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'sanitize_csv_converter_version' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -4960,6 +5140,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'scan_exclusion_list' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -4983,6 +5164,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
     },
     'scan_inclusion_list' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -5005,6 +5187,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
     },
     'scan_skip_modulo_step' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -5027,6 +5210,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'score_-h2o_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5051,6 +5235,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_-nh3_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5075,6 +5260,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_a_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5124,6 +5310,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_b1_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5147,6 +5334,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_b_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5196,6 +5384,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_c_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5245,6 +5434,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_c_terminal_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5268,6 +5458,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_correlation_corr' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5291,6 +5482,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_diff_threshold' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -5314,6 +5506,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'score_imm_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5338,6 +5531,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_int_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5362,6 +5556,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_x_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5411,6 +5606,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_y_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5460,6 +5656,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_z+1_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5484,6 +5681,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_z+2_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5508,6 +5706,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'score_z_ions' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5557,6 +5756,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'search_for_saps' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -5584,6 +5784,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'semi_enzyme' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -5646,6 +5847,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'show_unodes_in_development' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -5664,6 +5866,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'spec_dynamic_range' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -5691,6 +5894,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'svm_c_param' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'svm_1_0_0',
         ],
@@ -5712,6 +5916,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'test_param1' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             '_test_node',
         ],
@@ -5740,6 +5945,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'test_param2' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             '_test_node',
         ],
@@ -5768,6 +5974,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'threshold_is_log10' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -5787,6 +5994,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'unify_csv_converter_version' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -5807,6 +6015,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'ursgal_resource_url' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -5826,6 +6035,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'use_quality_filter' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -5849,6 +6059,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'use_refinement' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -5876,6 +6087,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'use_spectrum_charge' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -5895,6 +6107,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'use_spectrum_mz' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'pepnovo_3_1',
@@ -5920,6 +6133,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'validated_ident_csv_suffix' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -5940,6 +6154,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'validation_generalized' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -5963,6 +6178,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'validation_minimum_score' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -6001,6 +6217,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "",
     },
     'validation_score_field' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -6172,6 +6389,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "",
     },
     'visualization_column_names' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6197,6 +6415,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
     },
     'visualization_font' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6216,6 +6435,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "tuple",
     },
     'visualization_header' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6236,6 +6456,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "str",
     },
     'visualization_label_list' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6259,6 +6480,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
     },
     'visualization_opacity' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6282,6 +6504,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'visualization_scaling_factors' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6301,6 +6524,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "tuple",
     },
     'visualization_size' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6320,6 +6544,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "tuple",
     },
     'visualization_stroke_width' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6343,6 +6568,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "float",
     },
     'window_size' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'combine_pep_1_0_0',
         ],
@@ -6369,6 +6595,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'word_len' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'upeptide_mapper_1_0_0',
         ],
@@ -6388,6 +6615,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "int",
     },
     'write_unfiltered_results' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'filter_csv_1_0_0',
         ],
@@ -6407,6 +6635,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "bool",
     },
     'xtandem_stp_bias' : {
+        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
