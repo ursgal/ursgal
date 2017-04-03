@@ -6,23 +6,28 @@ import os
 class merge_csvs_1_0_0( ursgal.UNode ):
     """Merge CSVS 1_0_0 UNode"""
     META_INFO = {
-        'engine_type'            : {
-            'converter'         : True,
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'Merge CSVs',                                 # str, Software name (kaz)
+        'version'            : '1.0.0',                                         # str, Software version name (kaz)
+        'release_date'       : '2016-3-4',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'engine_type' : {
+            'converter' : True,
         },
-        'output_extension'       : '.csv',
+        'input_types'        : ['csv'],                                              # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['csv'],                                              # list, extensions without a dot (kaz)
         'output_suffix'          : 'merged',
-        'input_types'            : ['.csv'],
         'include_in_git'            : True,
         'in_development'            : False,
         'utranslation_style'    : 'merge_csvs_style_1',
-        'engine': {
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'merge_csvs_1_0_0.py',
+                    'exe' : 'merge_csvs_1_0_0.py',
                 },
             },
         },
-        'citation'                  : 'Kremer, L. P. M., Leufken, J., '\
+        'citation' : 'Kremer, L. P. M., Leufken, J., '\
             'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
             'Ursgal, Universal Python Module Combining Common Bottom-Up '\
             'Proteomics Tools for Large-Scale Analysis. '\

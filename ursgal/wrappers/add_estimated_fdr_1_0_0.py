@@ -11,7 +11,7 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
         'name'               : 'Add Estimated FDR',                             # str, Software name (kaz)
         'version'            : '1.0.0',                                         # str, Software version name (kaz)
-        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'release_date'       : '2008-1-1',                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'converter' : True
         },
@@ -31,7 +31,7 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         'citation' : \
             'An implementation of the target/decoy FDR estimation '\
             'method described in: Lukas Kall, John D. Storey, Michael J. '\
-            'MacCoss and William Stafford Noble (2007) Assigning significance '\
+            'MacCoss and William Stafford Noble (2008) Assigning significance '\
             'to peptides identified by tandem mass spectrometry using decoy '\
             'databases.' ,
 

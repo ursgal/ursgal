@@ -17,37 +17,42 @@ class kojak_percolator_2_08( ursgal.UNode ):
     Kojak provides preformatted Percolator input, this is used direclty as the
     input file for Percolator. In contrast to the original Percolator node, the
     input files are not reformatted or used to write a new input file.
-    
+
     Note:
-        
+
         Percolator (2.08) has to be symlinked or copied to engine-folder
         'kojak_percolator_2_08' in order to make this node work.
 
     Reference:
-    Käll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
+    Kﾃ､ll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
     """
     META_INFO = {
-        'engine_type'            : {
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'Kojak Percolator',                              # str, Software name (kaz)
+        'version'            : '2.08',                                          # str, Software version name (kaz)
+        'release_date'       : '2007-11-1',                                     # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'engine_type' : {
             'controller'        : False,
             'converter'         : False,
             'validation_engine' : True,
             'search_engine'     : False,
             'meta_engine'       : False
         },
-        'output_extension'          : '.tsv',
-        'output_suffix'             : 'percolator_2_08_validated',
-        'input_types'               : ['.txt'],
-        'create_own_folder'         : False,
-        'citation'   : 'Kall L, Canterbury JD, Weston J, Noble WS, '\
+        'input_types'        : ['txt'],                                         # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['tsv'],                                         # list, extensions without a dot (kaz)
+        'output_suffix'      : 'percolator_2_08_validated',
+        'create_own_folder'  : False,
+        'citation' : 'Kall L, Canterbury JD, Weston J, Noble WS, '\
             'MacCoss MJ. (2007) Semi-supervised learning for peptide '\
             'identification from shotgun proteomics datasets.',
-        'include_in_git'            : None,
-        'cannot_distribute'         : True,
-        'group_psms'                : False,
-        'in_development'            : False,
-        'cpu_usage'                 : 1,
-        'utranslation_style'        : 'kojak_percolator_style_1',
-        'engine': {
+        'include_in_git'     : None,
+        'cannot_distribute'  : True,
+        'group_psms'         : False,
+        'in_development'     : False,
+        'cpu_usage'          : 1,
+        'utranslation_style' : 'kojak_percolator_style_1',
+        'engine' : {
             'darwin' : {
                 '64bit' : {
                     'exe'            : 'percolator_2_08',

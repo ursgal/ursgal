@@ -22,9 +22,9 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
     """
     META_INFO = {
         'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
-        'name'               : 'Get Ftp Files',                                 # str, Software name (kaz)
+        'name'               : 'Get FTP Files',                                 # str, Software name (kaz)
         'version'            : '1.0.0',                                         # str, Software version name (kaz)
-        'release_date'       : '2016-3-1',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'release_date'       : '2016-3-4',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'fetcher' : True,
         },
