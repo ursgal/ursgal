@@ -12,10 +12,24 @@ class moda_v1_51( ursgal.UNode ):
     Na S, Bandeira N, Paek E. (2012) Fast multi-blind modification search through tandem mass spectrometry.
     """
     META_INFO = {
+        'edit_version'                : 1.00,                                   # flot, inclease number if something is changed (kaz)
+        'name'                        : 'Moda',                                 # str, Software name (kaz)
+        'version'                     : 'v1.51',                                # str, Software version name (kaz)
+        'release_date'                : '2012-4-1',                             # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'search_engine' : True,
         },
-        'engine': {
+        'input_types'                 : ['mgf', 'pkl', 'dta', 'mzXML'],         # list, extensions without a dot (kaz)
+        'multiple_files'              : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'            : ['csv'],                                # list, extensions without a dot (kaz)
+        'compress_raw_search_results' : False,
+        'create_own_folder'           : True,
+        'in_development'              : True,
+        'include_in_git'              : False,
+        'citation'                    : 'Na S, Bandeira N, Paek E. (2012) '\
+            'Fast multi-blind modification search through tandem mass spectrometry.',
+        'utranslation_style'          : 'moda_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'moda_v1.51.jar',
@@ -25,17 +39,8 @@ class moda_v1_51( ursgal.UNode ):
                 },
             },
         },
-        'utranslation_style'    : 'moda_style_1',
-        'compress_raw_search_results' : False,
-        'output_extension'          : '.csv',
-        'input_types'               : ['.mgf', '.pkl', '.dta', '.mzXML'],
-        'create_own_folder'         : True,
-        'citation'                  : 'Na S, Bandeira N, Paek E. (2012) '\
-            'Fast multi-blind modification search through tandem mass spectrometry.',
-        'in_development'            : True,
-        'include_in_git'            : False,
     }
-    
+
     def __init__(self, *args, **kwargs):
         super(moda_v1_51, self).__init__(*args, **kwargs)
         pass
@@ -64,7 +69,7 @@ class moda_v1_51( ursgal.UNode ):
             self.params['output_file']
         )
         self.created_tmp_files.append(
-            self.params['translations']['output_file_incl_path'].replace('.csv', '.txt') 
+            self.params['translations']['output_file_incl_path'].replace('.csv', '.txt')
         )
         translations['-o']['output_file_incl_path'] = \
             self.params['translations']['output_file_incl_path']
@@ -108,7 +113,7 @@ class moda_v1_51( ursgal.UNode ):
                 (translations['PPMTolerance']['precursor_mass_tolerance_minus']+\
                 translations['PPMTolerance']['precursor_mass_tolerance_plus'])/2
             del translations['PPMTolerance']
-        
+
         elif translations['PPMTolerance']['precursor_mass_tolerance_unit'] == 'mmu':
             translations['PeptTolerance'] = \
                 10e-3*\
@@ -120,7 +125,7 @@ class moda_v1_51( ursgal.UNode ):
              translations['PPMTolerance'] = \
                 (translations['PPMTolerance']['precursor_mass_tolerance_minus']+\
                 translations['PPMTolerance']['precursor_mass_tolerance_plus'])/2
-            
+
         if translations['FragTolerance']['frag_mass_tolerance_unit'] == 'ppm':
             translations['FragTolerance'] = \
                 ursgal.ucore.convert_ppm_to_dalton(
@@ -133,7 +138,7 @@ class moda_v1_51( ursgal.UNode ):
         else:
             translations['FragTolerance'] = \
                 translations['FragTolerance']['frag_mass_tolerance']
-                
+
         for translated_key, translation_dict in translations.items():
             if translated_key == '-Xmx':
                 self.params[ 'command_list' ].insert(1,'{0}{1}'.format(

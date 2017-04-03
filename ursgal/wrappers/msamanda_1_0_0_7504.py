@@ -9,21 +9,26 @@ class msamanda_1_0_0_7504( msamanda ):
     Import functions from msamanda_1_0_0_5243
     """
     META_INFO = {
-        'engine_type': {
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'MSAmanda',                                      # str, Software name (kaz)
+        'version'            : '1.0.0.7504',                                    # str, Software version name (kaz)
+        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'engine_type' : {
             'search_engine': True,
         },
-        'output_extension'          : '.csv',
-        'input_types'               : ['.mgf'],
-        'create_own_folder'         : True,
-        'citation'                  : 'Dorfer V, Pichler P, Stranzl T, '\
+        'input_types'        : ['mgf'],                                         # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'create_own_folder'  : True,
+        'citation'           : 'Dorfer V, Pichler P, Stranzl T, '\
             'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
             'a universal identification algorithm optimized for high accuracy '\
             'tandem mass spectra.',
-        'include_in_git'            : None,
-        'cannot_distribute'         : True,
-        'in_development'            : False,
-        'utranslation_style'        : 'msamanda_style_1',
-        'engine': {
+        'include_in_git'     : None,
+        'cannot_distribute'  : True,
+        'in_development'     : False,
+        'utranslation_style' : 'msamanda_style_1',
+        'engine' : {
             'linux' : {
                 '64bit' : {
                     'exe'            : 'MSAmanda.exe',

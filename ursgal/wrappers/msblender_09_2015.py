@@ -18,23 +18,27 @@ class msblender_09_2015( ursgal.UNode ):
     Documentation at http://www.marcottelab.org/index.php/MSblender
     """
     META_INFO = {
-        'engine_exe' : {
-            'linux'   : 'msblender',
-            'darwin'  : 'msblender',
-        },
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'MSblender',                                     # str, Software name (kaz)
+        'version'            : '09.2015',                                       # str, Software version name (kaz)
+        'release_date'       : '2015-9-1',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'meta_engine' : True,
         },
-        'in_development'            : True,
-        'output_extension'          : '.csv',
-        'input_types'               : ['.csv'],
-        'create_own_folder'         : False,
+        'input_types'        : ['csv'],                                         # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'in_development'     : True,
+        'create_own_folder'  : False,
         'citation'    : 'Kwon T, Choi H, Vogel C, Nesvizhskii AI, '\
             'Marcotte EM. (2011) MSblender: A Probabilistic Approach '\
             'for Integrating Peptide Identifications from Multiple '\
             'Database Search Engines.',
-
-        'include_in_git'            : True,
+        'include_in_git'     : True,
+        'engine_exe' : {
+            'linux'  : 'msblender',
+            'darwin' : 'msblender',
+        },
     }
 
     def __init__( self, *args, **kwargs ):
@@ -406,7 +410,7 @@ class msblender_09_2015( ursgal.UNode ):
     def calc_FDR ( self, PSM_count, false_positives ):
         '''
         calculate false discovery rate according to FDR Method 2
-        (Käll et al. 2008) as explained by Jones et al. 2009
+        (Kﾃ､ll et al. 2008) as explained by Jones et al. 2009
         '''
         true_positives  = PSM_count - (2 * false_positives)
         if true_positives <= 0:  # prevent FDR above 1. Not sure if this is done?
