@@ -51,17 +51,17 @@ class UMapMaster(unittest.TestCase):
         upapa_class = self.uc.unodes['upeptide_mapper_1_0_0']['class'].import_engine_as_python_function(
             'UPeptideMapper_v3'
         )
-        database_path =  os.path.join(
+        self.database_path =  os.path.join(
             'tests',
             'data',
             'Test.fasta'
         )
-        with open(database_path, 'w') as io:
+        with open(self.database_path, 'w') as io:
             for line in TEST_FASTA:
                 print(line.strip(), file=io )
         # print(upapa_class)
         self.upapa_class = upapa_class(
-            fasta_database = database_path
+            fasta_database = self.database_path
         )
 
     def test_purge_fasta(self):
@@ -108,6 +108,59 @@ class UMapMaster(unittest.TestCase):
                 'Protein3',
                 mapping['id']
             )
+
+    def test_incremental_cache_buildups(self):
+        '''
+
+        '''
+        self.upapa_class.cache_database(
+            self.database_path,
+            'Test.fasta'
+        )
+        # map with one parsed fasta
+        maps = self.upapa_class.map_peptides( ['KLEINER'], 'Test.fasta')['KLEINER']
+        # print(maps)
+        # print(maps)
+        self.assertEqual( len(maps), 1)
+        tmp_database_path =  os.path.join(
+            'tests',
+            'data',
+            'tmp_Test.fasta'
+        )
+        with open(tmp_database_path, 'w') as io:
+            for line in TEST_FASTA_TWO:
+                print(line.strip(), file=io )
+
+        self.upapa_class.cache_database(
+            tmp_database_path,
+            'tmp_Test.fasta'
+        )
+        # exit()
+        # print(self.upapa_class.automatons)
+        # print(s)
+        maps = self.upapa_class.map_peptides(
+            ['KLEINER'],
+            'Test.fasta'
+        )['KLEINER']
+        # print(self.upapa_class.peptide_2_protein_mappings)
+        # print(maps)
+        self.assertEqual(
+            len(maps),
+            1
+         )
+        # exit()
+        self.assertEqual(
+            len(
+                self.upapa_class.map_peptides(
+                    ['KLEINER'],
+                    'tmp_Test.fasta'
+                )['KLEINER']
+            ),
+            1
+         )
+
+        os.remove(tmp_database_path)
+
 
     # def test_peptide_lt_word_len(self):
     #     expected = {

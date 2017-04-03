@@ -210,7 +210,7 @@ def main(input_file=None, output_file=None, params=None):
                     else:
                         print(
                             '''
-                            [ WARNING ] New not covered case of aa: "{0}" 
+                            [ WARNING ] New not covered case of aa exception for: "{0}" 
                             [ WARNING ] Please adjust upeptide_mapper accordingly
                             '''.format(aa_to_replace)
                         )
@@ -677,32 +677,44 @@ class UPeptideMapper_v3():
         
         self.peptide_2_protein_mappings = {}
         self.total_sequence_string      = {}
+        self.cache_database(fasta_database, self.fasta_name)
+
+        self.automatons = {}
         
+
+    def cache_database(self, fasta_database,  fasta_name):
+        '''
+        If the same faat_name is buffered again all info is purged from the
+        class.
+        '''
+        if fasta_name in self.protein_indices.keys():
+            self.purge_fasta_info(fasta_name)
+            self.fasta_name = fasta_name
         for protein_id, seq in ursgal.ucore.parseFasta(open(fasta_database,'r').readlines()):
             print(
                 'Buffering protein #{0} of database {1}'.format(
-                    self.fasta_counter[self.fasta_name],
+                    self.fasta_counter[fasta_name],
                     fasta_database
                 ),
                 end ='\r' 
             )
             len_seq             = len(seq)
             
-            self.protein_indices[self.fasta_name][protein_id] = {
-                'start': self.len_total_sequence_string[self.fasta_name],
-                'stop' : self.len_total_sequence_string[self.fasta_name] + len_seq
+            self.protein_indices[fasta_name][protein_id] = {
+                'start': self.len_total_sequence_string[fasta_name],
+                'stop' : self.len_total_sequence_string[fasta_name] + len_seq
             }
             # self.total_sequence_string += seq
-            self.total_sequence_list[self.fasta_name].append(seq)
-            self.protein_list[self.fasta_name] += [ protein_id ] * len_seq
-            self.protein_sequences[self.fasta_name][ protein_id ] = seq
-            self.len_total_sequence_string[self.fasta_name] += len_seq
-            self.fasta_counter[self.fasta_name] += 1
+            self.total_sequence_list[fasta_name].append(seq)
+            self.protein_list[fasta_name] += [ protein_id ] * len_seq
+            self.protein_sequences[fasta_name][ protein_id ] = seq
+            self.len_total_sequence_string[fasta_name] += len_seq
+            self.fasta_counter[fasta_name] += 1
         print()
         print('Joining protein sequences')
-        self.total_sequence_string[self.fasta_name] = ''.join( self.total_sequence_list[self.fasta_name] )
+        self.total_sequence_string[fasta_name] = ''.join( self.total_sequence_list[fasta_name] )
         print('Joining protein sequences done')
-
+        return
 
     def map_peptides(self, peptide_list, fasta_name):
         ''' 
@@ -737,17 +749,18 @@ class UPeptideMapper_v3():
             ]
         '''
 
-        if fasta_name not in self.peptide_2_protein_mappings.keys():
-            self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
+        # if fasta_name not in self.peptide_2_protein_mappings.keys():
+        self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
 
         # self.peptide_2_protein_mappings = defaultdict(list)
-        self.A = ahocorasick.Automaton()
-        for idx, peptide in enumerate(peptide_list):
-            #integrated buffering of peptides
-            if peptide not in self.peptide_2_protein_mappings[fasta_name].keys():
-                self.A.add_word(peptide, (idx, peptide))
-        self.A.make_automaton()
-        for match in self.A.iter(self.total_sequence_string[fasta_name]):
+        if fasta_name not in self.automatons.keys():
+            self.automatons[fasta_name] = ahocorasick.Automaton()
+            for idx, peptide in enumerate(peptide_list):
+                #integrated buffering of peptides
+                if peptide not in self.peptide_2_protein_mappings[fasta_name].keys():
+                    self.automatons[fasta_name].add_word(peptide, (idx, peptide))
+            self.automatons[fasta_name].make_automaton()
+        for match in self.automatons[fasta_name].iter(self.total_sequence_string[fasta_name]):
             idx, (p_idx, m_peptide) = match
             len_m_peptide = len(m_peptide)
             protein_name_end_index = self.protein_list[fasta_name][idx]
@@ -774,7 +787,7 @@ class UPeptideMapper_v3():
             if pre_pos < 0:
                 pre = '-'
             else:
-                pre = protein_seq[pre_pos]
+                pre = protein_seq[ pre_pos ]
             try:
                 post = protein_seq[ stop_in_protein ]
             except:
@@ -796,6 +809,7 @@ class UPeptideMapper_v3():
         '''
         Purges regular sequence lookup and fcache for a given fasta_name
         '''
+        print('Purging buffer for {0}'.format(fasta_name))
         del self.protein_list[fasta_name]               
         del self.protein_indices[fasta_name]            
         del self.protein_sequences[fasta_name]          
@@ -805,6 +819,8 @@ class UPeptideMapper_v3():
         del self.len_total_sequence_string[fasta_name] 
         if fasta_name in self.peptide_2_protein_mappings.keys():
             del self.peptide_2_protein_mappings[fasta_name]
+        if fasta_name in self.automatons.keys():
+            del self.automatons[fasta_name]
 
 if __name__ == '__main__':
     if len(sys.argv) < 5:
