@@ -11,13 +11,13 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
         'name'               : 'Add Estimated FDR',                             # str, Software name (kaz)
         'version'            : '1.0.0',                                         # str, Software version name (kaz)
-        'release_date'       : '2008-1-1',                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'release_date'       : '2008-1-1',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'converter' : True
         },
-        'input_extensions'   : ['.csv'],                                         # list, extensions (kaz)
+        'input_extensions'   : ['.csv'],                                        # list, extensions (kaz)
         'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.csv'],                                         # list, extensions (kaz)
+        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'output_suffix'      : 'withFDR',
         'in_development'     : False,
         'include_in_git'     : True,

@@ -14,9 +14,9 @@ class svm_1_0_0( ursgal.UNode ):
         'engine_type' : {
             'validation_engine' : True,
         },
-        'input_extensions'  : ['.csv'],                                          # list, extensions (kaz)
+        'input_extensions'  : ['.csv'],                                         # list, extensions (kaz)
         'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions' : ['.csv'],                                          # list, extensions (kaz)
+        'output_extensions' : ['.csv'],                                         # list, extensions (kaz)
         'output_suffix'     : 'svm_validated',
         'create_own_folder' : False,
         'in_development'    : True,  # do not show in UNode overview

@@ -6,10 +6,10 @@ import os
 class _test_node( ursgal.UNode ):
     """_test_node UNode"""
     META_INFO = {
-        'edit_version'      : 1.00,                                              # flot, inclease number if something is changed (kaz)
-        'name'              : 'test node',                                       # str, Software name (kaz)
-        'version'           : 'alpha',                                           # str, Software version name (kaz)
-        'release_date'      : None,                                              # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'      : 1.00,                                             # flot, inclease number if something is changed (kaz)
+        'name'              : 'test node',                                      # str, Software name (kaz)
+        'version'           : 'alpha',                                          # str, Software version name (kaz)
+        'release_date'      : None,                                             # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'converter' : True
         },

@@ -28,9 +28,9 @@ class combine_FDR_0_1( ursgal.UNode ):
         'engine_type' : {
             'meta_engine' : True,
         },
-        'input_extensions'      : ['.csv'],                                      # list, extensions (kaz)
+        'input_extensions'      : ['.csv'],                                     # list, extensions (kaz)
         'input_multi_file'      : False,                                        # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'     : ['.csv'],                                      # list, extensions (kaz)
+        'output_extensions'     : ['.csv'],                                     # list, extensions (kaz)
         'create_own_folder'     : False,
         'in_development'        : False,
         'include_in_git'        : True,

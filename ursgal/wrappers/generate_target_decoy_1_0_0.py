@@ -17,7 +17,7 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         },
         'input_extensions'   : [],                                              # list, extensions (kaz)
         'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.fasta'],                                       # list, extensions (kaz)
+        'output_extensions'  : ['.fasta'],                                      # list, extensions (kaz)
         'output_suffix'      : 'target_decoy',
         'in_development'     : False,
         'include_in_git'     : True,

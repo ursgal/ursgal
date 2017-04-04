@@ -17,9 +17,9 @@ class filter_csv_1_0_0( ursgal.UNode ):
         'engine_type' : {
             'converter' : True
         },
-        'input_extensions'       : ['.csv'],                                     # list, extensions (kaz)
+        'input_extensions'       : ['.csv'],                                    # list, extensions (kaz)
         'input_multi_file'       : False,                                       # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'      : ['.csv'],                                     # list, extensions (kaz)
+        'output_extensions'      : ['.csv'],                                    # list, extensions (kaz)
         'output_suffix'          : 'accepted',
         'rejected_output_suffix' : 'rejected',
         'in_development'         : False,
