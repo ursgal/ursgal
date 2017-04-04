@@ -11,35 +11,37 @@ import os.path
 class venndiagram_1_0_0( ursgal.UNode ):
     """Venn Diagram uNode"""
     META_INFO = {
-        'engine_type'           : {
-            'converter'         : False,
-            'validation_engine' : False,
-            'search_engine'     : False,
-            'meta_engine'       : False,
-            'visualizer'        : True,
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'Venndiagram',                                   # str, Software name (kaz)
+        'version'            : '1.0.0',                                         # str, Software version name (kaz)
+        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'engine_type' : {
+            'visualizer' : True,
         },
-        'output_extension'    : '.svg',
-        'output_suffix'       : 'venndiagram',
-        'input_types'         : ['.csv',],
-        'include_in_git'            : True,
-        'in_development'            : False,
-        'utranslation_style'    : 'venndiagram_style_1',
-        'engine': {
+        'input_types'        : ['csv'],                                         # list, extensions without a dot (kaz)
+        'multiple_files'     : True,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['svg'],                                         # list, extensions without a dot (kaz)
+        'output_suffix'      : 'venndiagram',
+        'include_in_git'     : True,
+        'in_development'     : False,
+        'utranslation_style' : 'venndiagram_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'            : 'venndiagram_1_0_0.py',
+                    'exe' : 'venndiagram_1_0_0.py',
                 },
             },
         },
-        'citation'                  : 'Kremer, L. P. M., Leufken, J., '\
+        'citation'           : 'Kremer, L. P. M., Leufken, J., '\
             'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
             'Ursgal, Universal Python Module Combining Common Bottom-Up '\
             'Proteomics Tools for Large-Scale Analysis. '\
             'J. Proteome res. 15, 788-794.',
     }
+
     def __init__(self, *args, **kwargs):
         super(venndiagram_1_0_0, self).__init__(*args, **kwargs)
-
+        pass
 
     def _execute( self ):
         '''

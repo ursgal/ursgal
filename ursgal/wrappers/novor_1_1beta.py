@@ -13,34 +13,39 @@ class novor_1_1beta( ursgal.UNode ):
     Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software.
     """
     META_INFO = {
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'Novor',                                         # str, Software name (kaz)
+        'version'            : '1.1beta',                                       # str, Software version name (kaz)
+        'release_date'       : '2015-6-30',                                     # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'denovo_engine' : True,
         },
+        'input_types'        : ['mgf'],                                         # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'in_development'     : False,
+        'create_own_folder'  : True,
+        'include_in_git'     : False,
+        'utranslation_style' : 'novor_style_1',
         'engine' : {
             'linux' : {
                 '64bit' : {
-                    'exe'            :'novor.sh',
+                    'exe' : 'novor.sh',
                 }
             },
             'darwin' : {
                 '64bit' : {
-                    'exe'            :'novor.sh',
+                    'exe' : 'novor.sh',
                 }
             },
             'win32' : {
                 '64bit' : {
-                    'exe'            : 'novor.bat',
+                    'exe' : 'novor.bat',
                 }
             },
         },
-        'utranslation_style'        : 'novor_style_1',
-        'in_development'            : False,
-        'output_extension'          : '.csv',
-        'input_types'               : ['.mgf'],
-        'create_own_folder'         : True,
-        'citation'                  : \
+        'citation'           : \
             'Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software.',
-        'include_in_git'            : False,
     }
 
     def __init__(self, *args, **kwargs):

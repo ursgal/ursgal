@@ -7,26 +7,27 @@ class svm_1_0_0( ursgal.UNode ):
     """svm_1_0_0 UNode"""
 
     META_INFO = {
-        'in_development'   : True,  # do not show in UNode overview
-        'engine_type'      : {
-            'controller'        : False,
-            'converter'         : False,
+        'edit_version'      : 1.00,                                             # flot, inclease number if something is changed (kaz)
+        'name'              : 'Svm',                                            # str, Software name (kaz)
+        'version'           : '1.0.0',                                          # str, Software version name (kaz)
+        'release_date'      : None,                                             # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'engine_type' : {
             'validation_engine' : True,
-            'search_engine'     : False,
-            'meta_engine'       : False
         },
-        'input_types'      : ['.csv'],
-        'output_extension' : '.csv',
-        'output_suffix'    : 'svm_validated',
-        'engine': {
+        'input_types'       : ['csv'],                                          # list, extensions without a dot (kaz)
+        'multiple_files'    : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'  : ['csv'],                                          # list, extensions without a dot (kaz)
+        'output_suffix'     : 'svm_validated',
+        'create_own_folder' : False,
+        'in_development'    : True,  # do not show in UNode overview
+        'include_in_git'    : True,
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe' : 'svm_1_0_0.py',
                 },
             },
         },
-        'create_own_folder'         : False,
-        'include_in_git'            : True,
     }
 
     def __init__(self, *args, **kwargs):

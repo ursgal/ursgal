@@ -20,10 +20,6 @@ class msamanda_1_0_0_7504( msamanda ):
         'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
         'create_own_folder'  : True,
-        'citation'           : 'Dorfer V, Pichler P, Stranzl T, '\
-            'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
-            'a universal identification algorithm optimized for high accuracy '\
-            'tandem mass spectra.',
         'include_in_git'     : None,
         'cannot_distribute'  : True,
         'in_development'     : False,
@@ -46,6 +42,9 @@ class msamanda_1_0_0_7504( msamanda ):
                 },
             },
         },
-
+        'citation'           : 'Dorfer V, Pichler P, Stranzl T, '\
+            'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
+            'a universal identification algorithm optimized for high accuracy '\
+            'tandem mass spectra.',
     }
     pass

@@ -64,24 +64,19 @@ class combine_pep_1_0_0(ursgal.UNode):
     '''
 
     META_INFO = {
-        'edit_version'     : 1.00,                                              # flot, inclease number if something is changed (kaz)
-        'name'             : 'Combine Pep',                                     # str, Software name (kaz)
-        'version'          : '1.0.0',                                           # str, Software version name (kaz)
-        'release_date'     : '2009-5-1',                                        # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'Combine Pep',                                   # str, Software name (kaz)
+        'version'            : '1.0.0',                                         # str, Software version name (kaz)
+        'release_date'       : '2009-5-1',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'controller'        : False,
-            'converter'         : False,
-            'validation_engine' : False,
-            'search_engine'     : False,
             'meta_engine'       : True,
         },
-        'input_types'      : ['csv'],                                           # list, extensions without a dot (kaz)
-        'multiple_files'   : False,                                             # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension' : ['csv'],                                           # list, extensions without a dot (kaz)
-        #'citation' : 'Combines PEP scores from different search engines.',
-        'include_in_git'            : True,
-        'in_development'            : False,
-        'utranslation_style'        : 'combine_pep_style_1',
+        'input_types'        : ['csv'],                                         # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'include_in_git'     : True,
+        'in_development'     : False,
+        'utranslation_style' : 'combine_pep_style_1',
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
@@ -89,6 +84,7 @@ class combine_pep_1_0_0(ursgal.UNode):
                 },
             },
         },
+        #'citation' : 'Combines PEP scores from different search engines.',
     }
 
     def __init__(self, *args, **kwargs):

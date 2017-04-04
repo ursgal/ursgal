@@ -14,25 +14,20 @@ class get_http_files_1_0_0( ursgal.UNode ):
 
     """
     META_INFO = {
-        'edit_version'     : 1.00,                                              # flot, inclease number if something is changed (kaz)
-        'name'             : 'Get HTTP Files',                                  # str, Software name (kaz)
-        'version'          : '1.0.0',                                           # str, Software version name (kaz)
-        'release_date'     : '2016-3-4',                                        # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'Get HTTP Files',                                # str, Software name (kaz)
+        'version'            : '1.0.0',                                         # str, Software version name (kaz)
+        'release_date'       : '2016-3-4',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'fetcher' : True,
         },
-        'input_types'      : [],                                                # list, extensions without a dot (kaz)
-        'multiple_files'   : False,                                             # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension' : [],                                                # list, extensions without a dot (kaz)
-        'output_suffix'    : None,
-        'in_development'   : False,
-        'include_in_git'   : True,
-        'citation'         : 'Kremer, L. P. M., Leufken, J., '\
-            'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
-            'Ursgal, Universal Python Module Combining Common Bottom-Up '\
-            'Proteomics Tools for Large-Scale Analysis. '\
-            'J. Proteome res. 15, 788-794.',
-        'utranslation_style'        : 'get_http_style_1',
+        'input_types'        : [],                                              # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : [],                                              # list, extensions without a dot (kaz)
+        'output_suffix'      : None,
+        'in_development'     : False,
+        'include_in_git'     : True,
+        'utranslation_style' : 'get_http_style_1',
         # 'engine_url' : {
         #     'internal' : True,
         # },
@@ -43,6 +38,11 @@ class get_http_files_1_0_0( ursgal.UNode ):
                 },
             },
         },
+        'citation'           : 'Kremer, L. P. M., Leufken, J., '\
+            'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
+            'Ursgal, Universal Python Module Combining Common Bottom-Up '\
+            'Proteomics Tools for Large-Scale Analysis. '\
+            'J. Proteome res. 15, 788-794.',
     }
 
     def __init__(self, *args, **kwargs):

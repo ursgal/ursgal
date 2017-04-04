@@ -11,32 +11,33 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
     Converts .mzML files into .mgf files
     """
     META_INFO = {
-        'engine_type'            : {
-            'converter'         : True,
-            'validation_engine' : False,
-            'search_engine'     : False,
-            'meta_engine'       : False
+        'edit_version'     : 1.00,                                              # flot, inclease number if something is changed (kaz)
+        'name'             : 'mzml2mgf',                                        # str, Software name (kaz)
+        'version'          : '1.0.0',                                           # str, Software version name (kaz)
+        'release_date'     : None,                                              # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'engine_type' : {
+            'converter' : True,
         },
-
-        'output_extension'       : '.mgf',
-        'output_suffix'          : None,
-        'input_types'            : ['.mzml', '.mzml.gz'],
-        'in_development'            : False,
-        'include_in_git'         : True,
-
-        'engine': {
+        'input_types'      : ['mzml', 'mzml.gz'],                               # list, extensions without a dot (kaz)
+        'multiple_files'   : False,                                             # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension' : ['mgf'],                                           # list, extensions without a dot (kaz)
+        'output_suffix'    : None,
+        'in_development'   : False,
+        'include_in_git'   : True,
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'mzml2mgf_1_0_0.py',
+                    'exe' : 'mzml2mgf_1_0_0.py',
                 },
             },
         },
-        'citation'                  : 'Kremer, L. P. M., Leufken, J., '\
+        'citation'         : 'Kremer, L. P. M., Leufken, J., '\
             'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
             'Ursgal, Universal Python Module Combining Common Bottom-Up '\
             'Proteomics Tools for Large-Scale Analysis. '\
             'J. Proteome res. 15, 788-794.',
     }
+
     def __init__(self, *args, **kwargs):
         super(mzml2mgf_1_0_0, self).__init__(*args, **kwargs)
 

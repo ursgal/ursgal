@@ -33,29 +33,27 @@ class percolator_2_08( ursgal.UNode ):
     learns to separate target from decoy peptide-spectrum matches (PSMs)
 
     Reference:
-    Käll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
+    Kﾃ､ll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
     """
     META_INFO = {
-        'engine_type'            : {
-            'controller'        : False,
-            'converter'         : False,
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'Percolator',                                    # str, Software name (kaz)
+        'version'            : '2.08',                                          # str, Software version name (kaz)
+        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'engine_type' : {
             'validation_engine' : True,
-            'search_engine'     : False,
-            'meta_engine'       : False
         },
-        'output_extension'          : '.csv',
-        'output_suffix'             : 'percolator_validated',
-        'input_types'               : ['.csv'],
-        'create_own_folder'         : False,
-        'citation'   : 'Kall L, Canterbury JD, Weston J, Noble WS, '\
-            'MacCoss MJ. (2007) Semi-supervised learning for peptide '\
-            'identification from shotgun proteomics datasets.',
-        'include_in_git'            : False,
-        'group_psms'                : True,
-        'in_development'            : False,
-        'cpu_usage'                 : 1,
-        'utranslation_style'        : 'percolator_style_1',
-        'engine': {
+        'input_types'        : ['csv'],                                         # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'output_suffix'      : 'percolator_validated',
+        'create_own_folder'  : False,
+        'include_in_git'     : False,
+        'group_psms'         : True,
+        'in_development'     : False,
+        'cpu_usage'          : 1,
+        'utranslation_style' : 'percolator_style_1',
+        'engine' : {
             'darwin' : {
                 '64bit' : {
                     'exe'            : 'percolator_2_08',
@@ -86,7 +84,10 @@ class percolator_2_08( ursgal.UNode ):
                     'additional_exe' : [],
                 },
             },
-        }
+        },
+        'citation'   : 'Kall L, Canterbury JD, Weston J, Noble WS, '\
+            'MacCoss MJ. (2007) Semi-supervised learning for peptide '\
+            'identification from shotgun proteomics datasets.',
     }
 
     def __init__(self, *args, **kwargs):
@@ -142,7 +143,7 @@ class percolator_2_08( ursgal.UNode ):
                     "The difference between this PSM's XCorr and the XCorr of the next-ranked \
                 PSM for this spectrum, divided by this PSM's XCorr or 1, whichever is larger. \
                 Note that this definition differs from that of the standard delta Cn reported \
-                by SEQUEST®"
+                by SEQUESTﾂｮ"
                         }
             ),
             (

@@ -10,21 +10,21 @@ class myrimatch_2_2_140( myri ):
     Import functions from myrimatch_2_1_138
     """
     META_INFO = {
+        'edit_version'                : 1.00,                                   # flot, inclease number if something is changed (kaz)
+        'name'                        : 'Myrimatch',                            # str, Software name (kaz)
+        'version'                     : '2.2.140',                              # str, Software version name (kaz)
+        'release_date'                : None,                                   # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_types'               : ['.mzML'],
-        'output_extension'          : '.mzid',
-        'create_own_folder'         : True,
+        'input_types'                 : ['mzML'],                               # list, extensions without a dot (kaz)
+        'multiple_files'              : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'            : ['mzid'],                               # list, extensions without a dot (kaz)
+        'create_own_folder'           : True,
         'compress_raw_search_results' : True,
-
-        'citation'                  : 'Tabb DL, Fernando CG, Chambers MC. '\
-            '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
-            'identification by multivariate hypergeometric analysis.',
-        'in_development'            : False,
-        'include_in_git'            : False,
-        'utranslation_style'        : 'myrimatch_style_1',
-        'engine': {
+        'in_development'              : False,
+        'include_in_git'              : False,
+        'engine' : {
             'win32' : {
                 '64bit' : {
                     'exe'            : 'myrimatch.exe',
@@ -40,5 +40,9 @@ class myrimatch_2_2_140( myri ):
                 },
             },
         },
+        'citation'                    : 'Tabb DL, Fernando CG, Chambers MC. '\
+            '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
+            'identification by multivariate hypergeometric analysis.',
+        'utranslation_style'          : 'myrimatch_style_1',
     }
     pass

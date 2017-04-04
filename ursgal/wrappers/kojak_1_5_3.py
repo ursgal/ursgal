@@ -10,7 +10,7 @@ class kojak_1_5_3( ursgal.UNode ):
     Parameter options at http://www.kojak-ms.org/param/index.html
 
     Reference:
-    Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient analysis of chemically cross-linked protein complexes. J Proteome Res 14: 2190窶・198
+    Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient analysis of chemically cross-linked protein complexes. J Proteome Res 14: 2190遯ｶ繝ｻ198
 
     Note:
 
@@ -24,11 +24,6 @@ class kojak_1_5_3( ursgal.UNode ):
         'version'                     : '1.5.3',                                # str, Software version name (kaz)
         'release_date'                : '2016-11-11',                           # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'controller'        : False,
-            'converter'         : False,
-            'validation_engine' : False,
-            'search_engine'     : False,
-            'meta_engine'       : False,
             'cross_link_engine' : True,
         },
         'input_types'                 : ['mzML', 'mzXML'],                      # list, extensions without a dot (kaz)
@@ -52,10 +47,6 @@ class kojak_1_5_3( ursgal.UNode ):
         'in_development'              : False,
         'create_own_folder'           : True,
         'compress_raw_search_results' : False,
-        'citation'                    : '''Hoopmann MR, Zelter A, Johnson RS,
-        Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient
-        analysis of chemically cross-linked protein complexes.
-        J Proteome Res 14: 2190窶・198''',
         'include_in_git'              : None,
         'cannot_distribute'           : True,
         'utranslation_style'          : 'kojak_style_1',
@@ -77,6 +68,10 @@ class kojak_1_5_3( ursgal.UNode ):
                 }
             },
         },
+        'citation'                    : '''Hoopmann MR, Zelter A, Johnson RS,
+        Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient
+        analysis of chemically cross-linked protein complexes.
+        J Proteome Res 14: 2190遯ｶ繝ｻ198''',
     }
 
 

@@ -14,23 +14,23 @@ class mzidentml_lib_1_7( ml ):
 
     '''
     META_INFO = {
-        'in_development'    : False,
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'MzidLib',                                       # str, Software name (kaz)
+        'version'            : '1.7',                                           # str, Software version name (kaz)
+        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'search_engine' : False,
             'converter'     : True
         },
-        'output_extension'  : '.csv',
-        'output_suffix'     : None,
-        'input_types'       : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
-        # 'can_gz': True,
-        'citation'       : 'Reisinger F, Krishna R, Ghali F, Rios D, '\
-            'Hermjakob H, Vizcaino JA, Jones AR. (2012) jmzIdentML API: '\
-            'A Java interface to the mzIdentML standard for peptide and '\
-            'protein identification data.',
-        'include_in_git'            : None,
-        'cannot_distribute'         : True,
-        'utranslation_style'    : 'mzidentml_style_1',
-        'engine': {
+        'input_types'        : ['xml', 'xml.gz', 'csv', 'mzid', 'mzid.gz'],     # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'in_development'     : False,
+        'output_suffix'      : None,
+        # 'can_gz'             : True,
+        'include_in_git'     : None,
+        'cannot_distribute'  : True,
+        'utranslation_style' : 'mzidentml_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'mzidlib-1.7.jar',
@@ -40,5 +40,9 @@ class mzidentml_lib_1_7( ml ):
                 },
             },
         },
+        'citation'           : 'Reisinger F, Krishna R, Ghali F, Rios D, '\
+            'Hermjakob H, Vizcaino JA, Jones AR. (2012) jmzIdentML API: '\
+            'A Java interface to the mzIdentML standard for peptide and '\
+            'protein identification data.',
     }
     pass

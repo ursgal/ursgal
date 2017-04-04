@@ -13,8 +13,7 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         'version'            : '1.0.0',                                         # str, Software version name (kaz)
         'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'search_engine' : False,
-            'converter'     : True
+            'converter' : True
         },
         'input_types'        : [],                                              # list, extensions without a dot (kaz)
         'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
@@ -30,7 +29,6 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
                 },
             },
         },
-
         # 'engine_exe'                : {
         #     'arc_independent' : 'generate_target_decoy_1_0_0.py',
         # },

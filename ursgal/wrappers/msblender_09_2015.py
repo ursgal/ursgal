@@ -30,15 +30,15 @@ class msblender_09_2015( ursgal.UNode ):
         'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
         'in_development'     : True,
         'create_own_folder'  : False,
-        'citation'    : 'Kwon T, Choi H, Vogel C, Nesvizhskii AI, '\
-            'Marcotte EM. (2011) MSblender: A Probabilistic Approach '\
-            'for Integrating Peptide Identifications from Multiple '\
-            'Database Search Engines.',
         'include_in_git'     : True,
         'engine_exe' : {
             'linux'  : 'msblender',
             'darwin' : 'msblender',
         },
+        'citation'           : 'Kwon T, Choi H, Vogel C, Nesvizhskii AI, '\
+            'Marcotte EM. (2011) MSblender: A Probabilistic Approach '\
+            'for Integrating Peptide Identifications from Multiple '\
+            'Database Search Engines.',
     }
 
     def __init__( self, *args, **kwargs ):
@@ -410,7 +410,7 @@ class msblender_09_2015( ursgal.UNode ):
     def calc_FDR ( self, PSM_count, false_positives ):
         '''
         calculate false discovery rate according to FDR Method 2
-        (Kﾃ､ll et al. 2008) as explained by Jones et al. 2009
+        (K繝ｻ繝ｻ・ｽ・､ll et al. 2008) as explained by Jones et al. 2009
         '''
         true_positives  = PSM_count - (2 * false_positives)
         if true_positives <= 0:  # prevent FDR above 1. Not sure if this is done?

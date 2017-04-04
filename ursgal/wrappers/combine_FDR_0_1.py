@@ -37,11 +37,7 @@ class combine_FDR_0_1( ursgal.UNode ):
         'multiple_files'        : False,                                        # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extension'      : ['csv'],                                      # list, extensions without a dot (kaz)
         'create_own_folder'     : False,
-        'citation' : 'An implementation of the "combined FDR Score" algorithm, '\
-            'as described in: Jones AR, Siepen JA, Hubbard SJ, Paton NW (2009) '\
-            'Improving sensitivity in proteome studies by analysis of false '\
-            'discovery rates for multiple search engines.',
-        'include_in_git'            : True,
+        'include_in_git'        : True,
         'utranslation_style'    : 'combine_FDR_style_1',
         'engine': {
             'platform_independent' : {
@@ -50,6 +46,10 @@ class combine_FDR_0_1( ursgal.UNode ):
                 },
             },
         },
+        'citation' : 'An implementation of the "combined FDR Score" algorithm, '\
+            'as described in: Jones AR, Siepen JA, Hubbard SJ, Paton NW (2009) '\
+            'Improving sensitivity in proteome studies by analysis of false '\
+            'discovery rates for multiple search engines.',
     }
 
     def __init__(self, *args, **kwargs):

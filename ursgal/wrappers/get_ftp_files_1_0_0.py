@@ -34,11 +34,6 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
         'output_suffix'      : None,
         'in_development'     : True,
         'include_in_git'     : True,
-        'citation'           : 'Kremer, L. P. M., Leufken, J., '\
-            'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
-            'Ursgal, Universal Python Module Combining Common Bottom-Up '\
-            'Proteomics Tools for Large-Scale Analysis. '\
-            'J. Proteome res. 15, 788-794.',
         'utranslation_style' : 'get_ftp_style_1',
         'engine' : {
             'platform_independent' : {
@@ -47,6 +42,11 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
                 },
             },
         },
+        'citation'           : 'Kremer, L. P. M., Leufken, J., '\
+            'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
+            'Ursgal, Universal Python Module Combining Common Bottom-Up '\
+            'Proteomics Tools for Large-Scale Analysis. '\
+            'J. Proteome res. 15, 788-794.',
     }
 
     def __init__(self, *args, **kwargs):

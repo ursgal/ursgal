@@ -15,29 +15,27 @@ class qvality_2_02( ursgal.UNode ):
     q-value and posterior error probability calculation from score distributions
 
     Reference:
-    Käll L, Storey JD, Noble WS (2009) QVALITY: non-parametric estimation of q-values and posterior error probabilities.
+    Kﾃ､ll L, Storey JD, Noble WS (2009) QVALITY: non-parametric estimation of q-values and posterior error probabilities.
     """
 
     META_INFO = {
-        'engine_type'            : {
-            'controller'        : False,
-            'converter'         : False,
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'QVALITY',                                       # str, Software name (kaz)
+        'version'            : '1.0.0',                                         # str, Software version name (kaz)
+        'release_date'       : '2009-4-1',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'engine_type' : {
             'validation_engine' : True,
-            'search_engine'     : False,
-            'meta_engine'       : False
         },
-        'output_extension'          : '.csv',
-        'output_suffix'             : 'qvality_validated',
-        'input_types'               : ['.csv'],
-        'create_own_folder'         : False,
-        'citation'   : 'Kall L, Storey JD, Noble WS (2009) QVALITY: '\
-            'non-parametric estimation of q-values and posterior error '\
-            'probabilities.',
-        'include_in_git'            : False,
-        'group_psms'                : True,
-        'in_development'            : False,
-        'utranslation_style'        : 'qvality_style_1',
-        'engine': {
+        'input_types'        : ['csv'],                                         # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'output_suffix'      : 'qvality_validated',
+        'create_own_folder'  : False,
+        'include_in_git'     : False,
+        'group_psms'         : True,
+        'in_development'     : False,
+        'utranslation_style' : 'qvality_style_1',
+        'engine' : {
             'darwin' : {
                 '64bit' : {
                     'exe'            : 'qvality',
@@ -69,6 +67,9 @@ class qvality_2_02( ursgal.UNode ):
                 },
             },
         },
+        'citation'           : 'Kall L, Storey JD, Noble WS (2009) QVALITY: '\
+            'non-parametric estimation of q-values and posterior error '\
+            'probabilities.',
     }
 
     def __init__(self, *args, **kwargs):

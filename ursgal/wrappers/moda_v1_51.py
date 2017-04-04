@@ -26,8 +26,6 @@ class moda_v1_51( ursgal.UNode ):
         'create_own_folder'           : True,
         'in_development'              : True,
         'include_in_git'              : False,
-        'citation'                    : 'Na S, Bandeira N, Paek E. (2012) '\
-            'Fast multi-blind modification search through tandem mass spectrometry.',
         'utranslation_style'          : 'moda_style_1',
         'engine' : {
             'platform_independent' : {
@@ -39,6 +37,8 @@ class moda_v1_51( ursgal.UNode ):
                 },
             },
         },
+        'citation'                    : 'Na S, Bandeira N, Paek E. (2012) '\
+            'Fast multi-blind modification search through tandem mass spectrometry.',
     }
 
     def __init__(self, *args, **kwargs):

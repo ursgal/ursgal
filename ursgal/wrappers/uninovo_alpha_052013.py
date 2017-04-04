@@ -13,34 +13,36 @@ class uninovo_alpha_052013( ursgal.UNode ):
     """
     META_INFO = {
         # see http://proteomics.ucsd.edu/Software/UniNovo/#Downloads
+        'edit_version'      : 1.00,                                             # flot, inclease number if something is changed (kaz)
+        'name'              : 'UniNovo',                                        # str, Software name (kaz)
+        'version'           : 'alpha.052013',                                   # str, Software version name (kaz)
+        'release_date'      : '2013-5-20',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'denovo_engine' : True,
         },
-        'citation'                  : 'Jeong K, Kim S, Pevzner PA (2013): UniNovo: a universal tool for de novo peptide sequencing.',
-        'in_development'            : True,
-
-        'include_in_git'            : None,
-    'in_development'            : True,
-        'engine': {
+        'input_types'       : ['mgf'],                                          # list, extensions without a dot (kaz)
+        'multiple_files'    : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'  : ['den'],                                          # list, extensionswithout a dot (kaz)
+        'create_own_folder' : True,
+        'in_development'    : True,
+        'include_in_git'    : None,
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'            : 'UniNovo.jar',
-                    'url'            : 'http://proteomics.ucsd.edu/Software/UniNovo/UniNovo.20130520.zip',
+                    'exe' : 'UniNovo.jar',
+                    'url' : 'http://proteomics.ucsd.edu/Software/UniNovo/UniNovo.20130520.zip',
                     # 'zip_md5'        : '',
                     # 'additional_exe' : [],
                 },
             },
         },
-
-        'output_extension'          : '.den',
-        'input_types'               : ['.mgf'],
-        'create_own_folder'         : True,
+        'citation'          : 'Jeong K, Kim S, Pevzner PA (2013): UniNovo: '\
+            'a universal tool for de novo peptide sequencing.',
     }
 
     def __init__(self, *args, **kwargs):
         super(uninovo_alpha_052013, self).__init__(*args, **kwargs)
         pass
-
 
     def preflight( self ):
         '''

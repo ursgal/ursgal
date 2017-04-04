@@ -18,6 +18,7 @@ class _test_node( ursgal.UNode ):
         'multiple_files'   : False,                                             # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extension' : ['csv'],                                           # list, extensions without a dot (kaz)
         'output_suffix'    : 'test_node',
+        'include_in_git'   : True,
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
@@ -27,7 +28,6 @@ class _test_node( ursgal.UNode ):
         },
         'citation'         : \
             'TEST/DEBUG: Internal Ursgal UNode for debugging nd testing.',
-        'include_in_git'   : True,
     }
 
     def __init__(self, *args, **kwargs):

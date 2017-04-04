@@ -23,9 +23,8 @@ class filter_csv_1_0_0( ursgal.UNode ):
         'output_suffix'          : 'accepted',
         'in_development'         : False,
         'rejected_output_suffix' : 'rejected',
-        'utranslation_style'     : 'filter_csv_style_1',
         'include_in_git'         : True,
-
+        'utranslation_style'     : 'filter_csv_style_1',
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {

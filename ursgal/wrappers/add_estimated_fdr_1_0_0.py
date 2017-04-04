@@ -20,6 +20,7 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
         'output_suffix'      : 'withFDR',
+        'include_in_git'     : True,
         'utranslation_style' : 'add_estimated_fdr_style_1',
         'engine' : {
             'platform_independent' : {
@@ -34,8 +35,6 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
             'MacCoss and William Stafford Noble (2008) Assigning significance '\
             'to peptides identified by tandem mass spectrometry using decoy '\
             'databases.' ,
-
-        'include_in_git'     : True,
     }
 
     def __init__(self, *args, **kwargs):

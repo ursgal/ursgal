@@ -9,30 +9,29 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
     """
     MzidLib 1_6_10 UNode
 
-    'Reisinger F, Krishna R, Ghali F, Ríos D, Hermjakob H, Vizcaíno JA, Jones AR. (2012)
+    'Reisinger F, Krishna R, Ghali F, Rﾃｭos D, Hermjakob H, Vizcaﾃｭno JA, Jones AR. (2012)
     jmzIdentML API: A Java interface to the mzIdentML standard for peptide and protein identification data.'
 
     Java program to convert results to .mzIdentML and .mzIdentML to .csv
 
     """
     META_INFO = {
+        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
+        'name'               : 'MzidLib',                                       # str, Software name (kaz)
+        'version'            : '1.6.10',                                        # str, Software version name (kaz)
+        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'search_engine' : False,
-            'converter'     : True
+            'converter' : True
         },
-        'output_extension'  : '.csv',
-        'output_suffix'     : None,
-        'input_types'       : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
-        # 'can_gz': True,
-        'citation'       : 'Reisinger F, Krishna R, Ghali F, Rios D, '\
-            'Hermjakob H, Vizcaino JA, Jones AR. (2012) jmzIdentML API: '\
-            'A Java interface to the mzIdentML standard for peptide and '\
-            'protein identification data.',
-        'in_development'            : False,
-        'include_in_git'            : False,
-        'utranslation_style'    : 'mzidentml_lib_1_6_10',
-
-        'engine': {
+        'input_types'        : ['xml', 'xml.gz', 'csv', 'mzid', 'mzid.gz'],     # list, extensions without a dot (kaz)
+        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'output_suffix'      : None,
+        # 'can_gz'             : True,
+        'in_development'     : False,
+        'include_in_git'     : False,
+        'utranslation_style' : 'mzidentml_lib_1_6_10',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'mzidentml-lib-1.6.10.jar',
@@ -42,6 +41,10 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                 },
             },
         },
+        'citation'           : 'Reisinger F, Krishna R, Ghali F, Rios D, '\
+            'Hermjakob H, Vizcaino JA, Jones AR. (2012) jmzIdentML API: '\
+            'A Java interface to the mzIdentML standard for peptide and '\
+            'protein identification data.',
     }
 
     def __init__(self, *args, **kwargs):
