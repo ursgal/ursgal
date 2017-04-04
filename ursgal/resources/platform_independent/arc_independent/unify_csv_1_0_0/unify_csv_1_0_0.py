@@ -804,9 +804,9 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
 
                 if all(peptide_complies_search_criteria_lookup[lookup_identifier]):
                     # all True
-                    line_dict['Complies search criteria'] = 'True'
+                    line_dict['Complies search criteria'] = 'true'
                 else:
-                    line_dict['Complies search criteria'] = 'False'
+                    line_dict['Complies search criteria'] = 'false'
                     # print(line_dict['Sequence'])
                     # exit()
             

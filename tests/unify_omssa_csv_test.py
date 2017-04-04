@@ -106,7 +106,7 @@ def unify_omssa( test_dict ):
             'Sequence Stop',
             'Sequence Pre AA',
             'Sequence Post AA',
-            'some_other_value',
+            'Complies search criteria'
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]
