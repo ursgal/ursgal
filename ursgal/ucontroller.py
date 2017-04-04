@@ -35,11 +35,12 @@ class UController(ursgal.UNode):
             overriding default values from ursgal/kb/*.py
         profile (str): Profiles key for faster parameter selection. This
             idea is adapted from MS-GF+ and translated to all search engines.
+            
             Currently available profiles are:
 
                 * 'QExactive+'
                 * 'LTQ XL high res'
-                * 'LTQ XL low res'.
+                * 'LTQ XL low res'
 
     Example::
 
@@ -1727,9 +1728,12 @@ class UController(ursgal.UNode):
         self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.mgf'] )
         if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
             if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
-                self.input_file_sanity_check( self.params['database'], engine=engine_name,
-                                              custom_str='FASTA database (uc.params["database"])',
-                                              extensions = ['fasta', 'fa', 'fast'] )
+                self.input_file_sanity_check(
+                    self.params['database'],
+                    engine     = engine_name,
+                    custom_str = 'FASTA database (uc.params["database"])',
+                    extensions = ['fasta', 'fa', 'fast']
+                )
         answer = self.prepare_unode_run(
             input_file,
             output_file = output_file_name,

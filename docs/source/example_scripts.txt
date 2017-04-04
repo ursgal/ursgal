@@ -16,6 +16,7 @@ Simple example search
 
 .. _simpleexamplecombinedfdr:
 
+
 Simple example using combined fdr (or pep)
 ------------------------------------------
 
@@ -264,3 +265,10 @@ Example search with search for labeling with 15N and no label
 
 
 
+Upeptide mapper v3 complete C. reinhardtii proteome match
+---------------------------------------------------------
+
+.. autofunction:: complete_chlamydomonas_proteome_match.main
+
+
+.. include:: code_inc/complete_chlamydomonas_proteome_match.inc

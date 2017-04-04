@@ -29,14 +29,8 @@ TEST_FASTA = [
     #----+----|----+----|----+----|----+----|----+----|
     '>Overlapping',
     'GGGGGGGGGG',
-    '>ugly_fasta',
-    'censorTHIS*',
-    '>SortingPepCorrect_1',
-    'FORWARDKKK',
-    '>SortingPepCorrect_2',
-    'DRAWROFKKK',
-    '>SortingPepCorrect_3',
-    'FROWARDKKK',
+    '>GnomeChompsky',
+    'MUSTACHIO'
 ]
 
 TEST_FASTA_TWO = [
@@ -100,6 +94,17 @@ class UMapMaster(unittest.TestCase):
             [
                 ('Protein1', 1),
                 ('Protein3', 6),
+            ]
+        )
+
+        self.upapa_class.map_peptides(
+            [ 'MUSTACHIO' ],
+            'Test.fasta'
+        )
+        self.assertEqual(
+            [ (d['id'], d['start']) for d in self.upapa_class.peptide_2_protein_mappings['Test.fasta']['MUSTACHIO'] ],
+            [
+                ('GnomeChompsky', 1),
             ]
         )
         return

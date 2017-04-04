@@ -81,10 +81,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     OMSSA
         * Carbamidomethyl is updated and set
-        * Selenocystein is not reported with the correct unimod modification
 
     MS-Amanda
-        * Selenocystein is not reported with the correct unimod modification
         * multiple protein ID per peptide are splitted in two entries.
           (is done in MS-Amanda postflight)
 
@@ -682,6 +680,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                         dict_2_append = {
                             upeptide_map_sort_key : protein_id
                         }
+
                         for key in upeptide_map_other_keys:
                             dict_2_append[key] = split_collector[key][pos]
                         sorted_upeptide_maps.append(
@@ -704,7 +703,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                         continue
                     peptide_fullfills_enzyme_specificity = False
                     last_protein_id = None
-                    for protein_info_dict in sorted_upeptide_maps:
+                    for major_protein_info_dict in sorted_upeptide_maps:
                         # print(line_dict)
                         # print(protein)
                         protein_specifically_cleaved   = False
@@ -717,47 +716,68 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                             'Sequence Post AA',
 
                         '''
-                        if params['translations']['keep_asp_pro_broken_peps'] is True:
-                            if line_dict['Sequence'][-1] == 'D' and\
-                                    protein_info_dict['Sequence Post AA'] == 'P':
-                                cterm_correct = True
-                            if line_dict['Sequence'][0] == 'P' and\
-                                    protein_info_dict['Sequence Pre AA'] == 'D':
-                                nterm_correct = True
+                        protein_info_dict_buffer = []
+                        if ';' in major_protein_info_dict['Sequence Start']:
+                            tmp_split_collector =defaultdict(list)
+                            for key in upeptide_map_other_keys:
+                                tmp_split_collector[key] = major_protein_info_dict[key].split(';')
+                            for pos, p_id in enumerate(tmp_split_collector['Sequence Start']):
+                                dict_2_append = {
+                                    'Protein ID' : major_protein_info_dict['Protein ID']
+                                }
+                                for key in tmp_split_collector.keys():
+                                    dict_2_append[key] = tmp_split_collector[key][pos]
+                                protein_info_dict_buffer.append(dict_2_append)
+                        else:
+                            protein_info_dict_buffer = [ major_protein_info_dict ]
 
-                        if cleavage_site == 'C':
-                            if protein_info_dict['Sequence Pre AA'] in allowed_aa\
-                                    or protein_info_dict['Sequence Start'] in [1, 2, 3]:
-                                if line_dict['Sequence'][0] not in inhibitor_aa\
-                                        or protein_info_dict['Sequence Start'] in [1, 2, 3]:
-                                    nterm_correct = True
-                            if protein_info_dict['Sequence Post AA'] not in inhibitor_aa:
-                                if line_dict['Sequence'][-1] in allowed_aa\
-                                     or protein_info_dict['Sequence Post AA'] == '-':
-                                    cterm_correct = True
 
-                        elif cleavage_site == 'N':
-                            if protein_info_dict['Sequence Post AA'] in allowed_aa:
-                                if line_dict['Sequence'][-1] not in inhibitor_aa\
-                                        or protein_info_dict['Sequence Post AA'] == '-':
+                        for protein_info_dict in protein_info_dict_buffer:
+                            if params['translations']['keep_asp_pro_broken_peps'] is True:
+                                if line_dict['Sequence'][-1] == 'D' and\
+                                        protein_info_dict['Sequence Post AA'] == 'P':
                                     cterm_correct = True
-                            if protein_info_dict['Sequence Pre AA'] not in inhibitor_aa\
-                                or protein_info_dict['Sequence Start'] in [1, 2, 3]:
-                                if line_dict['Sequence'][0] in allowed_aa\
-                                    or protein_info_dict['Sequence Start'] in [1, 2, 3]:
+                                if line_dict['Sequence'][0] == 'P' and\
+                                        protein_info_dict['Sequence Pre AA'] == 'D':
                                     nterm_correct = True
 
-                        if params['translations']['semi_enzyme'] is True:
-                            if cterm_correct is True or nterm_correct is True:
+                            if cleavage_site == 'C':
+                                if protein_info_dict['Sequence Pre AA'] in allowed_aa\
+                                        or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                                    if line_dict['Sequence'][0] not in inhibitor_aa\
+                                            or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                                        nterm_correct = True
+                                if protein_info_dict['Sequence Post AA'] not in inhibitor_aa:
+                                    if line_dict['Sequence'][-1] in allowed_aa\
+                                         or protein_info_dict['Sequence Post AA'] == '-':
+                                        cterm_correct = True
+
+                            elif cleavage_site == 'N':
+                                if protein_info_dict['Sequence Post AA'] in allowed_aa:
+                                    if line_dict['Sequence'][-1] not in inhibitor_aa\
+                                            or protein_info_dict['Sequence Post AA'] == '-':
+                                        cterm_correct = True
+                                if protein_info_dict['Sequence Pre AA'] not in inhibitor_aa\
+                                    or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                                    if line_dict['Sequence'][0] in allowed_aa\
+                                        or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                                        nterm_correct = True
+                            # if line_dict['Sequence'] == 'SPRPGAAPGSR':
+                            #     print(protein_info_dict)
+                            #     print(nterm_correct, cterm_correct)
+                            if params['translations']['semi_enzyme'] is True:
+                                if cterm_correct is True or nterm_correct is True:
+                                    protein_specifically_cleaved = True
+                            elif cterm_correct is True and nterm_correct is True:
                                 protein_specifically_cleaved = True
-                        elif cterm_correct is True and nterm_correct is True:
-                            protein_specifically_cleaved = True
-
-                        if protein_specifically_cleaved is True:
-                            peptide_fullfills_enzyme_specificity = True
-                            last_protein_id = protein_info_dict['Protein ID']
+                            if protein_specifically_cleaved is True:
+                                peptide_fullfills_enzyme_specificity = True
+                                last_protein_id = protein_info_dict['Protein ID']
                     # we may test for further criteria to set this flag/fieldname
                     # e.g. the missed cleavage count etc.
+                    # if line_dict['Sequence'] == 'SPRPGAAPGSR':
+                    #     print(peptide_fullfills_enzyme_specificity)
+                    #     exit()
                     if peptide_fullfills_enzyme_specificity is False:
                         non_enzymatic_peps.add( line_dict['Sequence'] )
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(
@@ -771,12 +791,13 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                     #check here if missed cleavage count is correct...
                     missed_cleavage_counter = 0
                     for aa in allowed_aa:
+                        if aa == '-':
+                            continue
                         missed_cleavage_counter += line_dict['Sequence'].count( aa )
-                    if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
+                    if missed_cleavage_counter > params['translations']['max_missed_cleavages'] + 1:
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(False)
                     else:
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(True)
-
                 # count each PSM occurence to check whether row-merging is needed:
                 psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 psm_counter[psm] += 1
@@ -798,16 +819,17 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
     if database_search is True:
         # upapa.purge_fasta_info( fasta_lookup_name )
         if len(non_enzymatic_peps) != 0:
-            print( '''
-                [ WARNING ] The following peptides could not be mapped to the
-                [ WARNING ] given database {0}
-                [ WARNING ] with correct enzymatic cleavage sites:
-                [ WARNING ] {1}
-                [ WARNING ] These PSMs were skipped.'''.format(
-            params['translations']['database'],
-            non_enzymatic_peps
-            ))
-
+            print(
+                '''
+                [ WARNING ] The following peptides do not reflect the enzyme
+                [ WARNING ] specificity:
+                [ WARNING ] {0}
+                [ WARNING ] These PSMs are marked 'Complies search criteria' = 'False'
+                '''.format(
+                    non_enzymatic_peps
+                )
+            )
+    # exit()
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:

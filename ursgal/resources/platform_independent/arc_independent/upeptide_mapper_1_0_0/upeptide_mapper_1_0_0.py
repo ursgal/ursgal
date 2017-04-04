@@ -77,11 +77,17 @@ def main(input_file=None, output_file=None, params=None):
             params['translations']['database'],
             force  = False,
         )
-    else:
+    elif params['translations']['peptide_mapper_class_version'] == 'upapa_v3':
         #silent default :)
         upapa = UPeptideMapper_v3( params['translations']['database'] )
         fasta_lookup_name = upapa.fasta_name
-
+    else:
+        print(
+            '[ map_peps ] peptide mapper class version unknown: {0}'.format(
+                params['translations']['peptide_mapper_class_version']
+            )
+        )
+        exit()
     print(
         '''[ map_peps ] Using peptide mapper version: {0}'''.format(
             params['translations']['peptide_mapper_class_version']
@@ -450,7 +456,7 @@ class UPeptideMapper_v2( dict ):
         '''
         Builds the fast cache and regular sequence dict from a fasta stream
         '''
-        print('[   upapa  ] UPeptideMapper is building the fast cache and regular sequence dict from a fasta')
+        print('[ upapa v2 ] UPeptideMapper is building the fast cache and regular sequence dict from a fasta')
         if fasta_name not in self.keys():
             force = True
             self[ fasta_name ] = {}
@@ -462,7 +468,7 @@ class UPeptideMapper_v2( dict ):
             for upapa_id, (id, seq) in enumerate(
                     ursgal.ucore.parseFasta( fasta_stream )):
                 print(
-                    '[   upapa  ] Indexing sequence #{0} with word_len {1}'.format(
+                    '[ upapa v2 ] Indexing sequence #{0} with word_len {1}'.format(
                         upapa_id,
                         self.word_len
                     ),
@@ -653,12 +659,13 @@ class UPeptideMapper_v3():
     versions. Is the new default version for peptide mapping.
     
     Note:
-        Uses the implementation of Aho-Corasick algorithm pyahocorasick
-        See: https://pypi.python.org/pypi/pyahocorasick/
+        Uses the implementation of Aho-Corasick algorithm pyahocorasick.
+        Please refer to https://pypi.python.org/pypi/pyahocorasick/ for more
+        information.
 
     Warning:
         The new implementation is still in beta/testing phase. Please use, check
-        and iterpret accordingly
+        and interpret accordingly
     
 
 
@@ -684,15 +691,24 @@ class UPeptideMapper_v3():
 
     def cache_database(self, fasta_database,  fasta_name):
         '''
-        If the same faat_name is buffered again all info is purged from the
-        class.
+        Function to cache the given fasta database.
+        
+        Args:
+            fasta_database (str): path to the fasta database
+            fasta_name (str): name of the database 
+                (e.g. os.path.basename(fasta_database))
+        
+        Note:
+        
+            If the same fasta_name is buffered again all info is purged from the
+            class.
         '''
         if fasta_name in self.protein_indices.keys():
             self.purge_fasta_info(fasta_name)
             self.fasta_name = fasta_name
         for protein_id, seq in ursgal.ucore.parseFasta(open(fasta_database,'r').readlines()):
             print(
-                'Buffering protein #{0} of database {1}'.format(
+                '[ upapa v3 ] Buffering protein #{0} of database {1}'.format(
                     self.fasta_counter[fasta_name],
                     fasta_database
                 ),
@@ -711,9 +727,9 @@ class UPeptideMapper_v3():
             self.len_total_sequence_string[fasta_name] += len_seq
             self.fasta_counter[fasta_name] += 1
         print()
-        print('Joining protein sequences')
+        # print('[ upapa v3 ] Joining protein sequences')
         self.total_sequence_string[fasta_name] = ''.join( self.total_sequence_list[fasta_name] )
-        print('Joining protein sequences done')
+        # print('[ upapa v3 ] Joining protein sequences done')
         return
 
     def map_peptides(self, peptide_list, fasta_name):
@@ -723,22 +739,24 @@ class UPeptideMapper_v3():
         Args:
             peptide_list (list): list with peptides to be mapped
             fasta_name (str): name of the database
-
+                (e.g. os.path.basename(fasta_database))
 
         Returns:
-            peptide_2_protein_mappings(dict): Dictionary containing
+            peptide_2_protein_mappings (dict): Dictionary containing
                 peptides as keys and lists of protein mappings as values of the 
                 given fasta_name
-
 
         Note:
             Based on the number of peptides the returned mapping dictionary
             can become very large.
-
+        
+        Warning:
+            The peptide to protein mapping is resetted if a new list o peptides
+            is mapped to the same database (fasta_name).
 
         Examples::
 
-            peptide_2_protein_mappings['BSA1']  = [
+            peptide_2_protein_mappings['BSA1']['PEPTIDE']  = [
                 {
                     'start' : 1,
                     'end'   : 10,
@@ -808,7 +826,7 @@ class UPeptideMapper_v3():
         '''
         Purges regular sequence lookup and fcache for a given fasta_name
         '''
-        print('Purging buffer for {0}'.format(fasta_name))
+        print('[ upapa v3 ] Purging buffer for {0}'.format(fasta_name))
         del self.protein_list[fasta_name]               
         del self.protein_indices[fasta_name]            
         del self.protein_sequences[fasta_name]          
