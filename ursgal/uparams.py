@@ -1339,8 +1339,6 @@ N-terminus or C-terminus ''',
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
-        'default_value' : 4,
-        'description' :  ''' Maximum fragment ion charge to search. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-zoh',
@@ -1349,14 +1347,16 @@ N-terminus or C-terminus ''',
             'fragment',
             'spectrum',
         ],
-        'uvalue_option' : {
-            'max' : 100000,
-            'min' : 0,
-            'updownval' : 1,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+            'max'       : 100000,
+            'min'       : 0,
+            'updownval' : 1,
+        },
+        'default_value' : 4,
+        'description' :  ''' Maximum fragment ion charge to search. ''',
     },
     'frag_method' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -1365,8 +1365,6 @@ N-terminus or C-terminus ''',
             'msgfplus_v9979',
             'novor_1_1beta',
         ],
-        'default_value' : "hcd",
-        'description' :  ''' Used fragmentation method, e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-m',
@@ -1375,12 +1373,6 @@ N-terminus or C-terminus ''',
         'utag' : [
             'instrument',
         ],
-        'uvalue_option' : {
-            'comboBox' : True,
-            'radioButton' : False,
-            'initialValue' : ['cid', 'ecd', 'etd', 'hcd'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
-        },
         'uvalue_translation' : {
             'msgfplus_style_1' : {
                 'cid' : '1',
@@ -1393,6 +1385,14 @@ N-terminus or C-terminus ''',
             },
         },
         'uvalue_type' : "select",
+        'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['cid', 'ecd', 'etd', 'hcd'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
+        'default_value' : "hcd",
+        'description' :  ''' Used fragmentation method, e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
     },
     'frag_min_mz' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -1403,8 +1403,6 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : 150,
-        'description' :  ''' Minimal considered fragment ion m/z ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, minimum fragment mz',
@@ -1413,22 +1411,22 @@ N-terminus or C-terminus ''',
             'fragment',
             'spectrum',
         ],
-        'uvalue_option' : {
-            'max' : 100000,
-            'min' : 0,
-            'updownval' : 1,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+            'max'       : 100000,
+            'min'       : 0,
+            'updownval' : 1,
+        },
+        'default_value' : 150,
+        'description' :  ''' Minimal considered fragment ion m/z ''',
     },
     'ftp_blocksize' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
-        'default_value' : 1024,
-        'description' :  ''' Blocksize for ftp download ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_blocksize',
@@ -1436,20 +1434,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'download',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : 1024,
+        'description' :  ''' Blocksize for ftp download ''',
     },
     'ftp_folder' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' ftp folder that should be downloaded ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_folder',
@@ -1457,20 +1455,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'download',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : None,
+        'description' :  ''' ftp folder that should be downloaded ''',
     },
     'ftp_include_ext' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' Only files with the defined file extension are downloaded with ftp download ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_include_ext',
@@ -1478,20 +1476,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'download',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : None,
+        'description' :  ''' Only files with the defined file extension are downloaded with ftp download ''',
     },
     'ftp_max_number_of_files' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' Maximum number of files that will be downloaded ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_max_number_of_files',
@@ -1499,20 +1497,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'download',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : None,
+        'description' :  ''' Maximum number of files that will be downloaded ''',
     },
     'ftp_output_folder' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' Default ftp download path ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_output_folder',
@@ -1520,20 +1518,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'download',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : None,
+        'description' :  ''' Default ftp download path ''',
     },
     'ftp_password' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' ftp download password ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_password',
@@ -1541,20 +1539,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'download',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : None,
+        'description' :  ''' ftp download password ''',
     },
     'ftp_url' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' ftp download URL, will fail if it is not set by the user ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'ftp_url',
@@ -1562,12 +1560,14 @@ N-terminus or C-terminus ''',
         'utag' : [
             'download',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : None,
+        'description' :  ''' ftp download URL, will fail if it is not set by the user ''',
     },
     'header_translations' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -1584,108 +1584,106 @@ N-terminus or C-terminus ''',
             'omssa_2_1_9',
             'pepnovo_3_1',
         ],
-        'default_value' : None,
-        'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_percolator_style_1' : 'header_translations',
-            'msamanda_style_1' : 'header_translations',
-            'msgfplus_style_1' : 'header_translations',
-            'novor_style_1' : 'header_translations',
-            'omssa_style_1' : 'header_translations',
-            'pepnovo_style_1' : 'header_translations',
+            'msamanda_style_1'         : 'header_translations',
+            'msgfplus_style_1'         : 'header_translations',
+            'novor_style_1'            : 'header_translations',
+            'omssa_style_1'            : 'header_translations',
+            'pepnovo_style_1'          : 'header_translations',
         },
         'utag' : [
             'Conversion',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
             'kojak_percolator_style_1' : {
-                'PSMId' : 'PSMId',
-                'peptide' : 'Sequence',
+                'PSMId'                : 'PSMId',
+                'peptide'              : 'Sequence',
                 'posterior_error_prob' : 'PEP',
-                'proteinIds' : 'Protein ID',
-                'q-value' : 'q-value',
-                'score' : 'Kojak:score',
+                'proteinIds'           : 'Protein ID',
+                'q-value'              : 'q-value',
+                'score'                : 'Kojak:score',
             },
             'msamanda_style_1' : {
-                'Amanda Score' : 'Amanda:Score',
-                'Charge' : 'Charge',
-                'Filename' : 'Filename',
-                'Modifications' : 'Modifications',
-                'Protein Accessions' : 'proteinacc_start_stop_pre_post_;',
-                'RT' : 'Retention Time (s)',
-                'Rank' : 'Rank',
-                'Scan Number' : 'Spectrum ID',
-                'Sequence' : 'Sequence',
-                'Title' : 'Spectrum Title',
+                'Amanda Score'         : 'Amanda:Score',
+                'Charge'               : 'Charge',
+                'Filename'             : 'Filename',
+                'Modifications'        : 'Modifications',
+                'Protein Accessions'   : 'proteinacc_start_stop_pre_post_;',
+                'RT'                   : 'Retention Time (s)',
+                'Rank'                 : 'Rank',
+                'Scan Number'          : 'Spectrum ID',
+                'Sequence'             : 'Sequence',
+                'Title'                : 'Spectrum Title',
                 'Weighted Probability' : 'Amanda:Weighted Probability',
-                'm/z' : 'Exp m/z',
+                'm/z'                  : 'Exp m/z',
             },
             'msgfplus_style_1' : {
-                'Charge' : 'Charge',
-                'DeNovoScore' : 'MS-GF:DeNovoScore',
-                'EValue' : 'MS-GF:EValue',
-                'MSGFScore' : 'MS-GF:RawScore',
-                'Peptide' : 'Sequence',
-                'Precursor' : 'Exp m/z',
-                'Protein' : 'proteinacc_start_stop_pre_post_;',
-                'ScanNum' : 'Spectrum ID',
-                'SpecEValue' : 'MS-GF:SpecEValue',
-                'SpecFile' : 'Raw data location',
-                'Title' : 'Spectrum Title',
+                'Charge'               : 'Charge',
+                'DeNovoScore'          : 'MS-GF:DeNovoScore',
+                'EValue'               : 'MS-GF:EValue',
+                'MSGFScore'            : 'MS-GF:RawScore',
+                'Peptide'              : 'Sequence',
+                'Precursor'            : 'Exp m/z',
+                'Protein'              : 'proteinacc_start_stop_pre_post_;',
+                'ScanNum'              : 'Spectrum ID',
+                'SpecEValue'           : 'MS-GF:SpecEValue',
+                'SpecFile'             : 'Raw data location',
+                'Title'                : 'Spectrum Title',
             },
             'novor_style_1' : {
-                ' RT' : 'Retention Time (s)',
-                ' aaScore' : 'Novor:aaScore',
-                ' err(data-denovo)' : 'Error (exp-calc)',
-                ' mz(data)' : 'Exp m/z',
-                ' pepMass(denovo)' : 'Calc mass',
-                ' peptide' : 'Sequence',
+                ' RT'                  : 'Retention Time (s)',
+                ' aaScore'             : 'Novor:aaScore',
+                ' err(data-denovo)'    : 'Error (exp-calc)',
+                ' mz(data)'            : 'Exp m/z',
+                ' pepMass(denovo)'     : 'Calc mass',
+                ' peptide'             : 'Sequence',
                 ' ppm(1e6*err/(mz*z))' : 'Error (ppm)',
-                ' scanNum' : 'Spectrum ID',
-                ' score' : 'Novor:score',
-                ' z' : 'Charge',
-                '# id' : 'Novor:id',
+                ' scanNum'             : 'Spectrum ID',
+                ' score'               : 'Novor:score',
+                ' z'                   : 'Charge',
+                '# id'                 : 'Novor:id',
             },
             'omssa_style_1' : {
-                ' Accession' : 'Accession',
-                ' Charge' : 'Charge',
-                ' Defline' : 'proteinacc_start_stop_pre_post_;',
-                ' E-value' : 'OMSSA:evalue',
-                ' Filename/id' : 'Spectrum Title',
-                ' Mass' : 'Exp m/z',
-                ' Mods' : 'Modifications',
-                ' NIST score' : 'NIST score',
-                ' P-value' : 'OMSSA:pvalue',
-                ' Peptide' : 'Sequence',
-                ' Start' : 'Start',
-                ' Stop' : 'Stop',
-                ' Theo Mass' : 'Calc m/z',
-                ' gi' : 'gi',
-                'Spectrum number' : 'Spectrum ID',
+                ' Accession'           : 'Accession',
+                ' Charge'              : 'Charge',
+                ' Defline'             : 'proteinacc_start_stop_pre_post_;',
+                ' E-value'             : 'OMSSA:evalue',
+                ' Filename/id'         : 'Spectrum Title',
+                ' Mass'                : 'Exp m/z',
+                ' Mods'                : 'Modifications',
+                ' NIST score'          : 'NIST score',
+                ' P-value'             : 'OMSSA:pvalue',
+                ' Peptide'             : 'Sequence',
+                ' Start'               : 'Start',
+                ' Stop'                : 'Stop',
+                ' Theo Mass'           : 'Calc m/z',
+                ' gi'                  : 'gi',
+                'Spectrum number'      : 'Spectrum ID',
             },
             'pepnovo_style_1' : {
-                '#Index' : 'Pepnovo:id',
-                'C-Gap' : 'Pepnovo:C-Gap',
-                'CumProb' : 'Pepnovo:CumProb',
-                'N-Gap' : 'Pepnovo:N-Gap',
-                'PnvScr' : 'Pepnovo:PnvScr',
-                'RnkScr' : 'Pepnovo:RnkScr',
-                '[M+H]' : 'Calc mass(Da)',
-                'output_aa_probs' : 'Pepnovo:aaScore',
+                '#Index'               : 'Pepnovo:id',
+                'C-Gap'                : 'Pepnovo:C-Gap',
+                'CumProb'              : 'Pepnovo:CumProb',
+                'N-Gap'                : 'Pepnovo:N-Gap',
+                'PnvScr'               : 'Pepnovo:PnvScr',
+                'RnkScr'               : 'Pepnovo:RnkScr',
+                '[M+H]'                : 'Calc mass(Da)',
+                'output_aa_probs'      : 'Pepnovo:aaScore',
             },
         },
         'uvalue_type' : "",
+        'uvalue_option' : {
+        },
+        'default_value' : None,
+        'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
     },
     'heatmap_annotation_field_name' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
-        'default_value' : "Protein",
-        'description' :  ''' The name of the annotation to plot in the heatmap ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_annotation_field_name',
@@ -1693,19 +1691,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             '',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+        },
+        'default_value' : "Protein",
+        'description' :  ''' The name of the annotation to plot in the heatmap ''',
     },
     'heatmap_box_style' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
-        'default_value' : "classic",
-        'description' :  ''' Box style for the heatmap ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_box_style',
@@ -1713,19 +1711,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             '',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : "classic",
+        'description' :  ''' Box style for the heatmap ''',
     },
     'heatmap_color_gradient' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
-        'default_value' : "Spectral",
-        'description' :  ''' Color gradient for the heatmap ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_color_gradient',
@@ -1733,20 +1731,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             '',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+        },
+        'default_value' : "Spectral",
+        'description' :  ''' Color gradient for the heatmap ''',
     },
     'heatmap_column_order' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
-        'default_value' : [
-        ],
-        'description' :  ''' The plot order of the columns ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_column_order',
@@ -1754,19 +1751,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             '',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
+        'uvalue_option' : {
+        },
+        'default_value' : [
+        ],
+        'description' :  ''' The plot order of the columns ''',
     },
     'heatmap_error_suffix' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
-        'default_value' : "_std",
-        'description' :  ''' The suffix to identify the value error holding columns ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_error_suffix',
@@ -1774,19 +1772,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             '',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+        },
+        'default_value' : "_std",
+        'description' :  ''' The suffix to identify the value error holding columns ''',
     },
     'heatmap_identifier_field_name' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
-        'default_value' : "Protein",
-        'description' :  ''' The name of the identifier to plot in the heatmap ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_identifier_field_name',
@@ -1794,19 +1792,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             '',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+        },
+        'default_value' : "Protein",
+        'description' :  ''' The name of the identifier to plot in the heatmap ''',
     },
     'heatmap_max_value' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
-        'default_value' : 3,
-        'description' :  ''' Maximum value for the color gradient ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_max_value',
@@ -1814,19 +1812,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             '',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : 3,
+        'description' :  ''' Maximum value for the color gradient ''',
     },
     'heatmap_min_value' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
-        'default_value' : -3,
-        'description' :  ''' Minimum vaue for the color gradient ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_min_value',
@@ -1834,19 +1832,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             '',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : -3,
+        'description' :  ''' Minimum vaue for the color gradient ''',
     },
     'heatmap_value_suffix' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
-        'default_value' : "_mean",
-        'description' :  ''' The suffix to identify the value columns, which should be plotted ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'heatmap_style_1' : 'heatmap_value_suffix',
@@ -1854,19 +1852,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             '',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+        },
+        'default_value' : "_mean",
+        'description' :  ''' The suffix to identify the value columns, which should be plotted ''',
     },
     'helper_extension' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : ".u.json",
-        'description' :  ''' Exension for helper files ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'helper_extension',
@@ -1874,20 +1872,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'file_handling',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : ".u.json",
+        'description' :  ''' Exension for helper files ''',
     },
     'http_output_folder' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
-        'default_value' : "None",
-        'description' :  ''' Default http download path ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'http_output_folder',
@@ -1895,20 +1893,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'download',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : "None",
+        'description' :  ''' Default http download path ''',
     },
     'http_url' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' http download URL, will fail if it is not set by the user ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'get_http_style_1' : 'http_url',
@@ -1916,12 +1914,14 @@ N-terminus or C-terminus ''',
         'utag' : [
             'download',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : None,
+        'description' :  ''' http download URL, will fail if it is not set by the user ''',
     },
     'instrument' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -1932,59 +1932,57 @@ N-terminus or C-terminus ''',
             'msgfplus_v9979',
             'novor_1_1beta',
         ],
-        'default_value' : "q_exactive",
-        'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'kojak_style_1' : 'instrument',
-            'moda_style_1' : 'Instrument',
+            'kojak_style_1'    : 'instrument',
+            'moda_style_1'     : 'Instrument',
             'msgfplus_style_1' : '-inst',
-            'novor_style_1' : 'massAnalyzer',
+            'novor_style_1'    : 'massAnalyzer',
         },
         'utag' : [
             'instrument',
         ],
-        'uvalue_option' : {
-            'comboBox' : True,
-            'radioButton' : False,
-            'initialValue' : ['high_res_ltq', 'low_res_ltq', 'q_exactive', 'tof'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
-        },
         'uvalue_translation' : {
             'kojak_style_1' : {
-                'FTICR' : '1',
+                'FTICR'        : '1',
                 'high_res_ltq' : '0',
-                'low_res_ltq' : '0',
-                'q_exactive' : '0',
+                'low_res_ltq'  : '0',
+                'q_exactive'   : '0',
             },
             'moda_style_1' : {
                 'high_res_ltq' : 'ESI-TRAP',
-                'low_res_ltq' : 'ESI-TRAP',
-                'q_exactive' : 'ESI-TRAP',
-                'tof' : 'ESI-QTOF',
+                'low_res_ltq'  : 'ESI-TRAP',
+                'q_exactive'   : 'ESI-TRAP',
+                'tof'          : 'ESI-QTOF',
             },
             'msgfplus_style_1' : {
                 'high_res_ltq' : '1',
-                'low_res_ltq' : '0',
-                'q_exactive' : '3',
-                'tof' : '2',
+                'low_res_ltq'  : '0',
+                'q_exactive'   : '3',
+                'tof'          : '2',
             },
             'novor_style_1' : {
                 'high_res_ltq' : 'Trap',
-                'low_res_ltq' : 'Trap',
-                'q_exactive' : 'FT',
-                'tof' : 'TOF',
+                'low_res_ltq'  : 'Trap',
+                'q_exactive'   : 'FT',
+                'tof'          : 'TOF',
             },
         },
         'uvalue_type' : "select",
+        'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['high_res_ltq', 'low_res_ltq', 'q_exactive', 'tof'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
+        'default_value' : "q_exactive",
+        'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
     },
     'intensity_cutoff' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
-        'default_value' : 0.0,
-        'description' :  ''' Low intensity cutoff as a fraction of max peak ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-cl',
@@ -1992,23 +1990,23 @@ N-terminus or C-terminus ''',
         'utag' : [
             'spectrum',
         ],
-        'uvalue_option' : {
-            'max' : 10000000,
-            'min' : 0,
-            'unit' : 1e-05,
-            'updownval' : 0.01,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
+        'uvalue_option' : {
+            'max'       : 10000000,
+            'min'       : 0,
+            'unit'      : 1e-05,
+            'updownval' : 0.01,
+        },
+        'default_value' : 0.0,
+        'description' :  ''' Low intensity cutoff as a fraction of max peak ''',
     },
     'json_extension' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : ".u.json",
-        'description' :  ''' Exension for .json files ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'json_extension',
@@ -2016,20 +2014,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'file_handling',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : ".u.json",
+        'description' :  ''' Exension for .json files ''',
     },
     'keep_asp_pro_broken_peps' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
-        'default_value' : True,
-        'description' :  ''' X!tandem searches for peptides broken between Asp (D) and Pro (P) for every enzyme. Therefore, it reports peptides that are not enzymatically cleaved. Specify, if those should be kept during unify_csv or removed. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'unify_csv_style_1' : 'keep_asp_pro_broken_peps',
@@ -2037,19 +2035,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             'protein',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
+        'uvalue_option' : {
+        },
+        'default_value' : True,
+        'description' :  ''' X!tandem searches for peptides broken between Asp (D) and Pro (P) for every enzyme. Therefore, it reports peptides that are not enzymatically cleaved. Specify, if those should be kept during unify_csv or removed. ''',
     },
     'kernel' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'svm_1_0_0',
         ],
-        'default_value' : "rbf",
-        'description' :  ''' The kernel function of the support vector machine used for PSM post-processing ("rbf", "linear", "poly" or "sigmoid") ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'svm_style_1' : 'kernel',
@@ -2059,19 +2057,19 @@ N-terminus or C-terminus ''',
             'statistics',
             'validation',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+        },
+        'default_value' : "rbf",
+        'description' :  ''' The kernel function of the support vector machine used for PSM post-processing ("rbf", "linear", "poly" or "sigmoid") ''',
     },
     'kojak_MS1_centroid' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 0,
-        'description' :  ''' MS1 centroided data yes (1) or no (0) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_MS1_centroid',
@@ -2079,19 +2077,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : 0,
+        'description' :  ''' MS1 centroided data yes (1) or no (0) ''',
     },
     'kojak_MS1_resolution' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 30000,
-        'description' :  ''' MS1 resolution ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_MS1_resolution',
@@ -2099,19 +2097,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : 30000,
+        'description' :  ''' MS1 resolution ''',
     },
     'kojak_MS2_centroid' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 1,
-        'description' :  ''' MS2 centroided data yes (1) or no (0) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_MS2_centroid',
@@ -2119,19 +2117,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : 1,
+        'description' :  ''' MS2 centroided data yes (1) or no (0) ''',
     },
     'kojak_MS2_resolution' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 25000,
-        'description' :  ''' MS2 resolution ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_MS2_resolution',
@@ -2139,20 +2137,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : 25000,
+        'description' :  ''' MS2 resolution ''',
     },
     'kojak_diff_mods_on_xl' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 0,
-        'description' :  ''' To search differential modifications on cross-linked
-        peptides: diff_mods_on_xl = 1 ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_diff_mods_on_xl',
@@ -2160,20 +2157,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : 0,
+        'description' :  ''' To search differential modifications on cross-linked
+        peptides: diff_mods_on_xl = 1 ''',
     },
     'kojak_enrichment' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 0,
-        'description' :  ''' Values between 0 and 1 to describe 18O APE
-        For example, 0.25 equals 25 APE ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_enrichment',
@@ -2181,19 +2178,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : 0,
+        'description' :  ''' Values between 0 and 1 to describe 18O APE
+        For example, 0.25 equals 25 APE ''',
     },
     'kojak_export_pepxml' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : True,
-        'description' :  ''' Activate (True) or deactivate (False) output as pepXML ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_export_pepXML',
@@ -2201,23 +2199,23 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
             'kojak_style_1' : {
                 False : 0,
-                True : 1,
+                True  : 1,
             },
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : True,
+        'description' :  ''' Activate (True) or deactivate (False) output as pepXML ''',
     },
     'kojak_export_percolator' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : True,
-        'description' :  ''' Activate (True) or deactivate (False) output for percolator ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_export_percolator',
@@ -2225,27 +2223,23 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
             'kojak_style_1' : {
                 False : 0,
-                True : 1,
+                True  : 1,
             },
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : True,
+        'description' :  ''' Activate (True) or deactivate (False) output for percolator ''',
     },
     'kojak_fragment_bin_offset' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 0.4,
-        'description' :  ''' fragment_bin_offset and fragment_bin_size
-            influence algorithm precision and memory usage.
-            They should be set appropriately for the data analyzed.
-            For ion trap ms/ms:  1.0005 size, 0.4 offset
-            For high res ms/ms:    0.03 size, 0.0 offset ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_fragment_bin_offset',
@@ -2253,23 +2247,23 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
+        'uvalue_option' : {
+        },
+        'default_value' : 0.4,
+        'description' :  ''' fragment_bin_offset and fragment_bin_size
+            influence algorithm precision and memory usage.
+            They should be set appropriately for the data analyzed.
+            For ion trap ms/ms:  1.0005 size, 0.4 offset
+            For high res ms/ms:    0.03 size, 0.0 offset ''',
     },
     'kojak_fragment_bin_size' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 1.005,
-        'description' :  ''' fragment_bin_offset and fragment_bin_size
-            influence algorithm precision and memory usage.
-            They should be set appropriately for the data analyzed.
-            For ion trap ms/ms:  1.0005 size, 0.4 offset
-            For high res ms/ms:    0.03 size, 0.0 offset ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_fragment_bin_size',
@@ -2277,20 +2271,23 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
+        'uvalue_option' : {
+        },
+        'default_value' : 1.005,
+        'description' :  ''' fragment_bin_offset and fragment_bin_size
+            influence algorithm precision and memory usage.
+            They should be set appropriately for the data analyzed.
+            For ion trap ms/ms:  1.0005 size, 0.4 offset
+            For high res ms/ms:    0.03 size, 0.0 offset ''',
     },
     'kojak_mono_links_on_xl' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 0,
-        'description' :  ''' To search for mono-linked cross-linker on
-        cross-linked peptides: mono_links_on_xl = 1 ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_mono_links_on_xl',
@@ -2298,19 +2295,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : 0,
+        'description' :  ''' To search for mono-linked cross-linker on
+        cross-linked peptides: mono_links_on_xl = 1 ''',
     },
     'kojak_percolator_version' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : "2.08",
-        'description' :  ''' Defines the output format of Kojak for Percolator ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_percolator_version',
@@ -2318,23 +2316,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+        },
+        'default_value' : "2.08",
+        'description' :  ''' Defines the output format of Kojak for Percolator ''',
     },
     'kojak_prefer_precursor_pred' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 2,
-        'description' :  ''' prefer precursor mono mass predicted by
-        instrument software.
-          0 = ignore previous predictions
-          1 = use only previous predictions
-          2 = supplement predictions with additional analysis ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_prefer_precursor_pred',
@@ -2342,19 +2336,23 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
+        'uvalue_option' : {
+        },
+        'default_value' : 2,
+        'description' :  ''' prefer precursor mono mass predicted by
+        instrument software.
+          0 = ignore previous predictions
+          1 = use only previous predictions
+          2 = supplement predictions with additional analysis ''',
     },
     'kojak_spectrum_processing' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : False,
-        'description' :  ''' True if spectrum should be processed by kojak ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_spectrum_processing',
@@ -2362,8 +2360,6 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
             'kojak_style_1' : {
                 False : 0,
@@ -2371,15 +2367,16 @@ N-terminus or C-terminus ''',
             },
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : False,
+        'description' :  ''' True if spectrum should be processed by kojak ''',
     },
     'kojak_top_count' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 300,
-        'description' :  ''' number of top scoring single peptides to combine
-            in relaxed analysis ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_top_count',
@@ -2387,19 +2384,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : 300,
+        'description' :  ''' number of top scoring single peptides to combine
+            in relaxed analysis ''',
     },
     'kojak_truncate_prot_names' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 0,
-        'description' :  ''' Max protein name character to export, 0=off ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_truncate_prot_names',
@@ -2407,20 +2405,19 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : 0,
+        'description' :  ''' Max protein name character to export, 0=off ''',
     },
     'kojak_turbo_button' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : False,
-        'description' :  ''' Generally speeds up analysis. Special cases cause reverse
-            effect, thus this is allowed to be disabled. True if it should be used. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_turbo_button',
@@ -2428,15 +2425,18 @@ N-terminus or C-terminus ''',
         'utag' : [
             'cross-linking',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
             'kojak_style_1' : {
                 False : 0,
-                True : 1,
+                True  : 1,
             },
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+        },
+        'default_value' : False,
+        'description' :  ''' Generally speeds up analysis. Special cases cause reverse
+            effect, thus this is allowed to be disabled. True if it should be used. ''',
     },
     'label' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -2459,38 +2459,36 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "14N",
-        'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'moda_style_1' : 'label',
-            'msamanda_style_1' : 'label',
-            'msgfplus_style_1' : 'label',
+            'moda_style_1'      : 'label',
+            'msamanda_style_1'  : 'label',
+            'msgfplus_style_1'  : 'label',
             'myrimatch_style_1' : 'label',
-            'omssa_style_1' : ('-tem', '-tom'),
-            'xtandem_style_1' : 'protein, modified residue mass file',
+            'omssa_style_1'     : ('-tem', '-tom'),
+            'xtandem_style_1'   : 'protein, modified residue mass file',
         },
         'utag' : [
             'label',
             'modifications',
         ],
-        'uvalue_option' : {
-            'comboBox' : True,
-            'radioButton' : False,
-            'initialValue' : ['14N', '15N'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "select",
+        'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['14N', '15N'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
+        'default_value' : "14N",
+        'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
     },
     'machine_offset_in_ppm' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
-        'default_value' : 0.0,
-        'description' :  ''' Machine offset, m/z values will be corected/shifted by the given value. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'mzml2mgf_style_1' : 'machine_offset_in_ppm',
@@ -2499,15 +2497,17 @@ N-terminus or C-terminus ''',
             'converter',
             'instrument',
         ],
-        'uvalue_option' : {
-            'max' : 10000000,
-            'min' : 0,
-            'unit' : 1e-05,
-            'updownval' : 0.01,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
+        'uvalue_option' : {
+            'max'       : 10000000,
+            'min'       : 0,
+            'unit'      : 1e-05,
+            'updownval' : 0.01,
+        },
+        'default_value' : 0.0,
+        'description' :  ''' Machine offset, m/z values will be corected/shifted by the given value. ''',
     },
     'max_accounted_observed_peaks' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -2521,26 +2521,26 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : 100,
-        'description' :  ''' Maximum number of peaks from a spectrum used. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'kojak_style_1' : 'max_accounted_observed_peaks',
+            'kojak_style_1'     : 'max_accounted_observed_peaks',
             'myrimatch_style_1' : 'MaxPeakCount',
-            'xtandem_style_1' : 'spectrum, total peaks',
+            'xtandem_style_1'   : 'spectrum, total peaks',
         },
         'utag' : [
             'MS2',
             'fragment',
         ],
-        'uvalue_option' : {
-            'max' : 10000000,
-            'min' : 0,
-            'updownval' : 100,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+            'max'       : 10000000,
+            'min'       : 0,
+            'updownval' : 100,
+        },
+        'default_value' : 100,
+        'description' :  ''' Maximum number of peaks from a spectrum used. ''',
     },
     'max_missed_cleavages' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -2562,28 +2562,28 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : 2,
-        'description' :  ''' Maximum number of missed cleavages per peptide ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'kojak_style_1' : 'max_missed_cleavages',
-            'moda_style_1' : 'MissedCleavage',
-            'msamanda_style_1' : 'missed_cleavages',
+            'kojak_style_1'     : 'max_missed_cleavages',
+            'moda_style_1'      : 'MissedCleavage',
+            'msamanda_style_1'  : 'missed_cleavages',
             'myrimatch_style_1' : 'MaxMissedCleavages',
-            'omssa_style_1' : '-v',
-            'xtandem_style_1' : 'scoring, maximum missed cleavage sites',
+            'omssa_style_1'     : '-v',
+            'xtandem_style_1'   : 'scoring, maximum missed cleavage sites',
         },
         'utag' : [
             'protein',
         ],
-        'uvalue_option' : {
-            'max' : 10000000,
-            'min' : 0,
-            'updownval' : 100,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+            'max'       : 10000000,
+            'min'       : 0,
+            'updownval' : 100,
+        },
+        'default_value' : 2,
+        'description' :  ''' Maximum number of missed cleavages per peptide ''',
     },
     'max_mod_alternatives' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
