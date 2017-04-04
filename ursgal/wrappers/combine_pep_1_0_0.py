@@ -69,7 +69,7 @@ class combine_pep_1_0_0(ursgal.UNode):
         'version'            : '1.0.0',                                         # str, Software version name (kaz)
         'release_date'       : '2009-5-1',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'meta_engine'       : True,
+            'meta_engine' : True,
         },
         'input_extensions'   : ['.csv'],                                         # list, extensions (kaz)
         'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)

@@ -14,7 +14,7 @@ class msamanda_1_0_0_5242( msamanda ):
         'version'            : '1.0.0.5242',                                    # str, Software version name (kaz)
         'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'search_engine': True,
+            'search_engine' : True,
         },
         'input_extensions'   : ['.mgf'],                                        # list, extensions (kaz)
         'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)

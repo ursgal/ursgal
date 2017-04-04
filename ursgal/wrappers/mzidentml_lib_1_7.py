@@ -19,7 +19,7 @@ class mzidentml_lib_1_7( ml ):
         'version'            : '1.7',                                           # str, Software version name (kaz)
         'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'converter'     : True
+            'converter' : True
         },
         'input_extensions'   : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'], # list, extensions (kaz)
         'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)

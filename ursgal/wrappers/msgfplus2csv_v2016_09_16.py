@@ -24,7 +24,6 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
         'version'            : 'v2016.09.16',                                   # str, Software version name (kaz)
         'release_date'       : '2016-9-16',                                     # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'search_engine' : False,
             'converter'     : True
         },
         'input_extensions'   : ['.mzid'],                                       # list, extensions (kaz)

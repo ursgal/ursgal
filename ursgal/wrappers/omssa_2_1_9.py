@@ -29,7 +29,7 @@ class omssa_2_1_9( ursgal.UNode ):
         'version'            : '2.1.9',                                         # str, Software version name (kaz)
         'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'search_engine'     : True,
+            'search_engine' : True,
         },
         'input_extensions'   : ['.mgf'],                                        # list, extensions (kaz)
         'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)

@@ -21,7 +21,6 @@ class venndiagram_1_0_0( ursgal.UNode ):
         'input_extensions'   : ['.csv'],                                        # list, extensions (kaz)
         'input_multi_file'   : True,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extensions'  : ['.svg'],                                        # list, extensions (kaz)
-        'output_extension'    : '.svg',
         'output_suffix'      : 'venndiagram',
         'include_in_git'     : True,
         'in_development'     : False,

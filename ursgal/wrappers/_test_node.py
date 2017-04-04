@@ -10,7 +10,6 @@ class _test_node( ursgal.UNode ):
         'name'              : 'test node',                                       # str, Software name (kaz)
         'version'           : 'alpha',                                           # str, Software version name (kaz)
         'release_date'      : None,                                              # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
-        'in_development'    : True,  # do not show in UNode overview
         'engine_type' : {
             'converter' : True
         },
@@ -18,6 +17,7 @@ class _test_node( ursgal.UNode ):
         'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extensions' : ['.csv'],                                         # list, extensions (kaz)
         'output_suffix'     : 'test_node',
+        'in_development'    : True,  # do not show in UNode overview
         'include_in_git'    : True,
         'engine' : {
             'platform_independent' : {

@@ -26,11 +26,7 @@ class combine_FDR_0_1( ursgal.UNode ):
         'version'               : '0.1',                                        # str, Software version name (kaz)
         'release_date'          : '2009-5-1',                                   # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
-            'controller'        : False,
-            'converter'         : False,
-            'validation_engine' : False,
-            'search_engine'     : False,
-            'meta_engine'       : True,
+            'meta_engine' : True,
         },
         'input_extensions'      : ['.csv'],                                      # list, extensions (kaz)
         'input_multi_file'      : False,                                        # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
