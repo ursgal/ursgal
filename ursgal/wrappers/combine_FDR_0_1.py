@@ -32,11 +32,11 @@ class combine_FDR_0_1( ursgal.UNode ):
             'search_engine'     : False,
             'meta_engine'       : True,
         },
-        'in_development'        : False,
-        'input_types'           : ['csv'],                                      # list, extensions without a dot (kaz)
-        'multiple_files'        : False,                                        # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'      : ['csv'],                                      # list, extensions without a dot (kaz)
+        'input_extensions'      : ['.csv'],                                      # list, extensions (kaz)
+        'input_multi_file'      : False,                                        # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'     : ['.csv'],                                      # list, extensions (kaz)
         'create_own_folder'     : False,
+        'in_development'        : False,
         'include_in_git'        : True,
         'utranslation_style'    : 'combine_FDR_style_1',
         'engine': {

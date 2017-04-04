@@ -20,9 +20,9 @@ class uninovo_alpha_052013( ursgal.UNode ):
         'engine_type' : {
             'denovo_engine' : True,
         },
-        'input_types'       : ['mgf'],                                          # list, extensions without a dot (kaz)
-        'multiple_files'    : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'  : ['den'],                                          # list, extensionswithout a dot (kaz)
+        'input_extensions'  : ['.mgf'],                                         # list, extensions (kaz)
+        'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions' : ['.den'],                                         # list, extensions (kaz)
         'create_own_folder' : True,
         'in_development'    : True,
         'include_in_git'    : None,

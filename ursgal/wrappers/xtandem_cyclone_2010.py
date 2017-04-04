@@ -12,9 +12,9 @@ class xtandem_cyclone_2010( tandem ):
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_types'                 : ['mgf', 'gaml', 'dta', 'pkl', 'mzData', 'mzXML'], # list, extensions without a dot (kaz)
-        'multiple_files'              : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'            : ['xml'],                                # list, extensions without a dot (kaz)
+        'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'], # list, extensions (kaz)
+        'input_multi_file'            : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'           : ['.xml'],                               # list, extensions (kaz)
         'create_own_folder'           : True,
         'compress_raw_search_results' : True,
         'include_in_git'              : False,

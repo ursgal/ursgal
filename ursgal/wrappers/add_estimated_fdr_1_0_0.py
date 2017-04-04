@@ -15,11 +15,11 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         'engine_type' : {
             'converter' : True
         },
-        'in_development'     : False,
-        'input_types'        : ['csv'],                                         # list, extensions without a dot (kaz)
-        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'input_extensions'   : ['.csv'],                                         # list, extensions (kaz)
+        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'  : ['.csv'],                                         # list, extensions (kaz)
         'output_suffix'      : 'withFDR',
+        'in_development'     : False,
         'include_in_git'     : True,
         'utranslation_style' : 'add_estimated_fdr_style_1',
         'engine' : {

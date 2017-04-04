@@ -20,9 +20,9 @@ class novor_1_1beta( ursgal.UNode ):
         'engine_type' : {
             'denovo_engine' : True,
         },
-        'input_types'        : ['mgf'],                                         # list, extensions without a dot (kaz)
-        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'input_extensions'   : ['.mgf'],                                        # list, extensions (kaz)
+        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'in_development'     : False,
         'create_own_folder'  : True,
         'include_in_git'     : False,

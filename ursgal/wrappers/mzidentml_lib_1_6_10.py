@@ -9,7 +9,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
     """
     MzidLib 1_6_10 UNode
 
-    'Reisinger F, Krishna R, Ghali F, Rﾃｭos D, Hermjakob H, Vizcaﾃｭno JA, Jones AR. (2012)
+    'Reisinger F, Krishna R, Ghali F, R・・ｽｭos D, Hermjakob H, Vizca・・ｽｭno JA, Jones AR. (2012)
     jmzIdentML API: A Java interface to the mzIdentML standard for peptide and protein identification data.'
 
     Java program to convert results to .mzIdentML and .mzIdentML to .csv
@@ -23,9 +23,9 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         'engine_type' : {
             'converter' : True
         },
-        'input_types'        : ['xml', 'xml.gz', 'csv', 'mzid', 'mzid.gz'],     # list, extensions without a dot (kaz)
-        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'input_extensions'   : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'], # list, extensions (kaz)
+        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'output_suffix'      : None,
         # 'can_gz'             : True,
         'in_development'     : False,

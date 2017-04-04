@@ -25,9 +25,9 @@ class msblender_09_2015( ursgal.UNode ):
         'engine_type' : {
             'meta_engine' : True,
         },
-        'input_types'        : ['csv'],                                         # list, extensions without a dot (kaz)
-        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'input_extensions'   : ['.csv'],                                        # list, extensions (kaz)
+        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'in_development'     : True,
         'create_own_folder'  : False,
         'include_in_git'     : True,
@@ -410,7 +410,7 @@ class msblender_09_2015( ursgal.UNode ):
     def calc_FDR ( self, PSM_count, false_positives ):
         '''
         calculate false discovery rate according to FDR Method 2
-        (K繝ｻ繝ｻ・ｽ・､ll et al. 2008) as explained by Jones et al. 2009
+        (K郢晢ｽｻ郢晢ｽｻ繝ｻ・ｽ繝ｻ・､ll et al. 2008) as explained by Jones et al. 2009
         '''
         true_positives  = PSM_count - (2 * false_positives)
         if true_positives <= 0:  # prevent FDR above 1. Not sure if this is done?

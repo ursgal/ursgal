@@ -19,9 +19,9 @@ class moda_v1_51( ursgal.UNode ):
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_types'                 : ['mgf', 'pkl', 'dta', 'mzXML'],         # list, extensions without a dot (kaz)
-        'multiple_files'              : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'            : ['csv'],                                # list, extensions without a dot (kaz)
+        'input_extensions'            : ['.mgf', '.pkl', '.dta', '.mzXML'],     # list, extensions (kaz)
+        'input_multi_file'            : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'           : ['.csv'],                               # list, extensions (kaz)
         'compress_raw_search_results' : False,
         'create_own_folder'           : True,
         'in_development'              : True,

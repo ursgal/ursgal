@@ -28,9 +28,9 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
         'engine_type' : {
             'fetcher' : True,
         },
-        'input_types'        : [],                                              # list, extensions without a dot (kaz)
-        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'   : [],                                              # list, extensions without a dot (kaz)
+        'input_extensions'   : [],                                              # list, extensions (kaz)
+        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'  : [],                                              # list, extensions (kaz)
         'output_suffix'      : None,
         'in_development'     : True,
         'include_in_git'     : True,

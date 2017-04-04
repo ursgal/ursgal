@@ -21,9 +21,9 @@ class mzidentml_lib_1_7( ml ):
         'engine_type' : {
             'converter'     : True
         },
-        'input_types'        : ['xml', 'xml.gz', 'csv', 'mzid', 'mzid.gz'],     # list, extensions without a dot (kaz)
-        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'input_extensions'   : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'], # list, extensions (kaz)
+        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'in_development'     : False,
         'output_suffix'      : None,
         # 'can_gz'             : True,

@@ -1374,9 +1374,7 @@ class UController(ursgal.UNode):
                 'The path is automatically determined by ursgal.'),
                 caller='WARNING'
             )
-        ok_extension = self.meta_unodes[ engine ].META_INFO.get(
-            'output_extension', None
-        )
+        ok_extension = self.decid_output_extension(engine)
         prefix = self.params['prefix']
         user_fname = os.path.basename( user_fname )
         if ok_extension is None or user_fname.endswith( ok_extension ):
@@ -1461,6 +1459,19 @@ class UController(ursgal.UNode):
                 'history'        : [],
             }
 
+    def decid_output_extension( self, engine ):
+        file_extension = None
+        file_extensions = self.meta_unodes[ engine ].META_INFO.get(
+            'output_extensions',
+            None
+        )
+        if file_extensions is not None and type(file_extensions) is list:
+            if len(file_extensions) >= 1:
+                file_extension = str(file_extensions[0])
+            else:
+                file_extension = ""
+        return file_extension
+
     def build_name_from_history_or_regen( self, engine ):
         file_name_blocks = []
 
@@ -1512,13 +1523,11 @@ class UController(ursgal.UNode):
         output_file = '_'.join( file_name_blocks )
 
         # Add file extension if needed (engine-specific, defined in kb)
-        file_extension = self.meta_unodes[ engine ].META_INFO.get(
-            'output_extension',
-            None
-        )
+        file_extension = self.decid_output_extension(engine)
         if file_extension is None:
             self.print_info(
-                'No file extension ("output_extension") defined in kb.{0}.META_INFO. Keeping input file extension'.format(
+                'No file extension ("output_extension") defined in '\
+                'kb.{0}.META_INFO. Keeping input file extension'.format(
                     self.engine
                 ),
                 caller = "WARNING"
@@ -2968,7 +2977,7 @@ True
             # verify that the file ends with one of the extensions specified in UNode.kb, or user-specified:
             all_extensions = set()
             if engine is not None:
-                engine_extensions = self.unodes[ engine ]['class'].META_INFO['input_types']
+                engine_extensions = self.unodes[ engine ]['class'].META_INFO['input_extensions']
                 for ext in engine_extensions:
                     all_extensions.add( ext.upper() )
             if extensions is not None:

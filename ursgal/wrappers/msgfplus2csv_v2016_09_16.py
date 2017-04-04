@@ -27,9 +27,9 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
             'search_engine' : False,
             'converter'     : True
         },
-        'input_types'        : ['mzid'],                                        # list, extensions without a dot (kaz)
-        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'   : ['csv'],                                         # list, extensions without a dot (kaz)
+        'input_extensions'   : ['.mzid'],                                       # list, extensions (kaz)
+        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'output_suffix'      : None,
         'include_in_git'     : False,
         'in_development'     : False,

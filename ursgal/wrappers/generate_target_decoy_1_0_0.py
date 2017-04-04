@@ -15,9 +15,9 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         'engine_type' : {
             'converter' : True
         },
-        'input_types'        : [],                                              # list, extensions without a dot (kaz)
-        'multiple_files'     : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'   : ['fasta'],                                       # list, extensions without a dot (kaz)
+        'input_extensions'   : [],                                              # list, extensions (kaz)
+        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'  : ['.fasta'],                                       # list, extensions (kaz)
         'output_suffix'      : 'target_decoy',
         'in_development'     : False,
         'include_in_git'     : True,

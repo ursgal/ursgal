@@ -10,7 +10,7 @@ class kojak_1_5_3( ursgal.UNode ):
     Parameter options at http://www.kojak-ms.org/param/index.html
 
     Reference:
-    Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient analysis of chemically cross-linked protein complexes. J Proteome Res 14: 2190遯ｶ繝ｻ198
+    Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient analysis of chemically cross-linked protein complexes. J Proteome Res 14: 2190驕ｯ・ｶ郢晢ｽｻ198
 
     Note:
 
@@ -26,29 +26,15 @@ class kojak_1_5_3( ursgal.UNode ):
         'engine_type' : {
             'cross_link_engine' : True,
         },
-        'input_types'                 : ['mzML', 'mzXML'],                      # list, extensions without a dot (kaz)
-        'multiple_files'              : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension' : [
-            'kojak.txt',
-            'pep.xml',
-            'perc.inter.txt',
-            'perc.intra.txt',
-            'perc.loop.txt',
-            'perc.single.txt',
-        ],                                                                      # list, extensions without a dot (kaz)
-        # 'all_extensions' : [
-        #     '.kojak.txt',
-        #     '.pep.xml',
-        #     '.perc.inter.txt',
-        #     '.perc.intra.txt',
-        #     '.perc.loop.txt',
-        #     '.perc.single.txt',
-        # ],
-        'in_development'              : False,
+        'input_extensions'            : ['.mzML', '.mzXML'],                    # list, extensions (kaz)
+        'input_multi_file'            : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions' : ['.kojak.txt', '.pep.xml', '.perc.inter.txt', \
+            '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt'],           # list, extensions (kaz)
         'create_own_folder'           : True,
         'compress_raw_search_results' : False,
-        'include_in_git'              : None,
         'cannot_distribute'           : True,
+        'in_development'              : False,
+        'include_in_git'              : None,
         'utranslation_style'          : 'kojak_style_1',
         'engine' : {
             'linux' : {
@@ -71,7 +57,7 @@ class kojak_1_5_3( ursgal.UNode ):
         'citation'                    : '''Hoopmann MR, Zelter A, Johnson RS,
         Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient
         analysis of chemically cross-linked protein complexes.
-        J Proteome Res 14: 2190遯ｶ繝ｻ198''',
+        J Proteome Res 14: 2190驕ｯ・ｶ郢晢ｽｻ198''',
     }
 
 

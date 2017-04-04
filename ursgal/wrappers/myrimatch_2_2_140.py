@@ -17,9 +17,9 @@ class myrimatch_2_2_140( myri ):
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_types'                 : ['mzML'],                               # list, extensions without a dot (kaz)
-        'multiple_files'              : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extension'            : ['mzid'],                               # list, extensions without a dot (kaz)
+        'input_extensions'            : ['.mzML'],                              # list, extensions (kaz)
+        'input_multi_file'            : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'           : ['.mzid'],                              # list, extensions (kaz)
         'create_own_folder'           : True,
         'compress_raw_search_results' : True,
         'in_development'              : False,
