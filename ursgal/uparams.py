@@ -1,6 +1,6 @@
 ursgal_params = {
     '-xmx' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus2csv_v2016_09_16',
             'msgfplus_v2016_09_16',
@@ -9,43 +9,29 @@ ursgal_params = {
             'mzidentml_lib_1_6_11',
             'mzidentml_lib_1_7',
         ],
-        'default_value' : "13312m",
-        'description' :  ''' Set maximum Java heap size (used RAM) ''',
         'triggers_rerun' : False,
         'ukey_translation' : {
-            'msgfplus_style_1' : '-Xmx',
+            'msgfplus_style_1'  : '-Xmx',
             'mzidentml_style_1' : '-Xmx',
         },
         'utag' : [
             'hardware_resources',
         ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type'    : "str",
         'uvalue_option' : {
             'multipleLine' : False,
         },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "str",
+        'default_value'  : "13312m",
+        'description' : \
+            'Set maximum Java heap size (used RAM)',
     },
     'aa_exception_dict' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
-        'default_value' : {
-            'J' : {
-                'original_aa' : 'L',
-            },
-            'O' : {
-                'original_aa' : 'K',
-                'unimod_name' : 'Methylpyrroline',
-            },
-            'U' : {
-                'original_aa' : 'C',
-                'unimod_name' : 'Delta:S(-1)Se(1)',
-                'unimod_name_with_cam' : 'SecCarbamidomethyl',
-            },
-        },
-        'description' :  ''' Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as it's unimod modification name ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'unify_csv_style_1' : 'aa_exception_dict',
@@ -53,19 +39,36 @@ ursgal_params = {
         'utag' : [
             'conversion',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "dict",
+        'uvalue_type'    : "dict",
+        'uvalue_option' : {
+        },
+        'default_value' : {
+            'J' : {
+                'original_aa'          : 'L',
+            },
+            'O' : {
+                'original_aa'          : 'K',
+                'unimod_name'          : 'Methylpyrroline',
+            },
+            'U' : {
+                'original_aa'          : 'C',
+                'unimod_name'          : 'Delta:S(-1)Se(1)',
+                'unimod_name_with_cam' : 'SecCarbamidomethyl',
+            },
+        },
+        'description' : \
+            'Unusual aminoacids that are not accepted '\
+            '(e.g. by unify_csv_1_0_0), but reported by some engines. Given '\
+            'as a dictionary mapping on he original_aa as well as it\'s '\
+            'unimod modification name',
     },
     'accept_conflicting_psms' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
-        'default_value' : False,
-        'description' :  ''' If True, multiple PSMs for one spectrum can be reported if their score difference is below the threshold. If False, all PSMs for one spectrum are removed if the score difference between the best and secondbest PSM is not above the threshold, i.e. if there are conflicting PSMs with similar scores. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'sanitize_csv_style_1' : 'accept_conflicting_psms',
@@ -73,42 +76,50 @@ ursgal_params = {
         'utag' : [
             'validation',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "bool",
+        'uvalue_type'    : "bool",
+        'uvalue_option' : {
+        },
+        'default_value'  : False,
+        'description' : \
+            'If True, multiple PSMs for one spectrum can be reported if their '\
+            'score difference is below the threshold. If False, all PSMs for '\
+            'one spectrum are removed if the score difference between the '\
+            'best and secondbest PSM is not above the threshold, i.e. if '\
+            'there are conflicting PSMs with similar scores.',
     },
     'base_mz' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'omssa_2_1_9',
             'pepnovo_3_1',
         ],
-        'default_value' : 1000,
-        'description' :  ''' m/z value that is used as basis for the conversion from ppm to Da ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'moda_style_1' : 'base_mz',
-            'omssa_style_1' : 'base_mz',
+            'moda_style_1'    : 'base_mz',
+            'omssa_style_1'   : 'base_mz',
             'pepnovo_style_1' : 'base_mz',
         },
         'utag' : [
             'fragment',
             'precursor',
         ],
-        'uvalue_option' : {
-            'max' : 100000,
-            'min' : 0,
-            'updownval' : 1,
-        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "int",
+        'uvalue_type'    : "int",
+        'uvalue_option' : {
+            'max'       : 100000,
+            'min'       : 0,
+            'updownval' : 1,
+        },
+        'default_value'  : 1000,
+        'description' : \
+            'm/z value that is used as basis for the conversion from ppm to Da',
     },
     'batch_size' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -118,27 +129,29 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : 100000,
-        'description' :  ''' sets the number of sequences loaded in as a batch from the database file ''',
         'triggers_rerun' : False,
         'ukey_translation' : {
             'myrimatch_style_1' : 'NumBatches',
-            'xtandem_style_1' : 'spectrum, sequence batch size',
+            'xtandem_style_1'   : 'spectrum, sequence batch size',
         },
         'utag' : [
             'hardware_resources',
         ],
-        'uvalue_option' : {
-            'max' : 10000000,
-            'min' : 0,
-            'updownval' : 100,
-        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "int",
+        'uvalue_type'    : "int",
+        'uvalue_option' : {
+            'max'       : 10000000,
+            'min'       : 0,
+            'updownval' : 100,
+        },
+        'default_value'  : 100000,
+        'description' : \
+            'sets the number of sequences loaded in as a batch from the '\
+            'database file',
     },
     'bigger_scores_better' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -146,118 +159,121 @@ ursgal_params = {
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'add_estimated_fdr_style_1' : 'bigger_scores_better',
-            'percolator_style_1' : 'bigger_scores_better',
-            'qvality_style_1' : '-r',
-            'sanitize_csv_style_1' : 'bigger_scores_better',
-            'svm_style_1' : 'bigger_scores_better',
+            'percolator_style_1'        : 'bigger_scores_better',
+            'qvality_style_1'           : '-r',
+            'sanitize_csv_style_1'      : 'bigger_scores_better',
+            'svm_style_1'               : 'bigger_scores_better',
         },
         'utag' : [
             'scoring',
             'validation',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
             'add_estimated_fdr_style_1' : {
-                'msamanda_1_0_0_5242' : True,
-                'msamanda_1_0_0_5243' : True,
-                'msamanda_1_0_0_6299' : True,
-                'msamanda_1_0_0_6300' : True,
-                'msamanda_1_0_0_7503' : True,
-                'msamanda_1_0_0_7504' : True,
+                'msamanda_1_0_0_5242'  : True,
+                'msamanda_1_0_0_5243'  : True,
+                'msamanda_1_0_0_6299'  : True,
+                'msamanda_1_0_0_6300'  : True,
+                'msamanda_1_0_0_7503'  : True,
+                'msamanda_1_0_0_7504'  : True,
                 'msgfplus_v2016_09_16' : False,
-                'msgfplus_v9979' : False,
-                'myrimatch_2_1_138' : True,
-                'myrimatch_2_2_140' : True,
-                'omssa_2_1_9' : False,
+                'msgfplus_v9979'       : False,
+                'myrimatch_2_1_138'    : True,
+                'myrimatch_2_2_140'    : True,
+                'omssa_2_1_9'          : False,
                 'xtandem_cyclone_2010' : True,
-                'xtandem_jackhammer' : True,
-                'xtandem_piledriver' : True,
+                'xtandem_jackhammer'   : True,
+                'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
-                'xtandem_vengeance' : True,
+                'xtandem_vengeance'    : True,
             },
             'percolator_style_1' : {
-                'msamanda_1_0_0_5242' : True,
-                'msamanda_1_0_0_5243' : True,
-                'msamanda_1_0_0_6299' : True,
-                'msamanda_1_0_0_6300' : True,
-                'msamanda_1_0_0_7503' : True,
-                'msamanda_1_0_0_7504' : True,
+                'msamanda_1_0_0_5242'  : True,
+                'msamanda_1_0_0_5243'  : True,
+                'msamanda_1_0_0_6299'  : True,
+                'msamanda_1_0_0_6300'  : True,
+                'msamanda_1_0_0_7503'  : True,
+                'msamanda_1_0_0_7504'  : True,
                 'msgfplus_v2016_09_16' : False,
-                'msgfplus_v9979' : False,
-                'myrimatch_2_1_138' : True,
-                'myrimatch_2_2_140' : True,
-                'omssa_2_1_9' : False,
+                'msgfplus_v9979'       : False,
+                'myrimatch_2_1_138'    : True,
+                'myrimatch_2_2_140'    : True,
+                'omssa_2_1_9'          : False,
                 'xtandem_cyclone_2010' : True,
-                'xtandem_jackhammer' : True,
-                'xtandem_piledriver' : True,
+                'xtandem_jackhammer'   : True,
+                'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
-                'xtandem_vengeance' : True,
+                'xtandem_vengeance'    : True,
             },
             'qvality_style_1' : {
-                'msamanda_1_0_0_5242' : True,
-                'msamanda_1_0_0_5243' : True,
-                'msamanda_1_0_0_6299' : True,
-                'msamanda_1_0_0_6300' : True,
-                'msamanda_1_0_0_7503' : True,
-                'msamanda_1_0_0_7504' : True,
+                'msamanda_1_0_0_5242'  : True,
+                'msamanda_1_0_0_5243'  : True,
+                'msamanda_1_0_0_6299'  : True,
+                'msamanda_1_0_0_6300'  : True,
+                'msamanda_1_0_0_7503'  : True,
+                'msamanda_1_0_0_7504'  : True,
                 'msgfplus_v2016_09_16' : False,
-                'msgfplus_v9979' : False,
-                'myrimatch_2_1_138' : True,
-                'myrimatch_2_2_140' : True,
-                'omssa_2_1_9' : False,
+                'msgfplus_v9979'       : False,
+                'myrimatch_2_1_138'    : True,
+                'myrimatch_2_2_140'    : True,
+                'omssa_2_1_9'          : False,
                 'xtandem_cyclone_2010' : True,
-                'xtandem_jackhammer' : True,
-                'xtandem_piledriver' : True,
+                'xtandem_jackhammer'   : True,
+                'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
-                'xtandem_vengeance' : True,
+                'xtandem_vengeance'    : True,
             },
             'sanitize_csv_style_1' : {
-                'msamanda_1_0_0_5242' : True,
-                'msamanda_1_0_0_5243' : True,
-                'msamanda_1_0_0_6299' : True,
-                'msamanda_1_0_0_6300' : True,
-                'msamanda_1_0_0_7503' : True,
-                'msamanda_1_0_0_7504' : True,
+                'msamanda_1_0_0_5242'  : True,
+                'msamanda_1_0_0_5243'  : True,
+                'msamanda_1_0_0_6299'  : True,
+                'msamanda_1_0_0_6300'  : True,
+                'msamanda_1_0_0_7503'  : True,
+                'msamanda_1_0_0_7504'  : True,
                 'msgfplus_v2016_09_16' : False,
-                'msgfplus_v9979' : False,
-                'myrimatch_2_1_138' : True,
-                'myrimatch_2_2_140' : True,
-                'omssa_2_1_9' : False,
+                'msgfplus_v9979'       : False,
+                'myrimatch_2_1_138'    : True,
+                'myrimatch_2_2_140'    : True,
+                'omssa_2_1_9'          : False,
                 'xtandem_cyclone_2010' : True,
-                'xtandem_jackhammer' : True,
-                'xtandem_piledriver' : True,
+                'xtandem_jackhammer'   : True,
+                'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
-                'xtandem_vengeance' : True,
+                'xtandem_vengeance'    : True,
             },
             'svm_style_1' : {
-                'msamanda_1_0_0_5242' : True,
-                'msamanda_1_0_0_5243' : True,
-                'msamanda_1_0_0_6299' : True,
-                'msamanda_1_0_0_6300' : True,
-                'msamanda_1_0_0_7503' : True,
-                'msamanda_1_0_0_7504' : True,
+                'msamanda_1_0_0_5242'  : True,
+                'msamanda_1_0_0_5243'  : True,
+                'msamanda_1_0_0_6299'  : True,
+                'msamanda_1_0_0_6300'  : True,
+                'msamanda_1_0_0_7503'  : True,
+                'msamanda_1_0_0_7504'  : True,
                 'msgfplus_v2016_09_16' : False,
-                'msgfplus_v9979' : False,
-                'myrimatch_2_1_138' : True,
-                'myrimatch_2_2_140' : True,
-                'omssa_2_1_9' : False,
+                'msgfplus_v9979'       : False,
+                'myrimatch_2_1_138'    : True,
+                'myrimatch_2_2_140'    : True,
+                'omssa_2_1_9'          : False,
                 'xtandem_cyclone_2010' : True,
-                'xtandem_jackhammer' : True,
-                'xtandem_piledriver' : True,
+                'xtandem_jackhammer'   : True,
+                'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
-                'xtandem_vengeance' : True,
+                'xtandem_vengeance'    : True,
             },
         },
-        'uvalue_type' : "bool",
+        'uvalue_type'    : "bool",
+        'uvalue_option' : {
+        },
+        'default_value'  : None,
+        'description' : \
+            'Defines if bigger scores are better (or the other way round), '\
+            'for scores that should be validated (see validation_score_field) '\
+            'e.g. by percolator, qvality',
     },
     'cleavage_cterm_mass_change' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -265,8 +281,6 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : 17.00305,
-        'description' :  ''' The mass added to the peptide C-terminus by protein cleavage ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, cleavage C-terminal mass change',
@@ -274,18 +288,21 @@ ursgal_params = {
         'utag' : [
             'protein',
         ],
-        'uvalue_option' : {
-            'max' : 10000000,
-            'min' : 0,
-            'unit' : 1e-05,
-            'updownval' : 0.01,
-        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "float",
+        'uvalue_type'    : "float",
+        'uvalue_option' : {
+            'max'       : 10000000,
+            'min'       : 0,
+            'unit'      : 1e-05,
+            'updownval' : 0.01,
+        },
+        'default_value'  : 17.00305,
+        'description' : \
+            'The mass added to the peptide C-terminus by protein cleavage',
     },
     'cleavage_nterm_mass_change' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -293,8 +310,6 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : 1.00794,
-        'description' :  ''' The mass added to the peptide N-terminus bz protein cleavage ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, cleavage N-terminal mass change',
@@ -302,18 +317,21 @@ ursgal_params = {
         'utag' : [
             'protein',
         ],
-        'uvalue_option' : {
-            'max' : 10000000,
-            'min' : 0,
-            'unit' : 1e-05,
-            'updownval' : 0.01,
-        },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "float",
+        'uvalue_type'    : "float",
+        'uvalue_option' : {
+            'max'       : 10000000,
+            'min'       : 0,
+            'unit'      : 1e-05,
+            'updownval' : 0.01,
+        },
+        'default_value'  : 1.00794,
+        'description' : \
+            'The mass added to the peptide N-terminus bz protein cleavage',
     },
     'compensate_small_fasta' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -321,8 +339,6 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : False,
-        'description' :  ''' Compensate for very small database files. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'scoring, cyclic permutation',
@@ -330,23 +346,24 @@ ursgal_params = {
         'utag' : [
             'database',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
             'xtandem_style_1' : {
                 False : 'no',
-                True : 'yes',
+                True  : 'yes',
             },
         },
-        'uvalue_type' : "bool",
+        'uvalue_type'    : "bool",
+        'uvalue_option' : {
+        },
+        'default_value'  : False,
+        'description' : \
+            'Compensate for very small database files.',
     },
     'compress_raw_search_results_if_possible' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : True,
-        'description' :  ''' Compress raw search result to .gz: True or False ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'compress_raw_search_results_if_possible',
@@ -354,11 +371,13 @@ ursgal_params = {
         'utag' : [
             'file_handling',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
+        'uvalue_option' : {
+        },
+        'default_value' : True,
+        'description' :  ''' Compress raw search result to .gz: True or False ''',
     },
     'compute_xcorr' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -366,8 +385,6 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
         ],
-        'default_value' : False,
-        'description' :  ''' Compute xcorr ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'ComputeXCorr',
@@ -375,8 +392,6 @@ ursgal_params = {
         'utag' : [
             'scoring',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
             'myrimatch_style_1' : {
                 False : 0,
@@ -384,14 +399,16 @@ ursgal_params = {
             },
         },
         'uvalue_type' : "bool",
+        'uvalue_option' : {
+        },
+        'default_value' : False,
+        'description' :  ''' Compute xcorr ''',
     },
     'consecutive_ion_prob' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
-        'default_value' : 0.5,
-        'description' :  ''' Probability of consecutive ion (used in correlation correction) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-scorp',
@@ -399,14 +416,16 @@ ursgal_params = {
         'utag' : [
             'scoring',
         ],
-        'uvalue_option' : {
-            'min' : 0,
-            'unit' : 1e-05,
-            'updownval' : 0.01,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
+        'uvalue_option' : {
+            'min'       : 0,
+            'unit'      : 1e-05,
+            'updownval' : 0.01,
+        },
+        'default_value' : 0.5,
+        'description' :  ''' Probability of consecutive ion (used in correlation correction) ''',
     },
     'cpus' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -424,33 +443,45 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "max - 1",
-        'description' :  ''' Number of used cpus/threads ''',
         'triggers_rerun' : False,
         'ukey_translation' : {
-            'kojak_style_1' : 'cpus',
-            'msgfplus_style_1' : '-thread',
-            'myrimatch_style_1' : '-cpus',
-            'omssa_style_1' : '-nt',
+            'kojak_style_1'       : 'cpus',
+            'msgfplus_style_1'    : '-thread',
+            'myrimatch_style_1'   : '-cpus',
+            'omssa_style_1'       : '-nt',
             'ucontroller_style_1' : 'cpus',
-            'xtandem_style_1' : 'spectrum, threads',
+            'xtandem_style_1'     : 'spectrum, threads',
         },
         'utag' : [
             'hardware_resources',
         ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int _uevaluation_req",
         'uvalue_option' : {
             'max' : '_uevaluation_req',
             'min' : 1,
         },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "int _uevaluation_req",
+        'default_value' : "max - 1",
+        'description' :  ''' Number of used cpus/threads ''',
     },
     'cross_link_definition' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'cross_link_definition',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+        'uvalue_option' : {
+        },
         'default_value' : "nK  nK  138.0680742 BS3",
         'description' :  ''' Cross-link and mono-link masses allowed.
 May have more than one of each parameter.
@@ -459,26 +490,12 @@ Format for cross_link is:
 One or more amino acids (uppercase only!!) can be specified for
 each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
 N-terminus or C-terminus ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'kojak_style_1' : 'cross_link_definition',
-        },
-        'utag' : [
-            'cross-linking',
-        ],
-        'uvalue_option' : {
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "str",
     },
     'csv_filter_rules' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'filter_csv_1_0_0',
         ],
-        'default_value' : None,
-        'description' :  ''' Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'filter_csv_style_1' : 'filter_rules',
@@ -486,14 +503,15 @@ N-terminus or C-terminus ''',
         'utag' : [
             'conversion',
         ],
-        'uvalue_option' : {
-            'initialValue' : [],
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 1,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
+        'uvalue_option' : {
+            'initialValue'   : [],
+            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
+        'default_value' : None,
+        'description' :  ''' Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared ''',
     },
     'database' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -518,32 +536,31 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : None,
-        'description' :  ''' Path to database file containing protein sequences in fasta format ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'kojak_style_1' : 'database',
-            'moda_style_1' : 'Fasta',
-            'msamanda_style_1' : 'database',
-            'msgfplus_style_1' : '-d',
+            'kojak_style_1'     : 'database',
+            'moda_style_1'      : 'Fasta',
+            'msamanda_style_1'  : 'database',
+            'msgfplus_style_1'  : '-d',
             'myrimatch_style_1' : 'ProteinDatabase',
-            'omssa_style_1' : '-d',
+            'omssa_style_1'     : '-d',
             'unify_csv_style_1' : 'database',
-            'xtandem_style_1' : 'file URL',
+            'xtandem_style_1'   : 'file URL',
         },
         'utag' : [
             'database',
             'input',
             'input_files',                                                      # 'input_files' of utag becomes input file(s) on ogawa automatically (kaz)
         ],
-        'input_types' : ['fa', 'fasta'],                                        # list, extensions without a dot (kaz)
-        'multiple_input' : False,                                               # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine'      : False,
+            'input_extensions'  : ['.fasta', '.fa'],                            # list, extensions (kaz)
+        },
+        'default_value' : None,
+        'description' :  ''' Path to database file containing protein sequences in fasta format ''',
     },
     'database_taxonomy' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -554,8 +571,6 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "all",
-        'description' :  ''' If a taxonomy ID is specified, only the corresponding protein sequences from the fasta database are included in the search. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'taxon label',
@@ -563,23 +578,23 @@ N-terminus or C-terminus ''',
         'utag' : [
             'database',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
             'omssa_style_1' : {
                 'all' : 0,
             },
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : "all",
+        'description' :  ''' If a taxonomy ID is specified, only the corresponding protein sequences from the fasta database are included in the search. ''',
     },
     'decoy_generation_mode' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
         ],
-        'default_value' : "shuffle_peptide",
-        'description' :  ''' Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein). ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'mode',
@@ -587,16 +602,17 @@ N-terminus or C-terminus ''',
         'utag' : [
             'database',
         ],
-        'uvalue_option' : {
-            'comboBox' : True,
-            'initialValue' : ['reverse_protein', 'shuffle_peptide'],
-            'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "select",
+        'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['reverse_protein', 'shuffle_peptide'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
+        'default_value' : "shuffle_peptide",
+        'description' :  ''' Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein). ''',
     },
     'decoy_tag' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -611,36 +627,32 @@ N-terminus or C-terminus ''',
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
         ],
-        'default_value' : "decoy_",
-        'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'decoy_tag',
-            'kojak_style_1' : 'decoy_tag',
-            'myrimatch_style_1' : 'DecoyPrefix',
-            'mzidentml_style_1' : '-decoyRegex',
-            'unify_csv_style_1' : 'decoy_tag',
-            'xtandem2csv_style_1' : 'decoy_tag',
+            'kojak_style_1'                 : 'decoy_tag',
+            'myrimatch_style_1'             : 'DecoyPrefix',
+            'mzidentml_style_1'             : '-decoyRegex',
+            'unify_csv_style_1'             : 'decoy_tag',
+            'xtandem2csv_style_1'           : 'decoy_tag',
         },
         'utag' : [
             'database',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : "decoy_",
+        'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
     },
     'del_from_params_before_json_dump' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : [
-            'grouped_psms',
-        ],
-        'description' :  ''' List of parameters that are deleted before .json is dumped (to not overload the .json with unimportant informations) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'del_from_params_before_json_dump',
@@ -648,22 +660,23 @@ N-terminus or C-terminus ''',
         'utag' : [
             'file_handling',
         ],
-        'uvalue_option' : {
-            'initialValue' : [],
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 1,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
+        'uvalue_option' : {
+            'initialValue'   : [],
+            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
+        'default_value' : [
+            'grouped_psms',
+        ],
+        'description' :  ''' List of parameters that are deleted before .json is dumped (to not overload the .json with unimportant informations) ''',
     },
     'denovo_model' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
-        'default_value' : "cid_trypsin",
-        'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-model',
@@ -671,27 +684,26 @@ N-terminus or C-terminus ''',
         'utag' : [
             'model',
         ],
-        'uvalue_option' : {
-            'comboBox' : True,
-            'initialValue' : ['cid_trypsin'],
-            'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
-        },
         'uvalue_translation' : {
             'pepnovo_style_1' : {
                 'cid_trypsin' : 'CID_IT_TRYP',
             },
         },
         'uvalue_type' : "select",
+        'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['cid_trypsin'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
+        'default_value' : "cid_trypsin",
+        'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
     },
     'denovo_model_dir' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
-        'default_value' : None,
-        'description' :  ''' Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1 ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-model_dir',
@@ -699,12 +711,14 @@ N-terminus or C-terminus ''',
         'utag' : [
             'model',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : None,
+        'description' :  ''' Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1 ''',
     },
     'engine_internal_decoy_generation' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -723,43 +737,41 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : False,
-        'description' :  ''' Engine creates an own decoy database. Not recommended, because a target decoy database should be generated independently from the search engine, e.g. by using the uNode generate_target_decoy_1_0_0 ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'generate_decoy',
             'msgfplus_style_1' : '-tda',
-            'xtandem_style_1' : 'scoring, include reverse',
+            'xtandem_style_1'  : 'scoring, include reverse',
         },
         'utag' : [
             'database',
             'input',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
             'msamanda_style_1' : {
                 False : 'false',
-                True : 'true',
+                True  : 'true',
             },
             'msgfplus_style_1' : {
                 False : '0',
-                True : '1',
+                True  : '1',
             },
             'xtandem_style_1' : {
                 False : 'no',
-                True : 'yes',
+                True  : 'yes',
             },
         },
         'uvalue_type' : "bool",
+        'uvalue_option' : {
+        },
+        'default_value' : False,
+        'description' :  ''' Engine creates an own decoy database. Not recommended, because a target decoy database should be generated independently from the search engine, e.g. by using the uNode generate_target_decoy_1_0_0 ''',
     },
     'engines_create_folders' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : True,
-        'description' :  ''' Create folders for the output of engines that allow this option in their META_INFO ('create_own_folder' : True). True or False ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'engines_create_folders',
@@ -767,11 +779,13 @@ N-terminus or C-terminus ''',
         'utag' : [
             'file_handling',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
+        'uvalue_option' : {
+        },
+        'default_value' : True,
+        'description' :  ''' Create folders for the output of engines that allow this option in their META_INFO ('create_own_folder' : True). True or False ''',
     },
     'enzyme' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -800,8 +814,251 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'generate_target_decoy_style_1' : 'enzyme',
+            'kojak_style_1'                 : 'enzyme',
+            'moda_style_1'                  : 'Enzyme',
+            'msamanda_style_1'              : 'enzyme specificity',
+            'msgfplus_style_1'              : '-e',
+            'myrimatch_style_1'             : 'CleavageRules',
+            'novor_style_1'                 : 'enzyme',
+            'omssa_style_1'                 : '-e',
+            'pepnovo_style_1'               : '-digest',
+            'percolator_style_1'            : 'enzyme',
+            'unify_csv_style_1'             : 'enzyme',
+            'xtandem_style_1'               : 'protein, cleavage site',
+        },
+        'utag' : [
+            'database',
+            'protein',
+        ],
+        'uvalue_translation' : {
+            'generate_target_decoy_style_1' : {
+                'argc'                  : 'R;C;P',
+                'aspn'                  : 'D;N;',
+                'chymotrypsin'          : 'FMWY;C;P',
+                'chymotrypsin_p'        : 'FMWY;C;',
+                'clostripain'           : 'R;C;',
+                'cnbr'                  : 'M;C;P',
+                'elastase'              : 'AGILV;C;P',
+                'formic_acid'           : 'D;C;P',
+                'gluc'                  : 'DE;C;P',
+                'gluc_bicarb'           : 'E;C;P',
+                'iodosobenzoate'        : 'W;C;',
+                'lysc'                  : 'K;C;P',
+                'lysc_gluc'             : 'DEK;C;P',
+                'lysc_p'                : 'K;C;',
+                'lysn'                  : 'K;N;',
+                'lysn_promisc'          : 'AKRS;N;',
+                'pepsina'               : 'FL;C;',
+                'protein_endopeptidase' : 'P;C;',
+                'staph_protease'        : 'E;C;',
+                'trypsin'               : 'KR;C;P',
+                'trypsin_cnbr'          : 'KRM;C;P',
+                'trypsin_gluc'          : 'DEKR;C;P',
+                'trypsin_p'             : 'KR;C;',
+            },
+            'kojak_style_1' : {
+                'gluc'                  : '[DE]|{P}',
+                'lysc_gluc'             : '[DEK]|{P}',
+                'lysn'                  : '|[K]',
+                'trypsin'               : '[KR]|{P}',
+                'trypsin_p'             : '[RK]|',
+            },
+            'moda_style_1' : {
+                'argc'                  : 'argc, R/C',
+                'aspn'                  : 'aspn, D/N;',
+                'chymotrypsin'          : 'chymotrypsin, FMWY/C',
+                'chymotrypsin_p'        : 'chymotrypsin, FMWY/C',
+                'clostripain'           : 'clostripain, R/C',
+                'cnbr'                  : 'cnbr, M/C',
+                'elastase'              : 'elastase, AGILV/C',
+                'formic_acid'           : 'formic_acid, D/C',
+                'gluc'                  : 'gluc, DE/C',
+                'gluc_bicarb'           : 'gluc_bicarb, E/C',
+                'iodosobenzoate'        : 'iodosobenzoate, W/C',
+                'lysc'                  : 'lysc, K/C',
+                'lysc_p'                : 'lysc_p, K/C',
+                'lysn'                  : 'lysn, K/N',
+                'lysn_promisc'          : 'lysn_promisc, AKRS/N',
+                'no_cleavage'           : 'NONE',
+                'pepsina'               : 'pepsina, FL/C',
+                'protein_endopeptidase' : 'protein_endopeptidase, P/C',
+                'staph_protease'        : 'staph_protease, E/C',
+                'trypsin'               : 'trypsin, KR/C',
+                'trypsin_cnbr'          : 'trypsin_cnbr, KRM/C',
+                'trypsin_gluc'          : 'trypsin_gluc, DEKR/C',
+                'trypsin_p'             : 'trypsin_p, KR/C',
+            },
+            'msamanda_style_1' : {
+                'argc'                  : 'R;after;P',
+                'aspn'                  : 'D;before;',
+                'chymotrypsin'          : 'FMWY;after;P',
+                'chymotrypsin_p'        : 'FMWY;after;',
+                'clostripain'           : 'R;after;',
+                'cnbr'                  : 'M;after;P',
+                'elastase'              : 'AGILV;after;P',
+                'formic_acid'           : 'D;after;P',
+                'gluc'                  : 'DE;after;P',
+                'gluc_bicarb'           : 'E;after;P',
+                'iodosobenzoate'        : 'W;after;',
+                'lysc'                  : 'K;after;P',
+                'lysc_gluc'             : 'DEK;after;P',
+                'lysc_p'                : 'K;after;',
+                'lysn'                  : 'K;before;',
+                'lysn_promisc'          : 'AKRS;before;',
+                'nonspecific'           : ';;',
+                'pepsina'               : 'FL;after;',
+                'protein_endopeptidase' : 'P;after;',
+                'staph_protease'        : 'E;after;',
+                'trypsin'               : 'KR;after;P',
+                'trypsin_cnbr'          : 'KRM;after;P',
+                'trypsin_gluc'          : 'DEKR;after;P',
+                'trypsin_p'             : 'KR;after;',
+            },
+            'msgfplus_style_1' : {
+                'alpha_lp'              : '8',
+                'argc'                  : '6',
+                'aspn'                  : '7',
+                'chymotrypsin'          : '2',
+                'gluc'                  : '5',
+                'lysc'                  : '3',
+                'lysn'                  : '4',
+                'no_cleavage'           : '9',
+                'nonspecific'           : '0',
+                'trypsin'               : '1',
+                'trypsin_p'             : '1',
+            },
+            'myrimatch_style_1' : {
+                'aspn'                  : 'Asp-N',
+                'chymotrypsin'          : 'Chymotrypsin',
+                'cnbr'                  : 'CNBr',
+                'formic_acid'           : 'Formic_acid',
+                'lysc'                  : 'Lys-C',
+                'lysc_p'                : 'Lys-C/P',
+                'pepsina'               : 'PepsinA',
+                'trypsin'               : 'Trypsin',
+                'trypsin_chymotrypsin'  : 'TrypChymo',
+                'trypsin_p'             : 'Trypsin/P',
+            },
+            'novor_style_1' : {
+                'trypsin'               : 'Trypsin',
+            },
+            'omssa_style_1' : {
+                'argc'                  : '1',
+                'aspn'                  : '12',
+                'aspn_gluc'             : '14',
+                'chymotrypsin'          : '3',
+                'chymotrypsin_p'        : '18',
+                'cnbr'                  : '2',
+                'formic_acid'           : '4',
+                'gluc'                  : '13',
+                'lysc'                  : '5',
+                'lysc_p'                : '6',
+                'lysn'                  : '21',
+                'no_cleavage'           : '11',
+                'nonspecific'           : '17',
+                'pepsina'               : '7',
+                'thermolysin_p'         : '22',
+                'top_down'              : '15',
+                'trypsin'               : '0',
+                'trypsin_chymotrypsin'  : '9',
+                'trypsin_cnbr'          : '8',
+                'trypsin_p'             : '10',
+            },
+            'pepnovo_style_1' : {
+                'nonspecific'           : 'NON_SPECIFIC',
+                'trypsin'               : 'TRYPSIN',
+            },
+            'percolator_style_1' : {
+                'argc'                  : 'R;C;P',
+                'aspn'                  : 'D;N;',
+                'chymotrypsin'          : 'FMWY;C;P',
+                'chymotrypsin_p'        : 'FMWY;C;',
+                'clostripain'           : 'R;C;',
+                'cnbr'                  : 'M;C;P',
+                'elastase'              : 'AGILV;C;P',
+                'formic_acid'           : 'D;C;P',
+                'gluc'                  : 'DE;C;P',
+                'gluc_bicarb'           : 'E;C;P',
+                'iodosobenzoate'        : 'W;C;',
+                'lysc'                  : 'K;C;P',
+                'lysc_gluc'             : 'DEK;C;P',
+                'lysc_p'                : 'K;C;',
+                'lysn'                  : 'K;N;',
+                'lysn_promisc'          : 'AKRS;N;',
+                'pepsina'               : 'FL;C;',
+                'protein_endopeptidase' : 'P;C;',
+                'staph_protease'        : 'E;C;',
+                'trypsin'               : 'KR;C;P',
+                'trypsin_cnbr'          : 'KRM;C;P',
+                'trypsin_gluc'          : 'DEKR;C;P',
+                'trypsin_p'             : 'KR;C;',
+            },
+            'unify_csv_style_1' : {
+                'argc'                  : 'R;C;P',
+                'aspn'                  : 'D;N;',
+                'chymotrypsin'          : 'FMWY;C;P',
+                'chymotrypsin_p'        : 'FMWY;C;',
+                'clostripain'           : 'R;C;',
+                'cnbr'                  : 'M;C;P',
+                'elastase'              : 'AGILV;C;P',
+                'formic_acid'           : 'D;C;P',
+                'gluc'                  : 'DE;C;P',
+                'gluc_bicarb'           : 'E;C;P',
+                'iodosobenzoate'        : 'W;C;',
+                'lysc'                  : 'K;C;P',
+                'lysc_gluc'             : 'DEK;C;P',
+                'lysc_p'                : 'K;C;',
+                'lysn'                  : 'K;N;',
+                'lysn_promisc'          : 'AKRS;N;',
+                'pepsina'               : 'FL;C;',
+                'protein_endopeptidase' : 'P;C;',
+                'staph_protease'        : 'E;C;',
+                'trypsin'               : 'KR;C;P',
+                'trypsin_cnbr'          : 'KRM;C;P',
+                'trypsin_gluc'          : 'DEKR;C;P',
+                'trypsin_p'             : 'KR;C;',
+            },
+            'xtandem_style_1' : {
+                'argc'                  : '[R]|{P}',
+                'aspn'                  : '[X]|[D]',
+                'chymotrypsin'          : '[FMWY]|{P}',
+                'chymotrypsin_p'        : '[FMWY]|[X]',
+                'clostripain'           : '[R]|[X]',
+                'cnbr'                  : '[M]|{P}',
+                'elastase'              : '[AGILV]|{P}',
+                'formic_acid'           : '[D]|{P}',
+                'gluc'                  : '[DE]|{P}',
+                'gluc_bicarb'           : '[E]|{P}',
+                'iodosobenzoate'        : '[W]|[X]',
+                'lysc'                  : '[K]|{P}',
+                'lysc_gluc'             : '[DEK]|[X]|{P}',
+                'lysc_p'                : '[K]|[X]',
+                'lysn'                  : '[X]|[K]',
+                'lysn_promisc'          : '[X]|[AKRS]',
+                'nonspecific'           : '[X]|[X]',
+                'pepsina'               : '[FL]|[X]',
+                'protein_endopeptidase' : '[P]|[X]',
+                'staph_protease'        : '[E]|[X]',
+                'tca'                   : '[FMWY]|{P},[KR]|{P},[X]|[D]',
+                'trypsin'               : '[KR]|{P}',
+                'trypsin_cnbr'          : '[KR]|{P},[M]|{P}',
+                'trypsin_gluc'          : '[DEKR]|{P}',
+                'trypsin_p'             : '[RK]|[X]',
+            },
+        },
+        'uvalue_type' : "select",
+        'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['argc', 'aspn', 'aspn_gluc', 'chymotrypsin', 'chymotrypsin_p', 'clostripain', 'cnbr', 'elastase', 'formic_acid', 'gluc', 'gluc_bicarb', 'iodosobenzoate', 'lysc', 'lysc_p', 'lysn', 'lysn_promisc', 'no_cleavage', 'nonspecific', 'pepsina', 'protein_endopeptidase', 'staph_protease', 'tca', 'thermolysin_p', 'top_down', 'trypsin', 'trypsin_chymotrypsin', 'trypsin_cnbr', 'trypsin_gluc', 'trypsin_p'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
         'default_value' : "trypsin",
-        'description' :  ''' Enzyme: Rule of protein cleavage
+        'description' :  \
+            ''' Enzyme: Rule of protein cleavage
             Possible cleavages are :
                 'argc'           -> '[R]|{P}'
                 'aspn'           -> '[X]|[D]'
@@ -828,257 +1085,12 @@ N-terminus or C-terminus ''',
                 'trypsin_cnbr'
                 'trypsin_p',
                 'lysc_gluc', ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'generate_target_decoy_style_1' : 'enzyme',
-            'kojak_style_1' : 'enzyme',
-            'moda_style_1' : 'Enzyme',
-            'msamanda_style_1' : 'enzyme specificity',
-            'msgfplus_style_1' : '-e',
-            'myrimatch_style_1' : 'CleavageRules',
-            'novor_style_1' : 'enzyme',
-            'omssa_style_1' : '-e',
-            'pepnovo_style_1' : '-digest',
-            'percolator_style_1' : 'enzyme',
-            'unify_csv_style_1' : 'enzyme',
-            'xtandem_style_1' : 'protein, cleavage site',
-        },
-        'utag' : [
-            'database',
-            'protein',
-        ],
-        'uvalue_option' : {
-            'comboBox' : True,
-            'initialValue' : ['argc', 'aspn', 'aspn_gluc', 'chymotrypsin', 'chymotrypsin_p', 'clostripain', 'cnbr', 'elastase', 'formic_acid', 'gluc', 'gluc_bicarb', 'iodosobenzoate', 'lysc', 'lysc_p', 'lysn', 'lysn_promisc', 'no_cleavage', 'nonspecific', 'pepsina', 'protein_endopeptidase', 'staph_protease', 'tca', 'thermolysin_p', 'top_down', 'trypsin', 'trypsin_chymotrypsin', 'trypsin_cnbr', 'trypsin_gluc', 'trypsin_p'],
-            'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
-        },
-        'uvalue_translation' : {
-            'generate_target_decoy_style_1' : {
-                'argc' : 'R;C;P',
-                'aspn' : 'D;N;',
-                'chymotrypsin' : 'FMWY;C;P',
-                'chymotrypsin_p' : 'FMWY;C;',
-                'clostripain' : 'R;C;',
-                'cnbr' : 'M;C;P',
-                'elastase' : 'AGILV;C;P',
-                'formic_acid' : 'D;C;P',
-                'gluc' : 'DE;C;P',
-                'gluc_bicarb' : 'E;C;P',
-                'iodosobenzoate' : 'W;C;',
-                'lysc' : 'K;C;P',
-                'lysc_gluc' : 'DEK;C;P',
-                'lysc_p' : 'K;C;',
-                'lysn' : 'K;N;',
-                'lysn_promisc' : 'AKRS;N;',
-                'pepsina' : 'FL;C;',
-                'protein_endopeptidase' : 'P;C;',
-                'staph_protease' : 'E;C;',
-                'trypsin' : 'KR;C;P',
-                'trypsin_cnbr' : 'KRM;C;P',
-                'trypsin_gluc' : 'DEKR;C;P',
-                'trypsin_p' : 'KR;C;',
-            },
-            'kojak_style_1' : {
-                'gluc' : '[DE]|{P}',
-                'lysc_gluc' : '[DEK]|{P}',
-                'lysn' : '|[K]',
-                'trypsin' : '[KR]|{P}',
-                'trypsin_p' : '[RK]|',
-            },
-            'moda_style_1' : {
-                'argc' : 'argc, R/C',
-                'aspn' : 'aspn, D/N;',
-                'chymotrypsin' : 'chymotrypsin, FMWY/C',
-                'chymotrypsin_p' : 'chymotrypsin, FMWY/C',
-                'clostripain' : 'clostripain, R/C',
-                'cnbr' : 'cnbr, M/C',
-                'elastase' : 'elastase, AGILV/C',
-                'formic_acid' : 'formic_acid, D/C',
-                'gluc' : 'gluc, DE/C',
-                'gluc_bicarb' : 'gluc_bicarb, E/C',
-                'iodosobenzoate' : 'iodosobenzoate, W/C',
-                'lysc' : 'lysc, K/C',
-                'lysc_p' : 'lysc_p, K/C',
-                'lysn' : 'lysn, K/N',
-                'lysn_promisc' : 'lysn_promisc, AKRS/N',
-                'no_cleavage' : 'NONE',
-                'pepsina' : 'pepsina, FL/C',
-                'protein_endopeptidase' : 'protein_endopeptidase, P/C',
-                'staph_protease' : 'staph_protease, E/C',
-                'trypsin' : 'trypsin, KR/C',
-                'trypsin_cnbr' : 'trypsin_cnbr, KRM/C',
-                'trypsin_gluc' : 'trypsin_gluc, DEKR/C',
-                'trypsin_p' : 'trypsin_p, KR/C',
-            },
-            'msamanda_style_1' : {
-                'argc' : 'R;after;P',
-                'aspn' : 'D;before;',
-                'chymotrypsin' : 'FMWY;after;P',
-                'chymotrypsin_p' : 'FMWY;after;',
-                'clostripain' : 'R;after;',
-                'cnbr' : 'M;after;P',
-                'elastase' : 'AGILV;after;P',
-                'formic_acid' : 'D;after;P',
-                'gluc' : 'DE;after;P',
-                'gluc_bicarb' : 'E;after;P',
-                'iodosobenzoate' : 'W;after;',
-                'lysc' : 'K;after;P',
-                'lysc_gluc' : 'DEK;after;P',
-                'lysc_p' : 'K;after;',
-                'lysn' : 'K;before;',
-                'lysn_promisc' : 'AKRS;before;',
-                'nonspecific' : ';;',
-                'pepsina' : 'FL;after;',
-                'protein_endopeptidase' : 'P;after;',
-                'staph_protease' : 'E;after;',
-                'trypsin' : 'KR;after;P',
-                'trypsin_cnbr' : 'KRM;after;P',
-                'trypsin_gluc' : 'DEKR;after;P',
-                'trypsin_p' : 'KR;after;',
-            },
-            'msgfplus_style_1' : {
-                'alpha_lp' : '8',
-                'argc' : '6',
-                'aspn' : '7',
-                'chymotrypsin' : '2',
-                'gluc' : '5',
-                'lysc' : '3',
-                'lysn' : '4',
-                'no_cleavage' : '9',
-                'nonspecific' : '0',
-                'trypsin' : '1',
-                'trypsin_p' : '1',
-            },
-            'myrimatch_style_1' : {
-                'aspn' : 'Asp-N',
-                'chymotrypsin' : 'Chymotrypsin',
-                'cnbr' : 'CNBr',
-                'formic_acid' : 'Formic_acid',
-                'lysc' : 'Lys-C',
-                'lysc_p' : 'Lys-C/P',
-                'pepsina' : 'PepsinA',
-                'trypsin' : 'Trypsin',
-                'trypsin_chymotrypsin' : 'TrypChymo',
-                'trypsin_p' : 'Trypsin/P',
-            },
-            'novor_style_1' : {
-                'trypsin' : 'Trypsin',
-            },
-            'omssa_style_1' : {
-                'argc' : '1',
-                'aspn' : '12',
-                'aspn_gluc' : '14',
-                'chymotrypsin' : '3',
-                'chymotrypsin_p' : '18',
-                'cnbr' : '2',
-                'formic_acid' : '4',
-                'gluc' : '13',
-                'lysc' : '5',
-                'lysc_p' : '6',
-                'lysn' : '21',
-                'no_cleavage' : '11',
-                'nonspecific' : '17',
-                'pepsina' : '7',
-                'thermolysin_p' : '22',
-                'top_down' : '15',
-                'trypsin' : '0',
-                'trypsin_chymotrypsin' : '9',
-                'trypsin_cnbr' : '8',
-                'trypsin_p' : '10',
-            },
-            'pepnovo_style_1' : {
-                'nonspecific' : 'NON_SPECIFIC',
-                'trypsin' : 'TRYPSIN',
-            },
-            'percolator_style_1' : {
-                'argc' : 'R;C;P',
-                'aspn' : 'D;N;',
-                'chymotrypsin' : 'FMWY;C;P',
-                'chymotrypsin_p' : 'FMWY;C;',
-                'clostripain' : 'R;C;',
-                'cnbr' : 'M;C;P',
-                'elastase' : 'AGILV;C;P',
-                'formic_acid' : 'D;C;P',
-                'gluc' : 'DE;C;P',
-                'gluc_bicarb' : 'E;C;P',
-                'iodosobenzoate' : 'W;C;',
-                'lysc' : 'K;C;P',
-                'lysc_gluc' : 'DEK;C;P',
-                'lysc_p' : 'K;C;',
-                'lysn' : 'K;N;',
-                'lysn_promisc' : 'AKRS;N;',
-                'pepsina' : 'FL;C;',
-                'protein_endopeptidase' : 'P;C;',
-                'staph_protease' : 'E;C;',
-                'trypsin' : 'KR;C;P',
-                'trypsin_cnbr' : 'KRM;C;P',
-                'trypsin_gluc' : 'DEKR;C;P',
-                'trypsin_p' : 'KR;C;',
-            },
-            'unify_csv_style_1' : {
-                'argc' : 'R;C;P',
-                'aspn' : 'D;N;',
-                'chymotrypsin' : 'FMWY;C;P',
-                'chymotrypsin_p' : 'FMWY;C;',
-                'clostripain' : 'R;C;',
-                'cnbr' : 'M;C;P',
-                'elastase' : 'AGILV;C;P',
-                'formic_acid' : 'D;C;P',
-                'gluc' : 'DE;C;P',
-                'gluc_bicarb' : 'E;C;P',
-                'iodosobenzoate' : 'W;C;',
-                'lysc' : 'K;C;P',
-                'lysc_gluc' : 'DEK;C;P',
-                'lysc_p' : 'K;C;',
-                'lysn' : 'K;N;',
-                'lysn_promisc' : 'AKRS;N;',
-                'pepsina' : 'FL;C;',
-                'protein_endopeptidase' : 'P;C;',
-                'staph_protease' : 'E;C;',
-                'trypsin' : 'KR;C;P',
-                'trypsin_cnbr' : 'KRM;C;P',
-                'trypsin_gluc' : 'DEKR;C;P',
-                'trypsin_p' : 'KR;C;',
-            },
-            'xtandem_style_1' : {
-                'argc' : '[R]|{P}',
-                'aspn' : '[X]|[D]',
-                'chymotrypsin' : '[FMWY]|{P}',
-                'chymotrypsin_p' : '[FMWY]|[X]',
-                'clostripain' : '[R]|[X]',
-                'cnbr' : '[M]|{P}',
-                'elastase' : '[AGILV]|{P}',
-                'formic_acid' : '[D]|{P}',
-                'gluc' : '[DE]|{P}',
-                'gluc_bicarb' : '[E]|{P}',
-                'iodosobenzoate' : '[W]|[X]',
-                'lysc' : '[K]|{P}',
-                'lysc_gluc' : '[DEK]|[X]|{P}',
-                'lysc_p' : '[K]|[X]',
-                'lysn' : '[X]|[K]',
-                'lysn_promisc' : '[X]|[AKRS]',
-                'nonspecific' : '[X]|[X]',
-                'pepsina' : '[FL]|[X]',
-                'protein_endopeptidase' : '[P]|[X]',
-                'staph_protease' : '[E]|[X]',
-                'tca' : '[FMWY]|{P},[KR]|{P},[X]|[D]',
-                'trypsin' : '[KR]|{P}',
-                'trypsin_cnbr' : '[KR]|{P},[M]|{P}',
-                'trypsin_gluc' : '[DEKR]|{P}',
-                'trypsin_p' : '[RK]|[X]',
-            },
-        },
-        'uvalue_type' : "select",
     },
     'fdr_cutoff' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'svm_1_0_0',
         ],
-        'default_value' : 0.01,
-        'description' :  ''' Target PSMs with a lower FDR than this threshold will be used as a positive training set for SVM post-processing ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'svm_style_1' : 'fdr_cutoff',
@@ -1088,19 +1100,19 @@ N-terminus or C-terminus ''',
             'statistics',
             'validation',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "float",
+        'uvalue_option' : {
+        },
+        'default_value' : 0.01,
+        'description' :  ''' Target PSMs with a lower FDR than this threshold will be used as a positive training set for SVM post-processing ''',
     },
     'filter_csv_converter_version' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : "filter_csv_1_0_0",
-        'description' :  ''' filter csv converter version: version name ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'filter_csv_converter_version',
@@ -1108,21 +1120,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'converter_version',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : "filter_csv_1_0_0",
+        'description' :  ''' filter csv converter version: version name ''',
     },
     'forbidden_cterm_mods' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_vengeance',
         ],
-        'default_value' : [
-        ],
-        'description' :  ''' List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide, e.g. ['GG'] ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'residue, potential modification mass',
@@ -1130,22 +1141,22 @@ N-terminus or C-terminus ''',
         'utag' : [
             'modifications',
         ],
-        'uvalue_option' : {
-            'initialValue' : [],
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 1,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "list",
+        'uvalue_option' : {
+            'initialValue'   : [],
+            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
+        'default_value' : [
+        ],
+        'description' :  ''' List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide, e.g. ['GG'] ''',
     },
     'forbidden_residues' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'novor_1_1beta',
         ],
-        'default_value' : "I,U",
-        'description' :  ''' Aminoacids that are not allowed during/taken into account during denovo searches. Given as a string of comma seperated aminoacids (single letter code) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'novor_style_1' : 'forbiddenResidues',
@@ -1153,20 +1164,20 @@ N-terminus or C-terminus ''',
         'utag' : [
             'de_novo',
         ],
-        'uvalue_option' : {
-            'multipleLine' : False,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+        'uvalue_option' : {
+            'multipleLine' : False,
+        },
+        'default_value' : "I,U",
+        'description' :  ''' Aminoacids that are not allowed during/taken into account during denovo searches. Given as a string of comma seperated aminoacids (single letter code) ''',
     },
     'force' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
-        'default_value' : False,
-        'description' :  ''' If set 'True', engines are forced to re-run although no node-related parameters have changed ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'force',
@@ -1174,11 +1185,13 @@ N-terminus or C-terminus ''',
         'utag' : [
             'file_handling',
         ],
-        'uvalue_option' : {
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
+        'uvalue_option' : {
+        },
+        'default_value' : False,
+        'description' :  ''' If set 'True', engines are forced to re-run although no node-related parameters have changed ''',
     },
     'frag_mass_tolerance' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -1201,8 +1214,6 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : 20,
-        'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'FragTolerance',
@@ -1216,14 +1227,16 @@ N-terminus or C-terminus ''',
         'utag' : [
             'fragment',
         ],
-        'uvalue_option' : {
-            'max' : 100000,
-            'min' : 0,
-            'updownval' : 1,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+            'max'       : 100000,
+            'min'       : 0,
+            'updownval' : 1,
+        },
+        'default_value' : 20,
+        'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
     },
     'frag_mass_tolerance_unit' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -1246,28 +1259,19 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "ppm",
-        'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'moda_style_1' : 'FragTolerance',
-            'msamanda_style_1' : 'ms2_tol unit',
+            'moda_style_1'      : 'FragTolerance',
+            'msamanda_style_1'  : 'ms2_tol unit',
             'myrimatch_style_1' : 'FragmentMzTolerance',
-            'novor_style_1' : 'fragmentIonErrorTol',
-            'omssa_style_1' : 'frag_mass_tolerance_unit',
-            'pepnovo_style_1' : 'frag_mass_tolerance_unit',
-            'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error units',
+            'novor_style_1'     : 'fragmentIonErrorTol',
+            'omssa_style_1'     : 'frag_mass_tolerance_unit',
+            'pepnovo_style_1'   : 'frag_mass_tolerance_unit',
+            'xtandem_style_1'   : 'spectrum, fragment monoisotopic mass error units',
         },
         'utag' : [
             'fragment',
         ],
-        'uvalue_option' : {
-            'comboBox' : True,
-            'initialValue' : ['da', 'mmu', 'ppm'],
-            'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
-        },
         'uvalue_translation' : {
             'msamanda_style_1' : {
                 'da' : 'Da',
@@ -1286,6 +1290,14 @@ N-terminus or C-terminus ''',
             },
         },
         'uvalue_type' : "select",
+        'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['da', 'mmu', 'ppm'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
+        'default_value' : "ppm",
+        'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
     },
     'frag_mass_type' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -1297,8 +1309,6 @@ N-terminus or C-terminus ''',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
         ],
-        'default_value' : "monoisotopic",
-        'description' :  ''' Fragment mass type: monoisotopic or average ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-tom',
@@ -1308,20 +1318,21 @@ N-terminus or C-terminus ''',
             'fragment',
             'spectrum',
         ],
-        'uvalue_option' : {
-            'comboBox' : True,
-            'initialValue' : ['average', 'monoisotopic'],
-            'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
-        },
         'uvalue_translation' : {
             'omssa_style_1' : {
-                'average' : '1',
+                'average'      : '1',
                 'monoisotopic' : '0',
             },
         },
         'uvalue_type' : "select",
+        'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['average', 'monoisotopic'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+        },
+        'default_value' : "monoisotopic",
+        'description' :  ''' Fragment mass type: monoisotopic or average ''',
     },
     'frag_max_charge' : {
         'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
@@ -1366,10 +1377,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['cid', 'ecd', 'etd', 'hcd'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['cid', 'ecd', 'etd', 'hcd'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
             'msgfplus_style_1' : {
@@ -1936,10 +1946,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['high_res_ltq', 'low_res_ltq', 'q_exactive', 'tof'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['high_res_ltq', 'low_res_ltq', 'q_exactive', 'tof'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
             'kojak_style_1' : {
@@ -2467,10 +2476,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['14N', '15N'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['14N', '15N'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
         },
@@ -2822,10 +2830,9 @@ N-terminus or C-terminus ''',
             'input',
             'input_files',                                                      # 'input_files' of utag becomes input file(s) on ogawa automatically (kaz)
         ],
-        'input_types' : ['mgf'],                                                # list, extensions without a dot (kaz)
-        'multiple_input' : False,                                               # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'uvalue_option' : {
-            'multipleLine' : False,
+            'multipleLine'     : False,
+            'input_extensions' : ['.mgf'],                                      # list, extensions (kaz)
         },
         'uvalue_translation' : {
         },
@@ -3065,10 +3072,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : [None, 'iTRAQ4plex', 'iTRAQ8plex', 'TMT2plex', 'TMT6plex'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : [None, 'iTRAQ4plex', 'iTRAQ8plex', 'TMT2plex', 'TMT6plex'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
             'moda_style_1' : {
@@ -3151,8 +3157,7 @@ Example:
         ],
         'uvalue_option' : {
             'initialValue' : [],
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 1,
+            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
         },
@@ -3288,10 +3293,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['0', '1', '2', '3'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['0', '1', '2', '3'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
         },
@@ -3502,10 +3506,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['exportPSMs', 'exportProteinGroups', 'exportProteinsOnly', 'exportProteoAnnotator', 'exportRepProteinPerPAGOnly'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['exportPSMs', 'exportProteinGroups', 'exportProteinsOnly', 'exportProteoAnnotator', 'exportRepProteinPerPAGOnly'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
         },
@@ -3528,10 +3531,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['AddEmpaiToMzid', 'CreateRestrictedFASTADatabase', 'Csv2mzid', 'FalseDiscoveryRate', 'InsertMetaDataFromFasta', 'Mzid2Csv', 'Omssa2mzid', 'ProteoGrouper', 'Tandem2mzid', 'Threshold'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['AddEmpaiToMzid', 'CreateRestrictedFASTADatabase', 'Csv2mzid', 'FalseDiscoveryRate', 'InsertMetaDataFromFasta', 'Mzid2Csv', 'Omssa2mzid', 'ProteoGrouper', 'Tandem2mzid', 'Threshold'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
         },
@@ -4332,10 +4334,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['.csv', '.mzid', '.omx', 'default'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['.csv', '.mzid', '.omx', 'default'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
             'omssa_style_1' : {
@@ -4453,10 +4454,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['linear', 'none'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['linear', 'none'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
             'omssa_style_1' : {
@@ -4500,10 +4500,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['0', '0,1', '0,2'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['0', '0,1', '0,2'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
             'kojak_style_1' : {
@@ -4674,10 +4673,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['da', 'mmu', 'ppm'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['da', 'mmu', 'ppm'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
             'msamanda_style_1' : {
@@ -4728,10 +4726,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['average', 'monoisotopic'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['average', 'monoisotopic'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
             'msamanda_style_1' : {
@@ -5027,10 +5024,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'comboBox' : True,
-            'initialValue' : ['1', '2', '3', '4', '5'],
             'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'initialValue' : ['1', '2', '3', '4', '5'],
+            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
         },
@@ -5156,8 +5152,7 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'initialValue' : [],
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 1,
+            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
         },
@@ -5179,8 +5174,7 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'initialValue' : [],
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 1,
+            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
         },
@@ -6407,8 +6401,7 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'initialValue' : [],
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 1,
+            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
         },
@@ -6472,8 +6465,7 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_option' : {
             'initialValue' : [],
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 1,
+            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'uvalue_translation' : {
         },
