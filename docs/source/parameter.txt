@@ -6127,7 +6127,7 @@ scan_skip_modulo_step
 ################################
 
 
-Include only the n'th spectrum during mzml2mgf conversion
+Include only the n-th spectrum during mzml2mgf conversion
 
 :Default value: None
 :type: int

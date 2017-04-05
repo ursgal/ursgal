@@ -5768,11 +5768,17 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [],
-            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'initialValue'   : [
+            ],
+            'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
+            ],
+            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
+            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : None,
-        'description' :  ''' Exclusively spectra included during mzml2mgf conversion ''',
+        'description' : \
+            'Exclusively spectra included during mzml2mgf conversion',
     },
     'scan_skip_modulo_step' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5796,7 +5802,8 @@ ursgal_params = {
             'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : None,
-        'description' :  ''' Include only the n'th spectrum during mzml2mgf conversion ''',
+        'description' : \
+            'Include only the n-th spectrum during mzml2mgf conversion',
     },
     'score_-h2o_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5821,7 +5828,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Spectrum: if true, ions loss of H2O are respected in algorithm ''',
+        'description' : \
+            'Spectrum: if true, ions loss of H2O are respected in algorithm',
     },
     'score_-nh3_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5846,7 +5854,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Spectrum: if true, ions loss of NH3 are respected in algorithm ''',
+        'description' : \
+            'Spectrum: if true, ions loss of NH3 are respected in algorithm',
     },
     'score_a_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5896,7 +5905,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Spectrum: if true, a ions are used in algorithm ''',
+        'description' : \
+            'Spectrum: if true, a ions are used in algorithm',
     },
     'score_b1_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5920,7 +5930,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' first forward (b1) product ions inclued in search ''',
+        'description' : \
+            'first forward (b1) product ions inclued in search',
     },
     'score_b_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5970,7 +5981,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Spectrum: if true, b ions are used in algorithm ''',
+        'description' : \
+            'Spectrum: if true, b ions are used in algorithm',
     },
     'score_c_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6020,7 +6032,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Spectrum: if true, c ions are used in algorithm ''',
+        'description' : \
+            'Spectrum: if true, c ions are used in algorithm',
     },
     'score_c_terminal_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6044,7 +6057,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Score c terminal ions ''',
+        'description' : \
+            'Score c terminal ions',
     },
     'score_correlation_corr' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6068,7 +6082,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Use correlation correction to score? ''',
+        'description' : \
+            'Use correlation correction to score?',
     },
     'score_diff_threshold' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6121,7 +6136,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Spectrum: if true, immonium ions are respected in algorithm ''',
+        'description' : \
+            'Spectrum: if true, immonium ions are respected in algorithm',
     },
     'score_int_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6146,7 +6162,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Spectrum: if true, internal fragment ions are respect in algorithm ''',
+        'description' : \
+            'Spectrum: if true, internal fragment ions are respect in algorithm',
     },
     'score_x_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6196,7 +6213,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Spectrum: if true, x ions are used in algorithm ''',
+        'description' : \
+            'Spectrum: if true, x ions are used in algorithm',
     },
     'score_y_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6246,7 +6264,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Spectrum: if true, y ions are used in algorithm ''',
+        'description' : \
+            'Spectrum: if true, y ions are used in algorithm',
     },
     'score_z+1_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6271,7 +6290,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Spectrum: if true, z ion plus 1 Da mass are used in algorithm ''',
+        'description' : \
+            'Spectrum: if true, z ion plus 1 Da mass are used in algorithm',
     },
     'score_z+2_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6296,7 +6316,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Spectrum: if true z ion plus 2 Da mass are used in algorithm ''',
+        'description' : \
+            'Spectrum: if true z ion plus 2 Da mass are used in algorithm',
     },
     'score_z_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6346,7 +6367,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Spectrum: if true, z ions are used in algorithm ''',
+        'description' : \
+            'Spectrum: if true, z ions are used in algorithm',
     },
     'search_for_saps' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6374,7 +6396,10 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Search for potential single amino acid polymorphisms. 'True' might cause problems in the downstream processing of th result files (unify_csv, ...) ''',
+        'description' : \
+            'Search for potential single amino acid polymorphisms. \'True\' '\
+            'might cause problems in the downstream processing of th result '\
+            'files (unify_csv, ...)',
     },
     'semi_enzyme' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6437,7 +6462,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Allows semi-enzymatic peptide ends ''',
+        'description' : \
+            'Allows semi-enzymatic peptide ends',
     },
     'show_unodes_in_development' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6455,8 +6481,9 @@ ursgal_params = {
         'uvalue_type' : "bool",
         'uvalue_option' : {
         },
-        'default_value' : "False",
-        'description' :  ''' Show ursgal nodes that are in development: False or True ''',
+        'default_value' : False,
+        'description' : \
+            'Show ursgal nodes that are in development: False or True',
     },
     'spec_dynamic_range' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6485,7 +6512,11 @@ ursgal_params = {
             'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 100,
-        'description' :  ''' Internal normalization for MS/MS spectrum: The highest peak (intensity) within a spectrum is set to given value and all other peaks are normalized to this peak. If the normalized value is less than 1 the peak is rejected. ''',
+        'description' : \
+            'Internal normalization for MS/MS spectrum: The highest peak '\
+            '(intensity) within a spectrum is set to given value and all '\
+            'other peaks are normalized to this peak. If the normalized value '\
+            'is less than 1 the peak is rejected.',
     },
     'svm_c_param' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6542,7 +6573,8 @@ ursgal_params = {
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "b",
-        'description' :  ''' TEST/DEBUG: Internal Ursgal parameter 1 for debugging and testing. ''',
+        'description' : \
+            'TEST/DEBUG: Internal Ursgal parameter 1 for debugging and testing.',
     },
     'test_param2' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6559,11 +6591,11 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             '_test_node_style_1' : {
-                'five'  : 5,
-                'four'  : 4,
                 'one'   : 1,
-                'three' : 3,
                 'two'   : 2,
+                'three' : 3,
+                'four'  : 4,
+                'five'  : 5,
             },
         },
         'uvalue_type' : "str",
@@ -6571,7 +6603,8 @@ ursgal_params = {
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "three",
-        'description' :  ''' TEST/DEBUG: Internal Ursgal parameter 2 for debugging and testing. ''',
+        'description' : 'TEST/DEBUG: Internal Ursgal parameter 2 for '\
+        'debugging and testing.',
     },
     'threshold_is_log10' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
