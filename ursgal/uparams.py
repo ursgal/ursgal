@@ -125,9 +125,10 @@ ursgal_params = {
         },
         'uvalue_type'    : "int",
         'uvalue_option' : {
-            'max'       : 100000,
+            'max'       : 1000000,
             'min'       : 0,
             'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value'  : 1000,
         'description' : \
@@ -158,7 +159,8 @@ ursgal_params = {
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 10000,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value'  : 100000,
         'description' : \
@@ -394,7 +396,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Compress raw search result to .gz: True or False ''',
+        'description' : \
+            'Compress raw search result to .gz: True or False',
     },
     'compute_xcorr' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -419,7 +422,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Compute xcorr ''',
+        'description' : \
+            'Compute xcorr',
     },
     'consecutive_ion_prob' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -476,15 +480,37 @@ ursgal_params = {
             'hardware_resources',
         ],
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                -1 : "max - 1",
+            },
+            'msgfplus_style_1' : {
+                -1 : "max - 1",
+            },
+            'myrimatch_style_1' : {
+                -1 : "max - 1",
+            },
+            'omssa_style_1' : {
+                -1 : "max - 1",
+            },
+            'ucontroller_style_1' : {
+                -1 : "max - 1",
+            },
+            'xtandem_style_1' : {
+                -1 : "max - 1",
+            },
         },
         'uvalue_type' : "int _uevaluation_req",
         'uvalue_option' : {
-            'max' : '_uevaluation_req',
-            'min' : 1,
+            'max'       : '_uevaluation_req',
+            'min'       : -1,
             'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
-        'default_value' : "max - 1",
-        'description' :  ''' Number of used cpus/threads ''',
+        'default_value' : -1,
+        'description' : \
+            'Number of used cpus/threads\n'
+            '    -1 : "max - 1"\n'
+            '    >0 : cpu num',
     },
     'cross_link_definition' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -505,13 +531,14 @@ ursgal_params = {
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "nK  nK  138.0680742 BS3",
-        'description' :  ''' Cross-link and mono-link masses allowed.
-May have more than one of each parameter.
-Format for cross_link is:
-**[amino acids] [amino acids] [mass mod] [identifier]**
-One or more amino acids (uppercase only!!) can be specified for
-each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
-N-terminus or C-terminus ''',
+        'description' : \
+            'Cross-link and mono-link masses allowed.\n'\
+            'May have more than one of each parameter.\n'\
+            'Format for cross_link is: \n'\
+            '    **[amino acids] [amino acids] [mass mod] [identifier]**\n'\
+            'One or more amino acids (uppercase only!!) can be specified for '\
+            'each linkage moiety. Use lowercase \'n\' or \'c\' to indicate '\
+            'protein N-terminus or C-terminus',
     },
     'csv_filter_rules' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -592,7 +619,8 @@ N-terminus or C-terminus ''',
             'input_extensions'  : ['.fasta', '.fa'],                            # list, extensions (kaz)
         },
         'default_value' : None,
-        'description' :  ''' Path to database file containing protein sequences in fasta format ''',
+        'description' : \
+            'Path to database file containing protein sequences in fasta format',
     },
     'database_taxonomy' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -620,7 +648,9 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "all",
-        'description' :  ''' If a taxonomy ID is specified, only the corresponding protein sequences from the fasta database are included in the search. ''',
+        'description' : \
+            'If a taxonomy ID is specified, only the corresponding protein '\
+            'sequences from the fasta database are included in the search.',
     },
     'decoy_generation_mode' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -644,7 +674,10 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "shuffle_peptide",
-        'description' :  ''' Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein). ''',
+        'description' : \
+            'Decoy database: Creates a target decoy database based on '\
+            'shuffling of peptides or complete reversing the protein sequence '\
+            '(reverse_protein).',
     },
     'decoy_tag' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -678,7 +711,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "decoy_",
-        'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
+        'description' : \
+            'decoy-specific tag to differentiate between targets and decoys',
     },
     'del_from_params_before_json_dump' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -735,10 +769,12 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['cid_trypsin'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "cid_trypsin",
-        'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
+        'description' : \
+            'PepNovo model used for de novo sequencing. Based on the enzyme '\
+            'and fragmentation type. Currently only CID_IT_TRYP available.',
     },
     'denovo_model_dir' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -751,6 +787,7 @@ N-terminus or C-terminus ''',
         },
         'utag' : [
             'model',
+            'input_dir',                                                        # 'input_dir' of utag becomes input dir on ogawa automatically (kaz)
         ],
         'uvalue_translation' : {
         },
@@ -759,7 +796,10 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : None,
-        'description' :  ''' Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1 ''',
+        'description' : \
+            'Directory containing the model files for PepNovo. If \'None\', '\
+            'it is supposed to be in :\n'\
+            '    resources/<platform>/<architecture>/pepnovo_3_1',
     },
     'engine_internal_decoy_generation' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -806,7 +846,10 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Engine creates an own decoy database. Not recommended, because a target decoy database should be generated independently from the search engine, e.g. by using the uNode generate_target_decoy_1_0_0 ''',
+        'description' : \
+            'Engine creates an own decoy database. Not recommended, because a '\
+            'target decoy database should be generated independently from the '\
+            'search engine, e.g. by using the uNode generate_target_decoy_1_0_0',
     },
     'engines_create_folders' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -826,7 +869,9 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Create folders for the output of engines that allow this option in their META_INFO ('create_own_folder' : True). True or False ''',
+        'description' : \
+            'Create folders for the output of engines that allow this option '\
+            'in their META_INFO (\'create_own_folder\' : True). True or False',
     },
     'enzyme' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1094,38 +1139,68 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'comboBox'       : True,
             'radioButton'    : False,
-            'initialValue'   : ['argc', 'aspn', 'aspn_gluc', 'chymotrypsin', 'chymotrypsin_p', 'clostripain', 'cnbr', 'elastase', 'formic_acid', 'gluc', 'gluc_bicarb', 'iodosobenzoate', 'lysc', 'lysc_p', 'lysn', 'lysn_promisc', 'no_cleavage', 'nonspecific', 'pepsina', 'protein_endopeptidase', 'staph_protease', 'tca', 'thermolysin_p', 'top_down', 'trypsin', 'trypsin_chymotrypsin', 'trypsin_cnbr', 'trypsin_gluc', 'trypsin_p'],
+            'initialValue'   : [
+                'argc',
+                'aspn',
+                'aspn_gluc',
+                'chymotrypsin',
+                'chymotrypsin_p',
+                'clostripain',
+                'cnbr',
+                'elastase',
+                'formic_acid',
+                'gluc',
+                'gluc_bicarb',
+                'iodosobenzoate',
+                'lysc',
+                'lysc_p',
+                'lysn',
+                'lysn_promisc',
+                'no_cleavage',
+                'nonspecific',
+                'pepsina',
+                'protein_endopeptidase',
+                'staph_protease',
+                'tca',
+                'thermolysin_p',
+                'top_down',
+                'trypsin',
+                'trypsin_chymotrypsin',
+                'trypsin_cnbr',
+                'trypsin_gluc',
+                'trypsin_p'
+            ],
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "trypsin",
         'description' :  \
-            ''' Enzyme: Rule of protein cleavage
-            Possible cleavages are :
-                'argc'           -> '[R]|{P}'
-                'aspn'           -> '[X]|[D]'
-                'aspn_gluc'
-                'chymotrypsin'   -> '[FMWY]|{P}'
-                'chymotrypsin_p' -> '[FMWY]|[X]'
-                'cnbr'           -> '[M]|{P}'
-                'elastase'       -> '[AGILV]|{P}'
-                'formic_acid'    -> '[D]|{P}'
-                'gluc'
-                'lysc'
-                'lysc_p'
-                'lysn'
-                'no_cleavage'
-                'nonspecific'
-                'pepsina'
-                'semi_chymotrypsin'
-                'semi_gluc'
-                'semi_tryptic'
-                'thermolysin_p'
-                'top_down'
-                'trypsin'
-                'trypsin_chymotrypsin
-                'trypsin_cnbr'
-                'trypsin_p',
-                'lysc_gluc', ''',
+            'Enzyme: Rule of protein cleavage'\
+            'Possible cleavages are :\n'\
+            '    argc           -> [R]|{P}\n'\
+            '    aspn           -> [X]|[D]\n'\
+            '    aspn_gluc\n'\
+            '    chymotrypsin   -> [FMWY]|{P}\n'\
+            '    chymotrypsin_p -> [FMWY]|[X]\n'\
+            '    cnbr           -> [M]|{P}\n'\
+            '    elastase       -> [AGILV]|{P}\n'\
+            '    formic_acid    -> [D]|{P}\n'\
+            '    gluc\n'\
+            '    lysc\n'\
+            '    lysc_p\n'\
+            '    lysn\n'\
+            '    no_cleavage\n'\
+            '    nonspecific\n'\
+            '    pepsina\n'\
+            '    semi_chymotrypsin\n'\
+            '    semi_gluc\n'\
+            '    semi_tryptic\n'\
+            '    thermolysin_p\n'\
+            '    top_down\n'\
+            '    trypsin\n'\
+            '    trypsin_chymotrypsin\n'\
+            '    trypsin_cnbr\n'\
+            '    trypsin_p\n'\
+            '    lysc_gluc',
     },
     'fdr_cutoff' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1175,7 +1250,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "filter_csv_1_0_0",
-        'description' :  ''' filter csv converter version: version name ''',
+        'description' : \
+            'filter csv converter version: version name',
     },
     'forbidden_cterm_mods' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1194,11 +1270,13 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
         'uvalue_option' : {
             'initialValue'   : [],
-            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
         ],
-        'description' :  ''' List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide, e.g. ['GG'] ''',
+        'description' : \
+            'List of modifications (unimod name) that are not allowed to '\
+            'occur at the C-terminus of a peptide, e.g. [\'GG\']',
     },
     'forbidden_residues' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1219,7 +1297,10 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "I,U",
-        'description' :  ''' Aminoacids that are not allowed during/taken into account during denovo searches. Given as a string of comma seperated aminoacids (single letter code) ''',
+        'description' : \
+            'Aminoacids that are not allowed during/taken into account during '\
+            'denovo searches. Given as a string of comma seperated aminoacids '\
+            '(single letter code)',
     },
     'force' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1239,7 +1320,9 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' If set 'True', engines are forced to re-run although no node-related parameters have changed ''',
+        'description' : \
+            'If set \'True\', engines are forced to re-run although no '\
+            'node-related parameters have changed',
     },
     'frag_mass_tolerance' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1264,13 +1347,13 @@ N-terminus or C-terminus ''',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'moda_style_1' : 'FragTolerance',
-            'msamanda_style_1' : 'ms2_tol',
+            'moda_style_1'      : 'FragTolerance',
+            'msamanda_style_1'  : 'ms2_tol',
             'myrimatch_style_1' : 'FragmentMzTolerance',
-            'novor_style_1' : 'fragmentIonErrorTol',
-            'omssa_style_1' : '-to',
-            'pepnovo_style_1' : '-fragment_tolerance',
-            'xtandem_style_1' : 'spectrum, fragment monoisotopic mass error',
+            'novor_style_1'     : 'fragmentIonErrorTol',
+            'omssa_style_1'     : '-to',
+            'pepnovo_style_1'   : '-fragment_tolerance',
+            'xtandem_style_1'   : 'spectrum, fragment monoisotopic mass error',
         },
         'utag' : [
             'fragment',
@@ -1282,9 +1365,11 @@ N-terminus or C-terminus ''',
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 20,
-        'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
+        'description' : \
+            'Mass tolerance of measured and calculated fragment ions',
     },
     'frag_mass_tolerance_unit' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1345,7 +1430,9 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "ppm",
-        'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
+        'description' : \
+            'Fragment mass tolerance unit: available in ppm '\
+            '(parts-per-millon), da (Dalton) or mmu (Milli mass unit)',
     },
     'frag_mass_type' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1380,7 +1467,8 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "monoisotopic",
-        'description' :  ''' Fragment mass type: monoisotopic or average ''',
+        'description' : \
+            'Fragment mass type: monoisotopic or average',
     },
     'frag_max_charge' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1402,9 +1490,11 @@ N-terminus or C-terminus ''',
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 4,
-        'description' :  ''' Maximum fragment ion charge to search. ''',
+        'description' : \
+            'Maximum fragment ion charge to search.',
     },
     'frag_method' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1416,7 +1506,7 @@ N-terminus or C-terminus ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-m',
-            'novor_style_1' : 'fragmentation',
+            'novor_style_1'    : 'fragmentation',
         },
         'utag' : [
             'instrument',
@@ -1440,7 +1530,10 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "hcd",
-        'description' :  ''' Used fragmentation method, e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
+        'description' : \
+            'Used fragmentation method, e.g. collision-induced dissociation '\
+            '(CID), electron-capture dissociation (ECD), electron-transfer '\
+            'dissociation (ETD), Higher-energy C-trap dissociation (HCD)',
     },
     'frag_min_mz' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1466,9 +1559,11 @@ N-terminus or C-terminus ''',
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 150,
-        'description' :  ''' Minimal considered fragment ion m/z ''',
+        'description' : \
+            'Minimal considered fragment ion m/z',
     },
     'ftp_blocksize' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1484,12 +1579,16 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "str",
+        'uvalue_type' : "int",
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
+            'max'       : 1000000000,
+            'min'       : 1,
+            'updownval' : 1,
+            'unit'      : 'bytes'                                               # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 1024,
-        'description' :  ''' Blocksize for ftp download ''',
+        'description' : \
+            'Blocksize for ftp download',
     },
     'ftp_folder' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1510,7 +1609,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : None,
-        'description' :  ''' ftp folder that should be downloaded ''',
+        'description' : \
+            'ftp folder that should be downloaded',
     },
     'ftp_include_ext' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1531,7 +1631,9 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : None,
-        'description' :  ''' Only files with the defined file extension are downloaded with ftp download ''',
+        'description' : \
+            'Only files with the defined file extension are downloaded with '\
+            'ftp download',
     },
     'ftp_max_number_of_files' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1546,13 +1648,20 @@ N-terminus or C-terminus ''',
             'download',
         ],
         'uvalue_translation' : {
+            'get_http_style_1' : {
+                0 : None,
+            },
         },
-        'uvalue_type' : "str",
+        'uvalue_type' : "int",
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
-        },
-        'default_value' : None,
-        'description' :  ''' Maximum number of files that will be downloaded ''',
+            'max'       : 1000000000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : 'files'                                               # str, unit is required if uvalue_type is int (kaz)
+        'default_value' : 0,
+        'description' : \
+            'Maximum number of files that will be downloaded\n'\
+            '     0 : No Limitation',
     },
     'ftp_output_folder' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1573,7 +1682,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : None,
-        'description' :  ''' Default ftp download path ''',
+        'description' : \
+            'Default ftp download path',
     },
     'ftp_password' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1589,12 +1699,13 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "str",
+        'uvalue_type' : "str_password",
         'uvalue_option' : {
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : None,
-        'description' :  ''' ftp download password ''',
+        'description' : \
+            'ftp download password',
     },
     'ftp_url' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1615,7 +1726,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : None,
-        'description' :  ''' ftp download URL, will fail if it is not set by the user ''',
+        'description' : \
+            'ftp download URL, will fail if it is not set by the user',
     },
     'header_translations' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1721,11 +1833,13 @@ N-terminus or C-terminus ''',
                 'output_aa_probs'      : 'Pepnovo:aaScore',
             },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : "str",
         'uvalue_option' : {
+            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : None,
-        'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
+        'description' : \
+            'Translate output headers into Ursgal unify_csv style headers',
     },
     'heatmap_annotation_field_name' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1746,7 +1860,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "Protein",
-        'description' :  ''' The name of the annotation to plot in the heatmap ''',
+        'description' : \
+            'The name of the annotation to plot in the heatmap',
     },
     'heatmap_box_style' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1762,11 +1877,13 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "str",
         'uvalue_option' : {
+            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "classic",
-        'description' :  ''' Box style for the heatmap ''',
+        'description' : \
+            'Box style for the heatmap',
     },
     'heatmap_color_gradient' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1787,7 +1904,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "Spectral",
-        'description' :  ''' Color gradient for the heatmap ''',
+        'description' : \
+            'Color gradient for the heatmap',
     },
     'heatmap_column_order' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1805,10 +1923,18 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
+            'initialValue'   : [
+            ],
+            'list_title'   : [                                                  # [str], title of list item is required if uvalue type is list (kaz)
+            ],
+            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
+            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
         ],
-        'description' :  ''' The plot order of the columns ''',
+        'description' : \
+            'The plot order of the columns',
     },
     'heatmap_error_suffix' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1829,7 +1955,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "_std",
-        'description' :  ''' The suffix to identify the value error holding columns ''',
+        'description' : \
+            'The suffix to identify the value error holding columns',
     },
     'heatmap_identifier_field_name' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1850,7 +1977,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "Protein",
-        'description' :  ''' The name of the identifier to plot in the heatmap ''',
+        'description' : \
+            'The name of the identifier to plot in the heatmap',
     },
     'heatmap_max_value' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1868,9 +1996,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
+            'max'       : 100,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 3,
-        'description' :  ''' Maximum value for the color gradient ''',
+        'description' : \
+            'Maximum value for the color gradient',
     },
     'heatmap_min_value' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1888,9 +2021,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
+            'max'       : 10000,
+            'min'       : -10000,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : -3,
-        'description' :  ''' Minimum vaue for the color gradient ''',
+        'description' : \
+            'Minimum vaue for the color gradient',
     },
     'heatmap_value_suffix' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1911,7 +2049,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "_mean",
-        'description' :  ''' The suffix to identify the value columns, which should be plotted ''',
+        'description' : \
+            'The suffix to identify the value columns, which should be plotted',
     },
     'helper_extension' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1932,7 +2071,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : ".u.json",
-        'description' :  ''' Exension for helper files ''',
+        'description' : \
+            'Exension for helper files',
     },
     'http_output_folder' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1953,7 +2093,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "None",
-        'description' :  ''' Default http download path ''',
+        'description' : \
+            'Default http download path',
     },
     'http_url' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1974,7 +2115,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : None,
-        'description' :  ''' http download URL, will fail if it is not set by the user ''',
+        'description' : \
+            'http download URL, will fail if it is not set by the user',
     },
     'instrument' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2025,11 +2167,17 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'comboBox'       : True,
             'radioButton'    : False,
-            'initialValue'   : ['high_res_ltq', 'low_res_ltq', 'q_exactive', 'tof'],
+            'initialValue'   : [
+                'high_res_ltq',
+                'low_res_ltq',
+                'q_exactive',
+                'tof',
+            ],
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "q_exactive",
-        'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
+        'description' : \
+            'Type of mass spectrometer (used to determine the scoring model)',
     },
     'intensity_cutoff' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2076,7 +2224,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : ".u.json",
-        'description' :  ''' Exension for .json files ''',
+        'description' : \
+            'Exension for .json files',
     },
     'keep_asp_pro_broken_peps' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2096,7 +2245,11 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' X!tandem searches for peptides broken between Asp (D) and Pro (P) for every enzyme. Therefore, it reports peptides that are not enzymatically cleaved. Specify, if those should be kept during unify_csv or removed. ''',
+        'description' : \
+            'X!tandem searches for peptides broken between Asp (D) and '\
+            'Pro (P) for every enzyme. Therefore, it reports peptides that '\
+            'are not enzymatically cleaved. Specify, if those should be kept '\
+            'during unify_csv or removed.',
     },
     'kernel' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2114,12 +2267,17 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "str",
+        'uvalue_type' : "select",
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['rbf', 'linear', 'poly', 'sigmoid'],
+            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "rbf",
-        'description' :  ''' The kernel function of the support vector machine used for PSM post-processing ("rbf", "linear", "poly" or "sigmoid") ''',
+        'description' : \
+            'The kernel function of the support vector machine used for PSM '\
+            'post-processing ("rbf", "linear", "poly" or "sigmoid")',
     },
     'kojak_MS1_centroid' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2134,12 +2292,21 @@ N-terminus or C-terminus ''',
             'cross-linking',
         ],
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                'Yes' : 1,
+                'No'  : 0,
+            },
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "select",
         'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['Yes', 'No'],
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : 0,
-        'description' :  ''' MS1 centroided data yes (1) or no (0) ''',
+        'default_value' : 'No',
+        'description' : \
+            'MS1 centroided data yes (1) or no (0)',
     },
     'kojak_MS1_resolution' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2157,9 +2324,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
+            'max'       : 100000000,
+            'min'       : 0,
+            'updownval' : 1000,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 30000,
-        'description' :  ''' MS1 resolution ''',
+        'description' : \
+            'MS1 resolution',
     },
     'kojak_MS2_centroid' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2174,12 +2346,21 @@ N-terminus or C-terminus ''',
             'cross-linking',
         ],
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                'Yes' : 1,
+                'No'  : 0,
+            },
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "select",
         'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['Yes', 'No'],
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : 1,
-        'description' :  ''' MS2 centroided data yes (1) or no (0) ''',
+        'default_value' : 'Yes',
+        'description' : \
+            'MS2 centroided data yes (1) or no (0)',
     },
     'kojak_MS2_resolution' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2197,9 +2378,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
+            'max'       : 100000000,
+            'min'       : 0,
+            'updownval' : 1000,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 25000,
-        'description' :  ''' MS2 resolution ''',
+        'description' : \
+            'MS2 resolution',
     },
     'kojak_diff_mods_on_xl' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2217,10 +2403,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
+            'max'       : 10000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 0,
-        'description' :  ''' To search differential modifications on cross-linked
-        peptides: diff_mods_on_xl = 1 ''',
+        'description' : \
+            'To search differential modifications on cross-linked peptides: '\
+            'diff_mods_on_xl = 1',
     },
     'kojak_enrichment' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2236,12 +2427,18 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "float",
         'uvalue_option' : {
+            'max'       : 1,
+            'min'       : 0,
+            'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
+            'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 0,
-        'description' :  ''' Values between 0 and 1 to describe 18O APE
-        For example, 0.25 equals 25 APE ''',
+        'description' : \
+            'Values between 0 and 1 to describe 18O APE \n'\
+            'For example, 0.25 equals 25 APE',
     },
     'kojak_export_pepxml' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2257,15 +2454,20 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                False : 0,
-                True  : 1,
+                'Activate'   : 1,
+                'Deactivate' : 0,
             },
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "select",
         'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['Activate', 'Deactivate'],
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : True,
-        'description' :  ''' Activate (True) or deactivate (False) output as pepXML ''',
+        'default_value' : 'Deactivate',
+        'description' : \
+            'Activate (1) or deactivate (0) output as pepXML',
     },
     'kojak_export_percolator' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2281,15 +2483,20 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                False : 0,
-                True  : 1,
+                'Activate'   : 1,
+                'Deactivate' : 0,
             },
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "select",
         'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['Activate', 'Deactivate'],
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : True,
-        'description' :  ''' Activate (True) or deactivate (False) output for percolator ''',
+        'default_value' : 'Activate',
+        'description' : \
+            'Activate (1) or deactivate (0) output for percolator',
     },
     'kojak_fragment_bin_offset' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2367,10 +2574,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
+            'max'       : 1000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 0,
-        'description' :  ''' To search for mono-linked cross-linker on
-        cross-linked peptides: mono_links_on_xl = 1 ''',
+        'description' : \
+            'To search for mono-linked cross-linker on cross-linked peptides: '\
+            'mono_links_on_xl = 1',
     },
     'kojak_percolator_version' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2391,7 +2603,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "2.08",
-        'description' :  ''' Defines the output format of Kojak for Percolator ''',
+        'description' : \
+            'Defines the output format of Kojak for Percolator',
     },
     'kojak_prefer_precursor_pred' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2407,9 +2620,9 @@ N-terminus or C-terminus ''',
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                '0: ignore previous predictions' : 0,
-                '1: only previous predictions'   : 1,
-                '2: supplement predictions'      : 2,
+                '0: ignore previous' : 0,
+                '1: only previous'   : 1,
+                '2: supplement'      : 2,
             },
         },
         'uvalue_type' : "select",
@@ -2417,13 +2630,13 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : [
-                '0: ignore previous predictions',
-                '1: only previous predictions',
-                '2: supplement predictions',
+                '0: ignore previous',
+                '1: only previous',
+                '2: supplement',
             ],
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : 'supplement predictions with additional analysis',
+        'default_value' : 'supplement',
         'description' : \
             'prefer precursor mono mass predicted by instrument software.\n'\
             '    0 = ignore previous predictions\n'\
@@ -2445,14 +2658,15 @@ N-terminus or C-terminus ''',
         'uvalue_translation' : {
             'kojak_style_1' : {
                 False : 0,
-                True : 1,
+                True  : 1,
             },
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "bool",
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' True if spectrum should be processed by kojak ''',
+        'description' : \
+            'True, if spectrum should be processed by kojak',
     },
     'kojak_top_count' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2470,10 +2684,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
+            'max'       : 1000000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 300,
-        'description' :  ''' number of top scoring single peptides to combine
-            in relaxed analysis ''',
+        'description' : \
+            'number of top scoring single peptides to combine in relaxed '\
+            'analysis',
     },
     'kojak_truncate_prot_names' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2491,9 +2710,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
+            'max'       : 10000000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 0,
-        'description' :  ''' Max protein name character to export, 0=off ''',
+        'description' : \
+            'Max protein name character to export, 0=off',
     },
     'kojak_turbo_button' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2513,12 +2737,14 @@ N-terminus or C-terminus ''',
                 True  : 1,
             },
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "bool",
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Generally speeds up analysis. Special cases cause reverse
-            effect, thus this is allowed to be disabled. True if it should be used. ''',
+        'description' : \
+            'Generally speeds up analysis. Special cases cause reverse '\
+            'effect, thus this is allowed to be disabled. True if it should '\
+            'be used.',
     },
     'label' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2564,7 +2790,8 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "14N",
-        'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
+        'description' : \
+            '15N if the corresponding amino acid labeling was applied',
     },
     'machine_offset_in_ppm' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2622,10 +2849,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 100,
-        'description' :  ''' Maximum number of peaks from a spectrum used. ''',
+        'description' : \
+            'Maximum number of peaks from a spectrum used.',
     },
     'max_missed_cleavages' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2663,12 +2892,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 100000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 2,
-        'description' :  ''' Maximum number of missed cleavages per peptide ''',
+        'description' : \
+            'Maximum number of missed cleavages per peptide',
     },
     'max_mod_alternatives' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2686,12 +2917,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 100000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 6,
-        'description' :  ''' Maximal number of variable modification alternatives, given as C in 2^C ''',
+        'description' : \
+            'Maximal number of variable modification alternatives, given as C '\
+            'in 2^C',
     },
     'max_mod_size' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2712,9 +2946,11 @@ N-terminus or C-terminus ''',
             'max'       : 10000,
             'min'       : -10000,
             'updownval' : 10,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 200,
-        'description' :  ''' Minimum modification size to consider (in Da) ''',
+        'description' : \
+            'Minimum modification size to consider (in Da)',
     },
     'max_num_mods' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2738,12 +2974,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 100000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : 'mods'                                                # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 3,
-        'description' :  ''' Maximal number of modifications per peptide ''',
+        'description' : \
+            'Maximal number of modifications per peptide',
     },
     'max_num_of_ions_per_series_to_search' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2766,10 +3004,13 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : "all",
-        'description' :  ''' Max number of ions in each series being searched (0=all) ''',
+        'description' : \
+            'Max number of ions in each series being searched\n'
+            '     0 : all',
     },
     'max_num_per_mod' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2807,12 +3048,15 @@ N-terminus or C-terminus ''',
                 'number' : 1,
             },
             'unit': {                                                           # dict, unit for each int-type is required if dict_type include int (kaz)
-                'number' : None,
+                'number' : '',
             },
         },
         'default_value' : {
         },
-        'description' :  ''' Maximal number of modification sites per peptide for a specific modification, given as a dictionary: {unimod_name : number} ''',
+        'description' : \
+            'Maximal number of modification sites per peptide for a specific '\
+            'modification, given as a dictionary: \n'\
+            '    {unimod_name : number}',
     },
     'max_output_e_value' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2869,12 +3113,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 100000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 10,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 40,
-        'description' :  ''' Maximal length of a peptide ''',
+        'description' : \
+            'Maximal length of a peptide',
     },
     'max_pep_var' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2895,12 +3141,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 1000000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 100000,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 1000000,
-        'description' :  ''' Maximal peptide variants ''',
+        'description' : \
+            'Maximal peptide variants',
     },
     'mgf_input_file' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2945,7 +3193,8 @@ N-terminus or C-terminus ''',
             'input_extensions' : ['.mgf'],                                      # list, extensions (kaz)
         },
         'default_value' : None,
-        'description' :  ''' Path to input .mgf file ''',
+        'description' : \
+            'Path to input .mgf file',
     },
     'min_mod_size' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2959,16 +3208,18 @@ N-terminus or C-terminus ''',
         'utag' : [
             'modifications',
         ],
-        'uvalue_option' : {
-            'max'       : 10000,
-            'min'       : -10000,
-            'updownval' : 10,
-        },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
+        'uvalue_option' : {
+            'max'       : 100000,
+            'min'       : -100000,
+            'updownval' : 10,
+            'unit'      : 'Da'                                                  # str, unit is required if uvalue_type is int (kaz)
+        },
         'default_value' : -200,
-        'description' :  ''' Minimum modification size to consider (in Da) ''',
+        'description' : \
+            'Minimum modification size to consider (in Da)',
     },
     'min_output_score' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3029,12 +3280,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 100000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 6,
-        'description' :  ''' Minimal length of a peptide ''',
+        'description' : \
+            'Minimal length of a peptide',
     },
     'min_precursor_matches' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3055,10 +3308,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 1,
-        'description' :  ''' Minimum number of precursors that match a spectrum. ''',
+        'description' : \
+            'Minimum number of precursors that match a spectrum.',
     },
     'min_required_matched_peaks' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3088,10 +3343,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 4,
-        'description' :  ''' Mimimum number of matched ions required for a peptide to be scored ''',
+        'description' : \
+            'Mimimum number of matched ions required for a peptide to be scored',
     },
     'min_required_observed_peaks' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3118,10 +3375,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 5,
-        'description' :  ''' Mimimum number of peaks in the spectrum to be considered. ''',
+        'description' : \
+            'Mimimum number of peaks in the spectrum to be considered.',
     },
     'moda_blind_mode' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3136,15 +3395,29 @@ N-terminus or C-terminus ''',
             'modifications',
         ],
         'uvalue_translation' : {
+            'moda_style_1' : {
+                'No Modification'   : 0,
+                'One Modification'  : 1,
+                'No Limit'          : 2,
+            },
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "select",
         'uvalue_option' : {
-            'max'       : 2,
-            'min'       : 0,
-            'updownval' : 1,
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : [
+                'No Modification',
+                'One Modification',
+                'No Limit',
+            ],
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : 2,
-        'description' :  ''' Allowed number of modifications per peptide. '0' = no modification, '1' = one modification, '2' = no limit ''',
+        'default_value' : 'No Limit',
+        'description' : \
+            'Allowed number of modifications per peptide. \n'\
+            '    \'0\' = no modification, \n'\
+            '    \'1\' = one modification, \n'\
+            '    \'2\' = no limit',
     },
     'moda_high_res' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3160,14 +3433,17 @@ N-terminus or C-terminus ''',
         'uvalue_translation' : {
             'moda_style_1' : {
                 False : 'OFF',
-                True : 'ON',
+                True  : 'ON',
             },
         },
         'uvalue_type' : "bool",
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' If True, fragment tolerance is set as the same as precursor tolerance, when the peptide mass is significantly small, such that fragment tolerance is larger than precursor tolerance ''',
+        'description' : \
+            'If True, fragment tolerance is set as the same as precursor '\
+            'tolerance, when the peptide mass is significantly small, such '\
+            'that fragment tolerance is larger than precursor tolerance',
     },
     'moda_protocol_id' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3189,11 +3465,19 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'comboBox'       : True,
             'radioButton'    : False,
-            'initialValue'   : [None, 'iTRAQ4plex', 'iTRAQ8plex', 'TMT2plex', 'TMT6plex'],
+            'initialValue'   : [
+                'None',
+                'iTRAQ4plex',
+                'iTRAQ8plex',
+                'TMT2plex',
+                'TMT6plex'
+            ],
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : None,
-        'description' :  ''' MODa specific protocol to enable scoring parameters for labeled samples. ''',
+        'default_value' : 'None',
+        'description' : \
+            'MODa specific protocol to enable scoring parameters for labeled '\
+            'samples.',
     },
     'modifications' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3248,40 +3532,56 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [],
-            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'initialValue'   : [
+                '*,opt,Prot-N-term,Acetyl',
+                'M,opt,any,Oxidation',
+            ],
+            'list_title'   : [                                                  # [str], title of list item is required if uvalue type is list (kaz)
+                'mod',
+                'mod',
+            ],
+            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
+            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
             '*,opt,Prot-N-term,Acetyl',
             'M,opt,any,Oxidation',
         ],
-        'description' :  ''' Modifications are given as a list of strings, each representing the modification of one amino acid. The string consists of four informations seperated by comma:
-
-'amino acid,type,position,unimod name'
-
- amino acid : specify the modified amino acid as a single letter, use '*' if the amino acid is variable
-
- type   : specify if it is a fixed (fix) or potential (opt) modification
-
- position  : specify the position within the protein/peptide (Prot-N-term, Prot-C-term), use 'any' if the positon is variable
-
- unimod name : specify the unimod PSI-MS Name (see unimod.org)
-
-Examples:
-
- [ 'M,opt,any,Oxidation' ]   - potential oxidation of Met at any position within a peptide
-
- [ '*,opt,Prot-N-term,Acetyl' ]  - potential acetylation of any amino acid at the N-terminus of a protein
-
- [ 'S,opt,any,Phospho' ]   - potential phosphorylation of Serine at any position within a peptide
-
- ['C,fix,any,Carbamidomethyl', 'N,opt,any,Deamidated', 'Q,opt,any,Deamidated'] - fixed carbamidomethylation of Cys and potential deamidation of Asn and/or Gln at any position within a peptide
-
-Additionally, userdefined modifications can be given and are written to a userdefined_unimod.xml in ursgal/kb/ext. Userdefined modifications need to have a unique name instead of the unimod name the chemical composition needs to be given as a Hill notation on the fifth position in the string
-
-Example:
-
- [ 'S,opt,any,New_mod,C2H5N1O3' ] ''',
+        'description' : \
+            'Modifications are given as a list of strings, each representing '\
+            'the modification of one amino acid. The string consists of four '\
+            'informations seperated by comma: \n'\
+            '    \'amino acid, type, position, unimod name\'\n'\
+            '    amino acid  : specify the modified amino acid as a single '\
+            'letter, use \'*\' if the amino acid is variable\n'\
+            '    type        : specify if it is a fixed (fix) or potential '\
+            '(opt) modification\n'\
+            '    position    : specify the position within the '\
+            'protein/peptide (Prot-N-term, Prot-C-term), use \'any\' if the '\
+            'positon is variable\n'\
+            '    unimod name : specify the unimod PSI-MS Name '\
+            '(see unimod.org)\n'\
+            '\n'\
+            'Examples:\n'\
+            '    [ \'M,opt,any,Oxidation\' ] - potential oxidation of Met at '\
+            'any position within a peptide\n'\
+            '    [ \'*,opt,Prot-N-term,Acetyl\' ] - potential acetylation of '\
+            'any amino acid at the N-terminus of a protein\n'\
+            '    [ \'S,opt,any,Phospho\' ] - potential phosphorylation of '\
+            'Serine at any position within a peptide\n'\
+            '    [ \'C,fix,any,Carbamidomethyl\', \'N,opt,any,Deamidated\', '\
+            '\'Q,opt,any,Deamidated\' ] - fixed carbamidomethylation of Cys '\
+            'and potential deamidation of Asn and/or Gln at any position '\
+            'within a peptide\n'\
+            'Additionally, userdefined modifications can be given and are '\
+            'written to a userdefined_unimod.xml in ursgal/kb/ext. '\
+            'Userdefined modifications need to have a unique name instead of '\
+            'the unimod name the chemical composition needs to be given as a '\
+            'Hill notation on the fifth position in the string\n'\
+            '\n'\
+            'Example:\n'\
+            '[ \'S,opt,any,New_mod,C2H5N1O3\' ]',
     },
     'mono_link_definition' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3289,6 +3589,9 @@ Example:
             'kojak_1_5_3',
         ],
         'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'mono_link_definition',
+        },
         'utag' : [
             'cross-linking',
         ],
@@ -3299,16 +3602,14 @@ Example:
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "nK  156.0786",
-        'description' :  ''' Cross-link and mono-link masses allowed.
-May have more than one of each parameter.
-Format for mono_link is:
-[amino acids] [mass mod]
-One or more amino acids (uppercase only!!) can be specified for
-each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
-N-terminus or C-terminus ''',
-        'ukey_translation' : {
-            'kojak_style_1' : 'mono_link_definition',
-        },
+        'description' : \
+            'Cross-link and mono-link masses allowed. \n'\
+            'May have more than one of each parameter. \n'\
+            'Format for mono_link is: \n'\
+            '    [amino acids] [mass mod]\n'\
+            'One or more amino acids (uppercase only!!) can be specified for '\
+            'each linkage moiety. Use lowercase \'n\' or \'c\' to indicate '\
+            'protein N-terminus or C-terminus',
     },
     'ms1_centroided' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3328,11 +3629,12 @@ N-terminus or C-terminus ''',
                 True  : 1,
             },
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "bool",
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' MS1 data are centroided: True or False ''',
+        'description' : \
+            'MS1 data are centroided: True or False',
     },
     'ms1_resolution' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3350,9 +3652,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
+            'max'       : 100000000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 30000,
-        'description' :  ''' MS1 resolution ''',
+        'description' : \
+            'MS1 resolution',
     },
     'ms2_centroided' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3372,11 +3679,12 @@ N-terminus or C-terminus ''',
                 True  : 1,
             },
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "bool",
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' MS2 data are centroided: True or False ''',
+        'description' : \
+            'MS2 data are centroided: True or False',
     },
     'ms2_resolution' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3394,9 +3702,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
+            'max'       : 100000000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 25000,
-        'description' :  ''' MS2 resolution ''',
+        'description' : \
+            'MS2 resolution',
     },
     'msgfplus_protocol_id' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3420,7 +3733,9 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : 0,
-        'description' :  ''' MS-GF+ specific protocol identifier. Protocols are used to enable scoring parameters for enriched and/or labeled samples. ''',
+        'description' : \
+            'MS-GF+ specific protocol identifier. Protocols are used to '\
+            'enable scoring parameters for enriched and/or labeled samples.',
     },
     'myrimatch_class_size_multiplier' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3440,10 +3755,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 2,
-        'description' :  ''' Myrimatch ClassSizeMultiplier ''',
+        'description' : \
+            'Myrimatch ClassSizeMultiplier',
     },
     'myrimatch_num_int_classes' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3463,10 +3780,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 3,
-        'description' :  ''' Myrimatch NumIntensityClasses ''',
+        'description' : \
+            'Myrimatch NumIntensityClasses',
     },
     'myrimatch_num_mz_fidelity_classes' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3486,10 +3805,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 3,
-        'description' :  ''' Myrimatch NumMzFidelityClasses ''',
+        'description' : \
+            'Myrimatch NumMzFidelityClasses',
     },
     'myrimatch_prot_sampl_time' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3509,10 +3830,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 15,
-        'description' :  ''' Myrimatch ProteinSamplingTime ''',
+        'description' : \
+            'Myrimatch ProteinSamplingTime',
     },
     'myrimatch_smart_plus_three' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3536,7 +3859,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Use Myrimatch UseSmartPlusThreeModel ''',
+        'description' : \
+            'Use Myrimatch UseSmartPlusThreeModel',
     },
     'myrimatch_tic_cutoff' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3588,7 +3912,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Compress mzidentml_lib output files ''',
+        'description' : \
+            'Compress mzidentml_lib output files',
     },
     'mzidentml_converter_version' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3609,7 +3934,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "mzidentml_lib_1_6_10",
-        'description' :  ''' mzidentml converter version: version name ''',
+        'description' : \
+            'mzidentml converter version: version name',
     },
     'mzidentml_export_type' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3641,7 +3967,8 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "exportPSMs",
-        'description' :  ''' Defines which paramters shoul be exporte by mzidentml_lib ''',
+        'description' : \
+            'Defines which paramters shoul be exporte by mzidentml_lib',
     },
     'mzidentml_function' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3677,7 +4004,9 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "Mzid2Csv",
-        'description' :  ''' Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far ''',
+        'description' : \
+            'Defines the mzidentml_lib function to be used. Note: only '\
+            '\'Mzid2Csv\' is suppoted so far',
     },
     'mzidentml_output_fragmentation' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3703,7 +4032,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Include fragmentation in mzidentml_lib output ''',
+        'description' : \
+            'Include fragmentation in mzidentml_lib output',
     },
     'mzidentml_verbose_output' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3729,7 +4059,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Verbose mzidentml_lib output ''',
+        'description' : \
+            'Verbose mzidentml_lib output',
     },
     'mzml2mgf_converter_version' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3750,7 +4081,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "mzml2mgf_1_0_0",
-        'description' :  ''' mzml to mgf converter version: version name ''',
+        'description' : \
+            'mzml to mgf converter version: version name',
     },
     'neutral_loss_enabled' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3779,7 +4111,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Neutral losses enabled for spectrum algorithm: set  True or False ''',
+        'description' : \
+            'Neutral losses enabled for spectrum algorithm: set  True or False',
     },
     'neutral_loss_mass' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3804,10 +4137,13 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 0,
-        'description' :  ''' Sets the centre of the window for ignoring neutral molecule losses. ''',
+        'description' : \
+            'Sets the centre of the window for ignoring neutral molecule '\
+            'losses.',
     },
     'neutral_loss_window' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3832,10 +4168,13 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 0,
-        'description' :  ''' Neutral loss window: sets the width of the window for ignoring neutral molecule losses. ''',
+        'description' : \
+            'Neutral loss window: sets the width of the window for ignoring '\
+            'neutral molecule losses.',
     },
     'noise_suppression_enabled' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3855,14 +4194,15 @@ N-terminus or C-terminus ''',
         'uvalue_translation' : {
             'xtandem_style_1' : {
                 False : 'no',
-                True : 'yes',
+                True  : 'yes',
             },
         },
         'uvalue_type' : "bool",
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Used noise suppresssion ''',
+        'description' : \
+            'Used noise suppresssion',
     },
     'num_compared_psms' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3880,12 +4220,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 100,
+            'max'       : 10000,
             'min'       : 1,
             'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 2,
-        'description' :  ''' Maximum number of PSMs (sorted by score, starting with the best scoring PSM) that are compared ''',
+        'description' : \
+            'Maximum number of PSMs (sorted by score, starting with the best '\
+            'scoring PSM) that are compared',
     },
     'num_hits_retain_spec' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3904,12 +4247,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 100000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 30,
-        'description' :  ''' Maximum number of hits retained per precursor charge state per spectrum during the search ''',
+        'description' : \
+            'Maximum number of hits retained per precursor charge state per '\
+            'spectrum during the search',
     },
     'num_i_decimals' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3927,12 +4273,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 100000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 5,
-        'description' :  ''' Number of decimals for intensity (peak) ''',
+        'description' : \
+            'Number of decimals for intensity (peak)',
     },
     'num_match_spec' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3966,12 +4314,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 100000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 10,
-        'description' :  ''' Maximum number of peptide spectrum matches to report for each spectrum ''',
+        'description' : \
+            'Maximum number of peptide spectrum matches to report for each '\
+            'spectrum',
     },
     'num_mz_decimals' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3989,12 +4340,14 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 10000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 5,
-        'description' :  ''' Number of decimals for m/z mass ''',
+        'description' : \
+            'Number of decimals for m/z mass',
     },
     'omssa_cp' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4019,7 +4372,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Omssa: eliminate charge reduced precursors in spectra ''',
+        'description' : \
+            'Omssa: eliminate charge reduced precursors in spectra',
     },
     'omssa_h1' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4039,10 +4393,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 2,
-        'description' :  ''' Omssa: number of peaks allowed in single charge window ''',
+        'description' : \
+            'Omssa: number of peaks allowed in single charge window',
     },
     'omssa_h2' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4062,10 +4418,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 2,
-        'description' :  ''' Omssa: number of peaks allowed in double charge window ''',
+        'description' : \
+            'Omssa: number of peaks allowed in double charge window',
     },
     'omssa_ht' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4085,10 +4443,13 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 6,
-        'description' :  ''' Omssa: number of m/z values corresponding to the most intense peaks that must include one match to the theoretical peptide ''',
+        'description' : \
+            'Omssa: number of m/z values corresponding to the most intense '\
+            'peaks that must include one match to the theoretical peptide',
     },
     'omssa_mm' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4108,10 +4469,13 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 10,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 128,
-        'description' :  ''' Omssa: the maximum number of mass ladders to generate per database peptide ''',
+        'description' : \
+            'Omssa: the maximum number of mass ladders to generate per '\
+            'database peptide',
     },
     'omssa_ta' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4188,7 +4552,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Omssa: verbose info print ''',
+        'description' : \
+            'Omssa: verbose info print',
     },
     'omssa_w1' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4208,10 +4573,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 27,
-        'description' :  ''' Omssa: single charge window in Da ''',
+        'description' : \
+            'Omssa: single charge window in Da',
     },
     'omssa_w2' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4231,10 +4598,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 14,
-        'description' :  ''' Omssa: double charge window in Da ''',
+        'description' : \
+            'Omssa: double charge window in Da',
     },
     'omssa_z1' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4286,7 +4655,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Should charge plus one be determined algorithmically? ''',
+        'description' : \
+            'Should charge plus one be determined algorithmically?',
     },
     'omssa_zcc' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4306,10 +4676,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 2,
-        'description' :  ''' Omssa: how should precursor charges be determined?, use a range ''',
+        'description' : \
+            'Omssa: how should precursor charges be determined?, use a range',
     },
     'omssa_zt' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4330,10 +4702,13 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 3,
-        'description' :  ''' Minimum precursor charge to start considering multiply charged products ''',
+        'description' : \
+            'Minimum precursor charge to start considering multiply charged '\
+            'products',
     },
     'output_aa_probs' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4353,7 +4728,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Output probabilities for each amino acid. ''',
+        'description' : \
+            'Output probabilities for each amino acid.',
     },
     'output_add_features' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4378,7 +4754,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Number of decimals for intensity (peak) ''',
+        'description' : \
+            'Number of decimals for intensity (peak)',
     },
     'output_cum_probs' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4398,7 +4775,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Output cumulative probabilities. ''',
+        'description' : \
+            'Output cumulative probabilities.',
     },
     'output_file_incl_path' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4434,19 +4812,19 @@ N-terminus or C-terminus ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'output_file',
-            'merge_csv_style_1' : 'output',
-            'moda_style_1' : '-o',
-            'msamanda_style_1' : 'output_file_incl_path',
-            'msgfplus_style_1' : '-o',
-            'myrimatch_style_1' : 'output_file_incl_path',
-            'mzidentml_style_1' : 'output_file_incl_path',
-            'novor_style_1' : 'output_file_incl_path',
-            'omssa_style_1' : 'output_file_incl_path',
-            'pepnovo_style_1' : 'output_file_incl_path',
-            'percolator_style_1' : 'output_file_incl_path',
-            'qvality_style_1' : '-o',
-            'venndiagram_style_1' : 'output_file',
-            'xtandem_style_1' : 'output, path',
+            'merge_csv_style_1'             : 'output',
+            'moda_style_1'                  : '-o',
+            'msamanda_style_1'              : 'output_file_incl_path',
+            'msgfplus_style_1'              : '-o',
+            'myrimatch_style_1'             : 'output_file_incl_path',
+            'mzidentml_style_1'             : 'output_file_incl_path',
+            'novor_style_1'                 : 'output_file_incl_path',
+            'omssa_style_1'                 : 'output_file_incl_path',
+            'pepnovo_style_1'               : 'output_file_incl_path',
+            'percolator_style_1'            : 'output_file_incl_path',
+            'qvality_style_1'               : '-o',
+            'venndiagram_style_1'           : 'output_file',
+            'xtandem_style_1'               : 'output, path',
         },
         'utag' : [
             'output',
@@ -4458,7 +4836,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : None,
-        'description' :  ''' Path to output file ''',
+        'description' : \
+            'Path to output file',
     },
     'output_file_type' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4497,7 +4876,11 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "default",
-        'description' :  ''' Output file type. If set to 'default', default output file tzpes for each engine are used. Note: not every file type is supported by every engine and usin non-default types might cause problems during conversion to .csv. ''',
+        'description' : \
+            'Output file type. If set to \'default\', default output file '\
+            'tzpes for each engine are used. Note: not every file type is '\
+            'supported by every engine and usin non-default types might cause '\
+            'problems during conversion to .csv.',
     },
     'output_prm' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4517,7 +4900,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Only print spectrum graph nodes with scores. ''',
+        'description' : \
+            'Only print spectrum graph nodes with scores.',
     },
     'output_prm_norm' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4537,7 +4921,9 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Prints spectrum graph scores after normalization and removal of negative scores. ''',
+        'description' : \
+            'Prints spectrum graph scores after normalization and removal of '\
+            'negative scores.',
     },
     'output_q_values' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4561,7 +4947,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Output Q-values ''',
+        'description' : \
+            'Output Q-values',
     },
     'pepnovo_tag_length' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4576,15 +4963,22 @@ N-terminus or C-terminus ''',
             'peptide',
         ],
         'uvalue_translation' : {
+            'pepnovo_style_1': {
+                0 : None
+            }
         },
         'uvalue_type' : "int",
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
-        'default_value' : None,
-        'description' :  ''' Returns peptide sequences of the specified length (only lengths 3-6 are allowed) ''',
+        'default_value' : 0,
+        'description' : \
+            'Returns peptide sequences of the specified length (only lengths '\
+            '3-6 are allowed)\n'\
+            '    0 : None',
     },
     'precursor_charge_dependency' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4612,7 +5006,8 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "linear",
-        'description' :  ''' charge dependency of precursor mass tolerance (none or linear) ''',
+        'description' : \
+            'charge dependency of precursor mass tolerance (none or linear)',
     },
     'precursor_isotope_range' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4674,7 +5069,8 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "0,1",
-        'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
+        'description' : \
+            'Error range for incorrect carbon isotope parent ion assignment',
     },
     'precursor_mass_tolerance_minus' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4723,10 +5119,13 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 5,
-        'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
+        'description' : \
+            'Precursor mass tolerance: lower mass tolerance of measured and '\
+            'calculated parent ion M+H',
     },
     'precursor_mass_tolerance_plus' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4775,10 +5174,13 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 5,
-        'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
+        'description' : \
+            'Precursor mass tolerance: higher mass tolerance of measured and '\
+            'calculated parent ion M+H',
     },
     'precursor_mass_tolerance_unit' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4846,7 +5248,9 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "ppm",
-        'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
+        'description' : \
+            'Precursor mass tolerance unit: available in ppm '\
+            '(parts-per-millon), da (Dalton) or mmu (Milli mass unit)',
     },
     'precursor_mass_type' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4892,7 +5296,8 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "monoisotopic",
-        'description' :  ''' Precursor mass type: monoisotopic or average ''',
+        'description' : \
+            'Precursor mass type: monoisotopic or average',
     },
     'precursor_max_charge' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4926,10 +5331,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 5,
-        'description' :  ''' Maximal accepted parent ion charge ''',
+        'description' : \
+            'Maximal accepted parent ion charge',
     },
     'precursor_max_mass' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4954,9 +5361,11 @@ N-terminus or C-terminus ''',
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 100,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 10000,
-        'description' :  ''' Maximal parent ion mass ''',
+        'description' : \
+            'Maximal parent ion mass',
     },
     'precursor_min_charge' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4986,10 +5395,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 1,
-        'description' :  ''' Minimal accepted parent ion charge ''',
+        'description' : \
+            'Minimal accepted parent ion charge',
     },
     'precursor_min_mass' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5018,10 +5429,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 400,
-        'description' :  ''' Minimal parent ion mass ''',
+        'description' : \
+            'Minimal parent ion mass',
     },
     'prefix' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5041,7 +5454,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : None,
-        'description' :  '''  ''',
+        'description' : \
+            '',
     },
     'protein_delimiter' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5065,7 +5479,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "<|>",
-        'description' :  ''' This delimiter seperates protein IDs/names in the unified csv ''',
+        'description' : \
+            'This delimiter seperates protein IDs/names in the unified csv',
     },
     'psm_merge_delimiter' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5087,7 +5502,9 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : ";",
-        'description' :  ''' This delimiter seperates differing values for merged rows in the unified csv ''',
+        'description' : \
+            'This delimiter seperates differing values for merged rows in the '\
+            'unified csv',
     },
     'qvality_cross_validation' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5107,10 +5524,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 0,
-        'description' :  ''' The relative crossvalidation step size used as treshhold before ending the iterations, qvality determines step size automatically when set to 0 ''',
+        'description' : \
+            'The relative crossvalidation step size used as treshhold before '\
+            'ending the iterations, qvality determines step size '\
+            'automatically when set to 0',
     },
     'qvality_epsilon_step' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5130,10 +5551,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 0,
-        'description' :  ''' The relative step size used as treshhold before cross validation error is calculated, qvality determines step size automatically when set to 0 ''',
+        'description' : \
+            'The relative step size used as treshhold before cross validation '\
+            'error is calculated, qvality determines step size automatically '\
+            'when set to 0',
     },
     'qvality_number_of_bins' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5153,10 +5578,12 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 10,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 500,
-        'description' :  ''' Number of bins used in qvality ''',
+        'description' : \
+            'Number of bins used in qvality',
     },
     'qvality_verbose' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5180,7 +5607,9 @@ N-terminus or C-terminus ''',
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : 2,
-        'description' :  ''' Verbose qvality output (range from 0 = no processing info to 5 = all) ''',
+        'description' : \
+            'Verbose qvality output (range from 0 = no processing info to 5 = '\
+            'all)',
     },
     'raw_ident_csv_suffix' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5201,7 +5630,9 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : ".csv",
-        'description' :  ''' CSV suffix of raw indentification: this is the conversion result after CSV conversion but before adding retention time ''',
+        'description' : \
+            'CSV suffix of raw indentification: this is the conversion result '\
+            'after CSV conversion but before adding retention time',
     },
     'remove_redundant_psms' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5221,7 +5652,11 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' If True, redundant PSMs (e.g. the same identification reported by multiple engined) for the same spectrum are removed. An identification is defined by the combination of 'Sequence', 'Modifications' and 'Charge'. ''',
+        'description' : \
+            'If True, redundant PSMs (e.g. the same identification reported '\
+            'by multiple engined) for the same spectrum are removed. An '\
+            'identification is defined by the combination of \'Sequence\', '\
+            '\'Modifications\' and \'Charge\'.',
     },
     'remove_temporary_files' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5241,7 +5676,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Remove temporary files: True or False ''',
+        'description' : \
+            'Remove temporary files: True or False',
     },
     'rt_pickle_name' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5262,7 +5698,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "_ursgal_lookup.pkl",
-        'description' :  ''' name of the pickle that is used to map the retention time ''',
+        'description' : \
+            'name of the pickle that is used to map the retention time',
     },
     'sanitize_csv_converter_version' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5283,7 +5720,8 @@ N-terminus or C-terminus ''',
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "sanitize_csv_1_0_0",
-        'description' :  ''' sanitize csv converter version: version name ''',
+        'description' : \
+            'sanitize csv converter version: version name',
     },
     'scan_exclusion_list' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5301,12 +5739,18 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [],
-            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'initialValue'   : [
+            ],
+            'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
+            ],
+            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
+            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
         ],
-        'description' :  ''' Spectra rejected during mzml2mgf conversion ''',
+        'description' : \
+            'Spectra rejected during mzml2mgf conversion',
     },
     'scan_inclusion_list' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5348,7 +5792,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : None,
         'description' :  ''' Include only the n'th spectrum during mzml2mgf conversion ''',
@@ -6036,7 +6481,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 100,
         'description' :  ''' Internal normalization for MS/MS spectrum: The highest peak (intensity) within a spectrum is set to given value and all other peaks are normalized to this peak. If the normalized value is less than 1 the peak is rejected. ''',
@@ -6586,7 +7032,7 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : ('Helvetica', 31, 25, 20, 20),
-        'description' :  ''' Font used for visualiyation plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn) ''',
+        'description' :  ''' Font used for visualization plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn) ''',
     },
     'visualization_header' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6660,7 +7106,7 @@ N-terminus or C-terminus ''',
         },
         'default_value' : 0.35,
         'description' : \
-            'Opacity used in visualiyation plots (e.g. Venn diagram)',
+            'Opacity used in visualization plots (e.g. Venn diagram)',
     },
     'visualization_scaling_factors' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6680,7 +7126,7 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : (600, 400),
-        'description' :  ''' Scaling factor for visualiyation plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor) ''',
+        'description' :  ''' Scaling factor for visualization plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor) ''',
     },
     'visualization_size' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6700,7 +7146,7 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'default_value' : (1200, 800),
-        'description' :  ''' Size of visualiyation plots (e.g. Venn diagram), given as tuple (width, height) ''',
+        'description' :  ''' Size of visualization plots (e.g. Venn diagram), given as tuple (width, height) ''',
     },
     'visualization_stroke_width' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6725,7 +7171,8 @@ N-terminus or C-terminus ''',
             'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 2.0,
-        'description' :  ''' Stroke width used in visualiyation plots (e.g. Venn diagram) ''',
+        'description' : \
+            'Stroke width used in visualization plots (e.g. Venn diagram)',
     },
     'window_size' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6746,7 +7193,8 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'updownval' : 100,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 249,
         'description' :  ''' Combined PEPs are computed by
