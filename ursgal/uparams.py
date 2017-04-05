@@ -1,6 +1,6 @@
 ursgal_params = {
     '-xmx' : {
-        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus2csv_v2016_09_16',
             'msgfplus_v2016_09_16',
@@ -28,7 +28,7 @@ ursgal_params = {
             'Set maximum Java heap size (used RAM)',
     },
     'aa_exception_dict' : {
-        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
@@ -43,6 +43,21 @@ ursgal_params = {
         },
         'uvalue_type'    : "dict",
         'uvalue_option' : {
+            'dict_title' : {                                                    # dict, title in dict is required if uvalue type is dict (kaz)
+                'Data Set' : {
+                    'Format' : 'Unusual AA'
+                }
+            },
+            'dict_type' : {                                                     # dict, type for each title is required if uvalue type is dict (kaz)
+                'Data Set'   : "str",
+                'Format'     : "str",
+                'Unusual AA' : "str",
+            },
+            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if dict_type include str (kaz)
+                'Data Set'   : False,
+                'Format'     : False,
+                'Unusual AA' : False,
+            },
         },
         'default_value' : {
             'J' : {
@@ -65,7 +80,7 @@ ursgal_params = {
             'unimod modification name',
     },
     'accept_conflicting_psms' : {
-        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -90,7 +105,7 @@ ursgal_params = {
             'there are conflicting PSMs with similar scores.',
     },
     'base_mz' : {
-        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'omssa_2_1_9',
@@ -119,7 +134,7 @@ ursgal_params = {
             'm/z value that is used as basis for the conversion from ppm to Da',
     },
     'batch_size' : {
-        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -151,7 +166,7 @@ ursgal_params = {
             'database file',
     },
     'bigger_scores_better' : {
-        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -273,7 +288,7 @@ ursgal_params = {
             'e.g. by percolator, qvality',
     },
     'cleavage_cterm_mass_change' : {
-        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -294,7 +309,7 @@ ursgal_params = {
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value'  : 17.00305,
@@ -302,7 +317,7 @@ ursgal_params = {
             'The mass added to the peptide C-terminus by protein cleavage',
     },
     'cleavage_nterm_mass_change' : {
-        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -323,7 +338,7 @@ ursgal_params = {
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value'  : 1.00794,
@@ -331,7 +346,7 @@ ursgal_params = {
             'The mass added to the peptide N-terminus bz protein cleavage',
     },
     'compensate_small_fasta' : {
-        'edit_version'   : 1.00,                                                # flot, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -360,7 +375,7 @@ ursgal_params = {
             'Compensate for very small database files.',
     },
     'compress_raw_search_results_if_possible' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -380,7 +395,7 @@ ursgal_params = {
         'description' :  ''' Compress raw search result to .gz: True or False ''',
     },
     'compute_xcorr' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -405,7 +420,7 @@ ursgal_params = {
         'description' :  ''' Compute xcorr ''',
     },
     'consecutive_ion_prob' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -421,14 +436,14 @@ ursgal_params = {
         'uvalue_type' : "float",
         'uvalue_option' : {
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : 0.5,
         'description' :  ''' Probability of consecutive ion (used in correlation correction) ''',
     },
     'cpus' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
@@ -466,7 +481,7 @@ ursgal_params = {
         'description' :  ''' Number of used cpus/threads ''',
     },
     'cross_link_definition' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -493,7 +508,7 @@ each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
 N-terminus or C-terminus ''',
     },
     'csv_filter_rules' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'filter_csv_1_0_0',
         ],
@@ -515,7 +530,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared ''',
     },
     'database' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -564,7 +579,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Path to database file containing protein sequences in fasta format ''',
     },
     'database_taxonomy' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -592,7 +607,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' If a taxonomy ID is specified, only the corresponding protein sequences from the fasta database are included in the search. ''',
     },
     'decoy_generation_mode' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
         ],
@@ -616,7 +631,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein). ''',
     },
     'decoy_tag' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'kojak_1_5_3',
@@ -650,7 +665,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' decoy-specific tag to differentiate between targets and decoys ''',
     },
     'del_from_params_before_json_dump' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -674,7 +689,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' List of parameters that are deleted before .json is dumped (to not overload the .json with unimportant informations) ''',
     },
     'denovo_model' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -701,7 +716,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
     },
     'denovo_model_dir' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -722,7 +737,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1 ''',
     },
     'engine_internal_decoy_generation' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -769,7 +784,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Engine creates an own decoy database. Not recommended, because a target decoy database should be generated independently from the search engine, e.g. by using the uNode generate_target_decoy_1_0_0 ''',
     },
     'engines_create_folders' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -789,7 +804,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Create folders for the output of engines that allow this option in their META_INFO ('create_own_folder' : True). True or False ''',
     },
     'enzyme' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'kojak_1_5_3',
@@ -1088,7 +1103,7 @@ N-terminus or C-terminus ''',
                 'lysc_gluc', ''',
     },
     'fdr_cutoff' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'svm_1_0_0',
         ],
@@ -1110,7 +1125,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Target PSMs with a lower FDR than this threshold will be used as a positive training set for SVM post-processing ''',
     },
     'filter_csv_converter_version' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1131,7 +1146,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' filter csv converter version: version name ''',
     },
     'forbidden_cterm_mods' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_vengeance',
         ],
@@ -1154,7 +1169,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' List of modifications (unimod name) that are not allowed to occur at the C-terminus of a peptide, e.g. ['GG'] ''',
     },
     'forbidden_residues' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'novor_1_1beta',
         ],
@@ -1175,7 +1190,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Aminoacids that are not allowed during/taken into account during denovo searches. Given as a string of comma seperated aminoacids (single letter code) ''',
     },
     'force' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1195,7 +1210,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' If set 'True', engines are forced to re-run although no node-related parameters have changed ''',
     },
     'frag_mass_tolerance' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -1240,7 +1255,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Mass tolerance of measured and calculated fragment ions ''',
     },
     'frag_mass_tolerance_unit' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -1301,7 +1316,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
     },
     'frag_mass_type' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -1336,7 +1351,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Fragment mass type: monoisotopic or average ''',
     },
     'frag_max_charge' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -1360,7 +1375,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximum fragment ion charge to search. ''',
     },
     'frag_method' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -1396,7 +1411,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Used fragmentation method, e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
     },
     'frag_min_mz' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1424,7 +1439,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Minimal considered fragment ion m/z ''',
     },
     'ftp_blocksize' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1445,7 +1460,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Blocksize for ftp download ''',
     },
     'ftp_folder' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1466,7 +1481,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' ftp folder that should be downloaded ''',
     },
     'ftp_include_ext' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1487,7 +1502,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Only files with the defined file extension are downloaded with ftp download ''',
     },
     'ftp_max_number_of_files' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1508,7 +1523,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximum number of files that will be downloaded ''',
     },
     'ftp_output_folder' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1529,7 +1544,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Default ftp download path ''',
     },
     'ftp_password' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1550,7 +1565,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' ftp download password ''',
     },
     'ftp_url' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1571,7 +1586,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' ftp download URL, will fail if it is not set by the user ''',
     },
     'header_translations' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_percolator_2_08',
             'msamanda_1_0_0_5242',
@@ -1681,7 +1696,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Translate output headers into Ursgal unify_csv style headers ''',
     },
     'heatmap_annotation_field_name' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1702,7 +1717,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' The name of the annotation to plot in the heatmap ''',
     },
     'heatmap_box_style' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1722,7 +1737,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Box style for the heatmap ''',
     },
     'heatmap_color_gradient' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1743,7 +1758,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Color gradient for the heatmap ''',
     },
     'heatmap_column_order' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1764,7 +1779,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' The plot order of the columns ''',
     },
     'heatmap_error_suffix' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1785,7 +1800,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' The suffix to identify the value error holding columns ''',
     },
     'heatmap_identifier_field_name' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1806,7 +1821,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' The name of the identifier to plot in the heatmap ''',
     },
     'heatmap_max_value' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1826,7 +1841,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximum value for the color gradient ''',
     },
     'heatmap_min_value' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1846,7 +1861,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Minimum vaue for the color gradient ''',
     },
     'heatmap_value_suffix' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -1867,7 +1882,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' The suffix to identify the value columns, which should be plotted ''',
     },
     'helper_extension' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1888,7 +1903,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Exension for helper files ''',
     },
     'http_output_folder' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
@@ -1909,7 +1924,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Default http download path ''',
     },
     'http_url' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
@@ -1930,7 +1945,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' http download URL, will fail if it is not set by the user ''',
     },
     'instrument' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -1985,7 +2000,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
     },
     'intensity_cutoff' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -2002,14 +2017,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : 0.0,
         'description' :  ''' Low intensity cutoff as a fraction of max peak ''',
     },
     'json_extension' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -2030,7 +2045,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Exension for .json files ''',
     },
     'keep_asp_pro_broken_peps' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
@@ -2050,7 +2065,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' X!tandem searches for peptides broken between Asp (D) and Pro (P) for every enzyme. Therefore, it reports peptides that are not enzymatically cleaved. Specify, if those should be kept during unify_csv or removed. ''',
     },
     'kernel' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'svm_1_0_0',
         ],
@@ -2073,7 +2088,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' The kernel function of the support vector machine used for PSM post-processing ("rbf", "linear", "poly" or "sigmoid") ''',
     },
     'kojak_MS1_centroid' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2093,7 +2108,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' MS1 centroided data yes (1) or no (0) ''',
     },
     'kojak_MS1_resolution' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2113,7 +2128,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' MS1 resolution ''',
     },
     'kojak_MS2_centroid' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2133,7 +2148,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' MS2 centroided data yes (1) or no (0) ''',
     },
     'kojak_MS2_resolution' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2153,7 +2168,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' MS2 resolution ''',
     },
     'kojak_diff_mods_on_xl' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2174,7 +2189,7 @@ N-terminus or C-terminus ''',
         peptides: diff_mods_on_xl = 1 ''',
     },
     'kojak_enrichment' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2195,7 +2210,7 @@ N-terminus or C-terminus ''',
         For example, 0.25 equals 25 APE ''',
     },
     'kojak_export_pepxml' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2219,7 +2234,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Activate (True) or deactivate (False) output as pepXML ''',
     },
     'kojak_export_percolator' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2243,7 +2258,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Activate (True) or deactivate (False) output for percolator ''',
     },
     'kojak_fragment_bin_offset' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2267,7 +2282,7 @@ N-terminus or C-terminus ''',
             For high res ms/ms:    0.03 size, 0.0 offset ''',
     },
     'kojak_fragment_bin_size' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2291,7 +2306,7 @@ N-terminus or C-terminus ''',
             For high res ms/ms:    0.03 size, 0.0 offset ''',
     },
     'kojak_mono_links_on_xl' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2312,7 +2327,7 @@ N-terminus or C-terminus ''',
         cross-linked peptides: mono_links_on_xl = 1 ''',
     },
     'kojak_percolator_version' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2333,7 +2348,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Defines the output format of Kojak for Percolator ''',
     },
     'kojak_prefer_precursor_pred' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2357,7 +2372,7 @@ N-terminus or C-terminus ''',
           2 = supplement predictions with additional analysis ''',
     },
     'kojak_spectrum_processing' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2381,7 +2396,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' True if spectrum should be processed by kojak ''',
     },
     'kojak_top_count' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2402,7 +2417,7 @@ N-terminus or C-terminus ''',
             in relaxed analysis ''',
     },
     'kojak_truncate_prot_names' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2422,7 +2437,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Max protein name character to export, 0=off ''',
     },
     'kojak_turbo_button' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2447,7 +2462,7 @@ N-terminus or C-terminus ''',
             effect, thus this is allowed to be disabled. True if it should be used. ''',
     },
     'label' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -2493,7 +2508,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
     },
     'machine_offset_in_ppm' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -2511,14 +2526,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : 0.0,
         'description' :  ''' Machine offset, m/z values will be corected/shifted by the given value. ''',
     },
     'max_accounted_observed_peaks' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -2551,7 +2566,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximum number of peaks from a spectrum used. ''',
     },
     'max_missed_cleavages' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -2594,7 +2609,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximum number of missed cleavages per peptide ''',
     },
     'max_mod_alternatives' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_vengeance',
         ],
@@ -2617,7 +2632,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximal number of variable modification alternatives, given as C in 2^C ''',
     },
     'max_mod_size' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -2640,7 +2655,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Minimum modification size to consider (in Da) ''',
     },
     'max_num_mods' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
@@ -2669,7 +2684,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximal number of modifications per peptide ''',
     },
     'max_num_of_ions_per_series_to_search' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -2695,7 +2710,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Max number of ions in each series being searched (0=all) ''',
     },
     'max_num_per_mod' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_vengeance',
         ],
@@ -2710,13 +2725,35 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "dict",
         'uvalue_option' : {
+            'dict_title' : {                                                    # dict, title in dict is required if uvalue type is dict (kaz)
+                'Format' : 'number'
+            },
+            'dict_type' : {                                                     # dict, type for each title is required if uvalue type is dict (kaz)
+                'Format' : "str",
+                'number' : "int",
+            },
+            'multipleLine' : {                                                  # dict, multipleLine for each int-type is required if dict_type include int (kaz)
+                'Format' : False,
+            },
+            'max': {                                                            # dict, max for each int-type is required if dict_type include int (kaz)
+                'number' : 10000000,
+            },
+            'min': {                                                            # dict, min for each int-type is required if dict_type include int (kaz)
+                'number' : 0,
+            },
+            'updownval': {                                                      # dict, updownval for each int-type is required if dict_type include int (kaz)
+                'number' : 1,
+            },
+            'unit': {                                                           # dict, unit for each int-type is required if dict_type include int (kaz)
+                'number' : None,
+            },
         },
         'default_value' : {
         },
         'description' :  ''' Maximal number of modification sites per peptide for a specific modification, given as a dictionary: {unimod_name : number} ''',
     },
     'max_output_e_value' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -2740,14 +2777,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : 1.0,
         'description' :  ''' Highest e-value for reported peptides ''',
     },
     'max_pep_length' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -2776,7 +2813,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximal length of a peptide ''',
     },
     'max_pep_var' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -2802,7 +2839,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximal peptide variants ''',
     },
     'mgf_input_file' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -2847,7 +2884,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Path to input .mgf file ''',
     },
     'min_mod_size' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -2870,7 +2907,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Minimum modification size to consider (in Da) ''',
     },
     'min_output_score' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -2897,14 +2934,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : "default",
         'description' :  ''' Lowest score for reported peptides. If set to 'default', default values fo each engine will be used. ''',
     },
     'min_pep_length' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -2933,7 +2970,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Minimal length of a peptide ''',
     },
     'min_precursor_matches' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -2957,7 +2994,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Minimum number of precursors that match a spectrum. ''',
     },
     'min_required_matched_peaks' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -2990,7 +3027,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Mimimum number of matched ions required for a peptide to be scored ''',
     },
     'min_required_observed_peaks' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -3020,7 +3057,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Mimimum number of peaks in the spectrum to be considered. ''',
     },
     'moda_blind_mode' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -3043,7 +3080,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Allowed number of modifications per peptide. '0' = no modification, '1' = one modification, '2' = no limit ''',
     },
     'moda_high_res' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -3066,7 +3103,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' If True, fragment tolerance is set as the same as precursor tolerance, when the peptide mass is significantly small, such that fragment tolerance is larger than precursor tolerance ''',
     },
     'moda_protocol_id' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -3092,7 +3129,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' MODa specific protocol to enable scoring parameters for labeled samples. ''',
     },
     'modifications' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -3180,7 +3217,7 @@ Example:
  [ 'S,opt,any,New_mod,C2H5N1O3' ] ''',
     },
     'mono_link_definition' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3207,7 +3244,7 @@ N-terminus or C-terminus ''',
         },
     },
     'ms1_centroided' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3231,7 +3268,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' MS1 data are centroided: True or False ''',
     },
     'ms1_resolution' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3251,7 +3288,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' MS1 resolution ''',
     },
     'ms2_centroided' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3275,7 +3312,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' MS2 data are centroided: True or False ''',
     },
     'ms2_resolution' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3295,7 +3332,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' MS2 resolution ''',
     },
     'msgfplus_protocol_id' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -3319,7 +3356,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' MS-GF+ specific protocol identifier. Protocols are used to enable scoring parameters for enriched and/or labeled samples. ''',
     },
     'myrimatch_class_size_multiplier' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3342,7 +3379,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Myrimatch ClassSizeMultiplier ''',
     },
     'myrimatch_num_int_classes' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3365,7 +3402,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Myrimatch NumIntensityClasses ''',
     },
     'myrimatch_num_mz_fidelity_classes' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3388,7 +3425,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Myrimatch NumMzFidelityClasses ''',
     },
     'myrimatch_prot_sampl_time' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3411,7 +3448,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Myrimatch ProteinSamplingTime ''',
     },
     'myrimatch_smart_plus_three' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3435,7 +3472,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Use Myrimatch UseSmartPlusThreeModel ''',
     },
     'myrimatch_tic_cutoff' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3452,14 +3489,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : 0.98,
         'description' :  ''' Myrimatch TicCutoffPercentage ''',
     },
     'mzidentml_compress' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -3485,7 +3522,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Compress mzidentml_lib output files ''',
     },
     'mzidentml_converter_version' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -3506,7 +3543,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' mzidentml converter version: version name ''',
     },
     'mzidentml_export_type' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -3538,7 +3575,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Defines which paramters shoul be exporte by mzidentml_lib ''',
     },
     'mzidentml_function' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -3574,7 +3611,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far ''',
     },
     'mzidentml_output_fragmentation' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -3600,7 +3637,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Include fragmentation in mzidentml_lib output ''',
     },
     'mzidentml_verbose_output' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -3626,7 +3663,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Verbose mzidentml_lib output ''',
     },
     'mzml2mgf_converter_version' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -3647,7 +3684,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' mzml to mgf converter version: version name ''',
     },
     'neutral_loss_enabled' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -3676,7 +3713,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Neutral losses enabled for spectrum algorithm: set  True or False ''',
     },
     'neutral_loss_mass' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -3704,7 +3741,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Sets the centre of the window for ignoring neutral molecule losses. ''',
     },
     'neutral_loss_window' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -3732,7 +3769,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Neutral loss window: sets the width of the window for ignoring neutral molecule losses. ''',
     },
     'noise_suppression_enabled' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -3759,7 +3796,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Used noise suppresssion ''',
     },
     'num_compared_psms' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -3782,7 +3819,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximum number of PSMs (sorted by score, starting with the best scoring PSM) that are compared ''',
     },
     'num_hits_retain_spec' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3806,7 +3843,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximum number of hits retained per precursor charge state per spectrum during the search ''',
     },
     'num_i_decimals' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -3829,7 +3866,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Number of decimals for intensity (peak) ''',
     },
     'num_match_spec' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -3868,7 +3905,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximum number of peptide spectrum matches to report for each spectrum ''',
     },
     'num_mz_decimals' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -3891,7 +3928,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Number of decimals for m/z mass ''',
     },
     'omssa_cp' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3916,7 +3953,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Omssa: eliminate charge reduced precursors in spectra ''',
     },
     'omssa_h1' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3939,7 +3976,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Omssa: number of peaks allowed in single charge window ''',
     },
     'omssa_h2' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3962,7 +3999,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Omssa: number of peaks allowed in double charge window ''',
     },
     'omssa_ht' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3985,7 +4022,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Omssa: number of m/z values corresponding to the most intense peaks that must include one match to the theoretical peptide ''',
     },
     'omssa_mm' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4008,7 +4045,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Omssa: the maximum number of mass ladders to generate per database peptide ''',
     },
     'omssa_ta' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4025,14 +4062,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : 1.0,
         'description' :  ''' Omssa: automatic mass tolerance adjustment fraction ''',
     },
     'omssa_tex' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4049,14 +4086,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : 1446.94,
         'description' :  ''' Omssa: threshold in Da above which the mass of neutron should be added in exact mass search ''',
     },
     'omssa_verbose' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4080,7 +4117,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Omssa: verbose info print ''',
     },
     'omssa_w1' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4103,7 +4140,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Omssa: single charge window in Da ''',
     },
     'omssa_w2' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4126,7 +4163,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Omssa: double charge window in Da ''',
     },
     'omssa_z1' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4143,14 +4180,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : 0.95,
         'description' :  ''' Omssa: fraction of peaks below precursor used to determine if spectrum is charge 1 ''',
     },
     'omssa_zc' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4175,7 +4212,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Should charge plus one be determined algorithmically? ''',
     },
     'omssa_zcc' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4198,7 +4235,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Omssa: how should precursor charges be determined?, use a range ''',
     },
     'omssa_zt' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4222,7 +4259,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Minimum precursor charge to start considering multiply charged products ''',
     },
     'output_aa_probs' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -4242,7 +4279,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Output probabilities for each amino acid. ''',
     },
     'output_add_features' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -4267,7 +4304,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Number of decimals for intensity (peak) ''',
     },
     'output_cum_probs' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -4287,7 +4324,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Output cumulative probabilities. ''',
     },
     'output_file_incl_path' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'merge_csv_1_0_0',
@@ -4347,7 +4384,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Path to output file ''',
     },
     'output_file_type' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -4386,7 +4423,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Output file type. If set to 'default', default output file tzpes for each engine are used. Note: not every file type is supported by every engine and usin non-default types might cause problems during conversion to .csv. ''',
     },
     'output_prm' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -4406,7 +4443,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Only print spectrum graph nodes with scores. ''',
     },
     'output_prm_norm' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -4426,7 +4463,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Prints spectrum graph scores after normalization and removal of negative scores. ''',
     },
     'output_q_values' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msgfplus2csv_v2016_09_16',
         ],
@@ -4450,7 +4487,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Output Q-values ''',
     },
     'pepnovo_tag_length' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -4473,7 +4510,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Returns peptide sequences of the specified length (only lengths 3-6 are allowed) ''',
     },
     'precursor_charge_dependency' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4501,7 +4538,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' charge dependency of precursor mass tolerance (none or linear) ''',
     },
     'precursor_isotope_range' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
@@ -4563,7 +4600,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
     },
     'precursor_mass_tolerance_minus' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -4615,7 +4652,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Precursor mass tolerance: lower mass tolerance of measured and calculated parent ion M+H ''',
     },
     'precursor_mass_tolerance_plus' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -4667,7 +4704,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Precursor mass tolerance: higher mass tolerance of measured and calculated parent ion M+H ''',
     },
     'precursor_mass_tolerance_unit' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -4735,7 +4772,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
     },
     'precursor_mass_type' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -4781,7 +4818,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Precursor mass type: monoisotopic or average ''',
     },
     'precursor_max_charge' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -4818,7 +4855,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximal accepted parent ion charge ''',
     },
     'precursor_max_mass' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -4845,7 +4882,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Maximal parent ion mass ''',
     },
     'precursor_min_charge' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -4878,7 +4915,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Minimal accepted parent ion charge ''',
     },
     'precursor_min_mass' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -4910,7 +4947,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Minimal parent ion mass ''',
     },
     'prefix' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -4930,7 +4967,7 @@ N-terminus or C-terminus ''',
         'description' :  '''  ''',
     },
     'protein_delimiter' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'percolator_2_08',
             'unify_csv_1_0_0',
@@ -4954,7 +4991,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' This delimiter seperates protein IDs/names in the unified csv ''',
     },
     'psm_merge_delimiter' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
@@ -4976,7 +5013,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' This delimiter seperates differing values for merged rows in the unified csv ''',
     },
     'qvality_cross_validation' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -4999,7 +5036,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' The relative crossvalidation step size used as treshhold before ending the iterations, qvality determines step size automatically when set to 0 ''',
     },
     'qvality_epsilon_step' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -5022,7 +5059,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' The relative step size used as treshhold before cross validation error is calculated, qvality determines step size automatically when set to 0 ''',
     },
     'qvality_number_of_bins' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -5045,7 +5082,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Number of bins used in qvality ''',
     },
     'qvality_verbose' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -5069,7 +5106,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Verbose qvality output (range from 0 = no processing info to 5 = all) ''',
     },
     'raw_ident_csv_suffix' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -5090,7 +5127,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' CSV suffix of raw indentification: this is the conversion result after CSV conversion but before adding retention time ''',
     },
     'remove_redundant_psms' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -5110,7 +5147,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' If True, redundant PSMs (e.g. the same identification reported by multiple engined) for the same spectrum are removed. An identification is defined by the combination of 'Sequence', 'Modifications' and 'Charge'. ''',
     },
     'remove_temporary_files' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -5130,7 +5167,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Remove temporary files: True or False ''',
     },
     'rt_pickle_name' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -5151,7 +5188,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' name of the pickle that is used to map the retention time ''',
     },
     'sanitize_csv_converter_version' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -5172,7 +5209,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' sanitize csv converter version: version name ''',
     },
     'scan_exclusion_list' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -5195,7 +5232,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectra rejected during mzml2mgf conversion ''',
     },
     'scan_inclusion_list' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -5217,7 +5254,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Exclusively spectra included during mzml2mgf conversion ''',
     },
     'scan_skip_modulo_step' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -5240,7 +5277,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Include only the n'th spectrum during mzml2mgf conversion ''',
     },
     'score_-h2o_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5265,7 +5302,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, ions loss of H2O are respected in algorithm ''',
     },
     'score_-nh3_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5290,7 +5327,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, ions loss of NH3 are respected in algorithm ''',
     },
     'score_a_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5340,7 +5377,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, a ions are used in algorithm ''',
     },
     'score_b1_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5364,7 +5401,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' first forward (b1) product ions inclued in search ''',
     },
     'score_b_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5414,7 +5451,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, b ions are used in algorithm ''',
     },
     'score_c_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5464,7 +5501,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, c ions are used in algorithm ''',
     },
     'score_c_terminal_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5488,7 +5525,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Score c terminal ions ''',
     },
     'score_correlation_corr' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5512,7 +5549,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Use correlation correction to score? ''',
     },
     'score_diff_threshold' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -5536,7 +5573,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Minimum score difference between the best PSM and the first rejected PSM of one spectrum, default: 0.01 ''',
     },
     'score_imm_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5561,7 +5598,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, immonium ions are respected in algorithm ''',
     },
     'score_int_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5586,7 +5623,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, internal fragment ions are respect in algorithm ''',
     },
     'score_x_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5636,7 +5673,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, x ions are used in algorithm ''',
     },
     'score_y_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5686,7 +5723,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, y ions are used in algorithm ''',
     },
     'score_z+1_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5711,7 +5748,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, z ion plus 1 Da mass are used in algorithm ''',
     },
     'score_z+2_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5736,7 +5773,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true z ion plus 2 Da mass are used in algorithm ''',
     },
     'score_z_ions' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -5786,7 +5823,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Spectrum: if true, z ions are used in algorithm ''',
     },
     'search_for_saps' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -5814,7 +5851,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Search for potential single amino acid polymorphisms. 'True' might cause problems in the downstream processing of th result files (unify_csv, ...) ''',
     },
     'semi_enzyme' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -5877,7 +5914,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Allows semi-enzymatic peptide ends ''',
     },
     'show_unodes_in_development' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -5896,7 +5933,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Show ursgal nodes that are in development: False or True ''',
     },
     'spec_dynamic_range' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -5924,7 +5961,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Internal normalization for MS/MS spectrum: The highest peak (intensity) within a spectrum is set to given value and all other peaks are normalized to this peak. If the normalized value is less than 1 the peak is rejected. ''',
     },
     'svm_c_param' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'svm_1_0_0',
         ],
@@ -5946,7 +5983,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Penalty parameter C of the error term of the post-processing SVM ''',
     },
     'test_param1' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             '_test_node',
         ],
@@ -5975,7 +6012,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' TEST/DEBUG: Internal Ursgal parameter 1 for debugging and testing. ''',
     },
     'test_param2' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             '_test_node',
         ],
@@ -6004,7 +6041,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' TEST/DEBUG: Internal Ursgal parameter 2 for debugging and testing. ''',
     },
     'threshold_is_log10' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -6024,7 +6061,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' True, if log10 scale has been used for score_diff_threshold. ''',
     },
     'unify_csv_converter_version' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -6045,7 +6082,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' unify csv converter version: version name ''',
     },
     'ursgal_resource_url' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -6066,7 +6103,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' URL that is used to install and prepare_resources.py ''',
     },
     'use_quality_filter' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -6090,7 +6127,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Use filter for low quality spectra. ''',
     },
     'use_refinement' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -6118,7 +6155,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' X! TANDEM can use 'refinement' to improve the speed and accuracy of peptide modelling. This is not included in Ursgal, yet. See further: http://www.thegpm.org/TANDEM/api/refine.html ''',
     },
     'use_spectrum_charge' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -6138,7 +6175,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Does not correct precursor charge. ''',
     },
     'use_spectrum_mz' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'moda_v1_51',
             'pepnovo_3_1',
@@ -6164,7 +6201,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Does not correct precusor m/z. ''',
     },
     'validated_ident_csv_suffix' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -6185,7 +6222,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' CSV suffix of validated identification files: string, CSV-file which contains PSMs validated with validation tools ''',
     },
     'validation_generalized' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -6209,7 +6246,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Generalized target decoy competition, situations where PSMs known to more frequently be incorrect are mixed in with the correct PSMs ''',
     },
     'validation_minimum_score' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -6248,7 +6285,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Defines the minimum score used fo validation. If scores lower than this are produced, they are set to the minimum score. This is used to avoid huge gaps/jumps in the score distribution ''',
     },
     'validation_score_field' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -6420,7 +6457,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator. If None is defined, default values are used ''',
     },
     'visualization_column_names' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6445,7 +6482,7 @@ N-terminus or C-terminus ''',
         'triggers_rerun' : True,
     },
     'visualization_font' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6465,7 +6502,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Font used for visualiyation plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn) ''',
     },
     'visualization_header' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6486,7 +6523,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Header of visualization output (e.g. Venn diagram) ''',
     },
     'visualization_label_list' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6508,7 +6545,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Specifies labels for the datasets that should be visualized. Needs to be given in the same order as the datasets. ''',
     },
     'visualization_opacity' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6525,14 +6562,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : 0.35,
         'description' :  ''' Opacity used in visualiyation plots (e.g. Venn diagram) ''',
     },
     'visualization_scaling_factors' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6552,7 +6589,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Scaling factor for visualiyation plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor) ''',
     },
     'visualization_size' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6572,7 +6609,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Size of visualiyation plots (e.g. Venn diagram), given as tuple (width, height) ''',
     },
     'visualization_stroke_width' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -6589,14 +6626,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'unit'      : 1e-05,
+            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
         },
         'default_value' : 2.0,
         'description' :  ''' Stroke width used in visualiyation plots (e.g. Venn diagram) ''',
     },
     'window_size' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'combine_pep_1_0_0',
         ],
@@ -6623,7 +6660,7 @@ N-terminus or C-terminus ''',
     This parameter defines the window size. ''',
     },
     'word_len' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'upeptide_mapper_1_0_0',
         ],
@@ -6643,7 +6680,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' NOTE: This can only be changed using the params dict if UPeptideMapper has become a UNode. !!! word length used to index peptide mapper, smaller word len requires more memory ''',
     },
     'write_unfiltered_results' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'filter_csv_1_0_0',
         ],
@@ -6663,7 +6700,7 @@ N-terminus or C-terminus ''',
         'description' :  ''' Writes rejected results if True ''',
     },
     'xtandem_stp_bias' : {
-        'edit_version' : 1.00,                                                  # flot, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
