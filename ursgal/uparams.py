@@ -311,6 +311,7 @@ ursgal_params = {
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value'  : 17.00305,
         'description' : \
@@ -340,6 +341,7 @@ ursgal_params = {
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value'  : 1.00794,
         'description' : \
@@ -435,12 +437,15 @@ ursgal_params = {
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
+            'max'       : 100,
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 0.5,
-        'description' :  ''' Probability of consecutive ion (used in correlation correction) ''',
+        'description' : \
+            'Probability of consecutive ion (used in correlation correction)',
     },
     'cpus' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -476,6 +481,7 @@ ursgal_params = {
         'uvalue_option' : {
             'max' : '_uevaluation_req',
             'min' : 1,
+            'updownval' : 1,
         },
         'default_value' : "max - 1",
         'description' :  ''' Number of used cpus/threads ''',
@@ -523,11 +529,21 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [],
-            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'initialValue'   : ['', '', ''],
+            'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
+                'column name/csv fieldname',
+                'rule',
+                'compared value',
+            ],
+            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
+            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : None,
-        'description' :  ''' Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared ''',
+        'description' : \
+            'Rules are defined as list of tuples with the first tuple element '\
+            'as the column name/csv fieldname, the second tuple element the '\
+            'rule and the third tuple element the value which should be compared',
     },
     'database' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -625,7 +641,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['reverse_protein', 'shuffle_peptide'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "shuffle_peptide",
         'description' :  ''' Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein). ''',
@@ -680,13 +696,22 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [],
-            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'initialValue'   : [
+                'grouped_psms',
+            ],
+            'list_title'   : [                                                  # [str], title of list item is required if uvalue type is list (kaz)
+                'del param',
+            ],
+            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
+            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
             'grouped_psms',
         ],
-        'description' :  ''' List of parameters that are deleted before .json is dumped (to not overload the .json with unimportant informations) ''',
+        'description' : \
+            'List of parameters that are deleted before .json is dumped '\
+            '(to not overload the .json with unimportant informations)',
     },
     'denovo_model' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -710,7 +735,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['cid_trypsin'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "cid_trypsin",
         'description' :  ''' PepNovo model used for de novo sequencing. Based on the enzyme and fragmentation type. Currently only CID_IT_TRYP available. ''',
@@ -1070,7 +1095,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['argc', 'aspn', 'aspn_gluc', 'chymotrypsin', 'chymotrypsin_p', 'clostripain', 'cnbr', 'elastase', 'formic_acid', 'gluc', 'gluc_bicarb', 'iodosobenzoate', 'lysc', 'lysc_p', 'lysn', 'lysn_promisc', 'no_cleavage', 'nonspecific', 'pepsina', 'protein_endopeptidase', 'staph_protease', 'tca', 'thermolysin_p', 'top_down', 'trypsin', 'trypsin_chymotrypsin', 'trypsin_cnbr', 'trypsin_gluc', 'trypsin_p'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "trypsin",
         'description' :  \
@@ -1120,9 +1145,16 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
+            'max'       : 1,
+            'min'       : 0,
+            'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
+            'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 0.01,
-        'description' :  ''' Target PSMs with a lower FDR than this threshold will be used as a positive training set for SVM post-processing ''',
+        'description' : \
+            'Target PSMs with a lower FDR than this threshold will be used as '\
+            'a positive training set for SVM post-processing',
     },
     'filter_csv_converter_version' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1162,7 +1194,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
         'uvalue_option' : {
             'initialValue'   : [],
-            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
         ],
@@ -1310,7 +1342,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['da', 'mmu', 'ppm'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "ppm",
         'description' :  ''' Fragment mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
@@ -1345,7 +1377,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['average', 'monoisotopic'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "monoisotopic",
         'description' :  ''' Fragment mass type: monoisotopic or average ''',
@@ -1405,7 +1437,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['cid', 'ecd', 'etd', 'hcd'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "hcd",
         'description' :  ''' Used fragmentation method, e.g. collision-induced dissociation (CID), electron-capture dissociation (ECD), electron-transfer dissociation (ETD), Higher-energy C-trap dissociation (HCD) ''',
@@ -1994,7 +2026,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['high_res_ltq', 'low_res_ltq', 'q_exactive', 'tof'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "q_exactive",
         'description' :  ''' Type of mass spectrometer (used to determine the scoring model) ''',
@@ -2019,9 +2051,11 @@ N-terminus or C-terminus ''',
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 0.0,
-        'description' :  ''' Low intensity cutoff as a fraction of max peak ''',
+        'description' : \
+            'Low intensity cutoff as a fraction of max peak',
     },
     'json_extension' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2273,13 +2307,19 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
+            'max'       : 1,
+            'min'       : 0,
+            'f-point'   : 1e-01,                                                # e-val, floating point, name is changed (kaz)
+            'updownval' : 0.1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
-        'default_value' : 0.4,
-        'description' :  ''' fragment_bin_offset and fragment_bin_size
-            influence algorithm precision and memory usage.
-            They should be set appropriately for the data analyzed.
-            For ion trap ms/ms:  1.0005 size, 0.4 offset
-            For high res ms/ms:    0.03 size, 0.0 offset ''',
+        'default_value' : 0.0,
+        'description' : \
+            'fragment_bin_offset and fragment_bin_size\n'\
+            'influence algorithm precision and memory usage.\n'\
+            'They should be set appropriately for the data analyzed.\n'\
+            'For ion trap ms/ms:  1.0005 size, 0.4 offset\n'\
+            'For high res ms/ms:    0.03 size, 0.0 offset',
     },
     'kojak_fragment_bin_size' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2297,13 +2337,19 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
+            'max'       : 2,
+            'min'       : 0,
+            'f-point'   : 1e-04,                                                # e-val, floating point, name is changed (kaz)
+            'updownval' : 0.1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
-        'default_value' : 1.005,
-        'description' :  ''' fragment_bin_offset and fragment_bin_size
-            influence algorithm precision and memory usage.
-            They should be set appropriately for the data analyzed.
-            For ion trap ms/ms:  1.0005 size, 0.4 offset
-            For high res ms/ms:    0.03 size, 0.0 offset ''',
+        'default_value' : 0.03,
+        'description' : \
+            'fragment_bin_offset and fragment_bin_size\n'\
+            'influence algorithm precision and memory usage.\n'\
+            'They should be set appropriately for the data analyzed.\n'\
+            'For ion trap ms/ms:  1.0005 size, 0.4 offset\n'\
+            'For high res ms/ms:    0.03 size, 0.0 offset',
     },
     'kojak_mono_links_on_xl' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2360,16 +2406,29 @@ N-terminus or C-terminus ''',
             'cross-linking',
         ],
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                '0: ignore previous predictions' : 0,
+                '1: only previous predictions'   : 1,
+                '2: supplement predictions'      : 2,
+            },
         },
-        'uvalue_type' : "float",
+        'uvalue_type' : "select",
         'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : [
+                '0: ignore previous predictions',
+                '1: only previous predictions',
+                '2: supplement predictions',
+            ],
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : 2,
-        'description' :  ''' prefer precursor mono mass predicted by
-        instrument software.
-          0 = ignore previous predictions
-          1 = use only previous predictions
-          2 = supplement predictions with additional analysis ''',
+        'default_value' : 'supplement predictions with additional analysis',
+        'description' : \
+            'prefer precursor mono mass predicted by instrument software.\n'\
+            '    0 = ignore previous predictions\n'\
+            '    1 = use only previous predictions\n'\
+            '    2 = supplement predictions with additional analysis',
     },
     'kojak_spectrum_processing' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2502,7 +2561,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['14N', '15N'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "14N",
         'description' :  ''' 15N if the corresponding amino acid labeling was applied ''',
@@ -2528,9 +2587,12 @@ N-terminus or C-terminus ''',
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 0.0,
-        'description' :  ''' Machine offset, m/z values will be corected/shifted by the given value. ''',
+        'description' : \
+            'Machine offset, m/z values will be corected/shifted by the given '\
+            'value.',
     },
     'max_accounted_observed_peaks' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2779,9 +2841,11 @@ N-terminus or C-terminus ''',
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 1.0,
-        'description' :  ''' Highest e-value for reported peptides ''',
+        'description' : \
+            'Highest e-value for reported peptides',
     },
     'max_pep_length' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2932,13 +2996,16 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 10,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-10,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : "default",
-        'description' :  ''' Lowest score for reported peptides. If set to 'default', default values fo each engine will be used. ''',
+        'description' : \
+            'Lowest score for reported peptides. If set to \'default\', '\
+            'default values fo each engine will be used.',
     },
     'min_pep_length' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3123,7 +3190,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : [None, 'iTRAQ4plex', 'iTRAQ8plex', 'TMT2plex', 'TMT6plex'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : None,
         'description' :  ''' MODa specific protocol to enable scoring parameters for labeled samples. ''',
@@ -3182,7 +3249,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
         'uvalue_option' : {
             'initialValue'   : [],
-            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
             '*,opt,Prot-N-term,Acetyl',
@@ -3350,7 +3417,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['0', '1', '2', '3'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : 0,
         'description' :  ''' MS-GF+ specific protocol identifier. Protocols are used to enable scoring parameters for enriched and/or labeled samples. ''',
@@ -3487,13 +3554,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 10,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-02,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 0.98,
-        'description' :  ''' Myrimatch TicCutoffPercentage ''',
+        'description' : \
+            'Myrimatch TicCutoffPercentage',
     },
     'mzidentml_compress' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3569,7 +3638,7 @@ N-terminus or C-terminus ''',
                 'exportProteoAnnotator',
                 'exportRepProteinPerPAGOnly',
             ],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "exportPSMs",
         'description' :  ''' Defines which paramters shoul be exporte by mzidentml_lib ''',
@@ -3605,7 +3674,7 @@ N-terminus or C-terminus ''',
                 'Tandem2mzid',
                 'Threshold',
             ],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "Mzid2Csv",
         'description' :  ''' Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far ''',
@@ -4060,13 +4129,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 10000,
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 1.0,
-        'description' :  ''' Omssa: automatic mass tolerance adjustment fraction ''',
+        'description' : \
+            'Omssa: automatic mass tolerance adjustment fraction',
     },
     'omssa_tex' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4086,11 +4157,14 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
             'max'       : 10000000,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-02,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 1446.94,
-        'description' :  ''' Omssa: threshold in Da above which the mass of neutron should be added in exact mass search ''',
+        'description' : \
+            'Omssa: threshold in Da above which the mass of neutron should be '\
+            'added in exact mass search',
     },
     'omssa_verbose' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4178,13 +4252,16 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 10000,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-02,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 0.95,
-        'description' :  ''' Omssa: fraction of peaks below precursor used to determine if spectrum is charge 1 ''',
+        'description' : \
+            'Omssa: fraction of peaks below precursor used to determine if '\
+            'spectrum is charge 1',
     },
     'omssa_zc' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4417,7 +4494,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['.csv', '.mzid', '.omx', 'default'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "default",
         'description' :  ''' Output file type. If set to 'default', default output file tzpes for each engine are used. Note: not every file type is supported by every engine and usin non-default types might cause problems during conversion to .csv. ''',
@@ -4532,7 +4609,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['linear', 'none'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "linear",
         'description' :  ''' charge dependency of precursor mass tolerance (none or linear) ''',
@@ -4594,7 +4671,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['0', '0,1', '0,2'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "0,1",
         'description' :  ''' Error range for incorrect carbon isotope parent ion assignment ''',
@@ -4766,7 +4843,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['da', 'mmu', 'ppm'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "ppm",
         'description' :  ''' Precursor mass tolerance unit: available in ppm (parts-per-millon), da (Dalton) or mmu (Milli mass unit) ''',
@@ -4812,7 +4889,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['average', 'monoisotopic'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "monoisotopic",
         'description' :  ''' Precursor mass type: monoisotopic or average ''',
@@ -5100,7 +5177,7 @@ N-terminus or C-terminus ''',
             'comboBox'       : True,
             'radioButton'    : False,
             'initialValue'   : ['1', '2', '3', '4', '5'],
-            'custom_val_max' : 0,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : 2,
         'description' :  ''' Verbose qvality output (range from 0 = no processing info to 5 = all) ''',
@@ -5225,7 +5302,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
         'uvalue_option' : {
             'initialValue'   : [],
-            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
         ],
@@ -5248,7 +5325,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
         'uvalue_option' : {
             'initialValue'   : [],
-            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : None,
         'description' :  ''' Exclusively spectra included during mzml2mgf conversion ''',
@@ -5565,12 +5642,16 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
-            'max'       : 1000,
+            'max'       : 100,
             'min'       : 0,
-            'updownval' : 1,
+            'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
+            'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
-        'default_value' : 2,
-        'description' :  ''' Minimum score difference between the best PSM and the first rejected PSM of one spectrum, default: 0.01 ''',
+        'default_value' : 0.01,
+        'description' : \
+            'Minimum score difference between the best PSM and the first '\
+            'rejected PSM of one spectrum, default: 0.01',
     },
     'score_imm_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5978,9 +6059,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
+            'max'       : 10000,
+            'min'       : 0,
+            'f-point'   : 1e-01,                                                # e-val, floating point, name is changed (kaz)
+            'updownval' : 0.1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 1.0,
-        'description' :  ''' Penalty parameter C of the error term of the post-processing SVM ''',
+        'description' : \
+            'Penalty parameter C of the error term of the post-processing SVM',
     },
     'test_param1' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6476,7 +6563,7 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
         'uvalue_option'      : {
             'initialValue'   : [],
-            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'description' :  ''' The specified csv column names are used for the visualization. E.g. for a Venn diagram the entries of these columns are used (merged) to determine overlapping results. ''',
         'triggers_rerun' : True,
@@ -6539,10 +6626,15 @@ N-terminus or C-terminus ''',
         'uvalue_type' : "list",
         'uvalue_option' : {
             'initialValue'   : [],
-            'custom_val_max' : 1,                                               # Name is changed and 'userCustomValues' is disuse (kaz)
+            'list_title'     : [],                                              # [str], title of list item is required if uvalue type is list (kaz)
+            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
+            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [],
-        'description' :  ''' Specifies labels for the datasets that should be visualized. Needs to be given in the same order as the datasets. ''',
+        'description' : \
+            'Specifies labels for the datasets that should be visualized. '\
+            'Needs to be given in the same order as the datasets.',
     },
     'visualization_opacity' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6560,13 +6652,15 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "float",
         'uvalue_option' : {
-            'max'       : 10000000,
+            'max'       : 100000,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 0.35,
-        'description' :  ''' Opacity used in visualiyation plots (e.g. Venn diagram) ''',
+        'description' : \
+            'Opacity used in visualiyation plots (e.g. Venn diagram)',
     },
     'visualization_scaling_factors' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6628,6 +6722,7 @@ N-terminus or C-terminus ''',
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
         'default_value' : 2.0,
         'description' :  ''' Stroke width used in visualiyation plots (e.g. Venn diagram) ''',
