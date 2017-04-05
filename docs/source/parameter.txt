@@ -2469,7 +2469,7 @@ fragment_bin_offset and fragment_bin_size
             For ion trap ms/ms:  1.0005 size, 0.4 offset
             For high res ms/ms:    0.03 size, 0.0 offset
 
-:Default value: 0.4
+:Default value: 0.0
 :type: float
 :triggers rerun: False
             
@@ -2502,7 +2502,7 @@ fragment_bin_offset and fragment_bin_size
             For ion trap ms/ms:  1.0005 size, 0.4 offset
             For high res ms/ms:    0.03 size, 0.0 offset
 
-:Default value: 1.005
+:Default value: 0.4
 :type: float
 :triggers rerun: False
             
