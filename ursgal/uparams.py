@@ -14,28 +14,26 @@ ursgal_params = {
         'uvalue_option' : {
             'dict_title' : {                                                    # dict, title in dict is required if uvalue type is dict (kaz)
                 'extension' : {
-                    'tag'  : 'cont_str'
-                    'tag2' : 'cont_list'
+                    'tag' : 'cont',
                 },
             },
-            'dict_type' : {                                                     # dict, type for each title is required if uvalue type is dict (kaz)
-                'extension' : "str",
-                'tag'       : "str",
-                'tag2'      : "str",
-                'cont_str'  : "str",
-                'cont_list' : "list",
+            'dict_type' : {                                                     # dict, the keys are final keys of default_value (kaz)
+                'short_name'     : "str",
+                'long_name'      : "str",
+                'same_extension' : "list",
+                'description'    : "str",
             },
             'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if dict_type include str (kaz)
-                'extension' : False,
-                'tag'       : False,
-                'tag2'      : False,
-                'cont_str'  : False,
+                'short_name'     : False,
+                'long_name'      : False,
+                'description'    : False,
             },
             'list_title' : {                                                    # dict, title of list item is required if dict_type include list (kaz)
-                'cont_list' = [],
+                'same_extension' : [],
             },
             'list_type' : {                                                     # dict, type for each title is required if dict_type include list (kaz)
             },
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : {
             '.csv' : {
@@ -303,15 +301,21 @@ ursgal_params = {
                     'Format' : 'Unusual AA'
                 }
             },
-            'dict_type' : {                                                     # dict, type for each title is required if uvalue type is dict (kaz)
-                'Data Set'   : "str",
-                'Format'     : "str",
-                'Unusual AA' : "str",
+            'dict_type' : {                                                     # dict, the keys are final keys of default_value (kaz)
+                'original_aa'          : "str",
+                'unimod_name'          : "str",
+                'unimod_name_with_cam' : "str",
             },
             'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if dict_type include str (kaz)
-                'Data Set'   : False,
-                'Format'     : False,
-                'Unusual AA' : False,
+                'original_aa'          : False,
+                'unimod_name'          : False,
+                'unimod_name_with_cam' : False,
+            },
+            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+                'str' : {
+                    'multipleLine' : False,
+                },
             },
         },
         'default_value' : {
@@ -1962,6 +1966,7 @@ ursgal_params = {
             'min'       : 0,
             'updownval' : 1,
             'unit'      : 'files'                                               # str, unit is required if uvalue_type is int (kaz)
+        },
         'default_value' : 0,
         'description' : \
             'Maximum number of files that will be downloaded\n'\
@@ -3333,26 +3338,18 @@ ursgal_params = {
         'uvalue_type' : "dict",
         'uvalue_option' : {
             'dict_title' : {                                                    # dict, title in dict is required if uvalue type is dict (kaz)
-                'Format' : 'number'
+                'unimod_name' : 'number'
             },
-            'dict_type' : {                                                     # dict, type for each title is required if uvalue type is dict (kaz)
-                'Format' : "str",
-                'number' : "int",
+            'dict_type' : {                                                     # dict, the keys are final keys of default_value (kaz)
             },
-            'multipleLine' : {                                                  # dict, multipleLine for each int-type is required if dict_type include int (kaz)
-                'Format' : False,
-            },
-            'max': {                                                            # dict, max for each int-type is required if dict_type include int or float (kaz)
-                'number' : 10000000,
-            },
-            'min': {                                                            # dict, min for each int-type is required if dict_type include int or float (kaz)
-                'number' : 0,
-            },
-            'updownval': {                                                      # dict, updownval for each int-type is required if dict_type include int or float (kaz)
-                'number' : 1,
-            },
-            'unit': {                                                           # dict, unit for each int-type is required if dict_type include int or float (kaz)
-                'number' : '',
+            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+                'int' : {
+                    'max'       : 10000,
+                    'min'       : 0,
+                    'updownval' : 1,
+                    'unit'      : '',
+                },
             },
         },
         'default_value' : {
@@ -5758,7 +5755,7 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : None,
+        'uvalue_type' : "None",
         'uvalue_option' : {
         },
         'default_value' : None,
@@ -7347,7 +7344,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
             },
         },
-        'uvalue_type' : None,
+        'uvalue_type' : "None",
         'uvalue_option' : {
         },
         'default_value' : None,
