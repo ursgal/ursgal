@@ -1,4 +1,259 @@
 ursgal_params = {
+    '_extentions' : {                                                           # The information of all of extension, which is used in ursgal, in here (kaz)
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+        ],
+        'triggers_rerun' : False,
+        'ukey_translation' : {
+        },
+        'utag' : [
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type'    : "dict",
+        'uvalue_option' : {
+            'dict_title' : {                                                    # dict, title in dict is required if uvalue type is dict (kaz)
+                'extension' : {
+                    'tag'  : 'cont_str'
+                    'tag2' : 'cont_list'
+                },
+            },
+            'dict_type' : {                                                     # dict, type for each title is required if uvalue type is dict (kaz)
+                'extension' : "str",
+                'tag'       : "str",
+                'tag2'      : "str",
+                'cont_str'  : "str",
+                'cont_list' : "list",
+            },
+            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if dict_type include str (kaz)
+                'extension' : False,
+                'tag'       : False,
+                'tag2'      : False,
+                'cont_str'  : False,
+            },
+            'list_title' : {                                                    # dict, title of list item is required if dict_type include list (kaz)
+                'cont_list' = [],
+            },
+            'list_type' : {                                                     # dict, type for each title is required if dict_type include list (kaz)
+            },
+        },
+        'default_value' : {
+            '.csv' : {
+                'short_name'     : 'CSV',
+                'long_name'      : 'CSV (Comma Delimited)',
+                'same_extension' : [],
+                'description'    : \
+                    'The comma-separated values (CSV) file format is a '\
+                    'tabular data format that has fields separated by the '\
+                    'comma character and quoted by the double quote '\
+                    'character.\n'\
+                    '(DataTypes.net; https://datatypes.net)',
+            },
+            '.den' : {
+                'short_name'     : 'DEN',
+                'long_name'      : 'DEN (XMVB Density Data)',
+                'same_extension' : [],
+                'description'    : \
+                    'DEN file is a XMVB Density Data. Xiamen Valence Bond '\
+                    '(XMVB) is a quantum chemistry program for performing '\
+                    'electronic structure calculations based on the '\
+                    'non-orthogonal Valence Bond methods.\n'\
+                    '(DataTypes.net; https://datatypes.net)',
+            },
+            '.dta' : {
+                'short_name'     : 'DTA',
+                'long_name'      : 'DTA (Stata Data)',
+                'same_extension' : [],
+                'description'    : \
+                    'DTA file is a Stata Data File. Stata is a '\
+                    'general-purpose statistical software package created in '\
+                    '1985 by StataCorp. It is used by many businesses and '\
+                    'academic institutions around the world.\n'\
+                    '(DataTypes.net; https://datatypes.net)',
+            },
+            '.dta.txt' : {
+                'short_name'     : 'DTA_Text',
+                'long_name'      : 'DTA_Text (Text Fromat of DTA)',
+                'same_extension' : [],
+                'description'    : \
+                    'Text format of DTA format.',
+            },
+            '.fasta' : {
+                'short_name'     : 'FASTA',
+                'long_name'      : 'FASTA (Sequence Alignment)',
+                'same_extension' : ['.fa', '.mpfa', '.fna', '.fsa', '.fas'],
+                'description'    : \
+                    'FASTA file is a FASTA Sequence. In bioinformatics, FASTA '\
+                    'format is a text-based format for representing either '\
+                    'nucleotide sequences or peptide sequences, in which '\
+                    'nucleotides or amino acids are represented using '\
+                    'single-letter codes.\n'\
+                    '(DataTypes.net; https://datatypes.net)',
+            },
+            '.gaml' : {
+                'short_name'     : 'GAML',
+                'long_name'      : 'GAML (GAML spectra)',
+                'same_extension' : [],
+                'description'    : \
+                    'GAML spectra',
+            },
+            '.kojak.txt' : {
+                'short_name'     : 'Kojak',
+                'long_name'      : 'Kojak (Kojak result)',
+                'same_extension' : [],
+                'description'    : \
+                    'Kojak result',
+            },
+            '.mgf' : {
+                'short_name'     : 'MGF',
+                'long_name'      : 'MGF (Materials and Geometry)',
+                'same_extension' : [],
+                'description'    : \
+                    'MGF file is a Materials and Geometry Format Data. The '\
+                    'Materials and Geometry Format (MGF) is a description '\
+                    'language for 3-dimensional environments expressly suited '\
+                    'to visible light simulation and rendering.\n'\
+                    '(DataTypes.net; https://datatypes.net)',
+            },
+            '.ms2' : {
+                'short_name'     : 'MS2',
+                'long_name'      : 'MS2 (MS data)',
+                'same_extension' : [],
+                'description'    : \
+                    'Mass spectrometry data format',
+            },
+            '.mzData' : {
+                'short_name'     : 'mzData',
+                'long_name'      : 'mzData (MS data)',
+                'same_extension' : [],
+                'description'    : \
+                    'This format was deprecated, and was replaced by mzML',
+            },
+            '.mzid' : {
+                'short_name'     : 'mzid',
+                'long_name'      : 'mzid (MS data)',
+                'same_extension' : [],
+                'description'    : \
+                    'Mass spectrometry data format',
+            },
+            '.mzid.gz' : {
+                'short_name'     : 'mzid.gz',
+                'long_name'      : 'mzid.gz (Compressed mzid)',
+                'same_extension' : [],
+                'description'    : \
+                    'Compressed mzid',
+            },
+            '.mzML' : {
+                'short_name'     : 'mzML',
+                'long_name'      : 'mzML (MS data)',
+                'same_extension' : ['.mzml'],
+                'description'    : \
+                    'Mass spectrometry data format',
+            },
+            '.mzXML' : {
+                'short_name'     : 'mzXML',
+                'long_name'      : 'mzXML (MS data)',
+                'same_extension' : [],
+                'description'    : \
+                    'This format was replaced by mzML',
+            },
+            '.pep.xml' : {
+                'short_name'     : 'pep.xml',
+                'long_name'      : 'pep.xml (Kojak result)',
+                'same_extension' : [],
+                'description'    : \
+                    'Kojak result',
+            },
+            '.perc.inter.txt' : {
+                'short_name'     : 'perc.inter.txt',
+                'long_name'      : 'perc.inter.txt (Kojak result)',
+                'same_extension' : [],
+                'description'    : \
+                    'Kojak result',
+            },
+            '.perc.intra.txt' : {
+                'short_name'     : 'perc.intra.txt',
+                'long_name'      : 'perc.intra.txt (Kojak result)',
+                'same_extension' : [],
+                'description'    : \
+                    'Kojak result',
+            },
+            '.perc.loop.txt' : {
+                'short_name'     : 'perc.loop.txt',
+                'long_name'      : 'perc.loop.txt (Kojak result)',
+                'same_extension' : [],
+                'description'    : \
+                    'Kojak result',
+            },
+            '.perc.single.txt' : {
+                'short_name'     : 'perc.single.txt',
+                'long_name'      : 'perc.single.txt (Kojak result)',
+                'same_extension' : [],
+                'description'    : \
+                    'Kojak result',
+            },
+            '.pkl' : {
+                'short_name'     : 'PKL',
+                'long_name'      : 'PKL (pickle)',
+                'same_extension' : [],
+                'description'    : \
+                    'PKL file is a file created by pickle module',
+            },
+            '.svg' : {
+                'short_name'     : 'SVG',
+                'long_name'      : 'SVG (Scalable Vector Graphic)',
+                'same_extension' : [],
+                'description'    : \
+                    'SVG file is a Scalable Vector Graphic. SVG is a language '\
+                    'for describing two-dimensional graphics and graphical '\
+                    'applications in XML.\n'\
+                    '(DataTypes.net; https://datatypes.net)',
+            },
+            '.tsv' : {
+                'short_name'     : 'TSV',
+                'long_name'      : 'TSV (Tab-Separated Values document)',
+                'same_extension' : [],
+                'description'    : \
+                    'TSV is a Tab-Separated Values document. It is very '\
+                    'simple textual data format which allows tabular data to '\
+                    'be exhanged between applications that use different '\
+                    'internal data formats.\n'\
+                    '(DataTypes.net; https://datatypes.net)',
+            },
+            '.txt' : {
+                'short_name'     : 'Text',
+                'long_name'      : 'Text (General text format)',
+                'same_extension' : ['.text'],
+                'description'    : \
+                    'TXT file is a plain text. Plain text is textual '\
+                    'material, usually in a disk file, that is (largely) '\
+                    'unformatted.\n'\
+                    '(DataTypes.net; https://datatypes.net)',
+            },
+            '.xml' : {
+                'short_name'     : 'XML',
+                'long_name'      : 'XML (Extensible Markup Language document)',
+                'same_extension' : [],
+                'description'    : \
+                    'XML file is an Extensible Markup Language document. XML '\
+                    'is a simple, very flexible text format derived from SGML '\
+                    '(ISO 8879). Originally designed to meet the challenges '\
+                    'of large-scale electronic publishing, XML is also '\
+                    'playing an increasingly important role in the exchange '\
+                    'of a wide variety of data on the Web and elsewhere.\n'\
+                    '(DataTypes.net; https://datatypes.net)',
+            },
+            '.xml.gz' : {
+                'short_name'     : 'XML.gz',
+                'long_name'      : 'XML.gz (Compressed mzid)',
+                'same_extension' : [],
+                'description'    : \
+                    'Compressed xml',
+            },
+        },
+        'description' : \
+            'information of extentions',
+    },
     '-xmx' : {
         'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
@@ -190,6 +445,7 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'add_estimated_fdr_style_1' : {
+                'None'                 : None,
                 'msamanda_1_0_0_5242'  : True,
                 'msamanda_1_0_0_5243'  : True,
                 'msamanda_1_0_0_6299'  : True,
@@ -208,6 +464,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
             },
             'percolator_style_1' : {
+                'None'                 : None,
                 'msamanda_1_0_0_5242'  : True,
                 'msamanda_1_0_0_5243'  : True,
                 'msamanda_1_0_0_6299'  : True,
@@ -226,6 +483,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
             },
             'qvality_style_1' : {
+                'None'                 : None,
                 'msamanda_1_0_0_5242'  : True,
                 'msamanda_1_0_0_5243'  : True,
                 'msamanda_1_0_0_6299'  : True,
@@ -244,6 +502,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
             },
             'sanitize_csv_style_1' : {
+                'None'                 : None,
                 'msamanda_1_0_0_5242'  : True,
                 'msamanda_1_0_0_5243'  : True,
                 'msamanda_1_0_0_6299'  : True,
@@ -262,6 +521,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
             },
             'svm_style_1' : {
+                'None'                 : None,
                 'msamanda_1_0_0_5242'  : True,
                 'msamanda_1_0_0_5243'  : True,
                 'msamanda_1_0_0_6299'  : True,
@@ -280,10 +540,32 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
             },
         },
-        'uvalue_type'    : "bool",
+        'uvalue_type'    : "select",
         'uvalue_option' : {
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : [
+                'None',
+                'msamanda_1_0_0_5242',
+                'msamanda_1_0_0_5243',
+                'msamanda_1_0_0_6299',
+                'msamanda_1_0_0_6300',
+                'msamanda_1_0_0_7503',
+                'msamanda_1_0_0_7504',
+                'msgfplus_v2016_09_16',
+                'msgfplus_v9979',
+                'myrimatch_2_1_138',
+                'myrimatch_2_2_140',
+                'omssa_2_1_9',
+                'xtandem_cyclone_2010',
+                'xtandem_jackhammer',
+                'xtandem_piledriver',
+                'xtandem_sledgehammer',
+                'xtandem_vengeance',
+            ],
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value'  : None,
+        'default_value'  : 'None',
         'description' : \
             'Defines if bigger scores are better (or the other way round), '\
             'for scores that should be validated (see validation_score_field) '\
@@ -582,7 +864,8 @@ ursgal_params = {
         'description' : \
             'Rules are defined as list of tuples with the first tuple element '\
             'as the column name/csv fieldname, the second tuple element the '\
-            'rule and the third tuple element the value which should be compared',
+            'rule and the third tuple element the value which should be '\
+            'compared',
     },
     'database' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
