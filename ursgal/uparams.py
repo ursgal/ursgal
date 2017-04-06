@@ -556,14 +556,26 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : ['', '', ''],
+            'initialValue'   : [
+                '',
+                '',
+                ''
+            ],
             'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
                 'column name/csv fieldname',
                 'rule',
                 'compared value',
             ],
-            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
-            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'list_type' : {                                                     # dict, type for each title is required if uvalue type is list (kaz)
+                'column name/csv fieldname' : 'str',
+                'rule'                      : 'str',
+                'compared value'            : 'str',
+            },
+            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if item is str (kaz)
+                'column name/csv fieldname' : False,
+                'rule'                      : False,
+                'compared value'            : False,
+            },
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : None,
@@ -736,8 +748,12 @@ ursgal_params = {
             'list_title'   : [                                                  # [str], title of list item is required if uvalue type is list (kaz)
                 'del param',
             ],
-            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
-            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'list_type' : {                                                     # dict, type for each title is required if uvalue type is list (kaz)
+                'del param' : 'str',
+            },
+            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if item is str (kaz)
+                'del param' : False,
+            },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
@@ -1269,7 +1285,12 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [],
+            'initialValue' : [
+            ],
+            'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
+            ],
+            'list_type' : {                                                     # dict, type for each title is required if uvalue type is list (kaz)
+            },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
@@ -1923,12 +1944,12 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [
+            'initialValue' : [
             ],
-            'list_title'   : [                                                  # [str], title of list item is required if uvalue type is list (kaz)
+            'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
             ],
-            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
-            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'list_type' : {                                                     # dict, type for each title is required if uvalue type is list (kaz)
+            },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
@@ -3038,16 +3059,16 @@ ursgal_params = {
             'multipleLine' : {                                                  # dict, multipleLine for each int-type is required if dict_type include int (kaz)
                 'Format' : False,
             },
-            'max': {                                                            # dict, max for each int-type is required if dict_type include int (kaz)
+            'max': {                                                            # dict, max for each int-type is required if dict_type include int or float (kaz)
                 'number' : 10000000,
             },
-            'min': {                                                            # dict, min for each int-type is required if dict_type include int (kaz)
+            'min': {                                                            # dict, min for each int-type is required if dict_type include int or float (kaz)
                 'number' : 0,
             },
-            'updownval': {                                                      # dict, updownval for each int-type is required if dict_type include int (kaz)
+            'updownval': {                                                      # dict, updownval for each int-type is required if dict_type include int or float (kaz)
                 'number' : 1,
             },
-            'unit': {                                                           # dict, unit for each int-type is required if dict_type include int (kaz)
+            'unit': {                                                           # dict, unit for each int-type is required if dict_type include int or float (kaz)
                 'number' : '',
             },
         },
@@ -3532,16 +3553,20 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [
+            'initialValue' : [
                 '*,opt,Prot-N-term,Acetyl',
                 'M,opt,any,Oxidation',
             ],
-            'list_title'   : [                                                  # [str], title of list item is required if uvalue type is list (kaz)
+            'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
                 'mod',
                 'mod',
             ],
-            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
-            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'list_type' : {                                                     # dict, type for each title is required if uvalue type is list (kaz)
+                'mod' : 'str',
+            },
+            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if item is str (kaz)
+                'mod' : False,
+            },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
@@ -5450,7 +5475,7 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : "",
+        'uvalue_type' : None,
         'uvalue_option' : {
         },
         'default_value' : None,
@@ -5739,12 +5764,12 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [
+            'initialValue' : [
             ],
             'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
             ],
-            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
-            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'list_type' : {                                                     # dict, type for each title is required if uvalue type is list (kaz)
+            },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [
@@ -5768,12 +5793,12 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [
+            'initialValue' : [
             ],
             'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
             ],
-            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
-            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'list_type' : {                                                     # dict, type for each title is required if uvalue type is list (kaz)
+            },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : None,
@@ -6568,9 +6593,12 @@ ursgal_params = {
                 'e' : 'E',
             },
         },
-        'uvalue_type' : "str",
+        'uvalue_type' : "select",
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['a', 'b', 'c', 'd', 'e'],
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "b",
         'description' : \
@@ -6598,13 +6626,16 @@ ursgal_params = {
                 'five'  : 5,
             },
         },
-        'uvalue_type' : "str",
+        'uvalue_type' : "select",
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
+            'comboBox'       : True,
+            'radioButton'    : False,
+            'initialValue'   : ['one', 'two', 'three', 'four', 'five'],
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : "three",
-        'description' : 'TEST/DEBUG: Internal Ursgal parameter 2 for '\
-        'debugging and testing.',
+        'description' : \
+            'TEST/DEBUG: Internal Ursgal parameter 2 for debugging and testing.',
     },
     'threshold_is_log10' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6624,7 +6655,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' True, if log10 scale has been used for score_diff_threshold. ''',
+        'description' : \
+            'True, if log10 scale has been used for score_diff_threshold.',
     },
     'unify_csv_converter_version' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6645,7 +6677,8 @@ ursgal_params = {
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "unify_csv_1_0_0",
-        'description' :  ''' unify csv converter version: version name ''',
+        'description' : \
+            'unify csv converter version: version name',
     },
     'ursgal_resource_url' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6666,7 +6699,8 @@ ursgal_params = {
         'uvalue_option' : {
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
-        'description' :  ''' URL that is used to install and prepare_resources.py ''',
+        'description' : \
+            'URL that is used to install and prepare_resources.py',
     },
     'use_quality_filter' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6690,7 +6724,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Use filter for low quality spectra. ''',
+        'description' : \
+            'Use filter for low quality spectra.',
     },
     'use_refinement' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6718,7 +6753,10 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' X! TANDEM can use 'refinement' to improve the speed and accuracy of peptide modelling. This is not included in Ursgal, yet. See further: http://www.thegpm.org/TANDEM/api/refine.html ''',
+        'description' : \
+            'X! TANDEM can use \'refinement\' to improve the speed and '\
+            'accuracy of peptide modelling. This is not included in Ursgal, '\
+            'yet. See further: http://www.thegpm.org/TANDEM/api/refine.html',
     },
     'use_spectrum_charge' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6738,7 +6776,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Does not correct precursor charge. ''',
+        'description' : \
+            'Does not correct precursor charge.',
     },
     'use_spectrum_mz' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6764,7 +6803,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : True,
-        'description' :  ''' Does not correct precusor m/z. ''',
+        'description' : \
+            'Does not correct precusor m/z.',
     },
     'validated_ident_csv_suffix' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6785,7 +6825,9 @@ ursgal_params = {
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "validated.csv",
-        'description' :  ''' CSV suffix of validated identification files: string, CSV-file which contains PSMs validated with validation tools ''',
+        'description' : \
+            'CSV suffix of validated identification files: string, CSV-file '\
+            'which contains PSMs validated with validation tools',
     },
     'validation_generalized' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6809,7 +6851,10 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Generalized target decoy competition, situations where PSMs known to more frequently be incorrect are mixed in with the correct PSMs ''',
+        'description' : \
+            'Generalized target decoy competition, situations where PSMs '\
+            'known to more frequently be incorrect are mixed in with the '\
+            'correct PSMs',
     },
     'validation_minimum_score' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6844,11 +6889,14 @@ ursgal_params = {
                 'xtandem_vengeance'    : 0,
             },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : None,
         'uvalue_option' : {
         },
         'default_value' : None,
-        'description' :  ''' Defines the minimum score used fo validation. If scores lower than this are produced, they are set to the minimum score. This is used to avoid huge gaps/jumps in the score distribution ''',
+        'description' : \
+            'Defines the minimum score used for validation. If scores lower '\
+            'than this are produced, they are set to the minimum score. This '\
+            'is used to avoid huge gaps/jumps in the score distribution',
     },
     'validation_score_field' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7016,17 +7064,20 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
             },
         },
-        'uvalue_type' : "",
+        'uvalue_type' : None,
         'uvalue_option' : {
         },
         'default_value' : None,
-        'description' :  ''' Name of the column that is used for validation, e.g. by qvality and percolator. If None is defined, default values are used ''',
+        'description' : \
+            'Name of the column that is used for validation, e.g. by qvality '\
+            'and percolator. If None is defined, default values are used',
     },
     'visualization_column_names' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
+        'triggers_rerun' : True,
         'default_value' : [
             'Modifications',
             'Sequence',
@@ -7041,11 +7092,18 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
         'uvalue_option'      : {
-            'initialValue'   : [],
-            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'initialValue' : [
+            ],
+            'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
+            ],
+            'list_type' : {                                                     # dict, type for each title is required if uvalue type is list (kaz)
+            },
+            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'description' :  ''' The specified csv column names are used for the visualization. E.g. for a Venn diagram the entries of these columns are used (merged) to determine overlapping results. ''',
-        'triggers_rerun' : True,
+        'description' : \
+            'The specified csv column names are used for the visualization. '\
+            'E.g. for a Venn diagram the entries of these columns are used '\
+            '(merged) to determine overlapping results.',
     },
     'visualization_font' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7063,9 +7121,61 @@ ursgal_params = {
         },
         'uvalue_type' : "tuple",
         'uvalue_option' : {
+            'initialValue' : [
+                'Helvetica',
+                31,
+                25,
+                20,
+                20,
+            ],
+            'tuple_title' : [                                                   # [str], title of tuple item is required if uvalue type is tuple (kaz)
+                'font-type',
+                'font-size header',
+                'font-size major',
+                'font-size minor',
+                'font-size venn',
+            ],
+            'tuple_type' : {                                                    # dict, type for each title is required if uvalue type is tuple (kaz)
+                'font-type'        : 'str',
+                'font-size header' : 'int',
+                'font-size major'  : 'int',
+                'font-size minor'  : 'int',
+                'font-size venn'   : 'int',
+            },
+            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if item is str (kaz)
+                'font-type'        : False,
+            },
+            'max': {                                                            # dict, max for each int-type is required if tuple_type include int or float (kaz)
+                'font-size header' : 1000,
+                'font-size major'  : 1000,
+                'font-size minor'  : 1000,
+                'font-size venn'   : 1000,
+            },
+            'min': {                                                            # dict, min for each int-type is required if tuple_type include int or float (kaz)
+                'font-size header' : 0,
+                'font-size major'  : 0,
+                'font-size minor'  : 0,
+                'font-size venn'   : 0,
+            },
+            'updownval': {                                                      # dict, updownval for each int-type is required if tuple_type include int or float (kaz)
+                'font-size header' : 1,
+                'font-size major'  : 1,
+                'font-size minor'  : 1,
+                'font-size venn'   : 1,
+            },
+            'unit': {                                                           # dict, unit for each int-type is required if tuple_type include int or float (kaz)
+                'font-size header' : 'pt',
+                'font-size major'  : 'pt',
+                'font-size minor'  : 'pt',
+                'font-size venn'   : 'pt',
+            },
+            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : ('Helvetica', 31, 25, 20, 20),
-        'description' :  ''' Font used for visualization plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn) ''',
+        'description' : \
+            'Font used for visualization plots (e.g. Venn diagram), given as '\
+            'tuple (font-type, font-size header, font-size major, font-size '\
+            'minor, font-size venn)',
     },
     'visualization_header' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7086,7 +7196,8 @@ ursgal_params = {
             'multipleLine' : False,                                             # bool, multipleLine is required if uvalue type is str (kaz)
         },
         'default_value' : "ursgal Venn Diagram",
-        'description' :  ''' Header of visualization output (e.g. Venn diagram) ''',
+        'description' : \
+            'Header of visualization output (e.g. Venn diagram)',
     },
     'visualization_label_list' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7104,10 +7215,12 @@ ursgal_params = {
         },
         'uvalue_type' : "list",
         'uvalue_option' : {
-            'initialValue'   : [],
-            'list_title'     : [],                                              # [str], title of list item is required if uvalue type is list (kaz)
-            'list_type'      : 'str',                                           # str, type for each title is required if uvalue type is list (kaz)
-            'multipleLine'   : False,                                           # bool, multipleLine for each str-type is required if list_type include str (kaz)
+            'initialValue' : [
+            ],
+            'list_title' : [                                                    # [str], title of list item is required if uvalue type is list (kaz)
+            ],
+            'list_type' : {                                                     # dict, type for each title is required if uvalue type is list (kaz)
+            },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
         'default_value' : [],
@@ -7157,9 +7270,39 @@ ursgal_params = {
         },
         'uvalue_type' : "tuple",
         'uvalue_option' : {
+            'initialValue' : [
+                600,
+                400,
+            ],
+            'tuple_title' : [                                                   # [str], title of tuple item is required if uvalue type is tuple (kaz)
+                'x-axis-scaling-factor',
+                'y-axis-scaling-factor',
+            ],
+            'tuple_type' : {                                                    # dict, type for each title is required if uvalue type is tuple (kaz)
+                'x-axis-scaling-factor' : 'int',
+                'y-axis-scaling-factor' : 'int',
+            },
+            'max': {                                                            # dict, max for each int-type is required if tuple_type include int or float (kaz)
+                'x-axis-scaling-factor' : 100000,
+                'y-axis-scaling-factor' : 100000,
+            },
+            'min': {                                                            # dict, min for each int-type is required if tuple_type include int or float (kaz)
+                'x-axis-scaling-factor' : 1,
+                'y-axis-scaling-factor' : 1,
+            },
+            'updownval': {                                                      # dict, updownval for each int-type is required if tuple_type include int or float (kaz)
+                'x-axis-scaling-factor' : 1,
+                'y-axis-scaling-factor' : 1,
+            },
+            'unit': {                                                           # dict, unit for each int-type is required if tuple_type include int or float (kaz)
+                'x-axis-scaling-factor' : '',
+                'y-axis-scaling-factor' : '',
+            },
         },
         'default_value' : (600, 400),
-        'description' :  ''' Scaling factor for visualization plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor) ''',
+        'description' : \
+            'Scaling factor for visualization plots (e.g. Venn diagram), '\
+            'given as tuple (x-axis-scaling-factor, y-axis-scaling-factor)',
     },
     'visualization_size' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7177,9 +7320,39 @@ ursgal_params = {
         },
         'uvalue_type' : "tuple",
         'uvalue_option' : {
+            'initialValue' : [
+                1200,
+                800,
+            ],
+            'tuple_title' : [                                                   # [str], title of tuple item is required if uvalue type is tuple (kaz)
+                'width',
+                'height',
+            ],
+            'tuple_type' : {                                                    # dict, type for each title is required if uvalue type is tuple (kaz)
+                'width'  : 'int',
+                'height' : 'int',
+            },
+            'max': {                                                            # dict, max for each int-type is required if tuple_type include int or float (kaz)
+                'width'  : 100000,
+                'height' : 100000,
+            },
+            'min': {                                                            # dict, min for each int-type is required if tuple_type include int or float (kaz)
+                'width'  : 1,
+                'height' : 1,
+            },
+            'updownval': {                                                      # dict, updownval for each int-type is required if tuple_type include int or float (kaz)
+                'width'  : 1,
+                'height' : 1,
+            },
+            'unit': {                                                           # dict, unit for each int-type is required if tuple_type include int or float (kaz)
+                'width'  : 'px',
+                'height' : 'px',
+            },
         },
         'default_value' : (1200, 800),
-        'description' :  ''' Size of visualization plots (e.g. Venn diagram), given as tuple (width, height) ''',
+        'description' : \
+            'Size of visualization plots (e.g. Venn diagram), given as tuple '\
+            '(width, height)',
     },
     'visualization_stroke_width' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7230,10 +7403,11 @@ ursgal_params = {
             'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 249,
-        'description' :  ''' Combined PEPs are computed by
-    iterating a sliding window over the sorted PSMs. Each PSM receives
-    a PEP based on the target/decoy ratio of the surrounding PEPs.
-    This parameter defines the window size. ''',
+        'description' : \
+            'Combined PEPs are computed by iterating a sliding window over '\
+            'the sorted PSMs. Each PSM receives a PEP based on the '\
+            'target/decoy ratio of the surrounding PEPs. This parameter '\
+            'defines the window size.',
     },
     'word_len' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7253,7 +7427,10 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : 8,
-        'description' :  ''' NOTE: This can only be changed using the params dict if UPeptideMapper has become a UNode. !!! word length used to index peptide mapper, smaller word len requires more memory ''',
+        'description' : \
+            'NOTE: This can only be changed using the params dict if '\
+            'UPeptideMapper has become a UNode. !!! word length used to index '\
+            'peptide mapper, smaller word len requires more memory',
     },
     'write_unfiltered_results' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7273,7 +7450,8 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Writes rejected results if True ''',
+        'description' : \
+            'Writes rejected results if True',
     },
     'xtandem_stp_bias' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7301,6 +7479,7 @@ ursgal_params = {
         'uvalue_option' : {
         },
         'default_value' : False,
-        'description' :  ''' Interpretation of peptide phosphorylation models. ''',
+        'description' : \
+            'Interpretation of peptide phosphorylation models.',
     },
 }
