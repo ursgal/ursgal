@@ -22,6 +22,8 @@ class crux_2_1( ursgal.UNode ):
         'output_extensions' : [],                                               # list, extensions (kaz)
         'in_development'    : True,
         'include_in_git'    : None,
+        'citation' : \
+            '',
     }
 
 

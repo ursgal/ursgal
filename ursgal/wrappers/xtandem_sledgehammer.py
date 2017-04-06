@@ -65,8 +65,8 @@ class xtandem_sledgehammer( ursgal.UNode ):
                 },
             },
         },
-        'citation'                    : 'Craig R, Beavis RC. (2004) TANDEM: '\
-            'matching proteins with tandem mass spectra.',
+        'citation' : 'Craig R, Beavis RC. (2004) TANDEM: matching proteins '\
+        'with tandem mass spectra.',
     }
 
     def __init__(self, *args, **kwargs):

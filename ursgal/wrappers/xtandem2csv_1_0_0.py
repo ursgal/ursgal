@@ -28,6 +28,8 @@ class xtandem2csv_1_0_0( ursgal.UNode ):
                 },
             },
         },
+        'citation' : \
+            ''
 
     }
 

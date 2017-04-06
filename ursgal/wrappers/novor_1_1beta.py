@@ -44,8 +44,9 @@ class novor_1_1beta( ursgal.UNode ):
                 }
             },
         },
-        'citation'           : \
-            'Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software.',
+        'citation' : \
+            'Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing '\
+            'Software.',
     }
 
     def __init__(self, *args, **kwargs):

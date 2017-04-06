@@ -84,7 +84,8 @@ class combine_pep_1_0_0(ursgal.UNode):
                 },
             },
         },
-        #'citation' : 'Combines PEP scores from different search engines.',
+        'citation' : \
+            'Combines PEP scores from different search engines.',
     }
 
     def __init__(self, *args, **kwargs):

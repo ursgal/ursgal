@@ -40,9 +40,10 @@ class myrimatch_2_1_138( ursgal.UNode ):
                 },
             },
         },
-        'citation'                    : 'Tabb DL, Fernando CG, Chambers MC. '\
-            '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
-            'identification by multivariate hypergeometric analysis.',
+        'citation' : \
+            'Tabb DL, Fernando CG, Chambers MC. (2007) MyriMatch: highly '\
+            'accurate tandem mass spectral peptide identification by '\
+            'multivariate hypergeometric analysis.',
     }
 
     def __init__(self, *args, **kwargs):

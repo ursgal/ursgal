@@ -49,10 +49,10 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                 },
             },
         },
-        'citation'           : 'Dorfer V, Pichler P, Stranzl T, '\
-            'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
-            'a universal identification algorithm optimized for high accuracy '\
-            'tandem mass spectra.',
+        'citation' : \
+            'Dorfer V, Pichler P, Stranzl T, Stadlmann J, Taus T, Winkler S, '\
+            'Mechtler K. (2014) MS Amanda, a universal identification '\
+            'algorithm optimized for high accuracy tandem mass spectra.',
     }
 
     def __init__(self, *args, **kwargs):

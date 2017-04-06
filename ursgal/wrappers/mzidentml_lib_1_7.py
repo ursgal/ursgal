@@ -40,9 +40,10 @@ class mzidentml_lib_1_7( ml ):
                 },
             },
         },
-        'citation'           : 'Reisinger F, Krishna R, Ghali F, Rios D, '\
-            'Hermjakob H, Vizcaino JA, Jones AR. (2012) jmzIdentML API: '\
-            'A Java interface to the mzIdentML standard for peptide and '\
-            'protein identification data.',
+        'citation' : \
+            'Reisinger F, Krishna R, Ghali F, Rios D, Hermjakob H, '\
+            'Vizcaino JA, Jones AR. (2012) jmzIdentML API: A Java interface '\
+            'to the mzIdentML standard for peptide and protein identification '\
+            'data.',
     }
     pass

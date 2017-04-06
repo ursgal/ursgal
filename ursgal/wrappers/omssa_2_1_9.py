@@ -96,9 +96,10 @@ class omssa_2_1_9( ursgal.UNode ):
                 'aa_targets'      : ['N-term'] # override 'X' in OMSSA mods xml
             }
         },
-        'citation'           : 'Geer LY, Markey SP, Kowalak JA, '\
-            'Wagner L, Xu M, Maynard DM, Yang X, Shi W, Bryant SH (2004) '\
-            'Open Mass Spectrometry Search Algorithm.',
+        'citation' : \
+            'Geer LY, Markey SP, Kowalak JA, Wagner L, Xu M, Maynard DM, '\
+            'Yang X, Shi W, Bryant SH (2004) Open Mass Spectrometry Search '\
+            'Algorithm.',
     }
 
     def __init__(self, *args, **kwargs):

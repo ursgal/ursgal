@@ -42,9 +42,9 @@ class msamanda_1_0_0_7504( msamanda ):
                 },
             },
         },
-        'citation'           : 'Dorfer V, Pichler P, Stranzl T, '\
-            'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
-            'a universal identification algorithm optimized for high accuracy '\
-            'tandem mass spectra.',
+        'citation' : \
+            'Dorfer V, Pichler P, Stranzl T, Stadlmann J, Taus T, Winkler S, '\
+            'Mechtler K. (2014) MS Amanda, a universal identification '\
+            'algorithm optimized for high accuracy tandem mass spectra.',
     }
     pass

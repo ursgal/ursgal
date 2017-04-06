@@ -30,11 +30,10 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
             },
         },
         'citation' : \
-            'An implementation of the target/decoy FDR estimation '\
-            'method described in: Lukas Kall, John D. Storey, Michael J. '\
-            'MacCoss and William Stafford Noble (2008) Assigning significance '\
-            'to peptides identified by tandem mass spectrometry using decoy '\
-            'databases.' ,
+            'An implementation of the target/decoy FDR estimation method '\
+            'described in: Lukas Kall, John D. Storey, Michael J. MacCoss and '\
+            'William Stafford Noble (2008) Assigning significance to peptides '\
+            'identified by tandem mass spectrometry using decoy databases.' ,
     }
 
     def __init__(self, *args, **kwargs):

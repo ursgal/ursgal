@@ -29,9 +29,9 @@ class plot_pygcluster_heatmap_from_csv_1_0_0( ursgal.UNode ):
                 },
             },
         },
-        'citation'           : 'Jaeger D, Barth J, Niehues A, Fufezan C (2014) '
-            'pyGCluster, a novel hierarchical clustering approach. '
-            'Bioinformatics 30 896 898'
+        'citation' : \
+            'Jaeger D, Barth J, Niehues A, Fufezan C (2014) pyGCluster, a '\
+            'novel hierarchical clustering approach. Bioinformatics 30 896 898',
     }
 
     def __init__(self, *args, **kwargs):

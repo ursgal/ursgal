@@ -32,9 +32,9 @@ class naive_bayes_1_0_0( ursgal.UNode ):
                 },
             },
         },
-        'citation' : 'Combines PEP scores from different search engines '\
-            'using naive Bayes (see i.e. '\
-            'http://www.paulgraham.com/naivebayes.html)',
+        'citation' : \
+            'Combines PEP scores from different search engines using naive '\
+            'Bayes (see i.e. http://www.paulgraham.com/naivebayes.html)',
     }
 
     def __init__(self, *args, **kwargs):

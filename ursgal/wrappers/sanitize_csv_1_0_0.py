@@ -33,6 +33,8 @@ class sanitize_csv_1_0_0( ursgal.UNode ):
                 },
             },
         },
+        'citation' : \
+            ''
     }
 
 

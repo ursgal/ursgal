@@ -28,6 +28,8 @@ class svm_1_0_0( ursgal.UNode ):
                 },
             },
         },
+        'citation' : \
+            ''
     }
 
     def __init__(self, *args, **kwargs):

@@ -32,11 +32,11 @@ class venndiagram_1_0_0( ursgal.UNode ):
                 },
             },
         },
-        'citation'           : 'Kremer, L. P. M., Leufken, J., '\
-            'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
-            'Ursgal, Universal Python Module Combining Common Bottom-Up '\
-            'Proteomics Tools for Large-Scale Analysis. '\
-            'J. Proteome res. 15, 788-794.',
+        'citation' : \
+            'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & '\
+            'Fufezan, C. (2016) Ursgal, Universal Python Module Combining '\
+            'Common Bottom-Up Proteomics Tools for Large-Scale Analysis. J. '\
+            'Proteome res. 15, 788-794.',
     }
 
     def __init__(self, *args, **kwargs):

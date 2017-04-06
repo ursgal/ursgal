@@ -46,7 +46,8 @@ class xtandem_jackhammer( tandem ):
                 },
             },
         },
-        'citation'                    : 'Craig R, Beavis RC. (2004) TANDEM: '\
-            'matching proteins with tandem mass spectra.',
+        'citation' : \
+            'Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem '\
+            'mass spectra.',
     }
     pass

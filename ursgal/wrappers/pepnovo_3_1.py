@@ -48,10 +48,11 @@ class pepnovo_3_1( ursgal.UNode ):
                 }
             },
         },
-        'citation'           : 'Ari M. Frank, Mikhail M. Savitski, '\
-            'Michael L. Nielsen, Roman A. Zubarev, and Pavel A. Pevzner '\
-            '(2007) De Novo Peptide Sequencing and Identification with '\
-            'Precision Mass Spectrometry, J. Proteome Res. 6:114-123.',
+        'citation' : \
+            'Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. '\
+            'Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing '\
+            'and Identification with Precision Mass Spectrometry, J. Proteome '\
+            'Res. 6:114-123.',
     }
 
     def __init__(self, *args, **kwargs):

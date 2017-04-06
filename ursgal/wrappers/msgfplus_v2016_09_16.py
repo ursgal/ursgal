@@ -37,10 +37,11 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
                 },
             },
         },
-        'citation'                    : 'Kim S, Mischerikow N, Bandeira N, '\
-            'Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) '\
-            'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
-            'Tandem Mass Spectra: Applications to Database Search.',
+        'citation' : \
+            'Kim S, Mischerikow N, Bandeira N, Navarro JD, Wich L, '\
+            'Mohammed S, Heck AJ, Pevzner PA. (2010) The Generating Function '\
+            'of CID, ETD, and CID/ETD Pairs of Tandem Mass Spectra: '\
+            'Applications to Database Search.',
     }
 
     def __init__(self, *args, **kwargs):

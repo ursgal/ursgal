@@ -26,7 +26,7 @@ class _test_node( ursgal.UNode ):
                 },
             },
         },
-        'citation'          : \
+        'citation' : \
             'TEST/DEBUG: Internal Ursgal UNode for debugging nd testing.',
     }
 

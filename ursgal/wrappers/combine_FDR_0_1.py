@@ -42,8 +42,9 @@ class combine_FDR_0_1( ursgal.UNode ):
                 },
             },
         },
-        'citation' : 'An implementation of the "combined FDR Score" algorithm, '\
-            'as described in: Jones AR, Siepen JA, Hubbard SJ, Paton NW (2009) '\
+        'citation' : \
+            'An implementation of the "combined FDR Score" algorithm, as '\
+            'described in: Jones AR, Siepen JA, Hubbard SJ, Paton NW (2009) '\
             'Improving sensitivity in proteome studies by analysis of false '\
             'discovery rates for multiple search engines.',
     }

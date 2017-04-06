@@ -9,7 +9,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
     """
     MzidLib 1_6_10 UNode
 
-    'Reisinger F, Krishna R, Ghali F, R・・ｽｭos D, Hermjakob H, Vizca・・ｽｭno JA, Jones AR. (2012)
+    'Reisinger F, Krishna R, Ghali F, R繝ｻ繝ｻ・ｽ・ｭos D, Hermjakob H, Vizca繝ｻ繝ｻ・ｽ・ｭno JA, Jones AR. (2012)
     jmzIdentML API: A Java interface to the mzIdentML standard for peptide and protein identification data.'
 
     Java program to convert results to .mzIdentML and .mzIdentML to .csv
@@ -41,10 +41,11 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                 },
             },
         },
-        'citation'           : 'Reisinger F, Krishna R, Ghali F, Rios D, '\
-            'Hermjakob H, Vizcaino JA, Jones AR. (2012) jmzIdentML API: '\
-            'A Java interface to the mzIdentML standard for peptide and '\
-            'protein identification data.',
+        'citation' : \
+            'Reisinger F, Krishna R, Ghali F, Rios D, Hermjakob H, '\
+            'Vizcaino JA, Jones AR. (2012) jmzIdentML API: A Java interface '\
+            'to the mzIdentML standard for peptide and protein identification '\
+            'data.',
     }
 
     def __init__(self, *args, **kwargs):

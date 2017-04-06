@@ -36,8 +36,9 @@ class uninovo_alpha_052013( ursgal.UNode ):
                 },
             },
         },
-        'citation'          : 'Jeong K, Kim S, Pevzner PA (2013): UniNovo: '\
-            'a universal tool for de novo peptide sequencing.',
+        'citation' : \
+            'Jeong K, Kim S, Pevzner PA (2013): UniNovo: a universal tool for '\
+            'de novo peptide sequencing.',
     }
 
     def __init__(self, *args, **kwargs):

@@ -35,6 +35,8 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         # 'engine_url' : {
         #     'internal' : True,
         # },
+        'citation' : \
+            '',
     }
 
     def __init__(self, *args, **kwargs):
