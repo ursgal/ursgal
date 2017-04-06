@@ -57,7 +57,7 @@ def main(input_file=None, output_file=None, params=None):
           at any position. These peptides are also reported. If peptides can
           still not be mapped after re-mapping, these are reported as well.
 
- 
+
     '''
     print(
         '''[ map_peps ] Mapping peptides from file {0}'''.format(
@@ -207,7 +207,7 @@ def main(input_file=None, output_file=None, params=None):
                                     new_aa,
                                     line_dict['Sequence'][index_of_aa+1:],
                                 )
-                                tmp_peptide_set.add( 
+                                tmp_peptide_set.add(
                                     remapped_peptide
                                 )
                                 line_dict['Sequence'] = remapped_peptide
@@ -216,7 +216,7 @@ def main(input_file=None, output_file=None, params=None):
                     else:
                         print(
                             '''
-                            [ WARNING ] New not covered case of aa exception for: "{0}" 
+                            [ WARNING ] New not covered case of aa exception for: "{0}"
                             [ WARNING ] Please adjust upeptide_mapper accordingly
                             '''.format(aa_to_replace)
                         )
@@ -235,7 +235,7 @@ def main(input_file=None, output_file=None, params=None):
         p2p_mappings  = upapa.map_peptides(
             list(tmp_peptide_set),
             fasta_lookup_name
-        ) 
+        )
         print('''[ map_peps ] Mapping peptides done''')
         total_lines = len(csv_file_buffer)
         #this assertion works for all but MSAmanda sinc J instaead of I or L is reported
@@ -402,7 +402,7 @@ def main(input_file=None, output_file=None, params=None):
                     len(not_mappable_after_all),
                 )
             )
-   
+
     if do_not_delete is False:
         created_tmp_files.append( output_file + '_full_protein_names.txt' )
     return created_tmp_files
@@ -518,7 +518,7 @@ class UPeptideMapper_v2( dict ):
         for peptide in peptide_list:
             self.peptide_2_protein_mappings[fasta_name][peptide] = self.map_peptide(
                 peptide,
-                fasta_name = fasta_name,   
+                fasta_name = fasta_name,
             )
 
         return self.peptide_2_protein_mappings[fasta_name]
@@ -657,7 +657,7 @@ class UPeptideMapper_v3():
 
     New improved version which is faster and consumes less memory than earlier
     versions. Is the new default version for peptide mapping.
-    
+
     Note:
         Uses the implementation of Aho-Corasick algorithm pyahocorasick.
         Please refer to https://pypi.python.org/pypi/pyahocorasick/ for more
@@ -666,40 +666,40 @@ class UPeptideMapper_v3():
     Warning:
         The new implementation is still in beta/testing phase. Please use, check
         and interpret accordingly
-    
+
 
 
     '''
     def __init__(self, fasta_database ):
         self.fasta_name                 = os.path.basename(os.path.abspath( fasta_database ))
-        
+
         self.protein_indices            = defaultdict(dict)
         self.protein_sequences          = defaultdict(dict)
 
         self.total_sequence_list        = defaultdict(list)
         self.protein_list               = defaultdict(list)
-        
+
         self.fasta_counter              = defaultdict(int)
         self.len_total_sequence_string  = defaultdict(int)
-        
+
         self.peptide_2_protein_mappings = {}
         self.total_sequence_string      = {}
         self.cache_database(fasta_database, self.fasta_name)
 
         self.automatons = {}
-        
+
 
     def cache_database(self, fasta_database,  fasta_name):
         '''
         Function to cache the given fasta database.
-        
+
         Args:
             fasta_database (str): path to the fasta database
-            fasta_name (str): name of the database 
+            fasta_name (str): name of the database
                 (e.g. os.path.basename(fasta_database))
-        
+
         Note:
-        
+
             If the same fasta_name is buffered again all info is purged from the
             class.
         '''
@@ -712,10 +712,10 @@ class UPeptideMapper_v3():
                     self.fasta_counter[fasta_name],
                     fasta_database
                 ),
-                end ='\r' 
+                end ='\r'
             )
             len_seq             = len(seq)
-            
+
             self.protein_indices[fasta_name][protein_id] = {
                 'start': self.len_total_sequence_string[fasta_name],
                 'stop' : self.len_total_sequence_string[fasta_name] + len_seq
@@ -733,7 +733,7 @@ class UPeptideMapper_v3():
         return
 
     def map_peptides(self, peptide_list, fasta_name):
-        ''' 
+        '''
         Function to map a given peptide list in one batch.
 
         Args:
@@ -743,13 +743,13 @@ class UPeptideMapper_v3():
 
         Returns:
             peptide_2_protein_mappings (dict): Dictionary containing
-                peptides as keys and lists of protein mappings as values of the 
+                peptides as keys and lists of protein mappings as values of the
                 given fasta_name
 
         Note:
             Based on the number of peptides the returned mapping dictionary
             can become very large.
-        
+
         Warning:
             The peptide to protein mapping is resetted if a new list o peptides
             is mapped to the same database (fasta_name).
@@ -827,13 +827,13 @@ class UPeptideMapper_v3():
         Purges regular sequence lookup and fcache for a given fasta_name
         '''
         print('[ upapa v3 ] Purging buffer for {0}'.format(fasta_name))
-        del self.protein_list[fasta_name]               
-        del self.protein_indices[fasta_name]            
-        del self.protein_sequences[fasta_name]          
-        del self.total_sequence_string[fasta_name]      
-        del self.fasta_counter[fasta_name]              
-        del self.total_sequence_list[fasta_name]        
-        del self.len_total_sequence_string[fasta_name] 
+        del self.protein_list[fasta_name]
+        del self.protein_indices[fasta_name]
+        del self.protein_sequences[fasta_name]
+        del self.total_sequence_string[fasta_name]
+        del self.fasta_counter[fasta_name]
+        del self.total_sequence_list[fasta_name]
+        del self.len_total_sequence_string[fasta_name]
         if fasta_name in self.peptide_2_protein_mappings.keys():
             del self.peptide_2_protein_mappings[fasta_name]
         if fasta_name in self.automatons.keys():
