@@ -266,6 +266,7 @@ def chk_format_param( param_name, param_dict ):
     uvalue_type   = param_dict['uvalue_type']
     default_value = param_dict['default_value']
     uvalue_option = param_dict['uvalue_option']
+
     if param_dict.get('input_files') is not None:
         if uvalue_option.get('input_extensions') is None:
             error_msg = 'input_extensions is required in uvalue_option, '\
@@ -286,17 +287,197 @@ def chk_format_param( param_name, param_dict ):
             error_msg = str(search_style) + ' is unknown style.'
             raise ValueError(error_msg)
 
-    if uvalue_type is str:
-        if type(default_value) is not type(None) and \
-                                                 type(default_value) is not str:
+    if uvalue_type == 'str' or uvalue_type == 'str_password':
+        if type(default_value) is not str and \
+                type(default_value) is not type(None):
             error_msg = 'The type of \'default_value\' is str or None.'
             raise ValueError(error_msg)
+
         if uvalue_option.get('multipleLine') is None:
             error_msg = 'multipleLine is required in uvalue_option.'
             raise ValueError(error_msg)
         elif type(uvalue_option['multipleLine']) is not bool:
             error_msg = 'The type of \'multipleLine\' is bool.'
             raise ValueError(error_msg)
+
+    elif uvalue_type == 'int':
+        if type(default_value) is not int and \
+                type(default_value) is not type(None):
+            error_msg = 'The type of \'default_value\' is int or None.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('max') is None:
+            error_msg = 'max is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['max']) is not int:
+            error_msg = 'The type of \'max\' is int.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('min') is None:
+            error_msg = 'min is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['min']) is not int:
+            error_msg = 'The type of \'min\' is int.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('updownval') is None:
+            error_msg = 'updownval is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['updownval']) is not int:
+            error_msg = 'The type of \'updownval\' is int.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('unit') is None:
+            error_msg = 'unit is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['unit']) is not str:
+            error_msg = 'The type of \'unit\' is str.'
+            raise ValueError(error_msg)
+
+    elif uvalue_type == 'int _uevaluation_req' and \
+            type(default_value) is not type(None):
+        if type(default_value) is not int:
+            error_msg = 'The type of \'default_value\' is int or None.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('max') is None:
+            error_msg = 'max is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['max']) is not int and \
+                type(uvalue_option['max']) is not str:
+            error_msg = 'The type of \'max\' is int or str.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('min') is None:
+            error_msg = 'min is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['min']) is not int and \
+                type(uvalue_option['min']) is not str:
+            error_msg = 'The type of \'min\' is int or str.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('updownval') is None:
+            error_msg = 'updownval is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['updownval']) is not int:
+            error_msg = 'The type of \'updownval\' is int.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('unit') is None:
+            error_msg = 'unit is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['unit']) is not str:
+            error_msg = 'The type of \'unit\' is str.'
+            raise ValueError(error_msg)
+
+    elif uvalue_type == 'float':
+        if type(default_value) is not int and \
+                type(default_value) is not float and \
+                type(default_value) is not type(None):
+            error_msg = 'The type of \'default_value\' is float, int or None.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('max') is None:
+            error_msg = 'max is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['max']) is not int and \
+                type(uvalue_option['max']) is not float:
+            error_msg = 'The type of \'max\' is int.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('min') is None:
+            error_msg = 'min is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['min']) is not int and \
+                type(uvalue_option['min']) is not float:
+            error_msg = 'The type of \'min\' is int.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('f-point') is None:
+            error_msg = 'f-point is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['f-point']) is not float:
+            error_msg = 'The type of \'f-point\' is float.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('updownval') is None:
+            error_msg = 'updownval is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['updownval']) is not int and \
+                type(uvalue_option['updownval']) is not float:
+            error_msg = 'The type of \'updownval\' is int.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('unit') is None:
+            error_msg = 'unit is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['unit']) is not str:
+            error_msg = 'The type of \'unit\' is str.'
+            raise ValueError(error_msg)
+
+    elif uvalue_type == 'bool':
+        if type(default_value) is not bool:
+            error_msg = 'The type of \'default_value\' is bool.\n'\
+                'if None is required, select can be used.'
+            raise ValueError(error_msg)
+
+    elif uvalue_type == 'select':
+        if type(default_value) is not str:
+            error_msg = 'The type of \'default_value\' is str.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('combo_box') is None:
+            error_msg = 'combo_box is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['combo_box']) is not bool:
+            error_msg = 'The type of \'combo_box\' is bool.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('radio_button') is None:
+            error_msg = 'radio_button is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['radio_button']) is not bool:
+            error_msg = 'The type of \'radio_button\' is bool.'
+            raise ValueError(error_msg)
+
+        if uvalue_option.get('initial_value') is None:
+            error_msg = 'initial_value is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['initial_value']) is not list:
+            error_msg = 'The type of \'initial_value\' is bool.'
+            raise ValueError(error_msg)
+        else:
+            for item in uvalue_option['initial_value']:
+                if type(item) is not str:
+                    error_msg = 'The type of \'select item\' is str.'
+                    raise ValueError(error_msg)
+
+        if uvalue_option.get('custom_val_max') is None:
+            error_msg = 'custom_val_max is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['custom_val_max']) is not int:
+            error_msg = 'The type of \'custom_val_max\' is int.'
+            raise ValueError(error_msg)
+        else:
+            if uvalue_option['custom_val_max'] < 0:
+                error_msg = 'custom_val_max is more than 0.'
+                raise ValueError(error_msg)
+
+    elif uvalue_type == 'list':
+        pass
+
+    elif uvalue_type == 'tuple':
+        pass
+
+    elif uvalue_type == 'dict':
+        pass
+
+    elif uvalue_type == 'None':
+        pass
+
+    else:
+        error_msg = '\'' + str(uvalue_type) + '\' does not support.'
+        raise ValueError(error_msg)
 
 
 

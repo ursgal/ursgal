@@ -3340,7 +3340,7 @@ ursgal_params = {
             'updownval' : 1,
             'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
-        'default_value' : 'all',
+        'default_value' : 0,
         'description' : \
             'Max number of ions in each series being searched\n'
             '     0 : all',
@@ -3565,23 +3565,26 @@ ursgal_params = {
         'uvalue_translation' : {
             'myrimatch_style_1' : {
                 'default' : 1e-07,
+                -1e-10    : 1e-07,
             },
             'pepnovo_style_1' : {
                 'default' : 0.9,
+                -1e-10    : 0.9,
             },
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
             'max'       : 10,
-            'min'       : 0,
+            'min'       : -1e-10,
             'f-point'   : 1e-10,                                                # e-val, floating point, name is changed (kaz)
             'updownval' : 0.01,
             'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
         },
-        'default_value' : 'default',
+        'default_value' : -1e-10,
         'description' : \
             'Lowest score for reported peptides. If set to \'default\', '\
-            'default values fo each engine will be used.',
+            'default values fo each engine will be used.\n'\
+            '    -1e-10 = \'default\'',
     },
     'min_pep_length' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -4058,6 +4061,12 @@ ursgal_params = {
         'utag' : [
         ],
         'uvalue_translation' : {
+            'msgfplus_style_1' : {
+                '0' : 0,
+                '1' : 1,
+                '2' : 2,
+                '3' : 3,
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -4066,7 +4075,7 @@ ursgal_params = {
             'initial_value'  : ['0', '1', '2', '3'],
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : 0,
+        'default_value' : '0',
         'description' : \
             'MS-GF+ specific protocol identifier. Protocols are used to '\
             'enable scoring parameters for enriched and/or labeled samples.',
@@ -5932,6 +5941,13 @@ ursgal_params = {
             'validation',
         ],
         'uvalue_translation' : {
+            'qvality_style_1' : {
+                '1' : 1,
+                '2' : 2,
+                '3' : 3,
+                '4' : 4,
+                '5' : 5,
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -5940,7 +5956,7 @@ ursgal_params = {
             'initial_value'  : ['1', '2', '3', '4', '5'],
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : 2,
+        'default_value' : '2',
         'description' : \
             'Verbose qvality output (range from 0 = no processing info to 5 = '\
             'all)',
@@ -7758,6 +7774,10 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'max'       : 10000000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : 8,
         'description' : \
