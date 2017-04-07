@@ -3069,7 +3069,7 @@ class UControllerParams(dict):
         (this has to be done in case the UController is resetted...)
         '''
         assert key in self.ucontroller_instance.DEFAULT_PARAMS, '''
-  "{0}" is not a valid uPLAnIT parameter. Please check the documentation for a list of valid parameters."
+  "{0}" is not a valid parameter. Please check the documentation for a list of valid parameters."
         '''.format( key )
         self.ucontroller_instance.init_kwargs['params'][ key ] = value
         super(UControllerParams, self).__setitem__(key, value)

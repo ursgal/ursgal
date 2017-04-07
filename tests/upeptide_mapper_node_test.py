@@ -54,23 +54,23 @@ params = {
             'data',
             'BSA.fasta'
         ),
-        'peptide_mapper_class_version' : 'upapa_v3'
     },
     'prefix' : None
 }
 
-
-upeptide_mapper_main(
-    input_file     = input_csv,
-    output_file    = output_csv,
-    params         = params,
-)
-
 all_mapped_peptides = set()
 ident_list = [ ]
-for line_dict in csv.DictReader(open(output_csv, 'r')):
-    ident_list.append( line_dict )
-    all_mapped_peptides.add(line_dict['Sequence'])
+for peptide_mapper_class_version in [ 'UPeptideMapper_v3', 'UPeptideMapper_v4' ]:
+    params['translations']['peptide_mapper_class_version'] = peptide_mapper_class_version
+    upeptide_mapper_main(
+        input_file     = input_csv,
+        output_file    = output_csv,
+        params         = params,
+    )
+
+    for line_dict in csv.DictReader(open(output_csv, 'r')):
+        ident_list.append( line_dict )
+        all_mapped_peptides.add(line_dict['Sequence'])
 
 def upeptide_mapper_test():
     for test_id, test_dict in enumerate(ident_list):

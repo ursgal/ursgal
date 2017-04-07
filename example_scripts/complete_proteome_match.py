@@ -8,17 +8,16 @@ import os.path
 import sys
 import time
 
-def main( class_version):
+def main(fasta_database, class_version):
     '''
 
     Example script to demonstrate speed and memory efficiency of the new 
     upeptide_mapper.
-
-    All tryptic peptides (n=1,094,395, 6 < len(peptide) < 40 ) are mapped to the 
-    Chlamydomonas reinhardtii (38876 entries) target-decoy database.
+    
+    Specify fasta_database and class_version as input.
 
     usage:
-        ./complete_chlamydomonas_proteome_match.py <class_version>
+        ./complete_proteome_match.py <fasta_database> <class_version>
     
     Class versions
         * UPeptideMapper_v2
@@ -28,26 +27,13 @@ def main( class_version):
     '''
 
     input_params = {
-        'database' : os.path.join(
-            os.pardir,
-            'example_data',
-            'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
-        ),
-        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta' ,
-        'http_output_folder' : os.path.join(
-            os.pardir,
-            'example_data',
-        )
+        'database' : sys.argv[1],
     }
 
     uc = ursgal.UController(
         params = input_params
     )
 
-    if os.path.exists(input_params['database']) is False:
-        uc.fetch_file(
-            engine     = 'get_http_files_1_0_0'
-        )
     print('Parsing fasta and digesting sequences')
     peptides = set()
     digest_start = time.time()
@@ -55,7 +41,7 @@ def main( class_version):
         tryptic_peptides = ursgal.ucore.digest(
             sequence,
             ('KR', 'C'),
-            no_missed_cleavages = True
+            # no_missed_cleavages = True
         )
         for p in tryptic_peptides:
             if 6 <= len(p) <= 40:  
@@ -75,7 +61,6 @@ def main( class_version):
     peptide_mapper = upapa_class(
         fasta_database = input_params['database']
     )
-
     if class_version == 'UPeptideMapper_v4':
         args = [
             list(peptides)
@@ -83,7 +68,7 @@ def main( class_version):
     else:
         args = [
             list(peptides),
-            'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
+            os.path.basename(fasta_database)
         ]
     p2p_mappings = peptide_mapper.map_peptides(*args)
     print(
@@ -99,4 +84,4 @@ def main( class_version):
 
 if __name__ == "__main__":
 
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])

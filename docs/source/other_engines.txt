@@ -103,9 +103,16 @@ Upeptide mapper v1_0_0
 
 .. autofunction:: ursgal.resources.platform_independent.arc_independent.upeptide_mapper_1_0_0.upeptide_mapper_1_0_0.main
 
+Mapper class v4 (dev)
+~~~~~~~~~~~~~~~~~~~~~
 
-Mapper class v3
-~~~~~~~~~~~~~~~
+.. autoclass:: ursgal.resources.platform_independent.arc_independent.upeptide_mapper_1_0_0.upeptide_mapper_1_0_0.UPeptideMapper_v4
+   :members:
+   :private-members:
+
+
+Mapper class v3 (dev)
+~~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: ursgal.resources.platform_independent.arc_independent.upeptide_mapper_1_0_0.upeptide_mapper_1_0_0.UPeptideMapper_v3
    :members:

@@ -4301,8 +4301,8 @@ N-terminus or C-terminus ''',
         'available_in_unode' : [
             'upeptide_mapper_1_0_0',
         ],
-        'default_value' : 'upapa_v3',
-        'description' :  '''version 3 is the fastest and memory efficient class version, version 2 is the classic approach ''',
+        'default_value' : 'UPeptideMapper_v3',
+        'description' :  '''version 3 and 4 are the fastest and most memory efficient class versions, version 2 is the classic approach ''',
         'triggers_rerun' : False,
         'ukey_translation' : {
             'upeptide_mapper_style_1' : 'peptide_mapper_class_version',

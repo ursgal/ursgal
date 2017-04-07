@@ -265,10 +265,20 @@ Example search with search for labeling with 15N and no label
 
 
 
-Upeptide mapper v3 complete C. reinhardtii proteome match
----------------------------------------------------------
+Upeptide mapper v3 and 4 complete C. reinhardtii proteome match
+---------------------------------------------------------------
 
 .. autofunction:: complete_chlamydomonas_proteome_match.main
 
 
 .. include:: code_inc/complete_chlamydomonas_proteome_match.inc
+
+
+Upeptide mapper v3 and 4 complete proteome match
+------------------------------------------------
+
+.. autofunction:: complete_proteome_match.main
+
+
+.. include:: code_inc/complete_proteome_match.inc
+

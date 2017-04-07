@@ -25,7 +25,7 @@ except:
     import re as regex
     finditer_kwargs = {}
 import ahocorasick
-
+import bisect
 # increase the field size limit to avoid crash if protein merge tags
 # become too long does not work under windows
 if sys.platform != 'win32':
@@ -71,16 +71,23 @@ def main(input_file=None, output_file=None, params=None):
     pep_map_lookup     = {}
     joinchar           = params['translations']['protein_delimiter']
 
-    if params['translations']['peptide_mapper_class_version'] == 'upapa_v2':
+    if params['translations']['peptide_mapper_class_version'] == 'UPeptideMapper_v2':
         upapa = UPeptideMapper_v2( word_len = params['translations']['word_len'])
         fasta_lookup_name = upapa.build_lookup_from_file(
             params['translations']['database'],
             force  = False,
         )
-    elif params['translations']['peptide_mapper_class_version'] == 'upapa_v3':
+        class_etxra_args = [fasta_lookup_name]
+    elif params['translations']['peptide_mapper_class_version'] == 'UPeptideMapper_v3':
         #silent default :)
         upapa = UPeptideMapper_v3( params['translations']['database'] )
         fasta_lookup_name = upapa.fasta_name
+        class_etxra_args = [ fasta_lookup_name ]
+    elif params['translations']['peptide_mapper_class_version'] == 'UPeptideMapper_v4':
+        #silent default :)
+        upapa = UPeptideMapper_v4( params['translations']['database'] )
+        fasta_lookup_name = os.path.basename( params['translations']['database'] )
+        class_etxra_args = []
     else:
         print(
             '[ map_peps ] peptide mapper class version unknown: {0}'.format(
@@ -234,7 +241,7 @@ def main(input_file=None, output_file=None, params=None):
         )
         p2p_mappings  = upapa.map_peptides(
             list(tmp_peptide_set),
-            fasta_lookup_name
+            *class_etxra_args
         )
         print('''[ map_peps ] Mapping peptides done''')
         total_lines = len(csv_file_buffer)
@@ -374,7 +381,7 @@ def main(input_file=None, output_file=None, params=None):
             upapa.peptide_2_protein_mappings[fasta_lookup_name] = defaultdict(list)
             p2p_mappings  = upapa.map_peptides(
                 list(variants),
-                fasta_lookup_name
+                *class_etxra_args
             )
             if len(p2p_mappings.keys()) != 0:
                 for p_with_x, maps in p2p_mappings.items():
@@ -420,8 +427,8 @@ class UPeptideMapper_v2( dict ):
     Note:
 
         This is the deprectaed version of the peptide mapper which can be used
-        by setting the parameter 'peptide_mapper_class_version' to 'upapa_v2'.
-        Otherwise the new mapper class version ('upapa_v3') is used as default.
+        by setting the parameter 'peptide_mapper_class_version' to 'UPeptideMapper_v2'.
+        Otherwise the new mapper class version ('UPeptideMapper_v3') is used as default.
 
     '''
     def __init__(self, word_len = None ):
@@ -706,14 +713,15 @@ class UPeptideMapper_v3():
         if fasta_name in self.protein_indices.keys():
             self.purge_fasta_info(fasta_name)
             self.fasta_name = fasta_name
-        for protein_id, seq in ursgal.ucore.parseFasta(open(fasta_database,'r').readlines()):
-            print(
-                '[ upapa v3 ] Buffering protein #{0} of database {1}'.format(
-                    self.fasta_counter[fasta_name],
-                    fasta_database
-                ),
-                end ='\r'
-            )
+        for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parseFasta(open(fasta_database,'r').readlines())):
+            if protein_pos % 500 == 0:
+                print(
+                    '[ upapa v3 ] Buffering protein #{0} of database {1}'.format(
+                        self.fasta_counter[fasta_name],
+                        fasta_database
+                    ),
+                    end ='\r'
+                )
             len_seq             = len(seq)
 
             self.protein_indices[fasta_name][protein_id] = {
@@ -838,6 +846,158 @@ class UPeptideMapper_v3():
             del self.peptide_2_protein_mappings[fasta_name]
         if fasta_name in self.automatons.keys():
             del self.automatons[fasta_name]
+
+
+class UPeptideMapper_v4():
+    '''
+    UPeptideMapper V4
+    
+    Improved version of class version 3 (changes proposed by Christian)
+
+    Note:
+        Uses the implementation of Aho-Corasick algorithm pyahocorasick.
+        Please refer to https://pypi.python.org/pypi/pyahocorasick/ for more
+        information.
+
+
+
+    '''
+    def __init__(self, fasta_database ):
+
+        # self.protein_indices            = {}
+        self.protein_sequences          = {}
+
+        self.total_sequence_list        = []
+
+        self.protein_list               = []
+        self.protein_start_indices      = []
+
+        self.fasta_counter              = 0
+        self.len_total_sequence_string  = 0
+
+        self.peptide_2_protein_mappings = {}
+        self.total_sequence_string      = {}
+        self.cache_database(fasta_database)
+
+
+    def cache_database(self, fasta_database):
+        '''
+        Function to cache the given fasta database.
+
+        Args:
+            fasta_database (str): path to the fasta database
+
+        Note:
+
+            If the same fasta_name is buffered again all info is purged from the
+            class.
+        '''
+
+        for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parseFasta(open(fasta_database,'r').readlines())):
+            if protein_pos % 500 == 0:
+                print(
+                    '[ upapa v4 ] Buffering protein #{0} of database {1}'.format(
+                        self.fasta_counter,
+                        fasta_database
+                    ),
+                    end ='\r'
+                )
+            len_seq             = len(seq)
+
+            self.total_sequence_list.append(seq)
+
+            self.protein_list.append( protein_id )
+            self.protein_start_indices.append( self.len_total_sequence_string +protein_pos) # protein start
+
+            self.protein_sequences[ protein_id ] = seq
+            self.len_total_sequence_string += len_seq  #offset for delimiter |
+            self.fasta_counter += 1
+        print()
+        self.total_sequence_string = '|'.join( self.total_sequence_list )
+        return
+
+    def map_peptides(self, peptide_list):
+        '''
+        Function to map a given peptide list in one batch.
+
+        Args:
+            peptide_list (list): list with peptides to be mapped
+
+
+        Returns:
+            peptide_2_protein_mappings (dict): Dictionary containing
+                peptides as keys and lists of protein mappings as values of the
+                given fasta_name
+
+        Note:
+            Based on the number of peptides the returned mapping dictionary
+            can become very large.
+
+        Warning:
+            The peptide to protein mapping is resetted if a new list o peptides
+            is mapped to the same database (fasta_name).
+
+        Examples::
+
+            peptide_2_protein_mappings['PEPTIDE']  = [
+                {
+                    'start' : 1,
+                    'end'   : 10,
+                    'pre'   : 'K',
+                    'post'  : 'D',
+                    'id'    : 'BSA'
+                }
+            ]
+        '''
+
+        self.peptide_2_protein_mappings = defaultdict(list)
+
+        # self.peptide_2_protein_mappings = defaultdict(list)
+        self.automaton =  ahocorasick.Automaton()
+        for idx, peptide in enumerate(peptide_list):
+            self.automaton.add_word(peptide, (idx, peptide))
+        self.automaton.make_automaton()
+
+        for match in self.automaton.iter(self.total_sequence_string):
+            idx, (p_idx, m_peptide) = match
+            len_m_peptide = len(m_peptide)
+
+            protein_index = bisect.bisect( self.protein_start_indices, idx ) - 1
+            protein_name  = self.protein_list[protein_index]
+            protein_seq   = self.protein_sequences[protein_name]
+            start_in_total_seq_string = self.protein_start_indices[protein_index]
+            # print('Index',protein_index)
+            stop_in_protein = idx - start_in_total_seq_string + 1
+            start_in_protein = stop_in_protein - len(m_peptide)
+
+            pre_pos = start_in_protein - 1
+
+            # print(stop_in_protein)
+            # print(start_in_protein)
+            # print(pre_pos)
+            if pre_pos < 0:
+                pre = '-'
+            else:
+                pre = protein_seq[ pre_pos ]
+            try:
+                post = protein_seq[ stop_in_protein ]
+            except:
+                post = '-'
+
+            self.peptide_2_protein_mappings[m_peptide].append(
+                {
+                    'start' : start_in_protein + 1,
+                    'end'   : stop_in_protein,
+                    'pre'   : pre,
+                    'post'  : post,
+                    'id'    : protein_name
+                }
+            )
+
+        return self.peptide_2_protein_mappings
+
+
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 5:
