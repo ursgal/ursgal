@@ -33,7 +33,7 @@ class percolator_2_08( ursgal.UNode ):
     learns to separate target from decoy peptide-spectrum matches (PSMs)
 
     Reference:
-    K郢晢ｽｻ郢晢ｽｻ繝ｻ・ｽ繝ｻ・､ll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
+    Käll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
     """
     META_INFO = {
         'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
@@ -86,7 +86,7 @@ class percolator_2_08( ursgal.UNode ):
             },
         },
         'citation' : \
-            'Kall L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) '\
+            'Käll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) '\
             'Semi-supervised learning for peptide identification from shotgun '\
             'proteomics datasets.',
     }
@@ -144,7 +144,7 @@ class percolator_2_08( ursgal.UNode ):
                     "The difference between this PSM's XCorr and the XCorr of the next-ranked \
                 PSM for this spectrum, divided by this PSM's XCorr or 1, whichever is larger. \
                 Note that this definition differs from that of the standard delta Cn reported \
-                by SEQUEST郢晢ｽｻ郢ｧ謇假ｽｽ・ｽ繝ｻ・ｮ"
+                by SEQUEST®"
                         }
             ),
             (

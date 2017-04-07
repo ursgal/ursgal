@@ -13,7 +13,7 @@ class _test_node( ursgal.UNode ):
         'engine_type' : {
             'converter' : True
         },
-        'input_extensions'  : ['.txt', '.csv', '.fasta', '.mzml'],              # list, extensions (kaz)
+        'input_extensions'  : ['.txt', '.csv', '.fasta', '.mzML'],              # list, extensions (kaz)
         'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extensions' : ['.csv'],                                         # list, extensions (kaz)
         'output_suffix'     : 'test_node',

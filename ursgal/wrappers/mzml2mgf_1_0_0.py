@@ -18,7 +18,7 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
         'engine_type' : {
             'converter' : True,
         },
-        'input_extensions'  : ['.mzml', '.mzml.gz'],                            # list, extensions (kaz)
+        'input_extensions'  : ['.mzML', '.mzML.gz'],                            # list, extensions (kaz)
         'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extensions' : ['.mgf'],                                         # list, extensions (kaz)
         'output_suffix'     : '',

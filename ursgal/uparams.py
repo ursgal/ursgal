@@ -144,9 +144,16 @@ ursgal_params = {
             '.mzML' : {
                 'short_name'     : 'mzML',
                 'long_name'      : 'mzML (MS data)',
-                'same_extension' : ['.mzml'],
+                'same_extension' : [],
                 'description'    : \
                     'Mass spectrometry data format',
+            },
+            '.mzML.gz' : {
+                'short_name'     : 'mzML',
+                'long_name'      : 'mzML (MS data)',
+                'same_extension' : [],
+                'description'    : \
+                    'Compressed mzML',
             },
             '.mzXML' : {
                 'short_name'     : 'mzXML',
@@ -7201,7 +7208,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 0,
             },
         },
-        'uvalue_type' : None,
+        'uvalue_type' : 'None',
         'uvalue_option' : {
         },
         'default_value' : None,
