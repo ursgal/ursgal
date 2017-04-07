@@ -1303,6 +1303,23 @@ class UController(ursgal.UNode):
                         )
                     )
                     self.io['input']['params'][ u_param ] = u_value
+            # check if params from previous run are identical with default
+            for i_json_param, i_json_value in self.io['input']['params'].items():
+                if i_json_param in self.params.keys():
+                    continue 
+                if i_json_param not in self.meta_unodes[ engine ].PARAMS_TRIGGERING_RERUN:
+                    continue
+                default_value = self.meta_unodes[engine].UNODE_UPARAMS[i_json_param]['default_value']
+                if i_json_value != default_value:
+                    number_of_diffs_between_json_and_params += 1
+                    self.print_info(
+                        'Mismatch of param {0}: UController: {1}; i_json: {2}'.format(
+                            i_json_param,
+                            default_value,
+                            i_json_value
+                        )
+                    )
+                    self.io['input']['params'][ i_json_param ] = default_value
             if number_of_diffs_between_json_and_params > 0:
                 self.print_info(
                     'Updated {0} params in self.io["input"]["params"]'.format(
@@ -1611,7 +1628,6 @@ class UController(ursgal.UNode):
                     #     None
                     # )
                     default_value = self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value']
-
                     if used_param not in o_params.keys():
                         reasons.append(
                             'parameter "{0}" '\
