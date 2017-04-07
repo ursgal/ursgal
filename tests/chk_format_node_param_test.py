@@ -12,7 +12,7 @@ from ursgal import UController
 
 uc = UController()
 all_node  = uc.unodes
-all_node_name  = list(all_node)
+all_node_name = list(all_node)
 all_node_name.sort()
 remove_list = []
 for node_name in all_node_name:
@@ -130,48 +130,48 @@ for remove_name in remove_list:
     all_param_name.remove(remove_name)
 
 param_info = {
-    'edit_version' : {
-        'essential' : True,
-        'type'      : float,
+    'available_in_unode' : {
+        'essential'   : True,
+        'type'        : list,
+        'ignore_key'  : ['ucontroller']
     },
-    'available_in_unode' : {   #
-        'essential' : True,
-        'type'      : list,
-    },
-    'triggers_rerun' : {
-        'essential' : True,
-        'type'      : bool,
-    },
-    'ukey_translation' : {
-        'essential' : True,
-        'type'      : dict,
-    },
-    'utag' : {
-        'essential' : True,
-        'type'      : list,
-    },
-    'uvalue_translation' : {
-        'essential' : True,
-        'type'      : dict,
-    },
-    'uvalue_type' : {          #
-        'essential' : True,
-        'type'      : str,
-    },
-    'uvalue_option' : {
-        'essential' : True,
-        'type'      : dict,
-    },
-    'default_value' : {        #
-        'essential' : True,
-        'type'      : [type(None), str, int, float, bool, list, tuple, dict],
+    'default_value'   : {
+        'essential'   : True,
+        'type'        : [type(None), str, int, float, bool, list, tuple, dict],
     },
     'description' : {
-        'essential' : True,
-        'type'      : str,
+        'essential'   : True,
+        'type'        : str,
+    },
+    'edit_version' : {
+        'essential'   : True,
+        'type'        : float,
+    },
+    'triggers_rerun' : {
+        'essential'   : True,
+        'type'        : bool,
+    },
+    'ukey_translation' : {
+        'essential'   : True,
+        'type'        : dict,
+    },
+    'utag' : {
+        'essential'   : True,
+        'type'        : list,
+    },
+    'uvalue_option'   : {
+        'essential'   : True,
+        'type'        : dict,
+    },
+    'uvalue_translation' : {
+        'essential'   : True,
+        'type'        : dict,
+    },
+    'uvalue_type' : {
+        'essential'   : True,
+        'type'        : str,
     },
 }
-
 
 
 def chk_format_node_test():
@@ -229,8 +229,8 @@ def chk_format_param_test():
 
 
 def chk_format_param( param_name, param_dict ):
-##    for k in param_dict.keys():
-##        param_info[k]
+    for k in param_dict.keys():
+        param_info[k]
 
     for k, v in param_info.items():
         if v['essential'] is True or param_dict.get(k) is not None:
@@ -248,6 +248,27 @@ def chk_format_param( param_name, param_dict ):
                 if v['type'] != type(param_dict[k]):
                     error_msg = 'The type of \'' + str(k) + '\'' + ' is not exactly.'
                     raise ValueError(error_msg)
+
+    for ava_node in param_dict['available_in_unode']:
+        if (ava_node in param_info['available_in_unode']['ignore_key']) is False:
+            all_node[ava_node]
+
+    uvalue_type   = param_dict['uvalue_type']
+    default_value = param_dict['default_value']
+    uvalue_option = param_dict['uvalue_option']
+    if uvalue_type is str:
+        if type(default_value) is not type(None) and \
+                                                 type(default_value) is not str:
+            error_msg = 'The type of \'default_value\' is str or None.'
+            raise ValueError(error_msg)
+        if uvalue_option.get('multipleLine') is None:
+            error_msg = 'multipleLine is required in uvalue_option.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['multipleLine']) is not bool:
+            error_msg = 'The type of \'multipleLine\' is bool.'
+            raise ValueError(error_msg)
+
+
 
 
 if __name__ == '__main__':

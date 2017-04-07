@@ -5116,7 +5116,7 @@ ursgal_params = {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
-            'merge_csv_1_0_0',
+            'merge_csvs_1_0_0',
             'moda_v1_51',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
