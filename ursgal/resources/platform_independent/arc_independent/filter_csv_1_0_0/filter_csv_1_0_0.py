@@ -137,9 +137,31 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
                         elif line_dict[dict_key][-2] == 'N' and line_dict[dict_key][-1] != 'P':
                             if 'S' in line_dict['Sequence Post AA'] or 'T' in line_dict['Sequence Post AA']:
                                 write_row_bools.add(True)
-                                break
                             else:
                                 write_row_bools.add(False)
+                        else:
+                            write_row_bools.add(False)
+                    elif rule == 'mod_at_glycosite':
+                        mods =  line_dict[dict_key].split(';')
+                        accepted = False
+                        for mod in mods:
+                            if value in mod:
+                                pos = int(mod.split(':')[-1])
+                                if line_dict['Sequence'][pos-1] != 'N':
+                                    continue
+                                if line_dict['Sequence'][pos] == 'P':
+                                    continue
+                                if pos >= len(line_dict['Sequence'])-2:
+                                    if 'S' not in line_dict['Sequence Post AA'] and 'T' not in line_dict['Sequence Post AA']:
+                                        continue
+                                else:
+                                    if line_dict['Sequence'][pos+1] not in ['S', 'T']:
+                                        continue
+                                accepted = True
+                            else:
+                                continue
+                        if accepted == True:
+                            write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
                     else:

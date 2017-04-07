@@ -438,11 +438,23 @@ class UNode(object, metaclass=Meta_UNode):
         proc = None
 
         if len(self.params['command_list']) != 0:
-            proc = subprocess.Popen(
-                self.params['command_list'],
-                stdout = subprocess.PIPE,
-                # shell = True
-            )
+            mswindows = ( sys.platform == "win32" )
+            if mswindows is True:
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                startupinfo.wShowWindow = subprocess.SW_HIDE
+                proc = subprocess.Popen(
+                    self.params['command_list'],
+                    stdout = subprocess.PIPE,
+                    shell = False,
+                    startupinfo=startupinfo,
+                )
+            else:
+                proc = subprocess.Popen(
+                    self.params['command_list'],
+                    stdout = subprocess.PIPE,
+                    # shell = True
+                )
         else:
             print('Command list is empty, nothing to do here...')
             print('_execute failed ....', self.params['command_list'])

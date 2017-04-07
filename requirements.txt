@@ -1,4 +1,4 @@
 pymzml >= 0.7.6
 nose >=1.3
 regex
--e git+https://github.com/pygcluster/pyGCluster#egg=pyGCluster
+https://github.com/pygcluster/pyGCluster/archive/master.zip

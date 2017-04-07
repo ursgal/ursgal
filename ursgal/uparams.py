@@ -138,6 +138,7 @@ ursgal_params = {
             'percolator_2_08',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
+            'svm_1_0_0',
         ],
         'default_value' : None,
         'description' :  ''' Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality ''',
@@ -147,6 +148,7 @@ ursgal_params = {
             'percolator_style_1' : 'bigger_scores_better',
             'qvality_style_1' : '-r',
             'sanitize_csv_style_1' : 'bigger_scores_better',
+            'svm_style_1' : 'bigger_scores_better',
         },
         'utag' : [
             'scoring',
@@ -210,6 +212,24 @@ ursgal_params = {
                 'xtandem_vengeance' : True,
             },
             'sanitize_csv_style_1' : {
+                'msamanda_1_0_0_5242' : True,
+                'msamanda_1_0_0_5243' : True,
+                'msamanda_1_0_0_6299' : True,
+                'msamanda_1_0_0_6300' : True,
+                'msamanda_1_0_0_7503' : True,
+                'msamanda_1_0_0_7504' : True,
+                'msgfplus_v2016_09_16' : False,
+                'msgfplus_v9979' : False,
+                'myrimatch_2_1_138' : True,
+                'myrimatch_2_2_140' : True,
+                'omssa_2_1_9' : False,
+                'xtandem_cyclone_2010' : True,
+                'xtandem_jackhammer' : True,
+                'xtandem_piledriver' : True,
+                'xtandem_sledgehammer' : True,
+                'xtandem_vengeance' : True,
+            },
+            'svm_style_1' : {
                 'msamanda_1_0_0_5242' : True,
                 'msamanda_1_0_0_5243' : True,
                 'msamanda_1_0_0_6299' : True,
@@ -1023,6 +1043,27 @@ N-terminus or C-terminus ''',
             },
         },
         'uvalue_type' : "select",
+    },
+    'fdr_cutoff' : {
+        'available_in_unode' : [
+            'svm_1_0_0',
+        ],
+        'default_value' : 0.01,
+        'description' :  ''' Target PSMs with a lower FDR than this threshold will be used as a positive training set for SVM post-processing ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'svm_style_1' : 'fdr_cutoff',
+        },
+        'utag' : [
+            'scoring',
+            'statistics',
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
     },
     'filter_csv_converter_version' : {
         'available_in_unode' : [
@@ -1930,6 +1971,27 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "bool",
     },
+    'kernel' : {
+        'available_in_unode' : [
+            'svm_1_0_0',
+        ],
+        'default_value' : "rbf",
+        'description' :  ''' The kernel function of the support vector machine used for PSM post-processing ("rbf", "linear", "poly" or "sigmoid") ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'svm_style_1' : 'kernel',
+        },
+        'utag' : [
+            'scoring',
+            'statistics',
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'kojak_MS1_centroid' : {
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -2046,12 +2108,12 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
     },
-    'kojak_export_pepXML' : {
+    'kojak_export_pepxml' : {
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 1,
-        'description' :  ''' Activate (1) or deactivate (0) output as pepXML ''',
+        'default_value' : True,
+        'description' :  ''' Activate (True) or deactivate (False) output as pepXML ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_export_pepXML',
@@ -2062,6 +2124,10 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
         },
         'uvalue_type' : "int",
     },
@@ -2069,8 +2135,8 @@ N-terminus or C-terminus ''',
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 1,
-        'description' :  ''' Activate (1) or deactivate (0) output for percolator ''',
+        'default_value' : True,
+        'description' :  ''' Activate (True) or deactivate (False) output for percolator ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_export_percolator',
@@ -2081,6 +2147,10 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
         },
         'uvalue_type' : "int",
     },
@@ -2196,8 +2266,8 @@ N-terminus or C-terminus ''',
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 0,
-        'description' :  ''' 0=no, 1=yes ''',
+        'default_value' : False,
+        'description' :  ''' True if spectrum should be processed by kojak ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_spectrum_processing',
@@ -2208,6 +2278,10 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
         },
         'uvalue_type' : "int",
     },
@@ -2254,9 +2328,9 @@ N-terminus or C-terminus ''',
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
-        'default_value' : 0,
+        'default_value' : False,
         'description' :  ''' Generally speeds up analysis. Special cases cause reverse
-            effect, thus this is allowed to be disabled. 0=off ''',
+            effect, thus this is allowed to be disabled. True if it should be used. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_turbo_button',
@@ -2267,6 +2341,10 @@ N-terminus or C-terminus ''',
         'uvalue_option' : {
         },
         'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
         },
         'uvalue_type' : "int",
     },
@@ -2997,6 +3075,90 @@ N-terminus or C-terminus ''',
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
+    },
+    'ms1_centroided' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : False,
+        'description' :  ''' MS1 data are centroided: True or False ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS1_centroid',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
+        },
+        'uvalue_type' : "int",
+    },
+    'ms1_resolution' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 30000,
+        'description' :  ''' MS1 resolution ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS1_resolution',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'ms2_centroided' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : True,
+        'description' :  ''' MS2 data are centroided: True or False ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS2_centroid',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+            'kojak_style_1' : {
+                False : 0,
+                True : 1,
+            },
+        },
+        'uvalue_type' : "int",
+    },
+    'ms2_resolution' : {
+        'available_in_unode' : [
+            'kojak_1_5_3',
+        ],
+        'default_value' : 25000,
+        'description' :  ''' MS2 resolution ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'kojak_style_1' : 'kojak_MS2_resolution',
+        },
+        'utag' : [
+            'cross-linking',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
     },
     'msgfplus_protocol_id' : {
         'available_in_unode' : [
@@ -5528,6 +5690,27 @@ N-terminus or C-terminus ''',
         },
         'uvalue_type' : "int",
     },
+    'svm_c_param' : {
+        'available_in_unode' : [
+            'svm_1_0_0',
+        ],
+        'default_value' : 1.0,
+        'description' :  ''' Penalty parameter C of the error term of the post-processing SVM ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'svm_style_1' : 'c',
+        },
+        'utag' : [
+            'scoring',
+            'statistics',
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
     'test_param1' : {
         'available_in_unode' : [
             '_test_node',
@@ -5823,6 +6006,7 @@ N-terminus or C-terminus ''',
             'percolator_2_08',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
+            'svm_1_0_0',
             'ucontroller',
             'unify_csv_1_0_0',
         ],
@@ -5834,6 +6018,7 @@ N-terminus or C-terminus ''',
             'percolator_style_1' : 'validation_score_field',
             'qvality_style_1' : 'validation_score_field',
             'sanitize_csv_style_1' : 'validation_score_field',
+            'svm_style_1' : 'validation_score_field',
             'ucontroller_style_1' : 'validation_score_field',
             'unify_csv_style_1' : 'validation_score_field',
         },
@@ -5904,6 +6089,26 @@ N-terminus or C-terminus ''',
                 'xtandem_vengeance' : 'X\!Tandem:hyperscore',
             },
             'sanitize_csv_style_1' : {
+                'msamanda_1_0_0_5242' : 'Amanda:Score',
+                'msamanda_1_0_0_5243' : 'Amanda:Score',
+                'msamanda_1_0_0_6299' : 'Amanda:Score',
+                'msamanda_1_0_0_6300' : 'Amanda:Score',
+                'msamanda_1_0_0_7503' : 'Amanda:Score',
+                'msamanda_1_0_0_7504' : 'Amanda:Score',
+                'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v9979' : 'MS-GF:SpecEValue',
+                'myrimatch_2_1_138' : 'MyriMatch:MVH',
+                'myrimatch_2_2_140' : 'MyriMatch:MVH',
+                'novor_1_1beta' : 'Novor:score',
+                'omssa_2_1_9' : 'OMSSA:pvalue',
+                'pepnovo_3_1' : 'Pepnovo:PnvScr',
+                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
+                'xtandem_jackhammer' : 'X\!Tandem:hyperscore',
+                'xtandem_piledriver' : 'X\!Tandem:hyperscore',
+                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
+                'xtandem_vengeance' : 'X\!Tandem:hyperscore',
+            },
+            'svm_style_1' : {
                 'msamanda_1_0_0_5242' : 'Amanda:Score',
                 'msamanda_1_0_0_5243' : 'Amanda:Score',
                 'msamanda_1_0_0_6299' : 'Amanda:Score',
