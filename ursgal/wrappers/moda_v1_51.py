@@ -25,7 +25,7 @@ class moda_v1_51( ursgal.UNode ):
         'compress_raw_search_results' : False,
         'create_own_folder'           : True,
         'in_development'              : True,
-        'include_in_git'              : False,
+        'include_in_git'              : True,
         'utranslation_style'          : 'moda_style_1',
         'engine' : {
             'platform_independent' : {

@@ -20,7 +20,7 @@ class msamanda_1_0_0_6300( msamanda ):
         'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'create_own_folder'  : True,
-        'include_in_git'     : None,
+        'include_in_git'     : True,
         'cannot_distribute'  : True,
         'in_development'     : False,
         'utranslation_style' : 'msamanda_style_1',

@@ -25,7 +25,7 @@ class xtandem_sledgehammer( ursgal.UNode ):
         'create_own_folder'           : True,
         'compress_raw_search_results' : True,
         'in_development'              : False,
-        'include_in_git'              : False,
+        'include_in_git'              : True,
         'utranslation_style'          : 'xtandem_style_1',
         'engine' : {
             'darwin' : {

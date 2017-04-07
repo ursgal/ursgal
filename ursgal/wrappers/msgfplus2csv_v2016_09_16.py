@@ -30,7 +30,7 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
         'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'output_suffix'      : None,
-        'include_in_git'     : False,
+        'include_in_git'     : True,
         'in_development'     : False,
         'utranslation_style' : 'msgfplus_style_1',
         'engine' : {

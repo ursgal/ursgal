@@ -15,7 +15,7 @@ class qvality_2_02( ursgal.UNode ):
     q-value and posterior error probability calculation from score distributions
 
     Reference:
-    K繝ｻ繝ｻ・ｽ・､ll L, Storey JD, Noble WS (2009) QVALITY: non-parametric estimation of q-values and posterior error probabilities.
+    K郢晢ｽｻ郢晢ｽｻ繝ｻ・ｽ繝ｻ・､ll L, Storey JD, Noble WS (2009) QVALITY: non-parametric estimation of q-values and posterior error probabilities.
     """
 
     META_INFO = {
@@ -31,7 +31,7 @@ class qvality_2_02( ursgal.UNode ):
         'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'output_suffix'      : 'qvality_validated',
         'create_own_folder'  : False,
-        'include_in_git'     : False,
+        'include_in_git'     : True,
         'group_psms'         : True,
         'in_development'     : False,
         'utranslation_style' : 'qvality_style_1',

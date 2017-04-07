@@ -23,7 +23,7 @@ class myrimatch_2_2_140( myri ):
         'create_own_folder'           : True,
         'compress_raw_search_results' : True,
         'in_development'              : False,
-        'include_in_git'              : False,
+        'include_in_git'              : True,
         'utranslation_style'          : 'myrimatch_style_1',
         'engine' : {
             'win32' : {

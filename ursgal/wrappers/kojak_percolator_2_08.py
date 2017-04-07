@@ -24,7 +24,7 @@ class kojak_percolator_2_08( ursgal.UNode ):
         'kojak_percolator_2_08' in order to make this node work.
 
     Reference:
-    K郢晢ｽｻ郢晢ｽｻ繝ｻ・ｽ繝ｻ・､ll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
+    K驛｢譎｢・ｽ・ｻ驛｢譎｢・ｽ・ｻ郢晢ｽｻ繝ｻ・ｽ郢晢ｽｻ繝ｻ・､ll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
     """
     META_INFO = {
         'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
@@ -42,7 +42,7 @@ class kojak_percolator_2_08( ursgal.UNode ):
         'cannot_distribute'  : True,
         'group_psms'         : False,
         'in_development'     : False,
-        'include_in_git'     : None,
+        'include_in_git'     : True,
         'cpu_usage'          : 1,
         'utranslation_style' : 'kojak_percolator_style_1',
         'engine' : {

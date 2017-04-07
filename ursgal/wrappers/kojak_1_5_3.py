@@ -10,7 +10,7 @@ class kojak_1_5_3( ursgal.UNode ):
     Parameter options at http://www.kojak-ms.org/param/index.html
 
     Reference:
-    Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient analysis of chemically cross-linked protein complexes. J Proteome Res 14: 2190–2198
+    Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient analysis of chemically cross-linked protein complexes. J Proteome Res 14: 2190窶・198
 
     Note:
 
@@ -34,7 +34,7 @@ class kojak_1_5_3( ursgal.UNode ):
         'compress_raw_search_results' : False,
         'cannot_distribute'           : True,
         'in_development'              : False,
-        'include_in_git'              : None,
+        'include_in_git'              : True,
         'utranslation_style'          : 'kojak_style_1',
         'engine' : {
             'linux' : {
@@ -57,7 +57,7 @@ class kojak_1_5_3( ursgal.UNode ):
         'citation' : \
             'Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis '\
             'TN, Moritz RL (2015) Kojak: Efficient analysis of chemically '\
-            'cross-linked protein complexes. J Proteome Res 14: 2190–2198',
+            'cross-linked protein complexes. J Proteome Res 14: 2190窶・198',
     }
 
 

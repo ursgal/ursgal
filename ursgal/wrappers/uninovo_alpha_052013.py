@@ -25,7 +25,7 @@ class uninovo_alpha_052013( ursgal.UNode ):
         'output_extensions' : ['.den'],                                         # list, extensions (kaz)
         'create_own_folder' : True,
         'in_development'    : True,
-        'include_in_git'    : None,
+        'include_in_git'    : True,
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {

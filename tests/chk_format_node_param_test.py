@@ -5,7 +5,7 @@
 check the format of node and param.
 
 '''
-import datetime
+from datetime import datetime
 from ursgal import uparams
 from ursgal import UController
 
@@ -23,37 +23,49 @@ for remove_name in remove_list:
     all_node_name.remove(remove_name)
 
 node_meta_info = {
+    'cannot_distribute' : {
+        'essential' : False,
+        'type'      : bool,
+    },
+    'citation' : {
+        'essential' : True,
+        'type'      : str,
+    },
+    'compress_raw_search_results' : {
+        'essential' : False,
+        'type'      : bool,
+    },
+    'cpu_usage' : {
+        'essential' : False,
+        'type'      : int,
+    },
+    'create_own_folder' : {
+        'essential' : False,
+        'type'      : bool,
+    },
     'edit_version' : {
         'essential' : True,
-        'type'      : [float],
+        'type'      : float,
     },
-    'name' : {
-        'essential' : True,
-        'type'      : [str],
+    'engine' : {
+        'essential' : False,
+        'type'      : dict,
     },
-    'version' : {
-        'essential' : True,
-        'type'      : [str],
-    },
-    'release_date' : {
-        'essential' : True,
-        'type'      : ['datetime', None],
+    'engine_exe' : {
+        'essential' : False,
+        'type'      : dict,
     },
     'engine_type' : {
         'essential' : True,
         'type'      : dict,
     },
-    'input_extensions' : {
-        'essential' : True,
-        'type'      : list,
+    'engine_url' : {
+        'essential' : False,
+        'type'      : dict,
     },
-    'input_multi_file' : {
-        'essential' : True,
+    'group_psms' : {
+        'essential' : False,
         'type'      : bool,
-    },
-    'output_extensions' : {
-        'essential' : True,
-        'type'      : list,
     },
     'in_development' : {
         'essential' : True,
@@ -63,17 +75,55 @@ node_meta_info = {
         'essential' : True,
         'type'      : bool,
     },
-    'citation' : {
+    'input_extensions' : {
+        'essential' : True,
+        'type'      : list,
+    },
+    'input_multi_file' : {
+        'essential' : True,
+        'type'      : bool,
+    },
+    'mods_to_unimod_correction' : {
+        'essential' : False,
+        'type'      : dict,
+    },
+    'name' : {
+        'essential' : True,
+        'type'      : str,
+    },
+    'output_extensions' : {
+        'essential' : True,
+        'type'      : list,
+    },
+    'output_suffix' : {
+        'essential' : False,
+        'type'      : str,
+    },
+    'rejected_output_suffix' : {
+        'essential' : False,
+        'type'      : str,
+    },
+    'release_date' : {
+        'essential' : True,
+        'type'      : ['datetime', type(None)],
+    },
+    'utranslation_style' : {
+        'essential' : False,
+        'type'      : str,
+    },
+    'version' : {
         'essential' : True,
         'type'      : str,
     },
 }
+
 
 all_param = uparams.ursgal_params
 all_param_name = list(all_param)
 all_param_name.sort()
 remove_list = []
 for param_name in all_param_name:
+##    if param_name[0] == '_' and param_name != '_extentions':
     if param_name[0] == '_':
         if len(param_name) < 5 or param_name[0:5] != '_test':
             remove_list.append(param_name)
@@ -81,49 +131,55 @@ for remove_name in remove_list:
     all_param_name.remove(remove_name)
 
 
-##all_cont = []
+print(all_param_name)
+
+
 
 def chk_format_node_test():
     for node_name in all_node_name:
         node_dict = all_node[node_name]
         yield chk_format_node, node_name, node_dict
 
+
 def chk_format_node( node_name, node_dict ):
-##    global all_cont
-##    for key in list(node_dict['META_INFO']):
-##        all_cont.append(key)
-##    all_cont = list(set(all_cont))
-##    return
+    for k in node_dict['META_INFO'].keys():
+        node_meta_info[k]
 
-    node_dict['META_INFO']
-    node_dict['META_INFO']['edit_version']
-    node_dict['META_INFO']['name']
-    node_dict['META_INFO']['version']
-    node_dict['META_INFO']['release_date']
-    node_dict['META_INFO']['engine_type']
-    node_dict['META_INFO']['input_extensions']
-    node_dict['META_INFO']['input_multi_file']
-    node_dict['META_INFO']['output_extensions']
-    node_dict['META_INFO']['in_development']
-    node_dict['META_INFO']['include_in_git']
-    node_dict['META_INFO']['citation']
-
-##    node_dict['META_INFO']['output_suffix']
-##    node_dict['META_INFO']['utranslation_style']
-
-##    node_dict['META_INFO']['engine']
-##    node_dict['META_INFO']['engine_exe']
-##    engine_url
-
-##    node_dict['META_INFO']['group_psms']
-##    node_dict['META_INFO']['compress_raw_search_results']
-##    node_dict['META_INFO']['create_own_folder']
-##    node_dict['META_INFO']['cpu_usage']
-##    node_dict['META_INFO']['rejected_output_suffix']
-##    node_dict['META_INFO']['cannot_distribute']
-##    node_dict['META_INFO']['mods_to_unimod_correction']
+    for k, v in node_meta_info.items():
+        if v['essential'] is True or node_dict['META_INFO'].get(k) is not None:
+            if type(v['type']) is list:
+                answer = False
+                meta_info_value = node_dict['META_INFO'][k]
+                for type_item in v['type']:
+                    if type_item == type(meta_info_value):
+                        answer = True
+                        break
+                    elif type_item == 'datetime' and type(meta_info_value) is str:
+                        num = len(meta_info_value) - len(meta_info_value.\
+                                              replace('-', '').replace(':', ''))
+                        if num == 2:
+                            datetime.strptime(meta_info_value, '%Y-%m-%d')
+                            answer = True
+                            break
+                        elif num == 4:
+                            datetime.strptime(meta_info_value, '%Y-%m-%d %H:%M:%S')
+                            answer = True
+                            break
+                if answer is not True:
+                    raise ValueError(k)
+            else:
+                if v['type'] != type(node_dict['META_INFO'][k]):
+                    raise ValueError(k)
 
 
+def chk_format_node_test():
+    for param_name in all_param_name:
+        param_dict = all_param[param_name]
+        yield chk_format_param, param_name, param_dict
+
+
+def chk_format_param( param_name, param_dict ):
+    pass
 
 
 ##def chk_format_param( test_dict, expected_dict ):
@@ -149,10 +205,13 @@ def chk_format_node( node_name, node_dict ):
 
 if __name__ == '__main__':
     print(__doc__)
-    for node_name in all_node_name:
-        node_dict = all_node[node_name]
-        chk_format_node( node_name, node_dict )
+##    for node_name in all_node_name:
+##        node_dict = all_node[node_name]
+##        chk_format_node( node_name, node_dict )
 
-##    global all_cont
-##    print(all_cont)
+    for param_name in all_param_name:
+        param_dict = all_param[param_name]
+        chk_format_param( param_name, param_dict )
+
+
 

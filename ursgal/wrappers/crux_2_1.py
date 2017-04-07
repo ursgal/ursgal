@@ -21,7 +21,7 @@ class crux_2_1( ursgal.UNode ):
         'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extensions' : [],                                               # list, extensions (kaz)
         'in_development'    : True,
-        'include_in_git'    : None,
+        'include_in_git'    : True,
         'citation' : \
             '',
     }
