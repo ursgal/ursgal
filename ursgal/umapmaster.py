@@ -304,7 +304,7 @@ class UPeptideMapper( dict ):
     def __init__(self, word_len = None ):
         if word_len is None:
             word_len = ursgal.uparams.ursgal_params['word_len'].get(
-                'default_value', 8
+                'default_value', 6
             )
             '''Ultimately this will be passed over by the wrapper
             if this class is its own standalone script / UNode
@@ -391,6 +391,7 @@ class UPeptideMapper( dict ):
 
             # sorted 3.8GB
             s_pep = ''.join(sorted(pep))
+            # s_pep = pep
             # print(s_pep, type(s_pep))
             try:
                 self[ fasta_name ][ s_pep ].add( (id, pos + 1) )
@@ -471,6 +472,7 @@ class UPeptideMapper( dict ):
                         # pep = pep.encode()
                         # print( pep, peptide )
                         s_pep = ''.join(sorted(pep))
+                        # s_pep = pep
 
                         fasta_set = self[ fasta_name ].get(s_pep, None)
                         if fasta_set is None:

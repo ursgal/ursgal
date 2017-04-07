@@ -456,7 +456,8 @@ class UController(ursgal.UNode):
 
         if input_suffix == ".csv":
             self.print_info(
-                "No need to convert to csv because input is already a csv!"
+                "No need to convert to csv because input is already a csv!",
+                caller = 'cnvrtcsv'
             )
             report = input_file
 
@@ -1034,7 +1035,8 @@ class UController(ursgal.UNode):
             "Preparing unode run for engine {0} on file(s) {1}".format(
                 engine_name,
                 input_file
-            )
+            ),
+            caller = 'prprun'
         )
 
         # If the UNode received multiple input files,
@@ -1275,7 +1277,10 @@ class UController(ursgal.UNode):
         #
         # -\- Setting up self.io['input'] -/-
         #
-        self.print_info( msg='Setting self.io["input"]' )
+        self.print_info(
+            msg    = 'Setting self.io["input"]',
+            caller = 'set_ios'
+        )
         self.io['input']['finfo'] = self.set_file_info_dict( input_file )
         self.take_care_of_params_and_stats( io_mode = 'input')
         # setting status ...
@@ -1300,7 +1305,8 @@ class UController(ursgal.UNode):
                             u_param,
                             u_value,
                             self.io['input']['params'].get(u_param, '[no_entry]')
-                        )
+                        ),
+                        caller = 'set_ios'
                     )
                     self.io['input']['params'][ u_param ] = u_value
             # check if params from previous run are identical with default
@@ -1324,7 +1330,8 @@ class UController(ursgal.UNode):
                 self.print_info(
                     'Updated {0} params in self.io["input"]["params"]'.format(
                         number_of_diffs_between_json_and_params
-                    )
+                    ),
+                    caller = 'set_ios'
                 )
 #             for u_param, u_value in self.params.items():
 #                 if u_param not in self.io['input']['params'].keys():
@@ -1405,7 +1412,9 @@ class UController(ursgal.UNode):
         self.print_info(
             "You defined {0}'s output file name as: {1}".format(
                 engine, out_fname
-        ) )
+            ),
+            caller = 'Info'
+        )
         return out_fname
 
     def take_care_of_params_and_stats(self, io_mode=None):
@@ -1585,7 +1594,9 @@ class UController(ursgal.UNode):
         self.print_info(
             "Generated engine {0} output file name: {1}".format(
                 engine, full_output
-            ) )
+            ),
+            caller = 'Info'
+        )
         return full_output
 
 
@@ -1931,11 +1942,17 @@ class UController(ursgal.UNode):
         number_of_updated_params = len(
             ursgal.PROFILES[ profile ]
         )
-        self.print_info('Initializing profile {0}'.format( profile ))
-        self.print_info('{0} parameter{1} been updated'.format(
-            number_of_updated_params,
-            's have' if number_of_updated_params > 1 else ' has'
-        ))
+        self.print_info(
+            'Initializing profile {0}'.format( profile ),
+            caller= 'profile'
+        )
+        self.print_info(
+            '{0} parameter{1} been updated'.format(
+                number_of_updated_params,
+                's have' if number_of_updated_params > 1 else ' has'
+            ),
+            caller = 'profile'
+        )
 
         self.init_kwargs['profile'] = profile
         if dev_mode:
@@ -2053,10 +2070,12 @@ class UController(ursgal.UNode):
             self.print_info(
                 ('Skipping {function}() on file {file} since it was '
                  'previously executed with the same input file(s) and '
-                 'parameters.').format( **print_d )
-                )
+                 'parameters.').format( **print_d ),
+                caller = 'Info'    
+            )
             self.print_info(
-                'To re-run, use {function}( force=True )'.format( **print_d )
+                'To re-run, use {function}( force=True )'.format( **print_d ),
+                caller = 'Info'
                 )
             report = {
                 'output_file' : os.path.join(
@@ -2069,9 +2088,13 @@ class UController(ursgal.UNode):
             # node has to be run because it was never executed before,
             # or because input file or params changed
             self.print_info(
-                '{function}() scheduled on input file {file}'.format(**print_d)
+                '{function}() scheduled on input file {file}'.format(**print_d),
+                caller = 'Info'
             )
-            self.print_info('Reason for run: {0}'.format( answer ) )
+            self.print_info(
+                'Reason for run: {0}'.format( answer ),
+                caller = 'Info'
+            )
 
             if history_addon is None:
                 history_addon = {}
