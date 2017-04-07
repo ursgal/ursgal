@@ -21,9 +21,9 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
         'input_extensions'  : ['.mzML', '.mzML.gz'],                            # list, extensions (kaz)
         'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extensions' : ['.mgf'],                                         # list, extensions (kaz)
-        'output_suffix'     : '',
+        'output_suffix'     : None,
         'in_development'    : False,
-        'include_in_git'    : True,
+        'include_in_git'    : None,
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {

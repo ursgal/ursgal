@@ -25,9 +25,9 @@ class mzidentml_lib_1_7( ml ):
         'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'in_development'     : False,
-        'output_suffix'      : '',
+        'output_suffix'      : None,
         # 'can_gz'             : True,
-        'include_in_git'     : True,
+        'include_in_git'     : None,
         'cannot_distribute'  : True,
         'utranslation_style' : 'mzidentml_style_1',
         'engine' : {

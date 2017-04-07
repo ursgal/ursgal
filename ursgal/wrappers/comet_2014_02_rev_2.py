@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+﻿#!/usr/bin/env python3.4
 import ursgal
 
 
@@ -20,7 +20,7 @@ class comet_2014_02_rev_2( ursgal.UNode ):
         'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
         'output_extensions' : [],                                               # list, extensions (kaz)
         'in_development'    : True,
-        'include_in_git'    : True,
+        'include_in_git'    : None,
         'citation' : \
             '',
     }

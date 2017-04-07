@@ -27,7 +27,7 @@ class pepnovo_3_1( ursgal.UNode ):
         'utranslation_style' : 'pepnovo_style_1',
         'in_development'     : False,
         'create_own_folder'  : True,
-        'include_in_git'     : True,
+        'include_in_git'     : False,
         'engine' : {
             'linux' : {
                 '64bit' : {

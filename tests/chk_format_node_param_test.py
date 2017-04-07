@@ -73,7 +73,7 @@ node_meta_info = {
     },
     'include_in_git' : {
         'essential' : True,
-        'type'      : bool,
+        'type'      : [bool, type(None)],
     },
     'input_extensions' : {
         'essential' : True,
@@ -97,7 +97,7 @@ node_meta_info = {
     },
     'output_suffix' : {
         'essential' : False,
-        'type'      : str,
+        'type'      : [str, type(None)],
     },
     'rejected_output_suffix' : {
         'essential' : False,

@@ -25,7 +25,7 @@ class msgfplus_v9979( ursgal.UNode ):
         'compress_raw_search_results' : True,
         'create_own_folder'           : True,
         'in_development'              : False,
-        'include_in_git'              : True,
+        'include_in_git'              : False,
         'utranslation_style'          : 'msgfplus_style_1',
         'engine' : {
             'platform_independent' : {

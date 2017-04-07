@@ -25,7 +25,7 @@ class novor_1_1beta( ursgal.UNode ):
         'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'in_development'     : False,
         'create_own_folder'  : True,
-        'include_in_git'     : True,
+        'include_in_git'     : False,
         'utranslation_style' : 'novor_style_1',
         'engine' : {
             'linux' : {

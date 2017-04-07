@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+﻿#!/usr/bin/env python3.4
 import ursgal
 import math
 import csv
@@ -48,7 +48,7 @@ class percolator_2_08( ursgal.UNode ):
         'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
         'output_suffix'      : 'percolator_validated',
         'create_own_folder'  : False,
-        'include_in_git'     : True,
+        'include_in_git'     : False,
         'group_psms'         : True,
         'in_development'     : False,
         'cpu_usage'          : 1,
@@ -144,7 +144,7 @@ class percolator_2_08( ursgal.UNode ):
                     "The difference between this PSM's XCorr and the XCorr of the next-ranked \
                 PSM for this spectrum, divided by this PSM's XCorr or 1, whichever is larger. \
                 Note that this definition differs from that of the standard delta Cn reported \
-                by SEQUEST®"
+                by SEQUEST・ゑｽｮ"
                         }
             ),
             (

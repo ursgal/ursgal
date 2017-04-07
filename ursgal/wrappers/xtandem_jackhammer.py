@@ -17,7 +17,7 @@ class xtandem_jackhammer( tandem ):
         'output_extensions'           : ['.xml'],                               # list, extensions (kaz)
         'create_own_folder'           : True,
         'compress_raw_search_results' : True,
-        'include_in_git'              : True,
+        'include_in_git'              : False,
         'in_development'              : False,
         'utranslation_style'          : 'xtandem_style_1',
         'engine' : {

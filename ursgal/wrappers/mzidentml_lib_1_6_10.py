@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+﻿#!/usr/bin/env python3.4
 import ursgal
 import sys
 import os
@@ -9,7 +9,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
     """
     MzidLib 1_6_10 UNode
 
-    'Reisinger F, Krishna R, Ghali F, R郢晢ｽｻ郢晢ｽｻ繝ｻ・ｽ繝ｻ・ｭos D, Hermjakob H, Vizca郢晢ｽｻ郢晢ｽｻ繝ｻ・ｽ繝ｻ・ｭno JA, Jones AR. (2012)
+    'Reisinger F, Krishna R, Ghali F, Ríos D, Hermjakob H, Vizcaíno JA, Jones AR. (2012)
     jmzIdentML API: A Java interface to the mzIdentML standard for peptide and protein identification data.'
 
     Java program to convert results to .mzIdentML and .mzIdentML to .csv
@@ -29,7 +29,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         'output_suffix'      : None,
         # 'can_gz'             : True,
         'in_development'     : False,
-        'include_in_git'     : True,
+        'include_in_git'     : False,
         'utranslation_style' : 'mzidentml_lib_1_6_10',
         'engine' : {
             'platform_independent' : {
