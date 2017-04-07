@@ -31,6 +31,7 @@ class msblender_09_2015( ursgal.UNode ):
         'in_development'     : True,
         'create_own_folder'  : False,
         'include_in_git'     : True,
+        'utranslation_style' : 'msblender_style_1',
         'engine_exe' : {
             'linux'  : 'msblender',
             'darwin' : 'msblender',

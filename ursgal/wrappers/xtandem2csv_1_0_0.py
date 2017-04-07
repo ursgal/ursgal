@@ -21,6 +21,7 @@ class xtandem2csv_1_0_0( ursgal.UNode ):
         'output_suffix'     : None,
         'in_development'    : False,
         'include_in_git'    : True,
+        'utranslation_style' : 'xtandem2csv_style_1',
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {

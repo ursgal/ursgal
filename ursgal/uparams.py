@@ -1526,7 +1526,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'svm_style_1' : 'fdr_cutoff',
+        #     'svm_style_1' : 'fdr_cutoff',
         },
         'utag' : [
             'scoring',
@@ -2591,7 +2591,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'svm_style_1' : 'kernel',
+        #     'svm_style_1' : 'kernel',
         },
         'utag' : [
             'scoring',
@@ -5132,7 +5132,7 @@ ursgal_params = {
             'mzidentml_lib_1_6_11',
             'mzidentml_lib_1_7',
             'novor_1_1beta',
-            'omssa_style_1',
+            # 'omssa_style_1',
             'pepnovo_3_1',
             'percolator_2_08',
             'qvality_2_02',
@@ -5146,7 +5146,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'output_file',
-            'merge_csv_style_1'             : 'output',
+            # 'merge_csv_style_1'             : 'output',
             'moda_style_1'                  : '-o',
             'msamanda_style_1'              : 'output_file_incl_path',
             'msgfplus_style_1'              : '-o',
@@ -5644,7 +5644,7 @@ ursgal_params = {
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
-            'myrimatch',
+            # 'myrimatch',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -6869,7 +6869,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'svm_style_1' : 'c',
+        #     'svm_style_1' : 'c',
         },
         'utag' : [
             'scoring',
@@ -7234,7 +7234,7 @@ ursgal_params = {
             'percolator_style_1'        : 'validation_score_field',
             'qvality_style_1'           : 'validation_score_field',
             'sanitize_csv_style_1'      : 'validation_score_field',
-            'svm_style_1'               : 'validation_score_field',
+        #     'svm_style_1'               : 'validation_score_field',
             'ucontroller_style_1'       : 'validation_score_field',
             'unify_csv_style_1'         : 'validation_score_field',
         },
@@ -7745,11 +7745,11 @@ ursgal_params = {
     'word_len' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
         'available_in_unode' : [
-            'upeptide_mapper_1_0_0',
+            # 'upeptide_mapper_1_0_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
-            'upeptide_mapper_style_1' : 'word_len',
+        #     'upeptide_mapper_style_1' : 'word_len',
         },
         'utag' : [
             'conversion',

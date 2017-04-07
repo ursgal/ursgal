@@ -25,6 +25,7 @@ class naive_bayes_1_0_0( ursgal.UNode ):
         'create_own_folder' : False,
         'include_in_git'    : True,
         'in_development'    : False,
+        'utranslation_style' : 'naive_bayes_style_1',
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {

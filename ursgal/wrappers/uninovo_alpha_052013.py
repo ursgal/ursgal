@@ -26,6 +26,7 @@ class uninovo_alpha_052013( ursgal.UNode ):
         'create_own_folder' : True,
         'in_development'    : True,
         'include_in_git'    : None,
+        'utranslation_style' : 'uninovo_style_1',
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {

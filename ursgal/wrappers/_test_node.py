@@ -6,19 +6,20 @@ import os
 class _test_node( ursgal.UNode ):
     """_test_node UNode"""
     META_INFO = {
-        'edit_version'      : 1.00,                                             # flot, inclease number if something is changed (kaz)
-        'name'              : 'test node',                                      # str, Software name (kaz)
-        'version'           : 'alpha',                                          # str, Software version name (kaz)
-        'release_date'      : None,                                             # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,                                             # flot, inclease number if something is changed (kaz)
+        'name'               : 'test node',                                      # str, Software name (kaz)
+        'version'            : 'alpha',                                          # str, Software version name (kaz)
+        'release_date'       : None,                                             # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
         'engine_type' : {
             'converter' : True
         },
-        'input_extensions'  : ['.txt', '.csv', '.fasta', '.mzML'],              # list, extensions (kaz)
-        'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions' : ['.csv'],                                         # list, extensions (kaz)
-        'output_suffix'     : 'test_node',
-        'in_development'    : True,  # do not show in UNode overview
-        'include_in_git'    : True,
+        'input_extensions'   : ['.txt', '.csv', '.fasta', '.mzML'],              # list, extensions (kaz)
+        'input_multi_file'   : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'output_extensions'  : ['.csv'],                                         # list, extensions (kaz)
+        'output_suffix'      : 'test_node',
+        'in_development'     : True,  # do not show in UNode overview
+        'include_in_git'     : True,
+        'utranslation_style' : '_test_node_style_1',
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {

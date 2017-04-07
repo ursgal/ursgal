@@ -108,7 +108,7 @@ node_meta_info = {
         'type'      : ['datetime', type(None)],
     },
     'utranslation_style' : {
-        'essential' : False,
+        'essential' : True,
         'type'      : str,
     },
     'version' : {
@@ -117,6 +117,9 @@ node_meta_info = {
     },
 }
 
+style_list = [
+    'ucontroller_style_1',
+]
 
 all_param = uparams.ursgal_params
 all_param_name = list(all_param)
@@ -221,6 +224,13 @@ def chk_format_node( node_name, node_dict ):
                 'uparams.ursgal_params[\'_extentions\'][\'default_value\'].keys()'
             raise ValueError(error_msg)
 
+    if type(node_dict['META_INFO']['utranslation_style']) is not str:
+        error_msg = 'The type of \'utranslation_style\' is str.'
+        raise ValueError(error_msg)
+    else:
+        global style_list
+        style_list.append(node_dict['META_INFO']['utranslation_style'])
+
 
 def chk_format_param_test():
     for param_name in all_param_name:
@@ -256,6 +266,26 @@ def chk_format_param( param_name, param_dict ):
     uvalue_type   = param_dict['uvalue_type']
     default_value = param_dict['default_value']
     uvalue_option = param_dict['uvalue_option']
+    if param_dict.get('input_files') is not None:
+        if uvalue_option.get('input_extensions') is None:
+            error_msg = 'input_extensions is required in uvalue_option, '\
+                'because this is input file params.'
+            raise ValueError(error_msg)
+        elif type(uvalue_option['input_extensions']) is not list:
+            error_msg = 'The type of \'input_extensions\' is list.'
+            raise ValueError(error_msg)
+
+    global style_list
+    style_list = list(set(style_list))
+    ukey_translation_keys   = list(param_dict['ukey_translation'])
+    uvalue_translation_keys = list(param_dict['uvalue_translation'])
+    search_style_list = list(set(ukey_translation_keys+uvalue_translation_keys))
+
+    for search_style in search_style_list:
+        if (search_style in style_list) is False:
+            error_msg = str(search_style) + ' is unknown style.'
+            raise ValueError(error_msg)
+
     if uvalue_type is str:
         if type(default_value) is not type(None) and \
                                                  type(default_value) is not str:
