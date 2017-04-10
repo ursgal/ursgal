@@ -1,5 +1,5 @@
 ursgal_params = {
-    '_extentions' : {                                                           # The information of all of extension, which is used in ursgal, in here (kaz)
+    '_extentions' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
         ],
@@ -12,28 +12,28 @@ ursgal_params = {
         },
         'uvalue_type'    : 'dict',
         'uvalue_option' : {
-            'dict_title' : {                                                    # dict, title in dict is required if uvalue_type is dict (kaz)
+            'dict_title' : {
                 'extension' : {
                     'tag' : 'cont',
                 },
             },
-            'dict_type' : {                                                     # dict, the keys are final keys of default_value (kaz)
+            'dict_type' : {
                 'short_name'     : 'str',
                 'long_name'      : 'str',
                 'same_extension' : 'list',
                 'description'    : 'str',
             },
-            'multiple_line' : {                                                 # dict, multiple_line for each str-type is required if dict_type include str (kaz)
+            'multiple_line' : {
                 'short_name'     : False,
                 'long_name'      : False,
                 'description'    : False,
             },
-            'title_list' : {                                                    # dict, title of list item is required if dict_type include list (kaz)
+            'title_list' : {
                 'same_extension' : [],
             },
-            'type_dict' : {                                                     # dict, type for each title is required if dict_type include list (kaz)
+            'type_dict' : {
             },
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : {
             '.csv' : {
@@ -260,7 +260,7 @@ ursgal_params = {
             'information of extentions',
     },
     '-xmx' : {
-        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msgfplus2csv_v2016_09_16',
             'msgfplus_v2016_09_16',
@@ -282,14 +282,14 @@ ursgal_params = {
         'uvalue_type'    : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value'  : '13312m',
         'description' : \
             'Set maximum Java heap size (used RAM)',
     },
     'aa_exception_dict' : {
-        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
@@ -305,23 +305,23 @@ ursgal_params = {
         'uvalue_type'    : 'dict',
         'uvalue_option' : {
             'none_val' : None,
-            'dict_title' : {                                                    # dict, title in dict is required if uvalue_type is dict (kaz)
+            'dict_title' : {
                 'Data Set' : {
                     'Format' : 'Unusual AA'
                 }
             },
-            'dict_type' : {                                                     # dict, the keys are final keys of default_value (kaz)
+            'dict_type' : {
                 'original_aa'          : 'str',
                 'unimod_name'          : 'str',
                 'unimod_name_with_cam' : 'str',
             },
-            'multiple_line' : {                                                 # dict, multiple_line for each str-type is required if dict_type include str (kaz)
+            'multiple_line' : {
                 'original_aa'          : False,
                 'unimod_name'          : False,
                 'unimod_name_with_cam' : False,
             },
-            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
-            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+            'custom_val_max' : 10000,
+            'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
@@ -348,7 +348,7 @@ ursgal_params = {
             'unimod modification name',
     },
     'accept_conflicting_psms' : {
-        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -373,7 +373,7 @@ ursgal_params = {
             'there are conflicting PSMs with similar scores.',
     },
     'base_mz' : {
-        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
             'omssa_2_1_9',
@@ -397,14 +397,14 @@ ursgal_params = {
             'max'       : 1000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value'  : 1000,
         'description' : \
             'm/z value that is used as basis for the conversion from ppm to Da',
     },
     'batch_size' : {
-        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -430,7 +430,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 10000,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value'  : 100000,
         'description' : \
@@ -438,7 +438,7 @@ ursgal_params = {
             'database file',
     },
     'bigger_scores_better' : {
-        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -578,7 +578,7 @@ ursgal_params = {
                 'xtandem_sledgehammer',
                 'xtandem_vengeance',
             ],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value'  : 'None',
         'description' : \
@@ -587,7 +587,7 @@ ursgal_params = {
             'e.g. by percolator, qvality',
     },
     'cleavage_cterm_mass_change' : {
-        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -609,16 +609,16 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-05,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value'  : 17.00305,
         'description' : \
             'The mass added to the peptide C-terminus by protein cleavage',
     },
     'cleavage_nterm_mass_change' : {
-        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -640,16 +640,16 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-05,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value'  : 1.00794,
         'description' : \
             'The mass added to the peptide N-terminus bz protein cleavage',
     },
     'compensate_small_fasta' : {
-        'edit_version'   : 1.00,                                                # float, inclease number if something is changed (kaz)
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -678,7 +678,7 @@ ursgal_params = {
             'Compensate for very small database files.',
     },
     'compress_raw_search_results_if_possible' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -699,7 +699,7 @@ ursgal_params = {
             'Compress raw search result to .gz: True or False',
     },
     'compute_xcorr' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -725,7 +725,7 @@ ursgal_params = {
             'Compute xcorr',
     },
     'consecutive_ion_prob' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -743,16 +743,16 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 100,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-05,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0.5,
         'description' : \
             'Probability of consecutive ion (used in correlation correction)',
     },
     'cpus' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
@@ -805,7 +805,7 @@ ursgal_params = {
             'max'       : '_uevaluation_req',
             'min'       : -1,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : -1,
         'description' : \
@@ -814,7 +814,7 @@ ursgal_params = {
             '    >0 : cpu num',
     },
     'cross_link_definition' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -830,7 +830,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                             # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'nK  nK  138.0680742 BS3',
         'description' : \
@@ -843,7 +843,7 @@ ursgal_params = {
             'protein N-terminus or C-terminus',
     },
     'csv_filter_rules' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'filter_csv_1_0_0',
         ],
@@ -860,27 +860,27 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'none_val' : [                                                      # list, initialValue is required if uvalue_type is list (kaz)
+            'none_val' : [
                 '',
                 '',
                 ''
             ],
-            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [
                 'column name/csv fieldname',
                 'rule',
                 'compared value',
             ],
-            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {
                 'column name/csv fieldname' : 'str',
                 'rule'                      : 'str',
                 'compared value'            : 'str',
             },
-            'multiple_line' : {                                                  # dict, multiple_line for each str-type is required if item is str (kaz)
+            'multiple_line' : {
                 'column name/csv fieldname' : False,
                 'rule'                      : False,
                 'compared value'            : False,
             },
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : None,
         'description' : \
@@ -890,7 +890,7 @@ ursgal_params = {
             'compared',
     },
     'database' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -926,7 +926,7 @@ ursgal_params = {
         'utag' : [
             'database',
             'input',
-            'input_files',                                                      # 'input_files' of utag becomes input file(s) on ogawa automatically (kaz)
+            'input_files',
         ],
         'uvalue_translation' : {
         },
@@ -934,7 +934,7 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val'         : '',
             'multiple_line'    : False,
-            'input_extensions' : ['.fasta', '.fa'],                             # list, extensions (kaz)
+            'input_extensions' : ['.fasta', '.fa'],
         },
         'default_value' : None,
         'description' : \
@@ -942,7 +942,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'database_taxonomy' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -965,7 +965,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'all',
         'description' : \
@@ -973,7 +973,7 @@ ursgal_params = {
             'sequences from the fasta database are included in the search.',
     },
     'decoy_generation_mode' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
         ],
@@ -991,7 +991,7 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['reverse_protein', 'shuffle_peptide'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'shuffle_peptide',
         'description' : \
@@ -1000,7 +1000,7 @@ ursgal_params = {
             '(reverse_protein).',
     },
     'decoy_tag' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'kojak_1_5_3',
@@ -1029,14 +1029,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'decoy_',
         'description' : \
             'decoy-specific tag to differentiate between targets and decoys',
     },
     'del_from_params_before_json_dump' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1052,17 +1052,17 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list'   : [                                                  # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list'   : [
                 'del param',
             ],
-            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {
                 'del param' : 'str',
             },
-            'multiple_line' : {                                                 # dict, multiple_line for each str-type is required if item is str (kaz)
+            'multiple_line' : {
                 'del param' : False,
             },
-            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
-            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+            'custom_val_max' : 10000,
+            'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
@@ -1076,7 +1076,7 @@ ursgal_params = {
             '(to not overload the .json with unimportant informations)',
     },
     'denovo_model' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -1097,7 +1097,7 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['cid_trypsin'],
-            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 1,
         },
         'default_value' : 'cid_trypsin',
         'description' : \
@@ -1105,7 +1105,7 @@ ursgal_params = {
             'and fragmentation type. Currently only CID_IT_TRYP available.',
     },
     'denovo_model_dir' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -1115,14 +1115,14 @@ ursgal_params = {
         },
         'utag' : [
             'model',
-            'input_dir',                                                        # 'input_dir' of utag becomes input dir on ogawa automatically (kaz)
+            'input_dir',
         ],
         'uvalue_translation' : {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : '',
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -1133,7 +1133,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'engine_internal_decoy_generation' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -1183,7 +1183,7 @@ ursgal_params = {
             'search engine, e.g. by using the uNode generate_target_decoy_1_0_0',
     },
     'engines_create_folders' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1205,7 +1205,7 @@ ursgal_params = {
             'in their META_INFO (\'create_own_folder\' : True). True or False',
     },
     'enzyme' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'kojak_1_5_3',
@@ -1501,7 +1501,7 @@ ursgal_params = {
                 'trypsin_gluc',
                 'trypsin_p'
             ],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'trypsin',
         'description' :  \
@@ -1534,13 +1534,13 @@ ursgal_params = {
             '    lysc_gluc',
     },
     'fdr_cutoff' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'svm_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-        #     'svm_style_1' : 'fdr_cutoff',
+            'svm_style_1' : 'fdr_cutoff',
         },
         'utag' : [
             'scoring',
@@ -1554,9 +1554,9 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 1,
             'min'       : 0,
-            'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-03,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0.01,
         'description' : \
@@ -1564,7 +1564,7 @@ ursgal_params = {
             'a positive training set for SVM post-processing',
     },
     'filter_csv_converter_version' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1580,14 +1580,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'filter_csv_1_0_0',
         'description' : \
             'filter csv converter version: version name',
     },
     'forbidden_cterm_mods' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_vengeance',
         ],
@@ -1603,12 +1603,12 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [
             ],
-            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {
             },
-            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
-            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+            'custom_val_max' : 10000,
+            'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
@@ -1621,7 +1621,7 @@ ursgal_params = {
             'occur at the C-terminus of a peptide, e.g. [\'GG\']',
     },
     'forbidden_residues' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'novor_1_1beta',
         ],
@@ -1637,7 +1637,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'I,U',
         'description' : \
@@ -1646,7 +1646,7 @@ ursgal_params = {
             '(single letter code)',
     },
     'force' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1668,7 +1668,7 @@ ursgal_params = {
             'node-related parameters have changed',
     },
     'frag_mass_tolerance' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -1709,14 +1709,14 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 20,
         'description' : \
             'Mass tolerance of measured and calculated fragment ions',
     },
     'frag_mass_tolerance_unit' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -1771,7 +1771,7 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['da', 'mmu', 'ppm'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'ppm',
         'description' : \
@@ -1779,7 +1779,7 @@ ursgal_params = {
             '(parts-per-millon), da (Dalton) or mmu (Milli mass unit)',
     },
     'frag_mass_type' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -1808,14 +1808,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['average', 'monoisotopic'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'monoisotopic',
         'description' : \
             'Fragment mass type: monoisotopic or average',
     },
     'frag_max_charge' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -1835,14 +1835,14 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 4,
         'description' : \
             'Maximum fragment ion charge to search.',
     },
     'frag_method' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -1872,7 +1872,7 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['cid', 'ecd', 'etd', 'hcd'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'hcd',
         'description' : \
@@ -1881,7 +1881,7 @@ ursgal_params = {
             'dissociation (ETD), Higher-energy C-trap dissociation (HCD)',
     },
     'frag_min_mz' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1905,14 +1905,14 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 150,
         'description' : \
             'Minimal considered fragment ion m/z',
     },
     'ftp_blocksize' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1931,14 +1931,14 @@ ursgal_params = {
             'max'       : 1000000000,
             'min'       : 1,
             'updownval' : 1,
-            'unit'      : 'bytes'                                               # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : 'bytes'
         },
         'default_value' : 1024,
         'description' : \
             'Blocksize for ftp download',
     },
     'ftp_folder' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1954,7 +1954,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : '',
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -1962,7 +1962,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'ftp_include_ext' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -1978,7 +1978,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : '',
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -1987,7 +1987,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'ftp_max_number_of_files' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -2006,7 +2006,7 @@ ursgal_params = {
             'max'       : 1000000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : 'files'                                               # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : 'files'
         },
         'default_value' : None,
         'description' : \
@@ -2014,7 +2014,7 @@ ursgal_params = {
             '     0 : No Limitation',
     },
     'ftp_output_folder' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -2030,7 +2030,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : '',
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -2038,7 +2038,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'ftp_password' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -2054,7 +2054,7 @@ ursgal_params = {
         'uvalue_type' : 'str_password',
         'uvalue_option' : {
             'none_val'      : '',
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -2062,7 +2062,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'ftp_url' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'get_ftp_files_1_0_0',
         ],
@@ -2078,7 +2078,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : '',
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -2086,7 +2086,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'header_translations' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_percolator_2_08',
             'msamanda_1_0_0_5242',
@@ -2192,7 +2192,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : 'None',
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -2200,7 +2200,7 @@ ursgal_params = {
             '    \'None\' : None',
     },
     'heatmap_annotation_field_name' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -2216,14 +2216,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'Protein',
         'description' : \
             'The name of the annotation to plot in the heatmap',
     },
     'heatmap_box_style' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -2239,14 +2239,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'classic',
         'description' : \
             'Box style for the heatmap',
     },
     'heatmap_color_gradient' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -2262,14 +2262,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'Spectral',
         'description' : \
             'Color gradient for the heatmap',
     },
     'heatmap_column_order' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -2285,12 +2285,12 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [
             ],
-            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {
             },
-            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
-            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+            'custom_val_max' : 10000,
+            'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
@@ -2302,7 +2302,7 @@ ursgal_params = {
             'The plot order of the columns',
     },
     'heatmap_error_suffix' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -2318,14 +2318,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : '_std',
         'description' : \
             'The suffix to identify the value error holding columns',
     },
     'heatmap_identifier_field_name' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -2341,14 +2341,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'Protein',
         'description' : \
             'The name of the identifier to plot in the heatmap',
     },
     'heatmap_max_value' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -2367,14 +2367,14 @@ ursgal_params = {
             'max'       : 100,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 3,
         'description' : \
             'Maximum value for the color gradient',
     },
     'heatmap_min_value' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -2393,14 +2393,14 @@ ursgal_params = {
             'max'       : 10000,
             'min'       : -10000,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : -3,
         'description' : \
             'Minimum vaue for the color gradient',
     },
     'heatmap_value_suffix' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -2416,14 +2416,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : '_mean',
         'description' : \
             'The suffix to identify the value columns, which should be plotted',
     },
     'helper_extension' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -2439,14 +2439,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : '.u.json',
         'description' : \
             'Exension for helper files',
     },
     'http_output_folder' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
@@ -2462,7 +2462,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : '',
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -2470,7 +2470,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'http_url' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'get_http_files_1_0_0',
         ],
@@ -2486,7 +2486,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : '',
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -2494,7 +2494,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'instrument' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -2548,14 +2548,14 @@ ursgal_params = {
                 'q_exactive',
                 'tof',
             ],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'q_exactive',
         'description' : \
             'Type of mass spectrometer (used to determine the scoring model)',
     },
     'intensity_cutoff' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -2573,16 +2573,16 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-05,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0.0,
         'description' : \
             'Low intensity cutoff as a fraction of max peak',
     },
     'json_extension' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -2598,14 +2598,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                             # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : '.u.json',
         'description' : \
             'Exension for .json files',
     },
     'keep_asp_pro_broken_peps' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
@@ -2629,13 +2629,13 @@ ursgal_params = {
             'during unify_csv or removed.',
     },
     'kernel' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'svm_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-        #     'svm_style_1' : 'kernel',
+            'svm_style_1' : 'kernel',
         },
         'utag' : [
             'scoring',
@@ -2649,7 +2649,7 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['rbf', 'linear', 'poly', 'sigmoid'],
-            'custom_val_max' : 1,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 1,
         },
         'default_value' : 'rbf',
         'description' : \
@@ -2657,7 +2657,7 @@ ursgal_params = {
             'post-processing (\'rbf\', \'linear\', \'poly\' or \'sigmoid\')',
     },
     'kojak_MS1_centroid' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2679,14 +2679,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['Yes', 'No'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'No',
         'description' : \
             'MS1 centroided data yes (1) or no (0)',
     },
     'kojak_MS1_resolution' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2705,14 +2705,14 @@ ursgal_params = {
             'max'       : 100000000,
             'min'       : 0,
             'updownval' : 1000,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 30000,
         'description' : \
             'MS1 resolution',
     },
     'kojak_MS2_centroid' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2734,14 +2734,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['Yes', 'No'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'Yes',
         'description' : \
             'MS2 centroided data yes (1) or no (0)',
     },
     'kojak_MS2_resolution' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2760,14 +2760,14 @@ ursgal_params = {
             'max'       : 100000000,
             'min'       : 0,
             'updownval' : 1000,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 25000,
         'description' : \
             'MS2 resolution',
     },
     'kojak_diff_mods_on_xl' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2786,7 +2786,7 @@ ursgal_params = {
             'max'       : 10000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 0,
         'description' : \
@@ -2794,7 +2794,7 @@ ursgal_params = {
             'diff_mods_on_xl = 1',
     },
     'kojak_enrichment' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2812,9 +2812,9 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 1,
             'min'       : 0,
-            'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-03,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0,
         'description' : \
@@ -2822,7 +2822,7 @@ ursgal_params = {
             'For example, 0.25 equals 25 APE',
     },
     'kojak_export_pepxml' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2844,14 +2844,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['Activate', 'Deactivate'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'Deactivate',
         'description' : \
             'Activate (1) or deactivate (0) output as pepXML',
     },
     'kojak_export_percolator' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2873,14 +2873,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['Activate', 'Deactivate'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'Activate',
         'description' : \
             'Activate (1) or deactivate (0) output for percolator',
     },
     'kojak_fragment_bin_offset' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2898,9 +2898,9 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 1,
             'min'       : 0,
-            'f-point'   : 1e-01,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-01,
             'updownval' : 0.1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0.0,
         'description' : \
@@ -2911,7 +2911,7 @@ ursgal_params = {
             'For high res ms/ms:    0.03 size, 0.0 offset',
     },
     'kojak_fragment_bin_size' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2929,9 +2929,9 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 2,
             'min'       : 0,
-            'f-point'   : 1e-04,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-04,
             'updownval' : 0.1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0.03,
         'description' : \
@@ -2942,7 +2942,7 @@ ursgal_params = {
             'For high res ms/ms:    0.03 size, 0.0 offset',
     },
     'kojak_mono_links_on_xl' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2961,7 +2961,7 @@ ursgal_params = {
             'max'       : 1000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 0,
         'description' : \
@@ -2969,7 +2969,7 @@ ursgal_params = {
             'mono_links_on_xl = 1',
     },
     'kojak_percolator_version' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -2985,14 +2985,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : '2.08',
         'description' : \
             'Defines the output format of Kojak for Percolator',
     },
     'kojak_prefer_precursor_pred' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3019,7 +3019,7 @@ ursgal_params = {
                 '1: only previous',
                 '2: supplement',
             ],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'supplement',
         'description' : \
@@ -3029,7 +3029,7 @@ ursgal_params = {
             '    2 = supplement predictions with additional analysis',
     },
     'kojak_spectrum_processing' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3054,7 +3054,7 @@ ursgal_params = {
             'True, if spectrum should be processed by kojak',
     },
     'kojak_top_count' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3073,7 +3073,7 @@ ursgal_params = {
             'max'       : 1000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 300,
         'description' : \
@@ -3081,7 +3081,7 @@ ursgal_params = {
             'analysis',
     },
     'kojak_truncate_prot_names' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3100,14 +3100,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 0,
         'description' : \
             'Max protein name character to export, 0=off',
     },
     'kojak_turbo_button' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3134,7 +3134,7 @@ ursgal_params = {
             'be used.',
     },
     'label' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -3174,14 +3174,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['14N', '15N'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : '14N',
         'description' : \
             '15N if the corresponding amino acid labeling was applied',
     },
     'machine_offset_in_ppm' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -3200,9 +3200,9 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-05,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0.0,
         'description' : \
@@ -3210,7 +3210,7 @@ ursgal_params = {
             'value.',
     },
     'max_accounted_observed_peaks' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -3239,14 +3239,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 100,
         'description' : \
             'Maximum number of peaks from a spectrum used.',
     },
     'max_missed_cleavages' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -3285,14 +3285,14 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 2,
         'description' : \
             'Maximum number of missed cleavages per peptide',
     },
     'max_mod_alternatives' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_vengeance',
         ],
@@ -3311,7 +3311,7 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 6,
         'description' : \
@@ -3319,7 +3319,7 @@ ursgal_params = {
             'in 2^C',
     },
     'max_mod_size' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -3338,14 +3338,14 @@ ursgal_params = {
             'max'       : 10000,
             'min'       : -10000,
             'updownval' : 10,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 200,
         'description' : \
             'Minimum modification size to consider (in Da)',
     },
     'max_num_mods' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
@@ -3370,14 +3370,14 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : 'mods'                                                # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : 'mods'
         },
         'default_value' : 3,
         'description' : \
             'Maximal number of modifications per peptide',
     },
     'max_num_of_ions_per_series_to_search' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3399,7 +3399,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 0,
         'description' : \
@@ -3407,7 +3407,7 @@ ursgal_params = {
             '     0 : all',
     },
     'max_num_per_mod' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_vengeance',
         ],
@@ -3423,13 +3423,13 @@ ursgal_params = {
         'uvalue_type' : 'dict',
         'uvalue_option' : {
             'none_val' : None,
-            'dict_title' : {                                                    # dict, title in dict is required if uvalue_type is dict (kaz)
+            'dict_title' : {
                 'unimod_name' : 'number'
             },
-            'dict_type' : {                                                     # dict, the keys are final keys of default_value (kaz)
+            'dict_type' : {
             },
-            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
-            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+            'custom_val_max' : 10000,
+            'custom_type' : {
                 'int' : {
                     'max'       : 10000,
                     'min'       : 0,
@@ -3446,7 +3446,7 @@ ursgal_params = {
             '    {unimod_name : number}',
     },
     'max_output_e_value' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -3471,16 +3471,16 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-05,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 1.0,
         'description' : \
             'Highest e-value for reported peptides',
     },
     'max_pep_length' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -3505,14 +3505,14 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 10,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 40,
         'description' : \
             'Maximal length of a peptide',
     },
     'max_pep_var' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3534,14 +3534,14 @@ ursgal_params = {
             'max'       : 1000000000,
             'min'       : 0,
             'updownval' : 100000,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 1000000,
         'description' : \
             'Maximal peptide variants',
     },
     'mgf_input_file' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -3573,7 +3573,7 @@ ursgal_params = {
         },
         'utag' : [
             'input',
-            'input_files',                                                      # 'input_files' of utag becomes input file(s) on ogawa automatically (kaz)
+            'input_files',
         ],
         'uvalue_translation' : {
         },
@@ -3581,7 +3581,7 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val'         : '',
             'multiple_line'    : False,
-            'input_extensions' : ['.mgf'],                                      # list, extensions (kaz)
+            'input_extensions' : ['.mgf'],
         },
         'default_value' : None,
         'description' : \
@@ -3589,7 +3589,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'min_mod_size' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -3608,14 +3608,14 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : -100000,
             'updownval' : 10,
-            'unit'      : 'Da'                                                  # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : 'Da'
         },
         'default_value' : -200,
         'description' : \
             'Minimum modification size to consider (in Da)',
     },
     'min_output_score' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3645,9 +3645,9 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10,
             'min'       : -1e-10,
-            'f-point'   : 1e-10,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-10,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : -1e-10,
         'description' : \
@@ -3656,7 +3656,7 @@ ursgal_params = {
             '    -1e-10 = \'default\'',
     },
     'min_pep_length' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -3681,14 +3681,14 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 6,
         'description' : \
             'Minimal length of a peptide',
     },
     'min_precursor_matches' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -3708,14 +3708,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 1,
         'description' : \
             'Minimum number of precursors that match a spectrum.',
     },
     'min_required_matched_peaks' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3744,14 +3744,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 4,
         'description' : \
             'Mimimum number of matched ions required for a peptide to be scored',
     },
     'min_required_observed_peaks' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -3777,14 +3777,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 5,
         'description' : \
             'Mimimum number of peaks in the spectrum to be considered.',
     },
     'moda_blind_mode' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -3811,7 +3811,7 @@ ursgal_params = {
                 'One Modification',
                 'No Limit',
             ],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'No Limit',
         'description' : \
@@ -3821,7 +3821,7 @@ ursgal_params = {
             '    \'2\' = no limit',
     },
     'moda_high_res' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -3847,7 +3847,7 @@ ursgal_params = {
             'that fragment tolerance is larger than precursor tolerance',
     },
     'moda_protocol_id' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -3873,7 +3873,7 @@ ursgal_params = {
                 'TMT2plex',
                 'TMT6plex'
             ],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'None',
         'description' : \
@@ -3881,7 +3881,7 @@ ursgal_params = {
             'samples.',
     },
     'modifications' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -3934,20 +3934,20 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [
                 'mod_1',
                 'mod_2',
             ],
-            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {
                 'mod_1' : 'str',
                 'mod_2' : 'str',
             },
-            'multiple_line' : {                                                 # dict, multiple_line for each str-type is required if item is str (kaz)
+            'multiple_line' : {
                 'mod_1' : False,
                 'mod_2' : False,
             },
-            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
-            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+            'custom_val_max' : 10000,
+            'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
@@ -3993,7 +3993,7 @@ ursgal_params = {
             '[ \'S,opt,any,New_mod,C2H5N1O3\' ]',
     },
     'mono_link_definition' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -4009,7 +4009,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'nK  156.0786',
         'description' : \
@@ -4022,7 +4022,7 @@ ursgal_params = {
             'protein N-terminus or C-terminus',
     },
     'ms1_centroided' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -4047,7 +4047,7 @@ ursgal_params = {
             'MS1 data are centroided: True or False',
     },
     'ms1_resolution' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -4066,14 +4066,14 @@ ursgal_params = {
             'max'       : 100000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 30000,
         'description' : \
             'MS1 resolution',
     },
     'ms2_centroided' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -4098,7 +4098,7 @@ ursgal_params = {
             'MS2 data are centroided: True or False',
     },
     'ms2_resolution' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -4117,14 +4117,14 @@ ursgal_params = {
             'max'       : 100000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 25000,
         'description' : \
             'MS2 resolution',
     },
     'msgfplus_protocol_id' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -4148,7 +4148,7 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['0', '1', '2', '3'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : '0',
         'description' : \
@@ -4156,7 +4156,7 @@ ursgal_params = {
             'enable scoring parameters for enriched and/or labeled samples.',
     },
     'myrimatch_class_size_multiplier' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4175,14 +4175,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 2,
         'description' : \
             'Myrimatch ClassSizeMultiplier',
     },
     'myrimatch_num_int_classes' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4201,14 +4201,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 3,
         'description' : \
             'Myrimatch NumIntensityClasses',
     },
     'myrimatch_num_mz_fidelity_classes' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4227,14 +4227,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 3,
         'description' : \
             'Myrimatch NumMzFidelityClasses',
     },
     'myrimatch_prot_sampl_time' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4253,14 +4253,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 15,
         'description' : \
             'Myrimatch ProteinSamplingTime',
     },
     'myrimatch_smart_plus_three' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4285,7 +4285,7 @@ ursgal_params = {
             'Use Myrimatch UseSmartPlusThreeModel',
     },
     'myrimatch_tic_cutoff' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4303,16 +4303,16 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10,
             'min'       : 0,
-            'f-point'   : 1e-02,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-02,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0.98,
         'description' : \
             'Myrimatch TicCutoffPercentage',
     },
     'mzidentml_compress' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -4339,7 +4339,7 @@ ursgal_params = {
             'Compress mzidentml_lib output files',
     },
     'mzidentml_converter_version' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -4355,14 +4355,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'mzidentml_lib_1_6_10',
         'description' : \
             'mzidentml converter version: version name',
     },
     'mzidentml_export_type' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -4388,14 +4388,14 @@ ursgal_params = {
                 'exportProteoAnnotator',
                 'exportRepProteinPerPAGOnly',
             ],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'exportPSMs',
         'description' : \
             'Defines which paramters shoul be exporte by mzidentml_lib',
     },
     'mzidentml_function' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -4425,7 +4425,7 @@ ursgal_params = {
                 'Tandem2mzid',
                 'Threshold',
             ],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'Mzid2Csv',
         'description' : \
@@ -4433,7 +4433,7 @@ ursgal_params = {
             '\'Mzid2Csv\' is suppoted so far',
     },
     'mzidentml_output_fragmentation' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -4460,7 +4460,7 @@ ursgal_params = {
             'Include fragmentation in mzidentml_lib output',
     },
     'mzidentml_verbose_output' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -4487,7 +4487,7 @@ ursgal_params = {
             'Verbose mzidentml_lib output',
     },
     'mzml2mgf_converter_version' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -4503,14 +4503,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'mzml2mgf_1_0_0',
         'description' : \
             'mzml to mgf converter version: version name',
     },
     'neutral_loss_enabled' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -4540,7 +4540,7 @@ ursgal_params = {
             'Neutral losses enabled for spectrum algorithm: set  True or False',
     },
     'neutral_loss_mass' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -4564,7 +4564,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 0,
         'description' : \
@@ -4572,7 +4572,7 @@ ursgal_params = {
             'losses.',
     },
     'neutral_loss_window' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -4596,7 +4596,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 0,
         'description' : \
@@ -4604,7 +4604,7 @@ ursgal_params = {
             'neutral molecule losses.',
     },
     'noise_suppression_enabled' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -4632,7 +4632,7 @@ ursgal_params = {
             'Used noise suppresssion',
     },
     'num_compared_psms' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -4651,7 +4651,7 @@ ursgal_params = {
             'max'       : 10000,
             'min'       : 1,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 2,
         'description' : \
@@ -4659,7 +4659,7 @@ ursgal_params = {
             'scoring PSM) that are compared',
     },
     'num_hits_retain_spec' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4679,7 +4679,7 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 30,
         'description' : \
@@ -4687,7 +4687,7 @@ ursgal_params = {
             'spectrum during the search',
     },
     'num_i_decimals' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -4706,14 +4706,14 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 5,
         'description' : \
             'Number of decimals for intensity (peak)',
     },
     'num_match_spec' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -4748,7 +4748,7 @@ ursgal_params = {
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 10,
         'description' : \
@@ -4756,7 +4756,7 @@ ursgal_params = {
             'spectrum',
     },
     'num_mz_decimals' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -4775,14 +4775,14 @@ ursgal_params = {
             'max'       : 10000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 5,
         'description' : \
             'Number of decimals for m/z mass',
     },
     'omssa_cp' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4808,7 +4808,7 @@ ursgal_params = {
             'Omssa: eliminate charge reduced precursors in spectra',
     },
     'omssa_h1' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4827,14 +4827,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 2,
         'description' : \
             'Omssa: number of peaks allowed in single charge window',
     },
     'omssa_h2' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4853,14 +4853,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 2,
         'description' : \
             'Omssa: number of peaks allowed in double charge window',
     },
     'omssa_ht' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4879,7 +4879,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 6,
         'description' : \
@@ -4887,7 +4887,7 @@ ursgal_params = {
             'peaks that must include one match to the theoretical peptide',
     },
     'omssa_mm' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4906,7 +4906,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 10,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 128,
         'description' : \
@@ -4914,7 +4914,7 @@ ursgal_params = {
             'database peptide',
     },
     'omssa_ta' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4932,16 +4932,16 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10000,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-05,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 1.0,
         'description' : \
             'Omssa: automatic mass tolerance adjustment fraction',
     },
     'omssa_tex' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4959,9 +4959,9 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
-            'f-point'   : 1e-02,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-02,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 1446.94,
         'description' : \
@@ -4969,7 +4969,7 @@ ursgal_params = {
             'added in exact mass search',
     },
     'omssa_verbose' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -4994,7 +4994,7 @@ ursgal_params = {
             'Omssa: verbose info print',
     },
     'omssa_w1' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5013,14 +5013,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 27,
         'description' : \
             'Omssa: single charge window in Da',
     },
     'omssa_w2' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5039,14 +5039,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 14,
         'description' : \
             'Omssa: double charge window in Da',
     },
     'omssa_z1' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5064,9 +5064,9 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10000,
             'min'       : 0,
-            'f-point'   : 1e-02,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-02,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0.95,
         'description' : \
@@ -5074,7 +5074,7 @@ ursgal_params = {
             'spectrum is charge 1',
     },
     'omssa_zc' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5100,7 +5100,7 @@ ursgal_params = {
             'Should charge plus one be determined algorithmically?',
     },
     'omssa_zcc' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5119,14 +5119,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 2,
         'description' : \
             'Omssa: how should precursor charges be determined?, use a range',
     },
     'omssa_zt' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5146,7 +5146,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 3,
         'description' : \
@@ -5154,7 +5154,7 @@ ursgal_params = {
             'products',
     },
     'output_aa_probs' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -5175,7 +5175,7 @@ ursgal_params = {
             'Output probabilities for each amino acid.',
     },
     'output_add_features' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v9979',
@@ -5201,7 +5201,7 @@ ursgal_params = {
             'Number of decimals for intensity (peak)',
     },
     'output_cum_probs' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -5222,7 +5222,7 @@ ursgal_params = {
             'Output cumulative probabilities.',
     },
     'output_file_incl_path' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'merge_csvs_1_0_0',
@@ -5277,7 +5277,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : 'None',
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -5285,7 +5285,7 @@ ursgal_params = {
             '    \'None\' : None',
     },
     'output_file_type' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -5318,7 +5318,7 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['.csv', '.mzid', '.omx', 'default'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'default',
         'description' : \
@@ -5328,7 +5328,7 @@ ursgal_params = {
             'problems during conversion to .csv.',
     },
     'output_prm' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -5349,7 +5349,7 @@ ursgal_params = {
             'Only print spectrum graph nodes with scores.',
     },
     'output_prm_norm' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -5371,7 +5371,7 @@ ursgal_params = {
             'negative scores.',
     },
     'output_q_values' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus2csv_v2016_09_16',
         ],
@@ -5396,7 +5396,7 @@ ursgal_params = {
             'Output Q-values',
     },
     'pepnovo_tag_length' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -5415,7 +5415,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : None,
         'description' : \
@@ -5424,7 +5424,7 @@ ursgal_params = {
             '    0 : None',
     },
     'precursor_charge_dependency' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -5446,14 +5446,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['linear', 'none'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'linear',
         'description' : \
             'charge dependency of precursor mass tolerance (none or linear)',
     },
     'precursor_isotope_range' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
@@ -5509,14 +5509,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['0', '0,1', '0,2'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : '0,1',
         'description' : \
             'Error range for incorrect carbon isotope parent ion assignment',
     },
     'precursor_mass_tolerance_minus' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -5564,7 +5564,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 5,
         'description' : \
@@ -5572,7 +5572,7 @@ ursgal_params = {
             'calculated parent ion M+H',
     },
     'precursor_mass_tolerance_plus' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
@@ -5620,7 +5620,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 5,
         'description' : \
@@ -5628,7 +5628,7 @@ ursgal_params = {
             'calculated parent ion M+H',
     },
     'precursor_mass_tolerance_unit' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -5690,7 +5690,7 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['da', 'mmu', 'ppm'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'ppm',
         'description' : \
@@ -5698,7 +5698,7 @@ ursgal_params = {
             '(parts-per-millon), da (Dalton) or mmu (Milli mass unit)',
     },
     'precursor_mass_type' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5738,14 +5738,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['average', 'monoisotopic'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'monoisotopic',
         'description' : \
             'Precursor mass type: monoisotopic or average',
     },
     'precursor_max_charge' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5778,14 +5778,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 5,
         'description' : \
             'Maximal accepted parent ion charge',
     },
     'precursor_max_mass' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -5808,14 +5808,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 100,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 10000,
         'description' : \
             'Maximal parent ion mass',
     },
     'precursor_min_charge' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -5844,14 +5844,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 1,
         'description' : \
             'Minimal accepted parent ion charge',
     },
     'precursor_min_mass' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -5879,14 +5879,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 400,
         'description' : \
             'Minimal parent ion mass',
     },
     'prefix' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -5909,7 +5909,7 @@ ursgal_params = {
             '    \'None\' : None',
     },
     'protein_delimiter' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'percolator_2_08',
             'unify_csv_1_0_0',
@@ -5928,14 +5928,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : '<|>',
         'description' : \
             'This delimiter seperates protein IDs/names in the unified csv',
     },
     'psm_merge_delimiter' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
         ],
@@ -5952,7 +5952,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : ';',
         'description' : \
@@ -5960,7 +5960,7 @@ ursgal_params = {
             'unified csv',
     },
     'qvality_cross_validation' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -5979,7 +5979,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 0,
         'description' : \
@@ -5988,7 +5988,7 @@ ursgal_params = {
             'automatically when set to 0',
     },
     'qvality_epsilon_step' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -6007,7 +6007,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 0,
         'description' : \
@@ -6016,7 +6016,7 @@ ursgal_params = {
             'when set to 0',
     },
     'qvality_number_of_bins' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -6035,14 +6035,14 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 10,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 500,
         'description' : \
             'Number of bins used in qvality',
     },
     'qvality_verbose' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -6067,7 +6067,7 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['1', '2', '3', '4', '5'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : '2',
         'description' : \
@@ -6075,7 +6075,7 @@ ursgal_params = {
             'all)',
     },
     'raw_ident_csv_suffix' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -6091,7 +6091,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : '.csv',
         'description' : \
@@ -6099,7 +6099,7 @@ ursgal_params = {
             'after CSV conversion but before adding retention time',
     },
     'remove_redundant_psms' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -6123,7 +6123,7 @@ ursgal_params = {
             '\'Modifications\' and \'Charge\'.',
     },
     'remove_temporary_files' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -6144,7 +6144,7 @@ ursgal_params = {
             'Remove temporary files: True or False',
     },
     'rt_pickle_name' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -6160,14 +6160,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : '_ursgal_lookup.pkl',
         'description' : \
             'name of the pickle that is used to map the retention time',
     },
     'sanitize_csv_converter_version' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -6183,14 +6183,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'sanitize_csv_1_0_0',
         'description' : \
             'sanitize csv converter version: version name',
     },
     'scan_exclusion_list' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -6206,12 +6206,12 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [
             ],
-            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {
             },
-            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
-            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+            'custom_val_max' : 10000,
+            'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
@@ -6223,7 +6223,7 @@ ursgal_params = {
             'Spectra rejected during mzml2mgf conversion',
     },
     'scan_inclusion_list' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -6238,14 +6238,14 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'none_val' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
+            'none_val' : [
             ],
-            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [
             ],
-            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {
             },
-            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
-            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+            'custom_val_max' : 10000,
+            'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
@@ -6256,7 +6256,7 @@ ursgal_params = {
             'Exclusively spectra included during mzml2mgf conversion',
     },
     'scan_skip_modulo_step' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -6277,7 +6277,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : -1,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : None,
         'description' : \
@@ -6285,7 +6285,7 @@ ursgal_params = {
             '    -1 : None',
     },
     'score_-h2o_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -6311,7 +6311,7 @@ ursgal_params = {
             'Spectrum: if true, ions loss of H2O are respected in algorithm',
     },
     'score_-nh3_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -6337,7 +6337,7 @@ ursgal_params = {
             'Spectrum: if true, ions loss of NH3 are respected in algorithm',
     },
     'score_a_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -6388,7 +6388,7 @@ ursgal_params = {
             'Spectrum: if true, a ions are used in algorithm',
     },
     'score_b1_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -6413,7 +6413,7 @@ ursgal_params = {
             'first forward (b1) product ions inclued in search',
     },
     'score_b_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -6464,7 +6464,7 @@ ursgal_params = {
             'Spectrum: if true, b ions are used in algorithm',
     },
     'score_c_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -6515,7 +6515,7 @@ ursgal_params = {
             'Spectrum: if true, c ions are used in algorithm',
     },
     'score_c_terminal_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -6540,7 +6540,7 @@ ursgal_params = {
             'Score c terminal ions',
     },
     'score_correlation_corr' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
         ],
@@ -6565,7 +6565,7 @@ ursgal_params = {
             'Use correlation correction to score?',
     },
     'score_diff_threshold' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -6584,9 +6584,9 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 100,
             'min'       : 0,
-            'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-03,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0.01,
         'description' : \
@@ -6594,7 +6594,7 @@ ursgal_params = {
             'rejected PSM of one spectrum, default: 0.01',
     },
     'score_imm_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -6620,7 +6620,7 @@ ursgal_params = {
             'Spectrum: if true, immonium ions are respected in algorithm',
     },
     'score_int_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -6646,7 +6646,7 @@ ursgal_params = {
             'Spectrum: if true, internal fragment ions are respect in algorithm',
     },
     'score_x_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -6697,7 +6697,7 @@ ursgal_params = {
             'Spectrum: if true, x ions are used in algorithm',
     },
     'score_y_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -6748,7 +6748,7 @@ ursgal_params = {
             'Spectrum: if true, y ions are used in algorithm',
     },
     'score_z+1_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -6774,7 +6774,7 @@ ursgal_params = {
             'Spectrum: if true, z ion plus 1 Da mass are used in algorithm',
     },
     'score_z+2_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
@@ -6800,7 +6800,7 @@ ursgal_params = {
             'Spectrum: if true z ion plus 2 Da mass are used in algorithm',
     },
     'score_z_ions' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
             'msamanda_1_0_0_5242',
@@ -6851,7 +6851,7 @@ ursgal_params = {
             'Spectrum: if true, z ions are used in algorithm',
     },
     'search_for_saps' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -6882,7 +6882,7 @@ ursgal_params = {
             'files (unify_csv, ...)',
     },
     'semi_enzyme' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -6946,7 +6946,7 @@ ursgal_params = {
             'Allows semi-enzymatic peptide ends',
     },
     'show_unodes_in_development' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -6966,7 +6966,7 @@ ursgal_params = {
             'Show ursgal nodes that are in development: False or True',
     },
     'spec_dynamic_range' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -6990,7 +6990,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 100,
         'description' : \
@@ -7000,13 +7000,13 @@ ursgal_params = {
             'is less than 1 the peak is rejected.',
     },
     'svm_c_param' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'svm_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-        #     'svm_style_1' : 'c',
+            'svm_style_1' : 'c',
         },
         'utag' : [
             'scoring',
@@ -7020,16 +7020,16 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10000,
             'min'       : 0,
-            'f-point'   : 1e-01,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-01,
             'updownval' : 0.1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 1.0,
         'description' : \
             'Penalty parameter C of the error term of the post-processing SVM',
     },
     'test_param1' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             '_test_node',
         ],
@@ -7055,14 +7055,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['a', 'b', 'c', 'd', 'e'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'b',
         'description' : \
             'TEST/DEBUG: Internal Ursgal parameter 1 for debugging and testing.',
     },
     'test_param2' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             '_test_node',
         ],
@@ -7088,14 +7088,14 @@ ursgal_params = {
             'combo_box'      : True,
             'radio_button'   : False,
             'initial_value'  : ['one', 'two', 'three', 'four', 'five'],
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : 'three',
         'description' : \
             'TEST/DEBUG: Internal Ursgal parameter 2 for debugging and testing.',
     },
     'threshold_is_log10' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'sanitize_csv_1_0_0',
         ],
@@ -7116,7 +7116,7 @@ ursgal_params = {
             'True, if log10 scale has been used for score_diff_threshold.',
     },
     'unify_csv_converter_version' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -7132,14 +7132,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'unify_csv_1_0_0',
         'description' : \
             'unify csv converter version: version name',
     },
     'ursgal_resource_url' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -7155,14 +7155,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/',
         'description' : \
             'URL that is used to install and prepare_resources.py',
     },
     'use_quality_filter' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -7187,7 +7187,7 @@ ursgal_params = {
             'Use filter for low quality spectra.',
     },
     'use_refinement' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -7218,7 +7218,7 @@ ursgal_params = {
             'yet. See further: http://www.thegpm.org/TANDEM/api/refine.html',
     },
     'use_spectrum_charge' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -7239,7 +7239,7 @@ ursgal_params = {
             'Does not correct precursor charge.',
     },
     'use_spectrum_mz' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
             'pepnovo_3_1',
@@ -7266,7 +7266,7 @@ ursgal_params = {
             'Does not correct precusor m/z.',
     },
     'validated_ident_csv_suffix' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -7282,7 +7282,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'validated.csv',
         'description' : \
@@ -7290,7 +7290,7 @@ ursgal_params = {
             'which contains PSMs validated with validation tools',
     },
     'validation_generalized' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -7317,7 +7317,7 @@ ursgal_params = {
             'correct PSMs',
     },
     'validation_minimum_score' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -7362,7 +7362,7 @@ ursgal_params = {
             '    \'None\' : None',
     },
     'validation_score_field' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -7378,7 +7378,7 @@ ursgal_params = {
             'percolator_style_1'        : 'validation_score_field',
             'qvality_style_1'           : 'validation_score_field',
             'sanitize_csv_style_1'      : 'validation_score_field',
-        #     'svm_style_1'               : 'validation_score_field',
+            'svm_style_1'               : 'validation_score_field',
             'ucontroller_style_1'       : 'validation_score_field',
             'unify_csv_style_1'         : 'validation_score_field',
         },
@@ -7539,7 +7539,7 @@ ursgal_params = {
             '    \'None\' : None',
     },
     'visualization_column_names' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -7555,20 +7555,20 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [
                 'column_name_1',
                 'column_name_2',
             ],
-            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {
                 'column_name_1' : 'str',
                 'column_name_2' : 'str',
             },
-            'multiple_line' : {                                                  # dict, multiple_line for each str-type is required if item is str (kaz)
+            'multiple_line' : {
                 'column_name_1' : False,
                 'column_name_2' : False,
             },
-            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
-            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+            'custom_val_max' : 10000,
+            'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
@@ -7584,7 +7584,7 @@ ursgal_params = {
             '(merged) to determine overlapping results.',
     },
     'visualization_font' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -7600,48 +7600,48 @@ ursgal_params = {
         'uvalue_type' : 'tuple',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [                                                   # [str], title of tuple item is required if uvalue_type is tuple (kaz)
+            'title_list' : [
                 'font-type',
                 'font-size header',
                 'font-size major',
                 'font-size minor',
                 'font-size venn',
             ],
-            'type_dict' : {                                                    # dict, type for each title is required if uvalue_type is tuple (kaz)
+            'type_dict' : {
                 'font-type'        : 'str',
                 'font-size header' : 'int',
                 'font-size major'  : 'int',
                 'font-size minor'  : 'int',
                 'font-size venn'   : 'int',
             },
-            'multiple_line' : {                                                  # dict, multiple_line for each str-type is required if item is str (kaz)
+            'multiple_line' : {
                 'font-type'        : False,
             },
-            'max': {                                                            # dict, max for each int-type is required if tuple_type include int or float (kaz)
+            'max': {
                 'font-size header' : 1000,
                 'font-size major'  : 1000,
                 'font-size minor'  : 1000,
                 'font-size venn'   : 1000,
             },
-            'min': {                                                            # dict, min for each int-type is required if tuple_type include int or float (kaz)
+            'min': {
                 'font-size header' : 0,
                 'font-size major'  : 0,
                 'font-size minor'  : 0,
                 'font-size venn'   : 0,
             },
-            'updownval': {                                                      # dict, updownval for each int-type is required if tuple_type include int or float (kaz)
+            'updownval': {
                 'font-size header' : 1,
                 'font-size major'  : 1,
                 'font-size minor'  : 1,
                 'font-size venn'   : 1,
             },
-            'unit': {                                                           # dict, unit for each int-type is required if tuple_type include int or float (kaz)
+            'unit': {
                 'font-size header' : 'pt',
                 'font-size major'  : 'pt',
                 'font-size minor'  : 'pt',
                 'font-size venn'   : 'pt',
             },
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : (
             'Helvetica',
@@ -7656,7 +7656,7 @@ ursgal_params = {
             'minor, font-size venn)',
     },
     'visualization_header' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -7672,14 +7672,14 @@ ursgal_params = {
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : None,
-            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
+            'multiple_line' : False,
         },
         'default_value' : 'ursgal Venn Diagram',
         'description' : \
             'Header of visualization output (e.g. Venn diagram)',
     },
     'visualization_label_list' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -7695,14 +7695,14 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
+            'initialValue' : [
             ],
-            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [
             ],
-            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {
             },
-            'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
-            'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
+            'custom_val_max' : 10000,
+            'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
@@ -7715,7 +7715,7 @@ ursgal_params = {
             'Needs to be given in the same order as the datasets.',
     },
     'visualization_opacity' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -7733,16 +7733,16 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
-            'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-03,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 0.35,
         'description' : \
             'Opacity used in visualization plots (e.g. Venn diagram)',
     },
     'visualization_scaling_factors' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -7758,31 +7758,31 @@ ursgal_params = {
         'uvalue_type' : 'tuple',
         'uvalue_option' : {
             'none_val'       : None,
-            'title_list' : [                                                   # [str], title of tuple item is required if uvalue_type is tuple (kaz)
+            'title_list' : [
                 'x-axis-scaling-factor',
                 'y-axis-scaling-factor',
             ],
-            'type_dict' : {                                                    # dict, type for each title is required if uvalue_type is tuple (kaz)
+            'type_dict' : {
                 'x-axis-scaling-factor' : 'int',
                 'y-axis-scaling-factor' : 'int',
             },
-            'max': {                                                            # dict, max for each int-type is required if tuple_type include int or float (kaz)
+            'max': {
                 'x-axis-scaling-factor' : 100000,
                 'y-axis-scaling-factor' : 100000,
             },
-            'min': {                                                            # dict, min for each int-type is required if tuple_type include int or float (kaz)
+            'min': {
                 'x-axis-scaling-factor' : 1,
                 'y-axis-scaling-factor' : 1,
             },
-            'updownval': {                                                      # dict, updownval for each int-type is required if tuple_type include int or float (kaz)
+            'updownval': {
                 'x-axis-scaling-factor' : 1,
                 'y-axis-scaling-factor' : 1,
             },
-            'unit': {                                                           # dict, unit for each int-type is required if tuple_type include int or float (kaz)
+            'unit': {
                 'x-axis-scaling-factor' : '',
                 'y-axis-scaling-factor' : '',
             },
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : (600, 400),
         'description' : \
@@ -7790,7 +7790,7 @@ ursgal_params = {
             'given as tuple (x-axis-scaling-factor, y-axis-scaling-factor)',
     },
     'visualization_size' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -7806,31 +7806,31 @@ ursgal_params = {
         'uvalue_type' : 'tuple',
         'uvalue_option' : {
             'none_val'       : None,
-            'title_list' : [                                                   # [str], title of tuple item is required if uvalue_type is tuple (kaz)
+            'title_list' : [
                 'width',
                 'height',
             ],
-            'type_dict' : {                                                    # dict, type for each title is required if uvalue_type is tuple (kaz)
+            'type_dict' : {
                 'width'  : 'int',
                 'height' : 'int',
             },
-            'max': {                                                            # dict, max for each int-type is required if tuple_type include int or float (kaz)
+            'max': {
                 'width'  : 100000,
                 'height' : 100000,
             },
-            'min': {                                                            # dict, min for each int-type is required if tuple_type include int or float (kaz)
+            'min': {
                 'width'  : 1,
                 'height' : 1,
             },
-            'updownval': {                                                      # dict, updownval for each int-type is required if tuple_type include int or float (kaz)
+            'updownval': {
                 'width'  : 1,
                 'height' : 1,
             },
-            'unit': {                                                           # dict, unit for each int-type is required if tuple_type include int or float (kaz)
+            'unit': {
                 'width'  : 'px',
                 'height' : 'px',
             },
-            'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
+            'custom_val_max' : 0,
         },
         'default_value' : (1200, 800),
         'description' : \
@@ -7838,7 +7838,7 @@ ursgal_params = {
             '(width, height)',
     },
     'visualization_stroke_width' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -7856,16 +7856,16 @@ ursgal_params = {
             'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
-            'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
+            'f-point'   : 1e-05,
             'updownval' : 0.01,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is float (kaz)
+            'unit'      : ''
         },
         'default_value' : 2.0,
         'description' : \
             'Stroke width used in visualization plots (e.g. Venn diagram)',
     },
     'window_size' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'combine_pep_1_0_0',
         ],
@@ -7885,7 +7885,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 249,
         'description' : \
@@ -7895,7 +7895,7 @@ ursgal_params = {
             'defines the window size.',
     },
     'word_len' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             # 'upeptide_mapper_1_0_0',
         ],
@@ -7914,7 +7914,7 @@ ursgal_params = {
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
-            'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
+            'unit'      : ''
         },
         'default_value' : 8,
         'description' : \
@@ -7923,7 +7923,7 @@ ursgal_params = {
             'peptide mapper, smaller word len requires more memory',
     },
     'write_unfiltered_results' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'filter_csv_1_0_0',
         ],
@@ -7944,7 +7944,7 @@ ursgal_params = {
             'Writes rejected results if True',
     },
     'xtandem_stp_bias' : {
-        'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',

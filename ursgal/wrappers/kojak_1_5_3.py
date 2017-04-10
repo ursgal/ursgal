@@ -19,17 +19,17 @@ class kojak_1_5_3( ursgal.UNode ):
 
     """
     META_INFO = {
-        'edit_version'                : 1.00,                                   # flot, inclease number if something is changed (kaz)
-        'name'                        : 'Kojak',                                # str, Software name (kaz)
-        'version'                     : '1.5.3',                                # str, Software version name (kaz)
-        'release_date'                : '2015-5-1',                             # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'                : 1.00,
+        'name'                        : 'Kojak',
+        'version'                     : '1.5.3',
+        'release_date'                : '2015-5-1',
         'engine_type' : {
             'cross_link_engine' : True,
         },
-        'input_extensions'            : ['.mzML', '.mzXML'],                    # list, extensions (kaz)
-        'input_multi_file'            : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
+        'input_extensions'            : ['.mzML', '.mzXML'],
+        'input_multi_file'            : False,
         'output_extensions' : ['.kojak.txt', '.pep.xml', '.perc.inter.txt', \
-            '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt'],           # list, extensions (kaz)
+            '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt'],
         'create_own_folder'           : True,
         'compress_raw_search_results' : False,
         'cannot_distribute'           : True,

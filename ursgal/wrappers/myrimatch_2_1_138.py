@@ -15,16 +15,16 @@ class myrimatch_2_1_138( ursgal.UNode ):
     Tabb DL, Fernando CG, Chambers MC. (2007) MyriMatch: highly accurate tandem mass spectral peptide identification by multivariate hypergeometric analysis.
     """
     META_INFO = {
-        'edit_version'                : 1.00,                                   # flot, inclease number if something is changed (kaz)
-        'name'                        : 'Myrimatch',                            # str, Software name (kaz)
-        'version'                     : '2.1.138',                              # str, Software version name (kaz)
-        'release_date'                : None,                                   # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'                : 1.00,
+        'name'                        : 'Myrimatch',
+        'version'                     : '2.1.138',
+        'release_date'                : None,
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_extensions'            : ['.mzML'],                              # list, extensions (kaz)
-        'input_multi_file'            : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'           : ['.mzid'],                              # list, extensions (kaz)
+        'input_extensions'            : ['.mzML'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.mzid'],
         'in_development'              : False,
         'include_in_git'              : False,
         'create_own_folder'           : True,

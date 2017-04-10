@@ -11,16 +11,16 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
     Converts .mzML files into .mgf files
     """
     META_INFO = {
-        'edit_version'       : 1.00,                                             # flot, inclease number if something is changed (kaz)
-        'name'               : 'mzml2mgf',                                       # str, Software name (kaz)
-        'version'            : '1.0.0',                                          # str, Software version name (kaz)
-        'release_date'       : None,                                             # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,
+        'name'               : 'mzml2mgf',
+        'version'            : '1.0.0',
+        'release_date'       : None,
         'engine_type' : {
             'converter' : True,
         },
-        'input_extensions'   : ['.mzML', '.mzML.gz'],                            # list, extensions (kaz)
-        'input_multi_file'   : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.mgf'],                                         # list, extensions (kaz)
+        'input_extensions'   : ['.mzML', '.mzML.gz'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.mgf'],
         'output_suffix'      : None,
         'in_development'     : False,
         'include_in_git'     : None,

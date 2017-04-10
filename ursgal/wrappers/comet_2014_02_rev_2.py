@@ -9,16 +9,16 @@ class comet_2014_02_rev_2( ursgal.UNode ):
     Not implemented yet
     """
     META_INFO = {
-        'edit_version'      : 1.00,                                             # flot, inclease number if something is changed (kaz)
-        'name'              : 'Comet',                                          # str, Software name (kaz)
-        'version'           : '2014_02_rev_2',                                  # str, Software version name (kaz)
-        'release_date'      : '2014-1-10',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'      : 1.00,
+        'name'              : 'Comet',
+        'version'           : '2014_02_rev_2',
+        'release_date'      : '2014-1-10',
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_extensions'  : [],                                               # list, extensions (kaz)
-        'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions' : [],                                               # list, extensions (kaz)
+        'input_extensions'  : [],
+        'input_multi_file'  : False,
+        'output_extensions' : [],
         'in_development'    : True,
         'include_in_git'    : None,
         'utranslation_style' : 'comet_style_1',

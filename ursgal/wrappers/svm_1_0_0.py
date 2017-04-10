@@ -7,16 +7,16 @@ class svm_1_0_0( ursgal.UNode ):
     """svm_1_0_0 UNode"""
 
     META_INFO = {
-        'edit_version'       : 1.00,                                             # flot, inclease number if something is changed (kaz)
-        'name'               : 'Svm',                                            # str, Software name (kaz)
-        'version'            : '1.0.0',                                          # str, Software version name (kaz)
-        'release_date'       : None,                                             # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,
+        'name'               : 'Svm',
+        'version'            : '1.0.0',
+        'release_date'       : None,
         'engine_type' : {
             'validation_engine' : True,
         },
-        'input_extensions'   : ['.csv'],                                         # list, extensions (kaz)
-        'input_multi_file'   : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.csv'],                                         # list, extensions (kaz)
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
         'output_suffix'      : 'svm_validated',
         'create_own_folder'  : False,
         'in_development'     : True,  # do not show in UNode overview

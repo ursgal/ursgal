@@ -18,16 +18,16 @@ class msblender_09_2015( ursgal.UNode ):
     Documentation at http://www.marcottelab.org/index.php/MSblender
     """
     META_INFO = {
-        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
-        'name'               : 'MSblender',                                     # str, Software name (kaz)
-        'version'            : '09.2015',                                       # str, Software version name (kaz)
-        'release_date'       : '2015-9-1',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,
+        'name'               : 'MSblender',
+        'version'            : '09.2015',
+        'release_date'       : '2015-9-1',
         'engine_type' : {
             'meta_engine' : True,
         },
-        'input_extensions'   : ['.csv'],                                        # list, extensions (kaz)
-        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
         'in_development'     : True,
         'create_own_folder'  : False,
         'include_in_git'     : True,

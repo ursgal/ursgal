@@ -14,16 +14,16 @@ class pepnovo_3_1( ursgal.UNode ):
     Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing and Identification with Precision Mass Spectrometry, J. Proteome Res. 6:114-123.
     """
     META_INFO = {
-        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
-        'name'               : 'PepNovo',                                       # str, Software name (kaz)
-        'version'            : 'v3.1',                                          # str, Software version name (kaz)
-        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,
+        'name'               : 'PepNovo',
+        'version'            : 'v3.1',
+        'release_date'       : None,
         'engine_type' : {
             'denovo_engine' : True,
         },
-        'input_extensions'   : ['.mgf'],                                        # list, extensions (kaz)
-        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
+        'input_extensions'   : ['.mgf'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
         'utranslation_style' : 'pepnovo_style_1',
         'in_development'     : False,
         'create_own_folder'  : True,

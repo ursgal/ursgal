@@ -10,16 +10,16 @@ class myrimatch_2_2_140( myri ):
     Import functions from myrimatch_2_1_138
     """
     META_INFO = {
-        'edit_version'                : 1.00,                                   # flot, inclease number if something is changed (kaz)
-        'name'                        : 'Myrimatch',                            # str, Software name (kaz)
-        'version'                     : '2.2.140',                              # str, Software version name (kaz)
-        'release_date'                : None,                                   # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'                : 1.00,
+        'name'                        : 'Myrimatch',
+        'version'                     : '2.2.140',
+        'release_date'                : None,
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_extensions'            : ['.mzML'],                              # list, extensions (kaz)
-        'input_multi_file'            : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'           : ['.mzid'],                              # list, extensions (kaz)
+        'input_extensions'            : ['.mzML'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.mzid'],
         'create_own_folder'           : True,
         'compress_raw_search_results' : True,
         'in_development'              : False,

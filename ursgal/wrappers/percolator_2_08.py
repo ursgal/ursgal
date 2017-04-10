@@ -36,16 +36,16 @@ class percolator_2_08( ursgal.UNode ):
     Käll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
     """
     META_INFO = {
-        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
-        'name'               : 'Percolator',                                    # str, Software name (kaz)
-        'version'            : '2.08',                                          # str, Software version name (kaz)
-        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,
+        'name'               : 'Percolator',
+        'version'            : '2.08',
+        'release_date'       : None,
         'engine_type' : {
             'validation_engine' : True,
         },
-        'input_extensions'   : ['.csv'],                                        # list, extensions (kaz)
-        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
         'output_suffix'      : 'percolator_validated',
         'create_own_folder'  : False,
         'include_in_git'     : False,

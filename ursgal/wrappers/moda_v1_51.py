@@ -12,16 +12,16 @@ class moda_v1_51( ursgal.UNode ):
     Na S, Bandeira N, Paek E. (2012) Fast multi-blind modification search through tandem mass spectrometry.
     """
     META_INFO = {
-        'edit_version'                : 1.00,                                   # flot, inclease number if something is changed (kaz)
-        'name'                        : 'Moda',                                 # str, Software name (kaz)
-        'version'                     : 'v1.51',                                # str, Software version name (kaz)
-        'release_date'                : '2012-4-1',                             # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'                : 1.00,
+        'name'                        : 'Moda',
+        'version'                     : 'v1.51',
+        'release_date'                : '2012-4-1',
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_extensions'            : ['.mgf', '.pkl', '.dta', '.mzXML'],     # list, extensions (kaz)
-        'input_multi_file'            : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'           : ['.csv'],                               # list, extensions (kaz)
+        'input_extensions'            : ['.mgf', '.pkl', '.dta', '.mzXML'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.csv'],
         'compress_raw_search_results' : False,
         'create_own_folder'           : True,
         'in_development'              : True,

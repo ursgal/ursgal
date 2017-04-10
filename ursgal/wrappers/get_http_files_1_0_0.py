@@ -14,16 +14,16 @@ class get_http_files_1_0_0( ursgal.UNode ):
 
     """
     META_INFO = {
-        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
-        'name'               : 'Get HTTP Files',                                # str, Software name (kaz)
-        'version'            : '1.0.0',                                         # str, Software version name (kaz)
-        'release_date'       : '2016-3-4',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,
+        'name'               : 'Get HTTP Files',
+        'version'            : '1.0.0',
+        'release_date'       : '2016-3-4',
         'engine_type' : {
             'fetcher' : True,
         },
-        'input_extensions'   : [],                                              # list, extensions (kaz)
-        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : [],                                              # list, extensions (kaz)
+        'input_extensions'   : [],
+        'input_multi_file'   : False,
+        'output_extensions'  : [],
         'output_suffix'      : None,
         'in_development'     : False,
         'include_in_git'     : True,

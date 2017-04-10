@@ -5,16 +5,16 @@ from .xtandem_sledgehammer import xtandem_sledgehammer as tandem
 
 class xtandem_jackhammer( tandem ):
     META_INFO = {
-        'edit_version'                : 1.00,                                   # flot, inclease number if something is changed (kaz)
-        'name'                        : 'X!Tandem',                             # str, Software name (kaz)
-        'version'                     : 'Jackhammer',                           # str, Software version name (kaz)
-        'release_date'                : '2013-6-15',                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'                : 1.00,
+        'name'                        : 'X!Tandem',
+        'version'                     : 'Jackhammer',
+        'release_date'                : '2013-6-15',
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'], # list, extensions (kaz)
-        'input_multi_file'            : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'           : ['.xml'],                               # list, extensions (kaz)
+        'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.xml'],
         'create_own_folder'           : True,
         'compress_raw_search_results' : True,
         'include_in_git'              : False,

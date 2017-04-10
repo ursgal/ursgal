@@ -8,16 +8,16 @@ import os
 class plot_pygcluster_heatmap_from_csv_1_0_0( ursgal.UNode ):
     """plot_pygcluster_heatmap_from_csv_1_0_0 UNode"""
     META_INFO = {
-        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
-        'name'               : 'Plot pyGCluster Heatmap from CSV',              # str, Software name (kaz)
-        'version'            : '1.0.0',                                         # str, Software version name (kaz)
-        'release_date'       : '2014-3-15',                                     # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,
+        'name'               : 'Plot pyGCluster Heatmap from CSV',
+        'version'            : '1.0.0',
+        'release_date'       : '2014-3-15',
         'engine_type' : {
             'visualizer' : True,
         },
-        'input_extensions'   : ['.csv'],                                        # list, extensions (kaz)
-        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.svg'],                                        # list, extensions (kaz)
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.svg'],
         'output_suffix'      : '',
         'include_in_git'     : True,
         'in_development'     : True,

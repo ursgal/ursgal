@@ -12,16 +12,16 @@ class msgfplus_v9979( ursgal.UNode ):
     Kim S, Mischerikow N, Bandeira N, Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) The Generating Function of CID, ETD, and CID/ETD Pairs of Tandem Mass Spectra: Applications to Database Search.
     """
     META_INFO = {
-        'edit_version'                : 1.00,                                   # flot, inclease number if something is changed (kaz)
-        'name'                        : 'MSGF+',                                # str, Software name (kaz)
-        'version'                     : 'v9979',                                # str, Software version name (kaz)
-        'release_date'                : '2010-12-1',                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'                : 1.00,
+        'name'                        : 'MSGF+',
+        'version'                     : 'v9979',
+        'release_date'                : '2010-12-1',
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_extensions'            : ['.mgf', '.mzML', '.mzXML', '.ms2', '.pkl', '.dta.txt'], # list, extensions (kaz)
-        'input_multi_file'            : False,                                  # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'           : ['.mzid'],                              # list, extensions (kaz)
+        'input_extensions'            : ['.mgf', '.mzML', '.mzXML', '.ms2', '.pkl', '.dta.txt'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.mzid'],
         'compress_raw_search_results' : True,
         'create_own_folder'           : True,
         'in_development'              : False,

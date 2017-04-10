@@ -21,16 +21,16 @@ class combine_FDR_0_1( ursgal.UNode ):
     '''
 
     META_INFO = {
-        'edit_version'          : 1.00,                                         # flot, inclease number if something is changed (kaz)
-        'name'                  : 'combine FDR',                                # str, Software name (kaz)
-        'version'               : '0.1',                                        # str, Software version name (kaz)
-        'release_date'          : '2009-5-1',                                   # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'          : 1.00,
+        'name'                  : 'combine FDR',
+        'version'               : '0.1',
+        'release_date'          : '2009-5-1',
         'engine_type' : {
             'meta_engine' : True,
         },
-        'input_extensions'      : ['.csv'],                                     # list, extensions (kaz)
-        'input_multi_file'      : False,                                        # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'     : ['.csv'],                                     # list, extensions (kaz)
+        'input_extensions'      : ['.csv'],
+        'input_multi_file'      : False,
+        'output_extensions'     : ['.csv'],
         'create_own_folder'     : False,
         'in_development'        : False,
         'include_in_git'        : True,

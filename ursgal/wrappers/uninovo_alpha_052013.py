@@ -13,16 +13,16 @@ class uninovo_alpha_052013( ursgal.UNode ):
     """
     META_INFO = {
         # see http://proteomics.ucsd.edu/Software/UniNovo/#Downloads
-        'edit_version'      : 1.00,                                             # flot, inclease number if something is changed (kaz)
-        'name'              : 'UniNovo',                                        # str, Software name (kaz)
-        'version'           : 'alpha.052013',                                   # str, Software version name (kaz)
-        'release_date'      : '2013-5-20',                                      # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'      : 1.00,
+        'name'              : 'UniNovo',
+        'version'           : 'alpha.052013',
+        'release_date'      : '2013-5-20',
         'engine_type' : {
             'denovo_engine' : True,
         },
-        'input_extensions'  : ['.mgf'],                                         # list, extensions (kaz)
-        'input_multi_file'  : False,                                            # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions' : ['.den'],                                         # list, extensions (kaz)
+        'input_extensions'  : ['.mgf'],
+        'input_multi_file'  : False,
+        'output_extensions' : ['.den'],
         'create_own_folder' : True,
         'in_development'    : True,
         'include_in_git'    : None,

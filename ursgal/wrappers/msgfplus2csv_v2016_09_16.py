@@ -19,16 +19,16 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
     Kim S, Mischerikow N, Bandeira N, Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) The Generating Function of CID, ETD, and CID/ETD Pairs of Tandem Mass Spectra: Applications to Database Search.
     """
     META_INFO = {
-        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
-        'name'               : 'msgfplus2csv',                                  # str, Software name (kaz)
-        'version'            : 'v2016.09.16',                                   # str, Software version name (kaz)
-        'release_date'       : '2016-9-16',                                     # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,
+        'name'               : 'msgfplus2csv',
+        'version'            : 'v2016.09.16',
+        'release_date'       : '2016-9-16',
         'engine_type' : {
             'converter'     : True
         },
-        'input_extensions'   : ['.mzid'],                                       # list, extensions (kaz)
-        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
+        'input_extensions'   : ['.mzid'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
         'output_suffix'      : None,
         'include_in_git'     : None,
         'in_development'     : False,

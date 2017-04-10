@@ -9,16 +9,16 @@ import pickle
 class unify_csv_1_0_0( ursgal.UNode ):
     """unify_csv_1_0_0 UNode"""
     META_INFO = {
-        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
-        'name'               : 'Unify CSV',                                     # str, Software name (kaz)
-        'version'            : '1.0.0',                                         # str, Software version name (kaz)
-        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,
+        'name'               : 'Unify CSV',
+        'version'            : '1.0.0',
+        'release_date'       : None,
         'engine_type' : {
             'converter' : True
         },
-        'input_extensions'   : ['.csv'],                                        # list, extensions (kaz)
-        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.csv'],                                        # list, extensions (kaz)
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
         'output_suffix'      : 'unified',
         'include_in_git'     : True,
         'in_development'     : True,

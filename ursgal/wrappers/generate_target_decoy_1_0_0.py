@@ -8,16 +8,16 @@ import pprint
 class generate_target_decoy_1_0_0( ursgal.UNode ):
     """Generate Target Decoy 1_0_0 UNode"""
     META_INFO = {
-        'edit_version'       : 1.00,                                            # flot, inclease number if something is changed (kaz)
-        'name'               : 'Generate Target Decoy',                         # str, Software name (kaz)
-        'version'            : '1.0.0',                                         # str, Software version name (kaz)
-        'release_date'       : None,                                            # None, '%Y-%m-%d' or '%Y-%m-%d %H:%M:%S' (kaz)
+        'edit_version'       : 1.00,
+        'name'               : 'Generate Target Decoy',
+        'version'            : '1.0.0',
+        'release_date'       : None,
         'engine_type' : {
             'converter' : True
         },
-        'input_extensions'   : [],                                              # list, extensions (kaz)
-        'input_multi_file'   : False,                                           # bool, fill true up if multiple files input is MUST like venn-diagram (kaz)
-        'output_extensions'  : ['.fasta'],                                      # list, extensions (kaz)
+        'input_extensions'   : [],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.fasta'],
         'output_suffix'      : 'target_decoy',
         'in_development'     : False,
         'include_in_git'     : True,
