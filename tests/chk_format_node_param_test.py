@@ -172,7 +172,93 @@ param_info = {
     },
     'uvalue_type' : {
         'essential'   : True,
-        'types'       : [str,]
+        'types'       : [str]
+    },
+}
+
+type_info = {
+    'str' : {
+        'my_type' : str,
+        'option'  : {
+            'multiple_line'  : [bool],
+        },
+    },
+    'str_password' : {
+        'my_type' : str,
+        'option'  : {
+            'multiple_line'  : [bool],
+        },
+    },
+    'int' : {
+        'my_type' : int,
+        'option'  : {
+            'max'            : [int],
+            'min'            : [int],
+            'updownval'      : [int],
+            'unit'           : [str],
+        },
+    },
+    'int _uevaluation_req' : {
+        'my_type' : int,
+        'option'  : {
+            'max'            : [int, str],
+            'min'            : [int, str],
+            'updownval'      : [int],
+            'unit'           : [str],
+        },
+    },
+    'float' : {
+        'my_types' : [int, float],
+        'option'  : {
+            'max'            : [int, float],
+            'min'            : [int, float],
+            'f-point'        : [float],
+            'updownval'      : [int, float],
+            'unit'           : [str],
+        },
+    },
+    'bool' : {
+        'my_type' : bool,
+        'option'  : {
+        },
+    },
+    'select' : {
+        'my_type' : str,
+        'option'  : {
+            'combo_box'      : [bool],
+            'radio_button'   : [bool],
+            'initial_value'  : [list],
+            'custom_val_max' : [int],
+        },
+    },
+    'list' : {
+        'my_type' : list,
+        'option'  : {
+            'title_list'     : [list],
+            'type_dict'      : [dict],
+            'custom_val_max' : [int],
+        },
+    },
+    'tuple' : {
+        'my_type' : tuple,
+        'option': {
+            'title_list'     : [list],
+            'type_dict'      : [dict],
+            'custom_val_max' : [int],
+        },
+    },
+    'dict' : {
+        'my_type' : dict,
+        'option'  : {
+            'dict_title'     : [dict],
+            'dict_type'      : [dict],
+        },
+    },
+    'None' : {
+        'my_type' : type(None),
+        'option'  : {
+            'system_param'   : [bool]
+        },
     },
 }
 
@@ -218,7 +304,7 @@ def chk_vals_types( parent_name='', key_name='', vals=[], type_list=[] ):
                 key_info = 'of \'' + str(key_name) + '\''
                 if parent_name != '':
                     parent_info = ' in ' + str(parent_name) + ' '
-            type_info = ''
+            my_type = ''
             len_type_list = len(type_list)
             if len_type_list >= 1:
                 num = 0
@@ -229,16 +315,16 @@ def chk_vals_types( parent_name='', key_name='', vals=[], type_list=[] ):
                         type_name = type_class.__name__
                     if num == len_type_list-1:
                         if num == 0:
-                            type_info = str(type_name)
+                            my_type = str(type_name)
                         else:
-                            type_info = type_info + ' or ' + str(type_name)
+                            my_type = my_type + ' or ' + str(type_name)
                     elif num == 0:
-                        type_info = str(type_name)
+                        my_type = str(type_name)
                     else:
-                        type_info = type_info + ', ' + str(type_name)
+                        my_type = my_type + ', ' + str(type_name)
                     num += 1
             error_msg = 'The type ' + key_info + parent_info + 'is not ' + \
-                str(v_type.__name__) + '. ' + 'It has ' + type_info + '.'
+                str(v_type.__name__) + '. ' + 'It has ' + my_type + '.'
             raise ValueError(error_msg)
 
 
@@ -287,6 +373,31 @@ def chk_format_node( node_name, node_dict ):
 
     global style_list
     style_list.append(node_dict['META_INFO']['utranslation_style'])
+
+
+def search_dict_keys(dict_item, single_key=True, key_list=[], layer_num=0):
+    layer_dict = {}
+    for key in dict_item.keys():
+        key_list.append(key)
+        if isinstance(dict_item[key], dict):
+            key_list2, layer_dict2 = search_dict_keys(
+                dict_item[key],
+                single_key,
+                key_list,
+                layer_num + 1,
+            )
+            for k, v in layer_dict2.items():
+                if layer_dict.get(k) is None:
+                    layer_dict[k] = []
+                layer_dict[k].extend(v)
+
+            if single_key is True:
+                break
+        else:
+            if layer_dict.get(key) is None:
+                layer_dict[key] = []
+            layer_dict[key].append(layer_num+1)
+    return key_list, layer_dict
 
 
 def chk_format_param( param_name, param_dict ):
@@ -338,19 +449,25 @@ def chk_format_param( param_name, param_dict ):
             error_msg = str(search_style) + ' is unknown style.'
             raise ValueError(error_msg)
 
+    if (uvalue_type in list(type_info)) is False:
+        error_msg = str(uvalue_type) + ' is unknown type.'
+        raise ValueError(error_msg)
+
     if uvalue_type == 'str' or uvalue_type == 'str_password':
+        my_type = type_info[uvalue_type]['my_type']
+
         chk_vals_types(
             parent_name = param_name,
             key_name    = 'default_value',
             vals        = [default_value],
-            type_list   = [str, type(None)],
+            type_list   = [my_type, type(None)],
         )
 
         type_list = None
         if type(default_value) is type(None):
-            type_list = [str]
+            type_list = [my_type]
         elif type(default_value) is not type(None):
-            type_list = [str, type(None)]
+            type_list = [my_type, type(None)]
         if type_list is not None:
             chk_json_item(
                 parent_name = 'uvalue_option',
@@ -360,27 +477,30 @@ def chk_format_param( param_name, param_dict ):
                 type_list   = type_list,
             )
 
-        chk_json_item(
-            parent_name = 'uvalue_option',
-            essential   = True,
-            key_list    = ['multiple_line'],
-            dict_item   = uvalue_option,
-            type_list   = [bool],
-        )
+        for k, v in type_info[uvalue_type]['option'].items():
+            chk_json_item(
+                parent_name = 'uvalue_option',
+                essential   = True,
+                key_list    = [k],
+                dict_item   = uvalue_option,
+                type_list   = v,
+            )
 
     elif uvalue_type == 'int':
+        my_type = type_info[uvalue_type]['my_type']
+
         chk_vals_types(
             parent_name = param_name,
             key_name    = 'default_value',
             vals        = [default_value],
-            type_list   = [int, type(None)],
+            type_list   = [my_type, type(None)],
         )
 
         type_list = None
         if type(default_value) is type(None):
-            type_list = [int]
+            type_list = [my_type]
         elif type(default_value) is not type(None):
-            type_list = [int, type(None)]
+            type_list = [my_type, type(None)]
         if type_list is not None:
             chk_json_item(
                 parent_name = 'uvalue_option',
@@ -390,13 +510,7 @@ def chk_format_param( param_name, param_dict ):
                 type_list   = type_list,
             )
 
-        uvalue_type_dependence = {
-            'max'       : [int],
-            'min'       : [int],
-            'updownval' : [int],
-            'unit'      : [str],
-        }
-        for k, v in uvalue_type_dependence.items():
+        for k, v in type_info[uvalue_type]['option'].items():
             chk_json_item(
                 parent_name = 'uvalue_option',
                 essential   = True,
@@ -407,18 +521,20 @@ def chk_format_param( param_name, param_dict ):
 
     elif uvalue_type == 'int _uevaluation_req' and \
             type(default_value) is not type(None):
+        my_type = type_info[uvalue_type]['my_type']
+
         chk_vals_types(
             parent_name = param_name,
             key_name    = 'default_value',
             vals        = [default_value],
-            type_list   = [int, type(None)],
+            type_list   = [my_type, type(None)],
         )
 
         type_list = None
         if type(default_value) is type(None):
-            type_list = [int]
+            type_list = [my_type]
         elif type(default_value) is not type(None):
-            type_list = [int, type(None)]
+            type_list = [my_type, type(None)]
         if type_list is not None:
             chk_json_item(
                 parent_name = 'uvalue_option',
@@ -428,13 +544,7 @@ def chk_format_param( param_name, param_dict ):
                 type_list   = type_list,
             )
 
-        uvalue_type_dependence = {
-            'max'       : [int, str],
-            'min'       : [int, str],
-            'updownval' : [int],
-            'unit'      : [str],
-        }
-        for k, v in uvalue_type_dependence.items():
+        for k, v in type_info[uvalue_type]['option'].items():
             chk_json_item(
                 parent_name = 'uvalue_option',
                 essential   = True,
@@ -444,18 +554,20 @@ def chk_format_param( param_name, param_dict ):
             )
 
     elif uvalue_type == 'float':
+        my_types = type_info[uvalue_type]['my_types']
+
         chk_vals_types(
             parent_name = param_name,
             key_name    = 'default_value',
             vals        = [default_value],
-            type_list   = [int, float, type(None)],
+            type_list   = my_types + [type(None)],
         )
 
         type_list = None
         if type(default_value) is type(None):
-            type_list = [int, float]
+            type_list = my_types
         elif type(default_value) is not type(None):
-            type_list = [int, float, type(None)]
+            type_list = my_types + [type(None)]
         if type_list is not None:
             chk_json_item(
                 parent_name = 'uvalue_option',
@@ -465,14 +577,7 @@ def chk_format_param( param_name, param_dict ):
                 type_list   = type_list,
             )
 
-        uvalue_type_dependence = {
-            'max'       : [int, float],
-            'min'       : [int, float],
-            'f-point'   : [float],
-            'updownval' : [int, float],
-            'unit'      : [str],
-        }
-        for k, v in uvalue_type_dependence.items():
+        for k, v in type_info[uvalue_type]['option'].items():
             chk_json_item(
                 parent_name = 'uvalue_option',
                 essential   = True,
@@ -482,28 +587,35 @@ def chk_format_param( param_name, param_dict ):
             )
 
     elif uvalue_type == 'bool':
+        my_type = type_info[uvalue_type]['my_type']
+
         chk_vals_types(
             parent_name = param_name,
             key_name    = 'default_value',
             vals        = [default_value],
-            type_list   = [bool],
+            type_list   = [my_type],
         )
+
+        for k, v in type_info[uvalue_type]['option'].items():
+            chk_json_item(
+                parent_name = 'uvalue_option',
+                essential   = True,
+                key_list    = [k],
+                dict_item   = uvalue_option,
+                type_list   = v,
+            )
 
     elif uvalue_type == 'select':
+        my_type = type_info[uvalue_type]['my_type']
+
         chk_vals_types(
             parent_name = param_name,
             key_name    = 'default_value',
             vals        = [default_value],
-            type_list   = [str],
+            type_list   = [my_type],
         )
 
-        uvalue_type_dependence = {
-            'combo_box'      : [bool],
-            'radio_button'   : [bool],
-            'initial_value'  : [list],
-            'custom_val_max' : [int],
-        }
-        for k, v in uvalue_type_dependence.items():
+        for k, v in type_info[uvalue_type]['option'].items():
             chk_json_item(
                 parent_name = 'uvalue_option',
                 essential   = True,
@@ -516,26 +628,34 @@ def chk_format_param( param_name, param_dict ):
             parent_name = 'uvalue_option',
             key_name    = 'initial_value',
             vals        = uvalue_option['initial_value'],
-            type_list   = [str],
+            type_list   = [my_type],
         )
 
+        chk_vals_types(
+            parent_name = 'uvalue_option',
+            key_name    = 'custom_val_max',
+            vals        = [uvalue_option['custom_val_max']],
+            type_list   = [int],
+        )
         if uvalue_option['custom_val_max'] < 0:
             error_msg = 'custom_val_max is more than 0.'
             raise ValueError(error_msg)
 
-    elif uvalue_type == 'list':
+    elif uvalue_type == 'list' or uvalue_type == 'tuple':
+        my_type = type_info[uvalue_type]['my_type']
+
         chk_vals_types(
             parent_name = param_name,
             key_name    = 'default_value',
             vals        = [default_value],
-            type_list   = [list, type(None)],
+            type_list   = [my_type, type(None)],
         )
 
         type_list = None
         if type(default_value) is type(None):
-            type_list = [list]
+            type_list = [my_type]
         elif type(default_value) is not type(None):
-            type_list = [list, type(None)]
+            type_list = [my_type, type(None)]
         if type_list is not None:
             chk_json_item(
                 parent_name = 'uvalue_option',
@@ -547,12 +667,7 @@ def chk_format_param( param_name, param_dict ):
 
         none_val   = uvalue_option['none_val']
 
-        uvalue_type_dependence = {
-            'list_title'     : [list],
-            'list_type'      : [dict],
-            'custom_val_max' : [int],
-        }
-        for k, v in uvalue_type_dependence.items():
+        for k, v in type_info[uvalue_type]['option'].items():
             chk_json_item(
                 parent_name = 'uvalue_option',
                 essential   = True,
@@ -561,56 +676,240 @@ def chk_format_param( param_name, param_dict ):
                 type_list   = v,
             )
 
-        list_title = uvalue_option['list_title']
-        list_type  = uvalue_option['list_type']
+        title_list = uvalue_option['title_list']
+        type_dict  = uvalue_option['type_dict']
 
         if default_value is not None:
-            if len(list_title) != len(default_value):
+            if len(title_list) != len(default_value):
                 error_msg = 'default_value is not exactly number compared '\
-                    'with list_title.'
+                    'with title_list.'
                 raise ValueError(error_msg)
         if none_val is not None:
-            if len(list_title) != len(none_val):
+            if len(title_list) != len(none_val):
                 error_msg = 'none_val is not exactly number compared with '\
-                    'list_title.'
+                    'title_list.'
                 raise ValueError(error_msg)
 
         chk_json_item(
             parent_name = 'uvalue_option',
             essential   = True,
-            key_list    = list_title,
-            dict_item   = list_type,
+            key_list    = title_list,
+            dict_item   = type_dict,
             type_list   = [str],
         )
 
-        list_type_list = list(set(list(list_type.values())))
-        if ('str' in list_type_list) is True:
+        list_type_list = list(set(list(type_dict.values())))
+        for k, v in type_info.items():
+            if (k in list_type_list) is True:
+                chk_json_item(
+                    parent_name = 'uvalue_option',
+                    essential   = True,
+                    key_list    = list(v['option']),
+                    dict_item   = uvalue_option,
+                    type_list   = [dict],
+                )
+
+        for k, v in type_info.items():
+            for title in title_list:
+                if type_dict[title] == k:
+                    for k2, v2 in v['option'].items():
+                        chk_json_item(
+                            parent_name = k2,
+                            essential   = True,
+                            key_list    = [title],
+                            dict_item   = uvalue_option[k2],
+                            type_list   = v2,
+                        )
+
+        chk_vals_types(
+            parent_name = 'uvalue_option',
+            key_name    = 'custom_val_max',
+            vals        = [uvalue_option['custom_val_max']],
+            type_list   = [int],
+        )
+        if uvalue_option['custom_val_max'] < 0:
+            error_msg = 'custom_val_max is more than 0.'
+            raise ValueError(error_msg)
+        elif uvalue_option['custom_val_max'] >= 1:
             chk_json_item(
                 parent_name = 'uvalue_option',
                 essential   = True,
-                key_list    = ['multiple_line'],
+                key_list    = ['custom_type'],
                 dict_item   = uvalue_option,
                 type_list   = [dict],
             )
-
-        for k in list_title:
-            if list_type[k] == 'str':
-                chk_json_item(
-                    parent_name = 'multiple_line',
-                    essential   = True,
-                    key_list    = [k],
-                    dict_item   = uvalue_option['multiple_line'],
-                    type_list   = [bool],
-                )
-
-    elif uvalue_type == 'tuple':
-        pass
+            for type_name in list(uvalue_option['custom_type']):
+                if (type_name in list(type_info)) is True:
+                    chk_json_item(
+                        parent_name = 'custom_type',
+                        essential   = True,
+                        key_list    = [type_name],
+                        dict_item   = uvalue_option['custom_type'],
+                        type_list   = [dict],
+                    )
+                    for k, v in type_info[type_name]['option'].items():
+                        chk_json_item(
+                            parent_name = type_name,
+                            essential   = True,
+                            key_list    = [k],
+                            dict_item   = uvalue_option['custom_type'][type_name],
+                            type_list   = v,
+                        )
+                else:
+                    error_msg = str(uvalue_type) + ' is unknown type.'
+                    raise ValueError(error_msg)
 
     elif uvalue_type == 'dict':
-        pass
+        my_type = type_info[uvalue_type]['my_type']
+
+        chk_vals_types(
+            parent_name = param_name,
+            key_name    = 'default_value',
+            vals        = [default_value],
+            type_list   = [my_type, type(None)],
+        )
+
+        type_list = None
+        if type(default_value) is type(None):
+            type_list = [my_type]
+        elif type(default_value) is not type(None):
+            type_list = [my_type, type(None)]
+        if type_list is not None:
+            chk_json_item(
+                parent_name = 'uvalue_option',
+                essential   = True,
+                key_list    = ['none_val'],
+                dict_item   = uvalue_option,
+                type_list   = type_list,
+            )
+
+        none_val = uvalue_option['none_val']
+
+        for k, v in type_info[uvalue_type]['option'].items():
+            chk_json_item(
+                parent_name = 'uvalue_option',
+                essential   = True,
+                key_list    = [k],
+                dict_item   = uvalue_option,
+                type_list   = v,
+            )
+
+        dict_title = uvalue_option['dict_title']
+        dict_type  = uvalue_option['dict_type']
+
+        title_key_list, title_layer_dict = search_dict_keys(
+            dict_item  = dict_title,
+            single_key = True,
+            key_list   = [],
+            layer_num  = 0,
+        )
+        title_layer_list = []
+        [title_layer_list.extend(v) for v in title_layer_dict.values()]
+        title_layer_list = list(set(title_layer_list))
+
+        title_dict_len = len(title_key_list)
+        key_list, layer_dict = search_dict_keys(
+            dict_item  = dict_title,
+            single_key = False,
+            key_list   = [],
+            layer_num  = 0,
+        )
+
+        if title_dict_len != len(key_list):
+            error_msg = 'dict_title is single layer.'
+            raise ValueError(error_msg)
+
+        for k in key_list:
+            dict_title = dict_title[k]
+        chk_vals_types(
+            parent_name = 'dict_title',
+            key_name    = key_list[-1],
+            vals        = [dict_title],
+            type_list   = [str],
+        )
+
+        dict_val_search = {
+            'default_value' : default_value,
+            'none_val'      : none_val,
+        }
+        for k, v in dict_val_search.items():
+            if v is not None:
+                key_list, layer_dict = search_dict_keys(
+                    dict_item  = v,
+                    single_key = False,
+                    key_list   = [],
+                    layer_num  = 0,
+                )
+                layer_list = []
+                [layer_list.extend(v) for v in layer_dict.values()]
+                layer_list = list(set(layer_list))
+                if layer_list != [] and layer_list != title_layer_list:
+                    error_msg = str(k) + ' has different layer number '\
+                        'compared with dict_title.'
+                    raise ValueError(error_msg)
+
+                title_list = list(layer_dict)
+                for k, v in type_info.items():
+                    for title in title_list:
+                        if dict_type[title] == k:
+                            for k2, v2 in v['option'].items():
+                                chk_json_item(
+                                    parent_name = k2,
+                                    essential   = True,
+                                    key_list    = [title],
+                                    dict_item   = uvalue_option[k2],
+                                    type_list   = v2,
+                                )
+
+        chk_vals_types(
+            parent_name = 'uvalue_option',
+            key_name    = 'custom_val_max',
+            vals        = [uvalue_option['custom_val_max']],
+            type_list   = [int],
+        )
+        if uvalue_option['custom_val_max'] < 0:
+            error_msg = 'custom_val_max is more than 0.'
+            raise ValueError(error_msg)
+        elif uvalue_option['custom_val_max'] >= 1:
+            chk_json_item(
+                parent_name = 'uvalue_option',
+                essential   = True,
+                key_list    = ['custom_type'],
+                dict_item   = uvalue_option,
+                type_list   = [dict],
+            )
+            for type_name in list(uvalue_option['custom_type']):
+                if (type_name in list(type_info)) is True:
+                    chk_json_item(
+                        parent_name = 'custom_type',
+                        essential   = True,
+                        key_list    = [type_name],
+                        dict_item   = uvalue_option['custom_type'],
+                        type_list   = [dict],
+                    )
+                    for k, v in type_info[type_name]['option'].items():
+                        chk_json_item(
+                            parent_name = type_name,
+                            essential   = True,
+                            key_list    = [k],
+                            dict_item   = uvalue_option['custom_type'][type_name],
+                            type_list   = v,
+                        )
+                else:
+                    error_msg = str(uvalue_type) + ' is unknown type.'
+                    raise ValueError(error_msg)
 
     elif uvalue_type == 'None':
-        pass
+        my_type = type_info[uvalue_type]['my_type']
+
+        for k, v in type_info[uvalue_type]['option'].items():
+            chk_json_item(
+                parent_name = 'uvalue_option',
+                essential   = True,
+                key_list    = [k],
+                dict_item   = uvalue_option,
+                type_list   = v,
+            )
 
     else:
         error_msg = '\'' + str(uvalue_type) + '\' does not support.'

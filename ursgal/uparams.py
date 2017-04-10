@@ -28,10 +28,10 @@ ursgal_params = {
                 'long_name'      : False,
                 'description'    : False,
             },
-            'list_title' : {                                                    # dict, title of list item is required if dict_type include list (kaz)
+            'title_list' : {                                                    # dict, title of list item is required if dict_type include list (kaz)
                 'same_extension' : [],
             },
-            'list_type' : {                                                     # dict, type for each title is required if dict_type include list (kaz)
+            'type_dict' : {                                                     # dict, type for each title is required if dict_type include list (kaz)
             },
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
@@ -304,6 +304,7 @@ ursgal_params = {
         },
         'uvalue_type'    : 'dict',
         'uvalue_option' : {
+            'none_val' : None,
             'dict_title' : {                                                    # dict, title in dict is required if uvalue_type is dict (kaz)
                 'Data Set' : {
                     'Format' : 'Unusual AA'
@@ -864,12 +865,12 @@ ursgal_params = {
                 '',
                 ''
             ],
-            'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
                 'column name/csv fieldname',
                 'rule',
                 'compared value',
             ],
-            'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
                 'column name/csv fieldname' : 'str',
                 'rule'                      : 'str',
                 'compared value'            : 'str',
@@ -1051,10 +1052,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'list_title'   : [                                                  # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list'   : [                                                  # [str], title of list item is required if uvalue_type is list (kaz)
                 'del param',
             ],
-            'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
                 'del param' : 'str',
             },
             'multiple_line' : {                                                 # dict, multiple_line for each str-type is required if item is str (kaz)
@@ -1602,9 +1603,9 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
             ],
-            'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
             },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
@@ -2284,9 +2285,9 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
             ],
-            'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
             },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
@@ -3421,6 +3422,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'dict',
         'uvalue_option' : {
+            'none_val' : None,
             'dict_title' : {                                                    # dict, title in dict is required if uvalue_type is dict (kaz)
                 'unimod_name' : 'number'
             },
@@ -3932,11 +3934,11 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
                 'mod_1',
                 'mod_2',
             ],
-            'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
                 'mod_1' : 'str',
                 'mod_2' : 'str',
             },
@@ -5900,6 +5902,7 @@ ursgal_params = {
         'uvalue_type' : 'None',
         'uvalue_option' : {
             'none_val' : 'None',
+            'system_param' : True,
         },
         'default_value' : None,
         'description' : \
@@ -6203,9 +6206,9 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
             ],
-            'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
             },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
@@ -6237,9 +6240,9 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
             ],
-            'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
             ],
-            'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
             },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
@@ -7346,9 +7349,10 @@ ursgal_params = {
                 'xtandem_vengeance'    : 0,
             },
         },
-        'uvalue_type' : 'None',
+        'uvalue_type' : 'str',
         'uvalue_option' : {
-            'none_val'  : 'None',
+            'none_val'      : 'None',
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -7523,9 +7527,10 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
             },
         },
-        'uvalue_type' : 'None',
+        'uvalue_type' : 'str',
         'uvalue_option' : {
-            'none_val'  : 'None',
+            'none_val'      : 'None',
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
@@ -7550,11 +7555,11 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
                 'column_name_1',
                 'column_name_2',
             ],
-            'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
                 'column_name_1' : 'str',
                 'column_name_2' : 'str',
             },
@@ -7594,22 +7599,15 @@ ursgal_params = {
         },
         'uvalue_type' : 'tuple',
         'uvalue_option' : {
-            'none_val'       : None,
-            'initialValue' : [
-                'Helvetica',
-                31,
-                25,
-                20,
-                20,
-            ],
-            'tuple_title' : [                                                   # [str], title of tuple item is required if uvalue_type is tuple (kaz)
+            'none_val' : None,
+            'title_list' : [                                                   # [str], title of tuple item is required if uvalue_type is tuple (kaz)
                 'font-type',
                 'font-size header',
                 'font-size major',
                 'font-size minor',
                 'font-size venn',
             ],
-            'tuple_type' : {                                                    # dict, type for each title is required if uvalue_type is tuple (kaz)
+            'type_dict' : {                                                    # dict, type for each title is required if uvalue_type is tuple (kaz)
                 'font-type'        : 'str',
                 'font-size header' : 'int',
                 'font-size major'  : 'int',
@@ -7699,9 +7697,9 @@ ursgal_params = {
             'none_val' : None,
             'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
             ],
-            'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+            'title_list' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
             ],
-            'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+            'type_dict' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
             },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
@@ -7760,15 +7758,11 @@ ursgal_params = {
         'uvalue_type' : 'tuple',
         'uvalue_option' : {
             'none_val'       : None,
-            'initialValue' : [
-                600,
-                400,
-            ],
-            'tuple_title' : [                                                   # [str], title of tuple item is required if uvalue_type is tuple (kaz)
+            'title_list' : [                                                   # [str], title of tuple item is required if uvalue_type is tuple (kaz)
                 'x-axis-scaling-factor',
                 'y-axis-scaling-factor',
             ],
-            'tuple_type' : {                                                    # dict, type for each title is required if uvalue_type is tuple (kaz)
+            'type_dict' : {                                                    # dict, type for each title is required if uvalue_type is tuple (kaz)
                 'x-axis-scaling-factor' : 'int',
                 'y-axis-scaling-factor' : 'int',
             },
@@ -7812,15 +7806,11 @@ ursgal_params = {
         'uvalue_type' : 'tuple',
         'uvalue_option' : {
             'none_val'       : None,
-            'initialValue' : [
-                1200,
-                800,
-            ],
-            'tuple_title' : [                                                   # [str], title of tuple item is required if uvalue_type is tuple (kaz)
+            'title_list' : [                                                   # [str], title of tuple item is required if uvalue_type is tuple (kaz)
                 'width',
                 'height',
             ],
-            'tuple_type' : {                                                    # dict, type for each title is required if uvalue_type is tuple (kaz)
+            'type_dict' : {                                                    # dict, type for each title is required if uvalue_type is tuple (kaz)
                 'width'  : 'int',
                 'height' : 'int',
             },
