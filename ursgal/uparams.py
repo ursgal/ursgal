@@ -23,7 +23,7 @@ ursgal_params = {
                 'same_extension' : 'list',
                 'description'    : 'str',
             },
-            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if dict_type include str (kaz)
+            'multiple_line' : {                                                 # dict, multiple_line for each str-type is required if dict_type include str (kaz)
                 'short_name'     : False,
                 'long_name'      : False,
                 'description'    : False,
@@ -281,7 +281,8 @@ ursgal_params = {
         },
         'uvalue_type'    : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value'  : '13312m',
         'description' : \
@@ -313,7 +314,7 @@ ursgal_params = {
                 'unimod_name'          : 'str',
                 'unimod_name_with_cam' : 'str',
             },
-            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if dict_type include str (kaz)
+            'multiple_line' : {                                                 # dict, multiple_line for each str-type is required if dict_type include str (kaz)
                 'original_aa'          : False,
                 'unimod_name'          : False,
                 'unimod_name_with_cam' : False,
@@ -321,7 +322,7 @@ ursgal_params = {
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
                 'str' : {
-                    'multipleLine' : False,
+                    'multiple_line' : False,
                 },
             },
         },
@@ -391,6 +392,7 @@ ursgal_params = {
         },
         'uvalue_type'    : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 1000000,
             'min'       : 0,
             'updownval' : 1,
@@ -423,6 +425,7 @@ ursgal_params = {
         },
         'uvalue_type'    : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 10000,
@@ -602,6 +605,7 @@ ursgal_params = {
         },
         'uvalue_type'    : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
@@ -632,6 +636,7 @@ ursgal_params = {
         },
         'uvalue_type'    : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
@@ -734,6 +739,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100,
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
@@ -794,6 +800,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int _uevaluation_req',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : '_uevaluation_req',
             'min'       : -1,
             'updownval' : 1,
@@ -821,7 +828,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                             # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'nK  nK  138.0680742 BS3',
         'description' : \
@@ -851,7 +859,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
+            'none_val' : [                                                      # list, initialValue is required if uvalue_type is list (kaz)
                 '',
                 '',
                 ''
@@ -866,7 +874,7 @@ ursgal_params = {
                 'rule'                      : 'str',
                 'compared value'            : 'str',
             },
-            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if item is str (kaz)
+            'multiple_line' : {                                                  # dict, multiple_line for each str-type is required if item is str (kaz)
                 'column name/csv fieldname' : False,
                 'rule'                      : False,
                 'compared value'            : False,
@@ -923,12 +931,14 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine'      : False,
-            'input_extensions'  : ['.fasta', '.fa'],                            # list, extensions (kaz)
+            'none_val'         : '',
+            'multiple_line'    : False,
+            'input_extensions' : ['.fasta', '.fa'],                             # list, extensions (kaz)
         },
         'default_value' : None,
         'description' : \
-            'Path to database file containing protein sequences in fasta format',
+            'Path to database file containing protein sequences in fasta format\n'\
+            '    \'\' : None',
     },
     'database_taxonomy' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -953,7 +963,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'all',
         'description' : \
@@ -1016,7 +1027,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'decoy_',
         'description' : \
@@ -1038,22 +1050,20 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
-                'grouped_psms',
-            ],
+            'none_val' : None,
             'list_title'   : [                                                  # [str], title of list item is required if uvalue_type is list (kaz)
                 'del param',
             ],
             'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
                 'del param' : 'str',
             },
-            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if item is str (kaz)
+            'multiple_line' : {                                                 # dict, multiple_line for each str-type is required if item is str (kaz)
                 'del param' : False,
             },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
                 'str' : {
-                    'multipleLine' : False,
+                    'multiple_line' : False,
                 },
             },
         },
@@ -1110,13 +1120,16 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : '',
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : None,
         'description' : \
             'Directory containing the model files for PepNovo. If \'None\', '\
             'it is supposed to be in :\n'\
-            '    resources/<platform>/<architecture>/pepnovo_3_1',
+            '    resources/<platform>/<architecture>/pepnovo_3_1\n'\
+            '\n'\
+            '    \'\' : None',
     },
     'engine_internal_decoy_generation' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1537,6 +1550,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 1,
             'min'       : 0,
             'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
@@ -1564,7 +1578,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'filter_csv_1_0_0',
         'description' : \
@@ -1586,8 +1601,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
-            ],
+            'none_val' : None,
             'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
             ],
             'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
@@ -1595,7 +1609,7 @@ ursgal_params = {
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
                 'str' : {
-                    'multipleLine' : False,
+                    'multiple_line' : False,
                 },
             },
         },
@@ -1621,7 +1635,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'I,U',
         'description' : \
@@ -1689,6 +1704,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
@@ -1814,6 +1830,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
@@ -1883,6 +1900,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
@@ -1908,6 +1926,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 1000000000,
             'min'       : 1,
             'updownval' : 1,
@@ -1933,11 +1952,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : '',
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : None,
         'description' : \
-            'ftp folder that should be downloaded',
+            'ftp folder that should be downloaded\n'\
+            '    \'\' : None',
     },
     'ftp_include_ext' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1955,12 +1976,14 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : '',
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : None,
         'description' : \
             'Only files with the defined file extension are downloaded with '\
-            'ftp download',
+            'ftp download\n'\
+            '    \'\' : None',
     },
     'ftp_max_number_of_files' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -1975,18 +1998,16 @@ ursgal_params = {
             'download',
         ],
         'uvalue_translation' : {
-            'get_http_style_1' : {
-                0 : None,
-            },
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : 0,
             'max'       : 1000000000,
             'min'       : 0,
             'updownval' : 1,
             'unit'      : 'files'                                               # str, unit is required if uvalue_type is int (kaz)
         },
-        'default_value' : 0,
+        'default_value' : None,
         'description' : \
             'Maximum number of files that will be downloaded\n'\
             '     0 : No Limitation',
@@ -2007,11 +2028,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : '',
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : None,
         'description' : \
-            'Default ftp download path',
+            'Default ftp download path\n'\
+            '    \'\' : None',
     },
     'ftp_password' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2029,11 +2052,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'str_password',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : '',
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : None,
         'description' : \
-            'ftp download password',
+            'ftp download password\n'\
+            '    \'\' : None',
     },
     'ftp_url' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2051,11 +2076,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : '',
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : None,
         'description' : \
-            'ftp download URL, will fail if it is not set by the user',
+            'ftp download URL, will fail if it is not set by the user\n'\
+            '    \'\' : None',
     },
     'header_translations' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2163,11 +2190,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : 'None',
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : None,
         'description' : \
-            'Translate output headers into Ursgal unify_csv style headers',
+            'Translate output headers into Ursgal unify_csv style headers\n'\
+            '    \'None\' : None',
     },
     'heatmap_annotation_field_name' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2185,7 +2214,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'Protein',
         'description' : \
@@ -2207,7 +2237,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'classic',
         'description' : \
@@ -2229,7 +2260,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'Spectral',
         'description' : \
@@ -2251,8 +2283,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
-            ],
+            'none_val' : None,
             'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
             ],
             'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
@@ -2260,7 +2291,7 @@ ursgal_params = {
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
                 'str' : {
-                    'multipleLine' : False,
+                    'multiple_line' : False,
                 },
             },
         },
@@ -2285,7 +2316,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : '_std',
         'description' : \
@@ -2307,7 +2339,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'Protein',
         'description' : \
@@ -2329,6 +2362,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100,
             'min'       : 0,
             'updownval' : 1,
@@ -2354,6 +2388,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000,
             'min'       : -10000,
             'updownval' : 1,
@@ -2379,7 +2414,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : '_mean',
         'description' : \
@@ -2401,7 +2437,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : '.u.json',
         'description' : \
@@ -2423,11 +2460,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : '',
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
-        'default_value' : 'None',
+        'default_value' : None,
         'description' : \
-            'Default http download path',
+            'Default http download path\n'\
+            '    \'\' : None',
     },
     'http_url' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2445,11 +2484,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : '',
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : None,
         'description' : \
-            'http download URL, will fail if it is not set by the user',
+            'http download URL, will fail if it is not set by the user\n'\
+            '    \'\' : None',
     },
     'instrument' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -2528,6 +2569,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
@@ -2554,7 +2596,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                             # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : '.u.json',
         'description' : \
@@ -2657,6 +2700,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000000,
             'min'       : 0,
             'updownval' : 1000,
@@ -2711,6 +2755,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000000,
             'min'       : 0,
             'updownval' : 1000,
@@ -2736,6 +2781,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000,
             'min'       : 0,
             'updownval' : 1,
@@ -2762,6 +2808,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 1,
             'min'       : 0,
             'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
@@ -2847,6 +2894,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 1,
             'min'       : 0,
             'f-point'   : 1e-01,                                                # e-val, floating point, name is changed (kaz)
@@ -2877,6 +2925,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 2,
             'min'       : 0,
             'f-point'   : 1e-04,                                                # e-val, floating point, name is changed (kaz)
@@ -2907,6 +2956,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 1000,
             'min'       : 0,
             'updownval' : 1,
@@ -2933,7 +2983,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : '2.08',
         'description' : \
@@ -3017,6 +3068,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 1000000,
             'min'       : 0,
             'updownval' : 1,
@@ -3043,6 +3095,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -3143,6 +3196,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
@@ -3180,6 +3234,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -3225,6 +3280,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
@@ -3250,6 +3306,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
@@ -3276,6 +3333,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000,
             'min'       : -10000,
             'updownval' : 10,
@@ -3307,6 +3365,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
@@ -3335,6 +3394,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -3406,6 +3466,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
@@ -3438,6 +3499,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 10,
@@ -3466,6 +3528,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 1000000000,
             'min'       : 0,
             'updownval' : 100000,
@@ -3514,12 +3577,14 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine'     : False,
+            'none_val'         : '',
+            'multiple_line'    : False,
             'input_extensions' : ['.mgf'],                                      # list, extensions (kaz)
         },
         'default_value' : None,
         'description' : \
-            'Path to input .mgf file',
+            'Path to input .mgf file\n'\
+            '    \'\' : None',
     },
     'min_mod_size' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -3537,6 +3602,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : -100000,
             'updownval' : 10,
@@ -3574,6 +3640,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10,
             'min'       : -1e-10,
             'f-point'   : 1e-10,                                                # e-val, floating point, name is changed (kaz)
@@ -3608,6 +3675,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
@@ -3634,6 +3702,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -3669,6 +3738,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -3701,6 +3771,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -3860,24 +3931,23 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
-                '*,opt,Prot-N-term,Acetyl',
-                'M,opt,any,Oxidation',
-            ],
+            'none_val' : None,
             'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
-                'mod',
-                'mod',
+                'mod_1',
+                'mod_2',
             ],
             'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
-                'mod' : 'str',
+                'mod_1' : 'str',
+                'mod_2' : 'str',
             },
-            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if item is str (kaz)
-                'mod' : False,
+            'multiple_line' : {                                                 # dict, multiple_line for each str-type is required if item is str (kaz)
+                'mod_1' : False,
+                'mod_2' : False,
             },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
                 'str' : {
-                    'multipleLine' : False,
+                    'multiple_line' : False,
                 },
             },
         },
@@ -3936,7 +4006,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'nK  156.0786',
         'description' : \
@@ -3989,6 +4060,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4039,6 +4111,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4096,6 +4169,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4121,6 +4195,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4146,6 +4221,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4171,6 +4247,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4221,6 +4298,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10,
             'min'       : 0,
             'f-point'   : 1e-02,                                                # e-val, floating point, name is changed (kaz)
@@ -4274,7 +4352,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'mzidentml_lib_1_6_10',
         'description' : \
@@ -4421,7 +4500,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'mzml2mgf_1_0_0',
         'description' : \
@@ -4478,6 +4558,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4509,6 +4590,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4563,6 +4645,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000,
             'min'       : 1,
             'updownval' : 1,
@@ -4590,6 +4673,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
@@ -4616,6 +4700,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
@@ -4657,6 +4742,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'updownval' : 1,
@@ -4683,6 +4769,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000,
             'min'       : 0,
             'updownval' : 1,
@@ -4734,6 +4821,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4759,6 +4847,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4784,6 +4873,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4810,6 +4900,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 10,
@@ -4836,6 +4927,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000,
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
@@ -4862,6 +4954,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'f-point'   : 1e-02,                                                # e-val, floating point, name is changed (kaz)
@@ -4914,6 +5007,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4939,6 +5033,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -4964,6 +5059,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000,
             'min'       : 0,
             'f-point'   : 1e-02,                                                # e-val, floating point, name is changed (kaz)
@@ -5017,6 +5113,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -5043,6 +5140,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -5176,11 +5274,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : 'None',
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : None,
         'description' : \
-            'Path to output file',
+            'Path to output file\n'\
+            '    \'None\' : None',
     },
     'output_file_type' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5306,18 +5406,16 @@ ursgal_params = {
             'peptide',
         ],
         'uvalue_translation' : {
-            'pepnovo_style_1': {
-                0 : None
-            }
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : 0,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
             'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
-        'default_value' : 0,
+        'default_value' : None,
         'description' : \
             'Returns peptide sequences of the specified length (only lengths '\
             '3-6 are allowed)\n'\
@@ -5460,6 +5558,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -5515,6 +5614,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -5672,6 +5772,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -5701,6 +5802,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 100,
@@ -5736,6 +5838,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -5770,6 +5873,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -5795,10 +5899,11 @@ ursgal_params = {
         },
         'uvalue_type' : 'None',
         'uvalue_option' : {
+            'none_val' : 'None',
         },
         'default_value' : None,
         'description' : \
-            '',
+            '    \'None\' : None',
     },
     'protein_delimiter' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -5819,7 +5924,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : '<|>',
         'description' : \
@@ -5842,7 +5948,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : ';',
         'description' : \
@@ -5865,6 +5972,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -5892,6 +6000,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -5919,6 +6028,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 10,
@@ -5977,7 +6087,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : '.csv',
         'description' : \
@@ -6045,7 +6156,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : '_ursgal_lookup.pkl',
         'description' : \
@@ -6067,7 +6179,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'sanitize_csv_1_0_0',
         'description' : \
@@ -6089,8 +6202,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
-            ],
+            'none_val' : None,
             'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
             ],
             'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
@@ -6098,7 +6210,7 @@ ursgal_params = {
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
                 'str' : {
-                    'multipleLine' : False,
+                    'multiple_line' : False,
                 },
             },
         },
@@ -6123,7 +6235,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
+            'none_val' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
             ],
             'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
             ],
@@ -6132,7 +6244,7 @@ ursgal_params = {
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
                 'str' : {
-                    'multipleLine' : False,
+                    'multiple_line' : False,
                 },
             },
         },
@@ -6153,17 +6265,21 @@ ursgal_params = {
             'converter',
         ],
         'uvalue_translation' : {
+            'mzml2mgf_style_1' : {
+            },
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : -1,
             'max'       : 10000000,
-            'min'       : 0,
+            'min'       : -1,
             'updownval' : 1,
             'unit'      : ''                                                    # str, unit is required if uvalue_type is int (kaz)
         },
         'default_value' : None,
         'description' : \
-            'Include only the n-th spectrum during mzml2mgf conversion',
+            'Include only the n-th spectrum during mzml2mgf conversion\n'\
+            '    -1 : None',
     },
     'score_-h2o_ions' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -6462,6 +6578,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100,
             'min'       : 0,
             'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
@@ -6866,6 +6983,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -6896,6 +7014,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000,
             'min'       : 0,
             'f-point'   : 1e-01,                                                # e-val, floating point, name is changed (kaz)
@@ -7009,7 +7128,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'unify_csv_1_0_0',
         'description' : \
@@ -7030,10 +7150,11 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : 'str',
-        'default_value' : 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
+        'default_value' : 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/',
         'description' : \
             'URL that is used to install and prepare_resources.py',
     },
@@ -7157,7 +7278,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'validated.csv',
         'description' : \
@@ -7226,12 +7348,14 @@ ursgal_params = {
         },
         'uvalue_type' : 'None',
         'uvalue_option' : {
+            'none_val'  : 'None',
         },
         'default_value' : None,
         'description' : \
             'Defines the minimum score used for validation. If scores lower '\
             'than this are produced, they are set to the minimum score. This '\
-            'is used to avoid huge gaps/jumps in the score distribution',
+            'is used to avoid huge gaps/jumps in the score distribution\n'\
+            '    \'None\' : None',
     },
     'validation_score_field' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7401,11 +7525,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'None',
         'uvalue_option' : {
+            'none_val'  : 'None',
         },
         'default_value' : None,
         'description' : \
             'Name of the column that is used for validation, e.g. by qvality '\
-            'and percolator. If None is defined, default values are used',
+            'and percolator. If None is defined, default values are used\n'\
+            '    \'None\' : None',
     },
     'visualization_column_names' : {
         'edit_version' : 1.00,                                                  # float, inclease number if something is changed (kaz)
@@ -7422,19 +7548,24 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : 'list',
-        'uvalue_option'      : {
-            'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
-                'Modifications',
-                'Sequence',
-            ],
+        'uvalue_option' : {
+            'none_val' : None,
             'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
+                'column_name_1',
+                'column_name_2',
             ],
             'list_type' : {                                                     # dict, type for each title is required if uvalue_type is list (kaz)
+                'column_name_1' : 'str',
+                'column_name_2' : 'str',
+            },
+            'multiple_line' : {                                                  # dict, multiple_line for each str-type is required if item is str (kaz)
+                'column_name_1' : False,
+                'column_name_2' : False,
             },
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
                 'str' : {
-                    'multipleLine' : False,
+                    'multiple_line' : False,
                 },
             },
         },
@@ -7463,6 +7594,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'tuple',
         'uvalue_option' : {
+            'none_val'       : None,
             'initialValue' : [
                 'Helvetica',
                 31,
@@ -7484,7 +7616,7 @@ ursgal_params = {
                 'font-size minor'  : 'int',
                 'font-size venn'   : 'int',
             },
-            'multipleLine' : {                                                  # dict, multipleLine for each str-type is required if item is str (kaz)
+            'multiple_line' : {                                                  # dict, multiple_line for each str-type is required if item is str (kaz)
                 'font-type'        : False,
             },
             'max': {                                                            # dict, max for each int-type is required if tuple_type include int or float (kaz)
@@ -7513,7 +7645,13 @@ ursgal_params = {
             },
             'custom_val_max' : 0,                                               # int, Name is changed and 'userCustomValues' is disuse (kaz)
         },
-        'default_value' : ('Helvetica', 31, 25, 20, 20),
+        'default_value' : (
+            'Helvetica',
+            31,
+            25,
+            20,
+            20
+        ),
         'description' : \
             'Font used for visualization plots (e.g. Venn diagram), given as '\
             'tuple (font-type, font-size header, font-size major, font-size '\
@@ -7535,7 +7673,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
-            'multipleLine' : False,                                             # bool, multipleLine is required if uvalue_type is str (kaz)
+            'none_val'      : None,
+            'multiple_line' : False,                                            # bool, multiple_line is required if uvalue_type is str (kaz)
         },
         'default_value' : 'ursgal Venn Diagram',
         'description' : \
@@ -7557,6 +7696,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
+            'none_val' : None,
             'initialValue' : [                                                  # list, initialValue is required if uvalue_type is list (kaz)
             ],
             'list_title' : [                                                    # [str], title of list item is required if uvalue_type is list (kaz)
@@ -7566,11 +7706,12 @@ ursgal_params = {
             'custom_val_max' : 10000,                                           # int, Name is changed and 'userCustomValues' is disuse (kaz)
             'custom_type' : {                                                   # dict, custom_type is required if custom_val_max >= 1 (kaz)
                 'str' : {
-                    'multipleLine' : False,
+                    'multiple_line' : False,
                 },
             },
         },
-        'default_value' : [],
+        'default_value' : [
+        ],
         'description' : \
             'Specifies labels for the datasets that should be visualized. '\
             'Needs to be given in the same order as the datasets.',
@@ -7591,6 +7732,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 100000,
             'min'       : 0,
             'f-point'   : 1e-03,                                                # e-val, floating point, name is changed (kaz)
@@ -7617,6 +7759,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'tuple',
         'uvalue_option' : {
+            'none_val'       : None,
             'initialValue' : [
                 600,
                 400,
@@ -7668,6 +7811,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'tuple',
         'uvalue_option' : {
+            'none_val'       : None,
             'initialValue' : [
                 1200,
                 800,
@@ -7719,6 +7863,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'float',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'f-point'   : 1e-05,                                                # e-val, floating point, name is changed (kaz)
@@ -7746,6 +7891,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
@@ -7774,6 +7920,7 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
+            'none_val'  : None,
             'max'       : 10000000,
             'min'       : 0,
             'updownval' : 1,
