@@ -4,12 +4,15 @@ import os
 import pprint
 from collections import defaultdict as ddict
 import csv
-# import ursgal.chemical_composition_kb
-# from chemical_compositions_kb import aa_names
+
 
 class msfragger_20170103( ursgal.UNode ):
     """
     MSFragger unode
+
+    Note:
+        Please download and install MSFragger manually from 
+        http://www.nesvilab.org/software.html
 
     Reference:
     Kong, A. T., Leprevost, F. V, Avtonomov, D. M., Mellacheruvu, D., and Nesvizhskii, A. I. (2017)
@@ -17,7 +20,11 @@ class msfragger_20170103( ursgal.UNode ):
     proteomics. Nat. Publ. Gr. 293
 
     Note:
-        Addition of user amino acids not implemented yet
+        Addition of user amino acids not implemented yet. Only mzML search
+        possible at the moment.
+
+    Warning:
+        Still in testing phase
 
     """
     META_INFO = {
@@ -67,8 +74,6 @@ spectrometry–based proteomics. Nat. Publ. Gr. 293',
     def preflight( self ):
         '''
         Formatting the command line via self.params
-
-        Modifications file will be created in the output folder
 
         Returns:
                 dict: self.params

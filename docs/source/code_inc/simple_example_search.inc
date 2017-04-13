@@ -44,11 +44,8 @@
 	
 	    if sys.platform == 'win32':
 	        msamanda = 'msamanda_1_0_0_7503'
-	
-	    elif sys.platform == 'darwin':
-	        #mono needs to be installed
-	        msamanda = 'msamanda_1_0_0_7504'
 	    else:
+	        #mono needs to be installed
 	        msamanda = 'msamanda_1_0_0_7504'
 	
 	    engine_list = [
