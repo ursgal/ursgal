@@ -85,6 +85,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     MS-Amanda
         * multiple protein ID per peptide are splitted in two entries.
           (is done in MS-Amanda postflight)
+    
+    MSFragger
+        * 15N modification have to be removed from Modifications and the 
+          merged modifications have to be corrected.
 
     '''
     print(
@@ -262,7 +266,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         for line_nr, line_dict in enumerate(csv_file_buffer):
             if line_nr % 500 == 0:
                 print(
-                    '[ unify_cs ] Processing line number: {0}/{1} .. '.format(
+                    '[ unify_cs ] Processing line number: {0}/{1} '.format(
                         line_nr,
                         total_lines,
                     ),
@@ -430,6 +434,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                     if modification == '':
                         continue
                     pos, mod = None, None
+                    # print(modification)
                     match = mod_pattern.search( modification )
                     pos = int( match.group('pos') )
                     mod = modification[ :match.start() ]
@@ -508,6 +513,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     decimal_places = 3
                                 )
                             name_list += app_mass_to_name_list_buffer[mass_buffer_key]
+                        # print(name_list)
                         # except:
                         #     print('''
                         #         A modification was reported that was not included in the search parameters
