@@ -333,16 +333,24 @@ spectrometry–based proteomics. Nat. Publ. Gr. 293',
                         continue
                     else:
                         pos, mass = single_mod.split('$')
-                        if pos == '0' and mass == '58.00548' and line_dict['Sequence'][0]== 'M':
+                        if pos == '0' and line_dict['Sequence'][0]== 'M':
+                            split_mod = False
+                            if self.params['translations']['label'] == '15N' and mass == '59.002518':
+                                split_mod = True
+                            elif mass == '58.00548':
+                                split_mod = True
+                            else:
+                                pass
                             #merge of acetylation and Oxidation
                             # 42.010565 + 15.994915 = 58.00548
-                            for (new_mod_pos,new_mod_mass) in [ (0, 42.010565),(1, 15.994915) ]:
-                                reformatted_mod_list.append(
-                                    '{0}:{1}'.format(
-                                        new_mod_mass,
-                                        new_mod_pos
+                            if split_mod:
+                                for (new_mod_pos,new_mod_mass) in [ (0, 42.010565),(1, 15.994915) ]:
+                                    reformatted_mod_list.append(
+                                        '{0}:{1}'.format(
+                                            new_mod_mass,
+                                            new_mod_pos
+                                        )
                                     )
-                                )
                         else:
                             reformatted_mod_list.append(
                                 '{0}:{1}'.format(mass,int(pos)+1)

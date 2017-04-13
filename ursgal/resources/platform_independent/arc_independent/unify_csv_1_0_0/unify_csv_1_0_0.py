@@ -212,6 +212,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     ze_only_buffer = {}
 
+    app_mass_to_name_list_buffer = {}
+
     with open( input_file, 'r' ) as in_file:
         csv_input  = csv.DictReader(
             in_file
@@ -482,29 +484,42 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     line_dict['Sequence'], modification, aa
                                 )
                     else:
-                        
-                        if aa in fixed_mods.keys() and use15N \
-                            and 'msgfplus' in search_engine.lower():
-                            if pos != 0:
-                                mod = float(mod) - ursgal.ursgal_kb.DICT_15N_DIFF[aa]
-                        
-
-                        try:
-                            name_list = ursgal.GlobalUnimodMapper.appMass2name_list(
-                                round(float(mod), 3), decimal_places = 3
-                            )
-                        except:
-                            print('''
-                                A modification was reported that was not included in the search parameters
-                                unify_csv cannot deal with this, please check your parameters and engine output
-                                reported modification: {0}
-                                modifications in parameters: {1}
-                                '''.format(mod, params['translations']['modifications'])
-                            )
-                            raise Exception('unify_csv failed because a '\
-                                'modification was reported that was not '\
-                                'given in params: {0}'.format(modification)
-                            )
+                        float_mod = float(mod)
+                        masses_2_test = [ float_mod ]
+                        if use15N:
+                            substract_15N_diff = False
+                            if aa in fixed_mods.keys() and 'msgfplus' in search_engine.lower() and pos != 0:
+                                substract_15N_diff = True
+                            if 'msfragger' in search_engine.lower() and float_mod > 4:
+                                # maximum 15N labeling is 3.988 Da (R)
+                                substract_15N_diff = True
+                            if substract_15N_diff:
+                                masses_2_test.append( float_mod - ursgal.ursgal_kb.DICT_15N_DIFF[aa] )
+                        # try:
+                        #works always but returns empty list...
+                        name_list = []
+                        for mass_2_test in masses_2_test:
+                            rounded_mass = round(mass_2_test, 3)
+                            mass_buffer_key = '{0:1.3f}'.format(rounded_mass)
+                            #buffer increases speed massively...
+                            if mass_buffer_key not in app_mass_to_name_list_buffer.keys():
+                                app_mass_to_name_list_buffer[mass_buffer_key] = ursgal.GlobalUnimodMapper.appMass2name_list(
+                                    rounded_mass,
+                                    decimal_places = 3
+                                )
+                            name_list += app_mass_to_name_list_buffer[mass_buffer_key]
+                        # except:
+                        #     print('''
+                        #         A modification was reported that was not included in the search parameters
+                        #         unify_csv cannot deal with this, please check your parameters and engine output
+                        #         reported modification: {0}
+                        #         modifications in parameters: {1}
+                        #         '''.format(mod, params['translations']['modifications'])
+                        #     )
+                        #     raise Exception('unify_csv failed because a '\
+                        #         'modification was reported that was not '\
+                        #         'given in params: {0}'.format(modification)
+                        #     )
                         mapped_mod = False
                         for name in name_list:
                             if name in modname2aa.keys():
