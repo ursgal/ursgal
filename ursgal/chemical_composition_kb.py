@@ -79,3 +79,27 @@ aa_compositions = {
     'Y': 'C9H9NO2',
     'U': 'C3H5NOSe' # Selenocystein
 }
+
+aa_names = {
+    'A': 'alanine',
+    'C': 'cysteine',
+    'D': 'aspartic_acid',
+    'E': 'glutamic_acid',
+    'F': 'phenylalanine',
+    'G': 'glycine',
+    'H': 'histidine',
+    'I': 'isoleucine',
+    'K': 'lysine',
+    'L': 'leucine',
+    'M': 'methionine',
+    'N': 'asparagine',
+    'P': 'proline',
+    'Q': 'glutamine',
+    'R': 'arginine',
+    'S': 'serine',
+    'T': 'threonine',
+    'V': 'valine',
+    'W': 'tryptophan',
+    'Y': 'tyrosine',
+    'U': 'selenocystein' # Selenocystein
+}

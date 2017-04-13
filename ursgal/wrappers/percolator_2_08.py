@@ -515,12 +515,12 @@ class percolator_2_08( ursgal.UNode ):
 
 
         # marking temporary files for deletion:
-        self.created_tmp_files += [
-            self.params['translations']['decoy_output_file_incl_path'],
-            self.params['translations']['percolator_in'],
-            '{output_file_incl_path}.psms'.format( **self.params['translations'] ),
-            '{output_file_incl_path}.peptides'.format( **self.params['translations'] ),
-        ]
+        # self.created_tmp_files += [
+        #     self.params['translations']['decoy_output_file_incl_path'],
+        #     self.params['translations']['percolator_in'],
+        #     '{output_file_incl_path}.psms'.format( **self.params['translations'] ),
+        #     '{output_file_incl_path}.peptides'.format( **self.params['translations'] ),
+        # ]
 
 
     def postflight( self ):

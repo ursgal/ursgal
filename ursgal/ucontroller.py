@@ -1849,13 +1849,16 @@ class UController(ursgal.UNode):
             'msgf',
             'myrimatch',
             'omssa',
-            'xtandem'
+            'xtandem',
+            'msfragger'
         ]
         database_search = False
         for db_se in database_search_engines:
             if db_se in engine.lower():
                 database_search = True
         if database_search:
+            #if mapper version == 'COmpomics stuff'
+            #execute this node and in map peptides, these results are read...
             mapped_csv_search_results = self.map_peptides(
                 input_file       = csv_search_results,
                 output_file_name = output_file_name,

@@ -168,15 +168,15 @@ class xtandem_vengeance( ursgal.UNode ):
                 continue
             else:
                 forbidden_cterm = ''
-                max_num_per_mod = ''
+                max_num_per_mod_name_specific = ''
                 if mod['name'] in self.params['translations']['forbidden_cterm_mods']:
                     forbidden_cterm = ']'
-                if mod['name'] in self.params['translations']['max_num_per_mod'].keys():
-                    max_num_per_mod = self.params['translations']['max_num_per_mod'][mod['name']]
+                if mod['name'] in self.params['translations']['max_num_per_mod_name_specific'].keys():
+                    max_num_per_mod_name_specific = self.params['translations']['max_num_per_mod_name_specific'][mod['name']]
                 potential_mods.append(
                     '{0}@{1}{2}{3}'.format(
                         mod[ 'mass' ],
-                        max_num_per_mod,
+                        max_num_per_mod_name_specific,
                         forbidden_cterm,
                         mod[ 'aa' ],
                     )

@@ -306,6 +306,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 '''
                 Valid for:
                     Novor
+                    MSFragger
                 '''
                 pure_input_file_name = os.path.basename(
                     line_dict['Raw data location']
@@ -481,10 +482,13 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     line_dict['Sequence'], modification, aa
                                 )
                     else:
+                        
                         if aa in fixed_mods.keys() and use15N \
                             and 'msgfplus' in search_engine.lower():
                             if pos != 0:
                                 mod = float(mod) - ursgal.ursgal_kb.DICT_15N_DIFF[aa]
+                        
+
                         try:
                             name_list = ursgal.GlobalUnimodMapper.appMass2name_list(
                                 round(float(mod), 3), decimal_places = 3
@@ -521,10 +525,12 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 mapped_mod = True
                                 skip_mod = True
                                 break
+                        # pprint.pprint(line_dict)
                         assert mapped_mod is True, '''
                                 A mass was reported that does not map on any unimod or userdefined modification
                                 or the modified aminoacid is not the specified one
                                 unify_csv cannot deal with this, please check your parameters and engine output
+                                sequence: {4}
                                 reported mass: {0}
                                 maps on: {1}
                                 reported modified aminoacid: {2}
@@ -533,7 +539,8 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     mod,
                                     name_list,
                                     aa,
-                                    params['translations']['modifications']
+                                    params['translations']['modifications'],
+                                    line_dict['Sequence']
                                 )
                     if modification in tmp_mods or skip_mod is True:
                         continue

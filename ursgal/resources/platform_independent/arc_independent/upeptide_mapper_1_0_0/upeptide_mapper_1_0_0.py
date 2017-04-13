@@ -88,6 +88,7 @@ def main(input_file=None, output_file=None, params=None):
         upapa = UPeptideMapper_v4( params['translations']['database'] )
         fasta_lookup_name = os.path.basename( params['translations']['database'] )
         class_etxra_args = []
+
     else:
         print(
             '[ map_peps ] peptide mapper class version unknown: {0}'.format(
@@ -100,14 +101,9 @@ def main(input_file=None, output_file=None, params=None):
             params['translations']['peptide_mapper_class_version']
         )
     )
-    cam = False
-    for modification in params['translations']['modifications']:
-        if 'C,fix,any,Carbamidomethyl' in modification:
-            cam = True
-
 
     output_file_object = open(output_file, 'w')
-    protein_id_output = open(output_file + '_full_protein_names.txt', 'w')
+    protein_id_output  = open(output_file + '_full_protein_names.txt', 'w')
     mz_buffer = {}
     csv_kwargs = {
         'extrasaction' : 'ignore'
@@ -116,9 +112,6 @@ def main(input_file=None, output_file=None, params=None):
         csv_kwargs['lineterminator'] = '\n'
     else:
         csv_kwargs['lineterminator'] = '\r\n'
-
-
-    # total_lines = len(list(csv.reader(open(input_file,'r'))))
 
     pep_map_lookup = {}
 
@@ -167,19 +160,11 @@ def main(input_file=None, output_file=None, params=None):
             for aa_to_replace, replace_dict in sorted(params['translations']['aa_exception_dict'].items(), reverse=True):
                 if aa_to_replace in line_dict['Sequence']:
                     if aa_to_replace in ['O']:
-                        # if aa_to_replace == 'U':
-                        #     # print(line_dict['Sequence'])
-                        #     csv_file_buffer.append(deepcopy(line_dict))
-                        #     tmp_peptide_set.add(line_dict['Sequence'])
-                        #change mods only if unimod has to be changed...
                         if 'unimod_name' in replace_dict.keys():
                             for r_pos, aa in enumerate(line_dict['Sequence']):
                                 if aa == aa_to_replace:
                                     index_of_aa = r_pos + 1
                                     unimod_name = replace_dict['unimod_name']
-                                    #this was to U and CAM replacement, we shoulkd not do this
-                                    # if cam and 'C' in replace_dict['original_aa']:
-                                    #     unimod_name = replace_dict['unimod_name_with_cam']
                                     new_mod = '{0}:{1}'.format(
                                         unimod_name,
                                         index_of_aa
