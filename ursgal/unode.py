@@ -1037,11 +1037,11 @@ class UNode(object, metaclass=Meta_UNode):
             lap /= 60
         else:
             unit = 'seconds'
-        msg = 'Execution time {0:.2f} {1}'.format(
+        msg = 'Execution time {0:.3f} {1}'.format(
             lap,
             unit
         )
-        self.print_info(  msg, caller=tag )
+        self.print_info( msg, caller=tag )
 
     @classmethod
     def print_info( cls, msg, caller=None ):
@@ -1160,7 +1160,7 @@ class UNode(object, metaclass=Meta_UNode):
         self.update_params_with_io_data()
         report = self.generate_empty_report()
 
-        tag = '{0}_{1}'.format(
+        tag = '{0}@{1}'.format(
             self.engine,
             self.io['input']['finfo']['full'],
         )
@@ -1185,7 +1185,7 @@ class UNode(object, metaclass=Meta_UNode):
 
         # self.check_if_all_default_params_are_in_params()
 
-        self.time_point(tag = 'run')
+        # self.time_point(tag = 'run')
         self.stats['history'] = self.update_history_status(
             history = self.stats['history']
         )
@@ -1303,7 +1303,7 @@ class UNode(object, metaclass=Meta_UNode):
                 if os.path.exists(tmp_file):
                     os.remove( tmp_file )
 
-        self.print_execution_time(tag = 'run')
+        self.print_execution_time(tag = tag)
 
         report['output_file'] = os.path.join(
             self.io['output']['finfo']['dir'],
