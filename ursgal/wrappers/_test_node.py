@@ -8,7 +8,7 @@ import time
 class _test_node( ursgal.UNode ):
     """_test_node UNode"""
     META_INFO = {
-        'in_development' : False,  # do not show in UNode overview
+        'in_development' : True,  # do not show in UNode overview
         'engine_type' : {
             'zZz_test'  : True
         },
