@@ -2529,19 +2529,24 @@ Nothing to do here...
                 # exit()
         return zip_file_list, update_kb_list
 
-    def download_resources(self):
+    def download_resources(self, resources=None):
         '''
         Function to download all executable from the specified http url
 
+        Keyword Arguments:
+            resources (list): list of specific resources that should be
+                downloaded. Is left to None, all possible resources are
+                downloaded.
         '''
         download_zip_files = []
         get_http_main = self.unodes['get_http_files_1_0_0']['class'].import_engine_as_python_function()
         base_http_get_params = {
             'http_url_root': self.params['ursgal_resource_url'],
         }
-
-        for engine in self.unodes.keys():
-            if 'resource_folder'in self.unodes[engine].keys():
+        if resources is None:
+            resources = self.unodes.keys()
+        for engine in resources:
+            if 'resource_folder' in self.unodes[engine].keys():
                 if self.unodes[engine]['available'] is False:
                     include_in_git = self.unodes[engine].get('include_in_git')
                     in_development = self.unodes[engine].get('in_development', False)
