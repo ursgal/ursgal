@@ -8,6 +8,16 @@ import time
 
 def main():
     '''
+    
+    Testscript to evaluate the speed of common search engines.
+
+    Usage:
+        ./compare_search_engine_speed.py
+
+    Note:
+        The complete time for the search including peptide mapping and
+        unifying the csv results.
+
     '''
     engine_list = [
         'msfragger_20170103',
@@ -25,10 +35,6 @@ def main():
         'modifications' : [
             '*,opt,Prot-N-term,Acetyl',
             'M,opt,any,Oxidation',
-            # 'C,fix,any,Carbamidomethyl',
-            # 'T,opt,any,Phospho',
-            # 'S,opt,any,Phospho',
-            # 'Y,opt,any,Phospho',
         ],
         'csv_filter_rules':[
             ['PEP'      , 'lte'    , 0.01 ]    ,
@@ -50,17 +56,6 @@ def main():
             os.pardir,
             'example_data'
         ),
-        # 'precursor_max_mass' : 5000,
-        # 'precursor_min_mass' : 500,
-        # 'frag_max_charge'    : 2,
-        # 'min_pep_length'     : 7,
-        # 'max_num_per_mod'    : 3,
-        # 'num_match_spec'     : 10,
-        # 'precursor_true_tolerance' : 20,
-        # 'precursor_true_tolerance_units' : 'ppm',
-        # 'frag_mass_tolerance' : 500,
-        # 'frag_mass_tolerance_unit' : 'ppm',
-
     }
 
     if os.path.exists(params['ftp_output_folder']) is False:
@@ -84,8 +79,11 @@ def main():
         )
     time_collector = {}
     filtered_files_list = []
+    mgf_file = uc.convert_to_mgf_and_update_rt_lookup(
+        input_file       = mzML_file,
+    )
     for engine in engine_list:
-        start_time =time.time()
+        start_time = time.time()
         unified_result_file = uc.search(
             input_file = mzML_file,
             engine     = engine,

@@ -85,7 +85,8 @@ spectrometry–based proteomics. Nat. Publ. Gr. 293',
         #further prepare and translate params
 
         # pprint.pprint(self.params['translations']['_grouped_by_translated_key'])
-
+        # pprint.pprint(self.params)
+        # exit()
         self.params_to_write = {
             'output_file_extension' : 'tsv',       #tsv or pepXML we fix it...
             'output_format'         : 'tsv',                 #pepXML or tsv
@@ -135,7 +136,7 @@ spectrometry–based proteomics. Nat. Publ. Gr. 293',
                     search_enzyme_butnotafter = P
                     '''
                     aa_site, term, inhibitor = param_value.split( ';' )
-                    self.params_to_write[ 'search_enzyme_name' ] = msfragger_param_name
+                    self.params_to_write[ 'search_enzyme_name' ] = self.params['enzyme']
                     self.params_to_write[ 'search_enzyme_cutafter' ] = aa_site
                     self.params_to_write[ 'search_enzyme_butnotafter' ] = inhibitor
                 elif msfragger_param_name == 'num_enzyme_termini':
