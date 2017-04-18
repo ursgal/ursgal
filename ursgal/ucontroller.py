@@ -35,7 +35,7 @@ class UController(ursgal.UNode):
             overriding default values from ursgal/kb/*.py
         profile (str): Profiles key for faster parameter selection. This
             idea is adapted from MS-GF+ and translated to all search engines.
-            
+
             Currently available profiles are:
 
                 * 'QExactive+'
@@ -186,8 +186,8 @@ class UController(ursgal.UNode):
             dict: Dictionary of unodes
         '''
         unodes = {
-            '_by_meta_type' : {},  # groups e.g. all search engines
-            '_engine_type' : {}    # groups e.g. all XTandem
+            '__by_meta_type' : {},  # groups e.g. all search engines
+            '__engine_type' : {}    # groups e.g. all XTandem
         }
         wrappers_path_glob = os.path.join(
             ursgal.base_dir, 'wrappers', '*.py'
@@ -266,9 +266,9 @@ class UController(ursgal.UNode):
             engine_type = wrapper_meta_info.get('engine_type', {})
             for meta_type, meta_type_bool in engine_type.items():
                 if meta_type_bool is True:
-                    if meta_type not in unodes['_by_meta_type'].keys():
-                        unodes['_by_meta_type'][ meta_type ] = []
-                    unodes['_by_meta_type'][ meta_type ].append(
+                    if meta_type not in unodes['__by_meta_type'].keys():
+                        unodes['__by_meta_type'][ meta_type ] = []
+                    unodes['__by_meta_type'][ meta_type ].append(
                         wrapper_module_name
                     )
 
@@ -343,9 +343,9 @@ class UController(ursgal.UNode):
             #             # only engines that are not tagged as 'in_development'
             #             # are shown in the overview
             #             if not kb_module.META_INFO.get('in_development', False):
-            #                 if meta_type not in unodes['_by_meta_type'].keys():
-            #                     unodes['_by_meta_type'][ meta_type ] = []
-            #                 unodes['_by_meta_type'][ meta_type ].append(
+            #                 if meta_type not in unodes['__by_meta_type'].keys():
+            #                     unodes['__by_meta_type'][ meta_type ] = []
+            #                 unodes['__by_meta_type'][ meta_type ].append(
             #                     kb_module_name
             #                 )
         return unodes
@@ -363,7 +363,7 @@ class UController(ursgal.UNode):
         Returns:
             dict: Dictionary of unodes
         '''
-        unodes = {'_by_meta_type' : {} }
+        unodes = {'__by_meta_type' : {} }
         kb_path_glob = os.path.join( ursgal.base_dir, 'kb', '*.py' )
         for kb_file in glob.glob( kb_path_glob ):
             filename = os.path.basename( kb_file )
@@ -421,9 +421,9 @@ class UController(ursgal.UNode):
                         # only engines that are not tagged as 'in_development'
                         # are shown in the overview
                         if not kb_module.META_INFO.get('in_development', False):
-                            if meta_type not in unodes['_by_meta_type'].keys():
-                                unodes['_by_meta_type'][ meta_type ] = []
-                            unodes['_by_meta_type'][ meta_type ].append(
+                            if meta_type not in unodes['__by_meta_type'].keys():
+                                unodes['__by_meta_type'][ meta_type ] = []
+                            unodes['__by_meta_type'][ meta_type ].append(
                                 kb_module_name
                             )
         return unodes
@@ -580,13 +580,12 @@ class UController(ursgal.UNode):
         for platform_key, arc_key, engine_folder in engine_folders:
 
             for engine in sorted( self.unodes.keys() ):
-                if engine.startswith('_'):
-                    # we skip _by_meta_type and _engine_type dicts ...
+                if engine.startswith('__'):
+                    # we skip __by_meta_type and __engine_type dicts ...
                     continue
 
                 # kb_info = self.unodes.get( engine, {} )
                 kb_info = self.unodes[ engine ]
-
                 # if len(kb_info.keys()) == 0:
                 #     self.print_info('No wrapper found for ')
                 #     # No info available
@@ -595,6 +594,12 @@ class UController(ursgal.UNode):
                 kb_engine_entry = kb_info.get( 'engine', None )
 
                 if kb_engine_entry is None:
+                    # if True: # self.verbose is False:
+                    #     self.print_info(
+                    #         'Skipped {0}, no engine entry in meta_info'.format(
+                    #             engine
+                    #         )
+                    #     )
                     continue
                 if platform_key not in kb_engine_entry.keys():
                     continue
@@ -1970,12 +1975,12 @@ class UController(ursgal.UNode):
         '''
         n = 0
         print()
-        for meta_type in sorted(self.unodes['_by_meta_type'].keys()):
+        for meta_type in sorted(self.unodes['__by_meta_type'].keys()):
             if meta_type == 'in_development':
                 continue
 
             number_of_no_dev_nodes = 0
-            for engine in sorted(self.unodes['_by_meta_type'][ meta_type ]):
+            for engine in sorted(self.unodes['__by_meta_type'][ meta_type ]):
                 if self.unodes[ engine ]['in_development'] is False:
                     number_of_no_dev_nodes += 1
 
@@ -1987,7 +1992,7 @@ class UController(ursgal.UNode):
                 meta_type.upper(),
                 **ursgal.COLORS
             ))
-            for engine in sorted(self.unodes['_by_meta_type'][ meta_type ]):
+            for engine in sorted(self.unodes['__by_meta_type'][ meta_type ]):
 
                 if self.unodes[ engine ]['in_development']:
                     continue
@@ -2186,11 +2191,11 @@ class UController(ursgal.UNode):
         The ucontroller function to call the upeptide_mapper node.
 
         Note:
-            Different converter versions can be used (see parameter 
+            Different converter versions can be used (see parameter
             'peptide_mapper_converter_version') as well as different classes
-            inside the converter node (see parameter 
+            inside the converter node (see parameter
             'peptide_mapper_class_version' )
-        
+
         Available converter nodes
             * upeptide_mapper_1_0_0
 
@@ -2524,19 +2529,24 @@ Nothing to do here...
                 # exit()
         return zip_file_list, update_kb_list
 
-    def download_resources(self):
+    def download_resources(self, resources=None):
         '''
         Function to download all executable from the specified http url
 
+        Keyword Arguments:
+            resources (list): list of specific resources that should be
+                downloaded. Is left to None, all possible resources are
+                downloaded.
         '''
         download_zip_files = []
         get_http_main = self.unodes['get_http_files_1_0_0']['class'].import_engine_as_python_function()
         base_http_get_params = {
             'http_url_root': self.params['ursgal_resource_url'],
         }
-
-        for engine in self.unodes.keys():
-            if 'resource_folder'in self.unodes[engine].keys():
+        if resources is None:
+            resources = self.unodes.keys()
+        for engine in resources:
+            if 'resource_folder' in self.unodes[engine].keys():
                 if self.unodes[engine]['available'] is False:
                     include_in_git = self.unodes[engine].get('include_in_git')
                     in_development = self.unodes[engine].get('in_development', False)
@@ -2752,7 +2762,7 @@ File {0} is not present in online resource folder.
         '''
 
         if input_file is None:
-            tmp_file_name = tempfile.NamedTemporaryFile().name
+            tmp_file_name = tempfile.NamedTemporaryFile(prefix='Ursgal_', suffix='.txt').name
             with open (tmp_file_name, 'w') as tmp_io:
                 print(
                     '''
