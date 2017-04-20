@@ -6,22 +6,29 @@ import os
 class _test_node( ursgal.UNode ):
     """_test_node UNode"""
     META_INFO = {
-        'in_development' : True,  # do not show in UNode overview
+        'edit_version'       : 1.00,
+        'name'               : 'test node',
+        'version'            : 'alpha',
+        'release_date'       : None,
         'engine_type' : {
-            'converter'  : True
+            'converter' : True
         },
-        'input_types'      : ['.txt', '.csv', '.fasta', '.mzml'],
-        'output_extension' : '.csv',
-        'output_suffix'    : 'test_node',
-        'engine': {
+        'input_extensions'   : ['.txt', '.csv', '.fasta', '.mzML'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'output_suffix'      : 'test_node',
+        'in_development'     : True,  # do not show in UNode overview
+        'include_in_git'     : True,
+        'utranslation_style' : '_test_node_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe' : 'test_node_exe.py',
                 },
             },
         },
-        'citation' : 'TEST/DEBUG: Internal Ursgal UNode for debugging and testing.',
-        'include_in_git' : True,
+        'citation' : \
+            'TEST/DEBUG: Internal Ursgal UNode for debugging nd testing.',
     }
 
     def __init__(self, *args, **kwargs):

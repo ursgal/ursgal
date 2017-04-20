@@ -7,26 +7,30 @@ class svm_1_0_0( ursgal.UNode ):
     """svm_1_0_0 UNode"""
 
     META_INFO = {
-        'in_development'   : True,  # do not show in UNode overview
-        'engine_type'      : {
-            'controller'        : False,
-            'converter'         : False,
+        'edit_version'       : 1.00,
+        'name'               : 'Svm',
+        'version'            : '1.0.0',
+        'release_date'       : None,
+        'engine_type' : {
             'validation_engine' : True,
-            'search_engine'     : False,
-            'meta_engine'       : False
         },
-        'input_types'      : ['.csv'],
-        'output_extension' : '.csv',
-        'output_suffix'    : 'svm_validated',
-        'engine': {
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'output_suffix'      : 'svm_validated',
+        'create_own_folder'  : False,
+        'in_development'     : True,  # do not show in UNode overview
+        'include_in_git'     : True,
+        'utranslation_style' : 'svm_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe' : 'svm_1_0_0.py',
                 },
             },
         },
-        'create_own_folder'         : False,
-        'include_in_git'            : True,
+        'citation' : \
+            ''
     }
 
     def __init__(self, *args, **kwargs):

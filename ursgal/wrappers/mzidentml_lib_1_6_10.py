@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+﻿#!/usr/bin/env python3.4
 import ursgal
 import sys
 import os
@@ -16,23 +16,22 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
 
     """
     META_INFO = {
+        'edit_version'       : 1.00,
+        'name'               : 'MzidLib',
+        'version'            : '1.6.10',
+        'release_date'       : None,
         'engine_type' : {
-            'search_engine' : False,
-            'converter'     : True
+            'converter' : True
         },
-        'output_extension'  : '.csv',
-        'output_suffix'     : None,
-        'input_types'       : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
-        # 'can_gz': True,
-        'citation'       : 'Reisinger F, Krishna R, Ghali F, Rios D, '\
-            'Hermjakob H, Vizcaino JA, Jones AR. (2012) jmzIdentML API: '\
-            'A Java interface to the mzIdentML standard for peptide and '\
-            'protein identification data.',
-        'in_development'            : False,
-        'include_in_git'            : False,
-        'utranslation_style'    : 'mzidentml_lib_1_6_10',
-
-        'engine': {
+        'input_extensions'   : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'output_suffix'      : None,
+        # 'can_gz'             : True,
+        'in_development'     : False,
+        'include_in_git'     : False,
+        'utranslation_style' : 'mzidentml_lib_1_6_10',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'mzidentml-lib-1.6.10.jar',
@@ -42,6 +41,11 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                 },
             },
         },
+        'citation' : \
+            'Reisinger F, Krishna R, Ghali F, Rios D, Hermjakob H, '\
+            'Vizcaino JA, Jones AR. (2012) jmzIdentML API: A Java interface '\
+            'to the mzIdentML standard for peptide and protein identification '\
+            'data.',
     }
 
     def __init__(self, *args, **kwargs):

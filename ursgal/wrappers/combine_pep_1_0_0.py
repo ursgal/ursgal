@@ -64,27 +64,28 @@ class combine_pep_1_0_0(ursgal.UNode):
     '''
 
     META_INFO = {
-        'engine_type'    : {
-            'controller'        : False,
-            'converter'         : False,
-            'validation_engine' : False,
-            'search_engine'     : False,
-            'meta_engine'       : True,
+        'edit_version'       : 1.00,
+        'name'               : 'Combine Pep',
+        'version'            : '1.0.0',
+        'release_date'       : '2009-5-1',
+        'engine_type' : {
+            'meta_engine' : True,
         },
-        'input_types'               : ['.csv'],
-        'output_extension'          : '.csv',
-        'create_own_folder'         : False,
-        #'citation' : 'Combines PEP scores from different search engines.',
-        'include_in_git'            : True,
-        'in_development'            : False,
-        'utranslation_style'        : 'combine_pep_style_1',
-        'engine': {
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'in_development'     : False,
+        'include_in_git'     : True,
+        'utranslation_style' : 'combine_pep_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'combine_pep_1_0_0.py',
+                    'exe' : 'combine_pep_1_0_0.py',
                 },
             },
         },
+        'citation' : \
+            'Combines PEP scores from different search engines.',
     }
 
     def __init__(self, *args, **kwargs):

@@ -11,35 +11,37 @@ import os.path
 class venndiagram_1_0_0( ursgal.UNode ):
     """Venn Diagram uNode"""
     META_INFO = {
-        'engine_type'           : {
-            'converter'         : False,
-            'validation_engine' : False,
-            'search_engine'     : False,
-            'meta_engine'       : False,
-            'visualizer'        : True,
+        'edit_version'       : 1.00,
+        'name'               : 'Venndiagram',
+        'version'            : '1.0.0',
+        'release_date'       : None,
+        'engine_type' : {
+            'visualizer' : True,
         },
-        'output_extension'    : '.svg',
-        'output_suffix'       : 'venndiagram',
-        'input_types'         : ['.csv',],
-        'include_in_git'            : True,
-        'in_development'            : False,
-        'utranslation_style'    : 'venndiagram_style_1',
-        'engine': {
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : True,
+        'output_extensions'  : ['.svg'],
+        'output_suffix'      : 'venndiagram',
+        'include_in_git'     : True,
+        'in_development'     : False,
+        'utranslation_style' : 'venndiagram_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'            : 'venndiagram_1_0_0.py',
+                    'exe' : 'venndiagram_1_0_0.py',
                 },
             },
         },
-        'citation'                  : 'Kremer, L. P. M., Leufken, J., '\
-            'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
-            'Ursgal, Universal Python Module Combining Common Bottom-Up '\
-            'Proteomics Tools for Large-Scale Analysis. '\
-            'J. Proteome res. 15, 788-794.',
+        'citation' : \
+            'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & '\
+            'Fufezan, C. (2016) Ursgal, Universal Python Module Combining '\
+            'Common Bottom-Up Proteomics Tools for Large-Scale Analysis. J. '\
+            'Proteome res. 15, 788-794.',
     }
+
     def __init__(self, *args, **kwargs):
         super(venndiagram_1_0_0, self).__init__(*args, **kwargs)
-
+        pass
 
     def _execute( self ):
         '''

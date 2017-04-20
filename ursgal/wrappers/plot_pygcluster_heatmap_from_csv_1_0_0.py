@@ -8,27 +8,30 @@ import os
 class plot_pygcluster_heatmap_from_csv_1_0_0( ursgal.UNode ):
     """plot_pygcluster_heatmap_from_csv_1_0_0 UNode"""
     META_INFO = {
+        'edit_version'       : 1.00,
+        'name'               : 'Plot pyGCluster Heatmap from CSV',
+        'version'            : '1.0.0',
+        'release_date'       : '2014-3-15',
         'engine_type' : {
-            'search_engine' : False,
-            'converter'     : False,
-            'visualizer'    : True,
+            'visualizer' : True,
         },
-        'output_extension'  : '.svg',
-        'output_suffix'     : '',
-        'input_types'       : ['.csv'],
-        'include_in_git'    : True,
-        'in_development'    : True,
-        'utranslation_style': 'heatmap_style_1',
-        'engine': {
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.svg'],
+        'output_suffix'      : '',
+        'include_in_git'     : True,
+        'in_development'     : True,
+        'utranslation_style' : 'heatmap_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe' : 'plot_pygcluster_heatmap_from_csv_1_0_0.py',
                 },
             },
         },
-        'citation'          : 'Jaeger D, Barth J, Niehues A, Fufezan C (2014) '
-            'pyGCluster, a novel hierarchical clustering approach. '
-            'Bioinformatics 30 896 898'
+        'citation' : \
+            'Jaeger D, Barth J, Niehues A, Fufezan C (2014) pyGCluster, a '\
+            'novel hierarchical clustering approach. Bioinformatics 30 896 898',
     }
 
     def __init__(self, *args, **kwargs):

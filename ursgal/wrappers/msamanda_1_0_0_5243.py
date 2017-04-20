@@ -16,21 +16,22 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
 
     """
     META_INFO = {
-        'engine_type': {
-            'search_engine': True,
+        'edit_version'       : 1.00,
+        'name'               : 'MSAmanda',
+        'version'            : '1.0.0.5243',
+        'release_date'       : None,
+        'engine_type' : {
+            'search_engine' : True,
         },
-        'output_extension'          : '.csv',
-        'input_types'               : ['.mgf'],
-        'create_own_folder'         : True,
-        'citation'                  : 'Dorfer V, Pichler P, Stranzl T, '\
-            'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
-            'a universal identification algorithm optimized for high accuracy '\
-            'tandem mass spectra.',
-        'include_in_git'            : None,
-        'cannot_distribute'         : True,
-        'in_development'            : False,
-        'utranslation_style'        : 'msamanda_style_1',
-        'engine': {
+        'input_extensions'   : ['.mgf'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'create_own_folder'  : True,
+        'include_in_git'     : None,
+        'cannot_distribute'  : True,
+        'in_development'     : False,
+        'utranslation_style' : 'msamanda_style_1',
+        'engine' : {
             'linux' : {
                 '64bit' : {
                     'exe'            : 'MSAmanda.exe',
@@ -48,6 +49,10 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                 },
             },
         },
+        'citation' : \
+            'Dorfer V, Pichler P, Stranzl T, Stadlmann J, Taus T, Winkler S, '\
+            'Mechtler K. (2014) MS Amanda, a universal identification '\
+            'algorithm optimized for high accuracy tandem mass spectra.',
     }
 
     def __init__(self, *args, **kwargs):

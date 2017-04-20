@@ -24,25 +24,22 @@ class omssa_2_1_9( ursgal.UNode ):
 
     """
     META_INFO = {
-        'engine_type'            : {
-            'controller'        : False,
-            'converter'         : False,
-            'validation_engine' : False,
-            'search_engine'     : True,
-            'meta_engine'       : False
+        'edit_version'       : 1.00,
+        'name'               : 'OMSSA',
+        'version'            : '2.1.9',
+        'release_date'       : None,
+        'engine_type' : {
+            'search_engine' : True,
         },
-        'citation'              : 'Geer LY, Markey SP, Kowalak JA, '\
-            'Wagner L, Xu M, Maynard DM, Yang X, Shi W, Bryant SH (2004) '\
-            'Open Mass Spectrometry Search Algorithm.',
-        'input_types'           : ['.mgf'],
-        'output_extension'      : '.csv',
-        'create_own_folder'     : True,
-        'in_development'        : False,
-
-        'include_in_git'        : False,
-        'utranslation_style'    : 'omssa_style_1',
+        'input_extensions'   : ['.mgf'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'create_own_folder'  : True,
+        'in_development'     : False,
+        'include_in_git'     : False,
+        'utranslation_style' : 'omssa_style_1',
         ### Below are the download information ###
-        'engine': {
+        'engine' : {
             'darwin' : {
                 '64bit' : {
                     'exe'            : 'omssacl',
@@ -87,18 +84,22 @@ class omssa_2_1_9( ursgal.UNode ):
                 'unimod_name'     : 'TMT6plex',
                 'aa_targets'      : ['N-term'] # override 'X' in OMSSA mods xml
             },
-            'TMT duplex on K': {
+            'TMT duplex on K' : {
                 'unimod_id'       : '738',
                 'ommsa_unimod_id' : '738', # this is TMT duplex in unimod
                 'unimod_name'     : 'TMT2plex'
             },
-            'TMT duplex on n-term peptide': {
+            'TMT duplex on n-term peptide' : {
                 'unimod_id'       : '738',
                 'ommsa_unimod_id' : '738', # this is TMT duplex in unimod
                 'unimod_name'     : 'TMT2plex',
                 'aa_targets'      : ['N-term'] # override 'X' in OMSSA mods xml
             }
-        }
+        },
+        'citation' : \
+            'Geer LY, Markey SP, Kowalak JA, Wagner L, Xu M, Maynard DM, '\
+            'Yang X, Shi W, Bryant SH (2004) Open Mass Spectrometry Search '\
+            'Algorithm.',
     }
 
     def __init__(self, *args, **kwargs):

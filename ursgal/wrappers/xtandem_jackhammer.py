@@ -5,20 +5,22 @@ from .xtandem_sledgehammer import xtandem_sledgehammer as tandem
 
 class xtandem_jackhammer( tandem ):
     META_INFO = {
+        'edit_version'                : 1.00,
+        'name'                        : 'X!Tandem',
+        'version'                     : 'Jackhammer',
+        'release_date'                : '2013-6-15',
         'engine_type' : {
             'search_engine' : True,
         },
-        'output_extension'          : '.xml',
-        'input_types'               : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
-        'create_own_folder'         : True,
-        'include_in_git'            : False,
+        'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.xml'],
+        'create_own_folder'           : True,
         'compress_raw_search_results' : True,
-
-        'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
-            'matching proteins with tandem mass spectra.',
-        'in_development'            : False,
-        'utranslation_style'        : 'xtandem_style_1',
-        'engine': {
+        'include_in_git'              : False,
+        'in_development'              : False,
+        'utranslation_style'          : 'xtandem_style_1',
+        'engine' : {
             'darwin' : {
                 '64bit' : {
                     'exe'            : 'tandem',
@@ -44,5 +46,8 @@ class xtandem_jackhammer( tandem ):
                 },
             },
         },
+        'citation' : \
+            'Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem '\
+            'mass spectra.',
     }
     pass

@@ -9,14 +9,25 @@ class pepnovo_3_1( ursgal.UNode ):
     """
     PepNovo v3.1 UNode
     http://proteomics.ucsd.edu/Software/PepNovo/
-    
+
     Reference:
     Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing and Identification with Precision Mass Spectrometry, J. Proteome Res. 6:114-123.
     """
     META_INFO = {
+        'edit_version'       : 1.00,
+        'name'               : 'PepNovo',
+        'version'            : 'v3.1',
+        'release_date'       : None,
         'engine_type' : {
             'denovo_engine' : True,
         },
+        'input_extensions'   : ['.mgf'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'utranslation_style' : 'pepnovo_style_1',
+        'in_development'     : False,
+        'create_own_folder'  : True,
+        'include_in_git'     : False,
         'engine' : {
             'linux' : {
                 '64bit' : {
@@ -28,7 +39,7 @@ class pepnovo_3_1( ursgal.UNode ):
             },
             'darwin' : {
                '64bit' : {
-                   'exe'             :'PepNovo_bin',
+                   'exe'             : 'PepNovo_bin',
                }
             },
             'win32' : {
@@ -37,13 +48,11 @@ class pepnovo_3_1( ursgal.UNode ):
                 }
             },
         },
-        'utranslation_style'        : 'pepnovo_style_1',
-        'input_types'               : ['.mgf'],
-        'in_development'            : False,
-        'output_extension'          : '.csv',
-        'create_own_folder'         : True,
-        'citation'   : 'Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing and Identification with Precision Mass Spectrometry, J. Proteome Res. 6:114-123.',
-        'include_in_git'            : False,
+        'citation' : \
+            'Ari M. Frank, Mikhail M. Savitski, Michael L. Nielsen, Roman A. '\
+            'Zubarev, and Pavel A. Pevzner (2007) De Novo Peptide Sequencing '\
+            'and Identification with Precision Mass Spectrometry, J. Proteome '\
+            'Res. 6:114-123.',
     }
 
     def __init__(self, *args, **kwargs):
@@ -112,9 +121,9 @@ class pepnovo_3_1( ursgal.UNode ):
                                                 / 2.0
 
         if self.params['translations']['frag_mass_tolerance_unit'] == 'ppm':
-            self.params['translations']['frag_mass_tolerance'] = ursgal.ucore.convert_ppm_to_dalton( 
-                self.params['translations']['frag_mass_tolerance'], 
-                base_mz=self.params['base_mz'] 
+            self.params['translations']['frag_mass_tolerance'] = ursgal.ucore.convert_ppm_to_dalton(
+                self.params['translations']['frag_mass_tolerance'],
+                base_mz=self.params['base_mz']
             )
 
         if self.params['translations']['denovo_model_dir'] == None:

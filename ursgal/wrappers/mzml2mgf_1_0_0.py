@@ -11,32 +11,34 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
     Converts .mzML files into .mgf files
     """
     META_INFO = {
-        'engine_type'            : {
-            'converter'         : True,
-            'validation_engine' : False,
-            'search_engine'     : False,
-            'meta_engine'       : False
+        'edit_version'       : 1.00,
+        'name'               : 'mzml2mgf',
+        'version'            : '1.0.0',
+        'release_date'       : None,
+        'engine_type' : {
+            'converter' : True,
         },
-
-        'output_extension'       : '.mgf',
-        'output_suffix'          : None,
-        'input_types'            : ['.mzml', '.mzml.gz'],
-        'in_development'            : False,
-        'include_in_git'         : True,
-
-        'engine': {
+        'input_extensions'   : ['.mzML', '.mzML.gz'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.mgf'],
+        'output_suffix'      : None,
+        'in_development'     : False,
+        'include_in_git'     : None,
+        'utranslation_style' : 'mzml2mgf_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'mzml2mgf_1_0_0.py',
+                    'exe' : 'mzml2mgf_1_0_0.py',
                 },
             },
         },
-        'citation'                  : 'Kremer, L. P. M., Leufken, J., '\
-            'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
-            'Ursgal, Universal Python Module Combining Common Bottom-Up '\
-            'Proteomics Tools for Large-Scale Analysis. '\
-            'J. Proteome res. 15, 788-794.',
+        'citation' : \
+            'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & '\
+            'Fufezan, C. (2016) Ursgal, Universal Python Module Combining '\
+            'Common Bottom-Up Proteomics Tools for Large-Scale Analysis. J. '\
+            'Proteome res. 15, 788-794.',
     }
+
     def __init__(self, *args, **kwargs):
         super(mzml2mgf_1_0_0, self).__init__(*args, **kwargs)
 

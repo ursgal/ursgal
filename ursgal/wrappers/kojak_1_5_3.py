@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+﻿#!/usr/bin/env python3.4
 import ursgal
 import os
 import shutil
@@ -10,46 +10,33 @@ class kojak_1_5_3( ursgal.UNode ):
     Parameter options at http://www.kojak-ms.org/param/index.html
 
     Reference:
-    Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient analysis of chemically cross-linked protein complexes. J Proteome Res 14: 2190–2198
-    
+    Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient analysis of chemically cross-linked protein complexes. J Proteome Res 14: 2190-198
+
     Note:
-    
+
         Kojak has to be installed manually at the moment! Use folder name:
         'kojak_1_5_3' in the resources folder.
 
     """
     META_INFO = {
-        'name': 'Kojak',
-        'version' : '1_5_3',
-        'engine_type'    : {
-            'controller'         : False,
-            'converter'          : False,
-            'validation_engine'  : False,
-            'search_engine'      : False,
-            'meta_engine'        : False,
+        'edit_version'                : 1.00,
+        'name'                        : 'Kojak',
+        'version'                     : '1.5.3',
+        'release_date'                : '2015-5-1',
+        'engine_type' : {
             'cross_link_engine' : True,
         },
-        'in_development'            : False,
-        'output_extension'          : '.kojak.txt',
-        'all_extensions'            : [
-            '.kojak.txt',
-            '.pep.xml',
-            '.perc.inter.txt',
-            '.perc.intra.txt',
-            '.perc.loop.txt',
-            '.perc.single.txt',
-        ],
-        'input_types'               : ['.mzML', '.mzXML'],
-        'create_own_folder'         : True,
+        'input_extensions'            : ['.mzML', '.mzXML'],
+        'input_multi_file'            : False,
+        'output_extensions' : ['.kojak.txt', '.pep.xml', '.perc.inter.txt', \
+            '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt'],
+        'create_own_folder'           : True,
         'compress_raw_search_results' : False,
-        'citation'                  : '''Hoopmann MR, Zelter A, Johnson RS, 
-        Riffle M, Maccoss MJ, Davis TN, Moritz RL (2015) Kojak: Efficient 
-        analysis of chemically cross-linked protein complexes. 
-        J Proteome Res 14: 2190–2198''',
-        'include_in_git'            : None,
-        'cannot_distribute'         : True,
-        'utranslation_style'        : 'kojak_style_1',
-        'engine': {
+        'cannot_distribute'           : True,
+        'in_development'              : False,
+        'include_in_git'              : None,
+        'utranslation_style'          : 'kojak_style_1',
+        'engine' : {
             'linux' : {
                 '64bit' : {
                     'exe'            : 'kojak',
@@ -67,11 +54,16 @@ class kojak_1_5_3( ursgal.UNode ):
                 }
             },
         },
+        'citation' : \
+            'Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis '\
+            'TN, Moritz RL (2015) Kojak: Efficient analysis of chemically '\
+            'cross-linked protein complexes. J Proteome Res 14: 2190-198',
     }
+
+
     def __init__(self, *args, **kwargs):
         super(kojak_1_5_3, self).__init__(*args, **kwargs)
         pass
-
 
     def preflight( self ):
         '''
@@ -137,7 +129,6 @@ class kojak_1_5_3( ursgal.UNode ):
 
         return self.params
 
-
     def postflight( self ):
         '''
         Move the result files to the Kojak folder, since the output files can
@@ -188,7 +179,7 @@ class kojak_1_5_3( ursgal.UNode ):
         templates = {
             'Kojak.conf' : '''\
 # Kojak version 1.5.3 parameter file
-# Please see online documentation at: 
+# Please see online documentation at:
 # http://www.kojak-ms.org/param
 
 # All parameters are separated from their values by an equals sign ('=')
@@ -215,17 +206,17 @@ percolator_version  =   {kojak_percolator_version}
 #
 # Parameters used to described the data being input to Kojak
 #
-enrichment      =   {kojak_enrichment}       #Values between 0 and 1 to describe 18O APE. 
+enrichment      =   {kojak_enrichment}       #Values between 0 and 1 to describe 18O APE.
                             #For example, 0.25 equals 25 APE.
 instrument      =   {instrument}       #Values are: 0=Orbitrap, 1=FTICR (such as Thermo LTQ-FT)
 MS1_centroid    =   {ms1_centroided}       #0=no, 1=yes
 MS2_centroid    =   {ms2_centroided}        #0=no, 1=yes
-MS1_resolution  =   {ms1_resolution}    #Resolution at 400 m/z, value ignored if data are 
+MS1_resolution  =   {ms1_resolution}    #Resolution at 400 m/z, value ignored if data are
                             #already centroided
-MS2_resolution  =   {ms2_resolution}    #Resolution at 400 m/z, value ignored if data are 
+MS2_resolution  =   {ms2_resolution}    #Resolution at 400 m/z, value ignored if data are
                             #already centroided
 
-                            
+
 #
 # Cross-link and mono-link masses allowed. May have more than one of each parameter.
 #
@@ -252,7 +243,7 @@ MS2_resolution  =   {ms2_resolution}    #Resolution at 400 m/z, value ignored if
 # Differential modifications. Add as many as necessary. Uppercase only!
 # n = protein N-terminus, c = protein C-terminus
 #
-# If more than one modification is possible for an amino acid, 
+# If more than one modification is possible for an amino acid,
 # list all modifications on separate lines
 #
 #modification            =       M       15.9949
@@ -292,23 +283,23 @@ ion_series_Z            =   {score_z_ions}
 #
 # Additional parameters used in Kojak analysis
 #
-decoy_filter            =   {decoy_tag}   #identifier for all decoys in the database. 
+decoy_filter            =   {decoy_tag}   #identifier for all decoys in the database.
                                     #Default value is "random" (without quotes)
 isotope_error           =   {precursor_isotope_range}       #account for errors in precursor peak identification.
-                                    #Searches this number of isotope peak offsets. 
+                                    #Searches this number of isotope peak offsets.
                                     #Values are 0,1,or 2.
 max_miscleavages        =   {max_missed_cleavages}       #number of missed trypsin cleavages allowed
 max_peptide_mass        =   {precursor_max_mass}  #largest allowed peptide mass in Daltons
 min_peptide_mass        =   {precursor_min_mass}   #lowest allowed peptide mass in Daltons
 max_spectrum_peaks      =   {max_accounted_observed_peaks}       #top N peaks to use during analysis. 0 uses all peaks.
 ppm_tolerance_pre       =   {precursor_mass_tolerance_plus}    #mass tolerance on precursor when searching
-prefer_precursor_pred   =   {kojak_prefer_precursor_pred}       #prefer precursor mono mass predicted by 
-                                    #instrument software. 
+prefer_precursor_pred   =   {kojak_prefer_precursor_pred}       #prefer precursor mono mass predicted by
+                                    #instrument software.
                                     #  0 = ignore previous predictions
                                     #  1 = use only previous predictions
                                     #  2 = supplement predictions with additional analysis
 spectrum_processing     =   {kojak_spectrum_processing}       #0=no, 1=yes
-top_count               =   {kojak_top_count}     #number of top scoring single peptides to combine 
+top_count               =   {kojak_top_count}     #number of top scoring single peptides to combine
                                     #in relaxed analysis
 truncate_prot_names     =   {kojak_truncate_prot_names}       #Max protein name character to export, 0=off
 turbo_button            =   {kojak_turbo_button}       #Generally speeds up analysis. Special cases cause reverse
