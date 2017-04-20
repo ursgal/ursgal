@@ -3632,11 +3632,9 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'myrimatch_style_1' : {
-                'default' : 1e-07,
                 -1e-10    : 1e-07,
             },
             'pepnovo_style_1' : {
-                'default' : 0.9,
                 -1e-10    : 0.9,
             },
         },
@@ -3651,7 +3649,7 @@ ursgal_params = {
         },
         'default_value' : -1e-10,
         'description' : \
-            'Lowest score for reported peptides. If set to \'default\', '\
+            'Lowest score for reported peptides. If set to \'-1e-10\', '\
             'default values fo each engine will be used.\n'\
             '    -1e-10 = \'default\'',
     },
