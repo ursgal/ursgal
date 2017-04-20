@@ -40,7 +40,7 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         '''
         '''
         print('[ -ENGINE- ] Executing conversion ..')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         add_fdr_main = self.import_engine_as_python_function()
         if self.params['input_file'].lower().endswith('.csv') is False:
             raise ValueError('add_estimated_fdr_1_0_0 input file must be a CSV file!')
@@ -85,5 +85,5 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
             bigger_scores_better = bigger_is_better,
         )
 
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         return output_file

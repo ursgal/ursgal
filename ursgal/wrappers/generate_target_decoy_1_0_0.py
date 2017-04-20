@@ -88,7 +88,7 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         '''
         
         print('[ -ENGINE- ] Executing conversion ..')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         generate_target_decoy_main = self.import_engine_as_python_function()
 
         input_files = []
@@ -121,5 +121,5 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
             decoy_tag   = self.params['translations']['decoy_tag']
         )
 
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         return self.params['output_file_incl_path']

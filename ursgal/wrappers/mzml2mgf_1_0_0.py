@@ -42,7 +42,7 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
 
     def _execute( self ):
         print('[ -ENGINE- ] Executing conversion ..')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         mzml2mgf_main = self.import_engine_as_python_function()
 
 
@@ -71,5 +71,5 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
                 This need to be updated in time ...
 
                 ''')
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         return tmp

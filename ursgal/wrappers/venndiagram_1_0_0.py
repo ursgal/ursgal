@@ -63,7 +63,6 @@ class venndiagram_1_0_0( ursgal.UNode ):
         #     opacity (float)
 
         print('[ -ENGINE- ] Plotting Venn diagram ..')
-        self.time_point(tag = 'execution')
         venndiagram_main = self.import_engine_as_python_function()
 
         venn_params = {}

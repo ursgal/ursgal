@@ -52,7 +52,7 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
 
         '''
         print('[ -ENGINE- ] Executing FTP Download ..')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         main = self.import_engine_as_python_function()
         downloaded_files = main(
             ftp_url             = self.params.get('ftp_url', None),
@@ -64,7 +64,7 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
             max_number_of_files = self.params.get('ftp_max_number_of_files', None),
             blocksize           = self.params.get('ftp_blocksize', None)
         )
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         self.io['output']['finfo']['dir'] =  os.path.dirname( downloaded_files[-1] )
         self.io['output']['finfo']['file'] = os.path.basename( downloaded_files[-1] )
         return

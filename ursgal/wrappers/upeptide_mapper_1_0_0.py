@@ -44,7 +44,6 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
 
         '''
         print('[ -ENGINE- ] Executing conversion ..')
-        self.time_point(tag = 'execution')
         upeptide_mapper_main = self.import_engine_as_python_function()
         if self.params['output_file'].lower().endswith('.csv') is False:
             raise ValueError('Trying to unify a non-csv file')
@@ -66,5 +65,4 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
         for tmp_file in tmp_files:
             self.created_tmp_files.append(tmp_file)
 
-        self.print_execution_time(tag='execution')
         return output_file

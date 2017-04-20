@@ -124,12 +124,12 @@ Executing main() function from {scriptpath} with the following parameters:
 
         # executing main function of the naive bayes script
         naive_bayes_main(
-            input_csvs = self.command_dict['input_csvs'],
-            input_engines = self.command_dict['input_engines'],
-            output_csv = self.command_dict['output_csv'],
+            input_csvs           = self.command_dict['input_csvs'],
+            input_engines        = self.command_dict['input_engines'],
+            output_csv           = self.command_dict['output_csv'],
             columns_for_grouping = self.command_dict['columns_for_grouping'],
-            input_sep = self.command_dict['input_sep'],
-            output_sep = self.command_dict['output_sep'],
-            join_sep = self.command_dict['join_sep'],
-            pep_colname = self.command_dict['pep_colname'],
+            input_sep            = self.command_dict['input_sep'],
+            output_sep           = self.command_dict['output_sep'],
+            join_sep             = self.command_dict['join_sep'],
+            pep_colname          = self.command_dict['pep_colname'],
         )
