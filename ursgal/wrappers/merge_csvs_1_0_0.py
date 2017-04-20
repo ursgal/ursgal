@@ -6,27 +6,32 @@ import os
 class merge_csvs_1_0_0( ursgal.UNode ):
     """Merge CSVS 1_0_0 UNode"""
     META_INFO = {
-        'engine_type'            : {
-            'converter'         : True,
+        'edit_version'       : 1.00,
+        'name'               : 'Merge CSVs',
+        'version'            : '1.0.0',
+        'release_date'       : '2016-3-4',
+        'engine_type' : {
+            'converter' : True,
         },
-        'output_extension'       : '.csv',
-        'output_suffix'          : 'merged',
-        'input_types'            : ['.csv'],
-        'include_in_git'            : True,
-        'in_development'            : False,
-        'utranslation_style'    : 'merge_csvs_style_1',
-        'engine': {
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'output_suffix'      : 'merged',
+        'include_in_git'     : True,
+        'in_development'     : False,
+        'utranslation_style' : 'merge_csvs_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'merge_csvs_1_0_0.py',
+                    'exe' : 'merge_csvs_1_0_0.py',
                 },
             },
         },
-        'citation'                  : 'Kremer, L. P. M., Leufken, J., '\
-            'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
-            'Ursgal, Universal Python Module Combining Common Bottom-Up '\
-            'Proteomics Tools for Large-Scale Analysis. '\
-            'J. Proteome res. 15, 788-794.',
+        'citation' : \
+            'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & '\
+            'Fufezan, C. (2016) Ursgal, Universal Python Module Combining '\
+            'Common Bottom-Up Proteomics Tools for Large-Scale Analysis. J. '\
+            'Proteome res. 15, 788-794.',
     }
 
     def __init__(self, *args, **kwargs):

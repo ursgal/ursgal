@@ -1,4 +1,4 @@
-#!/usr/bin/python3.4
+﻿#!/usr/bin/python3.4
 
 from __future__ import print_function
 from __future__ import division
@@ -18,23 +18,28 @@ class msblender_09_2015( ursgal.UNode ):
     Documentation at http://www.marcottelab.org/index.php/MSblender
     """
     META_INFO = {
-        'engine_exe' : {
-            'linux'   : 'msblender',
-            'darwin'  : 'msblender',
-        },
+        'edit_version'       : 1.00,
+        'name'               : 'MSblender',
+        'version'            : '09.2015',
+        'release_date'       : '2015-9-1',
         'engine_type' : {
             'meta_engine' : True,
         },
-        'in_development'            : True,
-        'output_extension'          : '.csv',
-        'input_types'               : ['.csv'],
-        'create_own_folder'         : False,
-        'citation'    : 'Kwon T, Choi H, Vogel C, Nesvizhskii AI, '\
-            'Marcotte EM. (2011) MSblender: A Probabilistic Approach '\
-            'for Integrating Peptide Identifications from Multiple '\
-            'Database Search Engines.',
-
-        'include_in_git'            : True,
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'in_development'     : True,
+        'create_own_folder'  : False,
+        'include_in_git'     : True,
+        'utranslation_style' : 'msblender_style_1',
+        'engine_exe' : {
+            'linux'  : 'msblender',
+            'darwin' : 'msblender',
+        },
+        'citation' : \
+            'Kwon T, Choi H, Vogel C, Nesvizhskii AI, Marcotte EM. (2011) '\
+            'MSblender: A Probabilistic Approach for Integrating Peptide '\
+            'Identifications from Multiple Database Search Engines.',
     }
 
     def __init__( self, *args, **kwargs ):

@@ -10,21 +10,22 @@ class myrimatch_2_2_140( myri ):
     Import functions from myrimatch_2_1_138
     """
     META_INFO = {
+        'edit_version'                : 1.00,
+        'name'                        : 'Myrimatch',
+        'version'                     : '2.2.140',
+        'release_date'                : None,
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_types'               : ['.mzML'],
-        'output_extension'          : '.mzid',
-        'create_own_folder'         : True,
+        'input_extensions'            : ['.mzML'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.mzid'],
+        'create_own_folder'           : True,
         'compress_raw_search_results' : True,
-
-        'citation'                  : 'Tabb DL, Fernando CG, Chambers MC. '\
-            '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
-            'identification by multivariate hypergeometric analysis.',
-        'in_development'            : False,
-        'include_in_git'            : False,
-        'utranslation_style'        : 'myrimatch_style_1',
-        'engine': {
+        'in_development'              : False,
+        'include_in_git'              : False,
+        'utranslation_style'          : 'myrimatch_style_1',
+        'engine' : {
             'win32' : {
                 '64bit' : {
                     'exe'            : 'myrimatch.exe',
@@ -40,5 +41,9 @@ class myrimatch_2_2_140( myri ):
                 },
             },
         },
+        'citation' : \
+            'Tabb DL, Fernando CG, Chambers MC. (2007) MyriMatch: highly '\
+            'accurate tandem mass spectral peptide identification by '\
+            'multivariate hypergeometric analysis.',
     }
     pass

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+﻿#!/usr/bin/env python3.4
 import ursgal
 import math
 import csv
@@ -17,9 +17,9 @@ class kojak_percolator_2_08( ursgal.UNode ):
     Kojak provides preformatted Percolator input, this is used direclty as the
     input file for Percolator. In contrast to the original Percolator node, the
     input files are not reformatted or used to write a new input file.
-    
+
     Note:
-        
+
         Percolator (2.08) has to be symlinked or copied to engine-folder
         'kojak_percolator_2_08' in order to make this node work.
 
@@ -27,27 +27,25 @@ class kojak_percolator_2_08( ursgal.UNode ):
     Käll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) Semi-supervised learning for peptide identification from shotgun proteomics datasets.
     """
     META_INFO = {
-        'engine_type'            : {
-            'controller'        : False,
-            'converter'         : False,
+        'edit_version'       : 1.00,
+        'name'               : 'Kojak Percolator',
+        'version'            : '2.08',
+        'release_date'       : '2007-11-1',
+        'engine_type' : {
             'validation_engine' : True,
-            'search_engine'     : False,
-            'meta_engine'       : False
         },
-        'output_extension'          : '.tsv',
-        'output_suffix'             : 'percolator_2_08_validated',
-        'input_types'               : ['.txt'],
-        'create_own_folder'         : False,
-        'citation'   : 'Kall L, Canterbury JD, Weston J, Noble WS, '\
-            'MacCoss MJ. (2007) Semi-supervised learning for peptide '\
-            'identification from shotgun proteomics datasets.',
-        'include_in_git'            : None,
-        'cannot_distribute'         : True,
-        'group_psms'                : False,
-        'in_development'            : False,
-        'cpu_usage'                 : 1,
-        'utranslation_style'        : 'kojak_percolator_style_1',
-        'engine': {
+        'input_extensions'   : ['.txt'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.tsv'],
+        'output_suffix'      : 'percolator_2_08_validated',
+        'create_own_folder'  : False,
+        'cannot_distribute'  : True,
+        'group_psms'         : False,
+        'in_development'     : False,
+        'include_in_git'     : None,
+        'cpu_usage'          : 1,
+        'utranslation_style' : 'kojak_percolator_style_1',
+        'engine' : {
             'darwin' : {
                 '64bit' : {
                     'exe'            : 'percolator_2_08',
@@ -78,7 +76,11 @@ class kojak_percolator_2_08( ursgal.UNode ):
                     'additional_exe' : [],
                 },
             },
-        }
+        },
+        'citation' : \
+            'K・・ｽ､ll L, Canterbury JD, Weston J, Noble WS, MacCoss MJ. (2007) '\
+            'Semi-supervised learning for peptide identification from shotgun '\
+            'proteomics datasets.',
     }
 
     def __init__(self, *args, **kwargs):

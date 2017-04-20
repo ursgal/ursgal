@@ -12,10 +12,22 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
     Kim S, Mischerikow N, Bandeira N, Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) The Generating Function of CID, ETD, and CID/ETD Pairs of Tandem Mass Spectra: Applications to Database Search.
     """
     META_INFO = {
+        'edit_version'                : 1.00,
+        'name'                        : 'MSGF+',
+        'version'                     : 'v2016.09.16',
+        'release_date'                : '2016-9-16',
         'engine_type' : {
             'search_engine' : True,
         },
-        'engine': {
+        'input_extensions'            : ['.mgf', '.mzML', '.mzXML', '.ms2', '.pkl', '.dta.txt'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.mzid'],
+        'compress_raw_search_results' : False,
+        'create_own_folder'           : True,
+        'in_development'              : False,
+        'include_in_git'              : False,
+        'utranslation_style'          : 'msgfplus_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
@@ -25,17 +37,11 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
                 },
             },
         },
-        'utranslation_style'    : 'msgfplus_style_1',
-        'compress_raw_search_results' : False,
-        'output_extension'          : '.mzid',
-        'input_types'               : ['.mgf', '.mzML', '.mzXML', '.ms2', '.pkl' ,'_dta.txt'],
-        'create_own_folder'         : True,
-        'citation'                  : 'Kim S, Mischerikow N, Bandeira N, '\
-            'Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) '\
-            'The Generating Function of CID, ETD, and CID/ETD Pairs of '\
-            'Tandem Mass Spectra: Applications to Database Search.',
-        'in_development'            : False,
-        'include_in_git'            : False,
+        'citation' : \
+            'Kim S, Mischerikow N, Bandeira N, Navarro JD, Wich L, '\
+            'Mohammed S, Heck AJ, Pevzner PA. (2010) The Generating Function '\
+            'of CID, ETD, and CID/ETD Pairs of Tandem Mass Spectra: '\
+            'Applications to Database Search.',
     }
 
     def __init__(self, *args, **kwargs):

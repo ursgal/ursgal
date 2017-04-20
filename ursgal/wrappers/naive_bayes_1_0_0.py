@@ -12,34 +12,32 @@ class naive_bayes_1_0_0( ursgal.UNode ):
     naive_bayes_1_0_0 UNode
     '''
     META_INFO = {
-        'engine_type'    : {
-            'controller'        : False,
-            'converter'         : False,
-            'validation_engine' : False,
-            'search_engine'     : False,
-            'meta_engine'       : True,
+        'edit_version'      : 1.00,
+        'name'              : 'Naive Bayes',
+        'version'           : '1.0.0',
+        'release_date'      : None,
+        'engine_type' : {
+            'meta_engine' : True,
         },
-        'input_types'               : ['.csv'],
-        'output_extension'          : '.csv',
-        'create_own_folder'         : False,
-        'citation' : 'Combines PEP scores from different search engines '\
-            'using naive Bayes (see i.e. '\
-            'http://www.paulgraham.com/naivebayes.html)',
-        'include_in_git'            : True,
-        'in_development'            : False,
-        'engine': {
+        'input_extensions'  : ['.csv'],
+        'input_multi_file'  : False,
+        'output_extensions' : ['.csv'],
+        'create_own_folder' : False,
+        'include_in_git'    : True,
+        'in_development'    : False,
+        'utranslation_style' : 'naive_bayes_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'naive_bayes_1_0_0.py',
+                    'exe' : 'naive_bayes_1_0_0.py',
                 },
             },
         },
-        'citation'                  : 'Kremer, L. P. M., Leufken, J., '\
-            'Oyunchimeg, P., Schulze, S. & Fufezan, C. (2016) '\
-            'Ursgal, Universal Python Module Combining Common Bottom-Up '\
-            'Proteomics Tools for Large-Scale Analysis. '\
-            'J. Proteome res. 15, 788-794.',
+        'citation' : \
+            'Combines PEP scores from different search engines using naive '\
+            'Bayes (see i.e. http://www.paulgraham.com/naivebayes.html)',
     }
+
     def __init__(self, *args, **kwargs):
         super(naive_bayes_1_0_0, self).__init__(*args, **kwargs)
         pass

@@ -2469,7 +2469,7 @@ fragment_bin_offset and fragment_bin_size
             For ion trap ms/ms:  1.0005 size, 0.4 offset
             For high res ms/ms:    0.03 size, 0.0 offset
 
-:Default value: 0.4
+:Default value: 0.0
 :type: float
 :triggers rerun: False
             
@@ -2502,7 +2502,7 @@ fragment_bin_offset and fragment_bin_size
             For ion trap ms/ms:  1.0005 size, 0.4 offset
             For high res ms/ms:    0.03 size, 0.0 offset
 
-:Default value: 1.005
+:Default value: 0.4
 :type: float
 :triggers rerun: False
             
@@ -6127,7 +6127,7 @@ scan_skip_modulo_step
 ################################
 
 
-Include only the n'th spectrum during mzml2mgf conversion
+Include only the n-th spectrum during mzml2mgf conversion
 
 :Default value: None
 :type: int
@@ -7591,7 +7591,7 @@ visualization_font
 #############################
 
 
-Font used for visualiyation plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn)
+Font used for visualization plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn)
 
 :Default value: ('Helvetica', 31, 25, 20, 20)
 :type: tuple
@@ -7678,7 +7678,7 @@ visualization_opacity
 ################################
 
 
-Opacity used in visualiyation plots (e.g. Venn diagram)
+Opacity used in visualization plots (e.g. Venn diagram)
 
 :Default value: 0.35
 :type: float
@@ -7707,7 +7707,7 @@ visualization_scaling_factors
 ########################################
 
 
-Scaling factor for visualiyation plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor)
+Scaling factor for visualization plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor)
 
 :Default value: (600, 400)
 :type: tuple
@@ -7736,7 +7736,7 @@ visualization_size
 #############################
 
 
-Size of visualiyation plots (e.g. Venn diagram), given as tuple (width, height)
+Size of visualization plots (e.g. Venn diagram), given as tuple (width, height)
 
 :Default value: (1200, 800)
 :type: tuple
@@ -7765,7 +7765,7 @@ visualization_stroke_width
 #####################################
 
 
-Stroke width used in visualiyation plots (e.g. Venn diagram)
+Stroke width used in visualization plots (e.g. Venn diagram)
 
 :Default value: 2.0
 :type: float
