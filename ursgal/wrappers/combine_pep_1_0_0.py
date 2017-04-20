@@ -65,7 +65,7 @@ class combine_pep_1_0_0(ursgal.UNode):
 
     META_INFO = {
         'edit_version'       : 1.00,
-        'name'               : 'Combine Pep',
+        'name'               : 'Combine PEP',
         'version'            : '1.0.0',
         'release_date'       : '2009-5-1',
         'engine_type' : {

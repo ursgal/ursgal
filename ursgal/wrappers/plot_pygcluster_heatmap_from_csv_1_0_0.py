@@ -1,8 +1,6 @@
 #!/usr/bin/env python3.4
 import ursgal
-
 import os
-
 
 
 class plot_pygcluster_heatmap_from_csv_1_0_0( ursgal.UNode ):

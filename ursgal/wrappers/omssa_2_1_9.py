@@ -348,6 +348,7 @@ class omssa_2_1_9( ursgal.UNode ):
                 'base_mz',
                 'header_translations',
                 'frag_mass_tolerance_unit',
+                'output_file_incl_path',
             ]:
                 continue
             elif len(translation_dict) == 1:
