@@ -35,11 +35,12 @@ class UController(ursgal.UNode):
             overriding default values from ursgal/kb/*.py
         profile (str): Profiles key for faster parameter selection. This
             idea is adapted from MS-GF+ and translated to all search engines.
+
             Currently available profiles are:
 
                 * 'QExactive+'
                 * 'LTQ XL high res'
-                * 'LTQ XL low res'.
+                * 'LTQ XL low res'
 
     Example::
 
@@ -185,8 +186,8 @@ class UController(ursgal.UNode):
             dict: Dictionary of unodes
         '''
         unodes = {
-            '_by_meta_type' : {},  # groups e.g. all search engines
-            '_engine_type' : {}    # groups e.g. all XTandem
+            '__by_meta_type' : {},  # groups e.g. all search engines
+            '__engine_type' : {}    # groups e.g. all XTandem
         }
         wrappers_path_glob = os.path.join(
             ursgal.base_dir, 'wrappers', '*.py'
@@ -265,12 +266,11 @@ class UController(ursgal.UNode):
             engine_type = wrapper_meta_info.get('engine_type', {})
             for meta_type, meta_type_bool in engine_type.items():
                 if meta_type_bool is True:
-                    if meta_type not in unodes['_by_meta_type'].keys():
-                        unodes['_by_meta_type'][ meta_type ] = []
-                    unodes['_by_meta_type'][ meta_type ].append(
+                    if meta_type not in unodes['__by_meta_type'].keys():
+                        unodes['__by_meta_type'][ meta_type ] = []
+                    unodes['__by_meta_type'][ meta_type ].append(
                         wrapper_module_name
                     )
-
         return unodes
 
     def convert_results_to_csv(self, input_file, force=None, output_file_name=None):
@@ -426,13 +426,12 @@ class UController(ursgal.UNode):
         for platform_key, arc_key, engine_folder in engine_folders:
 
             for engine in sorted( self.unodes.keys() ):
-                if engine.startswith('_'):
-                    # we skip _by_meta_type and _engine_type dicts ...
+                if engine.startswith('__'):
+                    # we skip __by_meta_type and __engine_type dicts ...
                     continue
 
                 # kb_info = self.unodes.get( engine, {} )
                 kb_info = self.unodes[ engine ]
-
                 # if len(kb_info.keys()) == 0:
                 #     self.print_info('No wrapper found for ')
                 #     # No info available
@@ -441,6 +440,12 @@ class UController(ursgal.UNode):
                 kb_engine_entry = kb_info.get( 'engine', None )
 
                 if kb_engine_entry is None:
+                    # if True: # self.verbose is False:
+                    #     self.print_info(
+                    #         'Skipped {0}, no engine entry in meta_info'.format(
+                    #             engine
+                    #         )
+                    #     )
                     continue
                 if platform_key not in kb_engine_entry.keys():
                     continue
@@ -1609,9 +1614,12 @@ class UController(ursgal.UNode):
         self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.mgf'] )
         if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
             if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
-                self.input_file_sanity_check( self.params['database'], engine=engine_name,
-                                              custom_str='FASTA database (uc.params["database"])',
-                                              extensions = ['fasta', 'fa', 'fast'] )
+                self.input_file_sanity_check(
+                    self.params['database'],
+                    engine     = engine_name,
+                    custom_str = 'FASTA database (uc.params["database"])',
+                    extensions = ['fasta', 'fa', 'fast']
+                )
         answer = self.prepare_unode_run(
             input_file,
             output_file = output_file_name,
@@ -1721,9 +1729,33 @@ class UController(ursgal.UNode):
             force      = force,
         )
 
+        #insert peptide mapping here inlcuding the classification as a db engine
+        database_search_engines = [
+            'msamanda',
+            'msgf',
+            'myrimatch',
+            'omssa',
+            'xtandem',
+            'msfragger'
+        ]
+        database_search = False
+        for db_se in database_search_engines:
+            if db_se in engine.lower():
+                database_search = True
+        if database_search:
+            #if mapper version == 'COmpomics stuff'
+            #execute this node and in map peptides, these results are read...
+            mapped_csv_search_results = self.map_peptides(
+                input_file       = csv_search_results,
+                output_file_name = output_file_name,
+                force            = force,
+            )
+        else:
+            mapped_csv_search_results = csv_search_results
+
         # 4. Convert csv to unified ursgal csv format:
         unified_search_results = self.unify_csv(
-            input_file       = csv_search_results,
+            input_file       = mapped_csv_search_results,
             output_file_name = output_file_name,
             force            = force,
         )
@@ -1830,12 +1862,12 @@ class UController(ursgal.UNode):
         '''
         n = 0
         print()
-        for meta_type in sorted(self.unodes['_by_meta_type'].keys()):
+        for meta_type in sorted(self.unodes['__by_meta_type'].keys()):
             if meta_type == 'in_development':
                 continue
 
             number_of_no_dev_nodes = 0
-            for engine in sorted(self.unodes['_by_meta_type'][ meta_type ]):
+            for engine in sorted(self.unodes['__by_meta_type'][ meta_type ]):
                 if self.unodes[ engine ]['in_development'] is False:
                     number_of_no_dev_nodes += 1
 
@@ -1847,7 +1879,7 @@ class UController(ursgal.UNode):
                 meta_type.upper(),
                 **ursgal.COLORS
             ))
-            for engine in sorted(self.unodes['_by_meta_type'][ meta_type ]):
+            for engine in sorted(self.unodes['__by_meta_type'][ meta_type ]):
 
                 if self.unodes[ engine ]['in_development']:
                     continue
@@ -2043,6 +2075,43 @@ class UController(ursgal.UNode):
         return self.execute_unode(
             input_file       = input_file,
             engine           = self.params['unify_csv_converter_version'],
+            force            = force,
+            output_file_name = output_file_name
+        )
+
+    def map_peptides(self, input_file, force=False, output_file_name=None):
+        '''
+        The ucontroller function to call the upeptide_mapper node.
+
+        Note:
+            Different converter versions can be used (see parameter
+            'peptide_mapper_converter_version') as well as different classes
+            inside the converter node (see parameter
+            'peptide_mapper_class_version' )
+
+        Available converter nodes
+            * upeptide_mapper_1_0_0
+
+        Available converter classef of upeptide_mapper_1_0_0
+            * upapa_v3 (default)
+            * upapa_v2
+
+        Keyword Arguments:
+            input_file (str): The complete path to the input, input file has
+                currently to be a .csv file.
+            force (bool): (Re)do the analysis, even if output file
+                already exists.
+            output_file_name (str or None): Desired output file name
+                excluding path (optional). If None, output file name will
+                be auto-generated.
+
+        Returns:
+            str: Path of the output file
+        '''
+
+        return self.execute_unode(
+            input_file       = input_file,
+            engine           = self.params['peptide_mapper_converter_version'],
             force            = force,
             output_file_name = output_file_name
         )
@@ -2353,19 +2422,24 @@ Nothing to do here...
                 # exit()
         return zip_file_list, update_kb_list
 
-    def download_resources(self):
+    def download_resources(self, resources=None):
         '''
         Function to download all executable from the specified http url
 
+        Keyword Arguments:
+            resources (list): list of specific resources that should be
+                downloaded. Is left to None, all possible resources are
+                downloaded.
         '''
         download_zip_files = []
         get_http_main = self.unodes['get_http_files_1_0_0']['class'].import_engine_as_python_function()
         base_http_get_params = {
             'http_url_root': self.params['ursgal_resource_url'],
         }
-
-        for engine in self.unodes.keys():
-            if 'resource_folder'in self.unodes[engine].keys():
+        if resources is None:
+            resources = self.unodes.keys()
+        for engine in resources:
+            if 'resource_folder' in self.unodes[engine].keys():
                 if self.unodes[engine]['available'] is False:
                     include_in_git = self.unodes[engine].get('include_in_git')
                     in_development = self.unodes[engine].get('in_development', False)
@@ -2581,7 +2655,7 @@ File {0} is not present in online resource folder.
         '''
 
         if input_file is None:
-            tmp_file_name = tempfile.NamedTemporaryFile().name
+            tmp_file_name = tempfile.NamedTemporaryFile(prefix='Ursgal_', suffix='.txt').name
             with open (tmp_file_name, 'w') as tmp_io:
                 print(
                     '''
@@ -2901,7 +2975,7 @@ class UControllerParams(dict):
         (this has to be done in case the UController is resetted...)
         '''
         assert key in self.ucontroller_instance.DEFAULT_PARAMS, '''
-  "{0}" is not a valid uPLAnIT parameter. Please check the documentation for a list of valid parameters."
+  "{0}" is not a valid parameter. Please check the documentation for a list of valid parameters."
         '''.format( key )
         self.ucontroller_instance.init_kwargs['params'][ key ] = value
         super(UControllerParams, self).__setitem__(key, value)

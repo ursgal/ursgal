@@ -159,7 +159,7 @@ class filter_csv_1_0_0( ursgal.UNode ):
 
         '''
         print('[ -ENGINE- ] Executing conversion ..')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         filter_csv_main = self.import_engine_as_python_function()
         if self.params['output_file'].lower().endswith('.csv') is False:
             raise ValueError('Trying to filter a non-csv file')
@@ -202,5 +202,5 @@ class filter_csv_1_0_0( ursgal.UNode ):
             output_file_unfiltered = output_file_unfiltered,
         )
 
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         return output_file

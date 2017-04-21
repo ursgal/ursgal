@@ -36,14 +36,6 @@ TESTS = [
         'post_aa1' : 'K'
     },
     {
-        'peptide' : 'SHUIAEVEK',
-        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start1'   : 310,
-        'stop1'    : 318,
-        'pre_aa1'  : 'K',
-        'post_aa1' : 'D'
-    },
-    {
         'peptide' : 'YOLO',
         'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
         'start1'   : None,
@@ -59,24 +51,9 @@ TESTS = [
         'pre_aa1'  : None,
         'post_aa1' : None
     },
-    {
-        'peptide' : 'SHCIUEVEK',
-        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start1'   : 310,
-        'stop1'    : 318,
-        'pre_aa1'  : 'K',
-        'post_aa1' : 'D'
-    },
+
     {
         'peptide' : 'EYEATLEECCAK',
-        'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
-        'start1'   : 375,
-        'stop1'    : 386,
-        'pre_aa1'  : 'K',
-        'post_aa1' : 'D'
-    },
-    {
-        'peptide' : 'EYEATLEEUUAK',
         'protein_id1':'sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4',
         'start1'   : 375,
         'stop1'    : 386,

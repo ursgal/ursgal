@@ -6,8 +6,8 @@ import os
 
 def main():
     '''
-    Executes a search with 4 versions of X!Tandem on an example file from the
-    data from Barth et al.
+    Executes a search with 5 versions of X!Tandem on an example file from the
+    data from Barth et al. 2014.
 
     usage:
         ./xtandem_version_comparison.py
@@ -17,7 +17,9 @@ def main():
     different program versions of X!Tandem
 
     Creates a Venn diagram with the peptides obtained by the different versions.
-
+    
+    Note:
+        At the moment 5 XTandem versions are incorporated in Ursgal.
 
     '''
     engine_list = [

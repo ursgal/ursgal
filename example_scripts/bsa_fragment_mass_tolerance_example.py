@@ -101,9 +101,11 @@ def main():
         for line_dict in csv.DictReader(open(csv_path, 'r')):
             collector[ csv_path ].add( line_dict['Sequence'] )
     for csv_path, peptide_set in sorted(collector.items()):
+        file_name = os.path.basename(csv_path)
+        tolerance = file_name.split('_')[0]
         print(
-            'File {0} has {1} peptides'.format(
-                os.path.basename(csv_path),
+            'Search with {0: <4} Da fragment mass tolerance found {1: >2} peptides'.format(
+                tolerance,
                 len(peptide_set)
             )
         )

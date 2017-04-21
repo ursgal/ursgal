@@ -46,7 +46,7 @@ class xtandem2csv_1_0_0( ursgal.UNode ):
 
         '''
         print('[ -ENGINE- ] Executing conversion ..')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         xtandem2csv_main = self.import_engine_as_python_function()
         # if self.params['output_file'].lower().endswith('.xml') is False:
         #     raise ValueError('Trying to convert a non-xml file')
@@ -66,5 +66,5 @@ class xtandem2csv_1_0_0( ursgal.UNode ):
             decoy_tag      = self.params['translations']['decoy_tag'],
         )
 
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         return output_file

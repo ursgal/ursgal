@@ -9,6 +9,10 @@ def main():
     '''
     Simple example script how to generate a target decoy database.
 
+    Note:
+        By default a 'shuffled peptide preserving cleavage sites' database is 
+        generated. For this script a 'reverse protein' database is generated.
+
     usage:
 
         ./target_decoy_generation_example.py

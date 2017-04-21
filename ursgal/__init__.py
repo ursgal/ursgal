@@ -14,7 +14,7 @@ import ursgal.uparams
 # grouped and so on ...
 
 from .umapmaster import UParamMapper
-from .umapmaster import UPeptideMapper
+# from .umapmaster import UPeptideMapper
 
 from .unode import Meta_UNode
 from .unode import UNode

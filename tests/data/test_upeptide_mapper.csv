@@ -1,0 +1,10 @@
+Sequence,Modifications,,Expected Modifications,Expected Sequence,Expected Is decoy,Expected Protein ID,Expected Sequence Start,Expected Sequence Stop,Expected Sequence Pre AA,Expected Sequence Post AA
+SHUIAEVEK,,,,SHUIAEVEK,false,ProtD,2,10,M,A
+SHCIAEVEK,,,,SHCIAEVEK,false,sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4,310,318,K,D
+TESTIDER,,,,TESTIDER,true,ProtB<|>decoy_ProtA,1;9<|>1,8;16<|>8,-;R<|>-,T;T<|>-
+TES,,,,TES,true,ProtB<|>ProtC<|>decoy_ProtA<|>sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4,1;9;17<|>14<|>1<|>501,3;11;19<|>16<|>3<|>503,-;R;R<|>R<|>-<|>C,T;T;-<|>T<|>T<|>L
+MKWVTFIS,,,,MKWVTFIS,false,sp|P02769|ALBU_BOVIN Serum albumin OS=Bos taurus GN=ALB PE=1 SV=4,1,8,-,L
+OELLER,,,Methylpyrroline:1,KELLER,false,ProtE,1,6,-,-
+KELJER,,,,KELLER,false,ProtE,1,6,-,-
+AAAAAA,,,,AAAAAA,false,ProtF,1;2,6;7,-;A,A;-
+LERAAA,,,,,,,,,,

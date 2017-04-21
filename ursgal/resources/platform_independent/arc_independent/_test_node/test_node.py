@@ -3,6 +3,12 @@ usage: python3.4 _test_node.py -i x -o test.txt -t1 a -t2 3
 '''
 import argparse
 
+'''
+
+NOTE:
+    Currently the wrapper does not call this function.
+
+'''
 
 def _test(**kwargs):
     '''

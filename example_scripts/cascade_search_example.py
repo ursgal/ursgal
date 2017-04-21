@@ -199,10 +199,20 @@ def search(validation_engine):
         for level in sorted(cascade.keys()):
             uc.params['modifications'] = cascade[level]
             if level == '0':
-                results = workflow(spec_file, validation_engine = validation_engine,  prefix = 'cascade-lvl-{0}'.format(level))
+                results = workflow(
+                    spec_file,
+                    validation_engine = validation_engine,
+                    prefix            = 'cascade-lvl-{0}'.format(level)
+                )
             else:
                 uc.params['scan_exclusion_list'] = list(spectra_with_PSM)
-                results = workflow(spec_file, validation_engine = validation_engine, filter_before_validation = True, force = True, prefix = 'cascade-lvl-{0}'.format(level))
+                results = workflow(
+                    spec_file,
+                    validation_engine        = validation_engine,
+                    filter_before_validation = True,
+                    force                    = True,
+                    prefix                   = 'cascade-lvl-{0}'.format(level)
+                )
             result_files.append(results)
             #  spectrum IDs for PSMs are written into an exclusion list for the next level of the cascade search,
             #  these spectra will b excluded during mzml2mgf conversion
@@ -210,7 +220,11 @@ def search(validation_engine):
                 csv_input  = csv.DictReader(in_file)
                 for line_dict in csv_input:
                     spectra_with_PSM.add(line_dict['Spectrum ID'])
-            print('Number of spectra that will be removed for the next cacade level: ', len(spectra_with_PSM))
+            print(
+                'Number of spectra that will be removed for the next cacade level: {0}'.format(
+                    len(spectra_with_PSM)
+                )
+            )
             
     if len(result_files) == 1:
             results_all_files = result_files[0]

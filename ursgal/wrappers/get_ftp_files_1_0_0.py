@@ -7,18 +7,21 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
     get_ftp_files_1_0_0 UNode
 
     Downloads files from FTP servers
+    
+    Note:
+        meta info param 'output_extensions' is by default txt, so that the 
+        temporary txt json files get properly deleted
 
     Args:
-    def main(
-        ftp_url             = None,
-        folder              = None,
-        login               = None,
-        password            = None,
-        include_ext         = None,
-        output_folder       = None,
-        max_number_of_files = None,
-        blocksize           = None
-    )
+        * ftp_url            
+        * folder             
+        * login              
+        * password           
+        * include_ext        
+        * output_folder      
+        * max_number_of_files
+        * blocksize          
+    
     """
     META_INFO = {
         'edit_version'       : 1.00,
@@ -30,7 +33,7 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
         },
         'input_extensions'   : [],
         'input_multi_file'   : False,
-        'output_extensions'  : [],
+        'output_extensions'  : ['.txt'],
         'output_suffix'      : None,
         'in_development'     : False,
         'include_in_git'     : True,
@@ -58,7 +61,7 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
 
         '''
         print('[ -ENGINE- ] Executing FTP Download ..')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         main = self.import_engine_as_python_function()
         downloaded_files = main(
             ftp_url             = self.params.get('ftp_url', None),
@@ -70,7 +73,7 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
             max_number_of_files = self.params.get('ftp_max_number_of_files', None),
             blocksize           = self.params.get('ftp_blocksize', None)
         )
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         self.io['output']['finfo']['dir'] =  os.path.dirname( downloaded_files[-1] )
         self.io['output']['finfo']['file'] = os.path.basename( downloaded_files[-1] )
         return

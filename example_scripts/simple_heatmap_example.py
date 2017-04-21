@@ -21,6 +21,14 @@ def main():
 
         ./simple_heatmap_example.py <path_to_csv_file>
 
+    Note:
+
+        Use of force = True is recommended to cover changes in the csv input
+        file.
+        Default value suffix of the column name is '_mean' and '_std' for the
+        error estimate.
+        Please refer to the documentation for further details on parameters.
+
     '''
     uc = ursgal.UController(
         profile = 'LTQ XL low res',
@@ -36,8 +44,11 @@ def main():
     uc.visualize(
         input_files      = sys.argv[1],
         engine           = 'plot_pygcluster',
-        output_file_name = '{0}_heatmap.svg'.format(os.path.basename(sys.argv[1])),
+        output_file_name = '{0}_heatmap.svg'.format(
+            os.path.basename(sys.argv[1])
+        ),
         multi            = False,
+        force            = True
     )
     return
 

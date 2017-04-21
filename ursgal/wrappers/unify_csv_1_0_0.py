@@ -51,7 +51,6 @@ class unify_csv_1_0_0( ursgal.UNode ):
 
         '''
         print('[ -ENGINE- ] Executing conversion ..')
-        self.time_point(tag = 'execution')
         unify_csv_main = self.import_engine_as_python_function()
         if self.params['output_file'].lower().endswith('.csv') is False:
             raise ValueError('Trying to unify a non-csv file')
@@ -89,10 +88,8 @@ Could not load RT lookup dict from this location: {0}
             params          = self.params,
             search_engine   = last_engine,
             score_colname   = last_search_engine_colname,
-            upeptide_mapper = self.upeptide_mapper
         )
         for tmp_file in tmp_files:
             self.created_tmp_files.append(tmp_file)
-
-        self.print_execution_time(tag='execution')
+        print()
         return output_file

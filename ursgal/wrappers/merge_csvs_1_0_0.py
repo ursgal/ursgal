@@ -46,7 +46,7 @@ class merge_csvs_1_0_0( ursgal.UNode ):
         for different header, new columns are appended
         '''
         print('[ -ENGINE- ] Merging csv files...')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         csv_files = []
 
         for input_file_dict in self.params['input_file_dicts']:
@@ -67,5 +67,5 @@ class merge_csvs_1_0_0( ursgal.UNode ):
             csv_files = csv_files,
             output    = self.params['translations']['output_file_incl_path'],
         )
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         return merged_csv_output_path

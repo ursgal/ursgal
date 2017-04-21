@@ -17,8 +17,9 @@ def main():
 
     usage:
         ./bsa_ppm_offset_test.py
-
-    As expected, if the offset becomes to big no peptides can be found anymore.
+    
+    Note:
+        As expected, if the offset becomes to big no peptides can be found anymore.
 
     '''
     ppm_offsets = [
@@ -105,9 +106,11 @@ def main():
         for line_dict in csv.DictReader(open(csv_path, 'r')):
             collector[ csv_path ].add( line_dict['Sequence'] )
     for csv_path, peptide_set in sorted(collector.items()):
+        file_name = os.path.basename(csv_path)
+        offset = file_name.split('_')[0]
         print(
-            'File {0} has {1} peptides'.format(
-                os.path.basename(csv_path),
+            'Search with {0: >3} ppm offset found {1: >2} peptides'.format(
+                offset,
                 len(peptide_set)
             )
         )

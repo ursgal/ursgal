@@ -31,7 +31,7 @@ class omssa_2_1_9( ursgal.UNode ):
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_extensions'   : ['.mgf'],
+        'input_extensions'   : [ '.mgf' ],
         'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
@@ -204,7 +204,10 @@ class omssa_2_1_9( ursgal.UNode ):
                 break
 
         if blastdb_present is False:
-            self.print_info('Executing makeblastdb...')
+            self.print_info(
+                'Executing makeblastdb...',
+                caller = 'Info'
+            )
             proc = subprocess.Popen(
                 [
                     os.path.join(
