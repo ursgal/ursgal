@@ -3719,7 +3719,7 @@ min_output_score
 ###########################
 
 
-Lowest score for reported peptides. If set to 'default', default values fo each engine will be used.
+Lowest score for reported peptides. If set to '-1e-10', default values fo each engine will be used.
     -1e-10 = 'default'
 
 :Default value: -1e-10
@@ -3752,7 +3752,7 @@ Ursgal key translations
  ----------------- -----------------------------------
  .                 myrimatch_style_1 pepnovo_style_1  
  ================= ================= =================
- default           1e-07             0.9              
+ -1e-10            1e-07             0.9              
  ================= ================= =================
 
 .. raw:: html
