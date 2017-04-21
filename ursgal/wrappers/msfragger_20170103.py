@@ -41,6 +41,7 @@ class msfragger_20170103( ursgal.UNode ):
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
+        'cannot_distribute'           : True,
         'engine_type'                 : {
             'search_engine' : True,
         },
