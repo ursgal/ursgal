@@ -11,6 +11,11 @@ def main(unode=None):
 
     usage:
         ./show_unode_paramters.py <UNode>
+
+    Example node names:
+        * omssa_2_1_9
+        * xtandem_vengeance
+
     '''
     uc = ursgal.UController()
     for unode_key in uc.unodes.keys():
@@ -22,5 +27,5 @@ def main(unode=None):
 
 if __name__ == '__main__':
     main( 
-        unode=sys.argv[1]
+        unode = sys.argv[1]
     )

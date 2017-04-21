@@ -18,7 +18,9 @@
 	        ./simple_example_search.py
 	
 	    Note:
-	        myrimatch does not work with this file in this case
+	        Myrimatch does not work with this file.
+	        To use MSAmanda on unix platforms, please install mono
+	        (http://www.mono-project.com/download)
 	
 	    '''
 	    uc = ursgal.UController(
@@ -42,18 +44,32 @@
 	    else:
 	        xtandem = 'xtandem_sledgehammer'
 	
+	    use_msamanda = True
 	    if sys.platform == 'win32':
 	        msamanda = 'msamanda_1_0_0_7503'
 	    else:
 	        #mono needs to be installed
-	        msamanda = 'msamanda_1_0_0_7504'
+	        import subprocess
+	        try:
+	            proc = subprocess.Popen( ['mono', '-V'], stdout = subprocess.PIPE)
+	            msamanda = 'msamanda_1_0_0_7504'
+	            print('[   Info   ] Mono installed. MSAmanda can be used')
+	        except:
+	            print( '''
+	[  ERROR   ] MS Amanda requires Mono 3.10.0 or newer.
+	Installation: http://www.mono-project.com/download'''
+	            )
+	
+	            use_msamanda = False
 	
 	    engine_list = [
 	        'omssa',
 	        xtandem,
 	        'msgfplus_v2016_09_16',
-	        msamanda,
 	    ]
+	
+	    if use_msamanda:
+	        engine_list.append( msamanda )
 	
 	    mzML_file = os.path.join(
 	        os.pardir,

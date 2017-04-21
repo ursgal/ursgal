@@ -506,7 +506,7 @@ compomics_utility_name
 #################################
 
 
-Use the PeptideMapper tool
+Default value accesses the PeptideMapper tool, other tools are not implemented/covered yet
 
 :Default value: com.compomics.util.experiment.identification.protein_inference.executable.PeptideMapping
 :type: str
@@ -535,7 +535,7 @@ compomics_version
 ############################
 
 
-compomics version: version name
+Defines the compomics version to use
 
 :Default value: compomics_utilities_4_11_5
 :type: str

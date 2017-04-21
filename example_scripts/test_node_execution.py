@@ -10,7 +10,7 @@ import time
 
 def main():
     '''
-    Testscript for executing the test node which also tests the run time
+    Testscript for executing the test node, which also tests the run time
     determination function.
 
     Usage:

@@ -30,7 +30,11 @@ def main():
         ),
     }
     if os.path.exists(params['ftp_output_folder']) is False:
-        print('Ceated folder: {0}'.format(params['ftp_output_folder']))
+        print(
+            'Ceated folder: {0}'.format(
+                params['ftp_output_folder']
+            )
+        )
         os.mkdir(params['ftp_output_folder'])
     R = ursgal.UController(
         params = params

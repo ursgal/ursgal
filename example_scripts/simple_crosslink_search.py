@@ -14,6 +14,7 @@ def main():
 
     Parameters have not been optimized yet, please use this script as a template
     to use Kojak. Please note the different approach for executing Percolator.
+    
     Note:
 
         Please note that Kojak has to installed manually at the resources folder

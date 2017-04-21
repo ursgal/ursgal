@@ -33,6 +33,7 @@ def main( fasta_file, mapper_class_version ):
     ./map_peptides_to_fasta_comparison.py <fasta_file> <class_name>
 
     Class name can be
+        * 'UPeptideMapper_v4'
         * 'UPeptideMapper_v3'
         * 'UPeptideMapper_v2'
 
@@ -40,8 +41,16 @@ def main( fasta_file, mapper_class_version ):
     print()
     ITERATIONS = 100000
     peptides = generate_random_peptides( n = ITERATIONS)
-    print('Generate {0}  peptides'.format( len( peptides)))
-    print('Generate {0} unique peptides'.format( len( set(peptides))))
+    print(
+        'Generate {0}  peptides'.format(
+            len( peptides)
+        )
+    )
+    print(
+        'Generate {0} unique peptides'.format(
+            len( set(peptides) )
+        )
+    )
     uc = ursgal.UController( verbose = False )
 
     start = time.time()
@@ -51,22 +60,43 @@ def main( fasta_file, mapper_class_version ):
     if mapper_class_version == 'UPeptideMapper_v3':
         upeptide_mapper = upapa_class( fasta_file )
         fasta_name = upeptide_mapper.fasta_name
+        args = [
+            list(peptides),
+            fasta_name
+        ]
+    elif mapper_class_version == 'UPeptideMapper_v4':
+        upeptide_mapper = upapa_class( fasta_file )
+        args = [
+            list(peptides)
+        ]
     else:
         upeptide_mapper = upapa_class(word_len=6)
         fasta_name = upeptide_mapper.build_lookup_from_file( fasta_file )
+        args = [
+            list(peptides),
+            fasta_name
+        ]
+
+    
 
     stop = time.time()
-    print('With class {0} fasta Lookup generation took {1:.3f}s'.format(mapper_class_version, stop - start ))
+    print(
+        'With class {0} fasta Lookup generation took {1:.3f}s'.format(
+            mapper_class_version,
+            stop - start
+        )
+    )
+
     # exit(1)
     start = time.time()
     # for peptide in peptides:
-    upeptide_mapper.map_peptides(
-        peptides,
-        fasta_name
-    )
+    upeptide_mapper.map_peptides( *args )
     stop = time.time()
     print(
-        'With class {0} peptide mapping took {1:.3f}s'.format(mapper_class_version, stop - start )
+        'With class {0} peptide mapping took {1:.3f}s'.format(
+            mapper_class_version,
+            stop - start
+        )
     )
 
 

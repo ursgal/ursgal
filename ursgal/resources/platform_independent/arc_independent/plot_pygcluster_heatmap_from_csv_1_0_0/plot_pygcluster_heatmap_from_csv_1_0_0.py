@@ -16,6 +16,10 @@ def main(input_file=None, output_file=None, params=None):
         input_file (str): input filename of csv which should be unified
         output_file (str): output filename of csv after unifying
         params (dict): params as passed by ursgal
+    
+    Note:
+        Please do not forget to cite pyGCluster AND Ursgal when using this node.
+        Thank you in advance!
 
     Please visit pyGCluster documentation for more information on this plotting
     function::
@@ -48,7 +52,15 @@ def main(input_file=None, output_file=None, params=None):
           holding the error to the value (Default: '_std')
         * heatmap_column_order defines the order of the columns for plotting
 
-    Please do not forget to cite pyGCluster and Ursgal when using this node.
+    
+    
+    Note:
+
+        Use of force = True is recommended to cover changes in the csv input
+        file.
+        Default value suffix of the column name is '_mean' and '_std' for the
+        error estimate.
+        Please refer to the documentation for further details on parameters.
 
     '''
     csv_reader =  csv.DictReader(

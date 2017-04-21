@@ -96,7 +96,7 @@
 	        engine          = 'combine_FDR_0_1',
 	        # use combine_pep_1_0_0 for combined PEP :)
 	    )
-	    print('\n\tCombined results can be found here:')
+	    print('\tCombined results can be found here:')
 	    print(combined_results)
 	    return
 	
