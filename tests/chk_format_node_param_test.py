@@ -265,9 +265,6 @@ type_info = {
 
 def chk_dict_keys( parent_name='', key_list=[], dict_item={} ):
     for k in key_list:
-        # print(parent_name)
-        # print(dict_item)
-        # print(k)
         if dict_item.get(k) is None and \
                 dict_item.get(k, 'None') == 'None':
             parent_info = ''
@@ -334,10 +331,6 @@ def chk_vals_types( parent_name='', key_name='', vals=[], type_list=[] ):
 def chk_json_item( parent_name='', essential=False, key_list=[], dict_item={}, \
         type_list=[] ):
     if essential is True:
-        # print(parent_name)
-        # print(key_list)
-        # print(dict_item)
-        # print()
         chk_dict_keys(
             parent_name,
             key_list,
@@ -358,9 +351,6 @@ def chk_format_node( node_name, node_dict ):
         key_list    = ['META_INFO'],
         dict_item   = node_dict,
     )
-    # pprint.pprint(node_name)
-    # pprint.pprint(node_dict)
-    # print(node_meta_info)
     chk_dict_keys(
         parent_name = 'node_meta_info',
         key_list    = list(node_dict['META_INFO']),
@@ -483,7 +473,6 @@ def chk_format_param( param_name, param_dict ):
         elif type(default_value) is not type(None):
             type_list = [my_type, type(None)]
         if type_list is not None:
-            print(param_name)
             chk_json_item(
                 parent_name = 'uvalue_option',
                 essential   = True,
@@ -493,7 +482,6 @@ def chk_format_param( param_name, param_dict ):
             )
 
         for k, v in type_info[uvalue_type]['option'].items():
-            print(param_name)
             chk_json_item(
                 parent_name = 'uvalue_option',
                 essential   = True,
@@ -518,7 +506,6 @@ def chk_format_param( param_name, param_dict ):
         elif type(default_value) is not type(None):
             type_list = [my_type, type(None)]
         if type_list is not None:
-            print(param_name)
             chk_json_item(
                 parent_name = 'uvalue_option',
                 essential   = True,
@@ -586,9 +573,6 @@ def chk_format_param( param_name, param_dict ):
         elif type(default_value) is not type(None):
             type_list = my_types + [type(None)]
         if type_list is not None:
-            print(param_name)
-            print(type_list)
-            print(default_value)
             chk_json_item(
                 parent_name = 'uvalue_option',
                 essential   = True,
