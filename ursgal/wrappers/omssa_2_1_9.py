@@ -204,7 +204,10 @@ class omssa_2_1_9( ursgal.UNode ):
                 break
 
         if blastdb_present is False:
-            self.print_info('Executing makeblastdb...')
+            self.print_info(
+                'Executing makeblastdb...',
+                caller = 'Info'
+            )
             proc = subprocess.Popen(
                 [
                     os.path.join(

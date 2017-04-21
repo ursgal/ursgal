@@ -1062,10 +1062,12 @@ class UNode(object, metaclass=Meta_UNode):
         if len(caller) > 7:
             caller = caller[:8]
 
-        print('[ {0: ^08s} ] {1}'.format(
-            caller,
-            msg
-        ))
+        print(
+            '[ {0: ^08s} ] {1}'.format(
+                caller,
+                msg
+            )
+        )
 
     def print_header( self, header, tag=None, newline=True):
         if tag is not None:

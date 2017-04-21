@@ -61,7 +61,7 @@ def main( class_version):
             if 6 <= len(p) <= 40:  
                 peptides.add( p )
     print(
-        'Parsing fasta and digesting sequences took {0} seconds'.format(
+        'Parsing fasta and digesting sequences took {0:1.2f} seconds'.format(
             time.time() - digest_start
         )
     )
@@ -87,7 +87,7 @@ def main( class_version):
         ]
     p2p_mappings = peptide_mapper.map_peptides(*args)
     print(
-        'Buffering fasta and mapping {0} peptides took {1} seconds'.format(
+        'Buffering fasta and mapping {0} peptides took {1:1.2f} seconds'.format(
             len(peptides),
             time.time() - map_start
         )
@@ -98,5 +98,7 @@ def main( class_version):
         print('WARNING: Not all peptide have been mapped')
 
 if __name__ == "__main__":
-
+    if len(sys.argv) < 2:
+        print(main.__doc__)
+        exit()
     main(sys.argv[1])

@@ -28,7 +28,7 @@ def main():
         os.pardir,
         'example_data',
         'misc',
-        'filter_csv_validation_example_omssa_2_1_9_unified_percolator_2_08_validated.csv'
+        'filter_csv_for_mods_example_omssa_2_1_9_pmap_unified_percolator_2_08_validated.csv'
     )
     uc = ursgal.UController(
         params = params
