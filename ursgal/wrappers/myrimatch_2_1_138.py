@@ -15,20 +15,22 @@ class myrimatch_2_1_138( ursgal.UNode ):
     Tabb DL, Fernando CG, Chambers MC. (2007) MyriMatch: highly accurate tandem mass spectral peptide identification by multivariate hypergeometric analysis.
     """
     META_INFO = {
+        'edit_version'                : 1.00,
+        'name'                        : 'Myrimatch',
+        'version'                     : '2.1.138',
+        'release_date'                : None,
         'engine_type' : {
             'search_engine' : True,
         },
-        'include_in_git'            : False,
-        'output_extension'          : '.mzid',
-        'input_types'               : ['.mzML'],
-        'create_own_folder'         : True,
+        'input_extensions'            : ['.mzML'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.mzid'],
+        'in_development'              : False,
+        'include_in_git'              : False,
+        'create_own_folder'           : True,
         'compress_raw_search_results' : True,
-        'citation'                  : 'Tabb DL, Fernando CG, Chambers MC. '\
-            '(2007) MyriMatch: highly accurate tandem mass spectral peptide '\
-            'identification by multivariate hypergeometric analysis.',
-        'utranslation_style'        : 'myrimatch_style_1',
-        'in_development'            : False,
-        'engine': {
+        'utranslation_style'          : 'myrimatch_style_1',
+        'engine' : {
             'linux' : {
                 '64bit' : {
                     'exe'            : 'myrimatch_2_1_138',
@@ -38,6 +40,10 @@ class myrimatch_2_1_138( ursgal.UNode ):
                 },
             },
         },
+        'citation' : \
+            'Tabb DL, Fernando CG, Chambers MC. (2007) MyriMatch: highly '\
+            'accurate tandem mass spectral peptide identification by '\
+            'multivariate hypergeometric analysis.',
     }
 
     def __init__(self, *args, **kwargs):

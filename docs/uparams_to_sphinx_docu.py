@@ -26,7 +26,8 @@ def determine_longest_string( fdict ):
     for k, value in fdict.items():
         if isinstance(k, bool):
             k = 'False'
-        if len(k) > len_longest:
+        # print(k,value)
+        if len(str(k)) > len_longest:
             len_longest = len(k)
         if isinstance(value, dict):
             # value translations
@@ -179,6 +180,7 @@ Ursgal key translations
                         translated_value, len_longest
                     )
             except:
+                print(fdict)
                 print_error( udict, syntax_error_at = 'uvalue_translation' )
                 # for uvalue_unformated, translated_value in sorted(fdict.items()):
                 #     # header_text_3.append( '{0: <{1}}'.format(uvalue_unformated, len_longest) )

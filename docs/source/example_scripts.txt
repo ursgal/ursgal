@@ -282,3 +282,11 @@ Upeptide mapper v3 and 4 complete proteome match
 
 .. include:: code_inc/complete_proteome_match.inc
 
+
+Test node execution
+-------------------
+
+.. autofunction:: test_node_execution.main
+
+
+.. include:: code_inc/test_node_execution.inc

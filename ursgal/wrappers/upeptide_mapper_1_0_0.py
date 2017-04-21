@@ -11,13 +11,19 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
         upeptide_mapper_1_0_0 UNode
     """
     META_INFO = {
+        'edit_version'       : 1.00,
+        'name'               : 'UpeptideMapper',
+        'version'            : '1.0.0',
+        'release_date'       : None,
         'engine_type' : {
             'search_engine' : False,
             'converter'     : True
         },
-        'output_extension'  : '.csv',
+        'input_extensions'   : ['.csv'],
+        'output_extensions'  : ['.csv'],
+        'input_multi_file'   : False,
         'output_suffix'     : 'pmap',
-        'input_types'       : ['.csv'],
+        # 'input_types'       : ['.csv'],
         'include_in_git'    : True,
         'in_development'    : True,
         'utranslation_style': 'upeptide_mapper_style_1',

@@ -10,24 +10,30 @@ class filter_csv_1_0_0( ursgal.UNode ):
     """filter_csv_1_0_0 UNode"""
 
     META_INFO = {
+        'edit_version'           : 1.00,
+        'name'                   : 'Filter CSV',
+        'version'                : '1.0.0',
+        'release_date'           : None,
         'engine_type' : {
-            'converter'     : True
+            'converter' : True
         },
-        'output_extension' : '.csv',
-        'output_suffix'    : 'accepted',
-        'input_types'      : ['.csv'],
-        'in_development'   : False,
-        'rejected_output_suffix': 'rejected',
-        'utranslation_style'    : 'filter_csv_style_1',
-        'include_in_git'   : True,
-
-        'engine': {
+        'input_extensions'       : ['.csv'],
+        'input_multi_file'       : False,
+        'output_extensions'      : ['.csv'],
+        'output_suffix'          : 'accepted',
+        'rejected_output_suffix' : 'rejected',
+        'in_development'         : False,
+        'include_in_git'         : True,
+        'utranslation_style'     : 'filter_csv_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'filter_csv_1_0_0.py',
+                    'exe' : 'filter_csv_1_0_0.py',
                 },
             },
         },
+        'citation' : \
+            '',
     }
 
 

@@ -25,14 +25,27 @@ class msfragger_20170103( ursgal.UNode ):
 
     Warning:
         Still in testing phase
+        15N search may still be errorprone. Use with care!
 
     """
     META_INFO = {
-        'engine_type' : {
+        'edit_version'                : 1.00,
+        'name'                        : 'MSFragger',
+        'version'                     : '20170103',
+        'release_date'                : '2017-01-03',
+        'utranslation_style'          : 'msfragger_style_1',
+        'compress_raw_search_results' : False,
+        'input_multi_file'            : False,
+        'input_extensions'            : ['.mgf', '.mzML', '.mzXML'],
+        'output_extensions'           : ['.csv'],
+        'create_own_folder'           : True,
+        'in_development'              : False,
+        'include_in_git'              : False,
+        'engine_type'                 : {
             'search_engine' : True,
         },
-        'engine': {
-            'platform_independent' : {
+        'engine'                      : {
+            'platform_independent'    : {
                 'arc_independent' : {
                     'exe'            : 'MSFragger.jar',
                     'url'            : 'http://www.nesvilab.org/software.html',
@@ -41,17 +54,11 @@ class msfragger_20170103( ursgal.UNode ):
                 },
             },
         },
-        'utranslation_style'    : 'msfragger_style_1',
-        'compress_raw_search_results' : False,
-        'output_extension'          : '.csv',
-        'input_types'               : ['.mgf', '.mzML', '.mzXML'],
-        'create_own_folder'         : True,
-        'citation'                  : 'Kong, A. T., Leprevost, F. V, Avtonomov, \
-D. M., Mellacheruvu, D., and Nesvizhskii, A. I. (2017) MSFragger: \
-ultrafast and comprehensive peptide identification in mass \
-spectrometry–based proteomics. Nat. Publ. Gr. 293',
-        'in_development'            : False,
-        'include_in_git'            : False,
+        'citation'                   : \
+            'Kong, A. T., Leprevost, F. V, Avtonomov, '
+            'D. M., Mellacheruvu, D., and Nesvizhskii, A. I. (2017) MSFragger: '
+            'ultrafast and comprehensive peptide identification in mass '
+            'spectrometry–based proteomics. Nat. Publ. Gr. 293'
     }
 
     def __init__(self, *args, **kwargs):

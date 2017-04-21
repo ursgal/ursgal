@@ -68,7 +68,7 @@ author = 'Lukas P. M. Kremer, Purevdulam Oyunchimeg, Johannes Barth, Stefan Schu
 version_path = os.path.join(
     os.path.dirname(__file__),
     os.pardir, os.pardir,
-    'ursgal', 'version.txt'
+    'ursgal', 'version.py'
 )
 with open(version_path, 'r') as version_file:
     ursgal_version = version_file.read().strip()

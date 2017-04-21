@@ -12,22 +12,22 @@ class xtandem_vengeance( ursgal.UNode ):
     Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem mass spectra.
     """
     META_INFO = {
-        'name': 'X!Tandem',
-        'version' : 'Vengeance',
+        'edit_version'                : 1.00,
+        'name'                        : 'X!Tandem',
+        'version'                     : 'Vengeance',
+        'release_date'                : '2015-12-15',
         'engine_type' : {
             'search_engine' : True,
         },
-        'in_development'            : False,
-        'output_extension'          : '.xml',
-        'input_types'               : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
-        'create_own_folder'         : True,
+        'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.xml'],
+        'create_own_folder'           : True,
         'compress_raw_search_results' : True,
-        'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
-            'matching proteins with tandem mass spectra.',
-        'include_in_git'            : False,
-        'utranslation_style'        : 'xtandem_style_1',
-
-        'engine': {
+        'in_development'              : False,
+        'include_in_git'              : False,
+        'utranslation_style'          : 'xtandem_style_1',
+        'engine' : {
             'darwin' : {
                 '64bit' : {
                     'exe'            : 'tandem',
@@ -53,12 +53,14 @@ class xtandem_vengeance( ursgal.UNode ):
                 },
             },
         },
+        'citation' : \
+            'Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem '\
+            'mass spectra.',
     }
 
     def __init__(self, *args, **kwargs):
         super(xtandem_vengeance, self).__init__(*args, **kwargs)
         pass
-
 
     def preflight( self ):
         '''

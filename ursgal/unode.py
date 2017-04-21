@@ -193,8 +193,9 @@ class UNode(object, metaclass=Meta_UNode):
         self.print_info(
             'Calculating md5 for {0} ....'.format(
                 os.path.basename(input_file),
-                tag = 'md5'
-            )
+                # tag = 'md5'
+            ),
+            caller='md5'
         )
         with open(input_file, mode='rb') as f:
             d = hashlib.md5()
@@ -346,7 +347,10 @@ class UNode(object, metaclass=Meta_UNode):
         params['del_from_params_before_json_dump']
         or keys that start with '_'
         '''
-        self.print_info('Preparing json dump')
+        self.print_info(
+            'Preparing json dump',
+            caller = 'dmpjson'
+        )
         if stats is None:
             stats = self.io['output']['stats'].copy()
         if params is None:
@@ -400,7 +404,12 @@ class UNode(object, metaclass=Meta_UNode):
                 sort_keys = True,
                 indent = 2
             )
-        self.print_info('Json dumped. Path: {0}'.format( json_file ))
+        self.print_info(
+            'Json dumped. Path: {0}'.format(
+                json_file
+            ),
+            caller='dmpjson'
+        )
         return json_file
 
 
@@ -986,14 +995,14 @@ class UNode(object, metaclass=Meta_UNode):
     def _preflight(self):
 
         if 'citation' in self.META_INFO:
-            self.print_info( caller='', msg='')
+            self.print_info( caller='Citation', msg='')
             self.print_info( caller='Please', msg='')
             self.print_info(
                 self.META_INFO["citation"],
                 caller='cite:'
             )
             self.print_info( caller='-----', msg='')
-            self.print_info( caller='', msg='')
+            self.print_info( caller='Citation', msg='')
 
         self.print_info(
             'Executing preflight sequence ...',
@@ -1178,7 +1187,11 @@ class UNode(object, metaclass=Meta_UNode):
 
             self.print_info(
                 'Will compress output {output_file} on the fly ... renamed temporarily params["output_file"]'
-            .format( **self.params ))
+            .format(
+                **self.params
+                ),
+                caller = 'run'
+            )
 
         # DEFAULT PARAMS ARE INCLUDED HERE :)
         # self.params = self.DEFAULT_PARAMS.copy()
@@ -1190,7 +1203,8 @@ class UNode(object, metaclass=Meta_UNode):
             history = self.stats['history']
         )
         self.print_info(
-            'Preparing engine'
+            'Preparing engine',
+            caller = 'run'
         )
 
         # We use translated in the first json dump
@@ -1245,7 +1259,8 @@ class UNode(object, metaclass=Meta_UNode):
         )
         if requires_grouped_psms:
             self.print_info(
-                'Grouping PSMs'
+                'Grouping PSMs',
+                caller ='run'
             )
             self.time_point(tag='group_psms')
             self.params['grouped_psms'] = self._group_psms(
@@ -1259,7 +1274,8 @@ class UNode(object, metaclass=Meta_UNode):
             self.print_execution_time(tag = 'group_psms')
 
         self.print_info(
-            'Starting engine'
+            'Starting engine',
+            caller = 'run'
         )
         report['preflight'] = self._preflight()
         report['execution'] = self._execute()

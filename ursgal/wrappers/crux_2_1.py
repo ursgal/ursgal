@@ -10,11 +10,21 @@ class crux_2_1( ursgal.UNode ):
     """
 
     META_INFO = {
+        'edit_version'      : 1.00,
+        'name'              : 'Crux',
+        'version'           : '2.1',
+        'release_date'      : None,
         'engine_type' : {
             'search_engine' : True,
         },
-        'in_development' : True,
-        'include_in_git' : None,
+        'input_extensions'  : [],
+        'input_multi_file'  : False,
+        'output_extensions' : [],
+        'in_development'    : True,
+        'include_in_git'    : None,
+        'utranslation_style' : 'crux_style_1',
+        'citation' : \
+            '',
     }
 
 

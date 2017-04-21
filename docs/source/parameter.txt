@@ -52,14 +52,38 @@ Ursgal value translations for *-xmx*
 
       <hr />
 
+_extentions
+######################
+
+
+information of extentions
+
+:Default value: ['.csv', '.den', '.dta', '.dta.txt', '.fasta', '.gaml', '.kojak.txt', '.mgf', '.ms2', '.mzData', '.mzML', '.mzML.gz', '.mzXML', '.mzid', '.mzid.gz', '.pep.xml', '.perc.inter.txt', '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt', '.pkl', '.svg', '.tsv', '.txt', '.xml', '.xml.gz']
+:type: dict
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+
+Ursgal value translations for *_extentions*
+"""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
 aa_exception_dict
 ############################
 
 
-Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0),
-            but reported by some engines. Given as a dictionary mapping on he 
-            original_aa as well as it's unimod modification name.
-            U is now accepted as regular amino acid (2017/03/30)
+Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), but reported by some engines. Given as a dictionary mapping on he original_aa as well as the unimod modification name. U is now accepted as regular amino acid (2017/03/30)
 
 :Default value: ['J', 'O']
 :type: dict
@@ -280,7 +304,7 @@ bigger_scores_better
 Defines if bigger scores are better (or the other way round), for scores that should be validated (see validation_score_field) e.g. by percolator, qvality
 
 :Default value: None
-:type: bool
+:type: select
 :triggers rerun: False
             
 
@@ -314,6 +338,7 @@ Ursgal key translations
  ------------------------- ---------------------------------------------------------------------------------------------------------------------------------
  .                         add_estimated_fdr_style_1 percolator_style_1        qvality_style_1           sanitize_csv_style_1      svm_style_1              
  ========================= ========================= ========================= ========================= ========================= =========================
+ None                      None                      None                      None                      None                      None                     
  msamanda_1_0_0_5242       1                         1                         1                         1                         1                        
  msamanda_1_0_0_5243       1                         1                         1                         1                         1                        
  msamanda_1_0_0_6299       1                         1                         1                         1                         1                        
@@ -374,7 +399,7 @@ cleavage_nterm_mass_change
 #####################################
 
 
-The mass added to the peptide N-terminus by protein cleavage
+The mass added to the peptide N-terminus bz protein cleavage
 
 :Default value: 1.00794
 :type: float
@@ -640,8 +665,10 @@ cpus
 
 
 Number of used cpus/threads
+    -1 : 'max - 1'
+    >0 : cpu num
 
-:Default value: max - 1
+:Default value: -1
 :type: int _uevaluation_req
 :triggers rerun: False
             
@@ -678,6 +705,17 @@ Ursgal value translations for *cpus*
  xtandem_style_1     spectrum, threads  
  =================== ===================
 
+Ursgal key translations
+"""""""""""""""""""""""
+
+ =================== =================== =================== =================== =================== =================== ===================
+ Ursgal Value        Translated Value                                                                                                       
+ ------------------- -----------------------------------------------------------------------------------------------------------------------
+ .                   kojak_style_1       msgfplus_style_1    myrimatch_style_1   omssa_style_1       ucontroller_style_1 xtandem_style_1    
+ =================== =================== =================== =================== =================== =================== ===================
+ -1                  max - 1             max - 1             max - 1             max - 1             max - 1             max - 1            
+ =================== =================== =================== =================== =================== =================== ===================
+
 .. raw:: html
 
       <hr />
@@ -688,11 +726,9 @@ cross_link_definition
 
 Cross-link and mono-link masses allowed.
 May have more than one of each parameter.
-Format for cross_link is:
-**[amino acids] [amino acids] [mass mod] [identifier]**
-One or more amino acids (uppercase only!!) can be specified for
-each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
-N-terminus or C-terminus
+Format for cross_link is: 
+    **[amino acids] [amino acids] [mass mod] [identifier]**
+One or more amino acids (uppercase only!!) can be specified for each linkage moiety. Use lowercase 'n' or 'c' to indicate protein N-terminus or C-terminus
 
 :Default value: nK  nK  138.0680742 BS3
 :type: str
@@ -742,6 +778,16 @@ Ursgal value translations for *csv_filter_rules*
  filter_csv_style_1 filter_rules      
  ================== ==================
 
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================== ==================
+ Ursgal Value       Translated Value  
+ ------------------ ------------------
+ .                  filter_csv_style_1
+ ================== ==================
+ ================== ==================
+
 .. raw:: html
 
       <hr />
@@ -751,6 +797,7 @@ database
 
 
 Path to database file containing protein sequences in fasta format
+    '' : None
 
 :Default value: None
 :type: str
@@ -996,7 +1043,10 @@ denovo_model_dir
 ###########################
 
 
-Directory containing the model files for PepNovo. If 'None', it is supposed to be in resources/<platform>/<architecture>/pepnovo_3_1
+Directory containing the model files for PepNovo. If 'None', it is supposed to be in :
+    resources/<platform>/<architecture>/pepnovo_3_1
+
+    '' : None
 
 :Default value: None
 :type: str
@@ -1109,33 +1159,32 @@ enzyme
 #################
 
 
-Enzyme: Rule of protein cleavage
-            Possible cleavages are :
-                'argc'           -> '[R]|{P}'
-                'aspn'           -> '[X]|[D]'
-                'aspn_gluc'
-                'chymotrypsin'   -> '[FMWY]|{P}'
-                'chymotrypsin_p' -> '[FMWY]|[X]'
-                'cnbr'           -> '[M]|{P}'
-                'elastase'       -> '[AGILV]|{P}'
-                'formic_acid'    -> '[D]|{P}'
-                'gluc'
-                'lysc'
-                'lysc_p'
-                'lysn'
-                'no_cleavage'
-                'nonspecific'
-                'pepsina'
-                'semi_chymotrypsin'
-                'semi_gluc'
-                'semi_tryptic'
-                'thermolysin_p'
-                'top_down'
-                'trypsin'
-                'trypsin_chymotrypsin
-                'trypsin_cnbr'
-                'trypsin_p',
-                'lysc_gluc',
+Enzyme: Rule of protein cleavagePossible cleavages are :
+    argc           -> [R]|{P}
+    aspn           -> [X]|[D]
+    aspn_gluc
+    chymotrypsin   -> [FMWY]|{P}
+    chymotrypsin_p -> [FMWY]|[X]
+    cnbr           -> [M]|{P}
+    elastase       -> [AGILV]|{P}
+    formic_acid    -> [D]|{P}
+    gluc
+    lysc
+    lysc_p
+    lysn
+    no_cleavage
+    nonspecific
+    pepsina
+    semi_chymotrypsin
+    semi_gluc
+    semi_tryptic
+    thermolysin_p
+    top_down
+    trypsin
+    trypsin_chymotrypsin
+    trypsin_cnbr
+    trypsin_p
+    lysc_gluc
 
 :Default value: trypsin
 :type: select
@@ -1662,7 +1711,7 @@ ftp_blocksize
 Blocksize for ftp download
 
 :Default value: 1024
-:type: str
+:type: int
 :triggers rerun: False
             
 
@@ -1689,6 +1738,7 @@ ftp_folder
 
 
 ftp folder that should be downloaded
+    '' : None
 
 :Default value: None
 :type: str
@@ -1718,6 +1768,7 @@ ftp_include_ext
 
 
 Only files with the defined file extension are downloaded with ftp download
+    '' : None
 
 :Default value: None
 :type: str
@@ -1747,9 +1798,10 @@ ftp_max_number_of_files
 
 
 Maximum number of files that will be downloaded
+     0 : No Limitation
 
 :Default value: None
-:type: str
+:type: int
 :triggers rerun: False
             
 
@@ -1776,6 +1828,7 @@ ftp_output_folder
 
 
 Default ftp download path
+    '' : None
 
 :Default value: None
 :type: str
@@ -1805,9 +1858,10 @@ ftp_password
 
 
 ftp download password
+    '' : None
 
 :Default value: None
-:type: str
+:type: str_password
 :triggers rerun: False
             
 
@@ -1834,6 +1888,7 @@ ftp_url
 
 
 ftp download URL, will fail if it is not set by the user
+    '' : None
 
 :Default value: None
 :type: str
@@ -1863,9 +1918,10 @@ header_translations
 
 
 Translate output headers into Ursgal unify_csv style headers
+    'None' : None
 
 :Default value: None
-:type: 
+:type: str
 :triggers rerun: False
             
 
@@ -2030,7 +2086,7 @@ heatmap_box_style
 Box style for the heatmap
 
 :Default value: classic
-:type: int
+:type: str
 :triggers rerun: False
             
 
@@ -2289,6 +2345,7 @@ http_output_folder
 
 
 Default http download path
+    '' : None
 
 :Default value: None
 :type: str
@@ -2318,6 +2375,7 @@ http_url
 
 
 http download URL, will fail if it is not set by the user
+    '' : None
 
 :Default value: None
 :type: str
@@ -2397,7 +2455,7 @@ intensity_cutoff
 ###########################
 
 
-Low intensity cutoff as a fraction of max peak, msfragger default 0.01
+Low intensity cutoff as a fraction of max peak
 
 :Default value: 0.0
 :type: float
@@ -2486,10 +2544,10 @@ kernel
 #################
 
 
-The kernel function of the support vector machine used for PSM post-processing ("rbf", "linear", "poly" or "sigmoid")
+The kernel function of the support vector machine used for PSM post-processing ('rbf', 'linear', 'poly' or 'sigmoid')
 
 :Default value: rbf
-:type: str
+:type: select
 :triggers rerun: False
             
 
@@ -2517,8 +2575,8 @@ kojak_MS1_centroid
 
 MS1 centroided data yes (1) or no (0)
 
-:Default value: 0
-:type: int
+:Default value: No
+:type: select
 :triggers rerun: False
             
 
@@ -2535,6 +2593,18 @@ Ursgal value translations for *kojak_MS1_centroid*
  ================== ==================
  kojak_style_1      kojak_MS1_centroid
  ================== ==================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ No               0               
+ Yes              1               
+ ================ ================
 
 .. raw:: html
 
@@ -2575,8 +2645,8 @@ kojak_MS2_centroid
 
 MS2 centroided data yes (1) or no (0)
 
-:Default value: 1
-:type: int
+:Default value: Yes
+:type: select
 :triggers rerun: False
             
 
@@ -2593,6 +2663,18 @@ Ursgal value translations for *kojak_MS2_centroid*
  ================== ==================
  kojak_style_1      kojak_MS2_centroid
  ================== ==================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ No               0               
+ Yes              1               
+ ================ ================
 
 .. raw:: html
 
@@ -2631,8 +2713,7 @@ kojak_diff_mods_on_xl
 ################################
 
 
-To search differential modifications on cross-linked
-        peptides: diff_mods_on_xl = 1
+To search differential modifications on cross-linked peptides: diff_mods_on_xl = 1
 
 :Default value: 0
 :type: int
@@ -2661,11 +2742,11 @@ kojak_enrichment
 ###########################
 
 
-Values between 0 and 1 to describe 18O APE
-        For example, 0.25 equals 25 APE
+Values between 0 and 1 to describe 18O APE 
+For example, 0.25 equals 25 APE
 
 :Default value: 0
-:type: int
+:type: float
 :triggers rerun: False
             
 
@@ -2691,10 +2772,10 @@ kojak_export_pepxml
 ##############################
 
 
-Activate (True) or deactivate (False) output as pepXML
+Activate (1) or deactivate (0) output as pepXML
 
-:Default value: True
-:type: int
+:Default value: Deactivate
+:type: select
 :triggers rerun: False
             
 
@@ -2720,8 +2801,8 @@ Ursgal key translations
  ---------------- ----------------
  .                kojak_style_1   
  ================ ================
- 0                0               
- 1                1               
+ Activate         1               
+ Deactivate       0               
  ================ ================
 
 .. raw:: html
@@ -2732,10 +2813,10 @@ kojak_export_percolator
 ##################################
 
 
-Activate (True) or deactivate (False) output for percolator
+Activate (1) or deactivate (0) output for percolator
 
-:Default value: True
-:type: int
+:Default value: Activate
+:type: select
 :triggers rerun: False
             
 
@@ -2761,8 +2842,8 @@ Ursgal key translations
  ---------------- ----------------
  .                kojak_style_1   
  ================ ================
- 0                0               
- 1                1               
+ Activate         1               
+ Deactivate       0               
  ================ ================
 
 .. raw:: html
@@ -2774,12 +2855,12 @@ kojak_fragment_bin_offset
 
 
 fragment_bin_offset and fragment_bin_size
-            influence algorithm precision and memory usage.
-            They should be set appropriately for the data analyzed.
-            For ion trap ms/ms:  1.0005 size, 0.4 offset
-            For high res ms/ms:    0.03 size, 0.0 offset
+influence algorithm precision and memory usage.
+They should be set appropriately for the data analyzed.
+For ion trap ms/ms:  1.0005 size, 0.4 offset
+For high res ms/ms:    0.03 size, 0.0 offset
 
-:Default value: 0.4
+:Default value: 0.0
 :type: float
 :triggers rerun: False
             
@@ -2807,12 +2888,12 @@ kojak_fragment_bin_size
 
 
 fragment_bin_offset and fragment_bin_size
-            influence algorithm precision and memory usage.
-            They should be set appropriately for the data analyzed.
-            For ion trap ms/ms:  1.0005 size, 0.4 offset
-            For high res ms/ms:    0.03 size, 0.0 offset
+influence algorithm precision and memory usage.
+They should be set appropriately for the data analyzed.
+For ion trap ms/ms:  1.0005 size, 0.4 offset
+For high res ms/ms:    0.03 size, 0.0 offset
 
-:Default value: 1.005
+:Default value: 0.03
 :type: float
 :triggers rerun: False
             
@@ -2839,8 +2920,7 @@ kojak_mono_links_on_xl
 #################################
 
 
-To search for mono-linked cross-linker on
-        cross-linked peptides: mono_links_on_xl = 1
+To search for mono-linked cross-linker on cross-linked peptides: mono_links_on_xl = 1
 
 :Default value: 0
 :type: int
@@ -2898,14 +2978,13 @@ kojak_prefer_precursor_pred
 ######################################
 
 
-prefer precursor mono mass predicted by
-        instrument software.
-          0 = ignore previous predictions
-          1 = use only previous predictions
-          2 = supplement predictions with additional analysis
+prefer precursor mono mass predicted by instrument software.
+    0 = ignore previous predictions
+    1 = use only previous predictions
+    2 = supplement predictions with additional analysis
 
-:Default value: 2
-:type: float
+:Default value: supplement
+:type: select
 :triggers rerun: False
             
 
@@ -2923,6 +3002,19 @@ Ursgal value translations for *kojak_prefer_precursor_pred*
  kojak_style_1               kojak_prefer_precursor_pred
  =========================== ===========================
 
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================== ==================
+ Ursgal Value       Translated Value  
+ ------------------ ------------------
+ .                  kojak_style_1     
+ ================== ==================
+ 0: ignore previous 0                 
+ 1: only previous   1                 
+ 2: supplement      2                 
+ ================== ==================
+
 .. raw:: html
 
       <hr />
@@ -2931,10 +3023,10 @@ kojak_spectrum_processing
 ####################################
 
 
-True if spectrum should be processed by kojak
+True, if spectrum should be processed by kojak
 
 :Default value: False
-:type: int
+:type: bool
 :triggers rerun: False
             
 
@@ -2972,8 +3064,7 @@ kojak_top_count
 ##########################
 
 
-number of top scoring single peptides to combine
-            in relaxed analysis
+number of top scoring single peptides to combine in relaxed analysis
 
 :Default value: 300
 :type: int
@@ -3031,11 +3122,10 @@ kojak_turbo_button
 #############################
 
 
-Generally speeds up analysis. Special cases cause reverse
-            effect, thus this is allowed to be disabled. True if it should be used.
+Generally speeds up analysis. Special cases cause reverse effect, thus this is allowed to be disabled. True if it should be used.
 
 :Default value: False
-:type: int
+:type: bool
 :triggers rerun: False
             
 
@@ -3342,9 +3432,10 @@ max_num_of_ions_per_series_to_search
 ###############################################
 
 
-Max number of ions in each series being searched (0=all)
+Max number of ions in each series being searched
+     0 : all
 
-:Default value: all
+:Default value: 0
 :type: int
 :triggers rerun: False
             
@@ -3411,7 +3502,8 @@ max_num_per_mod_name_specific
 ########################################
 
 
-Maximal number of modification sites per peptide for a specific modification, given as a dictionary: {unimod_name : number}
+Maximal number of modification sites per peptide for a specific modification, given as a dictionary: 
+    {unimod_name : number}
 
 :Default value: []
 :type: dict
@@ -3547,6 +3639,7 @@ mgf_input_file
 
 
 Path to input .mgf file
+    '' : None
 
 :Default value: None
 :type: str
@@ -3627,8 +3720,9 @@ min_output_score
 
 
 Lowest score for reported peptides. If set to 'default', default values fo each engine will be used.
+    -1e-10 = 'default'
 
-:Default value: default
+:Default value: -1e-10
 :type: float
 :triggers rerun: False
             
@@ -3812,10 +3906,13 @@ moda_blind_mode
 ##########################
 
 
-Allowed number of modifications per peptide. '0' = no modification, '1' = one modification, '2' = no limit
+Allowed number of modifications per peptide. 
+    '0' = no modification, 
+    '1' = one modification, 
+    '2' = no limit
 
-:Default value: 2
-:type: int
+:Default value: No Limit
+:type: select
 :triggers rerun: False
             
 
@@ -3831,6 +3928,19 @@ Ursgal value translations for *moda_blind_mode*
  Style            Translation     
  ================ ================
  moda_style_1     BlindMode       
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                moda_style_1    
+ ================ ================
+ No Limit         2               
+ No Modification  0               
+ One Modification 1               
  ================ ================
 
 .. raw:: html
@@ -3922,33 +4032,22 @@ modifications
 ########################
 
 
-Modifications are given as a list of strings, each representing the modification of one amino acid. The string consists of four informations seperated by comma:
-
-'amino acid,type,position,unimod name'
-
- amino acid : specify the modified amino acid as a single letter, use '*' if the amino acid is variable
-
- type   : specify if it is a fixed (fix) or potential (opt) modification
-
- position  : specify the position within the protein/peptide (Prot-N-term, Prot-C-term), use 'any' if the position is variable
-
- unimod name : specify the unimod PSI-MS Name (see unimod.org)
+Modifications are given as a list of strings, each representing the modification of one amino acid. The string consists of four informations seperated by comma: 
+    'amino acid, type, position, unimod name'
+    amino acid  : specify the modified amino acid as a single letter, use '*' if the amino acid is variable
+    type        : specify if it is a fixed (fix) or potential (opt) modification
+    position    : specify the position within the protein/peptide (Prot-N-term, Prot-C-term), use 'any' if the positon is variable
+    unimod name : specify the unimod PSI-MS Name (see unimod.org)
 
 Examples:
-
- [ 'M,opt,any,Oxidation' ]   - potential oxidation of Met at any position within a peptide
-
- [ '*,opt,Prot-N-term,Acetyl' ]  - potential acetylation of any amino acid at the N-terminus of a protein
-
- [ 'S,opt,any,Phospho' ]   - potential phosphorylation of Serine at any position within a peptide
-
- ['C,fix,any,Carbamidomethyl', 'N,opt,any,Deamidated', 'Q,opt,any,Deamidated'] - fixed carbamidomethylation of Cys and potential deamidation of Asn and/or Gln at any position within a peptide
-
+    [ 'M,opt,any,Oxidation' ] - potential oxidation of Met at any position within a peptide
+    [ '*,opt,Prot-N-term,Acetyl' ] - potential acetylation of any amino acid at the N-terminus of a protein
+    [ 'S,opt,any,Phospho' ] - potential phosphorylation of Serine at any position within a peptide
+    [ 'C,fix,any,Carbamidomethyl', 'N,opt,any,Deamidated', 'Q,opt,any,Deamidated' ] - fixed carbamidomethylation of Cys and potential deamidation of Asn and/or Gln at any position within a peptide
 Additionally, userdefined modifications can be given and are written to a userdefined_unimod.xml in ursgal/kb/ext. Userdefined modifications need to have a unique name instead of the unimod name the chemical composition needs to be given as a Hill notation on the fifth position in the string
 
 Example:
-
- [ 'S,opt,any,New_mod,C2H5N1O3' ]
+[ 'S,opt,any,New_mod,C2H5N1O3' ]
 
 :Default value: ['*,opt,Prot-N-term,Acetyl', 'M,opt,any,Oxidation']
 :type: list
@@ -4010,13 +4109,11 @@ mono_link_definition
 ###############################
 
 
-Cross-link and mono-link masses allowed.
-May have more than one of each parameter.
-Format for mono_link is:
-[amino acids] [mass mod]
-One or more amino acids (uppercase only!!) can be specified for
-each linkage moiety. Use lowercase 'n' or 'c' to indicate protein
-N-terminus or C-terminus
+Cross-link and mono-link masses allowed. 
+May have more than one of each parameter. 
+Format for mono_link is: 
+    [amino acids] [mass mod]
+One or more amino acids (uppercase only!!) can be specified for each linkage moiety. Use lowercase 'n' or 'c' to indicate protein N-terminus or C-terminus
 
 :Default value: nK  156.0786
 :type: str
@@ -4048,7 +4145,7 @@ ms1_centroided
 MS1 data are centroided: True or False
 
 :Default value: False
-:type: int
+:type: bool
 :triggers rerun: False
             
 
@@ -4118,7 +4215,7 @@ ms2_centroided
 MS2 data are centroided: True or False
 
 :Default value: True
-:type: int
+:type: bool
 :triggers rerun: False
             
 
@@ -4408,6 +4505,20 @@ Ursgal value translations for *msgfplus_protocol_id*
  Style            Translation     
  ================ ================
  msgfplus_style_1 -protocol       
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                msgfplus_style_1
+ ================ ================
+ 0                0               
+ 1                1               
+ 2                2               
+ 3                3               
  ================ ================
 
 .. raw:: html
@@ -5719,6 +5830,7 @@ output_file_incl_path
 
 
 Path to output file
+    'None' : None
 
 :Default value: None
 :type: str
@@ -5729,7 +5841,7 @@ Available in unodes
 """""""""""""""""""
 
 * generate_target_decoy_1_0_0
-* merge_csv_1_0_0
+* merge_csvs_1_0_0
 * moda_v1_51
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
@@ -5745,7 +5857,7 @@ Available in unodes
 * mzidentml_lib_1_6_11
 * mzidentml_lib_1_7
 * novor_1_1beta
-* omssa_style_1
+* omssa_2_1_9
 * pepnovo_3_1
 * percolator_2_08
 * qvality_2_02
@@ -5763,7 +5875,7 @@ Ursgal value translations for *output_file_incl_path*
  Style                         Translation                  
  ============================= =============================
  generate_target_decoy_style_1 output_file                  
- merge_csv_style_1             output                       
+ merge_csvs_style_1            output                       
  moda_style_1                  -o                           
  msamanda_style_1              output_file_incl_path        
  msgfplus_style_1              -o                           
@@ -5935,6 +6047,7 @@ pepnovo_tag_length
 
 
 Returns peptide sequences of the specified length (only lengths 3-6 are allowed)
+    0 : None
 
 :Default value: None
 :type: int
@@ -6382,7 +6495,6 @@ Available in unodes
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
 * msgfplus_v9979
-* myrimatch
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * omssa_2_1_9
@@ -6557,7 +6669,7 @@ precursor_true_units
 
 
 :Default value: ppm
-:type: int
+:type: str
 :triggers rerun: False
             
 
@@ -6595,10 +6707,10 @@ prefix
 #################
 
 
-
+'None' : None
 
 :Default value: None
-:type: 
+:type: None
 :triggers rerun: False
             
 
@@ -6792,6 +6904,21 @@ Ursgal value translations for *qvality_verbose*
  Style            Translation     
  ================ ================
  qvality_style_1  -v              
+ ================ ================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                qvality_style_1 
+ ================ ================
+ 1                1               
+ 2                2               
+ 3                3               
+ 4                4               
+ 5                5               
  ================ ================
 
 .. raw:: html
@@ -7005,7 +7132,8 @@ scan_skip_modulo_step
 ################################
 
 
-Include only the n'th spectrum during mzml2mgf conversion
+Include only the n-th spectrum during mzml2mgf conversion
+    -1 : None
 
 :Default value: None
 :type: int
@@ -7025,6 +7153,16 @@ Ursgal value translations for *scan_skip_modulo_step*
  ===================== =====================
  mzml2mgf_style_1      scan_skip_modulo_step
  ===================== =====================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                mzml2mgf_style_1
+ ================ ================
+ ================ ================
 
 .. raw:: html
 
@@ -7404,7 +7542,7 @@ score_diff_threshold
 
 Minimum score difference between the best PSM and the first rejected PSM of one spectrum, default: 0.01
 
-:Default value: 2
+:Default value: 0.01
 :type: float
 :triggers rerun: False
             
@@ -7949,7 +8087,7 @@ test_param1
 TEST/DEBUG: Internal Ursgal parameter 1 for debugging and testing.
 
 :Default value: b
-:type: str
+:type: select
 :triggers rerun: False
             
 
@@ -7993,7 +8131,7 @@ test_param2
 TEST/DEBUG: Internal Ursgal parameter 2 for debugging and testing.
 
 :Default value: three
-:type: str
+:type: select
 :triggers rerun: False
             
 
@@ -8363,10 +8501,11 @@ validation_minimum_score
 ###################################
 
 
-Defines the minimum score used fo validation. If scores lower than this are produced, they are set to the minimum score. This is used to avoid huge gaps/jumps in the score distribution
+Defines the minimum score used for validation. If scores lower than this are produced, they are set to the minimum score. This is used to avoid huge gaps/jumps in the score distribution
+    'None' : None
 
 :Default value: None
-:type: 
+:type: str
 :triggers rerun: False
             
 
@@ -8419,9 +8558,10 @@ validation_score_field
 
 
 Name of the column that is used for validation, e.g. by qvality and percolator. If None is defined, default values are used
+    'None' : None
 
 :Default value: None
-:type: 
+:type: str
 :triggers rerun: False
             
 
@@ -8519,7 +8659,7 @@ visualization_font
 #############################
 
 
-Font used for visualiyation plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn)
+Font used for visualization plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn)
 
 :Default value: ('Helvetica', 31, 25, 20, 20)
 :type: tuple
@@ -8606,7 +8746,7 @@ visualization_opacity
 ################################
 
 
-Opacity used in visualiyation plots (e.g. Venn diagram)
+Opacity used in visualization plots (e.g. Venn diagram)
 
 :Default value: 0.35
 :type: float
@@ -8635,7 +8775,7 @@ visualization_scaling_factors
 ########################################
 
 
-Scaling factor for visualiyation plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor)
+Scaling factor for visualization plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor)
 
 :Default value: (600, 400)
 :type: tuple
@@ -8664,7 +8804,7 @@ visualization_size
 #############################
 
 
-Size of visualiyation plots (e.g. Venn diagram), given as tuple (width, height)
+Size of visualization plots (e.g. Venn diagram), given as tuple (width, height)
 
 :Default value: (1200, 800)
 :type: tuple
@@ -8693,7 +8833,7 @@ visualization_stroke_width
 #####################################
 
 
-Stroke width used in visualiyation plots (e.g. Venn diagram)
+Stroke width used in visualization plots (e.g. Venn diagram)
 
 :Default value: 2.0
 :type: float
@@ -8722,10 +8862,7 @@ window_size
 ######################
 
 
-Combined PEPs are computed by
-    iterating a sliding window over the sorted PSMs. Each PSM receives
-    a PEP based on the target/decoy ratio of the surrounding PEPs.
-    This parameter defines the window size.
+Combined PEPs are computed by iterating a sliding window over the sorted PSMs. Each PSM receives a PEP based on the target/decoy ratio of the surrounding PEPs. This parameter defines the window size.
 
 :Default value: 249
 :type: int
@@ -8754,7 +8891,7 @@ word_len
 ###################
 
 
-NOTE: This can only be changed using the params dict if UPeptideMapper has become a UNode. !!! word length used to index peptide mapper, smaller word len requires more memory
+word length used to index peptide mapper, smaller word len requires more memory
 
 :Default value: 6
 :type: int
@@ -8764,16 +8901,16 @@ NOTE: This can only be changed using the params dict if UPeptideMapper has becom
 Available in unodes
 """""""""""""""""""
 
-* upeptide_mapper_1_0_0
+* unify_csv_1_0_0
 
 Ursgal value translations for *word_len*
 """"""""""""""""""""""""""""""""""""""""
 
- ======================= =======================
- Style                   Translation            
- ======================= =======================
- upeptide_mapper_style_1 word_len               
- ======================= =======================
+ ================= =================
+ Style             Translation      
+ ================= =================
+ unify_csv_style_1 word_len         
+ ================= =================
 
 .. raw:: html
 
