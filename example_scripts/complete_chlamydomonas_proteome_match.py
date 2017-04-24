@@ -21,9 +21,11 @@ def main( class_version):
         ./complete_chlamydomonas_proteome_match.py <class_version>
     
     Class versions
-        * UPeptideMapper_v2
         * UPeptideMapper_v3
         * UPeptideMapper_v4
+
+    Note:
+        Works only with class version 3 and 4
 
     '''
 
@@ -65,6 +67,12 @@ def main( class_version):
             time.time() - digest_start
         )
     )
+    if sys.platform == 'win32':
+        print(
+            '[ WARNING ] pyahocorasick can not be installed via pip at the moment\n'
+            '[ WARNING ] Falling back to UpeptideMapper_v2'
+        )
+        class_version = 'UPeptideMapper_v2'
 
     upapa_class = uc.unodes['upeptide_mapper_1_0_0']['class'].import_engine_as_python_function(
         class_version
@@ -72,19 +80,30 @@ def main( class_version):
 
     print('Buffering fasta and mapping {0} peptides'.format(len(peptides)))
     map_start = time.time()  
-    peptide_mapper = upapa_class(
-        fasta_database = input_params['database']
-    )
-
-    if class_version == 'UPeptideMapper_v4':
+    
+    if class_version == 'UPeptideMapper_v2':
+        peptide_mapper = upapa_class(word_len =6)
+        fasta_lookup_name = peptide_mapper.build_lookup_from_file(
+            input_params['database'],
+            force  = False,
+        )
+        args = [
+            list(peptides),
+            fasta_lookup_name
+        ]
+    elif class_version == 'UPeptideMapper_v3':
+        peptide_mapper = upapa_class( input_params['database'] )
+        fasta_lookup_name = peptide_mapper.fasta_name
+        args = [
+            list(peptides),
+            fasta_lookup_name
+        ]
+    elif class_version == 'UPeptideMapper_v4':
+        peptide_mapper = upapa_class( input_params['database'] )
         args = [
             list(peptides)
         ]
-    else:
-        args = [
-            list(peptides),
-            'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
-        ]
+
     p2p_mappings = peptide_mapper.map_peptides(*args)
     print(
         'Buffering fasta and mapping {0} peptides took {1:1.2f} seconds'.format(

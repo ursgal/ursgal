@@ -51,7 +51,7 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
         print('[ -ENGINE- ] Executing conversion ..')
         upeptide_mapper_main = self.import_engine_as_python_function()
         if self.params['output_file'].lower().endswith('.csv') is False:
-            raise ValueError('Trying to unify a non-csv file')
+            raise ValueError('Trying to use a non-csv file')
 
         output_file = os.path.join(
             self.params['output_dir_path'],

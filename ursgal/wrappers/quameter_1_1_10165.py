@@ -33,7 +33,7 @@ class quameter_1_1_10165( ursgal.UNode ):
         'include_in_git'              : False,
         'cannot_distribute'           : True,
         'engine_type'                 : {
-            'search_engine' : True,
+            # 'search_engine' : True,
         },
         'engine'                      : {
             'linux'    : {
