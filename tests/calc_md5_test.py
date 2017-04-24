@@ -32,12 +32,12 @@ def check_md5_test():
 
 def check_md5( test_dict ):
     out_put = R.calc_md5( test_dict['input'] )
-    print( out_put , test_dict)
-    platform = sys.platform
-    if sys.platform != 'win32':
-        platform = 'unix'
+    # print( out_put , test_dict)
+    # platform = sys.platform
+    # if sys.platform != 'win32':
+    #     platform = 'unix'
 
-    assert out_put == test_dict['output'][platform], '''
+    assert out_put in [test_dict['output']['unix']]+[test_dict['output']['win32']], '''
         MD5 {0} failed
         output: {1}'''.format(
             test_dict,
