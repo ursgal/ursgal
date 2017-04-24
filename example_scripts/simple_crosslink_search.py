@@ -64,11 +64,6 @@ def main():
         'max_num_mods'                  : 2
     }
 
-    uc = ursgal.UController(
-        profile = 'LTQ XL low res',
-        params = params
-    )
-
     if os.path.exists(params['ftp_output_folder']) is False:
         os.mkdir(params['ftp_output_folder'])
 

@@ -204,6 +204,13 @@ ursgal_params = {
                 'description'    : \
                     'PKL file is a file created by pickle module',
             },
+            '.raw' : {
+                'short_name'     : 'RAW',
+                'long_name'      : 'RAW',
+                'same_extension' : [],
+                'description'    : \
+                    'ThermoFisher RAW format',
+            },
             '.svg' : {
                 'short_name'     : 'SVG',
                 'long_name'      : 'SVG (Scalable Vector Graphic)',

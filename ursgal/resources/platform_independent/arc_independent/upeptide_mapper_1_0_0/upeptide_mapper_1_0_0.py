@@ -70,6 +70,13 @@ def main(input_file=None, output_file=None, params=None):
     pep_map_lookup     = {}
     joinchar           = params['translations']['protein_delimiter']
 
+    if sys.platform == 'win32':
+        print(
+            '[ WARNING ] pyahocorasick can not be installed via pip on Windows at the moment\n'
+            '[ WARNING ] Falling back to UpeptideMapper_v2'
+        )
+        params['translations']['peptide_mapper_class_version'] = 'UPeptideMapper_v2'
+
     if params['translations']['peptide_mapper_class_version'] == 'UPeptideMapper_v2':
         upapa = UPeptideMapper_v2( word_len = params['translations']['word_len'])
         fasta_lookup_name = upapa.build_lookup_from_file(
