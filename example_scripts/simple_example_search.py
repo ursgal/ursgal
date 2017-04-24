@@ -34,6 +34,7 @@ def main():
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
             ],
+            'peptide_mapper_class_version' : 'UPeptideMapper_v2',
         }
     )
 
@@ -66,6 +67,7 @@ Installation: http://www.mono-project.com/download'''
         'msgfplus_v2016_09_16',
     ]
 
+    # use_msamanda = False
     if use_msamanda:
         engine_list.append( msamanda )
 

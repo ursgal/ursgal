@@ -8474,10 +8474,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
+            'upeptide_mapper_1_0_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
             'unify_csv_style_1' : 'word_len',
+            'upeptide_mapper_style_1' : 'word_len',
         },
         'utag' : [
             'conversion',

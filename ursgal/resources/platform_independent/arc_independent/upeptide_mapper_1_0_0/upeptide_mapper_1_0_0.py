@@ -24,7 +24,6 @@ except:
     print('[   INFO   ] pip install -r requirements.txt')
     import re as regex
     finditer_kwargs = {}
-import ahocorasick
 import bisect
 # increase the field size limit to avoid crash if protein merge tags
 # become too long does not work under windows
@@ -759,7 +758,7 @@ class UPeptideMapper_v3():
                 }
             ]
         '''
-
+        import ahocorasick
         # if fasta_name not in self.peptide_2_protein_mappings.keys():
         self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
 
@@ -934,7 +933,7 @@ class UPeptideMapper_v4():
                 }
             ]
         '''
-
+        import ahocorasick
         self.peptide_2_protein_mappings = defaultdict(list)
 
         # self.peptide_2_protein_mappings = defaultdict(list)
