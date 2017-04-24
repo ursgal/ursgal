@@ -1679,12 +1679,13 @@ class UController(ursgal.UNode):
             or OMSSA in these cases, since they are less demanding.
 
         Note:
-            This function calls four search-related ursgal functions
+            This function calls five search-related ursgal functions
             in succession, all of which can also be called individually:
 
                 * :meth:`.convert_to_mgf_and_update_rt_lookup` (if required)
                 * :meth:`.search_mgf`
                 * :meth:`.convert_results_to_csv`
+                * :meth:`.map_peptides`
                 * :meth:`.unify_csv`
         '''
 
