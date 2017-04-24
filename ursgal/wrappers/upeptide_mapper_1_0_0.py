@@ -16,7 +16,6 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
         'version'            : '1.0.0',
         'release_date'       : None,
         'engine_type' : {
-            'search_engine' : False,
             'converter'     : True
         },
         'input_extensions'   : ['.csv'],
@@ -25,7 +24,7 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
         'output_suffix'     : 'pmap',
         # 'input_types'       : ['.csv'],
         'include_in_git'    : True,
-        'in_development'    : True,
+        'in_development'    : False,
         'utranslation_style': 'upeptide_mapper_style_1',
         'engine': {
             'platform_independent' : {
@@ -46,7 +45,7 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
 
     def _execute( self ):
         '''
-        Peptide from search engine csv file are mapped to the given database(s)
+        Peptides from search engine csv file are mapped to the given database(s)
 
         '''
         print('[ -ENGINE- ] Executing conversion ..')
