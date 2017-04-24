@@ -21,11 +21,9 @@ def main( class_version):
         ./complete_chlamydomonas_proteome_match.py <class_version>
     
     Class versions
+        * UPeptideMapper_v2
         * UPeptideMapper_v3
         * UPeptideMapper_v4
-
-    Note:
-        Works only with class version 3 and 4
 
     '''
 
@@ -69,7 +67,7 @@ def main( class_version):
     )
     if sys.platform == 'win32':
         print(
-            '[ WARNING ] pyahocorasick can not be installed via pip at the moment\n'
+            '[ WARNING ] pyahocorasick can not be installed via pip on Windwows at the moment\n'
             '[ WARNING ] Falling back to UpeptideMapper_v2'
         )
         class_version = 'UPeptideMapper_v2'

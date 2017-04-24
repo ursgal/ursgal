@@ -54,7 +54,7 @@ def main(fasta_database, class_version):
 
     if sys.platform == 'win32':
         print(
-            '[ WARNING ] pyahocorasick can not be installed via pip at the moment\n'
+            '[ WARNING ] pyahocorasick can not be installed via pip on Windwows at the moment\n'
             '[ WARNING ] Falling back to UpeptideMapper_v2'
         )
         class_version = 'UPeptideMapper_v2'

@@ -72,11 +72,11 @@ def main(input_file=None, output_file=None, params=None):
 
     if sys.platform == 'win32':
         print(
-            '[ map_peps ] pyahocorasick can not be installed via pip at the moment\n'
-            '[ map_peps ]Falling back to UpeptideMapper_v2'
+            '[ WARNING ] pyahocorasick can not be installed via pip on Windows at the moment\n'
+            '[ WARNING ] Falling back to UpeptideMapper_v2'
         )
         params['translations']['peptide_mapper_class_version'] = 'UPeptideMapper_v2'
-    
+
     if params['translations']['peptide_mapper_class_version'] == 'UPeptideMapper_v2':
         upapa = UPeptideMapper_v2( word_len = params['translations']['word_len'])
         fasta_lookup_name = upapa.build_lookup_from_file(
