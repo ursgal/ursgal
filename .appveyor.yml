@@ -6,6 +6,10 @@ environment:
 
 install:
   - cmd: "%PYTHON%\\python.exe setup.py install"
-  - cmd: "%PYTHON%\\python.exe pip install -r requirements.txt"
+  - cmd: "%PYTHON%\\pip install -r requirements.txt"
+  - cmd: "%PYTHON%\\python.exe install_resources.py omssa_2_1_9"
+
+test_script:
+  - nosetests
 
 build: off
