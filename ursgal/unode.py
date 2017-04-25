@@ -17,7 +17,6 @@ import gzip
 import copy
 
 
-
 class Meta_UNode(type):
     """Metaclass for our UNode
 
@@ -1247,9 +1246,15 @@ class UNode(object, metaclass=Meta_UNode):
             'cross_link_engine',
             False
         )
+        map_mods_node_exceptions = [
+            'unify_csv'
+        ]
         if is_search_engine or is_denovo_engine or is_crosslink_engine:
             self.map_mods()
-
+        for engine_short_name in map_mods_node_exceptions:
+            if engine_short_name in self.engine:
+                self.map_mods()
+                break
         self.stats['history'] = self.update_history_status(
             status='launching',
             history = self.stats['history']

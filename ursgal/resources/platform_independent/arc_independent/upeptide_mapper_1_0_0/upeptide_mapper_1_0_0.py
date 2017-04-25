@@ -358,6 +358,8 @@ def main(input_file=None, output_file=None, params=None):
         peptide_has_X_in_sequence = set()
         mappable_after_all = set()
         for non_mappable_peptide in non_mappable_peps:
+            if non_mappable_peptide == '':
+                continue
             variants  = set()
             for pos, aa in enumerate(non_mappable_peptide):
                 variants.add(

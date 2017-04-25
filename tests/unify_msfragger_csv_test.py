@@ -14,8 +14,18 @@ import csv
 import pickle
 import os
 
+modifications = [
+    '*,opt,Prot-N-term,Acetyl',
+    'M,opt,any,Oxidation',
+    'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+]
 
-R = ursgal.UController()
+R = ursgal.UController(
+    params = {
+        'modifications' : modifications
+    }
+)
+R.map_mods()
 
 scan_rt_lookup = pickle.load(
     open(
@@ -47,11 +57,7 @@ unify_csv_main(
     scan_rt_lookup = scan_rt_lookup,
     params = {
         'translations' : {
-            'modifications' : [
-                '*,opt,Prot-N-term,Acetyl',
-                'M,opt,any,Oxidation',
-                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-            ],
+            'modifications' : modifications,
             'decoy_tag' : 'decoy_',
             'enzyme'    : 'KR;C;P',
             'semi_enzyme' : False,
@@ -69,6 +75,7 @@ unify_csv_main(
             'max_missed_cleavages'           : 2
         },
         'label' : '15N',
+        'mods' : R.params['mods']
     },
     search_engine  = 'msfragger_20170103',
 )
@@ -91,6 +98,7 @@ def unify_msfragger( test_dict ):
             'Spectrum ID',
             'Modifications',
             'Spectrum Title',
+            'Sequence'
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]
