@@ -4,6 +4,7 @@
 import ursgal
 import unittest
 import pprint
+import sys
 # from ursgal import umapmaster as umama
 import pprint
 import os
@@ -40,6 +41,10 @@ TEST_FASTA_TWO = [
 
 
 class UMapMaster(unittest.TestCase):
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
     def setUp(self):
         self.uc = ursgal.UController( verbose = False )
         upapa_class = self.uc.unodes['upeptide_mapper_1_0_0']['class'].import_engine_as_python_function(
@@ -59,6 +64,10 @@ class UMapMaster(unittest.TestCase):
         )
         return
 
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
     def test_purge_fasta(self):
         self.upapa_class.purge_fasta_info( 'Test.fasta' )
         self.assertFalse(
@@ -72,6 +81,10 @@ class UMapMaster(unittest.TestCase):
         )
         return
 
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
     def test_fasta_id_parsed_and_available(self):
         input_fastas = []
         for line in TEST_FASTA:
@@ -84,6 +97,10 @@ class UMapMaster(unittest.TestCase):
         )
         return
 
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
     def test_peptide_mapping_1(self):
         self.upapa_class.map_peptides(
             [ 'ELVIS' ],
@@ -109,6 +126,10 @@ class UMapMaster(unittest.TestCase):
         )
         return
 
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
     def test_peptide_mapping_2(self):
         maps = self.upapa_class.map_peptides( ['VISHE'], 'Test.fasta')['VISHE']
         self.assertEqual( len(maps), 1 )
@@ -119,6 +140,10 @@ class UMapMaster(unittest.TestCase):
             )
         return
 
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
     def test_incremental_cache_buildups(self):
         '''
 
@@ -172,7 +197,10 @@ class UMapMaster(unittest.TestCase):
         os.remove(tmp_database_path)
         return
 
-   
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
     def test_peptide_gt_word_but_not_continous(self):
         self.assertEqual(
             self.upapa_class.map_peptides(
@@ -183,7 +211,10 @@ class UMapMaster(unittest.TestCase):
         )
         return
 
-
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
     def test_multiple_occurrence_in_one_seq(self):
         maps = self.upapa_class.map_peptides( ['AAAAAAAAAA'], 'Test.fasta')['AAAAAAAAAA']
         self.assertEqual( len(maps), 2 )
@@ -212,6 +243,10 @@ class UMapMaster(unittest.TestCase):
         )
         return
 
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
     def test_multiple_occurrence_with_opverlap_in_one_seq(self):
         maps = self.upapa_class.map_peptides(
             ['GGGGGGG'],

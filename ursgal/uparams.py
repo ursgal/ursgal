@@ -204,6 +204,13 @@ ursgal_params = {
                 'description'    : \
                     'PKL file is a file created by pickle module',
             },
+            '.raw' : {
+                'short_name'     : 'RAW',
+                'long_name'      : 'RAW',
+                'same_extension' : [],
+                'description'    : \
+                    'ThermoFisher RAW format',
+            },
             '.svg' : {
                 'short_name'     : 'SVG',
                 'long_name'      : 'SVG (Scalable Vector Graphic)',
@@ -8474,10 +8481,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
+            'upeptide_mapper_1_0_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
             'unify_csv_style_1' : 'word_len',
+            'upeptide_mapper_style_1' : 'word_len',
         },
         'utag' : [
             'conversion',

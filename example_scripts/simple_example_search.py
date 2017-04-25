@@ -34,6 +34,7 @@ def main():
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
             ],
+            # 'peptide_mapper_class_version' : 'UPeptideMapper_v2',
         }
     )
 
@@ -47,7 +48,6 @@ def main():
         xtandem,
         'msgfplus_v2016_09_16',
     ]
-
 
     mzML_file = os.path.join(
         os.pardir,

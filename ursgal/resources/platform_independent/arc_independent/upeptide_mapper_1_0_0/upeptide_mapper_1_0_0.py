@@ -24,7 +24,6 @@ except:
     print('[   INFO   ] pip install -r requirements.txt')
     import re as regex
     finditer_kwargs = {}
-import ahocorasick
 import bisect
 # increase the field size limit to avoid crash if protein merge tags
 # become too long does not work under windows
@@ -70,6 +69,13 @@ def main(input_file=None, output_file=None, params=None):
     non_mappable_peps  = set()
     pep_map_lookup     = {}
     joinchar           = params['translations']['protein_delimiter']
+
+    if sys.platform == 'win32':
+        print(
+            '[ WARNING ] pyahocorasick can not be installed via pip on Windows at the moment\n'
+            '[ WARNING ] Falling back to UpeptideMapper_v2'
+        )
+        params['translations']['peptide_mapper_class_version'] = 'UPeptideMapper_v2'
 
     if params['translations']['peptide_mapper_class_version'] == 'UPeptideMapper_v2':
         upapa = UPeptideMapper_v2( word_len = params['translations']['word_len'])
@@ -352,6 +358,8 @@ def main(input_file=None, output_file=None, params=None):
         peptide_has_X_in_sequence = set()
         mappable_after_all = set()
         for non_mappable_peptide in non_mappable_peps:
+            if non_mappable_peptide == '':
+                continue
             variants  = set()
             for pos, aa in enumerate(non_mappable_peptide):
                 variants.add(
@@ -759,7 +767,7 @@ class UPeptideMapper_v3():
                 }
             ]
         '''
-
+        import ahocorasick
         # if fasta_name not in self.peptide_2_protein_mappings.keys():
         self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
 
@@ -934,7 +942,7 @@ class UPeptideMapper_v4():
                 }
             ]
         '''
-
+        import ahocorasick
         self.peptide_2_protein_mappings = defaultdict(list)
 
         # self.peptide_2_protein_mappings = defaultdict(list)
