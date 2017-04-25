@@ -4,7 +4,7 @@ import os
 import pprint
 from collections import defaultdict as ddict
 import csv
-
+import itertools
 
 class msfragger_20170103( ursgal.UNode ):
     """
@@ -21,11 +21,13 @@ class msfragger_20170103( ursgal.UNode ):
 
     Note:
         Addition of user amino acids not implemented yet. Only mzML search
-        possible at the moment.
+        possible at the moment. The mgf file can still be passed to the node,
+        but the mzML has to be in the same folder as the mgf.
 
     Warning:
-        Still in testing phase
-        15N search may still be errorprone. Use with care!
+        Still in testing phase! 
+        Metabolic labeling based 15N search may still be errorprone. Use with
+        care!
 
     """
     META_INFO = {
@@ -81,7 +83,8 @@ class msfragger_20170103( ursgal.UNode ):
 
     def preflight( self ):
         '''
-        Formatting the command line via self.params
+        Formatting the command line and writing the paramn input file via 
+        self.params
 
         Returns:
                 dict: self.params
@@ -117,6 +120,10 @@ class msfragger_20170103( ursgal.UNode ):
 
         additional_15N_modifications = []
         if self.params['translations']['_grouped_by_translated_key']['label']['label'] == '15N':
+            self.print_info(
+                'Search with label=15N may still be errorprone. Evaluate with care!',
+                caller = 'WARNING'
+            )
             for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
                 existing = False
                 for mod_dict in self.params[ 'mods' ][ 'fix' ]:
@@ -262,7 +269,13 @@ class msfragger_20170103( ursgal.UNode ):
 
     def postflight(self):
         '''
-        Read tsv and write final output file
+        Reads MSFragger tsv output and write final csv output file.
+                
+        Adds:
+            * Raw data location, since this can not be added later
+            * Converts masses in Da to m/z (could be done in unify_csv)
+
+
         '''
         ms_fragger_header = [
             'ScanID',
@@ -317,13 +330,14 @@ class msfragger_20170103( ursgal.UNode ):
 
         csv_writer.writeheader()
         for line_dict in csv_reader:
-            ############################################
-            # all fixig here has to go into unify csv! #
-            ############################################
-            line_dict['Retention time (s)'] = float(line_dict['Retention time (s)']) * 60.0
             line_dict['Raw data location'] = os.path.abspath(
                 self.params['translations']['mzml_input_file']
             )
+
+            ############################################
+            # all fixing here has to go into unify csv! #
+            ############################################
+
             # 'Precursor neutral mass (Da)' : '',
             # 'Neutral mass of peptide' : 'Calc m/z',# (including any variable modifications) (Da) 
             line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
@@ -334,53 +348,6 @@ class msfragger_20170103( ursgal.UNode ):
                 line_dict['MSFragger:Neutral mass of peptide'],
                 line_dict['Charge']
             )
-            # we have to reformat the modifications
-            # M|0$15.994915|3$15.994915 to 15.994915:0;15.994915:3
-            #reformat it in Xtandem style
-            if line_dict['Modifications'] == 'M':
-                line_dict['Modifications'] = ''
-            else:
-                mod_list = line_dict['Modifications']
-                reformatted_mod_list = []
-                for single_mod in mod_list.split('|'):
-                    if single_mod in ['M','']:
-                        continue
-                    else:
-                        pos, mass = single_mod.split('$')
-                        if pos == '0':
-                            split_mod = False
-                            if line_dict['Sequence'][0]== 'M':
-                                if self.params['translations']['label'] == '15N' and mass == '59.002518':
-                                    split_mod = True
-                                    insert_mod_list = [ (0, 42.010565),(1, 15.994915) ]
-                                elif mass == '58.00548':
-                                    split_mod = True
-                                    insert_mod_list = [ (0, 42.010565),(1, 15.994915) ]
-
-                                else:
-                                    pass
-                            elif line_dict['Sequence'][0]== 'C':
-                                if self.params['translations']['label'] == '15N' and mass == '100.029064':
-                                    split_mod = True
-                                    insert_mod_list = [ (0, 42.010565),(1,  57.021464) ]
-                                elif mass == '99.03203':
-                                    split_mod = True
-                                    insert_mod_list = [ (0, 42.010565),(1,  57.021464) ]
-                            #merge of acetylation and Oxidation
-                            # 42.010565 + 15.994915 = 58.00548
-                            if split_mod:
-                                for (new_mod_pos,new_mod_mass) in insert_mod_list:
-                                    reformatted_mod_list.append(
-                                        '{0}:{1}'.format(
-                                            new_mod_mass,
-                                            new_mod_pos
-                                        )
-                                    )
-                        else:
-                            reformatted_mod_list.append(
-                                '{0}:{1}'.format(mass,int(pos)+1)
-                            )
-                line_dict['Modifications'] = ';'.join( reformatted_mod_list )
 
             csv_writer.writerow( line_dict )
 

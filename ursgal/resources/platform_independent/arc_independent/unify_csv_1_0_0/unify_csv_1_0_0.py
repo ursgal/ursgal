@@ -20,6 +20,9 @@ import pprint
 import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
+import itertools
+from decimal import *
+
 # import time
 # increase the field size limit to avoid crash if protein merge tags
 # become too long does not work under windows
@@ -150,6 +153,57 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             # otherwise we should change that back so that it is skipped...
             modname2aa['Carbamidomethyl'] += ['U']
             fixed_mods['U'] = 'Carbamidomethyl'
+
+    if 'msfragger' in search_engine.lower():
+        ##########################
+        # msfragger mod merge block
+        # calculate possbile mod combos...
+        # if 15N add artifical mods...
+        getcontext().prec = 8
+        getcontext().rounding = ROUND_UP
+        mod_dict_list = params['mods']['opt'] + params['mods']['fix']
+        if use15N:
+            aminoacids_2_check = set()
+            for mod_dict in mod_dict_list:
+                aminoacids_2_check.add(mod_dict['aa'] )
+            additional_15N_modifications = []
+            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+                if aminoacid not in aminoacids_2_check:
+                    continue
+                additional_dict = {
+                    'name' : '_15N_{0}'.format(aminoacid),
+                    'mass' : N15_Diff,
+                    'aa'   : aminoacid,
+                    'pos'  : 'any'
+
+                }
+                additional_15N_modifications.append(
+                    additional_dict
+                )
+            mod_dict_list += additional_15N_modifications
+
+        mass_format_string = '{0:3.5f}'
+        mod_lookup = {} #d['name'] for d in self.params['mods']['opt']]
+        for mod_dict in mod_dict_list:
+            mod_lookup[ mod_dict['name'] ] = mod_dict
+
+        mod_names = sorted(list(mod_lookup.keys()))
+        mass_to_mod_combo = {}
+        # we cover all combocs of mods
+        for iter_length in range(2, len(mod_names) + 1):
+            for name_combo in itertools.combinations(mod_names, iter_length):
+                mass = 0
+                for name in name_combo:
+                    mass += Decimal(mod_lookup[name]['mass'])
+                # round to 5 decimals, at least valid for MSFragger 20170103
+                # mass = round(decimal.Decimal(mass), 5)
+                mass_to_mod_combo[ mass_format_string.format(mass) ] = {
+                    'name_combo' : name_combo,
+                }
+        # print(mass_to_mod_combo.keys())
+        # exit()
+        #msfragger mod merge block end
+        ##############################
 
     cc = ursgal.ChemicalComposition()
     ursgal.GlobalUnimodMapper._reparseXML()
@@ -330,7 +384,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             #update spectrum ID from block above
             line_dict['Spectrum ID'] = spectrum_id
 
-
             # now check for the basename in the scan rt lookup
             # possible cases:
             #   - input_file_basename
@@ -356,7 +409,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 else:
                     print(
                         '''
-Could not find scan ID {0} in scan_rt_lookup[ {1} ]
+[ WARNING ] Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                         '''.format(
                             spectrum_id,
                             input_file_basename
@@ -367,24 +420,114 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 scan_rt_lookup[ input_file_basename_for_rt_lookup ][ 'scan_2_rt' ]\
                     [ spectrum_id ]
 
-            #we should check if data has minute format or second format...
+            # We should check if data has minute format or second format...
             if scan_rt_lookup[ input_file_basename ]['unit'] == 'second':
                 rt_corr_factor = 1
             else:
                 rt_corr_factor = 60
             line_dict['Retention Time (s)'] = float( retention_time_in_minutes ) * rt_corr_factor
 
-            #
-            # now lets buffer for real !! :)
-            #
-            _ze_ultra_buffer_key_ = '{Sequence} || {Charge} || {Modifications} || '.format( **line_dict ) + params['label']
-            if _ze_ultra_buffer_key_ not in ze_only_buffer.keys():
+            #########################
+            # Buffering corrections #
+            #########################
+            main_buffer_key = '{Sequence} || {Charge} || {Modifications} || '.format(
+                **line_dict 
+            ) + params['label']
+            if main_buffer_key not in ze_only_buffer.keys():
                 line_dict_update = {}
-                #
-                # Modification block
+                ######################
+                # Modification block #
+                ######################
+                # check MSFragger crazy mod merge first...
+                if 'msfragger' in search_engine.lower():
+                    # we have to reformat the modifications
+                    # M|0$15.994915|3$15.994915 to 15.994915:0;15.994915:3
+                    # reformat it in Xtandem style
+                    ms_fragger_reformatted_mods = []
+                    if line_dict['Modifications'] != 'M':
+                        mod_list = line_dict['Modifications']
+                        for single_mod in mod_list.split('|'):
+                            if single_mod in ['M','']:
+                                continue
+                            else:
+                                msfragger_pos, raw_msfragger_mass = single_mod.split('$')
+                                msfragger_mass      = mass_format_string.format(
+                                    # round(decimal.Decimal(raw_msfragger_mass),5)
+                                    Decimal(raw_msfragger_mass)
+                                )
+                                msfragger_pos       = int(msfragger_pos)
+                                # print(pos, mass)
+                                if msfragger_mass in mass_to_mod_combo.keys():
+                                    combo_explainable = set([True])
+                                    tmp_mods = []
+                                    for new_name in mass_to_mod_combo[msfragger_mass]['name_combo']:
+                                        meta_mod_info = mod_lookup[new_name]
+                                        single_mod_check = set([True])
+                                        '''
+                                        meta_mod_info = {
+                                            '_id': 0,
+                                            'aa': '*',
+                                            'composition': {'C': 2, 'H': 2, 'O': 1},
+                                            'id': '1',
+                                            'mass': 42.010565,
+                                            'name': 'Acetyl',
+                                            'org': '*,opt,Prot-N-term,Acetyl',
+                                            'pos': 'Prot-N-term',
+                                            'unimod': True},
+                                        '''
+                                        #check aa
+                                        if meta_mod_info['aa'] != '*':
+                                            if meta_mod_info['aa'] != line_dict['Sequence'][msfragger_pos]:
+                                                single_mod_check.add(False)
+                                        # check pos
+                                        pos_to_check = None
+                                        if meta_mod_info['pos']== 'Prot-N-term':
+                                            pos_to_check = 0
+                                        elif meta_mod_info['pos'] == 'Prot-C-term':
+                                            pos_to_check = int(len(line_dict['Sequence'])) - 1
+                                        else:
+                                            pass
+                                        if pos_to_check is not None:
+                                            pos_in_peptide_for_format_str = pos_to_check
+                                            if pos_to_check != msfragger_pos:
+                                                single_mod_check.add(False)
+                                        else:
+                                            # MS Frager starts counting at zero
+                                            pos_in_peptide_for_format_str = msfragger_pos + 1  
 
-                # some engines do not report fixed modifications
-                # include in unified csv
+                                        if all(single_mod_check):
+                                            # we kepp mass here so that the 
+                                            # correct name is added later in already
+                                            # existing code
+                                            tmp_mods.append(
+                                                '{0}:{1}'.format(
+                                                    meta_mod_info['mass'],
+                                                    pos_in_peptide_for_format_str
+                                                )
+                                            )
+                                        else:
+                                            combo_explainable.add(False)
+                                    if all(combo_explainable):
+                                        ms_fragger_reformatted_mods += tmp_mods
+                                else:
+                                    # MS Frager starts counting at zero
+                                    ms_fragger_reformatted_mods.append(
+                                        '{0}:{1}'.format(
+                                            raw_msfragger_mass,
+                                            msfragger_pos + 1
+                                        )
+                                    )
+                        # print(line_dict['Modifications'])
+                        # print(mass_to_mod_combo.keys())
+                        # print(ms_fragger_reformatted_mods)
+                        # exit()
+                        line_dict['Modifications'] = ';'.join( ms_fragger_reformatted_mods )
+                    else:
+                        line_dict['Modifications'] = ''
+
+                ##################################################
+                # Some engines do not report fixed modifications #
+                ##################################################
                 if fixed_mods != {}:
                     for pos, aminoacid in enumerate(line_dict['Sequence']):
                         if aminoacid in fixed_mods.keys():
@@ -400,10 +543,11 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 tmp_mods = line_dict['Modifications'].split(';')
                                 tmp_mods.append(tmp)
                                 line_dict['Modifications'] = ';'.join( tmp_mods )
-
-                # Myrimatch and msgf+ can not handle 15N that easily
-                # report all AAs moded with unknown modification
-                # Note: masses are checked below to avoid any mismatch
+                ##################################################################
+                # Myrimatch, MSGF+, and MSFragger can not handle 15N that easily #
+                # Report all AAs moded with unknown modification                 #
+                # Note: masses are checked below to avoid any mismatch           #
+                ##################################################################
                 if use15N:
                     if 'myrimatch' in search_engine.lower() or \
                             'msgfplus_v9979' in search_engine.lower():
@@ -581,31 +725,9 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                             '{0}:1'.format( unimod_name ),
                             '{0}:0'.format( unimod_name )
                             )
-                #has been moved to upeptide mapperm to get correct sequences for mapping
-                # for aa_to_replace, replace_dict in aa_exception_dict.items():
-                #     if aa_to_replace in line_dict['Sequence']:
-                #         #change mods only if unimod has to be changed...
-                #         if 'unimod_name' in replace_dict.keys():
-                #             for r_pos, aa in enumerate(line_dict['Sequence']):
-                #                 if aa == aa_to_replace:
-                #                     index_of_U = r_pos + 1
-                #                     unimod_name = replace_dict['unimod_name']
-                #                     if cam and replace_dict['original_aa'] == 'C':
-                #                         unimod_name = replace_dict['unimod_name_with_cam']
-                #                     new_mod = '{0}:{1}'.format(
-                #                         unimod_name,
-                #                         index_of_U
-                #                     )
-                #                     if line_dict_update['Modifications'] == '':
-                #                         line_dict_update['Modifications'] += new_mod
-                #                     else:
-                #                         line_dict_update['Modifications'] += ';{0}'.format(
-                #                             new_mod
-                #                         )
-                #         line_dict['Sequence'] = line_dict['Sequence'].replace(
-                #             aa_to_replace,
-                #             replace_dict['original_aa']
-                #         )
+                ##########################
+                # Modification block end #
+                ##########################
 
                 line_dict_update['Sequence'] = line_dict['Sequence']
                 #
@@ -686,9 +808,9 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 # ------------
                 # BUFFER END
                 # -----------
-                ze_only_buffer[ _ze_ultra_buffer_key_ ] = line_dict_update
+                ze_only_buffer[ main_buffer_key ] = line_dict_update
 
-            line_dict_update = ze_only_buffer[ _ze_ultra_buffer_key_ ]
+            line_dict_update = ze_only_buffer[ main_buffer_key ]
             line_dict.update( line_dict_update )
 
             # protein block, only for database search engine
