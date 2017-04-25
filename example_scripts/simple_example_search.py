@@ -44,10 +44,9 @@ def main():
         xtandem = 'xtandem_sledgehammer'
 
     engine_list = [
-        # 'omssa',
+        'omssa',
         xtandem,
-        # 'msgfplus_v2016_09_16',
-        'msamanda_1_0_0_7504'
+        'msgfplus_v2016_09_16',
     ]
 
     mzML_file = os.path.join(
