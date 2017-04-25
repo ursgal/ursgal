@@ -21,11 +21,13 @@ class msfragger_20170103( ursgal.UNode ):
 
     Note:
         Addition of user amino acids not implemented yet. Only mzML search
-        possible at the moment.
+        possible at the moment. The mgf file can still be passed to the node,
+        but the mzML has to be in the same folder as the mgf.
 
     Warning:
-        Still in testing phase
-        15N search may still be errorprone. Use with care!
+        Still in testing phase! 
+        Metabolic labeling based 15N search may still be errorprone. Use with
+        care!
 
     """
     META_INFO = {
@@ -118,6 +120,10 @@ class msfragger_20170103( ursgal.UNode ):
 
         additional_15N_modifications = []
         if self.params['translations']['_grouped_by_translated_key']['label']['label'] == '15N':
+            self.print_info(
+                'Search with label=15N may still be errorprone. Evaluate with care!',
+                caller = 'WARNING'
+            )
             for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
                 existing = False
                 for mod_dict in self.params[ 'mods' ][ 'fix' ]:

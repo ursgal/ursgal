@@ -187,7 +187,10 @@ class xtandem_piledriver( ursgal.UNode ):
             )
             with open( xml_file_path, 'w') as out:
                 print( content, file=out)
-                self.print_info('wrote input file {0}'.format( file_name ))
+                self.print_info(
+                    'Wrote input file {0}'.format( file_name ),
+                    caller = 'preflight'
+                )
 
                 self.created_tmp_files.append( xml_file_path )
         return self.params

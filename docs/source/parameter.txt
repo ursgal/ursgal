@@ -58,7 +58,7 @@ _extentions
 
 information of extentions
 
-:Default value: ['.csv', '.den', '.dta', '.dta.txt', '.fasta', '.gaml', '.kojak.txt', '.mgf', '.ms2', '.mzData', '.mzML', '.mzML.gz', '.mzXML', '.mzid', '.mzid.gz', '.pep.xml', '.perc.inter.txt', '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt', '.pkl', '.svg', '.tsv', '.txt', '.xml', '.xml.gz']
+:Default value: ['.csv', '.den', '.dta', '.dta.txt', '.fasta', '.gaml', '.kojak.txt', '.mgf', '.ms2', '.mzData', '.mzML', '.mzML.gz', '.mzXML', '.mzid', '.mzid.gz', '.pep.xml', '.perc.inter.txt', '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt', '.pkl', '.raw', '.svg', '.tsv', '.txt', '.xml', '.xml.gz']
 :type: dict
 :triggers rerun: False
             
@@ -8902,15 +8902,17 @@ Available in unodes
 """""""""""""""""""
 
 * unify_csv_1_0_0
+* upeptide_mapper_1_0_0
 
 Ursgal value translations for *word_len*
 """"""""""""""""""""""""""""""""""""""""
 
- ================= =================
- Style             Translation      
- ================= =================
- unify_csv_style_1 word_len         
- ================= =================
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ unify_csv_style_1       word_len               
+ upeptide_mapper_style_1 word_len               
+ ======================= =======================
 
 .. raw:: html
 

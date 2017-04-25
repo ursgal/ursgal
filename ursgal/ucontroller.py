@@ -1685,7 +1685,7 @@ class UController(ursgal.UNode):
                 * :meth:`.convert_to_mgf_and_update_rt_lookup` (if required)
                 * :meth:`.search_mgf`
                 * :meth:`.convert_results_to_csv`
-                * :meth:`.map_peptides`
+                * :meth:`.map_peptides_to_fasta`
                 * :meth:`.unify_csv`
         '''
 
@@ -1746,7 +1746,7 @@ class UController(ursgal.UNode):
         if database_search:
             #if mapper version == 'COmpomics stuff'
             #execute this node and in map peptides, these results are read...
-            mapped_csv_search_results = self.map_peptides(
+            mapped_csv_search_results = self.map_peptides_to_fasta(
                 input_file       = csv_search_results,
                 output_file_name = output_file_name,
                 force            = force,
@@ -2080,7 +2080,7 @@ class UController(ursgal.UNode):
             output_file_name = output_file_name
         )
 
-    def map_peptides(self, input_file, force=False, output_file_name=None):
+    def map_peptides_to_fasta(self, input_file, force=False, output_file_name=None):
         '''
         The ucontroller function to call the upeptide_mapper node.
 
@@ -2093,9 +2093,10 @@ class UController(ursgal.UNode):
         Available converter nodes
             * upeptide_mapper_1_0_0
 
-        Available converter classef of upeptide_mapper_1_0_0
-            * upapa_v3 (default)
-            * upapa_v2
+        Available converter classes of upeptide_mapper_1_0_0
+            * UPeptideMapper_v3 (default)
+            * UPeptideMapper_v4 (no buffering and enhanced speed to v3)
+            * UPeptideMapper_v2
 
         Keyword Arguments:
             input_file (str): The complete path to the input, input file has

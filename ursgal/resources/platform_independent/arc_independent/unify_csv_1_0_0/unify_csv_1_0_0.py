@@ -21,6 +21,7 @@ import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
 import itertools
+from decimal import *
 
 # import time
 # increase the field size limit to avoid crash if protein merge tags
@@ -155,29 +156,51 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     if 'msfragger' in search_engine.lower():
         ##########################
-        #msfragger mod merge block
-        #calculate possbile mod combos...
+        # msfragger mod merge block
+        # calculate possbile mod combos...
+        # if 15N add artifical mods...
+        getcontext().prec = 8
+        getcontext().rounding = ROUND_UP
+        mod_dict_list = params['mods']['opt'] + params['mods']['fix']
+        if use15N:
+            aminoacids_2_check = set()
+            for mod_dict in mod_dict_list:
+                aminoacids_2_check.add(mod_dict['aa'] )
+            additional_15N_modifications = []
+            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+                if aminoacid not in aminoacids_2_check:
+                    continue
+                additional_dict = {
+                    'name' : '_15N_{0}'.format(aminoacid),
+                    'mass' : N15_Diff,
+                    'aa'   : aminoacid,
+                    'pos'  : 'any'
+
+                }
+                additional_15N_modifications.append(
+                    additional_dict
+                )
+            mod_dict_list += additional_15N_modifications
+
         mass_format_string = '{0:3.5f}'
         mod_lookup = {} #d['name'] for d in self.params['mods']['opt']]
-        for mod_dict in params['mods']['opt']+params['mods']['fix']:
+        for mod_dict in mod_dict_list:
             mod_lookup[ mod_dict['name'] ] = mod_dict
 
         mod_names = sorted(list(mod_lookup.keys()))
         mass_to_mod_combo = {}
         # we cover all combocs of mods
-        for iter_length in range(2,len(mod_names)+1):
+        for iter_length in range(2, len(mod_names) + 1):
             for name_combo in itertools.combinations(mod_names, iter_length):
                 mass = 0
                 for name in name_combo:
-                    mass += mod_lookup[name]['mass']
-                #round to 6 decimals, at least valid for MSFragger 20170103
-                # print(mass)
-                # print('{0:3.7f}'.format(mass))
-                mass = round(float(mass), 5)
+                    mass += Decimal(mod_lookup[name]['mass'])
+                # round to 5 decimals, at least valid for MSFragger 20170103
+                # mass = round(decimal.Decimal(mass), 5)
                 mass_to_mod_combo[ mass_format_string.format(mass) ] = {
                     'name_combo' : name_combo,
                 }
-        # print(mass_to_mod_combo)
+        # print(mass_to_mod_combo.keys())
         # exit()
         #msfragger mod merge block end
         ##############################
@@ -429,7 +452,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             else:
                                 msfragger_pos, raw_msfragger_mass = single_mod.split('$')
                                 msfragger_mass      = mass_format_string.format(
-                                    round(float(raw_msfragger_mass),5)
+                                    # round(decimal.Decimal(raw_msfragger_mass),5)
+                                    Decimal(raw_msfragger_mass)
                                 )
                                 msfragger_pos       = int(msfragger_pos)
                                 # print(pos, mass)
