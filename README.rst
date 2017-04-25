@@ -169,6 +169,7 @@ Copyright 2014-2015 by authors and contributors in alphabetical order
 * Johannes Leufken
 * Purevdulam Oyunchimeg
 * Stefan Schulze
+* Kazuhiko Sugimoto
 * Lukas Vaut
 
 Contact
