@@ -14,6 +14,13 @@ General
         http://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
         In Ursgal the parameter `java_-Xmx` can be used to adjust the Java memory
         usage.
+        
+    * MS-GF+ (or another Java based engine) crashes
+    
+        Please make sure that you have installed the current Java Runtime Environment
+        Download (Java SE Development Kit 8u131): 
+        http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
 
 Windows 10
 ##########
