@@ -37,8 +37,9 @@ Windows 10
 ##########
 
     * MS Amanda can not load .fasta files
-    * calculating the md5 can cause problems e.g. while executing test. This is due to different line endings
-         on Unix and Windows systems. The test functions test for both md5, so this problem should be avoided.
+    * calculating the md5 can cause problems e.g. while executing test. 
+         This is due to different line endings on Unix and Windows systems. The test functions test for both md5, 
+         so this problem should be avoided.
 
 
 MONO
