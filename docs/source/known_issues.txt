@@ -25,7 +25,7 @@ General
 Windows general
 ###############
 
-    * Some modules dan not be compiled/installed with python3.4+ using pip. 
+    * Some modules can not be compiled/installed with python3.4+ using pip. 
         
         E.g. pyahocorasick can not be installed. This has the consequence, that on Windows
         the old peptide mapper version is used. There are several workarounds to compile and

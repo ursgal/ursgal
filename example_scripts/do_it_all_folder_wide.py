@@ -108,10 +108,9 @@ def main(folder=None, profile=None, target_decoy_database=None):
                 )
             result_files.append(filtered_validated_results)
 
-        if len(result_files) > 1:
-            results_all_files = uc.merge_csvs(
-                input_files = result_files,
-            )
+        results_all_files = uc.merge_csvs(
+            input_files = result_files,
+        )
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
