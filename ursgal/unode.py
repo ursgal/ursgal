@@ -88,6 +88,16 @@ class Meta_UNode(type):
                 engine
             )
 
+        alternative_exe_folder = initd_klass.META_INFO.get(
+            'uses_unode',
+            None
+        )
+        # exit()
+        if alternative_exe_folder is not None:
+            kwargs['engine_path'] = kwargs['engine_path'].replace(
+                engine,
+                alternative_exe_folder
+            )
         initd_klass.exe = kwargs['engine_path']
 
         obligatory_methods = [

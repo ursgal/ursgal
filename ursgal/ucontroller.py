@@ -241,12 +241,26 @@ class UController(ursgal.UNode):
                 wrapper_meta_info = getattr(wrapper_class, 'META_INFO')
             else:
                 wrapper_meta_info = {}
-            engine            = wrapper_meta_info.get('engine', None)
-            include_in_git    = wrapper_meta_info.get('include_in_git', None)
-            in_development    = wrapper_meta_info.get('in_development', True)
-            # not sure if we need those below ...
-            zip_md5           = wrapper_meta_info.get('zip_md5', None)
-            cannot_distribute = wrapper_meta_info.get('cannot_distribute', None)
+            engine            = wrapper_meta_info.get(
+                'engine',
+                None
+            )
+            include_in_git    = wrapper_meta_info.get(
+                'include_in_git',
+                None
+            )
+            in_development    = wrapper_meta_info.get(
+                'in_development',
+                True
+            )
+            zip_md5           = wrapper_meta_info.get(
+                'zip_md5',
+                None
+            )
+            cannot_distribute = wrapper_meta_info.get(
+                'cannot_distribute',
+                None
+            )
             # and if so please change cannot_distribute >> distributable
 
             unodes[ wrapper_module_name ] = {
@@ -262,6 +276,12 @@ class UController(ursgal.UNode):
                 'import_status'     : 'n/d',
                 '_wrapper_class'    : wrapper_class,
             }
+            uses_unode = wrapper_meta_info.get(
+                'uses_unode',
+                None
+            )
+            if uses_unode is not None:
+                unodes[ wrapper_module_name ]['uses_unode'] = uses_unode
 
             engine_type = wrapper_meta_info.get('engine_type', {})
             for meta_type, meta_type_bool in engine_type.items():
@@ -459,15 +479,16 @@ class UController(ursgal.UNode):
                 if exe_name is None:
                     continue
 
-                # print(platform_key, engine, kb_info)
-                # exit()
-
                 engine_folder_path = os.path.join( engine_folder, engine )
                 engine_exe_path = os.path.join( engine_folder_path, exe_name )
 
                 self.unodes[ engine ]['resource_folder'] = engine_folder_path
 
-                if os.path.exists( engine_exe_path ):
+                alternative_exe_folder = kb_info.get(
+                    'uses_unode',
+                    None
+                )
+                if os.path.exists( engine_exe_path ) or alternative_exe_folder is not None:
                     _wrapper_class = self.unodes[ engine ]['_wrapper_class']
                     try:
                         self.unodes[ engine ]['class'] = _wrapper_class(

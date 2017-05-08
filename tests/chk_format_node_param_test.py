@@ -115,6 +115,10 @@ node_meta_info = {
         'essential' : True,
         'types'     : [str],
     },
+    'uses_unode' : {
+        'essential' : False,
+        'types'     : [str],
+    },
 }
 
 style_list = [
@@ -334,7 +338,7 @@ def chk_json_item( parent_name='', essential=False, key_list=[], dict_item={}, \
         chk_dict_keys(
             parent_name,
             key_list,
-            dict_item 
+            dict_item
         )
 
     for key_name in key_list:
