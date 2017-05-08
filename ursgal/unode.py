@@ -84,12 +84,11 @@ class Meta_UNode(type):
             None
         )
         if translation_style is not None:
-            Meta_UNode._uparam_mapper.lookup['style_2_engine'][ translation_style ].add(
+            Meta_UNode._uparam_mapper.lookup[ 'style_2_engine' ][ translation_style ].add(
                 engine
             )
 
         initd_klass.exe = kwargs['engine_path']
-
 
         obligatory_methods = [
             'preflight',
@@ -110,9 +109,6 @@ class Meta_UNode(type):
 
         if hasattr( initd_klass, '_run_after_meta_init'):
             initd_klass._after_init_meta_callback( *args, **kwargs )
-
-
-
 
         return initd_klass
 

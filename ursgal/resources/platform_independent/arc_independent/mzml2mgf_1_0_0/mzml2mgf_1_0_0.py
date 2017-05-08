@@ -8,8 +8,6 @@ Usage:
 Note:
 1) A new mgf file will be created at the same location as the mzML file
 2) only ms2 are converted to mgf
-3) on /media/plan-f/mzML/ there is a local linked pymzML folder !
-4) this
 '''
 # 18.11.2014
 # By C. Fufezan
@@ -21,7 +19,6 @@ import argparse
 import pymzml
 
 
-
 def _determine_mzml_name_base( file_name, prefix ):
     file_name = os.path.basename( file_name )
     if file_name.upper().endswith('.MZML.GZ'):
@@ -29,7 +26,11 @@ def _determine_mzml_name_base( file_name, prefix ):
     elif file_name.upper().endswith('.MZML'):
         mzml_name_base = file_name[:-5]
     else:
-        raise Exception("Can not determine mzml base name from {0}".format( file_name))
+        raise Exception(
+            "Can not determine mzml base name from {0}".format(
+                file_name
+            )
+        )
     if prefix is not None and prefix is not '':
         mzml_name_base = '_'.join( [prefix, mzml_name_base] )
     return mzml_name_base
@@ -90,7 +91,7 @@ def main(
             continue
         scan_time, unit = spec['scan time']
         spectrum_id = spec['id']
-        if scan_inclusion_list != None:
+        if scan_inclusion_list is not None:
             if int(spectrum_id) not in scan_inclusion_list:
                 continue
 
@@ -101,7 +102,6 @@ def main(
         if scan_skip_modulo_step is not None:
             if mgf_entries % scan_skip_modulo_step != 0:
                 continue
-
 
         tmp['rt_2_scan'][ scan_time ] = '{id}'.format(**spec)
         tmp['scan_2_rt'][ '{id}'.format(**spec) ] = scan_time

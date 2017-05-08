@@ -93,7 +93,7 @@ class xtandem_vengeance( ursgal.UNode ):
         )
 
         for file_name in xml_required:
-            file_info_key = file_name.replace('.xml','')
+            file_info_key = file_name.replace('.xml', '')
             xml_file_path = os.path.join(
                 self.params['output_dir_path'],
                 file_name
@@ -103,7 +103,7 @@ class xtandem_vengeance( ursgal.UNode ):
         #
         # building command_list !
         #
-        self.params['command_list'] =[
+        self.params['command_list'] = [
             self.exe,
             '{input}'.format(**self.params['translations']),
         ]
