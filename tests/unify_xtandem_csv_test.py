@@ -92,6 +92,7 @@ def unify_xtandem( test_dict ):
             'Spectrum ID',
             'Modifications',
             'Spectrum Title',
+            'Complies search criteria',
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]
