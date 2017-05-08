@@ -28,12 +28,12 @@ class quameter_1_1_10165( ursgal.UNode ):
         'input_multi_file'            : False,
         'input_extensions'            : ['.raw', '.mzML'],
         'output_extensions'           : ['.tsv'],
-        'create_own_folder'           : True,
+        'create_own_folder'           : False,
         'in_development'              : False,
         'include_in_git'              : False,
         'cannot_distribute'           : True,
         'engine_type'                 : {
-            # 'search_engine' : True,
+            'search_engine' : False,
         },
         'engine'                      : {
             'linux'    : {
@@ -95,7 +95,7 @@ class quameter_1_1_10165( ursgal.UNode ):
         self.params[ 'command_list' ] = [
             self.exe,
             self.params['translations']['mzml_input_file'],
-            '--MetricsType',
+            '-MetricsType',
             'idfree'
         ]
 

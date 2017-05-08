@@ -30,15 +30,16 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
         'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : None,
-        'include_in_git'     : None,
+        'include_in_git'     : False,
         'in_development'     : False,
+        'cannot_distribute'  : True,
         'utranslation_style' : 'msgfplus_style_1',
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'     : 'MSGFPlus.jar',
-                    'url'     : 'https://omics.pnl.gov/sites/default/files/MSGFPlus.zip',
-                    'zip_md5' : '80ba46ae6fd3b99a1599ff665d683f6f',
+                    'url'     : '',
+                    'zip_md5' : '',
                 },
             },
         },
@@ -47,6 +48,7 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
             'Mohammed S, Heck AJ, Pevzner PA. (2010) The Generating Function '\
             'of CID, ETD, and CID/ETD Pairs of Tandem Mass Spectra: '\
             'Applications to Database Search.',
+        'uses_unode' : 'msgfplus_v2016_09_16',
     }
 
     def __init__(self, *args, **kwargs):

@@ -11,4 +11,4 @@ install:
   - python install_resources.py omssa_2_1_9
   - pip install -r requirements.txt
 
-script: nosetests
+script: nosetests --with-coverage
