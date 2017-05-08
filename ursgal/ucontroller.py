@@ -745,31 +745,48 @@ class UController(ursgal.UNode):
         Returns:
             str: Path of the output file
         '''
-        engine_name = 'merge_csvs_1_0_0'
-        self.input_file_sanity_check(
-            input_files,
-            engine=engine_name,
-            multi=True
-        )
+        one_file_str  = isinstance(input_files, str)
+        one_file_list = isinstance(input_files, list) and len(input_files) == 1
+        if one_file_str or one_file_list:
+            # only a single file was specified, nothing to merge
+            # -> return the unchanged input file
+            self.print_info(
+                'merge_csvs() received only one input file, '
+                'continuing without merging',
+                caller = "WARNING"
+            )
+            if one_file_list:
+                output_file = input_files[0]
+            elif one_file_str:
+                output_file = input_files
+        else:
+            # multiple files were specified (expected!), merge them:
+            engine_name = 'merge_csvs_1_0_0'
+            self.input_file_sanity_check(
+                input_files,
+                engine=engine_name,
+                multi=True
+            )
 
-        answer = self.prepare_unode_run(
-            input_files,
-            output_file = output_file_name,
-            engine = engine_name,
-            force  = force
-        )
+            answer = self.prepare_unode_run(
+                input_files,
+                output_file = output_file_name,
+                engine = engine_name,
+                force  = force
+            )
 
-        search_engines_of_merged_files = []
-        for d in self.io['output']['params']['input_file_dicts']:
-            search_engines_of_merged_files.append( d["last_engine"] )
+            search_engines_of_merged_files = []
+            for d in self.io['output']['params']['input_file_dicts']:
+                search_engines_of_merged_files.append( d["last_engine"] )
 
-        report = self.run_unode_if_required(
-            force, engine_name, answer,
-            history_addon = {
-                'search_engines_of_merged_files' : search_engines_of_merged_files
-            }
-        )
-        return report['output_file']
+            report = self.run_unode_if_required(
+                force, engine_name, answer,
+                history_addon = {
+                    'search_engines_of_merged_files' : search_engines_of_merged_files
+                }
+            )
+            output_file = report['output_file']
+        return output_file
 
     def combine_search_results(self, input_files, engine, force=None, output_file_name=None ):
         '''

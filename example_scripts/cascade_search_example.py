@@ -177,13 +177,10 @@ def search(validation_engine):
             )
             validated_results.append( validated_search_results )
 
-        if len(validated_results) == 1:
-            validated_results_from_all_engines = validated_results[0]
-        else:
-            validated_results_from_all_engines = uc.merge_csvs(
-                input_files = sorted(validated_results),
-                force      = force,
-            )
+        validated_results_from_all_engines = uc.merge_csvs(
+            input_files = sorted(validated_results),
+            force      = force,
+        )
         uc.params['csv_filter_rules'] = [
             ['Is decoy','equals','false'],
             ['PEP','lte',0.01],
@@ -226,12 +223,9 @@ def search(validation_engine):
                 )
             )
             
-    if len(result_files) == 1:
-            results_all_files = result_files[0]
-    else:
-        results_all_files = uc.merge_csvs(
-            input_files = sorted(result_files),
-        )
+    results_all_files = uc.merge_csvs(
+        input_files = sorted(result_files),
+    )
     return results_all_files
 
 
