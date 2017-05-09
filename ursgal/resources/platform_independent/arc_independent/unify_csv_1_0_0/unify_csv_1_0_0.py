@@ -182,7 +182,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 )
             mod_dict_list += additional_15N_modifications
 
-        mass_format_string = '{0:3.5f}'
+        mass_format_string = '{0:3.3f}'
         mod_lookup = {} #d['name'] for d in self.params['mods']['opt']]
         for mod_dict in mod_dict_list:
             mod_lookup[ mod_dict['name'] ] = mod_dict
@@ -441,89 +441,93 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 # check MSFragger crazy mod merge first...
                 if 'msfragger' in search_engine.lower():
                     # we have to reformat the modifications
-                    # M|0$15.994915|3$15.994915 to 15.994915:0;15.994915:3
+                    # M|14$15.994915|17$57.021465 to 15.994915:14;57.021465:17
                     # reformat it in Xtandem style
                     ms_fragger_reformatted_mods = []
-                    if line_dict['Modifications'] != 'M':
+                    if line_dict['Modifications'] == 'M':
+                        # M stand for Modifications here, not Methionine
+                        line_dict['Modifications'] = ''
+                        continue
+                    else:
                         mod_list = line_dict['Modifications']
                         for single_mod in mod_list.split('|'):
                             if single_mod in ['M','']:
                                 continue
-                            else:
-                                msfragger_pos, raw_msfragger_mass = single_mod.split('$')
-                                msfragger_mass      = mass_format_string.format(
-                                    # round(decimal.Decimal(raw_msfragger_mass),5)
-                                    Decimal(raw_msfragger_mass)
-                                )
-                                msfragger_pos       = int(msfragger_pos)
-                                # print(pos, mass)
-                                if msfragger_mass in mass_to_mod_combo.keys():
-                                    combo_explainable = set([True])
-                                    tmp_mods = []
-                                    for new_name in mass_to_mod_combo[msfragger_mass]['name_combo']:
-                                        meta_mod_info = mod_lookup[new_name]
-                                        single_mod_check = set([True])
-                                        '''
-                                        meta_mod_info = {
-                                            '_id': 0,
-                                            'aa': '*',
-                                            'composition': {'C': 2, 'H': 2, 'O': 1},
-                                            'id': '1',
-                                            'mass': 42.010565,
-                                            'name': 'Acetyl',
-                                            'org': '*,opt,Prot-N-term,Acetyl',
-                                            'pos': 'Prot-N-term',
-                                            'unimod': True},
-                                        '''
-                                        #check aa
-                                        if meta_mod_info['aa'] != '*':
-                                            if meta_mod_info['aa'] != line_dict['Sequence'][msfragger_pos]:
-                                                single_mod_check.add(False)
-                                        # check pos
-                                        pos_to_check = None
-                                        if meta_mod_info['pos']== 'Prot-N-term':
-                                            pos_to_check = 0
-                                        elif meta_mod_info['pos'] == 'Prot-C-term':
-                                            pos_to_check = int(len(line_dict['Sequence'])) - 1
-                                        else:
-                                            pass
-                                        if pos_to_check is not None:
-                                            pos_in_peptide_for_format_str = pos_to_check
-                                            if pos_to_check != msfragger_pos:
-                                                single_mod_check.add(False)
-                                        else:
-                                            # MS Frager starts counting at zero
-                                            pos_in_peptide_for_format_str = msfragger_pos + 1  
+                            msfragger_pos, raw_msfragger_mass = single_mod.split('$')
+                            msfragger_mass      = mass_format_string.format(
+                                # mass rounded as defined above
+                                Decimal(raw_msfragger_mass)
+                            )
+                            msfragger_pos       = int(msfragger_pos)
+                            # print(msfragger_pos, msfragger_mass)
+                            # import pprint
+                            # pprint.pprint(mass_to_mod_combo)
+                            # exit()
+                            if msfragger_mass in mass_to_mod_combo.keys():
+                                combo_explainable = set([True])
+                                tmp_mods = []
+                                for new_name in mass_to_mod_combo[msfragger_mass]['name_combo']:
+                                    meta_mod_info = mod_lookup[new_name]
+                                    single_mod_check = set([True])
+                                    '''
+                                    meta_mod_info = {
+                                        '_id': 0,
+                                        'aa': '*',
+                                        'composition': {'C': 2, 'H': 2, 'O': 1},
+                                        'id': '1',
+                                        'mass': 42.010565,
+                                        'name': 'Acetyl',
+                                        'org': '*,opt,Prot-N-term,Acetyl',
+                                        'pos': 'Prot-N-term',
+                                        'unimod': True},
+                                    '''
+                                    #check aa
+                                    if meta_mod_info['aa'] != '*':
+                                        if meta_mod_info['aa'] != line_dict['Sequence'][msfragger_pos]:
+                                            single_mod_check.add(False)
+                                    # check pos
+                                    pos_to_check = None
+                                    if meta_mod_info['pos']== 'Prot-N-term':
+                                        pos_to_check = 0
+                                    elif meta_mod_info['pos'] == 'Prot-C-term':
+                                        pos_to_check = int(len(line_dict['Sequence'])) - 1
+                                    else:
+                                        pass
+                                    if pos_to_check is not None:
+                                        pos_in_peptide_for_format_str = pos_to_check
+                                        if pos_to_check != msfragger_pos:
+                                            single_mod_check.add(False)
+                                    else:
+                                        # MS Frager starts counting at zero
+                                        pos_in_peptide_for_format_str = msfragger_pos + 1  
 
-                                        if all(single_mod_check):
-                                            # we kepp mass here so that the 
-                                            # correct name is added later in already
-                                            # existing code
-                                            tmp_mods.append(
-                                                '{0}:{1}'.format(
-                                                    meta_mod_info['mass'],
-                                                    pos_in_peptide_for_format_str
-                                                )
+                                    if all(single_mod_check):
+                                        # we keep mass here so that the 
+                                        # correct name is added later in already
+                                        # existing code
+                                        tmp_mods.append(
+                                            '{0}:{1}'.format(
+                                                meta_mod_info['mass'],
+                                                pos_in_peptide_for_format_str
                                             )
-                                        else:
-                                            combo_explainable.add(False)
-                                    if all(combo_explainable):
-                                        ms_fragger_reformatted_mods += tmp_mods
-                                else:
-                                    # MS Frager starts counting at zero
-                                    ms_fragger_reformatted_mods.append(
-                                        '{0}:{1}'.format(
-                                            raw_msfragger_mass,
-                                            msfragger_pos + 1
                                         )
+                                    else:
+                                        combo_explainable.add(False)
+                                if all(combo_explainable):
+                                    ms_fragger_reformatted_mods += tmp_mods
+                            else:
+                                # MS Frager starts counting at zero
+                                ms_fragger_reformatted_mods.append(
+                                    '{0}:{1}'.format(
+                                        raw_msfragger_mass,
+                                        msfragger_pos + 1
                                     )
+                                )
                         # print(line_dict['Modifications'])
                         # print(mass_to_mod_combo.keys())
                         # print(ms_fragger_reformatted_mods)
                         # exit()
                         line_dict['Modifications'] = ';'.join( ms_fragger_reformatted_mods )
-                    else:
-                        line_dict['Modifications'] = ''
 
                 ##################################################
                 # Some engines do not report fixed modifications #

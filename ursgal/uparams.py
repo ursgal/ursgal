@@ -7920,6 +7920,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : 0,
                 'xtandem_sledgehammer' : 0,
                 'xtandem_vengeance'    : 0,
+                'msfragger_20170103'   : 0,
             },
         },
         'uvalue_type' : 'str',
