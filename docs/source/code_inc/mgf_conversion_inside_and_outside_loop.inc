@@ -62,7 +62,7 @@
 	        output_file = R.search(
 	            input_file = mgf_file,
 	            engine     = engine,
-	            output_file_name = 'some_userdefined_name'
+	            # output_file_name = 'some_userdefined_name'
 	        )
 	        output_files.append( output_file )
 	
@@ -75,7 +75,7 @@
 	        output_file = R.search(
 	            input_file = mzML_file, # from OpenMS example files
 	            engine     = engine,
-	            output_file_name = 'another_fname',
+	            # output_file_name = 'another_fname',
 	        )
 	        output_files.append( output_file )
 	

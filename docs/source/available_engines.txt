@@ -3,18 +3,9 @@
 Available Search Engines
 ========================
 
-MS Amanda
--------------------
-
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5242.msamanda_1_0_0_5242
-   :members:
-
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
-
-   :members:
 
 MS-GF+
------------
+------
 
 .. autoclass:: ursgal.wrappers.msgfplus_v9979.msgfplus_v9979
    :members:
@@ -22,33 +13,54 @@ MS-GF+
 .. autoclass:: ursgal.wrappers.msgfplus_v2016_09_16.msgfplus_v2016_09_16
    :members:
 
+
+X!Tandem
+--------
+
+.. autoclass:: ursgal.wrappers.xtandem_vengeance.xtandem_vengeance
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_sledgehammer.xtandem_sledgehammer
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_piledriver.xtandem_piledriver
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_jackhammer.xtandem_jackhammer
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_cyclone_2010.xtandem_cyclone_2010
+   :members:
+
+
+OMSSA
+-----
+
+.. autoclass:: ursgal.wrappers.omssa_2_1_9.omssa_2_1_9
+   :members:
+
+
+MSFragger 
+---------
+
+.. autoclass:: ursgal.wrappers.msfragger_20170103.msfragger_20170103
+   :members:
+
+
+MS Amanda
+---------
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5242.msamanda_1_0_0_5242
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
+   :members:
+
 MyriMatch
------------------
+---------
 
 .. autoclass:: ursgal.wrappers.myrimatch_2_1_138.myrimatch_2_1_138
    :members:
 
 .. autoclass:: ursgal.wrappers.myrimatch_2_2_140.myrimatch_2_2_140
    :members:
-
-OMSSA
------------
-
-.. autoclass:: ursgal.wrappers.omssa_2_1_9.omssa_2_1_9
-   :members:
-
-X!Tandem
----------------------
-
-.. autoclass:: ursgal.wrappers.xtandem_cyclone_2010.xtandem_cyclone_2010
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_jackhammer.xtandem_jackhammer
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_piledriver.xtandem_piledriver
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_sledgehammer.xtandem_sledgehammer
-   :members:
-

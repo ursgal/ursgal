@@ -5,7 +5,7 @@ import distutils
 from distutils.command.install_lib import install_lib
 import os
 import sys
-
+from ursgal.version import ursgal_version
 
 executable_list = [
     'makeblastdb',
@@ -27,7 +27,7 @@ executable_list = [
 if sys.platform in ['win32']:
     class my_install_lib(distutils.command.install_lib.install_lib):
         pass
-else:    
+else:
     class my_install_lib(distutils.command.install_lib.install_lib):
         def run(self):
             distutils.command.install_lib.install_lib.run(self)
@@ -40,13 +40,13 @@ else:
                     os.chmod(fn, mode)
 
 
-# We store our version number in a simple text file:
-version_path = os.path.join(
-    os.path.dirname(__file__),
-    'ursgal', 'version.txt'
-)
-with open(version_path, 'r') as version_file:
-    ursgal_version = version_file.read().strip()
+# # We store our version number in a simple text file:
+# version_path = os.path.join(
+#     os.path.dirname(__file__),
+#     'ursgal', 'version.txt'
+# )
+# with open(version_path, 'r') as version_file:
+#     ursgal_version = version_file.read().strip()
 
 
 setup(
@@ -57,7 +57,7 @@ setup(
     description='ursgal',
     package_data = {
         'ursgal' : [
-            'version.txt',
+            # 'version.txt',
             'wrappers/*.py',
             'resources/*/*/*',
             'resources/*/*/*/*',

@@ -30,11 +30,13 @@ def format_filename(s):
 
 def main( http_url = None, http_output_folder = None):
     # retrieve files via http
-    assert http_url is not None, 'Require http_url not None to run ;)'
+    assert http_url is not None, '[ -<HTPP>- ] Require http_url not None to run ;)'
 
-    print('Downloading files from {0} ...'.format(
-        http_url
-    ))
+    print(
+        '[ -<HTPP>- ] Downloading files from {0} ...'.format(
+            http_url
+        )
+    )
 
     basename = format_filename(os.path.basename(http_url))
 
@@ -52,14 +54,14 @@ def main( http_url = None, http_output_folder = None):
                 http_url,
                 filename = output_path
             )
-        print('Saved file as {0}'.format(
+        print('[ -<HTPP>- ] Saved file as {0}'.format(
             output_path,
         ))
     except urllib.error.URLError:
-        print( (
-            '\tWARNING! Could not download {0} '
-            'Check your internet connection!'
-            ).format(http_url)
+        print( 
+            '[ -<HTPP>- ] \t WARNING! Could not download {0} Check your internet connection!'.format(
+                http_url
+            )
         )
         os.remove( output_path )
     # exit()

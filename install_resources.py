@@ -1,16 +1,15 @@
 #!/usr/bin/env python3.4
 # encoding: utf-8
-
 import ursgal
+import sys
 
-
-def main():
+def main( resources ):
     '''
-    Download all resources from our webpage
+    Download all resources from our webpage.
 
     '''
     uc = ursgal.UController()
-    downloaded_zips = uc.download_resources()
+    downloaded_zips = uc.download_resources( resources = resources)
     # uses uc.params['ursgal_resource_url']  :)
     print()
 
@@ -33,4 +32,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) == 1:
+        resources = None
+    else:
+        resources = sys.argv[1:]
+    main(resources)

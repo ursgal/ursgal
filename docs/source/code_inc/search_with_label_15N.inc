@@ -11,12 +11,17 @@
 	    '''
 	    Executes a search with 3 different search engines on an example file from
 	    the data from Barth et al. Two searches are performed pe engine for each
-	    14N (unlabeled) and 15N labeling.
+	    14N (unlabeled) and 15N labeling. The overlap of identified peptides
+	    for the 14N and 15N searches between the engines is visualized as well as
+	    the overlap between all 14N and 15N identified peptides.
 	
 	    usage:
 	        ./search_with_label_15N.py
 	
-	
+	    Note:
+	        It is important to convert the mgf file outside of (and before :) ) the
+	        search loop to avoid mgf file redundancy and to assure correct retention
+	        time mapping in the unify_csv node.
 	
 	    '''
 	
@@ -78,9 +83,10 @@
 	    mgf_file = uc.convert_to_mgf_and_update_rt_lookup(
 	        input_file       = mzML_file,
 	    )
-	
-	    for label in [ '14N', '15N' ]:
-	        validated_files_list = []
+	    files_2_merge = {}
+	    label_list = [ '14N', '15N' ]
+	    for label in label_list:
+	        validated_and_filtered_files_list = []
 	        uc.params['label'] = label
 	        uc.params['prefix'] = label
 	        for engine in engine_list:
@@ -98,11 +104,25 @@
 	                input_file = validated_file,
 	            )
 	
-	            validated_files_list.append( filtered_file )
+	            validated_and_filtered_files_list.append( filtered_file )
+	        files_2_merge[ label ] = validated_and_filtered_files_list
 	        uc.visualize(
-	            input_files     = validated_files_list,
+	            input_files     = validated_and_filtered_files_list,
 	            engine          = 'venndiagram',
 	        )
+	    uc.params['prefix']                   = None
+	    uc.params['label']                    = ''
+	    uc.params['visualization_label_list'] = label_list
+	    label_comparison_file_list = []
+	    for label in label_list:
+	
+	        label_comparison_file_list.append(
+	            uc.merge_csvs( files_2_merge[label] )
+	        )
+	    uc.visualize(
+	        input_files     = label_comparison_file_list,
+	        engine          = 'venndiagram',
+	    )
 	
 	    return
 	

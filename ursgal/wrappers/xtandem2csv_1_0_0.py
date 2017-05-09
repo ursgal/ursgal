@@ -8,23 +8,29 @@ import pickle
 class xtandem2csv_1_0_0( ursgal.UNode ):
     """xtandem2csv_1_0_0 UNode"""
     META_INFO = {
+        'edit_version'      : 1.00,
+        'name'              : 'xtandem2csv',
+        'version'           : '1.0.0',
+        'release_date'      : None,
         'engine_type' : {
-            'search_engine' : False,
-            'converter'     : True
+            'converter' : True
         },
-        'output_extension'  : '.csv',
+        'input_extensions'  : ['.xml', '.xml.gz'],
+        'input_multi_file'  : False,
+        'output_extensions' : ['.csv'],
         'output_suffix'     : None,
-        'input_types'       : ['.xml', '.xml.gz' ],
-        'include_in_git' : True,
-        'in_development' : False,
-        'engine': {
+        'in_development'    : False,
+        'include_in_git'    : True,
+        'utranslation_style' : 'xtandem2csv_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe' : 'xtandem2csv_1_0_0.py',
                 },
             },
         },
-
+        'citation' : \
+            '',
     }
 
     def __init__(self, *args, **kwargs):
@@ -40,7 +46,7 @@ class xtandem2csv_1_0_0( ursgal.UNode ):
 
         '''
         print('[ -ENGINE- ] Executing conversion ..')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         xtandem2csv_main = self.import_engine_as_python_function()
         # if self.params['output_file'].lower().endswith('.xml') is False:
         #     raise ValueError('Trying to convert a non-xml file')
@@ -60,5 +66,5 @@ class xtandem2csv_1_0_0( ursgal.UNode ):
             decoy_tag      = self.params['translations']['decoy_tag'],
         )
 
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         return output_file

@@ -15,11 +15,15 @@ import os
 import pickle
 import csv
 import ursgal
+import pprint
 # import ursgal.ursgal_kb
 import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
+import itertools
+from decimal import *
 
+# import time
 # increase the field size limit to avoid crash if protein merge tags
 # become too long does not work under windows
 if sys.platform != 'win32':
@@ -30,8 +34,7 @@ DIFFERENCE_14N_15N = ursgal.ursgal_kb.DIFFERENCE_14N_15N
 
 
 def main(input_file=None, output_file=None, scan_rt_lookup=None,
-         params=None, search_engine=None, score_colname=None,
-         upeptide_mapper=None):
+         params=None, search_engine=None, score_colname=None):
     '''
     Arguments:
         input_file (str): input filename of csv which should be unified
@@ -59,9 +62,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
           since not all engines report the monoisotopic m/z
         * Mass accuracy calculation (in ppm), also taking into account that
           not always the monoisotopic peak is picked
-        * All peptide Sequences are remapped to their corresponding protein,
-          assuring correct start, stop, pre and post aminoacid. Thereby,
-          also correct enzymatic cleavage is checked.
         * Rows describing the same PSM (i.e. when two proteins share the
           same peptide) are merged to one row.
 
@@ -84,15 +84,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     OMSSA
         * Carbamidomethyl is updated and set
-        * Selenocystein is not reported with the correct unimod modification
 
     MS-Amanda
-        * Selenocystein is not reported with the correct unimod modification
         * multiple protein ID per peptide are splitted in two entries.
           (is done in MS-Amanda postflight)
-        * short protein IDs are mapped to the full protein ID, it is checked
-          which peptides map on which protein ID (is done in MS-Amanda
-          postflight)
+    
+    MSFragger
+        * 15N modification have to be removed from Modifications and the 
+          merged modifications have to be corrected.
 
     '''
     print(
@@ -118,7 +117,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         params['label'] = '14N'
     # print(use15N)
     # exit()
-    aa_exception_dict = params['translations']['aa_exception_dict']
+    # aa_exception_dict = params['translations']['aa_exception_dict']
     n_term_replacement = {
         'Ammonia-loss' : None,
         'Trimethyl'    : None,
@@ -128,6 +127,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     opt_mods   = {}
     modname2aa = {}
     cam        = False
+    
+    # modification masses are rounded to allow matching to unimod
+    no_decimals = params['translations']['rounded_mass_decimals']
+    mass_format_string = '{{0:3.{0}f}}'.format(no_decimals)
 
     # mod pattern
     mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
@@ -148,10 +151,70 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             opt_mods[aa] = name
         if 'C,fix,any,Carbamidomethyl' in modification:
             cam = True
+            # allow also Carbamidomnethyl on U, since the mod name gets changed
+            # already in upeptide_mapper
+            # According to unimod, the mnodification is also on Selenocystein
+            # otherwise we should change that back so that it is skipped...
+            modname2aa['Carbamidomethyl'] += ['U']
+            fixed_mods['U'] = 'Carbamidomethyl'
+
+    if 'msfragger' in search_engine.lower():
+        ##########################
+        # msfragger mod merge block
+        # calculate possbile mod combos...
+        # if 15N add artifical mods...
+        getcontext().prec = 8
+        getcontext().rounding = ROUND_UP
+        mod_dict_list = params['mods']['opt'] + params['mods']['fix']
+        if use15N:
+            aminoacids_2_check = set()
+            for mod_dict in mod_dict_list:
+                aminoacids_2_check.add(mod_dict['aa'] )
+            additional_15N_modifications = []
+            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+                if aminoacid not in aminoacids_2_check:
+                    continue
+                additional_dict = {
+                    'name' : '_15N_{0}'.format(aminoacid),
+                    'mass' : N15_Diff,
+                    'aa'   : aminoacid,
+                    'pos'  : 'any'
+
+                }
+                additional_15N_modifications.append(
+                    additional_dict
+                )
+            mod_dict_list += additional_15N_modifications
+
+        mod_lookup = {} #d['name'] for d in self.params['mods']['opt']]
+        for mod_dict in mod_dict_list:
+            mod_lookup[ mod_dict['name'] ] = mod_dict
+
+        mod_names = sorted(list(mod_lookup.keys()))
+        mass_to_mod_combo = {}
+        # we cover all combocs of mods
+        for iter_length in range(2, len(mod_names) + 1):
+            for name_combo in itertools.combinations(mod_names, iter_length):
+                mass = 0
+                for name in name_combo:
+                    mass += Decimal(mod_lookup[name]['mass'])
+                # round to 5 decimals, at least valid for MSFragger 20170103
+                mass_to_mod_combo[ mass_format_string.format(mass) ] = {
+                    'name_combo' : name_combo,
+                }
+        # print(mass_to_mod_combo.keys())
+        # exit()
+        #msfragger mod merge block end
+        ##############################
 
     cc = ursgal.ChemicalComposition()
     ursgal.GlobalUnimodMapper._reparseXML()
-    de_novo_engines = ['novor', 'pepnovo', 'uninovo', 'unknown_engine']
+    de_novo_engines = [
+        'novor',
+        'pepnovo',
+        'uninovo',
+        'unknown_engine'
+    ]
     database_search_engines = [
         'msamanda',
         'msgf',
@@ -168,37 +231,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         if db_se in search_engine.lower():
             database_search = True
 
-    if upeptide_mapper is None:
-        upapa = ursgal.UPeptideMapper()
-    else:
-        upapa = upeptide_mapper
-
-    if database_search is True:
-        target_decoy_peps = set()
-        non_enzymatic_peps = set()
-        pep_map_lookup = {}
-        fasta_lookup_name = upapa.build_lookup_from_file(
-            params['translations']['database'],
-            force  = False,
-        )
-    # print('Cached!')
-    # input()
-    psm_counter = Counter()
-    # if a PSM with multiple rows is found (i.e. in omssa results), the psm
-    # rows are merged afterwards
-
-    output_file_object = open(output_file, 'w')
-    protein_id_output = open(output_file + '_full_protein_names.txt', 'w')
-    mz_buffer = {}
-    csv_kwargs = {
-        'extrasaction' : 'ignore'
-    }
-    if sys.platform == 'win32':
-        csv_kwargs['lineterminator'] = '\n'
-    else:
-        csv_kwargs['lineterminator'] = '\r\n'
-    total_lines = len(list(csv.reader(open(input_file,'r'))))
-    ze_only_buffer = {}
 
     if params['translations']['enzyme'] != 'nonspecific':
         allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')
@@ -208,11 +240,47 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         inhibitor_aa  = ''
     allowed_aa += '-'
 
+    if database_search is True:
+        non_enzymatic_peps = set()
+        peptide_complies_search_criteria_lookup = defaultdict(set)
+        fasta_lookup_name = os.path.basename( 
+            os.path.abspath(
+                params['translations']['database']
+            ) 
+        )
+        upeptide_map_sort_key   = 'Protein ID' 
+        upeptide_map_other_keys = [
+            'Sequence Start',  
+            'Sequence Stop',   
+            'Sequence Pre AA', 
+            'Sequence Post AA',
+        ]
+    psm_counter = Counter()
+    # if a PSM with multiple rows is found (i.e. in omssa results), the psm
+    # rows are merged afterwards
+
+    output_file_object = open(output_file, 'w')
+    protein_id_output  = open(output_file + '_full_protein_names.txt', 'w')
+    mz_buffer          = {}
+    csv_kwargs         = {
+        'extrasaction' : 'ignore'
+    }
+    if sys.platform == 'win32':
+        csv_kwargs['lineterminator'] = '\n'
+    else:
+        csv_kwargs['lineterminator'] = '\r\n'
+
+    ze_only_buffer = {}
+
+    app_mass_to_name_list_buffer = {}
+
     with open( input_file, 'r' ) as in_file:
         csv_input  = csv.DictReader(
             in_file
         )
-
+        # recheck if fieldnames are correct. These are corrected in the upeptide
+        # mapper but if the search engine is a de novo engine then the fields
+        # might be incorrect
         output_fieldnames = list(csv_input.fieldnames)
         for remove_fieldname in [
             'proteinacc_start_stop_pre_post_;',
@@ -233,28 +301,32 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Sequence Stop',
             'Sequence Pre AA',
             'Sequence Post AA',
+            'Complies search criteria'
         ]
-
 
         for new_fieldname in new_fieldnames:
             if new_fieldname not in output_fieldnames:
-                output_fieldnames.insert(-5,new_fieldname)
+                output_fieldnames.insert( -5, new_fieldname )
         csv_output = csv.DictWriter(
             output_file_object,
             output_fieldnames,
             **csv_kwargs
         )
         csv_output.writeheader()
-        print('''[ unify_cs ] parsing csv''')
-        import time
-        for line_nr, line_dict in enumerate(csv_input):
+        print('''[ unify_cs ] Buffering csv file''')
+        csv_file_buffer = []
+        for line_dict in csv_input:
+            csv_file_buffer.append(line_dict)
+        total_lines = len(csv_file_buffer)
+        print('''[ unify_cs ] Buffering csv file done''')
+        for line_nr, line_dict in enumerate(csv_file_buffer):
             if line_nr % 500 == 0:
                 print(
-                    '[ unify_cs ] Processing line number: {0}/{1} .. '.format(
+                    '[ unify_cs ] Processing line number: {0}/{1} '.format(
                         line_nr,
                         total_lines,
                     ),
-                    end='\r'
+                    end = '\r'
                 )
 
             if line_dict['Spectrum Title'] != '':
@@ -296,6 +368,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 '''
                 Valid for:
                     Novor
+                    MSFragger
                 '''
                 pure_input_file_name = os.path.basename(
                     line_dict['Raw data location']
@@ -312,7 +385,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             #update spectrum ID from block above
             line_dict['Spectrum ID'] = spectrum_id
-
 
             # now check for the basename in the scan rt lookup
             # possible cases:
@@ -339,7 +411,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 else:
                     print(
                         '''
-Could not find scan ID {0} in scan_rt_lookup[ {1} ]
+[ WARNING ] Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                         '''.format(
                             spectrum_id,
                             input_file_basename
@@ -350,24 +422,118 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 scan_rt_lookup[ input_file_basename_for_rt_lookup ][ 'scan_2_rt' ]\
                     [ spectrum_id ]
 
-            #we should check if data has minute format or second format...
+            # We should check if data has minute format or second format...
             if scan_rt_lookup[ input_file_basename ]['unit'] == 'second':
                 rt_corr_factor = 1
             else:
                 rt_corr_factor = 60
             line_dict['Retention Time (s)'] = float( retention_time_in_minutes ) * rt_corr_factor
 
-            #
-            # now lets buffer for real !! :)
-            #
-            _ze_ultra_buffer_key_ = '{Sequence} || {Charge} || {Modifications} || '.format( **line_dict ) + params['label']
-            if _ze_ultra_buffer_key_ not in ze_only_buffer.keys():
+            #########################
+            # Buffering corrections #
+            #########################
+            main_buffer_key = '{Sequence} || {Charge} || {Modifications} || '.format(
+                **line_dict 
+            ) + params['label']
+            if main_buffer_key not in ze_only_buffer.keys():
                 line_dict_update = {}
-                #
-                # Modification block
+                ######################
+                # Modification block #
+                ######################
+                # check MSFragger crazy mod merge first...
+                if 'msfragger' in search_engine.lower():
+                    # we have to reformat the modifications
+                    # M|14$15.994915|17$57.021465 to 15.994915:14;57.021465:17
+                    # reformat it in Xtandem style
+                    ms_fragger_reformatted_mods = []
+                    if line_dict['Modifications'] == 'M':
+                        # M stand for Modifications here, not Methionine
+                        line_dict['Modifications'] = ''
+                        # continue
+                    else:
+                        mod_list = line_dict['Modifications']
+                        for single_mod in mod_list.split('|'):
+                            if single_mod in ['M','']:
+                                continue
+                            msfragger_pos, raw_msfragger_mass = single_mod.split('$')
+                            msfragger_mass      = mass_format_string.format(
+                                # mass rounded as defined above
+                                Decimal(raw_msfragger_mass)
+                            )
+                            msfragger_pos       = int(msfragger_pos)
+                            # print(msfragger_pos, msfragger_mass)
+                            # import pprint
+                            # pprint.pprint(mass_to_mod_combo)
+                            # exit()
+                            if msfragger_mass in mass_to_mod_combo.keys():
+                                combo_explainable = set([True])
+                                tmp_mods = []
+                                for new_name in mass_to_mod_combo[msfragger_mass]['name_combo']:
+                                    meta_mod_info = mod_lookup[new_name]
+                                    single_mod_check = set([True])
+                                    '''
+                                    meta_mod_info = {
+                                        '_id': 0,
+                                        'aa': '*',
+                                        'composition': {'C': 2, 'H': 2, 'O': 1},
+                                        'id': '1',
+                                        'mass': 42.010565,
+                                        'name': 'Acetyl',
+                                        'org': '*,opt,Prot-N-term,Acetyl',
+                                        'pos': 'Prot-N-term',
+                                        'unimod': True},
+                                    '''
+                                    #check aa
+                                    if meta_mod_info['aa'] != '*':
+                                        if meta_mod_info['aa'] != line_dict['Sequence'][msfragger_pos]:
+                                            single_mod_check.add(False)
+                                    # check pos
+                                    pos_to_check = None
+                                    if meta_mod_info['pos']== 'Prot-N-term':
+                                        pos_to_check = 0
+                                    elif meta_mod_info['pos'] == 'Prot-C-term':
+                                        pos_to_check = int(len(line_dict['Sequence'])) - 1
+                                    else:
+                                        pass
+                                    if pos_to_check is not None:
+                                        pos_in_peptide_for_format_str = pos_to_check
+                                        if pos_to_check != msfragger_pos:
+                                            single_mod_check.add(False)
+                                    else:
+                                        # MS Frager starts counting at zero
+                                        pos_in_peptide_for_format_str = msfragger_pos + 1  
 
-                # some engines do not report fixed modifications
-                # include in unified csv
+                                    if all(single_mod_check):
+                                        # we keep mass here so that the 
+                                        # correct name is added later in already
+                                        # existing code
+                                        tmp_mods.append(
+                                            '{0}:{1}'.format(
+                                                meta_mod_info['mass'],
+                                                pos_in_peptide_for_format_str
+                                            )
+                                        )
+                                    else:
+                                        combo_explainable.add(False)
+                                if all(combo_explainable):
+                                    ms_fragger_reformatted_mods += tmp_mods
+                            else:
+                                # MS Frager starts counting at zero
+                                ms_fragger_reformatted_mods.append(
+                                    '{0}:{1}'.format(
+                                        raw_msfragger_mass,
+                                        msfragger_pos + 1
+                                    )
+                                )
+                        # print(line_dict['Modifications'])
+                        # print(mass_to_mod_combo.keys())
+                        # print(ms_fragger_reformatted_mods)
+                        # exit()
+                        line_dict['Modifications'] = ';'.join( ms_fragger_reformatted_mods )
+
+                ##################################################
+                # Some engines do not report fixed modifications #
+                ##################################################
                 if fixed_mods != {}:
                     for pos, aminoacid in enumerate(line_dict['Sequence']):
                         if aminoacid in fixed_mods.keys():
@@ -383,10 +549,11 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 tmp_mods = line_dict['Modifications'].split(';')
                                 tmp_mods.append(tmp)
                                 line_dict['Modifications'] = ';'.join( tmp_mods )
-
-                # Myrimatch and msgf+ can not handle 15N that easily
-                # report all AAs moded with unknown modification
-                # Note: masses are checked below to avoid any mismatch
+                ##################################################################
+                # Myrimatch, MSGF+, and MSFragger can not handle 15N that easily #
+                # Report all AAs moded with unknown modification                 #
+                # Note: masses are checked below to avoid any mismatch           #
+                ##################################################################
                 if use15N:
                     if 'myrimatch' in search_engine.lower() or \
                             'msgfplus_v9979' in search_engine.lower():
@@ -417,6 +584,7 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                     if modification == '':
                         continue
                     pos, mod = None, None
+                    # print(modification)
                     match = mod_pattern.search( modification )
                     pos = int( match.group('pos') )
                     mod = modification[ :match.start() ]
@@ -471,27 +639,42 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     line_dict['Sequence'], modification, aa
                                 )
                     else:
-                        if aa in fixed_mods.keys() and use15N \
-                            and 'msgfplus' in search_engine.lower():
-                            if pos != 0:
-                                mod = float(mod) - ursgal.ursgal_kb.DICT_15N_DIFF[aa]
-                        try:
-                            name_list = ursgal.GlobalUnimodMapper.appMass2name_list(
-                                round(float(mod), 3), decimal_places = 3
-                            )
-                        except:
-                            print('''
-                                A modification was reported that was not included in the search parameters
-                                unify_csv cannot deal with this, please check your parameters and engine output
-                                reported modification: {0}
-                                modifications in parameters: {1}
-                                '''.format(mod, params['translations']['modifications'])
-                            )
-                            raise Exception('unify_csv failed because a '\
-                                'modification was reported that was not '\
-                                'given in params.'
-                                '{0}'.format(modification)
-                            )
+                        float_mod = float(mod)
+                        masses_2_test = [ float_mod ]
+                        if use15N:
+                            substract_15N_diff = False
+                            if aa in fixed_mods.keys() and 'msgfplus' in search_engine.lower() and pos != 0:
+                                substract_15N_diff = True
+                            if 'msfragger' in search_engine.lower() and float_mod > 4:
+                                # maximum 15N labeling is 3.988 Da (R)
+                                substract_15N_diff = True
+                            if substract_15N_diff:
+                                masses_2_test.append( float_mod - ursgal.ursgal_kb.DICT_15N_DIFF[aa] )
+                        # try:
+                        #works always but returns empty list...
+                        name_list = []
+                        for mass_2_test in masses_2_test:
+                            mass_buffer_key = mass_format_string.format(mass_2_test)
+                            #buffer increases speed massively...
+                            if mass_buffer_key not in app_mass_to_name_list_buffer.keys():
+                                app_mass_to_name_list_buffer[mass_buffer_key] = ursgal.GlobalUnimodMapper.appMass2name_list(
+                                    float(mass_buffer_key),
+                                    decimal_places = params['translations']['rounded_mass_decimals']
+                                )
+                            name_list += app_mass_to_name_list_buffer[mass_buffer_key]
+                        # print(name_list)
+                        # except:
+                        #     print('''
+                        #         A modification was reported that was not included in the search parameters
+                        #         unify_csv cannot deal with this, please check your parameters and engine output
+                        #         reported modification: {0}
+                        #         modifications in parameters: {1}
+                        #         '''.format(mod, params['translations']['modifications'])
+                        #     )
+                        #     raise Exception('unify_csv failed because a '\
+                        #         'modification was reported that was not '\
+                        #         'given in params: {0}'.format(modification)
+                        #     )
                         mapped_mod = False
                         for name in name_list:
                             if name in modname2aa.keys():
@@ -512,10 +695,12 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                 mapped_mod = True
                                 skip_mod = True
                                 break
+                        # pprint.pprint(line_dict)
                         assert mapped_mod is True, '''
                                 A mass was reported that does not map on any unimod or userdefined modification
                                 or the modified aminoacid is not the specified one
                                 unify_csv cannot deal with this, please check your parameters and engine output
+                                sequence: {4}
                                 reported mass: {0}
                                 maps on: {1}
                                 reported modified aminoacid: {2}
@@ -524,7 +709,8 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                                     mod,
                                     name_list,
                                     aa,
-                                    params['translations']['modifications']
+                                    params['translations']['modifications'],
+                                    line_dict['Sequence']
                                 )
                     if modification in tmp_mods or skip_mod is True:
                         continue
@@ -544,31 +730,9 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                             '{0}:1'.format( unimod_name ),
                             '{0}:0'.format( unimod_name )
                             )
-
-                for aa_to_replace, replace_dict in aa_exception_dict.items():
-                    if aa_to_replace in line_dict['Sequence']:
-                        #change mods only if unimod has to be changed...
-                        if 'unimod_name' in replace_dict.keys():
-                            for r_pos, aa in enumerate(line_dict['Sequence']):
-                                if aa == aa_to_replace:
-                                    index_of_U = r_pos + 1
-                                    unimod_name = replace_dict['unimod_name']
-                                    if cam and replace_dict['original_aa'] == 'C':
-                                        unimod_name = replace_dict['unimod_name_with_cam']
-                                    new_mod = '{0}:{1}'.format(
-                                        unimod_name,
-                                        index_of_U
-                                    )
-                                    if line_dict_update['Modifications'] == '':
-                                        line_dict_update['Modifications'] += new_mod
-                                    else:
-                                        line_dict_update['Modifications'] += ';{0}'.format(
-                                            new_mod
-                                        )
-                        line_dict['Sequence'] = line_dict['Sequence'].replace(
-                            aa_to_replace,
-                            replace_dict['original_aa']
-                        )
+                ##########################
+                # Modification block end #
+                ##########################
 
                 line_dict_update['Sequence'] = line_dict['Sequence']
                 #
@@ -649,42 +813,38 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
                 # ------------
                 # BUFFER END
                 # -----------
-                ze_only_buffer[ _ze_ultra_buffer_key_ ] = line_dict_update
+                ze_only_buffer[ main_buffer_key ] = line_dict_update
 
-            line_dict_update = ze_only_buffer[ _ze_ultra_buffer_key_ ]
+            line_dict_update = ze_only_buffer[ main_buffer_key ]
             line_dict.update( line_dict_update )
 
             # protein block, only for database search engine
             if database_search is True:
-                # remap peptides to proteins, check correct enzymatic
-                # cleavage and decoy assignment
+                # check for correct cleavage sites and set a new field to 
+                # verify correct enzyme performance
                 lookup_identifier = '{0}><{1}'.format(
                     line_dict['Sequence'],
                     fasta_lookup_name
                 )
-                if lookup_identifier not in pep_map_lookup.keys():
-                    tmp_decoy = set()
-                    # tmp_protein_id = {}
+                if lookup_identifier not in peptide_complies_search_criteria_lookup.keys():
+                    split_collector = { }
+                    for key in [ upeptide_map_sort_key ] + upeptide_map_other_keys:
+                        split_collector[ key ] = line_dict[key].split(joinchar)
+                    sorted_upeptide_maps = []
+                    for pos, protein_id in enumerate(sorted( split_collector[ upeptide_map_sort_key ] ) ):
+                        dict_2_append = {
+                            upeptide_map_sort_key : protein_id
+                        }
 
-                    upeptide_maps = upapa.map_peptide(
-                        peptide    = line_dict['Sequence'],
-                        fasta_name = fasta_lookup_name
-                    )
-                    '''
-                    <><><><><><><><><><><><><>
-                    '''
-                    # assert upeptide_maps != [],'''
-                    #         The peptide {0} could not be mapped to the
-                    #         given database {1}
-
-                    #         {2}
-
-                    #         '''.format(
-                    #             line_dict['Sequence'],
-                    #             fasta_lookup_name,
-                    #             ''
-                    #         )
-                    if upeptide_maps == []:
+                        for key in upeptide_map_other_keys:
+                            dict_2_append[key] = split_collector[key][pos]
+                        sorted_upeptide_maps.append(
+                            dict_2_append
+                        ) 
+                    # pprint.pprint(line_dict)
+                    # print(sorted_upeptide_maps)
+                    # exit()
+                    if sorted_upeptide_maps == []:
                         print('''
 [ WARNING ] The peptide {0} could not be mapped to the
 [ WARNING ] given database {1}
@@ -692,124 +852,130 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
 [ WARNING ] This PSM will be skipped.
                             '''.format(
                                 line_dict['Sequence'],
-                                fasta_lookup_name,
-                                ''
+                                params['translations']['database'],
                             )
                         )
                         continue
-
-                    sorted_upeptide_maps = [ protein_dict for protein_dict in sorted( upeptide_maps, key=lambda x: x['id'] ) ]
-                    # sorted(bacterial_protein_collector[race].items(),key=lambda x: x[1]['psm_count'])
-                    # print()
-                    # print(line_dict['Sequence'])
-                    # print(sorted_upeptide_maps)
-                    protein_mapping_dict = None
+                    peptide_fullfills_enzyme_specificity = False
                     last_protein_id = None
-                    for protein in sorted_upeptide_maps:
+                    for major_protein_info_dict in sorted_upeptide_maps:
                         # print(line_dict)
                         # print(protein)
-                        add_protein   = False
+                        protein_specifically_cleaved   = False
                         nterm_correct = False
                         cterm_correct = False
-                        if params['translations']['keep_asp_pro_broken_peps'] is True:
-                            if line_dict['Sequence'][-1] == 'D' and\
-                                    protein['post'] == 'P':
-                                cterm_correct = True
-                            if line_dict['Sequence'][0] == 'P' and\
-                                    protein['pre'] == 'D':
-                                nterm_correct = True
+                        '''
+                            'Sequence Start',
+                            'Sequence Stop',
+                            'Sequence Pre AA',
+                            'Sequence Post AA',
 
-                        if cleavage_site == 'C':
-                            if protein['pre'] in allowed_aa\
-                                    or protein['start'] in [1, 2, 3]:
-                                if line_dict['Sequence'][0] not in inhibitor_aa\
-                                        or protein['start'] in [1, 2, 3]:
-                                    nterm_correct = True
-                            if protein['post'] not in inhibitor_aa:
-                                if line_dict['Sequence'][-1] in allowed_aa\
-                                     or protein['post'] == '-':
-                                    cterm_correct = True
-
-                        elif cleavage_site == 'N':
-                            if protein['post'] in allowed_aa:
-                                if line_dict['Sequence'][-1] not in inhibitor_aa\
-                                        or protein['post'] == '-':
-                                    cterm_correct = True
-                            if protein['pre'] not in inhibitor_aa\
-                                or protein['start'] in [1, 2, 3]:
-                                if line_dict['Sequence'][0] in allowed_aa\
-                                    or protein['start'] in [1, 2, 3]:
-                                    nterm_correct = True
-
-                        if params['translations']['semi_enzyme'] is True:
-                            if cterm_correct is True or nterm_correct is True:
-                                add_protein = True
-                        elif cterm_correct is True and nterm_correct is True:
-                            add_protein = True
-
-                        if add_protein is True:
-                            # print(add_protein)
-                            # print(cterm_correct, nterm_correct)
-                            if protein_mapping_dict is None:
-                                protein_mapping_dict = {
-                                    'Protein ID'       : protein['id'],
-                                    'Sequence Start'   : str(protein['start']),
-                                    'Sequence Stop'    : str(protein['end']),
-                                    'Sequence Pre AA'  : protein['pre'],
-                                    'Sequence Post AA' : protein['post'],
+                        '''
+                        protein_info_dict_buffer = []
+                        if ';' in major_protein_info_dict['Sequence Start']:
+                            tmp_split_collector =defaultdict(list)
+                            for key in upeptide_map_other_keys:
+                                tmp_split_collector[key] = major_protein_info_dict[key].split(';')
+                            for pos, p_id in enumerate(tmp_split_collector['Sequence Start']):
+                                dict_2_append = {
+                                    'Protein ID' : major_protein_info_dict['Protein ID']
                                 }
-                            else:
-                                if protein['id'] == last_protein_id:
-                                    tmp_join_char = ';'
-                                else:
-                                    tmp_join_char = joinchar
+                                for key in tmp_split_collector.keys():
+                                    dict_2_append[key] = tmp_split_collector[key][pos]
+                                protein_info_dict_buffer.append(dict_2_append)
+                        else:
+                            protein_info_dict_buffer = [ major_protein_info_dict ]
 
-                                    protein_mapping_dict['Protein ID' ] += '{0}{1}'.format(tmp_join_char, protein['id'])
 
-                                protein_mapping_dict['Sequence Start'   ] += '{0}{1}'.format(tmp_join_char, str(protein['start']))
-                                protein_mapping_dict['Sequence Stop'    ] += '{0}{1}'.format(tmp_join_char, str(protein['end']))
-                                protein_mapping_dict['Sequence Pre AA'  ] += '{0}{1}'.format(tmp_join_char, protein['pre'])
-                                protein_mapping_dict['Sequence Post AA' ] += '{0}{1}'.format(tmp_join_char, protein['post'])
+                        for protein_info_dict in protein_info_dict_buffer:
+                            if params['translations']['keep_asp_pro_broken_peps'] is True:
+                                if line_dict['Sequence'][-1] == 'D' and\
+                                        protein_info_dict['Sequence Post AA'] == 'P':
+                                    cterm_correct = True
+                                if line_dict['Sequence'][0] == 'P' and\
+                                        protein_info_dict['Sequence Pre AA'] == 'D':
+                                    nterm_correct = True
 
-                            # print(protein_mapping_dict['Protein ID' ])
-                            last_protein_id = protein['id']
+                            if cleavage_site == 'C':
+                                if protein_info_dict['Sequence Pre AA'] in allowed_aa\
+                                        or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                                    if line_dict['Sequence'][0] not in inhibitor_aa\
+                                            or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                                        nterm_correct = True
+                                if protein_info_dict['Sequence Post AA'] not in inhibitor_aa:
+                                    if line_dict['Sequence'][-1] in allowed_aa\
+                                         or protein_info_dict['Sequence Post AA'] == '-':
+                                        cterm_correct = True
 
-                            # mzidentml-lib does not always set 'Is decoy' correctly
-                            # (it's always 'false' for MS-GF+ results), this is fixed here:
-                            if params['translations']['decoy_tag'] in protein['id']:
-                                tmp_decoy.add('true')
-                            else:
-                                tmp_decoy.add('false')
-
-                    if protein_mapping_dict is None:
-                        non_enzymatic_peps.add(line_dict['Sequence'])
-                        continue
-
-                    if len(protein_mapping_dict['Protein ID']) >= 2000:
-                        print(
-                            '{0}: {1}'.format(
-                                line_dict['Sequence'],
-                                protein_mapping_dict['Protein ID']
-                            ),
-                            file = protein_id_output
+                            elif cleavage_site == 'N':
+                                if protein_info_dict['Sequence Post AA'] in allowed_aa:
+                                    if line_dict['Sequence'][-1] not in inhibitor_aa\
+                                            or protein_info_dict['Sequence Post AA'] == '-':
+                                        cterm_correct = True
+                                if protein_info_dict['Sequence Pre AA'] not in inhibitor_aa\
+                                    or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                                    if line_dict['Sequence'][0] in allowed_aa\
+                                        or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                                        nterm_correct = True
+                            # if line_dict['Sequence'] == 'SPRPGAAPGSR':
+                            #     print(protein_info_dict)
+                            #     print(nterm_correct, cterm_correct)
+                            if params['translations']['semi_enzyme'] is True:
+                                if cterm_correct is True or nterm_correct is True:
+                                    protein_specifically_cleaved = True
+                            elif cterm_correct is True and nterm_correct is True:
+                                protein_specifically_cleaved = True
+                            if protein_specifically_cleaved is True:
+                                peptide_fullfills_enzyme_specificity = True
+                                last_protein_id = protein_info_dict['Protein ID']
+                    # we may test for further criteria to set this flag/fieldname
+                    # e.g. the missed cleavage count etc.
+                    # if line_dict['Sequence'] == 'SPRPGAAPGSR':
+                    #     print(peptide_fullfills_enzyme_specificity)
+                    #     exit()
+                    if peptide_fullfills_enzyme_specificity is False:
+                        non_enzymatic_peps.add( line_dict['Sequence'] )
+                        peptide_complies_search_criteria_lookup[lookup_identifier].add(
+                            False
                         )
-                        protein_mapping_dict['Protein ID'] = protein_mapping_dict['Protein ID'][:1990] + ' ...'
-                        do_not_delete = True
-
-                    if len(tmp_decoy) >= 2:
-                        target_decoy_peps.add(line_dict['Sequence'])
-                        protein_mapping_dict['Is decoy'] = 'true'
                     else:
-                        protein_mapping_dict['Is decoy'] = list(tmp_decoy)[0]
+                        peptide_complies_search_criteria_lookup[lookup_identifier].add(
+                            True
+                        )
 
-                    pep_map_lookup[ lookup_identifier ] = protein_mapping_dict
-
-                buffered_protein_mapping_dict = pep_map_lookup[lookup_identifier]
-                line_dict.update( buffered_protein_mapping_dict )
+                    #check here if missed cleavage count is correct...
+                    missed_cleavage_counter = 0
+                    for aa in allowed_aa:
+                        if aa == '-':
+                            continue
+                        if cleavage_site == 'C':
+                            missed_cleavage_pattern = '{0}[^{1}]'.format(
+                                aa, inhibitor_aa    
+                            )
+                            missed_cleavage_counter += \
+                                len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
+                        elif cleavage_site == 'N':
+                            missed_cleavage_pattern = '[^{1}]{0}'.format(
+                                aa, inhibitor_aa    
+                            ) 
+                            missed_cleavage_counter += \
+                                len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
+                    if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
+                        peptide_complies_search_criteria_lookup[lookup_identifier].add(False)
+                    else:
+                        peptide_complies_search_criteria_lookup[lookup_identifier].add(True)
                 # count each PSM occurence to check whether row-merging is needed:
                 psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 psm_counter[psm] += 1
 
+                if all(peptide_complies_search_criteria_lookup[lookup_identifier]):
+                    # all True
+                    line_dict['Complies search criteria'] = 'true'
+                else:
+                    line_dict['Complies search criteria'] = 'false'
+                    # print(line_dict['Sequence'])
+                    # exit()
+            
             csv_output.writerow(line_dict)
             '''
                 to_be_written_csv_lines.append( line_dict )
@@ -819,25 +985,17 @@ Could not find scan ID {0} in scan_rt_lookup[ {1} ]
     if database_search is True:
         # upapa.purge_fasta_info( fasta_lookup_name )
         if len(non_enzymatic_peps) != 0:
-            print( '''
-                [ WARNING ] The following peptides could not be mapped to the
-                [ WARNING ] given database {0}
-                [ WARNING ] with correct enzymatic cleavage sites:
-                [ WARNING ] {1}
-                [ WARNING ] These PSMs were skipped.'''.format(
-            params['translations']['database'],
-            non_enzymatic_peps
-            ))
-        if len(target_decoy_peps) != 0:
             print(
                 '''
-                [ WARNING ] The following peptides occured in a target as well as decoy protein
+                [ WARNING ] The following peptides do not reflect the enzyme
+                [ WARNING ] specificity:
                 [ WARNING ] {0}
-                [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
-                    target_decoy_peps,
+                [ WARNING ] These PSMs are marked 'Complies search criteria' = 'False'
+                '''.format(
+                    non_enzymatic_peps
                 )
             )
-
+    # exit()
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:
@@ -941,20 +1099,15 @@ if __name__ == '__main__':
 
     params = {
         'translations' : {
-            'aa_exception_dict' : {
-                'J' : {
-                'original_aa' : 'L',
-                },
-                'O' : {
-                    'original_aa' : 'K',
-                    'unimod_name' : 'Methylpyrroline',
-                },
-                'U' : {
-                    'original_aa' : 'C',
-                    'unimod_name' : 'Delta:S(-1)Se(1)',
-                    'unimod_name_with_cam' : 'SecCarbamidomethyl',
-                },
-            },
+            # 'aa_exception_dict' : {
+            #     'J' : {
+            #     'original_aa' : 'L',
+            #     },
+            #     'O' : {
+            #         'original_aa' : 'K',
+            #         'unimod_name' : 'Methylpyrroline',
+            #     },
+            # },
             'modifications' : [
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
@@ -970,13 +1123,15 @@ if __name__ == '__main__':
             'psm_merge_delimiter'      : ';',
             'precursor_mass_tolerance_plus':5,
             'precursor_mass_tolerance_minus':5,
-            'precursor_isotope_range': '0,1'
+            'precursor_isotope_range': '0,1',
+            'max_missed_cleavages' : 2
         },
         # 'label'                    : '15N',
         'label' : '',
         'prefix'                   : None
     }
     params['translations']['database'] = sys.argv[6]
+    # start_time = time.time()
     main(
         input_file     = sys.argv[1],
         output_file    = sys.argv[2],
@@ -984,4 +1139,6 @@ if __name__ == '__main__':
         params         = params,
         search_engine  = sys.argv[4],
         score_colname  = sys.argv[5]
-    )
+    )    # end_time = time.time()
+    # print(end_time-start_time)
+    # input()

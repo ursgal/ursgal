@@ -350,15 +350,21 @@
 	
 	    # Since we produced quite a lot of files, let's print the full
 	    # paths to our most important result files so we find them quickly:
-	    print('''
-	    These files can now be easily parsed and plotted with your
-	    plotting tool of choice! We used the Python plotting library
-	    matplotlib. Each unique combination of Sequence, modification
-	    and charge was counted as a unique peptide.
-	    ''')
+	    print(
+	        '''
+	These files can now be easily parsed and plotted with your
+	plotting tool of choice! We used the Python plotting library
+	matplotlib. Each unique combination of Sequence, modification
+	and charge was counted as a unique peptide.
+	        '''
+	    )
 	    print("\n########### Result files: ##############")
-	    for x in filtered_final_results:
-	        print( x )
+	    for result_file in filtered_final_results:
+	        print(
+	            '\t*{0}'.format(
+	                result_file
+	            )
+	        )
 	
 	if __name__ == "__main__":
 	    if len(sys.argv) < 2:

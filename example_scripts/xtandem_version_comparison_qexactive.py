@@ -8,8 +8,8 @@ import sys
 
 def main(folder):
     '''
-    Executes a search with 4 versions of X!Tandem on an example file from the
-    data from Bruderer et al.
+    Executes a search with 5 versions of X!Tandem on an example file from the
+    data from Bruderer et al. 2015.
 
     usage:
         ./xtandem_version_comparison.py <folder containing B_D140314_SGSDSsample1_R01_MSG_T0.mzML>
@@ -66,6 +66,7 @@ def main(folder):
         'xtandem_jackhammer',
         'xtandem_sledgehammer',
         'xtandem_piledriver',
+        'xtandem_vengeance'
     ]
 
     params = {

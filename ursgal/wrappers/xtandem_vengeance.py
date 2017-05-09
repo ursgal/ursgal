@@ -12,22 +12,22 @@ class xtandem_vengeance( ursgal.UNode ):
     Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem mass spectra.
     """
     META_INFO = {
-        'name': 'X!Tandem',
-        'version' : 'Vengeance',
+        'edit_version'                : 1.00,
+        'name'                        : 'X!Tandem',
+        'version'                     : 'Vengeance',
+        'release_date'                : '2015-12-15',
         'engine_type' : {
             'search_engine' : True,
         },
-        'in_development'            : False,
-        'output_extension'          : '.xml',
-        'input_types'               : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
-        'create_own_folder'         : True,
+        'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
+        'input_multi_file'            : False,
+        'output_extensions'           : ['.xml'],
+        'create_own_folder'           : True,
         'compress_raw_search_results' : True,
-        'citation'                  : 'Craig R, Beavis RC. (2004) TANDEM: '\
-            'matching proteins with tandem mass spectra.',
-        'include_in_git'            : False,
-        'utranslation_style'        : 'xtandem_style_1',
-
-        'engine': {
+        'in_development'              : False,
+        'include_in_git'              : False,
+        'utranslation_style'          : 'xtandem_style_1',
+        'engine' : {
             'darwin' : {
                 '64bit' : {
                     'exe'            : 'tandem',
@@ -53,12 +53,14 @@ class xtandem_vengeance( ursgal.UNode ):
                 },
             },
         },
+        'citation' : \
+            'Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem '\
+            'mass spectra.',
     }
 
     def __init__(self, *args, **kwargs):
         super(xtandem_vengeance, self).__init__(*args, **kwargs)
         pass
-
 
     def preflight( self ):
         '''
@@ -91,7 +93,7 @@ class xtandem_vengeance( ursgal.UNode ):
         )
 
         for file_name in xml_required:
-            file_info_key = file_name.replace('.xml','')
+            file_info_key = file_name.replace('.xml', '')
             xml_file_path = os.path.join(
                 self.params['output_dir_path'],
                 file_name
@@ -101,7 +103,7 @@ class xtandem_vengeance( ursgal.UNode ):
         #
         # building command_list !
         #
-        self.params['command_list'] =[
+        self.params['command_list'] = [
             self.exe,
             '{input}'.format(**self.params['translations']),
         ]
@@ -168,15 +170,15 @@ class xtandem_vengeance( ursgal.UNode ):
                 continue
             else:
                 forbidden_cterm = ''
-                max_num_per_mod = ''
+                max_num_per_mod_name_specific = ''
                 if mod['name'] in self.params['translations']['forbidden_cterm_mods']:
                     forbidden_cterm = ']'
-                if mod['name'] in self.params['translations']['max_num_per_mod'].keys():
-                    max_num_per_mod = self.params['translations']['max_num_per_mod'][mod['name']]
+                if mod['name'] in self.params['translations']['max_num_per_mod_name_specific'].keys():
+                    max_num_per_mod_name_specific = self.params['translations']['max_num_per_mod_name_specific'][mod['name']]
                 potential_mods.append(
                     '{0}@{1}{2}{3}'.format(
                         mod[ 'mass' ],
-                        max_num_per_mod,
+                        max_num_per_mod_name_specific,
                         forbidden_cterm,
                         mod[ 'aa' ],
                     )
@@ -205,7 +207,10 @@ class xtandem_vengeance( ursgal.UNode ):
             )
             with open( xml_file_path, 'w') as out:
                 print( content, file=out)
-                self.print_info('wrote input file {0}'.format( file_name ))
+                self.print_info(
+                    'Wrote input file {0}'.format( file_name ),
+                    caller = 'preflight'
+                )
 
                 self.created_tmp_files.append( xml_file_path )
         return self.params

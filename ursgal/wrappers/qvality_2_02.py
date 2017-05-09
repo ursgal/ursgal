@@ -15,29 +15,27 @@ class qvality_2_02( ursgal.UNode ):
     q-value and posterior error probability calculation from score distributions
 
     Reference:
-    Käll L, Storey JD, Noble WS (2009) QVALITY: non-parametric estimation of q-values and posterior error probabilities.
+    Kﾃ､ll L, Storey JD, Noble WS (2009) QVALITY: non-parametric estimation of q-values and posterior error probabilities.
     """
 
     META_INFO = {
-        'engine_type'            : {
-            'controller'        : False,
-            'converter'         : False,
+        'edit_version'       : 1.00,
+        'name'               : 'QVALITY',
+        'version'            : '1.0.0',
+        'release_date'       : '2009-4-1',
+        'engine_type' : {
             'validation_engine' : True,
-            'search_engine'     : False,
-            'meta_engine'       : False
         },
-        'output_extension'          : '.csv',
-        'output_suffix'             : 'qvality_validated',
-        'input_types'               : ['.csv'],
-        'create_own_folder'         : False,
-        'citation'   : 'Kall L, Storey JD, Noble WS (2009) QVALITY: '\
-            'non-parametric estimation of q-values and posterior error '\
-            'probabilities.',
-        'include_in_git'            : False,
-        'group_psms'                : True,
-        'in_development'            : False,
-        'utranslation_style'        : 'qvality_style_1',
-        'engine': {
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'output_suffix'      : 'qvality_validated',
+        'create_own_folder'  : False,
+        'include_in_git'     : False,
+        'group_psms'         : True,
+        'in_development'     : False,
+        'utranslation_style' : 'qvality_style_1',
+        'engine' : {
             'darwin' : {
                 '64bit' : {
                     'exe'            : 'qvality',
@@ -69,6 +67,9 @@ class qvality_2_02( ursgal.UNode ):
                 },
             },
         },
+        'citation' : \
+            'Kall L, Storey JD, Noble WS (2009) QVALITY: non-parametric '\
+            'estimation of q-values and posterior error probabilities.',
     }
 
     def __init__(self, *args, **kwargs):

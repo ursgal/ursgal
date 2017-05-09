@@ -8,30 +8,35 @@ import pprint
 class generate_target_decoy_1_0_0( ursgal.UNode ):
     """Generate Target Decoy 1_0_0 UNode"""
     META_INFO = {
+        'edit_version'       : 1.00,
+        'name'               : 'Generate Target Decoy',
+        'version'            : '1.0.0',
+        'release_date'       : None,
         'engine_type' : {
-            'search_engine' : False,
-            'converter'     : True
+            'converter' : True
         },
-        'output_extension' : '.fasta',
-        'output_suffix'    : 'target_decoy',
-        'input_types'      : [''],
-        'in_development'   : False,
-        'include_in_git'   : True,
-        'utranslation_style'    : 'generate_target_decoy_style_1',
-        'engine': {
+        'input_extensions'   : [],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.fasta'],
+        'output_suffix'      : 'target_decoy',
+        'in_development'     : False,
+        'include_in_git'     : True,
+        'utranslation_style' : 'generate_target_decoy_style_1',
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'generate_target_decoy_1_0_0.py',
+                    'exe' : 'generate_target_decoy_1_0_0.py',
                 },
             },
         },
-
         # 'engine_exe'                : {
         #     'arc_independent' : 'generate_target_decoy_1_0_0.py',
         # },
         # 'engine_url' : {
         #     'internal' : True,
         # },
+        'citation' : \
+            '',
     }
 
     def __init__(self, *args, **kwargs):
@@ -86,9 +91,9 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         base of generate_target_decoy_1_0_0.
 
         '''
-        
+
         print('[ -ENGINE- ] Executing conversion ..')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         generate_target_decoy_main = self.import_engine_as_python_function()
 
         input_files = []
@@ -121,5 +126,5 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
             decoy_tag   = self.params['translations']['decoy_tag']
         )
 
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         return self.params['output_file_incl_path']

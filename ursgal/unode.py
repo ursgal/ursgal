@@ -17,7 +17,6 @@ import gzip
 import copy
 
 
-
 class Meta_UNode(type):
     """Metaclass for our UNode
 
@@ -32,7 +31,7 @@ class Meta_UNode(type):
     _collected_initialized_unodes = {}
 
     _uparam_mapper = ursgal.UParamMapper()
-    _upeptide_mapper = ursgal.UPeptideMapper()
+    # _upeptide_mapper = ursgal.UPeptideMapper()
 
     def __new__(cls, cls_name, cls_bases, cls_dict ):
         new_class = super(
@@ -85,12 +84,21 @@ class Meta_UNode(type):
             None
         )
         if translation_style is not None:
-            Meta_UNode._uparam_mapper.lookup['style_2_engine'][ translation_style ].add(
+            Meta_UNode._uparam_mapper.lookup[ 'style_2_engine' ][ translation_style ].add(
                 engine
             )
 
+        alternative_exe_folder = initd_klass.META_INFO.get(
+            'uses_unode',
+            None
+        )
+        # exit()
+        if alternative_exe_folder is not None:
+            kwargs['engine_path'] = kwargs['engine_path'].replace(
+                engine,
+                alternative_exe_folder
+            )
         initd_klass.exe = kwargs['engine_path']
-
 
         obligatory_methods = [
             'preflight',
@@ -107,13 +115,10 @@ class Meta_UNode(type):
         Meta_UNode._collected_initialized_unodes[ engine ] = initd_klass
         initd_klass.meta_unodes = Meta_UNode._collected_initialized_unodes
         initd_klass.uparam_mapper = Meta_UNode._uparam_mapper
-        initd_klass.upeptide_mapper = Meta_UNode._upeptide_mapper
+        # initd_klass.upeptide_mapper = Meta_UNode._upeptide_mapper
 
         if hasattr( initd_klass, '_run_after_meta_init'):
             initd_klass._after_init_meta_callback( *args, **kwargs )
-
-
-
 
         return initd_klass
 
@@ -193,8 +198,9 @@ class UNode(object, metaclass=Meta_UNode):
         self.print_info(
             'Calculating md5 for {0} ....'.format(
                 os.path.basename(input_file),
-                tag = 'md5'
-            )
+                # tag = 'md5'
+            ),
+            caller='md5'
         )
         with open(input_file, mode='rb') as f:
             d = hashlib.md5()
@@ -346,7 +352,10 @@ class UNode(object, metaclass=Meta_UNode):
         params['del_from_params_before_json_dump']
         or keys that start with '_'
         '''
-        self.print_info('Preparing json dump')
+        self.print_info(
+            'Preparing json dump',
+            caller = 'dmpjson'
+        )
         if stats is None:
             stats = self.io['output']['stats'].copy()
         if params is None:
@@ -400,7 +409,12 @@ class UNode(object, metaclass=Meta_UNode):
                 sort_keys = True,
                 indent = 2
             )
-        self.print_info('Json dumped. Path: {0}'.format( json_file ))
+        self.print_info(
+            'Json dumped. Path: {0}'.format(
+                json_file
+            ),
+            caller='dmpjson'
+        )
         return json_file
 
 
@@ -674,7 +688,7 @@ class UNode(object, metaclass=Meta_UNode):
         )
         return grouped_psms
 
-    def import_engine_as_python_function( self ):
+    def import_engine_as_python_function( self, function_name = None ):
         '''
         The unode import_engine_as_python_function function
 
@@ -706,11 +720,13 @@ class UNode(object, metaclass=Meta_UNode):
         module_dir_name = os.path.dirname( self.exe )
         sys.path.insert( 1, module_dir_name )
         imported_module = importlib.import_module( self.engine )
-        assert hasattr(imported_module, 'main'), '''
+        if function_name is None:
+            function_name = 'main'
+        assert hasattr(imported_module, function_name), '''
         Can not import main() function from engine
         {0}
         '''.format( self.exe )
-        main_function = getattr( imported_module, "main" )
+        main_function = getattr( imported_module, function_name)
         return main_function
 
     def load_json( self, finfo=None, json_path=None):
@@ -852,6 +868,9 @@ class UNode(object, metaclass=Meta_UNode):
 
     def peptide_regex(self, database, protein_id, peptide):
         '''
+        Note:
+            This function is not longer used at the moment.
+
         The unode peptide_regex function
 
         Args:
@@ -981,14 +1000,14 @@ class UNode(object, metaclass=Meta_UNode):
     def _preflight(self):
 
         if 'citation' in self.META_INFO:
-            self.print_info( caller='', msg='')
+            self.print_info( caller='Citation', msg='')
             self.print_info( caller='Please', msg='')
             self.print_info(
                 self.META_INFO["citation"],
                 caller='cite:'
             )
             self.print_info( caller='-----', msg='')
-            self.print_info( caller='', msg='')
+            self.print_info( caller='Citation', msg='')
 
         self.print_info(
             'Executing preflight sequence ...',
@@ -1032,11 +1051,11 @@ class UNode(object, metaclass=Meta_UNode):
             lap /= 60
         else:
             unit = 'seconds'
-        msg = 'Execution time {0:.2f} {1}'.format(
+        msg = 'Execution time {0:.3f} {1}'.format(
             lap,
             unit
         )
-        self.print_info(  msg, caller=tag )
+        self.print_info( msg, caller=tag )
 
     @classmethod
     def print_info( cls, msg, caller=None ):
@@ -1048,10 +1067,12 @@ class UNode(object, metaclass=Meta_UNode):
         if len(caller) > 7:
             caller = caller[:8]
 
-        print('[ {0: ^08s} ] {1}'.format(
-            caller,
-            msg
-        ))
+        print(
+            '[ {0: ^08s} ] {1}'.format(
+                caller,
+                msg
+            )
+        )
 
     def print_header( self, header, tag=None, newline=True):
         if tag is not None:
@@ -1155,7 +1176,7 @@ class UNode(object, metaclass=Meta_UNode):
         self.update_params_with_io_data()
         report = self.generate_empty_report()
 
-        tag = '{0}_{1}'.format(
+        tag = '{0}@{1}'.format(
             self.engine,
             self.io['input']['finfo']['full'],
         )
@@ -1173,19 +1194,24 @@ class UNode(object, metaclass=Meta_UNode):
 
             self.print_info(
                 'Will compress output {output_file} on the fly ... renamed temporarily params["output_file"]'
-            .format( **self.params ))
+            .format(
+                **self.params
+                ),
+                caller = 'run'
+            )
 
         # DEFAULT PARAMS ARE INCLUDED HERE :)
         # self.params = self.DEFAULT_PARAMS.copy()
 
         # self.check_if_all_default_params_are_in_params()
 
-        self.time_point(tag = 'run')
+        # self.time_point(tag = 'run')
         self.stats['history'] = self.update_history_status(
             history = self.stats['history']
         )
         self.print_info(
-            'Preparing engine'
+            'Preparing engine',
+            caller = 'run'
         )
 
         # We use translated in the first json dump
@@ -1226,9 +1252,15 @@ class UNode(object, metaclass=Meta_UNode):
             'cross_link_engine',
             False
         )
+        map_mods_node_exceptions = [
+            'unify_csv'
+        ]
         if is_search_engine or is_denovo_engine or is_crosslink_engine:
             self.map_mods()
-
+        for engine_short_name in map_mods_node_exceptions:
+            if engine_short_name in self.engine:
+                self.map_mods()
+                break
         self.stats['history'] = self.update_history_status(
             status='launching',
             history = self.stats['history']
@@ -1240,7 +1272,8 @@ class UNode(object, metaclass=Meta_UNode):
         )
         if requires_grouped_psms:
             self.print_info(
-                'Grouping PSMs'
+                'Grouping PSMs',
+                caller ='run'
             )
             self.time_point(tag='group_psms')
             self.params['grouped_psms'] = self._group_psms(
@@ -1254,7 +1287,8 @@ class UNode(object, metaclass=Meta_UNode):
             self.print_execution_time(tag = 'group_psms')
 
         self.print_info(
-            'Starting engine'
+            'Starting engine',
+            caller = 'run'
         )
         report['preflight'] = self._preflight()
         report['execution'] = self._execute()
@@ -1298,7 +1332,7 @@ class UNode(object, metaclass=Meta_UNode):
                 if os.path.exists(tmp_file):
                     os.remove( tmp_file )
 
-        self.print_execution_time(tag = 'run')
+        self.print_execution_time(tag = tag)
 
         report['output_file'] = os.path.join(
             self.io['output']['finfo']['dir'],

@@ -18,7 +18,9 @@
 	        ./simple_example_search.py
 	
 	    Note:
-	        myrimatch does not work with this file in this case
+	        Myrimatch does not work with this file.
+	        To use MSAmanda on unix platforms, please install mono
+	        (http://www.mono-project.com/download)
 	
 	    '''
 	    uc = ursgal.UController(
@@ -34,6 +36,7 @@
 	                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
 	                '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
 	            ],
+	            # 'peptide_mapper_class_version' : 'UPeptideMapper_v2',
 	        }
 	    )
 	
@@ -42,20 +45,10 @@
 	    else:
 	        xtandem = 'xtandem_sledgehammer'
 	
-	    if sys.platform == 'win32':
-	        msamanda = 'msamanda_1_0_0_7503'
-	
-	    elif sys.platform == 'darwin':
-	        #mono needs to be installed
-	        msamanda = 'msamanda_1_0_0_7504'
-	    else:
-	        msamanda = 'msamanda_1_0_0_7504'
-	
 	    engine_list = [
 	        'omssa',
 	        xtandem,
 	        'msgfplus_v2016_09_16',
-	        # msamanda,
 	    ]
 	
 	    mzML_file = os.path.join(

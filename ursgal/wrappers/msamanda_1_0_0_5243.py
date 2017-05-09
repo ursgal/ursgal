@@ -16,21 +16,22 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
 
     """
     META_INFO = {
-        'engine_type': {
-            'search_engine': True,
+        'edit_version'       : 1.00,
+        'name'               : 'MSAmanda',
+        'version'            : '1.0.0.5243',
+        'release_date'       : None,
+        'engine_type' : {
+            'search_engine' : True,
         },
-        'output_extension'          : '.csv',
-        'input_types'               : ['.mgf'],
-        'create_own_folder'         : True,
-        'citation'                  : 'Dorfer V, Pichler P, Stranzl T, '\
-            'Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, '\
-            'a universal identification algorithm optimized for high accuracy '\
-            'tandem mass spectra.',
-        'include_in_git'            : None,
-        'cannot_distribute'         : True,
-        'in_development'            : False,
-        'utranslation_style'        : 'msamanda_style_1',
-        'engine': {
+        'input_extensions'   : ['.mgf'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'create_own_folder'  : True,
+        'include_in_git'     : None,
+        'cannot_distribute'  : True,
+        'in_development'     : False,
+        'utranslation_style' : 'msamanda_style_1',
+        'engine' : {
             'linux' : {
                 '64bit' : {
                     'exe'            : 'MSAmanda.exe',
@@ -48,6 +49,10 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                 },
             },
         },
+        'citation' : \
+            'Dorfer V, Pichler P, Stranzl T, Stadlmann J, Taus T, Winkler S, '\
+            'Mechtler K. (2014) MS Amanda, a universal identification '\
+            'algorithm optimized for high accuracy tandem mass spectra.',
     }
 
     def __init__(self, *args, **kwargs):
@@ -145,11 +150,14 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                         existing = True
                 if existing == True:
                     continue
-                self.params[ 'mods' ][ 'fix' ].append( { 'pos' : 'any',
-                                                         'aa'  : aminoacid,
-                                                         'name': '15N_{0}'.format(aminoacid),
-                                                         'mass': N15_Diff }
-                                                      )
+                self.params[ 'mods' ][ 'fix' ].append(
+                    { 
+                        'pos'   : 'any',
+                         'aa'   : aminoacid,
+                         'name' : '15N_{0}'.format(aminoacid),
+                         'mass' : N15_Diff 
+                    }
+                )
         self.params['translations']['enzyme_name'] = self.params['enzyme']
         self.params['translations']['enzyme_cleavage'], self.params['translations']['enzyme_position'], self.params['translations']['enzyme_inhibitors'] = self.params['translations']['enzyme'].split(';')
         self.params['translations']['enzyme'] = self.params['enzyme']
@@ -190,10 +198,14 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         templates = self.format_templates( )
         for file_name, content in templates.items():
             with open(
-              self.params['translations']['output_file_incl_path'] + file_name,
-              'w') as out:
+                    self.params['translations']['output_file_incl_path'] + file_name,
+                    'w'
+                ) as out:
                 print(content, file=out)
-                print('  wrote input file {0}'.format( file_name))
+                self.print_info(
+                    'Wrote input file {0}'.format( file_name),
+                    caller = 'Info'
+                )
                 self.created_tmp_files.append(
                     self.params['translations']['output_file_incl_path'] + file_name
                     )
@@ -225,10 +237,16 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                 'Stop',
                 'Calc m/z'
             ]
-            print('[ PARSING  ] Loading unformatted MS Amanda results ...')
+            self.print_info(
+                'Loading unformatted MS Amanda results ...',
+                caller = 'Info'
+            )
             for line_dict in csv_dict_reader_object:
                 cached_msamanada_output.append( line_dict )
-        print('[ PARSING  ] Done')
+        self.print_info(
+            'Loading unformatted MS Amanda results done',
+            caller = 'postflight'
+        )
 
         self.params['output_file'] = self.params['output_file'].replace(
             'tsv',
@@ -246,7 +264,10 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                 fieldnames = translated_headers
             )
             csv_dict_writer_object.writeheader()
-            print('[ INFO  ] Writing MS Amanda results, this can take a while...')
+            self.print_info(
+                'Writing MS Amanda results, this can take a while...',
+                caller = 'Info'
+            )
             csv_write_list = []
 
             total_docs =len(cached_msamanada_output)
@@ -295,37 +316,6 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
 
                 protein_id = tmp['proteinacc_start_stop_pre_post_;']
 
-                # if ';' in protein_id:
-                #     protein_id_list = protein_id.split(';')
-                # else:
-                #     protein_id_list = [ protein_id ]
-                # for protein_id in protein_id_list:
-
-                #     returned_peptide_regex_list = self.peptide_regex(
-                #         self.params['translations']['database'],
-                #         protein_id,
-                #         tmp['Sequence']
-                #     )
-                #     for protein in returned_peptide_regex_list:
-                #         for pep_regex in protein:
-                #             start, stop, pre_aa, post_aa, returned_protein_id = pep_regex
-                #     # for start, stop, pre_aa, post_aa, returned_protein_id in returned_peptide_regex_list:
-                #             # dict_2_write['proteinacc_start_stop_pre_post_;'] = returned_protein_id
-                #             dict_2_write['Start'] = start
-                #             dict_2_write['Stop']  = stop
-
-                #             dict_2_write['proteinacc_start_stop_pre_post_;'] = '{0}_{1}_{2}_{3}_{4}'.format(
-                #                 returned_protein_id,
-                #                 start,
-                #                 stop,
-                #                 pre_aa,
-                #                 post_aa
-                #             )
-
-                #             if self.params['translations']['decoy_tag'] in dict_2_write['proteinacc_start_stop_pre_post_;']:
-                #                 dict_2_write['Is decoy'] = 'true'
-                #             else:
-                #                 dict_2_write['Is decoy'] = 'false'
                 csv_write_list.append( dict_2_write )
             duplicity_buffer = set()
             for final_dict_2_write in csv_write_list:
@@ -338,7 +328,10 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
                 if duplicity_key not in duplicity_buffer:
                     csv_dict_writer_object.writerow( final_dict_2_write )
                     duplicity_buffer.add( duplicity_key )
-        print('[ INFO  ] Writing MS Amanda results done!')
+        self.print_info(
+            'Writing MS Amanda results done!',
+            caller = 'Info'
+        )
         pass
 
 

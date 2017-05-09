@@ -11,9 +11,3 @@ UParamMapper
 .. autoclass:: ursgal.umapmaster.UParamMapper
    :members:
 
-UPeptideMapper
---------------
-
-.. autoclass:: ursgal.umapmaster.UPeptideMapper
-  :members:
-

@@ -8,29 +8,32 @@ import pickle
 class add_estimated_fdr_1_0_0( ursgal.UNode ):
     """add_estimated_fdr_1_0_0 UNode"""
     META_INFO = {
+        'edit_version'       : 1.00,
+        'name'               : 'Add Estimated FDR',
+        'version'            : '1.0.0',
+        'release_date'       : '2008-1-1',
         'engine_type' : {
-            'converter'  : True
+            'converter' : True
         },
-        'in_development'   : False,
-        'input_types'      : ['.csv'],
-        'output_extension' : '.csv',
-        'output_suffix'    : 'withFDR',
+        'input_extensions'   : ['.csv'],
+        'input_multi_file'   : False,
+        'output_extensions'  : ['.csv'],
+        'output_suffix'      : 'withFDR',
+        'in_development'     : False,
+        'include_in_git'     : True,
         'utranslation_style' : 'add_estimated_fdr_style_1',
-        'engine': {
+        'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'add_estimated_fdr_1_0_0.py',
+                    'exe' : 'add_estimated_fdr_1_0_0.py',
                 },
             },
         },
         'citation' : \
-            'An implementation of the target/decoy FDR estimation '\
-            'method described in: Lukas Kall, John D. Storey, Michael J. '\
-            'MacCoss and William Stafford Noble (2007) Assigning significance '\
-            'to peptides identified by tandem mass spectrometry using decoy '\
-            'databases.' ,
-
-        'include_in_git'            : True,
+            'An implementation of the target/decoy FDR estimation method '\
+            'described in: Lukas Kall, John D. Storey, Michael J. MacCoss and '\
+            'William Stafford Noble (2008) Assigning significance to peptides '\
+            'identified by tandem mass spectrometry using decoy databases.' ,
     }
 
     def __init__(self, *args, **kwargs):
@@ -40,7 +43,7 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         '''
         '''
         print('[ -ENGINE- ] Executing conversion ..')
-        self.time_point(tag = 'execution')
+        # self.time_point(tag = 'execution')
         add_fdr_main = self.import_engine_as_python_function()
         if self.params['input_file'].lower().endswith('.csv') is False:
             raise ValueError('add_estimated_fdr_1_0_0 input file must be a CSV file!')
@@ -85,5 +88,5 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
             bigger_scores_better = bigger_is_better,
         )
 
-        self.print_execution_time(tag='execution')
+        # self.print_execution_time(tag='execution')
         return output_file

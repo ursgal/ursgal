@@ -219,7 +219,11 @@
 	            'psm'  : ddict(set),
 	            'pep'  : ddict(set)
 	        }
-	        grouped_psms = uc._group_psms( result_file, validation_score_field='PEP', bigger_scores_better=False )
+	        grouped_psms = uc._group_psms(
+	            result_file,
+	            validation_score_field = 'PEP',
+	            bigger_scores_better = False
+	        )
 	        for spec_title, grouped_psm_list in grouped_psms.items():
 	            best_score, best_line_dict = grouped_psm_list[0]
 	            if len(grouped_psm_list) > 1:

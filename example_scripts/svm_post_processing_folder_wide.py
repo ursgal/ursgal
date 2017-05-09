@@ -24,7 +24,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
 
     usage:
 
-        ./simple_svm_post-processing_folder_wide.py <mzML_folder> <profile> <target_decoy_database>
+        ./simple_svm_post_processing_folder_wide.py <mzML_folder> <profile> <target_decoy_database>
 
 
     Current profiles:
@@ -78,12 +78,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
             )
             unified_csvs.append(unified_search_result_file)
 
-        if len(unified_csvs) > 1:
-            # There was only one file, so no need to merge
-            merged_unified_csv = uc.merge_csvs(unified_csvs)
-        elif len(unified_csvs) == 1:
-            # Merging unified search results from multiple mzML files
-            merged_unified_csv = unified_csvs[0]
+        merged_unified_csv = uc.merge_csvs(unified_csvs)
 
         # Statistical post-processing of PSMs with a support vector machine
         svm_validated_csv = uc.validate(
@@ -114,4 +109,8 @@ if __name__ == '__main__':
     if len(sys.argv) < 3:
         print(main.__doc__)
         exit('You did not specify three command line arguments, exiting.')
-    main(folder=sys.argv[1], profile=sys.argv[2], target_decoy_database=sys.argv[3])
+    main(
+        folder                = sys.argv[1],
+        profile               = sys.argv[2],
+        target_decoy_database = sys.argv[3]
+    )

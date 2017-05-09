@@ -35,11 +35,12 @@ class UController(ursgal.UNode):
             overriding default values from ursgal/kb/*.py
         profile (str): Profiles key for faster parameter selection. This
             idea is adapted from MS-GF+ and translated to all search engines.
+
             Currently available profiles are:
 
                 * 'QExactive+'
                 * 'LTQ XL high res'
-                * 'LTQ XL low res'.
+                * 'LTQ XL low res'
 
     Example::
 
@@ -185,8 +186,8 @@ class UController(ursgal.UNode):
             dict: Dictionary of unodes
         '''
         unodes = {
-            '_by_meta_type' : {},  # groups e.g. all search engines
-            '_engine_type' : {}    # groups e.g. all XTandem
+            '__by_meta_type' : {},  # groups e.g. all search engines
+            '__engine_type' : {}    # groups e.g. all XTandem
         }
         wrappers_path_glob = os.path.join(
             ursgal.base_dir, 'wrappers', '*.py'
@@ -240,12 +241,26 @@ class UController(ursgal.UNode):
                 wrapper_meta_info = getattr(wrapper_class, 'META_INFO')
             else:
                 wrapper_meta_info = {}
-            engine            = wrapper_meta_info.get('engine', None)
-            include_in_git    = wrapper_meta_info.get('include_in_git', None)
-            in_development    = wrapper_meta_info.get('in_development', True)
-            # not sure if we need those below ...
-            zip_md5           = wrapper_meta_info.get('zip_md5', None)
-            cannot_distribute = wrapper_meta_info.get('cannot_distribute', None)
+            engine            = wrapper_meta_info.get(
+                'engine',
+                None
+            )
+            include_in_git    = wrapper_meta_info.get(
+                'include_in_git',
+                None
+            )
+            in_development    = wrapper_meta_info.get(
+                'in_development',
+                True
+            )
+            zip_md5           = wrapper_meta_info.get(
+                'zip_md5',
+                None
+            )
+            cannot_distribute = wrapper_meta_info.get(
+                'cannot_distribute',
+                None
+            )
             # and if so please change cannot_distribute >> distributable
 
             unodes[ wrapper_module_name ] = {
@@ -261,170 +276,21 @@ class UController(ursgal.UNode):
                 'import_status'     : 'n/d',
                 '_wrapper_class'    : wrapper_class,
             }
+            uses_unode = wrapper_meta_info.get(
+                'uses_unode',
+                None
+            )
+            if uses_unode is not None:
+                unodes[ wrapper_module_name ]['uses_unode'] = uses_unode
 
             engine_type = wrapper_meta_info.get('engine_type', {})
             for meta_type, meta_type_bool in engine_type.items():
                 if meta_type_bool is True:
-                    if meta_type not in unodes['_by_meta_type'].keys():
-                        unodes['_by_meta_type'][ meta_type ] = []
-                    unodes['_by_meta_type'][ meta_type ].append(
+                    if meta_type not in unodes['__by_meta_type'].keys():
+                        unodes['__by_meta_type'][ meta_type ] = []
+                    unodes['__by_meta_type'][ meta_type ].append(
                         wrapper_module_name
                     )
-
-            # # unodes[ wrapper_module_name ] = {
-            # #     'available' : available,
-            # #     'type'      : meta_type,
-            # #     'class'     : None,
-            # #     'engine': kb_module.META_INFO.get(
-            # #         'engine',
-            # #         None
-            # #     ),
-            # #     # 'zip_md5'   : kb_module.META_INFO.get(
-            # #     #     'zip_md5',
-            # #     #     None
-            # #     # ),
-            # #     'include_in_git': kb_module.META_INFO.get(
-            # #         'include_in_git',
-            # #         None
-            # #     ),
-            # #     'cannot_distribute': kb_module.META_INFO.get(
-            # #         'cannot_distribute',
-            # #         None
-            # #     ),
-            # #     'META_INFO': kb_module.META_INFO,
-            # #     'import_status' : 'n/d',
-            # # }
-            # print( wrapper_meta_info )
-            # exit(1)
-
-            # unodes[ wrapper_module_name ] = {}
-            # if hasattr(kb_module, 'META_INFO'):
-            #     if self.params['show_unodes_in_development'] is False:
-            #         is_dev_unode = kb_module.META_INFO.get(
-            #             'in_development',
-            #             False
-            #         )
-            #         if is_dev_unode:
-            #             unodes[kb_module_name]['in_development'] = True
-            #             # UNode is in development and not shown in overview,
-            #             # but technically available and can be executed
-
-            #     engine_type = kb_module.META_INFO['engine_type']
-            #     for meta_type, meta_type_bool in engine_type.items():
-            #         if meta_type_bool:
-            #             available = False
-            #             if kb_module_name == self.engine:
-            #                 # controller :)
-            #                 available = True
-            #             unodes[ kb_module_name ] = {
-            #                 'available' : available,
-            #                 'type'      : meta_type,
-            #                 'class'     : None,
-            #                 'engine': kb_module.META_INFO.get(
-            #                     'engine',
-            #                     None
-            #                 ),
-            #                 # 'zip_md5'   : kb_module.META_INFO.get(
-            #                 #     'zip_md5',
-            #                 #     None
-            #                 # ),
-            #                 'include_in_git': kb_module.META_INFO.get(
-            #                     'include_in_git',
-            #                     None
-            #                 ),
-            #                 'cannot_distribute': kb_module.META_INFO.get(
-            #                     'cannot_distribute',
-            #                     None
-            #                 ),
-            #                 'META_INFO': kb_module.META_INFO
-            #             }
-
-            #             # only engines that are not tagged as 'in_development'
-            #             # are shown in the overview
-            #             if not kb_module.META_INFO.get('in_development', False):
-            #                 if meta_type not in unodes['_by_meta_type'].keys():
-            #                     unodes['_by_meta_type'][ meta_type ] = []
-            #                 unodes['_by_meta_type'][ meta_type ].append(
-            #                     kb_module_name
-            #                 )
-        return unodes
-
-    def collect_all_unodes_from_kb( self ):
-        '''
-        The ucontroller function to collect all unodes
-
-        Iterates over all files in the kb folder and checks if the import is
-        possible. Nodes in developement are loaded ('in_developement' = True),
-        but not shown in the UController overview.
-
-        Note: internal function
-
-        Returns:
-            dict: Dictionary of unodes
-        '''
-        unodes = {'_by_meta_type' : {} }
-        kb_path_glob = os.path.join( ursgal.base_dir, 'kb', '*.py' )
-        for kb_file in glob.glob( kb_path_glob ):
-            filename = os.path.basename( kb_file )
-            if filename.startswith('__'):
-                continue
-            if kb_file.startswith('.'):
-                continue
-            kb_module_name = filename.replace('.py', '')
-            kb_module = importlib.__import__(
-                "ursgal.kb.{0}".format( kb_module_name ),
-                fromlist = [ kb_module_name ]
-            )
-            unodes[ kb_module_name ] = {}
-            if hasattr(kb_module, 'META_INFO'):
-                if self.params['show_unodes_in_development'] is False:
-                    is_dev_unode = kb_module.META_INFO.get(
-                        'in_development',
-                        False
-                    )
-                    if is_dev_unode:
-                        unodes[kb_module_name]['in_development'] = True
-                        # UNode is in development and not shown in overview,
-                        # but technically available and can be executed
-
-                engine_type = kb_module.META_INFO['engine_type']
-                for meta_type, meta_type_bool in engine_type.items():
-                    if meta_type_bool:
-                        available = False
-                        if kb_module_name == self.engine:
-                            # controller :)
-                            available = True
-                        unodes[ kb_module_name ] = {
-                            'available' : available,
-                            'type'      : meta_type,
-                            'class'     : None,
-                            'engine': kb_module.META_INFO.get(
-                                'engine',
-                                None
-                            ),
-                            # 'zip_md5'   : kb_module.META_INFO.get(
-                            #     'zip_md5',
-                            #     None
-                            # ),
-                            'include_in_git': kb_module.META_INFO.get(
-                                'include_in_git',
-                                None
-                            ),
-                            'cannot_distribute': kb_module.META_INFO.get(
-                                'cannot_distribute',
-                                None
-                            ),
-                            'META_INFO': kb_module.META_INFO
-                        }
-
-                        # only engines that are not tagged as 'in_development'
-                        # are shown in the overview
-                        if not kb_module.META_INFO.get('in_development', False):
-                            if meta_type not in unodes['_by_meta_type'].keys():
-                                unodes['_by_meta_type'][ meta_type ] = []
-                            unodes['_by_meta_type'][ meta_type ].append(
-                                kb_module_name
-                            )
         return unodes
 
     def convert_results_to_csv(self, input_file, force=None, output_file_name=None):
@@ -456,7 +322,8 @@ class UController(ursgal.UNode):
 
         if input_suffix == ".csv":
             self.print_info(
-                "No need to convert to csv because input is already a csv!"
+                "No need to convert to csv because input is already a csv!",
+                caller = 'cnvrtcsv'
             )
             report = input_file
 
@@ -579,13 +446,12 @@ class UController(ursgal.UNode):
         for platform_key, arc_key, engine_folder in engine_folders:
 
             for engine in sorted( self.unodes.keys() ):
-                if engine.startswith('_'):
-                    # we skip _by_meta_type and _engine_type dicts ...
+                if engine.startswith('__'):
+                    # we skip __by_meta_type and __engine_type dicts ...
                     continue
 
                 # kb_info = self.unodes.get( engine, {} )
                 kb_info = self.unodes[ engine ]
-
                 # if len(kb_info.keys()) == 0:
                 #     self.print_info('No wrapper found for ')
                 #     # No info available
@@ -594,6 +460,12 @@ class UController(ursgal.UNode):
                 kb_engine_entry = kb_info.get( 'engine', None )
 
                 if kb_engine_entry is None:
+                    # if True: # self.verbose is False:
+                    #     self.print_info(
+                    #         'Skipped {0}, no engine entry in meta_info'.format(
+                    #             engine
+                    #         )
+                    #     )
                     continue
                 if platform_key not in kb_engine_entry.keys():
                     continue
@@ -607,15 +479,16 @@ class UController(ursgal.UNode):
                 if exe_name is None:
                     continue
 
-                # print(platform_key, engine, kb_info)
-                # exit()
-
                 engine_folder_path = os.path.join( engine_folder, engine )
                 engine_exe_path = os.path.join( engine_folder_path, exe_name )
 
                 self.unodes[ engine ]['resource_folder'] = engine_folder_path
 
-                if os.path.exists( engine_exe_path ):
+                alternative_exe_folder = kb_info.get(
+                    'uses_unode',
+                    None
+                )
+                if os.path.exists( engine_exe_path ) or alternative_exe_folder is not None:
                     _wrapper_class = self.unodes[ engine ]['_wrapper_class']
                     try:
                         self.unodes[ engine ]['class'] = _wrapper_class(
@@ -893,31 +766,48 @@ class UController(ursgal.UNode):
         Returns:
             str: Path of the output file
         '''
-        engine_name = 'merge_csvs_1_0_0'
-        self.input_file_sanity_check(
-            input_files,
-            engine=engine_name,
-            multi=True
-        )
+        one_file_str  = isinstance(input_files, str)
+        one_file_list = isinstance(input_files, list) and len(input_files) == 1
+        if one_file_str or one_file_list:
+            # only a single file was specified, nothing to merge
+            # -> return the unchanged input file
+            self.print_info(
+                'merge_csvs() received only one input file, '
+                'continuing without merging',
+                caller = "WARNING"
+            )
+            if one_file_list:
+                output_file = input_files[0]
+            elif one_file_str:
+                output_file = input_files
+        else:
+            # multiple files were specified (expected!), merge them:
+            engine_name = 'merge_csvs_1_0_0'
+            self.input_file_sanity_check(
+                input_files,
+                engine=engine_name,
+                multi=True
+            )
 
-        answer = self.prepare_unode_run(
-            input_files,
-            output_file = output_file_name,
-            engine = engine_name,
-            force  = force
-        )
+            answer = self.prepare_unode_run(
+                input_files,
+                output_file = output_file_name,
+                engine = engine_name,
+                force  = force
+            )
 
-        search_engines_of_merged_files = []
-        for d in self.io['output']['params']['input_file_dicts']:
-            search_engines_of_merged_files.append( d["last_engine"] )
+            search_engines_of_merged_files = []
+            for d in self.io['output']['params']['input_file_dicts']:
+                search_engines_of_merged_files.append( d["last_engine"] )
 
-        report = self.run_unode_if_required(
-            force, engine_name, answer,
-            history_addon = {
-                'search_engines_of_merged_files' : search_engines_of_merged_files
-            }
-        )
-        return report['output_file']
+            report = self.run_unode_if_required(
+                force, engine_name, answer,
+                history_addon = {
+                    'search_engines_of_merged_files' : search_engines_of_merged_files
+                }
+            )
+            output_file = report['output_file']
+        return output_file
 
     def combine_search_results(self, input_files, engine, force=None, output_file_name=None ):
         '''
@@ -1034,7 +924,8 @@ class UController(ursgal.UNode):
             "Preparing unode run for engine {0} on file(s) {1}".format(
                 engine_name,
                 input_file
-            )
+            ),
+            caller = 'prprun'
         )
 
         # If the UNode received multiple input files,
@@ -1275,7 +1166,10 @@ class UController(ursgal.UNode):
         #
         # -\- Setting up self.io['input'] -/-
         #
-        self.print_info( msg='Setting self.io["input"]' )
+        self.print_info(
+            msg    = 'Setting self.io["input"]',
+            caller = 'set_ios'
+        )
         self.io['input']['finfo'] = self.set_file_info_dict( input_file )
         self.take_care_of_params_and_stats( io_mode = 'input')
         # setting status ...
@@ -1300,14 +1194,33 @@ class UController(ursgal.UNode):
                             u_param,
                             u_value,
                             self.io['input']['params'].get(u_param, '[no_entry]')
-                        )
+                        ),
+                        caller = 'set_ios'
                     )
                     self.io['input']['params'][ u_param ] = u_value
+            # check if params from previous run are identical with default
+            for i_json_param, i_json_value in self.io['input']['params'].items():
+                if i_json_param in self.params.keys():
+                    continue 
+                if i_json_param not in self.meta_unodes[ engine ].PARAMS_TRIGGERING_RERUN:
+                    continue
+                default_value = self.meta_unodes[engine].UNODE_UPARAMS[i_json_param]['default_value']
+                if i_json_value != default_value:
+                    number_of_diffs_between_json_and_params += 1
+                    self.print_info(
+                        'Mismatch of param {0}: UController: {1}; i_json: {2}'.format(
+                            i_json_param,
+                            default_value,
+                            i_json_value
+                        )
+                    )
+                    self.io['input']['params'][ i_json_param ] = default_value
             if number_of_diffs_between_json_and_params > 0:
                 self.print_info(
                     'Updated {0} params in self.io["input"]["params"]'.format(
                         number_of_diffs_between_json_and_params
-                    )
+                    ),
+                    caller = 'set_ios'
                 )
 #             for u_param, u_value in self.params.items():
 #                 if u_param not in self.io['input']['params'].keys():
@@ -1374,9 +1287,7 @@ class UController(ursgal.UNode):
                 'The path is automatically determined by ursgal.'),
                 caller='WARNING'
             )
-        ok_extension = self.meta_unodes[ engine ].META_INFO.get(
-            'output_extension', None
-        )
+        ok_extension = self.decid_output_extension(engine)
         prefix = self.params['prefix']
         user_fname = os.path.basename( user_fname )
         if ok_extension is None or user_fname.endswith( ok_extension ):
@@ -1388,7 +1299,9 @@ class UController(ursgal.UNode):
         self.print_info(
             "You defined {0}'s output file name as: {1}".format(
                 engine, out_fname
-        ) )
+            ),
+            caller = 'Info'
+        )
         return out_fname
 
     def take_care_of_params_and_stats(self, io_mode=None):
@@ -1461,6 +1374,19 @@ class UController(ursgal.UNode):
                 'history'        : [],
             }
 
+    def decid_output_extension( self, engine ):
+        file_extension = None
+        file_extensions = self.meta_unodes[ engine ].META_INFO.get(
+            'output_extensions',
+            None
+        )
+        if file_extensions is not None and type(file_extensions) is list:
+            if len(file_extensions) >= 1:
+                file_extension = str(file_extensions[0])
+            else:
+                file_extension = ""
+        return file_extension
+
     def build_name_from_history_or_regen( self, engine ):
         file_name_blocks = []
 
@@ -1512,13 +1438,11 @@ class UController(ursgal.UNode):
         output_file = '_'.join( file_name_blocks )
 
         # Add file extension if needed (engine-specific, defined in kb)
-        file_extension = self.meta_unodes[ engine ].META_INFO.get(
-            'output_extension',
-            None
-        )
+        file_extension = self.decid_output_extension(engine)
         if file_extension is None:
             self.print_info(
-                'No file extension ("output_extension") defined in kb.{0}.META_INFO. Keeping input file extension'.format(
+                'No file extension ("output_extension") defined in '\
+                'kb.{0}.META_INFO. Keeping input file extension'.format(
                     self.engine
                 ),
                 caller = "WARNING"
@@ -1568,7 +1492,9 @@ class UController(ursgal.UNode):
         self.print_info(
             "Generated engine {0} output file name: {1}".format(
                 engine, full_output
-            ) )
+            ),
+            caller = 'Info'
+        )
         return full_output
 
 
@@ -1611,7 +1537,6 @@ class UController(ursgal.UNode):
                     #     None
                     # )
                     default_value = self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value']
-
                     if used_param not in o_params.keys():
                         reasons.append(
                             'parameter "{0}" '\
@@ -1727,9 +1652,12 @@ class UController(ursgal.UNode):
         self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.mgf'] )
         if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
             if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
-                self.input_file_sanity_check( self.params['database'], engine=engine_name,
-                                              custom_str='FASTA database (uc.params["database"])',
-                                              extensions = ['fasta', 'fa', 'fast'] )
+                self.input_file_sanity_check(
+                    self.params['database'],
+                    engine     = engine_name,
+                    custom_str = 'FASTA database (uc.params["database"])',
+                    extensions = ['fasta', 'fa', 'fast']
+                )
         answer = self.prepare_unode_run(
             input_file,
             output_file = output_file_name,
@@ -1789,12 +1717,13 @@ class UController(ursgal.UNode):
             or OMSSA in these cases, since they are less demanding.
 
         Note:
-            This function calls four search-related ursgal functions
+            This function calls five search-related ursgal functions
             in succession, all of which can also be called individually:
 
                 * :meth:`.convert_to_mgf_and_update_rt_lookup` (if required)
                 * :meth:`.search_mgf`
                 * :meth:`.convert_results_to_csv`
+                * :meth:`.map_peptides_to_fasta`
                 * :meth:`.unify_csv`
         '''
 
@@ -1839,9 +1768,33 @@ class UController(ursgal.UNode):
             force      = force,
         )
 
+        #insert peptide mapping here inlcuding the classification as a db engine
+        database_search_engines = [
+            'msamanda',
+            'msgf',
+            'myrimatch',
+            'omssa',
+            'xtandem',
+            'msfragger'
+        ]
+        database_search = False
+        for db_se in database_search_engines:
+            if db_se in engine.lower():
+                database_search = True
+        if database_search:
+            #if mapper version == 'COmpomics stuff'
+            #execute this node and in map peptides, these results are read...
+            mapped_csv_search_results = self.map_peptides_to_fasta(
+                input_file       = csv_search_results,
+                output_file_name = output_file_name,
+                force            = force,
+            )
+        else:
+            mapped_csv_search_results = csv_search_results
+
         # 4. Convert csv to unified ursgal csv format:
         unified_search_results = self.unify_csv(
-            input_file       = csv_search_results,
+            input_file       = mapped_csv_search_results,
             output_file_name = output_file_name,
             force            = force,
         )
@@ -1915,11 +1868,17 @@ class UController(ursgal.UNode):
         number_of_updated_params = len(
             ursgal.PROFILES[ profile ]
         )
-        self.print_info('Initializing profile {0}'.format( profile ))
-        self.print_info('{0} parameter{1} been updated'.format(
-            number_of_updated_params,
-            's have' if number_of_updated_params > 1 else ' has'
-        ))
+        self.print_info(
+            'Initializing profile {0}'.format( profile ),
+            caller= 'profile'
+        )
+        self.print_info(
+            '{0} parameter{1} been updated'.format(
+                number_of_updated_params,
+                's have' if number_of_updated_params > 1 else ' has'
+            ),
+            caller = 'profile'
+        )
 
         self.init_kwargs['profile'] = profile
         if dev_mode:
@@ -1942,12 +1901,12 @@ class UController(ursgal.UNode):
         '''
         n = 0
         print()
-        for meta_type in sorted(self.unodes['_by_meta_type'].keys()):
+        for meta_type in sorted(self.unodes['__by_meta_type'].keys()):
             if meta_type == 'in_development':
                 continue
 
             number_of_no_dev_nodes = 0
-            for engine in sorted(self.unodes['_by_meta_type'][ meta_type ]):
+            for engine in sorted(self.unodes['__by_meta_type'][ meta_type ]):
                 if self.unodes[ engine ]['in_development'] is False:
                     number_of_no_dev_nodes += 1
 
@@ -1959,7 +1918,7 @@ class UController(ursgal.UNode):
                 meta_type.upper(),
                 **ursgal.COLORS
             ))
-            for engine in sorted(self.unodes['_by_meta_type'][ meta_type ]):
+            for engine in sorted(self.unodes['__by_meta_type'][ meta_type ]):
 
                 if self.unodes[ engine ]['in_development']:
                     continue
@@ -2037,10 +1996,12 @@ class UController(ursgal.UNode):
             self.print_info(
                 ('Skipping {function}() on file {file} since it was '
                  'previously executed with the same input file(s) and '
-                 'parameters.').format( **print_d )
-                )
+                 'parameters.').format( **print_d ),
+                caller = 'Info'    
+            )
             self.print_info(
-                'To re-run, use {function}( force=True )'.format( **print_d )
+                'To re-run, use {function}( force=True )'.format( **print_d ),
+                caller = 'Info'
                 )
             report = {
                 'output_file' : os.path.join(
@@ -2053,9 +2014,13 @@ class UController(ursgal.UNode):
             # node has to be run because it was never executed before,
             # or because input file or params changed
             self.print_info(
-                '{function}() scheduled on input file {file}'.format(**print_d)
+                '{function}() scheduled on input file {file}'.format(**print_d),
+                caller = 'Info'
             )
-            self.print_info('Reason for run: {0}'.format( answer ) )
+            self.print_info(
+                'Reason for run: {0}'.format( answer ),
+                caller = 'Info'
+            )
 
             if history_addon is None:
                 history_addon = {}
@@ -2149,6 +2114,44 @@ class UController(ursgal.UNode):
         return self.execute_unode(
             input_file       = input_file,
             engine           = self.params['unify_csv_converter_version'],
+            force            = force,
+            output_file_name = output_file_name
+        )
+
+    def map_peptides_to_fasta(self, input_file, force=False, output_file_name=None):
+        '''
+        The ucontroller function to call the upeptide_mapper node.
+
+        Note:
+            Different converter versions can be used (see parameter
+            'peptide_mapper_converter_version') as well as different classes
+            inside the converter node (see parameter
+            'peptide_mapper_class_version' )
+
+        Available converter nodes
+            * upeptide_mapper_1_0_0
+
+        Available converter classes of upeptide_mapper_1_0_0
+            * UPeptideMapper_v3 (default)
+            * UPeptideMapper_v4 (no buffering and enhanced speed to v3)
+            * UPeptideMapper_v2
+
+        Keyword Arguments:
+            input_file (str): The complete path to the input, input file has
+                currently to be a .csv file.
+            force (bool): (Re)do the analysis, even if output file
+                already exists.
+            output_file_name (str or None): Desired output file name
+                excluding path (optional). If None, output file name will
+                be auto-generated.
+
+        Returns:
+            str: Path of the output file
+        '''
+
+        return self.execute_unode(
+            input_file       = input_file,
+            engine           = self.params['peptide_mapper_converter_version'],
             force            = force,
             output_file_name = output_file_name
         )
@@ -2459,19 +2462,24 @@ Nothing to do here...
                 # exit()
         return zip_file_list, update_kb_list
 
-    def download_resources(self):
+    def download_resources(self, resources=None):
         '''
         Function to download all executable from the specified http url
 
+        Keyword Arguments:
+            resources (list): list of specific resources that should be
+                downloaded. Is left to None, all possible resources are
+                downloaded.
         '''
         download_zip_files = []
         get_http_main = self.unodes['get_http_files_1_0_0']['class'].import_engine_as_python_function()
         base_http_get_params = {
             'http_url_root': self.params['ursgal_resource_url'],
         }
-
-        for engine in self.unodes.keys():
-            if 'resource_folder'in self.unodes[engine].keys():
+        if resources is None:
+            resources = self.unodes.keys()
+        for engine in resources:
+            if 'resource_folder' in self.unodes[engine].keys():
                 if self.unodes[engine]['available'] is False:
                     include_in_git = self.unodes[engine].get('include_in_git')
                     in_development = self.unodes[engine].get('in_development', False)
@@ -2687,7 +2695,7 @@ File {0} is not present in online resource folder.
         '''
 
         if input_file is None:
-            tmp_file_name = tempfile.NamedTemporaryFile().name
+            tmp_file_name = tempfile.NamedTemporaryFile(prefix='Ursgal_', suffix='.txt').name
             with open (tmp_file_name, 'w') as tmp_io:
                 print(
                     '''
@@ -2968,7 +2976,7 @@ True
             # verify that the file ends with one of the extensions specified in UNode.kb, or user-specified:
             all_extensions = set()
             if engine is not None:
-                engine_extensions = self.unodes[ engine ]['class'].META_INFO['input_types']
+                engine_extensions = self.unodes[ engine ]['class'].META_INFO['input_extensions']
                 for ext in engine_extensions:
                     all_extensions.add( ext.upper() )
             if extensions is not None:
@@ -3007,7 +3015,7 @@ class UControllerParams(dict):
         (this has to be done in case the UController is resetted...)
         '''
         assert key in self.ucontroller_instance.DEFAULT_PARAMS, '''
-  "{0}" is not a valid uPLAnIT parameter. Please check the documentation for a list of valid parameters."
+  "{0}" is not a valid parameter. Please check the documentation for a list of valid parameters."
         '''.format( key )
         self.ucontroller_instance.init_kwargs['params'][ key ] = value
         super(UControllerParams, self).__setitem__(key, value)

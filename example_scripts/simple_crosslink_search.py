@@ -14,6 +14,7 @@ def main():
 
     Parameters have not been optimized yet, please use this script as a template
     to use Kojak. Please note the different approach for executing Percolator.
+    
     Note:
 
         Please note that Kojak has to installed manually at the resources folder
@@ -62,11 +63,6 @@ def main():
         'max_accounted_observed_peaks'  : 0, # i.e. all
         'max_num_mods'                  : 2
     }
-
-    uc = ursgal.UController(
-        profile = 'LTQ XL low res',
-        params = params
-    )
 
     if os.path.exists(params['ftp_output_folder']) is False:
         os.mkdir(params['ftp_output_folder'])
