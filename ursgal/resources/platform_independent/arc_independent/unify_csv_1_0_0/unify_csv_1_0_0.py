@@ -127,6 +127,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     opt_mods   = {}
     modname2aa = {}
     cam        = False
+    
+    # modification masses are rounded to allow matching to unimod
+    no_decimals = params['translations']['rounded_mass_decimals']
+    mass_format_string = '{{0:3.{0}f}}'.format(no_decimals)
 
     # mod pattern
     mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
@@ -182,7 +186,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 )
             mod_dict_list += additional_15N_modifications
 
-        mass_format_string = '{0:3.3f}'
         mod_lookup = {} #d['name'] for d in self.params['mods']['opt']]
         for mod_dict in mod_dict_list:
             mod_lookup[ mod_dict['name'] ] = mod_dict
@@ -196,7 +199,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 for name in name_combo:
                     mass += Decimal(mod_lookup[name]['mass'])
                 # round to 5 decimals, at least valid for MSFragger 20170103
-                # mass = round(decimal.Decimal(mass), 5)
                 mass_to_mod_combo[ mass_format_string.format(mass) ] = {
                     'name_combo' : name_combo,
                 }
@@ -652,13 +654,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         #works always but returns empty list...
                         name_list = []
                         for mass_2_test in masses_2_test:
-                            rounded_mass = round(mass_2_test, 3)
-                            mass_buffer_key = '{0:1.3f}'.format(rounded_mass)
+                            mass_buffer_key = mass_format_string.format(mass_2_test)
                             #buffer increases speed massively...
                             if mass_buffer_key not in app_mass_to_name_list_buffer.keys():
                                 app_mass_to_name_list_buffer[mass_buffer_key] = ursgal.GlobalUnimodMapper.appMass2name_list(
-                                    rounded_mass,
-                                    decimal_places = 3
+                                    float(mass_buffer_key),
+                                    decimal_places = params['translations']['rounded_mass_decimals']
                                 )
                             name_list += app_mass_to_name_list_buffer[mass_buffer_key]
                         # print(name_list)

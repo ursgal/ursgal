@@ -6704,6 +6704,34 @@ ursgal_params = {
         'description' : \
             'Remove temporary files: True or False',
     },
+    'rounded_mass_decimals' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'unify_csv_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'unify_csv_style_1' : 'rounded_mass_decimals',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'int',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 100,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''
+        },
+        'default_value' : 3,
+        'description' : \
+            'Masses of modifications are rounded in order to match them to '\
+            'their corresponding unimod name. Use this parameter to set the '\
+            'number of decimal places after rounding.',
+    },
     'rt_pickle_name' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
