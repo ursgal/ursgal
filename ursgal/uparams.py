@@ -6402,7 +6402,12 @@ ursgal_params = {
             'msfragger_20170103',
         ],
         'default_value' : 5,
-        'description' :  ''' ''',
+        'description' :  'True precursor mass tolerance '\
+        '(window is +/- this value). Used for tie breaker '\
+        'of results (in spectrally ambiguous cases) '\
+        'and zero bin boosting in open searches '\
+        '(0 disables these features). This option is '\
+        'STRONGLY recommended for open searches.',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'precursor_true_tolerance',
@@ -6425,7 +6430,7 @@ ursgal_params = {
             'msfragger_20170103',
         ],
         'default_value' : 'ppm',
-        'description' :  ''' ''',
+        'description' :  '''Mass tolerance units fo precursor_true_tolerance''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'precursor_true_units',

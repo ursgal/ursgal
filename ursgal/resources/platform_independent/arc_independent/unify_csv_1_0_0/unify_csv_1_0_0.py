@@ -449,7 +449,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     if line_dict['Modifications'] == 'M':
                         # M stand for Modifications here, not Methionine
                         line_dict['Modifications'] = ''
-                        continue
+                        # continue
                     else:
                         mod_list = line_dict['Modifications']
                         for single_mod in mod_list.split('|'):
