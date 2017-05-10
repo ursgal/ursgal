@@ -104,7 +104,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     )
 
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
-    psm_defining_colnames = get_psm_defining_colnames(score_colname)
+    psm_defining_colnames = get_psm_defining_colnames(score_colname, search_engine)
     joinchar              = params['translations']['protein_delimiter']
     do_not_delete         = False
     created_tmp_files     = []
@@ -1007,7 +1007,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     return created_tmp_files
 
 
-def get_psm_defining_colnames(score_colname):
+def get_psm_defining_colnames(score_colname, search_engine):
     '''
     Returns the all PSM-defining column names (i.e spectrum & peptide,
     but also score field because sometimes the same PSMs are reported
@@ -1020,6 +1020,8 @@ def get_psm_defining_colnames(score_colname):
         'Charge',
         'Is decoy',
     ]
+    if 'msfragger' in search_engine.lower():
+        psm.append('MSFragger:Neutral mass of peptide')
     if score_colname:
         psm.append(score_colname)
     return psm
