@@ -220,7 +220,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         'msgf',
         'myrimatch',
         'omssa',
-        'xtandem'
+        'xtandem',
+        'msfragger',
     ]
     de_novo = False
     database_search = False
@@ -449,7 +450,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     if line_dict['Modifications'] == 'M':
                         # M stand for Modifications here, not Methionine
                         line_dict['Modifications'] = ''
-                        # continue
                     else:
                         mod_list = line_dict['Modifications']
                         for single_mod in mod_list.split('|'):
@@ -859,8 +859,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     peptide_fullfills_enzyme_specificity = False
                     last_protein_id = None
                     for major_protein_info_dict in sorted_upeptide_maps:
-                        # print(line_dict)
-                        # print(protein)
                         protein_specifically_cleaved   = False
                         nterm_correct = False
                         cterm_correct = False
@@ -930,9 +928,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 last_protein_id = protein_info_dict['Protein ID']
                     # we may test for further criteria to set this flag/fieldname
                     # e.g. the missed cleavage count etc.
-                    # if line_dict['Sequence'] == 'SPRPGAAPGSR':
-                    #     print(peptide_fullfills_enzyme_specificity)
-                    #     exit()
                     if peptide_fullfills_enzyme_specificity is False:
                         non_enzymatic_peps.add( line_dict['Sequence'] )
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(
@@ -973,8 +968,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_dict['Complies search criteria'] = 'true'
                 else:
                     line_dict['Complies search criteria'] = 'false'
-                    # print(line_dict['Sequence'])
-                    # exit()
             
             csv_output.writerow(line_dict)
             '''
