@@ -8449,7 +8449,7 @@ ursgal_params = {
             },
             'custom_val_max' : 0,
         },
-        'default_value' : (1200, 800),
+        'default_value' : (1200, 900),
         'description' : \
             'Size of visualization plots (e.g. Venn diagram), given as tuple '\
             '(width, height)',

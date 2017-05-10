@@ -71,25 +71,6 @@ def main( *args, **kwargs ):
     for _ in args:
         assert isinstance(_, set) , "Input args have to be Python sets, got ... {0}".format( type(_))
 
-    A = args[0]
-    B = args[1]
-    if len(args) == 2:
-        C = set()
-        D = set()
-    elif len(args) == 3:
-        C = args[2]
-        D = set()
-    elif len(args) == 4:
-        C = args[2]
-        D = args[3]
-    elif len(args) == 5:
-        C = args[2]
-        D = args[3]
-        E = args[4]
-    else:
-        exit('WooT?')
-
-
     defaultValues = {
         'output_file'            : 'VennDiagram.svg',
         'header'                 : 'ursgal Venn Diagram',
@@ -115,6 +96,33 @@ def main( *args, **kwargs ):
     for k, v in defaultValues.items():
         if k not in kwargs.keys():
             kwargs[ k ] = v
+    
+    A = args[0]
+    B = args[1]
+    if len(args) == 2:
+        C = set()
+        D = set()
+        E = set()
+        kwargs['total-pos-cy'] = kwargs['cy'] + 220
+    elif len(args) == 3:
+        C = args[2]
+        D = set()
+        E = set()
+        kwargs['total-pos-cy'] = kwargs['cy'] + 320
+    elif len(args) == 4:
+        C = args[2]
+        D = args[3]
+        E = set()
+        kwargs['total-pos-cy'] = kwargs['cy'] + 320
+    elif len(args) == 5:
+        C = args[2]
+        D = args[3]
+        E = args[4]
+        kwargs['total-pos-cy'] = kwargs['cy'] + 410
+    else:
+        exit('WooT?')
+
+    kwargs['total_n'] = len(A | B | C | D | E)
 
     vdLen = len( args )
     vdTypeSpecific = {
@@ -125,7 +133,7 @@ def main( *args, **kwargs ):
                         'ry'            : 170,
                         'rot'           : 0,
                         'text-anchor'   : 'end',
-                        'text-pos-x'    : kwargs['cx'] - 300,
+                        'text-pos-x'    : kwargs['cx'] - 280,
                         'text-pos-y'    : kwargs['cy'] - 170,
                         # 'set'           : sets['A'],
                         },
@@ -136,7 +144,7 @@ def main( *args, **kwargs ):
                         'ry'            : 170,
                         'rot'           : 0,
                         'text-anchor'   : 'start',
-                        'text-pos-x'    : kwargs['cx'] + 300,
+                        'text-pos-x'    : kwargs['cx'] + 280,
                         'text-pos-y'    : kwargs['cy'] - 170,
                         }
                 },
@@ -290,7 +298,12 @@ style="position:relative; top:0; left:0; z-index:-1;">
 <title>{header}</title>
 <g font-family="{font}" >
 <text transform="translate({cx} 40)" font-size="{label font-size header}" text-anchor="middle">{header}</text>
-</g>    """.format(**kwargs), file = io)
+<text transform="translate({cx} {total-pos-cy})"  font-size="{label font-size major}" text-anchor="middle">Total</text>
+<text transform="translate({cx} {y2})"  font-size="{label font-size minor}" text-anchor="middle" font-style="italic">n = {total_n}</text>
+</g>    """.format(
+                    y2 = kwargs['total-pos-cy'] + 30,
+                    **kwargs
+            ), file = io)
 
     for setKey in sorted( vdTypeSpecific[ len(args) ].keys() ):
         # Why do we have multiple storages ?
