@@ -87,6 +87,10 @@ for line_dict in csv.DictReader(open(output_csv, 'r')):
 
 
 def unify_msfragger_test():
+    assert len(ident_list) == 3, '''
+    Unexpected number of lines in output csv.
+    Probably lines were merged that should not be merged.
+    '''
     for test_id, test_dict in enumerate(ident_list):
         yield unify_msfragger, test_dict
 
@@ -99,7 +103,8 @@ def unify_msfragger( test_dict ):
             'Spectrum ID',
             'Modifications',
             'Spectrum Title',
-            'Sequence'
+            'Sequence',
+            'MSFragger:Neutral mass of peptide',
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]
