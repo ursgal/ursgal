@@ -140,6 +140,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         mod_type = modification.split(',')[1]
         pos = modification.split(',')[2]
         name = modification.split(',')[3]
+        try:
+            name = ursgal.GlobalUnimodMapper.id2name(int(name))
+        except:
+            pass
         if name not in modname2aa.keys():
             modname2aa[name] = []
         modname2aa[name].append(aa)
