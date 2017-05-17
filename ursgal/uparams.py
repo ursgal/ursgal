@@ -2408,7 +2408,7 @@ ursgal_params = {
                 'Downstream Amino Acid' : 'Sequence Post AA',
                 'Protein' : 'Protein ID',
                 'Variable modifications detected':'Modifications', #'(starts with M, separated by |, formated as position,mass) 
-                'Retention time (minutes)': 'Retention time (s)',
+                'Retention time (minutes)': 'Retention Time (s)',
 
                 'Precursor neutral mass (Da)' : 'MSFragger:Precursor neutral mass (Da)',
                 'Neutral mass of peptide' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da) 
