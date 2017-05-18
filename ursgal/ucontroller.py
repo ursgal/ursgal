@@ -14,16 +14,17 @@ import zipfile
 import stat
 import shutil
 
-def debug_print(*args, pretty=True, color="GREEN"):
-    ''' pprint debug info in green, delete this function before release '''
-    color = color.upper()
-    print('{0}'.format(ursgal.COLORS[color]))
-    for text in args:
-        if pretty:
-            pprint.pprint( text )
-        else:
-            print(text)
-    print('{ENDC}'.format(**ursgal.COLORS))
+
+class ParamsDict(dict):
+    allowed_params = set(ursgal.uparams.ursgal_params.keys())
+    def __setitem__(self, key, value):
+        super().__setitem__(key, value)
+        if key not in ParamsDict.allowed_params:
+            raise Exception('"{}" is not a valid UController parameter, '
+                            'please check your spelling. Or check http://'
+                            'ursgal.readthedocs.io/en/latest/parameter.html '
+                            'for a list of available parameters.'.format(key))
+        return
 
 
 class UController(ursgal.UNode):
@@ -74,7 +75,7 @@ class UController(ursgal.UNode):
         self.scan_rt_lookup_path  = {}  # will be set on self.set_target()
         self.force                = kwargs.get('force', False)
         self.user_defined_params  = {}
-        self.params               = {}
+        self.params               = ParamsDict()
         self.init_kwargs          = {}
         self._run_after_meta_init = True
         self.verbose              = True
@@ -94,7 +95,7 @@ class UController(ursgal.UNode):
         ursgal_string = 'Ursgal v{0}  -  '\
             'https://github.com/ursgal/ursgal'.format(ursgal.__version__)
         print('         -\-{0: ^58}-/-\n'.format(ursgal_string))
-        self.params = {}
+        self.params = ParamsDict()
         self.init_kwargs = kwargs
         self.reset_controller()
 
