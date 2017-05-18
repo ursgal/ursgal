@@ -302,7 +302,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Sequence Stop',
             'Sequence Pre AA',
             'Sequence Post AA',
-            'Complies search criteria'
+            'Complies search criteria',
+            'Conflicting uparam',
         ]
 
         for new_fieldname in new_fieldnames:
@@ -826,6 +827,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_dict['Sequence'],
                     fasta_lookup_name
                 )
+                line_dict['Conflicting uparam'] = set()
                 if lookup_identifier not in peptide_complies_search_criteria_lookup.keys():
                     split_collector = { }
                     for key in [ upeptide_map_sort_key ] + upeptide_map_other_keys:
@@ -933,6 +935,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(
                             False
                         )
+                        line_dict['Conflicting uparam'].add('enzyme')
                     else:
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(
                             True
@@ -957,6 +960,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
                     if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(False)
+                        line_dict['Conflicting uparam'].add('max_missed_cleavages')
                     else:
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(True)
                 # count each PSM occurence to check whether row-merging is needed:
@@ -968,7 +972,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_dict['Complies search criteria'] = 'true'
                 else:
                     line_dict['Complies search criteria'] = 'false'
-            
+                line_dict['Conflicting uparam'] = ';'.join(sorted(line_dict['Conflicting uparam']))
             csv_output.writerow(line_dict)
             '''
                 to_be_written_csv_lines.append( line_dict )
