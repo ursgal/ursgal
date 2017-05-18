@@ -16,7 +16,8 @@ import shutil
 
 
 class ParamsDict(dict):
-    allowed_params = set(ursgal.uparams.ursgal_params.keys())
+    allowed_params = set(ursgal.uparams.ursgal_params.keys()) | \
+        {'mods', 'translations', 'TEST_PARAMS', 'TEST_PARAMS_2nd'}
     def __setitem__(self, key, value):
         super().__setitem__(key, value)
         if key not in ParamsDict.allowed_params:
