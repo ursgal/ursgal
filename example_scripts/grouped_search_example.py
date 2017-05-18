@@ -169,13 +169,10 @@ def search(validation_engine):
                 )
                 validated_results.append(validated_search_results)
 
-        if len(validated_results) == 1:
-            validated_results_from_all_engines = validated_results[0]
-        else:
-            uc.params['prefix'] = 'file{0}'.format(n)
-            validated_results_from_all_engines = uc.merge_csvs(
-                    input_files = sorted(validated_results),
-                )
+        uc.params['prefix'] = 'file{0}'.format(n)
+        validated_results_from_all_engines = uc.merge_csvs(
+                input_files = sorted(validated_results),
+            )
         uc.params['prefix'] = ''
         uc.params['csv_filter_rules'] = [
                 ['Is decoy','equals','false'],
@@ -186,12 +183,9 @@ def search(validation_engine):
             )
         result_files.append(filtered_validated_results)
 
-    if len(result_files) == 1:
-        results_all_files = result_files[0]
-    else:
-        results_all_files = uc.merge_csvs(
-                input_files = sorted(result_files),
-            )
+    results_all_files = uc.merge_csvs(
+            input_files = sorted(result_files),
+        )
     return results_all_files
 
 def analyze(collector):

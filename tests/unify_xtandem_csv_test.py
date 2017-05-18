@@ -64,7 +64,8 @@ unify_csv_main(
             'precursor_mass_tolerance_minus': 5,
             'precursor_mass_tolerance_plus' : 5,
             'precursor_isotope_range' : "0,1",
-            'max_missed_cleavages' : 2
+            'max_missed_cleavages' : 2,
+            'rounded_mass_decimals' : 3,
         },
         'label' : '',
 
@@ -92,6 +93,7 @@ def unify_xtandem( test_dict ):
             'Spectrum ID',
             'Modifications',
             'Spectrum Title',
+            'Complies search criteria',
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]

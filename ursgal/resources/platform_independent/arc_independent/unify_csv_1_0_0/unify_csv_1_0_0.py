@@ -104,7 +104,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     )
 
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
-    psm_defining_colnames = get_psm_defining_colnames(score_colname)
+    psm_defining_colnames = get_psm_defining_colnames(score_colname, search_engine)
     joinchar              = params['translations']['protein_delimiter']
     do_not_delete         = False
     created_tmp_files     = []
@@ -127,6 +127,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     opt_mods   = {}
     modname2aa = {}
     cam        = False
+    
+    # modification masses are rounded to allow matching to unimod
+    no_decimals = params['translations']['rounded_mass_decimals']
+    mass_format_string = '{{0:3.{0}f}}'.format(no_decimals)
 
     # mod pattern
     mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
@@ -182,7 +186,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 )
             mod_dict_list += additional_15N_modifications
 
-        mass_format_string = '{0:3.5f}'
         mod_lookup = {} #d['name'] for d in self.params['mods']['opt']]
         for mod_dict in mod_dict_list:
             mod_lookup[ mod_dict['name'] ] = mod_dict
@@ -196,7 +199,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 for name in name_combo:
                     mass += Decimal(mod_lookup[name]['mass'])
                 # round to 5 decimals, at least valid for MSFragger 20170103
-                # mass = round(decimal.Decimal(mass), 5)
                 mass_to_mod_combo[ mass_format_string.format(mass) ] = {
                     'name_combo' : name_combo,
                 }
@@ -218,7 +220,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         'msgf',
         'myrimatch',
         'omssa',
-        'xtandem'
+        'xtandem',
+        'msfragger',
     ]
     de_novo = False
     database_search = False
@@ -441,89 +444,92 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 # check MSFragger crazy mod merge first...
                 if 'msfragger' in search_engine.lower():
                     # we have to reformat the modifications
-                    # M|0$15.994915|3$15.994915 to 15.994915:0;15.994915:3
+                    # M|14$15.994915|17$57.021465 to 15.994915:14;57.021465:17
                     # reformat it in Xtandem style
                     ms_fragger_reformatted_mods = []
-                    if line_dict['Modifications'] != 'M':
+                    if line_dict['Modifications'] == 'M':
+                        # M stand for Modifications here, not Methionine
+                        line_dict['Modifications'] = ''
+                    else:
                         mod_list = line_dict['Modifications']
                         for single_mod in mod_list.split('|'):
                             if single_mod in ['M','']:
                                 continue
-                            else:
-                                msfragger_pos, raw_msfragger_mass = single_mod.split('$')
-                                msfragger_mass      = mass_format_string.format(
-                                    # round(decimal.Decimal(raw_msfragger_mass),5)
-                                    Decimal(raw_msfragger_mass)
-                                )
-                                msfragger_pos       = int(msfragger_pos)
-                                # print(pos, mass)
-                                if msfragger_mass in mass_to_mod_combo.keys():
-                                    combo_explainable = set([True])
-                                    tmp_mods = []
-                                    for new_name in mass_to_mod_combo[msfragger_mass]['name_combo']:
-                                        meta_mod_info = mod_lookup[new_name]
-                                        single_mod_check = set([True])
-                                        '''
-                                        meta_mod_info = {
-                                            '_id': 0,
-                                            'aa': '*',
-                                            'composition': {'C': 2, 'H': 2, 'O': 1},
-                                            'id': '1',
-                                            'mass': 42.010565,
-                                            'name': 'Acetyl',
-                                            'org': '*,opt,Prot-N-term,Acetyl',
-                                            'pos': 'Prot-N-term',
-                                            'unimod': True},
-                                        '''
-                                        #check aa
-                                        if meta_mod_info['aa'] != '*':
-                                            if meta_mod_info['aa'] != line_dict['Sequence'][msfragger_pos]:
-                                                single_mod_check.add(False)
-                                        # check pos
-                                        pos_to_check = None
-                                        if meta_mod_info['pos']== 'Prot-N-term':
-                                            pos_to_check = 0
-                                        elif meta_mod_info['pos'] == 'Prot-C-term':
-                                            pos_to_check = int(len(line_dict['Sequence'])) - 1
-                                        else:
-                                            pass
-                                        if pos_to_check is not None:
-                                            pos_in_peptide_for_format_str = pos_to_check
-                                            if pos_to_check != msfragger_pos:
-                                                single_mod_check.add(False)
-                                        else:
-                                            # MS Frager starts counting at zero
-                                            pos_in_peptide_for_format_str = msfragger_pos + 1  
+                            msfragger_pos, raw_msfragger_mass = single_mod.split('$')
+                            msfragger_mass      = mass_format_string.format(
+                                # mass rounded as defined above
+                                Decimal(raw_msfragger_mass)
+                            )
+                            msfragger_pos       = int(msfragger_pos)
+                            # print(msfragger_pos, msfragger_mass)
+                            # import pprint
+                            # pprint.pprint(mass_to_mod_combo)
+                            # exit()
+                            if msfragger_mass in mass_to_mod_combo.keys():
+                                combo_explainable = set([True])
+                                tmp_mods = []
+                                for new_name in mass_to_mod_combo[msfragger_mass]['name_combo']:
+                                    meta_mod_info = mod_lookup[new_name]
+                                    single_mod_check = set([True])
+                                    '''
+                                    meta_mod_info = {
+                                        '_id': 0,
+                                        'aa': '*',
+                                        'composition': {'C': 2, 'H': 2, 'O': 1},
+                                        'id': '1',
+                                        'mass': 42.010565,
+                                        'name': 'Acetyl',
+                                        'org': '*,opt,Prot-N-term,Acetyl',
+                                        'pos': 'Prot-N-term',
+                                        'unimod': True},
+                                    '''
+                                    #check aa
+                                    if meta_mod_info['aa'] != '*':
+                                        if meta_mod_info['aa'] != line_dict['Sequence'][msfragger_pos]:
+                                            single_mod_check.add(False)
+                                    # check pos
+                                    pos_to_check = None
+                                    if meta_mod_info['pos']== 'Prot-N-term':
+                                        pos_to_check = 0
+                                    elif meta_mod_info['pos'] == 'Prot-C-term':
+                                        pos_to_check = int(len(line_dict['Sequence'])) - 1
+                                    else:
+                                        pass
+                                    if pos_to_check is not None:
+                                        pos_in_peptide_for_format_str = pos_to_check
+                                        if pos_to_check != msfragger_pos:
+                                            single_mod_check.add(False)
+                                    else:
+                                        # MS Frager starts counting at zero
+                                        pos_in_peptide_for_format_str = msfragger_pos + 1  
 
-                                        if all(single_mod_check):
-                                            # we kepp mass here so that the 
-                                            # correct name is added later in already
-                                            # existing code
-                                            tmp_mods.append(
-                                                '{0}:{1}'.format(
-                                                    meta_mod_info['mass'],
-                                                    pos_in_peptide_for_format_str
-                                                )
+                                    if all(single_mod_check):
+                                        # we keep mass here so that the 
+                                        # correct name is added later in already
+                                        # existing code
+                                        tmp_mods.append(
+                                            '{0}:{1}'.format(
+                                                meta_mod_info['mass'],
+                                                pos_in_peptide_for_format_str
                                             )
-                                        else:
-                                            combo_explainable.add(False)
-                                    if all(combo_explainable):
-                                        ms_fragger_reformatted_mods += tmp_mods
-                                else:
-                                    # MS Frager starts counting at zero
-                                    ms_fragger_reformatted_mods.append(
-                                        '{0}:{1}'.format(
-                                            raw_msfragger_mass,
-                                            msfragger_pos + 1
                                         )
+                                    else:
+                                        combo_explainable.add(False)
+                                if all(combo_explainable):
+                                    ms_fragger_reformatted_mods += tmp_mods
+                            else:
+                                # MS Frager starts counting at zero
+                                ms_fragger_reformatted_mods.append(
+                                    '{0}:{1}'.format(
+                                        raw_msfragger_mass,
+                                        msfragger_pos + 1
                                     )
+                                )
                         # print(line_dict['Modifications'])
                         # print(mass_to_mod_combo.keys())
                         # print(ms_fragger_reformatted_mods)
                         # exit()
                         line_dict['Modifications'] = ';'.join( ms_fragger_reformatted_mods )
-                    else:
-                        line_dict['Modifications'] = ''
 
                 ##################################################
                 # Some engines do not report fixed modifications #
@@ -648,13 +654,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         #works always but returns empty list...
                         name_list = []
                         for mass_2_test in masses_2_test:
-                            rounded_mass = round(mass_2_test, 3)
-                            mass_buffer_key = '{0:1.3f}'.format(rounded_mass)
+                            mass_buffer_key = mass_format_string.format(mass_2_test)
                             #buffer increases speed massively...
                             if mass_buffer_key not in app_mass_to_name_list_buffer.keys():
                                 app_mass_to_name_list_buffer[mass_buffer_key] = ursgal.GlobalUnimodMapper.appMass2name_list(
-                                    rounded_mass,
-                                    decimal_places = 3
+                                    float(mass_buffer_key),
+                                    decimal_places = params['translations']['rounded_mass_decimals']
                                 )
                             name_list += app_mass_to_name_list_buffer[mass_buffer_key]
                         # print(name_list)
@@ -854,8 +859,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     peptide_fullfills_enzyme_specificity = False
                     last_protein_id = None
                     for major_protein_info_dict in sorted_upeptide_maps:
-                        # print(line_dict)
-                        # print(protein)
                         protein_specifically_cleaved   = False
                         nterm_correct = False
                         cterm_correct = False
@@ -925,9 +928,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 last_protein_id = protein_info_dict['Protein ID']
                     # we may test for further criteria to set this flag/fieldname
                     # e.g. the missed cleavage count etc.
-                    # if line_dict['Sequence'] == 'SPRPGAAPGSR':
-                    #     print(peptide_fullfills_enzyme_specificity)
-                    #     exit()
                     if peptide_fullfills_enzyme_specificity is False:
                         non_enzymatic_peps.add( line_dict['Sequence'] )
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(
@@ -943,8 +943,19 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     for aa in allowed_aa:
                         if aa == '-':
                             continue
-                        missed_cleavage_counter += line_dict['Sequence'].count( aa )
-                    if missed_cleavage_counter > params['translations']['max_missed_cleavages'] + 1:
+                        if cleavage_site == 'C':
+                            missed_cleavage_pattern = '{0}[^{1}]'.format(
+                                aa, inhibitor_aa    
+                            )
+                            missed_cleavage_counter += \
+                                len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
+                        elif cleavage_site == 'N':
+                            missed_cleavage_pattern = '[^{1}]{0}'.format(
+                                aa, inhibitor_aa    
+                            ) 
+                            missed_cleavage_counter += \
+                                len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
+                    if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(False)
                     else:
                         peptide_complies_search_criteria_lookup[lookup_identifier].add(True)
@@ -957,8 +968,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_dict['Complies search criteria'] = 'true'
                 else:
                     line_dict['Complies search criteria'] = 'false'
-                    # print(line_dict['Sequence'])
-                    # exit()
             
             csv_output.writerow(line_dict)
             '''
@@ -998,7 +1007,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     return created_tmp_files
 
 
-def get_psm_defining_colnames(score_colname):
+def get_psm_defining_colnames(score_colname, search_engine):
     '''
     Returns the all PSM-defining column names (i.e spectrum & peptide,
     but also score field because sometimes the same PSMs are reported
@@ -1011,6 +1020,8 @@ def get_psm_defining_colnames(score_colname):
         'Charge',
         'Is decoy',
     ]
+    if 'msfragger' in search_engine.lower():
+        psm.append('MSFragger:Neutral mass of peptide')
     if score_colname:
         psm.append(score_colname)
     return psm

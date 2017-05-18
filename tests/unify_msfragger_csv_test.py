@@ -72,7 +72,8 @@ unify_csv_main(
             'precursor_mass_tolerance_minus' : 5,
             'precursor_mass_tolerance_plus'  : 5,
             'precursor_isotope_range'        : "0,1",
-            'max_missed_cleavages'           : 2
+            'max_missed_cleavages'           : 2,
+            'rounded_mass_decimals' : 3,
         },
         'label' : '15N',
         'mods' : R.params['mods']
@@ -86,6 +87,10 @@ for line_dict in csv.DictReader(open(output_csv, 'r')):
 
 
 def unify_msfragger_test():
+    assert len(ident_list) == 3, '''
+    Unexpected number of lines in output csv.
+    Probably lines were merged that should not be merged.
+    '''
     for test_id, test_dict in enumerate(ident_list):
         yield unify_msfragger, test_dict
 
@@ -98,7 +103,8 @@ def unify_msfragger( test_dict ):
             'Spectrum ID',
             'Modifications',
             'Spectrum Title',
-            'Sequence'
+            'Sequence',
+            'MSFragger:Neutral mass of peptide',
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]

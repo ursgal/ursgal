@@ -5873,7 +5873,7 @@ ursgal_params = {
         ],
         'default_value' : 'UPeptideMapper_v3',
         'description' :  '''version 3 and 4 are the fastest and most memory efficient class versions, version 2 is the classic approach ''',
-        'triggers_rerun' : False,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'upeptide_mapper_style_1' : 'peptide_mapper_class_version',
         },
@@ -6402,7 +6402,12 @@ ursgal_params = {
             'msfragger_20170103',
         ],
         'default_value' : 5,
-        'description' :  ''' ''',
+        'description' :  'True precursor mass tolerance '\
+        '(window is +/- this value). Used for tie breaker '\
+        'of results (in spectrally ambiguous cases) '\
+        'and zero bin boosting in open searches '\
+        '(0 disables these features). This option is '\
+        'STRONGLY recommended for open searches.',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'precursor_true_tolerance',
@@ -6425,7 +6430,7 @@ ursgal_params = {
             'msfragger_20170103',
         ],
         'default_value' : 'ppm',
-        'description' :  ''' ''',
+        'description' :  '''Mass tolerance units fo precursor_true_tolerance''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'precursor_true_units',
@@ -6703,6 +6708,34 @@ ursgal_params = {
         'default_value' : True,
         'description' : \
             'Remove temporary files: True or False',
+    },
+    'rounded_mass_decimals' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'unify_csv_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'unify_csv_style_1' : 'rounded_mass_decimals',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'int',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 100,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''
+        },
+        'default_value' : 3,
+        'description' : \
+            'Masses of modifications are rounded in order to match them to '\
+            'their corresponding unimod name. Use this parameter to set the '\
+            'number of decimal places after rounding.',
     },
     'rt_pickle_name' : {
         'edit_version' : 1.00,
@@ -7920,6 +7953,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : 0,
                 'xtandem_sledgehammer' : 0,
                 'xtandem_vengeance'    : 0,
+                'msfragger_20170103'   : 0,
             },
         },
         'uvalue_type' : 'str',
@@ -8415,7 +8449,7 @@ ursgal_params = {
             },
             'custom_val_max' : 0,
         },
-        'default_value' : (1200, 800),
+        'default_value' : (1200, 900),
         'description' : \
             'Size of visualization plots (e.g. Venn diagram), given as tuple '\
             '(width, height)',

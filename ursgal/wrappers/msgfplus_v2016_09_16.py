@@ -3,13 +3,16 @@ import ursgal
 import os
 import subprocess
 
+
 class msgfplus_v2016_09_16( ursgal.UNode ):
     """
     MSGF+ UNode
     Parameter options at https://omics.pnl.gov/software/ms-gf
 
     Reference:
-    Kim S, Mischerikow N, Bandeira N, Navarro JD, Wich L, Mohammed S, Heck AJ, Pevzner PA. (2010) The Generating Function of CID, ETD, and CID/ETD Pairs of Tandem Mass Spectra: Applications to Database Search.
+        Kim S, Mischerikow N, Bandeira N, Navarro JD, Wich L, Mohammed S,
+        Heck AJ, Pevzner PA. (2010) The Generating Function of CID, ETD, and
+        CID/ETD Pairs of Tandem Mass Spectra: Applications to Database Search.
     """
     META_INFO = {
         'edit_version'                : 1.00,

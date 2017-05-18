@@ -241,12 +241,26 @@ class UController(ursgal.UNode):
                 wrapper_meta_info = getattr(wrapper_class, 'META_INFO')
             else:
                 wrapper_meta_info = {}
-            engine            = wrapper_meta_info.get('engine', None)
-            include_in_git    = wrapper_meta_info.get('include_in_git', None)
-            in_development    = wrapper_meta_info.get('in_development', True)
-            # not sure if we need those below ...
-            zip_md5           = wrapper_meta_info.get('zip_md5', None)
-            cannot_distribute = wrapper_meta_info.get('cannot_distribute', None)
+            engine            = wrapper_meta_info.get(
+                'engine',
+                None
+            )
+            include_in_git    = wrapper_meta_info.get(
+                'include_in_git',
+                None
+            )
+            in_development    = wrapper_meta_info.get(
+                'in_development',
+                True
+            )
+            zip_md5           = wrapper_meta_info.get(
+                'zip_md5',
+                None
+            )
+            cannot_distribute = wrapper_meta_info.get(
+                'cannot_distribute',
+                None
+            )
             # and if so please change cannot_distribute >> distributable
 
             unodes[ wrapper_module_name ] = {
@@ -262,6 +276,12 @@ class UController(ursgal.UNode):
                 'import_status'     : 'n/d',
                 '_wrapper_class'    : wrapper_class,
             }
+            uses_unode = wrapper_meta_info.get(
+                'uses_unode',
+                None
+            )
+            if uses_unode is not None:
+                unodes[ wrapper_module_name ]['uses_unode'] = uses_unode
 
             engine_type = wrapper_meta_info.get('engine_type', {})
             for meta_type, meta_type_bool in engine_type.items():
@@ -459,15 +479,16 @@ class UController(ursgal.UNode):
                 if exe_name is None:
                     continue
 
-                # print(platform_key, engine, kb_info)
-                # exit()
-
                 engine_folder_path = os.path.join( engine_folder, engine )
                 engine_exe_path = os.path.join( engine_folder_path, exe_name )
 
                 self.unodes[ engine ]['resource_folder'] = engine_folder_path
 
-                if os.path.exists( engine_exe_path ):
+                alternative_exe_folder = kb_info.get(
+                    'uses_unode',
+                    None
+                )
+                if os.path.exists( engine_exe_path ) or alternative_exe_folder is not None:
                     _wrapper_class = self.unodes[ engine ]['_wrapper_class']
                     try:
                         self.unodes[ engine ]['class'] = _wrapper_class(
@@ -745,31 +766,48 @@ class UController(ursgal.UNode):
         Returns:
             str: Path of the output file
         '''
-        engine_name = 'merge_csvs_1_0_0'
-        self.input_file_sanity_check(
-            input_files,
-            engine=engine_name,
-            multi=True
-        )
+        one_file_str  = isinstance(input_files, str)
+        one_file_list = isinstance(input_files, list) and len(input_files) == 1
+        if one_file_str or one_file_list:
+            # only a single file was specified, nothing to merge
+            # -> return the unchanged input file
+            self.print_info(
+                'merge_csvs() received only one input file, '
+                'continuing without merging',
+                caller = "WARNING"
+            )
+            if one_file_list:
+                output_file = input_files[0]
+            elif one_file_str:
+                output_file = input_files
+        else:
+            # multiple files were specified (expected!), merge them:
+            engine_name = 'merge_csvs_1_0_0'
+            self.input_file_sanity_check(
+                input_files,
+                engine=engine_name,
+                multi=True
+            )
 
-        answer = self.prepare_unode_run(
-            input_files,
-            output_file = output_file_name,
-            engine = engine_name,
-            force  = force
-        )
+            answer = self.prepare_unode_run(
+                input_files,
+                output_file = output_file_name,
+                engine = engine_name,
+                force  = force
+            )
 
-        search_engines_of_merged_files = []
-        for d in self.io['output']['params']['input_file_dicts']:
-            search_engines_of_merged_files.append( d["last_engine"] )
+            search_engines_of_merged_files = []
+            for d in self.io['output']['params']['input_file_dicts']:
+                search_engines_of_merged_files.append( d["last_engine"] )
 
-        report = self.run_unode_if_required(
-            force, engine_name, answer,
-            history_addon = {
-                'search_engines_of_merged_files' : search_engines_of_merged_files
-            }
-        )
-        return report['output_file']
+            report = self.run_unode_if_required(
+                force, engine_name, answer,
+                history_addon = {
+                    'search_engines_of_merged_files' : search_engines_of_merged_files
+                }
+            )
+            output_file = report['output_file']
+        return output_file
 
     def combine_search_results(self, input_files, engine, force=None, output_file_name=None ):
         '''

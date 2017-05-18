@@ -78,12 +78,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
             )
             unified_csvs.append(unified_search_result_file)
 
-        if len(unified_csvs) > 1:
-            # There was only one file, so no need to merge
-            merged_unified_csv = uc.merge_csvs(unified_csvs)
-        elif len(unified_csvs) == 1:
-            # Merging unified search results from multiple mzML files
-            merged_unified_csv = unified_csvs[0]
+        merged_unified_csv = uc.merge_csvs(unified_csvs)
 
         # Statistical post-processing of PSMs with a support vector machine
         svm_validated_csv = uc.validate(
