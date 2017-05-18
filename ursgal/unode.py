@@ -812,7 +812,7 @@ class UNode(object, metaclass=Meta_UNode):
                         ))
                         continue
                     unimod = True
-                    name = unimod_id
+                    name = unimod_name
                 except:
                     unimod_name = mod_params[ 3 ].strip()
                     unimod_id   = ursgal.GlobalUnimodMapper.name2id( unimod_name )
