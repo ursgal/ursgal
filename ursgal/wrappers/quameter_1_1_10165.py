@@ -4,7 +4,7 @@ import os
 import pprint
 from collections import defaultdict as ddict
 import csv
-
+import shutil
 
 class quameter_1_1_10165( ursgal.UNode ):
     """
@@ -109,5 +109,12 @@ class quameter_1_1_10165( ursgal.UNode ):
         '''
         Read tsvs and write final output file
         '''
-       
+        output_file_2_move = self.params['translations']['mzml_input_file'].replace(
+            '.mzML',
+            '.qual.tsv'
+        )
+        shutil.move(
+            output_file_2_move,
+            self.params['translations']['output_file_incl_path']
+        )       
         return
