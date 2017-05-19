@@ -10,6 +10,15 @@ import csv
 import pickle
 import os
 
+modifications = [
+    'M,opt,any,Oxidation',        # Met oxidation
+    'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+    '*,opt,Prot-N-term,Acetyl',    # N-Acteylation
+    # '*,opt,any,Deamidated:18O(1)'  # test case for ':' in unimod, is Deamidated:18O(1), with heavy oxygen, but this fails right now!!!
+    'K,opt,any,Label:13C(5)15N(1)', # we have to test SILAC!!!!
+    'K,opt,any,Label:13C(6)15N(2)' # we have to test SILAC!!!!
+]
+
 R = ursgal.UController(
     profile = 'LTQ XL low res',
     params  = {
@@ -18,9 +27,11 @@ R = ursgal.UController(
             'data',
             'BSA.fasta'
         ),
+        'modifications' : modifications
     },
     force  = False
 )
+R.map_mods()
 
 scan_rt_lookup = pickle.load(
     open(
@@ -55,14 +66,6 @@ unify_csv_main(
     scan_rt_lookup = scan_rt_lookup,
     params = {
         'translations' : {
-            'modifications' : [
-                'M,opt,any,Oxidation',        # Met oxidation
-                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-                '*,opt,Prot-N-term,Acetyl',    # N-Acteylation
-                # '*,opt,any,Deamidated:18O(1)'  # test case for ':' in unimod, is Deamidated:18O(1), with heavy oxygen, but this fails right now!!!
-                'K,opt,any,Label:13C(5)15N(1)', # we have to test SILAC!!!!
-                'K,opt,any,Label:13C(6)15N(2)' # we have to test SILAC!!!!
-            ],
             'decoy_tag': 'decoy_',
             'enzyme' : 'KR;C;P',
             'semi_enzyme' : False,
@@ -77,6 +80,7 @@ unify_csv_main(
             'rounded_mass_decimals' : 3,
         },
         'label' : '',
+        'mods' : R.params['mods'],
     },
     search_engine  = 'omssa_2_1_9',
 )

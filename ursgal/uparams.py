@@ -2422,7 +2422,7 @@ ursgal_params = {
                 'Downstream Amino Acid' : 'Sequence Post AA',
                 'Protein' : 'Protein ID',
                 'Variable modifications detected':'Modifications', #'(starts with M, separated by |, formated as position,mass) 
-                'Retention time (minutes)': 'Retention time (s)',
+                'Retention time (minutes)': 'Retention Time (s)',
 
                 'Precursor neutral mass (Da)' : 'MSFragger:Precursor neutral mass (Da)',
                 'Neutral mass of peptide' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da) 
@@ -4266,7 +4266,7 @@ ursgal_params = {
             'Modifications are given as a list of strings, each representing '\
             'the modification of one amino acid. The string consists of four '\
             'informations seperated by comma: \n'\
-            '    \'amino acid, type, position, unimod name\'\n'\
+            '    \'amino acid, type, position, unimod name or id\'\n'\
             '    amino acid  : specify the modified amino acid as a single '\
             'letter, use \'*\' if the amino acid is variable\n'\
             '    type        : specify if it is a fixed (fix) or potential '\
@@ -4274,8 +4274,8 @@ ursgal_params = {
             '    position    : specify the position within the '\
             'protein/peptide (Prot-N-term, Prot-C-term), use \'any\' if the '\
             'positon is variable\n'\
-            '    unimod name : specify the unimod PSI-MS Name '\
-            '(see unimod.org)\n'\
+            '    unimod name or id: specify the unimod PSI-MS Name '\
+            'or unimod Accession # (see unimod.org)\n'\
             '\n'\
             'Examples:\n'\
             '    [ \'M,opt,any,Oxidation\' ] - potential oxidation of Met at '\

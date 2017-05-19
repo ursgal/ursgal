@@ -10,8 +10,19 @@ import csv
 import pickle
 import os
 
+modifications = [
+    'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+    'Y,opt,any,Phospho',
+    '*,opt,Prot-C-term,Amidated',
+    'P,opt,any,Oxidation',
+]
 
-R = ursgal.UController()
+R = ursgal.UController(
+    params = {
+        'modifications' : modifications
+    }    
+)
+R.map_mods()
 
 scan_rt_lookup = pickle.load(
     open(
@@ -43,12 +54,6 @@ unify_csv_main(
     scan_rt_lookup = scan_rt_lookup,
     params = {
         'translations' : {
-            'modifications' : [
-                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-                'Y,opt,any,Phospho',
-                '*,opt,Prot-C-term,Amidated',
-                'P,opt,any,Oxidation',
-            ],
             'decoy_tag': 'decoy_',
             'enzyme' : 'KR;C;P',
             'semi_enzyme' : False,
@@ -67,6 +72,7 @@ unify_csv_main(
             'rounded_mass_decimals'          : 3,
         },
         'label' : '15N',
+        'mods' : R.params['mods'],
     },
     search_engine  = 'msgfplus_v9979',
 )

@@ -11,7 +11,18 @@ import pickle
 import os
 
 
-R = ursgal.UController()
+modifications = [
+    'M,opt,any,Oxidation',        # Met oxidation
+    'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+    '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
+]
+
+R = ursgal.UController(
+    params = {
+        'modifications' : modifications
+    }    
+)
+R.map_mods()
 
 scan_rt_lookup = pickle.load(
     open(
@@ -50,11 +61,6 @@ unify_csv_main(
                     'unimod_name_with_cam': 'SecCarbamidomethyl',
                 },
             },
-            'modifications' : [
-                'M,opt,any,Oxidation',        # Met oxidation
-                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-                '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
-            ],
             'enzyme' : 'KR;C;P',
             'semi_enzyme' : False,
             'protein_delimiter' : '<|>',
@@ -64,6 +70,7 @@ unify_csv_main(
             'rounded_mass_decimals' : 3,
         },
         'label' : '',
+        'mods' : R.params['mods'],
     },
     search_engine  = 'novor_1_1beta',
 )

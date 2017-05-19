@@ -57,7 +57,6 @@ unify_csv_main(
     scan_rt_lookup = scan_rt_lookup,
     params = {
         'translations' : {
-            'modifications' : modifications,
             'decoy_tag' : 'decoy_',
             'enzyme'    : 'KR;C;P',
             'semi_enzyme' : False,

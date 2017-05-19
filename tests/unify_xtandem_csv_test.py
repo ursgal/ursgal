@@ -10,14 +10,22 @@ import csv
 import pickle
 import os
 
+modifications = [
+    'M,opt,any,Oxidation',        # Met oxidation
+    'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+    '*,opt,Prot-N-term,Acetyl',    # N-Acteylation
+    'N,opt,any,1427',
+]
 
 R = ursgal.UController(
     profile = 'LTQ XL low res',
     params  = {
         'database': os.path.join( 'tests', 'data', 'BSA.fasta'),
+        'modifications':modifications,
     },
     force   = False
 )
+R.map_mods()
 
 scan_rt_lookup = pickle.load(
     open(
@@ -49,11 +57,6 @@ unify_csv_main(
     scan_rt_lookup = scan_rt_lookup,
     params = {
         'translations' : {
-            'modifications' : [
-                'M,opt,any,Oxidation',        # Met oxidation
-                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-                '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
-            ],
             'decoy_tag': 'decoy_',
             'enzyme' : 'KR;C;P',
             'semi_enzyme' : False,
@@ -68,6 +71,7 @@ unify_csv_main(
             'rounded_mass_decimals' : 3,
         },
         'label' : '',
+        'mods' : R.params['mods'],
 
     },
     search_engine  = 'xtandem_sledgehammer',
