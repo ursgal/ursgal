@@ -26,7 +26,7 @@ class quameter_1_1_10165( ursgal.UNode ):
         'utranslation_style'          : 'quameter_style_1',
         'compress_raw_search_results' : False,
         'input_multi_file'            : False,
-        'input_extensions'            : ['.raw', '.mzML', '.RAW'],
+        'input_extensions'            : ['.raw', '.mzML'],
         'output_extensions'           : ['.tsv'],
         'create_own_folder'           : False,
         'in_development'              : False,
