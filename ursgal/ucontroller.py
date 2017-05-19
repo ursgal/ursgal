@@ -339,6 +339,8 @@ class UController(ursgal.UNode):
                 engine_name = 'xtandem2csv_1_0_0'
             elif 'msgfplus_v2016_09_16' in last_engine:
                 engine_name = 'msgfplus2csv_v2016_09_16'
+            elif 'msgfplus_v2017_01_27' in last_engine:
+                engine_name = 'msgfplus2csv_v2017_01_27'
             else:
                 engine_name = self.params['mzidentml_converter_version']
 
@@ -611,12 +613,34 @@ class UController(ursgal.UNode):
             engine     = engine,
         )
         # remove the temporary input file!
-        os.remove(
-            os.path.join(
+        try:
+            if self.params['prefix'] is not None:
+                tmp_file_name = '{0}_{1}'.format(
+                    self.params['prefix'],
+                    self.io['input']['finfo']['json']
+                )
+            else:
+                tmp_file_name = self.io['input']['finfo']['json']
+            path_2_remove = os.path.join(
                 self.io['input']['finfo']['dir'],
-                self.io['input']['finfo']['json']
+                tmp_file_name
             )
-        )
+            os.remove(
+                path_2_remove
+            )
+        except:
+            self.print_info(
+                'Automatic removal of tmp file {0} failed'.format(
+                    path_2_remove
+                ),
+                caller = 'Info'
+            )
+            self.print_info(
+                'Please check folder and clean up manually: {0}'.format(
+                    self.io['input']['finfo']['dir']
+                ),
+                caller = 'Info'
+            )
         return answer
 
     def add_estimated_fdr( self, input_file=None, force=False, output_file_name=None ):

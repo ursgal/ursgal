@@ -4,7 +4,7 @@ import os
 import pprint
 from collections import defaultdict as ddict
 import csv
-
+import shutil
 
 class quameter_1_1_10165( ursgal.UNode ):
     """
@@ -77,13 +77,13 @@ class quameter_1_1_10165( ursgal.UNode ):
             self.params['input_file']
         )
         if self.input_file.lower().endswith('.mzml') or \
-            self.input_file.lower().endswith('.mzml.gz'):
+            self.input_file.lower().endswith('.raw'):
             self.params['translations']['mzml_input_file'] = self.input_file
         elif self.input_file.lower().endswith('.mgf'):
             self.params['translations']['mzml_input_file'] = \
                 self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( self.input_file )
             self.print_info(
-                'QuaMeter can only read Proteowizard MGF input files,'
+                'QuaMeter can only read RAW or mzML,'
                 'thecorresponding mzML file {0} will be used instead.'.format(
                     os.path.abspath(self.params['translations']['mzml_input_file'])
                 ),
@@ -109,5 +109,12 @@ class quameter_1_1_10165( ursgal.UNode ):
         '''
         Read tsvs and write final output file
         '''
-       
+        output_file_2_move = self.params['translations']['mzml_input_file'].replace(
+            '.mzML',
+            '.qual.tsv'
+        )
+        shutil.move(
+            output_file_2_move,
+            self.params['translations']['output_file_incl_path']
+        )       
         return
