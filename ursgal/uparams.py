@@ -502,6 +502,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -567,6 +568,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance' : True,
+                'xtandem_alanine' : True,
                 'msfragger_20170103' : True,
             },
             'percolator_style_1' : {
