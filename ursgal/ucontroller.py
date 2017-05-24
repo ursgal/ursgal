@@ -14,17 +14,6 @@ import zipfile
 import stat
 import shutil
 
-def debug_print(*args, pretty=True, color="GREEN"):
-    ''' pprint debug info in green, delete this function before release '''
-    color = color.upper()
-    print('{0}'.format(ursgal.COLORS[color]))
-    for text in args:
-        if pretty:
-            pprint.pprint( text )
-        else:
-            print(text)
-    print('{ENDC}'.format(**ursgal.COLORS))
-
 
 class UController(ursgal.UNode):
     '''
@@ -74,7 +63,7 @@ class UController(ursgal.UNode):
         self.scan_rt_lookup_path  = {}  # will be set on self.set_target()
         self.force                = kwargs.get('force', False)
         self.user_defined_params  = {}
-        self.params               = {}
+        self.params               = ParamsDict()
         self.init_kwargs          = {}
         self._run_after_meta_init = True
         self.verbose              = True
@@ -94,7 +83,7 @@ class UController(ursgal.UNode):
         ursgal_string = 'Ursgal v{0}  -  '\
             'https://github.com/ursgal/ursgal'.format(ursgal.__version__)
         print('         -\-{0: ^58}-/-\n'.format(ursgal_string))
-        self.params = {}
+        self.params = ParamsDict()
         self.init_kwargs = kwargs
         self.reset_controller()
 
@@ -106,10 +95,6 @@ class UController(ursgal.UNode):
         if self.verbose:
             self.show_unode_overview()
 
-        # input_file = kwargs.get('input_file', None)
-        # if input_file is not None:
-        #     self.set_target( kwargs['input_file'] )
-        # self.params = UControllerParams( self )
 
     def reset_controller( self ):
 
@@ -337,6 +322,8 @@ class UController(ursgal.UNode):
                 engine_name = 'xtandem2csv_1_0_0'
             elif 'msgfplus_v2016_09_16' in last_engine:
                 engine_name = 'msgfplus2csv_v2016_09_16'
+            elif 'msgfplus_v2017_01_27' in last_engine:
+                engine_name = 'msgfplus2csv_v2017_01_27'
             else:
                 engine_name = self.params['mzidentml_converter_version']
 
@@ -609,12 +596,34 @@ class UController(ursgal.UNode):
             engine     = engine,
         )
         # remove the temporary input file!
-        os.remove(
-            os.path.join(
+        try:
+            if self.params['prefix'] is not None:
+                tmp_file_name = '{0}_{1}'.format(
+                    self.params['prefix'],
+                    self.io['input']['finfo']['json']
+                )
+            else:
+                tmp_file_name = self.io['input']['finfo']['json']
+            path_2_remove = os.path.join(
                 self.io['input']['finfo']['dir'],
-                self.io['input']['finfo']['json']
+                tmp_file_name
             )
-        )
+            os.remove(
+                path_2_remove
+            )
+        except:
+            self.print_info(
+                'Automatic removal of tmp file {0} failed'.format(
+                    path_2_remove
+                ),
+                caller = 'Info'
+            )
+            self.print_info(
+                'Please check folder and clean up manually: {0}'.format(
+                    self.io['input']['finfo']['dir']
+                ),
+                caller = 'Info'
+            )
         return answer
 
     def add_estimated_fdr( self, input_file=None, force=False, output_file_name=None ):
@@ -1201,7 +1210,7 @@ class UController(ursgal.UNode):
             # check if params from previous run are identical with default
             for i_json_param, i_json_value in self.io['input']['params'].items():
                 if i_json_param in self.params.keys():
-                    continue 
+                    continue
                 if i_json_param not in self.meta_unodes[ engine ].PARAMS_TRIGGERING_RERUN:
                     continue
                 default_value = self.meta_unodes[engine].UNODE_UPARAMS[i_json_param]['default_value']
@@ -1997,7 +2006,7 @@ class UController(ursgal.UNode):
                 ('Skipping {function}() on file {file} since it was '
                  'previously executed with the same input file(s) and '
                  'parameters.').format( **print_d ),
-                caller = 'Info'    
+                caller = 'Info'
             )
             self.print_info(
                 'To re-run, use {function}( force=True )'.format( **print_d ),
@@ -2996,26 +3005,28 @@ True
   but only files ending with {ok_extensions} are permitted.'''.format( **d )
 
 
-class UControllerParams(dict):
+class ParamsDict(dict):
     '''
-    This helper class is an attribute of the UController called params
-    (i.e. uc.params). It's a basic dict with some added functionality.
-    The dict throws an exception if you specify an unknown parameter (=key)
-    i.e. uc.params["enzyme"] = "something" is okay but
-    uc.params["asdgjhjk"] = "something" throws an error cause it is not
-    a valid parameter.
+    A dict that only accepts known keys, i.e. keys that are listed in uparams.py
     '''
-    def __init__(self, ucontroller_instance, *args, **kwargs):
-        self.ucontroller_instance = ucontroller_instance
-        super(UControllerParams, self).__init__(*args, **kwargs)
+    allowed_params = set(ursgal.uparams.ursgal_params.keys()) | \
+        {'mods', 'translations', 'TEST_PARAMS', 'TEST_PARAMS_2nd'}
+
     def __setitem__(self, key, value):
-        '''
-        If "UController.params["x"] = "y" is used, the dict entry
-        will also be updated in the UController.init_kwargs["params"]
-        (this has to be done in case the UController is resetted...)
-        '''
-        assert key in self.ucontroller_instance.DEFAULT_PARAMS, '''
-  "{0}" is not a valid parameter. Please check the documentation for a list of valid parameters."
-        '''.format( key )
-        self.ucontroller_instance.init_kwargs['params'][ key ] = value
-        super(UControllerParams, self).__setitem__(key, value)
+        if key not in ParamsDict.allowed_params:
+            raise ValueError('Unknown UController parameter: "{}". '
+                'Please check your spelling, and check '
+                'http://ursgal.readthedocs.io/en/latest/parameter.html '
+                'for a list of available parameters.'.format(key))
+        super().__setitem__(key, value)
+
+    def update(self, dict_to_add):
+        params_to_add = set(dict_to_add.keys())
+        unknown_params = params_to_add - ParamsDict.allowed_params
+        up_str = sorted(['"{}"'.format(s) for s in unknown_params])
+        if unknown_params:
+            raise ValueError('Unknown UController parameter(s): {}. '
+                'Please check your spelling, and check '
+                'http://ursgal.readthedocs.io/en/latest/parameter.html '
+                'for a list of available parameters.'.format(', '.join(up_str)))
+        super().update(dict_to_add)
