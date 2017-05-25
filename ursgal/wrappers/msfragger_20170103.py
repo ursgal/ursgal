@@ -224,6 +224,10 @@ class msfragger_20170103( ursgal.UNode ):
                             mod_key = 'add_Nterm_protein'
                         elif mod_dict['pos'] == 'Prot-C-term':
                             mod_key =  'add_Cterm_protein'
+                        elif mod_dict['pos'] == 'N-term':
+                            mod_key = 'add_Nterm_peptide'
+                        elif mod_dict['pos'] == 'C-term':
+                            mod_key = 'add_Cterm_peptide'
                         else:
                             mod_key = 'add_{0}_{1}'.format(
                                 mod_dict['aa'],
