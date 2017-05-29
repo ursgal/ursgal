@@ -243,7 +243,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     if database_search is True:
         non_enzymatic_peps = set()
-        peptide_complies_search_criteria_lookup = defaultdict(set)
+        conflicting_uparams = defaultdict(set)
         fasta_lookup_name = os.path.basename( 
             os.path.abspath(
                 params['translations']['database']
@@ -302,7 +302,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Sequence Stop',
             'Sequence Pre AA',
             'Sequence Post AA',
-            'Complies search criteria'
+            'Complies search criteria',
+            'Conflicting uparam',
         ]
 
         for new_fieldname in new_fieldnames:
@@ -826,7 +827,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_dict['Sequence'],
                     fasta_lookup_name
                 )
-                if lookup_identifier not in peptide_complies_search_criteria_lookup.keys():
+                if lookup_identifier not in conflicting_uparams.keys():
                     split_collector = { }
                     for key in [ upeptide_map_sort_key ] + upeptide_map_other_keys:
                         split_collector[ key ] = line_dict[key].split(joinchar)
@@ -930,12 +931,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     # e.g. the missed cleavage count etc.
                     if peptide_fullfills_enzyme_specificity is False:
                         non_enzymatic_peps.add( line_dict['Sequence'] )
-                        peptide_complies_search_criteria_lookup[lookup_identifier].add(
-                            False
-                        )
-                    else:
-                        peptide_complies_search_criteria_lookup[lookup_identifier].add(
-                            True
+                        conflicting_uparams[lookup_identifier].add(
+                            'enzyme'
                         )
 
                     #check here if missed cleavage count is correct...
@@ -956,19 +953,19 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             missed_cleavage_counter += \
                                 len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
                     if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
-                        peptide_complies_search_criteria_lookup[lookup_identifier].add(False)
-                    else:
-                        peptide_complies_search_criteria_lookup[lookup_identifier].add(True)
+                        conflicting_uparams[lookup_identifier].add('max_missed_cleavages')
                 # count each PSM occurence to check whether row-merging is needed:
                 psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 psm_counter[psm] += 1
 
-                if all(peptide_complies_search_criteria_lookup[lookup_identifier]):
-                    # all True
+                if len(conflicting_uparams[lookup_identifier]) == 0:
+                    # all tested search criteria true
                     line_dict['Complies search criteria'] = 'true'
                 else:
                     line_dict['Complies search criteria'] = 'false'
-            
+                    line_dict['Conflicting uparam'] = ';'.join(
+                        sorted(conflicting_uparams[lookup_identifier])
+                    )
             csv_output.writerow(line_dict)
             '''
                 to_be_written_csv_lines.append( line_dict )

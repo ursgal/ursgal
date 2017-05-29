@@ -15,19 +15,6 @@ import stat
 import shutil
 
 
-class ParamsDict(dict):
-    allowed_params = set(ursgal.uparams.ursgal_params.keys()) | \
-        {'mods', 'translations', 'TEST_PARAMS', 'TEST_PARAMS_2nd'}
-    def __setitem__(self, key, value):
-        super().__setitem__(key, value)
-        if key not in ParamsDict.allowed_params:
-            raise Exception('"{}" is not a valid UController parameter, '
-                            'please check your spelling. Or check http://'
-                            'ursgal.readthedocs.io/en/latest/parameter.html '
-                            'for a list of available parameters.'.format(key))
-        return
-
-
 class UController(ursgal.UNode):
     '''
     ursgal main class
@@ -108,10 +95,6 @@ class UController(ursgal.UNode):
         if self.verbose:
             self.show_unode_overview()
 
-        # input_file = kwargs.get('input_file', None)
-        # if input_file is not None:
-        #     self.set_target( kwargs['input_file'] )
-        # self.params = UControllerParams( self )
 
     def reset_controller( self ):
 
@@ -1227,7 +1210,7 @@ class UController(ursgal.UNode):
             # check if params from previous run are identical with default
             for i_json_param, i_json_value in self.io['input']['params'].items():
                 if i_json_param in self.params.keys():
-                    continue 
+                    continue
                 if i_json_param not in self.meta_unodes[ engine ].PARAMS_TRIGGERING_RERUN:
                     continue
                 default_value = self.meta_unodes[engine].UNODE_UPARAMS[i_json_param]['default_value']
@@ -2023,7 +2006,7 @@ class UController(ursgal.UNode):
                 ('Skipping {function}() on file {file} since it was '
                  'previously executed with the same input file(s) and '
                  'parameters.').format( **print_d ),
-                caller = 'Info'    
+                caller = 'Info'
             )
             self.print_info(
                 'To re-run, use {function}( force=True )'.format( **print_d ),
@@ -3022,26 +3005,28 @@ True
   but only files ending with {ok_extensions} are permitted.'''.format( **d )
 
 
-class UControllerParams(dict):
+class ParamsDict(dict):
     '''
-    This helper class is an attribute of the UController called params
-    (i.e. uc.params). It's a basic dict with some added functionality.
-    The dict throws an exception if you specify an unknown parameter (=key)
-    i.e. uc.params["enzyme"] = "something" is okay but
-    uc.params["asdgjhjk"] = "something" throws an error cause it is not
-    a valid parameter.
+    A dict that only accepts known keys, i.e. keys that are listed in uparams.py
     '''
-    def __init__(self, ucontroller_instance, *args, **kwargs):
-        self.ucontroller_instance = ucontroller_instance
-        super(UControllerParams, self).__init__(*args, **kwargs)
+    allowed_params = set(ursgal.uparams.ursgal_params.keys()) | \
+        {'mods', 'translations', 'TEST_PARAMS', 'TEST_PARAMS_2nd'}
+
     def __setitem__(self, key, value):
-        '''
-        If "UController.params["x"] = "y" is used, the dict entry
-        will also be updated in the UController.init_kwargs["params"]
-        (this has to be done in case the UController is resetted...)
-        '''
-        assert key in self.ucontroller_instance.DEFAULT_PARAMS, '''
-  "{0}" is not a valid parameter. Please check the documentation for a list of valid parameters."
-        '''.format( key )
-        self.ucontroller_instance.init_kwargs['params'][ key ] = value
-        super(UControllerParams, self).__setitem__(key, value)
+        if key not in ParamsDict.allowed_params:
+            raise ValueError('Unknown UController parameter: "{}". '
+                'Please check your spelling, and check '
+                'http://ursgal.readthedocs.io/en/latest/parameter.html '
+                'for a list of available parameters.'.format(key))
+        super().__setitem__(key, value)
+
+    def update(self, dict_to_add):
+        params_to_add = set(dict_to_add.keys())
+        unknown_params = params_to_add - ParamsDict.allowed_params
+        up_str = sorted(['"{}"'.format(s) for s in unknown_params])
+        if unknown_params:
+            raise ValueError('Unknown UController parameter(s): {}. '
+                'Please check your spelling, and check '
+                'http://ursgal.readthedocs.io/en/latest/parameter.html '
+                'for a list of available parameters.'.format(', '.join(up_str)))
+        super().update(dict_to_add)
