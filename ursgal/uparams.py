@@ -3881,7 +3881,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
-            'xtandem_valanine',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
