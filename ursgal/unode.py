@@ -788,33 +788,52 @@ class UNode(object, metaclass=Meta_UNode):
                 )
                 print(mod_params)
                 continue
-            aa          = mod_params[ 0 ]
-            mod_option  = mod_params[ 1 ]
-            pos         = mod_params[ 2 ]
+            aa          = mod_params[ 0 ].strip()
+            mod_option  = mod_params[ 1 ].strip()
+            pos         = mod_params[ 2 ].strip()
             unimod = False
             unimod_id = None
 
             if len(mod_params) == 4:
-                unimod_name = mod_params[ 3 ]
-                unimod_id   = ursgal.GlobalUnimodMapper.name2id( unimod_name )
-                mass = ursgal.GlobalUnimodMapper.name2mass( unimod_name )
-                composition = ursgal.GlobalUnimodMapper.name2composition( unimod_name )
-                if unimod_id is None:
-                    print('''[ WARNING ] '{1}' is not a Unimod modification
-[ WARNING ] please change it to a valid PSI-MS unimod_Name
-[ WARNING ] or add the chemical composition hill notation (including 1)
-[ WARNING ] e.g.: H-1N1O2
-[ WARNING ] ursgal_style: 'amino_acid,opt/fix,position,name,chemical_composition'
-[ WARNING ] Continue without modification {0} '''.format(
-                        mod,
-                        unimod_name
-                    ))
-                    continue
-                unimod = True
-                name = unimod_name
+                try:
+                    unimod_id = int(mod_params[ 3 ].strip())
+                    unimod_name   = ursgal.GlobalUnimodMapper.id2name( unimod_id )
+                    mass = ursgal.GlobalUnimodMapper.id2mass( unimod_id )
+                    composition = ursgal.GlobalUnimodMapper.id2composition( unimod_id )
+                    if unimod_name is None:
+                        print('''[ WARNING ] '{1}' is not a Unimod modification
+    [ WARNING ] please change it to a valid Unimod Accession # or PSI-MS Unimod Name
+    [ WARNING ] or add the chemical composition hill notation (including 1)
+    [ WARNING ] e.g.: H-1N1O2
+    [ WARNING ] ursgal_style: 'amino_acid,opt/fix,position,name,chemical_composition'
+    [ WARNING ] Continue without modification {0} '''.format(
+                            mod,
+                            unimod_id
+                        ))
+                        continue
+                    unimod = True
+                    name = unimod_name
+                except:
+                    unimod_name = mod_params[ 3 ].strip()
+                    unimod_id   = ursgal.GlobalUnimodMapper.name2id( unimod_name )
+                    mass = ursgal.GlobalUnimodMapper.name2mass( unimod_name )
+                    composition = ursgal.GlobalUnimodMapper.name2composition( unimod_name )
+                    if unimod_id is None:
+                        print('''[ WARNING ] '{1}' is not a Unimod modification
+    [ WARNING ] please change it to a valid PSI-MS Unimod Name or Unimod Accession #
+    [ WARNING ] or add the chemical composition hill notation (including 1)
+    [ WARNING ] e.g.: H-1N1O2
+    [ WARNING ] ursgal_style: 'amino_acid,opt/fix,position,name,chemical_composition'
+    [ WARNING ] Continue without modification {0} '''.format(
+                            mod,
+                            unimod_name
+                        ))
+                        continue
+                    unimod = True
+                    name = unimod_name
 
             elif len(mod_params) == 5:
-                name = mod_params[ 3 ]
+                name = mod_params[ 3 ].strip()
                 chemical_formula = mod_params[ 4 ].strip()
                 chemical_composition = ursgal.ChemicalComposition()
                 chemical_composition.add_chemical_formula( chemical_formula )

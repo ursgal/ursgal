@@ -419,6 +419,8 @@ class UnimodMapper( object ):
 
     def _map_key_2_index_2_value(self, map_key, return_key):
         ''''''
+        if type(map_key) is int:
+            map_key = str(map_key)
         index = self.mapper.get( map_key.strip(), None)
         if index is None:
             ursgal.UNode.print_info(

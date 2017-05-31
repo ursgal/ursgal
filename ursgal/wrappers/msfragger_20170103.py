@@ -61,7 +61,7 @@ class msfragger_20170103( ursgal.UNode ):
             'Kong, A. T., Leprevost, F. V, Avtonomov, '
             'D. M., Mellacheruvu, D., and Nesvizhskii, A. I. (2017) MSFragger: '
             'ultrafast and comprehensive peptide identification in mass '
-            'spectrometry-based proteomics. Nat. Publ. Gr. 293'
+            'spectrometry-based proteomics. Nature Methods 14'
     }
 
     def __init__(self, *args, **kwargs):
@@ -192,8 +192,22 @@ class msfragger_20170103( ursgal.UNode ):
                             pos_modifier = '['
                         elif mod_dict['pos'] == 'Prot-C-term':
                             pos_modifier = ']'
-                        else:
+                        elif mod_dict['pos'] == 'N-term':
+                            pos_modifier = 'n'
+                        elif mod_dict['pos'] == 'C-term':
+                            pos_modifier = 'c'
+                        elif mod_dict['pos'] == 'any':
                             pass
+                        else:
+                            print(
+                            '''
+                            Unknown positional argument for given modification:
+                            {0}
+                            MSFragger cannot deal with this, please use one of the follwing:
+                            any, Prot-N-term, Prot-C-term, N-term, C-term
+                            '''.format(mod_dict['org'])
+                            )
+                            exit(1)
                         if pos_modifier is not None:
                             aa_to_append = '{0}{1}'.format(pos_modifier,aa_to_append)
                         mass_to_mod_aa[mod_dict['mass']].append( aa_to_append )
@@ -210,6 +224,10 @@ class msfragger_20170103( ursgal.UNode ):
                             mod_key = 'add_Nterm_protein'
                         elif mod_dict['pos'] == 'Prot-C-term':
                             mod_key =  'add_Cterm_protein'
+                        elif mod_dict['pos'] == 'N-term':
+                            mod_key = 'add_Nterm_peptide'
+                        elif mod_dict['pos'] == 'C-term':
+                            mod_key = 'add_Cterm_peptide'
                         else:
                             mod_key = 'add_{0}_{1}'.format(
                                 mod_dict['aa'],

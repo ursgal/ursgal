@@ -160,8 +160,8 @@ class MultiScorer(object):
                 modifications       = row[ 'Modifications' ]
                 spectrum_identifier = row[ 'Spectrum Title' ]
 
-                if 'decoy' in row['proteinacc_start_stop_pre_post_;'].lower():
-                    row['Is decoy'] = 'true'
+                # if 'decoy' in row['proteinacc_start_stop_pre_post_;'].lower():
+                #     row['Is decoy'] = 'true'
 
                 PSM_tuple        = ( pep_sequence, spectrum_identifier, modifications, row['Is decoy'] )
                 row["PSM tuple"] = PSM_tuple
@@ -261,7 +261,13 @@ class MultiScorer(object):
 
                 # debugging
                 for k in potentially_conflicting_colnames.keys():
+                    # try:
                     v = csv_row[ k ]
+                    # except:
+                    #     import pprint
+                    #     pprint.pprint(csv_row)
+                    #     print(k)
+                    #     exit()
                     potentially_conflicting_colnames[k].add( v )
             
             # if one engine thinks a hit is decoy, it probably is...
@@ -510,7 +516,7 @@ class MultiScorer(object):
         ]
         header_end = [
             'Is decoy',
-            'proteinacc_start_stop_pre_post_;'
+            'Protein ID'
         ]
         header_center = []
         for instance in cls.csv_instances:

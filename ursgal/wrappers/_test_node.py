@@ -13,7 +13,7 @@ class _test_node( ursgal.UNode ):
         'version'            : 'alpha',
         'release_date'       : None,
         'engine_type' : {
-            'zZz_test'  : True
+            '_test'  : True
         },
         'input_extensions'   : ['.txt', '.csv', '.fasta', '.mzML'],
         'input_multi_file'   : False,

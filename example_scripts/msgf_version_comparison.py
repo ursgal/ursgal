@@ -4,26 +4,24 @@
 import ursgal
 import os
 
+
 def main():
     '''
-    Executes a search with 4 versions of X!Tandem on an example file from the
-    data from Barth et al.
+    Executes a search with a current maximum of 3 versions of MSGF+ on an
+    example file from the data from Barth et al. (2014)
 
     usage:
-        ./xtandem_version_comparison.py
+        ./msgf_version_comparison.py
 
 
     This is a simple example file to show the straightforward comparison of
-    different program versions of X!Tandem
+    different program versions of MSGF+
 
-    Creates a Venn diagram with the peptides obtained by the different versions.
+    Creates a Venn diagram with the peptides obtained by the different
+    versions.
 
 
     '''
-    engine_list = [
-        'msgfplus_v9979',
-        'msgfplus_v2016_09_16',
-    ]
 
     params = {
         'database' : os.path.join(
@@ -52,8 +50,8 @@ def main():
             os.pardir,
             'example_data'
         ),
-        'scan_skip_modulo_step' : 10,
-        'prefix' : 'Every_10th_',
+        # 'scan_skip_modulo_step' : 10,
+        # 'prefix' : 'Every_10th_',
         'remove_temporary_files': False
     }
 
@@ -64,6 +62,15 @@ def main():
         profile = 'LTQ XL low res' ,
         params = params
     )
+
+    engine_list = [
+        'msgfplus_v9979',
+        'msgfplus_v2016_09_16',
+    ]
+    if 'msgfplus_v2017_01_27' in uc.unodes.keys():
+        if uc.unodes['msgfplus_v2017_01_27']['available']:
+            engine_list.append('msgfplus_v2017_01_27')
+
     mzML_file = os.path.join(
         params['ftp_output_folder'],
         params['ftp_include_ext'][0]

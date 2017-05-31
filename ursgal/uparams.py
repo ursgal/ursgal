@@ -270,7 +270,9 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msgfplus2csv_v2016_09_16',
+            'msgfplus2csv_v2017_01_27',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -555,6 +557,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : True,
                 'msamanda_1_0_0_7504'  : True,
                 'msgfplus_v2016_09_16' : False,
+                'msgfplus_v2017_01_27' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -575,6 +578,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : True,
                 'msamanda_1_0_0_7504'  : True,
                 'msgfplus_v2016_09_16' : False,
+                'msgfplus_v2017_01_27' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -596,6 +600,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : True,
                 'msamanda_1_0_0_7504'  : True,
                 'msgfplus_v2016_09_16' : False,
+                'msgfplus_v2017_01_27' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -616,6 +621,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : True,
                 'msamanda_1_0_0_7504'  : True,
                 'msgfplus_v2016_09_16' : False,
+                'msgfplus_v2017_01_27' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -636,6 +642,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : True,
                 'msamanda_1_0_0_7504'  : True,
                 'msgfplus_v2016_09_16' : False,
+                'msgfplus_v2017_01_27' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -661,6 +668,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503',
                 'msamanda_1_0_0_7504',
                 'msgfplus_v2016_09_16',
+                'msgfplus_v2017_01_27',
                 'msgfplus_v9979',
                 'myrimatch_2_1_138',
                 'myrimatch_2_2_140',
@@ -917,6 +925,7 @@ ursgal_params = {
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -1064,6 +1073,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -1315,6 +1325,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1390,6 +1401,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -2055,6 +2067,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'novor_1_1beta',
         ],
@@ -2306,6 +2319,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus2csv_v2016_09_16',
+            'msgfplus2csv_v2017_01_27',
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
@@ -2408,7 +2422,7 @@ ursgal_params = {
                 'Downstream Amino Acid' : 'Sequence Post AA',
                 'Protein' : 'Protein ID',
                 'Variable modifications detected':'Modifications', #'(starts with M, separated by |, formated as position,mass) 
-                'Retention time (minutes)': 'Retention time (s)',
+                'Retention time (minutes)': 'Retention Time (s)',
 
                 'Precursor neutral mass (Da)' : 'MSFragger:Precursor neutral mass (Da)',
                 'Neutral mass of peptide' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da) 
@@ -2734,6 +2748,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'novor_1_1beta',
         ],
@@ -3381,6 +3396,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3597,6 +3613,7 @@ ursgal_params = {
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3755,6 +3772,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -3827,6 +3845,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'novor_1_1beta',
             'omssa_2_1_9',
@@ -3933,6 +3952,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4172,6 +4192,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4245,7 +4266,7 @@ ursgal_params = {
             'Modifications are given as a list of strings, each representing '\
             'the modification of one amino acid. The string consists of four '\
             'informations seperated by comma: \n'\
-            '    \'amino acid, type, position, unimod name\'\n'\
+            '    \'amino acid, type, position, unimod name or id\'\n'\
             '    amino acid  : specify the modified amino acid as a single '\
             'letter, use \'*\' if the amino acid is variable\n'\
             '    type        : specify if it is a fixed (fix) or potential '\
@@ -4253,8 +4274,8 @@ ursgal_params = {
             '    position    : specify the position within the '\
             'protein/peptide (Prot-N-term, Prot-C-term), use \'any\' if the '\
             'positon is variable\n'\
-            '    unimod name : specify the unimod PSI-MS Name '\
-            '(see unimod.org)\n'\
+            '    unimod name or id: specify the unimod PSI-MS Name '\
+            'or unimod Accession # (see unimod.org)\n'\
             '\n'\
             'Examples:\n'\
             '    [ \'M,opt,any,Oxidation\' ] - potential oxidation of Met at '\
@@ -4411,6 +4432,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
         ],
         'triggers_rerun' : True,
@@ -5164,6 +5186,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -5622,6 +5645,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
         ],
         'triggers_rerun' : True,
@@ -5678,6 +5702,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -5818,6 +5843,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'msgfplus2csv_v2016_09_16',
+            'msgfplus2csv_v2017_01_27',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5873,7 +5899,7 @@ ursgal_params = {
         ],
         'default_value' : 'UPeptideMapper_v3',
         'description' :  '''version 3 and 4 are the fastest and most memory efficient class versions, version 2 is the classic approach ''',
-        'triggers_rerun' : False,
+        'triggers_rerun' : True,
         'ukey_translation' : {
             'upeptide_mapper_style_1' : 'peptide_mapper_class_version',
         },
@@ -5943,6 +5969,7 @@ ursgal_params = {
         'available_in_unode' : [
             'kojak_1_5_3',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -6020,6 +6047,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -6078,6 +6106,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -6136,6 +6165,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -6258,6 +6288,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -6331,6 +6362,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'omssa_2_1_9',
             'msfragger_20170103'
@@ -6439,12 +6471,12 @@ ursgal_params = {
         ],
         'uvalue_option' : {
             'multiple_line' : False,
-            'none_val'     : None 
+            'none_val'     : None
         },
         'uvalue_translation' : {
             'msfragger_style_1' : {
                 'ppm' : 1,
-                'da'  : 0 
+                'da'  : 0
             }
         },
         'uvalue_type' : "str",
@@ -7486,6 +7518,7 @@ ursgal_params = {
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
             'msgfplus_v2016_09_16',
+            'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -7987,6 +8020,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : 0,
                 'msamanda_1_0_0_7504'  : 0,
                 'msgfplus_v2016_09_16' : 1e-100,
+                'msgfplus_v2017_01_27' : 1e-100,
                 'msgfplus_v9979'       : 1e-100,
                 'myrimatch_2_1_138'    : 0,
                 'myrimatch_2_2_140'    : 0,
@@ -8047,6 +8081,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -8068,6 +8103,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -8089,6 +8125,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -8110,6 +8147,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -8131,6 +8169,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -8152,6 +8191,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -8173,6 +8213,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -8492,7 +8533,7 @@ ursgal_params = {
             },
             'custom_val_max' : 0,
         },
-        'default_value' : (1200, 800),
+        'default_value' : (1200, 900),
         'description' : \
             'Size of visualization plots (e.g. Venn diagram), given as tuple '\
             '(width, height)',

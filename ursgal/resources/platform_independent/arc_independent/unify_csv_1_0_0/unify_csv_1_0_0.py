@@ -104,7 +104,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     )
 
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
-    psm_defining_colnames = get_psm_defining_colnames(score_colname)
+    psm_defining_colnames = get_psm_defining_colnames(score_colname, search_engine)
     joinchar              = params['translations']['protein_delimiter']
     do_not_delete         = False
     created_tmp_files     = []
@@ -135,28 +135,28 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     # mod pattern
     mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
 
-    for modification in params['translations']['modifications']:
-        aa = modification.split(',')[0]
-        mod_type = modification.split(',')[1]
-        pos = modification.split(',')[2]
-        name = modification.split(',')[3]
-        if name not in modname2aa.keys():
-            modname2aa[name] = []
-        modname2aa[name].append(aa)
-        if 'N-term' in pos:
-            n_term_replacement[name] = aa
-        if mod_type == 'fix':
-            fixed_mods[aa] = name
-        if mod_type == 'opt':
-            opt_mods[aa] = name
-        if 'C,fix,any,Carbamidomethyl' in modification:
-            cam = True
-            # allow also Carbamidomnethyl on U, since the mod name gets changed
-            # already in upeptide_mapper
-            # According to unimod, the mnodification is also on Selenocystein
-            # otherwise we should change that back so that it is skipped...
-            modname2aa['Carbamidomethyl'] += ['U']
-            fixed_mods['U'] = 'Carbamidomethyl'
+    for mod_type in ['fix', 'opt']:
+        for modification in params['mods'][mod_type]:
+            aa = modification['aa']
+            pos = modification['pos']
+            name = modification['name']
+            if name not in modname2aa.keys():
+                modname2aa[name] = []
+            modname2aa[name].append(aa)
+            if 'N-term' in pos:
+                n_term_replacement[name] = aa
+            if mod_type == 'fix':
+                fixed_mods[aa] = name
+                if aa == 'C' and name == 'Carbamidomethyl':
+                    cam = True
+                    # allow also Carbamidomnethyl on U, since the mod name gets changed
+                    # already in upeptide_mapper
+                    # According to unimod, the mnodification is also on Selenocystein
+                    # otherwise we should change that back so that it is skipped...
+                    modname2aa['Carbamidomethyl'] += ['U']
+                    fixed_mods['U'] = 'Carbamidomethyl'
+            if mod_type == 'opt':
+                opt_mods[aa] = name
 
     if 'msfragger' in search_engine.lower():
         ##########################
@@ -220,7 +220,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         'msgf',
         'myrimatch',
         'omssa',
-        'xtandem'
+        'xtandem',
+        'msfragger',
     ]
     de_novo = False
     database_search = False
@@ -242,7 +243,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     if database_search is True:
         non_enzymatic_peps = set()
-        peptide_complies_search_criteria_lookup = defaultdict(set)
+        conflicting_uparams = defaultdict(set)
         fasta_lookup_name = os.path.basename( 
             os.path.abspath(
                 params['translations']['database']
@@ -301,7 +302,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Sequence Stop',
             'Sequence Pre AA',
             'Sequence Post AA',
-            'Complies search criteria'
+            'Complies search criteria',
+            'Conflicting uparam',
         ]
 
         for new_fieldname in new_fieldnames:
@@ -449,7 +451,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     if line_dict['Modifications'] == 'M':
                         # M stand for Modifications here, not Methionine
                         line_dict['Modifications'] = ''
-                        # continue
                     else:
                         mod_list = line_dict['Modifications']
                         for single_mod in mod_list.split('|'):
@@ -623,7 +624,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 '''.format(
                                     mod,
                                     aa,
-                                    params['translations']['modifications']
+                                    params['mods']
                                 )
                     elif 'unknown modification' == mod:
                         modification_known = False
@@ -709,7 +710,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                     mod,
                                     name_list,
                                     aa,
-                                    params['translations']['modifications'],
+                                    params['mods'],
                                     line_dict['Sequence']
                                 )
                     if modification in tmp_mods or skip_mod is True:
@@ -826,7 +827,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_dict['Sequence'],
                     fasta_lookup_name
                 )
-                if lookup_identifier not in peptide_complies_search_criteria_lookup.keys():
+                if lookup_identifier not in conflicting_uparams.keys():
                     split_collector = { }
                     for key in [ upeptide_map_sort_key ] + upeptide_map_other_keys:
                         split_collector[ key ] = line_dict[key].split(joinchar)
@@ -859,8 +860,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     peptide_fullfills_enzyme_specificity = False
                     last_protein_id = None
                     for major_protein_info_dict in sorted_upeptide_maps:
-                        # print(line_dict)
-                        # print(protein)
                         protein_specifically_cleaved   = False
                         nterm_correct = False
                         cterm_correct = False
@@ -930,17 +929,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 last_protein_id = protein_info_dict['Protein ID']
                     # we may test for further criteria to set this flag/fieldname
                     # e.g. the missed cleavage count etc.
-                    # if line_dict['Sequence'] == 'SPRPGAAPGSR':
-                    #     print(peptide_fullfills_enzyme_specificity)
-                    #     exit()
                     if peptide_fullfills_enzyme_specificity is False:
                         non_enzymatic_peps.add( line_dict['Sequence'] )
-                        peptide_complies_search_criteria_lookup[lookup_identifier].add(
-                            False
-                        )
-                    else:
-                        peptide_complies_search_criteria_lookup[lookup_identifier].add(
-                            True
+                        conflicting_uparams[lookup_identifier].add(
+                            'enzyme'
                         )
 
                     #check here if missed cleavage count is correct...
@@ -961,21 +953,19 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             missed_cleavage_counter += \
                                 len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
                     if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
-                        peptide_complies_search_criteria_lookup[lookup_identifier].add(False)
-                    else:
-                        peptide_complies_search_criteria_lookup[lookup_identifier].add(True)
+                        conflicting_uparams[lookup_identifier].add('max_missed_cleavages')
                 # count each PSM occurence to check whether row-merging is needed:
                 psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 psm_counter[psm] += 1
 
-                if all(peptide_complies_search_criteria_lookup[lookup_identifier]):
-                    # all True
+                if len(conflicting_uparams[lookup_identifier]) == 0:
+                    # all tested search criteria true
                     line_dict['Complies search criteria'] = 'true'
                 else:
                     line_dict['Complies search criteria'] = 'false'
-                    # print(line_dict['Sequence'])
-                    # exit()
-            
+                    line_dict['Conflicting uparam'] = ';'.join(
+                        sorted(conflicting_uparams[lookup_identifier])
+                    )
             csv_output.writerow(line_dict)
             '''
                 to_be_written_csv_lines.append( line_dict )
@@ -1014,7 +1004,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     return created_tmp_files
 
 
-def get_psm_defining_colnames(score_colname):
+def get_psm_defining_colnames(score_colname, search_engine):
     '''
     Returns the all PSM-defining column names (i.e spectrum & peptide,
     but also score field because sometimes the same PSMs are reported
@@ -1027,6 +1017,8 @@ def get_psm_defining_colnames(score_colname):
         'Charge',
         'Is decoy',
     ]
+    if 'msfragger' in search_engine.lower():
+        psm.append('MSFragger:Neutral mass of peptide')
     if score_colname:
         psm.append(score_colname)
     return psm
@@ -1108,13 +1100,30 @@ if __name__ == '__main__':
             #         'unimod_name' : 'Methylpyrroline',
             #     },
             # },
-            'modifications' : [
-                'M,opt,any,Oxidation',        # Met oxidation
-                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-                '*,opt,Prot-N-term,Acetyl',    # N-Acteylation[]
-                'K,opt,any,Label:13C(5)15N(1)',
-                'K,opt,any,Label:13C(6)15N(2)',
-            ],
+            'mods' : {
+                'fix': {
+                    '_id': 1,
+                    'aa': 'C',
+                    'composition': {'C': 2, 'H': 3, 'N': 1, 'O': 1},
+                    'id': '4',
+                    'mass': 57.021464,
+                    'name': 'Carbamidomethyl',
+                    'org': 'C,fix,any,Carbamidomethyl',
+                    'pos': 'any',
+                    'unimod': True
+                },
+                'opt': {
+                    '_id': 3,
+                    'aa': 'M',
+                    'composition': {'O': 1},
+                    'id': '35',
+                    'mass': 15.994915,
+                    'name': 'Oxidation',
+                    'org': 'M,opt,any,Oxidation',
+                    'pos': 'any',
+                    'unimod': True
+                },
+            },
             'protein_delimiter'        : '<|>',
             'enzyme'                   : 'KR;C;P',
             'keep_asp_pro_broken_peps' : True,
