@@ -502,6 +502,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -567,6 +568,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance' : True,
+                'xtandem_alanine' : True,
                 'msfragger_20170103' : True,
             },
             'percolator_style_1' : {
@@ -588,6 +590,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance'    : True,
+                'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
 
             },
@@ -610,6 +613,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance'    : True,
+                'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
             },
             'sanitize_csv_style_1' : {
@@ -631,6 +635,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance'    : True,
+                'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
             },
             'svm_style_1' : {
@@ -652,6 +657,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : True,
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance'    : True,
+                'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
             },
         },
@@ -678,6 +684,7 @@ ursgal_params = {
                 'xtandem_piledriver',
                 'xtandem_sledgehammer',
                 'xtandem_vengeance',
+                'xtandem_alanine',
             ],
             'custom_val_max' : 0,
         },
@@ -695,6 +702,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -726,6 +734,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -780,6 +789,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -936,6 +946,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103',
         ],
         'triggers_rerun' : False,
@@ -1084,6 +1095,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'upeptide_mapper_1_0_0',
             'compomics_utilities_4_11_5',
             'msfragger_20170103',
@@ -1129,6 +1141,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1332,6 +1345,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1415,6 +1429,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103',
         ],
         'triggers_rerun' : True,
@@ -1802,6 +1817,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1899,6 +1915,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -1949,6 +1966,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -2007,6 +2025,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2111,6 +2130,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3406,6 +3426,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103',
         ],
         'triggers_rerun' : True,
@@ -3475,6 +3496,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -3523,6 +3545,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103',
 
         ],
@@ -3559,6 +3582,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3699,6 +3723,7 @@ ursgal_params = {
     'max_num_per_mod_name_specific' : {
         'available_in_unode' : [
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3743,6 +3768,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3855,6 +3881,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4021,6 +4048,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -4057,6 +4085,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -4206,6 +4235,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -4981,6 +5011,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5011,6 +5042,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5043,6 +5075,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5720,6 +5753,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5762,6 +5796,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5981,6 +6016,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -6060,6 +6096,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103',
         ],
         'triggers_rerun' : True,
@@ -6119,6 +6156,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -6177,6 +6215,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -6403,6 +6442,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -6980,6 +7020,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7056,6 +7097,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7107,6 +7149,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7289,6 +7332,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7340,6 +7384,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7443,6 +7488,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7484,6 +7530,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7529,6 +7576,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
             'msfragger_20170103'
         ],
         'triggers_rerun' : True,
@@ -7606,6 +7654,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7827,6 +7876,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7987,6 +8037,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : 0,
                 'xtandem_sledgehammer' : 0,
                 'xtandem_vengeance'    : 0,
+                'xtandem_alanine'    : 0,
                 'msfragger_20170103'   : 0,
             },
         },
@@ -8050,6 +8101,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
+                'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore'
             },
             'percolator_style_1' : {
@@ -8072,6 +8124,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
+                'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
             },
             'qvality_style_1' : {
@@ -8094,6 +8147,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
+                'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore'
             },
             'sanitize_csv_style_1' : {
@@ -8116,6 +8170,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
+                'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore'
             },
             'svm_style_1' : {
@@ -8138,6 +8193,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
+                'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore'
             },
             'ucontroller_style_1' : {
@@ -8160,6 +8216,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
+                'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
             },
             'unify_csv_style_1' : {
@@ -8182,6 +8239,7 @@ ursgal_params = {
                 'xtandem_piledriver'   : 'X\!Tandem:hyperscore',
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
+                'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
             },
         },
@@ -8610,6 +8668,7 @@ ursgal_params = {
             'xtandem_piledriver',
             'xtandem_sledgehammer',
             'xtandem_vengeance',
+            'xtandem_alanine',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
