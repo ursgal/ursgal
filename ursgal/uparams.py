@@ -2229,6 +2229,31 @@ ursgal_params = {
             'ftp download\n'\
             '    \'\' : None',
     },
+    'ftp_login' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'get_ftp_files_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'get_http_style_1' : 'ftp_login',
+        },
+        'utag' : [
+            'download',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : None,
+        'description' : \
+            'Login name/user for the ftp server e.g. "PASS00269" in peptideatlas.org'\
+            'ftp download\n'\
+            '    \'\' : None',
+    },
     'ftp_max_number_of_files' : {
         'edit_version' : 1.00,
         'available_in_unode' : [

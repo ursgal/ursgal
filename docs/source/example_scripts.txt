@@ -47,6 +47,19 @@ X!Tandem version comparison
 
 
 
+MSGF+ version comparison
+---------------------------
+
+.. autofunction:: msgf_version_comparison.main
+
+.. include:: code_inc/msgf_version_comparison.inc
+
+
+.. figure:: images/msgfplus_version_comparison.png
+   :align: center
+
+
+
 BSA machine ppm offset example
 ------------------------------
 
