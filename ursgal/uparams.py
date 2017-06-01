@@ -211,6 +211,13 @@ ursgal_params = {
                 'description'    : \
                     'ThermoFisher RAW format',
             },
+            '.ssl' : {
+                'short_name'     : 'SSL',
+                'long_name'      : 'Spectrum Sequence List',
+                'same_extension' : [],
+                'description'    : \
+                    'Generic tab-delimited text file format supported by BiblioSpec',
+            },
             '.svg' : {
                 'short_name'     : 'SVG',
                 'long_name'      : 'SVG (Scalable Vector Graphic)',
@@ -7633,6 +7640,7 @@ ursgal_params = {
             'is less than 1 the peak is rejected.',
     },
     'ssl_score_column_name' : {
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'csv2ssl_1_0_0',
         ],
@@ -7646,12 +7654,15 @@ ursgal_params = {
             'scoring',
         ],
         'uvalue_option' : {
+            'none_val'  : None,
+            'multiple_line' : False,
         },
         'uvalue_translation' : {
         },
         'uvalue_type' : "str",
     },
     'ssl_score_type' : {
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'csv2ssl_1_0_0',
         ],
@@ -7665,11 +7676,10 @@ ursgal_params = {
             'scoring',
         ],
         'uvalue_option' : {
-            'comboBox' : True,
-            'initialValue' : ['UNKNOWN', 'PERCOLATOR QVALUE', 'TANDEM EXPECTATION VALUE', 'OMSSA EXPECTATION SCORE'],
-            'radioButton' : False,
-            'userCustomValues' : False,
-            'userCustomValuesMaxNum' : 0,
+            'combo_box' : True,
+            'initial_value' : ['UNKNOWN', 'PERCOLATOR QVALUE', 'TANDEM EXPECTATION VALUE', 'OMSSA EXPECTATION SCORE'],
+            'radio_button' : False,
+            'custom_val_max' : 0,
         },
         'uvalue_translation' : {
         },

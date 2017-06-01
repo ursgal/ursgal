@@ -10,13 +10,18 @@ class csv2ssl_1_0_0( ursgal.UNode ):
     """csv2ssl_1_0_0 UNode"""
 
     META_INFO = {
+        'edit_version'           : 1.00,
+        'name'                   : 'Convert CSV to SSL',
+        'version'                : '1.0.0',
+        'release_date'           : None,
         'engine_type' : {
             'converter'     : True
         },
-        'output_extension' : '.ssl',
+        'output_extensions' : ['.ssl'],
+        'input_extensions'  : ['.csv'],
         'output_suffix'    : 'converted',
-        'input_types'      : ['.csv'],
         'in_development'   : False,
+        'input_multi_file'       : False,
         'utranslation_style'    : 'csv2ssl_style_1',
         'include_in_git'   : True,
 
@@ -27,6 +32,7 @@ class csv2ssl_1_0_0( ursgal.UNode ):
                 },
             },
         },
+        'citation' : '',
     }
 
 
@@ -46,7 +52,7 @@ class csv2ssl_1_0_0( ursgal.UNode ):
         print('[ -ENGINE- ] Executing conversion ..')
         self.time_point(tag = 'execution')
         csv2ssl_main = self.import_engine_as_python_function()
-        if self.params['output_file'].lower().endswith('.csv') is False:
+        if self.params['input_file'].lower().endswith('.csv') is False:
             raise ValueError('Trying to convert a non-csv file')
 
         output_file = os.path.join(

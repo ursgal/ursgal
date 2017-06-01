@@ -7,7 +7,6 @@ Resulting .ssl files can be used as input for BiblioSpec
 usage:
     ./csv2ssl_1_0_0.py <input_file> <output_file> <score_column_name> <score_type>
 
-
 '''
 
 import sys
@@ -20,7 +19,12 @@ if sys.platform != 'win32':
     csv.field_size_limit(sys.maxsize)
 
 
-def main( input_file=None, output_file=None, score_column_name=None, score_type=None):
+def main(
+    input_file=None,
+    output_file=None,
+    score_column_name=None,
+    score_type=None
+):
     '''
     Convert csvs to ssl
     '''
@@ -73,7 +77,7 @@ def main( input_file=None, output_file=None, score_column_name=None, score_type=
                         )
                     except:
                         sys.exit(
-                            'Can not map unimod {0}. extracted position argument {1}'.format(
+                            'Can not map unimod {0}. extracted position argument: {1}'.format(
                                 mod, match.start()
                         ))
                     position = int(match.group('pos'))
