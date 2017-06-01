@@ -30,7 +30,9 @@ Available in unodes
 """""""""""""""""""
 
 * msgfplus2csv_v2016_09_16
+* msgfplus2csv_v2017_01_27
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
@@ -282,6 +284,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *batch_size*
 """"""""""""""""""""""""""""""""""""""""""
@@ -347,10 +350,12 @@ Ursgal key translations
  msamanda_1_0_0_7504       1                         1                         1                         1                         1                        
  msfragger_20170103        1                         1                         1                         1                         1                        
  msgfplus_v2016_09_16      0                         0                         0                         0                         0                        
+ msgfplus_v2017_01_27      0                         0                         0                         0                         0                        
  msgfplus_v9979            0                         0                         0                         0                         0                        
  myrimatch_2_1_138         1                         1                         1                         1                         1                        
  myrimatch_2_2_140         1                         1                         1                         1                         1                        
  omssa_2_1_9               0                         0                         0                         0                         0                        
+ xtandem_alanine           1                         1                         1                         1                         1                        
  xtandem_cyclone_2010      1                         1                         1                         1                         1                        
  xtandem_jackhammer        1                         1                         1                         1                         1                        
  xtandem_piledriver        1                         1                         1                         1                         1                        
@@ -381,6 +386,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *cleavage_cterm_mass_change*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -414,6 +420,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *cleavage_nterm_mass_change*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -476,6 +483,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *compensate_small_fasta*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -678,6 +686,7 @@ Available in unodes
 
 * kojak_1_5_3
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -688,6 +697,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *cpus*
@@ -816,6 +826,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -826,6 +837,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * upeptide_mapper_1_0_0
 * compomics_utilities_4_11_5
 * msfragger_20170103
@@ -872,6 +884,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *database_taxonomy*
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -1092,12 +1105,14 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * xtandem_cyclone_2010
 * xtandem_jackhammer
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *engine_internal_decoy_generation*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1204,6 +1219,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -1217,6 +1233,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *enzyme*
@@ -1358,6 +1375,7 @@ Available in unodes
 """""""""""""""""""
 
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *forbidden_cterm_mods*
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1461,6 +1479,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *frag_mass_tolerance*
@@ -1514,6 +1533,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *frag_mass_tolerance_unit*
@@ -1568,6 +1588,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *frag_mass_type*
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -1641,6 +1662,7 @@ Available in unodes
 """""""""""""""""""
 
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * novor_1_1beta
 
@@ -1690,6 +1712,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *frag_min_mz*
 """""""""""""""""""""""""""""""""""""""""""
@@ -1787,6 +1810,36 @@ Ursgal value translations for *ftp_include_ext*
  Style            Translation     
  ================ ================
  get_http_style_1 ftp_include_ext 
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+ftp_login
+####################
+
+
+Login name/user for the ftp server e.g. "PASS00269" in peptideatlas.orgftp download
+    '' : None
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* get_ftp_files_1_0_0
+
+Ursgal value translations for *ftp_login*
+"""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ get_http_style_1 ftp_login       
  ================ ================
 
 .. raw:: html
@@ -1936,6 +1989,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus2csv_v2016_09_16
+* msgfplus2csv_v2017_01_27
 * novor_1_1beta
 * omssa_2_1_9
 * pepnovo_3_1
@@ -2021,7 +2075,7 @@ Ursgal key translations
  Protein Accessions                                                   n/t                                                                  proteinacc_start_stop_pre_post_;                                     n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
  RT                                                                   n/t                                                                  Retention Time (s)                                                   n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
  Rank                                                                 n/t                                                                  Rank                                                                 n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
- Retention time (minutes)                                             n/t                                                                  n/t                                                                  Retention time (s)                                                   n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
+ Retention time (minutes)                                             n/t                                                                  n/t                                                                  Retention Time (s)                                                   n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
  RnkScr                                                               n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  Pepnovo:RnkScr                                                      
  Scan Number                                                          n/t                                                                  Spectrum ID                                                          n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
  ScanID                                                               n/t                                                                  n/t                                                                  Spectrum ID                                                          n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
@@ -2417,6 +2471,7 @@ Available in unodes
 * kojak_1_5_3
 * moda_v1_51
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * novor_1_1beta
 
@@ -3181,6 +3236,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -3190,6 +3246,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *label*
@@ -3262,6 +3319,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *max_accounted_observed_peaks*
@@ -3312,6 +3370,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *max_missed_cleavages*
@@ -3350,6 +3409,7 @@ Available in unodes
 """""""""""""""""""
 
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *max_mod_alternatives*
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3409,6 +3469,7 @@ Available in unodes
 
 * kojak_1_5_3
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -3514,6 +3575,7 @@ Available in unodes
 """""""""""""""""""
 
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *max_num_per_mod_name_specific*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3548,6 +3610,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *max_output_e_value*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -3578,6 +3641,7 @@ Available in unodes
 """""""""""""""""""
 
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -3657,6 +3721,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * novor_1_1beta
 * omssa_2_1_9
@@ -3666,6 +3731,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *mgf_input_file*
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -3774,6 +3840,7 @@ Available in unodes
 """""""""""""""""""
 
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -3847,6 +3914,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *min_required_matched_peaks*
@@ -3885,6 +3953,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *min_required_observed_peaks*
@@ -4033,11 +4102,11 @@ modifications
 
 
 Modifications are given as a list of strings, each representing the modification of one amino acid. The string consists of four informations seperated by comma: 
-    'amino acid, type, position, unimod name'
+    'amino acid, type, position, unimod name or id'
     amino acid  : specify the modified amino acid as a single letter, use '*' if the amino acid is variable
     type        : specify if it is a fixed (fix) or potential (opt) modification
     position    : specify the position within the protein/peptide (Prot-N-term, Prot-C-term), use 'any' if the positon is variable
-    unimod name : specify the unimod PSI-MS Name (see unimod.org)
+    unimod name or id: specify the unimod PSI-MS Name or unimod Accession # (see unimod.org)
 
 Examples:
     [ 'M,opt,any,Oxidation' ] - potential oxidation of Met at any position within a peptide
@@ -4066,6 +4135,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -4079,6 +4149,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *modifications*
@@ -4496,6 +4567,7 @@ Available in unodes
 """""""""""""""""""
 
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 
 Ursgal value translations for *msgfplus_protocol_id*
@@ -4985,6 +5057,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *neutral_loss_enabled*
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5030,6 +5103,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *neutral_loss_mass*
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -5063,6 +5137,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *neutral_loss_window*
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5229,6 +5304,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -5769,6 +5845,7 @@ Available in unodes
 """""""""""""""""""
 
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 
 Ursgal value translations for *output_add_features*
@@ -5850,6 +5927,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -5867,6 +5945,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *output_file_incl_path*
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5914,6 +5993,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *output_file_type*
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -6016,6 +6096,7 @@ Available in unodes
 """""""""""""""""""
 
 * msgfplus2csv_v2016_09_16
+* msgfplus2csv_v2017_01_27
 
 Ursgal value translations for *output_q_values*
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -6187,6 +6268,7 @@ Available in unodes
 
 * kojak_1_5_3
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -6198,6 +6280,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *precursor_isotope_range*
@@ -6257,6 +6340,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -6269,6 +6353,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *precursor_mass_tolerance_minus*
@@ -6317,6 +6402,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -6329,6 +6415,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *precursor_mass_tolerance_plus*
@@ -6376,6 +6463,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -6387,6 +6475,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *precursor_mass_tolerance_unit*
@@ -6494,6 +6583,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -6573,6 +6663,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * omssa_2_1_9
 * msfragger_20170103
@@ -6615,6 +6706,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *precursor_min_mass*
@@ -6637,7 +6729,7 @@ precursor_true_tolerance
 ###################################
 
 
-
+True precursor mass tolerance (window is +/- this value). Used for tie breaker of results (in spectrally ambiguous cases) and zero bin boosting in open searches (0 disables these features). This option is STRONGLY recommended for open searches.
 
 :Default value: 5
 :type: int
@@ -6666,7 +6758,7 @@ precursor_true_units
 ###############################
 
 
-
+Mass tolerance units fo precursor_true_tolerance
 
 :Default value: ppm
 :type: str
@@ -7012,6 +7104,35 @@ Ursgal value translations for *remove_temporary_files*
 
       <hr />
 
+rounded_mass_decimals
+################################
+
+
+Masses of modifications are rounded in order to match them to their corresponding unimod name. Use this parameter to set the number of decimal places after rounding.
+
+:Default value: 3
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* unify_csv_1_0_0
+
+Ursgal value translations for *rounded_mass_decimals*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ===================== =====================
+ Style                 Translation          
+ ===================== =====================
+ unify_csv_style_1     rounded_mass_decimals
+ ===================== =====================
+
+.. raw:: html
+
+      <hr />
+
 rt_pickle_name
 #########################
 
@@ -7265,6 +7386,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *score_a_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -7365,6 +7487,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *score_b_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -7424,6 +7547,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *score_c_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -7662,6 +7786,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *score_x_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -7721,6 +7846,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *score_y_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -7848,6 +7974,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *score_z_ions*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -7897,6 +8024,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *search_for_saps*
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -7945,6 +8073,7 @@ Available in unodes
 * msamanda_1_0_0_7503
 * msamanda_1_0_0_7504
 * msgfplus_v2016_09_16
+* msgfplus_v2017_01_27
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -7955,6 +8084,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 * msfragger_20170103
 
 Ursgal value translations for *semi_enzyme*
@@ -8037,6 +8167,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *spec_dynamic_range*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -8315,6 +8446,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *use_refinement*
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -8537,11 +8669,14 @@ Ursgal key translations
  msamanda_1_0_0_6300  0                   
  msamanda_1_0_0_7503  0                   
  msamanda_1_0_0_7504  0                   
+ msfragger_20170103   0                   
  msgfplus_v2016_09_16 1e-100              
+ msgfplus_v2017_01_27 1e-100              
  msgfplus_v9979       1e-100              
  myrimatch_2_1_138    0                   
  myrimatch_2_2_140    0                   
  omssa_2_1_9          1e-30               
+ xtandem_alanine      0                   
  xtandem_cyclone_2010 0                   
  xtandem_jackhammer   0                   
  xtandem_piledriver   0                   
@@ -8609,12 +8744,14 @@ Ursgal key translations
  msamanda_1_0_0_7504       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
  msfragger_20170103        MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore     
  msgfplus_v2016_09_16      MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
+ msgfplus_v2017_01_27      MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
  msgfplus_v9979            MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
  myrimatch_2_1_138         MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH            
  myrimatch_2_2_140         MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH            
  novor_1_1beta             Novor:score               Novor:score               Novor:score               Novor:score               Novor:score               Novor:score               Novor:score              
  omssa_2_1_9               OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue             
  pepnovo_3_1               Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr           
+ xtandem_alanine           X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
  xtandem_cyclone_2010      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
  xtandem_jackhammer        X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
  xtandem_piledriver        X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
@@ -8806,7 +8943,7 @@ visualization_size
 
 Size of visualization plots (e.g. Venn diagram), given as tuple (width, height)
 
-:Default value: (1200, 800)
+:Default value: (1200, 900)
 :type: tuple
 :triggers rerun: False
             
@@ -8966,6 +9103,7 @@ Available in unodes
 * xtandem_piledriver
 * xtandem_sledgehammer
 * xtandem_vengeance
+* xtandem_alanine
 
 Ursgal value translations for *xtandem_stp_bias*
 """"""""""""""""""""""""""""""""""""""""""""""""

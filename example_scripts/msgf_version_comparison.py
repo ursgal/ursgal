@@ -20,6 +20,7 @@ def main():
     Creates a Venn diagram with the peptides obtained by the different
     versions.
 
+    An example plot can be found in the online documentation.
 
     '''
 
