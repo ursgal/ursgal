@@ -59,7 +59,7 @@ def main(
         csv_output.writeheader()
 
         for csv_line_dict in csv_input:
-            rt = float(csv_line_dict['Retention Time (s)'])/60
+            rt = round(float(csv_line_dict['Retention Time (s)'])/60, 10)
             sequence = csv_line_dict['Sequence']
             mods = csv_line_dict['Modifications'].split(';')
 
