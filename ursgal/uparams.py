@@ -104,14 +104,10 @@ ursgal_params = {
             },
             '.mgf' : {
                 'short_name'     : 'MGF',
-                'long_name'      : 'MGF (Materials and Geometry)',
+                'long_name'      : 'Mascot Generic Format',
                 'same_extension' : [],
                 'description'    : \
-                    'MGF file is a Materials and Geometry Format Data. The '\
-                    'Materials and Geometry Format (MGF) is a description '\
-                    'language for 3-dimensional environments expressly suited '\
-                    'to visible light simulation and rendering.\n'\
-                    '(DataTypes.net; https://datatypes.net)',
+                    'The Mascot generic format for a data file submitted to Mascot',
             },
             '.ms2' : {
                 'short_name'     : 'MS2',
@@ -202,7 +198,7 @@ ursgal_params = {
                 'long_name'      : 'PKL (pickle)',
                 'same_extension' : [],
                 'description'    : \
-                    'PKL file is a file created by pickle module',
+                    'PKL file is a file created by the Python pickle module',
             },
             '.raw' : {
                 'short_name'     : 'RAW',
