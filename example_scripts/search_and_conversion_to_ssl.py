@@ -7,23 +7,19 @@ import sys
 import shutil
 
 
-def main():
+def main(mzML_file=None, profile=None, database=None):
     '''
-    Executes a search with XTandem on the BSA1.mzML input_file.
+    Executes a search with XTandem on an mzml_input_file.
     Results are validated with percolator and exported to .ssl.
 
     usage:
-        ./search_and_conversion_to_ssl.py
+        ./search_and_conversion_to_ssl.py <mzML_file> <profile> <target_decoy_database>
 
     '''
     uc = ursgal.UController(
-        profile = 'LTQ XL low res',
+        profile = profile,
         params = {
-            'database' : os.path.join(
-                os.pardir,
-                'example_data',
-                'BSA.fasta'
-            ),
+            'database' : database,
             'modifications' : [
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
@@ -36,29 +32,6 @@ def main():
         xtandem = 'xtandem_vengeance'
     else:
         xtandem = 'xtandem_sledgehammer'
-
-    mzML_file = os.path.join(
-        os.pardir,
-        'example_data',
-        'BSA_simple_example_search',
-        'BSA1.mzML'
-    )
-    if os.path.exists(mzML_file) is False:
-        uc.params['http_url'] = 'http://sourceforge.net/p/open-ms/code/HEAD/tree/OpenMS/share/OpenMS/examples/BSA/BSA1.mzML?format=raw'
-        uc.params['http_output_folder'] = os.path.dirname(mzML_file)
-        uc.fetch_file(
-            engine     = 'get_http_files_1_0_0',
-        )
-        try:
-            shutil.move(
-                '{0}?format=raw'.format(mzML_file),
-                mzML_file
-            )
-        except:
-            shutil.move(
-                '{0}format=raw'.format(mzML_file),
-                mzML_file
-            )
 
     unified_search_result_file = uc.search(
         input_file = mzML_file,
@@ -74,12 +47,16 @@ def main():
     uc.params['ssl_score_column_name'] = 'q-value'
     uc.params['ssl_score_type'] = 'PERCOLATOR QVALUE' 
 
-    ssl_file = uc.visualize(
-        input_files    = validated_results,
+    ssl_file = uc.convert(
+        input_file    = validated_results,
         engine         = 'csv2ssl',
     )
     return
 
 
 if __name__ == '__main__':
-    main()
+    main(
+        mzML_file=sys.argv[1],
+        profile=sys.argv[2],
+        database=sys.argv[3]
+    )
