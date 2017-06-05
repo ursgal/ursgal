@@ -25,7 +25,7 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML', '.ms2', '.pkl', '.dta.txt'],
         'input_multi_file'            : False,
         'output_extensions'           : ['.mzid'],
-        'compress_raw_search_results' : False,
+        'compress_raw_search_results' : True,
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
