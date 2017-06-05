@@ -36,7 +36,7 @@ class msgfplus_v2017_01_27( msgf ):
         ],
         'input_multi_file'            : False,
         'output_extensions'           : ['.mzid'],
-        'compress_raw_search_results' : False,
+        'compress_raw_search_results' : True,
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,

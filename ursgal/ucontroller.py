@@ -3061,8 +3061,8 @@ class ParamsDict(dict):
     def update(self, dict_to_add):
         params_to_add = set(dict_to_add.keys())
         unknown_params = params_to_add - ParamsDict.allowed_params
-        up_str = sorted(['"{}"'.format(s) for s in unknown_params])
         if unknown_params:
+            up_str = sorted(['"{}"'.format(s) for s in unknown_params])
             raise ValueError('Unknown UController parameter(s): {}. '
                 'Please check your spelling, and check '
                 'http://ursgal.readthedocs.io/en/latest/parameter.html '
