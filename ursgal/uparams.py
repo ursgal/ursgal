@@ -207,6 +207,13 @@ ursgal_params = {
                 'description'    : \
                     'ThermoFisher RAW format',
             },
+            '.ssl' : {
+                'short_name'     : 'SSL',
+                'long_name'      : 'Spectrum Sequence List',
+                'same_extension' : [],
+                'description'    : \
+                    'Generic tab-delimited text file format supported by BiblioSpec',
+            },
             '.svg' : {
                 'short_name'     : 'SVG',
                 'long_name'      : 'SVG (Scalable Vector Graphic)',
@@ -7701,6 +7708,52 @@ ursgal_params = {
             '(intensity) within a spectrum is set to given value and all '\
             'other peaks are normalized to this peak. If the normalized value '\
             'is less than 1 the peak is rejected.',
+    },
+    'ssl_score_column_name' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2ssl_1_0_0',
+        ],
+        'default_value' : "q-value",
+        'description' :  ''' Name of the column that includes the scores that should be used for the .ssl file ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2ssl_style_1' : 'score_column_name',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_option' : {
+            'none_val'  : None,
+            'multiple_line' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'ssl_score_type' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2ssl_1_0_0',
+        ],
+        'default_value' : "PERCOLATOR QVALUE",
+        'description' :  ''' Type of scores used for the .ssl file ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2ssl_style_1' : 'score_type',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_option' : {
+            'combo_box' : True,
+            'initial_value' : ['UNKNOWN', 'PERCOLATOR QVALUE', 'TANDEM EXPECTATION VALUE', 'OMSSA EXPECTATION SCORE'],
+            'radio_button' : False,
+            'custom_val_max' : 0,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "select",
     },
     'svm_c_param' : {
         'edit_version' : 1.00,

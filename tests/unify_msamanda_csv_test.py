@@ -2,7 +2,7 @@
 # encoding: utf-8
 '''
 
-Test the unify_csv function for msgfplus engine
+Test the unify_csv function for msamanda engine
 
 '''
 import ursgal

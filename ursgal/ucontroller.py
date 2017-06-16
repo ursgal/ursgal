@@ -894,6 +894,42 @@ class UController(ursgal.UNode):
         )
         return report['output_file']
 
+    def convert(self, input_file, engine, force=None, output_file_name=None ):
+        '''
+        The UController convert function converts the given input_file
+        into another format as defined by the specified engine.
+
+        Keyword Arguments:
+            input_file (str): The complete path to the input file.
+            engine (str): The name of the desired converter engine.
+                 Can also be a shortened version if it is unambigous.
+            force (bool): (Re)do the analysis, even if output file already
+                exists.
+            output_file_name (str or None): Desired output file name
+                excluding path (optional). If None, output file name will
+                be auto-generated.
+
+        Example::
+
+            >>> uc=ursgal.UController()
+            >>> unified_merged_results = 'BSA_msgfplus_unified_merged.csv',
+            >>> uc.convert_file(
+            ...    input_file = unified_merged_results,
+            ...    engine     = 'csv2ssl_1_0_0'
+            ...)
+
+        Returns:
+            str: Path of the output file
+        '''
+        return self.execute_unode(
+            input_file       = input_file,
+            engine           = engine,
+            force            = force,
+            output_file_name = output_file_name
+        )
+
+        return report['output_file']
+
     def set_file_info_dict( self, in_file ):
         '''Splits ext and path and so on '''
         finfo = {}
@@ -2238,6 +2274,8 @@ class UController(ursgal.UNode):
             force            = force,
             output_file_name = output_file_name
         )
+
+
 
 
     def prepare_resources(self, root_zip_target_folder):
