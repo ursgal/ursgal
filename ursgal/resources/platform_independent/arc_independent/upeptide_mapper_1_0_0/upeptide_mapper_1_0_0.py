@@ -887,11 +887,11 @@ class UPeptideMapper_v4():
         '''
 
         for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parseFasta(open(fasta_database,'r').readlines())):
-            if protein_pos % 500 == 0:
+            if protein_pos % 5000 == 0:
                 print(
                     '[ upapa v4 ] Buffering protein #{0} of database {1}'.format(
                         self.fasta_counter,
-                        fasta_database
+                        os.path.basename(fasta_database)
                     ),
                     end ='\r'
                 )

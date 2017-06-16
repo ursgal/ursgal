@@ -11,7 +11,7 @@ import time
 def main( class_version):
     '''
 
-    Example script to demonstrate speed and memory efficiency of the new 
+    Example script to demonstrate speed and memory efficiency of the new
     upeptide_mapper.
 
     All tryptic peptides (n=1,094,395, 6 < len(peptide) < 40 ) are mapped to the 
@@ -19,7 +19,7 @@ def main( class_version):
 
     usage:
         ./complete_chlamydomonas_proteome_match.py <class_version>
-    
+
     Class versions
         * UPeptideMapper_v2
         * UPeptideMapper_v3
@@ -58,7 +58,7 @@ def main( class_version):
             no_missed_cleavages = True
         )
         for p in tryptic_peptides:
-            if 6 <= len(p) <= 40:  
+            if 6 <= len(p) <= 40:
                 peptides.add( p )
     print(
         'Parsing fasta and digesting sequences took {0:1.2f} seconds'.format(
@@ -77,8 +77,8 @@ def main( class_version):
     )
 
     print('Buffering fasta and mapping {0} peptides'.format(len(peptides)))
-    map_start = time.time()  
-    
+    map_start = time.time()
+
     if class_version == 'UPeptideMapper_v2':
         peptide_mapper = upapa_class(word_len =6)
         fasta_lookup_name = peptide_mapper.build_lookup_from_file(
@@ -113,7 +113,6 @@ def main( class_version):
         print('All peptides have been mapped!')
     else:
         print('WARNING: Not all peptide have been mapped')
-
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(main.__doc__)
