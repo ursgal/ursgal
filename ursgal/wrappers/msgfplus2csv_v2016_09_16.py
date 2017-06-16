@@ -8,6 +8,7 @@ import csv
 import copy
 import re
 import pprint
+import gzip
 
 
 class msgfplus2csv_v2016_09_16( ursgal.UNode ):
@@ -26,7 +27,7 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
         'engine_type' : {
             'converter'     : True
         },
-        'input_extensions'   : ['.mzid'],
+        'input_extensions'   : ['.mzid', '.mzid.gz'],
         'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : None,
@@ -75,6 +76,13 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
 
         if self.io['input']['finfo']['is_compressed']:
             self.params['translations']['mzidentml_compress'] = True
+            with gzip.open(input_file_incl_path, 'rt') as fin:
+                path, ext = os.path.splitext(input_file_incl_path)
+                with open(path, 'wt') as fout:
+                    for line in fin:
+                        fout.write(line)
+            input_file_incl_path = path
+            self.params['translations']['tmp_uncompressed_mzid'] = path
 
         self.params['command_list'] = [
             'java',
@@ -96,6 +104,10 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
         '''
         Convert .tsv result file to .csv
         '''
+        # remove temp mzid
+        if self.params['translations'].get('tmp_uncompressed_mzid', None) is not None:
+            os.remove(self.params['translations']['tmp_uncompressed_mzid'])
+
         cached_msgfplus_output = []
         with open(self.params['translations']['output_file_incl_path'].strip('.csv')+'.tsv', 'r') as result_file:
             headers = []
