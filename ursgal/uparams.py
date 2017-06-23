@@ -104,7 +104,7 @@ ursgal_params = {
             },
             '.mgf' : {
                 'short_name'     : 'MGF',
-                'long_name'      : 'Mascot Generic Format',
+                'long_name'      : 'MGF (Mascot Generic Format)',
                 'same_extension' : [],
                 'description'    : \
                     'The Mascot generic format for a data file submitted to Mascot',
@@ -202,14 +202,14 @@ ursgal_params = {
             },
             '.raw' : {
                 'short_name'     : 'RAW',
-                'long_name'      : 'RAW',
+                'long_name'      : 'RAW (ThermoFisher RAW format)',
                 'same_extension' : [],
                 'description'    : \
                     'ThermoFisher RAW format',
             },
             '.ssl' : {
                 'short_name'     : 'SSL',
-                'long_name'      : 'Spectrum Sequence List',
+                'long_name'      : 'SSL (Spectrum Sequence List)',
                 'same_extension' : [],
                 'description'    : \
                     'Generic tab-delimited text file format supported by BiblioSpec',
@@ -2004,7 +2004,7 @@ ursgal_params = {
             },
             'msfragger_style_1' : {
                 'ppm' : 1,
-                'da'  : 0 
+                'da'  : 0
             }
         },
         'uvalue_type' : 'select',
@@ -2469,11 +2469,11 @@ ursgal_params = {
                 'Upstream Amino Acid': 'Sequence Pre AA',
                 'Downstream Amino Acid' : 'Sequence Post AA',
                 'Protein' : 'Protein ID',
-                'Variable modifications detected':'Modifications', #'(starts with M, separated by |, formated as position,mass) 
+                'Variable modifications detected':'Modifications', #'(starts with M, separated by |, formated as position,mass)
                 'Retention time (minutes)': 'Retention Time (s)',
 
                 'Precursor neutral mass (Da)' : 'MSFragger:Precursor neutral mass (Da)',
-                'Neutral mass of peptide' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da) 
+                'Neutral mass of peptide' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da)
                 'Hit rank':'MSFragger:Hit rank',
                 'Mass difference':'MSFragger:Mass difference',
                 'Matched fragment ions':'MSFragger:Matched fragment ions',
@@ -6283,7 +6283,7 @@ ursgal_params = {
             },
             'msfragger_style_1' : {
                 'ppm' : 1,
-                'da'  : 0 
+                'da'  : 0
             }
         },
         'uvalue_type' : 'select',
