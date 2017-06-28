@@ -35,7 +35,7 @@ class msgfplus_v2017_01_27( msgf ):
             '.dta.txt'
         ],
         'input_multi_file'            : False,
-        'output_extensions'           : ['.mzid'],
+        'output_extensions'           : ['.mzid', '.mzid.gz'],
         'compress_raw_search_results' : True,
         'create_own_folder'           : True,
         'in_development'              : False,
