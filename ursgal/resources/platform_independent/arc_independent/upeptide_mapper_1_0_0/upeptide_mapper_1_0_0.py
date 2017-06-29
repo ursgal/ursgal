@@ -44,8 +44,7 @@ def main(input_file=None, output_file=None, params=None):
 
     Results and fixes
         * All peptide Sequences are remapped to their corresponding protein,
-          assuring correct start, stop, pre and post aminoacid. Thereby,
-          also correct enzymatic cleavage is checked.
+          assuring correct start, stop, pre and post aminoacid.
         * It is determined if the corresponding proteins are decoy proteins.
           These peptides are reported after the mapping process.
         * Non-mappable peptides are reported. This can e.g. due to 'X' in

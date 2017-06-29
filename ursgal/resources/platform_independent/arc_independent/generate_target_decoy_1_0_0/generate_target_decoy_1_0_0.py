@@ -134,7 +134,11 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
                     else:
                         peptideWithoutCleavageAA = peptide
                 else:
-                    print('Where does your enzyme cleave?',enzyme)
+                    print('''
+                        No cleavage site for {0} defined.
+                        Please add this information to uparams.py
+                        (enzyme --> generate_target_decoy_style_1)
+                        '''.format(enzyme))
                     exit()
                 aaString = ''.join(sorted(peptide))
                 if aaString not in perDict.keys():
