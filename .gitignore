@@ -15,6 +15,7 @@ docs/source/code_inc
 docs/source/parameter.txt
 example_data/BSA_simple_example_search
 tests/data/_ursgal_lookup.pkl
+tests/data/csv2ssl_1_0_0/BSA1_csv2ssl_test_unified_converted.csv
 tests/data/msamanda_1_0_0_5243/test_BSA1_msamanda_1_0_0_5243_unified.csv
 tests/data/msgfplus_v9979/test_BSA1_msgfplus_v9979_unified.csv
 tests/data/myrimatch_2_1_138/test_BSA1_myrimatch_2_1_138_unified.csv

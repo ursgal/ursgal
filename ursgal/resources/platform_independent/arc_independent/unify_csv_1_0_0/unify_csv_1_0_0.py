@@ -123,10 +123,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         'Trimethyl'    : None,
         'Gly->Val'     : None,
     }
-    fixed_mods = {}
-    opt_mods   = {}
-    modname2aa = {}
-    cam        = False
+    fixed_mods   = {}
+    opt_mods     = {}
+    mod_dict     = {}
+    cam          = False
     
     # modification masses are rounded to allow matching to unimod
     no_decimals = params['translations']['rounded_mass_decimals']
@@ -140,9 +140,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             aa = modification['aa']
             pos = modification['pos']
             name = modification['name']
-            if name not in modname2aa.keys():
-                modname2aa[name] = []
-            modname2aa[name].append(aa)
+            if name not in mod_dict.keys():
+                mod_dict[name] = {
+                    'mass' : modification['mass'],
+                    'aa' : set(),
+                    'pos': set(),
+                }                
+            mod_dict[name]['aa'].add(aa)
+            mod_dict[name]['aa'].add(pos)
             if 'N-term' in pos:
                 n_term_replacement[name] = aa
             if mod_type == 'fix':
@@ -153,7 +158,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     # already in upeptide_mapper
                     # According to unimod, the mnodification is also on Selenocystein
                     # otherwise we should change that back so that it is skipped...
-                    modname2aa['Carbamidomethyl'] += ['U']
+                    mod_dict['Carbamidomethyl']['aa'].add('U')
                     fixed_mods['U'] = 'Carbamidomethyl'
             if mod_type == 'opt':
                 opt_mods[aa] = name
@@ -165,43 +170,59 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         # if 15N add artifical mods...
         getcontext().prec = 8
         getcontext().rounding = ROUND_UP
-        mod_dict_list = params['mods']['opt'] + params['mods']['fix']
+        # mod_dict_list = params['mods']['opt'] + params['mods']['fix']
         if use15N:
             aminoacids_2_check = set()
-            for mod_dict in mod_dict_list:
-                aminoacids_2_check.add(mod_dict['aa'] )
+            for modname in mod_dict.keys():
+                aminoacids_2_check |= mod_dict[modname]['aa']
             additional_15N_modifications = []
             for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
                 if aminoacid not in aminoacids_2_check:
                     continue
-                additional_dict = {
-                    'name' : '_15N_{0}'.format(aminoacid),
+                if '_15N_{0}'.format(aminoacid) in mod_dict.keys():
+                    print('''
+                        Error in unify_csv
+                        New mod_name already present in mod_dict'
+                        This should never happen'''
+                    )
+                    exit()
+                mod_dict['_15N_{0}'.format(aminoacid)] = {
                     'mass' : N15_Diff,
-                    'aa'   : aminoacid,
-                    'pos'  : 'any'
-
+                    'aa' : set([aminoacid]),
+                    'pos': set(['any']),
                 }
-                additional_15N_modifications.append(
-                    additional_dict
-                )
-            mod_dict_list += additional_15N_modifications
+                # additional_dict = {
+                #     'name' : '_15N_{0}'.format(aminoacid),
+                #     'mass' : N15_Diff,
+                #     'aa'   : aminoacid,
+                #     'pos'  : 'any'
 
-        mod_lookup = {} #d['name'] for d in self.params['mods']['opt']]
-        for mod_dict in mod_dict_list:
-            mod_lookup[ mod_dict['name'] ] = mod_dict
+                # }
+            #     additional_15N_modifications.append(
+            #         additional_dict
+            #     )
+            # mod_dict_list += additional_15N_modifications
 
-        mod_names = sorted(list(mod_lookup.keys()))
+        # mod_lookup = {} #d['name'] for d in self.params['mods']['opt']]
+        # for mod_dict in mod_dict_list:
+        #     if mod_dict['name'] not in mod_lookup.keys():
+        #         mod_lookup[mod_dict['name']] = []
+        #     mod_lookup[ mod_dict['name'] ].append(mod_dict)
+
+        mod_names = []
+        for mod in sorted(list(mod_dict.keys())):
+            mod_names.extend(itertools.repeat(mod, len(mod_dict[mod]['aa'])))
         mass_to_mod_combo = {}
         # we cover all combocs of mods
         for iter_length in range(2, len(mod_names) + 1):
             for name_combo in itertools.combinations(mod_names, iter_length):
                 mass = 0
                 for name in name_combo:
-                    mass += Decimal(mod_lookup[name]['mass'])
-                # round to 5 decimals, at least valid for MSFragger 20170103
-                mass_to_mod_combo[ mass_format_string.format(mass) ] = {
-                    'name_combo' : name_combo,
-                }
+                    mass += Decimal(mod_dict[name]['mass'])
+                rounded_mass = mass_format_string.format(mass)
+                if rounded_mass not in mass_to_mod_combo.keys():
+                    mass_to_mod_combo[rounded_mass] = set()
+                mass_to_mod_combo[ rounded_mass ].add( name_combo )
         # print(mass_to_mod_combo.keys())
         # exit()
         #msfragger mod merge block end
@@ -462,62 +483,80 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 Decimal(raw_msfragger_mass)
                             )
                             msfragger_pos       = int(msfragger_pos)
-                            # print(msfragger_pos, msfragger_mass)
-                            # import pprint
-                            # pprint.pprint(mass_to_mod_combo)
-                            # exit()
                             if msfragger_mass in mass_to_mod_combo.keys():
-                                combo_explainable = set([True])
-                                tmp_mods = []
-                                for new_name in mass_to_mod_combo[msfragger_mass]['name_combo']:
-                                    meta_mod_info = mod_lookup[new_name]
-                                    single_mod_check = set([True])
-                                    '''
-                                    meta_mod_info = {
-                                        '_id': 0,
-                                        'aa': '*',
-                                        'composition': {'C': 2, 'H': 2, 'O': 1},
-                                        'id': '1',
-                                        'mass': 42.010565,
-                                        'name': 'Acetyl',
-                                        'org': '*,opt,Prot-N-term,Acetyl',
-                                        'pos': 'Prot-N-term',
-                                        'unimod': True},
-                                    '''
-                                    #check aa
-                                    if meta_mod_info['aa'] != '*':
-                                        if meta_mod_info['aa'] != line_dict['Sequence'][msfragger_pos]:
-                                            single_mod_check.add(False)
-                                    # check pos
-                                    pos_to_check = None
-                                    if meta_mod_info['pos']== 'Prot-N-term':
-                                        pos_to_check = 0
-                                    elif meta_mod_info['pos'] == 'Prot-C-term':
-                                        pos_to_check = int(len(line_dict['Sequence'])) - 1
-                                    else:
-                                        pass
-                                    if pos_to_check is not None:
-                                        pos_in_peptide_for_format_str = pos_to_check
-                                        if pos_to_check != msfragger_pos:
-                                            single_mod_check.add(False)
-                                    else:
-                                        # MS Frager starts counting at zero
-                                        pos_in_peptide_for_format_str = msfragger_pos + 1  
+                                explainable_combos = []
+                                for combo in mass_to_mod_combo[msfragger_mass]:
+                                    combo_explainable = set([True])
+                                    tmp_mods = []
+                                    for new_name in combo:
+                                        meta_mod_info = mod_dict[new_name]
+                                        single_mod_check = set([True])
+                                        '''
+                                        meta_mod_info = {
+                                            'aa': set of aa,
+                                            'mass': 42.010565,
+                                            'pos': set of pos,
+                                        }                                    
+                                        '''
+                                        #check aa
+                                        if '*' not in meta_mod_info['aa'] and \
+                                            line_dict['Sequence'][msfragger_pos] not in meta_mod_info['aa']:
+                                                single_mod_check.add(False)
+                                        # check pos
+                                        if 'any' not in meta_mod_info['pos']:
+                                            pos_to_check = set()
+                                            if 'Prot-N-term' in meta_mod_info['pos'] or\
+                                                'N-term' in meta_mod_info['pos']:
+                                                pos_to_check.add(0)
+                                            elif 'Prot-C-term' in meta_mod_info['pos'] or \
+                                                'C-term' in meta_mod_info['pos']:
+                                                pos_to_check.add(int(len(line_dict['Sequence'])) - 1)
+                                            else:
+                                                pass
+                                            if pos_to_check != set():
+                                                if msfragger_pos not in pos_to_check:
+                                                    single_mod_check.add(False)
 
-                                    if all(single_mod_check):
-                                        # we keep mass here so that the 
-                                        # correct name is added later in already
-                                        # existing code
-                                        tmp_mods.append(
-                                            '{0}:{1}'.format(
-                                                meta_mod_info['mass'],
-                                                pos_in_peptide_for_format_str
+                                        if all(single_mod_check):
+                                            # MS Frager starts counting at zero
+                                            pos_in_peptide_for_format_str = msfragger_pos + 1  
+                                            # we keep mass here so that the 
+                                            # correct name is added later in already
+                                            # existing code
+                                            tmp_mods.append(
+                                                '{0}:{1}'.format(
+                                                    meta_mod_info['mass'],
+                                                    pos_in_peptide_for_format_str
+                                                )
                                             )
+                                        else:
+                                            combo_explainable.add(False)
+                                    if all(combo_explainable):
+                                        explainable_combos.append(tmp_mods)
+                                if len(explainable_combos) > 1:
+                                    print(
+                                        '''
+                                        [ WARNING ] Multiple modification combinations possible
+                                        [ WARNING ] to explain reported modification mass
+                                        [ WARNING ] The following combination was chosen to continue:
+                                        [ WARNING ] {0}
+                                        '''.format(
+                                            sorted(explainable_combos)[0],
                                         )
-                                    else:
-                                        combo_explainable.add(False)
-                                if all(combo_explainable):
-                                    ms_fragger_reformatted_mods += tmp_mods
+                                    )
+                                    # pprint.pprint(explainable_combos)
+                                    # ms_fragger_reformatted_mods += sorted(explainable_combos)[0]
+                                    # exit()
+                                elif len(explainable_combos) == 1:
+                                    ms_fragger_reformatted_mods += sorted(explainable_combos)[0]
+                                else:
+                                    # no combos explainable
+                                    ms_fragger_reformatted_mods.append(
+                                        '{0}:{1}'.format(
+                                            raw_msfragger_mass,
+                                            msfragger_pos + 1
+                                        )
+                                    )
                             else:
                                 # MS Frager starts counting at zero
                                 ms_fragger_reformatted_mods.append(
@@ -607,13 +646,13 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     #     fixed_mods[ aminoacid ]
                     #     # fixed mods are corrected/added already
                     #     continue
-                    if mod in modname2aa.keys():
+                    if mod in mod_dict.keys():
                         correct_mod = False
-                        if aa in modname2aa[mod]:
+                        if aa in mod_dict[mod]['aa']:
                             # everything is ok
                             correct_mod = True
                         elif Nterm or Cterm:
-                            if '*' in modname2aa[mod]:
+                            if '*' in mod_dict[mod]['aa']:
                                 correct_mod = True
                                 # still is ok
                         assert correct_mod is True,'''
@@ -678,11 +717,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         #     )
                         mapped_mod = False
                         for name in name_list:
-                            if name in modname2aa.keys():
-                                if aa in modname2aa[name]:
+                            if name in mod_dict.keys():
+                                if aa in mod_dict[name]['aa']:
                                     modification = '{0}:{1}'.format(name,new_pos)
                                     mapped_mod = True
-                                elif Nterm and '*' in modname2aa[name]:
+                                elif Nterm and '*' in mod_dict[name]['aa']:
                                     modification = '{0}:{1}'.format(name,0)
                                     mapped_mod = True
                                 else:
@@ -696,7 +735,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 mapped_mod = True
                                 skip_mod = True
                                 break
-                        # pprint.pprint(line_dict)
                         assert mapped_mod is True, '''
                                 A mass was reported that does not map on any unimod or userdefined modification
                                 or the modified aminoacid is not the specified one
@@ -722,8 +760,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 #
                 for unimod_name in n_term_replacement.keys():
                     if '{0}:1'.format(unimod_name) in line_dict_update['Modifications'].split(';'):
-                        if unimod_name in modname2aa.keys():
-                            aa = modname2aa[unimod_name]
+                        if unimod_name in mod_dict.keys():
+                            aa = mod_dict[unimod_name]['aa']
                             if aa != ['*']:
                                 if line_dict['Sequence'][0] in aa:
                                     continue
