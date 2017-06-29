@@ -3002,7 +3002,8 @@ True
   {custom_str} does not have the correct file extension.
   You specified the file
 \t{in_file}
-  but only files ending with {ok_extensions} are permitted.'''.format( **d )
+  but only files ending with {ok_extensions} are permitted for engine {0}
+  '''.format(engine, **d )
 
 
 class ParamsDict(dict):
