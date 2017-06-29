@@ -31,7 +31,11 @@ TEST_FASTA = [
     '>Overlapping',
     'GGGGGGGGGG',
     '>GnomeChompsky',
-    'MUSTACHIO'
+    'MUSTACHIO',
+    '>Overlap_protein',
+    'OVERLAP',
+    '>Overlap_protein2',
+    'OVERLAP'
 ]
 
 TEST_FASTA_TWO = [
@@ -238,7 +242,8 @@ class UMapMaster(unittest.TestCase):
                         'id'    : 'T1'
                     }
 
-                ], key= lambda x: x['start']
+                ],
+                key = lambda x: x['start']
             )
         )
         return
@@ -266,6 +271,47 @@ class UMapMaster(unittest.TestCase):
         self.assertEqual( len(maps), 7 )
         return
 
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
+    def test_overlap_produces_no_match(self):
+        maps = self.upapa_class.map_peptides(
+            ['LAPOVER'],
+            'Test.fasta'
+        )['LAPOVER']
+        self.assertEqual( len(maps), 0 )
+        return
+
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
+    def test_start_and_end_of_sequence(self):
+        maps = self.upapa_class.map_peptides(
+            ['OVERLAP'],
+            'Test.fasta'
+        )['OVERLAP']
+        # print(maps)
+        for map_dict in maps:
+            self.assertEqual( map_dict['post'], '-' )
+            self.assertEqual( map_dict['pre'], '-' )
+        return
+
+
+    @unittest.skipIf(
+        sys.platform == 'win32',
+        'pyahocorasick not installed via pip in Windows'
+    )
+    def test_end_of_sequence_and_fasta(self):
+        maps = self.upapa_class.map_peptides(
+            ['LAP'],
+            'Test.fasta'
+        )['LAP']
+        # print(maps)
+        for map_dict in maps:
+            self.assertEqual( map_dict['post'], '-' )
+        return
 
 if __name__ == '__main__':
     unittest.main()
