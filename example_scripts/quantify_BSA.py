@@ -8,7 +8,8 @@ def main():
     mzml = os.path.join(
         os.pardir,
         'example_data',
-        'BSA1.mzML'
+        'search_with_label_15N',
+        'JB_FASP_pH8_2-3_28122012.mzML'
     )
 
     params = {
@@ -20,7 +21,7 @@ def main():
         'database': os.path.join(
             os.pardir,
             'example_data',
-            'BSA.fasta'
+            'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
         )
     }
 
