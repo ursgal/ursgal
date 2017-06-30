@@ -21,21 +21,38 @@ def main():
         (http://www.mono-project.com/download)
 
     '''
+    params = {
+        'database' : os.path.join(
+            os.pardir,
+            'example_data',
+            'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
+        ),
+        'modifications' : [
+            'M,opt,any,Oxidation',        # Met oxidation
+            'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+            '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
+        ],
+        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta' ,
+        'http_output_folder' : os.path.join(
+            os.pardir,
+            'example_data'
+        ),
+        'ftp_url'       : 'ftp.peptideatlas.org',
+        'ftp_login'         : 'PASS00269',
+        'ftp_password'      : 'FI4645a',
+        'ftp_include_ext'   : [
+            'JB_FASP_pH8_2-3_28122012.mzML',
+        ],
+        'ftp_output_folder' : os.path.join(
+            os.pardir,
+            'example_data',
+            'simple_search'
+    ),
+        # 'peptide_mapper_class_version' : 'UPeptideMapper_v2',
+    }
     uc = ursgal.UController(
         profile = 'LTQ XL low res',
-        params = {
-            'database' : os.path.join(
-                os.pardir,
-                'example_data',
-                'BSA.fasta'
-            ),
-            'modifications' : [
-                'M,opt,any,Oxidation',        # Met oxidation
-                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-                '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
-            ],
-            # 'peptide_mapper_class_version' : 'UPeptideMapper_v2',
-        }
+        params = params
     )
 
     if sys.maxsize > 2 ** 32:
@@ -50,11 +67,18 @@ def main():
     ]
 
     mzML_file = os.path.join(
-        os.pardir,
-        'example_data',
-        'BSA_simple_example_search',
-        'BSA1.mzML'
+        params['ftp_output_folder'],
+        params['ftp_include_ext'][0]
     )
+    if os.path.exists(mzML_file) is False:
+        uc.fetch_file(
+            engine     = 'get_ftp_files_1_0_0'
+        )
+    if os.path.exists(params['database']) is False:
+        uc.fetch_file(
+            engine     = 'get_http_files_1_0_0'
+        )
+
     if os.path.exists(mzML_file) is False:
         uc.params['http_url'] = 'http://sourceforge.net/p/open-ms/code/HEAD/tree/OpenMS/share/OpenMS/examples/BSA/BSA1.mzML?format=raw'
         uc.params['http_output_folder'] = os.path.dirname(mzML_file)
@@ -80,6 +104,7 @@ def main():
             engine     = engine,
             force      = False
         )
+        uc.params['infere_proteins'] = True
         val = uc.validate(
             input_file=unified_search_result_file,
             engine    = 'percolator_3_0'
