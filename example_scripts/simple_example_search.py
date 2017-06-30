@@ -44,9 +44,9 @@ def main():
         xtandem = 'xtandem_sledgehammer'
 
     engine_list = [
+        'msgfplus_v2016_09_16',
         'omssa',
         xtandem,
-        'msgfplus_v2016_09_16',
     ]
 
     mzML_file = os.path.join(
@@ -80,8 +80,12 @@ def main():
             engine     = engine,
             force      = False
         )
-        unified_file_list.append(unified_search_result_file)
-
+        val = uc.validate(
+            input_file=unified_search_result_file,
+            engine    = 'percolator_3_0'
+        )
+        unified_file_list.append(val)
+    
     uc.visualize(
         input_files    = unified_file_list,
         engine         = 'venndiagram',

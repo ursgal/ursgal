@@ -1,4 +1,24 @@
 ursgal_params = {
+    'infere_proteins' : {
+        'available_in_unode' : [
+            'percolator_2_08',
+            'percolator_3_0',
+        ],
+        'default_value' : False,
+        'description' :  ''' Use the FIDO algorithm to infere protein posterior error probabilities in Percolator''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'percolator_style_1' : 'infere_proteins',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
     '_extentions' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
@@ -535,6 +555,7 @@ ursgal_params = {
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
+            'percolator_3_0',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
@@ -1207,7 +1228,8 @@ ursgal_params = {
             'mzidentml_lib_1_7',
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
-            'upeptide_mapper_1_0_0'
+            'upeptide_mapper_1_0_0',
+            'percolator_3_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1426,6 +1448,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'percolator_2_08',
+            'percolator_3_0',
             'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -1449,7 +1472,8 @@ ursgal_params = {
             'percolator_style_1'            : 'enzyme',
             'unify_csv_style_1'             : 'enzyme',
             'xtandem_style_1'               : 'protein, cleavage site',
-            'msfragger_style_1'             : 'enzyme'
+            'msfragger_style_1'             : 'enzyme',
+            'percolator_style_1'            : 'enz'
         },
         'utag' : [
             'database',
@@ -5774,6 +5798,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'percolator_2_08',
+            'percolator_3_0',
             'qvality_2_02',
             'venndiagram_1_0_0',
             'xtandem_cyclone_2010',
@@ -6576,6 +6601,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'percolator_2_08',
+            'percolator_3_0',
             'unify_csv_1_0_0',
             'upeptide_mapper_1_0_0'
         ],
@@ -8132,6 +8158,7 @@ ursgal_params = {
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
+            'percolator_3_0',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
