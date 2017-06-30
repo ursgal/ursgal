@@ -8,20 +8,8 @@ check the format of node and param.
 from datetime import datetime
 from ursgal import uparams
 from ursgal import UController
-import pprint
 
-uc = UController()
-all_node  = uc.unodes
-all_node_name = list(all_node)
-all_node_name.sort()
-remove_list = []
-for node_name in all_node_name:
-    if node_name[0] == '_':
-        if len(node_name) < 5 or node_name[0:5] != '_test':
-            remove_list.append(node_name)
-for remove_name in remove_list:
-    all_node_name.remove(remove_name)
-
+# node format
 node_meta_info = {
     'cannot_distribute' : {
         'essential' : False,
@@ -44,7 +32,7 @@ node_meta_info = {
         'types'     : [bool],
     },
     'edit_version' : {
-        'essential' : False,
+        'essential' : True,
         'types'     : [float],
     },
     'engine' : {
@@ -121,21 +109,7 @@ node_meta_info = {
     },
 }
 
-style_list = [
-    'ucontroller_style_1',
-]
-
-all_param = uparams.ursgal_params
-all_param_name = list(all_param)
-all_param_name.sort()
-remove_list = []
-for param_name in all_param_name:
-    if param_name[0] == '_':
-        if len(param_name) < 5 or param_name[0:5] != '_test':
-            remove_list.append(param_name)
-for remove_name in remove_list:
-    all_param_name.remove(remove_name)
-
+# param format
 param_info = {
     'available_in_unode' : {
         'essential'   : True,
@@ -151,7 +125,7 @@ param_info = {
         'types'       : [str],
     },
     'edit_version' : {
-        'essential'   : False,
+        'essential'   : True,
         'types'       : [float],
     },
     'triggers_rerun' : {
@@ -180,6 +154,7 @@ param_info = {
     },
 }
 
+# type format
 type_info = {
     'str' : {
         'my_type' : str,
@@ -266,6 +241,36 @@ type_info = {
     },
 }
 
+# styles which is required by system
+style_list = [
+    'ucontroller_style_1',
+]
+
+# pre-treatment of Node format
+uc = UController()
+all_node  = uc.unodes
+all_node_name = list(all_node)
+all_node_name.sort()
+remove_list = []
+for node_name in all_node_name:
+    if node_name[0] == '_':
+        if len(node_name) < 5 or node_name[0:5] != '_test':
+            remove_list.append(node_name)
+for remove_name in remove_list:
+    all_node_name.remove(remove_name)
+
+# pre-treatment of Param format
+all_param = uparams.ursgal_params
+all_param_name = list(all_param)
+all_param_name.sort()
+remove_list = []
+for param_name in all_param_name:
+    if param_name[0] == '_':
+        if len(param_name) < 5 or param_name[0:5] != '_test':
+            remove_list.append(param_name)
+for remove_name in remove_list:
+    all_param_name.remove(remove_name)
+
 
 def chk_dict_keys( parent_name='', key_list=[], dict_item={} ):
     for k in key_list:
@@ -335,11 +340,7 @@ def chk_vals_types( parent_name='', key_name='', vals=[], type_list=[] ):
 def chk_json_item( parent_name='', essential=False, key_list=[], dict_item={}, \
         type_list=[] ):
     if essential is True:
-        chk_dict_keys(
-            parent_name,
-            key_list,
-            dict_item
-        )
+        chk_dict_keys( parent_name, key_list, dict_item )
 
     for key_name in key_list:
         if dict_item.get(key_name) is not None or \
