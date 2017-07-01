@@ -67,46 +67,46 @@ class pyQms_0_0_1(ursgal.UNode):
                 self.params['input_file']
             )
 
-        # pyqms_params = {
-        #   'PERCENTILE_FORMAT_STRING'                :
-        #       self.params['PERCENTILE_FORMAT_STRING'],
-        #    'M_SCORE_THRESHOLD'                       :
-        #        self.params['M_SCORE_THRESHOLD'],
-        #    'ELEMENT_MIN_ABUNDANCE'                   :
-        #        self.params['ELEMENT_MIN_ABUNDANCE'],
-        #    'MIN_REL_PEAK_INTENSITY_FOR_MATCHING'     :
-        #        self.params['MIN_REL_PEAK_INTENSITY_FOR_MATCHING'],
-        #    'REQUIRED_PERCENTILE_PEAK_OVERLAP'        :
-        #        self.params['REQUIRED_PERCENTILE_PEAK_OVERLAP'],
-        #    'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES' :
-        #        self.params['MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES'],
-        #    'INTENSITY_TRANSFORMATION_FACTOR'         :
-        #        self.params['INTENSITY_TRANSFORMATION_FACTOR'],
-        #    'UPPER_MZ_LIMIT'                          :
-        #        self.params['UPPER_MZ_LIMIT'],
-        #    'LOWER_MZ_LIMIT'                          :
-        #        self.params['LOWER_MZ_LIMIT'],
-        #    'MZ_TRANSFORMATION_FACTOR'                :
-        #        self.params['MZ_TRANSFORMATION_FACTOR'],
-        #    'REL_MZ_RANGE'                            :
-        #        self.params['REL_MZ_RANGE'],
-        #    'REL_I_RANGE'                             :
-        #        self.params['REL_I_RANGE'],
-        #    'INTERNAL_PRECISION'                      :
-        #        self.params['INTERNAL_PRECISION'],
-        #    'MAX_MOLECULES_PER_MATCH_BIN'             :
-        #        self.params['MAX_MOLECULES_PER_MATCH_BIN'],
-        #    'SILAC_AAS_LOCKED_IN_EXPERIMENT'          :
-        #        self.params['SILAC_AAS_LOCKED_IN_EXPERIMENT'],
-        #    'BUILD_RESULT_INDEX'                      :
-        #        self.params['BUILD_RESULT_INDEX'],
-        #    'MACHINE_OFFSET_IN_PPM'                   :
-        #        self.params['MACHINE_OFFSET_IN_PPM'],
-        #    'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS'   :
-        #        self.params['FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS'],
-        #    'COLORS'                                  :
-        #        self.params['COLORS'],
-        # }
+        pyqms_params = {
+          'PERCENTILE_FORMAT_STRING'                :
+              self.params['label_percentile_format_string'],
+           'M_SCORE_THRESHOLD'                       :
+               self.params['m_score_cutoff'],
+           'ELEMENT_MIN_ABUNDANCE'                   :
+               self.params['min_element_abundance'],
+           'MIN_REL_PEAK_INTENSITY_FOR_MATCHING'     :
+               self.params['min_rel_peak_intensity_for_matching'],
+           'REQUIRED_PERCENTILE_PEAK_OVERLAP'        :
+               self.params['required_percentile_peak_overlap'],
+           'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES' :
+               self.params['minimum_number_of_matched_isotopologues'],
+           'INTENSITY_TRANSFORMATION_FACTOR'         :
+               self.params['intensity_transformation_factor'],
+           'UPPER_MZ_LIMIT'                          :
+               self.params['upper_mz_limit'],
+           'LOWER_MZ_LIMIT'                          :
+               self.params['lower_mz_limit'],
+           'MZ_TRANSFORMATION_FACTOR'                :
+               self.params['mz_transformation_factor'],
+           'REL_MZ_RANGE'                            :
+               self.params['rel_mz_range'],
+           'REL_I_RANGE'                             :
+               self.params['rel_i_range'],
+           'INTERNAL_PRECISION'                      :
+               self.params['internal_precision'],
+           'MAX_MOLECULES_PER_MATCH_BIN'             :
+               self.params['max_molecules_per_match_bin'],
+           'SILAC_AAS_LOCKED_IN_EXPERIMENT'          :
+               self.params['silac_aas_locked_in_experiment'],
+           'BUILD_RESULT_INDEX'                      :
+               self.params['build_pyQms_result_index'],
+           'MACHINE_OFFSET_IN_PPM'                   :
+               self.params['machine_offset_in_ppm'],
+           'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS'   :
+               self.params['fixed_label_isotope_enrichment_levels'],
+           'COLORS'                                  :
+               self.params['pyQms_colors'],
+        }
 
         fixed_labels = {}
         for fixed_mod in self.params['mods']['fix']:
@@ -139,7 +139,7 @@ class pyQms_0_0_1(ursgal.UNode):
             trivial_names       = self.params['pyQms_trivial_names'],
             #fragment_peptide    = self.params['translations']['fragment_peptide'],
             #fragments_to_match  = self.params['translations']['fragments_to_match'],
-            #pyQms_params        = pyqms_params,
+            pyQms_params        = pyqms_params,
             write_rt_info_file  = self.params['write_pyQms_rt_info']
 
         )

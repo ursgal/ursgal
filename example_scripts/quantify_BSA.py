@@ -8,7 +8,7 @@ def main():
     mzml = os.path.join(
         os.pardir,
         'example_data',
-        'search_with_label_15N',
+        'simple_search',
         'JB_FASP_pH8_2-3_28122012.mzML'
     )
 
@@ -50,11 +50,15 @@ def main():
         fil = uc.filter_csv(
             input_file=val
         )
-        results.append(file)
+        results.append(fil)
+
+    uc.params['quantitation_evidences'] = results
+    uc.params['label'] = '14N'
 
     quant = uc.execute_unode(
         input_file=mzml,
-        engine='pyQms_0_0_1'
+        engine='pyQms_0_0_1',
+        force=True
     )
 
 if __name__ == '__main__':
