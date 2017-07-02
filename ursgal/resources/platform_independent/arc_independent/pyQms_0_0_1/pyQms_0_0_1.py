@@ -113,7 +113,8 @@ def generate_result_pickle(
     trivial_names=None,
     fragment_peptide=False,
     fragments_to_match=None,
-    params= {}
+    params= {},
+    verbose=False
 ):
     """DOCSTRING."""
     if not isinstance(mzml_files, list) and isinstance(mzml_files, str):
@@ -138,11 +139,11 @@ def generate_result_pickle(
         ],
         'params'           : params,
         'metabolic_labels' : {
-            label              : [0.000, label_percentile],
+            label              : label_percentile,
         },
-        'trivial_names'    : None,
+        'trivial_names'    : trivial_names,
         'fixed_labels'     : fixed_labels,
-        'verbose'          : False,
+        'verbose'          : verbose,
         'evidences'        : evidences
     }
     print('[ -ENGINE- ] Set up Isotopolugue Library')
@@ -169,7 +170,6 @@ def generate_result_pickle(
                     end='\r'
                 )
             scan_time = spec['scan time'] #/ 60.0
-            # print(scan_time)
             if spec['ms level'] == ms_level:
                 results = lib.match_all(
                     mz_i_list=spec.centroidedPeaks,

@@ -324,7 +324,7 @@ ursgal_params = {
             'f-point': 1e-01
 
         },
-        'default_value': 1000,
+        'default_value': 1000.0,
         'description': """ Desc """,
         'triggers_rerun': True,
         'ukey_translation': {
@@ -794,16 +794,16 @@ ursgal_params = {
             'quantitation',
         ],
         'uvalue_option' : {
-            'f-point' : 0.001,
-            'max' : 1,
-            'min' : 0,
+            # 'f-point' : 0.001,
+            # 'max' : 1,
+            # 'min' : 0,
             'none_val' : None,
-            'unit' : 'percent',
-            'updownval' : 0.001,
+            # 'unit' : 'percent',
+            # 'updownval' : 0.001,
         },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "float",
+        'uvalue_type' : "list",
     },
     'fixed_label_isotope_enrichment_levels' : {
         'available_in_unode' : [
@@ -847,7 +847,7 @@ ursgal_params = {
         'available_in_unode' : [
             'pyQms_0_0_1',
         ],
-        'default_value' : None,
+        'default_value' : {},
         'description' :  ''' Trivial name lookup mapping molecules to a trivial name ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
