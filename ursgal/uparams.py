@@ -369,12 +369,19 @@ ursgal_params = {
             'pyQms_0_0_1',
         ],
         'uvalue_option': {
-            'none_val': None,
-            'multiple_line': False,
+            'none_val': [None],
+            'multiple_line': {
+                "AA" : False
+            },
             'max': 10000,
             'min': 0,
             'updownval': 1,
             'unit': 'psms',
+            'type_dict': {'AA' : 'str'},
+            'title_list': ['AA'],
+            'custom_val_max': 20,
+            'custom_type' : {
+            }
 
         },
         'default_value': None,
@@ -418,48 +425,92 @@ ursgal_params = {
         },
         'uvalue_type': "bool",
     },
-    'pyQms_colors': {
-        'available_in_unode': [
-            'pyQms_0_0_1',
-        ],
-        'uvalue_option': {
-            'none_val': None,
-            'multiple_line': False,
-            'max': 10000,
-            'min': 0,
-            'updownval': 1,
+    # 'pyQms_colors': {
+    #     'available_in_unode': [
+    #         'pyQms_0_0_1',
+    #     ],
+    #     'uvalue_option': {
+    #         'none_val': None,
+    #         'multiple_line': False,
+    #         'max': 10000,
+    #         'min': 0,
+    #         'updownval': 1,
+    #         'custom_val_max': 11,
+    #         'dict_type': {
+    #             '0.0': 'tuple',
+    #             '0.1': 'tuple',
+    #             '0.2': 'tuple',
+    #             '0.3': 'tuple',
+    #             '0.4': 'tuple',
+    #             '0.5': 'tuple',
+    #             '0.6': 'tuple',
+    #             '0.7': 'tuple',
+    #             '0.8': 'tuple',
+    #             '0.9': 'tuple',
+    #             '1.0': 'tuple'
 
-        },
-        'default_value': {
-            '0.0' : (37  , 37  , 37)  ,
-            '0.1' : (99  , 99  , 99)  ,
-            '0.2' : (150 , 150 , 150) ,
-            '0.3' : (204 , 204 , 204) ,
-            '0.4' : (247 , 247 , 247) ,
-            '0.5' : (203 , 27  , 29)  ,
-            '0.6' : (248 , 120 , 72)  ,
-            '0.7' : (253 , 219 , 121) ,
-            '0.8' : (209 , 239 , 121) ,
-            '0.9' : (129 , 202 , 78)  ,
-            '1' : (27  , 137 , 62)
-        },
-        'description': ''' Minimum number of peptide spectrum matches required \
-            for considering a peptide for quantification ''',
-        'triggers_rerun': True,
-        'ukey_translation': {
-            'pyQms_style_1': 'COLORS'
-        },
-        'utag': [
-            'quantitation',
-        ],
-        'uvalue_translation': {
-        },
-        'uvalue_type': "dict",
-    },
+    #         },
+    #         'dict_title': {
+    #             1 : 'Level',
+    #             2: 'Color Code'
+    #         },
+    #         'title_list' : {
+    #             '0.0' : [],
+    #             '0.1' : [],
+    #             '0.2' : [],
+    #             '0.3' : [],
+    #             '0.4' : [],
+    #             '0.5' : [],
+    #             '0.6' : [],
+    #             '0.7' : [],
+    #             '0.8' : [],
+    #             '0.9' : [],
+    #             '1.0' : []
+    #         },
+    #         'type_dict'  : {
+    #             '0.0': '',
+    #             '0.1': '',
+    #             '0.2': '',
+    #             '0.3': '',
+    #             '0.4': '',
+    #             '0.5': '',
+    #             '0.6': '',
+    #             '0.7': '',
+    #             '0.8': '',
+    #             '0.9': '',
+    #             '1.0': '',
+    #         }
+    #     },
+    #     'default_value': {
+    #         '0.0' : (37  , 37  , 37)  ,
+    #         '0.1' : (99  , 99  , 99)  ,
+    #         '0.2' : (150 , 150 , 150) ,
+    #         '0.3' : (204 , 204 , 204) ,
+    #         '0.4' : (247 , 247 , 247) ,
+    #         '0.5' : (203 , 27  , 29)  ,
+    #         '0.6' : (248 , 120 , 72)  ,
+    #         '0.7' : (253 , 219 , 121) ,
+    #         '0.8' : (209 , 239 , 121) ,
+    #         '0.9' : (129 , 202 , 78)  ,
+    #         '1.0' : (27  , 137 , 62)
+    #     },
+    #     'description': ''' Minimum number of peptide spectrum matches required \
+    #         for considering a peptide for quantification ''',
+    #     'triggers_rerun': True,
+    #     'ukey_translation': {
+    #         'pyQms_style_1': 'COLORS'
+    #     },
+    #     'utag': [
+    #         'quantitation',
+    #     ],
+    #     'uvalue_translation': {
+    #     },
+    #     'uvalue_type': "dict",
+    # },
     'min_psms_for_quant_event': {
         'available_in_unode': [
-            'protein_amounts_0_0_5',
-            'protein_amounts_0_0_6'
+            # 'protein_amounts_0_0_5',
+            # 'protein_amounts_0_0_6'
         ],
         'uvalue_option': {
             'none_val': None,
@@ -475,7 +526,7 @@ ursgal_params = {
             for considering a peptide for quantification ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'protein_amounts_style_1': 'min_psms'
+            # 'protein_amounts_style_1': 'min_psms'
         },
         'utag': [
             'quantitation',
@@ -578,7 +629,7 @@ ursgal_params = {
     },
     'experiment_mapping': {
         'available_in_unode': [
-            'protein_amounts_0_0_5',
+            # 'protein_amounts_0_0_5',
         ],
         'uvalue_option': {
             'none_val': {},
@@ -597,7 +648,7 @@ ursgal_params = {
         'description':  ''' Experiment mapping, so protein_amounts knows which file and lp to score against each other ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'protein_amounts_style_1': 'experiment_mapping'
+            # 'protein_amounts_style_1': 'experiment_mapping'
         },
         'utag': [
             'quantitation',
@@ -606,31 +657,31 @@ ursgal_params = {
         },
         'uvalue_type': "dict",
     },
-    'group_proteins_with_same_peptide': {
-        'available_in_unode': [
-            'protein_amounts_0_0_5',
-        ],
-        'uvalue_option': {
-            'none_val': None,
-            'multiple_line': False,
-        },
-        'default_value': False,
-        'description':  ''' Protein inference file with PEP and peptides by percolator ''',
-        'triggers_rerun': True,
-        'ukey_translation': {
-        },
-        'utag': [
-            'quantitation',
-        ],
-        'uvalue_translation': {
-            'protein_amounts_style_1' : ''
-        },
-        'uvalue_type': "bool",
-    },
+    # 'group_proteins_with_same_peptide': {
+    #     'available_in_unode': [
+    #         # 'protein_amounts_0_0_5',
+    #     ],
+    #     'uvalue_option': {
+    #         'none_val': None,
+    #         'multiple_line': False,
+    #     },
+    #     'default_value': False,
+    #     'description':  ''' Protein inference file with PEP and peptides by percolator ''',
+    #     'triggers_rerun': True,
+    #     'ukey_translation': {
+    #     },
+    #     'utag': [
+    #         'quantitation',
+    #     ],
+    #     'uvalue_translation': {
+    #         # 'protein_amounts_style_1' : ''
+    #     },
+    #     # 'uvalue_type': "bool",
+    # },
     'protein_inference_file': {
         'available_in_unode': [
-            'protein_amounts_0_0_5',
-            'protein_amounts_0_0_6'
+            # 'protein_amounts_0_0_5',
+            # 'protein_amounts_0_0_6'
         ],
         'default_value': None,
         'uvalue_option': {
@@ -640,7 +691,7 @@ ursgal_params = {
         'description':  ''' Protein inference file with PEP and peptides by percolator ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'protein_amounts_style_1' : 'inference_file'
+            # 'protein_amounts_style_1' : 'inference_file'
         },
         'utag': [
             'quantitation',
@@ -651,7 +702,7 @@ ursgal_params = {
     },
     'm_score_cutoff': {
         'available_in_unode': [
-            'protein_amounts_0_0_5',
+            # 'protein_amounts_0_0_5',
             'pyQms_0_0_1'
         ],
         'uvalue_option': {
@@ -667,7 +718,7 @@ ursgal_params = {
         'description':  ''' minimum required pyQms m_score for a quant event to be evaluated ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'protein_amounts_style_1': 'm_cutoff',
+            # 'protein_amounts_style_1': 'm_cutoff',
             'pyQms_style_1'           : 'm_score_cutoff'
         },
         'utag': [
@@ -736,7 +787,7 @@ ursgal_params = {
     'pyQms_pickle_name': {
         'available_in_unode': [
             'pyQms_0_0_1',
-            'protein_amounts_0_0_6'
+            # 'protein_amounts_0_0_6'
         ],
         'uvalue_option': {
             'none_val': None,
@@ -784,7 +835,7 @@ ursgal_params = {
         'available_in_unode' : [
             'pyQms_0_0_1',
         ],
-        'default_value' : 0,
+        'default_value' : [0.0],
         'description' :  ''' Label percentile ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -794,12 +845,28 @@ ursgal_params = {
             'quantitation',
         ],
         'uvalue_option' : {
-            # 'f-point' : 0.001,
-            # 'max' : 1,
-            # 'min' : 0,
+            'f-point' : {
+                'enrichment percentage': 0.001
+            },
+            'max' : {
+                'enrichment percentage':1
+            },
+            'min' : {
+                'enrichment percentage':0
+            },
             'none_val' : None,
-            # 'unit' : 'percent',
-            # 'updownval' : 0.001,
+            'custom_val_max': 1000,
+            'type_dict': {
+                'enrichment percentage' : 'float'
+            },
+            'title_list': ['enrichment percentage'],
+            'unit' : {
+                'enrichment percentage' : '%'
+            },
+            'updownval' : {
+                'enrichment percentage': 0.001
+            },
+            'custom_type': {}
         },
         'uvalue_translation' : {
         },
@@ -877,7 +944,7 @@ ursgal_params = {
     },
     'rt_border_tolerance' : {
         'available_in_unode' : [
-            'protein_amounts_0_0_5',
+            # 'protein_amounts_0_0_5',
             'pyQms_0_0_1',
         ],
         'default_value' : 1,
@@ -885,7 +952,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pyQms_style_1' : 'rt_border_tolerance',
-            'protein_amounts_style_1' : 'rt_border_tolerance'
+            # 'protein_amounts_style_1' : 'rt_border_tolerance'
         },
         'utag' : [
             'quantitation',
