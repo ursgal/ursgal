@@ -124,6 +124,11 @@ class xtandem_vengeance( ursgal.UNode ):
         self.params['translations']['Prot-N-term'] = 0.0
         self.params['translations']['Prot-C-term'] = 0.0
         for mod in self.params[ 'mods' ][ 'fix' ]:
+            if mod['pos'] == 'Nterm':
+                mod['aa'] = '['
+            elif mod['pos'] == 'Cterm':
+                mod['aa'] = ']'
+
             fixed_mods.append(
                 '{0}@{1}'.format(mod[ 'mass' ], mod[ 'aa' ] )
             )
@@ -175,6 +180,12 @@ class xtandem_vengeance( ursgal.UNode ):
                     forbidden_cterm = ']'
                 if mod['name'] in self.params['translations']['max_num_per_mod_name_specific'].keys():
                     max_num_per_mod_name_specific = self.params['translations']['max_num_per_mod_name_specific'][mod['name']]
+
+                if mod['pos'] == 'Nterm':
+                    mod['aa'] = '['
+                elif mod['pos'] == 'Cterm':
+                    mod['aa'] = ']'
+
                 potential_mods.append(
                     '{0}@{1}{2}{3}'.format(
                         mod[ 'mass' ],
