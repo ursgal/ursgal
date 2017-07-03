@@ -124,9 +124,9 @@ class xtandem_vengeance( ursgal.UNode ):
         self.params['translations']['Prot-N-term'] = 0.0
         self.params['translations']['Prot-C-term'] = 0.0
         for mod in self.params[ 'mods' ][ 'fix' ]:
-            if mod['pos'] == 'Nterm':
+            if mod['pos'] == 'N-term':
                 mod['aa'] = '['
-            elif mod['pos'] == 'Cterm':
+            elif mod['pos'] == 'C-term':
                 mod['aa'] = ']'
 
             fixed_mods.append(
@@ -181,9 +181,9 @@ class xtandem_vengeance( ursgal.UNode ):
                 if mod['name'] in self.params['translations']['max_num_per_mod_name_specific'].keys():
                     max_num_per_mod_name_specific = self.params['translations']['max_num_per_mod_name_specific'][mod['name']]
 
-                if mod['pos'] == 'Nterm':
+                if mod['pos'] == 'N-term':
                     mod['aa'] = '['
-                elif mod['pos'] == 'Cterm':
+                elif mod['pos'] == 'C-term':
                     mod['aa'] = ']'
 
                 potential_mods.append(
@@ -278,32 +278,22 @@ class xtandem_vengeance( ursgal.UNode ):
             'taxonomy.xml' : \
 '''<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml label="x! taxon-to-file matching list">
-      <taxon label="{database_taxonomy}">
-       <file URL="{database}" format="peptide" />
-     </taxon>
+        <taxon label="{database_taxonomy}">
+            <file URL="{database}" format="peptide" />
+        </taxon>
     </bioml>
 '''.format(**self.params['translations']),
             # -------------------------
             # -------------------------
-            'input.xml' : \
-'''<?xml version='1.0' encoding='iso-8859-1'?>
+            'input.xml' : '''<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml>
-        <note label="list path, default parameters" type="input">
-            {default_input}
-        </note>
-        <note label="list path, taxonomy information" type="input">
-            {taxonomy}
-        </note>
-        <note label="spectrum, path" type="input">
-            {mgf_input_file}
-        </note>
-        <note label="output, path" type="input">
-            {output_file_incl_path}
-        </note>
+        <note label="list path, default parameters" type="input">{default_input}</note>
+        <note label="list path, taxonomy information" type="input">{taxonomy}</note>
+        <note label="spectrum, path" type="input">{mgf_input_file}</note>
+        <note label="output, path" type="input">{output_file_incl_path}</note>
     </bioml>'''.format( **self.params['translations'] ),
 
-        'default_input.xml' : \
-'''<?xml version='1.0' encoding='iso-8859-1'?>
+        'default_input.xml' : '''<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml label="ursgal">
     <note type="heading">
 
