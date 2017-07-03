@@ -2,9 +2,9 @@
 import re
 import sys
 import os
+import ursgal
 
-DIFFERENCE_14N_15N = 0.997035
-PROTON             = 1.00727646677
+PROTON = ursgal.ucore.PROTON
 
 COLORS = {
     'ENDC'      : '\033[0m',

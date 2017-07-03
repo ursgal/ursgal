@@ -7,7 +7,12 @@ import pickle
 
 
 class unify_csv_1_0_0( ursgal.UNode ):
-    """unify_csv_1_0_0 UNode"""
+    """unify_csv_1_0_0 UNode
+
+    Unifies the .csv files of converted search engine results.
+    The corrections for each engine are listed in the node under
+    ursgal/resources/platform_independent/arc_independent/unify_csv_1_0_0
+    """
     META_INFO = {
         'edit_version'       : 1.00,
         'name'               : 'Unify CSV',

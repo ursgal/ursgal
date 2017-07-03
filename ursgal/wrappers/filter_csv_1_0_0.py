@@ -7,7 +7,13 @@ import pickle
 import shutil
 
 class filter_csv_1_0_0( ursgal.UNode ):
-    """filter_csv_1_0_0 UNode"""
+    """filter_csv_1_0_0 UNode
+
+    Filters .csv files row-wise according to user-defined rules.
+
+    The filter rules have to be defined in the params. See the engine
+    documentation for further information ( :meth:`.filter_csv_1_0_0._execute` ).
+    """
 
     META_INFO = {
         'edit_version'           : 1.00,
@@ -15,7 +21,7 @@ class filter_csv_1_0_0( ursgal.UNode ):
         'version'                : '1.0.0',
         'release_date'           : None,
         'engine_type' : {
-            'converter' : True
+            'misc' : True
         },
         'input_extensions'       : ['.csv'],
         'input_multi_file'       : False,

@@ -1,6 +1,22 @@
 Changelog
 =========
 
+Version 0.5.1    (07.2017)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Restructuring of engine classes. SEARCH_ENGINE(s) are now devided into
+   * CROSS_LINK_ENGINE(s)
+   * DENOVO_ENGINE(s)
+   * PROTEIN_DATABASE_ENGINE(s)
+   * SPECTRAL_LIBRARY_ENGINE(s)
+   The META_INFO of corresponding engines has been changed accordingly.
+   Furthermore, CONVERTER(s) have been split into real converters and MISC_ENGINE(s)
+#. Restructuring of UController functions. Unified functions for all engines
+   of one engine class (Converter, Search_Engines, Validation_Engines, etc)
+   are now available. Function names for each engine class are stores in
+   ursgal_kb.ucontroller_functions
+#. Smaller fixes and improvements (please check git log)
+
+
 Version 0.5.0    (04.2017)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -37,7 +53,6 @@ Version 0.4.0rc1 (05.2016)
    default value types.
 #. Included script to auto-generate documentation from uparams file.
 #. Updated documentation to reflect the changes above.
-
 
 
 Version 0.3.4 (02.2016)

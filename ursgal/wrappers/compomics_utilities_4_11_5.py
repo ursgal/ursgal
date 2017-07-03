@@ -30,8 +30,7 @@ class compomics_utilities_4_11_5( ursgal.UNode ):
         'version'            : '4.11.5',
         'release_date'       : None,
         'engine_type' : {
-            'search_engine' : False,
-            'converter'     : True
+            'misc'     : True
         },
         'output_suffix'     : 'compomics',
         'input_extensions'  : ['.txt', ],

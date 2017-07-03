@@ -552,7 +552,6 @@ class UNode(object, metaclass=Meta_UNode):
 
         Returns:
             str: The name of the last engine that was used.
-                Returns None if no search engine was used yet.
         '''
         last_engine = None
         if engine_types is None:
@@ -594,6 +593,46 @@ class UNode(object, metaclass=Meta_UNode):
                         break
 
         return last_engine
+
+    def get_last_engine_type(self, history=None ):
+        '''
+        The unode get_last_engine_type function
+
+        Keyword Arguments:
+            history (list): A list of path unodes, timestamps and parameters
+                that were used. This function can be used on the history loaded
+                from a file .json, to find out which search engine was used on
+                that file.
+                If not specified, this information is taken from the unode class
+                itself, and not a specific file.
+
+        Examples:
+            >>> fpaths = self.generate_basic_file_info( "14N_xtandem.csv" )
+            >>> file_info, __    = self.load_json( fpaths=fpaths, mode='input')
+            >>> last_engine_type = self.get_last_engine_type(
+                    history      = file_info["history"],
+                )
+            >>> print( last_engine_type )
+            "search_engine"
+
+        Returns:
+            str: The type of the last engine that was used.
+            Returns None if the engine_type cannot be specified or if no engine
+            was previously executed on this file.
+        '''
+
+        last_engine_type = None
+        if not history:
+            history = self.stats["history"]
+        history_event = history[-1]:
+        meta = history_event.get("META_INFO", {})
+        meta_engine_type_info = meta.get("engine_type", {})
+        for engine_type in meta_engine_type_info:
+            if meta_engine_type_info[engine_type] is True:
+                last_engine_type = engine_type
+                break
+
+        return last_engine_type
 
     def get_last_search_engine(self, history=None, multiple_engines=False ):
         '''

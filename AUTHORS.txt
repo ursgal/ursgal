@@ -1,7 +1,9 @@
 Authors:
 --------
-Lukas P. M. Kremer
-Purevdulam Oyunchimeg
-Johannes Barth
-Stefan Schulze
 Christian Fufezan
+Lukas P. M. Kremer
+Johannes Leufken
+Manuel Koesters
+Purevdulam Oyunchimeg
+Stefan Schulze
+Kazuhiko Sugimoto

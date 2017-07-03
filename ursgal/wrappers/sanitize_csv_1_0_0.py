@@ -7,7 +7,15 @@ import pickle
 import shutil
 
 class sanitize_csv_1_0_0( ursgal.UNode ):
-    """sanitize_csv_1_0_0 UNode"""
+    """sanitize_csv_1_0_0 UNode
+
+    Result files (.csv) are sanitized following defined parameters.
+    That means, for each spectrum PSMs are compared and the
+    best spectrum (spectra) is (are) chosen.
+
+    The parameters have to be defined in the params. See the engine
+    documentation for further information ( :meth:`.sanitize_csv_1_0_0._execute` ).
+    """
 
     META_INFO = {
         'edit_version'       : 1.00,
@@ -15,7 +23,7 @@ class sanitize_csv_1_0_0( ursgal.UNode ):
         'version'            : '1.0.0',
         'release_date'       : None,
         'engine_type' : {
-            'converter' : True
+            'misc' : True
         },
         'input_extensions'   : ['.csv'],
         'input_multi_file'   : False,
