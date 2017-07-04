@@ -378,10 +378,7 @@ class percolator_3_0( ursgal.UNode ):
         )
 
         self.params['command_list'] = [
-            # percolator -X pout.xml pin.tab >| yeast-01.psms
             self.exe,
-            # '-v',
-            # '5',
             '--only-psms',
             '{percolator_in}'.format(**self.params['translations']),
             '--results-psms',
@@ -389,8 +386,18 @@ class percolator_3_0( ursgal.UNode ):
             '--decoy-results-psms',
             '{percolator_decoy_out}'.format(**self.params['translations']),
         ]
-
-        # self.protein_name_mapper = {}
+        from pprint import pprint
+        pprint(self.params['translations'])
+        if self.params['translations']['percolator_post_processing'] == 'mix-max':
+            self.params['command_list'].append(
+                '-y'
+            )
+        elif self.params['translations']['percolator_post_processing'] == 'tdc':
+            self.params['command_list'].append(
+                '-Y'
+            )
+        else:
+            raise Exception('post processing method must be either mix-max or tdc')
 
         if self.params['infere_proteins'] is True:
             self.params['command_list'].remove('--only-psms')
@@ -423,8 +430,6 @@ class percolator_3_0( ursgal.UNode ):
 
             self.protein_name_mapper = {}
 
-
-        pprint(self.params['command_list'])
         last_search_engine = self.get_last_search_engine(
             history = self.stats['history']
         )

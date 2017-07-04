@@ -1,11 +1,12 @@
 ursgal_params = {
     'infere_proteins' : {
+        'edit_version': 1.00,
         'available_in_unode' : [
             'percolator_2_08',
             'percolator_3_0',
         ],
         'default_value' : False,
-        'description' :  ''' Use the FIDO algorithm to infere protein posterior error probabilities in Percolator''',
+        'description' :  ''' Use the picked-protein algorithm to infere protein PEP and FDR in Percolator''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'percolator_style_1' : 'infere_proteins',
@@ -18,6 +19,28 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "bool",
+    },
+    'percolator_post_processing': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'percolator_3_0',
+        ],
+        'default_value' : 'mix-max',
+        'description' :  ''' Method to assign FDR and PEP to PSMs''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'percolator_style_1' : '-y',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
     },
     '_extentions' : {
         'edit_version'   : 1.00,
@@ -385,7 +408,6 @@ ursgal_params = {
                 },
             },
         },
-
     },
     'accept_conflicting_psms' : {
         'edit_version'   : 1.00,
