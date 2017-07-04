@@ -1053,7 +1053,7 @@ ursgal_params = {
             },
             '.mgf' : {
                 'short_name'     : 'MGF',
-                'long_name'      : 'Mascot Generic Format',
+                'long_name'      : 'MGF (Mascot Generic Format)',
                 'same_extension' : [],
                 'description'    : \
                     'The Mascot generic format for a data file submitted to Mascot',
@@ -1151,14 +1151,14 @@ ursgal_params = {
             },
             '.raw' : {
                 'short_name'     : 'RAW',
-                'long_name'      : 'RAW',
+                'long_name'      : 'RAW (ThermoFisher RAW format)',
                 'same_extension' : [],
                 'description'    : \
                     'ThermoFisher RAW format',
             },
             '.ssl' : {
                 'short_name'     : 'SSL',
-                'long_name'      : 'Spectrum Sequence List',
+                'long_name'      : 'SSL (Spectrum Sequence List)',
                 'same_extension' : [],
                 'description'    : \
                     'Generic tab-delimited text file format supported by BiblioSpec',
@@ -1341,6 +1341,7 @@ ursgal_params = {
             'there are conflicting PSMs with similar scores.',
     },
     'add_cterm_peptide' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -1366,6 +1367,7 @@ ursgal_params = {
         'uvalue_type' : "float",
     },
     'add_nterm_peptide' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -1390,6 +1392,7 @@ ursgal_params = {
         'uvalue_type' : 'float',
     },
     'allow_multiple_variable_mods_on_residue' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -1710,6 +1713,7 @@ ursgal_params = {
             'The mass added to the peptide N-terminus bz protein cleavage',
     },
     'clip_nterm_m' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -1763,6 +1767,7 @@ ursgal_params = {
             'Compensate for very small database files.',
     },
     'compomics_utility_name' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'compomics_utilities_4_11_5',
         ],
@@ -1786,6 +1791,7 @@ ursgal_params = {
         'uvalue_type' : 'str',
     },
     'compomics_version' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -2952,7 +2958,7 @@ ursgal_params = {
             },
             'msfragger_style_1' : {
                 'ppm' : 1,
-                'da'  : 0 
+                'da'  : 0
             }
         },
         'uvalue_type' : 'select',
@@ -3417,11 +3423,11 @@ ursgal_params = {
                 'Upstream Amino Acid': 'Sequence Pre AA',
                 'Downstream Amino Acid' : 'Sequence Post AA',
                 'Protein' : 'Protein ID',
-                'Variable modifications detected':'Modifications', #'(starts with M, separated by |, formated as position,mass) 
+                'Variable modifications detected':'Modifications', #'(starts with M, separated by |, formated as position,mass)
                 'Retention time (minutes)': 'Retention Time (s)',
 
                 'Precursor neutral mass (Da)' : 'MSFragger:Precursor neutral mass (Da)',
-                'Neutral mass of peptide' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da) 
+                'Neutral mass of peptide' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da)
                 'Hit rank':'MSFragger:Hit rank',
                 'Mass difference':'MSFragger:Mass difference',
                 'Matched fragment ions':'MSFragger:Matched fragment ions',
@@ -4701,6 +4707,7 @@ ursgal_params = {
         'uvalue_type' : "int",
     },
     'max_num_per_mod_name_specific' : {
+        'edit_version' : 1.00,
         'available_in_unode' : [
             'xtandem_vengeance',
             'xtandem_alanine',
@@ -5474,6 +5481,7 @@ ursgal_params = {
             'enable scoring parameters for enriched and/or labeled samples.',
     },
     'msfragger_output_max_expect' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -5497,6 +5505,7 @@ ursgal_params = {
         'uvalue_type' : "int",
     },
     'msfragger_track_zero_topN' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -5520,6 +5529,7 @@ ursgal_params = {
         'uvalue_type' : "int",
     },
     'msfragger_zero_bin_accept_expect' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -5543,6 +5553,7 @@ ursgal_params = {
         'uvalue_type' : "int",
     },
     'msfragger_zero_bin_mult_expect' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -5566,6 +5577,7 @@ ursgal_params = {
         'uvalue_type' : "int",
     },
     'msfragger_add_topN_complementary' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -5589,6 +5601,7 @@ ursgal_params = {
         'uvalue_type' : "int",
     },
     'msfragger_min_fragments_modelling' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -5612,6 +5625,7 @@ ursgal_params = {
         'uvalue_type' : "int",
     },
     'msfragger_clear_mz_range' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -6911,6 +6925,7 @@ ursgal_params = {
             '    0 : None',
     },
     'peptide_mapper_class_version' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'upeptide_mapper_1_0_0',
         ],
@@ -6932,6 +6947,7 @@ ursgal_params = {
         'uvalue_type' : "str",
     },
     'peptide_mapper_converter_version' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -7237,7 +7253,7 @@ ursgal_params = {
             },
             'msfragger_style_1' : {
                 'ppm' : 1,
-                'da'  : 0 
+                'da'  : 0
             }
         },
         'uvalue_type' : 'select',
@@ -7456,6 +7472,7 @@ ursgal_params = {
             'Minimal parent ion mass',
     },
     'precursor_true_tolerance' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
@@ -7484,6 +7501,7 @@ ursgal_params = {
         'uvalue_type' : "int",
     },
     'precursor_true_units' : {
+        'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
