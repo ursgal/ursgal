@@ -5,16 +5,9 @@ import os
 
 def main():
     """."""
-    mzml = os.path.join(
-        os.pardir,
-        'example_data',
-        'simple_search',
-        'JB_FASP_pH8_2-3_28122012.mzML'
-    )
-
     params = {
         'csv_filter_rules': [
-            ['combined PEP', 'lte', 0.06],
+            ['combined PEP', 'lte', 0.05],
             ['Is decoy', 'equals', 'false']
         ],
         'compress_raw_search_results_if_possible' : False,
@@ -22,8 +15,26 @@ def main():
             os.pardir,
             'example_data',
             'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
+        ),
+        'ftp_url'       : 'ftp.peptideatlas.org',
+        'ftp_login'         : 'PASS00269',
+        'ftp_password'      : 'FI4645a',
+        'ftp_include_ext'   : [
+            'JB_FASP_pH8_2-3_28122012.mzML',
+        ],
+        'ftp_output_folder' : os.path.join(
+            os.pardir,
+            'example_data',
+            'quantify_JB_example'
+        ),
+        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta' ,
+        'http_output_folder' : os.path.join(
+            os.pardir,
+            'example_data'
         )
     }
+    if os.path.exists(params['ftp_output_folder']) is False:
+        os.mkdir(params['ftp_output_folder'])
 
     engines = [
         'msgfplus_v9979',
@@ -34,9 +45,22 @@ def main():
         profile='LTQ XL low res',
         params =params
     )
+    mzML_file = os.path.join(
+        params['ftp_output_folder'],
+        params['ftp_include_ext'][0]
+    )
+
+    if os.path.exists(mzML_file) is False:
+        uc.fetch_file(
+            engine = 'get_ftp_files_1_0_0'
+        )
+    if os.path.exists(params['database']) is False:
+        uc.fetch_file(
+            engine = 'get_http_files_1_0_0'
+        )
 
     mgf = uc.convert_to_mgf_and_update_rt_lookup(
-        input_file=mzml
+        input_file=mzML_file
     )
 
     all_res = []
@@ -56,8 +80,8 @@ def main():
             results.append(val)
 
         combined_results = uc.combine_search_results(
-            input_files     = results,
-            engine          = 'combine_PEP_1_0_0',
+            input_files = results,
+            engine      = 'combine_PEP_1_0_0',
         )
 
         fil = uc.filter_csv(
@@ -70,8 +94,8 @@ def main():
     uc.params['label_percentile']       = [0, 0.99]
     uc.params['evidence_score_field']   = 'combined PEP'
 
-    quant = uc.execute_unode(
-        input_file=mzml,
+    uc.execute_unode(
+        input_file=mzML_file,
         engine='pyQms_0_0_1',
         force=True
     )
