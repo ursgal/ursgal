@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 '''
 usage:
     ./upeptide_mapper_1_0_0.py <input_file> <output_file>
@@ -68,7 +68,6 @@ def main(input_file=None, output_file=None, params=None):
     non_mappable_peps  = set()
     pep_map_lookup     = {}
     joinchar           = params['translations']['protein_delimiter']
-
     if sys.platform == 'win32':
         print(
             '[ WARNING ] pyahocorasick can not be installed via pip on Windows at the moment\n'
@@ -843,7 +842,7 @@ class UPeptideMapper_v3():
 class UPeptideMapper_v4():
     '''
     UPeptideMapper V4
-    
+
     Improved version of class version 3 (changes proposed by Christian)
 
     Note:

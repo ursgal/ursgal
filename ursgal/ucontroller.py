@@ -1318,6 +1318,8 @@ class UController(ursgal.UNode):
         self.io['output']['finfo'] = self.set_file_info_dict( output_file )
 
         self.take_care_of_params_and_stats( io_mode = 'output')
+        # pprint.pprint( self.io )
+        # exit(1)
         return
 
     def sanitize_userdefined_output_filename(self, user_fname, engine ):
