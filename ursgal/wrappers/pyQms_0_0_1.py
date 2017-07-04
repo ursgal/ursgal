@@ -103,8 +103,8 @@ class pyQms_0_0_1(ursgal.UNode):
                 self.params['machine_offset_in_ppm'],
             'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS'   :
                 self.params['fixed_label_isotope_enrichment_levels'],
-            'COLORS'                                  :
-                self.params['pyQms_colors'],
+            # 'COLORS'                                  :
+            #     self.params['pyQms_colors'],
         }
 
         fixed_labels = {}
