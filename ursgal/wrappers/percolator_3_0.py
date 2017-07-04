@@ -349,16 +349,6 @@ class percolator_3_0( ursgal.UNode ):
         self.params['translations']['percolator_decoy_out'] = \
             '{decoy_output_file_incl_path}.psms'.format(**self.params['translations'])
 
-        # self.params['translations']['protein_output'] = os.path.join(
-        #     self.params['output_dir_path'],
-        #     '{prefix}_prot_inf.csv'.format(prefix=self.params['translations']['csv_input_file'].strip('.csv'))
-        # )
-
-        # self.params['translations']['peptide_output'] = os.path.join(
-        #     self.params['output_dir_path'],
-        #     '{prefix}_pep_inf.csv'.format(prefix=self.params['translations']['csv_input_file'].strip('.csv'))
-        # )
-
         self.params['translations']['protein_output_target'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file'].strip('.csv') + '_prot_inf_targets.csv'
@@ -386,8 +376,7 @@ class percolator_3_0( ursgal.UNode ):
             '--decoy-results-psms',
             '{percolator_decoy_out}'.format(**self.params['translations']),
         ]
-        from pprint import pprint
-        pprint(self.params['translations'])
+
         if self.params['translations']['percolator_post_processing'] == 'mix-max':
             self.params['command_list'].append(
                 '-y'
@@ -404,7 +393,6 @@ class percolator_3_0( ursgal.UNode ):
             self.params['command_list'] += [
                 '--picked-protein',
                 self.params['database'],
-                # '/home/manuel/Documents/GitRepos/Ursgal_clean/ursgal/example_data/no_decoys_2.fasta', # substitute by real target database
                 '-P',
                 '{decoy_tag}'.format(**self.params),
                 '--results-proteins',
@@ -415,20 +403,9 @@ class percolator_3_0( ursgal.UNode ):
                 '{peptide_output_target}'.format(**self.params['translations']),
                 '--decoy-results-peptides',
                 '{peptide_output_decoy}'.format(**self.params['translations']),
-                # '--protein-enzyme',
-                # '{enzyme}'.format(enzyme=self.params['translations']['enzyme'].split(';')[3]),
+                '--protein-enzyme',
+                self.params['enzyme']
             ]
-            opt_args = [
-                'test_fdr',
-                'train_fdr',
-                'max_iter',
-                'quick_validation',
-                'unitnorm',
-                'seed',
-
-            ]
-
-            self.protein_name_mapper = {}
 
         last_search_engine = self.get_last_search_engine(
             history = self.stats['history']
@@ -454,8 +431,6 @@ class percolator_3_0( ursgal.UNode ):
                         break
                 else:
                     break
-
-        # self.protein_name_mapper = {}
 
         for n, spectrum_title in enumerate( self.params['grouped_psms'].keys()):
             best_score = self.params['grouped_psms'][ spectrum_title ][0][0]
@@ -596,8 +571,6 @@ class percolator_3_0( ursgal.UNode ):
                         # replace spaces so percolator does not fuck up everything ...
                         space_name = line_dict[ mapped_key ].strip()
                         no_space_name = line_dict[ mapped_key ].strip().replace(' ', '_')
-                        if self.params['infere_proteins'] is True:
-                            self.protein_name_mapper[no_space_name] = space_name
                         t[ per_key ] = no_space_name
 
 
