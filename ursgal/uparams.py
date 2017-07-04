@@ -425,88 +425,88 @@ ursgal_params = {
         },
         'uvalue_type': "bool",
     },
-    # 'pyQms_colors': {
-    #     'available_in_unode': [
-    #         'pyQms_0_0_1',
-    #     ],
-    #     'uvalue_option': {
-    #         'none_val': None,
-    #         'multiple_line': False,
-    #         'max': 10000,
-    #         'min': 0,
-    #         'updownval': 1,
-    #         'custom_val_max': 11,
-    #         'dict_type': {
-    #             '0.0': 'tuple',
-    #             '0.1': 'tuple',
-    #             '0.2': 'tuple',
-    #             '0.3': 'tuple',
-    #             '0.4': 'tuple',
-    #             '0.5': 'tuple',
-    #             '0.6': 'tuple',
-    #             '0.7': 'tuple',
-    #             '0.8': 'tuple',
-    #             '0.9': 'tuple',
-    #             '1.0': 'tuple'
+    'pyQms_colors': {
+        'available_in_unode': [
+            'pyQms_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'custom_val_max': 11,
+            'dict_type': {
+                '0.0': 'tuple',
+                '0.1': 'tuple',
+                '0.2': 'tuple',
+                '0.3': 'tuple',
+                '0.4': 'tuple',
+                '0.5': 'tuple',
+                '0.6': 'tuple',
+                '0.7': 'tuple',
+                '0.8': 'tuple',
+                '0.9': 'tuple',
+                '1.0': 'tuple'
 
-    #         },
-    #         'dict_title': {
-    #             1 : 'Level',
-    #             2: 'Color Code'
-    #         },
-    #         'title_list' : {
-    #             '0.0' : [],
-    #             '0.1' : [],
-    #             '0.2' : [],
-    #             '0.3' : [],
-    #             '0.4' : [],
-    #             '0.5' : [],
-    #             '0.6' : [],
-    #             '0.7' : [],
-    #             '0.8' : [],
-    #             '0.9' : [],
-    #             '1.0' : []
-    #         },
-    #         'type_dict'  : {
-    #             '0.0': '',
-    #             '0.1': '',
-    #             '0.2': '',
-    #             '0.3': '',
-    #             '0.4': '',
-    #             '0.5': '',
-    #             '0.6': '',
-    #             '0.7': '',
-    #             '0.8': '',
-    #             '0.9': '',
-    #             '1.0': '',
-    #         }
-    #     },
-    #     'default_value': {
-    #         '0.0' : (37  , 37  , 37)  ,
-    #         '0.1' : (99  , 99  , 99)  ,
-    #         '0.2' : (150 , 150 , 150) ,
-    #         '0.3' : (204 , 204 , 204) ,
-    #         '0.4' : (247 , 247 , 247) ,
-    #         '0.5' : (203 , 27  , 29)  ,
-    #         '0.6' : (248 , 120 , 72)  ,
-    #         '0.7' : (253 , 219 , 121) ,
-    #         '0.8' : (209 , 239 , 121) ,
-    #         '0.9' : (129 , 202 , 78)  ,
-    #         '1.0' : (27  , 137 , 62)
-    #     },
-    #     'description': ''' Minimum number of peptide spectrum matches required \
-    #         for considering a peptide for quantification ''',
-    #     'triggers_rerun': True,
-    #     'ukey_translation': {
-    #         'pyQms_style_1': 'COLORS'
-    #     },
-    #     'utag': [
-    #         'quantitation',
-    #     ],
-    #     'uvalue_translation': {
-    #     },
-    #     'uvalue_type': "dict",
-    # },
+            },
+            'dict_title': {
+                1 : 'Level',
+                2: 'Color Code'
+            },
+            'title_list' : {
+                '0.0' : [],
+                '0.1' : [],
+                '0.2' : [],
+                '0.3' : [],
+                '0.4' : [],
+                '0.5' : [],
+                '0.6' : [],
+                '0.7' : [],
+                '0.8' : [],
+                '0.9' : [],
+                '1.0' : []
+            },
+            'type_dict'  : {
+                '0.0': '',
+                '0.1': '',
+                '0.2': '',
+                '0.3': '',
+                '0.4': '',
+                '0.5': '',
+                '0.6': '',
+                '0.7': '',
+                '0.8': '',
+                '0.9': '',
+                '1.0': '',
+            }
+        },
+        'default_value': {
+            '0.0' : (37  , 37  , 37)  ,
+            '0.1' : (99  , 99  , 99)  ,
+            '0.2' : (150 , 150 , 150) ,
+            '0.3' : (204 , 204 , 204) ,
+            '0.4' : (247 , 247 , 247) ,
+            '0.5' : (203 , 27  , 29)  ,
+            '0.6' : (248 , 120 , 72)  ,
+            '0.7' : (253 , 219 , 121) ,
+            '0.8' : (209 , 239 , 121) ,
+            '0.9' : (129 , 202 , 78)  ,
+            '1.0' : (27  , 137 , 62)
+        },
+        'description': ''' Minimum number of peptide spectrum matches required \
+            for considering a peptide for quantification ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyQms_style_1': 'COLORS'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "dict",
+    },
     'min_psms_for_quant_event': {
         'available_in_unode': [
             # 'protein_amounts_0_0_5',
@@ -657,27 +657,6 @@ ursgal_params = {
         },
         'uvalue_type': "dict",
     },
-    # 'group_proteins_with_same_peptide': {
-    #     'available_in_unode': [
-    #         # 'protein_amounts_0_0_5',
-    #     ],
-    #     'uvalue_option': {
-    #         'none_val': None,
-    #         'multiple_line': False,
-    #     },
-    #     'default_value': False,
-    #     'description':  ''' Protein inference file with PEP and peptides by percolator ''',
-    #     'triggers_rerun': True,
-    #     'ukey_translation': {
-    #     },
-    #     'utag': [
-    #         'quantitation',
-    #     ],
-    #     'uvalue_translation': {
-    #         # 'protein_amounts_style_1' : ''
-    #     },
-    #     # 'uvalue_type': "bool",
-    # },
     'protein_inference_file': {
         'available_in_unode': [
             # 'protein_amounts_0_0_5',
@@ -969,8 +948,6 @@ ursgal_params = {
         },
         'uvalue_type' : "float",
     },
-
-
     '_extentions' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
@@ -1337,7 +1314,6 @@ ursgal_params = {
                 },
             },
         },
-
     },
     'accept_conflicting_psms' : {
         'edit_version'   : 1.00,
