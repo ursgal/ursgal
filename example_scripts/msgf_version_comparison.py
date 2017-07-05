@@ -21,6 +21,9 @@ def main():
     versions.
 
     An example plot can be found in the online documentation.
+    
+    Note:
+        Uses the new MS-GF+ C# mzid converter if available
 
     '''
 
@@ -30,7 +33,6 @@ def main():
             'example_data',
             'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
         ),
-        'modifications' : [ 'C,fix,any,Carbamidomethyl' ],
         'csv_filter_rules':[
             ['PEP'      , 'lte'    , 0.01 ]    ,
             ['Is decoy' , 'equals' , 'false']
@@ -51,9 +53,8 @@ def main():
             os.pardir,
             'example_data'
         ),
-        # 'scan_skip_modulo_step' : 10,
-        # 'prefix' : 'Every_10th_',
-        'remove_temporary_files': False
+        'remove_temporary_files': False,
+
     }
 
     if os.path.exists(params['ftp_output_folder']) is False:
@@ -71,6 +72,10 @@ def main():
     if 'msgfplus_v2017_01_27' in uc.unodes.keys():
         if uc.unodes['msgfplus_v2017_01_27']['available']:
             engine_list.append('msgfplus_v2017_01_27')
+
+    if 'msgfplus_C_mzid2csv_v2017_01_13' in uc.unodes.keys():
+        if uc.unodes['msgfplus_C_mzid2csv_v2017_01_13']['available']:
+            uc.params['msgfplus_mzid_converter_version'] = 'msgfplus_C_mzid2csv_v2017_01_13'
 
     mzML_file = os.path.join(
         params['ftp_output_folder'],
