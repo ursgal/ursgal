@@ -4708,7 +4708,7 @@ ursgal_params = {
             'converter_version',
         ],
         'uvalue_option' : {
-            'none_val'     : None,
+            'none_val'     : '',
             'multiple_line' : False,
         },
         'uvalue_translation' : {

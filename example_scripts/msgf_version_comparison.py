@@ -73,9 +73,9 @@ def main():
         if uc.unodes['msgfplus_v2017_01_27']['available']:
             engine_list.append('msgfplus_v2017_01_27')
 
-    if 'msgfplus_C_mzid2csv_v2017_01_13' in uc.unodes.keys():
-        if uc.unodes['msgfplus_C_mzid2csv_v2017_01_13']['available']:
-            uc.params['msgfplus_mzid_converter_version'] = 'msgfplus_C_mzid2csv_v2017_01_13'
+    if 'msgfplus_C_mzid2csv_v2017_07_04' in uc.unodes.keys():
+        if uc.unodes['msgfplus_C_mzid2csv_v2017_07_04']['available']:
+            uc.params['msgfplus_mzid_converter_version'] = 'msgfplus_C_mzid2csv_v2017_07_04'
 
     mzML_file = os.path.join(
         params['ftp_output_folder'],
