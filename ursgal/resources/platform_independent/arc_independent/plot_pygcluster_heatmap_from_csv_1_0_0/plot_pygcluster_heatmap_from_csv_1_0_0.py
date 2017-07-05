@@ -98,10 +98,12 @@ def main(input_file=None, output_file=None, params=None):
             except:
                 continue
         identifiers.append(line_name)
-        try:
-            params['additional_labels'][ line_name ] = [' ', line_dict[params['heatmap_annotation_field_name']]]
-        except:
-            pass
+        if params['heatmap_annotation_field_name'] in line_dict.keys():
+            annotation = line_dict[params['heatmap_annotation_field_name']]
+            for character in forbidden_character_list:
+                annotation = annotation.replace( character, '__' )
+            params['additional_labels'][ line_name ] = [ ' ', annotation ]
+
     cluster                      = pyGCluster.Cluster()
     folder                       = os.path.dirname(output_file)
     cluster['Working directory'] = folder
