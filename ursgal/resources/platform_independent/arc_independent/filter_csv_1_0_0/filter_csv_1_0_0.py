@@ -62,7 +62,8 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
             )
             unfiltered_csv_output.writeheader()
         for line_dict in csv_input:
-
+            if set(line_dict.values()) == set(['']):
+                continue
             write_row_bools = set()
             for rule_tuple in filter_rules:
                 dict_key, rule, value = rule_tuple
@@ -76,18 +77,17 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
                     )
                     pass
                 else:
+
+                    if line_dict[dict_key] == '':
+                        continue
+
                     if rule == 'lte':
-
-                        if line_dict[dict_key] == '':
-                            continue
-
                         if float(line_dict[dict_key]) <= value:
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
 
                     elif rule == 'gte':
-                        # print(line_dict)
                         if float(line_dict[dict_key]) >= value:
                             write_row_bools.add(True)
                         else:

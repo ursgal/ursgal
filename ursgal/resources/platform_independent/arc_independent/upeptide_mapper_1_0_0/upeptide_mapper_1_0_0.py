@@ -70,8 +70,8 @@ def main(input_file=None, output_file=None, params=None):
     joinchar           = params['translations']['protein_delimiter']
     if sys.platform == 'win32':
         print(
-            '[ WARNING ] pyahocorasick can not be installed via pip on Windows at the moment\n'
-            '[ WARNING ] Falling back to UpeptideMapper_v2'
+'[ WARNING ] pyahocorasick can not be installed via pip on Windows at the moment\n'
+'[ WARNING ] Falling back to UpeptideMapper_v2'
         )
         params['translations']['peptide_mapper_class_version'] = 'UPeptideMapper_v2'
 
@@ -210,11 +210,9 @@ def main(input_file=None, output_file=None, params=None):
                                 csv_file_buffer.append( deepcopy(line_dict) )
                                 appended = True
                     else:
-                        print(
-                            '''
-                            [ WARNING ] New not covered case of aa exception for: "{0}"
-                            [ WARNING ] Please adjust upeptide_mapper accordingly
-                            '''.format(aa_to_replace)
+                        print('''
+[ WARNING ] New not covered case of aa exception for: "{0}"
+[ WARNING ] Please adjust upeptide_mapper accordingly'''.format(aa_to_replace)
                         )
                         exit()
             if appended is False:
@@ -332,23 +330,21 @@ def main(input_file=None, output_file=None, params=None):
 
     if len(target_decoy_peps) != 0:
         print(
-            '''
-            [ WARNING ] {0}
-            [ WARNING ] These {1} peptides above occured in a target as well as decoy protein
-            [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
-                target_decoy_peps,
-                len(target_decoy_peps)
-            )
+'''[ WARNING ] {0}
+[ WARNING ] These {1} peptides above (truncated to 100) occurred in a target as well as decoy protein
+[ WARNING ] 'Is decoy' has been set to 'True' '''.format(
+    target_decoy_peps if len(target_decoy_peps) <100 else list(target_decoy_peps)[:99],
+    len(target_decoy_peps)
+)
         )
     if len(non_mappable_peps) != 0:
         print(
-            '''
-            [ WARNING ] {0}
-            [ WARNING ] These {1} peptides above could not be mapped to the database
-            [ WARNING ] Check Search and Database if neccesary'''.format(
-                sorted(list(non_mappable_peps)),
-                len(non_mappable_peps)
-            )
+'''[ WARNING ] {0}
+[ WARNING ] These {1} peptides above (truncated to 100) could not be mapped to the database
+[ WARNING ] Check Search and Database if neccesary'''.format(
+    sorted(list(non_mappable_peps)) if len(list(non_mappable_peps)) < 100 else list(non_mappable_peps)[:99],
+    len(non_mappable_peps)
+)
         )
         #recheck these peptides if sequence has a 'X'
         # this is done by the peptide regex function in the unode... Use this instead?
@@ -380,25 +376,23 @@ def main(input_file=None, output_file=None, params=None):
                         peptide_has_X_in_sequence.add( p_with_x )
                         mappable_after_all.add( non_mappable_peptide )
         print(
-            '''
-            [ WARNING ] {0}
-            [ WARNING ] These {1} not mappable peptides have "X" in their sequence
-            [ WARNING ] {2} are part of the non-mappable peptides'''.format(
-                sorted(list(peptide_has_X_in_sequence)),
-                len(peptide_has_X_in_sequence),
-                len(mappable_after_all)
-            )
+'''[ WARNING ] {0}
+[ WARNING ] These {1} not mappable peptides (truncated to 100) have "X" in their sequence
+[ WARNING ] {2} are part of the non-mappable peptides'''.format(
+    sorted(list(peptide_has_X_in_sequence)) if len(peptide_has_X_in_sequence) < 100 else sorted(list(peptide_has_X_in_sequence))[:99],
+    len(peptide_has_X_in_sequence),
+    len(mappable_after_all)
+)
         )
         not_mappable_after_all = non_mappable_peps - mappable_after_all
         if len(not_mappable_after_all) != 0:
             print(
-                '''
-                [ WARNING ] {0}
-                [ WARNING ] These {1} peptides are indeed not mappable
-                [ WARNING ] Check of Search parameters and database is strongly recommended'''.format(
-                    not_mappable_after_all,
-                    len(not_mappable_after_all),
-                )
+'''[ WARNING ] {0}
+[ WARNING ] These {1} peptides (truncated to 100) are indeed not mappable
+[ WARNING ] Check of Search parameters and database is strongly recommended'''.format(
+    not_mappable_after_all if len(not_mappable_after_all) < 100 else list(not_mappable_after_all)[:99],
+    len(not_mappable_after_all),
+)
             )
 
     if do_not_delete is False:
