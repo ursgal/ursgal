@@ -27,7 +27,7 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
         'version'            : '1.0.0',
         'release_date'       : None,
         'engine_type' : {
-            'misc'     : True
+            'misc_engine'     : True
         },
         'input_extensions'   : ['.csv'],
         'output_extensions'  : ['.csv'],

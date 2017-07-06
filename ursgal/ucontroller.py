@@ -203,12 +203,24 @@ class UController(ursgal.UNode):
                 unodes[ wrapper_module_name ]['uses_unode'] = uses_unode
 
             engine_type = wrapper_meta_info.get('engine_type', {})
-            for meta_type, meta_type_bool in engine_type.items():
-                if meta_type_bool is True:
-                    if meta_type not in unodes['__by_meta_type'].keys():
-                        unodes['__by_meta_type'][ meta_type ] = []
-                    unodes['__by_meta_type'][ meta_type ].append(
-                        wrapper_module_name
+            for meta_type in engine_type.keys():
+                meta_type_level_1 = engine_type.get(meta_type, False)
+                if meta_type_level_1 is not False:
+                    if meta_type == 'search_engine':
+                        if meta_type not in unodes['__by_meta_type'].keys():
+                            unodes['__by_meta_type'][ meta_type ] = {}
+                        for meta_type_level_2 in meta_type_level_1.keys():
+                            if meta_type_level_1[meta_type_level_2] is True:
+                                if meta_type_level_2 not in unodes['__by_meta_type'][ meta_type ].keys():
+                                    unodes['__by_meta_type'][ meta_type ][meta_type_level_2] = []
+                                unodes['__by_meta_type'][ meta_type ][meta_type_level_2].append(
+                                    wrapper_module_name
+                                )
+                    else:
+                        if meta_type not in unodes['__by_meta_type'].keys():
+                            unodes['__by_meta_type'][ meta_type ] = []
+                        unodes['__by_meta_type'][ meta_type ].append(
+                            wrapper_module_name
                     )
         return unodes
 
@@ -1938,65 +1950,98 @@ class UController(ursgal.UNode):
         functionality of the engine avaibility and installation is verified.
         '''
         n = 0
-        print()
+        # print()
+        # import pprint
+        # pprint.pprint(self.unodes['__by_meta_type'])
+        # exit()
         for meta_type in sorted(self.unodes['__by_meta_type'].keys()):
             if meta_type == 'in_development':
                 continue
 
-            number_of_no_dev_nodes = 0
-            for engine in sorted(self.unodes['__by_meta_type'][ meta_type ]):
-                if self.unodes[ engine ]['in_development'] is False:
-                    number_of_no_dev_nodes += 1
+            if meta_type.upper() != "SEARCH_ENGINE":
+                number_of_no_dev_nodes = 0
+                for engine in sorted(self.unodes['__by_meta_type'][ meta_type ]):
+                    if self.unodes[ engine ]['in_development'] is False:
+                        number_of_no_dev_nodes += 1
 
-            if number_of_no_dev_nodes == 0:
-                continue
-
+                if number_of_no_dev_nodes == 0:
+                    continue
 
             print('\t{BOLD}{0}{ENDC}(s):'.format(
                 meta_type.upper(),
                 **ursgal.COLORS
             ))
-            for engine in sorted(self.unodes['__by_meta_type'][ meta_type ]):
 
-                if self.unodes[ engine ]['in_development']:
-                    continue
+            if meta_type.upper() == "SEARCH_ENGINE":
+                ind = '    '
+                for sub_type in sorted(self.unodes['__by_meta_type'][ meta_type ]):
+                    print('\t{1}{BOLD}{0}{ENDC}(s):'.format(
+                        sub_type.upper(),
+                        ind,
+                        **ursgal.COLORS
+                    ))
+                    engine_list = sorted(self.unodes['__by_meta_type'][ meta_type ][sub_type])
+                    n = self.show_unode_overview_print(engine_list, ind, n)    
 
-                node_status = self.unodes[ engine ].get(
-                    'import_status',
-                    'n/a'
-                )
-                if meta_type.upper() == "CONTROLLER":
-                    node_status = 'available'
+            else:
+                ind = ''
+                engine_list = sorted(self.unodes['__by_meta_type'][ meta_type ])
+                n = self.show_unode_overview_print(engine_list, ind, n)
 
-                if node_status == 'available':
-                    color = ursgal.COLORS['GREEN']
-                elif node_status == 'n/a':
-                    color = ursgal.COLORS['YELLOW']
-                else:
-                    color = ursgal.COLORS['RED']
-                url_available = ''
-                if hasattr( self.unodes[ engine ]['class'], 'META_INFO'):
-                    local_META_INFO = self.unodes[ engine ]['class'].META_INFO
-                    if 'engine_url' in local_META_INFO.keys():
-                        if 'internal' in local_META_INFO['engine_url'].keys():
-                            url_available = '\t{GREY} internal {ENDC}'.format(
-                                **ursgal.COLORS
-                            )
-                        else:
-                            url_available = '\t{YELLOW} url available {ENDC}'.format(
-                                **ursgal.COLORS
-                            )
+    def show_unode_overview_print( self, engine_list, ind, n ):
+        '''
+        The ucontroller show_unode_overview_print function
 
-                print('\t{0: >3} : {1:28} [{3} {2: ^25} {ENDC}] {4}'.format(
-                    n,
-                    engine,
-                    node_status,
-                    color,
-                    url_available,
-                    **ursgal.COLORS
-                ))
-                n += 1
-        return
+        Note:
+            internal function
+
+        Prints the overview of all available nodes. The overview
+        includes the category, name and availability of each
+        node. Available nodes are highlighted. Here also the correct
+        functionality of the engine avaibility and installation is verified.
+        '''
+        for engine in engine_list:
+
+            if self.unodes[ engine ]['in_development']:
+                continue
+
+            node_status = self.unodes[ engine ].get(
+                'import_status',
+                'n/a'
+            )
+
+            if node_status == 'available':
+                color = ursgal.COLORS['GREEN']
+            elif node_status == 'n/a':
+                color = ursgal.COLORS['YELLOW']
+            else:
+                color = ursgal.COLORS['RED']
+            url_available = ''
+            if hasattr( self.unodes[ engine ]['class'], 'META_INFO'):
+                local_META_INFO = self.unodes[ engine ]['class'].META_INFO
+                if 'engine_url' in local_META_INFO.keys():
+                    if 'internal' in local_META_INFO['engine_url'].keys():
+                        url_available = '\t{GREY} internal {ENDC}'.format(
+                            **ursgal.COLORS
+                        )
+                    else:
+                        url_available = '\t{YELLOW} url available {ENDC}'.format(
+                            **ursgal.COLORS
+                        )
+
+            spacer = '{0}'.format((5-len(ind))*' ')
+            print('\t{5}{0: >3} : {1:28}{6} [{3} {2: ^20} {ENDC}] {4}'.format(
+                n,
+                engine,
+                node_status,
+                color,
+                url_available,
+                ind,
+                spacer,
+                **ursgal.COLORS
+            ))
+            n += 1
+        return n
 
     def run_unode_if_required( self, force, engine_name, answer, history_addon=None ):
         '''

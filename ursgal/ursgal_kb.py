@@ -286,7 +286,7 @@ FILE_EXTENSIONS = {
 
 UCONTROLLER_FUNCTIONS = {
     'converter'         : 'convert',
-    'misc'              : 'execute_misc_engine',
+    'misc_engine'       : 'execute_misc_engine',
     'meta_engine'       : 'combine_search_results',
     'search_engine'     : 'search_mgf',
     'fetcher'           : 'fetch_file',

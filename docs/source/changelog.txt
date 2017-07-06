@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 0.5.1    (07.2017)
+Version 0.6.0    (07.2017)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 #. Restructuring of engine classes. SEARCH_ENGINE(s) are now devided into
    * CROSS_LINK_ENGINE(s)
@@ -9,10 +9,10 @@ Version 0.5.1    (07.2017)
    * PROTEIN_DATABASE_ENGINE(s)
    * SPECTRAL_LIBRARY_ENGINE(s)
    The META_INFO of corresponding engines has been changed accordingly.
-   Furthermore, CONVERTER(s) have been split into real converters and MISC_ENGINE(s)
+   Furthermore, CONVERTER(s) have been split into CONVERTER(s) and MISC_ENGINE(s)
 #. Restructuring of UController functions. Unified functions for all engines
    of one engine class (Converter, Search_Engines, Validation_Engines, etc)
-   are now available. Function names for each engine class are stores in
+   are now available. Function names for each engine class are stored in
    ursgal_kb.ucontroller_functions
 #. Smaller fixes and improvements (please check git log)
 
