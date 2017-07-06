@@ -272,9 +272,10 @@ class UController(ursgal.UNode):
         else:
             file_json_path = input_file + self.params['json_extension']
             json_content = self.load_json( json_path = file_json_path )
-            last_engine = self.get_last_engine(
+            last_engine = self.get_last_search_engine(
                 history = json_content[3]['history'],
             )
+            print('>>>>>>>>>>>>>', last_engine, '<<<<<<<<<<<<<<<<<')
             if 'xtandem' in last_engine:
                 engine_name = 'xtandem2csv_1_0_0'
             elif 'msgfplus_v2016_09_16' in last_engine:
@@ -838,21 +839,39 @@ class UController(ursgal.UNode):
         '''
 
         if guess_engine is True:
-
-            last_engine_type = self.get_last_engine_type(
-                    history = json_content[3]['history'],
-                )
-
-            if last_engine_type == 'search_engine':
-
-                outfile = convert_results_to_csv(
+            if input_file.upper().endswith('.MZML'):
+                outfile = self.convert_to_mgf_and_update_rt_lookup(
                     input_file       = input_file,
                     force            = force,
                     output_file_name = output_file_name
                 )
+            else:
+                file_json_path = input_file + self.params['json_extension']
+                last_engine_type = None
+
+                assert os.path.exists( file_json_path ), '''
+                Cannot guess a suitable engine, since no json for
+                the input file was found.
+                {0}
+                '''.format(input_file)
+
+                json_content = self.load_json(
+                        json_path = file_json_path
+                    )
+                last_engine_type = self.get_last_engine_type(
+                        history = json_content[3]['history'],
+                    )
+
+                if last_engine_type == 'search_engine':
+
+                    outfile = self.convert_results_to_csv(
+                        input_file       = input_file,
+                        force            = force,
+                        output_file_name = output_file_name
+                    )
 
         elif engine in ['mzml2mgf_1_0_0']:
-            outfile = convert_to_mgf_and_update_rt_lookup(
+            outfile = self.convert_to_mgf_and_update_rt_lookup(
                 input_file       = input_file,
                 force            = force,
                 output_file_name = output_file_name
@@ -1144,7 +1163,7 @@ class UController(ursgal.UNode):
                     json_path = file_json_path
                 )
                 if len(json_content) > 3 and 'history' in json_content[3]:
-                    last_engine = self.get_last_engine(
+                    last_engine = self.get_last_search_engine(
                             history = json_content[3]['history'],
                             multiple_engines = True,
                         )
@@ -1670,14 +1689,15 @@ class UController(ursgal.UNode):
         '''
         engine_name = self.engine_sanity_check( engine )
         self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.mgf'] )
-        if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
-            if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
-                self.input_file_sanity_check(
-                    self.params['database'],
-                    engine     = engine_name,
-                    custom_str = 'FASTA database (uc.params["database"])',
-                    extensions = ['fasta', 'fa', 'fast']
-                )
+        if self.unodes[ engine_name ]['class'].META_INFO.get('search_engine', False) is not False:
+        # if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
+        #     if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
+            self.input_file_sanity_check(
+                self.params['database'],
+                engine     = engine_name,
+                custom_str = 'FASTA database (uc.params["database"])',
+                extensions = ['fasta', 'fa', 'fast']
+            )
         answer = self.prepare_unode_run(
             input_file,
             output_file = output_file_name,
@@ -1740,34 +1760,40 @@ class UController(ursgal.UNode):
             This function calls five search-related ursgal functions
             in succession, all of which can also be called individually:
 
-                * :meth:`.convert_to_mgf_and_update_rt_lookup` (if required)
+                * :meth:`.convert` (mzml to mgf, if required, using the mzml2mgf engine)
                 * :meth:`.search_mgf`
-                * :meth:`.convert_results_to_csv`
-                * :meth:`.map_peptides_to_fasta`
-                * :meth:`.unify_csv`
+                * :meth:`.convert` (raw search results to csv, if required)
+                * :meth:`.execute_misc_engine` (upeptide_mapper)
+                * :meth:`.execute_misc_engine` (unify_csv)
         '''
 
         # Verify that the specified engine is a valid UNode
-        engine_name = self.engine_sanity_check( engine )
+        # will be done for each step ...
+        # engine_name = self.engine_sanity_check( engine )
+
         # Verify input file exists and is mzML
-        self.input_file_sanity_check(
-            input_file,
-            extensions = ['mzml', 'mzml.gz', 'mgf']
-        )
+        # will be done for each step
+        # self.input_file_sanity_check(
+        #     input_file,
+        #     extensions = ['mzml', 'mzml.gz', 'mgf']
+        # )
+
         # verify database exists and is fasta
-        if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
-            if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] is True:
-                self.input_file_sanity_check(
-                    self.params['database'],
-                    engine     = engine_name,
-                    custom_str = 'FASTA database (uc.params["database"])',
-                    extensions = ['fasta', 'fa', 'fast'],
-                )
+        # will be done for seach_mgf
+        # if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
+        #     if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] is True:
+        #         self.input_file_sanity_check(
+        #             self.params['database'],
+        #             engine     = engine_name,
+        #             custom_str = 'FASTA database (uc.params["database"])',
+        #             extensions = ['fasta', 'fa', 'fast'],
+        #         )
 
         # 1. Convert mzML(.gz) to MGF format (if it's not already MGF):
         if not input_file.upper().endswith('.MGF'):
-            mgf_file = self.convert_to_mgf_and_update_rt_lookup(
+            mgf_file = self.convert(
                 input_file,
+                engine = self.params['mzml2mgf_converter_version'],
                 force = force,
             )
         else:
@@ -1779,43 +1805,35 @@ class UController(ursgal.UNode):
             engine     = engine,
             force      = force,
         )
-        # exit( raw_search_results )
-
 
         # 3. Convert search result to CSV if required (mzidentml-lib):
-        csv_search_results = self.convert_results_to_csv(
+        csv_search_results = self.convert(
             input_file = raw_search_results,
+            engine = None,
+            guess_engine = True,
             force      = force,
         )
 
         #insert peptide mapping here inlcuding the classification as a db engine
-        database_search_engines = [
-            'msamanda',
-            'msgf',
-            'myrimatch',
-            'omssa',
-            'xtandem',
-            'msfragger'
-        ]
-        database_search = False
-        for db_se in database_search_engines:
-            if db_se in engine.lower():
-                database_search = True
-        if database_search:
-            #if mapper version == 'COmpomics stuff'
-            #execute this node and in map peptides, these results are read...
-            mapped_csv_search_results = self.map_peptides_to_fasta(
-                input_file       = csv_search_results,
-                output_file_name = output_file_name,
-                force            = force,
-            )
-        else:
-            mapped_csv_search_results = csv_search_results
+        engine_name = self.guess_engine_name( engine )
+        engine_type = self.unodes[ engine_name[0] ]['class'].META_INFO['engine_type'].get('search_engine', False)
+        if engine_type is not False:
+            if engine_type.get('protein_database_engine', False) is not False: 
+                #if mapper version == 'COmpomics stuff'
+                #execute this node and in map peptides, these results are read...
+                mapped_csv_search_results = self.map_peptides_to_fasta(
+                    input_file       = csv_search_results,
+                    output_file_name = output_file_name,
+                    force            = force,
+                )
+            else:
+                mapped_csv_search_results = csv_search_results
 
         # 4. Convert csv to unified ursgal csv format:
-        unified_search_results = self.unify_csv(
+        unified_search_results = self.execute_misc_engine(
             input_file       = mapped_csv_search_results,
             output_file_name = output_file_name,
+            engine           = self.params['unify_csv_converter_version'],
             force            = force,
         )
         return unified_search_results

@@ -80,7 +80,7 @@ Could not load RT lookup dict from this location: {0}
         )
 
         # find the last search/denovo engine:
-        last_engine = self.get_last_engine(
+        last_engine = self.get_last_search_engine(
             history = self.stats['history'],
         )
 

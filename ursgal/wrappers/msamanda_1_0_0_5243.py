@@ -21,7 +21,9 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         'version'            : '1.0.0.5243',
         'release_date'       : None,
         'engine_type' : {
-            'search_engine' : True,
+            'search_engine' : {
+                'protein_database_engine' : True,
+            }
         },
         'input_extensions'   : ['.mgf'],
         'input_multi_file'   : False,

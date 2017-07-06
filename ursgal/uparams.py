@@ -6608,29 +6608,6 @@ ursgal_params = {
         'description' : \
             'name of the pickle that is used to map the retention time',
     },
-    'sanitize_csv_converter_version' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'ucontroller',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'ucontroller_style_1' : 'sanitize_csv_converter_version',
-        },
-        'utag' : [
-            'converter_version',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'str',
-        'uvalue_option' : {
-            'none_val'      : None,
-            'multiple_line' : False,
-        },
-        'default_value' : 'sanitize_csv_1_0_0',
-        'description' : \
-            'sanitize csv converter version: version name',
-    },
     'scan_exclusion_list' : {
         'edit_version' : 1.00,
         'available_in_unode' : [

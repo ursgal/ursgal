@@ -15,7 +15,9 @@ class myrimatch_2_2_140( myri ):
         'version'                     : '2.2.140',
         'release_date'                : None,
         'engine_type' : {
-            'search_engine' : True,
+            'search_engine' : {
+                'protein_database_engine' : True,
+            }
         },
         'input_extensions'            : ['.mzML'],
         'input_multi_file'            : False,

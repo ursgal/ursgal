@@ -17,7 +17,9 @@ class moda_v1_51( ursgal.UNode ):
         'version'                     : 'v1.51',
         'release_date'                : '2012-4-1',
         'engine_type' : {
-            'search_engine' : True,
+            'search_engine' : {
+                'protein_database_engine' : True,
+            }
         },
         'input_extensions'            : ['.mgf', '.pkl', '.dta', '.mzXML'],
         'input_multi_file'            : False,

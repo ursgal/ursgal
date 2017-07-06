@@ -24,7 +24,9 @@ class kojak_1_5_3( ursgal.UNode ):
         'version'                     : '1.5.3',
         'release_date'                : '2015-5-1',
         'engine_type' : {
-            'cross_link_engine' : True,
+            'search_engine' : {
+                'cross_link_engine' : True,
+            }
         },
         'input_extensions'            : ['.mzML', '.mzXML'],
         'input_multi_file'            : False,

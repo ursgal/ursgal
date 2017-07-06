@@ -8,6 +8,7 @@ check the format of node and param.
 from datetime import datetime
 from ursgal import uparams
 from ursgal import UController
+from ursgal import ursgal_kb
 
 # node format
 node_meta_info = {
@@ -351,6 +352,7 @@ def chk_json_item( parent_name='', essential=False, key_list=[], dict_item={}, \
 
 
 def chk_format_node( node_name, node_dict ):
+    print(node_name)
     chk_dict_keys(
         parent_name = node_name,
         key_list    = ['META_INFO'],
@@ -371,7 +373,7 @@ def chk_format_node( node_name, node_dict ):
             type_list   = v['types'],
         )
 
-    all_extensions    = list(all_param['_extentions']['default_value'])
+    all_extensions    = list(ursgal_kb.FILE_EXTENSIONS)
     output_extensions = node_dict['META_INFO']['output_extensions']
     input_extensions  = node_dict['META_INFO']['input_extensions']
     for ext in (output_extensions + input_extensions):

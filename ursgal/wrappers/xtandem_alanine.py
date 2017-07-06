@@ -18,7 +18,9 @@ class xtandem_alanine( xtandem ):
         'version'                     : 'ALANINE',
         'release_date'                : '2017-02-01',
         'engine_type' : {
-            'search_engine' : True,
+            'search_engine' : {
+                'protein_database_engine' : True,
+            }
         },
         'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
         'input_multi_file'            : False,

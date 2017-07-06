@@ -61,7 +61,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
             self.params['translations']['mzidentml_compress'] = False
 
         if 'tandem' in search_engine:
-            tmp_options += [
+            tmp_options = [
                 '-databaseFileFormatID', 'MS:1001348',
                 'massSpecFileFormatID', 'MS:1001062',
                 '-idsStartAtZero', 'false'

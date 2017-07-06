@@ -45,7 +45,9 @@ class msfragger_20170103( ursgal.UNode ):
         'include_in_git'              : False,
         'cannot_distribute'           : True,
         'engine_type'                 : {
-            'search_engine' : True,
+            'search_engine' : {
+                'protein_database_engine' : True,
+            }
         },
         'engine'                      : {
             'platform_independent'    : {

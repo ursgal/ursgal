@@ -20,7 +20,9 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
         'version'                     : 'v2016.09.16',
         'release_date'                : '2016-9-16',
         'engine_type' : {
-            'search_engine' : True,
+            'search_engine' : {
+                'protein_database_engine' : True,
+            }
         },
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML', '.ms2', '.pkl', '.dta.txt'],
         'input_multi_file'            : False,

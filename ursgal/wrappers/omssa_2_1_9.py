@@ -29,7 +29,9 @@ class omssa_2_1_9( ursgal.UNode ):
         'version'            : '2.1.9',
         'release_date'       : None,
         'engine_type' : {
-            'search_engine' : True,
+            'search_engine' : {
+                'protein_database_engine' : True,
+            }
         },
         'input_extensions'   : [ '.mgf' ],
         'input_multi_file'   : False,

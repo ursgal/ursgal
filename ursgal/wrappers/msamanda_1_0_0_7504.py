@@ -14,7 +14,9 @@ class msamanda_1_0_0_7504( msamanda ):
         'version'            : '1.0.0.7504',
         'release_date'       : None,
         'engine_type' : {
-            'search_engine' : True,
+            'search_engine' : {
+                'protein_database_engine' : True,
+            }
         },
         'input_extensions'   : ['.mgf'],
         'input_multi_file'   : False,

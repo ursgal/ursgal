@@ -10,7 +10,9 @@ class xtandem_cyclone_2010( tandem ):
         'version'                     : 'Cyclone',
         'release_date'                : '2010-12-1',
         'engine_type' : {
-            'search_engine' : True,
+            'search_engine' : {
+                'protein_database_engine' : True,
+            }
         },
         'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
         'input_multi_file'            : False,

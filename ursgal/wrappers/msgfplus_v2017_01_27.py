@@ -24,7 +24,9 @@ class msgfplus_v2017_01_27( msgf ):
         'version'                     : 'v2017.01.27',
         'release_date'                : '2017-1-27',
         'engine_type' : {
-            'search_engine' : True,
+            'search_engine' : {
+                'protein_database_engine' : True,
+            }
         },
         'input_extensions'            : [
             '.mgf',
