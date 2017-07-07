@@ -287,7 +287,6 @@ class UController(ursgal.UNode):
             last_engine = self.get_last_search_engine(
                 history = json_content[3]['history'],
             )
-            print('>>>>>>>>>>>>>', last_engine, '<<<<<<<<<<<<<<<<<')
             if 'xtandem' in last_engine:
                 engine_name = 'xtandem2csv_1_0_0'
             elif 'msgfplus_v2016_09_16' in last_engine:

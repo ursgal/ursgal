@@ -85,7 +85,7 @@ class msfragger_20170103( ursgal.UNode ):
 
     def preflight( self ):
         '''
-        Formatting the command line and writing the paramn input file via 
+        Formatting the command line and writing the param input file via 
         self.params
 
         Returns:
@@ -163,6 +163,9 @@ class msfragger_20170103( ursgal.UNode ):
                         self.params_to_write[ msfragger_param_name ] = 0 
                     else:
                         self.params_to_write[ msfragger_param_name ] = param_value
+                elif msfragger_param_name == 'clear_mz_range':
+                    min_mz, max_mz = param_value
+                    self.params_to_write[ msfragger_param_name ] = '{0} {1}'.format(min_mz, max_mz)
                 elif msfragger_param_name == 'modifications':
                     '''
                     #maximum of 7 mods - amino acid codes, * for any amino acid, [ and ] specifies protein termini, n and c specifies peptide termini

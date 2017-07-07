@@ -10,13 +10,15 @@ ursgal_params = {
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
             'mzidentml_lib_1_7',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
             'msgfplus_style_1'  : '-Xmx',
             'mzidentml_style_1' : '-Xmx',
             'msfragger_style_1' : '-Xmx',
+            'pipi_style_1'      : '-Xmx',
         },
         'utag' : [
             'hardware_resources',
@@ -203,12 +205,14 @@ ursgal_params = {
             'moda_v1_51',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1'    : 'base_mz',
             'omssa_style_1'   : 'base_mz',
             'pepnovo_style_1' : 'base_mz',
+            'pipi_style_1'    : 'base_mz',
         },
         'utag' : [
             'fragment',
@@ -687,6 +691,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -697,6 +702,7 @@ ursgal_params = {
             'ucontroller_style_1' : 'cpus',
             'xtandem_style_1'     : 'spectrum, threads',
             'msfragger_style_1'   : 'num_threads',
+            'pipi_style_1'        : 'thread_num',
         },
         'utag' : [
             'hardware_resources',
@@ -838,6 +844,7 @@ ursgal_params = {
             'upeptide_mapper_1_0_0',
             'compomics_utilities_4_11_5',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -851,7 +858,8 @@ ursgal_params = {
             'xtandem_style_1'             : 'file URL',
             'upeptide_mapper_style_1'     : 'database',
             'compomics_utilities_style_1' : 'database',
-            'msfragger_style_1'           : 'database_name'
+            'msfragger_style_1'           : 'database_name',
+            'pipi_style_1'                : 'db',
 
         },
         'utag' : [
@@ -1170,6 +1178,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1185,7 +1194,8 @@ ursgal_params = {
             'percolator_style_1'            : 'enzyme',
             'unify_csv_style_1'             : 'enzyme',
             'xtandem_style_1'               : 'protein, cleavage site',
-            'msfragger_style_1'             : 'enzyme'
+            'msfragger_style_1'             : 'enzyme',
+            'pipi_style_1'                  : 'enzyme',
         },
         'utag' : [
             'database',
@@ -1431,6 +1441,14 @@ ursgal_params = {
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
             },
+            'pipi_style_1' : {
+                'aspn' : 'AspN;0;D;-',
+                'chymotrypsin' : 'Chymotrypsin;1;FMWY;P',
+                'gluc' : 'GluC;1;DE;P',
+                'lysc_p' : 'LysC;1;K;-',
+                'lysn' : 'LysN;0;K;-',
+                'trypsin' : 'Trypsin;1;KR;P',
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -1634,6 +1652,50 @@ ursgal_params = {
             'If set \'True\', engines are forced to re-run although no '\
             'node-related parameters have changed',
     },
+    'frag_clear_mz_range' : {
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'msfragger_20170103',
+            'pipi_1_3_0',
+        ],
+        'default_value' : (0.0, 0.0),
+        'description' :  ''' Removes peaks in this m/z range prior to matching. Given as tuple (min_clear_mz, max_clear_mz). Useful for iTRAQ/TMT experiments, i.e. (0.0, 150.0). ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'msfragger_style_1' : 'clear_mz_range',
+            'pipi_style_1' : 'frag_clear_mz_range',
+        },
+        'utag' : [
+            'fragment',
+            'spectrum'
+        ],
+        'uvalue_option' : {
+            'none_val' : None,
+            'title_list' : [
+                'min_clear_mz',
+                'max_clear_mz',
+            ],
+            'type_dict' : {
+                'min_clear_mz' : 'float',
+                'max_clear_mz' : 'float',
+            },
+            'max': {
+                'min_clear_mz' : 10000,
+                'max_clear_mz' : 10000,
+            },
+            'min': {
+                'min_clear_mz' : 0,
+                'max_clear_mz' : 0,
+            },
+            'updownval': {
+                'min_clear_mz' : 1,
+                'max_clear_mz' : 1,
+            },
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "tuple",
+    },
     'frag_mass_tolerance' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -1655,7 +1717,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1666,7 +1729,8 @@ ursgal_params = {
             'omssa_style_1'     : '-to',
             'pepnovo_style_1'   : '-fragment_tolerance',
             'xtandem_style_1'   : 'spectrum, fragment monoisotopic mass error',
-            'msfragger_style_1' : 'fragment_mass_tolerance'
+            'msfragger_style_1' : 'fragment_mass_tolerance',
+            'pipi_style_1'      : 'ms2_tolerance',
         },
         'utag' : [
             'fragment',
@@ -1706,7 +1770,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1717,7 +1782,8 @@ ursgal_params = {
             'omssa_style_1'     : 'frag_mass_tolerance_unit',
             'pepnovo_style_1'   : 'frag_mass_tolerance_unit',
             'xtandem_style_1'   : 'spectrum, fragment monoisotopic mass error units',
-            'msfragger_style_1' : 'fragment_mass_units'
+            'msfragger_style_1' : 'fragment_mass_units',
+            'pipi_style_1'      : 'frag_mass_tolerance_unit',
         },
         'utag' : [
             'fragment',
@@ -1797,11 +1863,13 @@ ursgal_params = {
         'available_in_unode' : [
             'omssa_2_1_9',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-zoh',
             'msfragger_style_1': 'max_fragment_charge',
+            'pipi_style_1' : 'max_ms2_charge',
         },
         'utag' : [
             'fragment',
@@ -3192,6 +3260,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3202,6 +3271,7 @@ ursgal_params = {
             'omssa_style_1'     : ('-tem', '-tom'),
             'xtandem_style_1'   : 'protein, modified residue mass file',
             'msfragger_style_1' : 'label',
+            'pipi_style_1'      : 'label',
         },
         'utag' : [
             'label',
@@ -3311,7 +3381,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3323,7 +3393,8 @@ ursgal_params = {
             'xtandem_style_1'         : 'scoring, maximum missed cleavage sites',
             'unify_csv_style_1'       : 'max_missed_cleavages',
             'upeptide_mapper_style_1' : 'max_missed_cleavages',
-            'msfragger_style_1'       : 'allowed_missed_cleavage'
+            'msfragger_style_1'       : 'allowed_missed_cleavage',
+            'pipi_style_1'            : 'missed_cleavage'
         },
         'utag' : [
             'protein',
@@ -3374,10 +3445,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'MaxModSize',
+            'pipi_style_1' : 'max_ptm_mass',
         },
         'utag' : [
             'modifications',
@@ -3394,7 +3467,7 @@ ursgal_params = {
         },
         'default_value' : 200,
         'description' : \
-            'Minimum modification size to consider (in Da)',
+            'Maximum modification size to consider (in Da)',
     },
     'max_num_mods' : {
         'edit_version' : 1.00,
@@ -3679,10 +3752,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'MinModSize',
+            'pipi_style_1' : 'min_ptm_mass',
         },
         'utag' : [
             'modifications',
@@ -3851,13 +3926,15 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-hs',
             'xtandem_style_1' : 'spectrum, minimum peaks',
             'msfragger_style_1': 'minimum_peaks',
+            'pipi_style_1' : 'min_peak_num',
         },
         'utag' : [
             'fragment',
@@ -4001,7 +4078,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4016,6 +4094,7 @@ ursgal_params = {
             'unify_csv_style_1'       : 'modifications',
             'upeptide_mapper_style_1' : 'modifications',
             'msfragger_style_1'       : 'modifications',
+            'pipi_style_1'            : 'modifications',
             'xtandem_style_1'         : (
                 'residue, modification mass',
                 'residue, potential modification mass',
@@ -4399,27 +4478,6 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
-    },
-    'msfragger_clear_mz_range' : {
-        'edit_version'   : 1.00,
-        'available_in_unode' : [
-            'msfragger_20170103',
-        ],
-        'default_value' : '0.0 0.0',
-        'description' :  ''' Removes peaks in this m/z range prior to matching. Useful for iTRAQ/TMT experiments (i.e. 0.0 150.0) ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'msfragger_style_1' : 'clear_mz_range',
-        },
-        'utag' : [
-        ],
-        'uvalue_option' : {
-            'none_val' : None,
-            'multiple_line' : False
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "str",
     },
     'myrimatch_class_size_multiplier' : {
         'edit_version' : 1.00,
@@ -5744,6 +5802,32 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
+    'pipi_mz_bin_offset' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'pipi_1_3_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'pipi_style_1' : 'mz_bin_offset',
+        },
+        'utag' : [
+            'spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'float',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 100,
+            'min'       : 0,
+            'updownval' : 0.1,
+            'unit'      : ''
+        },
+        'default_value' : 0.0,
+        'description' : \
+            'PIPI mz_bin_offset'
+    },
     'precursor_charge_dependency' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -5872,6 +5956,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5885,7 +5970,8 @@ ursgal_params = {
             'pepnovo_style_1'   : '-pm_tolerance',
             'unify_csv_style_1' : 'precursor_mass_tolerance_minus',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
-            'msfragger_style_1' : 'precursor_mass_tolerance'
+            'msfragger_style_1' : 'precursor_mass_tolerance',
+            'pipi_style_1'      : 'ms1_tolerance',
         },
         'utag' : [
             'precursor',
@@ -5931,7 +6017,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5945,7 +6032,8 @@ ursgal_params = {
             'pepnovo_style_1'   : '-pm_tolerance',
             'unify_csv_style_1' : ' precursor_mass_tolerance_minus',
             'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error plus',
-            'msfragger_style_1' : 'precursor_mass_tolerance'
+            'msfragger_style_1' : 'precursor_mass_tolerance',
+            'pipi_style_1'      : 'ms1_tolerance',
 
         },
         'utag' : [
@@ -5990,7 +6078,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -6003,6 +6092,7 @@ ursgal_params = {
             'pepnovo_style_1'   : 'precursor_mass_tolerance_unit',
             'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error units',
             'msfragger_style_1' : 'precursor_mass_units',
+            'pipi_style_1'      : 'ms1_tolerance_unit',
         },
         'utag' : [
             'precursor',
@@ -6030,7 +6120,11 @@ ursgal_params = {
             'msfragger_style_1' : {
                 'ppm' : 1,
                 'da'  : 0
-            }
+            },
+            'pipi_style_1' : {
+                'ppm' : 1,
+                'da'  : 0
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -6106,7 +6200,8 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -6114,7 +6209,8 @@ ursgal_params = {
             'msgfplus_style_1'  : '-maxCharge',
             'myrimatch_style_1' : 'NumChargeStates',
             'omssa_style_1'     : '-zh',
-            'msfragger_style_1' : 'precursor_max_charge'
+            'msfragger_style_1' : 'precursor_max_charge',
+            'pipi_style_1'      : ('max_ms1_charge', 'max_potential_charge'),
         },
         'utag' : [
             'precursor',
@@ -6139,14 +6235,16 @@ ursgal_params = {
             'kojak_1_5_3',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1'     : 'precursor_max_mass',
             'myrimatch_style_1' : 'MaxPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
-            'msfragger_style_1' : 'precursor_max_mass'
+            'msfragger_style_1' : 'precursor_max_mass',
+            'pipi_style_1'      : 'max_precursor_mass',
         },
         'utag' : [
             'precursor',
@@ -6178,15 +6276,16 @@ ursgal_params = {
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'omssa_2_1_9',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'considered_charges',
             'msgfplus_style_1' : '-minCharge',
             'omssa_style_1' : '-zl',
-            'msfragger_style_1' : 'precursor_min_charge'
-
+            'msfragger_style_1' : 'precursor_min_charge',
+            'pipi_style_1' : ('min_ms1_charge', 'min_potential_charge'),
         },
         'utag' : [
             'precursor',
@@ -6217,14 +6316,16 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1'     : 'precursor_min_mass',
             'myrimatch_style_1' : 'MinPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
-            'msfragger_style_1' : 'precursor_min_mass'
+            'msfragger_style_1' : 'precursor_min_mass',
+            'pipi_style_1'      : 'min_precursor_mass'
         },
         'utag' : [
             'precursor',
