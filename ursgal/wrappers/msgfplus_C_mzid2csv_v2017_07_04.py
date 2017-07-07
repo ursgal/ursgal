@@ -98,9 +98,12 @@ class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
             self.params['output_dir_path'],
             self.params['output_file']
         )
-
-        self.params['command_list'] = [
-            'mono',
+        if sys.platform in ['win32']:
+            self.params['command_list'] = []
+        else:
+            self.params['command_list'] = ['mono']
+        self.params['command_list'] += [
+            # 'mono',
             self.exe,
             '-mzid:{0}'.format(input_file_incl_path),
             '-tsv:{0}'.format(self.params['translations']['output_file_incl_path'].strip('.csv')+'.tsv'),
