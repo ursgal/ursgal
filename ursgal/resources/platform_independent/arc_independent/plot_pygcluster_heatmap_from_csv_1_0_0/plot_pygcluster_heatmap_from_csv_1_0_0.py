@@ -16,7 +16,7 @@ def main(input_file=None, output_file=None, params=None):
         input_file (str): input filename of csv which should be unified
         output_file (str): output filename of csv after unifying
         params (dict): params as passed by ursgal
-    
+
     Note:
         Please do not forget to cite pyGCluster AND Ursgal when using this node.
         Thank you in advance!
@@ -52,8 +52,7 @@ def main(input_file=None, output_file=None, params=None):
           holding the error to the value (Default: '_std')
         * heatmap_column_order defines the order of the columns for plotting
 
-    
-    
+
     Note:
 
         Use of force = True is recommended to cover changes in the csv input
@@ -63,7 +62,7 @@ def main(input_file=None, output_file=None, params=None):
         Please refer to the documentation for further details on parameters.
 
     '''
-    csv_reader =  csv.DictReader(
+    csv_reader = csv.DictReader(
         open(input_file, 'r')
     )
     params['additional_labels'] = {}
@@ -75,7 +74,7 @@ def main(input_file=None, output_file=None, params=None):
                     fieldname.replace(
                         params['heatmap_value_suffix'],
                         ''
-                    ) # this tag could also go into params
+                    )  # this tag could also go into params
                 )
         params['all_conditions'] = sorted(list(params['all_conditions']))
     else:
@@ -92,8 +91,12 @@ def main(input_file=None, output_file=None, params=None):
 
         for condition in params['all_conditions']:
             try:
-                ratio =  float(line_dict['{0}{1}'.format(condition,params['heatmap_value_suffix'])])
-                sd    = float(line_dict['{0}{1}'.format(condition,params['heatmap_error_suffix'])])
+                ratio =  float(
+                    line_dict['{0}{1}'.format(condition,params['heatmap_value_suffix'])]
+                )
+                sd    = float(
+                    line_dict['{0}{1}'.format(condition,params['heatmap_error_suffix'])]
+                )
                 plot_collector[ line_name ][condition] = (ratio, sd)
             except:
                 continue

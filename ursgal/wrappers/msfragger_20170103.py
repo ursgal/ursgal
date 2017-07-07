@@ -335,39 +335,40 @@ class msfragger_20170103( ursgal.UNode ):
             'mzML',
             'tsv'
         )
+
         csv_writer = csv.DictWriter(
             open(self.params['translations']['output_file_incl_path'], 'w'),
             fieldnames = translated_headers
         )
-
-        csv_reader = csv.DictReader(
-            open(msfragger_output_tsv,'r'),
-            fieldnames = translated_headers,
-            delimiter = '\t'
-        )
-
         csv_writer.writeheader()
-        for line_dict in csv_reader:
-            line_dict['Raw data location'] = os.path.abspath(
-                self.params['translations']['mzml_input_file']
-            )
 
-            ############################################
-            # all fixing here has to go into unify csv! #
-            ############################################
-
-            # 'Precursor neutral mass (Da)' : '',
-            # 'Neutral mass of peptide' : 'Calc m/z',# (including any variable modifications) (Da) 
-            line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
-                line_dict['MSFragger:Precursor neutral mass (Da)'],
-                line_dict['Charge']
+        with open(msfragger_output_tsv) as temp_tsv:
+            csv_reader = csv.DictReader(
+                temp_tsv,
+                fieldnames = translated_headers,
+                delimiter = '\t'
             )
-            line_dict['Calc m/z'] = ursgal.ucore.calculate_mz(
-                line_dict['MSFragger:Neutral mass of peptide'],
-                line_dict['Charge']
-            )
+            for line_dict in csv_reader:
+                line_dict['Raw data location'] = os.path.abspath(
+                    self.params['translations']['mzml_input_file']
+                )
 
-            csv_writer.writerow( line_dict )
+                ############################################
+                # all fixing here has to go into unify csv! #
+                ############################################
+
+                # 'Precursor neutral mass (Da)' : '',
+                # 'Neutral mass of peptide' : 'Calc m/z',# (including any variable modifications) (Da) 
+                line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
+                    line_dict['MSFragger:Precursor neutral mass (Da)'],
+                    line_dict['Charge']
+                )
+                line_dict['Calc m/z'] = ursgal.ucore.calculate_mz(
+                    line_dict['MSFragger:Neutral mass of peptide'],
+                    line_dict['Charge']
+                )
+
+                csv_writer.writerow( line_dict )
 
         if msfragger_output_tsv.endswith('.tsv'):
             os.remove(msfragger_output_tsv)
