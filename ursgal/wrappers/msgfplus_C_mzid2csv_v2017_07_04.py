@@ -104,8 +104,8 @@ class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
             self.exe,
             '-mzid:{0}'.format(input_file_incl_path),
             '-tsv:{0}'.format(self.params['translations']['output_file_incl_path'].strip('.csv')+'.tsv'),
-            # '-showDecoy',
-            # '-unroll',
+            '-showDecoy',
+            '-unroll',
             # '-singleResult',
         ]
         self.created_tmp_files.append(self.params['translations']['output_file_incl_path'].strip('.csv')+'.tsv')
