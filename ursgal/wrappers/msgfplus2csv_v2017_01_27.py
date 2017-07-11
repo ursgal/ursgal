@@ -30,7 +30,7 @@ class msgfplus2csv_v2017_01_27( msgf2csv ):
         'engine_type' : {
             'converter'     : True
         },
-        'input_extensions'   : ['.mzid'],
+        'input_extensions'   : ['.mzid', '.mzid.gz'],
         'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : None,
