@@ -933,6 +933,95 @@ ursgal_params = {
         'description' : \
             'Probability of consecutive ion (used in correlation correction)',
     },
+    'count_column_names' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2counted_results_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2counted_results_style_1' : 'count_column_names',
+        },
+        'utag' : [
+            'convertion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val' : None,
+            'title_list' : [
+                'column_name_1',
+                'column_name_2',
+            ],
+            'type_dict' : {
+                'column_name_1' : 'str',
+                'column_name_2' : 'str',
+            },
+            'multiple_line' : {
+                'column_name_1' : False,
+                'column_name_2' : False,
+            },
+            'custom_val_max' : 10000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : [
+            'Sequence',
+            'Modifications'
+        ],
+        'description' : \
+            'List of column headers which are used for counting.'
+            'The combination of these headers creates the unique countable element.',
+    },
+    'count_by_file' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2counted_results_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2counted_results_style_1' : 'count_by_file',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+        'uvalue_option' : {
+        },
+        'default_value' : True,
+        'description' : \
+            'the number of unique hits for each identifier '
+            'is given in seperate columns for each raw file '
+            '(file name as defiened in Spectrum Title)',
+    },
+    'convert_to_sfinx' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2counted_results_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2counted_results_style_1' : 'convert2sfinx',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+        'uvalue_option' : {
+        },
+        'default_value' : False,
+        'description' : \
+            'If True, the header of the identifier column is "rownames". '
+            'If False, the joined identifier header name will be used',
+    },
     'cpus' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -2851,6 +2940,47 @@ ursgal_params = {
         'default_value' : 'q_exactive',
         'description' : \
             'Type of mass spectrometer (used to determine the scoring model)',
+    },
+    'identifier_column_names' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2counted_results_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2counted_results_style_1' : 'identifier_column_names',
+        },
+        'utag' : [
+            'convertion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val' : None,
+            'title_list' : [
+                'column_name_1',
+            ],
+            'type_dict' : {
+                'column_name_1' : 'str',
+            },
+            'multiple_line' : {
+                'column_name_1' : False,
+            },
+            'custom_val_max' : 10000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : [
+            'Protein ID',
+        ],
+        'description' : \
+            'The (combination of) specified csv column name(s) are used as identifiers. '\
+            'E.g. to count the number of peptides for these identifiers. '\
+            'The parameter "count_column_names" defines the countable elements.',
     },
     'intensity_cutoff' : {
         'edit_version' : 1.00,
