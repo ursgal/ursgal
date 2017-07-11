@@ -44,8 +44,7 @@ def main(input_file=None, output_file=None, params=None):
 
     Results and fixes
         * All peptide Sequences are remapped to their corresponding protein,
-          assuring correct start, stop, pre and post aminoacid. Thereby,
-          also correct enzymatic cleavage is checked.
+          assuring correct start, stop, pre and post aminoacid.
         * It is determined if the corresponding proteins are decoy proteins.
           These peptides are reported after the mapping process.
         * Non-mappable peptides are reported. This can e.g. due to 'X' in
@@ -887,11 +886,11 @@ class UPeptideMapper_v4():
         '''
 
         for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parseFasta(open(fasta_database,'r').readlines())):
-            if protein_pos % 500 == 0:
+            if protein_pos % 5000 == 0:
                 print(
                     '[ upapa v4 ] Buffering protein #{0} of database {1}'.format(
                         self.fasta_counter,
-                        fasta_database
+                        os.path.basename(fasta_database)
                     ),
                     end ='\r'
                 )
