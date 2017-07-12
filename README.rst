@@ -105,6 +105,11 @@ Install third party engines::
 
     user@localhost:~/ursgal$ python3.4 install_resources.py
 
+.. note::
+
+    Since we are not allowed to distribute all third party engines, you might need to
+    download and install them on your own. See FAQ (:ref:`not-installed-engines`) and
+    the respective engine documentation for more information.
 
 Install Ursgal::
 
@@ -120,6 +125,7 @@ Install Ursgal::
 On Linux or OS X, use ```sudo python setup.py install``` or write into a user folder
 by using this command ```python setup.py install --user```. On Windows, you have to
 start the command line with administrator privileges.)
+
 
 
 Tests

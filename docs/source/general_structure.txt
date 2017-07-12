@@ -119,11 +119,19 @@ will allow ucontroller.search(engine='omssa_2_1_9') to be executed.
 
     META_INFO = {
         'engine_type'            : {
-          'controller'        : False,
-          'converter'         : False,
-          'validation_engine' : False,
-          'search_engine'     : True,
-          'meta_engine'       : False
+            'controller'        : False,
+            'converter'         : False,
+            'fetcher'           : False,
+            'meta_engine'       : False,
+            'misc_engine'       : False,
+            'search_engine'     : {
+                'cross_link_engine'       : False,
+                'denovo_engine'           : False,
+                'protein_database_engine' : True,
+                'spectral_library_engine' : False,
+            },
+            'validation_engine' : False,
+            'visualizer'        : False,
         },
         ...
     }
@@ -151,7 +159,7 @@ Input types
 """""""""""
 
 Input types are currently not used but the next iteration will include this.
-For example.
+For example:
 
 .. code-block:: python
 
@@ -165,14 +173,16 @@ For example.
 Output Extension
 """"""""""""""""
 
-The output extension is required to auto-generate the output file name.
+The output extension is required to auto-generate the output file name
+(together with the optional 'output_suffix') and to check, after execution, 
+if a correct output file has been created.
 For example:
 
 .. code-block:: python
 
     META_INFO = {
         ...
-        'output_extension'      : '.csv',
+        'output_extension'      : ['.csv'],
         ...
     }
 

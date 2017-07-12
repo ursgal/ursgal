@@ -1658,8 +1658,8 @@ ursgal_params = {
             'msfragger_20170103',
             'pipi_1_3_0',
         ],
-        'default_value' : (0.0, 0.0),
-        'description' :  ''' Removes peaks in this m/z range prior to matching. Given as tuple (min_clear_mz, max_clear_mz). Useful for iTRAQ/TMT experiments, i.e. (0.0, 150.0). ''',
+        'default_value' : [0.0, 0.0],
+        'description' :  ''' Removes peaks in this m/z range prior to matching. Given as list [min_clear_mz, max_clear_mz]. Useful for iTRAQ/TMT experiments, i.e. [0.0, 150.0]. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'clear_mz_range',
@@ -1694,7 +1694,7 @@ ursgal_params = {
         },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "tuple",
+        'uvalue_type' : "list",
     },
     'frag_mass_tolerance' : {
         'edit_version' : 1.00,
