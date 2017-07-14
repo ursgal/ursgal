@@ -3,6 +3,10 @@
 Available Search Engines
 ========================
 
+.. _protein-database-engines:
+
+Protein Database Engines
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 MS-GF+
 ------
@@ -75,4 +79,36 @@ MyriMatch
    :members:
 
 .. autoclass:: ursgal.wrappers.myrimatch_2_2_140.myrimatch_2_2_140
+   :members:
+
+
+_available_de_novo_engines:
+
+De Novo Engines
+^^^^^^^^^^^^^^^
+
+Novor
+-----
+
+
+.. autoclass:: ursgal.wrappers.novor_1_1beta.novor_1_1beta
+   :members:
+
+PepNovo
+-------
+
+
+.. autoclass:: ursgal.wrappers.pepnovo_3_1.pepnovo_3_1
+   :members:
+
+
+.. _available_cross_link_engines:
+
+Cross Linking Engines
+^^^^^^^^^^^^^^^^^^^^^
+
+Kojak
+-----
+
+.. autoclass:: ursgal.wrappers.kojak_1_5_3.kojak_1_5_3
    :members:

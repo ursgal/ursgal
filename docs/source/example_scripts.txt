@@ -103,7 +103,7 @@ Precursor mass tolerance example
 
 
 Fragment mass tolerance example
---------------------------------
+-------------------------------
 
 .. autofunction:: bsa_fragment_mass_tolerance_example.main
 

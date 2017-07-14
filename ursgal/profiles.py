@@ -1,4 +1,4 @@
-# Default params are listed in /kb/ucontroller.py and include e.g.:
+# Default params are listed in uparams.py and include e.g.:
 #     'score_b_ions'                      : True,
 #     'score_y_ions'                      : True,
 #     'precursor_mass_tolerance_unit'     : 'ppm',
