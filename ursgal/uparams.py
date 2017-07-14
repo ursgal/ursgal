@@ -2377,7 +2377,8 @@ ursgal_params = {
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msgfplus_C_mzid2csv_v2017_07_04'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2426,6 +2427,7 @@ ursgal_params = {
                 'ScanNum'              : 'Spectrum ID',
                 'SpecEValue'           : 'MS-GF:SpecEValue',
                 'SpecFile'             : 'Raw data location',
+                '#SpecFile'            : 'Raw data location',
                 'Title'                : 'Spectrum Title',
             },
             'novor_style_1' : {
@@ -4686,6 +4688,28 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val' : None,
             'multiple_line' : False
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'msgfplus_mzid_converter_version' : {
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : None,
+        'description' :  ''' Determines which msgfplus mzid conversion node should be used e.g. "msgfplus_C_mzid2csv_v2017_07_04"''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'msgfplus_mzid_converter_version',
+        },
+        'utag' : [
+            'converter_version',
+        ],
+        'uvalue_option' : {
+            'none_val'     : '',
+            'multiple_line' : False,
         },
         'uvalue_translation' : {
         },
