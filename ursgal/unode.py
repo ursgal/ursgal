@@ -1528,7 +1528,7 @@ class UNode(object, metaclass=Meta_UNode):
 
     def update_history_status( self, engine=None, history=None, status='pending', history_addon=None ):
         if history is None:
-            raise Exception("Legacy code impicitly updated history ... please change code!")
+            raise Exception("Legacy code implicitly updated history ... please change code!")
 
             # history = self.stats['history']
         if engine is None:

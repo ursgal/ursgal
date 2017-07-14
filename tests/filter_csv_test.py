@@ -89,7 +89,6 @@ def compare_filter_test():
 
 
 def compare_filter( test_dict ):
-
     output_csv = filter_csv_main(
         input_file     = input_csv,
         output_file    = os.path.join(

@@ -8154,7 +8154,7 @@ ursgal_params = {
             '    \'None\' : None',
     },
     'validation_score_field' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -8175,7 +8175,7 @@ ursgal_params = {
             'ucontroller_style_1'       : 'validation_score_field',
             'unify_csv_style_1'         : 'validation_score_field',
             'msfragger_style_1'         : 'validation_score_field',
-            'mascot__style_1'           : 'validation_score_field'
+            'mascot_style_1'           : 'validation_score_field'
         },
         'utag' : [
             'validation',

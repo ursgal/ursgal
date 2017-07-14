@@ -276,21 +276,21 @@ class percolator_2_08( ursgal.UNode ):
                     specified precursor range"
                 }
             ),
-            # (
-            #     'dM', {
-            #         'csv_field': '',
-            #         'DefaultDirection': 0,
-            #         'description': "The difference between the calculated and observed mass"
-            #     }
-            # ),
-            # (
-            #     'absdM', {
-            #         'csv_field': '',
-            #         'DefaultDirection': 0,
-            #         'description': "The absolute value of the difference between the calculated and \
-            #         observed mass"
-            #     }
-            # ),
+            (
+                'dM', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': "The difference between the calculated and observed mass"
+                }
+            ),
+            (
+                'absdM', {
+                    'csv_field': '',
+                    'DefaultDirection': 0,
+                    'description': "The absolute value of the difference between the calculated and \
+                    observed mass"
+                }
+            ),
             (
                 'Peptide', {
                     'csv_field': '',
@@ -470,7 +470,7 @@ class percolator_2_08( ursgal.UNode ):
                 if cleavage_site == 'C':
                     for i, aa in enumerate(pre_aa):
                         if aa in allowed_aa  \
-                            or line_dict['Sequence Start'] in ['1','2']:
+                            or line_dict['Sequence Start'] in ['1', '2']:
                             t['enzN'] = 1
                             final_pre_aa = aa
                             final_post_aa = post_aa[i]
