@@ -124,6 +124,11 @@ class xtandem_vengeance( ursgal.UNode ):
         self.params['translations']['Prot-N-term'] = 0.0
         self.params['translations']['Prot-C-term'] = 0.0
         for mod in self.params[ 'mods' ][ 'fix' ]:
+            if mod['pos'] == 'N-term':
+                mod['aa'] = '['
+            elif mod['pos'] == 'C-term':
+                mod['aa'] = ']'
+
             fixed_mods.append(
                 '{0}@{1}'.format(mod[ 'mass' ], mod[ 'aa' ] )
             )
@@ -148,8 +153,8 @@ class xtandem_vengeance( ursgal.UNode ):
                         if self.params['translations'][term] != 0.0:
                             print(
                                 '''
-            [ WARNING ] X!Tandem does not allow two mods on the same position {1}
-            [ WARNING ] Continue without modification {0} '''.format(mod, term, **mod)
+[ WARNING ] X!Tandem does not allow two mods on the same position {1}
+[ WARNING ] Continue without modification {0} '''.format(mod, term, **mod)
                             )
                             continue
                         else:
@@ -157,15 +162,15 @@ class xtandem_vengeance( ursgal.UNode ):
                     else:
                         print(
                                 '''
-            [ WARNING ] X!Tandem does not support specific aminoacids for terminal modifications
-            [ WARNING ] Continue without modification {0} '''.format(mod, term, **mod)
+[ WARNING ] X!Tandem does not support specific amino acids for terminal modifications
+[ WARNING ] Continue without modification {0} '''.format(mod, term, **mod)
                             )
                         continue
             if mod['aa'] in potentially_modified_aa:
                 print(
                     '''
-            [ WARNING ] X!Tandem does not allow two potential mods on the same aminoacid!
-            [ WARNING ] Continue without modification {0} '''.format(mod, **mod)
+[ WARNING ] X!Tandem does not allow two potential mods on the same aminoacid!
+[ WARNING ] Continue without modification {0} '''.format(mod, **mod)
                 )
                 continue
             else:
@@ -175,6 +180,12 @@ class xtandem_vengeance( ursgal.UNode ):
                     forbidden_cterm = ']'
                 if mod['name'] in self.params['translations']['max_num_per_mod_name_specific'].keys():
                     max_num_per_mod_name_specific = self.params['translations']['max_num_per_mod_name_specific'][mod['name']]
+
+                if mod['pos'] == 'N-term':
+                    mod['aa'] = '['
+                elif mod['pos'] == 'C-term':
+                    mod['aa'] = ']'
+
                 potential_mods.append(
                     '{0}@{1}{2}{3}'.format(
                         mod[ 'mass' ],
@@ -189,9 +200,9 @@ class xtandem_vengeance( ursgal.UNode ):
             self.params['translations']['pyro_glu'] = 'yes'
         if pyro_glu == 1:
             print('''
-    [ WARNING ] X!Tandem looks for Gln->pyro-Glu and Glu->pyro-Glu
-    [ WARNING ] at the same time, please include both or none
-    [ WARNING ] Continue without modification {0} '''.format(mod, **mod)
+[ WARNING ] X!Tandem looks for Gln->pyro-Glu and Glu->pyro-Glu
+[ WARNING ] at the same time, please include both or none
+[ WARNING ] Continue without modification {0} '''.format(mod, **mod)
             )
         self.params['translations']['fixed_modifications'] =  ','.join( fixed_mods )
         self.params['translations']['potential_modifications'] = ','.join( potential_mods )
@@ -206,7 +217,7 @@ class xtandem_vengeance( ursgal.UNode ):
                 file_name
             )
             with open( xml_file_path, 'w') as out:
-                print( content, file=out)
+                print( content, file = out)
                 self.print_info(
                     'Wrote input file {0}'.format( file_name ),
                     caller = 'preflight'
@@ -230,8 +241,8 @@ class xtandem_vengeance( ursgal.UNode ):
 
         '''
         templates = {
-            '15N-masses.xml' : '''\
-<?xml version="1.0"?>
+            '15N-masses.xml' : \
+'''<?xml version="1.0"?>
     <bioml title="peptide residue molecular mass values for an all 15N organisms">
         <aa type="A" mass="72.034148698" />
         <aa type="B" mass="116.036998" />
@@ -267,19 +278,19 @@ class xtandem_vengeance( ursgal.UNode ):
             'taxonomy.xml' : \
 '''<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml label="x! taxon-to-file matching list">
-      <taxon label="{database_taxonomy}">
-       <file URL="{database}" format="peptide" />
-     </taxon>
+        <taxon label="{database_taxonomy}">
+            <file URL="{database}" format="peptide" />
+        </taxon>
     </bioml>
 '''.format(**self.params['translations']),
             # -------------------------
             # -------------------------
             'input.xml' : '''<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml>
-      <note label="list path, default parameters" type="input">{default_input}</note>
-      <note label="list path, taxonomy information" type="input">{taxonomy}</note>
-      <note label="spectrum, path" type="input">{mgf_input_file}</note>
-      <note label="output, path" type="input">{output_file_incl_path}</note>
+        <note label="list path, default parameters" type="input">{default_input}</note>
+        <note label="list path, taxonomy information" type="input">{taxonomy}</note>
+        <note label="spectrum, path" type="input">{mgf_input_file}</note>
+        <note label="output, path" type="input">{output_file_incl_path}</note>
     </bioml>'''.format( **self.params['translations'] ),
 
         'default_input.xml' : '''<?xml version='1.0' encoding='iso-8859-1'?>
