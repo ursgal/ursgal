@@ -337,47 +337,39 @@ class msfragger_20170103( ursgal.UNode ):
             self.params['file_root'] + '.tsv'
         )
 
-        # msfragger_output_tsv = self.params['translations']['mzml_input_file'].replace(
-        #     'mzML',
-        #     'tsv'
-        # )
-        # this leads failure if folder names contain mzml
-
         csv_out_fobject = open(self.params['translations']['output_file_incl_path'], 'w')
         csv_writer = csv.DictWriter(
             csv_out_fobject,
             fieldnames = translated_headers
         )
-
-        msfragger_fobject = open(msfragger_output_tsv,'r')
-        csv_reader = csv.DictReader(
-            msfragger_fobject,
-            fieldnames = translated_headers,
-            delimiter = '\t'
-        )
-
         csv_writer.writeheader()
-        for line_dict in csv_reader:
-            line_dict['Raw data location'] = os.path.abspath(
-                self.params['translations']['mzml_input_file']
-            )
 
-            ############################################
-            # all fixing here has to go into unify csv! #
-            ############################################
-
-            # 'Precursor neutral mass (Da)' : '',
-            # 'Neutral mass of peptide' : 'Calc m/z',# (including any variable modifications) (Da)
-            line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
-                line_dict['MSFragger:Precursor neutral mass (Da)'],
-                line_dict['Charge']
+        with open(msfragger_output_tsv) as temp_tsv:
+            csv_reader = csv.DictReader(
+                temp_tsv,
+                fieldnames = translated_headers,
+                delimiter = '\t'
             )
-            line_dict['Calc m/z'] = ursgal.ucore.calculate_mz(
-                line_dict['MSFragger:Neutral mass of peptide'],
-                line_dict['Charge']
-            )
+            for line_dict in csv_reader:
+                line_dict['Raw data location'] = os.path.abspath(
+                    self.params['translations']['mzml_input_file']
+                )
 
-            csv_writer.writerow( line_dict )
+                ############################################
+                # all fixing here has to go into unify csv! #
+                ############################################
+
+                # 'Precursor neutral mass (Da)' : '',
+                # 'Neutral mass of peptide' : 'Calc m/z',# (including any variable modifications) (Da) 
+                line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
+                    line_dict['MSFragger:Precursor neutral mass (Da)'],
+                    line_dict['Charge']
+                )
+                line_dict['Calc m/z'] = ursgal.ucore.calculate_mz(
+                    line_dict['MSFragger:Neutral mass of peptide'],
+                    line_dict['Charge']
+                )
+                csv_writer.writerow( line_dict )
 
         msfragger_fobject.close()
         csv_out_fobject.close()
