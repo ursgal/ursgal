@@ -1776,9 +1776,26 @@ ursgal_params = {
                 'min_clear_mz' : 0,
                 'max_clear_mz' : 0,
             },
+            'unit': {
+                'min_clear_mz' : 'm/z',
+                'max_clear_mz'  : 'm/z',
+            },
             'updownval': {
                 'min_clear_mz' : 1,
                 'max_clear_mz' : 1,
+            },
+            'custom_type' : {
+                'int' : {
+                    'max'       : 10000,
+                    'min'       : 0,
+                    'updownval' : 1,
+                    'unit'      : '',
+                },
+            },
+            'custom_val_max' : 10000,
+            'f-point': {
+                'min_clear_mz' : 1e-01,
+                'max_clear_mz' : 1e-01,
             },
         },
         'uvalue_translation' : {
@@ -2264,7 +2281,8 @@ ursgal_params = {
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msgfplus_C_mzid2csv_v2017_07_04'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2313,6 +2331,7 @@ ursgal_params = {
                 'ScanNum'              : 'Spectrum ID',
                 'SpecEValue'           : 'MS-GF:SpecEValue',
                 'SpecFile'             : 'Raw data location',
+                '#SpecFile'            : 'Raw data location',
                 'Title'                : 'Spectrum Title',
             },
             'novor_style_1' : {
@@ -4609,6 +4628,28 @@ ursgal_params = {
         },
         'uvalue_type' : "int",
     },
+    'msgfplus_mzid_converter_version' : {
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : None,
+        'description' :  ''' Determines which msgfplus mzid conversion node should be used e.g. "msgfplus_C_mzid2csv_v2017_07_04"''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'msgfplus_mzid_converter_version',
+        },
+        'utag' : [
+            'converter_version',
+        ],
+        'uvalue_option' : {
+            'none_val'     : '',
+            'multiple_line' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'myrimatch_class_size_multiplier' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -5952,6 +5993,7 @@ ursgal_params = {
             'max'       : 100,
             'min'       : 0,
             'updownval' : 0.1,
+            'f-point'   : 1e-02,
             'unit'      : ''
         },
         'default_value' : 0.0,
