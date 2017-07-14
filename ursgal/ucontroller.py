@@ -21,7 +21,7 @@ class UController(ursgal.UNode):
 
     Keyword Arguments:
         params (dict): params that are used for all further analyses,
-            overriding default values from ursgal/kb/*.py
+            overriding default values from ursgal/uparams.py
         profile (str): Profiles key for faster parameter selection. This
             idea is adapted from MS-GF+ and translated to all search engines.
 
@@ -270,6 +270,8 @@ class UController(ursgal.UNode):
 
         Returns:
             str: Path of the output file
+
+        Notes: internal function, use :meth:`.convert` instead
         '''
 
         input_suffix = os.path.splitext( input_file )[-1].lower()
@@ -288,21 +290,14 @@ class UController(ursgal.UNode):
                 history = json_content[3]['history'],
             )
             if 'xtandem' in last_engine:
-                engine_name = 'xtandem2csv_1_0_0'
-            elif 'msgfplus_v2016_09_16' in last_engine:
+                engine_name = self.params['xtandem_converter_version']
+            elif 'msgfplus' in last_engine:
                 engine_name = self.params.get(
                     'msgfplus_mzid_converter_version',
                     None
                 )
                 if engine_name is None:
-                    engine_name = 'msgfplus2csv_v2016_09_16'
-            elif 'msgfplus_v2017_01_27' in last_engine:
-                engine_name = self.params.get(
-                    'msgfplus_mzid_converter_version',
-                    None
-                )
-                if engine_name is None:
-                    engine_name = 'msgfplus2csv_v2017_01_27'
+                    engine_name = self.UNODE_UPARAMS['msgfplus_mzid_converter_version']['uvalue_style_translation'][last_engine]
             else:
                 engine_name = self.params['mzidentml_converter_version']
 
@@ -324,6 +319,8 @@ class UController(ursgal.UNode):
 
         Returns:
             str: name of the output mgf file
+
+        Notes: internal function, use :meth:`.convert` instead
 
         '''
         engine_name = self.params['mzml2mgf_converter_version']
@@ -607,6 +604,9 @@ class UController(ursgal.UNode):
 
     def generate_target_decoy(self, input_files=None, engine=None, force=False, output_file_name=None):
         '''
+        [ WARNING ] This function is not supported anymore!
+                    Please use :meth:`.execute_misc_engine` instead
+
         The ucontroller function for target_decoy database generation.
 
         Keyword Arguments:
@@ -639,6 +639,10 @@ class UController(ursgal.UNode):
         Returns:
             str: Name/path of the output file
         '''
+        self.print_old_function_warning(
+            'generate_target_decoy',
+            'execute_misc_engine'
+        )
         if engine is None:
             engine = 'generate_target_decoy_1_0_0'
         return self.execute_unode(
@@ -1784,7 +1788,7 @@ class UController(ursgal.UNode):
                 * :meth:`.convert` (mzml to mgf, if required, using the mzml2mgf engine)
                 * :meth:`.search_mgf`
                 * :meth:`.convert` (raw search results to csv, if required)
-                * :meth:`.execute_misc_engine` (upeptide_mapper)
+                * :meth:`.execute_misc_engine` (peptide_mapper)
                 * :meth:`.execute_misc_engine` (unify_csv)
         '''
 
@@ -1842,9 +1846,10 @@ class UController(ursgal.UNode):
             if engine_type.get('protein_database_engine', False) is not False: 
                 #if mapper version == 'COmpomics stuff'
                 #execute this node and in map peptides, these results are read...
-                mapped_csv_search_results = self.map_peptides_to_fasta(
+                mapped_csv_search_results = self.execute_misc_engine(
                     input_file       = csv_search_results,
                     output_file_name = output_file_name,
+                    engine           = self.params['peptide_mapper_converter_version'],
                     force            = force,
                 )
             else:
@@ -1874,7 +1879,7 @@ class UController(ursgal.UNode):
         self.take_care_of_params_and_stats( io_mode = 'tmp')
         history = self.io['tmp']['stats']['history']
         for entry in history:
-            if entry['engine'] == 'mzml2mgf_1_0_0':
+            if entry['engine'] == self.params['mzml2mgf_converter_version']:
                 corresponding_mzml = os.path.join(
                     entry['finfo']['dir'],
                     entry['finfo']['file']
@@ -2165,6 +2170,9 @@ class UController(ursgal.UNode):
 
     def unify_csv(self, input_file, force=False, output_file_name=None):
         '''
+        [ WARNING ] This function is not supported anymore!
+                    Please use :meth:`.execute_misc_engine` instead
+
         The ucontroller unify_csv function
 
         Unifies the .csv files which were converted by the mzidentml library.
@@ -2203,6 +2211,11 @@ class UController(ursgal.UNode):
 
         # self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.csv'] )
 
+        self.print_old_function_warning(
+            'unify_csv',
+            'execute_misc_engine'
+        )
+
         return self.execute_unode(
             input_file       = input_file,
             engine           = self.params['unify_csv_converter_version'],
@@ -2212,6 +2225,9 @@ class UController(ursgal.UNode):
 
     def map_peptides_to_fasta(self, input_file, force=False, output_file_name=None):
         '''
+        [ WARNING ] This function is not supported anymore!
+                    Please use :meth:`.execute_misc_engine` instead
+
         The ucontroller function to call the upeptide_mapper node.
 
         Note:
@@ -2240,6 +2256,10 @@ class UController(ursgal.UNode):
         Returns:
             str: Path of the output file
         '''
+        self.print_old_function_warning(
+            'map_peptides_to_fasta',
+            'execute_misc_engine'
+        )
 
         return self.execute_unode(
             input_file       = input_file,
@@ -2250,6 +2270,9 @@ class UController(ursgal.UNode):
 
     def filter_csv(self, input_file, force=False, output_file_name=None):
         '''
+        [ WARNING ] This function is not supported anymore!
+                    Please use :meth:`.execute_misc_engine` instead
+
         The UController filter_csv function
 
         Filters .csv files row-wise according to user-defined rules.
@@ -2277,12 +2300,32 @@ class UController(ursgal.UNode):
             ... ]
             >>> uc.filter_csv( 'my_results.csv' )
         '''
+        self.print_old_function_warning(
+            'filter_csv',
+            'execute_misc_engine'
+        )
         return self.execute_unode(
             input_file       = input_file,
-            engine           = self.params['filter_csv_converter_version'],
+            engine           = 'filter_csv_1_0_0',
             force            = force,
             output_file_name = output_file_name
         )
+
+    def print_old_function_warning(self, old_funct_name, new_func_name):
+        '''
+        '''
+        print('''
+        [ WARNING ] You are using an old UController function:
+                    {0}
+        [ WARNING ] This funtion is not supported/updated anymore!
+        [ WARNING ] Please use the following instead:
+                    {1}
+        '''.format(
+                old_funct_name,
+                new_func_name
+            )
+        )
+        return
 
     def prepare_resources(self, root_zip_target_folder):
         '''

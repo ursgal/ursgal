@@ -1636,29 +1636,6 @@ ursgal_params = {
             'Target PSMs with a lower FDR than this threshold will be used as '\
             'a positive training set for SVM post-processing',
     },
-    'filter_csv_converter_version' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'ucontroller',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'ucontroller_style_1' : 'filter_csv_converter_version',
-        },
-        'utag' : [
-            'converter_version',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'str',
-        'uvalue_option' : {
-            'none_val'      : None,
-            'multiple_line' : False,
-        },
-        'default_value' : 'filter_csv_1_0_0',
-        'description' : \
-            'filter csv converter version: version name',
-    },
     'forbidden_cterm_mods' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -4647,6 +4624,10 @@ ursgal_params = {
             'multiple_line' : False,
         },
         'uvalue_translation' : {
+            'ucontroller_style_1': {
+                'msgfplus_v2016_09_16' : 'msgfplus2csv_v2016_09_16',
+                'msgfplus_v2017_01_27' : 'msgfplus2csv_v2017_01_27'
+            },
         },
         'uvalue_type' : "str",
     },
@@ -8731,6 +8712,28 @@ ursgal_params = {
         'default_value' : False,
         'description' : \
             'Writes rejected results if True',
+    },
+    'xtandem_converter_version' : {
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : 'xtandem2csv_1_0_0',
+        'description' :  ''' Determines which X!tandem conversion node should be used e.g. "xtandem2csv_1_0_0"''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'xtandem_converter_version',
+        },
+        'utag' : [
+            'converter_version',
+        ],
+        'uvalue_option' : {
+            'none_val'     : '',
+            'multiple_line' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
     },
     'xtandem_stp_bias' : {
         'edit_version' : 1.00,
