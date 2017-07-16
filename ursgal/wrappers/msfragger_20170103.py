@@ -371,7 +371,6 @@ class msfragger_20170103( ursgal.UNode ):
                 )
                 csv_writer.writerow( line_dict )
 
-        msfragger_fobject.close()
         csv_out_fobject.close()
         if msfragger_output_tsv.endswith('.tsv'):
             os.remove(msfragger_output_tsv)
