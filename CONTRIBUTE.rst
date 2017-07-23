@@ -51,6 +51,7 @@ you some things to think about:
 
   | Re-think naming of variables at least twice
   | Re-check deleting of own debug code before Pull-requests
+  | Re-check own files which create by nosetests and add it into '.gitignore' before Pull-requests
 
 
 
