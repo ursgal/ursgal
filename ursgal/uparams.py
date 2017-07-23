@@ -1,5 +1,5 @@
 ursgal_params = {
-    '_extentions' : {
+    '_extensions' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
         ],
