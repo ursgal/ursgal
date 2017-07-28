@@ -50,8 +50,8 @@ https://www.python.org/dev/peps/pep-0008/). Additionally this list will give
 you some things to think about:
 
   | Re-think naming of variables at least twice
-  | Re-check deleting of own debug code before Pull-requests
-  | Re-check own files which create by nosetests and add it into '.gitignore' before Pull-requests
+  | Re-check deleting of own debug code before sending Pull requests
+  | Re-check own files created by nosetests and add it into '.gitignore' before sending Pull requests
 
 
 
