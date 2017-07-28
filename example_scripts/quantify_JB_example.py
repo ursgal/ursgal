@@ -89,14 +89,15 @@ def main():
         )
         all_res.append(fil)
 
+    print(all_res)
     uc.params['quantitation_evidences'] = all_res
     uc.params['label']                  = '15N'
     uc.params['label_percentile']       = [0, 0.99]
     uc.params['evidence_score_field']   = 'combined PEP'
 
-    uc.execute_unode(
+    uc.quantify(
         input_file=mzML_file,
-        engine='pyQms_0_0_1',
+        engine='pyQms_1_0_0',
         force=True
     )
 

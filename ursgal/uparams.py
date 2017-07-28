@@ -2,7 +2,7 @@ ursgal_params = {
     'write_pyQms_rt_info': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -24,7 +24,7 @@ ursgal_params = {
     'label_percentile_format_string': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': '{0}',
@@ -49,7 +49,7 @@ ursgal_params = {
     'min_element_abundance': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -77,7 +77,7 @@ ursgal_params = {
     'min_rel_peak_intensity_for_matching': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -105,7 +105,7 @@ ursgal_params = {
     'required_percentile_peak_overlap': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -130,10 +130,10 @@ ursgal_params = {
         },
         'uvalue_type': "float",
     },
-    'minimum_number_of_matched_isotopologues': {
+    'min_number_of_matched_isotopologues': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -160,7 +160,7 @@ ursgal_params = {
     'intensity_transformation_factor': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -188,7 +188,7 @@ ursgal_params = {
     'upper_mz_limit': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -215,7 +215,7 @@ ursgal_params = {
     'lower_mz_limit': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': 0,
@@ -242,7 +242,7 @@ ursgal_params = {
     'mz_transformation_factor': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -269,7 +269,7 @@ ursgal_params = {
     'rel_mz_range': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -294,10 +294,10 @@ ursgal_params = {
         },
         'uvalue_type': "float",
     },
-    'rel_i_range': {
+    'rel_intensity_range': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -325,7 +325,7 @@ ursgal_params = {
     'internal_precision': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -353,7 +353,7 @@ ursgal_params = {
     'max_molecules_per_match_bin': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -381,7 +381,7 @@ ursgal_params = {
     'silac_aas_locked_in_experiment': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': [None],
@@ -416,7 +416,7 @@ ursgal_params = {
     'build_pyQms_result_index': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -444,7 +444,7 @@ ursgal_params = {
     # 'pyQms_colors': {
     #     'edit_version' : 1.00,
     #     'available_in_unode': [
-    #         'pyQms_0_0_1',
+    #         'pyQms_1_0_0',
     #     ],
     #     'uvalue_option': {
     #         'none_val': None,
@@ -554,7 +554,7 @@ ursgal_params = {
     'fragment_peptides': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1'
+            'pyQms_1_0_0'
         ],
         'uvalue_option': {
             'none_val': None,
@@ -576,7 +576,7 @@ ursgal_params = {
     'fragments_to_match': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1'
+            'pyQms_1_0_0'
         ],
         'uvalue_type': 'list',
         'uvalue_translation': {
@@ -602,7 +602,7 @@ ursgal_params = {
     'evidence_score_field': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'default_value': "PEP",
         'description':  ''' field which is used for scoring in peptide_amounts_0_0_1 ''',
@@ -624,7 +624,7 @@ ursgal_params = {
     'quantitation_evidences': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'default_value': None,
         'description':  ''' Molecules to quantify. Can be either list of string or csv file ''',
@@ -705,7 +705,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             # 'protein_amounts_0_0_5',
-            'pyQms_0_0_1'
+            'pyQms_1_0_0'
         ],
         'uvalue_option': {
             'none_val': None,
@@ -733,7 +733,7 @@ ursgal_params = {
     'molecules_to_quantify': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'uvalue_option': {
             'none_val': [],
@@ -765,7 +765,7 @@ ursgal_params = {
     'mz_score_percentile': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'default_value': 0.4,
         'description':  ''' weighting factor for pyQms mz score ''',
@@ -791,7 +791,7 @@ ursgal_params = {
     'pyQms_pickle_name': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
             # 'protein_amounts_0_0_6'
         ],
         'uvalue_option': {
@@ -814,7 +814,7 @@ ursgal_params = {
     'quant_ms_level': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyQms_0_0_1'
+            'pyQms_1_0_0'
         ],
         'uvalue_option': {
             'none_val': None,
@@ -840,7 +840,7 @@ ursgal_params = {
     'label_percentile' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'default_value' : [0.0],
         'description' :  ''' Label percentile ''',
@@ -882,7 +882,7 @@ ursgal_params = {
     'fixed_label_isotope_enrichment_levels' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'default_value' : {
             '13C' : 0.996,
@@ -921,9 +921,9 @@ ursgal_params = {
     'pyQms_trivial_names' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
-        'default_value' : {},
+        'default_value' : None,
         'description' :  ''' Trivial name lookup mapping molecules to a trivial name ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -955,7 +955,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             # 'protein_amounts_0_0_5',
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'default_value' : 1,
         'description' :  ''' Retention time border tolerance for curating RT windows ''',
@@ -4441,7 +4441,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pyQms_0_0_1',
+            'pyQms_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4475,7 +4475,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
-            'pyQms_0_0_1'
+            'pyQms_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5255,7 +5255,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pyQms_0_0_1'
+            'pyQms_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7362,7 +7362,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'msfragger_20170103',
-            'pyQms_0_0_1'
+            'pyQms_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7436,7 +7436,7 @@ ursgal_params = {
             'msgfplus_v9979',
             'omssa_2_1_9',
             'msfragger_20170103',
-            'pyQms_0_0_1'
+            'pyQms_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
