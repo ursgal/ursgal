@@ -97,7 +97,7 @@ def main():
 
     uc.quantify(
         input_file=mzML_file,
-        engine='pyQms_1_0_0',
+        engine='pyqms_1_0_0',
         force=True
     )
 
