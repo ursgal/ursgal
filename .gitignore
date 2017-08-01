@@ -36,6 +36,7 @@ tests/data/msfragger_20170103/test_BSA1_msfragger_20170103_unified.csv
 tests/data/msfragger_20170103/test_BSA1_msfragger_20170103_unified.csv_full_protein_names.txt
 tests/data/test_upeptide_mapper_pmap.csv
 tests/data/test_upeptide_mapper_pmap.csv_full_protein_names.txt
+tests/data/csv2counted_results_1_0_0/csv2counted_results_test_counted.csv
 ursgal/resources/platform_independent/arc_independent/msgfplus_v9979
 ursgal/resources/platform_independent/arc_independent/msgfplus2csv_v2016_09_16/
 ursgal/resources/platform_independent/arc_independent/msgfplus_v2016_09_16/

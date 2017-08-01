@@ -379,7 +379,7 @@ def chk_format_node( node_name, node_dict ):
     for ext in (output_extensions + input_extensions):
         if (ext in all_extensions) is False:
             error_msg = '\'' + str(ext) + '\'' + ' could not be found in '\
-                'uparams.ursgal_params[\'_extentions\'][\'default_value\'].keys()'
+                'uparams.ursgal_params[\'_extensions\'][\'default_value\'].keys()'
             raise ValueError(error_msg)
 
     global style_list
