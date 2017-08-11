@@ -39,8 +39,11 @@ tests/data/csv2counted_results_1_0_0/csv2counted_results_test_counted.csv
 ursgal/resources/platform_independent/arc_independent/msgfplus_v9979
 ursgal/resources/platform_independent/arc_independent/msgfplus2csv_v2016_09_16/
 ursgal/resources/platform_independent/arc_independent/msgfplus_v2016_09_16/
+ursgal/resources/platform_independent/arc_independent/msgfplus_v2017_01_27
 ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_10
 ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_11
+ursgal/resources/platform_independent/arc_independent/msfragger_20170103/
+ursgal/resources/platform_independent/arc_independent/msgfplus_v2016_09_16
 ursgal/resources/win32/
 ursgal/resources/darwin/
 example_scripts/logs/

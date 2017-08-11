@@ -11,12 +11,12 @@ class msfragger_20170103( ursgal.UNode ):
     MSFragger unode
 
     Note:
-        Please download and install MSFragger manually from 
+        Please download and install MSFragger manually from
         http://www.nesvilab.org/software.html
 
     Reference:
     Kong, A. T., Leprevost, F. V, Avtonomov, D. M., Mellacheruvu, D., and Nesvizhskii, A. I. (2017)
-    MSFragger: ultrafast and comprehensive peptide identification in mass spectrometry–based 
+    MSFragger: ultrafast and comprehensive peptide identification in mass spectrometry–based
     proteomics. Nat. Publ. Gr. 293
 
     Note:
@@ -25,7 +25,7 @@ class msfragger_20170103( ursgal.UNode ):
         but the mzML has to be in the same folder as the mgf.
 
     Warning:
-        Still in testing phase! 
+        Still in testing phase!
         Metabolic labeling based 15N search may still be errorprone. Use with
         care!
 
@@ -79,11 +79,11 @@ class msfragger_20170103( ursgal.UNode ):
                     file = io
                 )
 
-        return 
+        return
 
     def preflight( self ):
         '''
-        Formatting the command line and writing the paramn input file via 
+        Formatting the command line and writing the paramn input file via
         self.params
 
         Returns:
@@ -105,7 +105,7 @@ class msfragger_20170103( ursgal.UNode ):
                 self.params['translations']['_grouped_by_translated_key']['precursor_min_mass']['precursor_min_mass'],
                 self.params['translations']['_grouped_by_translated_key']['precursor_max_mass']['precursor_max_mass']
             )
-        } 
+        }
 
         write_exclusion_list = [
             'precursor_min_mass',
@@ -158,7 +158,7 @@ class msfragger_20170103( ursgal.UNode ):
                     # num_enzyme_termini = 2 # 2 for enzymatic, 1 for semi-enzymatic, 0 for nonspecific digestion
 
                     if self.params['translations']['_grouped_by_translated_key']['enzyme']['enzyme'] == 'nonspecific':
-                        self.params_to_write[ msfragger_param_name ] = 0 
+                        self.params_to_write[ msfragger_param_name ] = 0
                     else:
                         self.params_to_write[ msfragger_param_name ] = param_value
                 elif msfragger_param_name == 'modifications':
@@ -168,7 +168,7 @@ class msfragger_20170103( ursgal.UNode ):
                     variable_mod_02 = 42.0106 [*
                     #variable_mod_03 = 79.96633 STY
                     #variable_mod_03 = -17.0265 nQnC
-                    #variable_mod_04 = -18.0106 nE 
+                    #variable_mod_04 = -18.0106 nE
                     '''
                     # print(self.params['translations']['_grouped_by_translated_key'][msfragger_param_name])
                     # pprint.pprint(self.params[ 'mods' ])
@@ -263,7 +263,7 @@ class msfragger_20170103( ursgal.UNode ):
                 'thecorresponding mzML file {0} will be used instead.'.format(
                     os.path.abspath(self.params['translations']['mzml_input_file'])
                 ),
-                caller = "INFO" 
+                caller = "INFO"
             )
         else:
             raise Exception('MSFragger input spectrum file must be in mzML or MGF format!')
@@ -288,7 +288,7 @@ class msfragger_20170103( ursgal.UNode ):
     def postflight(self):
         '''
         Reads MSFragger tsv output and write final csv output file.
-                
+
         Adds:
             * Raw data location, since this can not be added later
             * Converts masses in Da to m/z (could be done in unify_csv)
@@ -307,11 +307,11 @@ class msfragger_20170103( ursgal.UNode ):
             'Protein',
             'Matched fragment ions',
             'Total possible number of matched theoretical fragment ions',
-            'Neutral mass of peptide',# (including any variable modifications) (Da) 
+            'Neutral mass of peptide',# (including any variable modifications) (Da)
             'Mass difference',
             'Number of tryptic termini',
             'Number of missed cleavages',
-            'Variable modifications detected', #'(starts with M, separated by |, formated as position,mass) 
+            'Variable modifications detected', #'(starts with M, separated by |, formated as position,mass)
             'Hyperscore',
             'Next score',
             'Intercept of expectation model (expectation in log space)',
@@ -331,13 +331,15 @@ class msfragger_20170103( ursgal.UNode ):
             'Calc m/z',
 
         ]
-        msfragger_output_tsv = self.params['translations']['mzml_input_file'].replace(
-            'mzML',
-            'tsv'
+
+        msfragger_output_tsv = os.path.join(
+            self.params['input_dir_path'],
+            self.params['file_root'] + '.tsv'
         )
 
+        csv_out_fobject = open(self.params['translations']['output_file_incl_path'], 'w')
         csv_writer = csv.DictWriter(
-            open(self.params['translations']['output_file_incl_path'], 'w'),
+            csv_out_fobject,
             fieldnames = translated_headers
         )
         csv_writer.writeheader()
@@ -367,9 +369,9 @@ class msfragger_20170103( ursgal.UNode ):
                     line_dict['MSFragger:Neutral mass of peptide'],
                     line_dict['Charge']
                 )
-
                 csv_writer.writerow( line_dict )
 
+        csv_out_fobject.close()
         if msfragger_output_tsv.endswith('.tsv'):
             os.remove(msfragger_output_tsv)
         return
