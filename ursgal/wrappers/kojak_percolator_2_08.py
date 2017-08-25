@@ -40,10 +40,8 @@ class kojak_percolator_2_08( ursgal.UNode ):
         'output_suffix'      : 'percolator_2_08_validated',
         'create_own_folder'  : False,
         'cannot_distribute'  : True,
-        'group_psms'         : False,
         'in_development'     : False,
         'include_in_git'     : None,
-        'cpu_usage'          : 1,
         'utranslation_style' : 'kojak_percolator_style_1',
         'engine' : {
             'darwin' : {

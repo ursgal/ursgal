@@ -41,7 +41,7 @@ class pipi_1_3_0( ursgal.UNode ):
         'engine'                      : {
             'platform_independent'    : {
                 'arc_independent' : {
-                    'exe'            : 'PIPI-1.3.0-dev.jar',
+                    'exe'            : 'PIPI-1.3.0.jar',
                     'url'            : 'http://bioinformatics.ust.hk/pipi.html',
                     'zip_md5'        : '',
                     'additional_exe' : [],
@@ -352,7 +352,7 @@ class pipi_1_3_0( ursgal.UNode ):
 
     def write_params_file(self):
         with open(self.param_file_name , 'w') as io:
-            print('''# 1.3.0-dev
+            print('''# 1.3.0
 # First line is the parameter file version. Don't change it.
 thread_num = {thread_num}
 percolator_path = None

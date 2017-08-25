@@ -27,7 +27,6 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
         'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : None,
-        # 'can_gz'             : True,
         'in_development'     : False,
         'include_in_git'     : False,
         'utranslation_style' : 'mzidentml_lib_1_6_10',

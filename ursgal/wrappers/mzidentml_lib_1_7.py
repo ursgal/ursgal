@@ -26,7 +26,6 @@ class mzidentml_lib_1_7( ml ):
         'output_extensions'  : ['.csv'],
         'in_development'     : False,
         'output_suffix'      : None,
-        # 'can_gz'             : True,
         'include_in_git'     : None,
         'cannot_distribute'  : True,
         'utranslation_style' : 'mzidentml_style_1',
