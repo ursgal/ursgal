@@ -854,11 +854,12 @@ class UNode(object, metaclass=Meta_UNode):
                 sorted( self.params[ 'modifications' ] )):
             mod_params  = mod.split( ',' )
             if len(mod_params) >=6 or len(mod_params) <=3:
-                print('''[ WARNING ] For modifications, please use the ursgal_style:
-[ WARNING ] 'amino_acid,opt/fix,position,Unimod PSI-MS Name'
-[ WARNING ] or
-[ WARNING ] 'amino_acid,opt/fix,position,name,chemical_composition'
-[ WARNING ] Continue without modification {0} '''.format( mod )
+                print('''
+    [ WARNING ] For modifications, please use the ursgal_style:
+    [ WARNING ] 'amino_acid,opt/fix,position,Unimod PSI-MS Name'
+    [ WARNING ] or
+    [ WARNING ] 'amino_acid,opt/fix,position,name,chemical_composition'
+    [ WARNING ] Continue without modification {0} '''.format( mod )
                 )
                 print(mod_params)
                 continue
@@ -875,7 +876,8 @@ class UNode(object, metaclass=Meta_UNode):
                     mass = ursgal.GlobalUnimodMapper.id2mass( unimod_id )
                     composition = ursgal.GlobalUnimodMapper.id2composition( unimod_id )
                     if unimod_name is None:
-                        print('''[ WARNING ] '{1}' is not a Unimod modification
+                        print('''
+    [ WARNING ] '{1}' is not a Unimod modification
     [ WARNING ] please change it to a valid Unimod Accession # or PSI-MS Unimod Name
     [ WARNING ] or add the chemical composition hill notation (including 1)
     [ WARNING ] e.g.: H-1N1O2
@@ -893,7 +895,8 @@ class UNode(object, metaclass=Meta_UNode):
                     mass = ursgal.GlobalUnimodMapper.name2mass( unimod_name )
                     composition = ursgal.GlobalUnimodMapper.name2composition( unimod_name )
                     if unimod_id is None:
-                        print('''[ WARNING ] '{1}' is not a Unimod modification
+                        print('''
+    [ WARNING ] '{1}' is not a Unimod modification
     [ WARNING ] please change it to a valid PSI-MS Unimod Name or Unimod Accession #
     [ WARNING ] or add the chemical composition hill notation (including 1)
     [ WARNING ] e.g.: H-1N1O2
@@ -912,9 +915,10 @@ class UNode(object, metaclass=Meta_UNode):
                 chemical_composition = ursgal.ChemicalComposition()
                 chemical_composition.add_chemical_formula( chemical_formula )
                 composition = chemical_composition
-                unimod_name_list = ursgal.GlobalUnimodMapper.composition2name_list( chemical_formula )
-                unimod_id_list = ursgal.GlobalUnimodMapper.composition2id_list( chemical_formula )
-                mass = ursgal.GlobalUnimodMapper.composition2mass( chemical_formula )
+                composition_unimod_style = chemical_composition.hill_notation_unimod()
+                unimod_name_list = ursgal.GlobalUnimodMapper.composition2name_list( composition_unimod_style )
+                unimod_id_list = ursgal.GlobalUnimodMapper.composition2id_list( composition_unimod_style )
+                mass = ursgal.GlobalUnimodMapper.composition2mass( composition_unimod_style )
                 for i, unimod_name in enumerate(unimod_name_list):
                     if unimod_name == name:
                         unimod_id = unimod_id_list[ i ]
@@ -922,11 +926,11 @@ class UNode(object, metaclass=Meta_UNode):
                         break
                 if unimod == False and unimod_name_list != []:
                     print(    '''
-                        [ WARNING ] '{0}' is not a Unimod modification
-                        [ WARNING ] but the chemical composition you specified is included in Unimod.
-                        [ WARNING ] Please use one of the Unimod names:
-                        [ WARNING ] {1}
-                        [ WARNING ] Continue without modification {2} '''.format(
+    [ WARNING ] '{0}' is not a Unimod modification
+    [ WARNING ] but the chemical composition you specified is included in Unimod.
+    [ WARNING ] Please use one of the Unimod names:
+    [ WARNING ] {1}
+    [ WARNING ] Continue without modification {2} '''.format(
                             name,
                             unimod_name_list,
                             mod
@@ -934,9 +938,9 @@ class UNode(object, metaclass=Meta_UNode):
                     continue
                 if unimod == False and unimod_name_list == []:
                     print (    '''
-                        [ WARNING ] '{0}' is not a Unimod modification
-                        [ WARNING ] trying to continue with the chemical composition you specified
-                        [ WARNING ] This is not working with OMSSA so far'''.format(
+    [ WARNING ] '{0}' is not a Unimod modification
+    [ WARNING ] trying to continue with the chemical composition you specified
+    [ WARNING ] This is not working with OMSSA so far'''.format(
                             mod,
                     ))
                     mass = chemical_composition._mass()
