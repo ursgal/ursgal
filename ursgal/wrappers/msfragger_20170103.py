@@ -126,7 +126,7 @@ class msfragger_20170103( ursgal.UNode ):
                 'Search with label=15N may still be errorprone. Evaluate with care!',
                 caller = 'WARNING'
             )
-            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+            for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 existing = False
                 for mod_dict in self.params[ 'mods' ][ 'fix' ]:
                     if aminoacid == mod_dict[ 'aa' ]:

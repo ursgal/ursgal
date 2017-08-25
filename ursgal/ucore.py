@@ -2,9 +2,9 @@
 import re
 import sys
 import os
-from ursgal import ursgal_kb
+from ursgal import ukb
 
-PROTON = ursgal_kb.PROTON
+PROTON = ukb.PROTON
 
 COLORS = {
     'ENDC'      : '\033[0m',

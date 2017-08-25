@@ -16,7 +16,7 @@ import pickle
 import csv
 import ursgal
 import pprint
-# import ursgal.ursgal_kb
+# import ursgal.ukb
 import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
@@ -30,7 +30,7 @@ if sys.platform != 'win32':
     csv.field_size_limit(sys.maxsize)
 
 
-DIFFERENCE_14N_15N = ursgal.ursgal_kb.DIFFERENCE_14N_15N
+DIFFERENCE_14N_15N = ursgal.ukb.DIFFERENCE_14N_15N
 
 
 def main(input_file=None, output_file=None, scan_rt_lookup=None,
@@ -176,7 +176,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             for modname in mod_dict.keys():
                 aminoacids_2_check |= mod_dict[modname]['aa']
             additional_15N_modifications = []
-            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+            for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 if aminoacid not in aminoacids_2_check:
                     continue
                 if '_15N_{0}'.format(aminoacid) in mod_dict.keys():
@@ -257,7 +257,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     if params['translations']['enzyme'] != 'nonspecific':
         allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')
     else:
-        allowed_aa    = ''.join( list( ursgal.ursgal_kb.NITROGENS.keys() ) )
+        allowed_aa    = ''.join( list( ursgal.ukb.NITROGENS.keys() ) )
         cleavage_site = 'C'
         inhibitor_aa  = ''
     allowed_aa += '-'
@@ -689,7 +689,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 # maximum 15N labeling is 3.988 Da (R)
                                 substract_15N_diff = True
                             if substract_15N_diff:
-                                masses_2_test.append( float_mod - ursgal.ursgal_kb.DICT_15N_DIFF[aa] )
+                                masses_2_test.append( float_mod - ursgal.ukb.DICT_15N_DIFF[aa] )
                         # try:
                         #works always but returns empty list...
                         name_list = []

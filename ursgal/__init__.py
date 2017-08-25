@@ -29,7 +29,7 @@ from .unimod_mapper import UnimodMapper
 import ursgal.ucore
 from .profiles import PROFILES
 
-import ursgal.ursgal_kb
+import ursgal.ukb
 
 
 GlobalUnimodMapper = UnimodMapper()

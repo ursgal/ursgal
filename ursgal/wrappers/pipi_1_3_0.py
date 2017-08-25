@@ -112,7 +112,7 @@ class pipi_1_3_0( ursgal.UNode ):
 
         additional_15N_modifications = []
         if self.params['translations']['label'] == '15N':
-            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+            for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 existing = False
                 for mod_dict in self.params[ 'mods' ][ 'fix' ]:
                     if aminoacid == mod_dict[ 'aa' ]:

@@ -13,7 +13,8 @@ Version 0.6.0    (07.2017)
 #. Restructuring of UController functions. Unified functions for all engines
    of one engine class (Converter, Search_Engines, Validation_Engines, etc)
    are now available. Function names for each engine class are stored in
-   ursgal_kb.ucontroller_functions
+   ukb.ucontroller_functions
+#. ursgal_kb.py has been renamed to ukb.py
 #. Smaller fixes and improvements (please check git log)
 
 

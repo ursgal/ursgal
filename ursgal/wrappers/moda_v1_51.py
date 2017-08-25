@@ -96,7 +96,7 @@ class moda_v1_51( ursgal.UNode ):
 
         fixed_mods = []
         if self.params['translations']['label'] == '15N':
-            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+            for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 existing = False
                 for mod in self.params[ 'mods' ][ 'fix' ]:
                     if aminoacid == mod[ 'aa' ]:
