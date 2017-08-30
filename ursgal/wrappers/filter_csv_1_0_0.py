@@ -193,8 +193,6 @@ class filter_csv_1_0_0( ursgal.UNode ):
                 '{0}.u.json'.format(output_file_unfiltered)
             )
 
-
-
         filter_csv_main(
             input_file     = input_file,
             output_file    = output_file,
