@@ -75,14 +75,16 @@ class UController(ursgal.UNode):
 
     def _after_init_meta_callback(self, *args, **kwargs):
         self.time_point( tag = 'init' )
-        self.print_header(
-            'UController initialized',
-            tag='init',
-            newline=False
-        )
-        ursgal_string = 'Ursgal v{0}  -  '\
-            'https://github.com/ursgal/ursgal'.format(ursgal.__version__)
-        print('         -\-{0: ^58}-/-\n'.format(ursgal_string))
+        self.verbose = kwargs.get('verbose', True)
+        if self.verbose:
+            self.print_header(
+                'UController initialized',
+                tag='init',
+                newline=False
+            )
+            ursgal_string = 'Ursgal v{0}  -  '\
+                'https://github.com/ursgal/ursgal'.format(ursgal.__version__)
+            print('         -\-{0: ^58}-/-\n'.format(ursgal_string))
         self.params = ParamsDict()
         self.init_kwargs = kwargs
         self.reset_controller()
@@ -90,7 +92,6 @@ class UController(ursgal.UNode):
         self.unodes = self._collect_all_unode_wrappers()
         # self.unodes = self.collect_all_unodes_from_kb()
         self.determine_availability_of_unodes()
-        self.verbose = kwargs.get('verbose', True)
 
         if self.verbose:
             self.show_unode_overview()
@@ -517,12 +518,13 @@ class UController(ursgal.UNode):
                     self.unodes[ engine ]['available'] = False
                     in_development = self.unodes[ engine ]['META_INFO']['in_development']
                     if not in_development:
-                        print(
-                            '[ WARNING! ] Engine {0} is not available in {1}'.format(
-                                engine,
-                                engine_folder_path
+                        if self.verbose:
+                            print(
+                                '[ WARNiNG! ] Engine {0} is not available in {1}'.format(
+                                    engine,
+                                    engine_folder_path
+                                )
                             )
-                        )
         return
 
     def engine_sanity_check( self, short_engine):
