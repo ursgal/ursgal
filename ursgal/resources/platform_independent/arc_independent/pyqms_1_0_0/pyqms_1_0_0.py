@@ -22,7 +22,8 @@ def set_up_argparser():
         '-m',
         '--molecules',
         help='Molecules to quantify'
-             'Can be either a path to an ident file or a list of strings (or None)',
+             'Can be either a path to an ident file or'
+             'a list of strings (or None)',
         type=str,
         action='append',
         default=[]
@@ -91,13 +92,6 @@ def set_up_argparser():
     return arg_parser
 
 
-def fragment_evidences(evidence_files, ions, charges):
-    """DOC."""
-    for ev in evidence_files:
-        pass
-    pass
-
-
 def generate_result_pickle(
     mzml_files,
     fixed_labels,
@@ -111,9 +105,7 @@ def generate_result_pickle(
     evidence_score_field=None,
     mz_score_percentile=0.4,
     trivial_names=None,
-    fragment_peptide=False,
-    fragments_to_match=None,
-    params= {},
+    pyqms_params=None,
     verbose=False
 ):
     """DOCSTRING."""
@@ -121,36 +113,34 @@ def generate_result_pickle(
         mzml_files = [mzml_files]
     print('[ -ENGINE- ] Parse Evidences')
 
-    if fragment_peptide is True:
-        # molecules and evidence are build from the input evidence files
-        # we need to parse the file, fragment each peptide and write a similiar csv with the fragments as rows
-        # evidence_files = fragment_evidences(evidence_files)
-        raise Exception('Not supported yet')
     fixed_labels, evidences, molecules = pyqms.adaptors.parse_evidence(
         fixed_labels=fixed_labels,
         evidence_files=evidence_files,
         molecules=molecules,
         evidence_score_field=evidence_score_field
     )
+    if params is None:
+        pyqms_params = {}
+
     params = {
-        'molecules'        : molecules,
-        'charges'          : [
+        'molecules': molecules,
+        'charges': [
             x for x in range(min_charge, max_charge + 1)
         ],
-        'params'           : params,
-        'metabolic_labels' : {
-            label              : label_percentile,
+        'params': pyqms_params,
+        'metabolic_labels': {
+            label: label_percentile,
         },
-        'trivial_names'    : trivial_names,
-        'fixed_labels'     : fixed_labels,
-        'verbose'          : verbose,
-        'evidences'        : evidences
+        'trivial_names': trivial_names,
+        'fixed_labels': fixed_labels,
+        'verbose': verbose,
+        'evidences': evidences
     }
     print('[ -ENGINE- ] Set up Isotopolugue Library')
     lib = pyqms.IsotopologueLibrary(**params)
 
     print('[ -ENGINE- ] Matching isotopologues to spectra ..')
-    results            = None
+    results = None
     for mzml_file in mzml_files:
         run = pymzml.run.Reader(
             mzml_file,
@@ -163,13 +153,14 @@ def generate_result_pickle(
                 break
             if n % 500 == 0:
                 print(
-                    '[ -ENGINE- ] File : {0:^40} : Processing spectrum {1}'.format(
+                    '[ -ENGINE- ] File : {0:^40} : '
+                    'Processing spectrum {1}'.format(
                         mzml_file_basename,
                         n,
                     ),
                     end='\r'
                 )
-            scan_time = spec['scan time'] #/ 60.0
+            scan_time = spec['scan time']
             if spec['ms level'] == ms_level:
                 results = lib.match_all(
                     mz_i_list=spec.centroidedPeaks,
@@ -186,18 +177,18 @@ def main(
     mzml_file=None,
     output_file=None,
     pickle_name=None,
-    evidence_files=[],
+    evidence_files=None,
     fixed_labels=None,
     molecules=None,
     rt_border_tolerance=1,
     label='N14',
-    label_percentile=0.000,
+    label_percentile=0.0,
     min_charge=1,
     max_charge=5,
     evidence_score_field='PEP',
     ms_level=1,
-    trivial_names={},
-    pyQms_params={},
+    trivial_names=None,
+    pyqms_params=None,
     write_rt_info_file=True
 ):
     """DOCSTRING."""
@@ -208,6 +199,13 @@ def main(
     rt_summary_file = os.path.join(
         output_file
     )
+
+    if pyqms_params is None:
+        pyqms_params = {}
+    if trivial_names is None:
+        trivial_names = {}
+    if evidence_files is None:
+        evidence_files = []
 
     results = generate_result_pickle(
         mzml_file,
@@ -221,7 +219,7 @@ def main(
         label_percentile,
         evidence_score_field,
         trivial_names=trivial_names,
-        params=pyQms_params
+        pyqms_params=pyqms_params
     )
 
     with open(out_pickle, 'wb') as f:
@@ -248,7 +246,7 @@ if __name__ == '__main__':
     main(
         mzml_file=arguments.input_file,
         output_file=arguments.output,
-        pickle_name ='quant_pickle.csv',
+        pickle_name='quant_pickle.csv',
         evidence_files=arguments.evidence_files,
         fixed_labels=None,
         molecules=arguments.molecules,
@@ -258,4 +256,3 @@ if __name__ == '__main__':
         min_charge=arguments.min_charge,
         max_charge=arguments.max_charge,
     )
-

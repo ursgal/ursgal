@@ -7,21 +7,21 @@ import ursgal
 
 class pyqms_1_0_0(ursgal.UNode):
     """
-    pyQms- molecule qunatitation node.
+    pyQms- molecule qunatification node.
     """
     META_INFO = {
-        'edit_version'                : 1.00,
-        'name'                        : 'pyQms',
-        'version'                     : '0.0.1',
-        'input_multi_file'          : False,
-        'release_date'                : None,
+        'edit_version'       : 1.00,
+        'name'               : 'pyQms',
+        'version'            : '0.0.1',
+        'input_multi_file'   : False,
+        'release_date'       : None,
         'engine_type'        : {
             'quantitation_engine' : True
         },
         'utranslation_style' : 'pyqms_style_1',
         'citation'           : 'pyQms, Leufken et. al.',
         'input_extensions'   : ['.mzML'],
-        'output_extensions'   : ['.csv'],
+        'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
         'in_development'     : False,
         'include_in_git'     : False,
@@ -29,7 +29,7 @@ class pyqms_1_0_0(ursgal.UNode):
         'engine'             : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'pyqms_1_0_0.py',
+                    'exe': 'pyqms_1_0_0.py',
                 },
             },
         },
@@ -122,24 +122,22 @@ class pyqms_1_0_0(ursgal.UNode):
             )
 
         out = main(
-            mzml_file           =mzml_files,
-            output_file         =output_file,
-            pickle_name         =pickle_file,
-            fixed_labels        =fixed_labels,
-            evidence_files      =self.params['quantitation_evidences'],
-            molecules           =self.params['molecules_to_quantify'],
-            rt_border_tolerance =self.params['rt_border_tolerance'],
-            label               =self.params['label'],
-            label_percentile    =self.params['label_percentile'],
-            min_charge          =self.params['precursor_min_charge'],
-            max_charge          =self.params['precursor_max_charge'],
+            mzml_file=mzml_files,
+            output_file=output_file,
+            pickle_name=pickle_file,
+            fixed_labels=fixed_labels,
+            evidence_files=self.params['quantitation_evidences'],
+            molecules=self.params['molecules_to_quantify'],
+            rt_border_tolerance=self.params['rt_border_tolerance'],
+            label=self.params['label'],
+            label_percentile=self.params['label_percentile'],
+            min_charge=self.params['precursor_min_charge'],
+            max_charge=self.params['precursor_max_charge'],
             evidence_score_field=self.params['evidence_score_field'],
-            ms_level            =self.params['quant_ms_level'],
-            trivial_names       =self.params['pyQms_trivial_names'],
-            pyQms_params        =pyqms_params,
-            write_rt_info_file  =self.params['write_pyQms_rt_info']
-            #fragment_peptide    = self.params['translations']['fragment_peptide'],
-            #fragments_to_match  = self.params['translations']['fragments_to_match'],
+            ms_level=self.params['quant_ms_level'],
+            trivial_names=self.params['pyQms_trivial_names'],
+            pyQms_params=pyqms_params,
+            write_rt_info_file=self.params['write_pyQms_rt_info']
         )
 
         self.print_execution_time(tag='execution')
