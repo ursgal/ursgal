@@ -6,90 +6,7 @@ import pyqms
 import pymzml
 
 import os
-import argparse
 import pickle
-import peptide_fragmentor
-
-
-def set_up_argparser():
-    """
-    """
-    arg_parser = argparse.ArgumentParser(
-        description='Calculate peptide amounts.'
-    )
-    # molecules
-    arg_parser.add_argument(
-        '-m',
-        '--molecules',
-        help='Molecules to quantify'
-             'Can be either a path to an ident file or'
-             'a list of strings (or None)',
-        type=str,
-        action='append',
-        default=[]
-    )
-    # mzml_file name
-    arg_parser.add_argument(
-        '-i',
-        '--input_file',
-        help='Name of the input mzML file.',
-        type=str
-    )
-    # output name
-    arg_parser.add_argument(
-        '-o',
-        '--output',
-        default='protein_amounts.csv',
-        help='Name the output file.',
-        type=str
-    )
-    # evidence file
-    arg_parser.add_argument(
-        '-e',
-        '--evidence_files',
-        help='evidence files, (e.g. unified and verified search results',
-        type=str,
-        action='append'
-    )
-    # rt_border_tolerance
-    arg_parser.add_argument(
-        '-rt_border',
-        # '--retention_time_border_tolerance',
-        help='Border tolerance for retention time when quantifying',
-        type=float
-    )
-    # label
-    arg_parser.add_argument(
-        '-label',
-        help='Labeling method, either 14N or 15N',
-        type=str
-    )
-    # label_percentile
-    arg_parser.add_argument(
-        '-label_percentile',
-        help='label percent, e.g. 0.990',
-        type=float
-    )
-    # max charge
-    arg_parser.add_argument(
-        '-max_charge',
-        help='Maximum considered charge',
-        type=int
-    )
-    # min charge
-    arg_parser.add_argument(
-        '-min_charge',
-        help='Minimum considered charge',
-        type=int
-    )
-
-    arg_parser.add_argument(
-        '-fixed_labels',
-        help='Path to file in python dict style specifying fixed labels',
-        type=str
-    )
-
-    return arg_parser
 
 
 def generate_result_pickle(
@@ -106,10 +23,10 @@ def generate_result_pickle(
     mz_score_percentile=0.4,
     trivial_names=None,
     pyqms_params=None,
-    verbose=False
+    verbose=True
 ):
     """DOCSTRING."""
-    if not isinstance(mzml_files, list) and isinstance(mzml_files, str):
+    if isinstance(mzml_files, str):
         mzml_files = [mzml_files]
     print('[ -ENGINE- ] Parse Evidences')
 
@@ -119,8 +36,6 @@ def generate_result_pickle(
         molecules=molecules,
         evidence_score_field=evidence_score_field
     )
-    if params is None:
-        pyqms_params = {}
 
     params = {
         'molecules': molecules,
@@ -144,14 +59,15 @@ def generate_result_pickle(
     for mzml_file in mzml_files:
         run = pymzml.run.Reader(
             mzml_file,
-            obo_version='1.1.0'
+            obo_version='1.1.0',
+            extraAccessions=[('MS:1000016' , ['value','unitName'])]
         )
 
         mzml_file_basename = os.path.basename(mzml_file)
         for n, spec in enumerate(run):
             if spec['id'] == 'TIC':
                 break
-            if n % 500 == 0:
+            if n % 100 == 0:
                 print(
                     '[ -ENGINE- ] File : {0:^40} : '
                     'Processing spectrum {1}'.format(
@@ -160,7 +76,11 @@ def generate_result_pickle(
                     ),
                     end='\r'
                 )
-            scan_time = spec['scan time']
+            scan_time, unit = spec['scan time']
+
+            if unit == 'second':
+                scan_time /= 60
+            
             if spec['ms level'] == ms_level:
                 results = lib.match_all(
                     mz_i_list=spec.centroidedPeaks,
@@ -181,7 +101,7 @@ def main(
     fixed_labels=None,
     molecules=None,
     rt_border_tolerance=1,
-    label='N14',
+    label='14N',
     label_percentile=0.0,
     min_charge=1,
     max_charge=5,
@@ -189,23 +109,13 @@ def main(
     ms_level=1,
     trivial_names=None,
     pyqms_params=None,
-    write_rt_info_file=True
+    verbose=True
 ):
     """DOCSTRING."""
-    out_pickle = os.path.join(
-        pickle_name
-    )
 
     rt_summary_file = os.path.join(
         output_file
     )
-
-    if pyqms_params is None:
-        pyqms_params = {}
-    if trivial_names is None:
-        trivial_names = {}
-    if evidence_files is None:
-        evidence_files = []
 
     results = generate_result_pickle(
         mzml_file,
@@ -219,40 +129,21 @@ def main(
         label_percentile,
         evidence_score_field,
         trivial_names=trivial_names,
-        pyqms_params=pyqms_params
+        pyqms_params=pyqms_params,
+        verbose=True
     )
 
-    with open(out_pickle, 'wb') as f:
+    with open(pickle_name, 'wb') as f:
         pickle.dump(results, f)
-    if write_rt_info_file is True:
-        results.write_rt_info_file(
-            output_file=rt_summary_file,
-            rt_border_tolerance=float(rt_border_tolerance)
-        )
-        results.calc_amounts_from_rt_info_file(
-            rt_info_file=rt_summary_file,
-            rt_border_tolerance=float(rt_border_tolerance)
-        )
+
+    results.write_rt_info_file(
+        output_file=rt_summary_file,
+        rt_border_tolerance=float(rt_border_tolerance)
+    )
+    results.calc_amounts_from_rt_info_file(
+        rt_info_file=rt_summary_file,
+        rt_border_tolerance=float(rt_border_tolerance)
+    )
 
     return rt_summary_file
 
-
-if __name__ == '__main__':
-
-    arg_parser = set_up_argparser()
-
-    arguments = arg_parser.parse_args()
-
-    main(
-        mzml_file=arguments.input_file,
-        output_file=arguments.output,
-        pickle_name='quant_pickle.csv',
-        evidence_files=arguments.evidence_files,
-        fixed_labels=None,
-        molecules=arguments.molecules,
-        rt_border_tolerance=arguments.rt_border,
-        label='15N',
-        label_percentile=arguments.label_percentile,
-        min_charge=arguments.min_charge,
-        max_charge=arguments.max_charge,
-    )

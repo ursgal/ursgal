@@ -11,15 +11,15 @@ class pyqms_1_0_0(ursgal.UNode):
     """
     META_INFO = {
         'edit_version'       : 1.00,
-        'name'               : 'pyQms',
-        'version'            : '0.0.1',
-        'input_multi_file'   : False,
+        'name'               : 'pyqms',
+        'version'            : '1.0.0',
+        'input_multi_file'   : True,
         'release_date'       : None,
         'engine_type'        : {
             'quantitation_engine' : True
         },
         'utranslation_style' : 'pyqms_style_1',
-        'citation'           : 'pyQms, Leufken et. al.',
+        'citation'           : 'Leufken J, Niehues A, Sarin LP, Wessel F, Hippler M, Leidel SA, Fufezan C (2017) pyQms enables universal and accurate quantification of mass spectrometry data',
         'input_extensions'   : ['.mzML'],
         'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
@@ -53,7 +53,7 @@ class pyqms_1_0_0(ursgal.UNode):
 
         pickle_file = os.path.join(
             self.params['output_dir_path'],
-            self.params['translations']['pyQms_pickle_name']
+            os.path.splitext(self.params['output_file'])[0] + '_quant.pkl' ,
         )
         # multiple input mzML files
         if self.params['input_file'].endswith('.json'):
@@ -98,7 +98,7 @@ class pyqms_1_0_0(ursgal.UNode):
             'SILAC_AAS_LOCKED_IN_EXPERIMENT'          :
                 self.params['silac_aas_locked_in_experiment'],
             'BUILD_RESULT_INDEX'                      :
-                self.params['build_pyQms_result_index'],
+                self.params['build_pyqms_result_index'],
             'MACHINE_OFFSET_IN_PPM'                   :
                 self.params['machine_offset_in_ppm'],
             'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS'   :
@@ -124,7 +124,6 @@ class pyqms_1_0_0(ursgal.UNode):
         out = main(
             mzml_file=mzml_files,
             output_file=output_file,
-            pickle_name=pickle_file,
             fixed_labels=fixed_labels,
             evidence_files=self.params['quantitation_evidences'],
             molecules=self.params['molecules_to_quantify'],
@@ -135,9 +134,10 @@ class pyqms_1_0_0(ursgal.UNode):
             max_charge=self.params['precursor_max_charge'],
             evidence_score_field=self.params['evidence_score_field'],
             ms_level=self.params['quant_ms_level'],
-            trivial_names=self.params['pyQms_trivial_names'],
-            pyQms_params=pyqms_params,
-            write_rt_info_file=self.params['write_pyQms_rt_info']
+            trivial_names=self.params['pyqms_trivial_names'],
+            pyqms_params=pyqms_params,
+            verbose=self.params['pyqms_verbosity'],
+            pickle_name = pickle_file
         )
 
         self.print_execution_time(tag='execution')

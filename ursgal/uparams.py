@@ -1,5 +1,5 @@
 ursgal_params = {
-    'write_pyQms_rt_info': {
+    'pyqms_verbosity': {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
@@ -9,10 +9,10 @@ ursgal_params = {
             'multiple_line': False,
         },
         'default_value': True,
-        'description': '''Wether or not to write a rt info file''',
-        'triggers_rerun': True,
+        'description': '''verbosity for pyqms''',
+        'triggers_rerun': False,
         'ukey_translation': {
-            'pyqms_style_1': 'write_rt_info'
+            'pyqms_style_1': 'pyqms_verbosity'
         },
         'utag': [
             'quantitation',
@@ -33,7 +33,7 @@ ursgal_params = {
 
         },
         'default_value': '{0:.3f}',
-        'description': """Defines the standard format string when\
+        'description': """Defines the standard format string when
             formatting labeling percentile float""",
         'triggers_rerun': True,
         'ukey_translation': {
@@ -62,7 +62,7 @@ ursgal_params = {
 
         },
         'default_value': 1e-3,
-        'description': """ DESC """,
+        'description': """ Set minmal abundance for elements used when building Isotopoluge Library """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1' : 'ELEMENT_MIN_ABUNDANCE'
@@ -90,7 +90,7 @@ ursgal_params = {
 
         },
         'default_value': 0.01,
-        'description': """ DESC """,
+        'description': """ Minimum required intensity for pyqms peak matching """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1' : 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING'
@@ -118,7 +118,7 @@ ursgal_params = {
 
         },
         'default_value': 0.5,
-        'description': """ Desc """,
+        'description': """ Minimum percentile overlap for matching labeled peaks """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1' : 'REQUIRED_PERCENTILE_PEAK_OVERLAP'
@@ -145,7 +145,7 @@ ursgal_params = {
 
         },
         'default_value': 2,
-        'description': """ Desc """,
+        'description': """ Min number of matched isotopologues for pyqms to consider for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'MININUM_NUMBER_OF_MATCHES_ISOTOPOLOGUES'
@@ -173,7 +173,7 @@ ursgal_params = {
 
         },
         'default_value': 1e5,
-        'description': """ Desc """,
+        'description': """ Tranform intensity by this factor for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'INTENSITY_TRANSFORMATION_FACTOR'
@@ -200,7 +200,7 @@ ursgal_params = {
             'f-point': 1e-01,
         },
         'default_value': 2000,
-        'description': """ Desc """,
+        'description': """ Highest considered mz for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'UPPER_MZ_LIMIT'
@@ -227,7 +227,7 @@ ursgal_params = {
             'f-point': 1e-01,
         },
         'default_value': 150,
-        'description': """ Desc """,
+        'description': """ lowest considered mz for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'LOWER_MZ_LIMIT'
@@ -254,7 +254,7 @@ ursgal_params = {
             'f-point': 1e-01
         },
         'default_value': 1000,
-        'description': """ Desc """,
+        'description': """ Factor which will be multiplied with mz before conversion to integer """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'MZ_TRANSFORMATION_FACTOR'
@@ -282,7 +282,7 @@ ursgal_params = {
 
         },
         'default_value': 5e-6,
-        'description': """ Desc """,
+        'description': """ rel mz Error """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'REL_MZ_RANGE'
@@ -310,7 +310,7 @@ ursgal_params = {
 
         },
         'default_value': 0.2,
-        'description': """ Desc """,
+        'description': """ rel Intensity Error """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'REL_I_RANGE'
@@ -338,7 +338,7 @@ ursgal_params = {
 
         },
         'default_value': 1000.0,
-        'description': """ Desc """,
+        'description': """ Float to int conversion precision """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'INTERNAL_PRECISION'
@@ -361,12 +361,11 @@ ursgal_params = {
             'max': 10000,
             'min': 0,
             'updownval': 1,
-            'unit': 'psms',
+            'unit': 'a.u',
 
         },
         'default_value': 20,
-        'description': ''' Minimum number of peptide spectrum matches required \
-            for considering a peptide for quantification ''',
+        'description': ''' Max number of molecules in one matching bin. ''',
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'MAX_MOLECULES_PER_MATCH_BIN'
@@ -400,8 +399,7 @@ ursgal_params = {
 
         },
         'default_value': None,
-        'description': ''' Minimum number of peptide spectrum matches required \
-            for considering a peptide for quantification ''',
+        'description': ''' AA which are always SILAC labeled and not considered for calculating partially labeling percentile ''',
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'SILAC_AAS_LOCKED_IN_EXPERIMENT'
@@ -413,7 +411,7 @@ ursgal_params = {
         },
         'uvalue_type': "list",
     },
-    'build_pyQms_result_index': {
+    'build_pyqms_result_index': {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
@@ -428,8 +426,7 @@ ursgal_params = {
 
         },
         'default_value': True,
-        'description': ''' Minimum number of peptide spectrum matches required \
-            for considering a peptide for quantification ''',
+        'description': ''' Build index for faster access ''',
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'BUILD_RESULT_INDEX'
@@ -522,83 +519,6 @@ ursgal_params = {
     #     },
     #     'uvalue_type': "dict",
     # },
-    'min_psms_for_quant_event': {
-        'edit_version' : 1.00,
-        'available_in_unode': [
-            # 'protein_amounts_0_0_5',
-            # 'protein_amounts_0_0_6'
-        ],
-        'uvalue_option': {
-            'none_val': None,
-            'multiple_line': False,
-            'max': 10000,
-            'min': 0,
-            'updownval': 1,
-            'unit': 'psms',
-
-        },
-        'default_value': 1,
-        'description': ''' Minimum number of peptide spectrum matches required \
-            for considering a peptide for quantification ''',
-        'triggers_rerun': True,
-        'ukey_translation': {
-            # 'protein_amounts_style_1': 'min_psms'
-        },
-        'utag': [
-            'quantitation',
-        ],
-        'uvalue_translation': {
-        },
-        'uvalue_type': "int",
-    },
-    'fragment_peptides': {
-        'edit_version' : 1.00,
-        'available_in_unode': [
-            'pyqms_1_0_0'
-        ],
-        'uvalue_option': {
-            'none_val': None,
-            'multiple_line': False,
-        },
-        'default_value': False,
-        'description': ''' wether or not to fragment peptide before matching to spectra ''',
-        'triggers_rerun': True,
-        'ukey_translation': {
-            'pyqms_style_1': 'frag_peps'
-        },
-        'utag': [
-            'quantitation',
-        ],
-        'uvalue_translation': {
-        },
-        'uvalue_type': "bool",
-    },
-    'fragments_to_match': {
-        'edit_version' : 1.00,
-        'available_in_unode': [
-            'pyqms_1_0_0'
-        ],
-        'uvalue_type': 'list',
-        'uvalue_translation': {
-        },
-        'ukey_translation': {
-            'pyqms_style_1': 'frags_to_match'
-        },
-        'utag': [
-            'quantitation',
-        ],
-        'uvalue_option': {
-            'none_val': [None],
-            'multiple_line': {'ions to match': False},
-            'title_list': ['ions to match'],
-            'type_dict': {'ions to match': 'str'},
-            'custom_val_max': 1000,
-            'custom_type': {},
-        },
-        'triggers_rerun': True,
-        'description': 'fragment ions to match to spectra',
-        'default_value': None,
-    },
     'evidence_score_field': {
         'edit_version' : 1.00,
         'available_in_unode': [
@@ -646,60 +566,6 @@ ursgal_params = {
         'uvalue_translation': {
         },
         'uvalue_type': 'list',
-    },
-    'experiment_mapping': {
-        'edit_version' : 1.00,
-        'available_in_unode': [
-            # 'protein_amounts_0_0_5',
-        ],
-        'uvalue_option': {
-            'none_val': {},
-            'multiple_line': False,
-            'dict_type': { 'str': {}},
-            'dict_title': {'conditiom': ''},
-            'custom_val_max': 100000,
-            'custom_type': {
-                'str': {
-                    'multiple_line': False,
-                },
-            },
-
-        },
-        'default_value': None,
-        'description':  ''' Experiment mapping, so protein_amounts knows which file and lp to score against each other ''',
-        'triggers_rerun': True,
-        'ukey_translation': {
-            # 'protein_amounts_style_1': 'experiment_mapping'
-        },
-        'utag': [
-            'quantitation',
-        ],
-        'uvalue_translation': {
-        },
-        'uvalue_type': "dict",
-    },
-    'protein_inference_file': {
-        'edit_version' : 1.00,
-        'available_in_unode': [
-            # 'protein_amounts_0_0_5',
-            # 'protein_amounts_0_0_6'
-        ],
-        'default_value': None,
-        'uvalue_option': {
-            'none_val': '',
-            'multiple_line': False
-        },
-        'description':  ''' Protein inference file with PEP and peptides by percolator ''',
-        'triggers_rerun': True,
-        'ukey_translation': {
-            # 'protein_amounts_style_1' : 'inference_file'
-        },
-        'utag': [
-            'quantitation',
-        ],
-        'uvalue_translation': {
-        },
-        'uvalue_type': "str",
     },
     'm_score_cutoff': {
         'edit_version' : 1.00,
@@ -788,29 +654,6 @@ ursgal_params = {
         },
         'uvalue_type': "float",
     },
-    'pyQms_pickle_name': {
-        'edit_version' : 1.00,
-        'available_in_unode': [
-            'pyqms_1_0_0',
-            # 'protein_amounts_0_0_6'
-        ],
-        'uvalue_option': {
-            'none_val': None,
-            'multiple_line': False,
-        },
-        'default_value': "_quant_pickle.pkl",
-        'description':  ''' Name of the output quant results file ''',
-        'triggers_rerun': False,
-        'ukey_translation': {
-            'pyqms_style_1': 'pickle_name'
-        },
-        'utag': [
-            'quantitation',
-        ],
-        'uvalue_translation': {
-        },
-        'uvalue_type': "str",
-    },
     'quant_ms_level': {
         'edit_version' : 1.00,
         'available_in_unode': [
@@ -843,7 +686,7 @@ ursgal_params = {
             'pyqms_1_0_0',
         ],
         'default_value' : [0.0],
-        'description' :  ''' Label percentile ''',
+        'description' :  ''' Enrichment level of the label ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pyqms_style_1' : 'label_percentile',
@@ -889,7 +732,7 @@ ursgal_params = {
             '15N' : 0.994,
             '2H' : 0.994,
         },
-        'description' :  ''' Minimum number of peptide spectrum matches required             for considering a peptide for quantification ''',
+        'description' :  ''' Enrichment of labeled elements in labeled chemical used ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pyqms_style_1' : 'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS',
@@ -918,7 +761,7 @@ ursgal_params = {
         },
         'uvalue_type' : "dict",
     },
-    'pyQms_trivial_names' : {
+    'pyqms_trivial_names' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'pyqms_1_0_0',
