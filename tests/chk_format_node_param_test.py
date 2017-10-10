@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 # encoding: utf-8
 '''
 
@@ -371,13 +371,13 @@ def chk_format_node( node_name, node_dict ):
             type_list   = v['types'],
         )
 
-    all_extensions    = list(all_param['_extentions']['default_value'])
+    all_extensions    = list(all_param['_extensions']['default_value'])
     output_extensions = node_dict['META_INFO']['output_extensions']
     input_extensions  = node_dict['META_INFO']['input_extensions']
     for ext in (output_extensions + input_extensions):
         if (ext in all_extensions) is False:
             error_msg = '\'' + str(ext) + '\'' + ' could not be found in '\
-                'uparams.ursgal_params[\'_extentions\'][\'default_value\'].keys()'
+                'uparams.ursgal_params[\'_extensions\'][\'default_value\'].keys()'
             raise ValueError(error_msg)
 
     global style_list

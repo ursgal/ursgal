@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 # encoding: utf-8
 import ursgal
 import sys
@@ -9,6 +9,7 @@ def main( resources ):
 
     '''
     uc = ursgal.UController()
+    # uc.params['ursgal_resource_url'] = 'http://plan-a.uni-muenster.de/'
     downloaded_zips = uc.download_resources( resources = resources)
     # uses uc.params['ursgal_resource_url']  :)
     print()

@@ -822,7 +822,7 @@ ursgal_params = {
         },
         'uvalue_type' : "float",
     },
-    '_extentions' : {
+    '_extensions' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
         ],
@@ -1398,6 +1398,7 @@ ursgal_params = {
                 'xtandem_vengeance' : True,
                 'xtandem_alanine' : True,
                 'msfragger_20170103' : True,
+                'mascot_x_x_x'  : True
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1420,6 +1421,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
+                'mascot_x_x_x'  : True
 
             },
             'qvality_style_1' : {
@@ -1443,6 +1445,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
+                'mascot_x_x_x'  : True
+
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1465,6 +1469,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
+                'mascot_x_x_x'  : True
+
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1487,6 +1493,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
+                'mascot_x_x_x'  : True
             },
         },
         'uvalue_type'    : 'select',
@@ -1513,6 +1520,7 @@ ursgal_params = {
                 'xtandem_sledgehammer',
                 'xtandem_vengeance',
                 'xtandem_alanine',
+                'mascot_x_x_x'
             ],
             'custom_val_max' : 0,
         },
@@ -1760,6 +1768,95 @@ ursgal_params = {
         'default_value' : 0.5,
         'description' : \
             'Probability of consecutive ion (used in correlation correction)',
+    },
+    'count_column_names' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2counted_results_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2counted_results_style_1' : 'count_column_names',
+        },
+        'utag' : [
+            'convertion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val' : None,
+            'title_list' : [
+                'column_name_1',
+                'column_name_2',
+            ],
+            'type_dict' : {
+                'column_name_1' : 'str',
+                'column_name_2' : 'str',
+            },
+            'multiple_line' : {
+                'column_name_1' : False,
+                'column_name_2' : False,
+            },
+            'custom_val_max' : 10000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : [
+            'Sequence',
+            'Modifications'
+        ],
+        'description' : \
+            'List of column headers which are used for counting.'
+            'The combination of these headers creates the unique countable element.',
+    },
+    'count_by_file' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2counted_results_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2counted_results_style_1' : 'count_by_file',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+        'uvalue_option' : {
+        },
+        'default_value' : True,
+        'description' : \
+            'the number of unique hits for each identifier '
+            'is given in seperate columns for each raw file '
+            '(file name as defiened in Spectrum Title)',
+    },
+    'convert_to_sfinx' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2counted_results_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2counted_results_style_1' : 'convert2sfinx',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+        'uvalue_option' : {
+        },
+        'default_value' : False,
+        'description' : \
+            'If True, the header of the identifier column is "rownames". '
+            'If False, the joined identifier header name will be used',
     },
     'cpus' : {
         'edit_version' : 1.00,
@@ -3199,7 +3296,8 @@ ursgal_params = {
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msgfplus_C_mzid2csv_v2017_07_04'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3248,6 +3346,7 @@ ursgal_params = {
                 'ScanNum'              : 'Spectrum ID',
                 'SpecEValue'           : 'MS-GF:SpecEValue',
                 'SpecFile'             : 'Raw data location',
+                '#SpecFile'            : 'Raw data location',
                 'Title'                : 'Spectrum Title',
             },
             'novor_style_1' : {
@@ -3679,6 +3778,47 @@ ursgal_params = {
         'default_value' : 'q_exactive',
         'description' : \
             'Type of mass spectrometer (used to determine the scoring model)',
+    },
+    'identifier_column_names' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2counted_results_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2counted_results_style_1' : 'identifier_column_names',
+        },
+        'utag' : [
+            'convertion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val' : None,
+            'title_list' : [
+                'column_name_1',
+            ],
+            'type_dict' : {
+                'column_name_1' : 'str',
+            },
+            'multiple_line' : {
+                'column_name_1' : False,
+            },
+            'custom_val_max' : 10000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : [
+            'Protein ID',
+        ],
+        'description' : \
+            'The (combination of) specified csv column name(s) are used as identifiers. '\
+            'E.g. to count the number of peptides for these identifiers. '\
+            'The parameter "count_column_names" defines the countable elements.',
     },
     'intensity_cutoff' : {
         'edit_version' : 1.00,
@@ -5514,6 +5654,28 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val' : None,
             'multiple_line' : False
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'msgfplus_mzid_converter_version' : {
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : None,
+        'description' :  ''' Determines which msgfplus mzid conversion node should be used e.g. "msgfplus_C_mzid2csv_v2017_07_04"''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'msgfplus_mzid_converter_version',
+        },
+        'utag' : [
+            'converter_version',
+        ],
+        'uvalue_option' : {
+            'none_val'     : '',
+            'multiple_line' : False,
         },
         'uvalue_translation' : {
         },
@@ -8978,7 +9140,7 @@ ursgal_params = {
             '    \'None\' : None',
     },
     'validation_score_field' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -8998,8 +9160,8 @@ ursgal_params = {
             'svm_style_1'               : 'validation_score_field',
             'ucontroller_style_1'       : 'validation_score_field',
             'unify_csv_style_1'         : 'validation_score_field',
-            'msfragger_style_1'         : 'validation_score_field'
-
+            'msfragger_style_1'         : 'validation_score_field',
+            'mascot_style_1'           : 'validation_score_field'
         },
         'utag' : [
             'validation',
@@ -9026,7 +9188,8 @@ ursgal_params = {
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
-                'msfragger_20170103'   : 'MSFragger:Hyperscore'
+                'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'mascot_x_x_x'         : 'Mascot:Score'
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9050,6 +9213,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'mascot_x_x_x'         : 'Mascot:Score'
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9072,7 +9236,9 @@ ursgal_params = {
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
-                'msfragger_20170103'   : 'MSFragger:Hyperscore'
+                'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'mascot_x_x_x'         : 'Mascot:Score'
+
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9095,7 +9261,9 @@ ursgal_params = {
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
-                'msfragger_20170103'   : 'MSFragger:Hyperscore'
+                'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'mascot_x_x_x'         : 'Mascot:Score'
+
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9118,7 +9286,8 @@ ursgal_params = {
                 'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
-                'msfragger_20170103'   : 'MSFragger:Hyperscore'
+                'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'mascot_x_x_x'         : 'Mascot:Score'
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9142,6 +9311,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'mascot_x_x_x'         : 'Mascot:Score'
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9165,6 +9335,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'mascot_x_x_x'         : 'Mascot:Score'
             },
         },
         'uvalue_type' : 'str',

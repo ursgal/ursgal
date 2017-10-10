@@ -7,7 +7,7 @@ def main():
     """."""
     params = {
         'csv_filter_rules': [
-            ['combined PEP', 'lte', 0.05],
+            # ['PEP', 'lte', 0.05],
             ['Is decoy', 'equals', 'false']
         ],
         'compress_raw_search_results_if_possible' : False,
@@ -38,33 +38,43 @@ def main():
 
     engines = [
         'msgfplus_v9979',
-        'msfragger_20170103'
+        # 'msfragger_20170103',
+        'omssa'
     ]
 
     uc = ursgal.UController(
         profile='LTQ XL low res',
         params =params
     )
+    #mzML_file = os.path.join(
+    #    params['ftp_output_folder'],
+    #    params['ftp_include_ext'][0]
+    #)
+
+    #if os.path.exists(mzML_file) is False:
+    #    uc.fetch_file(
+    #        engine = 'get_ftp_files_1_0_0'
+    #    )
+    #if os.path.exists(params['database']) is False:
+    #    uc.fetch_file(
+    #        engine = 'get_http_files_1_0_0'
+    #    )
     mzML_file = os.path.join(
-        params['ftp_output_folder'],
-        params['ftp_include_ext'][0]
+        os.pardir,
+        'example_data',
+        'BSA1.mzML'
     )
-
-    if os.path.exists(mzML_file) is False:
-        uc.fetch_file(
-            engine = 'get_ftp_files_1_0_0'
-        )
-    if os.path.exists(params['database']) is False:
-        uc.fetch_file(
-            engine = 'get_http_files_1_0_0'
-        )
-
+    uc.params['database'] = os.path.join(
+        os.pardir,
+        'example_data',
+        'my_BSA_target_decoy.fasta'
+    )
     mgf = uc.convert_to_mgf_and_update_rt_lookup(
         input_file=mzML_file
     )
 
     all_res = []
-    for label in ['14N', '15N']:
+    for label in ['14N',]:# '15N']:
         uc.params['label'] = label
         uc.params['prefix'] = label
         results = []
@@ -73,32 +83,33 @@ def main():
                 input_file=mgf,
                 engine=engine
             )
-            val = uc.validate(
-                input_file=res,
-                engine='percolator_2_08'
+            # val = uc.validate(
+            #     input_file=res,
+            #     engine='percolator_2_08'
+            # )
+            # results.append(val)
+            fil = uc.filter_csv(
+                input_file=res
             )
-            results.append(val)
+            results.append(fil)
 
-        combined_results = uc.combine_search_results(
-            input_files = results,
-            engine      = 'combine_PEP_1_0_0',
-        )
 
-        fil = uc.filter_csv(
-            input_file=combined_results
-        )
-        all_res.append(fil)
+        # combined_results = uc.combine_search_results(
+        #     input_files = results,
+        #     engine      = 'combine_PEP_1_0_0',
+        # )
 
-    print(all_res)
-    uc.params['quantitation_evidences'] = all_res
-    uc.params['label']                  = '15N'
-    uc.params['label_percentile']       = [0, 0.99]
-    uc.params['evidence_score_field']   = 'combined PEP'
+
+    print(results)
+    uc.params['quantitation_evidences'] = results
+    # uc.params['label']                  = '15N'
+    # uc.params['label_percentile']       = [0, 0.99]
+    # uc.params['evidence_score_field']   = 'combined PEP'
 
     uc.quantify(
         input_file=mzML_file,
         engine='pyqms_1_0_0',
-        force=True
+        force=False
     )
 
 if __name__ == '__main__':

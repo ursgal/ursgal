@@ -75,14 +75,16 @@ class UController(ursgal.UNode):
 
     def _after_init_meta_callback(self, *args, **kwargs):
         self.time_point( tag = 'init' )
-        self.print_header(
-            'UController initialized',
-            tag='init',
-            newline=False
-        )
-        ursgal_string = 'Ursgal v{0}  -  '\
-            'https://github.com/ursgal/ursgal'.format(ursgal.__version__)
-        print('         -\-{0: ^58}-/-\n'.format(ursgal_string))
+        self.verbose = kwargs.get('verbose', True)
+        if self.verbose:
+            self.print_header(
+                'UController initialized',
+                tag='init',
+                newline=False
+            )
+            ursgal_string = 'Ursgal v{0}  -  '\
+                'https://github.com/ursgal/ursgal'.format(ursgal.__version__)
+            print('         -\-{0: ^58}-/-\n'.format(ursgal_string))
         self.params = ParamsDict()
         self.init_kwargs = kwargs
         self.reset_controller()
@@ -90,7 +92,6 @@ class UController(ursgal.UNode):
         self.unodes = self._collect_all_unode_wrappers()
         # self.unodes = self.collect_all_unodes_from_kb()
         self.determine_availability_of_unodes()
-        self.verbose = kwargs.get('verbose', True)
 
         if self.verbose:
             self.show_unode_overview()
@@ -321,9 +322,19 @@ class UController(ursgal.UNode):
             if 'xtandem' in last_engine:
                 engine_name = 'xtandem2csv_1_0_0'
             elif 'msgfplus_v2016_09_16' in last_engine:
-                engine_name = 'msgfplus2csv_v2016_09_16'
+                engine_name = self.params.get(
+                    'msgfplus_mzid_converter_version',
+                    None
+                )
+                if engine_name is None:
+                    engine_name = 'msgfplus2csv_v2016_09_16'
             elif 'msgfplus_v2017_01_27' in last_engine:
-                engine_name = 'msgfplus2csv_v2017_01_27'
+                engine_name = self.params.get(
+                    'msgfplus_mzid_converter_version',
+                    None
+                )
+                if engine_name is None:
+                    engine_name = 'msgfplus2csv_v2017_01_27'
             else:
                 engine_name = self.params['mzidentml_converter_version']
 
@@ -507,12 +518,13 @@ class UController(ursgal.UNode):
                     self.unodes[ engine ]['available'] = False
                     in_development = self.unodes[ engine ]['META_INFO']['in_development']
                     if not in_development:
-                        print(
-                            '[ WARNING! ] Engine {0} is not available in {1}'.format(
-                                engine,
-                                engine_folder_path
+                        if self.verbose:
+                            print(
+                                '[ WARNiNG! ] Engine {0} is not available in {1}'.format(
+                                    engine,
+                                    engine_folder_path
+                                )
                             )
-                        )
         return
 
     def engine_sanity_check( self, short_engine):
@@ -1318,6 +1330,8 @@ class UController(ursgal.UNode):
         self.io['output']['finfo'] = self.set_file_info_dict( output_file )
 
         self.take_care_of_params_and_stats( io_mode = 'output')
+        # pprint.pprint( self.io )
+        # exit(1)
         return
 
     def sanitize_userdefined_output_filename(self, user_fname, engine ):
@@ -3097,7 +3111,8 @@ True
   {custom_str} does not have the correct file extension.
   You specified the file
 \t{in_file}
-  but only files ending with {ok_extensions} are permitted.'''.format( **d )
+  but only files ending with {ok_extensions} are permitted for engine {0}
+  '''.format(engine, **d )
 
 
 class ParamsDict(dict):
