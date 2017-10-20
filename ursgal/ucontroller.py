@@ -1665,7 +1665,6 @@ class UController(ursgal.UNode):
             print('We are compressing now and renaming the shiznit')
             exit(1)
 
-
     def search_mgf(self, input_file, engine, force=None, output_file_name=None):
         '''
         The UController search_mgf function
@@ -1858,6 +1857,64 @@ class UController(ursgal.UNode):
             force            = force,
         )
         return unified_search_results
+
+    def quantify(self, input_file, engine, force=None, output_file_name=None, multi=False):
+        """
+        The ucontroller quantify function
+
+        Performs a peptide/protein quantification using the specified quantitation engine and
+        mzML/ident file file. Produces a CSV file with peptide/protein quants in
+        the unified Ursgal CSV format.
+        see: :ref:`List of available engines<available-engines>`
+
+        Keyword Arguments:
+            input_file (str): The complete path to the mzML file.
+            engine (str): The name of the quantitation engine which should be
+                used, can also be a short version if this name is unambigous.
+            force (bool): (Re)do the analysis, even if output file
+                already exists.
+            output_file_name (str or None): Desired output file name
+                excluding path (optional). If None, output file name will
+                be auto-generated.
+
+        Example::
+
+            >>> uc = ursgal.UController(
+            ...    profile = 'LTQ XL high res',
+            ...    params  = {'evidence': 'BSA_idents.csv'}
+            ... )
+            >>> uc.quantify(
+            ...    input_file = 'BSA.mzML',
+            ...    engine     = 'pyQms_0_0_1'
+            ... )
+
+        Returns:
+            str: Path of the output file (unified CSV format)
+        """
+
+        # Verify that the specified engine is a valid UNode
+        engine_name = self.engine_sanity_check( engine )
+
+        self.input_file_sanity_check(
+            input_file,
+            extensions = ['mzml', 'mzml.gz', 'mzml.igz'],
+            multi=multi
+        )
+
+        answer = self.prepare_unode_run(
+            input_file,
+            output_file = output_file_name,
+            engine = engine_name,
+            force  = force
+        )
+
+        # in future unify output
+
+        report = self.run_unode_if_required(
+            force, engine_name, answer
+        )
+
+        return report['output_file']
 
     def get_mzml_that_corresponds_to_mgf(self, mgf_path):
         '''
