@@ -14,6 +14,12 @@ Ursgal. If you want to improve code or contribute new nodes/tools/algorithms
 please read these guidelines first. If something is unclear please contact one
 of the authors for help or let us know via e.g. an issue.
 
+We are happy to include your name to the list of contributors in the `README`_.
+Drop a line to one of the developers if you want to get included (and of course
+you actually contributed something)
+
+.. _README:
+   https://github.com/ursgal/ursgal/blob/master/README.rst
 
 Commit messages
 ***************
@@ -126,7 +132,7 @@ DOI:10.1021/acs.jproteome.5b00860*
 Copyrights
 ***********
 
-Copyright 2014-2015 by authors and contributors in alphabetical order
+Copyright 2014-2017 by authors and contributors in alphabetical order
 
 * Christian Fufezan
 * Manuel Koesters
