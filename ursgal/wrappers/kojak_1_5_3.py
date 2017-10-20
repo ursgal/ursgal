@@ -32,7 +32,7 @@ class kojak_1_5_3( ursgal.UNode ):
             '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt'],
         'create_own_folder'           : True,
         'compress_raw_search_results' : False,
-        'distributable'           : False,
+        'distributable'               : False,
         'in_development'              : False,
         'include_in_git'              : None,
         'utranslation_style'          : 'kojak_style_1',

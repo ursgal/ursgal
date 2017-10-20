@@ -27,6 +27,7 @@ class unify_csv_1_0_0( ursgal.UNode ):
         'output_suffix'      : 'unified',
         'include_in_git'     : True,
         'in_development'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'unify_csv_style_1',
         'engine' : {
             'platform_independent' : {

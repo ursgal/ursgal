@@ -27,6 +27,7 @@ class myrimatch_2_1_138( ursgal.UNode ):
         'output_extensions'           : ['.mzid'],
         'in_development'              : False,
         'include_in_git'              : False,
+        'distributable'               : True,
         'create_own_folder'           : True,
         'compress_raw_search_results' : True,
         'utranslation_style'          : 'myrimatch_style_1',

@@ -37,6 +37,7 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
         'output_suffix'      : 'withFDR',
         'in_development'     : False,
         'include_in_git'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'add_estimated_fdr_style_1',
         'engine' : {
             'platform_independent' : {

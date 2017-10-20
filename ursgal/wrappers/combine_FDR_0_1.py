@@ -34,6 +34,7 @@ class combine_FDR_0_1( ursgal.UNode ):
         'create_own_folder'     : False,
         'in_development'        : False,
         'include_in_git'        : True,
+        'distributable'      : True,
         'utranslation_style'    : 'combine_FDR_style_1',
         'engine': {
             'platform_independent' : {

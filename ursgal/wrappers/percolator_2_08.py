@@ -49,6 +49,7 @@ class percolator_2_08( ursgal.UNode ):
         'output_suffix'      : 'percolator_validated',
         'create_own_folder'  : False,
         'include_in_git'     : False,
+        'distributable'      : True,
         'group_psms'         : True,
         'in_development'     : False,
         'utranslation_style' : 'percolator_style_1',

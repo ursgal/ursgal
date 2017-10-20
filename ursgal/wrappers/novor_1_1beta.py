@@ -26,6 +26,7 @@ class novor_1_1beta( ursgal.UNode ):
         'in_development'     : False,
         'create_own_folder'  : True,
         'include_in_git'     : False,
+        'distributable'      : False,
         'utranslation_style' : 'novor_style_1',
         'engine' : {
             'linux' : {

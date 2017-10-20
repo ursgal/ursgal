@@ -27,7 +27,7 @@ class mzidentml_lib_1_7( ml ):
         'in_development'     : False,
         'output_suffix'      : None,
         'include_in_git'     : None,
-        'distributable'  : False,
+        'distributable'      : False,
         'utranslation_style' : 'mzidentml_style_1',
         'engine' : {
             'platform_independent' : {

@@ -19,6 +19,7 @@ class plot_pygcluster_heatmap_from_csv_1_0_0( ursgal.UNode ):
         'output_suffix'      : '',
         'include_in_git'     : True,
         'in_development'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'heatmap_style_1',
         'engine' : {
             'platform_independent' : {

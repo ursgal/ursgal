@@ -24,6 +24,7 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
         'output_suffix'      : None,
         'in_development'     : False,
         'include_in_git'     : None,
+        'distributable'      : True,
         'utranslation_style' : 'mzml2mgf_style_1',
         'engine' : {
             'platform_independent' : {

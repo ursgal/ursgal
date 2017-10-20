@@ -22,6 +22,7 @@ class crux_2_1( ursgal.UNode ):
         'output_extensions' : [],
         'in_development'    : True,
         'include_in_git'    : None,
+        'distributable'      : False,
         'utranslation_style' : 'crux_style_1',
         'citation' : \
             '',

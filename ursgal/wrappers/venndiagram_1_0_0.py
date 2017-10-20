@@ -24,6 +24,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
         'output_suffix'      : 'venndiagram',
         'include_in_git'     : True,
         'in_development'     : False,
+        'distributable'      : True,
         'utranslation_style' : 'venndiagram_style_1',
         'engine' : {
             'platform_independent' : {

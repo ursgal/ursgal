@@ -37,6 +37,7 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
         'output_suffix'      : None,
         'in_development'     : False,
         'include_in_git'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'get_ftp_style_1',
         'engine' : {
             'platform_independent' : {

@@ -12,7 +12,7 @@ from ursgal import ukb
 
 # node format
 node_meta_info = {
-    'cannot_distribute' : {
+    'distributable' : {
         'essential' : False,
         'types'     : [bool],
     },

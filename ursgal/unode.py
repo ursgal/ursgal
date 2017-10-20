@@ -15,6 +15,7 @@ import re
 import pprint
 import gzip
 import copy
+from ursgal import ukb
 
 
 class Meta_UNode(type):
@@ -522,7 +523,7 @@ class UNode(object, metaclass=Meta_UNode):
             return self.flatten_list(multi_list[0]) + self.flatten_list(multi_list[1:])
         return multi_list[:1] + self.flatten_list(multi_list[1:])
 
-    def get_last_engine(self, history=None, engine_types=None, multiple_engines=False, level=1):
+    def get_last_engine(self, history=None, engine_types=None, multiple_engines=False):
         '''
         The unode get_last_engine function
 
@@ -539,16 +540,13 @@ class UNode(object, metaclass=Meta_UNode):
                 should be identified
             multiple_engines (bool): if muliple engines have been used, this can be
                 set to True. Then reports a list of used engines.
-            level (int): defines the level of reported engine_type, 
-                e.g. search_engine has sub_types like protein_database_engine,
-                which could be reported by level=2. Currently level=2 is the maximum.
 
         Examples:
             >>> fpaths = self.generate_basic_file_info( "14N_xtandem.csv" )
             >>> file_info, __    = self.load_json( fpaths=fpaths, mode='input')
             >>> last_engine      = self.get_last_engine(
                     history      = file_info["history"],
-                    engine_types = ["search_engine"]
+                    engine_types = ["protein_database_search_engine"]
                 )
             >>> print( last_engine )
             "xtandem_sledgehammer"
@@ -560,10 +558,13 @@ class UNode(object, metaclass=Meta_UNode):
         if engine_types is None:
             engine_types = [
                 'converter',
+                'cross_link_search_engine',
+                'de_novo_search_engine',
+                'fetcher',
                 'misc_engine',
                 'meta_engine',
-                'search_engine',
-                'fetcher',
+                'protein_database_search_engine',
+                'spectral_library_search_engine',
                 'validation_engine',
                 'visualizer',
             ]
@@ -587,31 +588,17 @@ class UNode(object, metaclass=Meta_UNode):
                         {0}
                         '''.format( ", ".join(merged_engines) )
                     break
-                # if engine_type in history_event["META_INFO"]["engine_type"] and \
-                # history_event["META_INFO"]["engine_type"][engine_type] == True:
-                #     last_engine = history_event["engine"]
-                #     break
 
                 meta = history_event.get("META_INFO", {})
                 meta_engine_type_info = meta.get("engine_type", {})
                 for engine_type in engine_types:
-                    level_1 = meta_engine_type_info.get(engine_type, False)
-                    if level_1 is False:
-                        continue
-                    if level == 2:
-                        for l2_engine_type in level_1.keys():
-                            level_2 = level_1.get(l2_engine_type, False)
-                            if level_2 is False:
-                                continue
-                            last_engine = history_event["engine"]
-                            break
-                    else:
+                    if meta_engine_type_info.get( engine_type, False ):
                         last_engine = history_event["engine"]
                         break
 
         return last_engine
 
-    def get_last_engine_type(self, history=None, level=1 ):
+    def get_last_engine_type(self, history=None):
         '''
         The unode get_last_engine_type function
 
@@ -622,9 +609,6 @@ class UNode(object, metaclass=Meta_UNode):
                 that file.
                 If not specified, this information is taken from the unode class
                 itself, and not a specific file.
-            level (int): defines the level of reported engine_type, 
-                e.g. search_engine has sub_types like protein_database_engine,
-                which could be reported by level=2. Currently level=2 is the maximum.
 
         Examples:
             >>> fpaths = self.generate_basic_file_info( "14N_xtandem.csv" )
@@ -633,7 +617,7 @@ class UNode(object, metaclass=Meta_UNode):
                     history      = file_info["history"],
                 )
             >>> print( last_engine_type )
-            "search_engine"
+            "protein_database_search_engine"
 
         Returns:
             str: The type of the last engine that was used.
@@ -647,18 +631,9 @@ class UNode(object, metaclass=Meta_UNode):
         history_event = history[-1]
         meta = history_event.get("META_INFO", {})
         meta_engine_type_info = meta.get("engine_type", {})
+
         for engine_type in meta_engine_type_info.keys():
-            level_1 = meta_engine_type_info.get(engine_type, False)
-            if level_1 is False:
-                continue
-            if level == 2:
-                for l2_engine_type in level_1.keys():
-                    level_2 = level_1.get(l2_engine_type, False)
-                    if level_2 is False:
-                        continue
-                    last_engine_type = l2_engine_type
-                    break
-            else:
+            if meta_engine_type_info.get( engine_type, False ):
                 last_engine_type = engine_type
                 break
 
@@ -696,9 +671,13 @@ class UNode(object, metaclass=Meta_UNode):
         last_search_engine = None
         last_search_engine = self.get_last_engine( 
             history=history,
-            engine_types=['search_engine'],
+            engine_types=[
+                'cross_link_search_engine',
+                'de_novo_search_engine',
+                'protein_database_search_engine',
+                'spectral_library_search_engine',
+            ],
             multiple_engines=multiple_engines,
-            level=1,
         )
         return last_search_engine
 
@@ -1337,10 +1316,15 @@ class UNode(object, metaclass=Meta_UNode):
         # exit(1)
 
 
-        is_search_engine = self.META_INFO['engine_type'].get(
-            'search_engine',
-            False
-        )
+        is_search_engine = False
+        for engine_type in ukb.ENGINE_TYPES.keys():
+            if 'search_engine' in engine_type:
+                is_search_engine = self.META_INFO['engine_type'].get(
+                    engine_type,
+                    False
+                )
+            if is_search_engine is True:
+                break
         
         map_mods_node_exceptions = [
             'unify_csv'

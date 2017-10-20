@@ -32,6 +32,7 @@ class get_http_files_1_0_0( ursgal.UNode ):
         'output_suffix'      : None,
         'in_development'     : False,
         'include_in_git'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'get_http_style_1',
         # 'engine_url' : {
         #     'internal' : True,

@@ -24,7 +24,7 @@ class csv2ssl_1_0_0( ursgal.UNode ):
         'input_multi_file'       : False,
         'utranslation_style'    : 'csv2ssl_style_1',
         'include_in_git'   : True,
-
+        'distributable'      : True,
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {

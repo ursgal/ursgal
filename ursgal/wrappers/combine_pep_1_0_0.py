@@ -76,6 +76,7 @@ class combine_pep_1_0_0(ursgal.UNode):
         'output_extensions'  : ['.csv'],
         'in_development'     : False,
         'include_in_git'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'combine_pep_style_1',
         'engine' : {
             'platform_independent' : {

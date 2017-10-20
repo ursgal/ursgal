@@ -21,6 +21,7 @@ class comet_2014_02_rev_2( ursgal.UNode ):
         'output_extensions' : [],
         'in_development'    : True,
         'include_in_git'    : None,
+        'distributable'      : False,
         'utranslation_style' : 'comet_style_1',
         'citation' : \
             '',

@@ -19,6 +19,7 @@ class xtandem_jackhammer( tandem ):
         'compress_raw_search_results' : True,
         'include_in_git'              : False,
         'in_development'              : False,
+        'distributable'               : True,
         'utranslation_style'          : 'xtandem_style_1',
         'engine' : {
             'darwin' : {

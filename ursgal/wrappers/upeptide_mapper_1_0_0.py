@@ -35,6 +35,7 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
         'output_suffix'     : 'pmap',
         'include_in_git'    : True,
         'in_development'    : False,
+        'distributable'      : True,
         'utranslation_style': 'upeptide_mapper_style_1',
         'engine': {
             'platform_independent' : {

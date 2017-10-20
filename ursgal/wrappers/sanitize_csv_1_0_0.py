@@ -32,6 +32,7 @@ class sanitize_csv_1_0_0( ursgal.UNode ):
         'in_development'     : False,
         # 'rejected_output_suffix': 'rejected',
         'include_in_git'     : True,
+        'distributable'      : True,
         'group_psms'         : True,
         'utranslation_style' : 'sanitize_csv_style_1',
         'engine' : {
