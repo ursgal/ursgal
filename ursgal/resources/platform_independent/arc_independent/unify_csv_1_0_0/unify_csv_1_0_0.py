@@ -751,8 +751,19 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                     params['mods'],
                                     line_dict['Sequence']
                                 )
-                    if modification in tmp_mods or skip_mod is True:
+                    if skip_mod is True:
                         continue
+                    if modification in tmp_mods:
+                        if mod in n_term_replacement.keys() and pos == 1:
+                            if line_dict['Sequence'][0] in mod_dict[mod]['aa']:
+                                modification..replace(
+                                    '{0}:1'.format( mod ),
+                                    '{0}:0'.format( mod )
+                                )
+                            else:
+                                continue
+                        else:
+                            continue
                     tmp_mods.append(modification)
                 line_dict_update['Modifications'] = ';'.join( tmp_mods )
                 #

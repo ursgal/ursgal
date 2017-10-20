@@ -2360,10 +2360,9 @@ ursgal_params = {
                 'Protein' : 'Protein ID',
                 'Variable modifications detected':'Modifications', #'(starts with M, separated by |, formated as position,mass)
                 'Retention time (minutes)': 'Retention Time (s)',
-
                 'Precursor neutral mass (Da)' : 'MSFragger:Precursor neutral mass (Da)',
                 'Neutral mass of peptide' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da)
-                'Hit rank':'MSFragger:Hit rank',
+                'Hit rank':'Rank',
                 'Mass difference':'MSFragger:Mass difference',
                 'Matched fragment ions':'MSFragger:Matched fragment ions',
                 'Total possible number of matched theoretical fragment ions':'MSFragger:Total possible number of matched theoretical fragment ions',
@@ -7846,7 +7845,7 @@ ursgal_params = {
         'uvalue_type' : 'bool',
         'uvalue_option' : {
         },
-        'default_value' : True,
+        'default_value' : False,
         'description' : \
             'True, if log10 scale has been used for score_diff_threshold.',
     },

@@ -70,12 +70,7 @@ def main(
                         spec_line_dicts.append(line_dict)
                         psm_names.add(psm)
         if accept_conflicting_psms is False and len(spec_line_dicts) >= 2:
-            if remove_redundant_psms is True:
-                continue
-            elif len(psm_names) >= 2:
-                continue
-            else:
-                all_line_dicts.extend(spec_line_dicts)    
+            continue   
         else:
             all_line_dicts.extend(spec_line_dicts)
 
