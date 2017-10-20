@@ -15,9 +15,7 @@ class crux_2_1( ursgal.UNode ):
         'version'           : '2.1',
         'release_date'      : None,
         'engine_type' : {
-            'search_engine' : {
-                'protein_database_engine' : True,
-            }
+            'protein_database_search_engine' : True,
         },
         'input_extensions'  : [],
         'input_multi_file'  : False,

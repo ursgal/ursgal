@@ -18,9 +18,7 @@ class xtandem_alanine( xtandem ):
         'version'                     : 'ALANINE',
         'release_date'                : '2017-02-01',
         'engine_type' : {
-            'search_engine' : {
-                'protein_database_engine' : True,
-            }
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
         'input_multi_file'            : False,
@@ -29,7 +27,7 @@ class xtandem_alanine( xtandem ):
         'compress_raw_search_results' : True,
         'in_development'              : False,
         'include_in_git'              : False,
-        'cannot_distribute'           : True,
+        'distributable'           : False,
         'utranslation_style'          : 'xtandem_style_1',
         'engine' : {
             'darwin' : {

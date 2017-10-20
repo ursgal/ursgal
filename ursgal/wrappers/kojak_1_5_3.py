@@ -24,9 +24,7 @@ class kojak_1_5_3( ursgal.UNode ):
         'version'                     : '1.5.3',
         'release_date'                : '2015-5-1',
         'engine_type' : {
-            'search_engine' : {
-                'cross_link_engine' : True,
-            }
+            'cross_link_search_engine' : True,
         },
         'input_extensions'            : ['.mzML', '.mzXML'],
         'input_multi_file'            : False,
@@ -34,7 +32,7 @@ class kojak_1_5_3( ursgal.UNode ):
             '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt'],
         'create_own_folder'           : True,
         'compress_raw_search_results' : False,
-        'cannot_distribute'           : True,
+        'distributable'           : False,
         'in_development'              : False,
         'include_in_git'              : None,
         'utranslation_style'          : 'kojak_style_1',

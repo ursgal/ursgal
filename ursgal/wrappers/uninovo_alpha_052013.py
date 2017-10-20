@@ -18,9 +18,7 @@ class uninovo_alpha_052013( ursgal.UNode ):
         'version'           : 'alpha.052013',
         'release_date'      : '2013-5-20',
         'engine_type' : {
-            'search_engine' : {
-                'denovo_engine' : True,
-            }
+            'de_novo_search_engine' : True,
         },
         'input_extensions'  : ['.mgf'],
         'input_multi_file'  : False,

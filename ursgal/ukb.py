@@ -284,12 +284,25 @@ FILE_EXTENSIONS = {
     }
 }
 
-UCONTROLLER_FUNCTIONS = {
-    'converter'         : 'convert',
-    'misc_engine'       : 'execute_misc_engine',
-    'meta_engine'       : 'combine_search_results',
-    'search_engine'     : 'search_mgf',
-    'fetcher'           : 'fetch_file',
-    'validation_engine' : 'validate',
-    'visualizer'        : 'visualize',
+ENGINE_TYPES = {
+    'converter'                     : 'convert',
+    'controller'                    : None,
+    'cross_link_search_engine'      : 'search_mgf',
+    'misc_engine'                   : 'execute_misc_engine',
+    'meta_engine'                   : 'combine_search_results',
+    'de_novo_search_engine'         : 'search_mgf',
+    'fetcher'                       : 'fetch_file',
+    'protein_database_search_engine': 'search_mgf',
+    'spectral_library_search_engine': 'search_mgf',
+    '_test'                         : 'execute_misc_engine',
+    'validation_engine'             : 'validate',
+    'visualizer'                    : 'visualize',
 }
+
+UCONTROLLER_FUNCTIONS = {}
+for engine_type, ucontoller_function in ENGINE_TYPES.keys():
+    if ucontoller_function is None:
+        continue
+    if ucontoller_function not in UCONTROLLER_FUNCTIONS.keys():
+        UCONTROLLER_FUNCTIONS[ucontoller_function] = []
+    UCONTROLLER_FUNCTIONS[ucontoller_function].append(engine_type)

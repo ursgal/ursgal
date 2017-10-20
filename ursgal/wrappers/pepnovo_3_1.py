@@ -19,9 +19,7 @@ class pepnovo_3_1( ursgal.UNode ):
         'version'            : 'v3.1',
         'release_date'       : None,
         'engine_type' : {
-            'search_engine' : {
-                'denovo_engine' : True,
-            }
+            'de_novo_search_engine' : True,
         },
         'input_extensions'   : ['.mgf'],
         'input_multi_file'   : False,

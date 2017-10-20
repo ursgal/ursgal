@@ -17,9 +17,7 @@ class xtandem_vengeance( ursgal.UNode ):
         'version'                     : 'Vengeance',
         'release_date'                : '2015-12-15',
         'engine_type' : {
-            'search_engine' : {
-                'protein_database_engine' : True,
-            }
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
         'input_multi_file'            : False,

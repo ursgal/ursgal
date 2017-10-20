@@ -18,9 +18,7 @@ class novor_1_1beta( ursgal.UNode ):
         'version'            : '1.1beta',
         'release_date'       : '2015-6-30',
         'engine_type' : {
-            'search_engine' : {
-                'denovo_engine' : True,
-            }
+            'de_novo_search_engine' : True,
         },
         'input_extensions'   : ['.mgf'],
         'input_multi_file'   : False,

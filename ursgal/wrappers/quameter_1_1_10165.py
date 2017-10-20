@@ -31,9 +31,9 @@ class quameter_1_1_10165( ursgal.UNode ):
         'create_own_folder'           : False,
         'in_development'              : False,
         'include_in_git'              : False,
-        'cannot_distribute'           : True,
+        'distributable'           : False,
         'engine_type'                 : {
-            'search_engine' : False,
+            'misc_engine' : True,
         },
         'engine'                      : {
             'linux'    : {

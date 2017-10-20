@@ -24,9 +24,7 @@ class msgfplus_v2017_01_27( msgf ):
         'version'                     : 'v2017.01.27',
         'release_date'                : '2017-1-27',
         'engine_type' : {
-            'search_engine' : {
-                'protein_database_engine' : True,
-            }
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : [
             '.mgf',
@@ -43,7 +41,7 @@ class msgfplus_v2017_01_27( msgf ):
         'in_development'              : False,
         'include_in_git'              : False,
         'utranslation_style'          : 'msgfplus_style_1',
-        'cannot_distribute'           : True,
+        'distributable'           : False,
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {

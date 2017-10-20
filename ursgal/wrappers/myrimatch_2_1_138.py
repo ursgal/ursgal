@@ -20,9 +20,7 @@ class myrimatch_2_1_138( ursgal.UNode ):
         'version'                     : '2.1.138',
         'release_date'                : None,
         'engine_type' : {
-            'search_engine' : {
-                'protein_database_engine' : True,
-            }
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mzML'],
         'input_multi_file'            : False,

@@ -39,7 +39,7 @@ class kojak_percolator_2_08( ursgal.UNode ):
         'output_extensions'  : ['.tsv'],
         'output_suffix'      : 'percolator_2_08_validated',
         'create_own_folder'  : False,
-        'cannot_distribute'  : True,
+        'distributable'  : False,
         'in_development'     : False,
         'include_in_git'     : None,
         'utranslation_style' : 'kojak_percolator_style_1',

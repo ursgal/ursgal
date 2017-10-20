@@ -14,9 +14,7 @@ class comet_2014_02_rev_2( ursgal.UNode ):
         'version'           : '2014_02_rev_2',
         'release_date'      : '2014-1-10',
         'engine_type' : {
-            'search_engine' : {
-                'protein_database_engine' : True,
-            }
+            'protein_database_search_engine' : True,
         },
         'input_extensions'  : [],
         'input_multi_file'  : False,

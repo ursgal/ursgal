@@ -176,11 +176,10 @@ class UController(ursgal.UNode):
                 'zip_md5',
                 None
             )
-            cannot_distribute = wrapper_meta_info.get(
-                'cannot_distribute',
-                None
+            distributable = wrapper_meta_info.get(
+                'distributable',
+                True
             )
-            # and if so please change cannot_distribute >> distributable
 
             unodes[ wrapper_module_name ] = {
                 'available'         : False,
@@ -188,8 +187,7 @@ class UController(ursgal.UNode):
                 'class'             : None,
                 'engine'            : engine,
                 'include_in_git'    : include_in_git,
-                'cannot_distribute' : None,  # <Seriously ...
-                'distributable'     : False,
+                'distributable'     : distributable,
                 'META_INFO'         : wrapper_meta_info,
                 'in_development'    : in_development,
                 'import_status'     : 'n/d',
@@ -2362,11 +2360,11 @@ class UController(ursgal.UNode):
                 if include_in_git in [ None, True ]:
                     continue
                 # or we cannot dictribute it, restrictive licenses etc.
-                cannot_distribute = self.unodes[ engine ].get(
-                    'cannot_distribute',
-                    None
+                distributable = self.unodes[ engine ].get(
+                    'distributable',
+                    True
                 )
-                if cannot_distribute is True:
+                if distributable is False:
                     continue
 
                 resource_source_folder = 'ursgal{0}'.format(
@@ -2586,11 +2584,11 @@ class UController(ursgal.UNode):
                             engine
                         )
                     )
-                    cannot_distribute = self.unodes[engine]['META_INFO'].get(
-                        'cannot_distribute',
-                        None
+                    distributable = self.unodes[engine]['META_INFO'].get(
+                        'distributable',
+                        True
                     )
-                    if cannot_distribute is True:
+                    if distributable is False:
                         print(
                             'Engine {0} cannot be downloaded automatically, please download the engine manually and move it to the appropriate folder'.format(
                                 engine,
