@@ -707,7 +707,10 @@ class UNode(object, metaclass=Meta_UNode):
         if bigger_scores_better is None:
             bigger_scores_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][search_engine]
 
+
+        tmp = ddict(list)
         grouped_psms = ddict(list)
+
         opened_file = open( input_file, 'r')
         csv_dict_reader_object = csv.DictReader(
             row for row in opened_file if not row.startswith('#')
@@ -719,8 +722,7 @@ class UNode(object, metaclass=Meta_UNode):
                 '''defined validation_score_field {0} is not found,
                 please check/add it to uparams.py['validation_score_field']'''.format(validation_score_field)
 
-
-            grouped_psms[ line_dict[ 'Spectrum Title' ] ].append(
+            tmp[ line_dict[ 'Spectrum Title' ] ].append(
                 (
                     float(
                         line_dict[ validation_score_field ]
@@ -728,11 +730,20 @@ class UNode(object, metaclass=Meta_UNode):
                     line_dict
                 )
             )
-        for spectrum_title in grouped_psms.keys():
-            grouped_psms[ spectrum_title ].sort(
-                key     = operator.itemgetter(0),
-                reverse = bigger_scores_better
-            )
+
+        for spectrum_title in tmp.keys():
+            already_seen = set()
+
+            for score, line_dict in sorted( tmp[ spectrum_title ],
+                    key     = operator.itemgetter(0),
+                    reverse = bigger_scores_better
+                ):
+                _identifier = '_'.join( sorted( line_dict.values() ))
+                if _identifier in already_seen:
+                    continue
+                already_seen.add( _identifier )
+                grouped_psms[ spectrum_title ].append( ( score, line_dict ) )
+
         print(
             "[ GROUPING ] Grouped {0} PSMs into {1} unique spectrum titles".format(
                 n,
@@ -1319,11 +1330,26 @@ class UNode(object, metaclass=Meta_UNode):
                 )
             if is_search_engine is True:
                 break
-        
+        # is_search_engine = self.META_INFO['engine_type'].get(
+        #     'search_engine',
+        #     False
+        # )
+        # is_denovo_engine = self.META_INFO['engine_type'].get(
+        #     'denovo_engine',
+        #     False
+        # )
+        # is_crosslink_engine = self.META_INFO['engine_type'].get(
+        #     'cross_link_engine',
+        #     False
+        # )
+        is_quantitation_engine = self.META_INFO['engine_type'].get(
+            'quantitation_engine',
+            False
+        )
         map_mods_node_exceptions = [
             'unify_csv'
         ]
-        if is_search_engine is not False:
+        if is_search_engine or is_quantitation_engine:
             self.map_mods()
         for engine_short_name in map_mods_node_exceptions:
             if engine_short_name in self.engine:
@@ -1566,7 +1592,7 @@ class UNode(object, metaclass=Meta_UNode):
 
     def update_history_status( self, engine=None, history=None, status='pending', history_addon=None ):
         if history is None:
-            raise Exception("Legacy code impicitly updated history ... please change code!")
+            raise Exception("Legacy code implicitly updated history ... please change code!")
 
             # history = self.stats['history']
         if engine is None:

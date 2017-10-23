@@ -88,9 +88,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     MS-Amanda
         * multiple protein ID per peptide are splitted in two entries.
           (is done in MS-Amanda postflight)
-    
+
     MSFragger
-        * 15N modification have to be removed from Modifications and the 
+        * 15N modification have to be removed from Modifications and the
           merged modifications have to be corrected.
 
     '''
@@ -127,7 +127,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     opt_mods     = {}
     mod_dict     = {}
     cam          = False
-    
+
     # modification masses are rounded to allow matching to unimod
     no_decimals = params['translations']['rounded_mass_decimals']
     mass_format_string = '{{0:3.{0}f}}'.format(no_decimals)
@@ -145,7 +145,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     'mass' : modification['mass'],
                     'aa' : set(),
                     'pos': set(),
-                }                
+                }
             mod_dict[name]['aa'].add(aa)
             mod_dict[name]['aa'].add(pos)
             if 'N-term' in pos:
@@ -265,16 +265,16 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     if database_search is True:
         non_enzymatic_peps = set()
         conflicting_uparams = defaultdict(set)
-        fasta_lookup_name = os.path.basename( 
+        fasta_lookup_name = os.path.basename(
             os.path.abspath(
                 params['translations']['database']
-            ) 
+            )
         )
-        upeptide_map_sort_key   = 'Protein ID' 
+        upeptide_map_sort_key   = 'Protein ID'
         upeptide_map_other_keys = [
-            'Sequence Start',  
-            'Sequence Stop',   
-            'Sequence Pre AA', 
+            'Sequence Start',
+            'Sequence Stop',
+            'Sequence Pre AA',
             'Sequence Post AA',
         ]
     psm_counter = Counter()
@@ -456,7 +456,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             # Buffering corrections #
             #########################
             main_buffer_key = '{Sequence} || {Charge} || {Modifications} || '.format(
-                **line_dict 
+                **line_dict
             ) + params['label']
             if main_buffer_key not in ze_only_buffer.keys():
                 line_dict_update = {}
@@ -496,7 +496,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                             'aa': set of aa,
                                             'mass': 42.010565,
                                             'pos': set of pos,
-                                        }                                    
+                                        }
                                         '''
                                         #check aa
                                         if '*' not in meta_mod_info['aa'] and \
@@ -519,8 +519,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
                                         if all(single_mod_check):
                                             # MS Frager starts counting at zero
-                                            pos_in_peptide_for_format_str = msfragger_pos + 1  
-                                            # we keep mass here so that the 
+                                            pos_in_peptide_for_format_str = msfragger_pos + 1
+                                            # we keep mass here so that the
                                             # correct name is added later in already
                                             # existing code
                                             tmp_mods.append(
@@ -730,7 +730,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 'Label:15N(1)',
                                 'Label:15N(2)',
                                 'Label:15N(3)',
-                                'Label:15N(4)' 
+                                'Label:15N(4)'
                             ]:
                                 mapped_mod = True
                                 skip_mod = True
@@ -791,6 +791,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 # remove the double ';''
                 if line_dict_update['Modifications'] != '':
                     tmp = []
+                    positions = set()
                     for e in line_dict_update['Modifications'].split(';'):
                         if e == '':
                             # that remove the doubles ....
@@ -806,12 +807,20 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 m = (int(mod_pos), mod)
                                 if m not in tmp:
                                     tmp.append( m )
+                                    positions.add( int(mod_pos))
                     tmp.sort()
                     line_dict_update['Modifications'] = ';'.join(
                         [
                             '{m}:{p}'.format( m=mod, p=pos) for pos, mod in tmp
                         ]
                     )
+                    if len(tmp) != len(positions):
+                        print(
+                            '[ WARNING ] {Sequence}#{Modifications} will be skipped, because it contains to mods at the same position!'.format(
+                                **line_dict_update
+                            )
+                        )
+                        continue
 
                 # calculate m/z
                 cc.use(
@@ -870,7 +879,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             # protein block, only for database search engine
             if database_search is True:
-                # check for correct cleavage sites and set a new field to 
+                # check for correct cleavage sites and set a new field to
                 # verify correct enzyme performance
                 lookup_identifier = '{0}><{1}'.format(
                     line_dict['Sequence'],
@@ -890,7 +899,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             dict_2_append[key] = split_collector[key][pos]
                         sorted_upeptide_maps.append(
                             dict_2_append
-                        ) 
+                        )
                     # pprint.pprint(line_dict)
                     # print(sorted_upeptide_maps)
                     # exit()
@@ -991,14 +1000,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             continue
                         if cleavage_site == 'C':
                             missed_cleavage_pattern = '{0}[^{1}]'.format(
-                                aa, inhibitor_aa    
+                                aa, inhibitor_aa
                             )
                             missed_cleavage_counter += \
                                 len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
                         elif cleavage_site == 'N':
                             missed_cleavage_pattern = '[^{1}]{0}'.format(
-                                aa, inhibitor_aa    
-                            ) 
+                                aa, inhibitor_aa
+                            )
                             missed_cleavage_counter += \
                                 len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
                     if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
