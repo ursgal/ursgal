@@ -7396,7 +7396,7 @@ ursgal_params = {
             'Maximal accepted parent ion charge',
     },
     'precursor_max_mass' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -7407,7 +7407,6 @@ ursgal_params = {
         'ukey_translation' : {
             'kojak_style_1'     : 'precursor_max_mass',
             'myrimatch_style_1' : 'MaxPeptideMass',
-            'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_max_mass'
         },
         'utag' : [
@@ -7962,7 +7961,7 @@ ursgal_params = {
             'Exclusively spectra included during mzml2mgf conversion',
     },
     'scan_skip_modulo_step' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -7979,16 +7978,16 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
-            'none_val'  : -1,
+            'none_val'  : 1,
             'max'       : 10000000,
-            'min'       : -1,
+            'min'       : 1,
             'updownval' : 1,
             'unit'      : ''
         },
         'default_value' : None,
         'description' : \
             'Include only the n-th spectrum during mzml2mgf conversion\n'\
-            '    -1 : None',
+            '    1 : None',
     },
     'score_-h2o_ions' : {
         'edit_version' : 1.00,
