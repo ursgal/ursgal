@@ -834,7 +834,9 @@ class UController(ursgal.UNode):
             output_file_name (str or None): Desired output file name
                 excluding path (optional). If None, output file name will
                 be auto-generated.
-            guess_engine (bool): 
+            guess_engine (bool): The converter engine is guessed based on 
+                the input file. This works so far for mzml2mgf conversion and 
+                conversion of search_engine result files to csv.
 
         Example::
 

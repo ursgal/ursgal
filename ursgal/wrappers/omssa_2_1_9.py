@@ -235,8 +235,6 @@ class omssa_2_1_9( ursgal.UNode ):
             mod_type = param_key[1:4]
             modifications = ''
             self.params[ param_key ] = ''
-            import pprint
-            pprint.pprint(self.params)
             for mod in self.params[ 'mods' ][ mod_type ]:
                 unimod_id_does_not_exist = False
                 aa_can_not_be_mapped = True
