@@ -21,7 +21,6 @@ class novor_1_1beta( ursgal.UNode ):
             'de_novo_search_engine' : True,
         },
         'input_extensions'   : ['.mgf'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'in_development'     : False,
         'create_own_folder'  : True,

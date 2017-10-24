@@ -23,13 +23,11 @@ class myrimatch_2_1_138( ursgal.UNode ):
             'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mzML'],
-        'input_multi_file'            : False,
         'output_extensions'           : ['.mzid'],
         'in_development'              : False,
         'include_in_git'              : False,
         'distributable'               : True,
         'create_own_folder'           : True,
-        'compress_raw_search_results' : True,
         'utranslation_style'          : 'myrimatch_style_1',
         'engine' : {
             'linux' : {

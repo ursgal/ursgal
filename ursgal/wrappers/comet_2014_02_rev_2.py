@@ -17,7 +17,6 @@ class comet_2014_02_rev_2( ursgal.UNode ):
             'protein_database_search_engine' : True,
         },
         'input_extensions'  : [],
-        'input_multi_file'  : False,
         'output_extensions' : [],
         'in_development'    : True,
         'include_in_git'    : None,

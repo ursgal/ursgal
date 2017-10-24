@@ -26,7 +26,6 @@ class sanitize_csv_1_0_0( ursgal.UNode ):
             'misc_engine' : True
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'sanitized',
         'in_development'     : False,

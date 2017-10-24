@@ -26,7 +26,6 @@ class msblender_09_2015( ursgal.UNode ):
             'meta_engine' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'in_development'     : True,
         'create_own_folder'  : False,

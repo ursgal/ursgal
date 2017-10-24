@@ -29,7 +29,6 @@ class combine_FDR_0_1( ursgal.UNode ):
             'meta_engine' : True,
         },
         'input_extensions'      : ['.csv'],
-        'input_multi_file'      : False,
         'output_extensions'     : ['.csv'],
         'create_own_folder'     : False,
         'in_development'        : False,

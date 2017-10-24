@@ -27,7 +27,6 @@ class qvality_2_02( ursgal.UNode ):
             'validation_engine' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'qvality_validated',
         'create_own_folder'  : False,

@@ -21,7 +21,6 @@ class uninovo_alpha_052013( ursgal.UNode ):
             'de_novo_search_engine' : True,
         },
         'input_extensions'  : ['.mgf'],
-        'input_multi_file'  : False,
         'output_extensions' : ['.den'],
         'create_own_folder' : True,
         'in_development'    : True,

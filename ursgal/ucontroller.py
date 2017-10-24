@@ -1507,10 +1507,14 @@ class UController(ursgal.UNode):
 
         output_file += file_extension
 
-        global_ucontroller_compress_flag = self.params.get('compress_raw_search_results_if_possible', False)
-        compress_engine_output = self.unodes[ engine ]['class'].META_INFO.get( 'compress_raw_search_results', False)
-        if compress_engine_output and global_ucontroller_compress_flag:
-            output_file += '.gz'
+        # global_ucontroller_compress_flag = self.params.get('compress_raw_search_results_if_possible', False)
+        # compress_engine_output = self.unodes[ engine ]['class'].META_INFO.get( 'compress_raw_search_results', False)
+        # if compress_engine_output and global_ucontroller_compress_flag:
+        if self.params.get('compress_raw_search_results_if_possible', False):
+            if self.UNODE_UPARAMS['compress_raw_search_results_if_possible']['uvalue_style_translation'].get(
+                engine, False
+            ):
+                output_file += '.gz'
 
         path_building_blocks = [
             self.io['input']['finfo']['dir']

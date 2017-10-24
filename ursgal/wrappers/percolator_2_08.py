@@ -44,7 +44,6 @@ class percolator_2_08( ursgal.UNode ):
             'validation_engine' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'percolator_validated',
         'create_own_folder'  : False,

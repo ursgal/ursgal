@@ -25,8 +25,6 @@ class pipi_1_3_0( ursgal.UNode ):
         'version'                     : '1.3.0',
         'release_date'                : '2017-06-20',
         'utranslation_style'          : 'pipi_style_1',
-        'compress_raw_search_results' : False,
-        'input_multi_file'            : False,
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML'],
         'output_extensions'           : ['.csv'],
         'create_own_folder'           : True,

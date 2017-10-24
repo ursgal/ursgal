@@ -61,22 +61,18 @@ The default structure of a wrapper is::
     #!/usr/bin/env python3.4
     import ursgal
 
-    class omssa_2_1_9( ursgal.UNode ):
+    class xtandem_alanine( ursgal.UNode ):
         """
-        omssa_2_1_9 UNode
-
-        Parameter options at http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/asn_spec/omssa.asn.html
-
-        2.1.9 parameters at http://proteomicsresource.washington.edu/protocols06/omssa.php
+        X!Tandem UNode
+        Parameter options at http://www.thegpm.org/TANDEM/api/
 
         Reference:
-        Geer LY, Markey SP, Kowalak JA, Wagner L, Xu M, Maynard DM, Yang X, Shi W, Bryant SH (2004) Open Mass Spectrometry Search Algorithm.
-
+        Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem mass spectra.
         """
         META_INFO = { ... }
 
         def __init__(self, *args, **kwargs):
-            super(omssa_2_1_9, self).__init__(*args, **kwargs)
+            super(xtandem_alanine, self).__init__(*args, **kwargs)
 
         def preflight(self):
             # code that should be run before the UNode is executed
@@ -107,31 +103,64 @@ META_INFO entries are described below; for more examples, please refer to the
 wrapper folder.
 
 
-Engine_type
+Edit Version
+""""""""""""
+
+This number is used to determine the most recent version of the wrapper
+on different work stations. Therefore, it should be updated everytime a change
+in the wrapper is made.
+
+
+.. code-block:: python
+
+    META_INFO = {
+        ...
+        'edit_version'           : 1.00,
+        ...
+    }
+
+Name, Version and Release Date
+""""""""""""""""""""""""""""""
+
+The original name of the engine, it's version number and the release date
+of this version (if available).
+
+.. code-block:: python
+
+    META_INFO = {
+        ...
+        'name'               : 'X!Tandem',
+        'version'            : 'ALANINE',
+        'release_date'       : '2017-02-01',
+        ...
+    }
+
+
+Engine Type
 """""""""""
 
 Engine Type will define were the engine is grouped into. The groups are shown
 after ucontroller instantiation. Additionally, the wrapper registers the engines
 to certain controller functionality, e.g. engine_type['search_engine'] : True
 will allow ucontroller.search(engine='omssa_2_1_9') to be executed.
+The engine types and corresponding ucontroller functions are also listed in
+ukb.ENGINE_TYPES
 
 .. code-block:: python
 
     META_INFO = {
-        'engine_type'            : {
-            'controller'        : False,
-            'converter'         : False,
-            'fetcher'           : False,
-            'meta_engine'       : False,
-            'misc_engine'       : False,
-            'search_engine'     : {
-                'cross_link_engine'       : False,
-                'denovo_engine'           : False,
-                'protein_database_engine' : True,
-                'spectral_library_engine' : False,
-            },
-            'validation_engine' : False,
-            'visualizer'        : False,
+        'engine_type' : {
+            'controller'                    : False,
+            'converter'                     : False,
+            'fetcher'                       : False,
+            'meta_engine'                   : False,
+            'misc_engine'                   : False,
+            'cross_link_search_engine'      : False,
+            'de_novo_search_engine'         : False,
+            'quantification_engine'         : False,
+            'protein_database_search_engine': True,
+            'validation_engine'             : False,
+            'visualizer'                    : False,
         },
         ...
     }
@@ -148,9 +177,9 @@ credit that one can hope for ;) For example.
 
     META_INFO = {
         ...
-        'citation' : 'Geer LY, Markey SP, Kowalak JA, '\
-            'Wagner L, Xu M, Maynard DM, Yang X, Shi W, Bryant SH (2004) '\
-            'Open Mass Spectrometry Search Algorithm.',
+        'citation' : \
+            'Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem '\
+            'mass spectra.',
         ...
     }
 
@@ -165,7 +194,7 @@ For example.
 
     META_INFO = {
         ...
-        'input_extensions'           : ['.mgf'],
+        'input_extensions' : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
         ...
     }
 
@@ -227,6 +256,22 @@ The standalone executable can be distributed via the ursgal git.
 
 .. note:: Big executables are distributed via the ./install_resources.py
    script, thus refrain overloading ursgal.git too much :)
+
+.. code-block:: python
+
+    META_INFO = {
+        ...
+        'include_in_git'        : False,
+        ...
+    }
+
+
+Distributable
+"""""""""""""
+
+This is True if the coresponding standalone executable can be distributed 
+via the ./install_resources.py and False if the standalone executable
+needs to be downloaded manually.
 
 .. code-block:: python
 

@@ -31,7 +31,6 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
         },
         'input_extensions'   : ['.csv'],
         'output_extensions'  : ['.csv'],
-        'input_multi_file'   : False,
         'output_suffix'     : 'pmap',
         'include_in_git'    : True,
         'in_development'    : False,

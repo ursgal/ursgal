@@ -16,7 +16,6 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
             'misc_engine' : True
         },
         'input_extensions'   : [],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.fasta'],
         'output_suffix'      : 'target_decoy',
         'in_development'     : False,

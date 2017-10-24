@@ -24,7 +24,6 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
             'converter' : True
         },
         'input_extensions'   : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : None,
         'in_development'     : False,

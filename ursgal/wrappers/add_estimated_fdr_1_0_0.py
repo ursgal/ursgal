@@ -32,7 +32,6 @@ class add_estimated_fdr_1_0_0( ursgal.UNode ):
             'validation_engine' : True
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'withFDR',
         'in_development'     : False,

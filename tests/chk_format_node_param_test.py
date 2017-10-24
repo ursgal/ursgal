@@ -20,10 +20,10 @@ node_meta_info = {
         'essential' : True,
         'types'     : [str],
     },
-    'compress_raw_search_results' : {
-        'essential' : False,
-        'types'     : [bool],
-    },
+    # 'compress_raw_search_results' : {
+    #     'essential' : False,
+    #     'types'     : [bool],
+    # },
     'cpu_usage' : {
         'essential' : False,
         'types'     : [int],
@@ -68,10 +68,10 @@ node_meta_info = {
         'essential' : True,
         'types'     : [list],
     },
-    'input_multi_file' : {
-        'essential' : True,
-        'types'     : [bool],
-    },
+    # 'input_multi_file' : {
+    #     'essential' : True,
+    #     'types'     : [bool],
+    # },
     'mods_to_unimod_correction' : {
         'essential' : False,
         'types'     : [dict],

@@ -35,7 +35,6 @@ class kojak_percolator_2_08( ursgal.UNode ):
             'validation_engine' : True,
         },
         'input_extensions'   : ['.txt'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.tsv'],
         'output_suffix'      : 'percolator_2_08_validated',
         'create_own_folder'  : False,

@@ -18,7 +18,6 @@ class crux_2_1( ursgal.UNode ):
             'protein_database_search_engine' : True,
         },
         'input_extensions'  : [],
-        'input_multi_file'  : False,
         'output_extensions' : [],
         'in_development'    : True,
         'include_in_git'    : None,

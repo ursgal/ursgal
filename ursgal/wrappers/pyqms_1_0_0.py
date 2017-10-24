@@ -13,7 +13,6 @@ class pyqms_1_0_0(ursgal.UNode):
         'edit_version'       : 1.00,
         'name'               : 'pyqms',
         'version'            : '1.0.0',
-        'input_multi_file'   : True,
         'release_date'       : None,
         'engine_type'        : {
             'quantitation_engine' : True

@@ -16,7 +16,6 @@ class _test_node( ursgal.UNode ):
             '_test'  : True
         },
         'input_extensions'   : ['.txt', '.csv', '.fasta', '.mzML'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'test_node',
         'in_development'     : True,  # do not show in UNode overview

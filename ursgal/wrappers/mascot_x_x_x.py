@@ -13,10 +13,8 @@ class mascot_x_x_x( ursgal.UNode ):
         'engine_type' : {
             'search_engine' : True,
         },
-        'input_multi_file'            : False,
         'output_extensions'           : ['.xml'],
         'create_own_folder'           : True,
-        'compress_raw_search_results' : True,
         'utranslation_style'          : 'mascot_style_1',
         'citation'                    : 'www.matrixscience.com',
         'in_development'              : True,

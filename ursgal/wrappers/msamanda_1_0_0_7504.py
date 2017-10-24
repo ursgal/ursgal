@@ -17,7 +17,6 @@ class msamanda_1_0_0_7504( msamanda ):
             'protein_database_search_engine' : True,
         },
         'input_extensions'   : ['.mgf'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
         'include_in_git'     : None,
