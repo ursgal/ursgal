@@ -30,7 +30,6 @@ ursgal_params = {
             'none_val': '{0}',
             'multiple_line': False,
             'unit': 'psms',
-
         },
         'default_value': '{0:.3f}',
         'description': """Defines the standard format string when
@@ -59,7 +58,6 @@ ursgal_params = {
             'updownval': 0.001,
             'unit': 'abundance',
             'f-point': 1e-02
-
         },
         'default_value': 1e-3,
         'description': """ Set minmal abundance for elements used when building Isotopoluge Library """,
@@ -87,7 +85,6 @@ ursgal_params = {
             'updownval': 0.01,
             'unit': 'a.u.',
             'f-point': 1e-02
-
         },
         'default_value': 0.01,
         'description': """ Minimum required intensity for pyqms peak matching """,
@@ -115,7 +112,6 @@ ursgal_params = {
             'updownval': 0.1,
             'unit': 'a.u.',
             'f-point': 1e-02
-
         },
         'default_value': 0.5,
         'description': """ Minimum percentile overlap for matching labeled peaks """,
@@ -142,7 +138,6 @@ ursgal_params = {
             'min': 0,
             'updownval': 1,
             'unit': '',
-
         },
         'default_value': 2,
         'description': """ Min number of matched isotopologues for pyqms to consider for quantification """,
@@ -170,7 +165,6 @@ ursgal_params = {
             'updownval': 1e4,
             'unit': 'a.u.',
             'f-point': 0.1
-
         },
         'default_value': 1e5,
         'description': """ Tranform intensity by this factor for quantification """,
@@ -307,7 +301,6 @@ ursgal_params = {
             'updownval': 0.01,
             'unit': 'a.u.',
             'f-point': 1e-02
-
         },
         'default_value': 0.2,
         'description': """ rel Intensity Error """,
@@ -335,7 +328,6 @@ ursgal_params = {
             'updownval': 100,
             'unit': 'a.u.',
             'f-point': 1e-01
-
         },
         'default_value': 1000.0,
         'description': """ Float to int conversion precision """,
@@ -362,7 +354,6 @@ ursgal_params = {
             'min': 0,
             'updownval': 1,
             'unit': 'a.u',
-
         },
         'default_value': 20,
         'description': ''' Max number of molecules in one matching bin. ''',
@@ -396,7 +387,6 @@ ursgal_params = {
             'custom_val_max': 20,
             'custom_type' : {
             }
-
         },
         'default_value': None,
         'description': ''' AA which are always SILAC labeled and not considered for calculating partially labeling percentile ''',
@@ -423,7 +413,6 @@ ursgal_params = {
             'min': 0,
             'updownval': 1,
             'unit': 'psms',
-
         },
         'default_value': True,
         'description': ''' Build index for faster access ''',

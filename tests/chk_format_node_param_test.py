@@ -24,10 +24,10 @@ node_meta_info = {
     #     'essential' : False,
     #     'types'     : [bool],
     # },
-    'cpu_usage' : {
-        'essential' : False,
-        'types'     : [int],
-    },
+    # 'cpu_usage' : {
+    #     'essential' : False,
+    #     'types'     : [int],
+    # },
     'create_own_folder' : {
         'essential' : False,
         'types'     : [bool],
