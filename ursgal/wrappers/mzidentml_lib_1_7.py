@@ -22,7 +22,6 @@ class mzidentml_lib_1_7( ml ):
             'converter' : True
         },
         'input_extensions'   : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'in_development'     : False,
         'output_suffix'      : None,

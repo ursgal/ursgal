@@ -36,7 +36,6 @@ class compomics_utilities_4_11_5( ursgal.UNode ):
         'input_extensions'  : ['.txt', ],
         'output_extensions' : ['.csv', ],
         'distributable' : False,
-        'input_multi_file'   : False,
         'include_in_git'    : False,
         'in_development'    : False,
         'utranslation_style'    : 'compomics_utilities_style_1',

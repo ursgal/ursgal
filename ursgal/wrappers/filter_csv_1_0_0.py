@@ -24,7 +24,6 @@ class filter_csv_1_0_0( ursgal.UNode ):
             'misc_engine' : True
         },
         'input_extensions'       : ['.csv'],
-        'input_multi_file'       : False,
         'output_extensions'      : ['.csv'],
         'output_suffix'          : 'accepted',
         'rejected_output_suffix' : 'rejected',
@@ -199,8 +198,6 @@ class filter_csv_1_0_0( ursgal.UNode ):
                 '{0}.u.json'.format(output_file),
                 '{0}.u.json'.format(output_file_unfiltered)
             )
-
-
 
         filter_csv_main(
             input_file     = input_file,

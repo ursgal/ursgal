@@ -19,7 +19,6 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
             'converter' : True,
         },
         'input_extensions'   : ['.mzML', '.mzML.gz'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.mgf'],
         'output_suffix'      : None,
         'in_development'     : False,

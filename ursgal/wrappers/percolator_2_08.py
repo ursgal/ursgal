@@ -44,7 +44,6 @@ class percolator_2_08( ursgal.UNode ):
             'validation_engine' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'percolator_validated',
         'create_own_folder'  : False,
@@ -179,14 +178,14 @@ class percolator_2_08( ursgal.UNode ):
                 "The observed mass [M+H]+"
                         }
             ),
-            (
-                'PepLen',  {
-                    'csv_field': '',
-                    'DefaultDirection': 0,
-                    'description': \
-                "The length of the matched peptide, in residues"
-                }
-            ),
+            # (
+            #     'PepLen',  {
+            #         'csv_field': '',
+            #         'DefaultDirection': 0,
+            #         'description': \
+            #     "The length of the matched peptide, in residues"
+            #     }
+            # ),
             (
                 'Charge1', {
                     'csv_field': '',
@@ -360,7 +359,9 @@ class percolator_2_08( ursgal.UNode ):
         )
         self.params['_score_list'] = self.generating_score_list()
         minimum_score = None
+
         bigger_scores_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][last_search_engine]
+
         if bigger_scores_better is False:
             for p, _score in enumerate(self.params['_score_list']):
                 if _score <= 0:
@@ -390,6 +391,7 @@ class percolator_2_08( ursgal.UNode ):
             for m, (score, line_dict) in enumerate(
                     self.params['grouped_psms'][ spectrum_title ]):
                 t = {}
+
                 if bigger_scores_better is True:
                     rank_of_score = bisect.bisect_right(
                         self.params['_score_list'],
@@ -402,10 +404,13 @@ class percolator_2_08( ursgal.UNode ):
                     )
                     rank_of_score = len( self.params['_score_list'] ) - rank_of_score
                 #
-                # t['lnrSp'] = math.log( 1 + rank_of_score )
-                # t['Sp'] = rank_of_score
+                if 'Mascot:Rank' in line_dict.keys():
+                    rank_of_score = int(line_dict['Mascot:Rank'])
+                    # if best_score <= 5:
+                    #     continue
+                t['lnrSp'] = math.log( 1 + rank_of_score )
+                t['Sp'] = rank_of_score
                 #
-
                 charge      = float(line_dict['Charge'])
                 exp_mz      = float(line_dict['Exp m/z'])
                 t['Mass']   = ( exp_mz * charge ) - ( charge - 1 ) * PROTON
@@ -426,6 +431,7 @@ class percolator_2_08( ursgal.UNode ):
                     deltCn = 0
                 else:
                     deltLCn = (t['Xcorr'] - worst_score) / normalization
+
                     next_score = self.params['grouped_psms'][ spectrum_title ][m + 1][0]
                     if bigger_scores_better is False:
                         next_score = transform_score(next_score, minimum_score)
@@ -463,7 +469,7 @@ class percolator_2_08( ursgal.UNode ):
                 if cleavage_site == 'C':
                     for i, aa in enumerate(pre_aa):
                         if aa in allowed_aa  \
-                            or line_dict['Sequence Start'] in ['1','2']:
+                            or line_dict['Sequence Start'] in ['1', '2']:
                             t['enzN'] = 1
                             final_pre_aa = aa
                             final_post_aa = post_aa[i]

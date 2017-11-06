@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 # encoding: utf-8
 '''
 
@@ -20,14 +20,14 @@ node_meta_info = {
         'essential' : True,
         'types'     : [str],
     },
-    'compress_raw_search_results' : {
-        'essential' : False,
-        'types'     : [bool],
-    },
-    'cpu_usage' : {
-        'essential' : False,
-        'types'     : [int],
-    },
+    # 'compress_raw_search_results' : {
+    #     'essential' : False,
+    #     'types'     : [bool],
+    # },
+    # 'cpu_usage' : {
+    #     'essential' : False,
+    #     'types'     : [int],
+    # },
     'create_own_folder' : {
         'essential' : False,
         'types'     : [bool],
@@ -68,10 +68,10 @@ node_meta_info = {
         'essential' : True,
         'types'     : [list],
     },
-    'input_multi_file' : {
-        'essential' : True,
-        'types'     : [bool],
-    },
+    # 'input_multi_file' : {
+    #     'essential' : True,
+    #     'types'     : [bool],
+    # },
     'mods_to_unimod_correction' : {
         'essential' : False,
         'types'     : [dict],

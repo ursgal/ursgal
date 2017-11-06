@@ -27,11 +27,9 @@ class kojak_1_5_3( ursgal.UNode ):
             'cross_link_search_engine' : True,
         },
         'input_extensions'            : ['.mzML', '.mzXML'],
-        'input_multi_file'            : False,
         'output_extensions' : ['.kojak.txt', '.pep.xml', '.perc.inter.txt', \
             '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt'],
         'create_own_folder'           : True,
-        'compress_raw_search_results' : False,
         'distributable'               : False,
         'in_development'              : False,
         'include_in_git'              : None,

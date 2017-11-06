@@ -32,7 +32,6 @@ class omssa_2_1_9( ursgal.UNode ):
             'protein_database_search_engine' : True,
         },
         'input_extensions'   : [ '.mgf' ],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
         'in_development'     : False,

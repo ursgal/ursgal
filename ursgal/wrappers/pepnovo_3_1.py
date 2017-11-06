@@ -22,7 +22,6 @@ class pepnovo_3_1( ursgal.UNode ):
             'de_novo_search_engine' : True,
         },
         'input_extensions'   : ['.mgf'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'utranslation_style' : 'pepnovo_style_1',
         'in_development'     : False,

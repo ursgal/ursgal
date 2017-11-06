@@ -15,7 +15,6 @@ class svm_1_0_0( ursgal.UNode ):
             'validation_engine' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'svm_validated',
         'create_own_folder'  : False,

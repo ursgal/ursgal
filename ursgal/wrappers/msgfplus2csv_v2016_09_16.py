@@ -28,7 +28,6 @@ class msgfplus2csv_v2016_09_16( ursgal.UNode ):
             'converter'     : True
         },
         'input_extensions'   : ['.mzid', '.mzid.gz'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : None,
         'include_in_git'     : False,

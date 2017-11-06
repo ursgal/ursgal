@@ -20,10 +20,8 @@ class xtandem_sledgehammer( ursgal.UNode ):
             'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
-        'input_multi_file'            : False,
         'output_extensions'           : ['.xml'],
         'create_own_folder'           : True,
-        'compress_raw_search_results' : True,
         'in_development'              : False,
         'include_in_git'              : False,
         'distributable'               : True,
@@ -305,9 +303,10 @@ class xtandem_sledgehammer( ursgal.UNode ):
     <note type="input" label="spectrum, threads">{cpus}</note>
     <note type="input" label="spectrum, sequence batch size" >{batch_size}</note>
     <note type="input" label="spectrum, use noise suppression" >{noise_suppression_enabled}</note>
-
     <note type="heading">
+
         Residue modification
+
     </note>
     <note type="input" label="residue, modification mass">{fixed_modifications}</note>
     <note type="input" label="residue, potential modification mass">{potential_modifications}</note>

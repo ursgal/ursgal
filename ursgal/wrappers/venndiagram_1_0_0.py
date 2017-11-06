@@ -19,7 +19,6 @@ class venndiagram_1_0_0( ursgal.UNode ):
             'visualizer' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : True,
         'output_extensions'  : ['.svg'],
         'output_suffix'      : 'venndiagram',
         'include_in_git'     : True,
