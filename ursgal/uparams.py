@@ -2885,7 +2885,7 @@ ursgal_params = {
             'The kernel function of the support vector machine used for PSM '\
             'post-processing (\'rbf\', \'linear\', \'poly\' or \'sigmoid\')',
     },
-    'kojak_MS1_centroid' : {
+    'ms1_is_centroided' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -2895,26 +2895,22 @@ ursgal_params = {
             'kojak_style_1' : 'kojak_MS1_centroid',
         },
         'utag' : [
-            'cross-linking',
+            'spectrum',
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                'Yes' : 1,
-                'No'  : 0,
+                True : 1,
+                False  : 0,
             },
         },
-        'uvalue_type' : 'select',
+        'uvalue_type' : 'bool',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['Yes', 'No'],
-            'custom_val_max' : 0,
         },
-        'default_value' : 'No',
+        'default_value' : False,
         'description' : \
-            'MS1 centroided data yes (1) or no (0)',
+            'MS1 are centroided data: True or False',
     },
-    'kojak_MS1_resolution' : {
+    'ms1_resolution' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -2924,7 +2920,7 @@ ursgal_params = {
             'kojak_style_1' : 'kojak_MS1_resolution',
         },
         'utag' : [
-            'cross-linking',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -2940,7 +2936,7 @@ ursgal_params = {
         'description' : \
             'MS1 resolution',
     },
-    'kojak_MS2_centroid' : {
+    'ms2_is_centroid' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -2954,22 +2950,18 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                'Yes' : 1,
-                'No'  : 0,
+                True : 1,
+                False : 0,
             },
         },
-        'uvalue_type' : 'select',
+        'uvalue_type' : 'bool',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['Yes', 'No'],
-            'custom_val_max' : 0,
         },
-        'default_value' : 'Yes',
+        'default_value' : True,
         'description' : \
-            'MS2 centroided data yes (1) or no (0)',
+            'MS2 are centroided data: True or False',
     },
-    'kojak_MS2_resolution' : {
+    'ms2_resolution' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -2979,7 +2971,7 @@ ursgal_params = {
             'kojak_style_1' : 'kojak_MS2_resolution',
         },
         'utag' : [
-            'cross-linking',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -3093,20 +3085,16 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                'Activate'   : 1,
-                'Deactivate' : 0,
+                True   : 1,
+                False  : 0,
             },
         },
-        'uvalue_type' : 'select',
+        'uvalue_type' : 'bool',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['Activate', 'Deactivate'],
-            'custom_val_max' : 0,
         },
-        'default_value' : 'Activate',
+        'default_value' : True,
         'description' : \
-            'Activate (1) or deactivate (0) output for percolator',
+            'Activate (True) or deactivate (False) output for percolator',
     },
     'kojak_fragment_bin_offset' : {
         'edit_version' : 1.00,
