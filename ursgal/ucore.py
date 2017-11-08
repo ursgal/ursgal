@@ -164,7 +164,7 @@ def digest(sequence , enzyme, no_missed_cleavages = False):
     return additionals
 
 
-def parseFasta(io):
+def parse_fasta(io):
     '''
     Small function to efficiently parse a file in fasta format.
 

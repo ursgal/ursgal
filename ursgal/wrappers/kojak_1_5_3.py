@@ -152,7 +152,7 @@ class kojak_1_5_3( ursgal.UNode ):
                 self.params['output_dir_path'],
                 '{0}_kojak_{1}{2}'.format(
                     self.params['file_root'],
-                    self.META_INFO['version'],
+                    self.META_INFO['version'].replace('.', '_'),
                     extension
                 )
             )

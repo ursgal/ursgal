@@ -458,7 +458,7 @@ class UPeptideMapper_v2( dict ):
         # self.word_len = 6
         if force:
             for upapa_id, (id, seq) in enumerate(
-                    ursgal.ucore.parseFasta( fasta_stream )):
+                    ursgal.ucore.parse_fasta( fasta_stream )):
                 print(
                     '[ upapa v2 ] Indexing sequence #{0} with word_len {1}'.format(
                         upapa_id,
@@ -698,7 +698,7 @@ class UPeptideMapper_v3():
         if fasta_name in self.protein_indices.keys():
             self.purge_fasta_info(fasta_name)
             self.fasta_name = fasta_name
-        for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parseFasta(open(fasta_database,'r').readlines())):
+        for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parse_fasta(open(fasta_database,'r').readlines())):
             if protein_pos % 5000 == 0:
                 print(
                     '[ upapa v3 ] Buffering protein #{0} of database {1}'.format(
@@ -878,7 +878,7 @@ class UPeptideMapper_v4():
             class.
         '''
 
-        for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parseFasta(open(fasta_database,'r').readlines())):
+        for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parse_fasta(open(fasta_database,'r').readlines())):
             if protein_pos % 5000 == 0:
                 print(
                     '[ upapa v4 ] Buffering protein #{0} of database {1}'.format(

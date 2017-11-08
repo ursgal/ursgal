@@ -178,7 +178,7 @@ class compomics_utilities_4_11_5( ursgal.UNode ):
         # read database and get full name and also the pre and post aa
         short_2_long_name_mapping = {}
         fasta_id_dict = {}
-        for fastaID, sequence in ursgal.ucore.parseFasta( open( self.params['translations']['database'], 'r' ) ):
+        for fastaID, sequence in ursgal.ucore.parse_fasta( open( self.params['translations']['database'], 'r' ) ):
             fasta_id_dict[fastaID] = sequence
             try:
                 short_2_long_name_mapping[ fastaID.split('|')[1] ] = fastaID # uniprot style

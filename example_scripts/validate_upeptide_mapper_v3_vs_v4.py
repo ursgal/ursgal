@@ -46,7 +46,7 @@ def main( ):
     peptides = set()
     max_number_peptides = 1000000000
     digest_start = time.time()
-    for fastaID, sequence in ursgal.ucore.parseFasta( open( input_params['database'], 'r' ) ):
+    for fastaID, sequence in ursgal.ucore.parse_fasta( open( input_params['database'], 'r' ) ):
         tryptic_peptides = ursgal.ucore.digest(
             sequence,
             ('KR', 'C'),

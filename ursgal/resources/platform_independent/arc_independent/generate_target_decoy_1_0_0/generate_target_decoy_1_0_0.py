@@ -32,7 +32,7 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
     sequenceFastaDict = ddict(list)
     print("Checking for redundancy of protein sequences...", file = sys.stderr)
     for fastaFile in input_files:
-        for fastaID, sequence in ursgal.ucore.parseFasta( open( fastaFile, "r" ) ):
+        for fastaID, sequence in ursgal.ucore.parse_fasta( open( fastaFile, "r" ) ):
             if 'REVERSED' in fastaID:
                 continue
             sequenceFastaDict[sequence].append(fastaID)
