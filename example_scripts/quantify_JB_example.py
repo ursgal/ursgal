@@ -93,6 +93,7 @@ def main():
     uc.params['label']                  = '15N'
     uc.params['label_percentile']       = [0, 0.99]
     uc.params['evidence_score_field']   = 'combined PEP'
+    uc.params['ms_level']   = 1
 
     uc.quantify(
         input_file=mzML_file,

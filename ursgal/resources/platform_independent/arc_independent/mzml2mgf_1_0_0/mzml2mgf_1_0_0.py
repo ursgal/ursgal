@@ -45,7 +45,8 @@ def main(
         scan_exclusion_list   = None,
         scan_inclusion_list   = None,
         prefix                = None,
-        scan_skip_modulo_step = None
+        scan_skip_modulo_step = None,
+        ms_level              = 2,
     ):
 
     print('Converting file:\n\tmzml : {0}\n\tto\n\tmgf : {1}'.format(
@@ -87,7 +88,7 @@ def main(
 
         # if n >= 1000:
         #     break
-        if spec['ms level'] != 2:
+        if spec['ms level'] != ms_level:
             continue
         scan_time, unit = spec['scan time']
         spectrum_id = spec['id']

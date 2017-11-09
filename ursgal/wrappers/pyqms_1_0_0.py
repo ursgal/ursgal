@@ -133,7 +133,7 @@ class pyqms_1_0_0(ursgal.UNode):
             min_charge=self.params['precursor_min_charge'],
             max_charge=self.params['precursor_max_charge'],
             evidence_score_field=self.params['evidence_score_field'],
-            ms_level=self.params['quant_ms_level'],
+            ms_level=self.params['ms_level'],
             trivial_names=self.params['pyqms_trivial_names'],
             pyqms_params=pyqms_params,
             verbose=self.params['pyqms_verbosity'],

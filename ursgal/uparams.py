@@ -643,10 +643,11 @@ ursgal_params = {
         },
         'uvalue_type': "float",
     },
-    'quant_ms_level': {
-        'edit_version' : 1.00,
+    'ms_level': {
+        'edit_version' : 1.01,
         'available_in_unode': [
-            'pyqms_1_0_0'
+            'pyqms_1_0_0',
+            'mzml2mgf_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -656,14 +657,15 @@ ursgal_params = {
             'updownval': 1,
             'unit': 'ms_level'
         },
-        'default_value': 1,
-        'description': 'ms level on which the evidences should be matched',
+        'default_value': 2,
+        'description': 'MS level on which that is taken into account, e.g. for spectrum extraction, matching of evidences, etc.',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'ms_level'
+            'pyqms_style_1': 'ms_level',
+            'mzml2mgf_style_1' : 'ms_level',
         },
         'utag': [
-            'quantitation'
+            'Spectrum'
         ],
         'uvalue_translation': {
         },
@@ -681,7 +683,7 @@ ursgal_params = {
             'pyqms_style_1' : 'label_percentile',
         },
         'utag' : [
-            'quantitation',
+            'label',
         ],
         'uvalue_option' : {
             'f-point' : {
