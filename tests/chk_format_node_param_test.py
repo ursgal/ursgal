@@ -40,18 +40,18 @@ node_meta_info = {
         'essential' : False,
         'types'     : [dict],
     },
-    'engine_exe' : {
-        'essential' : False,
-        'types'     : [dict],
-    },
+    # 'engine_exe' : {
+    #     'essential' : False,
+    #     'types'     : [dict],
+    # },
     'engine_type' : {
         'essential' : True,
         'types'     : [dict],
     },
-    'engine_url' : {
-        'essential' : False,
-        'types'     : [dict],
-    },
+    # 'engine_url' : {
+    #     'essential' : False,
+    #     'types'     : [dict],
+    # },
     'group_psms' : {
         'essential' : False,
         'types'     : [bool],
@@ -72,10 +72,10 @@ node_meta_info = {
     #     'essential' : True,
     #     'types'     : [bool],
     # },
-    'mods_to_unimod_correction' : {
-        'essential' : False,
-        'types'     : [dict],
-    },
+    # 'mods_to_unimod_correction' : {
+    #     'essential' : False,
+    #     'types'     : [dict],
+    # },
     'name' : {
         'essential' : True,
         'types'     : [str],
@@ -104,10 +104,10 @@ node_meta_info = {
         'essential' : True,
         'types'     : [str],
     },
-    'uses_unode' : {
-        'essential' : False,
-        'types'     : [str],
-    },
+    # 'uses_unode' : {
+    #     'essential' : False,
+    #     'types'     : [str],
+    # },
 }
 
 # param format
@@ -205,33 +205,32 @@ type_info = {
     'select' : {
         'my_type' : str,
         'option'  : {
-            'combo_box'      : [bool],
-            'radio_button'   : [bool],
-            'initial_value'  : [list],
-            'custom_val_max' : [int],
+            'select_type'       : [str],
+            'available_values'  : [list],
+            'custom_val_max'    : [int],
         },
     },
     'list' : {
         'my_type' : list,
         'option'  : {
-            'title_list'     : [list],
-            'type_dict'      : [dict],
+            'item_title'     : [str],
+            'item_type'      : [str],
             'custom_val_max' : [int],
         },
     },
-    'tuple' : {
-        'my_type' : tuple,
-        'option': {
-            'title_list'     : [list],
-            'type_dict'      : [dict],
-            'custom_val_max' : [int],
-        },
-    },
+    # 'tuple' : {
+    #     'my_type' : tuple,
+    #     'option': {
+    #         'titles'     : [list],
+    #         'type_dict'      : [dict],
+    #         'custom_val_max' : [int],
+    #     },
+    # },
     'dict' : {
         'my_type' : dict,
         'option'  : {
-            'dict_title'     : [dict],
-            'dict_type'      : [dict],
+            'item_titles'     : [dict],
+            'value_types'      : [dict],
         },
     },
     'None' : {
@@ -637,8 +636,8 @@ def chk_format_param( param_name, param_dict ):
 
         chk_vals_types(
             parent_name = 'uvalue_option',
-            key_name    = 'initial_value',
-            vals        = uvalue_option['initial_value'],
+            key_name    = 'available_values',
+            vals        = uvalue_option['available_values'],
             type_list   = [my_type],
         )
 
@@ -652,7 +651,7 @@ def chk_format_param( param_name, param_dict ):
             error_msg = 'custom_val_max is more than 0.'
             raise ValueError(error_msg)
 
-    elif uvalue_type == 'list' or uvalue_type == 'tuple':
+    elif uvalue_type == 'list':
         my_type = type_info[uvalue_type]['my_type']
 
         chk_vals_types(
@@ -687,50 +686,53 @@ def chk_format_param( param_name, param_dict ):
                 type_list   = v,
             )
 
-        title_list = uvalue_option['title_list']
-        type_dict  = uvalue_option['type_dict']
+        item_title = uvalue_option['item_title']
+        item_type  = uvalue_option['item_type']
 
-        if default_value is not None:
-            if len(title_list) != len(default_value):
-                error_msg = 'default_value is not exactly number compared '\
-                    'with title_list.'
-                raise ValueError(error_msg)
-        if none_val is not None:
-            if len(title_list) != len(none_val):
-                error_msg = 'none_val is not exactly number compared with '\
-                    'title_list.'
-                raise ValueError(error_msg)
+        # Why should checking for the same number of elements be necessary?
+        # The number of elements in a list is variable
+        # if default_value is not None:
+        #     if len(title_list) != len(default_value):
+        #         error_msg = 'default_value is not exactly number compared '\
+        #             'with title_list.'
+        #         raise ValueError(error_msg)
+        # if none_val is not None:
+        #     if len(title_list) != len(none_val):
+        #         error_msg = 'none_val is not exactly number compared with '\
+        #             'title_list.'
+        #         raise ValueError(error_msg)
 
-        chk_json_item(
-            parent_name = 'uvalue_option',
-            essential   = True,
-            key_list    = title_list,
-            dict_item   = type_dict,
-            type_list   = [str],
-        )
+        # chk_json_item(
+        #     parent_name = 'uvalue_option',
+        #     essential   = True,
+        #     key_list    = [item_title],
+        #     dict_item   = item_type,
+        #     type_list   = [str],
+        # )
 
-        list_type_list = list(set(list(type_dict.values())))
+        # list_type_list = list(set(list(type_dict.values())))
         for k, v in type_info.items():
-            if (k in list_type_list) is True:
+            if k == item_type:
                 chk_json_item(
                     parent_name = 'uvalue_option',
                     essential   = True,
                     key_list    = list(v['option']),
                     dict_item   = uvalue_option,
-                    type_list   = [dict],
+                    type_list   = [item_type],
                 )
 
-        for k, v in type_info.items():
-            for title in title_list:
-                if type_dict[title] == k:
-                    for k2, v2 in v['option'].items():
-                        chk_json_item(
-                            parent_name = k2,
-                            essential   = True,
-                            key_list    = [title],
-                            dict_item   = uvalue_option[k2],
-                            type_list   = v2,
-                        )
+        # Just one title for items in list now, so this should not be necessary anymore
+        # for k, v in type_info.items():
+        #     for title in title_list:
+        #         if type_dict[title] == k:
+        #             for k2, v2 in v['option'].items():
+        #                 chk_json_item(
+        #                     parent_name = k2,
+        #                     essential   = True,
+        #                     key_list    = [title],
+        #                     dict_item   = uvalue_option[k2],
+        #                     type_list   = v2,
+        #                 )
 
         chk_vals_types(
             parent_name = 'uvalue_option',
@@ -805,8 +807,8 @@ def chk_format_param( param_name, param_dict ):
                 type_list   = v,
             )
 
-        dict_title = uvalue_option['dict_title']
-        dict_type  = uvalue_option['dict_type']
+        dict_title = uvalue_option['item_titles']
+        dict_type  = uvalue_option['value_types']
 
         title_key_list, title_layer_dict = search_dict_keys(
             dict_item  = dict_title,

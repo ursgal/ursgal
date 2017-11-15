@@ -88,17 +88,17 @@ class venndiagram_1_0_0( ursgal.UNode ):
             ]:
                 continue
             elif translated_key == 'visualization_font':
-                venn_params['font'] = translation_dict['visualization_font'][0]
-                venn_params['label font-size header'] = translation_dict['visualization_font'][1]
-                venn_params['label font-size major'] = translation_dict['visualization_font'][2]
-                venn_params['label font-size minor'] = translation_dict['visualization_font'][3]
-                venn_params['label font-size venn'] = translation_dict['visualization_font'][3]
+                venn_params['font'] = translation_dict['visualization_font']['font_type']
+                venn_params['label font-size header'] = translation_dict['visualization_font']['font_size_header']
+                venn_params['label font-size major'] = translation_dict['visualization_font']['font_size_major']
+                venn_params['label font-size minor'] = translation_dict['visualization_font']['font_size_minor']
+                venn_params['label font-size venn'] = translation_dict['visualization_font']['font_size_venn']
             elif translated_key == 'visualization_scaling_factors' :
-                venn_params['cx'] = translation_dict['visualization_scaling_factors'][0]
-                venn_params['cy'] = translation_dict['visualization_scaling_factors'][1]
+                venn_params['cx'] = translation_dict['visualization_scaling_factors']['x_axis']
+                venn_params['cy'] = translation_dict['visualization_scaling_factors']['y_axis']
             elif translated_key == 'visualization_size' :
-                venn_params['width'] = translation_dict['visualization_size'][0]
-                venn_params['height'] = translation_dict['visualization_size'][1]
+                venn_params['width'] = translation_dict['visualization_size']['width']
+                venn_params['height'] = translation_dict['visualization_size']['height']
             elif len(translation_dict) == 1:
                 venn_params[translated_key] = list(translation_dict.values())[0]
             else:

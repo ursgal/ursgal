@@ -375,15 +375,9 @@ ursgal_params = {
         ],
         'uvalue_option': {
             'none_val': [None],
-            'multiple_line': {
-                "AA" : False
-            },
-            'max': 10000,
-            'min': 0,
-            'updownval': 1,
-            'unit': 'psms',
-            'type_dict': {'AA' : 'str'},
-            'title_list': ['AA'],
+            'multiple_line': False,
+            'item_type': 'str',
+            'item_title': 'aminoacid',
             'custom_val_max': 20,
             'custom_type' : {
             }
@@ -536,17 +530,17 @@ ursgal_params = {
             'pyqms_1_0_0',
         ],
         'default_value': None,
-        'description':  ''' Molecules to quantify. Can be either list of string or csv file ''',
+        'description':  ''' Molecules to quantify. Can be either a list of strings or a csv file ''',
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'evidences'
         },
         'uvalue_option': {
             'none_val': [None],
-            'multiple_line': {'path': False},
-            'title_list': ['path'],
+            'item_title': 'path',
             'custom_val_max': 100000,
-            'type_dict': {'path': 'str'},
+            'item_type': 'str',
+            'multiple_line' : False,
             'custom_type': {}
         },
         'utag': [
@@ -592,20 +586,18 @@ ursgal_params = {
         ],
         'uvalue_option': {
             'none_val': [],
-            'dict_type': {'str': 'str'},
-            'multiple_line': False,
-            'title_list': [],
+            'item_type': 'str',
+            'item_title': 'molecule',
             'custom_val_max': 100000,
+            'multiple_line' : False,
             'custom_type': {
                 'str': {
                     'multiple_line': False,
                 },
             },
-            'type_dict': {
-            },
         },
         'default_value': None,
-        'description':  ''' Molecules to quantify. Can be either list of string or csv file ''',
+        'description':  ''' Molecules to quantify. Can be either a list of strings or a csv file ''',
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'molecules',
@@ -771,10 +763,10 @@ ursgal_params = {
                 'str' : {'multiple_line': False},
             },
             'custom_val_max' : 100000,
-            'dict_title' : {
+            'item_titles' : {
                 'formula' : 'trivial',
             },
-            'dict_type' : {
+            'value_types' : {
                 'str' : 'str',
             },
             'multiple_line' : False,
@@ -888,14 +880,17 @@ ursgal_params = {
         },
         'uvalue_type'    : 'dict',
         'uvalue_option' : {
-            'none_val' : None,
-            'dict_title' : {
-                'Data Set' : {
-                    'Format' : 'Unusual AA'
+            'none_val' : {},
+            'item_titles' : {
+                'amino_acid' : {
+                    'original_aa' : 'aa_list',
+                    'unimod_name' : 'name',
+                    'unimod_name_with_cam' : 'name',
                 }
             },
-            'dict_type' : {
-                'original_aa'          : 'str',
+            'value_types' : {
+                'amino_acid'           : 'dict',
+                'original_aa'          : 'list',
                 'unimod_name'          : 'str',
                 'unimod_name_with_cam' : 'str',
             },
@@ -904,12 +899,11 @@ ursgal_params = {
                 'unimod_name'          : False,
                 'unimod_name_with_cam' : False,
             },
-            'custom_val_max' : 10000,
-            'custom_type' : {
-                'str' : {
-                    'multiple_line' : False,
-                },
-            },
+            # 'custom_type' : {
+            #     'str' : {
+            #         'multiple_line' : False,
+            #     },
+            # },
         },
     },
     'accept_conflicting_psms' : {
@@ -1081,7 +1075,7 @@ ursgal_params = {
             'database file',
     },
     'bigger_scores_better' : {
-        'edit_version'   : 1.00,
+        'edit_version'   : 1.01,
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -1223,9 +1217,8 @@ ursgal_params = {
         },
         'uvalue_type'    : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type'   : 'radio_button',
+            'available_values'  : [
                 'None',
                 'msamanda_1_0_0_5242',
                 'msamanda_1_0_0_5243',
@@ -1233,6 +1226,7 @@ ursgal_params = {
                 'msamanda_1_0_0_6300',
                 'msamanda_1_0_0_7503',
                 'msamanda_1_0_0_7504',
+                'msfragger_20170103',
                 'msgfplus_v2016_09_16',
                 'msgfplus_v2017_01_27',
                 'msgfplus_v9979',
@@ -1539,19 +1533,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-                'column_name_1',
-                'column_name_2',
-            ],
-            'type_dict' : {
-                'column_name_1' : 'str',
-                'column_name_2' : 'str',
-            },
-            'multiple_line' : {
-                'column_name_1' : False,
-                'column_name_2' : False,
-            },
+            'item_title' : 'column name',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -1726,34 +1711,19 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'none_val' : [
-                '',
-                '',
-                ''
-            ],
-            'title_list' : [
-                'column name/csv fieldname',
-                'rule',
-                'compared value',
-            ],
-            'type_dict' : {
-                'column name/csv fieldname' : 'str',
-                'rule'                      : 'str',
-                'compared value'            : 'str',
-            },
-            'multiple_line' : {
-                'column name/csv fieldname' : False,
-                'rule'                      : False,
-                'compared value'            : False,
-            },
+            'none_val' : [],
+            'item_title' : 'filter rule',
+            'item_type' : 'list',
             'custom_val_max' : 0,
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
-            'Rules are defined as list of tuples with the first tuple element '\
-            'as the column name/csv fieldname, the second tuple element the '\
-            'rule and the third tuple element the value which should be '\
-            'compared',
+            'Rules are defined as list of lists with three elements:\n'\
+            '1. the column name/csv fieldname,\n'\
+            '2. the rule,\n'\
+            '3.the value which should be compared\n'\
+            'e.g.: [\'Is decoy\', \'equals\', \'false\']'
     },
     'database' : {
         'edit_version' : 1.00,
@@ -1811,7 +1781,6 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val'         : '',
             'multiple_line'    : False,
-            'input_extensions' : ['.fasta', '.fa'],
         },
         'default_value' : None,
         'description' : \
@@ -1851,7 +1820,7 @@ ursgal_params = {
             'sequences from the fasta database are included in the search.',
     },
     'decoy_generation_mode' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
         ],
@@ -1866,16 +1835,15 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['reverse_protein', 'shuffle_peptide'],
+            'select_type'    : 'radio_button',
+            'available_values'  : ['reverse_protein', 'shuffle_peptide'],
             'custom_val_max' : 0,
         },
         'default_value' : 'shuffle_peptide',
         'description' : \
             'Decoy database: Creates a target decoy database based on '\
-            'shuffling of peptides or complete reversing the protein sequence '\
-            '(reverse_protein).',
+            'shuffling of peptides (shuffle_peptide) or complete reversing '\
+            'the protein sequence (reverse_protein).',
     },
     'decoy_tag' : {
         'edit_version' : 1.00,
@@ -1933,16 +1901,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list'   : [
-                'del param',
-            ],
-            'type_dict' : {
-                'del param' : 'str',
-            },
-            'multiple_line' : {
-                'del param' : False,
-            },
+            'item_title'   : 'del param',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -1957,7 +1919,7 @@ ursgal_params = {
             '(to not overload the .json with unimportant informations)',
     },
     'denovo_model' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -1975,9 +1937,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['cid_trypsin'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['cid_trypsin'],
             'custom_val_max' : 1,
         },
         'default_value' : 'cid_trypsin',
@@ -2088,7 +2049,7 @@ ursgal_params = {
             'in their META_INFO (\'create_own_folder\' : True). True or False',
     },
     'enzyme' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'kojak_1_5_3',
@@ -2390,9 +2351,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type'   : 'radio_button',
+            'available_values'  : [
                 'argc',
                 'aspn',
                 'aspn_gluc',
@@ -2486,7 +2446,7 @@ ursgal_params = {
             'a positive training set for SVM post-processing',
     },
     'forbidden_cterm_mods' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'xtandem_vengeance',
             'xtandem_alanine',
@@ -2503,11 +2463,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-            ],
-            'type_dict' : {
-            },
+            'item_title' : 'unimod name',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -2682,7 +2641,7 @@ ursgal_params = {
             'Mass tolerance of measured and calculated fragment ions',
     },
     'frag_mass_tolerance_unit' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -2743,9 +2702,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['da', 'mmu', 'ppm'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['da', 'mmu', 'ppm'],
             'custom_val_max' : 0,
         },
         'default_value' : 'ppm',
@@ -2754,7 +2712,7 @@ ursgal_params = {
             '(parts-per-millon), da (Dalton) or mmu (Milli mass unit)',
     },
     'frag_mass_type' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -2781,9 +2739,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['average', 'monoisotopic'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['average', 'monoisotopic'],
             'custom_val_max' : 0,
         },
         'default_value' : 'monoisotopic',
@@ -2822,7 +2779,7 @@ ursgal_params = {
             'Maximum fragment ion charge to search.',
     },
     'frag_method' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
@@ -2850,9 +2807,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['cid', 'ecd', 'etd', 'hcd'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['cid', 'ecd', 'etd', 'hcd'],
             'custom_val_max' : 0,
         },
         'default_value' : 'hcd',
@@ -3303,7 +3259,7 @@ ursgal_params = {
             'Color gradient for the heatmap',
     },
     'heatmap_column_order' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -3319,11 +3275,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-            ],
-            'type_dict' : {
-            },
+            'item_title' : 'column name',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -3575,9 +3530,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type' : 'radio_button',
+            'available_values'  : [
                 'high_res_ltq',
                 'low_res_ltq',
                 'q_exactive',
@@ -3606,16 +3560,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-                'column_name_1',
-            ],
-            'type_dict' : {
-                'column_name_1' : 'str',
-            },
-            'multiple_line' : {
-                'column_name_1' : False,
-            },
+            'item_title' : 'column_name',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -3724,9 +3672,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['rbf', 'linear', 'poly', 'sigmoid'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['rbf', 'linear', 'poly', 'sigmoid'],
             'custom_val_max' : 1,
         },
         'default_value' : 'rbf',
@@ -3892,7 +3839,7 @@ ursgal_params = {
             'For example, 0.25 equals 25 APE',
     },
     'kojak_export_pepxml' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -3905,20 +3852,16 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                'Activate'   : 1,
-                'Deactivate' : 0,
+                True   : 1,
+                False : 0,
             },
         },
-        'uvalue_type' : 'select',
+        'uvalue_type' : 'bool',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['Activate', 'Deactivate'],
-            'custom_val_max' : 0,
         },
-        'default_value' : 'Deactivate',
+        'default_value' : False,
         'description' : \
-            'Activate (1) or deactivate (0) output as pepXML',
+            'Activate (True) or deactivate (False) output as pepXML',
     },
     'kojak_export_percolator' : {
         'edit_version' : 1.00,
@@ -4058,7 +4001,7 @@ ursgal_params = {
             'Defines the output format of Kojak for Percolator',
     },
     'kojak_prefer_precursor_pred' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -4071,28 +4014,28 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                '0: ignore previous' : 0,
-                '1: only previous'   : 1,
-                '2: supplement'      : 2,
+                'ignore_previous' : 0,
+                'only_previous'   : 1,
+                'supplement'      : 2,
             },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
-                '0: ignore previous',
-                '1: only previous',
-                '2: supplement',
+            'select_type' : 'radio_button',
+            'available_values'  : [
+                'ignore_previous',
+                'only_previous',
+                'supplement',
             ],
             'custom_val_max' : 0,
         },
         'default_value' : 'supplement',
         'description' : \
             'prefer precursor mono mass predicted by instrument software.\n'\
-            '    0 = ignore previous predictions\n'\
-            '    1 = use only previous predictions\n'\
-            '    2 = supplement predictions with additional analysis',
+            'Available values:\n'\
+            '    ignore_previous: previous predictions are ignored\n'\
+            '    only_previous: only previous predictions are used\n'\
+            '    supplement: predictions are supplemented with additional analysis',
     },
     'kojak_spectrum_processing' : {
         'edit_version' : 1.00,
@@ -4200,7 +4143,7 @@ ursgal_params = {
             'be used.',
     },
     'label' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -4245,9 +4188,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['14N', '15N'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['14N', '15N'],
             'custom_val_max' : 0,
         },
         'default_value' : '14N',
@@ -4540,13 +4482,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'dict',
         'uvalue_option' : {
-            'none_val' : None,
-            'dict_title' : {
+            'none_val' : {},
+            'item_titles' : {
                 'unimod_name' : 'number'
             },
-            'dict_type' : {
+            'value_types' : {
+                'unimod_name' : 'int'
             },
-            'custom_val_max' : 10000,
             'custom_type' : {
                 'int' : {
                     'max'       : 10000,
@@ -4707,7 +4649,6 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val'         : '',
             'multiple_line'    : False,
-            'input_extensions' : ['.mgf'],
         },
         'default_value' : None,
         'description' : \
@@ -4921,7 +4862,7 @@ ursgal_params = {
             'Mimimum number of peaks in the spectrum to be considered. MSFragger default: 15',
     },
     'moda_blind_mode' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -4934,28 +4875,28 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'moda_style_1' : {
-                'No Modification'   : 0,
-                'One Modification'  : 1,
-                'No Limit'          : 2,
+                'no_modification'   : 0,
+                'one_modification'  : 1,
+                'no_limit'          : 2,
             },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
-                'No Modification',
-                'One Modification',
-                'No Limit',
+            'select_type' : 'radio_button',
+            'available_values'  : [
+                'no_modification',
+                'one_modification',
+                'no_limit',
             ],
             'custom_val_max' : 0,
         },
-        'default_value' : 'No Limit',
+        'default_value' : 'no_limit',
         'description' : \
-            'Allowed number of modifications per peptide. \n'\
-            '    \'0\' = no modification, \n'\
-            '    \'1\' = one modification, \n'\
-            '    \'2\' = no limit',
+            'Allowed number of modifications per peptide in ModA BlindMode. \n'\
+            'Available values:'
+            '    no_modification\n'\
+            '    one_modification\n'\
+            '    no_limit',
     },
     'moda_high_res' : {
         'edit_version' : 1.00,
@@ -5001,9 +4942,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type' : 'radio_button',
+            'available_values'  : [
                 'None',
                 'iTRAQ4plex',
                 'iTRAQ8plex',
@@ -5081,19 +5021,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-                'mod_1',
-                'mod_2',
-            ],
-            'type_dict' : {
-                'mod_1' : 'str',
-                'mod_2' : 'str',
-            },
-            'multiple_line' : {
-                'mod_1' : False,
-                'mod_2' : False,
-            },
+            'item_title' : 'modification',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -5271,7 +5202,7 @@ ursgal_params = {
             'MS2 resolution',
     },
     'msgfplus_protocol_id' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
@@ -5293,9 +5224,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['0', '1', '2', '3'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['0', '1', '2', '3'],
             'custom_val_max' : 0,
         },
         'default_value' : '0',
@@ -5680,7 +5610,7 @@ ursgal_params = {
             'mzidentml converter version: version name',
     },
     'mzidentml_export_type' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -5697,9 +5627,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type' : 'radio_button',
+            'available_values'  : [
                 'exportPSMs',
                 'exportProteinGroups',
                 'exportProteinsOnly',
@@ -5729,9 +5658,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type' : 'radio_button',
+            'available_values'  : [
                 'AddEmpaiToMzid',
                 'CreateRestrictedFASTADatabase',
                 'Csv2mzid',
@@ -5748,7 +5676,7 @@ ursgal_params = {
         'default_value' : 'Mzid2Csv',
         'description' : \
             'Defines the mzidentml_lib function to be used. Note: only '\
-            '\'Mzid2Csv\' is suppoted so far',
+            '\'Mzid2Csv\' is supported so far',
     },
     'mzidentml_output_fragmentation' : {
         'edit_version' : 1.00,
@@ -6612,7 +6540,7 @@ ursgal_params = {
             '    \'None\' : None',
     },
     'output_file_type' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -6643,9 +6571,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['.csv', '.mzid', '.omx', 'default'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['.csv', '.mzid', '.omx', 'default'],
             'custom_val_max' : 0,
         },
         'default_value' : 'default',
@@ -6843,9 +6770,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['linear', 'none'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['linear', 'none'],
             'custom_val_max' : 0,
         },
         'default_value' : 'linear',
@@ -6915,9 +6841,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['0', '0,1', '0,2'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['0', '0,1', '0,2'],
             'custom_val_max' : 0,
         },
         'default_value' : '0,1',
@@ -7050,7 +6975,7 @@ ursgal_params = {
             'calculated parent ion M+H',
     },
     'precursor_mass_tolerance_unit' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -7123,9 +7048,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['da', 'mmu', 'ppm'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['da', 'mmu', 'ppm'],
             'custom_val_max' : 0,
         },
         'default_value' : 'ppm',
@@ -7171,9 +7095,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['average', 'monoisotopic'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['average', 'monoisotopic'],
             'custom_val_max' : 0,
         },
         'default_value' : 'monoisotopic',
@@ -7556,7 +7479,7 @@ ursgal_params = {
             'Number of bins used in qvality',
     },
     'qvality_verbose' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -7578,9 +7501,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['1', '2', '3', '4', '5'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['1', '2', '3', '4', '5'],
             'custom_val_max' : 0,
         },
         'default_value' : '2',
@@ -7725,11 +7647,14 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-            ],
-            'type_dict' : {
-            },
+            'item_title' : 'spectrum number',
+            'item_type' : 'int',
+            'min' : 0,
+            'max' : 100000000,
+            'updownval' : 1,
+            'unit' : '',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -7759,10 +7684,12 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val' : [
             ],
-            'title_list' : [
-            ],
-            'type_dict' : {
-            },
+            'item_title' : 'spectrum number',
+            'item_type' : 'int',
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : '',
+            'updownval' : 1,
             'custom_val_max' : 10000,
             'custom_type' : {
                 'str' : {
@@ -8571,8 +8498,8 @@ ursgal_params = {
             'scoring',
         ],
         'uvalue_option' : {
-            'combo_box' : True,
-            'initial_value' : ['UNKNOWN', 'PERCOLATOR QVALUE', 'TANDEM EXPECTATION VALUE', 'OMSSA EXPECTATION SCORE'],
+            'select_type' : 'radio_button',
+            'available_values' : ['UNKNOWN', 'PERCOLATOR QVALUE', 'TANDEM EXPECTATION VALUE', 'OMSSA EXPECTATION SCORE'],
             'radio_button' : False,
             'custom_val_max' : 0,
         },
@@ -8610,7 +8537,7 @@ ursgal_params = {
             'Penalty parameter C of the error term of the post-processing SVM',
     },
     'test_param1' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             '_test_node',
         ],
@@ -8633,9 +8560,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['a', 'b', 'c', 'd', 'e'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['a', 'b', 'c', 'd', 'e'],
             'custom_val_max' : 0,
         },
         'default_value' : 'b',
@@ -8643,7 +8569,7 @@ ursgal_params = {
             'TEST/DEBUG: Internal Ursgal parameter 1 for debugging and testing.',
     },
     'test_param2' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             '_test_node',
         ],
@@ -8666,9 +8592,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['one', 'two', 'three', 'four', 'five'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['one', 'two', 'three', 'four', 'five'],
             'custom_val_max' : 0,
         },
         'default_value' : 'three',
@@ -9179,19 +9104,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-                'column_name_1',
-                'column_name_2',
-            ],
-            'type_dict' : {
-                'column_name_1' : 'str',
-                'column_name_2' : 'str',
-            },
-            'multiple_line' : {
-                'column_name_1' : False,
-                'column_name_2' : False,
-            },
+            'item_title' : 'column name',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -9208,7 +9124,7 @@ ursgal_params = {
             '(merged) to determine overlapping results.',
     },
     'visualization_font' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -9221,63 +9137,35 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'tuple',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
-            'none_val' : None,
-            'title_list' : [
-                'font-type',
-                'font-size header',
-                'font-size major',
-                'font-size minor',
-                'font-size venn',
-            ],
-            'type_dict' : {
-                'font-type'        : 'str',
-                'font-size header' : 'int',
-                'font-size major'  : 'int',
-                'font-size minor'  : 'int',
-                'font-size venn'   : 'int',
+            'none_val' : {},
+            'item_titles' : {
+                'font_type' : 'type',
+                'font_size_header' : 'size',
+                'font_size_major' : 'size',
+                'font_size_minor' : 'size',
+                'font_size_venn' : 'size',
             },
-            'multiple_line' : {
-                'font-type'        : False,
+            'value_types' : {
+                'font_type' : 'str',
+                'font_size_header' : 'int',
+                'font_size_major' : 'int',
+                'font_size_minor' : 'int',
+                'font_size_venn' : 'int',
             },
-            'max': {
-                'font-size header' : 1000,
-                'font-size major'  : 1000,
-                'font-size minor'  : 1000,
-                'font-size venn'   : 1000,
-            },
-            'min': {
-                'font-size header' : 0,
-                'font-size major'  : 0,
-                'font-size minor'  : 0,
-                'font-size venn'   : 0,
-            },
-            'updownval': {
-                'font-size header' : 1,
-                'font-size major'  : 1,
-                'font-size minor'  : 1,
-                'font-size venn'   : 1,
-            },
-            'unit': {
-                'font-size header' : 'pt',
-                'font-size major'  : 'pt',
-                'font-size minor'  : 'pt',
-                'font-size venn'   : 'pt',
-            },
-            'custom_val_max' : 0,
         },
-        'default_value' : (
-            'Helvetica',
-            31,
-            25,
-            20,
-            20
-        ),
+        'default_value' : {
+            'font_type' : 'Helvetica',
+            'font_size_header' : 31,
+            'font_size_major' : 25,
+            'font_size_minor' : 20,
+            'font_size_venn' : 20
+        },
         'description' : \
             'Font used for visualization plots (e.g. Venn diagram), given as '\
-            'tuple (font-type, font-size header, font-size major, font-size '\
-            'minor, font-size venn)',
+            'dict with keys: font_type, font_size_header, font_size_major, font_size_minor,'\
+            ' font_size_venn',
     },
     'visualization_header' : {
         'edit_version' : 1.00,
@@ -9319,13 +9207,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'initialValue' : [
-            ],
-            'title_list' : [
-            ],
-            'type_dict' : {
-            },
+            'item_title' : 'label',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -9366,7 +9251,7 @@ ursgal_params = {
             'Opacity used in visualization plots (e.g. Venn diagram)',
     },
     'visualization_scaling_factors' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -9379,39 +9264,53 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'tuple',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
-            'none_val'       : None,
-            'title_list' : [
-                'x-axis-scaling-factor',
-                'y-axis-scaling-factor',
-            ],
-            'type_dict' : {
-                'x-axis-scaling-factor' : 'int',
-                'y-axis-scaling-factor' : 'int',
+            'none_val' : {},
+            'item_titles' : {
+                'x_axis' : 'factor',
+                'y_axis' : 'factor',
             },
-            'max': {
-                'x-axis-scaling-factor' : 100000,
-                'y-axis-scaling-factor' : 100000,
+            'value_types' : {
+                'x_axis' : 'int',
+                'y_axis' : 'int',
             },
-            'min': {
-                'x-axis-scaling-factor' : 1,
-                'y-axis-scaling-factor' : 1,
-            },
-            'updownval': {
-                'x-axis-scaling-factor' : 1,
-                'y-axis-scaling-factor' : 1,
-            },
-            'unit': {
-                'x-axis-scaling-factor' : '',
-                'y-axis-scaling-factor' : '',
-            },
-            'custom_val_max' : 0,
         },
-        'default_value' : (600, 400),
+        # 'uvalue_option' : {
+            # 'none_val'       : None,
+            # 'title_list' : [
+            #     'x-axis-scaling-factor',
+            #     'y-axis-scaling-factor',
+            # ],
+            # 'type_dict' : {
+            #     'x-axis-scaling-factor' : 'int',
+            #     'y-axis-scaling-factor' : 'int',
+            # },
+            # 'max': {
+            #     'x-axis-scaling-factor' : 100000,
+            #     'y-axis-scaling-factor' : 100000,
+            # },
+            # 'min': {
+            #     'x-axis-scaling-factor' : 1,
+            #     'y-axis-scaling-factor' : 1,
+            # },
+            # 'updownval': {
+            #     'x-axis-scaling-factor' : 1,
+            #     'y-axis-scaling-factor' : 1,
+            # },
+            # 'unit': {
+            #     'x-axis-scaling-factor' : '',
+            #     'y-axis-scaling-factor' : '',
+            # },
+            # 'custom_val_max' : 0,
+        # },
+        'default_value' : {
+            'x_axis' : 600, 
+            'y_axis' : 400,
+        },
         'description' : \
             'Scaling factor for visualization plots (e.g. Venn diagram), '\
-            'given as tuple (x-axis-scaling-factor, y-axis-scaling-factor)',
+            'given as dict with keys: x_axis, y_axis',
     },
     'visualization_size' : {
         'edit_version' : 1.00,
@@ -9427,39 +9326,53 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'tuple',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
-            'none_val'       : None,
-            'title_list' : [
-                'width',
-                'height',
-            ],
-            'type_dict' : {
-                'width'  : 'int',
+            'none_val' : {},
+            'item_titles' : {
+                'width' : 'size',
+                'height' : 'size',
+            },
+            'value_types' : {
+                'width' : 'int',
                 'height' : 'int',
             },
-            'max': {
-                'width'  : 100000,
-                'height' : 100000,
-            },
-            'min': {
-                'width'  : 1,
-                'height' : 1,
-            },
-            'updownval': {
-                'width'  : 1,
-                'height' : 1,
-            },
-            'unit': {
-                'width'  : 'px',
-                'height' : 'px',
-            },
-            'custom_val_max' : 0,
         },
-        'default_value' : (1200, 900),
+        # 'uvalue_option' : {
+            # 'none_val'       : None,
+            # 'title_list' : [
+            #     'width',
+            #     'height',
+            # ],
+            # 'type_dict' : {
+            #     'width'  : 'int',
+            #     'height' : 'int',
+            # },
+            # 'max': {
+            #     'width'  : 100000,
+            #     'height' : 100000,
+            # },
+            # 'min': {
+            #     'width'  : 1,
+            #     'height' : 1,
+            # },
+            # 'updownval': {
+            #     'width'  : 1,
+            #     'height' : 1,
+            # },
+            # 'unit': {
+            #     'width'  : 'px',
+            #     'height' : 'px',
+            # },
+            # 'custom_val_max' : 0,
+        # },
+        'default_value' : {
+            'width' : 1200,
+            'height' : 900
+        },
         'description' : \
-            'Size of visualization plots (e.g. Venn diagram), given as tuple '\
-            '(width, height)',
+            'Size of visualization plots (e.g. Venn diagram), given as dict '\
+            'with keys: width, height',
     },
     'visualization_stroke_width' : {
         'edit_version' : 1.00,
