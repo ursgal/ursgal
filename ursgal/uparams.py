@@ -9275,6 +9275,23 @@ ursgal_params = {
                 'x_axis' : 'int',
                 'y_axis' : 'int',
             },
+            'max': {
+                'x_axis' : 100000,
+                'y_axis' : 100000,
+            },
+            'min': {
+                'x_axis' : 1,
+                'y_axis' : 1,
+            },
+            'updownval': {
+                'x_axis' : 1,
+                'y_axis' : 1,
+            },
+            'unit': {
+                'x_axis' : '',
+                'y_axis' : '',
+            },
+            'custom_val_max' : 0,
         },
         # 'uvalue_option' : {
             # 'none_val'       : None,
@@ -9286,23 +9303,6 @@ ursgal_params = {
             #     'x-axis-scaling-factor' : 'int',
             #     'y-axis-scaling-factor' : 'int',
             # },
-            # 'max': {
-            #     'x-axis-scaling-factor' : 100000,
-            #     'y-axis-scaling-factor' : 100000,
-            # },
-            # 'min': {
-            #     'x-axis-scaling-factor' : 1,
-            #     'y-axis-scaling-factor' : 1,
-            # },
-            # 'updownval': {
-            #     'x-axis-scaling-factor' : 1,
-            #     'y-axis-scaling-factor' : 1,
-            # },
-            # 'unit': {
-            #     'x-axis-scaling-factor' : '',
-            #     'y-axis-scaling-factor' : '',
-            # },
-            # 'custom_val_max' : 0,
         # },
         'default_value' : {
             'x_axis' : 600, 
@@ -9337,6 +9337,23 @@ ursgal_params = {
                 'width' : 'int',
                 'height' : 'int',
             },
+            'max': {
+                'width'  : 100000,
+                'height' : 100000,
+            },
+            'min': {
+                'width'  : 1,
+                'height' : 1,
+            },
+            'updownval': {
+                'width'  : 1,
+                'height' : 1,
+            },
+            'unit': {
+                'width'  : 'px',
+                'height' : 'px',
+            },
+            'custom_val_max' : 0,
         },
         # 'uvalue_option' : {
             # 'none_val'       : None,
@@ -9348,23 +9365,6 @@ ursgal_params = {
             #     'width'  : 'int',
             #     'height' : 'int',
             # },
-            # 'max': {
-            #     'width'  : 100000,
-            #     'height' : 100000,
-            # },
-            # 'min': {
-            #     'width'  : 1,
-            #     'height' : 1,
-            # },
-            # 'updownval': {
-            #     'width'  : 1,
-            #     'height' : 1,
-            # },
-            # 'unit': {
-            #     'width'  : 'px',
-            #     'height' : 'px',
-            # },
-            # 'custom_val_max' : 0,
         # },
         'default_value' : {
             'width' : 1200,

@@ -833,13 +833,13 @@ def chk_format_param( param_name, param_dict ):
             raise ValueError(error_msg)
 
         for k in key_list:
-            dict_title = dict_title[k]
-        chk_vals_types(
-            parent_name = 'dict_title',
-            key_name    = key_list[-1],
-            vals        = [dict_title],
-            type_list   = [str],
-        )
+            dict_title2chk = dict_title[k]
+            chk_vals_types(
+                parent_name = 'dict_title',
+                key_name    = key_list[-1],
+                vals        = [dict_title2chk],
+                type_list   = [str],
+            )
 
         dict_val_search = {
             'default_value' : default_value,
