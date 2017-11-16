@@ -32,9 +32,23 @@ class msblender_09_2015( ursgal.UNode ):
         'include_in_git'     : True,
         'distributable'      : True,
         'utranslation_style' : 'msblender_style_1',
-        'engine_exe' : {
-            'linux'  : 'msblender',
-            'darwin' : 'msblender',
+        'engine' : {
+            'linux' : {
+                '64bit' : {
+                    'exe'            : 'msblender',
+                    'url'            : '',
+                    'zip_md5'        : None,
+                    'additional_exe' : [],
+                },
+            },
+            'darwin' : {
+                '64bit' : {
+                    'exe'            : 'msblender',
+                    'url'            : '',
+                    'zip_md5'        : None,
+                    'additional_exe' : [],
+                },
+            },
         },
         'citation' : \
             'Kwon T, Choi H, Vogel C, Nesvizhskii AI, Marcotte EM. (2011) '\

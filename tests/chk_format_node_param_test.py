@@ -72,10 +72,10 @@ node_meta_info = {
     #     'essential' : True,
     #     'types'     : [bool],
     # },
-    # 'mods_to_unimod_correction' : {
-    #     'essential' : False,
-    #     'types'     : [dict],
-    # },
+    'mods_to_unimod_correction' : {
+        'essential' : False,
+        'types'     : [dict],
+    },
     'name' : {
         'essential' : True,
         'types'     : [str],
@@ -104,10 +104,10 @@ node_meta_info = {
         'essential' : True,
         'types'     : [str],
     },
-    # 'uses_unode' : {
-    #     'essential' : False,
-    #     'types'     : [str],
-    # },
+    'uses_unode' : {
+        'essential' : False,
+        'types'     : [str],
+    },
 }
 
 # param format
@@ -711,15 +711,23 @@ def chk_format_param( param_name, param_dict ):
         # )
 
         # list_type_list = list(set(list(type_dict.values())))
-        for k, v in type_info.items():
-            if k == item_type:
-                chk_json_item(
-                    parent_name = 'uvalue_option',
-                    essential   = True,
-                    key_list    = list(v['option']),
-                    dict_item   = uvalue_option,
-                    type_list   = [item_type],
-                )
+        for k, v in type_info[uvalue_type]['option'].items():
+            chk_json_item(
+                parent_name = 'uvalue_option',
+                essential   = True,
+                key_list    = [k],
+                dict_item   = uvalue_option,
+                type_list   = v,
+            )
+        # for k, v in type_info.items():
+        #     if k == item_type:
+        #         chk_json_item(
+        #             parent_name = 'uvalue_option',
+        #             essential   = True,
+        #             key_list    = list(v['option']),
+        #             dict_item   = uvalue_option,
+        #             type_list   = [eval(item_type)],
+        #         )
 
         # Just one title for items in list now, so this should not be necessary anymore
         # for k, v in type_info.items():
@@ -832,14 +840,14 @@ def chk_format_param( param_name, param_dict ):
             error_msg = 'dict_title is single layer.'
             raise ValueError(error_msg)
 
-        for k in key_list:
-            dict_title2chk = dict_title[k]
-            chk_vals_types(
-                parent_name = 'dict_title',
-                key_name    = key_list[-1],
-                vals        = [dict_title2chk],
-                type_list   = [str],
-            )
+        # for k in key_list:
+        #     dict_title2chk = dict_title[k]
+        #     chk_vals_types(
+        #         parent_name = 'item_titles',
+        #         key_name    = k,
+        #         vals        = [dict_title2chk],
+        #         type_list   = [eval(dict_type[k])],
+        #     )
 
         dict_val_search = {
             'default_value' : default_value,
@@ -861,18 +869,18 @@ def chk_format_param( param_name, param_dict ):
                         'compared with dict_title.'
                     raise ValueError(error_msg)
 
-                title_list = list(layer_dict)
-                for k, v in type_info.items():
-                    for title in title_list:
-                        if dict_type[title] == k:
-                            for k2, v2 in v['option'].items():
-                                chk_json_item(
-                                    parent_name = k2,
-                                    essential   = True,
-                                    key_list    = [title],
-                                    dict_item   = uvalue_option[k2],
-                                    type_list   = v2,
-                                )
+                # title_list = list(layer_dict)
+                # for k, v in type_info.items():
+                #     for title in title_list:
+                #         if dict_type[title] == k:
+                #             for k2, v2 in v['option'].items():
+                #                 chk_json_item(
+                #                     parent_name = k2,
+                #                     essential   = True,
+                #                     key_list    = [title],
+                #                     dict_item   = uvalue_option[k2],
+                #                     type_list   = v2,
+                                # )
 
         chk_vals_types(
             parent_name = 'uvalue_option',

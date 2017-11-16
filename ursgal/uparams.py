@@ -678,28 +678,32 @@ ursgal_params = {
             'label',
         ],
         'uvalue_option' : {
-            'f-point' : {
-                'enrichment percentage': 0.001
-            },
-            'max' : {
-                'enrichment percentage':1
-            },
-            'min' : {
-                'enrichment percentage':0
-            },
-            'none_val' : None,
-            'custom_val_max': 1000,
-            'type_dict': {
-                'enrichment percentage' : 'float'
-            },
-            'title_list': ['enrichment percentage'],
-            'unit' : {
-                'enrichment percentage' : '%'
-            },
-            'updownval' : {
-                'enrichment percentage': 0.001
-            },
-            'custom_type': {}
+            'none_val' : [],
+            'item_title' : 'label_percentile',
+            'item_type' : 'float',
+            'custom_val_max' : 0,
+            # 'f-point' : {
+            #     'enrichment percentage': 0.001
+            # },
+            # 'max' : {
+            #     'enrichment percentage':1
+            # },
+            # 'min' : {
+            #     'enrichment percentage':0
+            # },
+            # 'none_val' : None,
+            # 'custom_val_max': 1000,
+            # 'type_dict': {
+            #     'enrichment percentage' : 'float'
+            # },
+            # 'title_list': ['enrichment percentage'],
+            # 'unit' : {
+            #     'enrichment percentage' : '%'
+            # },
+            # 'updownval' : {
+            #     'enrichment percentage': 0.001
+            # },
+            # 'custom_type': {}
         },
         'uvalue_translation' : {
         },
@@ -724,21 +728,43 @@ ursgal_params = {
             'quantitation',
         ],
         'uvalue_option' : {
-            'multiple_line' : False,
+            'item_titles':  {
+                'Isotope' : 'Enrichment',
+            },
+            'value_types': {
+                'Isotope' : 'float',
+            },
+            'multiple_line' : {
+                'Isotope' : False,
+            },
             'none_val' : None,
-            'unit' : 'psms',
+            'max' : {
+                'Isotope' : 1.0,
+            },
+            'min' : {
+                'Isotope' : 0.0,
+            },
+            'unit' : {
+                'Isotope' : 'psms',
+            },
+            'f-point' : {
+                'Isotope' : 0.1,
+            },
+            'updownval' : {
+                'Isotope' : 0.1,
+            },
             'custom_val_max' : 3,
             'custom_type' : {
                 'str' : {'multiple_line': False},
             },
-            'dict_type': {
-                '13C' : {'str' : 'float'},
-                '15N' : {'str' : 'float'},
-                '2H' : {'str' : 'float'},
-            },
-            'dict_title' : {
-                'Isotope' : 'Enrichment'
-            },
+            # 'dict_type': {
+            #     '13C' : {'str' : 'float'},
+            #     '15N' : {'str' : 'float'},
+            #     '2H' : {'str' : 'float'},
+            # },
+            # 'dict_title' : {
+            #     'Isotope' : 'Enrichment'
+            # },
         },
         'uvalue_translation' : {
         },
@@ -885,25 +911,26 @@ ursgal_params = {
                 'amino_acid' : {
                     'original_aa' : 'aa_list',
                     'unimod_name' : 'name',
-                    'unimod_name_with_cam' : 'name',
+                    # 'unimod_name_with_cam' : 'name',
                 }
             },
             'value_types' : {
                 'amino_acid'           : 'dict',
                 'original_aa'          : 'list',
                 'unimod_name'          : 'str',
-                'unimod_name_with_cam' : 'str',
+                # 'unimod_name_with_cam' : 'str',
             },
             'multiple_line' : {
-                'original_aa'          : False,
+                # 'original_aa'          : False,
                 'unimod_name'          : False,
-                'unimod_name_with_cam' : False,
+            #     # 'unimod_name_with_cam' : False,
             },
             # 'custom_type' : {
             #     'str' : {
             #         'multiple_line' : False,
             #     },
             # },
+            'custom_val_max' : 0,
         },
     },
     'accept_conflicting_psms' : {
@@ -1781,6 +1808,7 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val'         : '',
             'multiple_line'    : False,
+            'input_extensions' : ['.fasta', '.fa']
         },
         'default_value' : None,
         'description' : \
@@ -2545,30 +2573,13 @@ ursgal_params = {
         ],
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-                'min_clear_mz',
-                'max_clear_mz',
-            ],
-            'type_dict' : {
-                'min_clear_mz' : 'float',
-                'max_clear_mz' : 'float',
-            },
-            'max': {
-                'min_clear_mz' : 10000,
-                'max_clear_mz' : 10000,
-            },
-            'min': {
-                'min_clear_mz' : 0,
-                'max_clear_mz' : 0,
-            },
-            'unit': {
-                'min_clear_mz' : 'm/z',
-                'max_clear_mz'  : 'm/z',
-            },
-            'updownval': {
-                'min_clear_mz' : 1,
-                'max_clear_mz' : 1,
-            },
+            'item_title' : 'mz value',
+            'item_type' : 'float',
+            'custom_val_max' : 2,
+            'max': 100000,
+            'min': 0,
+            'unit': 'm/z',
+            'updownval': 1,
             'custom_type' : {
                 'int' : {
                     'max'       : 10000,
@@ -2577,11 +2588,8 @@ ursgal_params = {
                     'unit'      : '',
                 },
             },
-            'custom_val_max' : 10000,
-            'f-point': {
-                'min_clear_mz' : 1e-01,
-                'max_clear_mz' : 1e-01,
-            },
+            'custom_val_max' : 100000,
+            'f-point': 1e-01,
         },
         'uvalue_translation' : {
         },
@@ -4497,6 +4505,7 @@ ursgal_params = {
                     'unit'      : '',
                 },
             },
+            'custom_val_max' : 0,
         },
         'default_value' : {
         },
@@ -4649,6 +4658,7 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val'         : '',
             'multiple_line'    : False,
+            'input_extensions' : ['.mgf']
         },
         'default_value' : None,
         'description' : \
@@ -9154,6 +9164,34 @@ ursgal_params = {
                 'font_size_minor' : 'int',
                 'font_size_venn' : 'int',
             },
+            'multiple_line' : {
+                'font_type' : False,
+            },
+            'max' : {
+                'font_size_header' : 1000,
+                'font_size_major' : 1000,
+                'font_size_minor' : 1000,
+                'font_size_venn' : 1000,
+            },
+            'min' : {
+                'font_size_header' : 0,
+                'font_size_major' : 0,
+                'font_size_minor' : 0,
+                'font_size_venn' : 0,
+            },
+            'updownval' : {
+                'font_size_header' : 1,
+                'font_size_major' : 1,
+                'font_size_minor' : 1,
+                'font_size_venn' : 1,
+            },
+            'unit' : {
+                'font_size_header' : 'pt',
+                'font_size_major' : 'pt',
+                'font_size_minor' : 'pt',
+                'font_size_venn' : 'pt',
+            },
+            'custom_val_max' : 0,
         },
         'default_value' : {
             'font_type' : 'Helvetica',
