@@ -1578,13 +1578,16 @@ class UController(ursgal.UNode):
             i_params = self.io['input']['params']
             o_params = self.io['output']['params']
 
-            for used_param in self.meta_unodes[ engine ].PARAMS_TRIGGERING_RERUN:
-                # # changing the amount of CPUs should not trigger re-run:
-                # if used_param == 'cpus':
-                #     continue
+            for used_param in self.meta_unodes[engine].PARAMS_TRIGGERING_RERUN:
+                in_param = i_params.get(used_param, None)
+                out_param = o_params.get(used_param, None)
 
-                if used_param in o_params.keys() and used_param in i_params.keys():
-                    if o_params[ used_param ] != i_params[ used_param ]:
+                if out_param and in_param:
+                    if type(in_param) is list:
+                        in_param = list(sorted(in_param))
+                    if type(out_param) is list:
+                        out_param = list(sorted(out_param))
+                    if out_param != in_param:
                         reasons.append(
                             'Node related parameters (for instance "{0}") '\
                             'have changed compared to the last output '\
@@ -1592,10 +1595,6 @@ class UController(ursgal.UNode):
                         )
                         break
                 else:
-                    # default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(
-                    #     used_param,
-                    #     None
-                    # )
                     default_value = self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value']
                     if used_param not in o_params.keys():
                         reasons.append(
@@ -1604,18 +1603,23 @@ class UController(ursgal.UNode):
                             '...'.format(used_param)
                         )
                         break
-                    elif o_params[ used_param ] != default_value:
-                        reasons.append(
-                            'A new node related parameter ("{0}") '\
-                            'has been added compared to the last output '\
-                            '...'.format(used_param)
-                        )
-                        # print('default:',default_value)
-                        # print('used',o_params[used_param])
-                        # print(self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value'])
-                        # exit(1)
+                    else:
+                        if type(default_value) is list:
+                            default_value = sorted(default_value)
+                        if type(out_param) is list:
+                            out_param = sorted(out_param)
+                        if out_param != default_value:
+                            reasons.append(
+                                'A new node related parameter ("{0}") '\
+                                'has been added compared to the last output '\
+                                '...'.format(used_param)
+                            )
+                            # print('default:',default_value)
+                            # print('used',o_params[used_param])
+                            # print(self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value'])
+                            # exit(1)
 
-                        break
+                            break
 
         if self.io['output']['finfo']['json_exists']:
             # o_json exists no force no node related params changed
