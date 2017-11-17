@@ -157,8 +157,8 @@ ukb.ENGINE_TYPES
             'misc_engine'                   : False,
             'cross_link_search_engine'      : False,
             'de_novo_search_engine'         : False,
-            'quantification_engine'         : False,
             'protein_database_search_engine': True,
+            'quantification_engine'         : False,
             'validation_engine'             : False,
             'visualizer'                    : False,
         },
@@ -408,16 +408,21 @@ uvalue_option entries for different uvalue_types:
         'item_title' : generic title for the items in the list
         'item_type' : type of items in the list,
         'custom_val_max' : maximum number of entries (?)
+            **Please note:** depending on the item_type, additional options are required, e.g. multiple_line
+            if the item_type is 'str'
     * 'dict':
         'none_val': This value will be set to None (since None cannot be entered in the GUI)
         'multiple_line': True, if the user should be allowed to enter multiple lines (given for each key in the dict)
         'item_titles': generic titles for the keys and values in the dict (given in the same structure as the dict)
         'value_types': types of values for each key in the dict
+            **Please note:** depending on the value_types, additional options are required, e.g. max/min/f-point/updownval/unit
+            if the item_type is 'float'
     * 'select':
         'select_type': type of selection from available_values. e.g. 'combo_box' if combinations of multiple values can be selected,
-            'radio_button' if only one value can be selected
+        'radio_button' if only one value can be selected
         'available_values': list of available values to be selected
         'custom_val_max': maximum number of entries (?)
+
 
 
 The following example shows the parameter dict for the 'frag_mass_tolerance'

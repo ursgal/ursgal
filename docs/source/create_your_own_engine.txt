@@ -67,13 +67,13 @@ parameter name. The parameter values can be translated in 'uvalue_translation' u
     'enzyme' : {
         # include msgfplus_v9979 in available_in_unode
         'available_in_unode' : [
-            xtandem_vengeance',
+            'xtandem_vengeance',
             'msgfplus_v9979',
         ],
         # default_value, description, trigger_rerun, utag and uvalue_type don't need to be changed
         'default_value' : "trypsin",
         'description' :  ''' Enzyme: Rule of protein cleavage
-            Possible cleavages are ...
+            Possible cleavages are ... '''
         'trigger_rerun' : True,
         # Translate the ursgal parameter name ('enzyme') to the MS-GF+ parameter name ('-e') using the translation style (msgfplus_style_1) in ukey_translation
         'ukey_translation' : {
