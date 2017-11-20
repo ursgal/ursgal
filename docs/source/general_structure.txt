@@ -394,34 +394,54 @@ uvalue_option entries for different uvalue_types:
     * 'bool':
         no uvalue_options are required
     * 'float'/'int':
-        'none_val': This value will be set to None (since None cannot be entered in the GUI)
-        'max': maximal value to be entered
-        'min': minimal value to be entered
-        'f-point': number ob decimal points (not available/needed for uvalue_type 'int')
-        'updownval': step size of user control arrows/slider
-        'unit': unit of the uvalue
+        'none_val': 
+            This value will be set to None (since None cannot be entered in the GUI)
+        'max':
+            maximal value to be entered
+        'min':
+            minimal value to be entered
+        'f-point':
+            number ob decimal points (not available/needed for uvalue_type 'int')
+        'updownval':
+            step size of user control arrows/slider
+        'unit':
+            unit of the uvalue
     * 'str':
-        'none_val': This value will be set to None (since None cannot be entered in the GUI)
-        'multiple_line': True, if the user should be allowed to enter multiple lines
+        'none_val':
+            This value will be set to None (since None cannot be entered in the GUI)
+        'multiple_line':
+            True, if the user should be allowed to enter multiple lines
     * 'list':
-        'none_val' : This value will be set to None (since None cannot be entered in the GUI)
-        'item_title' : generic title for the items in the list
-        'item_type' : type of items in the list,
-        'custom_val_max' : maximum number of entries (?)
-            **Please note:** depending on the item_type, additional options are required, e.g. multiple_line
-            if the item_type is 'str'
+        'none_val':
+            This value will be set to None (since None cannot be entered in the GUI)
+        'item_title':
+            generic title for the items in the list
+        'item_type':
+            type of items in the list,
+        'custom_val_max':
+            maximum number of entries (?)
+        **Please note:** depending on the item_type, additional options are required, e.g. multiple_line
+        if the item_type is 'str'
     * 'dict':
-        'none_val': This value will be set to None (since None cannot be entered in the GUI)
-        'multiple_line': True, if the user should be allowed to enter multiple lines (given for each key in the dict)
-        'item_titles': generic titles for the keys and values in the dict (given in the same structure as the dict)
-        'value_types': types of values for each key in the dict
-            **Please note:** depending on the value_types, additional options are required, e.g. max/min/f-point/updownval/unit
-            if the item_type is 'float'
+        'none_val': 
+            This value will be set to None (since None cannot be entered in the GUI)
+        'multiple_line': 
+            True, if the user should be allowed to enter multiple lines (given for each key in the dict)
+        'item_titles': 
+            generic titles for the keys and values in the dict (given in the same structure as the dict)
+        'value_types': 
+            types of values for each key in the dict
+        **Please note:** depending on the value_types, additional options are required, 
+        e.g. max/min/f-point/updownval/unit if the item_type is 'float'
     * 'select':
-        'select_type': type of selection from available_values. e.g. 'combo_box' if combinations of multiple values can be selected,
-        'radio_button' if only one value can be selected
-        'available_values': list of available values to be selected
-        'custom_val_max': maximum number of entries (?)
+        'select_type': 
+            type of selection from available_values, 
+            e.g. 'combo_box' if combinations of multiple values can be selected,
+            'radio_button' if only one value can be selected
+        'available_values': 
+            list of available values to be selected
+        'custom_val_max': 
+            maximum number of entries (?)
 
 
 

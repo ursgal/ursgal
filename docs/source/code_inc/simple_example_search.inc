@@ -34,7 +34,7 @@
 	            'modifications' : [
 	                'M,opt,any,Oxidation',        # Met oxidation
 	                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
-	                '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
+	                '*,opt,Prot-N-term,Acetyl',    # N-Acteylation
 	            ],
 	            # 'peptide_mapper_class_version' : 'UPeptideMapper_v2',
 	        }
