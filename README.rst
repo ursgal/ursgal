@@ -168,9 +168,10 @@ as common practice in science, never trust a blackbox :)
 Copyrights
 ***********
 
-Copyright 2014-2015 by authors and contributors in alphabetical order
+Copyright 2014-2017 by authors and contributors in alphabetical order
 
 * Christian Fufezan,
+* Manuel Koesters
 * Lukas P. M. Kremer
 * Johannes Leufken
 * Purevdulam Oyunchimeg
