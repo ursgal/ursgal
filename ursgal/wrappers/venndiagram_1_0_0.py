@@ -138,10 +138,10 @@ class venndiagram_1_0_0( ursgal.UNode ):
         used_labels = []
 
         for n, (engine, file_path) in enumerate(data):
-            if self.params['translations']['visualization_label_list'] == []:
+            if self.params['translations']['visualization_label_positions'] == {}:
                 label = engine
             else:
-                label = self.params['translations']['visualization_label_list'][n]
+                label = self.params['translations']['visualization_label_positions'][str(n)]
             venn_params[default_label[n]] = label
             column_sets[ label ]     = set()
             used_labels.append(label)

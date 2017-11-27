@@ -66,7 +66,7 @@ def main(input_file=None, output_file=None, params=None):
         open(input_file, 'r')
     )
     params['additional_labels'] = {}
-    if params['heatmap_column_order'] == []:
+    if params['heatmap_column_order'] == {}:
         params['all_conditions']    = set()
         for fieldname in csv_reader.fieldnames:
             if fieldname.endswith(params['heatmap_value_suffix']):
@@ -78,7 +78,9 @@ def main(input_file=None, output_file=None, params=None):
                 )
         params['all_conditions'] = sorted(list(params['all_conditions']))
     else:
-        params['all_conditions'] = params['heatmap_column_order']
+        params['all_conditions'] = [
+            params['heatmap_column_order'][k] for k in sorted(params['heatmap_column_order'].keys())
+        ]
     plot_collector = {}
     identifiers    = []
     forbidden_character_list = [ '>', '<' ]

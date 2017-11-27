@@ -3266,7 +3266,7 @@ ursgal_params = {
         'description' : \
             'Color gradient for the heatmap',
     },
-    'heatmap_column_order' : {
+    'heatmap_column_positions' : {
         'edit_version' : 1.01,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
@@ -3280,11 +3280,11 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'list',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
             'none_val' : None,
-            'item_title' : 'column name',
-            'item_type' : 'str',
+            'item_titles' : {'position':'column name'},
+            'value_types' : {'position':'str'},
             'custom_val_max' : 10000,
             'multiple_line' : False,
             'custom_type' : {
@@ -3293,10 +3293,11 @@ ursgal_params = {
                 },
             },
         },
-        'default_value' : [
-        ],
+        'default_value' : {},
         'description' : \
-            'The plot order of the columns',
+            'The position of each column in the heatmap is given as a dict '\
+            'with keys corresponding to the position and values corresponding'\
+            'to the column name, e.g: {"0" : "Ratio1_2", "1" : "Ratio2_3"}',
     },
     'heatmap_error_suffix' : {
         'edit_version' : 1.00,
@@ -9228,25 +9229,25 @@ ursgal_params = {
         'description' : \
             'Header of visualization output (e.g. Venn diagram)',
     },
-    'visualization_label_list' : {
+    'visualization_label_positions' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'venndiagram_style_1' : 'visualization_label_list',
+            'venndiagram_style_1' : 'visualization_label_position',
         },
         'utag' : [
             'visualization',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'list',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
             'none_val' : None,
-            'item_title' : 'label',
-            'item_type' : 'str',
+            'item_titles' : {'position':'label'},
+            'value_types' : {'position':'str'},
             'custom_val_max' : 10000,
             'multiple_line' : False,
             'custom_type' : {
@@ -9255,11 +9256,12 @@ ursgal_params = {
                 },
             },
         },
-        'default_value' : [
-        ],
+        'default_value' : {},
         'description' : \
             'Specifies labels for the datasets that should be visualized. '\
-            'Needs to be given in the same order as the datasets.',
+            'Given as a dict in which the key represents the position '\
+            'of the corresponding dataset in the list, e.g.: '\
+            '{"0" : "LabelA", "1" : "LabelB"}',
     },
     'visualization_opacity' : {
         'edit_version' : 1.00,
