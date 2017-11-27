@@ -356,6 +356,9 @@ All default parameters for all nodes are stored there, can be accessed and modif
 This file contains one Python dictionary with keys representing the ursgal
 parameter.
 
+.. note:: The entries 'uvalue_option' and 'edit_version' will be removed 
+    with ursgal version 0.7.0. Let us know if and why you require them.
+
 Entries:
 
     * 'available_in_unode'
@@ -366,6 +369,10 @@ Entries:
         that these can be adjusted via parameters or profiles.
     * 'description'
         Provides a short explanatory text for the parameter.
+    * 'edit_version'
+        This number is used to determine the most recent version of the uparam
+        on different work stations. Therefore, it should be updated everytime a change
+        in the wrapper is made.
     * 'trigger_rerun'
         Defines if a change in this parameter will cause the unode
         to be executed, independently if there are already result files present.
