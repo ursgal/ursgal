@@ -17,10 +17,10 @@ def main():
     uc = ursgal.UController(
         profile = 'LTQ XL low res',
         params = {
-            'visualization_label_list' : [
-                'omssa',
-                'xtandem'
-            ]
+            'visualization_label_positions' : {
+                '0' : 'omssa',
+                '1' : 'xtandem'
+            }
 
         }
     )

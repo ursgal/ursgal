@@ -84,7 +84,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
         for translated_key, translation_dict in translations.items():
             if translated_key in [
                 'visualization_column_names',
-                'visualization_label_list',
+                # 'visualization_label_list',
             ]:
                 continue
             elif translated_key == 'visualization_font':

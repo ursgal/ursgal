@@ -107,6 +107,12 @@ class kojak_1_5_3( ursgal.UNode ):
                 if mono_link not in [None, '']:
                     self.params['translations']['formatted_mono_link'] += 'mono_link = {0}\n'.format(mono_link)
 
+        for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
+            if ion in self.params['translations']['score_ion_list']:
+                self.params['translations']['ion_series_{0}'.format(ion.upper())] = 1
+            else:
+                self.params['translations']['ion_series_{0}'.format(ion.upper())] = 0
+
         # building command_list !
 
         templates = self.format_templates( )

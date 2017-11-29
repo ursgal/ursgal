@@ -187,6 +187,12 @@ class xtandem_sledgehammer( ursgal.UNode ):
         self.params['translations']['potential_modifications'] = ','.join( potential_mods )
         self.params['translations']['refine_potential_modifications'] = ','.join( refine_potential_mods )
 
+        for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
+            if ion in self.params['translations']['score_ion_list']:
+                self.params['translations']['score_{0}_ions'.format(ion)] = 'yes'
+            else:
+                self.params['translations']['score_{0}_ions'.format(ion)] = 'no'
+
         templates = self.format_templates( )
         for file_name, content in templates.items():
             if file_name == '15N-masses.xml' and self.params['translations']['label'] == '14N':

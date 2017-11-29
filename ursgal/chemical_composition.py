@@ -354,10 +354,13 @@ class ChemicalComposition(dict):
                 count = 1
             else:
                 count = int(glyc_match.group('count').strip('(').strip(')'))
-            try:
-                monosacch_compo = self.monosaccharide_compositions[monosacch]
+            try: 
+                monosacch_compo = self._unimod_parser.name2composition(monosacch)
             except:
-                sys.exit('Do not know aa composition for {0}'.format(monosacch))
+                if monosacch in self.monosaccharide_compositions.keys():
+                    monosacch_compo = self.monosaccharide_compositions[monosacch]
+                else:
+                    sys.exit('Do not know glycan composition for {0}'.format(monosacch))
             self.add_chemical_formula(monosacch_compo, factor=count)
 
     def _chemical_formula_to_dict(self, chemical_formula):

@@ -110,10 +110,9 @@ def main():
         )
     uc.params['prefix']                   = None
     uc.params['label']                    = ''
-    uc.params['visualization_label_list'] = label_list
     label_comparison_file_list = []
-    for label in label_list:
-        
+    for n, label in enumerate(label_list):
+        uc.params['visualization_label_positions'][str(n)] = label
         label_comparison_file_list.append(
             uc.merge_csvs( files_2_merge[label] )
         )

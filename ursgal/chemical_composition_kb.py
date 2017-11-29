@@ -81,19 +81,20 @@ aa_compositions = {
 }
 
 monosaccharide_compositions = {
-    "HexNAc":  'C8H13NO5',
     "dHexNAc": 'C8H13NO4',
-    "Hex":     'C6H10O5',
-    "dHex":    'C6H10O4',
-    "Pent":    'C5H8O4',
-    "NeuAc":   'C11H17NO8',
     "HexA":    'C6H8O6',
     "MeHex":   'C7H12O5',
     "Me2Hex":  'C8H14O5',
     'MeHexA':  'C7H10O6',
-    'HexN':    'C6H11O4N',
     'dHexN':   'C6H11O3N',
     'NOHCNFmPse': 'C14H22O8N2',
+    "Pent":    'C5H8O4',
+    "NeuAc":   'C11H17NO8',
+    # part of unimod:
+    # "HexNAc":  'C8H13NO5',
+    # "Hex":     'C6H10O5',
+    # "dHex":    'C6H10O4',
+    # 'HexN':    'C6H11O4N',
 }
 
 aa_names = {

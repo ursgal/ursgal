@@ -56,10 +56,10 @@ def main():
         'mzidentml_lib_1_6_10',
         'mzidentml_lib_1_6_11',
     ]
-    uc.params['visualization_label_list' ] = converter_engine_list
 
     unified_file_list = []
-    for conveter_engine in converter_engine_list:
+    for n, conveter_engine in enumerate(converter_engine_list):
+        uc.params['visualization_label_positions'][str(n)] = conveter_engine
         uc.params['mzidentml_converter_version'] = conveter_engine
         uc.params['prefix'] = conveter_engine
         unified_search_result_file = uc.search(
