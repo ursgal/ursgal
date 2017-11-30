@@ -133,7 +133,6 @@ class pipi_1_3_0( ursgal.UNode ):
                     base_mz=self.params['base_mz']
                 )
             }
-        print()
 
         for pipi_param_name in self.params['translations']['_grouped_by_translated_key'].keys():
             for ursgal_param_name, param_value in self.params['translations']['_grouped_by_translated_key'][pipi_param_name].items():
@@ -235,18 +234,10 @@ class pipi_1_3_0( ursgal.UNode ):
                             self.params_to_write['c'] = mod_dict['mass']
                         else:
                             self.params_to_write[mod_dict['aa']] = mod_dict['mass']
-                    
-                    # print(fix_mods)
-                    # print(self.params_to_write)
-                    # exit()
-
                 else:
                     self.params_to_write[ pipi_param_name ] = param_value
-        pprint.pprint(self.params_to_write)
         self.write_params_file()
 
-        # pprint.pprint(self.params['translations'])
-        # exit()
         self.params[ 'command_list' ] = [
             'java',
             '-Xmx{0}'.format( self.params['translations']['_grouped_by_translated_key']['-Xmx']['-xmx'] ),
@@ -305,15 +296,17 @@ class pipi_1_3_0( ursgal.UNode ):
             fieldnames = translated_headers
         )
 
+        pipi_output = self.params['translations']['mgf_input_file'] + '.pipi.csv'
         csv_reader = csv.DictReader(
             open(pipi_output,'r'),
             fieldnames = translated_headers,
         )
+        self.created_tmp_files.append(pipi_output)
 
         csv_writer.writeheader()
         for line_dict in csv_reader:
             line_dict['Raw data location'] = os.path.abspath(
-                self.params['translations']['mzml_input_file']
+                self.params['translations']['mgf_input_file']
             )
 
         #     ############################################
