@@ -260,90 +260,82 @@ class pipi_1_3_0( ursgal.UNode ):
 
     def postflight(self):
         # '''
-        # Reads MSFragger tsv output and write final csv output file.
+        # Reads PIPI csv output and write final csv output file.
                 
         # Adds:
         #     * Raw data location, since this can not be added later
-        #     * Converts masses in Da to m/z (could be done in unify_csv)
-
 
         # '''
-        # ms_fragger_header = [
-        #     'ScanID',
-        #     'Precursor neutral mass (Da)',
-        #     'Retention time (minutes)',
-        #     'Precursor charge',
-        #     'Hit rank',
-        #     'Peptide Sequence',
-        #     'Upstream Amino Acid',
-        #     'Downstream Amino Acid',
-        #     'Protein',
-        #     'Matched fragment ions',
-        #     'Total possible number of matched theoretical fragment ions',
-        #     'Neutral mass of peptide',# (including any variable modifications) (Da) 
-        #     'Mass difference',
-        #     'Number of tryptic termini',
-        #     'Number of missed cleavages',
-        #     'Variable modifications detected', #'(starts with M, separated by |, formated as position,mass) 
-        #     'Hyperscore',
-        #     'Next score',
-        #     'Intercept of expectation model (expectation in log space)',
-        #     'Slope of expectation model (expectation in log space)',
-        # ]
+        pipi_fragger_header = [
+            'scan_num',
+            'peptide',
+            'charge',
+            'theo_mass',
+            'exp_mass',
+            'abs_ppm',
+            'delta_C',
+            'ptm_delta_score',
+            'protein_ID',
+            'score',
+            'naive_q_value',
+            'percolator_score',
+            'posterior_error_prob',
+            'percolator_q_value',
+            'other_PTM_patterns',
+            'MGF_title',
+        ]
 
-        # translated_headers = []
-        # header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
-        # for original_header_key in ms_fragger_header:
-        #     ursgal_header_key = header_translations[original_header_key]
-        #     translated_headers.append(ursgal_header_key)
+        translated_headers = []
+        header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
+        for original_header_key in pipi_fragger_header:
+            ursgal_header_key = header_translations[original_header_key]
+            translated_headers.append(ursgal_header_key)
 
-        # translated_headers += [
-        #     'Spectrum Title',
-        #     'Raw data location',
-        #     'Exp m/z',
-        #     'Calc m/z',
-
-        # ]
+        translated_headers += [
+            'Raw data location',
+            'Modifications'
+        ]
         # msfragger_output_tsv = self.params['translations']['mzml_input_file'].replace(
         #     'mzML',
         #     'tsv'
         # )
-        # csv_writer = csv.DictWriter(
-        #     open(self.params['translations']['output_file_incl_path'], 'w'),
-        #     fieldnames = translated_headers
-        # )
 
-        # csv_reader = csv.DictReader(
-        #     open(msfragger_output_tsv,'r'),
-        #     fieldnames = translated_headers,
-        #     delimiter = '\t'
-        # )
+        csv_writer = csv.DictWriter(
+            open(self.params['translations']['output_file_incl_path'], 'w'),
+            fieldnames = translated_headers
+        )
 
-        # csv_writer.writeheader()
-        # for line_dict in csv_reader:
-        #     line_dict['Raw data location'] = os.path.abspath(
-        #         self.params['translations']['mzml_input_file']
-        #     )
+        csv_reader = csv.DictReader(
+            open(pipi_output,'r'),
+            fieldnames = translated_headers,
+        )
+
+        csv_writer.writeheader()
+        for line_dict in csv_reader:
+            line_dict['Raw data location'] = os.path.abspath(
+                self.params['translations']['mzml_input_file']
+            )
 
         #     ############################################
         #     # all fixing here has to go into unify csv! #
         #     ############################################
 
-        #     # 'Precursor neutral mass (Da)' : '',
-        #     # 'Neutral mass of peptide' : 'Calc m/z',# (including any variable modifications) (Da) 
-        #     line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
-        #         line_dict['MSFragger:Precursor neutral mass (Da)'],
-        #         line_dict['Charge']
-        #     )
-        #     line_dict['Calc m/z'] = ursgal.ucore.calculate_mz(
-        #         line_dict['MSFragger:Neutral mass of peptide'],
-        #         line_dict['Charge']
-        #     )
-
-        #     csv_writer.writerow( line_dict )
-
-        # if msfragger_output_tsv.endswith('.tsv'):
-        #     os.remove(msfragger_output_tsv)
+            tmp_seq = ''
+            tmp_mods = []
+            line_dict['Sequence'] = line_dict['Sequence'].replace('n', '')
+            for part in line_dict['Sequence'].split('('):
+                if ')' in part:
+                    mod, seq = part.split(')')
+                    tmp_seq += seq
+                    tmp_mods.append(
+                        '{0}:{1}'.format(mod, len(tmp_seq))
+                    )
+                else:
+                    tmp_seq += part
+            tmp_seq = tmp_seq.replace('c', '')
+            line_dict['Sequence'] = tmp_seq
+            line_dict['Modifications'] = ';'.join(tmp_mods) 
+            csv_writer.writerow( line_dict )
         return
 
     def write_params_file(self):

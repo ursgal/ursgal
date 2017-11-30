@@ -1144,7 +1144,8 @@ ursgal_params = {
                 'xtandem_vengeance' : True,
                 'xtandem_alanine' : True,
                 'msfragger_20170103' : True,
-                'mascot_x_x_x'  : True
+                'mascot_x_x_x'  : True,
+                'pipi_1_3_0' : True,
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1167,8 +1168,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
-                'mascot_x_x_x'  : True
-
+                'mascot_x_x_x'  : True,
+                'pipi_1_3_0' : True,
             },
             'qvality_style_1' : {
                 'None'                 : None,
@@ -1191,8 +1192,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
-                'mascot_x_x_x'  : True
-
+                'mascot_x_x_x'  : True,
+                'pipi_1_3_0' : True,
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1215,8 +1216,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
-                'mascot_x_x_x'  : True
-
+                'mascot_x_x_x'  : True,
+                'pipi_1_3_0' : True,
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1239,7 +1240,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
-                'mascot_x_x_x'  : True
+                'mascot_x_x_x'  : True,
+                'pipi_1_3_0' : True,
             },
         },
         'uvalue_type'    : 'select',
@@ -3057,7 +3059,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'header_translations' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'kojak_percolator_2_08',
             'msamanda_1_0_0_5242',
@@ -3072,7 +3074,8 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'msfragger_20170103',
-            'msgfplus_C_mzid2csv_v2017_07_04'
+            'msgfplus_C_mzid2csv_v2017_07_04',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3082,7 +3085,8 @@ ursgal_params = {
             'novor_style_1'            : 'header_translations',
             'omssa_style_1'            : 'header_translations',
             'pepnovo_style_1'          : 'header_translations',
-            'msfragger_style_1'        : 'header_translations'
+            'msfragger_style_1'        : 'header_translations',
+            'pipi_style_1'             : 'header_translations',
         },
         'utag' : [
             'Conversion',
@@ -3163,6 +3167,24 @@ ursgal_params = {
                 'RnkScr'               : 'Pepnovo:RnkScr',
                 '[M+H]'                : 'Calc mass(Da)',
                 'output_aa_probs'      : 'Pepnovo:aaScore',
+            },
+            'pipi_style_1' : {
+                'scan_num' : 'Spectrum ID',
+                'peptide' : 'Sequence',
+                'charge' : 'Charge',
+                'theo_mass' : 'Calc m/z',
+                'exp_mass' : 'Exp m/z',
+                'abs_ppm' : 'PIPI:abs_ppm',
+                'delta_C' : 'PIPI:delta_C',
+                'ptm_delta_score' : 'PIPI:ptm_delta_score protein_ID',
+                'protein_ID' : 'Protein ID',
+                'score' : 'PIPI:score',
+                'naive_q_value' : 'PIPI:naive_q_value',
+                'percolator_score' : 'PIPI:percolator_score',
+                'posterior_error_prob' : 'PIPI:posterior_error_prob',
+                'percolator_q_value' : 'PIPI:percolator_q_value',
+                'other_PTM_patterns' : 'PIPI:other_PTM_patterns',
+                'MGF_title' : 'Spectrum Title',
             },
             'msfragger_style_1' : {
                 'ScanID' : 'Spectrum ID',
@@ -8968,7 +8990,6 @@ ursgal_params = {
             'svm_1_0_0',
             'ucontroller',
             'unify_csv_1_0_0',
-            'msfragger_20170103'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9008,7 +9029,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score'
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9032,7 +9054,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score'
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9056,8 +9079,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
-
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9081,8 +9104,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
-
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9106,7 +9129,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9130,7 +9154,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9154,7 +9179,8 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
             },
         },
         'uvalue_type' : 'str',
