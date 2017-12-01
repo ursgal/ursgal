@@ -3198,7 +3198,7 @@ ursgal_params = {
                 'Precursor neutral mass (Da)' : 'MSFragger:Precursor neutral mass (Da)',
                 'Neutral mass of peptide' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da)
                 'Hit rank':'Rank',
-                'Mass difference':'MSFragger:Mass difference',
+                'Mass difference':'Mass Difference',
                 'Matched fragment ions':'MSFragger:Matched fragment ions',
                 'Total possible number of matched theoretical fragment ions':'MSFragger:Total possible number of matched theoretical fragment ions',
                 'Hyperscore':'MSFragger:Hyperscore',

@@ -284,7 +284,8 @@ class pipi_1_3_0( ursgal.UNode ):
 
         translated_headers += [
             'Raw data location',
-            'Modifications'
+            'Modifications',
+            'Mass Difference',
         ]
         # msfragger_output_tsv = self.params['translations']['mzml_input_file'].replace(
         #     'mzML',

@@ -130,6 +130,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     # modification masses are rounded to allow matching to unimod
     no_decimals = params['translations']['rounded_mass_decimals']
+    if 'pipi' in search_engine.lower():
+        no_decimals = 1
+    if 'moda' in search_engine.lower():
+        no_decimals = 0
     mass_format_string = '{{0:3.{0}f}}'.format(no_decimals)
 
     # mod pattern
@@ -244,15 +248,22 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         'xtandem',
         'msfragger',
     ]
+    open_mod_search_engines = [
+        'pipi',
+        'moda',
+    ]
     de_novo = False
     database_search = False
+    open_mod_search = False
     for de_novo_engine in de_novo_engines:
         if de_novo_engine in search_engine.lower():
             de_novo = True
     for db_se in database_search_engines:
         if db_se in search_engine.lower():
             database_search = True
-
+    for om_se in open_mod_search_engines:
+        if om_se in search_engine.lower():
+            open_mod_search = True
 
     if params['translations']['enzyme'] != 'nonspecific':
         allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')
@@ -617,6 +628,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             )
 
                 tmp_mods = []
+                tmp_mass_diff = []
                 for modification in line_dict['Modifications'].split(';'):
                     Nterm = False
                     Cterm = False
@@ -680,7 +692,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 )
                     else:
                         float_mod = float(mod)
-                        masses_2_test = [ float_mod ]
+                        masses_2_test = [float_mod]
                         if use15N:
                             substract_15N_diff = False
                             if aa in fixed_mods.keys() and 'msgfplus' in search_engine.lower() and pos != 0:
@@ -689,7 +701,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 # maximum 15N labeling is 3.988 Da (R)
                                 substract_15N_diff = True
                             if substract_15N_diff:
-                                masses_2_test.append( float_mod - ursgal.ukb.DICT_15N_DIFF[aa] )
+                                masses_2_test.append(float_mod - ursgal.ukb.DICT_15N_DIFF[aa])
                         # try:
                         #works always but returns empty list...
                         name_list = []
@@ -699,7 +711,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             if mass_buffer_key not in app_mass_to_name_list_buffer.keys():
                                 app_mass_to_name_list_buffer[mass_buffer_key] = ursgal.GlobalUnimodMapper.appMass2name_list(
                                     float(mass_buffer_key),
-                                    decimal_places = params['translations']['rounded_mass_decimals']
+                                    decimal_places = no_decimals
                                 )
                             name_list += app_mass_to_name_list_buffer[mass_buffer_key]
                         # print(name_list)
@@ -735,6 +747,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 mapped_mod = True
                                 skip_mod = True
                                 break
+                        if open_mod_search is True and mapped_mod is False:
+                            skip_mod = True
+                            tmp_mass_diff.append('{0}:{1}'.format(mod, pos))
+                            break
                         assert mapped_mod is True, '''
                                 A mass was reported that does not map on any unimod or userdefined modification
                                 or the modified aminoacid is not the specified one
@@ -757,15 +773,16 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         if mod in n_term_replacement.keys() and pos == 1:
                             if line_dict['Sequence'][0] in mod_dict[mod]['aa']:
                                 modification.replace(
-                                    '{0}:1'.format( mod ),
-                                    '{0}:0'.format( mod )
+                                    '{0}:1'.format(mod),
+                                    '{0}:0'.format(mod)
                                 )
                             else:
                                 continue
                         else:
                             continue
                     tmp_mods.append(modification)
-                line_dict_update['Modifications'] = ';'.join( tmp_mods )
+                line_dict_update['Modifications'] = ';'.join(tmp_mods)
+                line_dict_update['Mass Difference'] = ';'.join(tmp_mass_diff)
                 #
                 # ^^--------- REPLACED MODIFICATIONS! ---------------^
                 #
@@ -777,8 +794,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 if line_dict['Sequence'][0] in aa:
                                     continue
                         line_dict_update['Modifications'] = line_dict_update['Modifications'].replace(
-                            '{0}:1'.format( unimod_name ),
-                            '{0}:0'.format( unimod_name )
+                            '{0}:1'.format(unimod_name),
+                            '{0}:0'.format(unimod_name)
                             )
                 ##########################
                 # Modification block end #
@@ -800,14 +817,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             # other way to do it...
                             # pos_of_split_point = re.search( ':\d*\Z', e )
                             # pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
-                            for occ, match in enumerate( mod_pattern.finditer( e )):
+                            for occ, match in enumerate(mod_pattern.finditer(e)):
                                 mod = e[:match.start()]
                                 mod_pos = e[match.start()+1:]
                                 # mod, pos = e.split(':')
                                 m = (int(mod_pos), mod)
                                 if m not in tmp:
-                                    tmp.append( m )
-                                    positions.add( int(mod_pos))
+                                    tmp.append(m)
+                                    positions.add(int(mod_pos))
                     tmp.sort()
                     line_dict_update['Modifications'] = ';'.join(
                         [
@@ -816,7 +833,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     )
                     if len(tmp) != len(positions):
                         print(
-                            '[ WARNING ] {Sequence}#{Modifications} will be skipped, because it contains to mods at the same position!'.format(
+                            '[ WARNING ] {Sequence}#{Modifications} will be skipped, because it contains two mods at the same position!'.format(
                                 **line_dict_update
                             )
                         )

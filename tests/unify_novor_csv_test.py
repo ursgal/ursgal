@@ -80,7 +80,7 @@ for line_dict in csv.DictReader(open(output_csv, 'r')):
     ident_list.append( line_dict )
 
 
-def unify_msamanda_test():
+def unify_novor_test():
     for test_id, test_dict in enumerate(ident_list):
         yield unify_novor, test_dict
 
@@ -108,4 +108,4 @@ def unify_novor( test_dict ):
 if __name__ == '__main__':
     print(__doc__)
     for test_id, test_dict in enumerate(ident_list):
-        unify_msamanda(test_dict)
+        unify_novor(test_dict)
