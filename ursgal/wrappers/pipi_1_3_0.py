@@ -1,7 +1,6 @@
 #!/usr/bin/env python3.4
 import ursgal
 import os
-import pprint
 from collections import defaultdict as ddict
 import csv
 import itertools
@@ -235,7 +234,7 @@ class pipi_1_3_0( ursgal.UNode ):
                         else:
                             self.params_to_write[mod_dict['aa']] = mod_dict['mass']
                 else:
-                    self.params_to_write[ pipi_param_name ] = param_value
+                    self.params_to_write[pipi_param_name] = param_value
         self.write_params_file()
 
         self.params[ 'command_list' ] = [
