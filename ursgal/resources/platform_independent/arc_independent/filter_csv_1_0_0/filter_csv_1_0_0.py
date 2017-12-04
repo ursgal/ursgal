@@ -81,10 +81,6 @@ Did you misspell the field name?'''.format(
                     )
                     raise Exception
                 else:
-
-                    # if line_dict[dict_key] == '':
-                    #     continue
-
                     if rule in ['lte', 'gte', 'lt' , 'gt']:
                         # requires not None! and to be floatable
                         if line_dict[ dict_key ] is None:
@@ -128,18 +124,19 @@ Did you misspell the field name?'''.format(
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
+
                     elif rule == 'contains_not':
-                        print('>>>>', line_dict[ dict_key ], rule)
                         if value not in line_dict[dict_key]:
-                            # print(line_dict, '<<<')
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
+
                     elif rule == 'regex':
                         if re.search(value, line_dict[dict_key]) is not None:
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
+
                     elif rule == 'contains_glycosite':
                         if re.search(value, line_dict[dict_key]) is not None:
                             write_row_bools.add(True)
@@ -150,6 +147,7 @@ Did you misspell the field name?'''.format(
                                 write_row_bools.add(False)
                         else:
                             write_row_bools.add(False)
+
                     elif rule == 'mod_at_glycosite':
                         mods =  line_dict[dict_key].split(';')
                         accepted = False
@@ -173,6 +171,19 @@ Did you misspell the field name?'''.format(
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
+
+                    elif rule == 'contains_element_of_list':
+                        assert type(value) == list, '''
+                        The value for the filter rule 'contains_element_of_list'
+                        needs to be a list. You specified:
+                        {0}
+                        '''.format(value)
+                        write = False
+                        for element in value:
+                            if element in line_dict[dict_key]:
+                                write = True
+                        write_row_bools.add(write)
+
                     else:
                         print('Rule: {0} not defined'.format(rule))
                         raise Exception
