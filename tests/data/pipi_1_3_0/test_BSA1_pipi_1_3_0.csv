@@ -3,3 +3,4 @@
 2443,,358.51047646677,358.510441800103,3,"GEMTDDHSSAAEAK",,,,2443,"/home/stefan/ursgal-dev/ursgal/example_data/BSA_simple_de_novo_search/BSA1.mgf",1508.6395263672,3,"GEMTDDHSSAAEAK","BSA1.2443.2443.3",,,483.536788876
 2443,,358.51047646677,526.59686746677,2,"AHCDHGWRR",,"57.0:3",,2443,"/home/stefan/ursgal-dev/ursgal/example_data/BSA_simple_de_novo_search/BSA1.mgf",1508.6395263672,2,"AHCDHGWRR","BSA1.2443.2443.2","Carbamidomethyl:3",,618.7756051111
 2444,,526.596609800103,526.59686746677,2,"AHCDHGWRR",,"57.0:3;1337:5",,2444,"/home/stefan/ursgal-dev/ursgal/example_data/BSA_simple_de_novo_search/BSA1.mgf",1509.0161132813,2,"AHCDHGWRR","BSA1.2444.2444.2","Carbamidomethyl:3","1337:5",618.7756051111
+2444,,526.596609800103,526.59686746677,2,"AHCDHGWRR",,"1337:0;57.0:3;11.22:7",,2444,"/home/stefan/ursgal-dev/ursgal/example_data/BSA_simple_de_novo_search/BSA1.mgf",1509.0161132813,2,"AHCDHGWRR","BSA1.2444.2444.2","Carbamidomethyl:3","1337:0;11.22:7",618.7756051111

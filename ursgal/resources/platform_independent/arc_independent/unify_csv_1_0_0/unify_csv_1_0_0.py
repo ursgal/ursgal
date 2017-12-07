@@ -329,6 +329,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         new_fieldnames = [
             'uCalc m/z',
             'Accuracy (ppm)',
+            'Mass Difference',
             'Protein ID',
             'Sequence Start',
             'Sequence Stop',
@@ -750,7 +751,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         if open_mod_search is True and mapped_mod is False:
                             skip_mod = True
                             tmp_mass_diff.append('{0}:{1}'.format(mod, pos))
-                            break
+                            continue
                         assert mapped_mod is True, '''
                                 A mass was reported that does not map on any unimod or userdefined modification
                                 or the modified aminoacid is not the specified one

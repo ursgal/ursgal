@@ -5,7 +5,8 @@ from collections import defaultdict as ddict
 import csv
 import itertools
 
-class pipi_1_3_0( ursgal.UNode ):
+
+class pipi_1_3_0(ursgal.UNode):
     """
     PIPI unode
 
@@ -19,32 +20,32 @@ class pipi_1_3_0( ursgal.UNode ):
     """
 
     META_INFO = {
-        'edit_version'                : 1.00,
-        'name'                        : 'PIPI',
-        'version'                     : '1.3.0',
-        'release_date'                : '2017-06-20',
-        'utranslation_style'          : 'pipi_style_1',
-        'input_extensions'            : ['.mgf', '.mzML', '.mzXML'],
-        'output_extensions'           : ['.csv'],
-        'create_own_folder'           : True,
-        'in_development'              : False,
-        'include_in_git'              : False,
-        'distributable'           : False,
-        'engine_type' : {
-            'protein_database_search_engine' : True,
+        'edit_version': 1.00,
+        'name': 'PIPI',
+        'version': '1.3.0',
+        'release_date': '2017-06-20',
+        'utranslation_style': 'pipi_style_1',
+        'input_extensions': ['.mgf', '.mzML', '.mzXML'],
+        'output_extensions': ['.csv'],
+        'create_own_folder': True,
+        'in_development': False,
+        'include_in_git': False,
+        'distributable': False,
+        'engine_type': {
+            'protein_database_search_engine': True,
         },
-        'engine'                      : {
-            'platform_independent'    : {
-                'arc_independent' : {
-                    'exe'            : 'PIPI-1.3.0.jar',
-                    'url'            : 'http://bioinformatics.ust.hk/pipi.html',
-                    'zip_md5'        : '',
-                    'additional_exe' : [],
+        'engine': {
+            'platform_independent': {
+                'arc_independent': {
+                    'exe': 'PIPI-1.3.0.jar',
+                    'url': 'http://bioinformatics.ust.hk/pipi.html',
+                    'zip_md5': '',
+                    'additional_exe': [],
                 },
             },
         },
-        'citation'                   : \
-            'Yu, F., Li, N., Yu, W. (2016) PIPI: PTM-Invariant '
+        'citation':
+        'Yu, F., Li, N., Yu, W. (2016) PIPI: PTM-Invariant '
             'Peptide Identification Using Coding Method. '
             'J Prot Res 15(12)'
     }
@@ -53,7 +54,7 @@ class pipi_1_3_0( ursgal.UNode ):
         super(pipi_1_3_0, self).__init__(*args, **kwargs)
         pass
 
-    def preflight( self ):
+    def preflight(self):
         '''
         Formatting the command line and writing the param input file via 
         self.params
@@ -70,25 +71,27 @@ class pipi_1_3_0( ursgal.UNode ):
             self.params['output_file']
         )
         self.param_file_name = os.path.join(
-            self.params['translations']['output_file_incl_path'].strip('.csv') \
+            self.params['translations']['output_file_incl_path'].strip('.csv')
             + 'pipi_params.def'
         )
-        self.created_tmp_files.append( self.param_file_name )
+        self.created_tmp_files.append(self.param_file_name)
 
         # pprint.pprint(self.params['translations']['_grouped_by_translated_key'])
         # pprint.pprint(self.params)
         # exit()
         self.params_to_write = {
-            'output_percolator_input' : 1,
-            'mod10' : '0.0@X?',
-            'pepNterm' : 0.0,
-            'pepCterm' : 0.0,
-            'proNterm' : 0.0,
-            'proCterm' : 0.0,
-        } 
+            'output_percolator_input': 1,
+            'mod10': '0.0@X?',
+            'pepNterm': 0.0,
+            'pepCterm': 0.0,
+            'proNterm': 0.0,
+            'proCterm': 0.0,
+        }
         symbols = ['~', '!', '%', '^', '&', '*', '+', '<', '>']
         for x, element in enumerate(symbols):
-            self.params_to_write['mod0{0}'.format(x+1)] = '0.0@X{0}'.format(element)
+            self.params_to_write[
+                'mod0{0}'.format(x + 1)
+            ] = '0.0@X{0}'.format(element)
         for aa in 'ACDEFGHIKLMNOPQRSTUVWYnc':
             self.params_to_write[aa] = 0
 
@@ -109,25 +112,26 @@ class pipi_1_3_0( ursgal.UNode ):
         if self.params['translations']['label'] == '15N':
             for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 existing = False
-                for mod_dict in self.params[ 'mods' ][ 'fix' ]:
-                    if aminoacid == mod_dict[ 'aa' ]:
-                        mod_dict[ 'mass' ] += N15_Diff
-                        mod_dict[ 'name' ] += '_15N_{0}'.format(aminoacid)
+                for mod_dict in self.params['mods']['fix']:
+                    if aminoacid == mod_dict['aa']:
+                        mod_dict['mass'] += N15_Diff
+                        mod_dict['name'] += '_15N_{0}'.format(aminoacid)
                         existing = True
                 if existing == True:
                     continue
                 else:
-                    self.params[ 'mods' ][ 'fix' ].append(
-                        { 'aa': aminoacid,
-                          'mass': N15_Diff,
-                          'name': '_15N_{0}'.format(aminoacid),
-                          'pos': 'any',
+                    self.params['mods']['fix'].append(
+                        {
+                            'aa': aminoacid,
+                            'mass': N15_Diff,
+                            'name': '_15N_{0}'.format(aminoacid),
+                            'pos': 'any',
                         }
                     )
 
         if self.params['translations']['frag_mass_tolerance_unit'] == 'ppm':
             self.params['translations']['_grouped_by_translated_key']['ms2_tolerance'] = {
-                'frag_mass_tolerance' : ursgal.ucore.convert_ppm_to_dalton(
+                'frag_mass_tolerance': ursgal.ucore.convert_ppm_to_dalton(
                     self.params['translations']['frag_mass_tolerance'],
                     base_mz=self.params['base_mz']
                 )
@@ -139,8 +143,8 @@ class pipi_1_3_0( ursgal.UNode ):
                     continue
                 elif pipi_param_name == 'frag_clear_mz_range':
                     min_mz, max_mz = param_value
-                    self.params_to_write[ 'min_clear_mz' ] = min_mz
-                    self.params_to_write[ 'max_clear_mz' ] = max_mz
+                    self.params_to_write['min_clear_mz'] = min_mz
+                    self.params_to_write['max_clear_mz'] = max_mz
                 elif type(pipi_param_name) is tuple:
                     for pn in pipi_param_name:
                         self.params_to_write[pn] = param_value
@@ -197,7 +201,7 @@ class pipi_1_3_0( ursgal.UNode ):
                             pass
                         else:
                             print(
-                            '''
+                                '''
                             Unknown positional argument for given modification:
                             {0}
                             PIPI cannot deal with this, please use one of the follwing:
@@ -223,7 +227,7 @@ class pipi_1_3_0( ursgal.UNode ):
                         self.params_to_write[mod_n] = '{0}@{1}{2}'.format(
                             mod_dict['mass'],
                             mod_dict['aa'],
-                            symbols[n-1]
+                            symbols[n - 1]
                         )
 
                     for mod_dict in self.params['mods']['fix']:
@@ -232,14 +236,16 @@ class pipi_1_3_0( ursgal.UNode ):
                         elif 'C-term' in mod_dict['pos']:
                             self.params_to_write['c'] = mod_dict['mass']
                         else:
-                            self.params_to_write[mod_dict['aa']] = mod_dict['mass']
+                            self.params_to_write[
+                                mod_dict['aa']] = mod_dict['mass']
                 else:
                     self.params_to_write[pipi_param_name] = param_value
         self.write_params_file()
 
-        self.params[ 'command_list' ] = [
+        self.params['command_list'] = [
             'java',
-            '-Xmx{0}'.format( self.params['translations']['_grouped_by_translated_key']['-Xmx']['-xmx'] ),
+            '-Xmx{0}'.format(self.params['translations']
+                             ['_grouped_by_translated_key']['-Xmx']['-xmx']),
             '-jar',
             self.exe,
             self.param_file_name,
@@ -251,7 +257,7 @@ class pipi_1_3_0( ursgal.UNode ):
     def postflight(self):
         # '''
         # Reads PIPI csv output and write final csv output file.
-                
+
         # Adds:
         #     * Raw data location, since this can not be added later
 
@@ -276,7 +282,8 @@ class pipi_1_3_0( ursgal.UNode ):
         ]
 
         translated_headers = []
-        header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
+        header_translations = self.UNODE_UPARAMS[
+            'header_translations']['uvalue_style_translation']
         for original_header_key in pipi_fragger_header:
             ursgal_header_key = header_translations[original_header_key]
             translated_headers.append(ursgal_header_key)
@@ -293,13 +300,14 @@ class pipi_1_3_0( ursgal.UNode ):
 
         csv_writer = csv.DictWriter(
             open(self.params['translations']['output_file_incl_path'], 'w'),
-            fieldnames = translated_headers
+            fieldnames=translated_headers
         )
 
-        pipi_output = self.params['translations']['mgf_input_file'] + '.pipi.csv'
+        pipi_output = self.params['translations'][
+            'mgf_input_file'] + '.pipi.csv'
         csv_reader = csv.DictReader(
-            open(pipi_output,'r'),
-            fieldnames = translated_headers,
+            open(pipi_output, 'r'),
+            fieldnames=translated_headers,
         )
         self.created_tmp_files.append(pipi_output)
 
@@ -327,12 +335,12 @@ class pipi_1_3_0( ursgal.UNode ):
                     tmp_seq += part
             tmp_seq = tmp_seq.replace('c', '')
             line_dict['Sequence'] = tmp_seq
-            line_dict['Modifications'] = ';'.join(tmp_mods) 
-            csv_writer.writerow( line_dict )
+            line_dict['Modifications'] = ';'.join(tmp_mods)
+            csv_writer.writerow(line_dict)
         return
 
     def write_params_file(self):
-        with open(self.param_file_name , 'w') as io:
+        with open(self.param_file_name, 'w') as io:
             print('''# 1.3.0
 # First line is the parameter file version. Don't change it.
 thread_num = {thread_num}
@@ -419,6 +427,8 @@ c = {c}
 
 # Do not change the following
 output_percolator_input = 1
-'''.format(**self.params_to_write), file=io
-        )
+'''.format(
+                **self.params_to_write),
+                file=io
+            )
         return
