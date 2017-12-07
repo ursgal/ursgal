@@ -1579,10 +1579,10 @@ class UController(ursgal.UNode):
             o_params = self.io['output']['params']
 
             for used_param in self.meta_unodes[engine].PARAMS_TRIGGERING_RERUN:
-                in_param = i_params.get(used_param, None)
-                out_param = o_params.get(used_param, None)
+                if used_param in o_params.keys() and used_param in i_params.keys():
+                    in_param = i_params[used_param]
+                    out_param = o_params[used_param]
 
-                if out_param and in_param:
                     if type(in_param) is list:
                         in_param = list(sorted(in_param))
                     if type(out_param) is list:
@@ -1606,6 +1606,7 @@ class UController(ursgal.UNode):
                     else:
                         if type(default_value) is list:
                             default_value = sorted(default_value)
+                        out_param = o_params[used_param]
                         if type(out_param) is list:
                             out_param = sorted(out_param)
                         if out_param != default_value:
