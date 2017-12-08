@@ -265,6 +265,6 @@ def analyze(folder):
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print(search.__doc__)
-        exit()
+        sys.exit(1)
     search(sys.argv[1])
     analyze(sys.argv[1])

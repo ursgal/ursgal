@@ -1669,7 +1669,7 @@ class UController(ursgal.UNode):
         )
         if compress_engine_output and global_ucontroller_compress_flag:
             print('We are compressing now and renaming the shiznit')
-            exit(1)
+            sys.exit(1)
 
     def search_mgf(self, input_file, engine=None, force=None, output_file_name=None):
         '''
@@ -2582,7 +2582,6 @@ class UController(ursgal.UNode):
                     )
                     print( message )
                     update_kb_list.append((engine,message))
-                # exit()
         return zip_file_list, update_kb_list
 
     def download_resources(self, resources=None):

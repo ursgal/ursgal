@@ -93,7 +93,6 @@ class Meta_UNode(type):
             'uses_unode',
             None
         )
-        # exit()
         if alternative_exe_folder is not None:
             kwargs['engine_path'] = kwargs['engine_path'].replace(
                 engine,

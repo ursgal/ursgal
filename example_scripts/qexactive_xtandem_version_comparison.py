@@ -57,7 +57,7 @@ def main(folder):
         uc.fetch_file(
             engine     = 'get_ftp_files_1_0_0'
         )
-        exit()
+        sys.exit(1)
 
 
     engine_list = [
@@ -127,6 +127,6 @@ def main(folder):
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print(main.__doc__)
-        exit()
+        sys.exit(1)
     main(sys.argv[1])
 

@@ -155,7 +155,7 @@ def group_psms(input_file, validation_score_field=None, bigger_scores_better=Non
 if __name__ == '__main__':
     if len(sys.argv) < 10:
         print(__doc__)
-        exit()
+        sys.exit(1)
 
     main(
         input_file              = sys.argv[1],

@@ -99,7 +99,7 @@ def main(input_file=None, output_file=None, params=None):
                 params['translations']['peptide_mapper_class_version']
             )
         )
-        exit()
+        sys.exit(1)
     print(
         '''[ map_peps ] Using peptide mapper version: {0}'''.format(
             params['translations']['peptide_mapper_class_version']
@@ -214,7 +214,7 @@ def main(input_file=None, output_file=None, params=None):
 [ WARNING ] New not covered case of aa exception for: "{0}"
 [ WARNING ] Please adjust upeptide_mapper accordingly'''.format(aa_to_replace)
                         )
-                        exit()
+                        sys.exit(1)
             if appended is False:
                 csv_file_buffer.append(line_dict)
             tmp_peptide_set.add( line_dict['Sequence'] )
@@ -780,7 +780,7 @@ class UPeptideMapper_v3():
                 # print(m_peptide)
                 # print(protein_name_start_index)
                 # print(protein_name_end_index)
-                # exit()
+                # sys.exit(1)
                 continue
             protein_start_in_sequence_string = self.protein_indices[fasta_name][protein_name_end_index]['start']
             protein_stop_in_sequence_string  = self.protein_indices[fasta_name][protein_name_end_index]['stop']
@@ -987,7 +987,7 @@ class UPeptideMapper_v4():
 if __name__ == '__main__':
     if len(sys.argv) < 5:
         print(__doc__)
-        exit()
+        sys.exit(1)
 
     params = {
         'translations' : {

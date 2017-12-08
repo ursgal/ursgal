@@ -5,6 +5,7 @@ import pprint
 from collections import defaultdict as ddict
 import csv
 import itertools
+import sys
 
 class msfragger_20170103( ursgal.UNode ):
     """
@@ -208,7 +209,7 @@ class msfragger_20170103( ursgal.UNode ):
                             any, Prot-N-term, Prot-C-term, N-term, C-term
                             '''.format(mod_dict['org'])
                             )
-                            exit(1)
+                            sys.exit(1)
                         if pos_modifier is not None:
                             aa_to_append = '{0}{1}'.format(pos_modifier,aa_to_append)
                         mass_to_mod_aa[mod_dict['mass']].append( aa_to_append )

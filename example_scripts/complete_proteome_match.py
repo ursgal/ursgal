@@ -103,5 +103,5 @@ def main(fasta_database, class_version):
 if __name__ == "__main__":
     if len(sys.argv) < 3:
         print(main.__doc__)
-        exit()
+        sys.exit(1)
     main(sys.argv[1], sys.argv[2])

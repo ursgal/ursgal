@@ -108,7 +108,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
 if __name__ == '__main__':
     if len(sys.argv) < 3:
         print(main.__doc__)
-        exit('You did not specify three command line arguments, exiting.')
+        sys.exit('You did not specify three command line arguments, exiting.')
     main(
         folder                = sys.argv[1],
         profile               = sys.argv[2],

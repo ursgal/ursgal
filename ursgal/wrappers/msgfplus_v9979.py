@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.4
 import ursgal
 import os
-
+import sys
 
 class msgfplus_v9979( ursgal.UNode ):
     """
@@ -136,7 +136,7 @@ class msgfplus_v9979( ursgal.UNode ):
             else:
                 print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
-                exit(1)
+                sys.exit(1)
         for k, v in command_dict.items():
             self.params[ 'command_list' ].extend((k, v))
 

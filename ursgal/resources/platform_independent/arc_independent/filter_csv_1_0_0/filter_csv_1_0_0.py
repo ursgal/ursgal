@@ -26,10 +26,10 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
     '''
     if filter_rules is None:
         print('No filter rules defined! Exiting now...')
-        exit()
+        sys.exit(1)
     elif len(filter_rules) == 0:
         print('No filter rules defined! Exiting now...')
-        exit()
+        sys.exit(1)
     else:
         pass
 
@@ -202,7 +202,7 @@ Did you misspell the field name?'''.format(
 if __name__ == '__main__':
     if len(sys.argv) < 4:
         print(__doc__)
-        exit()
+        sys.exit(1)
 
     if sys.argv[3] == 'None':
         output_file_unfiltered = None

@@ -46,7 +46,7 @@ def main():
         print('no duplicates were found')
     else:
         print('remove duplicates for:', duplicates)
-        exit()
+        sys.exit(1)
 
     print('''
         Rewriting params dict
@@ -96,7 +96,7 @@ def main():
                 print('        ],', file=output_file)
             else:
                 print('''        '{0}' : {1},'''.format(k,v), file=output_file)
-        # exit()
+        # sys.exit(1)
         # print('''        'trigger_rerun' : True,''', file=output_file)
         print('    },', file=output_file)
     print('}', file=output_file)

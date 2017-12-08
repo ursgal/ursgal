@@ -115,7 +115,7 @@ def main(folder=None, profile=None, target_decoy_database=None):
 if __name__ == '__main__':
     if len(sys.argv) < 3:
         print(main.__doc__)
-        exit()
+        sys.exit(1)
     main(
         folder                = sys.argv[1],
         profile               = sys.argv[2],

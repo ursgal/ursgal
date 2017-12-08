@@ -89,7 +89,6 @@ def main():
             engine     = engine,
         )
         time_collector[ engine ] = time.time()-start_time
-        # exit()
         validated_file = uc.validate(
             input_file = unified_result_file,
             engine     = 'percolator_2_08',

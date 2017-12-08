@@ -74,7 +74,6 @@ unify_csv_main(
     },
     search_engine  = 'myrimatch_2_1_138',
 )
-# exit()
 ident_list = [ ]
 for line_dict in csv.DictReader(open(output_csv, 'r')):
     ident_list.append( line_dict )

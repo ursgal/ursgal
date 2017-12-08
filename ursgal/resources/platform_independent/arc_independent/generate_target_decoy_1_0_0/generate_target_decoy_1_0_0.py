@@ -145,7 +145,7 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
                         Please add this information to uparams.py
                         (enzyme --> generate_target_decoy_style_1)
                         '''.format(enzyme))
-                    exit()
+                    sys.exit(1)
                 aaString = ''.join(sorted(peptide))
                 if aaString not in perDict.keys():
                     perDict[ aaString ] =  {
@@ -223,7 +223,7 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
 
         else:
             print('Mode {0} not specified'.format(mode))
-            exit()
+            sys.exit(1)
 
 
     if mode == 'shuffle_peptide':

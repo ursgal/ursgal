@@ -8771,7 +8771,7 @@ ursgal_params = {
             'none_val'      : None,
             'multiple_line' : False,
         },
-        'default_value' : 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/',
+        'default_value' : 'http://plan-a.uni-muenster.de/',
         'description' : \
             'URL that is used to install and prepare_resources.py',
     },

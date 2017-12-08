@@ -4,7 +4,7 @@ import os
 import subprocess
 import csv
 import re
-
+import sys
 
 class moda_v1_51(ursgal.UNode):
     """
@@ -181,7 +181,7 @@ class moda_v1_51(ursgal.UNode):
                 print('The translatd key ', translated_key,
                       ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
-                exit(1)
+                sys.exit(1)
 
         params_input_file.close()
 

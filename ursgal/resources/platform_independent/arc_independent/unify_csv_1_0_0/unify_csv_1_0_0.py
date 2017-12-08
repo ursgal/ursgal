@@ -116,7 +116,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     else:
         params['label'] = '14N'
     # print(use15N)
-    # exit()
+    # sys.exit(1)
     # aa_exception_dict = params['translations']['aa_exception_dict']
     n_term_replacement = {
         'Ammonia-loss' : None,
@@ -189,7 +189,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         New mod_name already present in mod_dict'
                         This should never happen'''
                     )
-                    exit()
+                    sys.exit(1)
                 mod_dict['_15N_{0}'.format(aminoacid)] = {
                     'mass' : N15_Diff,
                     'aa' : set([aminoacid]),
@@ -228,7 +228,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     mass_to_mod_combo[rounded_mass] = set()
                 mass_to_mod_combo[ rounded_mass ].add( name_combo )
         # print(mass_to_mod_combo.keys())
-        # exit()
+        # sys.exit(1)
         #msfragger mod merge block end
         ##############################
 
@@ -558,7 +558,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                     )
                                     # pprint.pprint(explainable_combos)
                                     # ms_fragger_reformatted_mods += sorted(explainable_combos)[0]
-                                    # exit()
+                                    # sys.exit(1)
                                 elif len(explainable_combos) == 1:
                                     ms_fragger_reformatted_mods += sorted(explainable_combos)[0]
                                 else:
@@ -580,7 +580,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         # print(line_dict['Modifications'])
                         # print(mass_to_mod_combo.keys())
                         # print(ms_fragger_reformatted_mods)
-                        # exit()
+                        # sys.exit(1)
                         line_dict['Modifications'] = ';'.join( ms_fragger_reformatted_mods )
 
                 ##################################################
@@ -920,7 +920,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         )
                     # pprint.pprint(line_dict)
                     # print(sorted_upeptide_maps)
-                    # exit()
+                    # sys.exit(1)
                     if sorted_upeptide_maps == []:
                         print('''
 [ WARNING ] The peptide {0} could not be mapped to the
@@ -1061,7 +1061,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     non_enzymatic_peps
                 )
             )
-    # exit()
+    # sys.exit(1)
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:
@@ -1161,7 +1161,7 @@ def merge_duplicate_psm_rows(unified_csv_path, psm_counter, psm_defining_colname
 if __name__ == '__main__':
     if len(sys.argv) < 7:
         print(__doc__)
-        exit()
+        sys.exit(1)
 
     scan_rt_lookup = pickle.load(open(sys.argv[3], 'rb'))
 

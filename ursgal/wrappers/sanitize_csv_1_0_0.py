@@ -114,7 +114,7 @@ class sanitize_csv_1_0_0( ursgal.UNode ):
                     Got {0}
                     Please specify parameters validation_score_field and bigger_scores_better
                 '''.format(last_engine))
-                exit(1)
+                sys.exit(1)
             else:
                 bigger_scores_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][last_engine]
                 validation_score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]

@@ -162,7 +162,7 @@ class compomics_utilities_4_11_5( ursgal.UNode ):
                                     [ WARNING ] Please adjust upeptide_mapper accordingly
                                     '''.format(aa_to_replace)
                                 )
-                                exit()
+                                sys.exit(1)
                     if appended is False:
                         peptides.add(line_dict['Sequence'])
                 for peptide in peptides:

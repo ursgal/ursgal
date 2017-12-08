@@ -370,7 +370,7 @@ class omssa_2_1_9( ursgal.UNode ):
             else:
                 print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
-                exit(1)
+                sys.exit(1)
 
     def postflight( self ):
         '''

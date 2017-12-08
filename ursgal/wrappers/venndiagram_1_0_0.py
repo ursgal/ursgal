@@ -104,7 +104,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
             else:
                 print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
-                exit(1)
+                sys.exit(1)
 
         column_sets = {}
         default_label = ['label_A','label_B','label_C','label_D','label_E','label_F']

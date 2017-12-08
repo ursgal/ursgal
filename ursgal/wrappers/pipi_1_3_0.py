@@ -4,7 +4,7 @@ import os
 from collections import defaultdict as ddict
 import csv
 import itertools
-
+import sys
 
 class pipi_1_3_0(ursgal.UNode):
     """
@@ -78,7 +78,7 @@ class pipi_1_3_0(ursgal.UNode):
 
         # pprint.pprint(self.params['translations']['_grouped_by_translated_key'])
         # pprint.pprint(self.params)
-        # exit()
+        # sys.exit(1)
         self.params_to_write = {
             'output_percolator_input': 1,
             'mod10': '0.0@X?',
@@ -208,7 +208,7 @@ class pipi_1_3_0(ursgal.UNode):
                             any, Prot-N-term, Prot-C-term, N-term, C-term
                             '''.format(mod_dict['org'])
                             )
-                            exit(1)
+                            sys.exit(1)
                         n += 1
                         assert n <= 10, '''
                         A maximum of 10 optional modifications is allowed in PIPI.
@@ -223,7 +223,7 @@ class pipi_1_3_0(ursgal.UNode):
                                 A maximum of 10 optional modifications is allowed in PIPI.
                                 You specified more than 10.
                             ''')
-                            exit()
+                            sys.exit(1)
                         self.params_to_write[mod_n] = '{0}@{1}{2}'.format(
                             mod_dict['mass'],
                             mod_dict['aa'],

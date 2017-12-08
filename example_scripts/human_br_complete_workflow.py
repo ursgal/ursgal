@@ -39,7 +39,7 @@ def main(folder):
         if os.path.exists( os.path.join( folder, mass_spec_file ) ) is False:
             print('Please download RAW files to folder {} and convert to mzML:'.format(folder))
             pprint.pprint(mass_spec_files)
-            exit()
+            sys.exit(1)
 
     # mods from Wen et al. (2015):
     modifications = [
@@ -193,5 +193,5 @@ def main(folder):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(main.__doc__)
-        exit()
+        sys.exit(1)
     main(sys.argv[1])
