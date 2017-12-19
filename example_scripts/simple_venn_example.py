@@ -15,11 +15,11 @@ def main():
 
     '''
     uc = ursgal.UController(
-        profile = 'LTQ XL low res',
-        params = {
-            'visualization_label_positions' : {
-                '0' : 'omssa',
-                '1' : 'xtandem'
+        profile='LTQ XL low res',
+        params={
+            'visualization_label_positions': {
+                '0': 'omssa',
+                '1': 'xtandem'
             }
 
         }
@@ -43,8 +43,8 @@ def main():
     ]
 
     uc.visualize(
-        input_files    = file_list,
-        engine         = 'venndiagram',
+        input_files=file_list,
+        engine='venndiagram',
     )
     return
 

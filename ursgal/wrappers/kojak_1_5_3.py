@@ -76,7 +76,21 @@ class kojak_1_5_3( ursgal.UNode ):
             self.params['input_dir_path'],
             self.params['input_file']
         )
-        self.params['translations']['mzml_input_file'] = input_file
+        if input_file.lower().endswith('.mzml') or \
+            input_file.lower().endswith('.mzml.gz'):
+            self.params['translations']['mzml_input_file'] = input_file
+        elif input_file.lower().endswith('.mgf'):
+            self.params['translations']['mzml_input_file'] = \
+                self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( input_file )
+            self.print_info(
+                'Kojak cannot read .mgf files.'
+                'the corresponding mzML file {0} will be used instead.'.format(
+                    os.path.abspath(self.params['translations']['mzml_input_file'])
+                ),
+                caller = "INFO"
+            )
+        else:
+            raise Exception('Kojak input spectrum file must be in mzML or MGF format!')
 
 
         # remap modifications to adapt to kojak format

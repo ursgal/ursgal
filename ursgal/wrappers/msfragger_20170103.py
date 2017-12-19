@@ -262,7 +262,7 @@ class msfragger_20170103( ursgal.UNode ):
                 self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( self.input_file )
             self.print_info(
                 'MSFragger can only read Proteowizard MGF input files,'
-                'thecorresponding mzML file {0} will be used instead.'.format(
+                'the corresponding mzML file {0} will be used instead.'.format(
                     os.path.abspath(self.params['translations']['mzml_input_file'])
                 ),
                 caller = "INFO"

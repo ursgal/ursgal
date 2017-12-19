@@ -937,8 +937,8 @@ class UController(ursgal.UNode):
             str: Path of the output file
         '''
         if 'merge_csvs' in engine:
-            outfile = merge_csvs(
-                input_files,
+            outfile = self.merge_csvs(
+                input_file,
                 force = force,
                 output_file_name = output_file_name
             )
@@ -1712,17 +1712,29 @@ class UController(ursgal.UNode):
             automatically converts mzML to MGF and produces a unified
             CSV output file.
         '''
-        engine_name = self.engine_sanity_check( engine )
-        self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.mgf'] )
-        if self.unodes[ engine_name ]['class'].META_INFO.get('search_engine', False) is not False:
-        # if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
-        #     if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
-            self.input_file_sanity_check(
-                self.params['database'],
-                engine     = engine_name,
-                custom_str = 'FASTA database (uc.params["database"])',
-                extensions = ['fasta', 'fa', 'fast']
-            )
+        engine_name = self.engine_sanity_check(engine)
+        self.input_file_sanity_check(
+            input_file,
+            engine=engine_name,
+            extensions=['.mgf']
+        )
+        for search_engine_type in [
+            'protein_database_search_engine',
+            'cross_link_search_engine',
+        ]:
+            if self.unodes[ engine_name ]['class'].META_INFO.get(
+                search_engine_type,
+                False
+            ) is not False:
+            # if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
+            #     if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
+                self.input_file_sanity_check(
+                    self.params['database'],
+                    engine     = engine_name,
+                    custom_str = 'FASTA database (uc.params["database"])',
+                    extensions = ['fasta', 'fa', 'fast']
+                )
+                break
         answer = self.prepare_unode_run(
             input_file,
             output_file = output_file_name,

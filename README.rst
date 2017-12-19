@@ -21,6 +21,15 @@ Introduction
    :alt: Join the chat at https://gitter.im/ursgal/ursgal
    :target: https://gitter.im/ursgal/ursgal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
+Update to v0.6.0 Warning
+************************
+
+Please note that, due to significant reorganization of UController functions as well as some uparams,
+compatibility of v0.6.0 with previous versions is not given in all cases.
+Most likely, your previous results will not be recognized, i.e. previously executed runs will be executed again.
+Please consider this before updating to v0.6.0, check the Changelog or ask us if you have any doubts.
+We are sorry for the inconvenience but changes were necessary for further development.
+
 Summary
 *******
 

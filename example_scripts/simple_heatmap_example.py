@@ -6,6 +6,7 @@ import sys
 import os
 import pyGCluster
 
+
 def main():
     '''
     Please visit pyGCluster documentation for more information on this plotting
@@ -31,24 +32,24 @@ def main():
 
     '''
     uc = ursgal.UController(
-        profile = 'LTQ XL low res',
-        params = {
-            'heatmap_annotation_field_name' : 'map to uniprot',
-            'heatmap_identifier_field_name' : 'Protein',
-            'heatmap_max_value'             : 3,
-            'heatmap_min_value'             : -3,
-            'heatmap_color_gradient'        : 'RdBu',
-            'heatmap_box_style'             : 'classic'
+        profile='LTQ XL low res',
+        params={
+            'heatmap_annotation_field_name': 'map to uniprot',
+            'heatmap_identifier_field_name': 'Protein',
+            'heatmap_max_value': 3,
+            'heatmap_min_value': -3,
+            'heatmap_color_gradient': 'RdBu',
+            'heatmap_box_style': 'classic'
         }
     )
     uc.visualize(
-        input_files      = sys.argv[1],
-        engine           = 'plot_pygcluster',
-        output_file_name = '{0}_heatmap.svg'.format(
+        input_files=sys.argv[1],
+        engine='plot_pygcluster',
+        output_file_name='{0}_heatmap.svg'.format(
             os.path.basename(sys.argv[1])
         ),
-        multi            = False,
-        force            = True
+        multi=False,
+        force=True
     )
     return
 

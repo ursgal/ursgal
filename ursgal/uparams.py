@@ -5611,8 +5611,9 @@ ursgal_params = {
         },
         'uvalue_translation' : {
             'ucontroller_style_1': {
+                'msgfplus_v9979' : 'mzidentml_lib_1_6_10',
                 'msgfplus_v2016_09_16' : 'msgfplus2csv_v2016_09_16',
-                'msgfplus_v2017_01_27' : 'msgfplus2csv_v2017_01_27'
+                'msgfplus_v2017_01_27' : 'msgfplus2csv_v2017_01_27',
             },
         },
         'uvalue_type' : "str",

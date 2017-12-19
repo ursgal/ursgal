@@ -40,20 +40,20 @@ def main(folder=None, profile=None, target_decoy_database=None):
             'M,opt,any,Oxidation',
             '*,opt,Prot-N-term,Acetyl',  # N-Acetylation
         ],
-        
+
         # You can customize the SVM kernel and parameters like this:
-        
-        'fdr_cutoff': 0.01,  # target PSMs with a lower FDR than this 
-            # threshold will be used as a positive training set in the SVM
-        'kernel': 'rbf',  # the kernel function of the SVM ("rbf", 
-            # "linear", "poly" or "sigmoid")
+
+        'fdr_cutoff': 0.01,  # target PSMs with a lower FDR than this
+        # threshold will be used as a positive training set in the SVM
+        'kernel': 'rbf',  # the kernel function of the SVM ("rbf",
+        # "linear", "poly" or "sigmoid")
         'svm_c_param': 1.0,  # penalty parameter C of the error
-            # term of the SVM
+        # term of the SVM
     }
 
     uc = ursgal.UController(
-        profile = profile,
-        params = input_params,
+        profile=profile,
+        params=input_params,
     )
 
     engine_list = [
@@ -73,17 +73,20 @@ def main(folder=None, profile=None, target_decoy_database=None):
         unified_csvs = []
         for mzML_file in mzML_files:
             unified_search_result_file = uc.search(
-                input_file = mzML_file,
-                engine     = search_engine,
+                input_file=mzML_file,
+                engine=search_engine,
             )
             unified_csvs.append(unified_search_result_file)
 
-        merged_unified_csv = uc.merge_csvs(unified_csvs)
+        merged_unified_csv = uc.execute_misc_engine(
+            input_file=unified_csvs,
+            engine='merge_csvs'
+        )
 
         # Statistical post-processing of PSMs with a support vector machine
         svm_validated_csv = uc.validate(
-            input_file = merged_unified_csv,
-            engine     = 'svm_1_0_0',
+            input_file=merged_unified_csv,
+            engine='svm_1_0_0',
         )
 
         # Estimate the false discovery rate (FDR) for each PSM,
@@ -92,9 +95,10 @@ def main(folder=None, profile=None, target_decoy_database=None):
         # Larger SVM scores indicate higher confidence
         uc.params['bigger_scores_better'] = True
         svm_results_with_fdr = uc.add_estimated_fdr(
-            input_file = svm_validated_csv,
+            input_file=svm_validated_csv,
         )
-        # Reset validation parameters to default (for subsequent SVM validation)
+        # Reset validation parameters to default (for subsequent SVM
+        # validation)
         uc.params['validation_score_field'] = None
         uc.params['bigger_scores_better'] = None
         svm_validated_files.append(svm_results_with_fdr)
@@ -110,7 +114,7 @@ if __name__ == '__main__':
         print(main.__doc__)
         sys.exit('You did not specify three command line arguments, exiting.')
     main(
-        folder                = sys.argv[1],
-        profile               = sys.argv[2],
-        target_decoy_database = sys.argv[3]
+        folder=sys.argv[1],
+        profile=sys.argv[2],
+        target_decoy_database=sys.argv[3]
     )
