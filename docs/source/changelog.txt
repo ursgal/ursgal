@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 0.6.0    (07.2017)
+Version 0.6.0    (01.2018)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 #. Restructuring of engine classes. SEARCH_ENGINE(s) are now devided into
    * CROSS_LINK_SEARCH_ENGINE(s)
