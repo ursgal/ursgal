@@ -80,7 +80,7 @@ def main():
 
     mgf_file = uc.convert(
         input_file=mzML_file,
-        engine='mzml2mgf',
+        engine='mzml2mgf_1_0_0',
     )
     files_2_merge = {}
     label_list = ['14N', '15N']
@@ -106,12 +106,12 @@ def main():
                 engine='unify_csv'
             )
             validated_file = uc.validate(
-                input_file=unified_result_file,
+                input_file=unified_search_results,
                 engine='percolator_2_08',
             )
             filtered_file = uc.execute_misc_engine(
                 input_file=validated_file,
-                engine='filter_csv'.
+                engine='filter_csv'
             )
             validated_and_filtered_files_list.append(filtered_file)
         files_2_merge[label] = validated_and_filtered_files_list
@@ -121,6 +121,7 @@ def main():
         )
     uc.params['prefix'] = None
     uc.params['label'] = ''
+    uc.params['visualization_label_positions'] = {}
     label_comparison_file_list = []
     for n, label in enumerate(label_list):
         uc.params['visualization_label_positions'][str(n)] = label

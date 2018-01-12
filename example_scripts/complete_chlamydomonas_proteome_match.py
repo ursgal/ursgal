@@ -8,7 +8,8 @@ import os.path
 import sys
 import time
 
-def main( class_version):
+
+def main(class_version):
     '''
 
     Example script to demonstrate speed and memory efficiency of the new
@@ -28,38 +29,38 @@ def main( class_version):
     '''
 
     input_params = {
-        'database' : os.path.join(
+        'database': os.path.join(
             os.pardir,
             'example_data',
             'Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta'
         ),
-        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta' ,
-        'http_output_folder' : os.path.join(
+        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
+        'http_output_folder': os.path.join(
             os.pardir,
             'example_data',
         )
     }
 
     uc = ursgal.UController(
-        params = input_params
+        params=input_params
     )
 
     if os.path.exists(input_params['database']) is False:
         uc.fetch_file(
-            engine     = 'get_http_files_1_0_0'
+            engine='get_http_files_1_0_0'
         )
     print('Parsing fasta and digesting sequences')
     peptides = set()
     digest_start = time.time()
-    for fastaID, sequence in ursgal.ucore.parse_fasta( open( input_params['database'], 'r' ) ):
+    for fastaID, sequence in ursgal.ucore.parse_fasta(open(input_params['database'], 'r')):
         tryptic_peptides = ursgal.ucore.digest(
             sequence,
             ('KR', 'C'),
-            no_missed_cleavages = True
+            no_missed_cleavages=True
         )
         for p in tryptic_peptides:
             if 6 <= len(p) <= 40:
-                peptides.add( p )
+                peptides.add(p)
     print(
         'Parsing fasta and digesting sequences took {0:1.2f} seconds'.format(
             time.time() - digest_start
@@ -80,24 +81,24 @@ def main( class_version):
     map_start = time.time()
 
     if class_version == 'UPeptideMapper_v2':
-        peptide_mapper = upapa_class(word_len =6)
+        peptide_mapper = upapa_class(word_len=6)
         fasta_lookup_name = peptide_mapper.build_lookup_from_file(
             input_params['database'],
-            force  = False,
+            force=False,
         )
         args = [
             list(peptides),
             fasta_lookup_name
         ]
     elif class_version == 'UPeptideMapper_v3':
-        peptide_mapper = upapa_class( input_params['database'] )
+        peptide_mapper = upapa_class(input_params['database'])
         fasta_lookup_name = peptide_mapper.fasta_name
         args = [
             list(peptides),
             fasta_lookup_name
         ]
     elif class_version == 'UPeptideMapper_v4':
-        peptide_mapper = upapa_class( input_params['database'] )
+        peptide_mapper = upapa_class(input_params['database'])
         args = [
             list(peptides)
         ]

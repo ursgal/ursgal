@@ -8,17 +8,18 @@ import os.path
 import sys
 import time
 
+
 def main(fasta_database, class_version):
     '''
 
     Example script to demonstrate speed and memory efficiency of the new 
     upeptide_mapper.
-    
+
     Specify fasta_database and class_version as input.
 
     usage:
         ./complete_proteome_match.py <fasta_database> <class_version>
-    
+
     Class versions
         * UPeptideMapper_v2
         * UPeptideMapper_v3
@@ -27,25 +28,25 @@ def main(fasta_database, class_version):
     '''
 
     input_params = {
-        'database' : sys.argv[1],
+        'database': sys.argv[1],
     }
 
     uc = ursgal.UController(
-        params = input_params
+        params=input_params
     )
 
     print('Parsing fasta and digesting sequences')
     peptides = set()
     digest_start = time.time()
-    for fastaID, sequence in ursgal.ucore.parse_fasta( open( input_params['database'], 'r' ) ):
+    for fastaID, sequence in ursgal.ucore.parse_fasta(open(input_params['database'], 'r')):
         tryptic_peptides = ursgal.ucore.digest(
             sequence,
             ('KR', 'C'),
             # no_missed_cleavages = True
         )
         for p in tryptic_peptides:
-            if 6 <= len(p) <= 40:  
-                peptides.add( p )
+            if 6 <= len(p) <= 40:
+                peptides.add(p)
     print(
         'Parsing fasta and digesting sequences took {0:1.2f} seconds'.format(
             time.time() - digest_start
@@ -64,27 +65,27 @@ def main(fasta_database, class_version):
     )
 
     print('Buffering fasta and mapping {0} peptides'.format(len(peptides)))
-    map_start = time.time()  
-    
+    map_start = time.time()
+
     if class_version == 'UPeptideMapper_v2':
-        peptide_mapper = upapa_class(word_len =6)
+        peptide_mapper = upapa_class(word_len=6)
         fasta_lookup_name = peptide_mapper.build_lookup_from_file(
             input_params['database'],
-            force  = False,
+            force=False,
         )
         args = [
             list(peptides),
             fasta_lookup_name
         ]
     elif class_version == 'UPeptideMapper_v3':
-        peptide_mapper = upapa_class( input_params['database'] )
+        peptide_mapper = upapa_class(input_params['database'])
         fasta_lookup_name = peptide_mapper.fasta_name
         args = [
             list(peptides),
             fasta_lookup_name
         ]
     elif class_version == 'UPeptideMapper_v4':
-        peptide_mapper = upapa_class( input_params['database'] )
+        peptide_mapper = upapa_class(input_params['database'])
         args = [
             list(peptides)
         ]

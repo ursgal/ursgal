@@ -884,8 +884,12 @@ class UController(ursgal.UNode):
                         force            = force,
                         output_file_name = output_file_name
                     )
+                else:
+                    print('Cannot guess a suitable engine, please specify it.')
+                    sys.exit(1)
 
-        elif engine in ['mzml2mgf_1_0_0']:
+        elif len(self.guess_engine_name(engine)) == 1 and\
+                self.guess_engine_name(engine)[0] in ['mzml2mgf_1_0_0']:
             outfile = self.convert_to_mgf_and_update_rt_lookup(
                 input_file       = input_file,
                 force            = force,

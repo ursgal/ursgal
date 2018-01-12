@@ -137,8 +137,9 @@ def search(validation_engine):
             input_file=sorted(validated_results),
             engine='merge_csvs',
         )
-        filtered_validated_results = uc.filter_csv(
+        filtered_validated_results = uc.execute_misc_engine(
             input_file=validated_results_from_all_engines,
+            engine='filter_csv'
         )
         result_files.append(filtered_validated_results)
 

@@ -72,7 +72,7 @@ def main(
         scan_exclusion_list = [ int(spec_id) for spec_id in scan_exclusion_list ]
 
     if machine_offset_in_ppm is not None:
-        mz_correction_factor = machine_offset_in_ppm
+        mz_correction_factor = machine_offset_in_ppm*1e-6
     else:
         mz_correction_factor = 0
 
