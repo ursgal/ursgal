@@ -1,3 +1,5 @@
+.. _faq:
+
 Frequently Asked Questions
 ==========================
 
@@ -28,6 +30,18 @@ Q: Found mismatch between json parameter ....
 
 During JSON dump Python tuples are converted into list like objects, thus this might be a reason. Just change your parameter to lists instead of tuples :)
 
+.. _not-installed-engines:
+
+Q: How do I add an engine that is not installed via install_resources.py?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Download the engine from the respective developers homepage (links are given in the engine wrapper documentation).
+Create a folder in the corresponding Ursgal resoucres (name of the folder = name of the engine in Ursgal, for more information see :ref:`generate-your-engines`: 1. Integration into Resources) and unpack/save all required files, especially the executable, there.
+Remember to run::
+
+	user@localhost:~/ursgal$ python3.4 setup.py install
+
+to include Ursgal (and the changes you have made to the resources) into Python site-packages.
 
 Development
 ###########

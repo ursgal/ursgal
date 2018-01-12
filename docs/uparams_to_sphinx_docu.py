@@ -67,8 +67,8 @@ if __name__ == '__main__':
     uprint('''
 .. _parameters:
 
-Ursgal to Engine Parameters overview
-************************************
+Ursgal Parameters
+*****************
 
 .. note:: This sphinx source file was **auto-generated** using
     ursgal/docs/uparams_to_sphinx_docu.py, which parses ursgal/ursgal/uparams.py

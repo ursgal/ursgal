@@ -1,6 +1,6 @@
 .. code-block:: python
 
-	#!/usr/bin/env python3.4
+	#!/usr/bin/env python3
 	# encoding: utf-8
 	import ursgal
 	import csv

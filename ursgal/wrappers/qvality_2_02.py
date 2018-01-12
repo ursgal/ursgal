@@ -27,13 +27,13 @@ class qvality_2_02( ursgal.UNode ):
             'validation_engine' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'qvality_validated',
         'create_own_folder'  : False,
         'include_in_git'     : False,
         'group_psms'         : True,
         'in_development'     : False,
+        'distributable'      : True,
         'utranslation_style' : 'qvality_style_1',
         'engine' : {
             'darwin' : {
@@ -111,7 +111,7 @@ class qvality_2_02( ursgal.UNode ):
             else:
                 print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
-                exit(1)
+                sys.exit(1)
 
         if self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][self.params['last_engine']] is False:
             self.params['command_list'].append('-r') #False: lower scores are better e.g.OMSSA, scores have to be reversed for qvality
@@ -192,7 +192,7 @@ class qvality_2_02( ursgal.UNode ):
                 #         print('WARNING - qvality output scores could not be mapped and score was the best for spectrum!')
                 #         print('Scores: ', formatted_score, formatted_score_2_compare )
                 #         pprint.pprint( psm_list )
-                #         exit()
+                #         sys.exit(1)
 
 
 

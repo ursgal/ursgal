@@ -5,6 +5,7 @@ import pprint
 from collections import defaultdict as ddict
 import csv
 import itertools
+import sys
 
 class msfragger_20170103( ursgal.UNode ):
     """
@@ -36,16 +37,14 @@ class msfragger_20170103( ursgal.UNode ):
         'version'                     : '20170103',
         'release_date'                : '2017-01-03',
         'utranslation_style'          : 'msfragger_style_1',
-        'compress_raw_search_results' : False,
-        'input_multi_file'            : False,
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML'],
         'output_extensions'           : ['.csv'],
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
-        'cannot_distribute'           : True,
-        'engine_type'                 : {
-            'search_engine' : True,
+        'distributable'           : False,
+        'engine_type' : {
+            'protein_database_search_engine' : True,
         },
         'engine'                      : {
             'platform_independent'    : {
@@ -83,7 +82,7 @@ class msfragger_20170103( ursgal.UNode ):
 
     def preflight( self ):
         '''
-        Formatting the command line and writing the paramn input file via
+        Formatting the command line and writing the param input file via 
         self.params
 
         Returns:
@@ -124,7 +123,7 @@ class msfragger_20170103( ursgal.UNode ):
                 'Search with label=15N may still be errorprone. Evaluate with care!',
                 caller = 'WARNING'
             )
-            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+            for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 existing = False
                 for mod_dict in self.params[ 'mods' ][ 'fix' ]:
                     if aminoacid == mod_dict[ 'aa' ]:
@@ -161,6 +160,9 @@ class msfragger_20170103( ursgal.UNode ):
                         self.params_to_write[ msfragger_param_name ] = 0
                     else:
                         self.params_to_write[ msfragger_param_name ] = param_value
+                elif msfragger_param_name == 'clear_mz_range':
+                    min_mz, max_mz = param_value
+                    self.params_to_write[ msfragger_param_name ] = '{0} {1}'.format(min_mz, max_mz)
                 elif msfragger_param_name == 'modifications':
                     '''
                     #maximum of 7 mods - amino acid codes, * for any amino acid, [ and ] specifies protein termini, n and c specifies peptide termini
@@ -207,7 +209,7 @@ class msfragger_20170103( ursgal.UNode ):
                             any, Prot-N-term, Prot-C-term, N-term, C-term
                             '''.format(mod_dict['org'])
                             )
-                            exit(1)
+                            sys.exit(1)
                         if pos_modifier is not None:
                             aa_to_append = '{0}{1}'.format(pos_modifier,aa_to_append)
                         mass_to_mod_aa[mod_dict['mass']].append( aa_to_append )
@@ -260,7 +262,7 @@ class msfragger_20170103( ursgal.UNode ):
                 self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( self.input_file )
             self.print_info(
                 'MSFragger can only read Proteowizard MGF input files,'
-                'thecorresponding mzML file {0} will be used instead.'.format(
+                'the corresponding mzML file {0} will be used instead.'.format(
                     os.path.abspath(self.params['translations']['mzml_input_file'])
                 ),
                 caller = "INFO"

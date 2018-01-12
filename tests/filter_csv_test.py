@@ -71,6 +71,12 @@ TESTS = [
         ],
         'number_of_expected_lines': 6,
     },
+    {
+        'csv_filter_rules' : [
+            ['Modifications','contains_element_of_list',['Oxidation', 'Carbamidomethyl']]
+        ],
+        'number_of_expected_lines': 9,
+    },
 ]
 
 

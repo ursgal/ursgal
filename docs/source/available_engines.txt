@@ -3,27 +3,37 @@
 Available Search Engines
 ========================
 
+.. _protein-database-engines:
+
+Protein Database Search Engines
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 MS-GF+
 ------
 
-.. autoclass:: ursgal.wrappers.msgfplus_v9979.msgfplus_v9979
+.. autoclass:: ursgal.wrappers.msgfplus_v2017_01_27.msgfplus_v2017_01_27
    :members:
 
 .. autoclass:: ursgal.wrappers.msgfplus_v2016_09_16.msgfplus_v2016_09_16
+   :members:
+
+.. autoclass:: ursgal.wrappers.msgfplus_v9979.msgfplus_v9979
    :members:
 
 
 X!Tandem
 --------
 
+.. autoclass:: ursgal.wrappers.xtandem_alanine.xtandem_alanine
+   :members:
+
 .. autoclass:: ursgal.wrappers.xtandem_vengeance.xtandem_vengeance
    :members:
 
-.. autoclass:: ursgal.wrappers.xtandem_sledgehammer.xtandem_sledgehammer
+.. autoclass:: ursgal.wrappers.xtandem_piledriver.xtandem_piledriver
    :members:
 
-.. autoclass:: ursgal.wrappers.xtandem_piledriver.xtandem_piledriver
+.. autoclass:: ursgal.wrappers.xtandem_sledgehammer.xtandem_sledgehammer
    :members:
 
 .. autoclass:: ursgal.wrappers.xtandem_jackhammer.xtandem_jackhammer
@@ -56,6 +66,12 @@ MS Amanda
 .. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
    :members:
 
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7503.msamanda_1_0_0_7503
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7504.msamanda_1_0_0_7504
+   :members:
+
 MyriMatch
 ---------
 
@@ -63,4 +79,34 @@ MyriMatch
    :members:
 
 .. autoclass:: ursgal.wrappers.myrimatch_2_2_140.myrimatch_2_2_140
+   :members:
+
+
+.. _available_de_novo_engines:
+
+De Novo Search Engines
+^^^^^^^^^^^^^^^^^^^^^^
+
+Novor
+-----
+
+.. autoclass:: ursgal.wrappers.novor_1_1beta.novor_1_1beta
+   :members:
+
+PepNovo
+-------
+
+.. autoclass:: ursgal.wrappers.pepnovo_3_1.pepnovo_3_1
+   :members:
+
+
+.. _available_cross_link_engines:
+
+Cross Link Search Engines
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Kojak
+-----
+
+.. autoclass:: ursgal.wrappers.kojak_1_5_3.kojak_1_5_3
    :members:

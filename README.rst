@@ -21,6 +21,16 @@ Introduction
    :alt: Join the chat at https://gitter.im/ursgal/ursgal
    :target: https://gitter.im/ursgal/ursgal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
+Update to v0.6.0 Warning
+************************
+
+Please note that, due to significant reorganization of UController functions as well as some uparams,
+compatibility of v0.6.0 with previous versions is not given in all cases.
+Most likely, your previous results will not be recognized, i.e. previously executed runs will be executed again.
+Please consider this before updating to v0.6.0, check the Changelog or ask us if you have any doubts.
+We are sorry for the inconvenience but changes were necessary for further development.
+If you want to continue using (and modifying) v0.5.0 you can use the branch v0.5.0.
+
 Summary
 *******
 
@@ -105,6 +115,11 @@ Install third party engines::
 
     user@localhost:~/ursgal$ python3.4 install_resources.py
 
+.. note::
+
+    Since we are not allowed to distribute all third party engines, you might need to
+    download and install them on your own. See FAQ (:ref:`not-installed-engines`) and
+    the respective engine documentation for more information.
 
 Install Ursgal::
 
@@ -120,6 +135,7 @@ Install Ursgal::
 On Linux or OS X, use ```sudo python setup.py install``` or write into a user folder
 by using this command ```python setup.py install --user```. On Windows, you have to
 start the command line with administrator privileges.)
+
 
 
 Tests
@@ -162,9 +178,10 @@ as common practice in science, never trust a blackbox :)
 Copyrights
 ***********
 
-Copyright 2014-2015 by authors and contributors in alphabetical order
+Copyright 2014-2017 by authors and contributors in alphabetical order
 
 * Christian Fufezan,
+* Manuel Koesters
 * Lukas P. M. Kremer
 * Johannes Leufken
 * Purevdulam Oyunchimeg

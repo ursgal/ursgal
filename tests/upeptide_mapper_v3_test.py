@@ -174,7 +174,7 @@ class UMapMaster(unittest.TestCase):
             tmp_database_path,
             'tmp_Test.fasta'
         )
-        # exit()
+        # sys.exit(1)
         # print(self.upapa_class.automatons)
         # print(s)
         maps = self.upapa_class.map_peptides(
@@ -187,7 +187,7 @@ class UMapMaster(unittest.TestCase):
             len(maps),
             1
          )
-        # exit()
+        # sys.exit(1)
         self.assertEqual(
             len(
                 self.upapa_class.map_peptides(

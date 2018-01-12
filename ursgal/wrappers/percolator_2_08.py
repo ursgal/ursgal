@@ -44,14 +44,13 @@ class percolator_2_08( ursgal.UNode ):
             'validation_engine' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'percolator_validated',
         'create_own_folder'  : False,
         'include_in_git'     : False,
+        'distributable'      : True,
         'group_psms'         : True,
         'in_development'     : False,
-        'cpu_usage'          : 1,
         'utranslation_style' : 'percolator_style_1',
         'engine' : {
             'darwin' : {

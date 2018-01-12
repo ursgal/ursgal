@@ -2,9 +2,9 @@
 import re
 import sys
 import os
+from ursgal import ukb
 
-DIFFERENCE_14N_15N = 0.997035
-PROTON             = 1.00727646677
+PROTON = ukb.PROTON
 
 COLORS = {
     'ENDC'      : '\033[0m',
@@ -164,7 +164,7 @@ def digest(sequence , enzyme, no_missed_cleavages = False):
     return additionals
 
 
-def parseFasta(io):
+def parse_fasta(io):
     '''
     Small function to efficiently parse a file in fasta format.
 

@@ -1,8 +1,8 @@
 
 .. _parameters:
 
-Ursgal to Engine Parameters overview
-************************************
+Ursgal Parameters
+*****************
 
 .. note:: This sphinx source file was **auto-generated** using
     ursgal/docs/uparams_to_sphinx_docu.py, which parses ursgal/ursgal/uparams.py
@@ -38,6 +38,7 @@ Available in unodes
 * mzidentml_lib_1_6_11
 * mzidentml_lib_1_7
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *-xmx*
 """"""""""""""""""""""""""""""""""""
@@ -48,34 +49,8 @@ Ursgal value translations for *-xmx*
  msfragger_style_1 -Xmx             
  msgfplus_style_1  -Xmx             
  mzidentml_style_1 -Xmx             
+ pipi_style_1      -Xmx             
  ================= =================
-
-.. raw:: html
-
-      <hr />
-
-_extentions
-######################
-
-
-information of extentions
-
-:Default value: ['.csv', '.den', '.dta', '.dta.txt', '.fasta', '.gaml', '.kojak.txt', '.mgf', '.ms2', '.mzData', '.mzML', '.mzML.gz', '.mzXML', '.mzid', '.mzid.gz', '.pep.xml', '.perc.inter.txt', '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt', '.pkl', '.raw', '.svg', '.tsv', '.txt', '.xml', '.xml.gz']
-:type: dict
-:triggers rerun: False
-            
-
-Available in unodes
-"""""""""""""""""""
-
-
-Ursgal value translations for *_extentions*
-"""""""""""""""""""""""""""""""""""""""""""
-
- ================ ================
- Style            Translation     
- ================ ================
- ================ ================
 
 .. raw:: html
 
@@ -247,6 +222,7 @@ Available in unodes
 * moda_v1_51
 * omssa_2_1_9
 * pepnovo_3_1
+* pipi_1_3_0
 
 Ursgal value translations for *base_mz*
 """""""""""""""""""""""""""""""""""""""
@@ -257,6 +233,7 @@ Ursgal value translations for *base_mz*
  moda_style_1     base_mz         
  omssa_style_1    base_mz         
  pepnovo_style_1  base_mz         
+ pipi_style_1     base_mz         
  ================ ================
 
 .. raw:: html
@@ -342,6 +319,7 @@ Ursgal key translations
  .                         add_estimated_fdr_style_1 percolator_style_1        qvality_style_1           sanitize_csv_style_1      svm_style_1              
  ========================= ========================= ========================= ========================= ========================= =========================
  None                      None                      None                      None                      None                      None                     
+ mascot_x_x_x              1                         1                         1                         1                         1                        
  msamanda_1_0_0_5242       1                         1                         1                         1                         1                        
  msamanda_1_0_0_5243       1                         1                         1                         1                         1                        
  msamanda_1_0_0_6299       1                         1                         1                         1                         1                        
@@ -362,6 +340,35 @@ Ursgal key translations
  xtandem_sledgehammer      1                         1                         1                         1                         1                        
  xtandem_vengeance         1                         1                         1                         1                         1                        
  ========================= ========================= ========================= ========================= ========================= =========================
+
+.. raw:: html
+
+      <hr />
+
+build_pyqms_result_index
+###################################
+
+
+Build index for faster access
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *build_pyqms_result_index*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ pyqms_style_1      BUILD_RESULT_INDEX
+ ================== ==================
 
 .. raw:: html
 
@@ -593,6 +600,42 @@ Ursgal value translations for *compress_raw_search_results_if_possible*
  ucontroller_style_1                     compress_raw_search_results_if_possible
  ======================================= =======================================
 
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ==================== ====================
+ Ursgal Value         Translated Value    
+ -------------------- --------------------
+ .                    ucontroller_style_1 
+ ==================== ====================
+ crux_2_1             0                   
+ kojak_1_5_3          0                   
+ mascot_x_x_x         1                   
+ moda_v1_51           0                   
+ msamanda_1_0_0_5242  0                   
+ msamanda_1_0_0_5243  0                   
+ msamanda_1_0_0_6299  0                   
+ msamanda_1_0_0_6300  0                   
+ msamanda_1_0_0_7503  0                   
+ msamanda_1_0_0_7504  0                   
+ msfragger_20170103   0                   
+ msgfplus_v2016_09_16 1                   
+ msgfplus_v2017_01_27 1                   
+ msgfplus_v9979       1                   
+ myrimatch_2_1_138    1                   
+ myrimatch_2_2_140    1                   
+ novor_1_1beta        0                   
+ omssa_2_1_9          0                   
+ pepnovo_3_1          0                   
+ pipi_1_3_0           0                   
+ xtandem_alanine      1                   
+ xtandem_cyclone_2010 1                   
+ xtandem_jackhammer   1                   
+ xtandem_piledriver   1                   
+ xtandem_sledgehammer 1                   
+ xtandem_vengeance    1                   
+ ==================== ====================
+
 .. raw:: html
 
       <hr />
@@ -668,6 +711,93 @@ Ursgal value translations for *consecutive_ion_prob*
 
       <hr />
 
+convert_to_sfinx
+###########################
+
+
+If True, the header of the identifier column is "rownames". If False, the joined identifier header name will be used
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* csv2counted_results_1_0_0
+
+Ursgal value translations for *convert_to_sfinx*
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =========================== ===========================
+ Style                       Translation                
+ =========================== ===========================
+ csv2counted_results_style_1 convert2sfinx              
+ =========================== ===========================
+
+.. raw:: html
+
+      <hr />
+
+count_by_file
+########################
+
+
+the number of unique hits for each identifier is given in seperate columns for each raw file (file name as defiened in Spectrum Title)
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* csv2counted_results_1_0_0
+
+Ursgal value translations for *count_by_file*
+"""""""""""""""""""""""""""""""""""""""""""""
+
+ =========================== ===========================
+ Style                       Translation                
+ =========================== ===========================
+ csv2counted_results_style_1 count_by_file              
+ =========================== ===========================
+
+.. raw:: html
+
+      <hr />
+
+count_column_names
+#############################
+
+
+List of column headers which are used for counting.The combination of these headers creates the unique countable element.
+
+:Default value: ['Sequence', 'Modifications']
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* csv2counted_results_1_0_0
+
+Ursgal value translations for *count_column_names*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =========================== ===========================
+ Style                       Translation                
+ =========================== ===========================
+ csv2counted_results_style_1 count_column_names         
+ =========================== ===========================
+
+.. raw:: html
+
+      <hr />
+
 cpus
 ###############
 
@@ -699,6 +829,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *cpus*
 """"""""""""""""""""""""""""""""""""
@@ -711,6 +842,7 @@ Ursgal value translations for *cpus*
  msgfplus_style_1    -thread            
  myrimatch_style_1   -cpus              
  omssa_style_1       -nt                
+ pipi_style_1        thread_num         
  ucontroller_style_1 cpus               
  xtandem_style_1     spectrum, threads  
  =================== ===================
@@ -767,7 +899,11 @@ csv_filter_rules
 ###########################
 
 
-Rules are defined as list of tuples with the first tuple element as the column name/csv fieldname, the second tuple element the rule and the third tuple element the value which should be compared
+Rules are defined as list of lists with three elements:
+1. the column name/csv fieldname,
+2. the rule,
+3.the value which should be compared
+e.g.: ['Is decoy', 'equals', 'false']
 
 :Default value: None
 :type: list
@@ -841,6 +977,7 @@ Available in unodes
 * upeptide_mapper_1_0_0
 * compomics_utilities_4_11_5
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *database*
 """"""""""""""""""""""""""""""""""""""""
@@ -856,6 +993,7 @@ Ursgal value translations for *database*
  msgfplus_style_1            -d                         
  myrimatch_style_1           ProteinDatabase            
  omssa_style_1               -d                         
+ pipi_style_1                db                         
  unify_csv_style_1           database                   
  upeptide_mapper_style_1     database                   
  xtandem_style_1             file URL                   
@@ -914,7 +1052,7 @@ decoy_generation_mode
 ################################
 
 
-Decoy database: Creates a target decoy database based on shuffling of peptides or complete reversing the protein sequence (reverse_protein).
+Decoy database: Creates a target decoy database based on shuffling of peptides (shuffle_peptide) or complete reversing the protein sequence (reverse_protein).
 
 :Default value: shuffle_peptide
 :type: select
@@ -1235,6 +1373,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *enzyme*
 """"""""""""""""""""""""""""""""""""""
@@ -1253,6 +1392,7 @@ Ursgal value translations for *enzyme*
  omssa_style_1                 -e                           
  pepnovo_style_1               -digest                      
  percolator_style_1            enzyme                       
+ pipi_style_1                  enzyme                       
  unify_csv_style_1             enzyme                       
  xtandem_style_1               protein, cleavage site       
  ============================= =============================
@@ -1260,43 +1400,72 @@ Ursgal value translations for *enzyme*
 Ursgal key translations
 """""""""""""""""""""""
 
- ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
- Ursgal Value                  Translated Value                                                                                                                                                                                                                                                                                                                                                                                     
- ----------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- .                             generate_target_decoy_style_1 kojak_style_1                 moda_style_1                  msamanda_style_1              msfragger_style_1             msgfplus_style_1              myrimatch_style_1             novor_style_1                 omssa_style_1                 pepnovo_style_1               percolator_style_1            unify_csv_style_1             xtandem_style_1              
- ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
- alpha_lp                      n/t                           n/t                           n/t                           n/t                           n/t                           8                             n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                          
- argc                          R;C;P                         n/t                           argc, R/C                     R;after;P                     R;C;P                         6                             n/t                           n/t                           1                             n/t                           R;C;P                         R;C;P                         [R]|{P}                      
- aspn                          D;N;                          n/t                           aspn, D/N;                    D;before;                     D;N;                          7                             Asp-N                         n/t                           12                            n/t                           D;N;                          D;N;                          [X]|[D]                      
- aspn_gluc                     n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           14                            n/t                           n/t                           n/t                           n/t                          
- chymotrypsin                  FMWY;C;P                      n/t                           chymotrypsin, FMWY/C          FMWY;after;P                  FMWY;C;P                      2                             Chymotrypsin                  n/t                           3                             n/t                           FMWY;C;P                      FMWY;C;P                      [FMWY]|{P}                   
- chymotrypsin_p                FMWY;C;                       n/t                           chymotrypsin, FMWY/C          FMWY;after;                   FMWY;C;                       n/t                           n/t                           n/t                           18                            n/t                           FMWY;C;                       FMWY;C;                       [FMWY]|[X]                   
- clostripain                   R;C;                          n/t                           clostripain, R/C              R;after;                      R;C;                          n/t                           n/t                           n/t                           n/t                           n/t                           R;C;                          R;C;                          [R]|[X]                      
- cnbr                          M;C;P                         n/t                           cnbr, M/C                     M;after;P                     M;C;P                         n/t                           CNBr                          n/t                           2                             n/t                           M;C;P                         M;C;P                         [M]|{P}                      
- elastase                      AGILV;C;P                     n/t                           elastase, AGILV/C             AGILV;after;P                 AGILV;C;P                     n/t                           n/t                           n/t                           n/t                           n/t                           AGILV;C;P                     AGILV;C;P                     [AGILV]|{P}                  
- formic_acid                   D;C;P                         n/t                           formic_acid, D/C              D;after;P                     D;C;P                         n/t                           Formic_acid                   n/t                           4                             n/t                           D;C;P                         D;C;P                         [D]|{P}                      
- gluc                          DE;C;P                        [DE]|{P}                      gluc, DE/C                    DE;after;P                    DE;C;P                        5                             n/t                           n/t                           13                            n/t                           DE;C;P                        DE;C;P                        [DE]|{P}                     
- gluc_bicarb                   E;C;P                         n/t                           gluc_bicarb, E/C              E;after;P                     E;C;P                         n/t                           n/t                           n/t                           n/t                           n/t                           E;C;P                         E;C;P                         [E]|{P}                      
- iodosobenzoate                W;C;                          n/t                           iodosobenzoate, W/C           W;after;                      W;C;                          n/t                           n/t                           n/t                           n/t                           n/t                           W;C;                          W;C;                          [W]|[X]                      
- lysc                          K;C;P                         n/t                           lysc, K/C                     K;after;P                     K;C;P                         3                             Lys-C                         n/t                           5                             n/t                           K;C;P                         K;C;P                         [K]|{P}                      
- lysc_gluc                     DEK;C;P                       [DEK]|{P}                     n/t                           DEK;after;P                   DEK;C;P                       n/t                           n/t                           n/t                           n/t                           n/t                           DEK;C;P                       DEK;C;P                       [DEK]|[X]|{P}                
- lysc_p                        K;C;                          n/t                           lysc_p, K/C                   K;after;                      K;C;                          n/t                           Lys-C/P                       n/t                           6                             n/t                           K;C;                          K;C;                          [K]|[X]                      
- lysn                          K;N;                          |[K]                          lysn, K/N                     K;before;                     K;N;                          4                             n/t                           n/t                           21                            n/t                           K;N;                          K;N;                          [X]|[K]                      
- lysn_promisc                  AKRS;N;                       n/t                           lysn_promisc, AKRS/N          AKRS;before;                  AKRS;N;                       n/t                           n/t                           n/t                           n/t                           n/t                           AKRS;N;                       AKRS;N;                       [X]|[AKRS]                   
- no_cleavage                   n/t                           n/t                           NONE                          n/t                           n/t                           9                             n/t                           n/t                           11                            n/t                           n/t                           n/t                           n/t                          
- nonspecific                   n/t                           n/t                           n/t                           ;;                            n/t                           0                             n/t                           n/t                           17                            NON_SPECIFIC                  n/t                           n/t                           [X]|[X]                      
- pepsina                       FL;C;                         n/t                           pepsina, FL/C                 FL;after;                     FL;C;                         n/t                           PepsinA                       n/t                           7                             n/t                           FL;C;                         FL;C;                         [FL]|[X]                     
- protein_endopeptidase         P;C;                          n/t                           protein_endopeptidase, P/C    P;after;                      P;C;                          n/t                           n/t                           n/t                           n/t                           n/t                           P;C;                          P;C;                          [P]|[X]                      
- staph_protease                E;C;                          n/t                           staph_protease, E/C           E;after;                      E;C;                          n/t                           n/t                           n/t                           n/t                           n/t                           E;C;                          E;C;                          [E]|[X]                      
- tca                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           [FMWY]|{P},[KR]|{P},[X]|[D]  
- thermolysin_p                 n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           22                            n/t                           n/t                           n/t                           n/t                          
- top_down                      n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           15                            n/t                           n/t                           n/t                           n/t                          
- trypsin                       KR;C;P                        [KR]|{P}                      trypsin, KR/C                 KR;after;P                    KR;C;P                        1                             Trypsin                       Trypsin                       0                             TRYPSIN                       KR;C;P                        KR;C;P                        [KR]|{P}                     
- trypsin_chymotrypsin          n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           TrypChymo                     n/t                           9                             n/t                           n/t                           n/t                           n/t                          
- trypsin_cnbr                  KRM;C;P                       n/t                           trypsin_cnbr, KRM/C           KRM;after;P                   KRM;C;P                       n/t                           n/t                           n/t                           8                             n/t                           KRM;C;P                       KRM;C;P                       [KR]|{P},[M]|{P}             
- trypsin_gluc                  DEKR;C;P                      n/t                           trypsin_gluc, DEKR/C          DEKR;after;P                  DEKR;C;P                      n/t                           n/t                           n/t                           n/t                           n/t                           DEKR;C;P                      DEKR;C;P                      [DEKR]|{P}                   
- trypsin_p                     KR;C;                         [RK]|                         trypsin_p, KR/C               KR;after;                     KR;C;                         1                             Trypsin/P                     n/t                           10                            n/t                           KR;C;                         KR;C;                         [RK]|[X]                     
- ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+ ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+ Ursgal Value                  Translated Value                                                                                                                                                                                                                                                                                                                                                                                                                   
+ ----------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ .                             generate_target_decoy_style_1 kojak_style_1                 moda_style_1                  msamanda_style_1              msfragger_style_1             msgfplus_style_1              myrimatch_style_1             novor_style_1                 omssa_style_1                 pepnovo_style_1               percolator_style_1            pipi_style_1                  unify_csv_style_1             xtandem_style_1              
+ ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+ alpha_lp                      n/t                           n/t                           n/t                           n/t                           n/t                           8                             n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                          
+ argc                          R;C;P                         n/t                           argc, R/C                     R;after;P                     R;C;P                         6                             n/t                           n/t                           1                             n/t                           R;C;P                         n/t                           R;C;P                         [R]|{P}                      
+ aspn                          D;N;                          n/t                           aspn, D/N;                    D;before;                     D;N;                          7                             Asp-N                         n/t                           12                            n/t                           D;N;                          AspN;0;D;-                    D;N;                          [X]|[D]                      
+ aspn_gluc                     n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           14                            n/t                           n/t                           n/t                           n/t                           n/t                          
+ chymotrypsin                  FMWY;C;P                      n/t                           chymotrypsin, FMWY/C          FMWY;after;P                  FMWY;C;P                      2                             Chymotrypsin                  n/t                           3                             n/t                           FMWY;C;P                      Chymotrypsin;1;FMWY;P         FMWY;C;P                      [FMWY]|{P}                   
+ chymotrypsin_p                FMWY;C;                       n/t                           chymotrypsin, FMWY/C          FMWY;after;                   FMWY;C;                       n/t                           n/t                           n/t                           18                            n/t                           FMWY;C;                       n/t                           FMWY;C;                       [FMWY]|[X]                   
+ clostripain                   R;C;                          n/t                           clostripain, R/C              R;after;                      R;C;                          n/t                           n/t                           n/t                           n/t                           n/t                           R;C;                          n/t                           R;C;                          [R]|[X]                      
+ cnbr                          M;C;P                         n/t                           cnbr, M/C                     M;after;P                     M;C;P                         n/t                           CNBr                          n/t                           2                             n/t                           M;C;P                         n/t                           M;C;P                         [M]|{P}                      
+ elastase                      AGILV;C;P                     n/t                           elastase, AGILV/C             AGILV;after;P                 AGILV;C;P                     n/t                           n/t                           n/t                           n/t                           n/t                           AGILV;C;P                     n/t                           AGILV;C;P                     [AGILV]|{P}                  
+ formic_acid                   D;C;P                         n/t                           formic_acid, D/C              D;after;P                     D;C;P                         n/t                           Formic_acid                   n/t                           4                             n/t                           D;C;P                         n/t                           D;C;P                         [D]|{P}                      
+ gluc                          DE;C;P                        [DE]|{P}                      gluc, DE/C                    DE;after;P                    DE;C;P                        5                             n/t                           n/t                           13                            n/t                           DE;C;P                        GluC;1;DE;P                   DE;C;P                        [DE]|{P}                     
+ gluc_bicarb                   E;C;P                         n/t                           gluc_bicarb, E/C              E;after;P                     E;C;P                         n/t                           n/t                           n/t                           n/t                           n/t                           E;C;P                         n/t                           E;C;P                         [E]|{P}                      
+ iodosobenzoate                W;C;                          n/t                           iodosobenzoate, W/C           W;after;                      W;C;                          n/t                           n/t                           n/t                           n/t                           n/t                           W;C;                          n/t                           W;C;                          [W]|[X]                      
+ lysc                          K;C;P                         n/t                           lysc, K/C                     K;after;P                     K;C;P                         3                             Lys-C                         n/t                           5                             n/t                           K;C;P                         n/t                           K;C;P                         [K]|{P}                      
+ lysc_gluc                     DEK;C;P                       [DEK]|{P}                     n/t                           DEK;after;P                   DEK;C;P                       n/t                           n/t                           n/t                           n/t                           n/t                           DEK;C;P                       n/t                           DEK;C;P                       [DEK]|[X]|{P}                
+ lysc_p                        K;C;                          n/t                           lysc_p, K/C                   K;after;                      K;C;                          n/t                           Lys-C/P                       n/t                           6                             n/t                           K;C;                          LysC;1;K;-                    K;C;                          [K]|[X]                      
+ lysn                          K;N;                          |[K]                          lysn, K/N                     K;before;                     K;N;                          4                             n/t                           n/t                           21                            n/t                           K;N;                          LysN;0;K;-                    K;N;                          [X]|[K]                      
+ lysn_promisc                  AKRS;N;                       n/t                           lysn_promisc, AKRS/N          AKRS;before;                  AKRS;N;                       n/t                           n/t                           n/t                           n/t                           n/t                           AKRS;N;                       n/t                           AKRS;N;                       [X]|[AKRS]                   
+ no_cleavage                   n/t                           n/t                           NONE                          n/t                           n/t                           9                             n/t                           n/t                           11                            n/t                           n/t                           n/t                           n/t                           n/t                          
+ nonspecific                   n/t                           n/t                           n/t                           ;;                            n/t                           0                             n/t                           n/t                           17                            NON_SPECIFIC                  n/t                           n/t                           n/t                           [X]|[X]                      
+ pepsina                       FL;C;                         n/t                           pepsina, FL/C                 FL;after;                     FL;C;                         n/t                           PepsinA                       n/t                           7                             n/t                           FL;C;                         n/t                           FL;C;                         [FL]|[X]                     
+ protein_endopeptidase         P;C;                          n/t                           protein_endopeptidase, P/C    P;after;                      P;C;                          n/t                           n/t                           n/t                           n/t                           n/t                           P;C;                          n/t                           P;C;                          [P]|[X]                      
+ staph_protease                E;C;                          n/t                           staph_protease, E/C           E;after;                      E;C;                          n/t                           n/t                           n/t                           n/t                           n/t                           E;C;                          n/t                           E;C;                          [E]|[X]                      
+ tca                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           [FMWY]|{P},[KR]|{P},[X]|[D]  
+ thermolysin_p                 n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           22                            n/t                           n/t                           n/t                           n/t                           n/t                          
+ top_down                      n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           15                            n/t                           n/t                           n/t                           n/t                           n/t                          
+ trypsin                       KR;C;P                        [KR]|{P}                      trypsin, KR/C                 KR;after;P                    KR;C;P                        1                             Trypsin                       Trypsin                       0                             TRYPSIN                       KR;C;P                        Trypsin;1;KR;P                KR;C;P                        [KR]|{P}                     
+ trypsin_chymotrypsin          n/t                           n/t                           n/t                           n/t                           n/t                           n/t                           TrypChymo                     n/t                           9                             n/t                           n/t                           n/t                           n/t                           n/t                          
+ trypsin_cnbr                  KRM;C;P                       n/t                           trypsin_cnbr, KRM/C           KRM;after;P                   KRM;C;P                       n/t                           n/t                           n/t                           8                             n/t                           KRM;C;P                       n/t                           KRM;C;P                       [KR]|{P},[M]|{P}             
+ trypsin_gluc                  DEKR;C;P                      n/t                           trypsin_gluc, DEKR/C          DEKR;after;P                  DEKR;C;P                      n/t                           n/t                           n/t                           n/t                           n/t                           DEKR;C;P                      n/t                           DEKR;C;P                      [DEKR]|{P}                   
+ trypsin_p                     KR;C;                         [RK]|                         trypsin_p, KR/C               KR;after;                     KR;C;                         1                             Trypsin/P                     n/t                           10                            n/t                           KR;C;                         n/t                           KR;C;                         [RK]|[X]                     
+ ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= ============================= =============================
+
+.. raw:: html
+
+      <hr />
+
+evidence_score_field
+###############################
+
+
+field which is used for scoring in peptide_amounts_0_0_1
+
+:Default value: PEP
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *evidence_score_field*
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ==================== ====================
+ Style                Translation         
+ ==================== ====================
+ pyqms_style_1        evidence_score_field
+ ==================== ====================
 
 .. raw:: html
 
@@ -1331,30 +1500,30 @@ Ursgal value translations for *fdr_cutoff*
 
       <hr />
 
-filter_csv_converter_version
-#######################################
+fixed_label_isotope_enrichment_levels
+################################################
 
 
-filter csv converter version: version name
+Enrichment of labeled elements in labeled chemical used
 
-:Default value: filter_csv_1_0_0
-:type: str
+:Default value: ['13C', '15N', '2H']
+:type: dict
 :triggers rerun: False
             
 
 Available in unodes
 """""""""""""""""""
 
-* ucontroller
+* pyqms_1_0_0
 
-Ursgal value translations for *filter_csv_converter_version*
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Ursgal value translations for *fixed_label_isotope_enrichment_levels*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
- ============================ ============================
- Style                        Translation                 
- ============================ ============================
- ucontroller_style_1          filter_csv_converter_version
- ============================ ============================
+ ===================================== =====================================
+ Style                                 Translation                          
+ ===================================== =====================================
+ pyqms_style_1                         FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS
+ ===================================== =====================================
 
 .. raw:: html
 
@@ -1448,6 +1617,37 @@ Ursgal value translations for *force*
 
       <hr />
 
+frag_clear_mz_range
+##############################
+
+
+Removes peaks in this m/z range prior to matching. Given as list [min_clear_mz, max_clear_mz]. Useful for iTRAQ/TMT experiments, i.e. [0.0, 150.0].
+
+:Default value: [0.0, 0.0]
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* msfragger_20170103
+* pipi_1_3_0
+
+Ursgal value translations for *frag_clear_mz_range*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ msfragger_style_1   clear_mz_range     
+ pipi_style_1        frag_clear_mz_range
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
 frag_mass_tolerance
 ##############################
 
@@ -1481,6 +1681,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *frag_mass_tolerance*
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1495,6 +1696,7 @@ Ursgal value translations for *frag_mass_tolerance*
  novor_style_1                              fragmentIonErrorTol                       
  omssa_style_1                              -to                                       
  pepnovo_style_1                            -fragment_tolerance                       
+ pipi_style_1                               ms2_tolerance                             
  xtandem_style_1                            spectrum, fragment monoisotopic mass error
  ========================================== ==========================================
 
@@ -1535,6 +1737,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *frag_mass_tolerance_unit*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1549,6 +1752,7 @@ Ursgal value translations for *frag_mass_tolerance_unit*
  novor_style_1                                    fragmentIonErrorTol                             
  omssa_style_1                                    frag_mass_tolerance_unit                        
  pepnovo_style_1                                  frag_mass_tolerance_unit                        
+ pipi_style_1                                     frag_mass_tolerance_unit                        
  xtandem_style_1                                  spectrum, fragment monoisotopic mass error units
  ================================================ ================================================
 
@@ -1632,6 +1836,7 @@ Available in unodes
 
 * omssa_2_1_9
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *frag_max_charge*
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -1641,6 +1846,7 @@ Ursgal value translations for *frag_max_charge*
  =================== ===================
  msfragger_style_1   max_fragment_charge
  omssa_style_1       -zoh               
+ pipi_style_1        max_ms2_charge     
  =================== ===================
 
 .. raw:: html
@@ -1994,6 +2200,7 @@ Available in unodes
 * omssa_2_1_9
 * pepnovo_3_1
 * msfragger_20170103
+* msgfplus_C_mzid2csv_v2017_07_04
 
 Ursgal value translations for *header_translations*
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -2044,6 +2251,7 @@ Ursgal key translations
   z                                                                   n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  Charge                                                               n/t                                                                  n/t                                                                 
  # id                                                                 n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  Novor:id                                                             n/t                                                                  n/t                                                                 
  #Index                                                               n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  Pepnovo:id                                                          
+ #SpecFile                                                            n/t                                                                  n/t                                                                  n/t                                                                  Raw data location                                                    n/t                                                                  n/t                                                                  n/t                                                                 
  Amanda Score                                                         n/t                                                                  Amanda:Score                                                         n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
  C-Gap                                                                n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  Pepnovo:C-Gap                                                       
  Charge                                                               n/t                                                                  Charge                                                               n/t                                                                  Charge                                                               n/t                                                                  n/t                                                                  n/t                                                                 
@@ -2052,7 +2260,7 @@ Ursgal key translations
  Downstream Amino Acid                                                n/t                                                                  n/t                                                                  Sequence Post AA                                                     n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
  EValue                                                               n/t                                                                  n/t                                                                  n/t                                                                  MS-GF:EValue                                                         n/t                                                                  n/t                                                                  n/t                                                                 
  Filename                                                             n/t                                                                  Filename                                                             n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
- Hit rank                                                             n/t                                                                  n/t                                                                  MSFragger:Hit rank                                                   n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
+ Hit rank                                                             n/t                                                                  n/t                                                                  Rank                                                                 n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
  Hyperscore                                                           n/t                                                                  n/t                                                                  MSFragger:Hyperscore                                                 n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
  Intercept of expectation model (expectation in log space)            n/t                                                                  n/t                                                                  MSFragger:Intercept of expectation model (expectation in log space)  n/t                                                                  n/t                                                                  n/t                                                                  n/t                                                                 
  MSGFScore                                                            n/t                                                                  n/t                                                                  n/t                                                                  MS-GF:RawScore                                                       n/t                                                                  n/t                                                                  n/t                                                                 
@@ -2454,6 +2662,35 @@ Ursgal value translations for *http_url*
 
       <hr />
 
+identifier_column_names
+##################################
+
+
+The (combination of) specified csv column name(s) are used as identifiers. E.g. to count the number of peptides for these identifiers. The parameter "count_column_names" defines the countable elements.
+
+:Default value: ['Protein ID']
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* csv2counted_results_1_0_0
+
+Ursgal value translations for *identifier_column_names*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =========================== ===========================
+ Style                       Translation                
+ =========================== ===========================
+ csv2counted_results_style_1 identifier_column_names    
+ =========================== ===========================
+
+.. raw:: html
+
+      <hr />
+
 instrument
 #####################
 
@@ -2532,6 +2769,64 @@ Ursgal value translations for *intensity_cutoff*
  msfragger_style_1 minimum_ratio    
  omssa_style_1     -cl              
  ================= =================
+
+.. raw:: html
+
+      <hr />
+
+intensity_transformation_factor
+##########################################
+
+
+Tranform intensity by this factor for quantification
+
+:Default value: 100000.0
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *intensity_transformation_factor*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =============================== ===============================
+ Style                           Translation                    
+ =============================== ===============================
+ pyqms_style_1                   INTENSITY_TRANSFORMATION_FACTOR
+ =============================== ===============================
+
+.. raw:: html
+
+      <hr />
+
+internal_precision
+#############################
+
+
+Float to int conversion precision
+
+:Default value: 1000.0
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *internal_precision*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ pyqms_style_1      INTERNAL_PRECISION
+ ================== ==================
 
 .. raw:: html
 
@@ -2624,146 +2919,6 @@ Ursgal value translations for *kernel*
 
       <hr />
 
-kojak_MS1_centroid
-#############################
-
-
-MS1 centroided data yes (1) or no (0)
-
-:Default value: No
-:type: select
-:triggers rerun: False
-            
-
-Available in unodes
-"""""""""""""""""""
-
-* kojak_1_5_3
-
-Ursgal value translations for *kojak_MS1_centroid*
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
- ================== ==================
- Style              Translation       
- ================== ==================
- kojak_style_1      kojak_MS1_centroid
- ================== ==================
-
-Ursgal key translations
-"""""""""""""""""""""""
-
- ================ ================
- Ursgal Value     Translated Value
- ---------------- ----------------
- .                kojak_style_1   
- ================ ================
- No               0               
- Yes              1               
- ================ ================
-
-.. raw:: html
-
-      <hr />
-
-kojak_MS1_resolution
-###############################
-
-
-MS1 resolution
-
-:Default value: 30000
-:type: int
-:triggers rerun: False
-            
-
-Available in unodes
-"""""""""""""""""""
-
-* kojak_1_5_3
-
-Ursgal value translations for *kojak_MS1_resolution*
-""""""""""""""""""""""""""""""""""""""""""""""""""""
-
- ==================== ====================
- Style                Translation         
- ==================== ====================
- kojak_style_1        kojak_MS1_resolution
- ==================== ====================
-
-.. raw:: html
-
-      <hr />
-
-kojak_MS2_centroid
-#############################
-
-
-MS2 centroided data yes (1) or no (0)
-
-:Default value: Yes
-:type: select
-:triggers rerun: False
-            
-
-Available in unodes
-"""""""""""""""""""
-
-* kojak_1_5_3
-
-Ursgal value translations for *kojak_MS2_centroid*
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
- ================== ==================
- Style              Translation       
- ================== ==================
- kojak_style_1      kojak_MS2_centroid
- ================== ==================
-
-Ursgal key translations
-"""""""""""""""""""""""
-
- ================ ================
- Ursgal Value     Translated Value
- ---------------- ----------------
- .                kojak_style_1   
- ================ ================
- No               0               
- Yes              1               
- ================ ================
-
-.. raw:: html
-
-      <hr />
-
-kojak_MS2_resolution
-###############################
-
-
-MS2 resolution
-
-:Default value: 25000
-:type: int
-:triggers rerun: False
-            
-
-Available in unodes
-"""""""""""""""""""
-
-* kojak_1_5_3
-
-Ursgal value translations for *kojak_MS2_resolution*
-""""""""""""""""""""""""""""""""""""""""""""""""""""
-
- ==================== ====================
- Style                Translation         
- ==================== ====================
- kojak_style_1        kojak_MS2_resolution
- ==================== ====================
-
-.. raw:: html
-
-      <hr />
-
 kojak_diff_mods_on_xl
 ################################
 
@@ -2827,10 +2982,10 @@ kojak_export_pepxml
 ##############################
 
 
-Activate (1) or deactivate (0) output as pepXML
+Activate (True) or deactivate (False) output as pepXML
 
-:Default value: Deactivate
-:type: select
+:Default value: False
+:type: bool
 :triggers rerun: False
             
 
@@ -2856,8 +3011,8 @@ Ursgal key translations
  ---------------- ----------------
  .                kojak_style_1   
  ================ ================
- Activate         1               
- Deactivate       0               
+ 0                0               
+ 1                1               
  ================ ================
 
 .. raw:: html
@@ -2868,10 +3023,10 @@ kojak_export_percolator
 ##################################
 
 
-Activate (1) or deactivate (0) output for percolator
+Activate (True) or deactivate (False) output for percolator
 
-:Default value: Activate
-:type: select
+:Default value: True
+:type: bool
 :triggers rerun: False
             
 
@@ -2897,8 +3052,8 @@ Ursgal key translations
  ---------------- ----------------
  .                kojak_style_1   
  ================ ================
- Activate         1               
- Deactivate       0               
+ 0                0               
+ 1                1               
  ================ ================
 
 .. raw:: html
@@ -3034,9 +3189,10 @@ kojak_prefer_precursor_pred
 
 
 prefer precursor mono mass predicted by instrument software.
-    0 = ignore previous predictions
-    1 = use only previous predictions
-    2 = supplement predictions with additional analysis
+Available values:
+    ignore_previous: previous predictions are ignored
+    only_previous: only previous predictions are used
+    supplement: predictions are supplemented with additional analysis
 
 :Default value: supplement
 :type: select
@@ -3060,15 +3216,15 @@ Ursgal value translations for *kojak_prefer_precursor_pred*
 Ursgal key translations
 """""""""""""""""""""""
 
- ================== ==================
- Ursgal Value       Translated Value  
- ------------------ ------------------
- .                  kojak_style_1     
- ================== ==================
- 0: ignore previous 0                 
- 1: only previous   1                 
- 2: supplement      2                 
- ================== ==================
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ ignore_previous  0               
+ only_previous    1               
+ supplement       2               
+ ================ ================
 
 .. raw:: html
 
@@ -3248,6 +3404,8 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
+* pyqms_1_0_0
 
 Ursgal value translations for *label*
 """""""""""""""""""""""""""""""""""""
@@ -3261,8 +3419,127 @@ Ursgal value translations for *label*
  msgfplus_style_1                    label                              
  myrimatch_style_1                   label                              
  omssa_style_1                       ('-tem', '-tom')                   
+ pipi_style_1                        label                              
+ pyqms_style_1                       label                              
  xtandem_style_1                     protein, modified residue mass file
  =================================== ===================================
+
+.. raw:: html
+
+      <hr />
+
+label_percentile
+###########################
+
+
+Enrichment level of the label
+
+:Default value: [0.0]
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *label_percentile*
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pyqms_style_1    label_percentile
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+label_percentile_format_string
+#########################################
+
+
+Defines the standard format string when
+            formatting labeling percentile float
+
+:Default value: {0:.3f}
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *label_percentile_format_string*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================= =======================
+ Style                   Translation            
+ ======================= =======================
+ pyqms_style_1           PECENTILE_FORMAT_STRING
+ ======================= =======================
+
+.. raw:: html
+
+      <hr />
+
+lower_mz_limit
+#########################
+
+
+lowest considered mz for quantification
+
+:Default value: 150
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *lower_mz_limit*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pyqms_style_1    LOWER_MZ_LIMIT  
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+m_score_cutoff
+#########################
+
+
+minimum required pyQms m_score for a quant event to be evaluated
+
+:Default value: 0.7
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *m_score_cutoff*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pyqms_style_1    m_score_cutoff  
+ ================ ================
 
 .. raw:: html
 
@@ -3283,6 +3560,7 @@ Available in unodes
 """""""""""""""""""
 
 * mzml2mgf_1_0_0
+* pyqms_1_0_0
 
 Ursgal value translations for *machine_offset_in_ppm*
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3291,6 +3569,7 @@ Ursgal value translations for *machine_offset_in_ppm*
  Style                 Translation          
  ===================== =====================
  mzml2mgf_style_1      machine_offset_in_ppm
+ pyqms_style_1         MACHINE_OFFSET_IN_PPM
  ===================== =====================
 
 .. raw:: html
@@ -3372,6 +3651,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *max_missed_cleavages*
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3385,6 +3665,7 @@ Ursgal value translations for *max_missed_cleavages*
  msfragger_style_1                      allowed_missed_cleavage               
  myrimatch_style_1                      MaxMissedCleavages                    
  omssa_style_1                          -v                                    
+ pipi_style_1                           missed_cleavage                       
  unify_csv_style_1                      max_missed_cleavages                  
  upeptide_mapper_style_1                max_missed_cleavages                  
  xtandem_style_1                        scoring, maximum missed cleavage sites
@@ -3428,7 +3709,7 @@ max_mod_size
 #######################
 
 
-Minimum modification size to consider (in Da)
+Maximum modification size to consider (in Da)
 
 :Default value: 200
 :type: int
@@ -3439,6 +3720,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* pipi_1_3_0
 
 Ursgal value translations for *max_mod_size*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -3447,7 +3729,37 @@ Ursgal value translations for *max_mod_size*
  Style            Translation     
  ================ ================
  moda_style_1     MaxModSize      
+ pipi_style_1     max_ptm_mass    
  ================ ================
+
+.. raw:: html
+
+      <hr />
+
+max_molecules_per_match_bin
+######################################
+
+
+Max number of molecules in one matching bin.
+
+:Default value: 20
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *max_molecules_per_match_bin*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =========================== ===========================
+ Style                       Translation                
+ =========================== ===========================
+ pyqms_style_1               MAX_MOLECULES_PER_MATCH_BIN
+ =========================== ===========================
 
 .. raw:: html
 
@@ -3752,6 +4064,35 @@ Ursgal value translations for *mgf_input_file*
 
       <hr />
 
+min_element_abundance
+################################
+
+
+Set minmal abundance for elements used when building Isotopoluge Library
+
+:Default value: 0.001
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *min_element_abundance*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ===================== =====================
+ Style                 Translation          
+ ===================== =====================
+ pyqms_style_1         ELEMENT_MIN_ABUNDANCE
+ ===================== =====================
+
+.. raw:: html
+
+      <hr />
+
 min_mod_size
 #######################
 
@@ -3767,6 +4108,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* pipi_1_3_0
 
 Ursgal value translations for *min_mod_size*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -3775,7 +4117,37 @@ Ursgal value translations for *min_mod_size*
  Style            Translation     
  ================ ================
  moda_style_1     MinModSize      
+ pipi_style_1     min_ptm_mass    
  ================ ================
+
+.. raw:: html
+
+      <hr />
+
+min_number_of_matched_isotopologues
+##############################################
+
+
+Min number of matched isotopologues for pyqms to consider for quantification
+
+:Default value: 2
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *min_number_of_matched_isotopologues*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================================= =======================================
+ Style                                   Translation                            
+ ======================================= =======================================
+ pyqms_style_1                           MININUM_NUMBER_OF_MATCHES_ISOTOPOLOGUES
+ ======================================= =======================================
 
 .. raw:: html
 
@@ -3892,6 +4264,35 @@ Ursgal value translations for *min_precursor_matches*
 
       <hr />
 
+min_rel_peak_intensity_for_matching
+##############################################
+
+
+Minimum required intensity for pyqms peak matching
+
+:Default value: 0.01
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *min_rel_peak_intensity_for_matching*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================================== ===================================
+ Style                               Translation                        
+ =================================== ===================================
+ pyqms_style_1                       MIN_REL_PEAK_INTENSITY_FOR_MATCHING
+ =================================== ===================================
+
+.. raw:: html
+
+      <hr />
+
 min_required_matched_peaks
 #####################################
 
@@ -3955,6 +4356,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *min_required_observed_peaks*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3964,6 +4366,7 @@ Ursgal value translations for *min_required_observed_peaks*
  ======================= =======================
  msfragger_style_1       minimum_peaks          
  omssa_style_1           -hs                    
+ pipi_style_1            min_peak_num           
  xtandem_style_1         spectrum, minimum peaks
  ======================= =======================
 
@@ -3975,12 +4378,12 @@ moda_blind_mode
 ##########################
 
 
-Allowed number of modifications per peptide. 
-    '0' = no modification, 
-    '1' = one modification, 
-    '2' = no limit
+Allowed number of modifications per peptide in ModA BlindMode. 
+Available values:    no_modification
+    one_modification
+    no_limit
 
-:Default value: No Limit
+:Default value: no_limit
 :type: select
 :triggers rerun: False
             
@@ -4007,9 +4410,9 @@ Ursgal key translations
  ---------------- ----------------
  .                moda_style_1    
  ================ ================
- No Limit         2               
- No Modification  0               
- One Modification 1               
+ no_limit         2               
+ no_modification  0               
+ one_modification 1               
  ================ ================
 
 .. raw:: html
@@ -4151,6 +4554,8 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
+* pyqms_1_0_0
 
 Ursgal value translations for *modifications*
 """""""""""""""""""""""""""""""""""""""""""""
@@ -4167,10 +4572,41 @@ Ursgal value translations for *modifications*
  novor_style_1           ('variableModifications', 'fixedModifications')
  omssa_style_1           ('-mv', 'mf')          
  pepnovo_style_1         -PTMs                  
+ pipi_style_1            modifications          
+ pyqms_style_1           modifications          
  unify_csv_style_1       modifications          
  upeptide_mapper_style_1 modifications          
  xtandem_style_1         ('residue, modification mass', 'residue, potential modification mass', 'protein, N-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, C-terminal residue modification mass', 'protein, quick acetyl', 'protein, quick pyrolidone')
  ======================= =======================
+
+.. raw:: html
+
+      <hr />
+
+molecules_to_quantify
+################################
+
+
+Molecules to quantify. Can be either a list of strings or a csv file
+
+:Default value: None
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *molecules_to_quantify*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pyqms_style_1    molecules       
+ ================ ================
 
 .. raw:: html
 
@@ -4227,6 +4663,47 @@ Available in unodes
 
 Ursgal value translations for *ms1_centroided*
 """"""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ kojak_style_1      kojak_MS1_centroid
+ ================== ==================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+ms1_is_centroided
+############################
+
+
+MS1 are centroided data: True or False
+
+:Default value: False
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* kojak_1_5_3
+
+Ursgal value translations for *ms1_is_centroided*
+"""""""""""""""""""""""""""""""""""""""""""""""""
 
  ================== ==================
  Style              Translation       
@@ -4320,6 +4797,47 @@ Ursgal key translations
 
       <hr />
 
+ms2_is_centroid
+##########################
+
+
+MS2 are centroided data: True or False
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* kojak_1_5_3
+
+Ursgal value translations for *ms2_is_centroid*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================== ==================
+ Style              Translation       
+ ================== ==================
+ kojak_style_1      kojak_MS2_centroid
+ ================== ==================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                kojak_style_1   
+ ================ ================
+ 0                0               
+ 1                1               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
 ms2_resolution
 #########################
 
@@ -4349,6 +4867,37 @@ Ursgal value translations for *ms2_resolution*
 
       <hr />
 
+ms_level
+###################
+
+
+MS level on which that is taken into account, e.g. for spectrum extraction, matching of evidences, etc.
+
+:Default value: 2
+:type: int
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+* mzml2mgf_1_0_0
+
+Ursgal value translations for *ms_level*
+""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ mzml2mgf_style_1 ms_level        
+ pyqms_style_1    ms_level        
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
 msfragger_add_topN_complementary
 ###########################################
 
@@ -4373,35 +4922,6 @@ Ursgal value translations for *msfragger_add_topN_complementary*
  ====================== ======================
  msfragger_style_1      add_topN_complementary
  ====================== ======================
-
-.. raw:: html
-
-      <hr />
-
-msfragger_clear_mz_range
-###################################
-
-
-Removes peaks in this m/z range prior to matching. Useful for iTRAQ/TMT experiments (i.e. 0.0 150.0)
-
-:Default value: 0.0 0.0
-:type: str
-:triggers rerun: False
-            
-
-Available in unodes
-"""""""""""""""""""
-
-* msfragger_20170103
-
-Ursgal value translations for *msfragger_clear_mz_range*
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
- ================= =================
- Style             Translation      
- ================= =================
- msfragger_style_1 clear_mz_range   
- ================= =================
 
 .. raw:: html
 
@@ -4547,6 +5067,47 @@ Ursgal value translations for *msfragger_zero_bin_mult_expect*
  ==================== ====================
  msfragger_style_1    zero_bin_mult_expect
  ==================== ====================
+
+.. raw:: html
+
+      <hr />
+
+msgfplus_mzid_converter_version
+##########################################
+
+
+Determines which msgfplus mzid conversion node should be used e.g. "msgfplus_C_mzid2csv_v2017_07_04"
+
+:Default value: None
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *msgfplus_mzid_converter_version*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =============================== ===============================
+ Style                           Translation                    
+ =============================== ===============================
+ ucontroller_style_1             msgfplus_mzid_converter_version
+ =============================== ===============================
+
+Ursgal key translations
+"""""""""""""""""""""""
+
+ ======================== ========================
+ Ursgal Value             Translated Value        
+ ------------------------ ------------------------
+ .                        ucontroller_style_1     
+ ======================== ========================
+ msgfplus_v2016_09_16     msgfplus2csv_v2016_09_16
+ msgfplus_v2017_01_27     msgfplus2csv_v2017_01_27
+ ======================== ========================
 
 .. raw:: html
 
@@ -4789,6 +5350,64 @@ Ursgal value translations for *myrimatch_tic_cutoff*
 
       <hr />
 
+mz_score_percentile
+##############################
+
+
+weighting factor for pyQms mz score
+
+:Default value: 0.4
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *mz_score_percentile*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ pyqms_style_1       mz_score_percentile
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
+mz_transformation_factor
+###################################
+
+
+Factor which will be multiplied with mz before conversion to integer
+
+:Default value: 1000
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *mz_transformation_factor*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ======================== ========================
+ Style                    Translation             
+ ======================== ========================
+ pyqms_style_1            MZ_TRANSFORMATION_FACTOR
+ ======================== ========================
+
+.. raw:: html
+
+      <hr />
+
 mzidentml_compress
 #############################
 
@@ -4896,7 +5515,7 @@ mzidentml_function
 #############################
 
 
-Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is suppoted so far
+Defines the mzidentml_lib function to be used. Note: only 'Mzid2Csv' is supported so far
 
 :Default value: Mzid2Csv
 :type: select
@@ -6211,6 +6830,35 @@ Ursgal value translations for *peptide_mapper_converter_version*
 
       <hr />
 
+pipi_mz_bin_offset
+#############################
+
+
+PIPI mz_bin_offset
+
+:Default value: 0.0
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pipi_1_3_0
+
+Ursgal value translations for *pipi_mz_bin_offset*
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pipi_style_1     mz_bin_offset   
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
 precursor_charge_dependency
 ######################################
 
@@ -6355,6 +7003,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *precursor_mass_tolerance_minus*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -6371,6 +7020,7 @@ Ursgal value translations for *precursor_mass_tolerance_minus*
  novor_style_1                                  precursorErrorTol                             
  omssa_style_1                                  -te                                           
  pepnovo_style_1                                -pm_tolerance                                 
+ pipi_style_1                                   ms1_tolerance                                 
  unify_csv_style_1                              precursor_mass_tolerance_minus                
  xtandem_style_1                                spectrum, parent monoisotopic mass error minus
  ============================================== ==============================================
@@ -6417,6 +7067,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *precursor_mass_tolerance_plus*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -6433,6 +7084,7 @@ Ursgal value translations for *precursor_mass_tolerance_plus*
  novor_style_1                                 precursorErrorTol                            
  omssa_style_1                                 -te                                          
  pepnovo_style_1                               -pm_tolerance                                
+ pipi_style_1                                  ms1_tolerance                                
  unify_csv_style_1                              precursor_mass_tolerance_minus              
  xtandem_style_1                               spectrum, parent monoisotopic mass error plus
  ============================================= =============================================
@@ -6477,6 +7129,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *precursor_mass_tolerance_unit*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -6492,20 +7145,21 @@ Ursgal value translations for *precursor_mass_tolerance_unit*
  novor_style_1                                  precursorErrorTol                             
  omssa_style_1                                  -teppm                                        
  pepnovo_style_1                                precursor_mass_tolerance_unit                 
+ pipi_style_1                                   ms1_tolerance_unit                            
  xtandem_style_1                                spectrum, parent monoisotopic mass error units
  ============================================== ==============================================
 
 Ursgal key translations
 """""""""""""""""""""""
 
- ================= ================= ================= ================= ================= ================= ================= =================
- Ursgal Value      Translated Value                                                                                                             
- ----------------- -----------------------------------------------------------------------------------------------------------------------------
- .                 msamanda_style_1  msfragger_style_1 msgfplus_style_1  myrimatch_style_1 novor_style_1     omssa_style_1     xtandem_style_1  
- ================= ================= ================= ================= ================= ================= ================= =================
- da                Da                0                 Da                Da                Da                                  Daltons          
- ppm               n/t               1                 n/t               n/t               n/t               -teppm            n/t              
- ================= ================= ================= ================= ================= ================= ================= =================
+ ================= ================= ================= ================= ================= ================= ================= ================= =================
+ Ursgal Value      Translated Value                                                                                                                               
+ ----------------- -----------------------------------------------------------------------------------------------------------------------------------------------
+ .                 msamanda_style_1  msfragger_style_1 msgfplus_style_1  myrimatch_style_1 novor_style_1     omssa_style_1     pipi_style_1      xtandem_style_1  
+ ================= ================= ================= ================= ================= ================= ================= ================= =================
+ da                Da                0                 Da                Da                Da                                  0                 Daltons          
+ ppm               n/t               1                 n/t               n/t               n/t               -teppm            1                 n/t              
+ ================= ================= ================= ================= ================= ================= ================= ================= =================
 
 .. raw:: html
 
@@ -6589,6 +7243,8 @@ Available in unodes
 * myrimatch_2_2_140
 * omssa_2_1_9
 * msfragger_20170103
+* pipi_1_3_0
+* pyqms_1_0_0
 
 Ursgal value translations for *precursor_max_charge*
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -6601,6 +7257,8 @@ Ursgal value translations for *precursor_max_charge*
  msgfplus_style_1     -maxCharge          
  myrimatch_style_1    NumChargeStates     
  omssa_style_1        -zh                 
+ pipi_style_1         ('max_ms1_charge', 'max_potential_charge')
+ pyqms_style_1        precursor_max_charge
  ==================== ====================
 
 .. raw:: html
@@ -6625,6 +7283,7 @@ Available in unodes
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *precursor_max_mass*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -6635,6 +7294,7 @@ Ursgal value translations for *precursor_max_mass*
  kojak_style_1                precursor_max_mass          
  msfragger_style_1            precursor_max_mass          
  myrimatch_style_1            MaxPeptideMass              
+ pipi_style_1                 max_precursor_mass          
  xtandem_style_1              spectrum, minimum parent m+h
  ============================ ============================
 
@@ -6667,6 +7327,8 @@ Available in unodes
 * msgfplus_v9979
 * omssa_2_1_9
 * msfragger_20170103
+* pipi_1_3_0
+* pyqms_1_0_0
 
 Ursgal value translations for *precursor_min_charge*
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -6678,6 +7340,8 @@ Ursgal value translations for *precursor_min_charge*
  msfragger_style_1    precursor_min_charge
  msgfplus_style_1     -minCharge          
  omssa_style_1        -zl                 
+ pipi_style_1         ('min_ms1_charge', 'min_potential_charge')
+ pyqms_style_1        precursor_min_charge
  ==================== ====================
 
 .. raw:: html
@@ -6708,6 +7372,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* pipi_1_3_0
 
 Ursgal value translations for *precursor_min_mass*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -6718,6 +7383,7 @@ Ursgal value translations for *precursor_min_mass*
  kojak_style_1                precursor_min_mass          
  msfragger_style_1            precursor_min_mass          
  myrimatch_style_1            MinPeptideMass              
+ pipi_style_1                 min_precursor_mass          
  xtandem_style_1              spectrum, minimum parent m+h
  ============================ ============================
 
@@ -6886,6 +7552,93 @@ Ursgal value translations for *psm_merge_delimiter*
 
       <hr />
 
+pyqms_trivial_names
+##############################
+
+
+Trivial name lookup mapping molecules to a trivial name
+
+:Default value: None
+:type: dict
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *pyqms_trivial_names*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pyqms_style_1    trivial_names   
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+pyqms_verbosity
+##########################
+
+
+verbosity for pyqms
+
+:Default value: True
+:type: bool
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *pyqms_verbosity*
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pyqms_style_1    pyqms_verbosity 
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+quantitation_evidences
+#################################
+
+
+Molecules to quantify. Can be either a list of strings or a csv file
+
+:Default value: None
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *quantitation_evidences*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pyqms_style_1    evidences       
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
 qvality_cross_validation
 ###################################
 
@@ -7046,6 +7799,64 @@ Ursgal value translations for *raw_ident_csv_suffix*
 
       <hr />
 
+rel_intensity_range
+##############################
+
+
+rel Intensity Error
+
+:Default value: 0.2
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *rel_intensity_range*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pyqms_style_1    REL_I_RANGE     
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
+rel_mz_range
+#######################
+
+
+rel mz Error
+
+:Default value: 5e-06
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *rel_mz_range*
+""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pyqms_style_1    REL_MZ_RANGE    
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
 remove_redundant_psms
 ################################
 
@@ -7104,6 +7915,35 @@ Ursgal value translations for *remove_temporary_files*
 
       <hr />
 
+required_percentile_peak_overlap
+###########################################
+
+
+Minimum percentile overlap for matching labeled peaks
+
+:Default value: 0.5
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *required_percentile_peak_overlap*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================================ ================================
+ Style                            Translation                     
+ ================================ ================================
+ pyqms_style_1                    REQUIRED_PERCENTILE_PEAK_OVERLAP
+ ================================ ================================
+
+.. raw:: html
+
+      <hr />
+
 rounded_mass_decimals
 ################################
 
@@ -7133,6 +7973,35 @@ Ursgal value translations for *rounded_mass_decimals*
 
       <hr />
 
+rt_border_tolerance
+##############################
+
+
+Retention time border tolerance for curating RT windows
+
+:Default value: 1
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *rt_border_tolerance*
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ =================== ===================
+ Style               Translation        
+ =================== ===================
+ pyqms_style_1       rt_border_tolerance
+ =================== ===================
+
+.. raw:: html
+
+      <hr />
+
 rt_pickle_name
 #########################
 
@@ -7157,35 +8026,6 @@ Ursgal value translations for *rt_pickle_name*
  =================== ===================
  ucontroller_style_1 rt_pickle_name     
  =================== ===================
-
-.. raw:: html
-
-      <hr />
-
-sanitize_csv_converter_version
-#########################################
-
-
-sanitize csv converter version: version name
-
-:Default value: sanitize_csv_1_0_0
-:type: str
-:triggers rerun: False
-            
-
-Available in unodes
-"""""""""""""""""""
-
-* ucontroller
-
-Ursgal value translations for *sanitize_csv_converter_version*
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
- ============================== ==============================
- Style                          Translation                   
- ============================== ==============================
- ucontroller_style_1            sanitize_csv_converter_version
- ============================== ==============================
 
 .. raw:: html
 
@@ -7254,7 +8094,7 @@ scan_skip_modulo_step
 
 
 Include only the n-th spectrum during mzml2mgf conversion
-    -1 : None
+    1 : None
 
 :Default value: None
 :type: int
@@ -8148,6 +8988,35 @@ Ursgal value translations for *show_unodes_in_development*
 
       <hr />
 
+silac_aas_locked_in_experiment
+#########################################
+
+
+AA which are always SILAC labeled and not considered for calculating partially labeling percentile
+
+:Default value: None
+:type: list
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *silac_aas_locked_in_experiment*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ============================== ==============================
+ Style                          Translation                   
+ ============================== ==============================
+ pyqms_style_1                  SILAC_AAS_LOCKED_IN_EXPERIMENT
+ ============================== ==============================
+
+.. raw:: html
+
+      <hr />
+
 spec_dynamic_range
 #############################
 
@@ -8177,6 +9046,64 @@ Ursgal value translations for *spec_dynamic_range*
  ======================= =======================
  xtandem_style_1         spectrum, dynamic range
  ======================= =======================
+
+.. raw:: html
+
+      <hr />
+
+ssl_score_column_name
+################################
+
+
+Name of the column that includes the scores that should be used for the .ssl file
+
+:Default value: q-value
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* csv2ssl_1_0_0
+
+Ursgal value translations for *ssl_score_column_name*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================= =================
+ Style             Translation      
+ ================= =================
+ csv2ssl_style_1   score_column_name
+ ================= =================
+
+.. raw:: html
+
+      <hr />
+
+ssl_score_type
+#########################
+
+
+Type of scores used for the .ssl file
+
+:Default value: PERCOLATOR QVALUE
+:type: select
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* csv2ssl_1_0_0
+
+Ursgal value translations for *ssl_score_type*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ csv2ssl_style_1  score_type      
+ ================ ================
 
 .. raw:: html
 
@@ -8305,7 +9232,7 @@ threshold_is_log10
 
 True, if log10 scale has been used for score_diff_threshold.
 
-:Default value: True
+:Default value: False
 :type: bool
 :triggers rerun: False
             
@@ -8352,6 +9279,35 @@ Ursgal value translations for *unify_csv_converter_version*
  =========================== ===========================
  ucontroller_style_1         unify_csv_converter_version
  =========================== ===========================
+
+.. raw:: html
+
+      <hr />
+
+upper_mz_limit
+#########################
+
+
+Highest considered mz for quantification
+
+:Default value: 2000
+:type: float
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* pyqms_1_0_0
+
+Ursgal value translations for *upper_mz_limit*
+""""""""""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ pyqms_style_1    UPPER_MZ_LIMIT  
+ ================ ================
 
 .. raw:: html
 
@@ -8719,6 +9675,7 @@ Ursgal value translations for *validation_score_field*
  Style                     Translation              
  ========================= =========================
  add_estimated_fdr_style_1 validation_score_field   
+ mascot_style_1            validation_score_field   
  msfragger_style_1         validation_score_field   
  percolator_style_1        validation_score_field   
  qvality_style_1           validation_score_field   
@@ -8736,6 +9693,7 @@ Ursgal key translations
  ------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  .                         add_estimated_fdr_style_1 percolator_style_1        qvality_style_1           sanitize_csv_style_1      svm_style_1               ucontroller_style_1       unify_csv_style_1        
  ========================= ========================= ========================= ========================= ========================= ========================= ========================= =========================
+ mascot_x_x_x              Mascot:Score              Mascot:Score              Mascot:Score              Mascot:Score              Mascot:Score              Mascot:Score              Mascot:Score             
  msamanda_1_0_0_5242       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
  msamanda_1_0_0_5243       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
  msamanda_1_0_0_6299       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
@@ -8796,10 +9754,10 @@ visualization_font
 #############################
 
 
-Font used for visualization plots (e.g. Venn diagram), given as tuple (font-type, font-size header, font-size major, font-size minor, font-size venn)
+Font used for visualization plots (e.g. Venn diagram), given as dict with keys: font_type, font_size_header, font_size_major, font_size_minor, font_size_venn
 
-:Default value: ('Helvetica', 31, 25, 20, 20)
-:type: tuple
+:Default value: ['font_size_header', 'font_size_major', 'font_size_minor', 'font_size_venn', 'font_type']
+:type: dict
 :triggers rerun: False
             
 
@@ -8912,10 +9870,10 @@ visualization_scaling_factors
 ########################################
 
 
-Scaling factor for visualization plots (e.g. Venn diagram), given as tuple (x-axis-scaling-factor, y-axis-scaling-factor)
+Scaling factor for visualization plots (e.g. Venn diagram), given as dict with keys: x_axis, y_axis
 
-:Default value: (600, 400)
-:type: tuple
+:Default value: ['x_axis', 'y_axis']
+:type: dict
 :triggers rerun: False
             
 
@@ -8941,10 +9899,10 @@ visualization_size
 #############################
 
 
-Size of visualization plots (e.g. Venn diagram), given as tuple (width, height)
+Size of visualization plots (e.g. Venn diagram), given as dict with keys: width, height
 
-:Default value: (1200, 900)
-:type: tuple
+:Default value: ['height', 'width']
+:type: dict
 :triggers rerun: False
             
 
@@ -9079,6 +10037,35 @@ Ursgal value translations for *write_unfiltered_results*
  ======================== ========================
  filter_csv_style_1       write_unfiltered_results
  ======================== ========================
+
+.. raw:: html
+
+      <hr />
+
+xtandem_converter_version
+####################################
+
+
+Determines which X!tandem conversion node should be used e.g. "xtandem2csv_1_0_0"
+
+:Default value: xtandem2csv_1_0_0
+:type: str
+:triggers rerun: False
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* ucontroller
+
+Ursgal value translations for *xtandem_converter_version*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ========================= =========================
+ Style                     Translation              
+ ========================= =========================
+ ucontroller_style_1       xtandem_converter_version
+ ========================= =========================
 
 .. raw:: html
 
