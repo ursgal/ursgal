@@ -11,6 +11,10 @@ class msamanda_2_0_0_9695( ursgal.UNode ):
     MSAmanda 2_0_0_9695 UNode
     Parameter options at http://ms.imp.ac.at/inc/pd-nodes/msamanda/Manual%20MS%20Amanda%20Standalone.pdf
 
+    Note:
+    Please download and install MSAmanda manually from
+    http://ms.imp.ac.at/?goto=msamanda
+
     Reference:
     Dorfer V, Pichler P, Stranzl T, Stadlmann J, Taus T, Winkler S, Mechtler K. (2014) MS Amanda, a universal identification algorithm optimized for high accuracy tandem mass spectra.
 

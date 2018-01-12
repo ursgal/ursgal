@@ -23,13 +23,13 @@ Convert CSV to Counted Results
 .. autofunction:: ursgal.resources.platform_independent.arc_independent.csv2counted_results_1_0_0.csv2counted_results_1_0_0.main
 
 
-Convert MS-GF+ MZID to CSV v2016_09_16
---------------------------------------
-
-.. autoclass:: ursgal.wrappers.msgfplus2csv_v2016_09_16.msgfplus2csv_v2016_09_16
-   :members:
+Convert MS-GF+ MZID to CSV
+--------------------------
 
 .. autoclass:: ursgal.wrappers.msgfplus2csv_v2017_01_27.msgfplus2csv_v2017_01_27
+   :members:
+
+.. autoclass:: ursgal.wrappers.msgfplus2csv_v2016_09_16.msgfplus2csv_v2016_09_16
    :members:
 
 
@@ -51,17 +51,16 @@ Convert X!Tandem XML to CSV 1_0_0
 .. autofunction:: ursgal.resources.platform_independent.arc_independent.xtandem2csv_1_0_0.xtandem2csv_1_0_0.main
 
 
-MzidLib 1_6_10
---------------
+MzidLib
+-------
 
-.. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_7.mzidentml_lib_1_7
    :members:
 
-
-MzidLib 1_6_11
---------------
-
 .. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_11.mzidentml_lib_1_6_11
+   :members:
+
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
    :members:
 
 
