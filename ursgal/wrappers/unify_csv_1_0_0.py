@@ -7,7 +7,12 @@ import pickle
 
 
 class unify_csv_1_0_0( ursgal.UNode ):
-    """unify_csv_1_0_0 UNode"""
+    """unify_csv_1_0_0 UNode
+
+    Unifies the .csv files of converted search engine results.
+    The corrections for each engine are listed in the node under
+    ursgal/resources/platform_independent/arc_independent/unify_csv_1_0_0
+    """
     META_INFO = {
         'edit_version'       : 1.00,
         'name'               : 'Unify CSV',
@@ -17,11 +22,11 @@ class unify_csv_1_0_0( ursgal.UNode ):
             'converter' : True
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'unified',
         'include_in_git'     : True,
         'in_development'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'unify_csv_style_1',
         'engine' : {
             'platform_independent' : {
@@ -75,7 +80,7 @@ Could not load RT lookup dict from this location: {0}
         )
 
         # find the last search/denovo engine:
-        last_engine = self.get_last_engine(
+        last_engine = self.get_last_search_engine(
             history = self.stats['history'],
         )
 

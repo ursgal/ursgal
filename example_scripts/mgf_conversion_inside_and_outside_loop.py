@@ -8,14 +8,12 @@ import shutil
 
 def main():
     '''
-
-
     '''
     R = ursgal.UController(
-        profile = 'LTQ XL low res',
-        params = {
-            'database': os.path.join( os.pardir, 'example_data', 'BSA.fasta' ),
-            'modifications' : [
+        profile='LTQ XL low res',
+        params={
+            'database': os.path.join(os.pardir, 'example_data', 'BSA.fasta'),
+            'modifications': [
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 '*,opt,Prot-N-term,Acetyl'    # N-Acteylation[]
@@ -36,7 +34,7 @@ def main():
         R.params['http_url'] = 'http://sourceforge.net/p/open-ms/code/HEAD/tree/OpenMS/share/OpenMS/examples/BSA/BSA1.mzML?format=raw'
         R.params['http_output_folder'] = os.path.dirname(mzML_file)
         R.fetch_file(
-            engine = 'get_http_files_1_0_0'
+            engine='get_http_files_1_0_0'
         )
         try:
             shutil.move(
@@ -51,19 +49,18 @@ def main():
 
     # First method: Convert to MGF outside of the loop:
     # (saves some time cause the MGF conversion is not always re-run)
-    mgf_file = R.convert_to_mgf_and_update_rt_lookup(
-        input_file       = mzML_file, # from OpenMS example files
+    mgf_file = R.convert(
+        input_file=mzML_file,  # from OpenMS example files
+        engine='mzml2mgf_1_0_0'
     )
     for prefix in ['10ppm', '20ppm']:
         R.params['prefix'] = prefix
 
         output_file = R.search(
-            input_file = mgf_file,
-            engine     = engine,
-            # output_file_name = 'some_userdefined_name'  
+            input_file=mgf_file,
+            engine=engine,
+            # output_file_name = 'some_userdefined_name'
         )
-        output_files.append( output_file )
-
 
     # Second method: Automatically convert to MGF inside the loop:
     # (MGF conversion is re-run every time because the prexix changed!)
@@ -71,12 +68,11 @@ def main():
         R.params['prefix'] = prefix
 
         output_file = R.search(
-            input_file = mzML_file, # from OpenMS example files
-            engine     = engine,
+            input_file=mzML_file,  # from OpenMS example files
+            engine=engine,
             # output_file_name = 'another_fname',
         )
-        output_files.append( output_file )
-
+        output_files.append(output_file)
 
     print('\tOutput files:')
     for f in output_files:

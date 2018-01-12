@@ -24,12 +24,11 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
             'converter' : True
         },
         'input_extensions'   : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : None,
-        # 'can_gz'             : True,
         'in_development'     : False,
         'include_in_git'     : False,
+        'distributable'      : True,
         'utranslation_style' : 'mzidentml_lib_1_6_10',
         'engine' : {
             'platform_independent' : {
@@ -61,7 +60,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
             self.params['translations']['mzidentml_compress'] = False
 
         if 'tandem' in search_engine:
-            tmp_options += [
+            tmp_options = [
                 '-databaseFileFormatID', 'MS:1001348',
                 'massSpecFileFormatID', 'MS:1001062',
                 '-idsStartAtZero', 'false'
@@ -97,7 +96,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                 else:
                     print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
                     print(translation_dict)
-                    exit(1)
+                    sys.exit(1)
 
         tmp_command_list += tmp_options
         proc = subprocess.Popen(

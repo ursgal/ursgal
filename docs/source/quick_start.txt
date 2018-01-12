@@ -91,8 +91,6 @@ You have already seen the :meth:`.UController.search` function in section 2. :me
     )
 
 Currently, the following UController workflow functions are available:
-    * :meth:`.UController.add_estimated_fdr`
-        Estimates the false discovery rate of target-decoy-based result files, given a quality score
     * :meth:`.UController.combine_search_results`
         Statistical integration of search results from multiple engines
     * :meth:`.UController.fetch_file`
@@ -106,7 +104,8 @@ Currently, the following UController workflow functions are available:
     * :meth:`.UController.search`
         Peptide spectrum matching
     * :meth:`.UController.validate`
-        Statistical post-processing of search results
+        Statistical post-processing of search results to calculate the
+        false-discovery rate (FDR, q-value) and/or posterior error probability (PEP)
     * :meth:`.UController.visualize`
         Visualization of results
 

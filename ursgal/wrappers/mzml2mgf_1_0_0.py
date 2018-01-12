@@ -19,11 +19,11 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
             'converter' : True,
         },
         'input_extensions'   : ['.mzML', '.mzML.gz'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.mgf'],
         'output_suffix'      : None,
         'in_development'     : False,
         'include_in_git'     : None,
+        'distributable'      : True,
         'utranslation_style' : 'mzml2mgf_style_1',
         'engine' : {
             'platform_independent' : {
@@ -64,7 +64,8 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
                 scan_exclusion_list   = self.params['translations']['scan_exclusion_list'],
                 scan_inclusion_list   = self.params['translations']['scan_inclusion_list'],
                 prefix                = self.params.get('prefix',None),
-                scan_skip_modulo_step = self.params['translations']['scan_skip_modulo_step']
+                scan_skip_modulo_step = self.params['translations']['scan_skip_modulo_step'],
+                ms_level              = self.params['translations']['ms_level'],
             )
         except KeyError:
             print('''

@@ -21,7 +21,7 @@ class UController(ursgal.UNode):
 
     Keyword Arguments:
         params (dict): params that are used for all further analyses,
-            overriding default values from ursgal/kb/*.py
+            overriding default values from ursgal/uparams.py
         profile (str): Profiles key for faster parameter selection. This
             idea is adapted from MS-GF+ and translated to all search engines.
 
@@ -95,72 +95,6 @@ class UController(ursgal.UNode):
 
         if self.verbose:
             self.show_unode_overview()
-
-
-    def reset_controller( self ):
-
-        temp_params = {}
-        temp_params.update( self.DEFAULT_PARAMS )
-
-        profile = self.init_kwargs.get('profile', None)
-        if profile is not None:
-            profile_params = self.set_profile( profile, dev_mode = True )
-            temp_params.update( profile_params )
-
-        init_params = self.init_kwargs.get('params', None)
-        if init_params is not None:
-            for k, v in init_params.items():
-                temp_params[ k ] = v
-
-        for k, v in self.params.items():
-            temp_params[ k ] = v
-
-        # sanitized_params = self.abs_paths_for_specific_keys( temp_params )
-        self.params.clear()
-        self.params.update( temp_params )
-
-        # addon_text = ''
-        # # if len( self.params.keys() ) != 0:
-        # number_of_changed_params = 0
-        # for k, v in self.params.items():
-        #     changed_param = False
-        #     if k in self.DEFAULT_PARAMS.keys():
-        #         if v != self.DEFAULT_PARAMS[ k ]:
-        #             changed_param = True
-        #         # else:
-        #         #     if v != self.init_kwargs['params'][ k ]:
-        #         #         changed_param = True
-        #     else:
-        #         changed_param = True
-        #     if changed_param:
-        #         number_of_changed_params += 1
-        #         self.init_kwargs['params'][ k ] = v
-        # if number_of_changed_params > 0:
-        #     addon_text = ' - changed {0} params during run time'.format(
-        #         number_of_changed_params
-        #     )
-
-        # self.params.clear()
-        # self.params.update( self.DEFAULT_PARAMS )
-
-        # profile = kwargs.get('profile', None)
-        # if profile is not None:
-        #     self.set_profile( profile )
-
-        # params = kwargs.get('params', None)
-        # if params is not None:
-        #     sanitized_params = self.abs_paths_for_specific_keys( params )
-        #     self.user_defined_params = sanitized_params
-        #     self.params.update( self.user_defined_params )
-
-        # force = kwargs.get('force', None)
-        # if force is not None and force is True:
-        #     self.force = force
-        # else:
-        #     self.force = False
-        # # if self.params
-        # self.print_info('Ucontroller resetted {0}...'.format( addon_text ))
-        return
 
     def _collect_all_unode_wrappers( self ):
         '''
@@ -243,11 +177,10 @@ class UController(ursgal.UNode):
                 'zip_md5',
                 None
             )
-            cannot_distribute = wrapper_meta_info.get(
-                'cannot_distribute',
-                None
+            distributable = wrapper_meta_info.get(
+                'distributable',
+                True
             )
-            # and if so please change cannot_distribute >> distributable
 
             unodes[ wrapper_module_name ] = {
                 'available'         : False,
@@ -255,8 +188,7 @@ class UController(ursgal.UNode):
                 'class'             : None,
                 'engine'            : engine,
                 'include_in_git'    : include_in_git,
-                'cannot_distribute' : None,  # <Seriously ...
-                'distributable'     : False,
+                'distributable'     : distributable,
                 'META_INFO'         : wrapper_meta_info,
                 'in_development'    : in_development,
                 'import_status'     : 'n/d',
@@ -278,6 +210,29 @@ class UController(ursgal.UNode):
                         wrapper_module_name
                     )
         return unodes
+
+    def reset_controller( self ):
+
+        temp_params = {}
+        temp_params.update( self.DEFAULT_PARAMS )
+
+        profile = self.init_kwargs.get('profile', None)
+        if profile is not None:
+            profile_params = self.set_profile( profile, dev_mode = True )
+            temp_params.update( profile_params )
+
+        init_params = self.init_kwargs.get('params', None)
+        if init_params is not None:
+            for k, v in init_params.items():
+                temp_params[ k ] = v
+
+        for k, v in self.params.items():
+            temp_params[ k ] = v
+
+        # sanitized_params = self.abs_paths_for_specific_keys( temp_params )
+        self.params.clear()
+        self.params.update( temp_params )
+        return
 
     def convert_results_to_csv(self, input_file, force=None, output_file_name=None):
         '''
@@ -302,6 +257,8 @@ class UController(ursgal.UNode):
 
         Returns:
             str: Path of the output file
+
+        Notes: internal function, use :meth:`.convert` instead
         '''
 
         input_suffix = os.path.splitext( input_file )[-1].lower()
@@ -316,25 +273,18 @@ class UController(ursgal.UNode):
         else:
             file_json_path = input_file + self.params['json_extension']
             json_content = self.load_json( json_path = file_json_path )
-            last_engine = self.get_last_engine(
+            last_engine = self.get_last_search_engine(
                 history = json_content[3]['history'],
             )
             if 'xtandem' in last_engine:
-                engine_name = 'xtandem2csv_1_0_0'
-            elif 'msgfplus_v2016_09_16' in last_engine:
+                engine_name = self.params['xtandem_converter_version']
+            elif 'msgfplus' in last_engine:
                 engine_name = self.params.get(
                     'msgfplus_mzid_converter_version',
                     None
                 )
                 if engine_name is None:
-                    engine_name = 'msgfplus2csv_v2016_09_16'
-            elif 'msgfplus_v2017_01_27' in last_engine:
-                engine_name = self.params.get(
-                    'msgfplus_mzid_converter_version',
-                    None
-                )
-                if engine_name is None:
-                    engine_name = 'msgfplus2csv_v2017_01_27'
+                    engine_name = self.UNODE_UPARAMS['msgfplus_mzid_converter_version']['uvalue_style_translation'][last_engine]
             else:
                 engine_name = self.params['mzidentml_converter_version']
 
@@ -356,6 +306,8 @@ class UController(ursgal.UNode):
 
         Returns:
             str: name of the output mgf file
+
+        Notes: internal function, use :meth:`.convert` instead
 
         '''
         engine_name = self.params['mzml2mgf_converter_version']
@@ -552,18 +504,18 @@ class UController(ursgal.UNode):
         '''
         matches = self.guess_engine_name( short_engine )
         assert len(matches) > 0, '''
-  The engine name "{0}" you have specified was not found.
-  Make sure that you spelled it correctly!
+      The engine name "{0}" you have specified was not found.
+      Make sure that you spelled it correctly!
         '''.format( short_engine )
         assert len(matches) == 1, '''
-  The engine name "{0}" you have specified is not explicit.
-  Multiple hits found: {1}.
+      The engine name "{0}" you have specified is not explicit.
+      Multiple hits found: {1}.
         '''.format( short_engine, ", ".join(matches) )
         full_engine_name = matches[0]
         assert self.unodes[full_engine_name].get('available', False) is True or \
             self.unodes[full_engine_name].get('in_development', False) is True, '''
-  Requested engine {0} was mapped on {1}, which is not available
-  on your system.
+      Requested engine {0} was mapped on {1}, which is not available
+      on your system.
         '''.format( short_engine, full_engine_name )
 
         return full_engine_name
@@ -638,51 +590,11 @@ class UController(ursgal.UNode):
             )
         return answer
 
-    def add_estimated_fdr( self, input_file=None, force=False, output_file_name=None ):
-        '''
-        The UController add_estimated_fdr function
-
-        Parses a target/decoy search result file and adds a column called
-        "estimated_FDR".
-
-        The CSV must contain:
-
-            * a column with a quality score for each PSM (e-value, error probability etc.)
-            * a column called "Is decoy" indicating whether a PSM is decoy or target.
-
-        Keyword Arguments:
-            input_file (str): The complete path to the input, input file
-                has to be a .csv file meeting the criteria described above.
-            force (bool): (Re)do the analysis, even if output file
-                already exists.
-            output_file_name (str or None): Desired output file name
-                excluding path (optional). If None, output file name will
-                be auto-generated.
-
-        Example::
-
-            >>> uc.params['validation_score_field'] = 'e-value'
-            >>> uc.params['bigger_scores_better']   = False
-            >>> uc.add_estimated_fdr(
-            ...     input_file = 'my_search_results.csv',
-            ... )
-
-        Note:
-            This function can be used to independently compare the
-            performance of different quality scores (where performance
-            is the ability to distinguish target PSMs from decoy PSMs).
-
-        Returns:
-            str: Path of the output file
-        '''
-        return self.execute_unode(
-            input_file = input_file,
-            engine     = 'add_estimated_fdr_1_0_0',
-            force      = force,
-        )
-
     def generate_target_decoy(self, input_files=None, engine=None, force=False, output_file_name=None):
         '''
+        [ WARNING ] This function is not supported anymore!
+                    Please use :meth:`.execute_misc_engine` instead
+
         The ucontroller function for target_decoy database generation.
 
         Keyword Arguments:
@@ -715,6 +627,10 @@ class UController(ursgal.UNode):
         Returns:
             str: Name/path of the output file
         '''
+        self.print_old_function_warning(
+            'generate_target_decoy',
+            'execute_misc_engine'
+        )
         if engine is None:
             engine = 'generate_target_decoy_1_0_0'
         return self.execute_unode(
@@ -830,7 +746,7 @@ class UController(ursgal.UNode):
             output_file = report['output_file']
         return output_file
 
-    def combine_search_results(self, input_files, engine, force=None, output_file_name=None ):
+    def combine_search_results(self, input_files, engine=None, force=None, output_file_name=None ):
         '''
         The ucontroller combine_search_results function
         combines search result .csv files that were generated by
@@ -889,13 +805,13 @@ class UController(ursgal.UNode):
         }
 
         assert len(input_file_search_engines) == len(input_files), '''
-  All combine_search_results() input files must be search results from
-  *different* search engines.
-  You specified {0} input files
-  ({1})
-  but they are only from {2} different engine(s).
-  If you want to analyze multiple files from the same engine, please
-  merge them beforehand using merge_csvs().'''.format(
+      All combine_search_results() input files must be search results from
+      *different* search engines.
+      You specified {0} input files
+      ({1})
+      but they are only from {2} different engine(s).
+      If you want to analyze multiple files from the same engine, please
+      merge them beforehand using merge_csvs().'''.format(
             len(input_files),
             input_files,
             len(input_file_search_engines)
@@ -906,7 +822,7 @@ class UController(ursgal.UNode):
         )
         return report['output_file']
 
-    def convert(self, input_file, engine, force=None, output_file_name=None ):
+    def convert(self, input_file, engine=None, force=None, output_file_name=None, guess_engine=False ):
         '''
         The UController convert function converts the given input_file
         into another format as defined by the specified engine.
@@ -920,6 +836,9 @@ class UController(ursgal.UNode):
             output_file_name (str or None): Desired output file name
                 excluding path (optional). If None, output file name will
                 be auto-generated.
+            guess_engine (bool): The converter engine is guessed based on 
+                the input file. This works so far for mzml2mgf conversion and 
+                conversion of search_engine result files to csv.
 
         Example::
 
@@ -933,14 +852,109 @@ class UController(ursgal.UNode):
         Returns:
             str: Path of the output file
         '''
-        return self.execute_unode(
+
+        if guess_engine is True:
+            if input_file.upper().endswith('.MZML'):
+                outfile = self.convert_to_mgf_and_update_rt_lookup(
+                    input_file       = input_file,
+                    force            = force,
+                    output_file_name = output_file_name
+                )
+            else:
+                file_json_path = input_file + self.params['json_extension']
+                last_engine_type = None
+
+                assert os.path.exists( file_json_path ), '''
+                Cannot guess a suitable engine, since no json for
+                the input file was found.
+                {0}
+                '''.format(input_file)
+
+                json_content = self.load_json(
+                        json_path = file_json_path
+                    )
+                last_engine_type = self.get_last_engine_type(
+                        history = json_content[3]['history'],
+                    )
+
+                if 'search_engine' in last_engine_type:
+
+                    outfile = self.convert_results_to_csv(
+                        input_file       = input_file,
+                        force            = force,
+                        output_file_name = output_file_name
+                    )
+                else:
+                    print('Cannot guess a suitable engine, please specify it.')
+                    sys.exit(1)
+
+        elif len(self.guess_engine_name(engine)) == 1 and\
+                self.guess_engine_name(engine)[0] in ['mzml2mgf_1_0_0']:
+            outfile = self.convert_to_mgf_and_update_rt_lookup(
+                input_file       = input_file,
+                force            = force,
+                output_file_name = output_file_name
+            )
+        else:
+            outfile = self.execute_unode(
+                input_file       = input_file,
+                engine           = engine,
+                force            = force,
+                output_file_name = output_file_name
+            )
+
+        return outfile
+
+    def execute_misc_engine(self, input_file, engine=None, force=None, output_file_name=None ):
+        '''
+        The UController execute_misc_engine function
+
+        This function can be used to execute any misc engine by
+        only giving the input_file and engine name.
+
+        Keyword Arguments:
+            input_file (str): The complete path to the input, a unified
+                (and possibly merged) search result .csv.
+            engine (str): the name of the validation engine which should be
+                run, can also be a short version if this name is unambigous
+            force (bool): (Re)do the analysis, even if output file
+                already exists.
+            output_file_name (str or None): Desired output file name
+                excluding path (optional). If None, output file name will
+                be auto-generated.
+
+        Note:
+            Input files to :meth:`.validate` must be in unified csv format (i.e.
+            output files of :meth:`.search` or :meth:`.unify_csv`).
+
+        Example::
+
+            >>> my_databases = ['homo_sapiensA.fasta', 'homo_sapiensB.fasta']
+            >>> uc = ursgal.UController()
+            >>> new_target_decoy_db = uc.execute_misc_engine(
+            ...    input_files      = my_databases,
+            ...    engine           = 'generate_target_decoy_1_0_0',
+            ...    output_file_name = 'my_homo_sapiens_target_decoy_db.fasta'
+            ...)
+
+        Returns:
+            str: Path of the output file
+        '''
+        if 'merge_csvs' in engine:
+            outfile = self.merge_csvs(
+                input_file,
+                force = force,
+                output_file_name = output_file_name
+            )
+
+        outfile = self.execute_unode(
             input_file       = input_file,
             engine           = engine,
             force            = force,
             output_file_name = output_file_name
         )
 
-        return report['output_file']
+        return outfile
 
     def set_file_info_dict( self, in_file ):
         '''Splits ext and path and so on '''
@@ -1168,7 +1182,7 @@ class UController(ursgal.UNode):
                     json_path = file_json_path
                 )
                 if len(json_content) > 3 and 'history' in json_content[3]:
-                    last_engine = self.get_last_engine(
+                    last_engine = self.get_last_search_engine(
                             history = json_content[3]['history'],
                             multiple_engines = True,
                         )
@@ -1279,19 +1293,6 @@ class UController(ursgal.UNode):
                     ),
                     caller = 'set_ios'
                 )
-#             for u_param, u_value in self.params.items():
-#                 if u_param not in self.io['input']['params'].keys():
-#                    self.io['input']['params'][ u_param ] = u_value
-#                 elif self.io['input']['params'][ u_param ] != u_value:
-#                     self.print_info('''
-# Found mismatch between json parameter {0}:{1} and controller params {0}:{2}. Consider re-run with force=True or delete old u.jsons.
-#                         '''.format(
-#                         u_param,
-#                         self.io['input']['params'][ u_param ],
-#                         u_value)
-#                     )
-#                 else:
-#                     pass
             # lets propagate md5 information into input finfo
             # for json dump.. evals are always done on loaded
             # i_finfo and o_finfo
@@ -1510,10 +1511,14 @@ class UController(ursgal.UNode):
 
         output_file += file_extension
 
-        global_ucontroller_compress_flag = self.params.get('compress_raw_search_results_if_possible', False)
-        compress_engine_output = self.unodes[ engine ]['class'].META_INFO.get( 'compress_raw_search_results', False)
-        if compress_engine_output and global_ucontroller_compress_flag:
-            output_file += '.gz'
+        # global_ucontroller_compress_flag = self.params.get('compress_raw_search_results_if_possible', False)
+        # compress_engine_output = self.unodes[ engine ]['class'].META_INFO.get( 'compress_raw_search_results', False)
+        # if compress_engine_output and global_ucontroller_compress_flag:
+        if self.params.get('compress_raw_search_results_if_possible', False):
+            if self.UNODE_UPARAMS['compress_raw_search_results_if_possible']['uvalue_style_translation'].get(
+                engine, False
+            ):
+                output_file += '.gz'
 
         path_building_blocks = [
             self.io['input']['finfo']['dir']
@@ -1577,13 +1582,16 @@ class UController(ursgal.UNode):
             i_params = self.io['input']['params']
             o_params = self.io['output']['params']
 
-            for used_param in self.meta_unodes[ engine ].PARAMS_TRIGGERING_RERUN:
-                # # changing the amount of CPUs should not trigger re-run:
-                # if used_param == 'cpus':
-                #     continue
-
+            for used_param in self.meta_unodes[engine].PARAMS_TRIGGERING_RERUN:
                 if used_param in o_params.keys() and used_param in i_params.keys():
-                    if o_params[ used_param ] != i_params[ used_param ]:
+                    in_param = i_params[used_param]
+                    out_param = o_params[used_param]
+
+                    if type(in_param) is list:
+                        in_param = list(sorted(in_param))
+                    if type(out_param) is list:
+                        out_param = list(sorted(out_param))
+                    if out_param != in_param:
                         reasons.append(
                             'Node related parameters (for instance "{0}") '\
                             'have changed compared to the last output '\
@@ -1591,10 +1599,6 @@ class UController(ursgal.UNode):
                         )
                         break
                 else:
-                    # default_value = self.meta_unodes[engine].DEFAULT_PARAMS.get(
-                    #     used_param,
-                    #     None
-                    # )
                     default_value = self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value']
                     if used_param not in o_params.keys():
                         reasons.append(
@@ -1603,18 +1607,24 @@ class UController(ursgal.UNode):
                             '...'.format(used_param)
                         )
                         break
-                    elif o_params[ used_param ] != default_value:
-                        reasons.append(
-                            'A new node related parameter ("{0}") '\
-                            'has been added compared to the last output '\
-                            '...'.format(used_param)
-                        )
-                        # print('default:',default_value)
-                        # print('used',o_params[used_param])
-                        # print(self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value'])
-                        # exit(1)
+                    else:
+                        if type(default_value) is list:
+                            default_value = sorted(default_value)
+                        out_param = o_params[used_param]
+                        if type(out_param) is list:
+                            out_param = sorted(out_param)
+                        if out_param != default_value:
+                            reasons.append(
+                                'A new node related parameter ("{0}") '\
+                                'has been added compared to the last output '\
+                                '...'.format(used_param)
+                            )
+                            # print('default:',default_value)
+                            # print('used',o_params[used_param])
+                            # print(self.meta_unodes[engine].UNODE_UPARAMS[used_param]['default_value'])
+                            # exit(1)
 
-                        break
+                            break
 
         if self.io['output']['finfo']['json_exists']:
             # o_json exists no force no node related params changed
@@ -1663,9 +1673,9 @@ class UController(ursgal.UNode):
         )
         if compress_engine_output and global_ucontroller_compress_flag:
             print('We are compressing now and renaming the shiznit')
-            exit(1)
+            sys.exit(1)
 
-    def search_mgf(self, input_file, engine, force=None, output_file_name=None):
+    def search_mgf(self, input_file, engine=None, force=None, output_file_name=None):
         '''
         The UController search_mgf function
 
@@ -1706,16 +1716,29 @@ class UController(ursgal.UNode):
             automatically converts mzML to MGF and produces a unified
             CSV output file.
         '''
-        engine_name = self.engine_sanity_check( engine )
-        self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.mgf'] )
-        if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
-            if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
+        engine_name = self.engine_sanity_check(engine)
+        self.input_file_sanity_check(
+            input_file,
+            engine=engine_name,
+            extensions=['.mgf']
+        )
+        for search_engine_type in [
+            'protein_database_search_engine',
+            'cross_link_search_engine',
+        ]:
+            if self.unodes[ engine_name ]['class'].META_INFO.get(
+                search_engine_type,
+                False
+            ) is not False:
+            # if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
+            #     if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] == True:
                 self.input_file_sanity_check(
                     self.params['database'],
                     engine     = engine_name,
                     custom_str = 'FASTA database (uc.params["database"])',
                     extensions = ['fasta', 'fa', 'fast']
                 )
+                break
         answer = self.prepare_unode_run(
             input_file,
             output_file = output_file_name,
@@ -1735,7 +1758,7 @@ class UController(ursgal.UNode):
         )
         return report['output_file']
 
-    def search(self, input_file, engine, force=None, output_file_name=None):
+    def search(self, input_file, engine=None, force=None, output_file_name=None):
         '''
         The ucontroller search function
 
@@ -1778,34 +1801,40 @@ class UController(ursgal.UNode):
             This function calls five search-related ursgal functions
             in succession, all of which can also be called individually:
 
-                * :meth:`.convert_to_mgf_and_update_rt_lookup` (if required)
+                * :meth:`.convert` (mzml to mgf, if required, using the mzml2mgf engine)
                 * :meth:`.search_mgf`
-                * :meth:`.convert_results_to_csv`
-                * :meth:`.map_peptides_to_fasta`
-                * :meth:`.unify_csv`
+                * :meth:`.convert` (raw search results to csv, if required)
+                * :meth:`.execute_misc_engine` (peptide_mapper)
+                * :meth:`.execute_misc_engine` (unify_csv)
         '''
 
         # Verify that the specified engine is a valid UNode
-        engine_name = self.engine_sanity_check( engine )
+        # will be done for each step ...
+        # engine_name = self.engine_sanity_check( engine )
+
         # Verify input file exists and is mzML
-        self.input_file_sanity_check(
-            input_file,
-            extensions = ['mzml', 'mzml.gz', 'mgf']
-        )
+        # will be done for each step
+        # self.input_file_sanity_check(
+        #     input_file,
+        #     extensions = ['mzml', 'mzml.gz', 'mgf']
+        # )
+
         # verify database exists and is fasta
-        if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
-            if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] is True:
-                self.input_file_sanity_check(
-                    self.params['database'],
-                    engine     = engine_name,
-                    custom_str = 'FASTA database (uc.params["database"])',
-                    extensions = ['fasta', 'fa', 'fast'],
-                )
+        # will be done for seach_mgf
+        # if 'search_engine' in self.unodes[ engine_name ]['class'].META_INFO.keys():
+        #     if self.unodes[ engine_name ]['class'].META_INFO['search_engine'] is True:
+        #         self.input_file_sanity_check(
+        #             self.params['database'],
+        #             engine     = engine_name,
+        #             custom_str = 'FASTA database (uc.params["database"])',
+        #             extensions = ['fasta', 'fa', 'fast'],
+        #         )
 
         # 1. Convert mzML(.gz) to MGF format (if it's not already MGF):
         if not input_file.upper().endswith('.MGF'):
-            mgf_file = self.convert_to_mgf_and_update_rt_lookup(
+            mgf_file = self.convert(
                 input_file,
+                engine = self.params['mzml2mgf_converter_version'],
                 force = force,
             )
         else:
@@ -1817,43 +1846,38 @@ class UController(ursgal.UNode):
             engine     = engine,
             force      = force,
         )
-        # exit( raw_search_results )
-
 
         # 3. Convert search result to CSV if required (mzidentml-lib):
-        csv_search_results = self.convert_results_to_csv(
+        csv_search_results = self.convert(
             input_file = raw_search_results,
+            engine = None,
+            guess_engine = True,
             force      = force,
         )
 
         #insert peptide mapping here inlcuding the classification as a db engine
-        database_search_engines = [
-            'msamanda',
-            'msgf',
-            'myrimatch',
-            'omssa',
-            'xtandem',
-            'msfragger'
-        ]
-        database_search = False
-        for db_se in database_search_engines:
-            if db_se in engine.lower():
-                database_search = True
-        if database_search:
+        engine_name = self.guess_engine_name( engine )
+        engine_type = self.unodes[ engine_name[0] ]['class'].META_INFO['engine_type'].get(
+            'protein_database_search_engine',
+            False
+        )
+        if engine_type is not False:
             #if mapper version == 'COmpomics stuff'
             #execute this node and in map peptides, these results are read...
-            mapped_csv_search_results = self.map_peptides_to_fasta(
+            mapped_csv_search_results = self.execute_misc_engine(
                 input_file       = csv_search_results,
                 output_file_name = output_file_name,
+                engine           = self.params['peptide_mapper_converter_version'],
                 force            = force,
             )
         else:
             mapped_csv_search_results = csv_search_results
 
         # 4. Convert csv to unified ursgal csv format:
-        unified_search_results = self.unify_csv(
+        unified_search_results = self.execute_misc_engine(
             input_file       = mapped_csv_search_results,
             output_file_name = output_file_name,
+            engine           = self.params['unify_csv_converter_version'],
             force            = force,
         )
         return unified_search_results
@@ -1931,7 +1955,7 @@ class UController(ursgal.UNode):
         self.take_care_of_params_and_stats( io_mode = 'tmp')
         history = self.io['tmp']['stats']['history']
         for entry in history:
-            if entry['engine'] == 'mzml2mgf_1_0_0':
+            if entry['engine'] == self.params['mzml2mgf_converter_version']:
                 corresponding_mzml = os.path.join(
                     entry['finfo']['dir'],
                     entry['finfo']['file']
@@ -2177,11 +2201,11 @@ class UController(ursgal.UNode):
             )
         except AssertionError as ass:
             error_msg = '''
-  \n{0} (most likely) crashed!
+     \n{0} (most likely) crashed!
 
-  The uNode {0} did not produce a valid output file at the expected location:
-    {1}
-  Inspect the printouts above for possible causes and verify that all input files are valid.
+      The uNode {0} did not produce a valid output file at the expected location:
+        {1}
+      Inspect the printouts above for possible causes and verify that all input files are valid.
             '''.format( engine_name, expected_fpath )
             raise Exception( error_msg ) from ass
         return
@@ -2189,6 +2213,9 @@ class UController(ursgal.UNode):
 
     def unify_csv(self, input_file, force=False, output_file_name=None):
         '''
+        [ WARNING ] This function is not supported anymore!
+                    Please use :meth:`.execute_misc_engine` instead
+
         The ucontroller unify_csv function
 
         Unifies the .csv files which were converted by the mzidentml library.
@@ -2227,6 +2254,11 @@ class UController(ursgal.UNode):
 
         # self.input_file_sanity_check( input_file, engine=engine_name, extensions=['.csv'] )
 
+        self.print_old_function_warning(
+            'unify_csv',
+            'execute_misc_engine'
+        )
+
         return self.execute_unode(
             input_file       = input_file,
             engine           = self.params['unify_csv_converter_version'],
@@ -2236,6 +2268,9 @@ class UController(ursgal.UNode):
 
     def map_peptides_to_fasta(self, input_file, force=False, output_file_name=None):
         '''
+        [ WARNING ] This function is not supported anymore!
+                    Please use :meth:`.execute_misc_engine` instead
+
         The ucontroller function to call the upeptide_mapper node.
 
         Note:
@@ -2264,6 +2299,10 @@ class UController(ursgal.UNode):
         Returns:
             str: Path of the output file
         '''
+        self.print_old_function_warning(
+            'map_peptides_to_fasta',
+            'execute_misc_engine'
+        )
 
         return self.execute_unode(
             input_file       = input_file,
@@ -2274,6 +2313,9 @@ class UController(ursgal.UNode):
 
     def filter_csv(self, input_file, force=False, output_file_name=None):
         '''
+        [ WARNING ] This function is not supported anymore!
+                    Please use :meth:`.execute_misc_engine` instead
+
         The UController filter_csv function
 
         Filters .csv files row-wise according to user-defined rules.
@@ -2301,53 +2343,32 @@ class UController(ursgal.UNode):
             ... ]
             >>> uc.filter_csv( 'my_results.csv' )
         '''
+        self.print_old_function_warning(
+            'filter_csv',
+            'execute_misc_engine'
+        )
         return self.execute_unode(
             input_file       = input_file,
-            engine           = self.params['filter_csv_converter_version'],
+            engine           = 'filter_csv_1_0_0',
             force            = force,
             output_file_name = output_file_name
         )
 
-    def sanitize_csv(self, input_file, force=False, output_file_name=None):
+    def print_old_function_warning(self, old_funct_name, new_func_name):
         '''
-        The UController sanitize_csv function
-
-        Result files (.csv) are sanitized following defined parameters.
-        That means, for each spectrum PSMs are compared and the
-        best spectrum (spectra) is (are) chosen.
-
-        Keyword Arguments:
-            input_file (str): The complete path to the input, input file has
-                currently to be a .csv file.
-            force (bool): (Re)do the analysis, even if output file
-                already exists.
-            output_file_name (str or None): Desired output file name
-                excluding path (optional). If None, output file name will
-                be auto-generated.
-
-        The parameters have to be defined in the params. See the engine
-        documentation for further information ( :meth:`.sanitize_csv_1_0_0._execute` ).
-
-        Example:
-
-            >>> # Only the best PSM for one spectrum is retained
-            >>> # and only if its PEP is differing from the secondbest by
-            >>> # two orders of magnitude
-            >>> uc.params['validation_score_field'] = 'PEP'
-            >>> uc.params['bigger_scores_better'] = False
-            >>> uc.params['score_diff_threshold'] = 2
-            >>> uc.params['threshold_is_log10'] = True
-            >>> uc.sanitize_csv( 'my_results.csv' )
         '''
-        return self.execute_unode(
-            input_file       = input_file,
-            engine           = self.params['sanitize_csv_converter_version'],
-            force            = force,
-            output_file_name = output_file_name
+        print('''
+        [ WARNING ] You are using an old UController function:
+                    {0}
+        [ WARNING ] This funtion is not supported/updated anymore!
+        [ WARNING ] Please use the following instead:
+                    {1}
+        '''.format(
+                old_funct_name,
+                new_func_name
+            )
         )
-
-
-
+        return
 
     def prepare_resources(self, root_zip_target_folder):
         '''
@@ -2362,15 +2383,15 @@ class UController(ursgal.UNode):
         )
 
         missing_md5_format_string = '''
-Please include the following in the knowledge base in META_INFO of {0}:
-'engine' : {{
-    '{1}' : {{
-        '{2}' : {{
-            'zip_md5' : '{3}'
+        Please include the following in the knowledge base in META_INFO of {0}:
+        'engine' : {{
+            '{1}' : {{
+                '{2}' : {{
+                    'zip_md5' : '{3}'
+                }}
+            }}
         }}
-    }}
-}}
-        '''
+                '''
 
         for root_dir, folder_list, file_list in os.walk(root_resource_folder):
             # print(root,folder)
@@ -2384,11 +2405,11 @@ Please include the following in the knowledge base in META_INFO of {0}:
                 if include_in_git in [ None, True ]:
                     continue
                 # or we cannot dictribute it, restrictive licenses etc.
-                cannot_distribute = self.unodes[ engine ].get(
-                    'cannot_distribute',
-                    None
+                distributable = self.unodes[ engine ].get(
+                    'distributable',
+                    True
                 )
-                if cannot_distribute is True:
+                if distributable is False:
                     continue
 
                 resource_source_folder = 'ursgal{0}'.format(
@@ -2498,10 +2519,10 @@ Please include the following in the knowledge base in META_INFO of {0}:
                         if online_md_5 == md5_in_kb:
                             print(
                                 '''
-md5 in knowledge base is equal to the md5 online for {engine} on platform {current_platform} and architecture {current_architecture}:
-md5 online:             {online_md_5}
-md5 in knowledge base : {md5_in_kb}
-Nothing to do here...
+        md5 in knowledge base is equal to the md5 online for {engine} on platform {current_platform} and architecture {current_architecture}:
+        md5 online:             {online_md_5}
+        md5 in knowledge base : {md5_in_kb}
+        Nothing to do here...
                                 '''.format(
                                     online_md_5          = online_md_5,
                                     md5_in_kb            = md5_in_kb,
@@ -2577,7 +2598,6 @@ Nothing to do here...
                     )
                     print( message )
                     update_kb_list.append((engine,message))
-                # exit()
         return zip_file_list, update_kb_list
 
     def download_resources(self, resources=None):
@@ -2608,11 +2628,11 @@ Nothing to do here...
                             engine
                         )
                     )
-                    cannot_distribute = self.unodes[engine]['META_INFO'].get(
-                        'cannot_distribute',
-                        None
+                    distributable = self.unodes[engine]['META_INFO'].get(
+                        'distributable',
+                        True
                     )
-                    if cannot_distribute is True:
+                    if distributable is False:
                         print(
                             'Engine {0} cannot be downloaded automatically, please download the engine manually and move it to the appropriate folder'.format(
                                 engine,
@@ -2694,8 +2714,8 @@ Nothing to do here...
                     except:
                         print(
                             '''
-File {0} is not present in online resource folder.
-Please install the engine manually!
+        File {0} is not present in online resource folder.
+        Please install the engine manually!
                             '''.format(
                                 tmp_http_get_params['http_url']
                             )
@@ -2730,8 +2750,8 @@ Please install the engine manually!
                         except:
                             print(
                             '''
-File {0} is not present in online resource folder.
-[  INFO   ] Please contact the Ursgal team!
+        File {0} is not present in online resource folder.
+        [  INFO   ] Please contact the Ursgal team!
                             '''.format(
                                 tmp_http_get_params['http_url']
                             )
@@ -2741,9 +2761,9 @@ File {0} is not present in online resource folder.
                         if calculated_zip_md5 != md5_in_kb:
                             print(
                                 '''
-    [ WARNING ] md5 of downloaded zip file {0} differs from
-    [ WARNING ] md5 in knowledge base, exiting now!!!
-    [  INFO   ] Please contact the Ursgal team!
+        [ WARNING ] md5 of downloaded zip file {0} differs from
+        [ WARNING ] md5 in knowledge base, exiting now!!!
+        [  INFO   ] Please contact the Ursgal team!
                                 '''.format(zip_file_name)
                             )
                             os.remove( zip_file_name )
@@ -2785,9 +2805,9 @@ File {0} is not present in online resource folder.
                     else:
                         print(
                             '''
-[ WARNING ] md5 of online repository for engine {0} differs from
-[ WARNING ] md5 in knowledge base, exiting now!!!
-[  INFO   ] Please contact the Ursgal team!
+        [ WARNING ] md5 of online repository for engine {0} differs from
+        [ WARNING ] md5 in knowledge base, exiting now!!!
+        [  INFO   ] Please contact the Ursgal team!
                             '''.format(engine)
                         )
 
@@ -2795,7 +2815,7 @@ File {0} is not present in online resource folder.
 
         return download_zip_files
 
-    def execute_unode(self, input_file, engine, force=False, output_file_name=None, dry_run=False):
+    def execute_unode(self, input_file, engine=None, force=False, output_file_name=None, dry_run=False):
         '''
         The UController execute_unode function. Executes arbitrary UNodes, as
         specified by their name.
@@ -2901,7 +2921,7 @@ True
         return multi, out_input
 
 
-    def validate(self, input_file, engine, force=None, output_file_name=None ):
+    def validate(self, input_file, engine=None, force=None, output_file_name=None ):
         '''
         The UController validate function
 
@@ -2953,7 +2973,7 @@ True
         )
 
 
-    def visualize(self, input_files, engine, force=None, output_file_name=None, multi=True):
+    def visualize(self, input_files, engine=None, force=None, output_file_name=None, multi=True):
         '''
         The ucontroller function for visualization
 
@@ -2992,18 +3012,12 @@ True
         Returns:
             str: Path of the output file
         '''
-        engine_name = self.engine_sanity_check( engine )
-        self.input_file_sanity_check( input_files, engine=engine_name, multi=multi )
-        answer = self.prepare_unode_run(
-            input_files,
-            output_file = output_file_name,
-            engine = engine_name,
-            force  = force
+        return self.execute_unode(
+            input_file       = input_files,
+            engine           = engine,
+            force            = force,
+            output_file_name = output_file_name
         )
-        report = self.run_unode_if_required(
-            force, engine_name, answer
-        )
-        return report['output_file']
 
 
     def input_file_sanity_check(self, input_file, engine=None, extensions=None, multi=False, custom_str=None ):
@@ -3050,25 +3064,25 @@ True
         if multi:
             # verify that input to multi-nodes is a list of 2 or more elements:
             assert isinstance( input_file, list ) and len( input_file ) >= 2, '''
-  {custom_str} must be a list of at least two files,
-  but you specified:
-\t{input_file}'''.format( **d )
+          {custom_str} must be a list of at least two files,
+          but you specified:
+        \t{input_file}'''.format( **d )
 
             # verify that input list to multi-nodes only contains strings:
             for f in input_file:
                 assert isinstance(f, str), '''
-  {custom_str} must contain only strings (file paths),
-  but you specified this element:
-\t{f}'''.format( f=f, **d )
+          {custom_str} must contain only strings (file paths),
+          but you specified this element:
+        \t{f}'''.format( f=f, **d )
 
             input_file_list = input_file  # it's a list, so we can treat it like that.
 
         elif not multi:
             # verify that input to single-nodes is a str:
             assert isinstance( input_file, str ), '''
-  {custom_str} must be a string (the path to a file),
-  but you specified:
-\t{input_file}'''.format( **d )
+          {custom_str} must be a string (the path to a file),
+          but you specified:
+        \t{input_file}'''.format( **d )
             input_file_list = [input_file]  # put it into a list, so we can treat both str and list inputs the same (loop over them)
 
         for in_file in input_file_list:
@@ -3076,20 +3090,20 @@ True
 
             # verify that input file exists:
             assert os.path.isfile( in_file ), '''
-  {custom_str} is not a file. Make sure that the file exists, and that
-  you typed the path correctly. You specified this path:
-\t{in_file}'''.format( **d )
+          {custom_str} is not a file. Make sure that the file exists, and that
+          you typed the path correctly. You specified this path:
+        \t{in_file}'''.format( **d )
 
             # verify that input file is not empty:
             assert os.stat( in_file ).st_size > 0, '''
-  {custom_str} is empty. You specified this file:
-\t{in_file}'''.format( **d )
+          {custom_str} is empty. You specified this file:
+        \t{in_file}'''.format( **d )
 
             # verify that current user has file reading permissions:
             assert os.access( in_file, os.R_OK ), '''
-  {custom_str} cannot be read. Make sure you have file reading permissions
-  on your current user. You specified this file:
-\t{in_file}'''.format( **d )
+          {custom_str} cannot be read. Make sure you have file reading permissions
+          on your current user. You specified this file:
+        \t{in_file}'''.format( **d )
 
             # verify that the file ends with one of the extensions specified in UNode.kb, or user-specified:
             all_extensions = set()
@@ -3108,11 +3122,11 @@ True
                     if in_file.upper().endswith( ext ):
                         ext_is_allowed = True
                 assert ext_is_allowed, '''
-  {custom_str} does not have the correct file extension.
-  You specified the file
-\t{in_file}
-  but only files ending with {ok_extensions} are permitted for engine {0}
-  '''.format(engine, **d )
+          {custom_str} does not have the correct file extension.
+          You specified the file
+        \t{in_file}
+          but only files ending with {ok_extensions} are permitted for engine {0}.
+          '''.format(engine, **d )
 
 
 class ParamsDict(dict):

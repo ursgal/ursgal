@@ -17,10 +17,10 @@ def main(mzML_file=None, profile=None, database=None):
 
     '''
     uc = ursgal.UController(
-        profile = profile,
-        params = {
-            'database' : database,
-            'modifications' : [
+        profile=profile,
+        params={
+            'database': database,
+            'modifications': [
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
@@ -34,22 +34,22 @@ def main(mzML_file=None, profile=None, database=None):
         xtandem = 'xtandem_sledgehammer'
 
     unified_search_result_file = uc.search(
-        input_file = mzML_file,
-        engine     = xtandem,
-        force      = False
+        input_file=mzML_file,
+        engine=xtandem,
+        force=False
     )
 
     validated_results = uc.validate(
-        input_file = unified_search_result_file,
-        engine = 'percolator_2_08',
+        input_file=unified_search_result_file,
+        engine='percolator_2_08',
     )
 
     uc.params['ssl_score_column_name'] = 'q-value'
-    uc.params['ssl_score_type'] = 'PERCOLATOR QVALUE' 
+    uc.params['ssl_score_type'] = 'PERCOLATOR QVALUE'
 
     ssl_file = uc.convert(
-        input_file    = validated_results,
-        engine         = 'csv2ssl',
+        input_file=validated_results,
+        engine='csv2ssl',
     )
     return
 

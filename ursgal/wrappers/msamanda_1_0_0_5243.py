@@ -21,14 +21,13 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         'version'            : '1.0.0.5243',
         'release_date'       : None,
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'   : ['.mgf'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
         'include_in_git'     : None,
-        'cannot_distribute'  : True,
+        'distributable'  : False,
         'in_development'     : False,
         'utranslation_style' : 'msamanda_style_1',
         'engine' : {
@@ -123,7 +122,7 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         score_ions = []
         instruments_file_input = []
         for ion in [ "a", "b", "c", "x", "y", "z", "-H2O", "-NH3", "Imm", "z+1", "z+2", "INT" ]:
-            if self.params['translations'][ 'score_{0}_ions'.format( ion.lower() ) ] == True:
+            if ion.lower() in self.params['translations']['score_ion_list']:
                 score_ions.append( ion )
                 instruments_file_input.append('''<series>{0}</series>'''.format(ion))
         instruments_file_input.append('''</setting>''')
@@ -131,17 +130,21 @@ class msamanda_1_0_0_5243( ursgal.UNode ):
         self.params['translations']['score_ions'] = ', '.join( score_ions )
         self.params['translations']['instruments_file_input'] = ''.join( instruments_file_input )
 
-        self.params['translations']['precursor_mass_tolerance'] = ( float(self.params['translations']['precursor_mass_tolerance_plus']) + \
-                                                    float(self.params['translations']['precursor_mass_tolerance_minus']) ) \
-                                                / 2.0
+        self.params['translations']['precursor_mass_tolerance'] = (
+            float(self.params['translations']['precursor_mass_tolerance_plus']) +
+            float(self.params['translations']['precursor_mass_tolerance_minus'])
+        ) / 2.0
 
         considered_charges = []
-        for charge in range( int(self.params['translations'][ 'precursor_min_charge' ]), int(self.params['translations'][ 'precursor_max_charge' ])+1 ):
+        for charge in range(
+                int(self.params['translations'][ 'precursor_min_charge' ]),
+                int(self.params['translations'][ 'precursor_max_charge' ]) + 1 
+        ):
             considered_charges.append( '+{0}'.format(charge) )
         self.params['translations']['considered_charges'] = ', '.join( considered_charges )
 
         if self.params['translations']['label'] == '15N':
-            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+            for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 existing = False
                 for mod in self.params[ 'mods' ][ 'fix' ]:
                     if aminoacid == mod[ 'aa' ]:

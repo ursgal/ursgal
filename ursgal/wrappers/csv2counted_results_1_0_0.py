@@ -21,10 +21,9 @@ class csv2counted_results_1_0_0( ursgal.UNode ):
         'input_extensions'      : ['.csv'],
         'output_suffix'         : 'counted',
         'in_development'        : False,
-        'input_multi_file'      : False,
         'utranslation_style'    : 'csv2counted_results_style_1',
         'include_in_git'        : True,
-
+        'distributable'      : True,
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
@@ -50,7 +49,7 @@ class csv2counted_results_1_0_0( ursgal.UNode ):
         Creates a _counted.csv file and returns its path.
 
         Columns containing the elements that should be counted (identifiers)
-        are given as a list of headers using uc.params["identifier_colum_names"].
+        are given as a list of headers using uc.params["identifier_column_names"].
         Columns defining a unique countable element (e.g. "Sequence", "Spectrum ID")
         are given as a list of headers using uc.params["count_column_names"].
 

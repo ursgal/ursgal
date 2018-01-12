@@ -32,11 +32,11 @@ class get_ftp_files_1_0_0( ursgal.UNode ):
             'fetcher' : True,
         },
         'input_extensions'   : [],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.txt'],
         'output_suffix'      : None,
         'in_development'     : False,
         'include_in_git'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'get_ftp_style_1',
         'engine' : {
             'platform_independent' : {

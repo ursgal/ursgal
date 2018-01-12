@@ -8,6 +8,7 @@ from collections import defaultdict as ddict
 import os
 import shutil
 
+
 def main():
     '''
     Example script to do a precursor mass tolerance parameter sweep.
@@ -18,16 +19,16 @@ def main():
 
     '''
     precursor_mass_tolerance_list = [
-        1 ,
-        2 ,
-        3 ,
-        4 ,
-        5 ,
-        6 ,
-        7 ,
-        8 ,
-        9 ,
-        10 ,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
     ]
 
     engine_list = [
@@ -35,14 +36,14 @@ def main():
     ]
 
     R = ursgal.UController(
-        profile = 'LTQ XL low res',
-        params = {
-            'database' : os.path.join(
+        profile='LTQ XL low res',
+        params={
+            'database': os.path.join(
                 os.pardir,
                 'example_data',
                 'BSA.fasta'
             ),
-            'modifications' : [
+            'modifications': [
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
@@ -62,7 +63,7 @@ def main():
 
         R.params['http_output_folder'] = os.path.dirname(mzML_file)
         R.fetch_file(
-            engine     = 'get_http_files_1_0_0'
+            engine='get_http_files_1_0_0'
         )
         try:
             shutil.move(
@@ -74,9 +75,11 @@ def main():
                 '{0}format=raw'.format(mzML_file),
                 mzML_file
             )
-    # Convert mzML to MGF outside the loop, so this step is not repeated in the loop
-    mgf_file = R.convert_to_mgf_and_update_rt_lookup(
-        input_file = mzML_file
+    # Convert mzML to MGF outside the loop, so this step is not repeated in
+    # the loop
+    mgf_file = R.convert(
+        input_file=mzML_file,
+        engine='mzml2mgf_1_0_0'
     )
 
     for engine in engine_list:
@@ -90,15 +93,15 @@ def main():
             )
 
             unified_search_result_file = R.search(
-                input_file = mgf_file,
-                engine     = engine,
-                force      = False,
+                input_file=mgf_file,
+                engine=engine,
+                force=False,
             )
 
     collector = ddict(set)
     for csv_path in glob.glob('{0}/*/*unified.csv'.format(os.path.dirname(mzML_file))):
         for line_dict in csv.DictReader(open(csv_path, 'r')):
-            collector[ csv_path ].add( line_dict['Sequence'] )
+            collector[csv_path].add(line_dict['Sequence'])
     for csv_path, peptide_set in sorted(collector.items()):
         file_name = os.path.basename(csv_path)
         tolerance = file_name.split('_')[0]
@@ -113,4 +116,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

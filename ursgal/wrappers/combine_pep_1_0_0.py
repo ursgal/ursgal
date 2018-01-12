@@ -72,10 +72,10 @@ class combine_pep_1_0_0(ursgal.UNode):
             'meta_engine' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'in_development'     : False,
         'include_in_git'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'combine_pep_style_1',
         'engine' : {
             'platform_independent' : {

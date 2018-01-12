@@ -5,6 +5,7 @@ import ursgal
 import os
 import sys
 
+
 def main():
     '''
     Simple crosslink search using Kojak and an example file from Barth et al. 
@@ -14,7 +15,7 @@ def main():
 
     Parameters have not been optimized yet, please use this script as a template
     to use Kojak. Please note the different approach for executing Percolator.
-    
+
     Note:
 
         Please note that Kojak has to installed manually at the resources folder
@@ -39,37 +40,37 @@ def main():
     '''
 
     params = {
-        'database' : sys.argv[1],
-        'ftp_url'       : 'ftp.peptideatlas.org',
-        'ftp_login'         : 'PASS00269',
-        'ftp_password'      : 'FI4645a',
-        'ftp_include_ext'   : [
+        'database': sys.argv[1],
+        'ftp_url': 'ftp.peptideatlas.org',
+        'ftp_login': 'PASS00269',
+        'ftp_password': 'FI4645a',
+        'ftp_include_ext': [
             'JB_FASP_pH8_2-3_28122012.mzML',
         ],
-        'ftp_output_folder' : os.path.join(
+        'ftp_output_folder': os.path.join(
             os.pardir,
             'example_data',
             'simple_crosslink_search'
         ),
-        'cross_link_definition' : ['C C -2 test_if_kojak_runs'],
-        'mono_link_definition'  : ['C 32', 'C -34'],
-        'modifications' : [
+        'cross_link_definition': ['C C -2 test_if_kojak_runs'],
+        'mono_link_definition': ['C 32', 'C -34'],
+        'modifications': [
             'M,opt,any,Oxidation',        # Met oxidation
         ],
-        'precursor_min_mass'            : 500,
-        'precursor_max_mass'            : 8000,
-        'precursor_mass_tolerance_plus' : 15,
-        'precursor_mass_tolerance_minus' : 15,
-        'max_accounted_observed_peaks'  : 0, # i.e. all
-        'max_num_mods'                  : 2
+        'precursor_min_mass': 500,
+        'precursor_max_mass': 8000,
+        'precursor_mass_tolerance_plus': 15,
+        'precursor_mass_tolerance_minus': 15,
+        'max_accounted_observed_peaks': 0,  # i.e. all
+        'max_num_mods': 2
     }
 
     if os.path.exists(params['ftp_output_folder']) is False:
         os.mkdir(params['ftp_output_folder'])
 
     uc = ursgal.UController(
-        profile = 'LTQ XL low res' ,
-        params = params
+        profile='LTQ XL low res',
+        params=params
     )
     mzML_file = os.path.join(
         params['ftp_output_folder'],
@@ -77,24 +78,29 @@ def main():
     )
     if os.path.exists(mzML_file) is False:
         uc.fetch_file(
-            engine     = 'get_ftp_files_1_0_0'
+            engine='get_ftp_files_1_0_0'
         )
 
-    td_database_name = params['database'].replace('.fasta', '_target_decoy.fasta' )
+    td_database_name = params['database'].replace(
+        '.fasta', '_target_decoy.fasta')
     if os.path.exists(td_database_name) is False:
-        uc.generate_target_decoy(
-            input_files       = [ params['database'] ],
-            output_file_name = td_database_name,
+        uc.execute_misc_engine(
+            input_files=[params['database']],
+            engine='generate_target_decoy_1_0_0',
+            output_file_name=td_database_name,
         )
     uc.params['database'] = td_database_name
 
     engine = 'kojak_1_5_3'
 
-    raw_result = uc.execute_unode(
-        mzML_file,
-        engine,
-        force            = False,
-        dry_run          = False
+    mgf_file = uc.convert(
+        input_file=mzML_file,
+        engine='mzml2mgf',
+    )
+    raw_result = uc.search_mgf(
+        input_file=mgf_file,
+        engine=engine,
+        force=False,
     )
     for extension in uc.unodes[engine]['META_INFO']['all_extensions']:
         if 'perc' not in extension:

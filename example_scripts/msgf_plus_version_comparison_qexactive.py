@@ -23,7 +23,7 @@ def main(folder):
     required_example_file = 'B_D140314_SGSDSsample1_R01_MSG_T0.mzML.gz'
     full_path = os.path.join(folder, required_example_file)
 
-    if os.path.exists( full_path ) is False:
+    if os.path.exists(full_path) is False:
 
         print(
             '''
@@ -37,25 +37,24 @@ def main(folder):
         )
 
         ftp_get_params = {
-            'ftp_url'                : 'ftp.peptideatlas.org',
-            'ftp_login'              : 'PASS00589',
-            'ftp_password'           : 'WF6554orn',
-            'ftp_include_ext'        : [
+            'ftp_url': 'ftp.peptideatlas.org',
+            'ftp_login': 'PASS00589',
+            'ftp_password': 'WF6554orn',
+            'ftp_include_ext': [
                 required_example_file.replace(
                     '.mzML',
                     '.raw'
                 )
             ],
-            'ftp_output_folder' : folder,
+            'ftp_output_folder': folder,
         }
         uc = ursgal.UController(
-            params = ftp_get_params
+            params=ftp_get_params
         )
         uc.fetch_file(
-            engine     = 'get_ftp_files_1_0_0'
+            engine='get_ftp_files_1_0_0'
         )
-        exit()
-
+        sys.exit(1)
 
     engine_list = [
         'msgfplus_v9979',
@@ -63,66 +62,66 @@ def main(folder):
     ]
 
     params = {
-        'database' : os.path.join(
+        'database': os.path.join(
             os.pardir,
             'example_data',
             'hs_201303_qs_sip_target_decoy.fasta'
         ),
-        'modifications' : [ 'C,fix,any,Carbamidomethyl' ],
-        'csv_filter_rules':[
-            ['PEP'      , 'lte'    , 0.01]    ,
-            ['Is decoy' , 'equals' , 'false']
+        'modifications': ['C,fix,any,Carbamidomethyl'],
+        'csv_filter_rules': [
+            ['PEP', 'lte', 0.01],
+            ['Is decoy', 'equals', 'false']
         ],
-        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/hs_201303_qs_sip_target_decoy.fasta' ,
-        'http_output_folder' : os.path.join(
+        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/hs_201303_qs_sip_target_decoy.fasta',
+        'http_output_folder': os.path.join(
             os.pardir,
             'example_data'
         ),
-        'machine_offset_in_ppm' : -5e-6,
-        'remove_temporary_files' : False
+        'machine_offset_in_ppm': -5e-6,
+        'remove_temporary_files': False
     }
 
     uc = ursgal.UController(
-        profile = 'QExactive+' ,
-        params = params
+        profile='QExactive+',
+        params=params
     )
 
     if os.path.exists(params['database']) is False:
         uc.fetch_file(
-            engine     = 'get_http_files_1_0_0'
+            engine='get_http_files_1_0_0'
         )
 
-    mzML_file = os.path.join(folder,required_example_file)
+    mzML_file = os.path.join(folder, required_example_file)
 
     filtered_files_list = []
     for engine in engine_list:
 
         unified_result_file = uc.search(
-            input_file = mzML_file,
-            engine     = engine,
-            force      = False,
+            input_file=mzML_file,
+            engine=engine,
+            force=False,
         )
 
         validated_file = uc.validate(
-            input_file = unified_result_file,
-            engine     = 'percolator_2_08',
+            input_file=unified_result_file,
+            engine='percolator_2_08',
         )
 
-        filtered_file = uc.filter_csv(
-            input_file = validated_file,
+        filtered_file = uc.execute_misc_engine(
+            input_file=validated_file,
+            engine='filter_csv_1_0_0',
         )
 
-        filtered_files_list.append( filtered_file )
+        filtered_files_list.append(filtered_file)
 
     uc.visualize(
-        input_files     = filtered_files_list,
-        engine          = 'venndiagram',
+        input_files=filtered_files_list,
+        engine='venndiagram',
     )
     return
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print(main.__doc__)
-        exit()
+        sys.exit(1)
     main(sys.argv[1])
-

@@ -2,7 +2,7 @@
 import ursgal
 import os
 import csv
-
+import sys
 
 class novor_1_1beta( ursgal.UNode ):
     """
@@ -18,14 +18,14 @@ class novor_1_1beta( ursgal.UNode ):
         'version'            : '1.1beta',
         'release_date'       : '2015-6-30',
         'engine_type' : {
-            'denovo_engine' : True,
+            'de_novo_search_engine' : True,
         },
         'input_extensions'   : ['.mgf'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'in_development'     : False,
         'create_own_folder'  : True,
         'include_in_git'     : False,
+        'distributable'      : False,
         'utranslation_style' : 'novor_style_1',
         'engine' : {
             'linux' : {
@@ -64,7 +64,7 @@ class novor_1_1beta( ursgal.UNode ):
                 dict: self.params
         '''
 
-        self.params['mgf_input_file'] = os.path.join(
+        self.params['translations']['mgf_input_file'] = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
@@ -269,13 +269,19 @@ class novor_1_1beta( ursgal.UNode ):
                         new_line_dict['Modifications'] = ''
                     continue
                 new_line_dict[ header_translations[k] ] = v.strip()
-            new_line_dict['Raw data location'] = self.params['mgf_input_file']
+            new_line_dict['Raw data location'] = self.params['translations']['mgf_input_file']
             new_line_dict_list.append(new_line_dict)
 
         new_result_file = open( self.params['translations']['output_file_incl_path'], 'w')
+        csv_kwargs = {}
+        if sys.platform == 'win32':
+            csv_kwargs['lineterminator'] = '\n'
+        else:
+            csv_kwargs['lineterminator'] = '\r\n'
         csv_dict_writer_object = csv.DictWriter(
             new_result_file,
-            fieldnames = translated_headers
+            fieldnames = translated_headers,
+            **csv_kwargs
         )
         csv_dict_writer_object.writeheader()
         for line_dict in new_line_dict_list:

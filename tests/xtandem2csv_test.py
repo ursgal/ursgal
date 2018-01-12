@@ -64,7 +64,7 @@ def unify_xtandem( test_dict, expected_dict ):
         'Spectrum ID',
         'Spectrum Title',
         'Retention Time (s)',
-        'rank',
+        'Rank',
         'Calc m/z',
         'Exp m/z',
         'Charge',
@@ -77,7 +77,10 @@ def unify_xtandem( test_dict, expected_dict ):
         ]:
         test_value = test_dict[key]
         expected_value = expected_dict[key]
-        assert test_value == expected_value
+        assert test_value == expected_value, print(
+            test_value,
+            expected_value
+        )
 
 if __name__ == '__main__':
     print(__doc__)

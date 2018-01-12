@@ -30,14 +30,12 @@ class compomics_utilities_4_11_5( ursgal.UNode ):
         'version'            : '4.11.5',
         'release_date'       : None,
         'engine_type' : {
-            'search_engine' : False,
-            'converter'     : True
+            'misc_engine'     : True
         },
         'output_suffix'     : 'compomics',
         'input_extensions'  : ['.txt', ],
         'output_extensions' : ['.csv', ],
-        'cannot_distribute' : True,
-        'input_multi_file'   : False,
+        'distributable' : False,
         'include_in_git'    : False,
         'in_development'    : False,
         'utranslation_style'    : 'compomics_utilities_style_1',
@@ -164,7 +162,7 @@ class compomics_utilities_4_11_5( ursgal.UNode ):
                                     [ WARNING ] Please adjust upeptide_mapper accordingly
                                     '''.format(aa_to_replace)
                                 )
-                                exit()
+                                sys.exit(1)
                     if appended is False:
                         peptides.add(line_dict['Sequence'])
                 for peptide in peptides:
@@ -180,7 +178,7 @@ class compomics_utilities_4_11_5( ursgal.UNode ):
         # read database and get full name and also the pre and post aa
         short_2_long_name_mapping = {}
         fasta_id_dict = {}
-        for fastaID, sequence in ursgal.ucore.parseFasta( open( self.params['translations']['database'], 'r' ) ):
+        for fastaID, sequence in ursgal.ucore.parse_fasta( open( self.params['translations']['database'], 'r' ) ):
             fasta_id_dict[fastaID] = sequence
             try:
                 short_2_long_name_mapping[ fastaID.split('|')[1] ] = fastaID # uniprot style

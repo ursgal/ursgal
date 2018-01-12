@@ -16,7 +16,7 @@ import pickle
 import csv
 import ursgal
 import pprint
-# import ursgal.ursgal_kb
+# import ursgal.ukb
 import re
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
@@ -30,7 +30,7 @@ if sys.platform != 'win32':
     csv.field_size_limit(sys.maxsize)
 
 
-DIFFERENCE_14N_15N = ursgal.ursgal_kb.DIFFERENCE_14N_15N
+DIFFERENCE_14N_15N = ursgal.ukb.DIFFERENCE_14N_15N
 
 
 def main(input_file=None, output_file=None, scan_rt_lookup=None,
@@ -116,7 +116,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     else:
         params['label'] = '14N'
     # print(use15N)
-    # exit()
+    # sys.exit(1)
     # aa_exception_dict = params['translations']['aa_exception_dict']
     n_term_replacement = {
         'Ammonia-loss' : None,
@@ -130,6 +130,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     # modification masses are rounded to allow matching to unimod
     no_decimals = params['translations']['rounded_mass_decimals']
+    if 'pipi' in search_engine.lower():
+        no_decimals = 1
+    if 'moda' in search_engine.lower():
+        no_decimals = 0
     mass_format_string = '{{0:3.{0}f}}'.format(no_decimals)
 
     # mod pattern
@@ -176,7 +180,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             for modname in mod_dict.keys():
                 aminoacids_2_check |= mod_dict[modname]['aa']
             additional_15N_modifications = []
-            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+            for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 if aminoacid not in aminoacids_2_check:
                     continue
                 if '_15N_{0}'.format(aminoacid) in mod_dict.keys():
@@ -185,7 +189,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         New mod_name already present in mod_dict'
                         This should never happen'''
                     )
-                    exit()
+                    sys.exit(1)
                 mod_dict['_15N_{0}'.format(aminoacid)] = {
                     'mass' : N15_Diff,
                     'aa' : set([aminoacid]),
@@ -224,7 +228,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     mass_to_mod_combo[rounded_mass] = set()
                 mass_to_mod_combo[ rounded_mass ].add( name_combo )
         # print(mass_to_mod_combo.keys())
-        # exit()
+        # sys.exit(1)
         #msfragger mod merge block end
         ##############################
 
@@ -244,20 +248,27 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         'xtandem',
         'msfragger',
     ]
+    open_mod_search_engines = [
+        'pipi',
+        'moda',
+    ]
     de_novo = False
     database_search = False
+    open_mod_search = False
     for de_novo_engine in de_novo_engines:
         if de_novo_engine in search_engine.lower():
             de_novo = True
     for db_se in database_search_engines:
         if db_se in search_engine.lower():
             database_search = True
-
+    for om_se in open_mod_search_engines:
+        if om_se in search_engine.lower():
+            open_mod_search = True
 
     if params['translations']['enzyme'] != 'nonspecific':
         allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')
     else:
-        allowed_aa    = ''.join( list( ursgal.ursgal_kb.NITROGENS.keys() ) )
+        allowed_aa    = ''.join( list( ursgal.ukb.NITROGENS.keys() ) )
         cleavage_site = 'C'
         inhibitor_aa  = ''
     allowed_aa += '-'
@@ -318,6 +329,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         new_fieldnames = [
             'uCalc m/z',
             'Accuracy (ppm)',
+            'Mass Difference',
             'Protein ID',
             'Sequence Start',
             'Sequence Stop',
@@ -546,7 +558,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                     )
                                     # pprint.pprint(explainable_combos)
                                     # ms_fragger_reformatted_mods += sorted(explainable_combos)[0]
-                                    # exit()
+                                    # sys.exit(1)
                                 elif len(explainable_combos) == 1:
                                     ms_fragger_reformatted_mods += sorted(explainable_combos)[0]
                                 else:
@@ -568,7 +580,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         # print(line_dict['Modifications'])
                         # print(mass_to_mod_combo.keys())
                         # print(ms_fragger_reformatted_mods)
-                        # exit()
+                        # sys.exit(1)
                         line_dict['Modifications'] = ';'.join( ms_fragger_reformatted_mods )
 
                 ##################################################
@@ -617,6 +629,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             )
 
                 tmp_mods = []
+                tmp_mass_diff = []
                 for modification in line_dict['Modifications'].split(';'):
                     Nterm = False
                     Cterm = False
@@ -680,7 +693,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 )
                     else:
                         float_mod = float(mod)
-                        masses_2_test = [ float_mod ]
+                        masses_2_test = [float_mod]
                         if use15N:
                             substract_15N_diff = False
                             if aa in fixed_mods.keys() and 'msgfplus' in search_engine.lower() and pos != 0:
@@ -689,7 +702,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 # maximum 15N labeling is 3.988 Da (R)
                                 substract_15N_diff = True
                             if substract_15N_diff:
-                                masses_2_test.append( float_mod - ursgal.ursgal_kb.DICT_15N_DIFF[aa] )
+                                masses_2_test.append(float_mod - ursgal.ukb.DICT_15N_DIFF[aa])
                         # try:
                         #works always but returns empty list...
                         name_list = []
@@ -699,7 +712,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             if mass_buffer_key not in app_mass_to_name_list_buffer.keys():
                                 app_mass_to_name_list_buffer[mass_buffer_key] = ursgal.GlobalUnimodMapper.appMass2name_list(
                                     float(mass_buffer_key),
-                                    decimal_places = params['translations']['rounded_mass_decimals']
+                                    decimal_places = no_decimals
                                 )
                             name_list += app_mass_to_name_list_buffer[mass_buffer_key]
                         # print(name_list)
@@ -735,6 +748,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 mapped_mod = True
                                 skip_mod = True
                                 break
+                        if open_mod_search is True and mapped_mod is False:
+                            skip_mod = True
+                            tmp_mass_diff.append('{0}:{1}'.format(mod, pos))
+                            continue
                         assert mapped_mod is True, '''
                                 A mass was reported that does not map on any unimod or userdefined modification
                                 or the modified aminoacid is not the specified one
@@ -751,10 +768,22 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                     params['mods'],
                                     line_dict['Sequence']
                                 )
-                    if modification in tmp_mods or skip_mod is True:
+                    if skip_mod is True:
                         continue
+                    if modification in tmp_mods:
+                        if mod in n_term_replacement.keys() and pos == 1:
+                            if line_dict['Sequence'][0] in mod_dict[mod]['aa']:
+                                modification.replace(
+                                    '{0}:1'.format(mod),
+                                    '{0}:0'.format(mod)
+                                )
+                            else:
+                                continue
+                        else:
+                            continue
                     tmp_mods.append(modification)
-                line_dict_update['Modifications'] = ';'.join( tmp_mods )
+                line_dict_update['Modifications'] = ';'.join(tmp_mods)
+                line_dict_update['Mass Difference'] = ';'.join(tmp_mass_diff)
                 #
                 # ^^--------- REPLACED MODIFICATIONS! ---------------^
                 #
@@ -766,8 +795,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 if line_dict['Sequence'][0] in aa:
                                     continue
                         line_dict_update['Modifications'] = line_dict_update['Modifications'].replace(
-                            '{0}:1'.format( unimod_name ),
-                            '{0}:0'.format( unimod_name )
+                            '{0}:1'.format(unimod_name),
+                            '{0}:0'.format(unimod_name)
                             )
                 ##########################
                 # Modification block end #
@@ -789,14 +818,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             # other way to do it...
                             # pos_of_split_point = re.search( ':\d*\Z', e )
                             # pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
-                            for occ, match in enumerate( mod_pattern.finditer( e )):
+                            for occ, match in enumerate(mod_pattern.finditer(e)):
                                 mod = e[:match.start()]
                                 mod_pos = e[match.start()+1:]
                                 # mod, pos = e.split(':')
                                 m = (int(mod_pos), mod)
                                 if m not in tmp:
-                                    tmp.append( m )
-                                    positions.add( int(mod_pos))
+                                    tmp.append(m)
+                                    positions.add(int(mod_pos))
                     tmp.sort()
                     line_dict_update['Modifications'] = ';'.join(
                         [
@@ -805,7 +834,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     )
                     if len(tmp) != len(positions):
                         print(
-                            '[ WARNING ] {Sequence}#{Modifications} will be skipped, because it contains to mods at the same position!'.format(
+                            '[ WARNING ] {Sequence}#{Modifications} will be skipped, because it contains two mods at the same position!'.format(
                                 **line_dict_update
                             )
                         )
@@ -891,7 +920,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         )
                     # pprint.pprint(line_dict)
                     # print(sorted_upeptide_maps)
-                    # exit()
+                    # sys.exit(1)
                     if sorted_upeptide_maps == []:
                         print('''
 [ WARNING ] The peptide {0} could not be mapped to the
@@ -1032,7 +1061,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     non_enzymatic_peps
                 )
             )
-    # exit()
+    # sys.exit(1)
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
     if psm_counter != Counter():
         if max(psm_counter.values()) > 1:
@@ -1132,7 +1161,7 @@ def merge_duplicate_psm_rows(unified_csv_path, psm_counter, psm_defining_colname
 if __name__ == '__main__':
     if len(sys.argv) < 7:
         print(__doc__)
-        exit()
+        sys.exit(1)
 
     scan_rt_lookup = pickle.load(open(sys.argv[3], 'rb'))
 

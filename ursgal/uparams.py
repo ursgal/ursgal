@@ -30,7 +30,6 @@ ursgal_params = {
             'none_val': '{0}',
             'multiple_line': False,
             'unit': 'psms',
-
         },
         'default_value': '{0:.3f}',
         'description': """Defines the standard format string when
@@ -59,7 +58,6 @@ ursgal_params = {
             'updownval': 0.001,
             'unit': 'abundance',
             'f-point': 1e-02
-
         },
         'default_value': 1e-3,
         'description': """ Set minmal abundance for elements used when building Isotopoluge Library """,
@@ -87,7 +85,6 @@ ursgal_params = {
             'updownval': 0.01,
             'unit': 'a.u.',
             'f-point': 1e-02
-
         },
         'default_value': 0.01,
         'description': """ Minimum required intensity for pyqms peak matching """,
@@ -115,7 +112,6 @@ ursgal_params = {
             'updownval': 0.1,
             'unit': 'a.u.',
             'f-point': 1e-02
-
         },
         'default_value': 0.5,
         'description': """ Minimum percentile overlap for matching labeled peaks """,
@@ -142,7 +138,6 @@ ursgal_params = {
             'min': 0,
             'updownval': 1,
             'unit': '',
-
         },
         'default_value': 2,
         'description': """ Min number of matched isotopologues for pyqms to consider for quantification """,
@@ -170,7 +165,6 @@ ursgal_params = {
             'updownval': 1e4,
             'unit': 'a.u.',
             'f-point': 0.1
-
         },
         'default_value': 1e5,
         'description': """ Tranform intensity by this factor for quantification """,
@@ -307,7 +301,6 @@ ursgal_params = {
             'updownval': 0.01,
             'unit': 'a.u.',
             'f-point': 1e-02
-
         },
         'default_value': 0.2,
         'description': """ rel Intensity Error """,
@@ -335,7 +328,6 @@ ursgal_params = {
             'updownval': 100,
             'unit': 'a.u.',
             'f-point': 1e-01
-
         },
         'default_value': 1000.0,
         'description': """ Float to int conversion precision """,
@@ -362,7 +354,6 @@ ursgal_params = {
             'min': 0,
             'updownval': 1,
             'unit': 'a.u',
-
         },
         'default_value': 20,
         'description': ''' Max number of molecules in one matching bin. ''',
@@ -384,19 +375,12 @@ ursgal_params = {
         ],
         'uvalue_option': {
             'none_val': [None],
-            'multiple_line': {
-                "AA" : False
-            },
-            'max': 10000,
-            'min': 0,
-            'updownval': 1,
-            'unit': 'psms',
-            'type_dict': {'AA' : 'str'},
-            'title_list': ['AA'],
+            'multiple_line': False,
+            'item_type': 'str',
+            'item_title': 'aminoacid',
             'custom_val_max': 20,
             'custom_type' : {
             }
-
         },
         'default_value': None,
         'description': ''' AA which are always SILAC labeled and not considered for calculating partially labeling percentile ''',
@@ -423,7 +407,6 @@ ursgal_params = {
             'min': 0,
             'updownval': 1,
             'unit': 'psms',
-
         },
         'default_value': True,
         'description': ''' Build index for faster access ''',
@@ -547,17 +530,17 @@ ursgal_params = {
             'pyqms_1_0_0',
         ],
         'default_value': None,
-        'description':  ''' Molecules to quantify. Can be either list of string or csv file ''',
+        'description':  ''' Molecules to quantify. Can be either a list of strings or a csv file ''',
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'evidences'
         },
         'uvalue_option': {
             'none_val': [None],
-            'multiple_line': {'path': False},
-            'title_list': ['path'],
+            'item_title': 'path',
             'custom_val_max': 100000,
-            'type_dict': {'path': 'str'},
+            'item_type': 'str',
+            'multiple_line' : False,
             'custom_type': {}
         },
         'utag': [
@@ -603,20 +586,18 @@ ursgal_params = {
         ],
         'uvalue_option': {
             'none_val': [],
-            'dict_type': {'str': 'str'},
-            'multiple_line': False,
-            'title_list': [],
+            'item_type': 'str',
+            'item_title': 'molecule',
             'custom_val_max': 100000,
+            'multiple_line' : False,
             'custom_type': {
                 'str': {
                     'multiple_line': False,
                 },
             },
-            'type_dict': {
-            },
         },
         'default_value': None,
-        'description':  ''' Molecules to quantify. Can be either list of string or csv file ''',
+        'description':  ''' Molecules to quantify. Can be either a list of strings or a csv file ''',
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'molecules',
@@ -654,10 +635,11 @@ ursgal_params = {
         },
         'uvalue_type': "float",
     },
-    'quant_ms_level': {
-        'edit_version' : 1.00,
+    'ms_level': {
+        'edit_version' : 1.01,
         'available_in_unode': [
-            'pyqms_1_0_0'
+            'pyqms_1_0_0',
+            'mzml2mgf_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -667,14 +649,15 @@ ursgal_params = {
             'updownval': 1,
             'unit': 'ms_level'
         },
-        'default_value': 1,
-        'description': 'ms level on which the evidences should be matched',
+        'default_value': 2,
+        'description': 'MS level on which that is taken into account, e.g. for spectrum extraction, matching of evidences, etc.',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'ms_level'
+            'pyqms_style_1': 'ms_level',
+            'mzml2mgf_style_1' : 'ms_level',
         },
         'utag': [
-            'quantitation'
+            'Spectrum'
         ],
         'uvalue_translation': {
         },
@@ -692,31 +675,35 @@ ursgal_params = {
             'pyqms_style_1' : 'label_percentile',
         },
         'utag' : [
-            'quantitation',
+            'label',
         ],
         'uvalue_option' : {
-            'f-point' : {
-                'enrichment percentage': 0.001
-            },
-            'max' : {
-                'enrichment percentage':1
-            },
-            'min' : {
-                'enrichment percentage':0
-            },
-            'none_val' : None,
-            'custom_val_max': 1000,
-            'type_dict': {
-                'enrichment percentage' : 'float'
-            },
-            'title_list': ['enrichment percentage'],
-            'unit' : {
-                'enrichment percentage' : '%'
-            },
-            'updownval' : {
-                'enrichment percentage': 0.001
-            },
-            'custom_type': {}
+            'none_val' : [],
+            'item_title' : 'label_percentile',
+            'item_type' : 'float',
+            'custom_val_max' : 0,
+            # 'f-point' : {
+            #     'enrichment percentage': 0.001
+            # },
+            # 'max' : {
+            #     'enrichment percentage':1
+            # },
+            # 'min' : {
+            #     'enrichment percentage':0
+            # },
+            # 'none_val' : None,
+            # 'custom_val_max': 1000,
+            # 'type_dict': {
+            #     'enrichment percentage' : 'float'
+            # },
+            # 'title_list': ['enrichment percentage'],
+            # 'unit' : {
+            #     'enrichment percentage' : '%'
+            # },
+            # 'updownval' : {
+            #     'enrichment percentage': 0.001
+            # },
+            # 'custom_type': {}
         },
         'uvalue_translation' : {
         },
@@ -741,21 +728,43 @@ ursgal_params = {
             'quantitation',
         ],
         'uvalue_option' : {
-            'multiple_line' : False,
+            'item_titles':  {
+                'Isotope' : 'Enrichment',
+            },
+            'value_types': {
+                'Isotope' : 'float',
+            },
+            'multiple_line' : {
+                'Isotope' : False,
+            },
             'none_val' : None,
-            'unit' : 'psms',
+            'max' : {
+                'Isotope' : 1.0,
+            },
+            'min' : {
+                'Isotope' : 0.0,
+            },
+            'unit' : {
+                'Isotope' : 'psms',
+            },
+            'f-point' : {
+                'Isotope' : 0.1,
+            },
+            'updownval' : {
+                'Isotope' : 0.1,
+            },
             'custom_val_max' : 3,
             'custom_type' : {
                 'str' : {'multiple_line': False},
             },
-            'dict_type': {
-                '13C' : {'str' : 'float'},
-                '15N' : {'str' : 'float'},
-                '2H' : {'str' : 'float'},
-            },
-            'dict_title' : {
-                'Isotope' : 'Enrichment'
-            },
+            # 'dict_type': {
+            #     '13C' : {'str' : 'float'},
+            #     '15N' : {'str' : 'float'},
+            #     '2H' : {'str' : 'float'},
+            # },
+            # 'dict_title' : {
+            #     'Isotope' : 'Enrichment'
+            # },
         },
         'uvalue_translation' : {
         },
@@ -780,10 +789,10 @@ ursgal_params = {
                 'str' : {'multiple_line': False},
             },
             'custom_val_max' : 100000,
-            'dict_title' : {
+            'item_titles' : {
                 'formula' : 'trivial',
             },
-            'dict_type' : {
+            'value_types' : {
                 'str' : 'str',
             },
             'multiple_line' : False,
@@ -822,276 +831,6 @@ ursgal_params = {
         },
         'uvalue_type' : "float",
     },
-    '_extensions' : {
-        'edit_version'   : 1.00,
-        'available_in_unode' : [
-        ],
-        'triggers_rerun' : False,
-        'ukey_translation' : {
-        },
-        'utag' : [
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type'    : 'dict',
-        'uvalue_option' : {
-            'dict_title' : {
-                'extension' : {
-                    'tag' : 'cont',
-                },
-            },
-            'dict_type' : {
-                'short_name'     : 'str',
-                'long_name'      : 'str',
-                'same_extension' : 'list',
-                'description'    : 'str',
-            },
-            'multiple_line' : {
-                'short_name'     : False,
-                'long_name'      : False,
-                'description'    : False,
-            },
-            'title_list' : {
-                'same_extension' : [],
-            },
-            'type_dict' : {
-            },
-            'custom_val_max' : 0,
-        },
-        'default_value' : {
-            '.csv' : {
-                'short_name'     : 'CSV',
-                'long_name'      : 'CSV (Comma Delimited)',
-                'same_extension' : [],
-                'description'    : \
-                    'The comma-separated values (CSV) file format is a '\
-                    'tabular data format that has fields separated by the '\
-                    'comma character and quoted by the double quote '\
-                    'character.\n'\
-                    '(DataTypes.net; https://datatypes.net)',
-            },
-            '.den' : {
-                'short_name'     : 'DEN',
-                'long_name'      : 'DEN (XMVB Density Data)',
-                'same_extension' : [],
-                'description'    : \
-                    'DEN file is a XMVB Density Data. Xiamen Valence Bond '\
-                    '(XMVB) is a quantum chemistry program for performing '\
-                    'electronic structure calculations based on the '\
-                    'non-orthogonal Valence Bond methods.\n'\
-                    '(DataTypes.net; https://datatypes.net)',
-            },
-            '.dta' : {
-                'short_name'     : 'DTA',
-                'long_name'      : 'DTA (Stata Data)',
-                'same_extension' : [],
-                'description'    : \
-                    'DTA file is a Stata Data File. Stata is a '\
-                    'general-purpose statistical software package created in '\
-                    '1985 by StataCorp. It is used by many businesses and '\
-                    'academic institutions around the world.\n'\
-                    '(DataTypes.net; https://datatypes.net)',
-            },
-            '.dta.txt' : {
-                'short_name'     : 'DTA_Text',
-                'long_name'      : 'DTA_Text (Text Fromat of DTA)',
-                'same_extension' : [],
-                'description'    : \
-                    'Text format of DTA format.',
-            },
-            '.fasta' : {
-                'short_name'     : 'FASTA',
-                'long_name'      : 'FASTA (Sequence Alignment)',
-                'same_extension' : ['.fa', '.mpfa', '.fna', '.fsa', '.fas'],
-                'description'    : \
-                    'FASTA file is a FASTA Sequence. In bioinformatics, FASTA '\
-                    'format is a text-based format for representing either '\
-                    'nucleotide sequences or peptide sequences, in which '\
-                    'nucleotides or amino acids are represented using '\
-                    'single-letter codes.\n'\
-                    '(DataTypes.net; https://datatypes.net)',
-            },
-            '.gaml' : {
-                'short_name'     : 'GAML',
-                'long_name'      : 'GAML (GAML spectra)',
-                'same_extension' : [],
-                'description'    : \
-                    'GAML spectra',
-            },
-            '.kojak.txt' : {
-                'short_name'     : 'Kojak',
-                'long_name'      : 'Kojak (Kojak result)',
-                'same_extension' : [],
-                'description'    : \
-                    'Kojak result',
-            },
-            '.mgf' : {
-                'short_name'     : 'MGF',
-                'long_name'      : 'MGF (Mascot Generic Format)',
-                'same_extension' : [],
-                'description'    : \
-                    'The Mascot generic format for a data file submitted to Mascot',
-            },
-            '.ms2' : {
-                'short_name'     : 'MS2',
-                'long_name'      : 'MS2 (MS data)',
-                'same_extension' : [],
-                'description'    : \
-                    'Mass spectrometry data format',
-            },
-            '.mzData' : {
-                'short_name'     : 'mzData',
-                'long_name'      : 'mzData (MS data)',
-                'same_extension' : [],
-                'description'    : \
-                    'This format was deprecated, and was replaced by mzML',
-            },
-            '.mzid' : {
-                'short_name'     : 'mzid',
-                'long_name'      : 'mzid (MS data)',
-                'same_extension' : [],
-                'description'    : \
-                    'Mass spectrometry data format',
-            },
-            '.mzid.gz' : {
-                'short_name'     : 'mzid.gz',
-                'long_name'      : 'mzid.gz (Compressed mzid)',
-                'same_extension' : [],
-                'description'    : \
-                    'Compressed mzid',
-            },
-            '.mzML' : {
-                'short_name'     : 'mzML',
-                'long_name'      : 'mzML (MS data)',
-                'same_extension' : [],
-                'description'    : \
-                    'Mass spectrometry data format',
-            },
-            '.mzML.gz' : {
-                'short_name'     : 'mzML',
-                'long_name'      : 'mzML (MS data)',
-                'same_extension' : [],
-                'description'    : \
-                    'Compressed mzML',
-            },
-            '.mzXML' : {
-                'short_name'     : 'mzXML',
-                'long_name'      : 'mzXML (MS data)',
-                'same_extension' : [],
-                'description'    : \
-                    'This format was replaced by mzML',
-            },
-            '.pep.xml' : {
-                'short_name'     : 'pep.xml',
-                'long_name'      : 'pep.xml (Kojak result)',
-                'same_extension' : [],
-                'description'    : \
-                    'Kojak result',
-            },
-            '.perc.inter.txt' : {
-                'short_name'     : 'perc.inter.txt',
-                'long_name'      : 'perc.inter.txt (Kojak result)',
-                'same_extension' : [],
-                'description'    : \
-                    'Kojak result',
-            },
-            '.perc.intra.txt' : {
-                'short_name'     : 'perc.intra.txt',
-                'long_name'      : 'perc.intra.txt (Kojak result)',
-                'same_extension' : [],
-                'description'    : \
-                    'Kojak result',
-            },
-            '.perc.loop.txt' : {
-                'short_name'     : 'perc.loop.txt',
-                'long_name'      : 'perc.loop.txt (Kojak result)',
-                'same_extension' : [],
-                'description'    : \
-                    'Kojak result',
-            },
-            '.perc.single.txt' : {
-                'short_name'     : 'perc.single.txt',
-                'long_name'      : 'perc.single.txt (Kojak result)',
-                'same_extension' : [],
-                'description'    : \
-                    'Kojak result',
-            },
-            '.pkl' : {
-                'short_name'     : 'PKL',
-                'long_name'      : 'PKL (pickle)',
-                'same_extension' : [],
-                'description'    : \
-                    'PKL file is a file created by the Python pickle module',
-            },
-            '.raw' : {
-                'short_name'     : 'RAW',
-                'long_name'      : 'RAW (ThermoFisher RAW format)',
-                'same_extension' : [],
-                'description'    : \
-                    'ThermoFisher RAW format',
-            },
-            '.ssl' : {
-                'short_name'     : 'SSL',
-                'long_name'      : 'SSL (Spectrum Sequence List)',
-                'same_extension' : [],
-                'description'    : \
-                    'Generic tab-delimited text file format supported by BiblioSpec',
-            },
-            '.svg' : {
-                'short_name'     : 'SVG',
-                'long_name'      : 'SVG (Scalable Vector Graphic)',
-                'same_extension' : [],
-                'description'    : \
-                    'SVG file is a Scalable Vector Graphic. SVG is a language '\
-                    'for describing two-dimensional graphics and graphical '\
-                    'applications in XML.\n'\
-                    '(DataTypes.net; https://datatypes.net)',
-            },
-            '.tsv' : {
-                'short_name'     : 'TSV',
-                'long_name'      : 'TSV (Tab-Separated Values document)',
-                'same_extension' : [],
-                'description'    : \
-                    'TSV is a Tab-Separated Values document. It is very '\
-                    'simple textual data format which allows tabular data to '\
-                    'be exhanged between applications that use different '\
-                    'internal data formats.\n'\
-                    '(DataTypes.net; https://datatypes.net)',
-            },
-            '.txt' : {
-                'short_name'     : 'Text',
-                'long_name'      : 'Text (General text format)',
-                'same_extension' : ['.text'],
-                'description'    : \
-                    'TXT file is a plain text. Plain text is textual '\
-                    'material, usually in a disk file, that is (largely) '\
-                    'unformatted.\n'\
-                    '(DataTypes.net; https://datatypes.net)',
-            },
-            '.xml' : {
-                'short_name'     : 'XML',
-                'long_name'      : 'XML (Extensible Markup Language document)',
-                'same_extension' : [],
-                'description'    : \
-                    'XML file is an Extensible Markup Language document. XML '\
-                    'is a simple, very flexible text format derived from SGML '\
-                    '(ISO 8879). Originally designed to meet the challenges '\
-                    'of large-scale electronic publishing, XML is also '\
-                    'playing an increasingly important role in the exchange '\
-                    'of a wide variety of data on the Web and elsewhere.\n'\
-                    '(DataTypes.net; https://datatypes.net)',
-            },
-            '.xml.gz' : {
-                'short_name'     : 'XML.gz',
-                'long_name'      : 'XML.gz (Compressed mzid)',
-                'same_extension' : [],
-                'description'    : \
-                    'Compressed xml',
-            },
-        },
-        'description' : \
-            'information of extentions',
-    },
     '-xmx' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
@@ -1103,13 +842,15 @@ ursgal_params = {
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
             'mzidentml_lib_1_7',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
             'msgfplus_style_1'  : '-Xmx',
             'mzidentml_style_1' : '-Xmx',
             'msfragger_style_1' : '-Xmx',
+            'pipi_style_1'      : '-Xmx',
         },
         'utag' : [
             'hardware_resources',
@@ -1165,28 +906,31 @@ ursgal_params = {
         },
         'uvalue_type'    : 'dict',
         'uvalue_option' : {
-            'none_val' : None,
-            'dict_title' : {
-                'Data Set' : {
-                    'Format' : 'Unusual AA'
+            'none_val' : {},
+            'item_titles' : {
+                'amino_acid' : {
+                    'original_aa' : 'aa_list',
+                    'unimod_name' : 'name',
+                    # 'unimod_name_with_cam' : 'name',
                 }
             },
-            'dict_type' : {
-                'original_aa'          : 'str',
+            'value_types' : {
+                'amino_acid'           : 'dict',
+                'original_aa'          : 'list',
                 'unimod_name'          : 'str',
-                'unimod_name_with_cam' : 'str',
+                # 'unimod_name_with_cam' : 'str',
             },
             'multiple_line' : {
-                'original_aa'          : False,
+                # 'original_aa'          : False,
                 'unimod_name'          : False,
-                'unimod_name_with_cam' : False,
+            #     # 'unimod_name_with_cam' : False,
             },
-            'custom_val_max' : 10000,
-            'custom_type' : {
-                'str' : {
-                    'multiple_line' : False,
-                },
-            },
+            # 'custom_type' : {
+            #     'str' : {
+            #         'multiple_line' : False,
+            #     },
+            # },
+            'custom_val_max' : 0,
         },
     },
     'accept_conflicting_psms' : {
@@ -1295,12 +1039,14 @@ ursgal_params = {
             'moda_v1_51',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1'    : 'base_mz',
             'omssa_style_1'   : 'base_mz',
             'pepnovo_style_1' : 'base_mz',
+            'pipi_style_1'    : 'base_mz',
         },
         'utag' : [
             'fragment',
@@ -1331,11 +1077,14 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
             'myrimatch_style_1' : 'NumBatches',
             'xtandem_style_1'   : 'spectrum, sequence batch size',
+            'msamanda_style_1'  : 'LoadedProteinsAtOnce',
         },
         'utag' : [
             'hardware_resources',
@@ -1355,8 +1104,35 @@ ursgal_params = {
             'sets the number of sequences loaded in as a batch from the '\
             'database file',
     },
-    'bigger_scores_better' : {
+    'batch_size_spectra' : {
         'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
+        ],
+        'triggers_rerun' : False,
+        'ukey_translation' : {
+            'msamanda_style_1'  : 'LoadedSpectraAtOnce',
+        },
+        'utag' : [
+            'hardware_resources',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type'    : 'int',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 10000000,
+            'min'       : 0,
+            'updownval' : 10000,
+            'unit'      : ''
+        },
+        'default_value'  : 2000,
+        'description' : \
+            'sets the number of spectra loaded into memory as a batch',
+    },
+    'bigger_scores_better' : {
+        'edit_version'   : 1.01,
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
@@ -1385,6 +1161,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : True,
                 'msamanda_1_0_0_7503'  : True,
                 'msamanda_1_0_0_7504'  : True,
+                'msamanda_2_0_0_9706'  : True,
+                'msamanda_2_0_0_9695'  : True,
                 'msgfplus_v2016_09_16' : False,
                 'msgfplus_v2017_01_27' : False,
                 'msgfplus_v9979'       : False,
@@ -1398,7 +1176,9 @@ ursgal_params = {
                 'xtandem_vengeance' : True,
                 'xtandem_alanine' : True,
                 'msfragger_20170103' : True,
-                'mascot_x_x_x'  : True
+                'mascot_x_x_x'  : True,
+                'pipi_1_3_0' : True,
+                'moda_v1_51' : True,
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1408,6 +1188,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : True,
                 'msamanda_1_0_0_7503'  : True,
                 'msamanda_1_0_0_7504'  : True,
+                'msamanda_2_0_0_9706'  : True,
+                'msamanda_2_0_0_9695'  : True,
                 'msgfplus_v2016_09_16' : False,
                 'msgfplus_v2017_01_27' : False,
                 'msgfplus_v9979'       : False,
@@ -1421,8 +1203,9 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
-                'mascot_x_x_x'  : True
-
+                'mascot_x_x_x'  : True,
+                'pipi_1_3_0' : True,
+                'moda_v1_51' : True,
             },
             'qvality_style_1' : {
                 'None'                 : None,
@@ -1432,6 +1215,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : True,
                 'msamanda_1_0_0_7503'  : True,
                 'msamanda_1_0_0_7504'  : True,
+                'msamanda_2_0_0_9706'  : True,
+                'msamanda_2_0_0_9695'  : True,
                 'msgfplus_v2016_09_16' : False,
                 'msgfplus_v2017_01_27' : False,
                 'msgfplus_v9979'       : False,
@@ -1445,8 +1230,9 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
-                'mascot_x_x_x'  : True
-
+                'mascot_x_x_x'  : True,
+                'pipi_1_3_0' : True,
+                'moda_v1_51' : True,
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1456,6 +1242,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : True,
                 'msamanda_1_0_0_7503'  : True,
                 'msamanda_1_0_0_7504'  : True,
+                'msamanda_2_0_0_9706'  : True,
+                'msamanda_2_0_0_9695'  : True,
                 'msgfplus_v2016_09_16' : False,
                 'msgfplus_v2017_01_27' : False,
                 'msgfplus_v9979'       : False,
@@ -1469,8 +1257,9 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
-                'mascot_x_x_x'  : True
-
+                'mascot_x_x_x'  : True,
+                'pipi_1_3_0' : True,
+                'moda_v1_51' : True,
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1480,6 +1269,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : True,
                 'msamanda_1_0_0_7503'  : True,
                 'msamanda_1_0_0_7504'  : True,
+                'msamanda_2_0_0_9706'  : True,
+                'msamanda_2_0_0_9695'  : True,
                 'msgfplus_v2016_09_16' : False,
                 'msgfplus_v2017_01_27' : False,
                 'msgfplus_v9979'       : False,
@@ -1493,14 +1284,15 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
-                'mascot_x_x_x'  : True
+                'mascot_x_x_x'  : True,
+                'pipi_1_3_0' : True,
+                'moda_v1_51' : True,
             },
         },
         'uvalue_type'    : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type'   : 'radio_button',
+            'available_values'  : [
                 'None',
                 'msamanda_1_0_0_5242',
                 'msamanda_1_0_0_5243',
@@ -1508,6 +1300,9 @@ ursgal_params = {
                 'msamanda_1_0_0_6300',
                 'msamanda_1_0_0_7503',
                 'msamanda_1_0_0_7504',
+                'msamanda_2_0_0_9706',
+                'msamanda_2_0_0_9695',
+                'msfragger_20170103',
                 'msgfplus_v2016_09_16',
                 'msgfplus_v2017_01_27',
                 'msgfplus_v9979',
@@ -1696,7 +1491,7 @@ ursgal_params = {
         'uvalue_type' : "str",
     },
     'compress_raw_search_results_if_possible' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'ucontroller',
         ],
@@ -1708,6 +1503,36 @@ ursgal_params = {
             'file_handling',
         ],
         'uvalue_translation' : {
+            'ucontroller_style_1':{
+                'crux_2_1' : False,
+                'kojak_1_5_3' : False,
+                'mascot_x_x_x' : True,
+                'moda_v1_51' : False,
+                'msamanda_1_0_0_5242'  : False,
+                'msamanda_1_0_0_5243'  : False,
+                'msamanda_1_0_0_6299'  : False,
+                'msamanda_1_0_0_6300'  : False,
+                'msamanda_1_0_0_7503'  : False,
+                'msamanda_1_0_0_7504'  : False,
+                'msamanda_2_0_0_9706'  : False,
+                'msamanda_2_0_0_9695'  : False,
+                'msfragger_20170103'   : False,
+                'msgfplus_v2016_09_16' : True,
+                'msgfplus_v2017_01_27' : True,
+                'msgfplus_v9979' : True,
+                'myrimatch_2_1_138'    : True,
+                'myrimatch_2_2_140'    : True,
+                'novor_1_1beta' : False,
+                'omssa_2_1_9' : False,
+                'pepnovo_3_1' : False,
+                'pipi_1_3_0' : False,
+                'xtandem_alanine' : True,
+                'xtandem_cyclone_2010' : True,
+                'xtandem_jackhammer' : True,
+                'xtandem_piledriver' : True,
+                'xtandem_sledgehammer' : True,
+                'xtandem_vengeance' : True,
+            },
         },
         'uvalue_type' : 'bool',
         'uvalue_option' : {
@@ -1786,19 +1611,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-                'column_name_1',
-                'column_name_2',
-            ],
-            'type_dict' : {
-                'column_name_1' : 'str',
-                'column_name_2' : 'str',
-            },
-            'multiple_line' : {
-                'column_name_1' : False,
-                'column_name_2' : False,
-            },
+            'item_title' : 'column name',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -1876,6 +1692,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -1886,6 +1703,7 @@ ursgal_params = {
             'ucontroller_style_1' : 'cpus',
             'xtandem_style_1'     : 'spectrum, threads',
             'msfragger_style_1'   : 'num_threads',
+            'pipi_style_1'        : 'thread_num',
         },
         'utag' : [
             'hardware_resources',
@@ -1971,34 +1789,19 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'none_val' : [
-                '',
-                '',
-                ''
-            ],
-            'title_list' : [
-                'column name/csv fieldname',
-                'rule',
-                'compared value',
-            ],
-            'type_dict' : {
-                'column name/csv fieldname' : 'str',
-                'rule'                      : 'str',
-                'compared value'            : 'str',
-            },
-            'multiple_line' : {
-                'column name/csv fieldname' : False,
-                'rule'                      : False,
-                'compared value'            : False,
-            },
+            'none_val' : [],
+            'item_title' : 'filter rule',
+            'item_type' : 'list',
             'custom_val_max' : 0,
+            'multiple_line' : False,
         },
         'default_value' : None,
         'description' : \
-            'Rules are defined as list of tuples with the first tuple element '\
-            'as the column name/csv fieldname, the second tuple element the '\
-            'rule and the third tuple element the value which should be '\
-            'compared',
+            'Rules are defined as list of lists with three elements:\n'\
+            '1. the column name/csv fieldname,\n'\
+            '2. the rule,\n'\
+            '3.the value which should be compared\n'\
+            'e.g.: [\'Is decoy\', \'equals\', \'false\']'
     },
     'database' : {
         'edit_version' : 1.00,
@@ -2011,6 +1814,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -2027,6 +1832,7 @@ ursgal_params = {
             'upeptide_mapper_1_0_0',
             'compomics_utilities_4_11_5',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2040,7 +1846,8 @@ ursgal_params = {
             'xtandem_style_1'             : 'file URL',
             'upeptide_mapper_style_1'     : 'database',
             'compomics_utilities_style_1' : 'database',
-            'msfragger_style_1'           : 'database_name'
+            'msfragger_style_1'           : 'database_name',
+            'pipi_style_1'                : 'db',
 
         },
         'utag' : [
@@ -2054,7 +1861,7 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val'         : '',
             'multiple_line'    : False,
-            'input_extensions' : ['.fasta', '.fa'],
+            'input_extensions' : ['.fasta', '.fa']
         },
         'default_value' : None,
         'description' : \
@@ -2094,7 +1901,7 @@ ursgal_params = {
             'sequences from the fasta database are included in the search.',
     },
     'decoy_generation_mode' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
         ],
@@ -2109,16 +1916,15 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['reverse_protein', 'shuffle_peptide'],
+            'select_type'    : 'radio_button',
+            'available_values'  : ['reverse_protein', 'shuffle_peptide'],
             'custom_val_max' : 0,
         },
         'default_value' : 'shuffle_peptide',
         'description' : \
             'Decoy database: Creates a target decoy database based on '\
-            'shuffling of peptides or complete reversing the protein sequence '\
-            '(reverse_protein).',
+            'shuffling of peptides (shuffle_peptide) or complete reversing '\
+            'the protein sequence (reverse_protein).',
     },
     'decoy_tag' : {
         'edit_version' : 1.00,
@@ -2159,6 +1965,31 @@ ursgal_params = {
         'description' : \
             'decoy-specific tag to differentiate between targets and decoys',
     },
+    'deisotope_spec' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'msamanda_2_0_0_9695',
+            'msamanda_2_0_0_9706',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'msamanda_style_1' : 'PerformDeisotoping',
+        },
+        'utag' : [
+            'spectrum',
+        ],
+        'uvalue_translation' : {
+            'msamanda_style_1' : {
+                False : 'false',
+                True  : 'true',
+            },
+        },
+        'uvalue_type' : 'bool',
+        'uvalue_option' : {
+        },
+        'default_value' : True,
+        'description' : 'Perform Deisotoping for MS2 spectra',
+    },
     'del_from_params_before_json_dump' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -2176,16 +2007,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list'   : [
-                'del param',
-            ],
-            'type_dict' : {
-                'del param' : 'str',
-            },
-            'multiple_line' : {
-                'del param' : False,
-            },
+            'item_title'   : 'del param',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -2200,7 +2025,7 @@ ursgal_params = {
             '(to not overload the .json with unimportant informations)',
     },
     'denovo_model' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'pepnovo_3_1',
         ],
@@ -2218,9 +2043,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['cid_trypsin'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['cid_trypsin'],
             'custom_val_max' : 1,
         },
         'default_value' : 'cid_trypsin',
@@ -2265,6 +2089,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -2331,7 +2157,7 @@ ursgal_params = {
             'in their META_INFO (\'create_own_folder\' : True). True or False',
     },
     'enzyme' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'generate_target_decoy_1_0_0',
             'kojak_1_5_3',
@@ -2342,6 +2168,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -2359,6 +2187,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2374,7 +2203,8 @@ ursgal_params = {
             'percolator_style_1'            : 'enzyme',
             'unify_csv_style_1'             : 'enzyme',
             'xtandem_style_1'               : 'protein, cleavage site',
-            'msfragger_style_1'             : 'enzyme'
+            'msfragger_style_1'             : 'enzyme',
+            'pipi_style_1'                  : 'enzyme',
         },
         'utag' : [
             'database',
@@ -2620,12 +2450,19 @@ ursgal_params = {
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
             },
+            'pipi_style_1' : {
+                'aspn' : 'AspN;0;D;-',
+                'chymotrypsin' : 'Chymotrypsin;1;FMWY;P',
+                'gluc' : 'GluC;1;DE;P',
+                'lysc_p' : 'LysC;1;K;-',
+                'lysn' : 'LysN;0;K;-',
+                'trypsin' : 'Trypsin;1;KR;P',
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type'   : 'radio_button',
+            'available_values'  : [
                 'argc',
                 'aspn',
                 'aspn_gluc',
@@ -2718,31 +2555,8 @@ ursgal_params = {
             'Target PSMs with a lower FDR than this threshold will be used as '\
             'a positive training set for SVM post-processing',
     },
-    'filter_csv_converter_version' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'ucontroller',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'ucontroller_style_1' : 'filter_csv_converter_version',
-        },
-        'utag' : [
-            'converter_version',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'str',
-        'uvalue_option' : {
-            'none_val'      : None,
-            'multiple_line' : False,
-        },
-        'default_value' : 'filter_csv_1_0_0',
-        'description' : \
-            'filter csv converter version: version name',
-    },
     'forbidden_cterm_mods' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'xtandem_vengeance',
             'xtandem_alanine',
@@ -2759,11 +2573,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-            ],
-            'type_dict' : {
-            },
+            'item_title' : 'unimod name',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -2823,6 +2636,47 @@ ursgal_params = {
             'If set \'True\', engines are forced to re-run although no '\
             'node-related parameters have changed',
     },
+    'frag_clear_mz_range' : {
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'msfragger_20170103',
+            'pipi_1_3_0',
+        ],
+        'default_value' : [0.0, 0.0],
+        'description' :  ''' Removes peaks in this m/z range prior to matching. Given as list [min_clear_mz, max_clear_mz]. Useful for iTRAQ/TMT experiments, i.e. [0.0, 150.0]. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'msfragger_style_1' : 'clear_mz_range',
+            'pipi_style_1' : 'frag_clear_mz_range',
+        },
+        'utag' : [
+            'fragment',
+            'spectrum'
+        ],
+        'uvalue_option' : {
+            'none_val' : None,
+            'item_title' : 'mz value',
+            'item_type' : 'float',
+            'custom_val_max' : 2,
+            'max': 100000,
+            'min': 0,
+            'unit': 'm/z',
+            'updownval': 1,
+            'custom_type' : {
+                'int' : {
+                    'max'       : 10000,
+                    'min'       : 0,
+                    'updownval' : 1,
+                    'unit'      : '',
+                },
+            },
+            'custom_val_max' : 100000,
+            'f-point': 1e-01,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
+    },
     'frag_mass_tolerance' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -2833,6 +2687,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
@@ -2844,7 +2700,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2855,7 +2712,8 @@ ursgal_params = {
             'omssa_style_1'     : '-to',
             'pepnovo_style_1'   : '-fragment_tolerance',
             'xtandem_style_1'   : 'spectrum, fragment monoisotopic mass error',
-            'msfragger_style_1' : 'fragment_mass_tolerance'
+            'msfragger_style_1' : 'fragment_mass_tolerance',
+            'pipi_style_1'      : 'ms2_tolerance',
         },
         'utag' : [
             'fragment',
@@ -2875,7 +2733,7 @@ ursgal_params = {
             'Mass tolerance of measured and calculated fragment ions',
     },
     'frag_mass_tolerance_unit' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -2884,6 +2742,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
@@ -2895,7 +2755,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2906,7 +2767,8 @@ ursgal_params = {
             'omssa_style_1'     : 'frag_mass_tolerance_unit',
             'pepnovo_style_1'   : 'frag_mass_tolerance_unit',
             'xtandem_style_1'   : 'spectrum, fragment monoisotopic mass error units',
-            'msfragger_style_1' : 'fragment_mass_units'
+            'msfragger_style_1' : 'fragment_mass_units',
+            'pipi_style_1'      : 'frag_mass_tolerance_unit',
         },
         'utag' : [
             'fragment',
@@ -2934,9 +2796,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['da', 'mmu', 'ppm'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['da', 'mmu', 'ppm'],
             'custom_val_max' : 0,
         },
         'default_value' : 'ppm',
@@ -2945,7 +2806,7 @@ ursgal_params = {
             '(parts-per-millon), da (Dalton) or mmu (Milli mass unit)',
     },
     'frag_mass_type' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -2972,9 +2833,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['average', 'monoisotopic'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['average', 'monoisotopic'],
             'custom_val_max' : 0,
         },
         'default_value' : 'monoisotopic',
@@ -2986,11 +2846,13 @@ ursgal_params = {
         'available_in_unode' : [
             'omssa_2_1_9',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-zoh',
             'msfragger_style_1': 'max_fragment_charge',
+            'pipi_style_1' : 'max_ms2_charge',
         },
         'utag' : [
             'fragment',
@@ -3011,7 +2873,7 @@ ursgal_params = {
             'Maximum fragment ion charge to search.',
     },
     'frag_method' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
@@ -3039,9 +2901,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['cid', 'ecd', 'etd', 'hcd'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['cid', 'ecd', 'etd', 'hcd'],
             'custom_val_max' : 0,
         },
         'default_value' : 'hcd',
@@ -3282,7 +3143,7 @@ ursgal_params = {
             '    \'\' : None',
     },
     'header_translations' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'kojak_percolator_2_08',
             'msamanda_1_0_0_5242',
@@ -3291,13 +3152,16 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus2csv_v2016_09_16',
             'msgfplus2csv_v2017_01_27',
             'novor_1_1beta',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'msfragger_20170103',
-            'msgfplus_C_mzid2csv_v2017_07_04'
+            'msgfplus_C_mzid2csv_v2017_07_04',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3307,7 +3171,8 @@ ursgal_params = {
             'novor_style_1'            : 'header_translations',
             'omssa_style_1'            : 'header_translations',
             'pepnovo_style_1'          : 'header_translations',
-            'msfragger_style_1'        : 'header_translations'
+            'msfragger_style_1'        : 'header_translations',
+            'pipi_style_1'             : 'header_translations',
         },
         'utag' : [
             'Conversion',
@@ -3389,6 +3254,24 @@ ursgal_params = {
                 '[M+H]'                : 'Calc mass(Da)',
                 'output_aa_probs'      : 'Pepnovo:aaScore',
             },
+            'pipi_style_1' : {
+                'scan_num' : 'Spectrum ID',
+                'peptide' : 'Sequence',
+                'charge' : 'Charge',
+                'theo_mass' : 'Calc m/z',
+                'exp_mass' : 'Exp m/z',
+                'abs_ppm' : 'PIPI:abs_ppm',
+                'delta_C' : 'PIPI:delta_C',
+                'ptm_delta_score' : 'PIPI:ptm_delta_score protein_ID',
+                'protein_ID' : 'Protein ID',
+                'score' : 'PIPI:score',
+                'naive_q_value' : 'PIPI:naive_q_value',
+                'percolator_score' : 'PIPI:percolator_score',
+                'posterior_error_prob' : 'PIPI:posterior_error_prob',
+                'percolator_q_value' : 'PIPI:percolator_q_value',
+                'other_PTM_patterns' : 'PIPI:other_PTM_patterns',
+                'MGF_title' : 'Spectrum Title',
+            },
             'msfragger_style_1' : {
                 'ScanID' : 'Spectrum ID',
                 'Peptide Sequence' : 'Sequence',
@@ -3398,11 +3281,10 @@ ursgal_params = {
                 'Protein' : 'Protein ID',
                 'Variable modifications detected':'Modifications', #'(starts with M, separated by |, formated as position,mass)
                 'Retention time (minutes)': 'Retention Time (s)',
-
                 'Precursor neutral mass (Da)' : 'MSFragger:Precursor neutral mass (Da)',
                 'Neutral mass of peptide' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da)
-                'Hit rank':'MSFragger:Hit rank',
-                'Mass difference':'MSFragger:Mass difference',
+                'Hit rank':'Rank',
+                'Mass difference':'Mass Difference',
                 'Matched fragment ions':'MSFragger:Matched fragment ions',
                 'Total possible number of matched theoretical fragment ions':'MSFragger:Total possible number of matched theoretical fragment ions',
                 'Hyperscore':'MSFragger:Hyperscore',
@@ -3492,8 +3374,8 @@ ursgal_params = {
         'description' : \
             'Color gradient for the heatmap',
     },
-    'heatmap_column_order' : {
-        'edit_version' : 1.00,
+    'heatmap_column_positions' : {
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'plot_pygcluster_heatmap_from_csv_1_0_0',
         ],
@@ -3506,24 +3388,24 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'list',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-            ],
-            'type_dict' : {
-            },
+            'item_titles' : {'position':'column name'},
+            'value_types' : {'position':'str'},
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
             },
         },
-        'default_value' : [
-        ],
+        'default_value' : {},
         'description' : \
-            'The plot order of the columns',
+            'The position of each column in the heatmap is given as a dict '\
+            'with keys corresponding to the position and values corresponding'\
+            'to the column name, e.g: {"0" : "Ratio1_2", "1" : "Ratio2_3"}',
     },
     'heatmap_error_suffix' : {
         'edit_version' : 1.00,
@@ -3765,9 +3647,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type' : 'radio_button',
+            'available_values'  : [
                 'high_res_ltq',
                 'low_res_ltq',
                 'q_exactive',
@@ -3796,16 +3677,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-                'column_name_1',
-            ],
-            'type_dict' : {
-                'column_name_1' : 'str',
-            },
-            'multiple_line' : {
-                'column_name_1' : False,
-            },
+            'item_title' : 'column_name',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -3914,9 +3789,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['rbf', 'linear', 'poly', 'sigmoid'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['rbf', 'linear', 'poly', 'sigmoid'],
             'custom_val_max' : 1,
         },
         'default_value' : 'rbf',
@@ -3924,7 +3798,7 @@ ursgal_params = {
             'The kernel function of the support vector machine used for PSM '\
             'post-processing (\'rbf\', \'linear\', \'poly\' or \'sigmoid\')',
     },
-    'kojak_MS1_centroid' : {
+    'ms1_is_centroided' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -3934,26 +3808,22 @@ ursgal_params = {
             'kojak_style_1' : 'kojak_MS1_centroid',
         },
         'utag' : [
-            'cross-linking',
+            'spectrum',
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                'Yes' : 1,
-                'No'  : 0,
+                True : 1,
+                False  : 0,
             },
         },
-        'uvalue_type' : 'select',
+        'uvalue_type' : 'bool',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['Yes', 'No'],
-            'custom_val_max' : 0,
         },
-        'default_value' : 'No',
+        'default_value' : False,
         'description' : \
-            'MS1 centroided data yes (1) or no (0)',
+            'MS1 are centroided data: True or False',
     },
-    'kojak_MS1_resolution' : {
+    'ms1_resolution' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -3963,7 +3833,7 @@ ursgal_params = {
             'kojak_style_1' : 'kojak_MS1_resolution',
         },
         'utag' : [
-            'cross-linking',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -3979,7 +3849,7 @@ ursgal_params = {
         'description' : \
             'MS1 resolution',
     },
-    'kojak_MS2_centroid' : {
+    'ms2_is_centroid' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -3993,22 +3863,18 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                'Yes' : 1,
-                'No'  : 0,
+                True : 1,
+                False : 0,
             },
         },
-        'uvalue_type' : 'select',
+        'uvalue_type' : 'bool',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['Yes', 'No'],
-            'custom_val_max' : 0,
         },
-        'default_value' : 'Yes',
+        'default_value' : True,
         'description' : \
-            'MS2 centroided data yes (1) or no (0)',
+            'MS2 are centroided data: True or False',
     },
-    'kojak_MS2_resolution' : {
+    'ms2_resolution' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -4018,7 +3884,7 @@ ursgal_params = {
             'kojak_style_1' : 'kojak_MS2_resolution',
         },
         'utag' : [
-            'cross-linking',
+            'spectrum',
         ],
         'uvalue_translation' : {
         },
@@ -4090,7 +3956,7 @@ ursgal_params = {
             'For example, 0.25 equals 25 APE',
     },
     'kojak_export_pepxml' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -4103,20 +3969,16 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                'Activate'   : 1,
-                'Deactivate' : 0,
+                True   : 1,
+                False : 0,
             },
         },
-        'uvalue_type' : 'select',
+        'uvalue_type' : 'bool',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['Activate', 'Deactivate'],
-            'custom_val_max' : 0,
         },
-        'default_value' : 'Deactivate',
+        'default_value' : False,
         'description' : \
-            'Activate (1) or deactivate (0) output as pepXML',
+            'Activate (True) or deactivate (False) output as pepXML',
     },
     'kojak_export_percolator' : {
         'edit_version' : 1.00,
@@ -4132,20 +3994,16 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                'Activate'   : 1,
-                'Deactivate' : 0,
+                True   : 1,
+                False  : 0,
             },
         },
-        'uvalue_type' : 'select',
+        'uvalue_type' : 'bool',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['Activate', 'Deactivate'],
-            'custom_val_max' : 0,
         },
-        'default_value' : 'Activate',
+        'default_value' : True,
         'description' : \
-            'Activate (1) or deactivate (0) output for percolator',
+            'Activate (True) or deactivate (False) output for percolator',
     },
     'kojak_fragment_bin_offset' : {
         'edit_version' : 1.00,
@@ -4260,7 +4118,7 @@ ursgal_params = {
             'Defines the output format of Kojak for Percolator',
     },
     'kojak_prefer_precursor_pred' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'kojak_1_5_3',
         ],
@@ -4273,28 +4131,28 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'kojak_style_1' : {
-                '0: ignore previous' : 0,
-                '1: only previous'   : 1,
-                '2: supplement'      : 2,
+                'ignore_previous' : 0,
+                'only_previous'   : 1,
+                'supplement'      : 2,
             },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
-                '0: ignore previous',
-                '1: only previous',
-                '2: supplement',
+            'select_type' : 'radio_button',
+            'available_values'  : [
+                'ignore_previous',
+                'only_previous',
+                'supplement',
             ],
             'custom_val_max' : 0,
         },
         'default_value' : 'supplement',
         'description' : \
             'prefer precursor mono mass predicted by instrument software.\n'\
-            '    0 = ignore previous predictions\n'\
-            '    1 = use only previous predictions\n'\
-            '    2 = supplement predictions with additional analysis',
+            'Available values:\n'\
+            '    ignore_previous: previous predictions are ignored\n'\
+            '    only_previous: only previous predictions are used\n'\
+            '    supplement: predictions are supplemented with additional analysis',
     },
     'kojak_spectrum_processing' : {
         'edit_version' : 1.00,
@@ -4402,7 +4260,7 @@ ursgal_params = {
             'be used.',
     },
     'label' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -4411,6 +4269,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -4424,6 +4284,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'pipi_1_3_0',
             'pyqms_1_0_0',
         ],
         'triggers_rerun' : True,
@@ -4435,6 +4296,7 @@ ursgal_params = {
             'omssa_style_1'     : ('-tem', '-tom'),
             'xtandem_style_1'   : 'protein, modified residue mass file',
             'msfragger_style_1' : 'label',
+            'pipi_style_1'      : 'label',
             'pyqms_style_1'     : 'label'
         },
         'utag' : [
@@ -4445,9 +4307,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['14N', '15N'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['14N', '15N'],
             'custom_val_max' : 0,
         },
         'default_value' : '14N',
@@ -4535,6 +4396,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -4547,7 +4410,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4559,7 +4422,8 @@ ursgal_params = {
             'xtandem_style_1'         : 'scoring, maximum missed cleavage sites',
             'unify_csv_style_1'       : 'max_missed_cleavages',
             'upeptide_mapper_style_1' : 'max_missed_cleavages',
-            'msfragger_style_1'       : 'allowed_missed_cleavage'
+            'msfragger_style_1'       : 'allowed_missed_cleavage',
+            'pipi_style_1'            : 'missed_cleavage'
         },
         'utag' : [
             'protein',
@@ -4610,10 +4474,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'MaxModSize',
+            'pipi_style_1' : 'max_ptm_mass',
         },
         'utag' : [
             'modifications',
@@ -4630,7 +4496,7 @@ ursgal_params = {
         },
         'default_value' : 200,
         'description' : \
-            'Minimum modification size to consider (in Da)',
+            'Maximum modification size to consider (in Da)',
     },
     'max_num_mods' : {
         'edit_version' : 1.00,
@@ -4641,12 +4507,15 @@ ursgal_params = {
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
+            'msamanda_2_0_0_9695',
+            'msamanda_2_0_0_9706',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1'     : 'max_num_mods',
             'msgfplus_style_1'  : 'NumMods',
             'myrimatch_style_1' : 'MaxDynamicMods',
+            'msamanda_style_1'  : 'MaxNoDynModifs',
         },
         'utag' : [
             'modifications',
@@ -4664,6 +4533,84 @@ ursgal_params = {
         'default_value' : 3,
         'description' : \
             'Maximal number of modifications per peptide',
+    },
+    'max_num_mod_sites' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
+        ],
+        'default_value' : 6,
+        'description' :  ''' Maximum number of potential modification sites for a specific modification per peptide. Peptides with a higher number are discarded, due to a too high complexity. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'msamanda_style_1'  : 'MaxNumberModSites',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 20,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'max_num_neutral_loss' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
+        ],
+        'default_value' : 1,
+        'description' :  ''' Maximum number of same neutral losses per peptide regarding water and ammonia losses. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'msamanda_style_1'  : 'MaxNumberNeutralLoss',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 10,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'max_num_neutral_loss_mod' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
+        ],
+        'default_value' : 2,
+        'description' :  ''' Maximum number of same neutral losses per peptide regarding modification specific losses.  ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'msamanda_style_1'  : 'MaxNumberNeutralLossModificati',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 5,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
     },
     'max_num_of_ions_per_series_to_search' : {
         'edit_version' : 1.00,
@@ -4698,13 +4645,16 @@ ursgal_params = {
     'max_num_per_mod' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
         ],
-        'default_value' : 2,
+        'default_value' : 3,
         'description' :  ''' Maximum number of residues that can be occupied by each variable modification (maximum of 5) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'msfragger_style_1' : 'max_variable_mods_per_mod'
+            'msfragger_style_1' : 'max_variable_mods_per_mod',
+            'msamanda_style_1'  : 'MaxNoModifs',
         },
         'utag' : [
             'modifications',
@@ -4737,13 +4687,13 @@ ursgal_params = {
         },
         'uvalue_type' : 'dict',
         'uvalue_option' : {
-            'none_val' : None,
-            'dict_title' : {
+            'none_val' : {},
+            'item_titles' : {
                 'unimod_name' : 'number'
             },
-            'dict_type' : {
+            'value_types' : {
+                'unimod_name' : 'int'
             },
-            'custom_val_max' : 10000,
             'custom_type' : {
                 'int' : {
                     'max'       : 10000,
@@ -4752,6 +4702,7 @@ ursgal_params = {
                     'unit'      : '',
                 },
             },
+            'custom_val_max' : 0,
         },
         'default_value' : {
         },
@@ -4871,6 +4822,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -4904,7 +4857,7 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val'         : '',
             'multiple_line'    : False,
-            'input_extensions' : ['.mgf'],
+            'input_extensions' : ['.mgf']
         },
         'default_value' : None,
         'description' : \
@@ -4915,10 +4868,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'MinModSize',
+            'pipi_style_1' : 'min_ptm_mass',
         },
         'utag' : [
             'modifications',
@@ -4986,13 +4941,16 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'msfragger_20170103',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1'  : '-minLength',
             'myrimatch_style_1' : 'MinPeptideLength',
             'omssa_style_1'     : '-no',
-            'msfragger_style_1' : 'digest_min_length'
+            'msfragger_style_1' : 'digest_min_length',
+            'msamanda_style_1'  : 'MinimumPepLength',
         },
         'utag' : [
             'peptide',
@@ -5087,13 +5045,15 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-hs',
             'xtandem_style_1' : 'spectrum, minimum peaks',
             'msfragger_style_1': 'minimum_peaks',
+            'pipi_style_1' : 'min_peak_num',
         },
         'utag' : [
             'fragment',
@@ -5114,7 +5074,7 @@ ursgal_params = {
             'Mimimum number of peaks in the spectrum to be considered. MSFragger default: 15',
     },
     'moda_blind_mode' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
         ],
@@ -5127,28 +5087,28 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
             'moda_style_1' : {
-                'No Modification'   : 0,
-                'One Modification'  : 1,
-                'No Limit'          : 2,
+                'no_modification'   : 0,
+                'one_modification'  : 1,
+                'no_limit'          : 2,
             },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
-                'No Modification',
-                'One Modification',
-                'No Limit',
+            'select_type' : 'radio_button',
+            'available_values'  : [
+                'no_modification',
+                'one_modification',
+                'no_limit',
             ],
             'custom_val_max' : 0,
         },
-        'default_value' : 'No Limit',
+        'default_value' : 'no_limit',
         'description' : \
-            'Allowed number of modifications per peptide. \n'\
-            '    \'0\' = no modification, \n'\
-            '    \'1\' = one modification, \n'\
-            '    \'2\' = no limit',
+            'Allowed number of modifications per peptide in ModA BlindMode. \n'\
+            'Available values:'
+            '    no_modification\n'\
+            '    one_modification\n'\
+            '    no_limit',
     },
     'moda_high_res' : {
         'edit_version' : 1.00,
@@ -5194,9 +5154,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type' : 'radio_button',
+            'available_values'  : [
                 'None',
                 'iTRAQ4plex',
                 'iTRAQ8plex',
@@ -5221,6 +5180,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -5238,6 +5199,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'pipi_1_3_0',
             'pyqms_1_0_0'
         ],
         'triggers_rerun' : True,
@@ -5253,6 +5215,7 @@ ursgal_params = {
             'unify_csv_style_1'       : 'modifications',
             'upeptide_mapper_style_1' : 'modifications',
             'msfragger_style_1'       : 'modifications',
+            'pipi_style_1'            : 'modifications',
             'xtandem_style_1'         : (
                 'residue, modification mass',
                 'residue, potential modification mass',
@@ -5272,19 +5235,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-                'mod_1',
-                'mod_2',
-            ],
-            'type_dict' : {
-                'mod_1' : 'str',
-                'mod_2' : 'str',
-            },
-            'multiple_line' : {
-                'mod_1' : False,
-                'mod_2' : False,
-            },
+            'item_title' : 'modification',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -5462,7 +5416,7 @@ ursgal_params = {
             'MS2 resolution',
     },
     'msgfplus_protocol_id' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
@@ -5484,9 +5438,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['0', '1', '2', '3'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['0', '1', '2', '3'],
             'custom_val_max' : 0,
         },
         'default_value' : '0',
@@ -5638,27 +5591,6 @@ ursgal_params = {
         },
         'uvalue_type' : "int",
     },
-    'msfragger_clear_mz_range' : {
-        'edit_version'   : 1.00,
-        'available_in_unode' : [
-            'msfragger_20170103',
-        ],
-        'default_value' : '0.0 0.0',
-        'description' :  ''' Removes peaks in this m/z range prior to matching. Useful for iTRAQ/TMT experiments (i.e. 0.0 150.0) ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'msfragger_style_1' : 'clear_mz_range',
-        },
-        'utag' : [
-        ],
-        'uvalue_option' : {
-            'none_val' : None,
-            'multiple_line' : False
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "str",
-    },
     'msgfplus_mzid_converter_version' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
@@ -5678,6 +5610,11 @@ ursgal_params = {
             'multiple_line' : False,
         },
         'uvalue_translation' : {
+            'ucontroller_style_1': {
+                'msgfplus_v9979' : 'mzidentml_lib_1_6_10',
+                'msgfplus_v2016_09_16' : 'msgfplus2csv_v2016_09_16',
+                'msgfplus_v2017_01_27' : 'msgfplus2csv_v2017_01_27',
+            },
         },
         'uvalue_type' : "str",
     },
@@ -5888,7 +5825,7 @@ ursgal_params = {
             'mzidentml converter version: version name',
     },
     'mzidentml_export_type' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
@@ -5905,9 +5842,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type' : 'radio_button',
+            'available_values'  : [
                 'exportPSMs',
                 'exportProteinGroups',
                 'exportProteinsOnly',
@@ -5937,9 +5873,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : [
+            'select_type' : 'radio_button',
+            'available_values'  : [
                 'AddEmpaiToMzid',
                 'CreateRestrictedFASTADatabase',
                 'Csv2mzid',
@@ -5956,7 +5891,7 @@ ursgal_params = {
         'default_value' : 'Mzid2Csv',
         'description' : \
             'Defines the mzidentml_lib function to be used. Note: only '\
-            '\'Mzid2Csv\' is suppoted so far',
+            '\'Mzid2Csv\' is supported so far',
     },
     'mzidentml_output_fragmentation' : {
         'edit_version' : 1.00,
@@ -6250,6 +6185,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -6766,6 +6703,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -6820,7 +6759,7 @@ ursgal_params = {
             '    \'None\' : None',
     },
     'output_file_type' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'omssa_2_1_9',
             'xtandem_cyclone_2010',
@@ -6851,9 +6790,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['.csv', '.mzid', '.omx', 'default'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['.csv', '.mzid', '.omx', 'default'],
             'custom_val_max' : 0,
         },
         'default_value' : 'default',
@@ -7004,6 +6942,33 @@ ursgal_params = {
         },
         'uvalue_type' : "str",
     },
+    'pipi_mz_bin_offset' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'pipi_1_3_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'pipi_style_1' : 'mz_bin_offset',
+        },
+        'utag' : [
+            'spectrum',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'float',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 100,
+            'min'       : 0,
+            'updownval' : 0.1,
+            'f-point'   : 1e-02,
+            'unit'      : ''
+        },
+        'default_value' : 0.0,
+        'description' : \
+            'PIPI mz_bin_offset'
+    },
     'precursor_charge_dependency' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -7024,9 +6989,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['linear', 'none'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['linear', 'none'],
             'custom_val_max' : 0,
         },
         'default_value' : 'linear',
@@ -7096,9 +7060,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['0', '0,1', '0,2'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['0', '0,1', '0,2'],
             'custom_val_max' : 0,
         },
         'default_value' : '0,1',
@@ -7116,6 +7079,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -7132,6 +7097,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7145,7 +7111,8 @@ ursgal_params = {
             'pepnovo_style_1'   : '-pm_tolerance',
             'unify_csv_style_1' : 'precursor_mass_tolerance_minus',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
-            'msfragger_style_1' : 'precursor_mass_tolerance'
+            'msfragger_style_1' : 'precursor_mass_tolerance',
+            'pipi_style_1'      : 'ms1_tolerance',
         },
         'utag' : [
             'precursor',
@@ -7176,6 +7143,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -7191,7 +7160,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7205,7 +7175,8 @@ ursgal_params = {
             'pepnovo_style_1'   : '-pm_tolerance',
             'unify_csv_style_1' : ' precursor_mass_tolerance_minus',
             'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error plus',
-            'msfragger_style_1' : 'precursor_mass_tolerance'
+            'msfragger_style_1' : 'precursor_mass_tolerance',
+            'pipi_style_1'      : 'ms1_tolerance',
 
         },
         'utag' : [
@@ -7227,7 +7198,7 @@ ursgal_params = {
             'calculated parent ion M+H',
     },
     'precursor_mass_tolerance_unit' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
             'msamanda_1_0_0_5242',
@@ -7236,6 +7207,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -7250,7 +7223,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7263,6 +7237,7 @@ ursgal_params = {
             'pepnovo_style_1'   : 'precursor_mass_tolerance_unit',
             'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error units',
             'msfragger_style_1' : 'precursor_mass_units',
+            'pipi_style_1'      : 'ms1_tolerance_unit',
         },
         'utag' : [
             'precursor',
@@ -7290,13 +7265,16 @@ ursgal_params = {
             'msfragger_style_1' : {
                 'ppm' : 1,
                 'da'  : 0
-            }
+            },
+            'pipi_style_1' : {
+                'ppm' : 1,
+                'da'  : 0
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['da', 'mmu', 'ppm'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['da', 'mmu', 'ppm'],
             'custom_val_max' : 0,
         },
         'default_value' : 'ppm',
@@ -7313,6 +7291,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -7342,9 +7322,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['average', 'monoisotopic'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['average', 'monoisotopic'],
             'custom_val_max' : 0,
         },
         'default_value' : 'monoisotopic',
@@ -7360,6 +7339,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -7367,6 +7348,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'msfragger_20170103',
+            'pipi_1_3_0',
             'pyqms_1_0_0'
         ],
         'triggers_rerun' : True,
@@ -7376,6 +7358,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'NumChargeStates',
             'omssa_style_1'     : '-zh',
             'msfragger_style_1' : 'precursor_max_charge',
+            'pipi_style_1'      : ('max_ms1_charge', 'max_potential_charge'),
             'pyqms_style_1'     : 'precursor_max_charge',
         },
         'utag' : [
@@ -7401,13 +7384,16 @@ ursgal_params = {
             'kojak_1_5_3',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1'     : 'precursor_max_mass',
             'myrimatch_style_1' : 'MaxPeptideMass',
-            'msfragger_style_1' : 'precursor_max_mass'
+            'xtandem_style_1'   : 'spectrum, minimum parent m+h',
+            'msfragger_style_1' : 'precursor_max_mass',
+            'pipi_style_1'      : 'max_precursor_mass',
         },
         'utag' : [
             'precursor',
@@ -7435,11 +7421,14 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'omssa_2_1_9',
             'msfragger_20170103',
+            'pipi_1_3_0',
             'pyqms_1_0_0'
         ],
         'triggers_rerun' : True,
@@ -7448,8 +7437,8 @@ ursgal_params = {
             'msgfplus_style_1' : '-minCharge',
             'omssa_style_1' : '-zl',
             'msfragger_style_1' : 'precursor_min_charge',
+            'pipi_style_1' : ('min_ms1_charge', 'min_potential_charge'),
             'pyqms_style_1'     : 'precursor_min_charge',
-
         },
         'utag' : [
             'precursor',
@@ -7480,14 +7469,16 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_3_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1'     : 'precursor_min_mass',
             'myrimatch_style_1' : 'MinPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
-            'msfragger_style_1' : 'precursor_min_mass'
+            'msfragger_style_1' : 'precursor_min_mass',
+            'pipi_style_1'      : 'min_precursor_mass'
         },
         'utag' : [
             'precursor',
@@ -7719,7 +7710,7 @@ ursgal_params = {
             'Number of bins used in qvality',
     },
     'qvality_verbose' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'qvality_2_02',
         ],
@@ -7741,9 +7732,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['1', '2', '3', '4', '5'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['1', '2', '3', '4', '5'],
             'custom_val_max' : 0,
         },
         'default_value' : '2',
@@ -7871,29 +7861,6 @@ ursgal_params = {
         'description' : \
             'name of the pickle that is used to map the retention time',
     },
-    'sanitize_csv_converter_version' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'ucontroller',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'ucontroller_style_1' : 'sanitize_csv_converter_version',
-        },
-        'utag' : [
-            'converter_version',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'str',
-        'uvalue_option' : {
-            'none_val'      : None,
-            'multiple_line' : False,
-        },
-        'default_value' : 'sanitize_csv_1_0_0',
-        'description' : \
-            'sanitize csv converter version: version name',
-    },
     'scan_exclusion_list' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -7911,11 +7878,14 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-            ],
-            'type_dict' : {
-            },
+            'item_title' : 'spectrum number',
+            'item_type' : 'int',
+            'min' : 0,
+            'max' : 100000000,
+            'updownval' : 1,
+            'unit' : '',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -7945,10 +7915,12 @@ ursgal_params = {
         'uvalue_option' : {
             'none_val' : [
             ],
-            'title_list' : [
-            ],
-            'type_dict' : {
-            },
+            'item_title' : 'spectrum number',
+            'item_type' : 'int',
+            'max' : 10000000,
+            'min' : 0,
+            'unit' : '',
+            'updownval' : 1,
             'custom_val_max' : 10000,
             'custom_type' : {
                 'str' : {
@@ -7988,264 +7960,6 @@ ursgal_params = {
         'description' : \
             'Include only the n-th spectrum during mzml2mgf conversion\n'\
             '    1 : None',
-    },
-    'score_-h2o_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'series',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : False,
-        'description' : \
-            'Spectrum: if true, ions loss of H2O are respected in algorithm',
-    },
-    'score_-nh3_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'series',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : False,
-        'description' : \
-            'Spectrum: if true, ions loss of NH3 are respected in algorithm',
-    },
-    'score_a_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'kojak_1_5_3',
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-            'myrimatch_2_1_138',
-            'myrimatch_2_2_140',
-            'omssa_2_1_9',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-            'xtandem_alanine',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'kojak_style_1'     : 'ion_series_A',
-            'msamanda_style_1'  : 'series',
-            'myrimatch_style_1' : 'FragmentationRule',
-            'omssa_style_1'     : '-i',
-            'xtandem_style_1'   : 'scoring, a ions',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-            'kojak_style_1' : {
-                False : '0',
-                True  : '1',
-            },
-            'omssa_style_1' : {
-                False : '',
-                True  : '0',
-            },
-            'xtandem_style_1' : {
-                False : 'no',
-                True  : 'yes',
-            },
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : False,
-        'description' : \
-            'Spectrum: if true, a ions are used in algorithm',
-    },
-    'score_b1_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'omssa_2_1_9',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'omssa_style_1' : '-sb1',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-            'omssa_style_1' : {
-                False : '1',
-                True  : '0',
-            },
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : False,
-        'description' : \
-            'first forward (b1) product ions inclued in search',
-    },
-    'score_b_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'kojak_1_5_3',
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-            'myrimatch_2_1_138',
-            'myrimatch_2_2_140',
-            'omssa_2_1_9',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-            'xtandem_alanine',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'kojak_style_1'     : 'ion_series_B',
-            'msamanda_style_1'  : 'series',
-            'myrimatch_style_1' : 'FragmentationRule',
-            'omssa_style_1'     : '-i',
-            'xtandem_style_1'   : 'scoring, b ions',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-            'kojak_style_1' : {
-                False : '0',
-                True  : '1',
-            },
-            'omssa_style_1' : {
-                False : '',
-                True  : '1',
-            },
-            'xtandem_style_1' : {
-                False : 'no',
-                True  : 'yes',
-            },
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : True,
-        'description' : \
-            'Spectrum: if true, b ions are used in algorithm',
-    },
-    'score_c_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'kojak_1_5_3',
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-            'myrimatch_2_1_138',
-            'myrimatch_2_2_140',
-            'omssa_2_1_9',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-            'xtandem_alanine',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'kojak_style_1'     : 'ion_series_C',
-            'msamanda_style_1'  : 'series',
-            'myrimatch_style_1' : 'FragmentationRule',
-            'omssa_style_1'     : '-i',
-            'xtandem_style_1'   : 'scoring, c ions',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-            'kojak_style_1' : {
-                False : '0',
-                True  : '1',
-            },
-            'omssa_style_1' : {
-                False : '',
-                True  : '2',
-            },
-            'xtandem_style_1' : {
-                False : 'no',
-                True  : 'yes',
-            },
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : False,
-        'description' : \
-            'Spectrum: if true, c ions are used in algorithm',
-    },
-    'score_c_terminal_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'omssa_2_1_9',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'omssa_style_1' : '-sct',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-            'omssa_style_1' : {
-                False : '1',
-                True  : '0',
-            },
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : True,
-        'description' : \
-            'Score c terminal ions',
     },
     'score_correlation_corr' : {
         'edit_version' : 1.00,
@@ -8301,59 +8015,7 @@ ursgal_params = {
             'Minimum score difference between the best PSM and the first '\
             'rejected PSM of one spectrum, default: 0.01',
     },
-    'score_imm_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'series',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : False,
-        'description' : \
-            'Spectrum: if true, immonium ions are respected in algorithm',
-    },
-    'score_int_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'series',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : False,
-        'description' : \
-            'Spectrum: if true, internal fragment ions are respect in algorithm',
-    },
-    'score_x_ions' : {
+    'score_ion_list' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
@@ -8363,6 +8025,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
@@ -8375,192 +8039,572 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'kojak_style_1'     : 'ion_series_X',
+            'kojak_style_1'     : (
+                'ion_series_X',
+                'ion_series_Y',
+                'ion_series_Z',
+                'ion_series_A',
+                'ion_series_B',
+                'ion_series_C',
+            ),
             'msamanda_style_1'  : 'series',
             'myrimatch_style_1' : 'FragmentationRule',
-            'omssa_style_1'     : '-i',
-            'xtandem_style_1'   : 'scoring, x ions',
+            'omssa_style_1'     : (
+                '-i',
+                '-sct',
+                '-sb1',
+            ),
+            'xtandem_style_1'   : (
+                'scoring, x ions',
+                'scoring, y ions',
+                'scoring, z ions',
+                'scoring, a ions',
+                'scoring, b ions',
+                'scoring, c ions',
+            ),
         },
         'utag' : [
             'scoring',
-        ],
-        'uvalue_translation' : {
-            'kojak_style_1' : {
-                False : '0',
-                True  : '1',
-            },
-            'omssa_style_1' : {
-                False : '',
-                True  : '3',
-            },
-            'xtandem_style_1' : {
-                False : 'no',
-                True  : 'yes',
-            },
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : False,
-        'description' : \
-            'Spectrum: if true, x ions are used in algorithm',
-    },
-    'score_y_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'kojak_1_5_3',
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-            'myrimatch_2_1_138',
-            'myrimatch_2_2_140',
-            'omssa_2_1_9',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-            'xtandem_alanine',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'kojak_style_1'     : 'ion_series_Y',
-            'msamanda_style_1'  : 'series',
-            'myrimatch_style_1' : 'FragmentationRule',
-            'omssa_style_1'     : '-i',
-            'xtandem_style_1'   : 'scoring, y ions',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-            'kojak_style_1' : {
-                False : '0',
-                True  : '1',
-            },
-            'omssa_style_1' : {
-                False : '',
-                True  : '4',
-            },
-            'xtandem_style_1' : {
-                False : 'no',
-                True  : 'yes',
-            },
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : True,
-        'description' : \
-            'Spectrum: if true, y ions are used in algorithm',
-    },
-    'score_z+1_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'series',
-        },
-        'utag' : [
-            'scoring',
+            'fragmentation'
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'bool',
+        'uvalue_type' : 'list',
         'uvalue_option' : {
-        },
-        'default_value' : False,
-        'description' : \
-            'Spectrum: if true, z ion plus 1 Da mass are used in algorithm',
-    },
-    'score_z+2_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'msamanda_style_1' : 'series',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : False,
-        'description' : \
-            'Spectrum: if true z ion plus 2 Da mass are used in algorithm',
-    },
-    'score_z_ions' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'kojak_1_5_3',
-            'msamanda_1_0_0_5242',
-            'msamanda_1_0_0_5243',
-            'msamanda_1_0_0_6299',
-            'msamanda_1_0_0_6300',
-            'msamanda_1_0_0_7503',
-            'msamanda_1_0_0_7504',
-            'myrimatch_2_1_138',
-            'myrimatch_2_2_140',
-            'omssa_2_1_9',
-            'xtandem_cyclone_2010',
-            'xtandem_jackhammer',
-            'xtandem_piledriver',
-            'xtandem_sledgehammer',
-            'xtandem_vengeance',
-            'xtandem_alanine',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'kojak_style_1'     : 'ion_series_Z',
-            'msamanda_style_1'  : 'series',
-            'myrimatch_style_1' : 'FragmentationRule',
-            'omssa_style_1'     : '-i',
-            'xtandem_style_1'   : 'scoring, z ions',
-        },
-        'utag' : [
-            'scoring',
-        ],
-        'uvalue_translation' : {
-            'kojak_style_1' : {
-                False : '0',
-                True  : '1',
-            },
-            'omssa_style_1' : {
-                False : '',
-                True  : '5',
-            },
-            'xtandem_style_1' : {
-                False : 'no',
-                True  : 'yes',
+            'none_val' : [],
+            'item_type' : 'str',
+            'item_title': 'ion type',
+            'multiple_line' : False,
+            'custom_val_max' : 100,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
             },
         },
-        'uvalue_type' : 'bool',
-        'uvalue_option' : {
-        },
-        'default_value' : False,
+        'default_value' : ['b', 'y', ],
         'description' : \
-            'Spectrum: if true, z ions are used in algorithm',
+            'List of ion types that are taken into account by the respective search engine.'\
+            'Availabel ion types: a, b, c, x, y, z, -h2o, -nh3, b1, c_terminal, imm (immonium), int (internal), z+1, z+2',
     },
+    #     'score_-h2o_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'msamanda_style_1' : 'series',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'Spectrum: if true, ions loss of H2O are respected in algorithm',
+    # },
+    # 'score_-nh3_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'msamanda_style_1' : 'series',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'Spectrum: if true, ions loss of NH3 are respected in algorithm',
+    # },
+    # 'score_a_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'kojak_1_5_3',
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #         'myrimatch_2_1_138',
+    #         'myrimatch_2_2_140',
+    #         'omssa_2_1_9',
+    #         'xtandem_cyclone_2010',
+    #         'xtandem_jackhammer',
+    #         'xtandem_piledriver',
+    #         'xtandem_sledgehammer',
+    #         'xtandem_vengeance',
+    #         'xtandem_alanine',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'kojak_style_1'     : 'ion_series_A',
+    #         'msamanda_style_1'  : 'series',
+    #         'myrimatch_style_1' : 'FragmentationRule',
+    #         'omssa_style_1'     : '-i',
+    #         'xtandem_style_1'   : 'scoring, a ions',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #         'kojak_style_1' : {
+    #             False : '0',
+    #             True  : '1',
+    #         },
+    #         'omssa_style_1' : {
+    #             False : '',
+    #             True  : '0',
+    #         },
+    #         'xtandem_style_1' : {
+    #             False : 'no',
+    #             True  : 'yes',
+    #         },
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'Spectrum: if true, a ions are used in algorithm',
+    # },
+    # 'score_b1_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'omssa_2_1_9',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'omssa_style_1' : '-sb1',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #         'omssa_style_1' : {
+    #             False : '1',
+    #             True  : '0',
+    #         },
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'first forward (b1) product ions inclued in search',
+    # },
+    # 'score_b_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'kojak_1_5_3',
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #         'myrimatch_2_1_138',
+    #         'myrimatch_2_2_140',
+    #         'omssa_2_1_9',
+    #         'xtandem_cyclone_2010',
+    #         'xtandem_jackhammer',
+    #         'xtandem_piledriver',
+    #         'xtandem_sledgehammer',
+    #         'xtandem_vengeance',
+    #         'xtandem_alanine',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'kojak_style_1'     : 'ion_series_B',
+    #         'msamanda_style_1'  : 'series',
+    #         'myrimatch_style_1' : 'FragmentationRule',
+    #         'omssa_style_1'     : '-i',
+    #         'xtandem_style_1'   : 'scoring, b ions',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #         'kojak_style_1' : {
+    #             False : '0',
+    #             True  : '1',
+    #         },
+    #         'omssa_style_1' : {
+    #             False : '',
+    #             True  : '1',
+    #         },
+    #         'xtandem_style_1' : {
+    #             False : 'no',
+    #             True  : 'yes',
+    #         },
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : True,
+    #     'description' : \
+    #         'Spectrum: if true, b ions are used in algorithm',
+    # },
+    # 'score_c_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'kojak_1_5_3',
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #         'myrimatch_2_1_138',
+    #         'myrimatch_2_2_140',
+    #         'omssa_2_1_9',
+    #         'xtandem_cyclone_2010',
+    #         'xtandem_jackhammer',
+    #         'xtandem_piledriver',
+    #         'xtandem_sledgehammer',
+    #         'xtandem_vengeance',
+    #         'xtandem_alanine',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'kojak_style_1'     : 'ion_series_C',
+    #         'msamanda_style_1'  : 'series',
+    #         'myrimatch_style_1' : 'FragmentationRule',
+    #         'omssa_style_1'     : '-i',
+    #         'xtandem_style_1'   : 'scoring, c ions',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #         'kojak_style_1' : {
+    #             False : '0',
+    #             True  : '1',
+    #         },
+    #         'omssa_style_1' : {
+    #             False : '',
+    #             True  : '2',
+    #         },
+    #         'xtandem_style_1' : {
+    #             False : 'no',
+    #             True  : 'yes',
+    #         },
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'Spectrum: if true, c ions are used in algorithm',
+    # },
+    # 'score_c_terminal_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'omssa_2_1_9',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'omssa_style_1' : '-sct',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #         'omssa_style_1' : {
+    #             False : '1',
+    #             True  : '0',
+    #         },
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : True,
+    #     'description' : \
+    #         'Score c terminal ions',
+    # },
+    # 'score_imm_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'msamanda_style_1' : 'series',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'Spectrum: if true, immonium ions are respected in algorithm',
+    # },
+    # 'score_int_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'msamanda_style_1' : 'series',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'Spectrum: if true, internal fragment ions are respect in algorithm',
+    # },
+    # 'score_x_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'kojak_1_5_3',
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #         'myrimatch_2_1_138',
+    #         'myrimatch_2_2_140',
+    #         'omssa_2_1_9',
+    #         'xtandem_cyclone_2010',
+    #         'xtandem_jackhammer',
+    #         'xtandem_piledriver',
+    #         'xtandem_sledgehammer',
+    #         'xtandem_vengeance',
+    #         'xtandem_alanine',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'kojak_style_1'     : 'ion_series_X',
+    #         'msamanda_style_1'  : 'series',
+    #         'myrimatch_style_1' : 'FragmentationRule',
+    #         'omssa_style_1'     : '-i',
+    #         'xtandem_style_1'   : 'scoring, x ions',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #         'kojak_style_1' : {
+    #             False : '0',
+    #             True  : '1',
+    #         },
+    #         'omssa_style_1' : {
+    #             False : '',
+    #             True  : '3',
+    #         },
+    #         'xtandem_style_1' : {
+    #             False : 'no',
+    #             True  : 'yes',
+    #         },
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'Spectrum: if true, x ions are used in algorithm',
+    # },
+    # 'score_y_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'kojak_1_5_3',
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #         'myrimatch_2_1_138',
+    #         'myrimatch_2_2_140',
+    #         'omssa_2_1_9',
+    #         'xtandem_cyclone_2010',
+    #         'xtandem_jackhammer',
+    #         'xtandem_piledriver',
+    #         'xtandem_sledgehammer',
+    #         'xtandem_vengeance',
+    #         'xtandem_alanine',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'kojak_style_1'     : 'ion_series_Y',
+    #         'msamanda_style_1'  : 'series',
+    #         'myrimatch_style_1' : 'FragmentationRule',
+    #         'omssa_style_1'     : '-i',
+    #         'xtandem_style_1'   : 'scoring, y ions',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #         'kojak_style_1' : {
+    #             False : '0',
+    #             True  : '1',
+    #         },
+    #         'omssa_style_1' : {
+    #             False : '',
+    #             True  : '4',
+    #         },
+    #         'xtandem_style_1' : {
+    #             False : 'no',
+    #             True  : 'yes',
+    #         },
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : True,
+    #     'description' : \
+    #         'Spectrum: if true, y ions are used in algorithm',
+    # },
+    # 'score_z+1_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'msamanda_style_1' : 'series',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'Spectrum: if true, z ion plus 1 Da mass are used in algorithm',
+    # },
+    # 'score_z+2_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'msamanda_style_1' : 'series',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'Spectrum: if true z ion plus 2 Da mass are used in algorithm',
+    # },
+    # 'score_z_ions' : {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode' : [
+    #         'kojak_1_5_3',
+    #         'msamanda_1_0_0_5242',
+    #         'msamanda_1_0_0_5243',
+    #         'msamanda_1_0_0_6299',
+    #         'msamanda_1_0_0_6300',
+    #         'msamanda_1_0_0_7503',
+    #         'msamanda_1_0_0_7504',
+    #         'myrimatch_2_1_138',
+    #         'myrimatch_2_2_140',
+    #         'omssa_2_1_9',
+    #         'xtandem_cyclone_2010',
+    #         'xtandem_jackhammer',
+    #         'xtandem_piledriver',
+    #         'xtandem_sledgehammer',
+    #         'xtandem_vengeance',
+    #         'xtandem_alanine',
+    #     ],
+    #     'triggers_rerun' : True,
+    #     'ukey_translation' : {
+    #         'kojak_style_1'     : 'ion_series_Z',
+    #         'msamanda_style_1'  : 'series',
+    #         'myrimatch_style_1' : 'FragmentationRule',
+    #         'omssa_style_1'     : '-i',
+    #         'xtandem_style_1'   : 'scoring, z ions',
+    #     },
+    #     'utag' : [
+    #         'scoring',
+    #     ],
+    #     'uvalue_translation' : {
+    #         'kojak_style_1' : {
+    #             False : '0',
+    #             True  : '1',
+    #         },
+    #         'omssa_style_1' : {
+    #             False : '',
+    #             True  : '5',
+    #         },
+    #         'xtandem_style_1' : {
+    #             False : 'no',
+    #             True  : 'yes',
+    #         },
+    #     },
+    #     'uvalue_type' : 'bool',
+    #     'uvalue_option' : {
+    #     },
+    #     'default_value' : False,
+    #     'description' : \
+    #         'Spectrum: if true, z ions are used in algorithm',
+    # },
     'search_for_saps' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -8603,6 +8647,8 @@ ursgal_params = {
             'msamanda_1_0_0_6300',
             'msamanda_1_0_0_7503',
             'msamanda_1_0_0_7504',
+            'msamanda_2_0_0_9706',
+            'msamanda_2_0_0_9695',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
@@ -8757,8 +8803,8 @@ ursgal_params = {
             'scoring',
         ],
         'uvalue_option' : {
-            'combo_box' : True,
-            'initial_value' : ['UNKNOWN', 'PERCOLATOR QVALUE', 'TANDEM EXPECTATION VALUE', 'OMSSA EXPECTATION SCORE'],
+            'select_type' : 'radio_button',
+            'available_values' : ['UNKNOWN', 'PERCOLATOR QVALUE', 'TANDEM EXPECTATION VALUE', 'OMSSA EXPECTATION SCORE'],
             'radio_button' : False,
             'custom_val_max' : 0,
         },
@@ -8796,7 +8842,7 @@ ursgal_params = {
             'Penalty parameter C of the error term of the post-processing SVM',
     },
     'test_param1' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             '_test_node',
         ],
@@ -8819,9 +8865,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['a', 'b', 'c', 'd', 'e'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['a', 'b', 'c', 'd', 'e'],
             'custom_val_max' : 0,
         },
         'default_value' : 'b',
@@ -8829,7 +8874,7 @@ ursgal_params = {
             'TEST/DEBUG: Internal Ursgal parameter 1 for debugging and testing.',
     },
     'test_param2' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             '_test_node',
         ],
@@ -8852,9 +8897,8 @@ ursgal_params = {
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
-            'combo_box'      : True,
-            'radio_button'   : False,
-            'initial_value'  : ['one', 'two', 'three', 'four', 'five'],
+            'select_type' : 'radio_button',
+            'available_values'  : ['one', 'two', 'three', 'four', 'five'],
             'custom_val_max' : 0,
         },
         'default_value' : 'three',
@@ -8878,7 +8922,7 @@ ursgal_params = {
         'uvalue_type' : 'bool',
         'uvalue_option' : {
         },
-        'default_value' : True,
+        'default_value' : False,
         'description' : \
             'True, if log10 scale has been used for score_diff_threshold.',
     },
@@ -8924,7 +8968,7 @@ ursgal_params = {
             'none_val'      : None,
             'multiple_line' : False,
         },
-        'default_value' : 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/',
+        'default_value' : 'http://plan-a.uni-muenster.de/',
         'description' : \
             'URL that is used to install and prepare_resources.py',
     },
@@ -9111,6 +9155,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : 0,
                 'msamanda_1_0_0_7503'  : 0,
                 'msamanda_1_0_0_7504'  : 0,
+                'msamanda_2_0_0_9706'  : 0,
+                'msamanda_2_0_0_9695'  : 0,
                 'msgfplus_v2016_09_16' : 1e-100,
                 'msgfplus_v2017_01_27' : 1e-100,
                 'msgfplus_v9979'       : 1e-100,
@@ -9122,8 +9168,10 @@ ursgal_params = {
                 'xtandem_piledriver'   : 0,
                 'xtandem_sledgehammer' : 0,
                 'xtandem_vengeance'    : 0,
-                'xtandem_alanine'    : 0,
+                'xtandem_alanine'      : 0,
                 'msfragger_20170103'   : 0,
+                'pipi_1_3_0'           : 0,
+                'moda_v1_51'           : 0,
             },
         },
         'uvalue_type' : 'str',
@@ -9148,7 +9196,6 @@ ursgal_params = {
             'svm_1_0_0',
             'ucontroller',
             'unify_csv_1_0_0',
-            'msfragger_20170103'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9159,8 +9206,6 @@ ursgal_params = {
             'svm_style_1'               : 'validation_score_field',
             'ucontroller_style_1'       : 'validation_score_field',
             'unify_csv_style_1'         : 'validation_score_field',
-            'msfragger_style_1'         : 'validation_score_field',
-            'mascot_style_1'           : 'validation_score_field'
         },
         'utag' : [
             'validation',
@@ -9173,6 +9218,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : 'Amanda:Score',
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
+                'msamanda_2_0_0_9706'  : 'Amanda:Score',
+                'msamanda_2_0_0_9695'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
                 'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
@@ -9188,7 +9235,9 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
+                'moda_v1_51'           : 'ModA:probability',
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9197,6 +9246,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : 'Amanda:Score',
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
+                'msamanda_2_0_0_9706'  : 'Amanda:Score',
+                'msamanda_2_0_0_9695'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
                 'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
@@ -9212,7 +9263,9 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
+                'moda_v1_51'           : 'ModA:probability',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9221,6 +9274,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : 'Amanda:Score',
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
+                'msamanda_2_0_0_9706'  : 'Amanda:Score',
+                'msamanda_2_0_0_9695'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
                 'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
@@ -9236,8 +9291,9 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
-
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
+                'moda_v1_51'           : 'ModA:probability',
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9246,6 +9302,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : 'Amanda:Score',
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
+                'msamanda_2_0_0_9706'  : 'Amanda:Score',
+                'msamanda_2_0_0_9695'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
                 'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
@@ -9261,8 +9319,9 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
-
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
+                'moda_v1_51'           : 'ModA:probability',
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9271,6 +9330,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : 'Amanda:Score',
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
+                'msamanda_2_0_0_9706'  : 'Amanda:Score',
+                'msamanda_2_0_0_9695'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
                 'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
@@ -9286,7 +9347,9 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
+                'moda_v1_51'           : 'ModA:probability',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9295,6 +9358,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : 'Amanda:Score',
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
+                'msamanda_2_0_0_9706'  : 'Amanda:Score',
+                'msamanda_2_0_0_9695'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
                 'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
@@ -9310,7 +9375,9 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
+                'moda_v1_51'           : 'ModA:probability',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9319,6 +9386,8 @@ ursgal_params = {
                 'msamanda_1_0_0_6300'  : 'Amanda:Score',
                 'msamanda_1_0_0_7503'  : 'Amanda:Score',
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
+                'msamanda_2_0_0_9706'  : 'Amanda:Score',
+                'msamanda_2_0_0_9695'  : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
                 'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
@@ -9334,7 +9403,9 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
-                'mascot_x_x_x'         : 'Mascot:Score'
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_3_0'           : 'PIPI:score',
+                'moda_v1_51'           : 'ModA:probability',
             },
         },
         'uvalue_type' : 'str',
@@ -9365,19 +9436,10 @@ ursgal_params = {
         'uvalue_type' : 'list',
         'uvalue_option' : {
             'none_val' : None,
-            'title_list' : [
-                'column_name_1',
-                'column_name_2',
-            ],
-            'type_dict' : {
-                'column_name_1' : 'str',
-                'column_name_2' : 'str',
-            },
-            'multiple_line' : {
-                'column_name_1' : False,
-                'column_name_2' : False,
-            },
+            'item_title' : 'column name',
+            'item_type' : 'str',
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
@@ -9394,7 +9456,7 @@ ursgal_params = {
             '(merged) to determine overlapping results.',
     },
     'visualization_font' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -9407,63 +9469,63 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'tuple',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
-            'none_val' : None,
-            'title_list' : [
-                'font-type',
-                'font-size header',
-                'font-size major',
-                'font-size minor',
-                'font-size venn',
-            ],
-            'type_dict' : {
-                'font-type'        : 'str',
-                'font-size header' : 'int',
-                'font-size major'  : 'int',
-                'font-size minor'  : 'int',
-                'font-size venn'   : 'int',
+            'none_val' : {},
+            'item_titles' : {
+                'font_type' : 'type',
+                'font_size_header' : 'size',
+                'font_size_major' : 'size',
+                'font_size_minor' : 'size',
+                'font_size_venn' : 'size',
+            },
+            'value_types' : {
+                'font_type' : 'str',
+                'font_size_header' : 'int',
+                'font_size_major' : 'int',
+                'font_size_minor' : 'int',
+                'font_size_venn' : 'int',
             },
             'multiple_line' : {
-                'font-type'        : False,
+                'font_type' : False,
             },
-            'max': {
-                'font-size header' : 1000,
-                'font-size major'  : 1000,
-                'font-size minor'  : 1000,
-                'font-size venn'   : 1000,
+            'max' : {
+                'font_size_header' : 1000,
+                'font_size_major' : 1000,
+                'font_size_minor' : 1000,
+                'font_size_venn' : 1000,
             },
-            'min': {
-                'font-size header' : 0,
-                'font-size major'  : 0,
-                'font-size minor'  : 0,
-                'font-size venn'   : 0,
+            'min' : {
+                'font_size_header' : 0,
+                'font_size_major' : 0,
+                'font_size_minor' : 0,
+                'font_size_venn' : 0,
             },
-            'updownval': {
-                'font-size header' : 1,
-                'font-size major'  : 1,
-                'font-size minor'  : 1,
-                'font-size venn'   : 1,
+            'updownval' : {
+                'font_size_header' : 1,
+                'font_size_major' : 1,
+                'font_size_minor' : 1,
+                'font_size_venn' : 1,
             },
-            'unit': {
-                'font-size header' : 'pt',
-                'font-size major'  : 'pt',
-                'font-size minor'  : 'pt',
-                'font-size venn'   : 'pt',
+            'unit' : {
+                'font_size_header' : 'pt',
+                'font_size_major' : 'pt',
+                'font_size_minor' : 'pt',
+                'font_size_venn' : 'pt',
             },
             'custom_val_max' : 0,
         },
-        'default_value' : (
-            'Helvetica',
-            31,
-            25,
-            20,
-            20
-        ),
+        'default_value' : {
+            'font_type' : 'Helvetica',
+            'font_size_header' : 31,
+            'font_size_major' : 25,
+            'font_size_minor' : 20,
+            'font_size_venn' : 20
+        },
         'description' : \
             'Font used for visualization plots (e.g. Venn diagram), given as '\
-            'tuple (font-type, font-size header, font-size major, font-size '\
-            'minor, font-size venn)',
+            'dict with keys: font_type, font_size_header, font_size_major, font_size_minor,'\
+            ' font_size_venn',
     },
     'visualization_header' : {
         'edit_version' : 1.00,
@@ -9488,41 +9550,39 @@ ursgal_params = {
         'description' : \
             'Header of visualization output (e.g. Venn diagram)',
     },
-    'visualization_label_list' : {
+    'visualization_label_positions' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'venndiagram_style_1' : 'visualization_label_list',
+            'venndiagram_style_1' : 'visualization_label_position',
         },
         'utag' : [
             'visualization',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'list',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
             'none_val' : None,
-            'initialValue' : [
-            ],
-            'title_list' : [
-            ],
-            'type_dict' : {
-            },
+            'item_titles' : {'position':'label'},
+            'value_types' : {'position':'str'},
             'custom_val_max' : 10000,
+            'multiple_line' : False,
             'custom_type' : {
                 'str' : {
                     'multiple_line' : False,
                 },
             },
         },
-        'default_value' : [
-        ],
+        'default_value' : {},
         'description' : \
             'Specifies labels for the datasets that should be visualized. '\
-            'Needs to be given in the same order as the datasets.',
+            'Given as a dict in which the key represents the position '\
+            'of the corresponding dataset in the list, e.g.: '\
+            '{"0" : "LabelA", "1" : "LabelB"}',
     },
     'visualization_opacity' : {
         'edit_version' : 1.00,
@@ -9552,7 +9612,7 @@ ursgal_params = {
             'Opacity used in visualization plots (e.g. Venn diagram)',
     },
     'visualization_scaling_factors' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'venndiagram_1_0_0',
         ],
@@ -9565,39 +9625,53 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'tuple',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
-            'none_val'       : None,
-            'title_list' : [
-                'x-axis-scaling-factor',
-                'y-axis-scaling-factor',
-            ],
-            'type_dict' : {
-                'x-axis-scaling-factor' : 'int',
-                'y-axis-scaling-factor' : 'int',
+            'none_val' : {},
+            'item_titles' : {
+                'x_axis' : 'factor',
+                'y_axis' : 'factor',
+            },
+            'value_types' : {
+                'x_axis' : 'int',
+                'y_axis' : 'int',
             },
             'max': {
-                'x-axis-scaling-factor' : 100000,
-                'y-axis-scaling-factor' : 100000,
+                'x_axis' : 100000,
+                'y_axis' : 100000,
             },
             'min': {
-                'x-axis-scaling-factor' : 1,
-                'y-axis-scaling-factor' : 1,
+                'x_axis' : 1,
+                'y_axis' : 1,
             },
             'updownval': {
-                'x-axis-scaling-factor' : 1,
-                'y-axis-scaling-factor' : 1,
+                'x_axis' : 1,
+                'y_axis' : 1,
             },
             'unit': {
-                'x-axis-scaling-factor' : '',
-                'y-axis-scaling-factor' : '',
+                'x_axis' : '',
+                'y_axis' : '',
             },
             'custom_val_max' : 0,
         },
-        'default_value' : (600, 400),
+        # 'uvalue_option' : {
+            # 'none_val'       : None,
+            # 'title_list' : [
+            #     'x-axis-scaling-factor',
+            #     'y-axis-scaling-factor',
+            # ],
+            # 'type_dict' : {
+            #     'x-axis-scaling-factor' : 'int',
+            #     'y-axis-scaling-factor' : 'int',
+            # },
+        # },
+        'default_value' : {
+            'x_axis' : 600, 
+            'y_axis' : 400,
+        },
         'description' : \
             'Scaling factor for visualization plots (e.g. Venn diagram), '\
-            'given as tuple (x-axis-scaling-factor, y-axis-scaling-factor)',
+            'given as dict with keys: x_axis, y_axis',
     },
     'visualization_size' : {
         'edit_version' : 1.00,
@@ -9613,15 +9687,15 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'tuple',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
-            'none_val'       : None,
-            'title_list' : [
-                'width',
-                'height',
-            ],
-            'type_dict' : {
-                'width'  : 'int',
+            'none_val' : {},
+            'item_titles' : {
+                'width' : 'size',
+                'height' : 'size',
+            },
+            'value_types' : {
+                'width' : 'int',
                 'height' : 'int',
             },
             'max': {
@@ -9642,10 +9716,24 @@ ursgal_params = {
             },
             'custom_val_max' : 0,
         },
-        'default_value' : (1200, 900),
+        # 'uvalue_option' : {
+            # 'none_val'       : None,
+            # 'title_list' : [
+            #     'width',
+            #     'height',
+            # ],
+            # 'type_dict' : {
+            #     'width'  : 'int',
+            #     'height' : 'int',
+            # },
+        # },
+        'default_value' : {
+            'width' : 1200,
+            'height' : 900
+        },
         'description' : \
-            'Size of visualization plots (e.g. Venn diagram), given as tuple '\
-            '(width, height)',
+            'Size of visualization plots (e.g. Venn diagram), given as dict '\
+            'with keys: width, height',
     },
     'visualization_stroke_width' : {
         'edit_version' : 1.00,
@@ -9753,6 +9841,28 @@ ursgal_params = {
         'default_value' : False,
         'description' : \
             'Writes rejected results if True',
+    },
+    'xtandem_converter_version' : {
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : 'xtandem2csv_1_0_0',
+        'description' :  ''' Determines which X!tandem conversion node should be used e.g. "xtandem2csv_1_0_0"''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'xtandem_converter_version',
+        },
+        'utag' : [
+            'converter_version',
+        ],
+        'uvalue_option' : {
+            'none_val'     : '',
+            'multiple_line' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
     },
     'xtandem_stp_bias' : {
         'edit_version' : 1.00,

@@ -24,15 +24,13 @@ class kojak_1_5_3( ursgal.UNode ):
         'version'                     : '1.5.3',
         'release_date'                : '2015-5-1',
         'engine_type' : {
-            'cross_link_engine' : True,
+            'cross_link_search_engine' : True,
         },
         'input_extensions'            : ['.mzML', '.mzXML'],
-        'input_multi_file'            : False,
         'output_extensions' : ['.kojak.txt', '.pep.xml', '.perc.inter.txt', \
             '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt'],
         'create_own_folder'           : True,
-        'compress_raw_search_results' : False,
-        'cannot_distribute'           : True,
+        'distributable'               : False,
         'in_development'              : False,
         'include_in_git'              : None,
         'utranslation_style'          : 'kojak_style_1',
@@ -78,7 +76,21 @@ class kojak_1_5_3( ursgal.UNode ):
             self.params['input_dir_path'],
             self.params['input_file']
         )
-        self.params['translations']['mzml_input_file'] = input_file
+        if input_file.lower().endswith('.mzml') or \
+            input_file.lower().endswith('.mzml.gz'):
+            self.params['translations']['mzml_input_file'] = input_file
+        elif input_file.lower().endswith('.mgf'):
+            self.params['translations']['mzml_input_file'] = \
+                self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( input_file )
+            self.print_info(
+                'Kojak cannot read .mgf files.'
+                'the corresponding mzML file {0} will be used instead.'.format(
+                    os.path.abspath(self.params['translations']['mzml_input_file'])
+                ),
+                caller = "INFO"
+            )
+        else:
+            raise Exception('Kojak input spectrum file must be in mzML or MGF format!')
 
 
         # remap modifications to adapt to kojak format
@@ -108,6 +120,12 @@ class kojak_1_5_3( ursgal.UNode ):
             for mono_link in self.params['translations']['mono_link_definition']:
                 if mono_link not in [None, '']:
                     self.params['translations']['formatted_mono_link'] += 'mono_link = {0}\n'.format(mono_link)
+
+        for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
+            if ion in self.params['translations']['score_ion_list']:
+                self.params['translations']['ion_series_{0}'.format(ion.upper())] = 1
+            else:
+                self.params['translations']['ion_series_{0}'.format(ion.upper())] = 0
 
         # building command_list !
 
@@ -154,7 +172,7 @@ class kojak_1_5_3( ursgal.UNode ):
                 self.params['output_dir_path'],
                 '{0}_kojak_{1}{2}'.format(
                     self.params['file_root'],
-                    self.META_INFO['version'],
+                    self.META_INFO['version'].replace('.', '_'),
                     extension
                 )
             )

@@ -3,6 +3,8 @@
 Example Scripts
 =================
 
+Simple Example Scripts
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. _simpleexamplesearch:
 
@@ -16,7 +18,6 @@ Simple example search
 
 .. _simpleexamplecombinedfdr:
 
-
 Simple example using combined fdr (or pep)
 ------------------------------------------
 
@@ -25,6 +26,38 @@ Simple example using combined fdr (or pep)
 .. include:: code_inc/simple_combined_fdr_score.inc
 
 
+.. _targetdecoygen:
+
+Target decoy generation
+-----------------------
+
+.. autofunction:: target_decoy_generation_example.main
+
+
+.. include:: code_inc/target_decoy_generation_example.inc
+
+
+Mgf conversion loop examples
+----------------------------
+
+.. autofunction:: mgf_conversion_inside_and_outside_loop.main
+
+
+.. include:: code_inc/mgf_conversion_inside_and_outside_loop.inc
+
+
+Test node execution
+-------------------
+
+.. autofunction:: test_node_execution.main
+
+
+.. include:: code_inc/test_node_execution.inc
+
+
+
+Complete Workflow Scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. _doitall:
 
@@ -37,6 +70,39 @@ Do it all folder wide
 .. include:: code_inc/do_it_all_folder_wide.inc
 
 
+Large scale data analysis
+-------------------------
+
+
+.. autofunction:: barth_et_al_large_scale.main
+
+
+.. include:: code_inc/barth_et_al_large_scale.inc
+
+
+Complete workflow for human BR dataset analysis
+-----------------------------------------------
+
+
+.. autofunction:: human_br_complete_workflow.main
+
+
+.. include:: code_inc/human_br_complete_workflow.inc
+
+
+
+Example search for 15N labeling and no label
+--------------------------------------------
+
+.. autofunction:: search_with_label_15N.main
+
+
+.. include:: code_inc/search_with_label_15N.inc
+
+
+
+Version Comparison Scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 X!Tandem version comparison
 ---------------------------
@@ -59,19 +125,8 @@ MSGF+ version comparison
    :align: center
 
 
-
-BSA machine ppm offset example
-------------------------------
-
-.. autofunction:: bsa_ppm_offset_test.main
-
-
-.. include:: code_inc/bsa_ppm_offset_test.inc
-
-
-
-Bruderer et al. (2015) high resolution machine ppm offset example
------------------------------------------------------------------
+Bruderer et al. (2015) X!Tandem comparison incl. machine ppm offset
+-------------------------------------------------------------------
 
 .. autofunction:: qexactive_xtandem_version_comparison.main
 
@@ -80,17 +135,16 @@ Bruderer et al. (2015) high resolution machine ppm offset example
 
 
 
+Parameter Optimization Scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. _targetdecoygen:
+BSA machine ppm offset example
+------------------------------
 
-Target decoy generation
------------------------
-
-.. autofunction:: target_decoy_generation_example.main
+.. autofunction:: bsa_ppm_offset_test.main
 
 
-.. include:: code_inc/target_decoy_generation_example.inc
-
+.. include:: code_inc/bsa_ppm_offset_test.inc
 
 
 Precursor mass tolerance example
@@ -103,7 +157,7 @@ Precursor mass tolerance example
 
 
 Fragment mass tolerance example
---------------------------------
+-------------------------------
 
 .. autofunction:: bsa_fragment_mass_tolerance_example.main
 
@@ -111,35 +165,8 @@ Fragment mass tolerance example
 .. include:: code_inc/bsa_fragment_mass_tolerance_example.inc
 
 
-
-Filter csv examples
--------------------
-
-Filter for modifications
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. autofunction:: filter_csv_for_mods_example.main
-
-
-.. include:: code_inc/filter_csv_for_mods_example.inc
-
-
-
-Filter validated results
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. autofunction:: filter_csv_validation_example.main
-
-
-.. include:: code_inc/filter_csv_validation_example.inc
-
-
-
-Machine ppm offset sweep
-------------------------
-
-Reproduce data for figure 2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Bruderer et al. (2015) machine offset sweep (data for figure 2)
+---------------------------------------------------------------
 
 .. autofunction:: machine_offset_bruderer_sweep.search
 
@@ -151,25 +178,34 @@ Reproduce data for figure 2
 
 
 
-Large scale data analysis
--------------------------
+Filter CSV Examples
+^^^^^^^^^^^^^^^^^^^
+
+Filter for modifications
+------------------------
+
+.. autofunction:: filter_csv_for_mods_example.main
 
 
-.. autofunction:: barth_et_al_large_scale.main
-
-
-.. include:: code_inc/barth_et_al_large_scale.inc
+.. include:: code_inc/filter_csv_for_mods_example.inc
 
 
 
+Filter validated results
+------------------------
+
+.. autofunction:: filter_csv_validation_example.main
 
 
-Cascade search
---------------
+.. include:: code_inc/filter_csv_validation_example.inc
 
+
+
+Cascade Search
+^^^^^^^^^^^^^^
 
 Cascade search example
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 .. autofunction:: cascade_search_example.search
 
@@ -181,7 +217,7 @@ Cascade search example
 
 
 Ungrouped search for comparison
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 .. autofunction:: ungrouped_search_example.search
 
@@ -193,7 +229,7 @@ Ungrouped search for comparison
 
 
 Grouped search for comparison
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 .. autofunction:: grouped_search_example.search
 
@@ -205,7 +241,7 @@ Grouped search for comparison
 
 
 Example results for cascade search
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------
 
 ROS dataset results from a subsset of data from Barth et al. 2014.
 
@@ -248,35 +284,9 @@ Human BR dataset results.
 +---------+-----------+-------------------+-----------+--------------+------------+-----------+-------+-------+--------+-----+
 
 
-Complete workflow for human BR dataset analysis
------------------------------------------------
 
-
-.. autofunction:: human_br_complete_workflow.main
-
-
-.. include:: code_inc/human_br_complete_workflow.inc
-
-
-
-Mgf conversion loop examples
-----------------------------
-
-.. autofunction:: mgf_conversion_inside_and_outside_loop.main
-
-
-.. include:: code_inc/mgf_conversion_inside_and_outside_loop.inc
-
-
-Example search with search for labeling with 15N and no label
--------------------------------------------------------------
-
-.. autofunction:: search_with_label_15N.main
-
-
-.. include:: code_inc/search_with_label_15N.inc
-
-
+Upeptide Mapper Example Scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Upeptide mapper v3 and 4 complete C. reinhardtii proteome match
 ---------------------------------------------------------------
@@ -295,11 +305,3 @@ Upeptide mapper v3 and 4 complete proteome match
 
 .. include:: code_inc/complete_proteome_match.inc
 
-
-Test node execution
--------------------
-
-.. autofunction:: test_node_execution.main
-
-
-.. include:: code_inc/test_node_execution.inc

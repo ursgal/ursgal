@@ -8,7 +8,18 @@ import pickle
 
 class upeptide_mapper_1_0_0( ursgal.UNode ):
     """
-        upeptide_mapper_1_0_0 UNode
+    upeptide_mapper_1_0_0 UNode
+
+    Note:
+        Different converter versions can be used (see parameter
+        'peptide_mapper_converter_version') as well as different classes
+        inside the converter node (see parameter
+        'peptide_mapper_class_version' )
+
+    Available converter classes of upeptide_mapper_1_0_0
+        * UPeptideMapper_v3 (default)
+        * UPeptideMapper_v4 (no buffering and enhanced speed to v3)
+        * UPeptideMapper_v2
     """
     META_INFO = {
         'edit_version'       : 1.00,
@@ -16,15 +27,14 @@ class upeptide_mapper_1_0_0( ursgal.UNode ):
         'version'            : '1.0.0',
         'release_date'       : None,
         'engine_type' : {
-            'converter'     : True
+            'misc_engine'     : True
         },
         'input_extensions'   : ['.csv'],
         'output_extensions'  : ['.csv'],
-        'input_multi_file'   : False,
         'output_suffix'     : 'pmap',
-        # 'input_types'       : ['.csv'],
         'include_in_git'    : True,
         'in_development'    : False,
+        'distributable'      : True,
         'utranslation_style': 'upeptide_mapper_style_1',
         'engine': {
             'platform_independent' : {
