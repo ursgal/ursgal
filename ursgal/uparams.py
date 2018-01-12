@@ -1,5 +1,828 @@
 ursgal_params = {
-    '_extentions' : {
+    'pyqms_verbosity': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+        },
+        'default_value': True,
+        'description': '''verbosity for pyqms''',
+        'triggers_rerun': False,
+        'ukey_translation': {
+            'pyqms_style_1': 'pyqms_verbosity'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'label_percentile_format_string': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': '{0}',
+            'multiple_line': False,
+            'unit': 'psms',
+
+        },
+        'default_value': '{0:.3f}',
+        'description': """Defines the standard format string when
+            formatting labeling percentile float""",
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1' : 'PECENTILE_FORMAT_STRING'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "str",
+    },
+    'min_element_abundance': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
+
+        },
+        'default_value': 1e-3,
+        'description': """ Set minmal abundance for elements used when building Isotopoluge Library """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1' : 'ELEMENT_MIN_ABUNDANCE'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'min_rel_peak_intensity_for_matching': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.01,
+            'unit': 'a.u.',
+            'f-point': 1e-02
+
+        },
+        'default_value': 0.01,
+        'description': """ Minimum required intensity for pyqms peak matching """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1' : 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'required_percentile_peak_overlap': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1,
+            'min': 0,
+            'updownval': 0.1,
+            'unit': 'a.u.',
+            'f-point': 1e-02
+
+        },
+        'default_value': 0.5,
+        'description': """ Minimum percentile overlap for matching labeled peaks """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1' : 'REQUIRED_PERCENTILE_PEAK_OVERLAP'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'min_number_of_matched_isotopologues': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+
+        },
+        'default_value': 2,
+        'description': """ Min number of matched isotopologues for pyqms to consider for quantification """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'MININUM_NUMBER_OF_MATCHES_ISOTOPOLOGUES'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'intensity_transformation_factor': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1e20,
+            'min': 0,
+            'updownval': 1e4,
+            'unit': 'a.u.',
+            'f-point': 0.1
+
+        },
+        'default_value': 1e5,
+        'description': """ Tranform intensity by this factor for quantification """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'INTENSITY_TRANSFORMATION_FACTOR'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'upper_mz_limit': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 20000,
+            'min': 0,
+            'updownval': 100,
+            'unit': 'a.u.',
+            'f-point': 1e-01,
+        },
+        'default_value': 2000,
+        'description': """ Highest considered mz for quantification """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'UPPER_MZ_LIMIT'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'lower_mz_limit': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': 0,
+            'multiple_line': False,
+            'max': 20000,
+            'min': 0,
+            'updownval': 100,
+            'unit': 'a.u.',
+            'f-point': 1e-01,
+        },
+        'default_value': 150,
+        'description': """ lowest considered mz for quantification """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'LOWER_MZ_LIMIT'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'mz_transformation_factor': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1e10,
+            'min': 0,
+            'updownval': 100,
+            'unit': 'a.u.',
+            'f-point': 1e-01
+        },
+        'default_value': 1000,
+        'description': """ Factor which will be multiplied with mz before conversion to integer """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'MZ_TRANSFORMATION_FACTOR'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'rel_mz_range': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10e10,
+            'min': 0,
+            'updownval': 5e4,
+            'unit': 'a.u.',
+            'f-point': 1e-7
+
+        },
+        'default_value': 5e-6,
+        'description': """ rel mz Error """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'REL_MZ_RANGE'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'rel_intensity_range': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1,
+            'min': 0,
+            'updownval': 0.01,
+            'unit': 'a.u.',
+            'f-point': 1e-02
+
+        },
+        'default_value': 0.2,
+        'description': """ rel Intensity Error """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'REL_I_RANGE'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'internal_precision': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1e10,
+            'min': 0,
+            'updownval': 100,
+            'unit': 'a.u.',
+            'f-point': 1e-01
+
+        },
+        'default_value': 1000.0,
+        'description': """ Float to int conversion precision """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'INTERNAL_PRECISION'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'max_molecules_per_match_bin': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'a.u',
+
+        },
+        'default_value': 20,
+        'description': ''' Max number of molecules in one matching bin. ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'MAX_MOLECULES_PER_MATCH_BIN'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'silac_aas_locked_in_experiment': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': [None],
+            'multiple_line': {
+                "AA" : False
+            },
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+            'type_dict': {'AA' : 'str'},
+            'title_list': ['AA'],
+            'custom_val_max': 20,
+            'custom_type' : {
+            }
+
+        },
+        'default_value': None,
+        'description': ''' AA which are always SILAC labeled and not considered for calculating partially labeling percentile ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'SILAC_AAS_LOCKED_IN_EXPERIMENT'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "list",
+    },
+    'build_pyqms_result_index': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+
+        },
+        'default_value': True,
+        'description': ''' Build index for faster access ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'BUILD_RESULT_INDEX'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    # 'pyQms_colors': {
+    #     'edit_version' : 1.00,
+    #     'available_in_unode': [
+    #         'pyqms_1_0_0',
+    #     ],
+    #     'uvalue_option': {
+    #         'none_val': None,
+    #         'multiple_line': False,
+    #         # 'max': 10000,
+    #         # 'min': 0,
+    #         # 'updownval': 1,
+    #         'custom_val_max': 11,
+    #         'dict_type': {
+    #             '0.0': 'tuple',
+    #             '0.1': 'tuple',
+    #             '0.2': 'tuple',
+    #             '0.3': 'tuple',
+    #             '0.4': 'tuple',
+    #             '0.5': 'tuple',
+    #             '0.6': 'tuple',
+    #             '0.7': 'tuple',
+    #             '0.8': 'tuple',
+    #             '0.9': 'tuple',
+    #             '1.0': 'tuple'
+    #         },
+    #         'dict_title': {
+    #             'Enrichment' : 'Color'
+    #         },
+    #         'title_list' : {
+    #             '0.0' : [],
+    #             '0.1' : [],
+    #             '0.2' : [],
+    #             '0.3' : [],
+    #             '0.4' : [],
+    #             '0.5' : [],
+    #             '0.6' : [],
+    #             '0.7' : [],
+    #             '0.8' : [],
+    #             '0.9' : [],
+    #             '1.0' : []
+    #         },
+    #         'type_dict'  : {
+    #             '0.0': {},
+    #             '0.1': {},
+    #             '0.2': {},
+    #             '0.3': {},
+    #             '0.4': {},
+    #             '0.5': {},
+    #             '0.6': {},
+    #             '0.7': {},
+    #             '0.8': {},
+    #             '0.9': {},
+    #             '1.0': {},
+    #         }
+    #     },
+    #     'default_value': {
+    #         '0.0' : (37  , 37  , 37)  ,
+    #         '0.1' : (99  , 99  , 99)  ,
+    #         '0.2' : (150 , 150 , 150) ,
+    #         '0.3' : (204 , 204 , 204) ,
+    #         '0.4' : (247 , 247 , 247) ,
+    #         '0.5' : (203 , 27  , 29)  ,
+    #         '0.6' : (248 , 120 , 72)  ,
+    #         '0.7' : (253 , 219 , 121) ,
+    #         '0.8' : (209 , 239 , 121) ,
+    #         '0.9' : (129 , 202 , 78)  ,
+    #         '1.0' : (27  , 137 , 62)
+    #     },
+    #     'description': ''' Minimum number of peptide spectrum matches required \
+    #         for considering a peptide for quantification ''',
+    #     'triggers_rerun': True,
+    #     'ukey_translation': {
+    #         'pyqms_style_1': 'COLORS'
+    #     },
+    #     'utag': [
+    #         'quantitation',
+    #     ],
+    #     'uvalue_translation': {
+    #     },
+    #     'uvalue_type': "dict",
+    # },
+    'evidence_score_field': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'default_value': "PEP",
+        'description':  ''' field which is used for scoring in peptide_amounts_0_0_1 ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1' : 'evidence_score_field'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+        },
+        'uvalue_translation': {
+        },
+        'uvalue_type': 'str',
+    },
+    'quantitation_evidences': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'default_value': None,
+        'description':  ''' Molecules to quantify. Can be either list of string or csv file ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'evidences'
+        },
+        'uvalue_option': {
+            'none_val': [None],
+            'multiple_line': {'path': False},
+            'title_list': ['path'],
+            'custom_val_max': 100000,
+            'type_dict': {'path': 'str'},
+            'custom_type': {}
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': 'list',
+    },
+    'm_score_cutoff': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            # 'protein_amounts_0_0_5',
+            'pyqms_1_0_0'
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1,
+            'min': 0,
+            'updownval': 0.1,
+            'unit': 'a.u.',
+            'f-point': 1e-02
+        },
+        'default_value': 0.7,
+        'description':  ''' minimum required pyQms m_score for a quant event to be evaluated ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            # 'protein_amounts_style_1': 'm_cutoff',
+            'pyqms_style_1'           : 'm_score_cutoff'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'molecules_to_quantify': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': [],
+            'dict_type': {'str': 'str'},
+            'multiple_line': False,
+            'title_list': [],
+            'custom_val_max': 100000,
+            'custom_type': {
+                'str': {
+                    'multiple_line': False,
+                },
+            },
+            'type_dict': {
+            },
+        },
+        'default_value': None,
+        'description':  ''' Molecules to quantify. Can be either list of string or csv file ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'molecules',
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': 'list',
+    },
+    'mz_score_percentile': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'default_value': 0.4,
+        'description':  ''' weighting factor for pyQms mz score ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'mz_score_percentile'
+        },
+        'utag': [
+            'quantitation',
+        ],
+        'uvalue_option': {
+            'max': 1.0,
+            'min': 0,
+            'updownval': 0.01,
+            'none_val': None,
+            'f-point': 1e-02,
+            'unit': 'percent'
+        },
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'quant_ms_level': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0'
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 5,
+            'min': 1,
+            'updownval': 1,
+            'unit': 'ms_level'
+        },
+        'default_value': 1,
+        'description': 'ms level on which the evidences should be matched',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'ms_level'
+        },
+        'utag': [
+            'quantitation'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': 'int',
+    },
+    'label_percentile' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'pyqms_1_0_0',
+        ],
+        'default_value' : [0.0],
+        'description' :  ''' Enrichment level of the label ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'pyqms_style_1' : 'label_percentile',
+        },
+        'utag' : [
+            'quantitation',
+        ],
+        'uvalue_option' : {
+            'f-point' : {
+                'enrichment percentage': 0.001
+            },
+            'max' : {
+                'enrichment percentage':1
+            },
+            'min' : {
+                'enrichment percentage':0
+            },
+            'none_val' : None,
+            'custom_val_max': 1000,
+            'type_dict': {
+                'enrichment percentage' : 'float'
+            },
+            'title_list': ['enrichment percentage'],
+            'unit' : {
+                'enrichment percentage' : '%'
+            },
+            'updownval' : {
+                'enrichment percentage': 0.001
+            },
+            'custom_type': {}
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
+    },
+    'fixed_label_isotope_enrichment_levels' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'pyqms_1_0_0',
+        ],
+        'default_value' : {
+            '13C' : 0.996,
+            '15N' : 0.994,
+            '2H' : 0.994,
+        },
+        'description' :  ''' Enrichment of labeled elements in labeled chemical used ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'pyqms_style_1' : 'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS',
+        },
+        'utag' : [
+            'quantitation',
+        ],
+        'uvalue_option' : {
+            'multiple_line' : False,
+            'none_val' : None,
+            'unit' : 'psms',
+            'custom_val_max' : 3,
+            'custom_type' : {
+                'str' : {'multiple_line': False},
+            },
+            'dict_type': {
+                '13C' : {'str' : 'float'},
+                '15N' : {'str' : 'float'},
+                '2H' : {'str' : 'float'},
+            },
+            'dict_title' : {
+                'Isotope' : 'Enrichment'
+            },
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "dict",
+    },
+    'pyqms_trivial_names' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'pyqms_1_0_0',
+        ],
+        'default_value' : None,
+        'description' :  ''' Trivial name lookup mapping molecules to a trivial name ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'pyqms_style_1' : 'trivial_names'
+        },
+        'utag' : [
+            'quantitation',
+        ],
+        'uvalue_option' : {
+            'custom_type' : {
+                'str' : {'multiple_line': False},
+            },
+            'custom_val_max' : 100000,
+            'dict_title' : {
+                'formula' : 'trivial',
+            },
+            'dict_type' : {
+                'str' : 'str',
+            },
+            'multiple_line' : False,
+            'none_val' : {
+            },
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "dict",
+    },
+    'rt_border_tolerance' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            # 'protein_amounts_0_0_5',
+            'pyqms_1_0_0',
+        ],
+        'default_value' : 1,
+        'description' :  ''' Retention time border tolerance for curating RT windows ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'pyqms_style_1' : 'rt_border_tolerance',
+            # 'protein_amounts_style_1' : 'rt_border_tolerance'
+        },
+        'utag' : [
+            'quantitation',
+        ],
+        'uvalue_option' : {
+            'f-point' : 0.01,
+            'max' : 200,
+            'min' : 0,
+            'none_val' : None,
+            'unit' : 'minute',
+            'updownval' : 1,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    '_extensions' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
         ],
@@ -365,7 +1188,6 @@ ursgal_params = {
                 },
             },
         },
-
     },
     'accept_conflicting_psms' : {
         'edit_version'   : 1.00,
@@ -3602,6 +4424,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'pyqms_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3612,6 +4435,7 @@ ursgal_params = {
             'omssa_style_1'     : ('-tem', '-tom'),
             'xtandem_style_1'   : 'protein, modified residue mass file',
             'msfragger_style_1' : 'label',
+            'pyqms_style_1'     : 'label'
         },
         'utag' : [
             'label',
@@ -3634,10 +4458,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
+            'pyqms_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'mzml2mgf_style_1' : 'machine_offset_in_ppm',
+            'pyqms_style_1'    : 'MACHINE_OFFSET_IN_PPM'
         },
         'utag' : [
             'converter',
@@ -4411,7 +5237,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pyqms_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4435,6 +5262,7 @@ ursgal_params = {
                 'protein, quick acetyl',
                 'protein, quick pyrolidone'
             ),
+            'pyqms_style_1' : 'modifications',
         },
         'utag' : [
             'modifications',
@@ -6538,7 +7366,8 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pyqms_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -6546,7 +7375,8 @@ ursgal_params = {
             'msgfplus_style_1'  : '-maxCharge',
             'myrimatch_style_1' : 'NumChargeStates',
             'omssa_style_1'     : '-zh',
-            'msfragger_style_1' : 'precursor_max_charge'
+            'msfragger_style_1' : 'precursor_max_charge',
+            'pyqms_style_1'     : 'precursor_max_charge',
         },
         'utag' : [
             'precursor',
@@ -6566,7 +7396,7 @@ ursgal_params = {
             'Maximal accepted parent ion charge',
     },
     'precursor_max_mass' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'kojak_1_5_3',
             'myrimatch_2_1_138',
@@ -6577,7 +7407,6 @@ ursgal_params = {
         'ukey_translation' : {
             'kojak_style_1'     : 'precursor_max_mass',
             'myrimatch_style_1' : 'MaxPeptideMass',
-            'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_max_mass'
         },
         'utag' : [
@@ -6610,14 +7439,16 @@ ursgal_params = {
             'msgfplus_v2017_01_27',
             'msgfplus_v9979',
             'omssa_2_1_9',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pyqms_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'considered_charges',
             'msgfplus_style_1' : '-minCharge',
             'omssa_style_1' : '-zl',
-            'msfragger_style_1' : 'precursor_min_charge'
+            'msfragger_style_1' : 'precursor_min_charge',
+            'pyqms_style_1'     : 'precursor_min_charge',
 
         },
         'utag' : [
@@ -7130,7 +7961,7 @@ ursgal_params = {
             'Exclusively spectra included during mzml2mgf conversion',
     },
     'scan_skip_modulo_step' : {
-        'edit_version' : 1.00,
+        'edit_version' : 1.01,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
         ],
@@ -7147,16 +7978,16 @@ ursgal_params = {
         },
         'uvalue_type' : 'int',
         'uvalue_option' : {
-            'none_val'  : -1,
+            'none_val'  : 1,
             'max'       : 10000000,
-            'min'       : -1,
+            'min'       : 1,
             'updownval' : 1,
             'unit'      : ''
         },
         'default_value' : None,
         'description' : \
             'Include only the n-th spectrum during mzml2mgf conversion\n'\
-            '    -1 : None',
+            '    1 : None',
     },
     'score_-h2o_ions' : {
         'edit_version' : 1.00,

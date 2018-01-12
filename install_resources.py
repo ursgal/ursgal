@@ -9,6 +9,7 @@ def main( resources ):
 
     '''
     uc = ursgal.UController()
+    # uc.params['ursgal_resource_url'] = 'http://plan-a.uni-muenster.de/'
     downloaded_zips = uc.download_resources( resources = resources)
     # uses uc.params['ursgal_resource_url']  :)
     print()

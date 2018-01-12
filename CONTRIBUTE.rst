@@ -14,11 +14,17 @@ Ursgal. If you want to improve code or contribute new nodes/tools/algorithms
 please read these guidelines first. If something is unclear please contact one
 of the authors for help or let us know via e.g. an issue.
 
+We are happy to include your name to the list of contributors in the `README`_.
+Drop a line to one of the developers if you want to get included (and of course
+you actually contributed something)
+
+.. _README:
+   https://github.com/ursgal/ursgal/blob/master/README.rst
 
 Commit messages
 ***************
 
-First of all, please be concise and as descriptive (explicit is better than 
+First of all, please be concise and as descriptive (explicit is better than
 implicit :) ) as possible. It is always
 helpful to point out, which parts of Ursgal were changed/fixed (e.g.
 documentation or example scripts etc. ). In the same time, please avoid
@@ -28,7 +34,7 @@ unneccesarily long messages.
 Parameters
 **********
 
-The central idea of Ursgal are the unified parameters. The central parameter is 
+The central idea of Ursgal are the unified parameters. The central parameter is
 tranlated, so that every engine can use it. This means, if you implement a new
 engine, you have to go through the (more or less) tedious process to check, if
 parameter X of the new engine Y is already listed in uparams.py. We require
@@ -45,11 +51,13 @@ Code standards and conventions
 Since this a collaborative project, you will encounter different coding styles.
 Despite the fact that we know that diversity is beautiful, we need to keep some
 common line on how to code (This list may be further extended). Please refer
-also to the PEP8 style guide, which we use generally 
+also to the PEP8 style guide, which we use generally
 https://www.python.org/dev/peps/pep-0008/). Additionally this list will give
 you some things to think about:
 
   | Re-think naming of variables at least twice
+  | Re-check deleting of own debug code before sending Pull requests
+  | Re-check own files created by nosetests and add it into '.gitignore' before sending Pull requests
 
 
 
@@ -84,7 +92,7 @@ team and merged into Ursgal.
 
 
 Issues
-****** 
+******
 
 If you have an issue or problem, please first search all open issues and pull
 request to avoid duplication of efforts. If you have a fix for the problem you
@@ -124,7 +132,7 @@ DOI:10.1021/acs.jproteome.5b00860*
 Copyrights
 ***********
 
-Copyright 2014-2015 by authors and contributors in alphabetical order
+Copyright 2014-2017 by authors and contributors in alphabetical order
 
 * Christian Fufezan
 * Manuel Koesters
@@ -132,7 +140,6 @@ Copyright 2014-2015 by authors and contributors in alphabetical order
 * Johannes Leufken
 * Purevdulam Oyunchimeg
 * Stefan Schulze
-* Kazuhiko Sugimoto
 * Lukas Vaut
 
 

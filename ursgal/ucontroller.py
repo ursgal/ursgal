@@ -75,14 +75,16 @@ class UController(ursgal.UNode):
 
     def _after_init_meta_callback(self, *args, **kwargs):
         self.time_point( tag = 'init' )
-        self.print_header(
-            'UController initialized',
-            tag='init',
-            newline=False
-        )
-        ursgal_string = 'Ursgal v{0}  -  '\
-            'https://github.com/ursgal/ursgal'.format(ursgal.__version__)
-        print('         -\-{0: ^58}-/-\n'.format(ursgal_string))
+        self.verbose = kwargs.get('verbose', True)
+        if self.verbose:
+            self.print_header(
+                'UController initialized',
+                tag='init',
+                newline=False
+            )
+            ursgal_string = 'Ursgal v{0}  -  '\
+                'https://github.com/ursgal/ursgal'.format(ursgal.__version__)
+            print('         -\-{0: ^58}-/-\n'.format(ursgal_string))
         self.params = ParamsDict()
         self.init_kwargs = kwargs
         self.reset_controller()
@@ -90,7 +92,6 @@ class UController(ursgal.UNode):
         self.unodes = self._collect_all_unode_wrappers()
         # self.unodes = self.collect_all_unodes_from_kb()
         self.determine_availability_of_unodes()
-        self.verbose = kwargs.get('verbose', True)
 
         if self.verbose:
             self.show_unode_overview()
@@ -517,12 +518,13 @@ class UController(ursgal.UNode):
                     self.unodes[ engine ]['available'] = False
                     in_development = self.unodes[ engine ]['META_INFO']['in_development']
                     if not in_development:
-                        print(
-                            '[ WARNING! ] Engine {0} is not available in {1}'.format(
-                                engine,
-                                engine_folder_path
+                        if self.verbose:
+                            print(
+                                '[ WARNiNG! ] Engine {0} is not available in {1}'.format(
+                                    engine,
+                                    engine_folder_path
+                                )
                             )
-                        )
         return
 
     def engine_sanity_check( self, short_engine):
@@ -1663,7 +1665,6 @@ class UController(ursgal.UNode):
             print('We are compressing now and renaming the shiznit')
             exit(1)
 
-
     def search_mgf(self, input_file, engine, force=None, output_file_name=None):
         '''
         The UController search_mgf function
@@ -1856,6 +1857,64 @@ class UController(ursgal.UNode):
             force            = force,
         )
         return unified_search_results
+
+    def quantify(self, input_file, engine, force=None, output_file_name=None, multi=False):
+        """
+        The ucontroller quantify function
+
+        Performs a peptide/protein quantification using the specified quantitation engine and
+        mzML/ident file file. Produces a CSV file with peptide/protein quants in
+        the unified Ursgal CSV format.
+        see: :ref:`List of available engines<available-engines>`
+
+        Keyword Arguments:
+            input_file (str): The complete path to the mzML file.
+            engine (str): The name of the quantitation engine which should be
+                used, can also be a short version if this name is unambigous.
+            force (bool): (Re)do the analysis, even if output file
+                already exists.
+            output_file_name (str or None): Desired output file name
+                excluding path (optional). If None, output file name will
+                be auto-generated.
+
+        Example::
+
+            >>> uc = ursgal.UController(
+            ...    profile = 'LTQ XL high res',
+            ...    params  = {'evidence': 'BSA_idents.csv'}
+            ... )
+            >>> uc.quantify(
+            ...    input_file = 'BSA.mzML',
+            ...    engine     = 'pyQms_0_0_1'
+            ... )
+
+        Returns:
+            str: Path of the output file (unified CSV format)
+        """
+
+        # Verify that the specified engine is a valid UNode
+        engine_name = self.engine_sanity_check( engine )
+
+        self.input_file_sanity_check(
+            input_file,
+            extensions = ['mzml', 'mzml.gz', 'mzml.igz'],
+            multi=multi
+        )
+
+        answer = self.prepare_unode_run(
+            input_file,
+            output_file = output_file_name,
+            engine = engine_name,
+            force  = force
+        )
+
+        # in future unify output
+
+        report = self.run_unode_if_required(
+            force, engine_name, answer
+        )
+
+        return report['output_file']
 
     def get_mzml_that_corresponds_to_mgf(self, mgf_path):
         '''
@@ -3052,7 +3111,8 @@ True
   {custom_str} does not have the correct file extension.
   You specified the file
 \t{in_file}
-  but only files ending with {ok_extensions} are permitted.'''.format( **d )
+  but only files ending with {ok_extensions} are permitted for engine {0}
+  '''.format(engine, **d )
 
 
 class ParamsDict(dict):
