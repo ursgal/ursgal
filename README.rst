@@ -21,6 +21,13 @@ Introduction
    :alt: Join the chat at https://gitter.im/ursgal/ursgal
    :target: https://gitter.im/ursgal/ursgal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
+Version Warning
+***************
+
+Please note that this is the branch of the Ursgal version v0.5.0. 
+This branch is no longer supported.
+Please consider updating to the newest verion by (Ursgal master).
+
 Summary
 *******
 
