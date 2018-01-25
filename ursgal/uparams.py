@@ -3900,6 +3900,43 @@ ursgal_params = {
         'description' : \
             'MS2 resolution',
     },
+    'keep_column_names' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'csv2counted_results_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'csv2counted_results_style_1' : 'keep_column_names',
+        },
+        'utag' : [
+            'convertion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val' : None,
+            'item_title' : 'column name',
+            'item_type' : 'str',
+            'custom_val_max' : 10000,
+            'multiple_line' : False,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : [
+            'Protein ID',
+        ],
+        'description' : \
+            'List of column headers which are are not used as identifiers but kept in the output, '\
+            'e.g. when counting ["Sequence", "Modifications"] the column '\
+            '["Protein ID"] could be specified here. Multiple entries '\
+            'for one identifier (e.g. when identifier_column_names = ["Potein ID"] '\
+            'and keep_column_names = ["Sequence"]) are seperated by "<#>".',
+    },
     'kojak_diff_mods_on_xl' : {
         'edit_version' : 1.00,
         'available_in_unode' : [

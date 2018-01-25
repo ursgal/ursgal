@@ -63,7 +63,12 @@ correct_values_dict = {
 test_dict = {}
 csv_out = csv.DictReader(open(output_csv, 'r'))
 for line_dict in csv_out:
-    test_dict[line_dict['Protein ID#Charge']] = {
+    test_dict[
+        '#'.join([
+            line_dict['Protein ID'],
+            line_dict['Charge']
+        ])
+    ] = {
         'test' : line_dict['test'],
         'test2' : line_dict['test2'],
     }
