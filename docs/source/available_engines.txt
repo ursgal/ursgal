@@ -57,20 +57,41 @@ MSFragger
    :members:
 
 
+MODa 
+----
+
+.. autoclass:: ursgal.wrappers.moda_v1_51.moda_v1_51
+   :members:
+
+
+PIPI
+----
+
+.. autoclass:: ursgal.wrappers.pipi_1_3_0.pipi_1_3_0
+   :members:
+
+
 MS Amanda
 ---------
 
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5242.msamanda_1_0_0_5242
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9706.msamanda_2_0_0_9706
    :members:
 
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9695.msamanda_2_0_0_9695
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7504.msamanda_1_0_0_7504
    :members:
 
 .. autoclass:: ursgal.wrappers.msamanda_1_0_0_7503.msamanda_1_0_0_7503
    :members:
 
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7504.msamanda_1_0_0_7504
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
    :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5242.msamanda_1_0_0_5242
+   :members:
+
 
 MyriMatch
 ---------

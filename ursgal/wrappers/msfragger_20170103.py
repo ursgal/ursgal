@@ -18,7 +18,7 @@ class msfragger_20170103( ursgal.UNode ):
     Reference:
     Kong, A. T., Leprevost, F. V, Avtonomov, D. M., Mellacheruvu, D., and Nesvizhskii, A. I. (2017)
     MSFragger: ultrafast and comprehensive peptide identification in mass spectrometry–based
-    proteomics. Nat. Publ. Gr. 293
+    proteomics. Nature Methods 14
 
     Note:
         Addition of user amino acids not implemented yet. Only mzML search
