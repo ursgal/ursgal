@@ -947,12 +947,13 @@ class UController(ursgal.UNode):
                 output_file_name = output_file_name
             )
 
-        outfile = self.execute_unode(
-            input_file       = input_file,
-            engine           = engine,
-            force            = force,
-            output_file_name = output_file_name
-        )
+        else:
+            outfile = self.execute_unode(
+                input_file       = input_file,
+                engine           = engine,
+                force            = force,
+                output_file_name = output_file_name
+            )
 
         return outfile
 
