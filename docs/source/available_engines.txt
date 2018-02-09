@@ -8,8 +8,34 @@ Available Search Engines
 Protein Database Search Engines
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+MS Amanda
+---------
+
+Available MS Amanda versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9706.msamanda_2_0_0_9706
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9695.msamanda_2_0_0_9695
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7504.msamanda_1_0_0_7504
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7503.msamanda_1_0_0_7503
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5242.msamanda_1_0_0_5242
+   :members:
+
+
 MS-GF+
 ------
+
+Available MS-GF+ versions, starting with the newest version:
 
 .. autoclass:: ursgal.wrappers.msgfplus_v2017_01_27.msgfplus_v2017_01_27
    :members:
@@ -21,35 +47,6 @@ MS-GF+
    :members:
 
 
-X!Tandem
---------
-
-.. autoclass:: ursgal.wrappers.xtandem_alanine.xtandem_alanine
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_vengeance.xtandem_vengeance
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_piledriver.xtandem_piledriver
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_sledgehammer.xtandem_sledgehammer
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_jackhammer.xtandem_jackhammer
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_cyclone_2010.xtandem_cyclone_2010
-   :members:
-
-
-OMSSA
------
-
-.. autoclass:: ursgal.wrappers.omssa_2_1_9.omssa_2_1_9
-   :members:
-
-
 MSFragger 
 ---------
 
@@ -57,10 +54,27 @@ MSFragger
    :members:
 
 
-MODa 
+MODa
 ----
 
 .. autoclass:: ursgal.wrappers.moda_v1_51.moda_v1_51
+   :members:
+
+
+MyriMatch
+---------
+
+.. autoclass:: ursgal.wrappers.myrimatch_2_1_138.myrimatch_2_1_138
+   :members:
+
+.. autoclass:: ursgal.wrappers.myrimatch_2_2_140.myrimatch_2_2_140
+   :members:
+
+
+OMSSA
+-----
+
+.. autoclass:: ursgal.wrappers.omssa_2_1_9.omssa_2_1_9
    :members:
 
 
@@ -93,13 +107,27 @@ MS Amanda
    :members:
 
 
-MyriMatch
----------
+X!Tandem
+--------
 
-.. autoclass:: ursgal.wrappers.myrimatch_2_1_138.myrimatch_2_1_138
+Available X!Tandem versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.xtandem_alanine.xtandem_alanine
    :members:
 
-.. autoclass:: ursgal.wrappers.myrimatch_2_2_140.myrimatch_2_2_140
+.. autoclass:: ursgal.wrappers.xtandem_vengeance.xtandem_vengeance
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_piledriver.xtandem_piledriver
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_sledgehammer.xtandem_sledgehammer
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_jackhammer.xtandem_jackhammer
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_cyclone_2010.xtandem_cyclone_2010
    :members:
 
 
