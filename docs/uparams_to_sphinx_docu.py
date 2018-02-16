@@ -113,8 +113,8 @@ Available in unodes
         for unode in udict['available_in_unode']:
             uprint('* {0}'.format( unode ))
         uprint('''
-Ursgal value translations for *{0}*
-""""""""""""""""""""""""""""""""{1}
+Ursgal key translations for *{0}*
+""""""""""""""""""""""""""""""{1}
 '''.format( ursgal_param, '"'*len(ursgal_param)))
         len_longest = determine_longest_string( udict['ukey_translation']  )
         fmt = create_format_string( number_of_columns = 2 )
@@ -138,8 +138,8 @@ Ursgal value translations for *{0}*
         if len( udict['uvalue_translation'] ) == 0:
             continue
         uprint('''
-Ursgal key translations
-"""""""""""""""""""""""
+Ursgal value translations
+"""""""""""""""""""""""""
 ''')
         len_longest = determine_longest_string( udict['uvalue_translation']  )
         fmt = create_format_string(

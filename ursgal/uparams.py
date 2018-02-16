@@ -958,80 +958,29 @@ ursgal_params = {
             'best and secondbest PSM is not above the threshold, i.e. if '\
             'there are conflicting PSMs with similar scores.',
     },
-    'add_cterm_peptide' : {
-        'edit_version'   : 1.00,
-        'available_in_unode' : [
-            'msfragger_20170103',
-        ],
-        'default_value' : 0.0,
-        'description' :  ''' Statically add mass in Da to C-terminal of peptide ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'msfragger_style_1' : 'add_Cterm_peptide',
-        },
-        'utag' : [
-            'validation',
-        ],
-        'uvalue_option' : {
-            'none_val'  : None,
-            'max'       : 10000,
-            'min'       : 0,
-            'f-point'   : 1e-02,
-            'updownval' : 1,
-            'unit'      : ''
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : "float",
-    },
-    'add_nterm_peptide' : {
-        'edit_version'   : 1.00,
-        'available_in_unode' : [
-            'msfragger_20170103',
-        ],
-        'default_value' : 0.0,
-        'description' :  ''' Statically add mass in Da to N-terminal of peptide ''',
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'msfragger_style_1' : 'add_Nterm_peptide',
-        },
-        'utag' : [
-        ],
-        'uvalue_option' : {
-            'none_val'  : None,
-            'max'       : 10000,
-            'min'       : 0,
-            'f-point'   : 1e-02,
-            'updownval' : 1,
-            'unit'      : ''
-        },
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'float',
-    },
     'allow_multiple_variable_mods_on_residue' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
-        'default_value' : 1,
-        'description' :  ''' static mods are not considered ''',
+        'default_value' : True,
+        'description' :  ''' Static mods are not considered ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'allow_multiple_variable_mods_on_residue',
         },
         'utag' : [
+            'modifications'
         ],
         'uvalue_option' : {
-            'none_val'  : None,
-            'max'       : 1,
-            'min'       : 0,
-            'updownval' : 1,
-            'unit'      : ''
         },
         'uvalue_translation' : {
+            'msfragger_style_1' : {
+                False : 0,
+                True : 1,
+            }
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "bool",
     },
     'base_mz' : {
         'edit_version'   : 1.00,
@@ -1394,7 +1343,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
         ],
-        'default_value' : 0,
+        'default_value' : False,
         'description' :  ''' Specifies the trimming of a protein N-terminal methionine as a variable modification (0 or 1) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1403,15 +1352,14 @@ ursgal_params = {
         'utag' : [
         ],
         'uvalue_option' : {
-            'none_val'  : None,
-            'max'       : 1,
-            'min'       : 0,
-            'updownval' : 1,
-            'unit'      : ''
         },
         'uvalue_translation' : {
+            'msfragger_style_1' : {
+                False : 0,
+                True : 1,
+            }
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "bool",
     },
     'compensate_small_fasta' : {
         'edit_version'   : 1.00,
@@ -5289,8 +5237,8 @@ ursgal_params = {
         'description' : \
             'Modifications are given as a list of strings, each representing '\
             'the modification of one amino acid. The string consists of four '\
-            'informations seperated by comma: \n'\
-            '    \'amino acid, type, position, unimod name or id\'\n'\
+            'informations seperated by comma: \n\n'\
+            '    \'amino acid, type, position, unimod name or id\'\n\n'\
             '    amino acid  : specify the modified amino acid as a single '\
             'letter, use \'*\' if the amino acid is variable\n'\
             '    type        : specify if it is a fixed (fix) or potential '\
@@ -5301,7 +5249,7 @@ ursgal_params = {
             '    unimod name or id: specify the unimod PSI-MS Name '\
             'or unimod Accession # (see unimod.org)\n'\
             '\n'\
-            'Examples:\n'\
+            'Examples:\n\n'\
             '    [ \'M,opt,any,Oxidation\' ] - potential oxidation of Met at '\
             'any position within a peptide\n'\
             '    [ \'*,opt,Prot-N-term,Acetyl\' ] - potential acetylation of '\
@@ -5311,14 +5259,14 @@ ursgal_params = {
             '    [ \'C,fix,any,Carbamidomethyl\', \'N,opt,any,Deamidated\', '\
             '\'Q,opt,any,Deamidated\' ] - fixed carbamidomethylation of Cys '\
             'and potential deamidation of Asn and/or Gln at any position '\
-            'within a peptide\n'\
+            'within a peptide\n\n'\
             'Additionally, userdefined modifications can be given and are '\
             'written to a userdefined_unimod.xml in ursgal/kb/ext. '\
             'Userdefined modifications need to have a unique name instead of '\
             'the unimod name the chemical composition needs to be given as a '\
             'Hill notation on the fifth position in the string\n'\
             '\n'\
-            'Example:\n'\
+            'Example:\n\n'\
             '[ \'S,opt,any,New_mod,C2H5N1O3\' ]',
     },
     'mono_link_definition' : {
@@ -5537,7 +5485,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
         ],
-        'default_value' : 0,
+        'default_value' : 0.0,
         'description' :  ''' Ranks a zero-bin hit above all non-zero-bin hit if it has expectation less than this value. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5547,21 +5495,22 @@ ursgal_params = {
         ],
         'uvalue_option' : {
             'none_val'  : None,
-            'max'       : 1,
+            'max'       : 10000,
             'min'       : 0,
-            'updownval' : 1,
+            'f-point'   : 1e-02,
+            'updownval' : 0.1,
             'unit'      : ''
         },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "float",
     },
     'msfragger_zero_bin_mult_expect' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
-        'default_value' : 1,
+        'default_value' : 1.0,
         'description' :  ''' Multiplies expect value of PSMs in the zero-bin during results ordering (set to less than 1 for boosting) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5571,21 +5520,22 @@ ursgal_params = {
         ],
         'uvalue_option' : {
             'none_val'  : None,
-            'max'       : 10000000,
+            'max'       : 10000,
             'min'       : 0,
-            'updownval' : 1,
+            'f-point'   : 1e-02,
+            'updownval' : 0.1,
             'unit'      : ''
         },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "float",
     },
     'msfragger_add_topN_complementary' : {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
         ],
-        'default_value' : 0,
+        'default_value' : False,
         'description' :  ''' Inserts complementary ions corresponding to the top N most intense fragments in each experimental spectra. Useful for recovery of modified peptides near C-terminal in open search. Should be set to 0 (disabled) otherwise. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5594,15 +5544,14 @@ ursgal_params = {
         'utag' : [
         ],
         'uvalue_option' : {
-            'none_val'  : None,
-            'max'       : 10000000,
-            'min'       : 0,
-            'updownval' : 1,
-            'unit'      : ''
         },
         'uvalue_translation' : {
+            'msfragger_style_1' : {
+                False : 0,
+                True : 1,
+            }
         },
-        'uvalue_type' : "int",
+        'uvalue_type' : "bool",
     },
     'msfragger_min_fragments_modelling' : {
         'edit_version'   : 1.00,
