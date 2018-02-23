@@ -126,7 +126,9 @@ Did you misspell the field name?'''.format(
                             write_row_bools.add(False)
 
                     elif rule == 'contains_not':
-                        if value not in line_dict[dict_key]:
+                        if line_dict[dict_key] is None:
+                            write_row_bools.add(True)
+                        elif value not in line_dict[dict_key]:
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)

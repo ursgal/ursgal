@@ -16,7 +16,7 @@ class moda_v1_51(ursgal.UNode):
     """
     META_INFO = {
         'edit_version': 1.00,
-        'name': 'Moda',
+        'name': 'MODa',
         'version': 'v1.51',
         'release_date': '2012-4-1',
         'engine_type': {

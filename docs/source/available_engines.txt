@@ -55,7 +55,7 @@ MSFragger
 
 
 MODa
-____
+----
 
 .. autoclass:: ursgal.wrappers.moda_v1_51.moda_v1_51
    :members:
@@ -71,9 +71,6 @@ MyriMatch
    :members:
 
 
-.. _available_de_novo_engines:
-
-
 OMSSA
 -----
 
@@ -82,9 +79,31 @@ OMSSA
 
 
 PIPI
-____
+----
 
 .. autoclass:: ursgal.wrappers.pipi_1_3_0.pipi_1_3_0
+   :members:
+
+
+MS Amanda
+---------
+
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9706.msamanda_2_0_0_9706
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9695.msamanda_2_0_0_9695
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7504.msamanda_1_0_0_7504
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7503.msamanda_1_0_0_7503
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5242.msamanda_1_0_0_5242
    :members:
 
 
@@ -111,6 +130,8 @@ Available X!Tandem versions, starting with the newest version:
 .. autoclass:: ursgal.wrappers.xtandem_cyclone_2010.xtandem_cyclone_2010
    :members:
 
+
+.. _available_de_novo_engines:
 
 De Novo Search Engines
 ^^^^^^^^^^^^^^^^^^^^^^
