@@ -103,7 +103,7 @@ Ursgal Parameters
             desc = udict['description'].strip(),
             default_value = default_value,
             type = udict.get('uvalue_type', ''),
-            rerun = udict.get('trigger_rerun', 'False')
+            rerun = udict.get('triggers_rerun', 'False')
         ))
 
         uprint('''

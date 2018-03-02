@@ -1050,7 +1050,7 @@ ursgal_params = {
         },
         'default_value'  : 100000,
         'description' : \
-            'sets the number of sequences loaded in as a batch from the '\
+            'Sets the number of sequences loaded in as a batch from the '\
             'database file',
     },
     'batch_size_spectra' : {
@@ -1336,7 +1336,7 @@ ursgal_params = {
         },
         'default_value'  : 1.00794,
         'description' : \
-            'The mass added to the peptide N-terminus bz protein cleavage',
+            'The mass added to the peptide N-terminus by protein cleavage',
     },
     'clip_nterm_m' : {
         'edit_version'   : 1.00,
@@ -1574,7 +1574,7 @@ ursgal_params = {
             'Modifications'
         ],
         'description' : \
-            'List of column headers which are used for counting.'
+            'List of column headers which are used for counting. '
             'The combination of these headers creates the unique countable element.',
     },
     'count_by_file' : {
@@ -1597,7 +1597,7 @@ ursgal_params = {
         'default_value' : True,
         'description' : \
             'the number of unique hits for each identifier '
-            'is given in seperate columns for each raw file '
+            'is given in separate columns for each raw file '
             '(file name as defiened in Spectrum Title)',
     },
     'convert_to_sfinx' : {
@@ -1686,7 +1686,7 @@ ursgal_params = {
         },
         'default_value' : -1,
         'description' : \
-            'Number of used cpus/threads\n'
+            'Number of used cpus/threads\n\n'
             '    -1 : \'max - 1\'\n'
             '    >0 : cpu num',
     },
@@ -1713,8 +1713,8 @@ ursgal_params = {
         'description' : \
             'Cross-link and mono-link masses allowed.\n'\
             'May have more than one of each parameter.\n'\
-            'Format for cross_link is: \n'\
-            '    **[amino acids] [amino acids] [mass mod] [identifier]**\n'\
+            'Format for cross_link is: \n\n'\
+            '**[amino acids] [amino acids] [mass mod] [identifier]**\n\n'\
             'One or more amino acids (uppercase only!!) can be specified for '\
             'each linkage moiety. Use lowercase \'n\' or \'c\' to indicate '\
             'protein N-terminus or C-terminus',
@@ -1745,10 +1745,10 @@ ursgal_params = {
         },
         'default_value' : None,
         'description' : \
-            'Rules are defined as list of lists with three elements:\n'\
-            '1. the column name/csv fieldname,\n'\
-            '2. the rule,\n'\
-            '3.the value which should be compared\n'\
+            'Rules are defined as list of lists with three elements:\n\n'\
+            '1. the column name/csv fieldname,\n\n'\
+            '2. the rule,\n\n'\
+            '3. the value which should be compared\n\n'\
             'e.g.: [\'Is decoy\', \'equals\', \'false\']'
     },
     'database' : {
@@ -1813,8 +1813,7 @@ ursgal_params = {
         },
         'default_value' : None,
         'description' : \
-            'Path to database file containing protein sequences in fasta format\n'\
-            '    \'\' : None',
+            'Path to database file containing protein sequences in fasta format.'
     },
     'database_taxonomy' : {
         'edit_version' : 1.00,
@@ -1870,7 +1869,7 @@ ursgal_params = {
         },
         'default_value' : 'shuffle_peptide',
         'description' : \
-            'Decoy database: Creates a target decoy database based on '\
+            'Decoy database: creates a target decoy database based on '\
             'shuffling of peptides (shuffle_peptide) or complete reversing '\
             'the protein sequence (reverse_protein).',
     },
@@ -2023,10 +2022,8 @@ ursgal_params = {
         'default_value' : None,
         'description' : \
             'Directory containing the model files for PepNovo. If \'None\', '\
-            'it is supposed to be in :\n'\
-            '    resources/<platform>/<architecture>/pepnovo_3_1\n'\
-            '\n'\
-            '    \'\' : None',
+            'it is supposed to be in :\n\n'\
+            'resources/<platform>/<architecture>/pepnovo_3_1'\
     },
     'engine_internal_decoy_generation' : {
         'edit_version' : 1.00,

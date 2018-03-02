@@ -215,6 +215,16 @@ def set_uparams_dropdown(selected_uparams):
 
 
 @app.callback(
+    dash.dependencies.Output('params', 'disabled'),
+    [dash.dependencies.Input('uparams_radio', 'value'), ])
+def set_uparams_dropdown(selected_uparams):
+    if selected_uparams == 'all_uparams':
+        return True
+    if selected_uparams == 'select_uparams':
+        return False
+
+
+@app.callback(
     dash.dependencies.Output('params', 'value'),
     [dash.dependencies.Input('uparams_radio', 'value'), ])
 def set_engines_value(selected_uparams):
@@ -235,6 +245,16 @@ def set_engines_dropdown(selected_engines):
 
 
 @app.callback(
+    dash.dependencies.Output('engine', 'disabled'),
+    [dash.dependencies.Input('engines_radio', 'value'), ])
+def set_engines_dropdown(selected_engines):
+    if selected_engines == 'all_engines':
+        return True
+    if selected_engines == 'select_engines':
+        return False
+
+
+@app.callback(
     dash.dependencies.Output('engine', 'value'),
     [dash.dependencies.Input('engines_radio', 'value'), ])
 def set_engines_value(selected_engines):
@@ -252,6 +272,16 @@ def set_engines_dropdown(selected_tags):
         return [{'disabled': True}]
     if selected_tags == 'select_tags':
         return [{'label': i, 'value': i} for i in sorted(available_tags) if i != '']
+
+
+@app.callback(
+    dash.dependencies.Output('tag', 'disabled'),
+    [dash.dependencies.Input('tags_radio', 'value'), ])
+def set_engines_dropdown(selected_tags):
+    if selected_tags == 'all_tags':
+        return True
+    if selected_tags == 'select_tags':
+        return False
 
 
 @app.callback(
@@ -312,11 +342,11 @@ def update_text(selected_engines, selected_uparams, selected_tags, selected_text
             '''
 ## {0}
 
-> {desc}
+{desc}
 
-> **Default value**: {default_value} \n
-> **type**: {type} \n
-> **triggers rerun**: {rerun} \n
+**Default value**: {default_value} \n
+**type**: {type} \n
+**triggers rerun**: {rerun} \n
 '''.format(
                 ursgal_param,
                 desc=udict['description'].strip(),
