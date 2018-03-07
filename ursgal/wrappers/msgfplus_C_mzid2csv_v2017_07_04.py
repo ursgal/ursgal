@@ -225,7 +225,7 @@ class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
                         + dict_2_write['Sequence'][stop:]
                     match = mod_pattern.search(dict_2_write['Sequence'])
                 dict_2_write['Modifications']     = ';'.join( extracted_mods )
-                dict_2_write['Raw data location'] = dict_2_write['Raw data location'].replace('_tmp.mgf', '')
+                dict_2_write['Raw data location'] = dict_2_write['Raw data location'].replace('_tmp.mgf', '').replace('.mgf', '')
                 dict_2_write['Spectrum Title']    = '{0}.{1}.{1}.{2}'.format(
                     dict_2_write['Raw data location'],
                     dict_2_write['Spectrum ID'],
