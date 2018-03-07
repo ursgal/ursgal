@@ -153,7 +153,7 @@ for which the corresponding parameters should be displayed
         dcc.Checklist(
             id='text_options',
             options=[
-                {'label': 'Show Unodes for each parameter',
+                {'label': 'Show UNodes for each parameter',
                     'value': 'available_unodes'},
                 {'label': 'Show Ursgal tags',
                     'value': 'show_utags'},
@@ -358,7 +358,7 @@ def update_text(selected_engines, selected_uparams, selected_tags, selected_text
         if 'available_unodes' in selected_text_options:
             text.append(
                 '''
-### Available in unodes:
+### Available in UNodes:
 ''')
             for unode in udict['available_in_unode']:
                 text.append('* {0}'.format(unode))
