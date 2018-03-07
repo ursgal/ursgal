@@ -48,18 +48,38 @@ def main(
         scan_skip_modulo_step = None,
         ms_level              = 2,
     ):
+    
+    import pkg_resources
+    pymzml_release_version = pkg_resources.get_distribution("pymzml").version
+    pymzml_major_version_number = int(pymzml_release_version[0])
 
-    print('Converting file:\n\tmzml : {0}\n\tto\n\tmgf : {1}'.format(
-        mzml,
-        mgf,
-    ))
+    if pymzml_major_version_number == 2:
+        reader_kwargs       = {}
+        pymzml_generation_2 = True
+    else: 
+        reader_kwargs       = {
+            'extraAccessions':[ ('MS:1000016', ['value', 'unitName'] )],
+            'obo_version' : '1.1.0'
+        }
+        pymzml_generation_2 = False
+
+    print(
+        'Ursgal is using pymzML version: {0}'.format(
+            pymzml_release_version
+        )
+    )
+    print(
+        'Converting file:\n\tmzml : {0}\n\tto\n\tmgf : {1}'.format(
+            mzml,
+            mgf,
+        )
+    )
     mzml_name_base = _determine_mzml_name_base( mzml, prefix )
     # rt_lookup = mzml_name_base + '_rt_lookup.pkl'
     oof = open( mgf , 'w' )
     run = pymzml.run.Reader(
         mzml,
-        extraAccessions=[ ('MS:1000016', ['value', 'unitName'] )],
-        obo_version = '1.1.0'
+        **reader_kwargs
     )
     tmp = {
         'rt_2_scan' : {},
@@ -86,12 +106,30 @@ def main(
                 end = '\r'
             )
 
-        # if n >= 1000:
-        #     break
-        if spec['ms level'] != ms_level:
+        if pymzml_generation_2:
+            spec_ms_level = spec.ms_level
+            unit          = 'minute'
+            scan_time     = spec.scan_time
+            peaks_2_write = spec.peaks('centroided')
+            spectrum_id   = spec.ID
+
+            if spec_ms_level != 1:
+                precursor_mz     = spec.selected_precursors[0]['mz']
+                precursor_charge = spec.selected_precursors[0]['charge']
+        else:
+            spec_ms_level    = spec['ms level']
+            scan_time, unit  = spec['scan time']
+            peaks_2_write    = spec.centroidedPeaks
+            spectrum_id      = spec['id']
+
+            if spec_ms_level != 1:
+                precursor_mz     = spec['precursors'][0]['mz']
+                precursor_charge = spec['precursors'][0]['charge']
+
+
+        if spec_ms_level != ms_level:
             continue
-        scan_time, unit = spec['scan time']
-        spectrum_id = spec['id']
+        # spectrum_id = spec['id']
         if scan_inclusion_list is not None:
             if int(spectrum_id) not in scan_inclusion_list:
                 continue
@@ -104,33 +142,36 @@ def main(
             if mgf_entries % scan_skip_modulo_step != 0:
                 continue
 
-        tmp['rt_2_scan'][ scan_time ] = '{id}'.format(**spec)
-        tmp['scan_2_rt'][ '{id}'.format(**spec) ] = scan_time
+        tmp['rt_2_scan'][ scan_time ] = '{0}'.format(spectrum_id)
+        tmp['scan_2_rt'][ '{0}'.format(spectrum_id) ] = scan_time
         tmp['unit'] = unit
 
         print('BEGIN IONS', file=oof)
         print(
             'TITLE={0}.{1}.{1}.{2}'.format(
                 mzml_name_base,
-                spec['id'],
-                spec['precursors'][0]['charge'],
+                spectrum_id,
+                precursor_charge,
             ),
             file = oof
         )
-        print('SCANS={id}'.format(**spec), file=oof)
+        print('SCANS={0}'.format(spectrum_id), file=oof)
 
-        scan_time, unit = spec['scan time']
+        # scan_time, unit = spec['scan time']
         if unit == 'second':
             scan_time = float(scan_time)
         else:
             scan_time = float(scan_time) * 60
         print(
             'RTINSECONDS={0}'.format(
-                scan_time
+                round(
+                    scan_time,
+                    11
+                )
             ),
             file = oof
         )
-        precursor_mz = spec['precursors'][0]['mz']
+        # precursor_mz = spec['precursors'][0]['mz']
 
         precursor_mz += precursor_mz * mz_correction_factor
         print(
@@ -139,15 +180,15 @@ def main(
             ),
             file = oof
         )
-        if spec['precursors'][0]['charge'] is not None:
+        if precursor_charge is not None:
             print(
                 'CHARGE={0}'.format(
-                    spec['precursors'][0]['charge']
+                    precursor_charge
                 ),
-                file=oof
+                file = oof
             )
 
-        for mz, intensity in spec.centroidedPeaks:
+        for mz, intensity in peaks_2_write:
             # if fragment_ppm_offset is not None:
             mz += mz * mz_correction_factor
             print(
