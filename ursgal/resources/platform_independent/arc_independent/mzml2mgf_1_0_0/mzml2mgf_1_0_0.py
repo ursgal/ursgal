@@ -95,12 +95,12 @@ def main(
         mz_correction_factor = machine_offset_in_ppm*1e-6
     else:
         mz_correction_factor = 0
-
+    mzml_basename = os.path.basename( mzml )
     for n, spec in enumerate(run):
         if n % 500 == 0:
             print(
                 'File : {0:^40} : Processing spectrum {1}'.format(
-                    os.path.basename( mzml ),
+                    mzml_basename,
                     n,
                 ),
                 end = '\r'
@@ -146,7 +146,10 @@ def main(
         tmp['scan_2_rt'][ '{0}'.format(spectrum_id) ] = scan_time
         tmp['unit'] = unit
 
-        print('BEGIN IONS', file=oof)
+        print(
+            'BEGIN IONS',
+            file = oof
+        )
         print(
             'TITLE={0}.{1}.{1}.{2}'.format(
                 mzml_name_base,
@@ -155,7 +158,12 @@ def main(
             ),
             file = oof
         )
-        print('SCANS={0}'.format(spectrum_id), file=oof)
+        print(
+            'SCANS={0}'.format(
+                spectrum_id
+            ),
+            file = oof
+        )
 
         # scan_time, unit = spec['scan time']
         if unit == 'second':
@@ -195,15 +203,24 @@ def main(
                 '{0:<10.{mzDecimals}f} {1:<10.{intensityDecimals}f}'.format(
                     mz,
                     intensity,
-                    mzDecimals = mz_decimals,
+                    mzDecimals        = mz_decimals,
                     intensityDecimals = i_decimals
                 ),
                 file = oof
             )
 
-        print('END IONS\n', file = oof )
+        print(
+            'END IONS\n',
+            file = oof
+        )
     print('')
-    print('Wrote {0} mgf entries'.format( mgf_entries))
+    print(
+        'Wrote {0} mgf entries to file {1}'.format(
+            mgf_entries,
+            mgf
+        )
+    )
+
     oof.close()
     return tmp
 
