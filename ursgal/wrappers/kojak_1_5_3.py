@@ -227,8 +227,8 @@ percolator_version  =   {kojak_percolator_version}
 enrichment      =   {kojak_enrichment}       #Values between 0 and 1 to describe 18O APE.
                             #For example, 0.25 equals 25 APE.
 instrument      =   {instrument}       #Values are: 0=Orbitrap, 1=FTICR (such as Thermo LTQ-FT)
-MS1_centroid    =   {ms1_centroided}       #0=no, 1=yes
-MS2_centroid    =   {ms2_centroided}        #0=no, 1=yes
+MS1_centroid    =   {ms1_is_centroided}       #0=no, 1=yes
+MS2_centroid    =   {ms2_is_centroided}        #0=no, 1=yes
 MS1_resolution  =   {ms1_resolution}    #Resolution at 400 m/z, value ignored if data are
                             #already centroided
 MS2_resolution  =   {ms2_resolution}    #Resolution at 400 m/z, value ignored if data are
