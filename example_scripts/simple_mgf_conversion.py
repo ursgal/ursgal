@@ -45,17 +45,6 @@ def main():
         engine     = 'mzml2mgf_1_0_0'
     )
 
-    # mgf_file = uc.convert(
-    #     input_file = '../tests/data/test_Creinhardtii_QE_pH8.mzML',  # from OpenMS example files
-    #     engine     = 'mzml2mgf_1_0_0'
-    # )
-
-    # mgf_file = uc.convert(
-    #     input_file = '../tests/data/test_Creinhardtii_QE_pH11.mzML',  # from OpenMS example files
-    #     engine     = 'mzml2mgf_1_0_0'
-    # )
-    
-
 if __name__ == '__main__':
     print(__doc__)
     main()

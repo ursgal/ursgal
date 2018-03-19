@@ -105,30 +105,27 @@ def main(
                 ),
                 end = '\r'
             )
+        # works for both generations of pymzml
+        spec_ms_level    = spec['ms level']
+
+        if spec_ms_level != ms_level:
+            continue
 
         if pymzml_generation_2:
-            spec_ms_level = spec.ms_level
             unit          = 'minute'
             scan_time     = spec.scan_time
             peaks_2_write = spec.peaks('centroided')
             spectrum_id   = spec.ID
 
-            if spec_ms_level != 1:
-                precursor_mz     = spec.selected_precursors[0]['mz']
-                precursor_charge = spec.selected_precursors[0]['charge']
+            precursor_mz     = spec.selected_precursors[0]['mz']
+            precursor_charge = spec.selected_precursors[0]['charge']
         else:
-            spec_ms_level    = spec['ms level']
             scan_time, unit  = spec['scan time']
             peaks_2_write    = spec.centroidedPeaks
             spectrum_id      = spec['id']
 
-            if spec_ms_level != 1:
-                precursor_mz     = spec['precursors'][0]['mz']
-                precursor_charge = spec['precursors'][0]['charge']
-
-
-        if spec_ms_level != ms_level:
-            continue
+            precursor_mz     = spec['precursors'][0]['mz']
+            precursor_charge = spec['precursors'][0]['charge']
         # spectrum_id = spec['id']
         if scan_inclusion_list is not None:
             if int(spectrum_id) not in scan_inclusion_list:
