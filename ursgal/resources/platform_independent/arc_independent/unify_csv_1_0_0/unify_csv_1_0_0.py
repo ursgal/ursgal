@@ -364,6 +364,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     end = '\r'
                 )
 
+            ##########################
+            # Spectrum Title block
+            # reformating Spectrum Title, 
             if line_dict['Spectrum Title'] != '':
                 '''
                 Valid for:
@@ -452,6 +455,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             input_file_basename
                         )
                     )
+                    
+            #END Spectrum Title block
+            ##########################
 
             retention_time_in_minutes = \
                 scan_rt_lookup[ input_file_basename_for_rt_lookup ][ 'scan_2_rt' ]\
