@@ -33,14 +33,14 @@ class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
         'output_suffix'      : None,
         'include_in_git'     : False,
         'in_development'     : False,
-        'distributable'  : False,
+        'distributable'      : True,
         'utranslation_style' : 'msgfplus_style_1',
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'     : 'MzidToTsvConverter.exe',
                     'url'     : '',
-                    'zip_md5' : '',
+                    'zip_md5' : 'f2f3c2e685fbc756c25ea63030dbf52d',
                 },
             },
         },

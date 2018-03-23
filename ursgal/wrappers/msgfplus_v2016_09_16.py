@@ -27,6 +27,7 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
+        'distributable'               : True,
         'utranslation_style'          : 'msgfplus_style_1',
         'engine' : {
             'platform_independent' : {

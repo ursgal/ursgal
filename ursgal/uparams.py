@@ -3174,6 +3174,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'msfragger_20170103',
             'msgfplus_C_mzid2csv_v2017_07_04',
+            'msgfplus_C_mzid2csv_v1_2_0',
             'pipi_1_3_0',
         ],
         'triggers_rerun' : True,

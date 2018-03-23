@@ -39,13 +39,13 @@ class msgfplus_v2018_01_30( msgf ):
         'in_development'              : False,
         'include_in_git'              : False,
         'utranslation_style'          : 'msgfplus_style_1',
-        'distributable'           : False,
+        'distributable'               : True,
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
                     'url'            : '',
-                    'zip_md5'        : '',
+                    'zip_md5'        : '165b09927b686e80de85d31c20c6a2f8',
                     'additional_exe' : [],
                 },
             },
