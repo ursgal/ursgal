@@ -91,7 +91,7 @@ def main():
         )
         all_res.append(fil)
 
-    uc.params['quantitation_evidences'] = all_res
+    uc.params['quantification_evidences'] = all_res
     uc.params['label'] = '15N'
     uc.params['label_percentile'] = [0, 0.99]
     uc.params['evidence_score_field'] = 'combined PEP'

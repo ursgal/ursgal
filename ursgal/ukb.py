@@ -293,7 +293,7 @@ ENGINE_TYPES = {
     'misc_engine'                   : 'execute_misc_engine',
     'meta_engine'                   : 'combine_search_results',
     'protein_database_search_engine': 'search_mgf',
-    'quantitation_engine'           : 'quantify',
+    'quantification_engine'         : 'quantify',
     'spectral_library_search_engine': 'search_mgf',
     '_test'                         : 'execute_misc_engine',
     'validation_engine'             : 'validate',

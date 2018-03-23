@@ -62,8 +62,8 @@ def print_current_params( params, old_params=None ):
     print('\tCurrent parameters:')
     print('\t-->>')
     for k, v in sorted( params.items() ):
-        if k in params['skipped_params_for_pprint_output']:
-            continue
+        # if k in params['skipped_params_for_pprint_output']:
+        #     continue
         if old_params is not None and k in old_params.keys():
             if params[ k ] == old_params[k]:
                 skipped_unchanged_params += 1

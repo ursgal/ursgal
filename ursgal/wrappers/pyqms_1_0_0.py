@@ -15,7 +15,7 @@ class pyqms_1_0_0(ursgal.UNode):
         'version'            : '1.0.0',
         'release_date'       : None,
         'engine_type'        : {
-            'quantitation_engine' : True
+            'quantification_engine' : True
         },
         'utranslation_style' : 'pyqms_style_1',
         'citation'           : 'Leufken J, Niehues A, Sarin LP, Wessel F, Hippler M, Leidel SA, Fufezan C (2017) pyQms enables universal and accurate quantification of mass spectrometry data',
@@ -41,7 +41,7 @@ class pyqms_1_0_0(ursgal.UNode):
 
     def _execute(self):
         """run."""
-        print('[ -ENGINE- ] Executing quantitation ..')
+        print('[ -ENGINE- ] Executing quantification ..')
         self.time_point(tag='execution')
 
         main = self.import_engine_as_python_function()
@@ -125,7 +125,7 @@ class pyqms_1_0_0(ursgal.UNode):
             mzml_file=mzml_files,
             output_file=output_file,
             fixed_labels=fixed_labels,
-            evidence_files=self.params['quantitation_evidences'],
+            evidence_files=self.params['quantification_evidences'],
             molecules=self.params['molecules_to_quantify'],
             rt_border_tolerance=self.params['rt_border_tolerance'],
             label=self.params['label'],

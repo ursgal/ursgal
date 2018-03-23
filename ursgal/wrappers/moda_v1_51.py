@@ -25,7 +25,7 @@ class moda_v1_51(ursgal.UNode):
         'input_extensions': ['.mgf', '.pkl', '.dta', '.mzXML'],
         'output_extensions': ['.csv'],
         'create_own_folder': True,
-        'in_development': True,
+        'in_development': False,
         'include_in_git': False,
         'distributable': False,
         'utranslation_style': 'moda_style_1',

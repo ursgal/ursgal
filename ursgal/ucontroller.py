@@ -114,11 +114,6 @@ class UController(ursgal.UNode):
         )
         for wrapper_file in glob.glob( wrappers_path_glob ):
             filename = os.path.basename( wrapper_file )
-            # if 'omssa' not in wrapper_file:
-            #     self.print_info('Skipping {0} for dev purpose ...'.format(
-            #         filename
-            #     ))
-            #     continue
             if filename.startswith('__'):
                 continue
             if wrapper_file.startswith('.'):
@@ -725,7 +720,6 @@ class UController(ursgal.UNode):
                 engine=engine_name,
                 multi=True
             )
-
             answer = self.prepare_unode_run(
                 input_files,
                 output_file = output_file_name,
@@ -940,7 +934,8 @@ class UController(ursgal.UNode):
         Returns:
             str: Path of the output file
         '''
-        if 'merge_csvs' in engine:
+        engine_name = self.engine_sanity_check(engine)
+        if 'merge_csvs' in engine_name:
             outfile = self.merge_csvs(
                 input_file,
                 force = force,
@@ -1330,7 +1325,6 @@ class UController(ursgal.UNode):
             )
 
         self.io['output']['finfo'] = self.set_file_info_dict( output_file )
-
         self.take_care_of_params_and_stats( io_mode = 'output')
         # pprint.pprint( self.io )
         # exit(1)
@@ -1473,7 +1467,7 @@ class UController(ursgal.UNode):
 
         # don't build name from history, just take the last file root:
         file_name_blocks.append(
-            self.io['input']['finfo']['file_root']
+            self.io['input']['finfo']['file_root'].strip('.u')
         )
         # add uNodes name as defined in kb
         # if there is no entry called 'output_suffix', the engine/node
@@ -1887,14 +1881,14 @@ class UController(ursgal.UNode):
         """
         The ucontroller quantify function
 
-        Performs a peptide/protein quantification using the specified quantitation engine and
+        Performs a peptide/protein quantification using the specified quantification engine and
         mzML/ident file file. Produces a CSV file with peptide/protein quants in
         the unified Ursgal CSV format.
         see: :ref:`List of available engines<available-engines>`
 
         Keyword Arguments:
             input_file (str): The complete path to the mzML file.
-            engine (str): The name of the quantitation engine which should be
+            engine (str): The name of the quantification engine which should be
                 used, can also be a short version if this name is unambigous.
             force (bool): (Re)do the analysis, even if output file
                 already exists.
@@ -2395,7 +2389,6 @@ class UController(ursgal.UNode):
                 '''
 
         for root_dir, folder_list, file_list in os.walk(root_resource_folder):
-            # print(root,folder)
             engine = os.path.split(root_dir)[-1]
             if engine in self.unodes.keys():
                 # we do not include binaries in the repository
