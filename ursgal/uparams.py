@@ -640,6 +640,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'mzml2mgf_1_0_0',
+            'mzml2mgf_2_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -4372,6 +4373,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
+            'mzml2mgf_2_0_0',
             'pyqms_1_0_0'
         ],
         'triggers_rerun' : True,
@@ -6214,6 +6216,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
+            'mzml2mgf_2_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -6289,6 +6292,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
+            'mzml2mgf_2_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7934,6 +7938,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
+            'mzml2mgf_2_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7970,6 +7975,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
+            'mzml2mgf_2_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8005,6 +8011,7 @@ ursgal_params = {
         'edit_version' : 1.01,
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
+            'mzml2mgf_2_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
