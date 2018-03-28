@@ -7552,14 +7552,55 @@ ursgal_params = {
         'description' : \
             'This delimiter seperates protein IDs/names in the unified csv',
     },
+    'psm_defining_colnames' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'psm_defining_colnames',
+        },
+        'utag' : [
+            'conversion',
+            'output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val' : None,
+            'item_title' : 'column_name',
+            'item_type' : 'str',
+            'multiple_line' : False,
+            'custom_val_max': 10000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : [
+            'Spectrum Title',
+            'Sequence',
+            'Modifications',
+            'Mass difference',
+            'Charge',
+            'Is decoy',
+        ],
+        'description' : \
+            'List of column names that are used to define unique PSMs and to merge multiple lines of the same PSM (if specified). The validation_score_field is automatically added to this list. ',
+    },
     'psm_merge_delimiter' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
+            'ucontroller',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'unify_csv_style_1' : 'psm_merge_delimiter',
+            'ucontroller_style_1' : 'psm_merge_delimiter',
         },
         'utag' : [
             'output',
