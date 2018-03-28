@@ -3176,6 +3176,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msgfplus_C_mzid2csv_v2017_07_04',
             'msgfplus_C_mzid2csv_v1_2_0',
+            'msgfplus_C_mzid2csv_v1_2_1',
             'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
