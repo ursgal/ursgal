@@ -1,4 +1,4 @@
-pymzml
+pymzml >= 0.7.6,<=0.9
 nose >=1.3
 regex
 pyahocorasick >= 1.1.4; sys_platform != 'win32'
