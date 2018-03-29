@@ -50,26 +50,33 @@ results = ursgal.ucore.merge_duplicate_psm_rows(
 
 merge_line_dicts = []
 for line_dict in csv.DictReader(open(results, 'r')):
-    merge_line_dicts.append(line_dict)
+    merge_line_dicts.append(sorted(line_dict.items()))
+sorted_merge_line_dicts = sorted(merge_line_dicts)
 
 expected_line_dicts = []
 for line_dict in csv.DictReader(open(expected_csv, 'r')):
-    expected_line_dicts.append(line_dict)
-
+    expected_line_dicts.append(sorted(line_dict.items()))
+sorted_expected_line_dicts = sorted(expected_line_dicts)
 
 def merge_duplicate_rows_test():
     assert max(psm_counter.values()) > 1, '''
     count_distinct_psms is incorrect:
     No entries > 1
     '''
-    for test_id, test_dict in enumerate(merge_line_dicts):
-        expected_dict = expected_line_dicts[test_id]
-        yield merge_rows, test_dict, expected_dict
+    for test_id, test_dict_items in enumerate(sorted_merge_line_dicts):
+        expected_dict_items = sorted_expected_line_dicts[test_id]
+        yield merge_rows, test_dict_items, expected_dict_items
 
 
-def merge_rows(test_dict, expected_dict):
-    for key, test_value in test_dict.items():
-        expected_value = expected_dict[key]
+def merge_rows(test_dict_items, expected_dict_items):
+    for i, test_item in enumerate(test_dict_items):
+        test_key, test_value = test_item
+        expected_item = expected_dict_items[i]
+        expected_key, expected_value = expected_item
+        assert test_key == expected_key, '''
+        test_key = {0}
+        expected_key = {1}
+        '''.format(test_key, expected_key)
         assert test_value == expected_value, '''
         test_value = {0}
         expected_value = {1}
