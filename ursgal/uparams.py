@@ -36,7 +36,7 @@ ursgal_params = {
             formatting labeling percentile float""",
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1' : 'PECENTILE_FORMAT_STRING'
+            'pyqms_style_1' : 'PERCENTILE_FORMAT_STRING'
         },
         'utag': [
             'quantification',
@@ -144,7 +144,7 @@ ursgal_params = {
         'description': """ Min number of matched isotopologues for pyqms to consider for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'MININUM_NUMBER_OF_MATCHES_ISOTOPOLOGUES'
+            'pyqms_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES'
         },
         'utag': [
             'quantification',
@@ -579,7 +579,7 @@ ursgal_params = {
         'description':  ''' minimum required pyQms m_score for a quant event to be evaluated ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'm_score_cutoff'
+            'pyqms_style_1': 'M_SCORE_THRESHOLD'
         },
         'utag': [
             'quantification',
