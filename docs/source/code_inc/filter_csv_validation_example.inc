@@ -33,12 +33,12 @@
 	        'filter_csv_for_mods_example_omssa_2_1_9_pmap_unified_percolator_2_08_validated.csv'
 	    )
 	    uc = ursgal.UController(
-	        params = params
+	        params=params
 	    )
 	
-	    filtered_csv = uc.filter_csv(
-	        input_file = csv_file_to_filter,
-	
+	    filtered_csv = uc.execute_misc_engine(
+	        input_file=csv_file_to_filter,
+	        engine='filter_csv_1_0_0',
 	    )
 	
 	

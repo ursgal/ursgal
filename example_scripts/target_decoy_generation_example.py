@@ -36,7 +36,7 @@ def main():
     )
 
     new_target_decoy_db_name = uc.execute_misc_engine(
-        input_files=fasta_database_list,
+        input_file=fasta_database_list,
         engine='generate_target_decoy_1_0_0',
         output_file_name='my_BSA_target_decoy.fasta',
     )
