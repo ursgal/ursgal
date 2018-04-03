@@ -20,15 +20,16 @@ def main():
     Creates a Venn diagram with the peptides obtained by the different versions.
 
     Note:
-        At the moment 5 XTandem versions are incorporated in Ursgal.
+        At the moment in total 6 XTandem versions are incorporated in Ursgal.
 
     '''
     engine_list = [
-        'xtandem_cyclone',
+        # 'xtandem_cyclone',
         'xtandem_jackhammer',
         'xtandem_sledgehammer',
         'xtandem_piledriver',
-        'xtandem_vengeance'
+        'xtandem_vengeance',
+        'xtandem_alanine',
 
     ]
 

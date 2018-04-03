@@ -72,6 +72,9 @@ def main():
     if 'msgfplus_v2017_01_27' in uc.unodes.keys():
         if uc.unodes['msgfplus_v2017_01_27']['available']:
             engine_list.append('msgfplus_v2017_01_27')
+    if 'msgfplus_v2018_01_30' in uc.unodes.keys():
+        if uc.unodes['msgfplus_v2018_01_30']['available']:
+            engine_list.append('msgfplus_v2018_01_30')
 
     if 'msgfplus_C_mzid2csv_v2017_07_04' in uc.unodes.keys():
         if uc.unodes['msgfplus_C_mzid2csv_v2017_07_04']['available']:

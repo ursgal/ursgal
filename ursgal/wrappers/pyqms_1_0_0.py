@@ -24,7 +24,7 @@ class pyqms_1_0_0(ursgal.UNode):
         'create_own_folder'  : True,
         'in_development'     : False,
         'include_in_git'     : False,
-        'distributable'      : True,
+        'distributable'      : False,
         # Download Information
         'engine'             : {
             'platform_independent' : {
