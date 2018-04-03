@@ -10,11 +10,12 @@ import re
 import pprint
 import gzip
 import subprocess
+# from .msgfplus_C_mzid2csv_v2017_07_04 import msgfplus_C_mzid2csv_v2017_07_04 as msgfc
 
 
-class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
+class msgfplus_C_mzid2csv_v1_2_1( ursgal.UNode ):
     """
-    msgfplus_C_mzid2csv_v2017_07_04 UNode
+    msgfplus_C_mzid2csv_v1.2.1 UNode
     Parameter options at https://omics.pnl.gov/software/ms-gf
 
     Reference:
@@ -23,8 +24,8 @@ class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
     META_INFO = {
         'edit_version'       : 1.00,
         'name'               : 'msgfplus_C_mzid2csv',
-        'version'            : 'v2017.07.04',
-        'release_date'       : '2017-7-04',
+        'version'            : 'v1.2.1',
+        'release_date'       : '2018-03-28',
         'engine_type' : {
             'converter'     : True
         },
@@ -40,7 +41,7 @@ class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
                 'arc_independent' : {
                     'exe'     : 'MzidToTsvConverter.exe',
                     'url'     : '',
-                    'zip_md5' : 'f2f3c2e685fbc756c25ea63030dbf52d',
+                    'zip_md5' : 'bddd04bcba2a72429f7d892a09e98ded'
                 },
             },
         },
@@ -50,9 +51,8 @@ class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
             'of CID, ETD, and CID/ETD Pairs of Tandem Mass Spectra: '\
             'Applications to Database Search.',
     }
-
     def __init__(self, *args, **kwargs):
-        super(msgfplus_C_mzid2csv_v2017_07_04, self).__init__(*args, **kwargs)
+        super(msgfplus_C_mzid2csv_v1_2_1, self).__init__(*args, **kwargs)
         if sys.platform in ['win32']:
             self.dependencies_ok = True
         else:
@@ -108,7 +108,7 @@ class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
             '-tsv:{0}'.format(self.params['translations']['output_file_incl_path'].strip('.csv')+'.tsv'),
             '-showDecoy',
             '-unroll',
-            # '-skipDupIds',
+            '-skipDupIds',
             # '-singleResult',
         ]
         self.created_tmp_files.append(self.params['translations']['output_file_incl_path'].strip('.csv')+'.tsv')

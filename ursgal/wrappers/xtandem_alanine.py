@@ -25,14 +25,14 @@ class xtandem_alanine( xtandem ):
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
-        'distributable'           : False,
+        'distributable'               : True,
         'utranslation_style'          : 'xtandem_style_1',
         'engine' : {
             'darwin' : {
                 '64bit' : {
                     'exe'            : 'tandem',
                     'url'            : '',
-                    'zip_md5'        : '',
+                    'zip_md5'        : 'f33da624f5bdd2702c60e4dc86e9137c',
                     'additional_exe' : [],
                 },
             },
@@ -40,7 +40,7 @@ class xtandem_alanine( xtandem ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : '',
+                    'zip_md5'        : '37f087c213dfed3c95e62a865d843fb9',
                     'additional_exe' : [],
                 },
             },
@@ -48,7 +48,7 @@ class xtandem_alanine( xtandem ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : '',
+                    'zip_md5'        : '78ed3c76271f3596aceea8ea5bc904bc',
                     'additional_exe' : [],
                 },
             },

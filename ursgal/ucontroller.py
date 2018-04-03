@@ -14,6 +14,7 @@ import zipfile
 import stat
 import shutil
 from collections import Counter
+import pkg_resources
 
 
 class UController(ursgal.UNode):
@@ -68,6 +69,7 @@ class UController(ursgal.UNode):
         self.init_kwargs          = {}
         self._run_after_meta_init = True
         self.verbose              = True
+
         # self.update_user_params   = False
 
         # Second init is initialized after the Meta_class has returned the
@@ -93,7 +95,12 @@ class UController(ursgal.UNode):
         self.unodes = self._collect_all_unode_wrappers()
         # self.unodes = self.collect_all_unodes_from_kb()
         self.determine_availability_of_unodes()
-
+            # if pymzml generation 2 is used we reset the default conveter version
+        pymzml_release_version = pkg_resources.get_distribution("pymzml").version
+        pymzml_major_version_number = int(pymzml_release_version[0])
+        if pymzml_major_version_number == 2:
+            self.params['mzml2mgf_converter_version'] = 'mzml2mgf_2_0_0'
+            # default is 1_0_0
         if self.verbose:
             self.show_unode_overview()
 

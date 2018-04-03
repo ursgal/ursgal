@@ -5,7 +5,7 @@ import subprocess
 from .msgfplus_v2016_09_16 import msgfplus_v2016_09_16 as msgf
 
 
-class msgfplus_v2017_01_27( msgf ):
+class msgfplus_v2018_01_30( msgf ):
     """
     MSGF+ UNode
     Parameter options at https://omics.pnl.gov/software/ms-gf
@@ -21,8 +21,8 @@ class msgfplus_v2017_01_27( msgf ):
     META_INFO = {
         'edit_version'                : 1.00,
         'name'                        : 'MSGF+',
-        'version'                     : 'v2017.01.27',
-        'release_date'                : '2017-1-27',
+        'version'                     : 'v2018.01.30',
+        'release_date'                : '2018-1-30',
         'engine_type' : {
             'protein_database_search_engine' : True,
         },
@@ -45,7 +45,7 @@ class msgfplus_v2017_01_27( msgf ):
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
                     'url'            : '',
-                    'zip_md5'        : '5936576205838d947a3de36556e92cd8',
+                    'zip_md5'        : '165b09927b686e80de85d31c20c6a2f8',
                     'additional_exe' : [],
                 },
             },

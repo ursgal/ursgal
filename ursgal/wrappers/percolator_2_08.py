@@ -535,7 +535,14 @@ class percolator_2_08( ursgal.UNode ):
         '''
         read the output and merge in back to the ident csv
         '''
-
+        percolator_log_file_name  = self.params['translations']['output_file_incl_path'].replace(
+            '.csv',
+            '_percolator_log.txt'
+        )
+        percolator_log_file = open(
+            percolator_log_file_name,
+            'w'
+        )
         potential_buggy_percolator_output = self.params['translations']['percolator_out'] + '.psms'
         if os.path.exists( potential_buggy_percolator_output ):
             print('WTF Percolator ?')
@@ -591,6 +598,7 @@ class percolator_2_08( ursgal.UNode ):
         else:
             csv_kwargs['lineterminator'] = '\r\n'
 
+        percolator_stats = ddict(int)
         csv_output = csv.DictWriter(
             open( self.params['translations']['output_file_incl_path'], 'w' ),
             csv_input.fieldnames,
@@ -621,13 +629,28 @@ class percolator_2_08( ursgal.UNode ):
                 line_dict['q-value'] = s2l[ psm_type ][ _psmid_pep_key ]['q-value']
                 # write all results including decoy into the full csv:
                 csv_output.writerow( line_dict )
+                percolator_stats['PSMs accepted and kept by Percolator'] += 1
             else:
                 print(
                     'Original PSM :{0} could not be found in percolator output file, most probably because PSM was filtered by percolator, (multiple peptides to one spectrum match)'.format(
                         _psmid_pep_key
-                    )
+                    ),
+                    file = percolator_log_file
                 )
+                percolator_stats['PSMs filtered and removed by Percolator'] += 1
+        for title, count in sorted(percolator_stats.items()):
+            self.print_info(
+                '{0} : {1}'.format(
+                    title,
+                    count
+                ),
+                caller = 'Info'
 
+            )
+        self.print_info(
+            'Please refer to file {0} for details'.format(percolator_log_file_name),
+            caller = 'Info'
+        )
 
     def generating_score_list( self ):
         scores = []

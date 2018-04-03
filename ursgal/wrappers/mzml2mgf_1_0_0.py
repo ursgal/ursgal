@@ -48,7 +48,8 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
         mzml2mgf_main = self.import_engine_as_python_function()
 
 
-        try:
+        # try:
+        if True:
             tmp = mzml2mgf_main(
                 mzml = os.path.join(
                     self.io['input']['finfo']['dir'],
@@ -67,12 +68,12 @@ class mzml2mgf_1_0_0( ursgal.UNode ):
                 scan_skip_modulo_step = self.params['translations']['scan_skip_modulo_step'],
                 ms_level              = self.params['translations']['ms_level'],
             )
-        except KeyError:
-            print('''
+        # except KeyError:
+        #     print('''
 
-                OBO Version changed ? converter uses obo names instead of tags.
-                This need to be updated in time ...
+        #         OBO Version changed ? converter uses obo names instead of tags.
+        #         This need to be updated in time ...
 
-                ''')
+        #         ''')
         # self.print_execution_time(tag='execution')
         return tmp

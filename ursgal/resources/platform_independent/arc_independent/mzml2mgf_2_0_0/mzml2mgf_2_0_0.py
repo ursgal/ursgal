@@ -58,13 +58,8 @@ def main(
     mzml_name_base = _determine_mzml_name_base( mzml, prefix )
     # rt_lookup = mzml_name_base + '_rt_lookup.pkl'
     oof = open( mgf , 'w' )
-    reader_kwargs       = {
-        'extraAccessions':[ ('MS:1000016', ['value', 'unitName'] )],
-        'obo_version' : '1.1.0'
-    }
     run = pymzml.run.Reader(
-        mzml,
-        **reader_kwargs
+        mzml
     )
     tmp = {
         'rt_2_scan' : {},
@@ -96,12 +91,14 @@ def main(
         if spec_ms_level != ms_level:
             continue
 
+        unit          = 'minute'
+        scan_time     = spec.scan_time
+        peaks_2_write = spec.peaks('centroided')
+        spectrum_id   = spec.ID
 
-        scan_time, unit  = spec['scan time']
-        peaks_2_write    = spec.centroidedPeaks
-        spectrum_id      = spec['id']
-        precursor_mz     = spec['precursors'][0]['mz']
-        precursor_charge = spec['precursors'][0]['charge']
+        precursor_mz     = spec.selected_precursors[0]['mz']
+        precursor_charge = spec.selected_precursors[0]['charge']
+
         # spectrum_id = spec['id']
         if scan_inclusion_list is not None:
             if int(spectrum_id) not in scan_inclusion_list:

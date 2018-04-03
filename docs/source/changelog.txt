@@ -1,6 +1,19 @@
 Changelog
 =========
 
+Version 0.6.1    (03.2018)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Improved compaitibility to pymzML generation 2 and splitted up the mzML to 
+   mgf converter in version 1.0.0 (pymzML 0.7.9) and 2.0.0 (pymzML 2.0.2).
+   The version of installed pymzML is now automatically determined and the
+   corresponding converter version is used.
+#. Added latest versions of MSGF+ (version 2018.01.20) and the corresponding C 
+   based mzidentML converter (version 1.2.0 and 1.2.1)
+#. Several new engine versions were made avaliable via the install_resources
+   script.
+#. Some general code cleanup was done
+
+
 Version 0.6.0    (01.2018)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 #. Restructuring of engine classes. SEARCH_ENGINE(s) are now devided into
