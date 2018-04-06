@@ -13,6 +13,7 @@ import tempfile
 import zipfile
 import stat
 import shutil
+from collections import Counter
 import pkg_resources
 
 
@@ -673,7 +674,7 @@ class UController(ursgal.UNode):
 
         return matches
 
-    def merge_csvs(self, input_files, force=None, output_file_name=None ):
+    def merge_csvs(self, input_files, force=None, output_file_name=None, merge_duplicates=False ):
         '''
         The ucontroller merge_csvs function
 
@@ -742,7 +743,8 @@ class UController(ursgal.UNode):
                 force, engine_name, answer,
                 history_addon = {
                     'search_engines_of_merged_files' : search_engines_of_merged_files
-                }
+                },
+                merge_duplicates=merge_duplicates,
             )
             output_file = report['output_file']
         return output_file
@@ -906,7 +908,7 @@ class UController(ursgal.UNode):
 
         return outfile
 
-    def execute_misc_engine(self, input_file, engine=None, force=None, output_file_name=None ):
+    def execute_misc_engine(self, input_file, engine=None, force=None, output_file_name=None, merge_duplicates=False ):
         '''
         The UController execute_misc_engine function
 
@@ -923,6 +925,9 @@ class UController(ursgal.UNode):
             output_file_name (str or None): Desired output file name
                 excluding path (optional). If None, output file name will
                 be auto-generated.
+            merge_duplicates (bool): If True, the produced output file will 
+                be checked for duplicated PSMs, which will be merged into a single line.
+                Caution, the original output file will be overwritten!
 
         Note:
             Input files to :meth:`.validate` must be in unified csv format (i.e.
@@ -946,7 +951,8 @@ class UController(ursgal.UNode):
             outfile = self.merge_csvs(
                 input_file,
                 force = force,
-                output_file_name = output_file_name
+                output_file_name = output_file_name,
+                merge_duplicates = merge_duplicates
             )
 
         else:
@@ -954,7 +960,8 @@ class UController(ursgal.UNode):
                 input_file       = input_file,
                 engine           = engine,
                 force            = force,
-                output_file_name = output_file_name
+                output_file_name = output_file_name,
+                merge_duplicates = merge_duplicates,
             )
 
         return outfile
@@ -1881,6 +1888,7 @@ class UController(ursgal.UNode):
             output_file_name = output_file_name,
             engine           = self.params['unify_csv_converter_version'],
             force            = force,
+            merge_duplicates = True,
         )
         return unified_search_results
 
@@ -2102,7 +2110,7 @@ class UController(ursgal.UNode):
                 n += 1
         return
 
-    def run_unode_if_required( self, force, engine_name, answer, history_addon=None ):
+    def run_unode_if_required( self, force, engine_name, answer, merge_duplicates=False, history_addon=None ):
         '''
         The ucontroller run_unode_if_required function
 
@@ -2177,6 +2185,30 @@ class UController(ursgal.UNode):
             report = self.unodes[ engine_name ]['class'].run(
                 json_path = json_path,
             )
+
+            if merge_duplicates:
+                psm_defining_colnames = self.params['psm_defining_colnames']
+                score_colname = self.UNODE_UPARAMS['validation_score_field'][
+                        'uvalue_style_translation'].get(engine_name, None)
+                if score_colname:
+                    psm_defining_colnames.append(score_colname)
+
+                psm_counter = ursgal.ucore.count_distinct_psms(
+                    csv_file_path=report['output_file'],
+                    psm_defining_colnames=psm_defining_colnames
+                )
+                if psm_counter != Counter():
+                    if max(psm_counter.values()) > 1:
+                        out_file = ursgal.ucore.merge_duplicate_psm_rows(
+                            csv_file_path=report['output_file'],
+                            psm_counter=psm_counter,
+                            joinchar=self.params['psm_merge_delimiter'],
+                            psm_defining_colnames=psm_defining_colnames
+                        )
+                        self.print_info(
+                            'Result file path: {0}'.format(out_file),
+                            caller = 'Info'
+                        )
 
             self.dump_json_and_calc_md5(
                 stats = report['stats'],
@@ -2816,7 +2848,7 @@ class UController(ursgal.UNode):
 
         return download_zip_files
 
-    def execute_unode(self, input_file, engine=None, force=False, output_file_name=None, dry_run=False):
+    def execute_unode(self, input_file, engine=None, force=False, output_file_name=None, dry_run=False, merge_duplicates=False):
         '''
         The UController execute_unode function. Executes arbitrary UNodes, as
         specified by their name.
@@ -2891,7 +2923,8 @@ True
         if dry_run is True:
             answer = None  # do not execute, even if params changed!
         report = self.run_unode_if_required(
-            force, engine_name, answer
+            force, engine_name, answer, 
+            merge_duplicates=merge_duplicates
         )
         return report['output_file']
 

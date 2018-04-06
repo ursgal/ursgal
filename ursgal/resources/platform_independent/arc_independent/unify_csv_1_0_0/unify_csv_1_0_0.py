@@ -18,7 +18,7 @@ import ursgal
 import pprint
 # import ursgal.ukb
 import re
-from collections import Counter, defaultdict
+from collections import defaultdict
 from copy import deepcopy as dc
 import itertools
 from decimal import *
@@ -104,7 +104,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     )
 
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
-    psm_defining_colnames = get_psm_defining_colnames(score_colname, search_engine)
+    # psm_defining_colnames = get_psm_defining_colnames(score_colname, search_engine)
     joinchar              = params['translations']['protein_delimiter']
     do_not_delete         = False
     created_tmp_files     = []
@@ -288,7 +288,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Sequence Pre AA',
             'Sequence Post AA',
         ]
-    psm_counter = Counter()
+    # psm_counter = Counter()
     # if a PSM with multiple rows is found (i.e. in omssa results), the psm
     # rows are merged afterwards
 
@@ -364,6 +364,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     end = '\r'
                 )
 
+            ##########################
+            # Spectrum Title block
+            # reformating Spectrum Title, 
             if line_dict['Spectrum Title'] != '':
                 '''
                 Valid for:
@@ -452,6 +455,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             input_file_basename
                         )
                     )
+                    
+            #END Spectrum Title block
+            ##########################
 
             retention_time_in_minutes = \
                 scan_rt_lookup[ input_file_basename_for_rt_lookup ][ 'scan_2_rt' ]\
@@ -1031,8 +1037,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
                         conflicting_uparams[lookup_identifier].add('max_missed_cleavages')
                 # count each PSM occurence to check whether row-merging is needed:
-                psm = tuple([line_dict[x] for x in psm_defining_colnames])
-                psm_counter[psm] += 1
+                # psm = tuple([line_dict[x] for x in psm_defining_colnames])
+                # psm_counter[psm] += 1
 
                 if len(conflicting_uparams[lookup_identifier]) == 0:
                     # all tested search criteria true
@@ -1063,9 +1069,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             )
     # sys.exit(1)
     # if there are multiple rows for a PSM, we have to merge them aka rewrite the csv...
-    if psm_counter != Counter():
-        if max(psm_counter.values()) > 1:
-            merge_duplicate_psm_rows(output_file, psm_counter, psm_defining_colnames, params['translations']['psm_merge_delimiter'])
+    # if psm_counter != Counter():
+    #     if max(psm_counter.values()) > 1:
+    #         merge_duplicate_psm_rows(output_file, psm_counter, psm_defining_colnames, params['translations']['psm_merge_delimiter'])
             '''
             to_be_written_csv_lines = merge_duplicate_psm_rows(
                 to_be_written_csv_lines,
@@ -1080,81 +1086,81 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     return created_tmp_files
 
 
-def get_psm_defining_colnames(score_colname, search_engine):
-    '''
-    Returns the all PSM-defining column names (i.e spectrum & peptide,
-    but also score field because sometimes the same PSMs are reported
-    with different scores...
-    '''
-    psm = [
-        'Spectrum Title',
-        'Sequence',
-        'Modifications',
-        'Charge',
-        'Is decoy',
-    ]
-    if 'msfragger' in search_engine.lower():
-        psm.append('MSFragger:Neutral mass of peptide')
-    if score_colname:
-        psm.append(score_colname)
-    return psm
+# def get_psm_defining_colnames(score_colname, search_engine):
+#     '''
+#     Returns the all PSM-defining column names (i.e spectrum & peptide,
+#     but also score field because sometimes the same PSMs are reported
+#     with different scores...
+#     '''
+#     psm = [
+#         'Spectrum Title',
+#         'Sequence',
+#         'Modifications',
+#         'Charge',
+#         'Is decoy',
+#     ]
+#     if 'msfragger' in search_engine.lower():
+#         psm.append('MSFragger:Neutral mass of peptide')
+#     if score_colname:
+#         psm.append(score_colname)
+#     return psm
 
 
-def merge_rowdicts(list_of_rowdicts, joinchar, alt_joinchar='<|>'):
-    '''
-    Merges CSV rows. If the column values are conflicting, they
-    are joined with a character (joinchar).
-    Special case: proteinaccessions are not joined with the joinchar,
-    but rather with alt_joinchar.
-    '''
-    merged_d = {}
-    fieldnames = list_of_rowdicts[0].keys()
-    for fieldname in fieldnames:
+# def merge_rowdicts(list_of_rowdicts, joinchar, alt_joinchar='<|>'):
+#     '''
+#     Merges CSV rows. If the column values are conflicting, they
+#     are joined with a character (joinchar).
+#     Special case: proteinaccessions are not joined with the joinchar,
+#     but rather with alt_joinchar.
+#     '''
+#     merged_d = {}
+#     fieldnames = list_of_rowdicts[0].keys()
+#     for fieldname in fieldnames:
 
-        joinchar_used = joinchar
-        # if fieldname == 'proteinacc_start_stop_pre_post_;':
-        #     joinchar_used = alt_joinchar
+#         joinchar_used = joinchar
+#         # if fieldname == 'proteinacc_start_stop_pre_post_;':
+#         #     joinchar_used = alt_joinchar
 
-        values = {d[fieldname] for d in list_of_rowdicts}
-        if len(values) == 1:
-            merged_d[fieldname] = list(values)[0]
-        else:
-            merged_d[fieldname] = joinchar_used.join(sorted(values))
-    return merged_d
+#         values = {d[fieldname] for d in list_of_rowdicts}
+#         if len(values) == 1:
+#             merged_d[fieldname] = list(values)[0]
+#         else:
+#             merged_d[fieldname] = joinchar_used.join(sorted(values))
+#     return merged_d
 
 
-def merge_duplicate_psm_rows(unified_csv_path, psm_counter, psm_defining_colnames, joinchar):
-    '''
-    Rows describing the same PSM (i.e. when two proteins share the
-    same peptide) are merged to one row.
-    '''
-    rows_to_merge_dict = defaultdict(list)
+# def merge_duplicate_psm_rows(unified_csv_path, psm_counter, psm_defining_colnames, joinchar):
+#     '''
+#     Rows describing the same PSM (i.e. when two proteins share the
+#     same peptide) are merged to one row.
+#     '''
+#     rows_to_merge_dict = defaultdict(list)
 
-    tmp_file = unified_csv_path + ".tmp"
-    os.rename(unified_csv_path, tmp_file)
-    print('Merging rows of the same PSM...')
-    with open(tmp_file, 'r') as tmp, open(unified_csv_path, 'w', newline='') as out:
-        tmp_reader = csv.DictReader(tmp)
-        writer = csv.DictWriter(out, fieldnames=tmp_reader.fieldnames)
-        writer.writeheader()
-        for row in tmp_reader:
-            psm = tuple([row[x] for x in psm_defining_colnames])
-            # each unique combination of these should only have ONE row!
-            # i.e. combination of seq+spec+score
-            if psm_counter[psm] == 1:
-                # no duplicate = no problem, we can just write the row again
-                writer.writerow(row)
-            elif psm_counter[psm] > 1:
-                # we have to collect all rows of this psm, and merge + write them later!
-                rows_to_merge_dict[psm].append(row)
-            else:
-                raise Exception("This should never happen.")
-        # finished parsing the old unmerged unified csv
-        for rows_to_merge in rows_to_merge_dict.values():
-            writer.writerow(
-                merge_rowdicts(rows_to_merge, joinchar=joinchar)
-            )
-    os.remove(tmp_file)  # remove the old unified csv that contains duplicate rows
+#     tmp_file = unified_csv_path + ".tmp"
+#     os.rename(unified_csv_path, tmp_file)
+#     print('Merging rows of the same PSM...')
+#     with open(tmp_file, 'r') as tmp, open(unified_csv_path, 'w', newline='') as out:
+#         tmp_reader = csv.DictReader(tmp)
+#         writer = csv.DictWriter(out, fieldnames=tmp_reader.fieldnames)
+#         writer.writeheader()
+#         for row in tmp_reader:
+#             psm = tuple([row[x] for x in psm_defining_colnames])
+#             # each unique combination of these should only have ONE row!
+#             # i.e. combination of seq+spec+score
+#             if psm_counter[psm] == 1:
+#                 # no duplicate = no problem, we can just write the row again
+#                 writer.writerow(row)
+#             elif psm_counter[psm] > 1:
+#                 # we have to collect all rows of this psm, and merge + write them later!
+#                 rows_to_merge_dict[psm].append(row)
+#             else:
+#                 raise Exception("This should never happen.")
+#         # finished parsing the old unmerged unified csv
+#         for rows_to_merge in rows_to_merge_dict.values():
+#             writer.writerow(
+#                 merge_rowdicts(rows_to_merge, joinchar=joinchar)
+#             )
+#     os.remove(tmp_file)  # remove the old unified csv that contains duplicate rows
 
 
 
@@ -1205,7 +1211,7 @@ if __name__ == '__main__':
             'keep_asp_pro_broken_peps' : True,
             'semi_enzyme'              : False,
             'decoy_tag'                : 'decoy_',
-            'psm_merge_delimiter'      : ';',
+            # 'psm_merge_delimiter'      : ';',
             'precursor_mass_tolerance_plus':5,
             'precursor_mass_tolerance_minus':5,
             'precursor_isotope_range': '0,1',
