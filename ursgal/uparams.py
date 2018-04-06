@@ -8947,6 +8947,27 @@ ursgal_params = {
         'description' : \
             'unify csv converter version: version name',
     },
+    'use_pyqms_for_mz_calculation' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'unify_csv_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'unify_csv_style_1' : 'use_pyqms_for_mz_calculation',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+        'uvalue_option' : {
+        },
+        'default_value' : False,
+        'description' : \
+            'Use pyQms for accurate calculation of isotopologue m/z. This will affect the accuracy (ppm) calculation as well. If True, unify_csv will be significantly slower. Please note that this does not work for any type of labeling yet.'
+    },
     'ursgal_resource_url' : {
         'edit_version' : 1.00,
         'available_in_unode' : [

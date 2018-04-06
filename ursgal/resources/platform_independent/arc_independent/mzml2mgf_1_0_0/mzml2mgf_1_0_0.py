@@ -19,8 +19,8 @@ import argparse
 import pymzml
 
 
-def _determine_mzml_name_base( file_name, prefix ):
-    file_name = os.path.basename( file_name )
+def _determine_mzml_name_base(file_name, prefix):
+    file_name = os.path.basename(file_name)
     if file_name.upper().endswith('.MZML.GZ'):
         mzml_name_base = file_name[:-8]
     elif file_name.upper().endswith('.MZML'):
@@ -32,47 +32,48 @@ def _determine_mzml_name_base( file_name, prefix ):
             )
         )
     if prefix is not None and prefix is not '':
-        mzml_name_base = '_'.join( [prefix, mzml_name_base] )
+        mzml_name_base = '_'.join([prefix, mzml_name_base])
     return mzml_name_base
 
 
 def main(
-        mzml                  = None,
-        mgf                   = None,
-        i_decimals            = 5,
-        mz_decimals           = 5,
-        machine_offset_in_ppm = None,
-        scan_exclusion_list   = None,
-        scan_inclusion_list   = None,
-        prefix                = None,
-        scan_skip_modulo_step = None,
-        ms_level              = 2,
-    ):
+    mzml=None,
+    mgf=None,
+    i_decimals=5,
+    mz_decimals=5,
+    machine_offset_in_ppm=None,
+    scan_exclusion_list=None,
+    scan_inclusion_list=None,
+    prefix=None,
+    scan_skip_modulo_step=None,
+    ms_level=2,
+):
 
     print('Converting file:\n\tmzml : {0}\n\tto\n\tmgf : {1}'.format(
         mzml,
         mgf,
     ))
-    mzml_name_base = _determine_mzml_name_base( mzml, prefix )
+    mzml_name_base = _determine_mzml_name_base(mzml, prefix)
     # rt_lookup = mzml_name_base + '_rt_lookup.pkl'
-    oof = open( mgf , 'w' )
+    oof = open(mgf, 'w')
     run = pymzml.run.Reader(
         mzml,
-        extraAccessions=[ ('MS:1000016', ['value', 'unitName'] )],
-        obo_version = '1.1.0'
+        extraAccessions=[('MS:1000016', ['value', 'unitName'])],
+        obo_version='1.1.0'
     )
     tmp = {
-        'rt_2_scan' : {},
-        'scan_2_rt' : {},
+        'rt_2_scan': {},
+        'scan_2_rt': {},
+        'scan_2_mz': {}
     }
     mgf_entries = 0
     if scan_exclusion_list is None:
         scan_exclusion_list = []
     else:
-        scan_exclusion_list = [ int(spec_id) for spec_id in scan_exclusion_list ]
+        scan_exclusion_list = [int(spec_id) for spec_id in scan_exclusion_list]
 
     if machine_offset_in_ppm is not None:
-        mz_correction_factor = machine_offset_in_ppm*1e-6
+        mz_correction_factor = machine_offset_in_ppm * 1e-6
     else:
         mz_correction_factor = 0
 
@@ -80,33 +81,36 @@ def main(
         if n % 500 == 0:
             print(
                 'File : {0:^40} : Processing spectrum {1}'.format(
-                    os.path.basename( mzml ),
+                    os.path.basename(mzml),
                     n,
                 ),
-                end = '\r'
+                end='\r'
             )
+
+        spectrum_id = spec['id']
+        try:
+            scan_time, unit = spec['scan time']
+        except:
+            unit = 'unicorns'
+            scan_time = 0
+        tmp['rt_2_scan'][scan_time] = spectrum_id
+        tmp['scan_2_rt'][spectrum_id] = scan_time
+        tmp['unit'] = unit
 
         # if n >= 1000:
         #     break
         if spec['ms level'] != ms_level:
             continue
-        scan_time, unit = spec['scan time']
-        spectrum_id = spec['id']
         if scan_inclusion_list is not None:
-            if int(spectrum_id) not in scan_inclusion_list:
+            if spectrum_id not in scan_inclusion_list:
                 continue
-
-        if int(spectrum_id) in scan_exclusion_list:
+        if spectrum_id in scan_exclusion_list:
             continue
         mgf_entries += 1
 
         if scan_skip_modulo_step is not None:
             if mgf_entries % scan_skip_modulo_step != 0:
                 continue
-
-        tmp['rt_2_scan'][ scan_time ] = '{id}'.format(**spec)
-        tmp['scan_2_rt'][ '{id}'.format(**spec) ] = scan_time
-        tmp['unit'] = unit
 
         print('BEGIN IONS', file=oof)
         print(
@@ -115,11 +119,10 @@ def main(
                 spec['id'],
                 spec['precursors'][0]['charge'],
             ),
-            file = oof
+            file=oof
         )
         print('SCANS={id}'.format(**spec), file=oof)
 
-        scan_time, unit = spec['scan time']
         if unit == 'second':
             scan_time = float(scan_time)
         else:
@@ -128,16 +131,17 @@ def main(
             'RTINSECONDS={0}'.format(
                 scan_time
             ),
-            file = oof
+            file=oof
         )
-        precursor_mz = spec['precursors'][0]['mz']
 
+        precursor_mz = spec['precursors'][0]['mz']
         precursor_mz += precursor_mz * mz_correction_factor
+        tmp['scan_2_mz'][spectrum_id] = precursor_mz
         print(
             'PEPMASS={0}'.format(
                 precursor_mz
             ),
-            file = oof
+            file=oof
         )
         if spec['precursors'][0]['charge'] is not None:
             print(
@@ -154,15 +158,15 @@ def main(
                 '{0:<10.{mzDecimals}f} {1:<10.{intensityDecimals}f}'.format(
                     mz,
                     intensity,
-                    mzDecimals = mz_decimals,
-                    intensityDecimals = i_decimals
+                    mzDecimals=mz_decimals,
+                    intensityDecimals=i_decimals
                 ),
-                file = oof
+                file=oof
             )
 
-        print('END IONS\n', file = oof )
+        print('END IONS\n', file=oof)
     print('')
-    print('Wrote {0} mgf entries'.format( mgf_entries))
+    print('Wrote {0} mgf entries'.format(mgf_entries))
     oof.close()
     return tmp
 
@@ -183,10 +187,10 @@ if __name__ == '__main__':
         '-i', '--i_decimals', default=5,
         help='Number of decimals for intensity values', type=int)
 
-    if len( sys.argv ) <= 1:
+    if len(sys.argv) <= 1:
         parser.print_help()
     else:
         args = parser.parse_args()
-        tmp = main( **args.__dict__ )
+        tmp = main(**args.__dict__)
         # print(tmp.keys())
         # print(sorted( tmp['scan_2_rt'].keys() ))
