@@ -322,7 +322,7 @@ def main(folder):
 
         # For the combined FDR scoring, we merge all 12 files:
         filtered_merged = uc.execute_misc_engine(
-            input_file=twelve_filtered
+            input_file=twelve_filtered,
             engine='merge_csvs_1_0_0'
         )
 

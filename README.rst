@@ -156,12 +156,13 @@ to test the package.
 
 
 
-Participate
-***********
+Questions and Participation
+***************************
 
-Fork us at https://github.com/ursgal/ursgal and open up pull requests! Thanks!
+If you encounter any problems you can open up issues at GitHub, join the conversation at Gitter, or write an email to ursgal.team@gmail.com. Please also check the :ref:`faq`.
 
-If you encounter any problems you can open up issues at GitHub, join the conversation at Gitter, or write an email to ursgal.team@gmail.com
+For any contributions, fork us at https://github.com/ursgal/ursgal and open up pull requests!
+Please also check the :ref:`contribute`. Thanks!
 
 
 Documentation
@@ -180,7 +181,7 @@ as common practice in science, never trust a blackbox :)
 Copyrights
 ***********
 
-Copyright 2014-2017 by authors and contributors in alphabetical order
+Copyright 2014-2018 by authors and contributors in alphabetical order
 
 * Christian Fufezan,
 * Manuel Koesters

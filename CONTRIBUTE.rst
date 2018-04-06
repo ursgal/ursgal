@@ -1,10 +1,7 @@
-Contribution guidelines
+Contribution Guidelines
 #######################
 
-Beta stage. If you find typos, please fix them :)
-
 *Ursgal - Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
-
 
 Summary
 *******
@@ -50,10 +47,10 @@ Code standards and conventions
 
 Since this a collaborative project, you will encounter different coding styles.
 Despite the fact that we know that diversity is beautiful, we need to keep some
-common line on how to code (This list may be further extended). Please refer
-also to the PEP8 style guide, which we use generally
-https://www.python.org/dev/peps/pep-0008/). Additionally this list will give
-you some things to think about:
+common line on how to code (This list may be further extended). We generally use
+PEP8 style (https://www.python.org/dev/peps/pep-0008/) with the exception of
+E203 (whitespaces before : in order to align values in dicts). Additionally 
+this list will give you some things to think about:
 
   | Re-think naming of variables at least twice
   | Re-check deleting of own debug code before sending Pull requests
@@ -100,7 +97,7 @@ may directly open a pull requets. On the other hand, if you plan to or
 are already working on implementing new stuff, you may also open an issue and
 (pre-) announce your contribution. Please tag then the issue with
 'enhancement'. In general the core team of Ursgal will also take care of crucial
-bugs in the main code. Since Ursgal is open source, we cannot maintain every
+bugs in the main code. Since Ursgal is open source, we cannot maintain every detail
 and assure its compatibility and functionality (please be reminded here to test
 your code, seriously, test your code)
 
@@ -108,7 +105,9 @@ your code, seriously, test your code)
 Citation
 ********
 
-If you use Ursagl, do not forget to cite us
+Be reminded, that in an academic world, citations are the only credit that one can hope for ;)
+Therefore, please make sure to properly cite every tool that you use or implement.
+And of course, if you use Ursagl, do not forget to cite us
 
 *Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. and Fufezan, C.
 (2015):* |publicationtitle|_ *, Journal of Proteome research, 15, 788-.
@@ -116,32 +115,4 @@ DOI:10.1021/acs.jproteome.5b00860*
 
 .. _publicationtitle: http://dx.doi.org/10.1021/acs.jproteome.5b00860
 .. |publicationtitle| replace:: *Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
-
-
-
-.. note::
-
-    Pip is included in Python 3.4 and higher. However, it might not be
-    included in your system's PATH environment variable.
-    If this is the case, you can either add the Python scripts directory to your
-    PATH env variable or use the path to the pip.exe directly for the
-    installation, e.g.: ~/Python34/Scripts/pip.exe install -r requirements.txt
-
-
-
-Copyrights
-***********
-
-Copyright 2014-2017 by authors and contributors in alphabetical order
-
-* Christian Fufezan
-* Manuel Koesters
-* Lukas P. M. Kremer
-* Johannes Leufken
-* Purevdulam Oyunchimeg
-* Stefan Schulze
-* Lukas Vaut
-
-
-
 
