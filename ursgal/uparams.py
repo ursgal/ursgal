@@ -12,7 +12,7 @@ ursgal_params = {
         'description': '''verbosity for pyqms''',
         'triggers_rerun': False,
         'ukey_translation': {
-            'pyqms_style_1': 'pyqms_verbosity'
+            'pyqms_style_1': 'pyqms_verbosity',
         },
         'utag': [
             'quantification',
@@ -25,6 +25,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': '{0}',
@@ -36,7 +37,8 @@ ursgal_params = {
             formatting labeling percentile float""",
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1' : 'PERCENTILE_FORMAT_STRING'
+            'pyqms_style_1' : 'PERCENTILE_FORMAT_STRING',
+            'sugarpy_style_1' : 'PERCENTILE_FORMAT_STRING',
         },
         'utag': [
             'quantification',
@@ -50,6 +52,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -64,7 +67,8 @@ ursgal_params = {
         'description': """ Set minmal abundance for elements used when building isotopologue library """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1' : 'ELEMENT_MIN_ABUNDANCE'
+            'pyqms_style_1' : 'ELEMENT_MIN_ABUNDANCE',
+            'sugarpy_style_1' : 'ELEMENT_MIN_ABUNDANCE'
         },
         'utag': [
             'quantification',
@@ -77,6 +81,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -91,7 +96,8 @@ ursgal_params = {
         'description': """ Minimum required intensity for pyqms peak matching """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1' : 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING'
+            'pyqms_style_1' : 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING',
+            'sugarpy_style_1' : 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING'
         },
         'utag': [
             'quantification',
@@ -104,6 +110,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -118,7 +125,8 @@ ursgal_params = {
         'description': """ Minimum percentile overlap for matching labeled peaks """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1' : 'REQUIRED_PERCENTILE_PEAK_OVERLAP'
+            'pyqms_style_1' : 'REQUIRED_PERCENTILE_PEAK_OVERLAP',
+            'sugarpy_style_1' : 'REQUIRED_PERCENTILE_PEAK_OVERLAP'
         },
         'utag': [
             'quantification',
@@ -131,6 +139,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -144,7 +153,8 @@ ursgal_params = {
         'description': """ Min number of matched isotopologues for pyqms to consider for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES'
+            'pyqms_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES',
+            'sugarpy_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES'
         },
         'utag': [
             'quantification',
@@ -158,6 +168,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -172,7 +183,8 @@ ursgal_params = {
         'description': """ Tranform intensity by this factor for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'INTENSITY_TRANSFORMATION_FACTOR'
+            'pyqms_style_1': 'INTENSITY_TRANSFORMATION_FACTOR',
+            'sugarpy_style_1': 'INTENSITY_TRANSFORMATION_FACTOR'
         },
         'utag': [
             'quantification',
@@ -186,6 +198,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -200,7 +213,8 @@ ursgal_params = {
         'description': """ Highest considered mz for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'UPPER_MZ_LIMIT'
+            'pyqms_style_1': 'UPPER_MZ_LIMIT',
+            'sugarpy_style_1': 'UPPER_MZ_LIMIT'
         },
         'utag': [
             'quantification',
@@ -214,6 +228,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': 0,
@@ -228,7 +243,8 @@ ursgal_params = {
         'description': """ lowest considered mz for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'LOWER_MZ_LIMIT'
+            'pyqms_style_1': 'LOWER_MZ_LIMIT',
+            'sugarpy_style_1': 'LOWER_MZ_LIMIT'
         },
         'utag': [
             'quantification',
@@ -242,6 +258,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -256,7 +273,8 @@ ursgal_params = {
         'description': """ Factor which will be multiplied with mz before conversion to integer """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'MZ_TRANSFORMATION_FACTOR'
+            'pyqms_style_1': 'MZ_TRANSFORMATION_FACTOR',
+            'sugarpy_style_1': 'MZ_TRANSFORMATION_FACTOR'
         },
         'utag': [
             'quantification',
@@ -270,6 +288,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -285,7 +304,8 @@ ursgal_params = {
         'description': """ relative mz error """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'REL_MZ_RANGE'
+            'pyqms_style_1': 'REL_MZ_RANGE',
+            'sugarpy_style_1': 'REL_MZ_RANGE',
         },
         'utag': [
             'quantification',
@@ -299,6 +319,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0'
         ],
         'uvalue_option': {
             'none_val': None,
@@ -313,7 +334,8 @@ ursgal_params = {
         'description': """ rel Intensity Error """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'REL_I_RANGE'
+            'pyqms_style_1': 'REL_I_RANGE',
+            'sugarpy_style_1': 'REL_I_RANGE'
         },
         'utag': [
             'quantification',
@@ -327,6 +349,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -341,7 +364,8 @@ ursgal_params = {
         'description': """ Float to int conversion precision """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'INTERNAL_PRECISION'
+            'pyqms_style_1': 'INTERNAL_PRECISION',
+            'sugarpy_style_1': 'INTERNAL_PRECISION'
         },
         'utag': [
             'quantification',
@@ -355,6 +379,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -368,7 +393,8 @@ ursgal_params = {
         'description': ''' Max number of molecules in one matching bin. ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'MAX_MOLECULES_PER_MATCH_BIN'
+            'pyqms_style_1': 'MAX_MOLECULES_PER_MATCH_BIN',
+            'sugarpy_style_1': 'MAX_MOLECULES_PER_MATCH_BIN'
         },
         'utag': [
             'quantification',
@@ -381,6 +407,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0'
         ],
         'uvalue_option': {
             'none_val': [None],
@@ -395,7 +422,8 @@ ursgal_params = {
         'description': ''' AA which are always SILAC labeled and not considered for calculating partially labeling percentile ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'SILAC_AAS_LOCKED_IN_EXPERIMENT'
+            'pyqms_style_1': 'SILAC_AAS_LOCKED_IN_EXPERIMENT',
+            'sugarpy_style_1': 'SILAC_AAS_LOCKED_IN_EXPERIMENT'
         },
         'utag': [
             'quantification',
@@ -409,6 +437,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0'
         ],
         'uvalue_option': {
             'none_val': None,
@@ -422,7 +451,8 @@ ursgal_params = {
         'description': ''' Build index for faster access ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'BUILD_RESULT_INDEX'
+            'pyqms_style_1': 'BUILD_RESULT_INDEX',
+            'sugarpy_style_1': 'BUILD_RESULT_INDEX'
         },
         'utag': [
             'quantification',
@@ -564,7 +594,8 @@ ursgal_params = {
     'm_score_cutoff': {
         'edit_version' : 1.00,
         'available_in_unode': [
-            'pyqms_1_0_0'
+            'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -579,7 +610,8 @@ ursgal_params = {
         'description':  ''' minimum required pyQms m_score for a quant event to be evaluated ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'M_SCORE_THRESHOLD'
+            'pyqms_style_1': 'M_SCORE_THRESHOLD',
+            'sugarpy_style_1': 'M_SCORE_THRESHOLD'
         },
         'utag': [
             'quantification',
@@ -652,6 +684,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'mzml2mgf_1_0_0',
             'mzml2mgf_2_0_0',
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -667,6 +700,7 @@ ursgal_params = {
         'ukey_translation': {
             'pyqms_style_1': 'ms_level',
             'mzml2mgf_style_1' : 'ms_level',
+            'sugarpy_style_1' : 'ms_level',
         },
         'utag': [
             'spectrum'
@@ -726,6 +760,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'default_value' : {
             '13C' : 0.996,
@@ -736,6 +771,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pyqms_style_1' : 'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS',
+            'sugarpy_style_1' : 'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS',
         },
         'utag' : [
             'quantification',
@@ -822,12 +858,14 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'pyqms_1_0_0',
+            'sugarpy_1_0_0',
         ],
         'default_value' : 1,
         'description' :  ''' Retention time border tolerance for curating RT windows ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pyqms_style_1' : 'rt_border_tolerance',
+            'sugarpy_1_0_0' : 'rt_border_tolerance',
         },
         'utag' : [
             'quantification',
@@ -4352,12 +4390,14 @@ ursgal_params = {
         'available_in_unode' : [
             'mzml2mgf_1_0_0',
             'mzml2mgf_2_0_0',
-            'pyqms_1_0_0'
+            'pyqms_1_0_0',
+            'sugarpy_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'mzml2mgf_style_1' : 'machine_offset_in_ppm',
             'pyqms_style_1'    : 'MACHINE_OFFSET_IN_PPM'
+            'sugarpy_style_1'  : 'MACHINE_OFFSET_IN_PPM'
         },
         'utag' : [
             'conversion',
@@ -7331,7 +7371,8 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'pipi_1_3_0',
-            'pyqms_1_0_0'
+            'pyqms_1_0_0',
+            'sugarpy_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7342,6 +7383,7 @@ ursgal_params = {
             'msfragger_style_1' : 'precursor_max_charge',
             'pipi_style_1'      : ('max_ms1_charge', 'max_potential_charge'),
             'pyqms_style_1'     : 'precursor_max_charge',
+            'sugarpy_style_1'   : 'max_charge',
         },
         'utag' : [
             'precursor',
@@ -7412,7 +7454,8 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'pipi_1_3_0',
-            'pyqms_1_0_0'
+            'pyqms_1_0_0',
+            'sugarpy_1_0_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7422,6 +7465,7 @@ ursgal_params = {
             'msfragger_style_1' : 'precursor_min_charge',
             'pipi_style_1' : ('min_ms1_charge', 'min_potential_charge'),
             'pyqms_style_1'     : 'precursor_min_charge',
+            'sugarpy_style_1': 'max_charge'
         },
         'utag' : [
             'precursor',
@@ -7871,10 +7915,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
+            'sugarpy_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'rt_pickle_name',
+            'ucontroller_style_1' : 'scan_rt_lookup',
         },
         'utag' : [
             'file_handling',
@@ -9942,5 +9988,287 @@ ursgal_params = {
         'default_value' : False,
         'description' : \
             'Interpretation of peptide phosphorylation models.',
+    },
+    'glycans_incl_as_mods' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sugarpy_1_0_0',
+        ],
+        'default_value' : [0.0],
+        'description' :  ''' List of Unimod PSI-MS names corresponding to glycans that were included in the database search as modification (will be removed from the peptidoform by SugarPy). ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sugarpy_style_1' : 'unimod_glycans_incl_in_search',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'none_val' : [],
+            'item_title' : 'PSI-MS',
+            'item_type' : 'str',
+            'custom_val_max' : 0,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
+    },
+    'use_median_accuracy' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sugarpy_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sugarpy_style_1' : 'use_median_accuracy',
+        },
+        'utag' : [
+            'accuracy',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type'    : 'select',
+        'uvalue_option' : {
+            'select_type'   : 'radio_button',
+            'available_values'  : [
+                'None',
+                'all',
+                'peptide',
+            ],
+            'custom_val_max' : 0,
+        'default_value' : False,
+        'description' : \
+            'Accuracy of identifications (ident_file) are used to calculate the machine_offset_in_ppm. If "all" is selected, the median of all identifications will be used, for "peptide" the median of each peptide will be used.',
+    },
+    'min_glycan_length' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sugarpy_1_0_0',
+        ],
+        'triggers_rerun' : False,
+        'ukey_translation' : {
+            'sugarpy_style_1' : 'max_tree_length',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'int',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 10000000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''
+        },
+        'default_value' : 1,
+        'description' : \
+            'Minimum number of monosaccharides per glycan'\
+    },
+    'max_glycan_length' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sugarpy_1_0_0',
+        ],
+        'triggers_rerun' : False,
+        'ukey_translation' : {
+            'sugarpy_style_1' : 'min_tree_length',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'int',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 10000000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : ''
+        },
+        'default_value' : 10,
+        'description' : \
+            'Maximum number of monosaccharides per glycan'\
+    },
+    'monosaccharide_compositions' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sugarpy_1_0_0',
+        ],
+        'default_value' : {
+            "dHex": 'C6H10O4',
+            # "dHexNAc": 'C8H13NO4',
+            "Hex": 'C6H10O5',
+            # "HexA": 'C6H8O6',
+            "HexNAc": 'C8H13NO5',
+            # "Me2Hex": 'C8H14O5',
+            # "MeHex": 'C7H12O5',
+            "NeuAc": 'C11H17NO8',
+            "Pent": 'C5H8O4',
+            # 'dHexN': 'C6H11O3N',
+            # 'HexN': 'C6H11O4N',
+            # 'MeHexA': 'C7H10O6',
+        },
+        'description' :  ''' Dictionary defining the chemical formula (hill notation) for each monosaccharide that is used. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sugarpy_style_1' : 'monosaccharides'
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+            'custom_type' : {
+                'str' : {'multiple_line': False},
+            },
+            'custom_val_max' : 100000,
+            'item_titles' : {
+                'name' : 'formula',
+            },
+            'value_types' : {
+                'str' : 'str',
+            },
+            'multiple_line' : False,
+            'none_val' : {
+            },
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "dict",
+    },
+    'mzml_input_file' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sugarpy_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sugarpy_style_1' : 'mzml_file',
+        },
+        'utag' : [
+            'input_files',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : None,
+        'description' : \
+            'Path to the mzML input file'
+    },
+    'min_number_of_spectra': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'sugarpy_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 2,
+        'description': """ Min number of spectra in which a molecule needs to be matched in order to consider it for further processing """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'sugarpy_style_1': 'min_spec_number'
+        },
+        'utag': [
+            'accuracy'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'max_trees_per_spec': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'sugarpy_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 5,
+        'description': """ Max number of glycoforms reported per spectrum for each peptide """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'sugarpy_style_1': 'max_trees_per_spec'
+        },
+        'utag': [
+            'output'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'min_sugarpy_score': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'sugarpy_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.1,
+            'unit': 'abundance',
+            'f-point': 1e-02
+        },
+        'default_value': 1.0,
+        'description': """ Min SugarPy score to be considered for output """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'sugarpy_style_1': 'min_sugarpy_score'
+        },
+        'utag': [
+            'accuracy',
+            'scoring',
+            'output'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'min_subtree_coverage': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'sugarpy_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.1,
+            'unit': 'abundance',
+            'f-point': 1e-02
+        },
+        'default_value': 1.0,
+        'description': """ Min subtree coverage to be considered for output """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'sugarpy_style_1': 'min_sub_cov'
+        },
+        'utag': [
+            'accuracy',
+            'scoring',
+            'output'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
     },
 }
