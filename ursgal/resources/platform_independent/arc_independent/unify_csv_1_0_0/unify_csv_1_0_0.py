@@ -15,6 +15,7 @@ import os
 import pickle
 import csv
 import ursgal
+import pyqms
 import pprint
 # import ursgal.ukb
 import re
@@ -115,6 +116,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             use15N = True
     else:
         params['label'] = '14N'
+
+    pyqms_mz_calc = params['translations']['use_pyqms_for_mz_calculation']
     # print(use15N)
     # sys.exit(1)
     # aa_exception_dict = params['translations']['aa_exception_dict']
@@ -354,6 +357,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             csv_file_buffer.append(line_dict)
         total_lines = len(csv_file_buffer)
         print('''[ unify_cs ] Buffering csv file done''')
+        all_molecules = set()
+        all_charges = set()
+        line_dict_collector = []
         for line_nr, line_dict in enumerate(csv_file_buffer):
             if line_nr % 500 == 0:
                 print(
@@ -458,7 +464,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     
             #END Spectrum Title block
             ##########################
-
+            spectrum_id = int(spectrum_id)
             retention_time_in_minutes = \
                 scan_rt_lookup[ input_file_basename_for_rt_lookup ][ 'scan_2_rt' ]\
                     [ spectrum_id ]
@@ -469,6 +475,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             else:
                 rt_corr_factor = 60
             line_dict['Retention Time (s)'] = float( retention_time_in_minutes ) * rt_corr_factor
+
+            precursor_mz = scan_rt_lookup[ input_file_basename_for_rt_lookup ][
+                'scan_2_mz' ][ spectrum_id ]
+            line_dict['Exp m/z'] = round(precursor_mz, 10)
 
             #########################
             # Buffering corrections #
@@ -846,52 +856,13 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         )
                         continue
 
-                # calculate m/z
-                cc.use(
+                all_molecules.add(
                     '{Sequence}#{Modifications}'.format(
                         **line_dict_update
                     )
                 )
-                if use15N:
-                    number_N = dc( cc['N'] )
-                    cc['15N'] = number_N
-                    del cc['N']
-                    if cam:
-                        c_count = line_dict_update['Sequence'].count('C')
-                        cc['14N'] = c_count
-                        cc['15N'] -= c_count
-                    # mass = mass + ( DIFFERENCE_14N_15N * number_N )
-                mass = cc._mass()
-                calc_mz = ursgal.ucore.calculate_mz(
-                    mass,
-                    line_dict['Charge']
-                )
-                # mz_buffer[ buffer_key ] = calc_mz
-
-                line_dict_update['uCalc m/z'] = calc_mz
-                # if 'msamanda' in search_engine.lower():
-                    # ms amanda does not return calculated mz values
-                if line_dict['Calc m/z'] == '':
-                    line_dict_update['Calc m/z'] = calc_mz
-
-                line_dict_update['Accuracy (ppm)'] = \
-                    (float(line_dict['Exp m/z']) - line_dict_update['uCalc m/z'])/line_dict_update['uCalc m/z'] * 1e6
-                prec_m_accuracy = (params['translations']['precursor_mass_tolerance_minus'] + params['translations']['precursor_mass_tolerance_plus'])/2
-                i = 0
-                while abs(line_dict_update['Accuracy (ppm)']) > prec_m_accuracy:
-                    i += 1
-                    if i > len(params['translations']['precursor_isotope_range'].split(','))-1:
-                        break
-                    isotope = params['translations']['precursor_isotope_range'].split(',')[i]
-                    isotope = int(isotope)
-                    if isotope == 0:
-                        continue
-                    calc_mz = ursgal.ucore.calculate_mz(
-                        mass + isotope*1.008664904,
-                        line_dict['Charge']
-                    )
-                    line_dict_update['Accuracy (ppm)'] = \
-                        (float(line_dict['Exp m/z']) - calc_mz)/calc_mz * 1e6
+                all_charges.add(int(line_dict['Charge']))
+                
 
                 # ------------
                 # BUFFER END
@@ -1048,10 +1019,84 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_dict['Conflicting uparam'] = ';'.join(
                         sorted(conflicting_uparams[lookup_identifier])
                     )
-            csv_output.writerow(line_dict)
-            '''
-                to_be_written_csv_lines.append( line_dict )
-            '''
+            line_dict_collector.append(line_dict)
+
+        # --------------------------------
+        # mz calc and accuracy calc block
+        # --------------------------------
+
+        print('[ unify_cs ] calculating mz accuracies')
+        # build IsotopologueLibrary
+        molecule2hill_dict = {}
+        for molecule in all_molecules:
+            cc.use(molecule)
+            if use15N:
+                number_N = dc( cc['N'] )
+                cc['15N'] = number_N
+                del cc['N']
+                if cam:
+                    c_count = molecule.split('#')[0].count('C')
+                    cc['14N'] = c_count
+                    cc['15N'] -= c_count
+            cc_hill = cc.hill_notation_unimod()
+            molecule2hill_dict[molecule] = '+{0}'.format(cc_hill)
+
+        if pyqms_mz_calc:
+            isotopologue_dict = pyqms.IsotopologueLibrary(
+                molecules=list(molecule2hill_dict.values()),
+                charges=list(all_charges),
+                verbose=True
+            )
+            # import pprint
+            # print(list(charges))
+            # pprint.pprint(isotopologue_dict.keys())
+
+        # calculate m/z
+        for collected_line_dict in line_dict_collector:
+            molecule = '{Sequence}#{Modifications}'.format(
+                **collected_line_dict
+            )
+            cc_hill = molecule2hill_dict[molecule].strip('+')
+            charge = int(collected_line_dict['Charge'])
+            if pyqms_mz_calc:
+                isotopologue_mzs = isotopologue_dict[cc_hill][
+                'env'][(('N', '0.000'),)][charge]['mz']
+
+                calc_mz = round(isotopologue_mzs[0], 10)
+                min_accuracy = (float(collected_line_dict['Exp m/z']) - calc_mz)/calc_mz * 1e6
+                for iso_mz in isotopologue_mzs[1:]:
+                    isotopologue_acc = (float(collected_line_dict['Exp m/z']) - iso_mz)/iso_mz * 1e6
+                    if abs(isotopologue_acc) > abs(min_accuracy):
+                        break
+                    else:
+                        min_accuracy = isotopologue_acc
+            else:
+                cc.use(molecule2hill_dict[molecule])
+                mass = cc._mass()
+                calc_mz = ursgal.ucore.calculate_mz(
+                    mass,
+                    int(collected_line_dict['Charge'])
+                )
+                min_accuracy = (float(collected_line_dict['Exp m/z']) - calc_mz)/calc_mz * 1e6
+                for isotope in range(1,6):
+                    iso_mz = ursgal.ucore.calculate_mz(
+                        mass + isotope*1.008664904,
+                        int(collected_line_dict['Charge'])
+                    )
+                    isotopologue_acc = (float(collected_line_dict['Exp m/z']) - iso_mz)/iso_mz * 1e6
+                    if abs(isotopologue_acc) > abs(min_accuracy):
+                        break
+                    else:
+                        min_accuracy = isotopologue_acc
+
+            collected_line_dict['uCalc m/z'] = calc_mz
+            if collected_line_dict['Calc m/z'] == '':
+                collected_line_dict['Calc m/z'] = calc_mz
+
+            collected_line_dict['Accuracy (ppm)'] = round(min_accuracy, 5)
+
+            csv_output.writerow(collected_line_dict)
+    
     output_file_object.close()
 
     if database_search is True:

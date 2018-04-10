@@ -68,6 +68,7 @@ unify_csv_main(
             'precursor_mass_tolerance_plus' : 5,
             'precursor_isotope_range' : "0,1",
             'rounded_mass_decimals' : 3,
+            'use_pyqms_for_mz_calculation' : False,
         },
         'label' : '',
         'mods' : R.params['mods'],

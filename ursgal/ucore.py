@@ -284,11 +284,12 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
         values = [d[fieldname] for d in list_of_rowdicts]
         if len(set(values)) == 1:
             merged_d[fieldname] = values[0]
-        elif len([v for v in values if v != '']) == 1:
-            values.remove('')
-            merged_d[fieldname] = values[0]
         else:
-            merged_d[fieldname] = joinchar.join(values)
+            no_empty_values = [v for v in values if v != '']
+            if len(set(no_empty_values)) == 1:
+                merged_d[fieldname] = no_empty_values[0]
+            else:
+                merged_d[fieldname] = joinchar.join(values)
     return merged_d
 
 
