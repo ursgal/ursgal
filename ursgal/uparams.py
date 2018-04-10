@@ -407,7 +407,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
-            'sugarpy_1_0_0'
+            'sugarpy_1_0_0',
         ],
         'uvalue_option': {
             'none_val': [None],
@@ -865,7 +865,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pyqms_style_1' : 'rt_border_tolerance',
-            'sugarpy_1_0_0' : 'rt_border_tolerance',
+            'sugarpy_style_1' : 'rt_border_tolerance',
         },
         'utag' : [
             'quantification',
@@ -4391,12 +4391,12 @@ ursgal_params = {
             'mzml2mgf_1_0_0',
             'mzml2mgf_2_0_0',
             'pyqms_1_0_0',
-            'sugarpy_1_0_0'
+            'sugarpy_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'mzml2mgf_style_1' : 'machine_offset_in_ppm',
-            'pyqms_style_1'    : 'MACHINE_OFFSET_IN_PPM'
+            'pyqms_style_1'    : 'MACHINE_OFFSET_IN_PPM',
             'sugarpy_style_1'  : 'MACHINE_OFFSET_IN_PPM'
         },
         'utag' : [
@@ -7372,7 +7372,7 @@ ursgal_params = {
             'msfragger_20170103',
             'pipi_1_3_0',
             'pyqms_1_0_0',
-            'sugarpy_1_0_0'
+            'sugarpy_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7455,7 +7455,7 @@ ursgal_params = {
             'msfragger_20170103',
             'pipi_1_3_0',
             'pyqms_1_0_0',
-            'sugarpy_1_0_0'
+            'sugarpy_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -10036,6 +10036,7 @@ ursgal_params = {
                 'peptide',
             ],
             'custom_val_max' : 0,
+        },
         'default_value' : False,
         'description' : \
             'Accuracy of identifications (ident_file) are used to calculate the machine_offset_in_ppm. If "all" is selected, the median of all identifications will be used, for "peptide" the median of each peptide will be used.',

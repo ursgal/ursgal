@@ -24,11 +24,11 @@ class sugarpy_1_0_0(ursgal.UNode):
         'create_own_folder'  : True,
         'in_development'     : False,
         'include_in_git'     : False,
-        'distributable'      : True,
+        'distributable'      : False,
         'engine'             : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe': 'SugarPy_1_0_0.py',
+                    'exe': 'sugarpy_1_0_0.py',
                 },
             },
         },
