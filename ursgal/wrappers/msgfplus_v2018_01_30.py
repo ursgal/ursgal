@@ -39,7 +39,7 @@ class msgfplus_v2018_01_30( msgf ):
         'in_development'              : False,
         'include_in_git'              : False,
         'utranslation_style'          : 'msgfplus_style_1',
-        'distributable'               : True,
+        'distributable'               : False,
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {

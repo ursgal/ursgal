@@ -225,6 +225,7 @@ Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S., and Fufezan, C. (201
 .. _Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis: http://dx.doi.org/10.1021/acs.jproteome.5b00860
 
 .. note::
+
     Please cite every tool you use in Ursgal. During runtime the references of
     the tools you are using are shown.
 

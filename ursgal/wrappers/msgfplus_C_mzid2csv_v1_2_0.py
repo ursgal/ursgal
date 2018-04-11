@@ -34,7 +34,7 @@ class msgfplus_C_mzid2csv_v1_2_0( msgfc ):
         'output_suffix'      : None,
         'include_in_git'     : False,
         'in_development'     : False,
-        'distributable'      : True,
+        'distributable'      : False,
         'utranslation_style' : 'msgfplus_style_1',
         'engine' : {
             'platform_independent' : {
