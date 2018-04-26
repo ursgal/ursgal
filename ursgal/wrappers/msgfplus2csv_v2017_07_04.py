@@ -12,7 +12,7 @@ import gzip
 import subprocess
 
 
-class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
+class msgfplus2csv_v2017_07_04( ursgal.UNode ):
     """
     msgfplus_C_mzid2csv_v2017_07_04 UNode
     Parameter options at https://omics.pnl.gov/software/ms-gf
@@ -52,7 +52,7 @@ class msgfplus_C_mzid2csv_v2017_07_04( ursgal.UNode ):
     }
 
     def __init__(self, *args, **kwargs):
-        super(msgfplus_C_mzid2csv_v2017_07_04, self).__init__(*args, **kwargs)
+        super(msgfplus2csv_v2017_07_04, self).__init__(*args, **kwargs)
         if sys.platform in ['win32']:
             self.dependencies_ok = True
         else:

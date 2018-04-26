@@ -10,10 +10,10 @@ import re
 import pprint
 import gzip
 import subprocess
-from .msgfplus_C_mzid2csv_v2017_07_04 import msgfplus_C_mzid2csv_v2017_07_04 as msgfc
+from .msgfplus2csv_v2017_07_04 import msgfplus2csv_v2017_07_04 as msgfc
 
 
-class msgfplus_C_mzid2csv_v1_2_0( msgfc ):
+class msgfplus2csv_v1_2_0( msgfc ):
     """
     msgfplus_C_mzid2csv_v1.2.0 UNode
     Parameter options at https://omics.pnl.gov/software/ms-gf

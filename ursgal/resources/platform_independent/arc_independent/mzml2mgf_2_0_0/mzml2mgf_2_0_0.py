@@ -95,6 +95,7 @@ def main(
             uni = 'unicorns'
             scan_time = 0
 
+        spectrum_id = spec.ID
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
         tmp['unit'] = unit
@@ -103,7 +104,6 @@ def main(
             continue
 
         peaks_2_write = spec.peaks('centroided')
-        spectrum_id = spec.ID
 
         precursor_mz = spec.selected_precursors[0]['mz']
         precursor_charge = spec.selected_precursors[0]['charge']

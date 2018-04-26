@@ -5,7 +5,7 @@ import os
 import ursgal
 
 
-class sugarpy_1_0_0(ursgal.UNode):
+class sugarpy_run_1_0_0(ursgal.UNode):
     """
     SugarPy - discovery-driven analysis of glycan compositions from IS-CID of intact glycopeptides.
     """
@@ -17,9 +17,9 @@ class sugarpy_1_0_0(ursgal.UNode):
         'engine_type'        : {
             'misc_engine' : True
         },
-        'utranslation_style' : 'sugarpy_style_1',
+        'utranslation_style' : 'sugarpy_run_style_1',
         'citation'           : '',
-        'input_extensions'   : ['.mzML'],
+        'input_extensions'   : ['.csv'],
         'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
         'in_development'     : False,
@@ -28,7 +28,7 @@ class sugarpy_1_0_0(ursgal.UNode):
         'engine'             : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe': 'sugarpy_1_0_0.py',
+                    'exe': 'sugarpy_run_1_0_0.py',
                 },
             },
         },
@@ -36,11 +36,11 @@ class sugarpy_1_0_0(ursgal.UNode):
 
     def __init__(self, *args, **kwargs):
         """."""
-        super(sugarpy_1_0_0, self).__init__(*args, **kwargs)
+        super(sugarpy_run_1_0_0, self).__init__(*args, **kwargs)
 
     def _execute(self):
-        """Run SugarPy on a given list of .mzML files based on identified
-        peptides from a evidences.csv
+        """Run SugarPy on a given .mzML file based on identified
+        peptides from an evidences.csv
 
         Translated Ursgal parameters are passed to the SugarPy main function.
         """
@@ -54,15 +54,20 @@ class sugarpy_1_0_0(ursgal.UNode):
             self.params['output_file']
         )
 
-        mzml_files = []
+        input_file  = os.path.join(
+            self.params['input_dir_path'],
+            self.params['input_file']
+        )
 
-        for input_file_dict in self.params['input_file_dicts']:
-            mzml_files.append(
-                os.path.join(
-                    input_file_dict['dir'],
-                    input_file_dict['file']
-                )
-            )
+        # mzml_files = []
+
+        # for input_file_dict in self.params['input_file_dicts']:
+        #     mzml_files.append(
+        #         os.path.join(
+        #             input_file_dict['dir'],
+        #             input_file_dict['file']
+        #         )
+        #     )
 
         translations = self.params['translations']['_grouped_by_translated_key']
 
@@ -86,12 +91,12 @@ class sugarpy_1_0_0(ursgal.UNode):
             'MACHINE_OFFSET_IN_PPM': None,
             'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS': None,
         }
-        sugarpy_params[charges] = list(range(
+        sugarpy_params = {}
+        sugarpy_params['charges'] = list(range(
             self.params['translations']['precursor_min_charge'],
             self.params['translations']['precursor_max_charge'] +1
         ))
 
-        sugarpy_params = {}
         for translated_key, translation_dict in translations.items():
             if translated_key in pyqms_params.keys():
                 pyqms_params[translated_key] = list(translation_dict.values())[0]
@@ -104,8 +109,9 @@ class sugarpy_1_0_0(ursgal.UNode):
                 print(translation_dict)
                 sys.exit(1)
         sugarpy_params['pyqms_params'] = pyqms_params
-        sugarpy_params['mzml_files'] = mzml_files
+        sugarpy_params['ident_file'] = input_file
         sugarpy_params['output_file'] = output_file
+        sugarpy_params['force'] = True
 
         out = main(**sugarpy_params)
 
