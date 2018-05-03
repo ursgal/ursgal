@@ -33,7 +33,7 @@ class msgfplus2csv_v2017_07_04( ursgal.UNode ):
         'output_suffix'      : None,
         'include_in_git'     : False,
         'in_development'     : False,
-        'distributable'      : True,
+        'distributable'      : False,
         'utranslation_style' : 'msgfplus_style_1',
         'engine' : {
             'platform_independent' : {
