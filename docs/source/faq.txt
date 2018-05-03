@@ -26,7 +26,20 @@ Visit http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-213
 Q: Downloading http files is not working on OSX. Why?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Make sure that certificates are properly installed. Go to Applications/Python 3.6 and double-click Install Certificates.command
+Make sure that certificates are properly installed. Go to Applications/Python 3.6 and double-click Install Certificates.command. The latest version of Python3.6 for Mac should come with
+the right certifications for secure connections anyways.
+
+
+Q: I have problems installing pyahocorasick on Windows! What can I do?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generally, Python 3.6 should be used when working with Windows. Here are some
+general remarks for a flawless installation under Windows.
+
+When using Windows 7, additionally install: Microsoft Visual
+C++ Build Tools, http://landinghub.visualstudio.com/visual-cpp-build-tools)
+
+When using Windows 10, consider additionally installing MS Build Tools 2015
 
 
 Usage
@@ -93,4 +106,4 @@ If you have not cloned Ursgal but used the ZIP file you can replace the folder w
 
 In both cases you might need to run the setup again to update the python site-packages::
 
-    user@localhost:~/ursgal$ python3.4 setup.py install
+    user@localhost:~/ursgal$ python3 setup.py install
