@@ -90,6 +90,7 @@ class sugarpy_run_1_0_0(ursgal.UNode):
             'BUILD_RESULT_INDEX': None,
             'MACHINE_OFFSET_IN_PPM': None,
             'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS': None,
+            'MZ_SCORE_PERCENTILE': None,
         }
         sugarpy_params = {}
         sugarpy_params['charges'] = list(range(

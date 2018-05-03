@@ -657,12 +657,14 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'sugarpy_run_1_0_0',
         ],
         'default_value': 0.4,
         'description':  ''' weighting factor for pyQms mz score ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'mz_score_percentile'
+            'pyqms_style_1': 'MZ_SCORE_PERCENTILE',
+            'sugarpy_run_style_1': 'MZ_SCORE_PERCENTILE',
         },
         'utag': [
             'quantification',
@@ -9122,7 +9124,7 @@ ursgal_params = {
         },
         'default_value' : 'http://plan-a.uni-muenster.de/',
         'description' : \
-            'URL that is used to install and prepare_resources.py',
+            'URL that is used to prepare and install resources via corresponding scripts (prepare_resources.py and install_resources.py)',
     },
     'use_quality_filter' : {
         'edit_version' : 1.00,
@@ -9557,6 +9559,7 @@ ursgal_params = {
                 'msamanda_1_0_0_7504'  : 'Amanda:Score',
                 'msamanda_2_0_0_9706'  : 'Amanda:Score',
                 'msamanda_2_0_0_9695'  : 'Amanda:Score',
+                'msamanda_2_0_0_10695' : 'Amanda:Score',
                 'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
                 'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_01_30' : 'MS-GF:SpecEValue',
