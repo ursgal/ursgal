@@ -54,7 +54,7 @@ class sugarpy_run_1_0_0(ursgal.UNode):
             self.params['output_file']
         )
 
-        input_file  = os.path.join(
+        input_file = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
@@ -69,7 +69,8 @@ class sugarpy_run_1_0_0(ursgal.UNode):
         #         )
         #     )
 
-        translations = self.params['translations']['_grouped_by_translated_key']
+        translations = self.params['translations'][
+            '_grouped_by_translated_key']
 
         pyqms_params = {
             'PERCENTILE_FORMAT_STRING': None,
@@ -95,18 +96,50 @@ class sugarpy_run_1_0_0(ursgal.UNode):
         sugarpy_params = {}
         sugarpy_params['charges'] = list(range(
             self.params['translations']['precursor_min_charge'],
-            self.params['translations']['precursor_max_charge'] +1
+            self.params['translations']['precursor_max_charge'] + 1
         ))
 
         for translated_key, translation_dict in translations.items():
-            if translated_key in pyqms_params.keys():
-                pyqms_params[translated_key] = list(translation_dict.values())[0]
+            if translated_key == 'REL_MZ_RANGE':
+                if self.params['translations']['ms_level'] == 1:
+                    print(
+                        '''
+                        [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
+                        [ WARNING ] need to be combined for SugarPy (use of symmetric tolerance window).
+                        [ WARNING ] The arithmetic mean is used.
+                        '''
+                    )
+                    pyqms_params['REL_MZ_RANGE'] = (
+                        float(self.params['translations']['precursor_mass_tolerance_plus']) +
+                        float(self.params['translations'][
+                              'precursor_mass_tolerance_minus'])) / 2.0
+                    if self.params['translations']['precursor_mass_tolerance_unit'] == 'da':
+                        pyqms_params['REL_MZ_RANGE'] = \
+                            ursgal.ucore.convert_dalton_to_ppm(
+                                pyqms_params['REL_MZ_RANGE'],
+                                base_mz=self.params['translations']['base_mz']
+                        )
+                else:
+                    pyqms_params['REL_MZ_RANGE'] = \
+                        self.params['translations']['frag_mass_tolerance']
+                    if self.params['translations']['frag_mass_tolerance_unit'] == 'da':
+                        pyqms_params['REL_MZ_RANGE'] = \
+                            ursgal.ucore.convert_dalton_to_ppm(
+                                pyqms_params['REL_MZ_RANGE'],
+                                base_mz=self.params['translations']['base_mz']
+                        )
+                pyqms_params['REL_MZ_RANGE'] = pyqms_params['REL_MZ_RANGE'] * 1e-6
+            elif translated_key in pyqms_params.keys():
+                pyqms_params[translated_key] = list(
+                    translation_dict.values())[0]
             elif 'charge' in translated_key:
                 continue
             elif len(translation_dict) == 1:
-                sugarpy_params[translated_key] = list(translation_dict.values())[0]
+                sugarpy_params[translated_key] = list(
+                    translation_dict.values())[0]
             else:
-                print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
+                print('The translatd key ', translated_key,
+                      ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
                 sys.exit(1)
         sugarpy_params['pyqms_params'] = pyqms_params

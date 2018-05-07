@@ -286,6 +286,13 @@ class omssa_2_1_9( ursgal.UNode ):
                     base_mz=self.params['translations']['base_mz']
                 )
 
+        print(
+            '''
+            [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
+            [ WARNING ] need to be combined for pyQms (use of symmetric tolerance window).
+            [ WARNING ] The arithmetic mean is used.
+            '''
+        )
         self.params['_omssa_precursor_error'] = (
             float(self.params['translations']['precursor_mass_tolerance_plus']) +
             float(self.params['translations']['precursor_mass_tolerance_minus'])

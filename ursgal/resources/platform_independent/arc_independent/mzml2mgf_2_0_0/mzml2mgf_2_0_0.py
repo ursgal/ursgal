@@ -86,19 +86,13 @@ def main(
                 ),
                 end='\r'
             )
-        # works for both generations of pymzml
-        spec_ms_level = spec['ms level']
-        try:
-            unit = 'minute'
-            scan_time = spec.scan_time
-        except:
-            uni = 'unicorns'
-            scan_time = 0
 
+        spec_ms_level = spec.ms_level
+        scan_time = spec.scan_time
         spectrum_id = spec.ID
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
-        tmp['unit'] = unit
+        tmp['unit'] = 'minute'
 
         if spec_ms_level != ms_level:
             continue
@@ -139,10 +133,7 @@ def main(
             file=oof
         )
 
-        if unit == 'second':
-            scan_time = float(scan_time)
-        else:
-            scan_time = float(scan_time) * 60
+        scan_time = float(scan_time) * 60
         print(
             'RTINSECONDS={0}'.format(
                 round(
@@ -154,6 +145,7 @@ def main(
         )
 
         precursor_mz += precursor_mz * mz_correction_factor
+        tmp['scan_2_mz'][spectrum_id] = precursor_mz
         print(
             'PEPMASS={0}'.format(
                 precursor_mz

@@ -94,17 +94,11 @@ def main(
         # works for both generations of pymzml
         spec_ms_level = spec['ms level']
         spectrum_id = spec['id']
-        try:
-            scan_time, unit = spec['scan time']
-        except:
-            unit = 'unicorns'
-            scan_time = 0
+        scan_time, unit = spec['scan time']
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
         tmp['unit'] = unit
 
-        # if n >= 1000:
-        #     break
         if spec_ms_level != ms_level:
             continue
 

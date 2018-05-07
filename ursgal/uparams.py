@@ -284,39 +284,6 @@ ursgal_params = {
         },
         'uvalue_type': "float",
     },
-    'rel_mz_range': {
-        'edit_version' : 1.00,
-        'available_in_unode': [
-            'pyqms_1_0_0',
-            'sugarpy_run_1_0_0',
-            'sugarpy_plot_1_0_0',
-        ],
-        'uvalue_option': {
-            'none_val': None,
-            'multiple_line': False,
-            'max': 10e10,
-            'min': 0,
-            'updownval': 5e4,
-            'unit': 'a.u.',
-            'f-point': 1e-7
-
-        },
-        'default_value': 5e-6,
-        'description': """ relative mz error """,
-        'triggers_rerun': True,
-        'ukey_translation': {
-            'pyqms_style_1': 'REL_MZ_RANGE',
-            'sugarpy_run_style_1': 'REL_MZ_RANGE',
-            'sugarpy_plot_style_1': 'ms_precision',
-        },
-        'utag': [
-            'quantification',
-            'accuracy',
-        ],
-        'uvalue_translation': {
-        },
-        'uvalue_type': "float",
-    },
     'rel_intensity_range': {
         'edit_version' : 1.00,
         'available_in_unode': [
@@ -1048,6 +1015,8 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'pipi_1_3_0',
+            'pyqms_1_0_0',
+            'sugarpy_run_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1055,6 +1024,8 @@ ursgal_params = {
             'omssa_style_1'   : 'base_mz',
             'pepnovo_style_1' : 'base_mz',
             'pipi_style_1'    : 'base_mz',
+            'pyqms_style_1'      : 'REL_MZ_RANGE',
+            'sugarpy_run_style_1': 'REL_MZ_RANGE',
         },
         'utag' : [
             'conversion'
@@ -2731,7 +2702,10 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0'
+            'pipi_1_3_0',
+            'pyqms_1_0_0',
+            'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2744,6 +2718,9 @@ ursgal_params = {
             'xtandem_style_1'   : 'spectrum, fragment monoisotopic mass error',
             'msfragger_style_1' : 'fragment_mass_tolerance',
             'pipi_style_1'      : 'ms2_tolerance',
+            'pyqms_style_1'      : 'REL_MZ_RANGE',
+            'sugarpy_run_style_1': 'REL_MZ_RANGE',
+            'sugarpy_plot_style_1': 'ms_precision',
         },
         'utag' : [
             'fragment',
@@ -2789,6 +2766,9 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'pipi_1_3_0',
+            'pyqms_1_0_0',
+            'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2801,6 +2781,9 @@ ursgal_params = {
             'xtandem_style_1'   : 'spectrum, fragment monoisotopic mass error units',
             'msfragger_style_1' : 'fragment_mass_units',
             'pipi_style_1'      : 'frag_mass_tolerance_unit',
+            'pyqms_style_1'      : 'REL_MZ_RANGE',
+            'sugarpy_run_style_1': 'REL_MZ_RANGE',
+            'sugarpy_plot_style_1': 'ms_precision',
         },
         'utag' : [
             'fragment',
@@ -7153,21 +7136,27 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'pipi_1_3_0',
+            'pyqms_1_0_0',
+            'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'kojak_style_1'     : 'ppm_tolerance_pre',
-            'moda_style_1'      : 'PPMTolerance',
-            'msamanda_style_1'  : 'ms1_tol',
-            'msgfplus_style_1'  : '-t',
-            'myrimatch_style_1' : 'MonoPrecursorMzTolerance',
-            'novor_style_1'     : 'precursorErrorTol',
-            'omssa_style_1'     : '-te',
-            'pepnovo_style_1'   : '-pm_tolerance',
-            'unify_csv_style_1' : 'precursor_mass_tolerance_minus',
-            'xtandem_style_1' : 'spectrum, parent monoisotopic mass error minus',
-            'msfragger_style_1' : 'precursor_mass_tolerance',
-            'pipi_style_1'      : 'ms1_tolerance',
+            'kojak_style_1'      : 'ppm_tolerance_pre',
+            'moda_style_1'       : 'PPMTolerance',
+            'msamanda_style_1'   : 'ms1_tol',
+            'msgfplus_style_1'   : '-t',
+            'myrimatch_style_1'  : 'MonoPrecursorMzTolerance',
+            'novor_style_1'      : 'precursorErrorTol',
+            'omssa_style_1'      : '-te',
+            'pepnovo_style_1'    : '-pm_tolerance',
+            'unify_csv_style_1'  : 'precursor_mass_tolerance_minus',
+            'xtandem_style_1'    : 'spectrum, parent monoisotopic mass error minus',
+            'msfragger_style_1'  : 'precursor_mass_tolerance',
+            'pipi_style_1'       : 'ms1_tolerance',
+            'pyqms_style_1'      : 'REL_MZ_RANGE',
+            'sugarpy_run_style_1': 'REL_MZ_RANGE',
+            'sugarpy_plot_style_1': 'ms_precision',
         },
         'utag' : [
             'precursor',
@@ -7220,6 +7209,9 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'pipi_1_3_0',
+            'pyqms_1_0_0',
+            'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7235,7 +7227,9 @@ ursgal_params = {
             'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error plus',
             'msfragger_style_1' : 'precursor_mass_tolerance',
             'pipi_style_1'      : 'ms1_tolerance',
-
+            'pyqms_style_1'      : 'REL_MZ_RANGE',
+            'sugarpy_run_style_1': 'REL_MZ_RANGE',
+            'sugarpy_plot_style_1': 'ms_precision',
         },
         'utag' : [
             'precursor',
@@ -7285,7 +7279,10 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0'
+            'pipi_1_3_0',
+            'pyqms_1_0_0',
+            'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7299,6 +7296,9 @@ ursgal_params = {
             'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error units',
             'msfragger_style_1' : 'precursor_mass_units',
             'pipi_style_1'      : 'ms1_tolerance_unit',
+            'pyqms_style_1'      : 'REL_MZ_RANGE',
+            'sugarpy_run_style_1': 'REL_MZ_RANGE',
+            'sugarpy_plot_style_1': 'ms_precision',
         },
         'utag' : [
             'precursor',

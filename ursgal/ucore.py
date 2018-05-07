@@ -95,6 +95,20 @@ def convert_ppm_to_dalton(ppm_value, base_mz=1000.0):
     '''
     return float(ppm_value) / float(base_mz)
 
+def convert_dalton_to_ppm(da_value, base_mz=1000.0):
+    '''
+        Convert the precision in Dalton to ppm
+
+        Keyword Arguments:
+            da_value (float): Dalton value to transform
+            base_mz (float): factor for transformation
+
+
+        Returns:
+            float: value in ppm
+    '''
+    return float(da_value) * float(base_mz)
+
 
 def calculate_mz(mass, charge):
     '''

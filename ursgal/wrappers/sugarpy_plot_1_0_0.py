@@ -56,19 +56,51 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
             self.params['output_file']
         )
 
-        input_file  = os.path.join(
+        input_file = os.path.join(
             self.params['input_dir_path'],
             self.params['input_file']
         )
 
-        translations = self.params['translations']['_grouped_by_translated_key']
+        translations = self.params['translations'][
+            '_grouped_by_translated_key']
 
         sugarpy_params = {}
         for translated_key, translation_dict in translations.items():
             if len(translation_dict) == 1:
-                sugarpy_params[translated_key] = list(translation_dict.values())[0]
+                sugarpy_params[translated_key] = list(
+                    translation_dict.values())[0]
+            elif translated_key == 'ms_precision':
+                if self.params['translations']['ms_level'] == 1:
+                    print(
+                        '''
+                        [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
+                        [ WARNING ] need to be combined for SugarPy (use of symmetric tolerance window).
+                        [ WARNING ] The arithmetic mean is used.
+                        '''
+                    )
+                    sugarpy_params['ms_precision'] = (
+                        float(self.params['translations']['precursor_mass_tolerance_plus']) +
+                        float(self.params['translations'][
+                              'precursor_mass_tolerance_minus'])) / 2.0
+                    if self.params['translations']['precursor_mass_tolerance_unit'] == 'da':
+                        sugarpy_params['ms_precision'] = \
+                            ursgal.ucore.convert_dalton_to_ppm(
+                                sugarpy_params['ms_precision'],
+                                base_mz=self.params['translations']['base_mz']
+                        )
+                else:
+                    sugarpy_params['ms_precision'] = \
+                        self.params['translations']['frag_mass_tolerance']
+                    if self.params['translations']['frag_mass_tolerance_unit'] == 'da':
+                        sugarpy_params['ms_precision'] = \
+                            ursgal.ucore.convert_dalton_to_ppm(
+                                sugarpy_params['ms_precision'],
+                                base_mz=self.params['translations']['base_mz']
+                        )
+                sugarpy_params['ms_precision'] = sugarpy_params['ms_precision'] * 1e-6
             else:
-                print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
+                print('The translatd key ', translated_key,
+                      ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
                 sys.exit(1)
         sugarpy_params['mzml_file'] = input_file

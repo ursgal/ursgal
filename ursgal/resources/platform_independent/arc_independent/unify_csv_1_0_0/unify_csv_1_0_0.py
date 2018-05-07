@@ -1047,9 +1047,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 charges=list(all_charges),
                 verbose=True
             )
-            # import pprint
-            # print(list(charges))
-            # pprint.pprint(isotopologue_dict.keys())
 
         # calculate m/z
         for collected_line_dict in line_dict_collector:

@@ -892,7 +892,7 @@ class UController(ursgal.UNode):
                     sys.exit(1)
 
         elif len(self.guess_engine_name(engine)) == 1 and\
-                self.guess_engine_name(engine)[0] in ['mzml2mgf_1_0_0']:
+                self.guess_engine_name(engine)[0] in ['mzml2mgf_1_0_0','mzml2mgf_2_0_0']:
             outfile = self.convert_to_mgf_and_update_rt_lookup(
                 input_file       = input_file,
                 force            = force,
