@@ -58,11 +58,10 @@ programs or scripts engines. Currently, ursgal comes with these engines:
 Included engines
 ----------------
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    available_engines
-   available_de_novo_engines
-   available_cross_link_engines
+   converter_engines
    other_engines
 
 
@@ -106,6 +105,14 @@ Record of released Ursgal versions with all notable changes
    :maxdepth: 1
 
    changelog
+
+Contribution Guidelines
+=======================
+
+.. toctree::
+   :maxdepth: 1
+
+   contribute
 
 
 FAQ

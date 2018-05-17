@@ -6,21 +6,37 @@ import sys
 import pickle
 
 class add_estimated_fdr_1_0_0( ursgal.UNode ):
-    """add_estimated_fdr_1_0_0 UNode"""
+    '''
+    add_estimated_fdr_1_0_0 UNode
+
+    Parses a target/decoy search result file and adds a column called
+    "estimated_FDR".
+
+    The CSV must contain:
+
+        * a column with a quality score for each PSM (e-value, error probability etc.)
+        * a column called "Is decoy" indicating whether a PSM is decoy or target.
+
+    Note:
+        This function can be used to independently compare the
+        performance of different quality scores (where performance
+        is the ability to distinguish target PSMs from decoy PSMs).
+
+    '''
     META_INFO = {
-        'edit_version'       : 1.00,
+        'edit_version'       : 1.01,
         'name'               : 'Add Estimated FDR',
         'version'            : '1.0.0',
         'release_date'       : '2008-1-1',
         'engine_type' : {
-            'converter' : True
+            'validation_engine' : True
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'withFDR',
         'in_development'     : False,
         'include_in_git'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'add_estimated_fdr_style_1',
         'engine' : {
             'platform_independent' : {

@@ -13,14 +13,14 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         'version'            : '1.0.0',
         'release_date'       : None,
         'engine_type' : {
-            'converter' : True
+            'misc_engine' : True
         },
         'input_extensions'   : [],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.fasta'],
         'output_suffix'      : 'target_decoy',
         'in_development'     : False,
         'include_in_git'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'generate_target_decoy_style_1',
         'engine' : {
             'platform_independent' : {

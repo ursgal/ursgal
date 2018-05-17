@@ -1,0 +1,74 @@
+.. _converter-engines:
+
+Converter Engines
+=================
+
+Convert CSV to SSL 1_0_0
+------------------------
+
+.. autoclass:: ursgal.wrappers.csv2ssl_1_0_0.csv2ssl_1_0_0
+   :members:
+   :private-members:
+
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.csv2ssl_1_0_0.csv2ssl_1_0_0.main
+
+
+Convert CSV to Counted Results
+------------------------------
+
+.. autoclass:: ursgal.wrappers.csv2counted_results_1_0_0.csv2counted_results_1_0_0
+   :members:
+   :private-members:
+
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.csv2counted_results_1_0_0.csv2counted_results_1_0_0.main
+
+
+Convert MS-GF+ MZID to CSV
+--------------------------
+
+.. autoclass:: ursgal.wrappers.msgfplus2csv_v2017_01_27.msgfplus2csv_v2017_01_27
+   :members:
+
+.. autoclass:: ursgal.wrappers.msgfplus2csv_v2016_09_16.msgfplus2csv_v2016_09_16
+   :members:
+
+
+Convert MZML to MGF 1_0_0
+-------------------------
+
+.. autoclass:: ursgal.wrappers.mzml2mgf_1_0_0.mzml2mgf_1_0_0
+   :members:
+
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.mzml2mgf_1_0_0.mzml2mgf_1_0_0.main
+
+
+Convert X!Tandem XML to CSV 1_0_0
+---------------------------------
+
+.. autoclass:: ursgal.wrappers.xtandem2csv_1_0_0.xtandem2csv_1_0_0
+   :members:
+
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.xtandem2csv_1_0_0.xtandem2csv_1_0_0.main
+
+
+MzidLib
+-------
+
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_7.mzidentml_lib_1_7
+   :members:
+
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_11.mzidentml_lib_1_6_11
+   :members:
+
+.. autoclass:: ursgal.wrappers.mzidentml_lib_1_6_10.mzidentml_lib_1_6_10
+   :members:
+
+
+Unify CSV v1_0_0
+----------------
+
+.. autoclass:: ursgal.wrappers.unify_csv_1_0_0.unify_csv_1_0_0
+   :members:
+   :private-members:
+
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.unify_csv_1_0_0.unify_csv_1_0_0.main

@@ -15,6 +15,7 @@ import re
 import pprint
 import gzip
 import copy
+from ursgal import ukb
 
 
 class Meta_UNode(type):
@@ -92,7 +93,6 @@ class Meta_UNode(type):
             'uses_unode',
             None
         )
-        # exit()
         if alternative_exe_folder is not None:
             kwargs['engine_path'] = kwargs['engine_path'].replace(
                 engine,
@@ -522,7 +522,7 @@ class UNode(object, metaclass=Meta_UNode):
             return self.flatten_list(multi_list[0]) + self.flatten_list(multi_list[1:])
         return multi_list[:1] + self.flatten_list(multi_list[1:])
 
-    def get_last_engine(self, history=None, engine_types=None, multiple_engines=False ):
+    def get_last_engine(self, history=None, engine_types=None, multiple_engines=False):
         '''
         The unode get_last_engine function
 
@@ -545,21 +545,27 @@ class UNode(object, metaclass=Meta_UNode):
             >>> file_info, __    = self.load_json( fpaths=fpaths, mode='input')
             >>> last_engine      = self.get_last_engine(
                     history      = file_info["history"],
-                    engine_types = ["search_engine"]
+                    engine_types = ["protein_database_search_engine"]
                 )
             >>> print( last_engine )
             "xtandem_sledgehammer"
 
         Returns:
             str: The name of the last engine that was used.
-                Returns None if no search engine was used yet.
         '''
         last_engine = None
         if engine_types is None:
             engine_types = [
-                'search_engine',
-                'denovo_engine',
-                'spectral_engine'
+                'converter',
+                'cross_link_search_engine',
+                'de_novo_search_engine',
+                'fetcher',
+                'misc_engine',
+                'meta_engine',
+                'protein_database_search_engine',
+                'spectral_library_search_engine',
+                'validation_engine',
+                'visualizer',
             ]
         if not history:
             history = self.stats["history"]
@@ -581,10 +587,6 @@ class UNode(object, metaclass=Meta_UNode):
                         {0}
                         '''.format( ", ".join(merged_engines) )
                     break
-                # if engine_type in history_event["META_INFO"]["engine_type"] and \
-                # history_event["META_INFO"]["engine_type"][engine_type] == True:
-                #     last_engine = history_event["engine"]
-                #     break
 
                 meta = history_event.get("META_INFO", {})
                 meta_engine_type_info = meta.get("engine_type", {})
@@ -594,6 +596,47 @@ class UNode(object, metaclass=Meta_UNode):
                         break
 
         return last_engine
+
+    def get_last_engine_type(self, history=None):
+        '''
+        The unode get_last_engine_type function
+
+        Keyword Arguments:
+            history (list): A list of path unodes, timestamps and parameters
+                that were used. This function can be used on the history loaded
+                from a file .json, to find out which search engine was used on
+                that file.
+                If not specified, this information is taken from the unode class
+                itself, and not a specific file.
+
+        Examples:
+            >>> fpaths = self.generate_basic_file_info( "14N_xtandem.csv" )
+            >>> file_info, __    = self.load_json( fpaths=fpaths, mode='input')
+            >>> last_engine_type = self.get_last_engine_type(
+                    history      = file_info["history"],
+                )
+            >>> print( last_engine_type )
+            "protein_database_search_engine"
+
+        Returns:
+            str: The type of the last engine that was used.
+            Returns None if the engine_type cannot be specified or if no engine
+            was previously executed on this file.
+        '''
+
+        last_engine_type = None
+        if not history:
+            history = self.stats["history"]
+        history_event = history[-1]
+        meta = history_event.get("META_INFO", {})
+        meta_engine_type_info = meta.get("engine_type", {})
+
+        for engine_type in meta_engine_type_info.keys():
+            if meta_engine_type_info.get( engine_type, False ):
+                last_engine_type = engine_type
+                break
+
+        return last_engine_type
 
     def get_last_search_engine(self, history=None, multiple_engines=False ):
         '''
@@ -625,7 +668,16 @@ class UNode(object, metaclass=Meta_UNode):
             used. Returns None if no search engine was used yet.
         '''
         last_search_engine = None
-        last_search_engine = self.get_last_engine( history=history, engine_types=['search_engine'], multiple_engines=multiple_engines)
+        last_search_engine = self.get_last_engine( 
+            history=history,
+            engine_types=[
+                'cross_link_search_engine',
+                'de_novo_search_engine',
+                'protein_database_search_engine',
+                'spectral_library_search_engine',
+            ],
+            multiple_engines=multiple_engines,
+        )
         return last_search_engine
 
     def _group_psms(self, input_file, validation_score_field=None, bigger_scores_better=None):
@@ -654,7 +706,10 @@ class UNode(object, metaclass=Meta_UNode):
         if bigger_scores_better is None:
             bigger_scores_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][search_engine]
 
+
+        tmp = ddict(list)
         grouped_psms = ddict(list)
+
         opened_file = open( input_file, 'r')
         csv_dict_reader_object = csv.DictReader(
             row for row in opened_file if not row.startswith('#')
@@ -666,8 +721,7 @@ class UNode(object, metaclass=Meta_UNode):
                 '''defined validation_score_field {0} is not found,
                 please check/add it to uparams.py['validation_score_field']'''.format(validation_score_field)
 
-
-            grouped_psms[ line_dict[ 'Spectrum Title' ] ].append(
+            tmp[ line_dict[ 'Spectrum Title' ] ].append(
                 (
                     float(
                         line_dict[ validation_score_field ]
@@ -675,11 +729,20 @@ class UNode(object, metaclass=Meta_UNode):
                     line_dict
                 )
             )
-        for spectrum_title in grouped_psms.keys():
-            grouped_psms[ spectrum_title ].sort(
-                key     = operator.itemgetter(0),
-                reverse = bigger_scores_better
-            )
+
+        for spectrum_title in tmp.keys():
+            already_seen = set()
+
+            for score, line_dict in sorted( tmp[ spectrum_title ],
+                    key     = operator.itemgetter(0),
+                    reverse = bigger_scores_better
+                ):
+                _identifier = '_'.join( sorted( line_dict.values() ))
+                if _identifier in already_seen:
+                    continue
+                already_seen.add( _identifier )
+                grouped_psms[ spectrum_title ].append( ( score, line_dict ) )
+
         print(
             "[ GROUPING ] Grouped {0} PSMs into {1} unique spectrum titles".format(
                 n,
@@ -780,11 +843,12 @@ class UNode(object, metaclass=Meta_UNode):
                 sorted( self.params[ 'modifications' ] )):
             mod_params  = mod.split( ',' )
             if len(mod_params) >=6 or len(mod_params) <=3:
-                print('''[ WARNING ] For modifications, please use the ursgal_style:
-[ WARNING ] 'amino_acid,opt/fix,position,Unimod PSI-MS Name'
-[ WARNING ] or
-[ WARNING ] 'amino_acid,opt/fix,position,name,chemical_composition'
-[ WARNING ] Continue without modification {0} '''.format( mod )
+                print('''
+    [ WARNING ] For modifications, please use the ursgal_style:
+    [ WARNING ] 'amino_acid,opt/fix,position,Unimod PSI-MS Name'
+    [ WARNING ] or
+    [ WARNING ] 'amino_acid,opt/fix,position,name,chemical_composition'
+    [ WARNING ] Continue without modification {0} '''.format( mod )
                 )
                 print(mod_params)
                 continue
@@ -801,7 +865,8 @@ class UNode(object, metaclass=Meta_UNode):
                     mass = ursgal.GlobalUnimodMapper.id2mass( unimod_id )
                     composition = ursgal.GlobalUnimodMapper.id2composition( unimod_id )
                     if unimod_name is None:
-                        print('''[ WARNING ] '{1}' is not a Unimod modification
+                        print('''
+    [ WARNING ] '{1}' is not a Unimod modification
     [ WARNING ] please change it to a valid Unimod Accession # or PSI-MS Unimod Name
     [ WARNING ] or add the chemical composition hill notation (including 1)
     [ WARNING ] e.g.: H-1N1O2
@@ -819,7 +884,8 @@ class UNode(object, metaclass=Meta_UNode):
                     mass = ursgal.GlobalUnimodMapper.name2mass( unimod_name )
                     composition = ursgal.GlobalUnimodMapper.name2composition( unimod_name )
                     if unimod_id is None:
-                        print('''[ WARNING ] '{1}' is not a Unimod modification
+                        print('''
+    [ WARNING ] '{1}' is not a Unimod modification
     [ WARNING ] please change it to a valid PSI-MS Unimod Name or Unimod Accession #
     [ WARNING ] or add the chemical composition hill notation (including 1)
     [ WARNING ] e.g.: H-1N1O2
@@ -838,9 +904,10 @@ class UNode(object, metaclass=Meta_UNode):
                 chemical_composition = ursgal.ChemicalComposition()
                 chemical_composition.add_chemical_formula( chemical_formula )
                 composition = chemical_composition
-                unimod_name_list = ursgal.GlobalUnimodMapper.composition2name_list( chemical_formula )
-                unimod_id_list = ursgal.GlobalUnimodMapper.composition2id_list( chemical_formula )
-                mass = ursgal.GlobalUnimodMapper.composition2mass( chemical_formula )
+                composition_unimod_style = chemical_composition.hill_notation_unimod()
+                unimod_name_list = ursgal.GlobalUnimodMapper.composition2name_list( composition_unimod_style )
+                unimod_id_list = ursgal.GlobalUnimodMapper.composition2id_list( composition_unimod_style )
+                mass = ursgal.GlobalUnimodMapper.composition2mass( composition_unimod_style )
                 for i, unimod_name in enumerate(unimod_name_list):
                     if unimod_name == name:
                         unimod_id = unimod_id_list[ i ]
@@ -848,11 +915,11 @@ class UNode(object, metaclass=Meta_UNode):
                         break
                 if unimod == False and unimod_name_list != []:
                     print(    '''
-                        [ WARNING ] '{0}' is not a Unimod modification
-                        [ WARNING ] but the chemical composition you specified is included in Unimod.
-                        [ WARNING ] Please use one of the Unimod names:
-                        [ WARNING ] {1}
-                        [ WARNING ] Continue without modification {2} '''.format(
+    [ WARNING ] '{0}' is not a Unimod modification
+    [ WARNING ] but the chemical composition you specified is included in Unimod.
+    [ WARNING ] Please use one of the Unimod names:
+    [ WARNING ] {1}
+    [ WARNING ] Continue without modification {2} '''.format(
                             name,
                             unimod_name_list,
                             mod
@@ -860,9 +927,9 @@ class UNode(object, metaclass=Meta_UNode):
                     continue
                 if unimod == False and unimod_name_list == []:
                     print (    '''
-                        [ WARNING ] '{0}' is not a Unimod modification
-                        [ WARNING ] trying to continue with the chemical composition you specified
-                        [ WARNING ] This is not working with OMSSA so far'''.format(
+    [ WARNING ] '{0}' is not a Unimod modification
+    [ WARNING ] trying to continue with the chemical composition you specified
+    [ WARNING ] This is not working with OMSSA so far'''.format(
                             mod,
                     ))
                     mass = chemical_composition._mass()
@@ -1248,33 +1315,40 @@ class UNode(object, metaclass=Meta_UNode):
         if 'translations' in self.params:
             del self.params['translations']
 
-
         untranslated_params, translated_params = \
             self.collect_and_translate_params( self.params )
         self.params.update( untranslated_params )
         self.params['translations'] = translated_params
-        # import pprint
-        # print('org')
-        # pprint.pprint(self.params)
-        # exit(1)
 
-
-        is_search_engine = self.META_INFO['engine_type'].get(
-            'search_engine',
-            False
-        )
-        is_denovo_engine = self.META_INFO['engine_type'].get(
-            'denovo_engine',
-            False
-        )
-        is_crosslink_engine = self.META_INFO['engine_type'].get(
-            'cross_link_engine',
+        is_search_engine = False
+        for engine_type in ukb.ENGINE_TYPES.keys():
+            if 'search_engine' in engine_type:
+                is_search_engine = self.META_INFO['engine_type'].get(
+                    engine_type,
+                    False
+                )
+            if is_search_engine is True:
+                break
+        # is_search_engine = self.META_INFO['engine_type'].get(
+        #     'search_engine',
+        #     False
+        # )
+        # is_denovo_engine = self.META_INFO['engine_type'].get(
+        #     'denovo_engine',
+        #     False
+        # )
+        # is_crosslink_engine = self.META_INFO['engine_type'].get(
+        #     'cross_link_engine',
+        #     False
+        # )
+        is_quantification_engine = self.META_INFO['engine_type'].get(
+            'quantification_engine',
             False
         )
         map_mods_node_exceptions = [
             'unify_csv'
         ]
-        if is_search_engine or is_denovo_engine or is_crosslink_engine:
+        if is_search_engine or is_quantification_engine:
             self.map_mods()
         for engine_short_name in map_mods_node_exceptions:
             if engine_short_name in self.engine:
@@ -1517,7 +1591,7 @@ class UNode(object, metaclass=Meta_UNode):
 
     def update_history_status( self, engine=None, history=None, status='pending', history_addon=None ):
         if history is None:
-            raise Exception("Legacy code impicitly updated history ... please change code!")
+            raise Exception("Legacy code implicitly updated history ... please change code!")
 
             # history = self.stats['history']
         if engine is None:

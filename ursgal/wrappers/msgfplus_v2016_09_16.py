@@ -2,7 +2,7 @@
 import ursgal
 import os
 import subprocess
-
+import sys
 
 class msgfplus_v2016_09_16( ursgal.UNode ):
     """
@@ -20,15 +20,14 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
         'version'                     : 'v2016.09.16',
         'release_date'                : '2016-9-16',
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML', '.ms2', '.pkl', '.dta.txt'],
-        'input_multi_file'            : False,
         'output_extensions'           : ['.mzid'],
-        'compress_raw_search_results' : True,
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
+        'distributable'               : True,
         'utranslation_style'          : 'msgfplus_style_1',
         'engine' : {
             'platform_independent' : {
@@ -126,7 +125,7 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
         print('NumMods={0}'.format(translations['NumMods']['max_num_mods']), file = mods_file)
 
         if self.params['translations']['label'] == '15N':
-            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+            for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 existing = False
                 for mod in self.params[ 'mods' ][ 'fix' ]:
                     if aminoacid == mod[ 'aa' ]:
@@ -170,7 +169,7 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
             else:
                 print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
-                exit(1)
+                sys.exit(1)
         for k, v in command_dict.items():
             self.params[ 'command_list' ].extend((k, v))
 

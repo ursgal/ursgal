@@ -51,7 +51,7 @@ class UnimodMapper( object ):
                     'ext',
                     'userdefined_unimod.xml'
                 ))
-            xmlFiles = [unimodXML, userdefined_unimodXML]
+            xmlFiles = [unimodXML, userdefined_unimodXML] 
         else:
             xmlFiles = [xmlFile]
         data_list = []
@@ -441,11 +441,11 @@ class UnimodMapper( object ):
 
     def writeXML(self, modification_dict, xmlFile = None):
         '''
-        Writes a unimod-style userdefined_unimod.xml file in ursal/kb/ext
+        Writes a unimod-style userdefined_unimod.xml file in 
+        ursal/resources/platform_independent/arc_independent/ext
 
         Args:
             modification_dict (dict): dictionary containing at least
-
             'mass' (mass of the modification),
             'name' (name of the modificaton),
             'composition' (chmical composition of the modification as a Hill notation)
@@ -475,7 +475,7 @@ class UnimodMapper( object ):
                 mod_dicts.insert(-1,mod_dict)
 
         for modification_dict in mod_dicts:
-            if modification_dict['id'] == None:
+            if modification_dict.get('id', None) == None:
                 modification_dict['id'] = 'u{0}'.format(len(mod_dicts))
             mod = ET.SubElement(modifications, '{usermod}mod', title = modification_dict['name'], record_id = modification_dict['id'])
             delta = ET.SubElement(mod, '{usermod}delta', mono_mass = str(modification_dict['mass']) )

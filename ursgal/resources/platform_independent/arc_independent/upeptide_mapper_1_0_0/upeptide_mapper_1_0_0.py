@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 '''
 usage:
     ./upeptide_mapper_1_0_0.py <input_file> <output_file>
@@ -68,11 +68,10 @@ def main(input_file=None, output_file=None, params=None):
     non_mappable_peps  = set()
     pep_map_lookup     = {}
     joinchar           = params['translations']['protein_delimiter']
-
     if sys.platform == 'win32':
         print(
-            '[ WARNING ] pyahocorasick can not be installed via pip on Windows at the moment\n'
-            '[ WARNING ] Falling back to UpeptideMapper_v2'
+'[ WARNING ] pyahocorasick can not be installed via pip on Windows at the moment\n'
+'[ WARNING ] Falling back to UpeptideMapper_v2'
         )
         params['translations']['peptide_mapper_class_version'] = 'UPeptideMapper_v2'
 
@@ -100,7 +99,7 @@ def main(input_file=None, output_file=None, params=None):
                 params['translations']['peptide_mapper_class_version']
             )
         )
-        exit()
+        sys.exit(1)
     print(
         '''[ map_peps ] Using peptide mapper version: {0}'''.format(
             params['translations']['peptide_mapper_class_version']
@@ -211,13 +210,11 @@ def main(input_file=None, output_file=None, params=None):
                                 csv_file_buffer.append( deepcopy(line_dict) )
                                 appended = True
                     else:
-                        print(
-                            '''
-                            [ WARNING ] New not covered case of aa exception for: "{0}"
-                            [ WARNING ] Please adjust upeptide_mapper accordingly
-                            '''.format(aa_to_replace)
+                        print('''
+[ WARNING ] New not covered case of aa exception for: "{0}"
+[ WARNING ] Please adjust upeptide_mapper accordingly'''.format(aa_to_replace)
                         )
-                        exit()
+                        sys.exit(1)
             if appended is False:
                 csv_file_buffer.append(line_dict)
             tmp_peptide_set.add( line_dict['Sequence'] )
@@ -333,23 +330,21 @@ def main(input_file=None, output_file=None, params=None):
 
     if len(target_decoy_peps) != 0:
         print(
-            '''
-            [ WARNING ] {0}
-            [ WARNING ] These {1} peptides above occured in a target as well as decoy protein
-            [ WARNING ] 'Is decoy' has been set to 'True' '''.format(
-                target_decoy_peps,
-                len(target_decoy_peps)
-            )
+'''[ WARNING ] {0}
+[ WARNING ] These {1} peptides above (truncated to 100) occurred in a target as well as decoy protein
+[ WARNING ] 'Is decoy' has been set to 'True' '''.format(
+    target_decoy_peps if len(target_decoy_peps) <100 else list(target_decoy_peps)[:99],
+    len(target_decoy_peps)
+)
         )
     if len(non_mappable_peps) != 0:
         print(
-            '''
-            [ WARNING ] {0}
-            [ WARNING ] These {1} peptides above could not be mapped to the database
-            [ WARNING ] Check Search and Database if neccesary'''.format(
-                sorted(list(non_mappable_peps)),
-                len(non_mappable_peps)
-            )
+'''[ WARNING ] {0}
+[ WARNING ] These {1} peptides above (truncated to 100) could not be mapped to the database
+[ WARNING ] Check Search and Database if neccesary'''.format(
+    sorted(list(non_mappable_peps)) if len(list(non_mappable_peps)) < 100 else list(non_mappable_peps)[:99],
+    len(non_mappable_peps)
+)
         )
         #recheck these peptides if sequence has a 'X'
         # this is done by the peptide regex function in the unode... Use this instead?
@@ -381,25 +376,23 @@ def main(input_file=None, output_file=None, params=None):
                         peptide_has_X_in_sequence.add( p_with_x )
                         mappable_after_all.add( non_mappable_peptide )
         print(
-            '''
-            [ WARNING ] {0}
-            [ WARNING ] These {1} not mappable peptides have "X" in their sequence
-            [ WARNING ] {2} are part of the non-mappable peptides'''.format(
-                sorted(list(peptide_has_X_in_sequence)),
-                len(peptide_has_X_in_sequence),
-                len(mappable_after_all)
-            )
+'''[ WARNING ] {0}
+[ WARNING ] These {1} not mappable peptides (truncated to 100) have "X" in their sequence
+[ WARNING ] {2} are part of the non-mappable peptides'''.format(
+    sorted(list(peptide_has_X_in_sequence)) if len(peptide_has_X_in_sequence) < 100 else sorted(list(peptide_has_X_in_sequence))[:99],
+    len(peptide_has_X_in_sequence),
+    len(mappable_after_all)
+)
         )
         not_mappable_after_all = non_mappable_peps - mappable_after_all
         if len(not_mappable_after_all) != 0:
             print(
-                '''
-                [ WARNING ] {0}
-                [ WARNING ] These {1} peptides are indeed not mappable
-                [ WARNING ] Check of Search parameters and database is strongly recommended'''.format(
-                    not_mappable_after_all,
-                    len(not_mappable_after_all),
-                )
+'''[ WARNING ] {0}
+[ WARNING ] These {1} peptides (truncated to 100) are indeed not mappable
+[ WARNING ] Check of Search parameters and database is strongly recommended'''.format(
+    not_mappable_after_all if len(not_mappable_after_all) < 100 else list(not_mappable_after_all)[:99],
+    len(not_mappable_after_all),
+)
             )
 
     if do_not_delete is False:
@@ -465,7 +458,7 @@ class UPeptideMapper_v2( dict ):
         # self.word_len = 6
         if force:
             for upapa_id, (id, seq) in enumerate(
-                    ursgal.ucore.parseFasta( fasta_stream )):
+                    ursgal.ucore.parse_fasta( fasta_stream )):
                 print(
                     '[ upapa v2 ] Indexing sequence #{0} with word_len {1}'.format(
                         upapa_id,
@@ -705,7 +698,7 @@ class UPeptideMapper_v3():
         if fasta_name in self.protein_indices.keys():
             self.purge_fasta_info(fasta_name)
             self.fasta_name = fasta_name
-        for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parseFasta(open(fasta_database,'r').readlines())):
+        for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parse_fasta(open(fasta_database,'r').readlines())):
             if protein_pos % 5000 == 0:
                 print(
                     '[ upapa v3 ] Buffering protein #{0} of database {1}'.format(
@@ -787,7 +780,7 @@ class UPeptideMapper_v3():
                 # print(m_peptide)
                 # print(protein_name_start_index)
                 # print(protein_name_end_index)
-                # exit()
+                # sys.exit(1)
                 continue
             protein_start_in_sequence_string = self.protein_indices[fasta_name][protein_name_end_index]['start']
             protein_stop_in_sequence_string  = self.protein_indices[fasta_name][protein_name_end_index]['stop']
@@ -843,7 +836,7 @@ class UPeptideMapper_v3():
 class UPeptideMapper_v4():
     '''
     UPeptideMapper V4
-    
+
     Improved version of class version 3 (changes proposed by Christian)
 
     Note:
@@ -885,7 +878,7 @@ class UPeptideMapper_v4():
             class.
         '''
 
-        for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parseFasta(open(fasta_database,'r').readlines())):
+        for protein_pos, (protein_id, seq) in enumerate(ursgal.ucore.parse_fasta(open(fasta_database,'r').readlines())):
             if protein_pos % 5000 == 0:
                 print(
                     '[ upapa v4 ] Buffering protein #{0} of database {1}'.format(
@@ -994,7 +987,7 @@ class UPeptideMapper_v4():
 if __name__ == '__main__':
     if len(sys.argv) < 5:
         print(__doc__)
-        exit()
+        sys.exit(1)
 
     params = {
         'translations' : {

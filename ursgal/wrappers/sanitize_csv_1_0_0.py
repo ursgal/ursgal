@@ -7,7 +7,15 @@ import pickle
 import shutil
 
 class sanitize_csv_1_0_0( ursgal.UNode ):
-    """sanitize_csv_1_0_0 UNode"""
+    """sanitize_csv_1_0_0 UNode
+
+    Result files (.csv) are sanitized following defined parameters.
+    That means, for each spectrum PSMs are compared and the
+    best spectrum (spectra) is (are) chosen.
+
+    The parameters have to be defined in the params. See the engine
+    documentation for further information ( :meth:`.sanitize_csv_1_0_0._execute` ).
+    """
 
     META_INFO = {
         'edit_version'       : 1.00,
@@ -15,15 +23,15 @@ class sanitize_csv_1_0_0( ursgal.UNode ):
         'version'            : '1.0.0',
         'release_date'       : None,
         'engine_type' : {
-            'converter' : True
+            'misc_engine' : True
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'sanitized',
         'in_development'     : False,
         # 'rejected_output_suffix': 'rejected',
         'include_in_git'     : True,
+        'distributable'      : True,
         'group_psms'         : True,
         'utranslation_style' : 'sanitize_csv_style_1',
         'engine' : {
@@ -106,7 +114,7 @@ class sanitize_csv_1_0_0( ursgal.UNode ):
                     Got {0}
                     Please specify parameters validation_score_field and bigger_scores_better
                 '''.format(last_engine))
-                exit(1)
+                sys.exit(1)
             else:
                 bigger_scores_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][last_engine]
                 validation_score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]

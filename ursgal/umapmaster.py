@@ -28,7 +28,7 @@ class UParamMapper( dict ):
     '''
     UParamMapper class offers interface to ursgal.uparams
 
-    Be default, the ursgal.uparams are parsed and the UParamMapper class
+    By default, the ursgal.uparams are parsed and the UParamMapper class
     is set with the ursgal_params dictionary.
     '''
     version = '0.2.0'

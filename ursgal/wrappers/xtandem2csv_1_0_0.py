@@ -16,11 +16,11 @@ class xtandem2csv_1_0_0( ursgal.UNode ):
             'converter' : True
         },
         'input_extensions'  : ['.xml', '.xml.gz'],
-        'input_multi_file'  : False,
         'output_extensions' : ['.csv'],
         'output_suffix'     : None,
         'in_development'    : False,
         'include_in_git'    : True,
+        'distributable'      : True,
         'utranslation_style' : 'xtandem2csv_style_1',
         'engine' : {
             'platform_independent' : {

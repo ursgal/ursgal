@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 # encoding: utf-8
 '''
 
@@ -89,4 +89,3 @@ if __name__ == '__main__':
     print(__doc__)
     for test_id, test_dict in enumerate(TESTS):
         map_mods(test_dict)
-        # exit()

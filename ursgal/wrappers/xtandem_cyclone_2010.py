@@ -10,15 +10,14 @@ class xtandem_cyclone_2010( tandem ):
         'version'                     : 'Cyclone',
         'release_date'                : '2010-12-1',
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
-        'input_multi_file'            : False,
         'output_extensions'           : ['.xml'],
         'create_own_folder'           : True,
-        'compress_raw_search_results' : True,
         'include_in_git'              : False,
         'in_development'              : False,
+        'distributable'               : True,
         'utranslation_style'          : 'xtandem_style_1',
         'engine' : {
             'darwin' : {

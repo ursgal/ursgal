@@ -17,15 +17,14 @@ class xtandem_sledgehammer( ursgal.UNode ):
         'version'                     : 'Sledgehammer',
         'release_date'                : '2013-9-1',
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
-        'input_multi_file'            : False,
         'output_extensions'           : ['.xml'],
         'create_own_folder'           : True,
-        'compress_raw_search_results' : True,
         'in_development'              : False,
         'include_in_git'              : False,
+        'distributable'               : True,
         'utranslation_style'          : 'xtandem_style_1',
         'engine' : {
             'darwin' : {
@@ -188,6 +187,12 @@ class xtandem_sledgehammer( ursgal.UNode ):
         self.params['translations']['potential_modifications'] = ','.join( potential_mods )
         self.params['translations']['refine_potential_modifications'] = ','.join( refine_potential_mods )
 
+        for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
+            if ion in self.params['translations']['score_ion_list']:
+                self.params['translations']['score_{0}_ions'.format(ion)] = 'yes'
+            else:
+                self.params['translations']['score_{0}_ions'.format(ion)] = 'no'
+
         templates = self.format_templates( )
         for file_name, content in templates.items():
             if file_name == '15N-masses.xml' and self.params['translations']['label'] == '14N':
@@ -304,9 +309,10 @@ class xtandem_sledgehammer( ursgal.UNode ):
     <note type="input" label="spectrum, threads">{cpus}</note>
     <note type="input" label="spectrum, sequence batch size" >{batch_size}</note>
     <note type="input" label="spectrum, use noise suppression" >{noise_suppression_enabled}</note>
-
     <note type="heading">
+
         Residue modification
+
     </note>
     <note type="input" label="residue, modification mass">{fixed_modifications}</note>
     <note type="input" label="residue, potential modification mass">{potential_modifications}</note>

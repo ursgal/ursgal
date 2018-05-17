@@ -35,15 +35,12 @@ class kojak_percolator_2_08( ursgal.UNode ):
             'validation_engine' : True,
         },
         'input_extensions'   : ['.txt'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.tsv'],
         'output_suffix'      : 'percolator_2_08_validated',
         'create_own_folder'  : False,
-        'cannot_distribute'  : True,
-        'group_psms'         : False,
+        'distributable'  : False,
         'in_development'     : False,
         'include_in_git'     : None,
-        'cpu_usage'          : 1,
         'utranslation_style' : 'kojak_percolator_style_1',
         'engine' : {
             'darwin' : {

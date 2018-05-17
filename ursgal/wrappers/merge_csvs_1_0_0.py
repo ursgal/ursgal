@@ -11,14 +11,14 @@ class merge_csvs_1_0_0( ursgal.UNode ):
         'version'            : '1.0.0',
         'release_date'       : '2016-3-4',
         'engine_type' : {
-            'converter' : True,
+            'misc_engine' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'merged',
         'include_in_git'     : True,
         'in_development'     : False,
+        'distributable'      : True,
         'utranslation_style' : 'merge_csvs_style_1',
         'engine' : {
             'platform_independent' : {

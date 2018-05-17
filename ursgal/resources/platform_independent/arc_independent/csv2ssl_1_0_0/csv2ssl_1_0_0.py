@@ -122,7 +122,7 @@ def main(
 if __name__ == '__main__':
     if len(sys.argv) < 4:
         print(__doc__)
-        exit()
+        sys.exit(1)
 
     if sys.argv[3] == 'None':
         output_file_unfiltered = None
