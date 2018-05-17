@@ -20,11 +20,11 @@ class naive_bayes_1_0_0( ursgal.UNode ):
             'meta_engine' : True,
         },
         'input_extensions'  : ['.csv'],
-        'input_multi_file'  : False,
         'output_extensions' : ['.csv'],
         'create_own_folder' : False,
         'include_in_git'    : True,
         'in_development'    : False,
+        'distributable'      : True,
         'utranslation_style' : 'naive_bayes_style_1',
         'engine' : {
             'platform_independent' : {

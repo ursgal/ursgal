@@ -1,6 +1,6 @@
 .. code-block:: python
 
-	#!/usr/bin/env python3.4
+	#!/usr/bin/env python3
 	# encoding: utf-8
 	
 	import ursgal
@@ -21,8 +21,8 @@
 	
 	    '''
 	    params = {
-	        'enzyme'                : 'trypsin',
-	        'decoy_generation_mode' : 'reverse_protein',
+	        'enzyme': 'trypsin',
+	        'decoy_generation_mode': 'reverse_protein',
 	    }
 	
 	    fasta_database_list = [
@@ -34,14 +34,16 @@
 	    ]
 	
 	    uc = ursgal.UController(
-	        params = params
+	        params=params
 	    )
 	
-	    new_target_decoy_db_name = uc.generate_target_decoy(
-	        input_files       = fasta_database_list,
-	        output_file_name = 'my_BSA_target_decoy.fasta',
+	    new_target_decoy_db_name = uc.execute_misc_engine(
+	        input_file=fasta_database_list,
+	        engine='generate_target_decoy_1_0_0',
+	        output_file_name='my_BSA_target_decoy.fasta',
 	    )
-	    print('Generated target decoy database: {0}'.format(new_target_decoy_db_name))
+	    print('Generated target decoy database: {0}'.format(
+	        new_target_decoy_db_name))
 	
 	if __name__ == '__main__':
 	    main()

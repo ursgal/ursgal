@@ -18,14 +18,14 @@ class uninovo_alpha_052013( ursgal.UNode ):
         'version'           : 'alpha.052013',
         'release_date'      : '2013-5-20',
         'engine_type' : {
-            'denovo_engine' : True,
+            'de_novo_search_engine' : True,
         },
         'input_extensions'  : ['.mgf'],
-        'input_multi_file'  : False,
         'output_extensions' : ['.den'],
         'create_own_folder' : True,
         'in_development'    : True,
         'include_in_git'    : None,
+        'distributable'      : False,
         'utranslation_style' : 'uninovo_style_1',
         'engine' : {
             'platform_independent' : {

@@ -24,16 +24,14 @@ class quameter_1_1_10165( ursgal.UNode ):
         'version'                     : '1.1.10165',
         'release_date'                : '2016-11-07',
         'utranslation_style'          : 'quameter_style_1',
-        'compress_raw_search_results' : False,
-        'input_multi_file'            : False,
         'input_extensions'            : ['.raw', '.mzML'],
         'output_extensions'           : ['.tsv'],
         'create_own_folder'           : False,
         'in_development'              : False,
         'include_in_git'              : False,
-        'cannot_distribute'           : True,
+        'distributable'           : False,
         'engine_type'                 : {
-            'search_engine' : False,
+            'misc_engine' : True,
         },
         'engine'                      : {
             'linux'    : {

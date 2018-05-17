@@ -1,10 +1,11 @@
 .. code-block:: python
 
-	#!/usr/bin/env python3.4
+	#!/usr/bin/env python3
 	# encoding: utf-8
 	
 	import ursgal
 	import os
+	
 	
 	def main():
 	    '''
@@ -19,13 +20,13 @@
 	
 	    '''
 	    params = {
-	        'ftp_url'       : 'ftp.peptideatlas.org',
-	        'ftp_login'         : 'PASS00269',
-	        'ftp_password'      : 'FI4645a',
-	        'ftp_include_ext'   : [
+	        'ftp_url': 'ftp.peptideatlas.org',
+	        'ftp_login': 'PASS00269',
+	        'ftp_password': 'FI4645a',
+	        'ftp_include_ext': [
 	            'JB_FASP_pH8_2-3_28122012.mzML',
 	        ],
-	        'ftp_output_folder' : os.path.join(
+	        'ftp_output_folder': os.path.join(
 	            os.pardir,
 	            'example_data',
 	            'get_file_from_ftp_server_example'
@@ -39,10 +40,10 @@
 	        )
 	        os.mkdir(params['ftp_output_folder'])
 	    R = ursgal.UController(
-	        params = params
+	        params=params
 	    )
 	    R.fetch_file(
-	        engine     = 'get_ftp_files_1_0_0'
+	        engine='get_ftp_files_1_0_0'
 	    )
 	    return
 	

@@ -1,3 +1,5 @@
+.. _faq:
+
 Frequently Asked Questions
 ==========================
 
@@ -5,11 +7,39 @@ Frequently Asked Questions
 Installation
 ############
 
-Q: MS Amanda does not work on Unix. What could be the problem ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Q: MS Amanda does not work on Unix. What could be the problem?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A: To run MSAmanda one needs to install the Mono frameweork.
+To run MSAmanda one needs to install the Mono frameweork.
 Visit http://www.mono-project.com/ for proper installation instructions.
+
+.. _java_runtime_installation:
+
+Q: MS-GF+ (or any Java based engine) fails. What could be the problem?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To run Java based engines like MS-GF+ or MSFragger, Java Runtime Environment needs to be installed.
+Visit http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html for download and installation.
+
+.. _http_certificates:
+
+Q: Downloading http files is not working on OSX. Why?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Make sure that certificates are properly installed. Go to Applications/Python 3.6 and double-click Install Certificates.command. The latest version of Python3.6 for Mac should come with
+the right certifications for secure connections anyways.
+
+
+Q: I have problems installing pyahocorasick on Windows! What can I do?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generally, Python 3.6 should be used when working with Windows. Here are some
+general remarks for a flawless installation under Windows.
+
+When using Windows 7, additionally install: Microsoft Visual
+C++ Build Tools, http://landinghub.visualstudio.com/visual-cpp-build-tools)
+
+When using Windows 10, consider additionally installing MS Build Tools 2015
 
 
 Usage
@@ -28,12 +58,40 @@ Q: Found mismatch between json parameter ....
 
 During JSON dump Python tuples are converted into list like objects, thus this might be a reason. Just change your parameter to lists instead of tuples :)
 
+.. _not-installed-engines:
+
+Q: How do I add an engine that is not installed via install_resources.py?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Download the engine from the respective developers homepage (links are given in the engine wrapper documentation).
+Create a folder in the corresponding Ursgal resoucres (name of the folder = name of the engine in Ursgal, for more information see :ref:`generate-your-engines`: 1. Integration into Resources) and unpack/save all required files, especially the executable, there.
+Remember to run::
+
+	user@localhost:~/ursgal$ python3.4 setup.py install
+
+to include Ursgal (and the changes you have made to the resources) into Python site-packages.
+
+Q: The example script simple_example_search.py fails. What am I doing wrong?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Check the printouts: at which step is it failing?
+If the download of the example BSA1.mzML was not successful, and you're using OSX, see :ref:`http_certificates`.
+If MS-GF+ fails and you are not sure if  you have installed Java Runtime Environment, see :ref:`java_runtime_installation`.
+If this doesn't help, shoot us a message or open an issue on GitHub (please include your printouts).
+
+Q: A validation engine (Percolator, qvality, ...) fails. What's going on?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+There are two common problems causing your workflow to fail at the point of validating results:
+1. Your database doesn't contain decoys (check out :ref:`target_decoy_generation_example.py<targetdecoygen>`) or decoys are not recognized (check if the uparam 'decoy_tag' is correct for your database).
+2. Your list of results is too small for proper statistics (the error message is something like "Too good seperation between targets and decoys"). In this case, you need to improve your search parameters (e.g. mass tolerances), database size (e.g. whole proteome instead of a single protein) or MS measurements (i.e. your raw data).
+
 
 Development
 ###########
 
-Q: How do I create/add a new engine ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Q: How do I create/add a new engine?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 See :ref:`generate-your-engines`.
 
@@ -48,4 +106,4 @@ If you have not cloned Ursgal but used the ZIP file you can replace the folder w
 
 In both cases you might need to run the setup again to update the python site-packages::
 
-    user@localhost:~/ursgal$ python3.4 setup.py install
+    user@localhost:~/ursgal$ python3 setup.py install

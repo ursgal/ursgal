@@ -73,8 +73,14 @@ class ChemicalComposition(dict):
         much more accurately using unimod and other element enrichments.
 
     '''
-    def __init__(self, sequence=None, aa_compositions=None,
-                 isotopic_distributions=None):
+
+    def __init__(
+        self,
+        sequence=None,
+        aa_compositions=None,
+        isotopic_distributions=None,
+        monosaccharide_compositions=None,
+    ):
 
         self._unimod_parser = None
         self.composition_of_mod_at_pos = {}
@@ -121,8 +127,12 @@ class ChemicalComposition(dict):
                 ursgal.chemical_composition_kb.isotopic_distributions
         else:
             self.isotopic_distributions = isotopic_distributions
+        if monosaccharide_compositions is None:
+            self.monosaccharide_compositions = ursgal.chemical_composition_kb.monosaccharide_compositions
+        else:
+            self.monosaccharide_compositions = monosaccharide_compositions
         if sequence is not None:
-            self.use( sequence )
+            self.use(sequence)
 
         self.isotope_mass_lookup = {}
         for element, isotope_list in self.isotopic_distributions.items():
@@ -131,21 +141,21 @@ class ChemicalComposition(dict):
                     str(round(isotope_mass)).split('.')[0],
                     element
                 )
-                self.isotope_mass_lookup[ isotope_mass_key ] = isotope_mass
+                self.isotope_mass_lookup[isotope_mass_key] = isotope_mass
 
-    def __add__( self, other_cc ):
+    def __add__(self, other_cc):
         '''Experimental'''
-        tmp = copy.deepcopy( self )
+        tmp = copy.deepcopy(self)
         for other_key, other_value in other_cc.items():
-            tmp[ other_key ] += other_value
+            tmp[other_key] += other_value
         return tmp
 
-    def __missing__( self, key ):
+    def __missing__(self, key):
         if key not in self.keys():
             self[key] = 0
         return self[key]
 
-    def clear( self ):
+    def clear(self):
         '''Resets all lookup dictionaries and self
 
         One class instance can be used analysing a series of sequences, thereby
@@ -160,18 +170,18 @@ class ChemicalComposition(dict):
         self.peptide = None
         self.addon = None
         for k in list(self.keys()):
-            del self[ k ]
+            del self[k]
 
-    def _parse_sequence_old_style( self, sequence ):
-        positions = [ len(sequence) ]
+    def _parse_sequence_old_style(self, sequence):
+        positions = [len(sequence)]
         for sign in ['+', '-']:
             if sign in sequence:
                 positions.append(sequence.index(sign))
-        minPos       = min(positions)
-        peptide      = sequence[:minPos]
-        addon        = sequence[minPos:]
+        minPos = min(positions)
+        peptide = sequence[:minPos]
+        addon = sequence[minPos:]
         self.peptide = peptide
-        self.addon   = addon
+        self.addon = addon
         if peptide != '':
             self.add_peptide(peptide)
             self['O'] += 1
@@ -188,16 +198,16 @@ class ChemicalComposition(dict):
                 self.subtract_chemical_formula(cb[1:])
         return
 
-    def _parse_sequence_unimod_style( self, sequence ):
+    def _parse_sequence_unimod_style(self, sequence):
         minPos = sequence.index("#")
-        peptide      = sequence[:minPos]
-        addon        = sequence[minPos + 1:]
+        peptide = sequence[:minPos]
+        addon = sequence[minPos + 1:]
         self.peptide = peptide
         if peptide != '':
             self.add_peptide(peptide)
             self['O'] += 1
             self['H'] += 2
-        self.addon   = addon
+        self.addon = addon
         unimods = self.addon.split(';')
         # pattern = self.regex_patterns[':pos']
         pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
@@ -206,25 +216,28 @@ class ChemicalComposition(dict):
                 continue
             unimod = unimod.strip()
             if ':' not in unimod:
-                sys.exit('This unimod: {0} requires positional information'.format( unimod ))
+                sys.exit(
+                    'This unimod: {0} requires positional information'.format(unimod))
 
-            for occ, match in enumerate( pattern.finditer( unimod )):
+            for occ, match in enumerate(pattern.finditer(unimod)):
                 try:
                     unimodcomposition = self._unimod_parser.name2composition(
-                        unimod[ :match.start() ]
+                        unimod[:match.start()]
                     )
                 except:
                     sys.exit(
                         'Can not map unimod {0}. extracted position argument {1}'.format(
                             unimod, match.start()
-                    ))
+                        ))
                 # if occ >= 1:
                 position = int(match.group('pos'))
                 if position in self.unimod_at_pos.keys():
-                    sys.exit('{0} <<- Two unimods at the same position ? '.format(
+                    print('{0} <<- Two unimods at the same position ? '.format(
                         sequence
                     ))
-                self.unimod_at_pos[ position ] = unimod[ :match.start() ]
+                    raise Exception
+
+                self.unimod_at_pos[position] = unimod[:match.start()]
             # match = re.search( position_re_pattern, unimod)
             # if match is not None:
             #     end = match.start()
@@ -246,8 +259,8 @@ class ChemicalComposition(dict):
             # print( 'Unimod:', unimod, unimod[:end] , )
             # Full addition
             # print( unimodcomposition , '<<<<<<')
-            for k,v in unimodcomposition.items():
-                self[ k ] += v
+            for k, v in unimodcomposition.items():
+                self[k] += v
             # storage position related modifications
             position = int(match.group('pos'))
             if position == 0:
@@ -256,12 +269,12 @@ class ChemicalComposition(dict):
                 position = 1
 
             if position not in self.composition_of_mod_at_pos.keys():
-                self.composition_of_mod_at_pos[ position ] = ddict(int)
+                self.composition_of_mod_at_pos[position] = ddict(int)
             if position not in self.composition_at_pos.keys():
-                self.composition_at_pos[ position ] = ddict(int)
+                self.composition_at_pos[position] = ddict(int)
             for k, v in unimodcomposition.items():
-                self.composition_of_mod_at_pos[ position ][ k ] += v
-                self.composition_at_pos[ position ][ k ] += v
+                self.composition_of_mod_at_pos[position][k] += v
+                self.composition_at_pos[position][k] += v
 
         return
 
@@ -272,7 +285,7 @@ class ChemicalComposition(dict):
         for multiple sequence since it remove class instantiation overhead.
 
         Args:
-            sequence (str) - See top for possible input formats.
+            sequence (str): See top for possible input formats.
         '''
 
         self.clear()
@@ -281,13 +294,21 @@ class ChemicalComposition(dict):
             # Unimod Style format
             if self._unimod_parser is None:
                 self._unimod_parser = ursgal.UnimodMapper()
-            self._parse_sequence_unimod_style( sequence )
+            self._parse_sequence_unimod_style(sequence)
         else:
-            self._parse_sequence_old_style( sequence )
+            self._parse_sequence_old_style(sequence)
 
-    def add_chemical_formula(self, chemical_formula):
-        """Adds chemical formula to the instance"""
-        self._merge(chemical_formula, mode='addition')
+    def add_chemical_formula(self, chemical_formula, factor=1):
+        '''Adds chemical formula to the instance
+
+        Args:
+            chemical_formula (str): chemical composition given as Hill notation
+
+        Keyword Arguments:
+            factor (int): multiplication factor to add the same chemical formula
+                multiple times
+        '''
+        self._merge(chemical_formula, mode='addition', factor=factor)
         return
 
     def add_peptide(self, peptide):
@@ -298,30 +319,56 @@ class ChemicalComposition(dict):
         number_offset = 0
         # this are the count for e.g. SILAC aa, i.e. R0 R1 or C0 and so on ...
         # print( peptide, type( peptide ))
-        for aaN_match in pattern.finditer( peptide ):
+        for aaN_match in pattern.finditer(peptide):
             aa = aaN_match.group('aa')
             N = aaN_match.group('N')
             pos = int(aaN_match.start()) - number_offset + 1
             if N != '':
-                number_offset += len( N )
+                number_offset += len(N)
             try:
-                aa_compo = self.aa_compositions[ aa+N ]
+                aa_compo = self.aa_compositions[aa + N]
             except:
-                sys.exit('Do not know aa composition for {0}'.format( aa+N ))
-            self.add_chemical_formula( aa_compo )
+                sys.exit('Do not know aa composition for {0}'.format(aa + N))
+            self.add_chemical_formula(aa_compo)
 
-            composition = self._chemical_formula_to_dict( aa_compo )
-            self.composition_of_aa_at_pos[ pos ] = composition
+            composition = self._chemical_formula_to_dict(aa_compo)
+            self.composition_of_aa_at_pos[pos] = composition
             if pos not in self.composition_at_pos.keys():
-                self.composition_at_pos[ pos ] = ddict(int)
+                self.composition_at_pos[pos] = ddict(int)
             for k, v in composition.items():
-                self.composition_at_pos[ pos ][k] += v
+                self.composition_at_pos[pos][k] += v
+
+    def add_glycan(self, glycan):
+        '''Adds a glycan to the instance.
+
+        Args:
+            glycan (str): sequence of monosaccharides given in unimod format,
+                e.g.: HexNAc(2)Hex(3)dHex(1)Pent(1),
+                available monosaccharides are listed in chemical_composition_kb
+        '''
+        pattern = re.compile(
+            r'''(?P<monosacch>[A-z]*)(?P<count>\([0-9]*\))''' )
+        for glyc_match in pattern.finditer(glycan):
+            monosacch = glyc_match.group('monosacch')
+            if glyc_match.group('count') == '':
+                count = 1
+            else:
+                count = int(glyc_match.group('count').strip('(').strip(')'))
+            try: 
+                monosacch_compo = self._unimod_parser.name2composition(monosacch)
+            except:
+                if monosacch in self.monosaccharide_compositions.keys():
+                    monosacch_compo = self.monosaccharide_compositions[monosacch]
+                else:
+                    sys.exit('Do not know glycan composition for {0}'.format(monosacch))
+            self.add_chemical_formula(monosacch_compo, factor=count)
 
     def _chemical_formula_to_dict(self, chemical_formula):
-        if isinstance( chemical_formula, ursgal.ChemicalComposition):
+        if isinstance(chemical_formula, ursgal.ChemicalComposition):
             chem_dict = chemical_formula
         elif '(' in chemical_formula:
-            pattern = re.compile(r'(?P<element>[0-9]*[A-z]*)(?P<count>[(][0-9]*[)])')
+            pattern = re.compile(
+                r'(?P<element>[0-9]*[A-z]*)(?P<count>[(][0-9]*[)])')
         else:
             pattern = re.compile(r'(?P<element>[A-Z][a-z]*)(?P<count>[0-9]*)')
         chem_dict = {}
@@ -330,7 +377,6 @@ class ChemicalComposition(dict):
             if match.group('count') == '':
                 count = 1
             else:
-
                 count = int(match.group('count').strip('(').strip(')'))
             if match.group('element') not in chem_dict.keys():
                 chem_dict[match.group('element')] = 0
@@ -376,7 +422,7 @@ class ChemicalComposition(dict):
         return s
 
     # def hill_notation(self, include_ones=False):
-    def hill_notation_unimod( self, cc=None ):
+    def hill_notation_unimod(self, cc=None):
         '''
         Formats chemical composition into `Hill notation`_ string
         adding `unimod`_ features.
@@ -408,7 +454,7 @@ class ChemicalComposition(dict):
                 if cc_dict[major] == 0:
                     continue
                 s += '{0}({1})'.format(
-                    major.replace('(','').replace(')',''),
+                    major.replace('(', '').replace(')', ''),
                     cc_dict[major]
                 )
         for k in sorted(cc_dict.keys()):
@@ -416,7 +462,7 @@ class ChemicalComposition(dict):
                 if cc_dict[k] == 0:
                     continue
                 s += '{0}({1})'.format(
-                    k.replace('(','').replace(')',''),
+                    k.replace('(', '').replace(')', ''),
                     cc_dict[k]
                 )
         return s
@@ -439,7 +485,7 @@ class ChemicalComposition(dict):
         for element, count in cc_mass_dict.items():
             isotope_mass = None
             try:
-                isotope_mass = self.isotopic_distributions[ element ][0][0]
+                isotope_mass = self.isotopic_distributions[element][0][0]
             except:
                 # we check for 15N or 13C or other isotopes
                 assert element in self.isotope_mass_lookup.keys(), '''
@@ -449,21 +495,23 @@ class ChemicalComposition(dict):
                 Isotopic masses and distributions can be found at
                 http://ciaaw.org/atomic-masses.html
                 '''.format( element )
-                isotope_mass = self.isotope_mass_lookup[ element ]
+                isotope_mass = self.isotope_mass_lookup[element]
             mass += count * isotope_mass
 
         return mass
 
-    def _merge(self, chemical_formula, mode='addition'):
+    def _merge(self, chemical_formula, mode='addition', factor=1):
         '''Generalized function that allows addition and subtraction'''
         if mode == 'addition':
             sign = +1
-        else:
+        elif mode == 'subtraction':
             sign = -1
+        else:
+            sys.exit('Do not know which mode to use for _merge')
         if isinstance(chemical_formula, str):
             chemical_formula = self._chemical_formula_to_dict(chemical_formula)
         for element, count in chemical_formula.items():
-            self[element] = self[element] + sign * count
+            self[element] = self[element] + sign * count * factor
         # else:
         #     print(chemical_formula, type(chemical_formula))
         #     sys.exit('Do not know the format of the chemical formula')
@@ -474,14 +522,22 @@ class ChemicalComposition(dict):
         for aa in peptide:
             self.subtract_chemical_formula(self.aa_compositions[aa])
 
-    def subtract_chemical_formula(self, chemical_formula):
-        '''Subtract chemical formula from instance'''
-        self._merge(chemical_formula, mode='subtraction')
+    def subtract_chemical_formula(self, chemical_formula, factor=1):
+        '''Subtract chemical formula from instance
+
+        Args:
+            chemical_formula (str): chemical composition given as Hill notation
+
+        Keyword Arguments:
+            factor (int): multiplication factor to add the same chemical formula
+                multiple times
+        '''
+        self._merge(chemical_formula, mode='subtraction', factor=factor)
         return
 
-    def generate_cc_dict( self ):
+    def generate_cc_dict(self):
         tmp = {}
-        tmp.update( self )
+        tmp.update(self)
         return tmp
 
 

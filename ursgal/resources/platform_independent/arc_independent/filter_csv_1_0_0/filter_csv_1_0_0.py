@@ -14,6 +14,7 @@ import os
 import csv
 import ursgal
 import re
+import operator
 
 if sys.platform != 'win32':
     csv.field_size_limit(sys.maxsize)
@@ -25,10 +26,10 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
     '''
     if filter_rules is None:
         print('No filter rules defined! Exiting now...')
-        exit()
+        sys.exit(1)
     elif len(filter_rules) == 0:
         print('No filter rules defined! Exiting now...')
-        exit()
+        sys.exit(1)
     else:
         pass
 
@@ -61,57 +62,59 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
                 **csv_kwargs
             )
             unfiltered_csv_output.writeheader()
-        for line_dict in csv_input:
-
+        for line_pos, line_dict in enumerate(csv_input):
             write_row_bools = set()
             for rule_tuple in filter_rules:
                 dict_key, rule, value = rule_tuple
                 if dict_key not in line_dict.keys():
                     print(
                         '''Rule not recognized: {0}
-                        Cause: Specified key not in csv fieldnames
-                        Did you misspell the fieldname?'''.format(
-                            rule_tuple
+Input file: {1}
+headers : {2}
+Cause: Specified key not in csv fieldnames
+Did you misspell the field name?'''.format(
+                            rule_tuple,
+                            input_file,
+                            csv_input.fieldnames,
+
                         )
                     )
-                    pass
+                    raise Exception
                 else:
-                    if rule == 'lte':
-
-                        if line_dict[dict_key] == '':
-                            continue
-
-                        if float(line_dict[dict_key]) <= value:
-                            write_row_bools.add(True)
-                        else:
+                    if rule in ['lte', 'gte', 'lt' , 'gt']:
+                        # requires not None! and to be floatable
+                        if line_dict[ dict_key ] is None:
                             write_row_bools.add(False)
 
-                    elif rule == 'gte':
-                        # print(line_dict)
-                        if float(line_dict[dict_key]) >= value:
-                            write_row_bools.add(True)
-                        else:
-                            write_row_bools.add(False)
+                        elif rule == 'lte':
+                            cpm_method = operator.__le__
+                        elif rule == 'gte':
+                            cpm_method = operator.__ge__
+                        elif rule == 'lt':
+                            cpm_method = operator.__lt__
+                        elif rule == 'gt':
+                            cpm_method = operator.__gt__
 
-                    elif rule == 'lt':
-                        if float(line_dict[dict_key]) < value:
-                            write_row_bools.add(True)
-                        else:
-                            write_row_bools.add(False)
+                        try:
+                            floated_value = float(line_dict[dict_key])
+                        except:
+                            floated_value = None
 
-                    elif rule == 'gt':
-                        if float(line_dict[dict_key]) > value:
+                        if floated_value is None:
+                            write_row_bools.add(False)
+                        elif cpm_method( floated_value, value):
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
 
                     elif rule == 'equals':
-                        if line_dict[dict_key] == value:
+                        if value == line_dict[dict_key]:
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
+
                     elif rule == 'equals_not':
-                        if line_dict[dict_key] != value:
+                        if value != line_dict[dict_key]:
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
@@ -121,16 +124,21 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
+
                     elif rule == 'contains_not':
-                        if value not in line_dict[dict_key]:
+                        if line_dict[dict_key] is None:
+                            write_row_bools.add(True)
+                        elif value not in line_dict[dict_key]:
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
-                    elif rule =='regex':
+
+                    elif rule == 'regex':
                         if re.search(value, line_dict[dict_key]) is not None:
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
+
                     elif rule == 'contains_glycosite':
                         if re.search(value, line_dict[dict_key]) is not None:
                             write_row_bools.add(True)
@@ -141,6 +149,7 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
                                 write_row_bools.add(False)
                         else:
                             write_row_bools.add(False)
+
                     elif rule == 'mod_at_glycosite':
                         mods =  line_dict[dict_key].split(';')
                         accepted = False
@@ -160,18 +169,33 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
                                 accepted = True
                             else:
                                 continue
-                        if accepted == True:
+                        if accepted is True:
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
+
+                    elif rule == 'contains_element_of_list':
+                        assert type(value) == list, '''
+                        The value for the filter rule 'contains_element_of_list'
+                        needs to be a list. You specified:
+                        {0}
+                        '''.format(value)
+                        write = False
+                        for element in value:
+                            if element in line_dict[dict_key]:
+                                write = True
+                        write_row_bools.add(write)
+
                     else:
                         print('Rule: {0} not defined'.format(rule))
+                        raise Exception
 
             if len(write_row_bools) == 1 and list(write_row_bools)[0] == True:
                 csv_output.writerow( line_dict )
             elif output_file_unfiltered is not None:
                 unfiltered_csv_output.writerow( line_dict )
             # break
+
     output_file_object.close()
     in_file.close()
     return output_file
@@ -180,7 +204,7 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
 if __name__ == '__main__':
     if len(sys.argv) < 4:
         print(__doc__)
-        exit()
+        sys.exit(1)
 
     if sys.argv[3] == 'None':
         output_file_unfiltered = None

@@ -41,7 +41,7 @@ def main(input_file = None, decoy_tag = None, output_file = None):
         'Spectrum ID',
         'Spectrum Title',
         'Retention Time (s)',
-        'rank',
+        'Rank',
         'Calc m/z',
         'Exp m/z',
         'Charge',
@@ -133,7 +133,7 @@ def main(input_file = None, decoy_tag = None, output_file = None):
                         domain['Is decoy'] = True
                     else:
                         domain['Is decoy'] = False
-                    domain['rank'] = 1
+                    domain['Rank'] = 1
 
             elif element.tag.endswith('aa'):
                 if 'modified' not in element.attrib.keys():

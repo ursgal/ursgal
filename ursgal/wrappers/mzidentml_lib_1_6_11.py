@@ -17,12 +17,11 @@ class mzidentml_lib_1_6_11( ml ):
             'converter' : True
         },
         'input_extensions'   : ['.xml', '.xml.gz', '.csv', '.mzid', '.mzid.gz'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : None,
         'in_development'     : False,
-        # 'can_gz'             : True,
         'include_in_git'     : False,
+        'distributable'      : True,
         'utranslation_style' : 'mzidentml_style_1',
         'engine' : {
             'platform_independent' : {

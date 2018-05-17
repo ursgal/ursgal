@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 # encoding: utf-8
 '''
 
@@ -71,6 +71,12 @@ TESTS = [
         ],
         'number_of_expected_lines': 6,
     },
+    {
+        'csv_filter_rules' : [
+            ['Modifications','contains_element_of_list',['Oxidation', 'Carbamidomethyl']]
+        ],
+        'number_of_expected_lines': 9,
+    },
 ]
 
 
@@ -89,7 +95,6 @@ def compare_filter_test():
 
 
 def compare_filter( test_dict ):
-
     output_csv = filter_csv_main(
         input_file     = input_csv,
         output_file    = os.path.join(

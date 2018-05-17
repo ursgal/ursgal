@@ -15,12 +15,12 @@ class svm_1_0_0( ursgal.UNode ):
             'validation_engine' : True,
         },
         'input_extensions'   : ['.csv'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'output_suffix'      : 'svm_validated',
         'create_own_folder'  : False,
         'in_development'     : True,  # do not show in UNode overview
         'include_in_git'     : True,
+        'distributable'      : True,
         'utranslation_style' : 'svm_style_1',
         'engine' : {
             'platform_independent' : {
