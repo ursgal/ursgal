@@ -19,7 +19,7 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
         },
         'utranslation_style' : 'sugarpy_plot_style_1',
         'citation'           : '',
-        'input_extensions'   : ['.mzML'],
+        'input_extensions'   : ['.mzML', '.csv'],
         'output_extensions'  : ['.txt'],
         'output_suffix'      : 'created_files',
         'create_own_folder'  : True,
@@ -64,12 +64,35 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
         translations = self.params['translations'][
             '_grouped_by_translated_key']
 
+        pyqms_params = {
+            'PERCENTILE_FORMAT_STRING': None,
+            'M_SCORE_THRESHOLD': None,
+            'ELEMENT_MIN_ABUNDANCE': None,
+            'MIN_REL_PEAK_INTENSITY_FOR_MATCHING': None,
+            'REQUIRED_PERCENTILE_PEAK_OVERLAP': None,
+            'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES': None,
+            'INTENSITY_TRANSFORMATION_FACTOR': None,
+            'UPPER_MZ_LIMIT': None,
+            'LOWER_MZ_LIMIT': None,
+            'MZ_TRANSFORMATION_FACTOR': None,
+            'REL_MZ_RANGE': None,
+            'REL_I_RANGE': None,
+            'INTERNAL_PRECISION': None,
+            'MAX_MOLECULES_PER_MATCH_BIN': None,
+            'SILAC_AAS_LOCKED_IN_EXPERIMENT': None,
+            'BUILD_RESULT_INDEX': None,
+            'MACHINE_OFFSET_IN_PPM': None,
+            'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS': None,
+            'MZ_SCORE_PERCENTILE': None,
+        }
         sugarpy_params = {}
+        sugarpy_params['charges'] = list(range(
+            self.params['translations']['precursor_min_charge'],
+            self.params['translations']['precursor_max_charge'] + 1
+        ))
+
         for translated_key, translation_dict in translations.items():
-            if len(translation_dict) == 1:
-                sugarpy_params[translated_key] = list(
-                    translation_dict.values())[0]
-            elif translated_key == 'ms_precision':
+            if translated_key == 'REL_MZ_RANGE':
                 if self.params['translations']['ms_level'] == 1:
                     print(
                         '''
@@ -78,31 +101,47 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
                         [ WARNING ] The arithmetic mean is used.
                         '''
                     )
-                    sugarpy_params['ms_precision'] = (
+                    pyqms_params['REL_MZ_RANGE'] = (
                         float(self.params['translations']['precursor_mass_tolerance_plus']) +
                         float(self.params['translations'][
                               'precursor_mass_tolerance_minus'])) / 2.0
                     if self.params['translations']['precursor_mass_tolerance_unit'] == 'da':
-                        sugarpy_params['ms_precision'] = \
+                        pyqms_params['REL_MZ_RANGE'] = \
                             ursgal.ucore.convert_dalton_to_ppm(
-                                sugarpy_params['ms_precision'],
+                                pyqms_params['REL_MZ_RANGE'],
                                 base_mz=self.params['translations']['base_mz']
                         )
                 else:
-                    sugarpy_params['ms_precision'] = \
+                    pyqms_params['REL_MZ_RANGE'] = \
                         self.params['translations']['frag_mass_tolerance']
                     if self.params['translations']['frag_mass_tolerance_unit'] == 'da':
-                        sugarpy_params['ms_precision'] = \
+                        pyqms_params['REL_MZ_RANGE'] = \
                             ursgal.ucore.convert_dalton_to_ppm(
-                                sugarpy_params['ms_precision'],
+                                pyqms_params['REL_MZ_RANGE'],
                                 base_mz=self.params['translations']['base_mz']
                         )
-                sugarpy_params['ms_precision'] = sugarpy_params['ms_precision'] * 1e-6
+                pyqms_params['REL_MZ_RANGE'] = pyqms_params['REL_MZ_RANGE'] * 1e-6
+                sugarpy_params['frag_mass_tolerance'] = self.params['translations']['frag_mass_tolerance']
+                if self.params['translations']['frag_mass_tolerance_unit'] == 'da':
+                    sugarpy_params['frag_mass_tolerance'] = \
+                        ursgal.ucore.convert_dalton_to_ppm(
+                            sugarpy_params['frag_mass_tolerance'],
+                            base_mz=self.params['translations']['base_mz']
+                        )
+            elif translated_key in pyqms_params.keys():
+                pyqms_params[translated_key] = list(
+                    translation_dict.values())[0]
+            elif 'charge' in translated_key:
+                continue
+            elif len(translation_dict) == 1:
+                sugarpy_params[translated_key] = list(
+                    translation_dict.values())[0]
             else:
                 print('The translatd key ', translated_key,
                       ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
                 sys.exit(1)
+        sugarpy_params['pyqms_params'] = pyqms_params
         sugarpy_params['mzml_file'] = input_file
         sugarpy_params['output_file'] = output_file
 

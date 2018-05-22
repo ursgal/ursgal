@@ -88,11 +88,19 @@ def main(
             )
 
         spec_ms_level = spec.ms_level
-        scan_time = spec.scan_time
+        scan_time, scan_time_unit = spec.scan_time
+        if scan_time_unit == 'seconds':
+            scan_time /= 60
+        elif unit != 'minute':
+            print('''
+                [ERROR] The retention time unit is nor recognized.
+                [ERROR] Please specify minute/second (nedded for mzml2mgf conversion).
+            ''')
         spectrum_id = spec.ID
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
         tmp['unit'] = 'minute'
+
 
         if spec_ms_level != ms_level:
             continue

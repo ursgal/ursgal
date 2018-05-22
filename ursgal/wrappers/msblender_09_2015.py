@@ -29,8 +29,8 @@ class msblender_09_2015( ursgal.UNode ):
         'output_extensions'  : ['.csv'],
         'in_development'     : True,
         'create_own_folder'  : False,
-        'include_in_git'     : True,
-        'distributable'      : True,
+        'include_in_git'     : False,
+        'distributable'      : False,
         'utranslation_style' : 'msblender_style_1',
         'engine' : {
             'linux' : {

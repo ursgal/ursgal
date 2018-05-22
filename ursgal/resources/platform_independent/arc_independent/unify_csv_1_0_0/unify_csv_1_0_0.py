@@ -235,6 +235,17 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         #msfragger mod merge block end
         ##############################
 
+    aa_exception_dict = params['translations']['aa_exception_dict']
+    for unusual_aa, original_aa_dict in aa_exception_dict.items():
+        if 'unimod_name' in original_aa_dict.keys():
+            if original_aa_dict['unimod_name'] not in mod_dict.keys():
+                mod_dict[original_aa_dict['unimod_name']] = {
+                    'mass' : 0.0,
+                    'aa' : set(),
+                    'pos': set(),
+                }
+            mod_dict[original_aa_dict['unimod_name']]['aa'].update(original_aa_dict['original_aa'])
+
     cc = ursgal.ChemicalComposition()
     ursgal.GlobalUnimodMapper._reparseXML()
     de_novo_engines = [

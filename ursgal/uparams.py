@@ -26,6 +26,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': '{0}',
@@ -39,6 +40,7 @@ ursgal_params = {
         'ukey_translation': {
             'pyqms_style_1' : 'PERCENTILE_FORMAT_STRING',
             'sugarpy_run_style_1' : 'PERCENTILE_FORMAT_STRING',
+            'sugarpy_plot_style_1' : 'PERCENTILE_FORMAT_STRING',
         },
         'utag': [
             'quantification',
@@ -53,6 +55,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -68,7 +71,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1' : 'ELEMENT_MIN_ABUNDANCE',
-            'sugarpy_run_style_1' : 'ELEMENT_MIN_ABUNDANCE'
+            'sugarpy_run_style_1' : 'ELEMENT_MIN_ABUNDANCE',
+            'sugarpy_plot_style_1' : 'ELEMENT_MIN_ABUNDANCE',
         },
         'utag': [
             'quantification',
@@ -82,6 +86,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -97,7 +102,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1' : 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING',
-            'sugarpy_run_style_1' : 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING'
+            'sugarpy_run_style_1' : 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING',
+            'sugarpy_plot_style_1': 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING',
         },
         'utag': [
             'quantification',
@@ -111,6 +117,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -126,7 +133,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1' : 'REQUIRED_PERCENTILE_PEAK_OVERLAP',
-            'sugarpy_run_style_1' : 'REQUIRED_PERCENTILE_PEAK_OVERLAP'
+            'sugarpy_run_style_1' : 'REQUIRED_PERCENTILE_PEAK_OVERLAP',
+            'sugarpy_plot_style_1' : 'REQUIRED_PERCENTILE_PEAK_OVERLAP',
         },
         'utag': [
             'quantification',
@@ -140,6 +148,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -154,7 +163,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES',
-            'sugarpy_run_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES'
+            'sugarpy_run_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES',
+            'sugarpy_plot_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES',
         },
         'utag': [
             'quantification',
@@ -169,6 +179,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -184,7 +195,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'INTENSITY_TRANSFORMATION_FACTOR',
-            'sugarpy_run_style_1': 'INTENSITY_TRANSFORMATION_FACTOR'
+            'sugarpy_run_style_1': 'INTENSITY_TRANSFORMATION_FACTOR',
+            'sugarpy_plot_style_1': 'INTENSITY_TRANSFORMATION_FACTOR',
         },
         'utag': [
             'quantification',
@@ -199,6 +211,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -214,7 +227,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'UPPER_MZ_LIMIT',
-            'sugarpy_run_style_1': 'UPPER_MZ_LIMIT'
+            'sugarpy_run_style_1': 'UPPER_MZ_LIMIT',
+            'sugarpy_plot_style_1': 'UPPER_MZ_LIMIT',
         },
         'utag': [
             'quantification',
@@ -229,6 +243,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0'
         ],
         'uvalue_option': {
             'none_val': 0,
@@ -244,7 +259,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'LOWER_MZ_LIMIT',
-            'sugarpy_run_style_1': 'LOWER_MZ_LIMIT'
+            'sugarpy_run_style_1': 'LOWER_MZ_LIMIT',
+            'sugarpy_plot_style_1': 'LOWER_MZ_LIMIT',
         },
         'utag': [
             'quantification',
@@ -259,6 +275,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -274,7 +291,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'MZ_TRANSFORMATION_FACTOR',
-            'sugarpy_run_style_1': 'MZ_TRANSFORMATION_FACTOR'
+            'sugarpy_run_style_1': 'MZ_TRANSFORMATION_FACTOR',
+            'sugarpy_plot_style_1': 'MZ_TRANSFORMATION_FACTOR',
         },
         'utag': [
             'quantification',
@@ -288,7 +306,8 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
-            'sugarpy_run_1_0_0'
+            'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -304,7 +323,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'REL_I_RANGE',
-            'sugarpy_run_style_1': 'REL_I_RANGE'
+            'sugarpy_run_style_1': 'REL_I_RANGE',
+            'sugarpy_plot_style_1': 'REL_I_RANGE'
         },
         'utag': [
             'quantification',
@@ -319,6 +339,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -334,7 +355,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'INTERNAL_PRECISION',
-            'sugarpy_run_style_1': 'INTERNAL_PRECISION'
+            'sugarpy_run_style_1': 'INTERNAL_PRECISION',
+            'sugarpy_plot_style_1': 'INTERNAL_PRECISION',
         },
         'utag': [
             'quantification',
@@ -349,6 +371,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -363,7 +386,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'MAX_MOLECULES_PER_MATCH_BIN',
-            'sugarpy_run_style_1': 'MAX_MOLECULES_PER_MATCH_BIN'
+            'sugarpy_run_style_1': 'MAX_MOLECULES_PER_MATCH_BIN',
+            'sugarpy_plot_style_1': 'MAX_MOLECULES_PER_MATCH_BIN',
         },
         'utag': [
             'quantification',
@@ -377,6 +401,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': [None],
@@ -392,7 +417,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'SILAC_AAS_LOCKED_IN_EXPERIMENT',
-            'sugarpy_run_style_1': 'SILAC_AAS_LOCKED_IN_EXPERIMENT'
+            'sugarpy_run_style_1': 'SILAC_AAS_LOCKED_IN_EXPERIMENT',
+            'sugarpy_plot_style_1': 'SILAC_AAS_LOCKED_IN_EXPERIMENT',
         },
         'utag': [
             'quantification',
@@ -406,7 +432,8 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
-            'sugarpy_run_1_0_0'
+            'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -421,7 +448,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'BUILD_RESULT_INDEX',
-            'sugarpy_run_style_1': 'BUILD_RESULT_INDEX'
+            'sugarpy_run_style_1': 'BUILD_RESULT_INDEX',
+            'sugarpy_plot_style_1': 'BUILD_RESULT_INDEX',
         },
         'utag': [
             'quantification',
@@ -565,6 +593,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -580,7 +609,8 @@ ursgal_params = {
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'M_SCORE_THRESHOLD',
-            'sugarpy_run_style_1': 'M_SCORE_THRESHOLD'
+            'sugarpy_run_style_1': 'M_SCORE_THRESHOLD',
+            'sugarpy_plot_style_1': 'M_SCORE_THRESHOLD'
         },
         'utag': [
             'quantification',
@@ -625,6 +655,7 @@ ursgal_params = {
         'available_in_unode': [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'default_value': 0.4,
         'description':  ''' weighting factor for pyQms mz score ''',
@@ -632,6 +663,7 @@ ursgal_params = {
         'ukey_translation': {
             'pyqms_style_1': 'MZ_SCORE_PERCENTILE',
             'sugarpy_run_style_1': 'MZ_SCORE_PERCENTILE',
+            'sugarpy_plot_style_1': 'MZ_SCORE_PERCENTILE',
         },
         'utag': [
             'quantification',
@@ -734,6 +766,7 @@ ursgal_params = {
         'available_in_unode' : [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'default_value' : {
             '13C' : 0.996,
@@ -745,6 +778,7 @@ ursgal_params = {
         'ukey_translation' : {
             'pyqms_style_1' : 'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS',
             'sugarpy_run_style_1' : 'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS',
+            'sugarpy_plot_style_1' : 'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS',
         },
         'utag' : [
             'quantification',
@@ -832,6 +866,7 @@ ursgal_params = {
         'available_in_unode' : [
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'default_value' : 1,
         'description' :  ''' Retention time border tolerance for curating RT windows ''',
@@ -839,6 +874,7 @@ ursgal_params = {
         'ukey_translation' : {
             'pyqms_style_1' : 'rt_border_tolerance',
             'sugarpy_run_style_1' : 'rt_border_tolerance',
+            'sugarpy_plot_style_1' : 'rt_border_tolerance',
         },
         'utag' : [
             'quantification',
@@ -1017,6 +1053,7 @@ ursgal_params = {
             'pipi_1_3_0',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1026,6 +1063,7 @@ ursgal_params = {
             'pipi_style_1'    : 'base_mz',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
+            'sugarpy_plot_style_1': 'REL_MZ_RANGE',
         },
         'utag' : [
             'conversion'
@@ -2720,7 +2758,7 @@ ursgal_params = {
             'pipi_style_1'      : 'ms2_tolerance',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
-            'sugarpy_plot_style_1': 'ms_precision',
+            'sugarpy_plot_style_1': 'REL_MZ_RANGE',
         },
         'utag' : [
             'fragment',
@@ -2783,7 +2821,7 @@ ursgal_params = {
             'pipi_style_1'      : 'frag_mass_tolerance_unit',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
-            'sugarpy_plot_style_1': 'ms_precision',
+            'sugarpy_plot_style_1': 'REL_MZ_RANGE',
         },
         'utag' : [
             'fragment',
@@ -2969,7 +3007,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'get_http_style_1' : 'ftp_blocksize',
+            'get_ftp_style_1' : 'ftp_blocksize',
         },
         'utag' : [
             'download',
@@ -2996,7 +3034,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'get_http_style_1' : 'ftp_folder',
+            'get_ftp_style_1' : 'ftp_folder',
         },
         'utag' : [
             'download',
@@ -3021,7 +3059,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'get_http_style_1' : 'ftp_include_ext',
+            'get_ftp_style_1' : 'ftp_include_ext',
         },
         'utag' : [
             'download',
@@ -3047,7 +3085,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'get_http_style_1' : 'ftp_login',
+            'get_ftp_style_1' : 'ftp_login',
         },
         'utag' : [
             'download',
@@ -3072,7 +3110,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'get_http_style_1' : 'ftp_max_number_of_files',
+            'get_ftp_style_1' : 'ftp_max_number_of_files',
         },
         'utag' : [
             'download',
@@ -3100,7 +3138,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'get_http_style_1' : 'ftp_output_folder',
+            'get_ftp_style_1' : 'ftp_output_folder',
         },
         'utag' : [
             'download',
@@ -3125,7 +3163,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'get_http_style_1' : 'ftp_password',
+            'get_ftp_style_1' : 'ftp_password',
         },
         'utag' : [
             'download',
@@ -3149,7 +3187,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'get_http_style_1' : 'ftp_url',
+            'get_ftp_style_1' : 'ftp_url',
         },
         'utag' : [
             'download',
@@ -4398,12 +4436,14 @@ ursgal_params = {
             'mzml2mgf_2_0_0',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'mzml2mgf_style_1' : 'machine_offset_in_ppm',
             'pyqms_style_1'    : 'MACHINE_OFFSET_IN_PPM',
-            'sugarpy_run_style_1'  : 'MACHINE_OFFSET_IN_PPM'
+            'sugarpy_run_style_1'  : 'MACHINE_OFFSET_IN_PPM',
+            'sugarpy_plot_style_1'  : 'MACHINE_OFFSET_IN_PPM',
         },
         'utag' : [
             'conversion',
@@ -7156,7 +7196,7 @@ ursgal_params = {
             'pipi_style_1'       : 'ms1_tolerance',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
-            'sugarpy_plot_style_1': 'ms_precision',
+            'sugarpy_plot_style_1': 'REL_MZ_RANGE',
         },
         'utag' : [
             'precursor',
@@ -7229,7 +7269,7 @@ ursgal_params = {
             'pipi_style_1'      : 'ms1_tolerance',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
-            'sugarpy_plot_style_1': 'ms_precision',
+            'sugarpy_plot_style_1': 'REL_MZ_RANGE',
         },
         'utag' : [
             'precursor',
@@ -7298,7 +7338,7 @@ ursgal_params = {
             'pipi_style_1'      : 'ms1_tolerance_unit',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
-            'sugarpy_plot_style_1': 'ms_precision',
+            'sugarpy_plot_style_1': 'REL_MZ_RANGE',
         },
         'utag' : [
             'precursor',
@@ -7416,6 +7456,7 @@ ursgal_params = {
             'pipi_1_3_0',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7427,6 +7468,7 @@ ursgal_params = {
             'pipi_style_1'      : ('max_ms1_charge', 'max_potential_charge'),
             'pyqms_style_1'     : 'precursor_max_charge',
             'sugarpy_run_style_1'   : 'max_charge',
+            'sugarpy_plot_style_1': 'max_charge',
         },
         'utag' : [
             'precursor',
@@ -7500,6 +7542,7 @@ ursgal_params = {
             'pipi_1_3_0',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7509,7 +7552,8 @@ ursgal_params = {
             'msfragger_style_1' : 'precursor_min_charge',
             'pipi_style_1' : ('min_ms1_charge', 'min_potential_charge'),
             'pyqms_style_1'     : 'precursor_min_charge',
-            'sugarpy_run_style_1': 'min_charge'
+            'sugarpy_run_style_1': 'min_charge',
+            'sugarpy_plot_style_1': 'min_charge',
         },
         'utag' : [
             'precursor',
@@ -9122,7 +9166,7 @@ ursgal_params = {
             'none_val'      : None,
             'multiple_line' : False,
         },
-        'default_value' : 'http://plan-a.uni-muenster.de/',
+        'default_value' : 'https://upenn.box.com/s/94eggf9vk16lt0ig2fp97g5ae4sy891d',
         'description' : \
             'URL that is used to prepare and install resources via corresponding scripts (prepare_resources.py and install_resources.py)',
     },
@@ -10073,6 +10117,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'default_value' : [
             'HexNAc',
@@ -10082,6 +10127,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'sugarpy_run_style_1' : 'unimod_glycans_incl_in_search',
+            'sugarpy_plot_style_1' : 'unimod_glycans_incl_in_search',
         },
         'utag' : [
             'modifications',
@@ -10154,10 +10200,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
             'sugarpy_run_style_1' : 'max_tree_length',
+            'sugarpy_plot_style_1' : 'max_tree_length',
         },
         'utag' : [
             'modifications',
@@ -10302,6 +10350,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -10315,7 +10364,8 @@ ursgal_params = {
         'description': """ Min number of spectra in which a molecule needs to be matched in order to consider it for further processing """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'sugarpy_run_style_1': 'min_spec_number'
+            'sugarpy_run_style_1': 'min_spec_number',
+            'sugarpy_plot_style_1': 'min_spec_number',
         },
         'utag': [
             'accuracy'
@@ -10682,6 +10732,104 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "dict",
+    },
+    'sugarpy_decoy_glycan' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sugarpy_plot_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sugarpy_plot_style_1': 'decoy_glycan',
+        },
+        'utag' : [
+            'input_files',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : 'End(HexNAc)Hex(5)HexNAc(3)NeuAc(1)dHex(1)',
+        'description' : '''Glycan (given in the SugarPy Hill noation format) that will be used for matching glycopeptide fragment ions in MS2 spectra from non-glycosylated peptides '''
+    },
+    'min_oxonium_ions': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'sugarpy_plot_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 3,
+        'description': """ Min number of oxonium ions that need to be matched in an MS/MS spectrum, to be accepted as containing oxonium ions (i.e. considered as glycopeptide) """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'sugarpy_plot_style_1': 'min_oxonium_ions'
+        },
+        'utag': [
+            'scoring'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'min_y_ions': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'sugarpy_plot_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 1,
+        'description': """ Min number of Y-ions that need to be matched in an MS/MS spectrum, to be accepted as containing Y-ions (i.e. considered as glycopeptide) """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'sugarpy_plot_style_1': 'min_Y_ions'
+        },
+        'utag': [
+            'scoring'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'ursgal_results_csv' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sugarpy_plot_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sugarpy_plot_style_1': 'ursgal_ident_file',
+        },
+        'utag' : [
+            'input_files',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+            'input_extensions' : ['.csv']
+        },
+        'default_value' : None,
+        'description' : \
+            'Path to the Ursgal results .csv containing all PSMs in the unified format'
     },
 }
 

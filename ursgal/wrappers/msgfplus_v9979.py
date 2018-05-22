@@ -24,13 +24,14 @@ class msgfplus_v9979( ursgal.UNode ):
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
+        'distribuable'                : True,
         'utranslation_style'          : 'msgfplus_style_1',
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
                     'url'            : 'http://proteomics.ucsd.edu/Software/MSGFPlus/MSGFPlus.zip',
-                    'zip_md5'        : '82a3e2204ff698e260ac9f89d3880b59',
+                    'zip_md5'        : '5eeb2f74f708f1861ca570a46e8a051d',
                     'additional_exe' : [],
                 },
             },

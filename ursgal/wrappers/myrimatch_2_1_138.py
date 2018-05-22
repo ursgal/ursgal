@@ -34,7 +34,7 @@ class myrimatch_2_1_138( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'myrimatch_2_1_138',
                     'url'            : '',
-                    'zip_md5'        : '99b4eb99bf59cd80e850bf9368b4eb3f',
+                    'zip_md5'        : 'bf5df092579fe3f3d1364c835fe2f3ea',
                     'additional_exe' : [],
                 },
             },

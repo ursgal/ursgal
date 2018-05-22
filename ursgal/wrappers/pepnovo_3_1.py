@@ -33,7 +33,7 @@ class pepnovo_3_1( ursgal.UNode ):
                 '64bit' : {
                     'exe'            :'PepNovo_bin',
                     'url'            : '',
-                    'zip_md5'        : '318866ea0ade5b2309cbcddc0066d2a8',
+                    'zip_md5'        : '8f9d9125e79d7b27ffb6d60c0ccc0c97',
                     'additional_exe' : [],
                 }
             },
