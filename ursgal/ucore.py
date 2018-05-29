@@ -95,6 +95,20 @@ def convert_ppm_to_dalton(ppm_value, base_mz=1000.0):
     '''
     return float(ppm_value) / float(base_mz)
 
+def convert_dalton_to_ppm(da_value, base_mz=1000.0):
+    '''
+        Convert the precision in Dalton to ppm
+
+        Keyword Arguments:
+            da_value (float): Dalton value to transform
+            base_mz (float): factor for transformation
+
+
+        Returns:
+            float: value in ppm
+    '''
+    return float(da_value) * float(base_mz)
+
 
 def calculate_mz(mass, charge):
     '''
@@ -284,11 +298,12 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
         values = [d[fieldname] for d in list_of_rowdicts]
         if len(set(values)) == 1:
             merged_d[fieldname] = values[0]
-        elif len([v for v in values if v != '']) == 1:
-            values.remove('')
-            merged_d[fieldname] = values[0]
         else:
-            merged_d[fieldname] = joinchar.join(values)
+            no_empty_values = [v for v in values if v != '']
+            if len(set(no_empty_values)) == 1:
+                merged_d[fieldname] = no_empty_values[0]
+            else:
+                merged_d[fieldname] = joinchar.join(values)
     return merged_d
 
 

@@ -91,6 +91,13 @@ class novor_1_1beta( ursgal.UNode ):
             self.params['output_file']
         )
 
+        print(
+            '''
+            [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
+            [ WARNING ] need to be combined for Novor (use of symmetric tolerance window).
+            [ WARNING ] The arithmetic mean is used.
+            '''
+        )
         self.params['translations']['precursor_mass_tolerance'] = ( float(self.params['precursor_mass_tolerance_plus']) + \
                                                             float(self.params['precursor_mass_tolerance_minus']) ) \
                                                             / 2.0
