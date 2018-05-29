@@ -13,9 +13,9 @@ import subprocess
 # from .msgfplus_C_mzid2csv_v2017_07_04 import msgfplus_C_mzid2csv_v2017_07_04 as msgfc
 
 
-class msgfplus_C_mzid2csv_v1_2_1( ursgal.UNode ):
+class msgfplus2csv_v1_2_1( ursgal.UNode ):
     """
-    msgfplus_C_mzid2csv_v1.2.1 UNode
+    msgfplus2csv_v1.2.1 UNode
     Parameter options at https://omics.pnl.gov/software/ms-gf
 
     Reference:
@@ -52,7 +52,7 @@ class msgfplus_C_mzid2csv_v1_2_1( ursgal.UNode ):
             'Applications to Database Search.',
     }
     def __init__(self, *args, **kwargs):
-        super(msgfplus_C_mzid2csv_v1_2_1, self).__init__(*args, **kwargs)
+        super(msgfplus2csv_v1_2_1, self).__init__(*args, **kwargs)
         if sys.platform in ['win32']:
             self.dependencies_ok = True
         else:

@@ -126,6 +126,13 @@ class msamanda_2_0_0_9695( ursgal.UNode ):
         self.params['translations']['score_ions'] = ', '.join( score_ions )
         self.params['translations']['instruments_file_input'] = ''.join( instruments_file_input )
 
+        print(
+            '''
+            [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
+            [ WARNING ] need to be combined for pyQms (use of symmetric tolerance window).
+            [ WARNING ] The arithmetic mean is used.
+            '''
+        )
         self.params['translations']['precursor_mass_tolerance'] = (
             float(self.params['translations']['precursor_mass_tolerance_plus']) +
             float(self.params['translations']['precursor_mass_tolerance_minus'])

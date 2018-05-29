@@ -68,6 +68,7 @@ unify_csv_main(
             'precursor_isotope_range' : "0,1",
             'max_missed_cleavages' : 2,
             'rounded_mass_decimals' : 3,
+            'use_pyqms_for_mz_calculation' : False,
         },
         'label' : '15N',
         'mods' : R.params['mods'],

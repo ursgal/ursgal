@@ -866,7 +866,10 @@ def chk_format_param( param_name, param_dict ):
                 layer_list = list(set(layer_list))
                 if layer_list != [] and layer_list != title_layer_list:
                     error_msg = str(k) + ' has different layer number '\
-                        'compared with dict_title.'
+                        'compared with dict_title. {0} vs {1}'.format(
+                            layer_list,
+                            title_layer_list
+                        )
                     raise ValueError(error_msg)
 
                 # title_list = list(layer_dict)

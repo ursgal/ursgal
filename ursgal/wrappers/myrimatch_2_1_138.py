@@ -137,6 +137,13 @@ class myrimatch_2_1_138( ursgal.UNode ):
                 continue
             self.params['translations']['myrimatch_dynamic_mods'] += '{0} {1} {2} '.format( mod[ 'aa' ], characters[ n ], mod[ 'mass' ] )
 
+        print(
+            '''
+            [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
+            [ WARNING ] need to be combined for Myrimatch (use of symmetric tolerance window).
+            [ WARNING ] The arithmetic mean is used.
+            '''
+        )
         self.params['translations']['precursor_mass_tolerance'] = ( float(self.params['translations']['precursor_mass_tolerance_plus']) + \
                                                     float(self.params['translations']['precursor_mass_tolerance_minus']) ) \
                                                 / 2.0
