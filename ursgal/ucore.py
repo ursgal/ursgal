@@ -95,6 +95,7 @@ def convert_ppm_to_dalton(ppm_value, base_mz=1000.0):
     '''
     return float(ppm_value) / float(base_mz)
 
+
 def convert_dalton_to_ppm(da_value, base_mz=1000.0):
     '''
         Convert the precision in Dalton to ppm
@@ -294,17 +295,43 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
     '''
     merged_d = {}
     fieldnames = list_of_rowdicts[0].keys()
+    # edited
     for fieldname in fieldnames:
-        values = [d[fieldname] for d in list_of_rowdicts]
-        if len(set(values)) == 1:
-            merged_d[fieldname] = values[0]
-        else:
-            no_empty_values = [v for v in values if v != '']
-            if len(set(no_empty_values)) == 1:
-                merged_d[fieldname] = no_empty_values[0]
+        if fieldname == "MS-GF:SpecEValue":
+            most_frequent_values = []
+            occurence_of_values = []
+            dict_frequency_of_occurence = {}
+            values = [d[fieldname] for d in list_of_rowdicts]
+            for value in set(values):
+                occurence_of_values.append(values.count(value))
+                dict_frequency_of_occurence[value] = values.count(value)
+            for value in dict_frequency_of_occurence:
+                if dict_frequency_of_occurence[value] == max(occurence_of_values):
+                    most_frequent_values.append(value)
+            if len(most_frequent_values) == 1:
+                merged_d[fieldname] = most_frequent_values[0]
             else:
                 merged_d[fieldname] = joinchar.join(values)
+
+        else:
+            values = [d[fieldname] for d in list_of_rowdicts]
+            if len(set(values)) == 1:
+                merged_d[fieldname] = values[0]
+            else:
+                no_empty_values = [v for v in values if v != '']
+                if len(set(no_empty_values)) == 1:
+                    merged_d[fieldname] = no_empty_values[0]
+                else:
+                    merged_d[fieldname] = joinchar.join(values)
+
     return merged_d
+
+   
+
+
+
+
+
 
 
 def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_colnames=None, joinchar='<|>', overwrite_file=True):
