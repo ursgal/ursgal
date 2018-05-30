@@ -120,7 +120,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     pyqms_mz_calc = params['translations']['use_pyqms_for_mz_calculation']
     # print(use15N)
     # sys.exit(1)
-    # aa_exception_dict = params['translations']['aa_exception_dict']
     n_term_replacement = {
         'Ammonia-loss' : None,
         'Trimethyl'    : None,
@@ -234,6 +233,17 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         # sys.exit(1)
         #msfragger mod merge block end
         ##############################
+
+    aa_exception_dict = params['translations']['aa_exception_dict']
+    for unusual_aa, original_aa_dict in aa_exception_dict.items():
+        if 'unimod_name' in original_aa_dict.keys():
+            if original_aa_dict['unimod_name'] not in mod_dict.keys():
+                mod_dict[original_aa_dict['unimod_name']] = {
+                    'mass' : 0.0,
+                    'aa' : set(),
+                    'pos': set(),
+                }
+            mod_dict[original_aa_dict['unimod_name']]['aa'].update(original_aa_dict['original_aa'])
 
     cc = ursgal.ChemicalComposition()
     ursgal.GlobalUnimodMapper._reparseXML()
