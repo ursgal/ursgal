@@ -299,7 +299,11 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
     return_value_2 = []
     for fieldname in fieldnames:
         if fieldname == "MS-GF:SpecEValue":
+
             values = [d[fieldname] for d in list_of_rowdicts]
+            if values == ['' for value in values]:
+                continue
+
             values_as_floats = [float(value) for value in values]
             merged_d[fieldname] = min(values_as_floats)
 
@@ -314,7 +318,9 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
                     most_frequent_values.append(value)
 
             if str(min(values_as_floats)) not in most_frequent_values:
-                return_value_2 = list_of_rowdicts        
+                return_value_2 = list_of_rowdicts
+
+
 
         else:
             values = [d[fieldname] for d in list_of_rowdicts]
