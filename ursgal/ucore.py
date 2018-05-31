@@ -296,22 +296,25 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
     merged_d = {}
     fieldnames = list_of_rowdicts[0].keys()
     # edited
+    return_value_2 = []
     for fieldname in fieldnames:
         if fieldname == "MS-GF:SpecEValue":
+            values = [d[fieldname] for d in list_of_rowdicts]
+            values_as_floats = [float(value) for value in values]
+            merged_d[fieldname] = min(values_as_floats)
+
             most_frequent_values = []
             occurence_of_values = []
             dict_frequency_of_occurence = {}
-            values = [d[fieldname] for d in list_of_rowdicts]
             for value in set(values):
                 occurence_of_values.append(values.count(value))
                 dict_frequency_of_occurence[value] = values.count(value)
             for value in dict_frequency_of_occurence:
                 if dict_frequency_of_occurence[value] == max(occurence_of_values):
                     most_frequent_values.append(value)
-            if len(most_frequent_values) == 1:
-                merged_d[fieldname] = most_frequent_values[0]
-            else:
-                merged_d[fieldname] = joinchar.join(values)
+
+            if str(min(values_as_floats)) not in most_frequent_values:
+                return_value_2 = list_of_rowdicts        
 
         else:
             values = [d[fieldname] for d in list_of_rowdicts]
@@ -324,15 +327,9 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
                 else:
                     merged_d[fieldname] = joinchar.join(values)
 
-    return merged_d
+    return merged_d, return_value_2
 
    
-
-
-
-
-
-
 
 def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_colnames=None, joinchar='<|>', overwrite_file=True):
     '''
@@ -358,6 +355,7 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         csv_kwargs['lineterminator'] = '\n'
     else:
         csv_kwargs['lineterminator'] = '\r\n'
+    separate_row_dict_list = []
     with open(tmp_file, 'r') as tmp, open(out_file, 'w', newline='') as out:
         tmp_reader = csv.DictReader(tmp)
         writer = csv.DictWriter(
@@ -382,9 +380,26 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
                 raise Exception("This should never happen.")
         # finished parsing the old unmerged unified csv
         for rows_to_merge in rows_to_merge_dict.values():
-            writer.writerow(
-                merge_rowdicts(rows_to_merge, joinchar=joinchar)
-            )
+            merged_row_dict, separate_row_dicts = merge_rowdicts(rows_to_merge, joinchar=joinchar)
+            separate_row_dict_list.extend(separate_row_dicts)
+            writer.writerow(merged_row_dict)
+
+    #write the new file here ...
+
+    with open(tmp_file, 'r') as tmp, open('problem_specE_values.csv', 'w', newline='') as out:
+        tmp_reader = csv.DictReader(tmp)
+        csv_writer = csv.DictWriter(
+            out,
+            fieldnames=tmp_reader.fieldnames,
+            **csv_kwargs
+        )
+        csv_writer.writeheader()
+        for separate_row_dict in separate_row_dict_list:
+            csv_writer.writerow(separate_row_dict)
+
+
+
+
     # remove the old unified csv that contains duplicate rows
     if overwrite_file:
         os.remove(tmp_file)
