@@ -304,8 +304,9 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
             print(values)
             if values == ['' for value in values]:
                 continue
-
-            values_as_floats = [float(value) for value in values]
+                
+            no_empty_values = [v for v in values if v != '']    
+            values_as_floats = [float(value) for value in no_empty_values]
             merged_d[fieldname] = min(values_as_floats)
 
             most_frequent_values = []
