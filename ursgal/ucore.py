@@ -300,7 +300,6 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
     for fieldname in fieldnames:
         if fieldname == "MS-GF:SpecEValue":
             values = [d[fieldname] for d in list_of_rowdicts]
-            print(values)
             if values == ['' for value in values]:
                 continue
 
