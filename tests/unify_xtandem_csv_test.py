@@ -69,7 +69,16 @@ unify_csv_main(
             'precursor_isotope_range' : "0,1",
             'max_missed_cleavages' : 2,
             'rounded_mass_decimals' : 3,
-            'use_pyqms_for_mz_calculation': False
+            'use_pyqms_for_mz_calculation': False,
+            'aa_exception_dict' : {
+                'J' : {
+                    'original_aa' : ['L','I'],
+                },
+                'O' : {
+                    'original_aa' : ['K'],
+                    'unimod_name' : 'Methylpyrroline',
+                },
+            },
         },
         'label' : '',
         'mods' : R.params['mods'],

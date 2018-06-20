@@ -10742,7 +10742,7 @@ ursgal_params = {
             'sugarpy_plot_style_1': 'decoy_glycan',
         },
         'utag' : [
-            'input_files',
+            'scoring',
         ],
         'uvalue_translation' : {
         },
