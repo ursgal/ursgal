@@ -91,10 +91,10 @@ def main(
         scan_time, scan_time_unit = spec.scan_time
         if scan_time_unit == 'seconds':
             scan_time /= 60
-        elif unit != 'minute':
+        elif scan_time_unit != 'minute':
             print('''
-                [ERROR] The retention time unit is nor recognized.
-                [ERROR] Please specify minute/second (nedded for mzml2mgf conversion).
+                [Warning] The retention time unit is nor recognized or not specified.
+                [Warning] It is assumed to be minutes and continues with that.
             ''')
         spectrum_id = spec.ID
         tmp['rt_2_scan'][scan_time] = spectrum_id
@@ -108,7 +108,11 @@ def main(
         peaks_2_write = spec.peaks('centroided')
 
         precursor_mz = spec.selected_precursors[0]['mz']
-        precursor_charge = spec.selected_precursors[0]['charge']
+
+        try:
+            precursor_charge = spec.selected_precursors[0]['charge']
+        except:
+            precursor_charge = None
 
         if scan_inclusion_list is not None:
             if int(spectrum_id) not in scan_inclusion_list:

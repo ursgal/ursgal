@@ -689,6 +689,7 @@ ursgal_params = {
             'mzml2mgf_2_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pipi_1_4_5',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -706,6 +707,7 @@ ursgal_params = {
             'mzml2mgf_style_1' : 'ms_level',
             'sugarpy_run_style_1' : 'ms_level',
             'sugarpy_plot_style_1' : 'ms_level',
+            'pipi_style_1' : 'ms_level',
         },
         'utag': [
             'spectrum'
@@ -905,7 +907,7 @@ ursgal_params = {
             'mzidentml_lib_1_6_11',
             'mzidentml_lib_1_7',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -1050,7 +1052,7 @@ ursgal_params = {
             'moda_v1_51',
             'omssa_2_1_9',
             'pepnovo_3_1',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -1197,7 +1199,7 @@ ursgal_params = {
                 'xtandem_alanine' : True,
                 'msfragger_20170103' : True,
                 'mascot_x_x_x'  : True,
-                'pipi_1_3_0' : True,
+                'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
             },
             'percolator_style_1' : {
@@ -1226,7 +1228,7 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'mascot_x_x_x'  : True,
-                'pipi_1_3_0' : True,
+                'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
             },
             'qvality_style_1' : {
@@ -1255,7 +1257,7 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'mascot_x_x_x'  : True,
-                'pipi_1_3_0' : True,
+                'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
             },
             'sanitize_csv_style_1' : {
@@ -1284,7 +1286,7 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'mascot_x_x_x'  : True,
-                'pipi_1_3_0' : True,
+                'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
             },
             'svm_style_1' : {
@@ -1313,7 +1315,7 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'mascot_x_x_x'  : True,
-                'pipi_1_3_0' : True,
+                'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
             },
         },
@@ -1559,7 +1561,7 @@ ursgal_params = {
                 'novor_1_1beta' : False,
                 'omssa_2_1_9' : False,
                 'pepnovo_3_1' : False,
-                'pipi_1_3_0' : False,
+                'pipi_1_4_5' : False,
                 'xtandem_alanine' : True,
                 'xtandem_cyclone_2010' : True,
                 'xtandem_jackhammer' : True,
@@ -1727,7 +1729,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -1869,7 +1871,7 @@ ursgal_params = {
             'upeptide_mapper_1_0_0',
             'compomics_utilities_4_11_5',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2137,12 +2139,14 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msamanda_style_1' : 'generate_decoy',
             'msgfplus_style_1' : '-tda',
             'xtandem_style_1'  : 'scoring, include reverse',
+            'pipi_style_1'     : 'add_decoy'
         },
         'utag' : [
             'database',
@@ -2159,6 +2163,10 @@ ursgal_params = {
             'xtandem_style_1' : {
                 False : 'no',
                 True  : 'yes',
+            },
+            'pipi_style_1' : {
+                False : '0',
+                True  : '1',
             },
         },
         'uvalue_type' : 'bool',
@@ -2225,7 +2233,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2678,7 +2686,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
         ],
         'default_value' : [0.0, 0.0],
         'description' :  ''' Removes peaks in this m/z range prior to matching. Given as list [min_clear_mz, max_clear_mz]. Useful for iTRAQ/TMT experiments, i.e. [0.0, 150.0]. ''',
@@ -2740,7 +2748,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -2803,7 +2811,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -2900,13 +2908,11 @@ ursgal_params = {
         'available_in_unode' : [
             'omssa_2_1_9',
             'msfragger_20170103',
-            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-zoh',
             'msfragger_style_1': 'max_fragment_charge',
-            'pipi_style_1' : 'max_ms2_charge',
         },
         'utag' : [
             'fragment',
@@ -3049,8 +3055,7 @@ ursgal_params = {
         },
         'default_value' : None,
         'description' : \
-            'ftp folder that should be downloaded\n'\
-            '    \'\' : None',
+            '''ftp folder that should be downloaded'''
     },
     'ftp_include_ext' : {
         'edit_version' : 1.00,
@@ -3073,10 +3078,7 @@ ursgal_params = {
             'multiple_line' : False,
         },
         'default_value' : None,
-        'description' : \
-            'Only files with the defined file extension are downloaded with '\
-            'ftp download\n'\
-            '    \'\' : None',
+        'description' : '''Only files with the defined file extension are downloaded with ftp download'''
     },
     'ftp_login' : {
         'edit_version' : 1.00,
@@ -3226,7 +3228,7 @@ ursgal_params = {
             'msgfplus2csv_v2017_07_04',
             'msgfplus2csv_v1_2_0',
             'msgfplus2csv_v1_2_1',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3326,14 +3328,13 @@ ursgal_params = {
                 'theo_mass' : 'Calc m/z',
                 'exp_mass' : 'Exp m/z',
                 'abs_ppm' : 'PIPI:abs_ppm',
-                'delta_C' : 'PIPI:delta_C',
-                'ptm_delta_score' : 'PIPI:ptm_delta_score protein_ID',
+                'delta_C_n' : 'PIPI:delta_C_n',
                 'protein_ID' : 'Protein ID',
                 'score' : 'PIPI:score',
-                'naive_q_value' : 'PIPI:naive_q_value',
-                'percolator_score' : 'PIPI:percolator_score',
-                'posterior_error_prob' : 'PIPI:posterior_error_prob',
-                'percolator_q_value' : 'PIPI:percolator_q_value',
+                'A_score' : 'A-Score',
+                'labelling' : 'Label',
+                'isotope_correction' : 'PIPI:isotope_correction',
+                'MS1_pearson_correlation_coefficient' : 'PIPI:MS1_pearson_correlation_coefficient',
                 'other_PTM_patterns' : 'PIPI:other_PTM_patterns',
                 'MGF_title' : 'Spectrum Title',
             },
@@ -4398,7 +4399,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
             'pyqms_1_0_0',
         ],
         'triggers_rerun' : True,
@@ -4410,7 +4411,7 @@ ursgal_params = {
             'omssa_style_1'     : ('-tem', '-tom'),
             'xtandem_style_1'   : 'protein, modified residue mass file',
             'msfragger_style_1' : 'label',
-            'pipi_style_1'      : 'label',
+            'pipi_style_1'      : '15N',
             'pyqms_style_1'     : 'label'
         },
         'utag' : [
@@ -4418,6 +4419,10 @@ ursgal_params = {
             'modifications',
         ],
         'uvalue_translation' : {
+            'pipi_style_1': {
+                '14N' : 0,
+                '15N' : 1,
+            }
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -4531,7 +4536,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4596,7 +4601,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4884,14 +4889,16 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1'  : '-maxLength',
             'myrimatch_style_1' : 'MaxPeptideLength',
             'omssa_style_1'     : '-nox',
-            'msfragger_style_1' : 'digest_max_length'
+            'msfragger_style_1' : 'digest_max_length',
+            'pipi_style_1' : 'max_peptide_length',
         },
         'utag' : [
             'peptide',
@@ -5000,7 +5007,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5077,6 +5084,7 @@ ursgal_params = {
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5085,6 +5093,7 @@ ursgal_params = {
             'omssa_style_1'     : '-no',
             'msfragger_style_1' : 'digest_min_length',
             'msamanda_style_1'  : 'MinimumPepLength',
+            'pipi_style_1'      : 'min_peptide_length'
         },
         'utag' : [
             'peptide',
@@ -5181,14 +5190,12 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-hs',
             'xtandem_style_1' : 'spectrum, minimum peaks',
             'msfragger_style_1': 'minimum_peaks',
-            'pipi_style_1' : 'min_peak_num',
         },
         'utag' : [
             'fragment',
@@ -5340,7 +5347,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
             'pyqms_1_0_0'
         ],
         'triggers_rerun' : True,
@@ -7020,7 +7027,7 @@ ursgal_params = {
     'pipi_mz_bin_offset' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
-            'pipi_1_3_0',
+            'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7175,7 +7182,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7214,8 +7221,7 @@ ursgal_params = {
         },
         'default_value' : 5,
         'description' : \
-            'Precursor mass tolerance: lower mass tolerance of measured and '\
-            'calculated parent ion M+H',
+            'Lower precursor mass tolerance; maximum negative deviation of measured from calculated parent ion mass.',
     },
     'precursor_mass_tolerance_plus' : {
         'edit_version' : 1.00,
@@ -7248,7 +7254,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7287,8 +7293,7 @@ ursgal_params = {
         },
         'default_value' : 5,
         'description' : \
-            'Precursor mass tolerance: higher mass tolerance of measured and '\
-            'calculated parent ion M+H',
+            'Upper precursor mass tolerance; maximum positive deviation of measured from calculated parent ion mass.',
     },
     'precursor_mass_tolerance_unit' : {
         'edit_version' : 1.01,
@@ -7319,7 +7324,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0',
+            'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7453,7 +7458,6 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'msfragger_20170103',
-            'pipi_1_3_0',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7465,7 +7469,6 @@ ursgal_params = {
             'myrimatch_style_1' : 'NumChargeStates',
             'omssa_style_1'     : '-zh',
             'msfragger_style_1' : 'precursor_max_charge',
-            'pipi_style_1'      : ('max_ms1_charge', 'max_potential_charge'),
             'pyqms_style_1'     : 'precursor_max_charge',
             'sugarpy_run_style_1'   : 'max_charge',
             'sugarpy_plot_style_1': 'max_charge',
@@ -7494,7 +7497,6 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'msfragger_20170103',
-            'pipi_1_3_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7502,7 +7504,6 @@ ursgal_params = {
             'myrimatch_style_1' : 'MaxPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_max_mass',
-            'pipi_style_1'      : 'max_precursor_mass',
         },
         'utag' : [
             'precursor',
@@ -7539,7 +7540,6 @@ ursgal_params = {
             'msgfplus_v9979',
             'omssa_2_1_9',
             'msfragger_20170103',
-            'pipi_1_3_0',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7550,7 +7550,6 @@ ursgal_params = {
             'msgfplus_style_1' : '-minCharge',
             'omssa_style_1' : '-zl',
             'msfragger_style_1' : 'precursor_min_charge',
-            'pipi_style_1' : ('min_ms1_charge', 'min_potential_charge'),
             'pyqms_style_1'     : 'precursor_min_charge',
             'sugarpy_run_style_1': 'min_charge',
             'sugarpy_plot_style_1': 'min_charge',
@@ -7585,7 +7584,6 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
-            'pipi_1_3_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7593,7 +7591,6 @@ ursgal_params = {
             'myrimatch_style_1' : 'MinPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_min_mass',
-            'pipi_style_1'      : 'min_precursor_mass'
         },
         'utag' : [
             'precursor',
@@ -9372,7 +9369,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 0,
                 'xtandem_alanine'      : 0,
                 'msfragger_20170103'   : 0,
-                'pipi_1_3_0'           : 0,
+                'pipi_1_4_5'           : 0,
                 'moda_v1_51'           : 0,
             },
         },
@@ -9441,7 +9438,7 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
-                'pipi_1_3_0'           : 'PIPI:score',
+                'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
             },
             'percolator_style_1' : {
@@ -9471,7 +9468,7 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
-                'pipi_1_3_0'           : 'PIPI:score',
+                'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
             },
             'qvality_style_1' : {
@@ -9501,7 +9498,7 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
-                'pipi_1_3_0'           : 'PIPI:score',
+                'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
             },
             'sanitize_csv_style_1' : {
@@ -9531,7 +9528,7 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
-                'pipi_1_3_0'           : 'PIPI:score',
+                'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
             },
             'svm_style_1' : {
@@ -9561,7 +9558,7 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
-                'pipi_1_3_0'           : 'PIPI:score',
+                'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
             },
             'ucontroller_style_1' : {
@@ -9591,7 +9588,7 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
-                'pipi_1_3_0'           : 'PIPI:score',
+                'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
             },
             'unify_csv_style_1' : {
@@ -9621,7 +9618,7 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
-                'pipi_1_3_0'           : 'PIPI:score',
+                'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
             },
         },
@@ -10378,6 +10375,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'sugarpy_run_1_0_0',
+            'sugarpy_plot_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -10391,7 +10389,8 @@ ursgal_params = {
         'description': """ Max number of glycoforms reported per spectrum for each peptide """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'sugarpy_run_style_1': 'max_trees_per_spec'
+            'sugarpy_run_style_1': 'max_trees_per_spec',
+            'sugarpy_plot_style_1': 'max_trees_per_spec',
         },
         'utag': [
             'output'
@@ -10830,6 +10829,31 @@ ursgal_params = {
         'default_value' : None,
         'description' : \
             'Path to the Ursgal results .csv containing all PSMs in the unified format'
+    },
+    'add_contaminants' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'pipi_1_4_5',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'pipi_style_1'     : 'add_contaminant'
+        },
+        'utag' : [
+            'database',
+        ],
+        'uvalue_translation' : {
+            'pipi_style_1' : {
+                False : '0',
+                True  : '1',
+            },
+        },
+        'uvalue_type' : 'bool',
+        'uvalue_option' : {
+        },
+        'default_value' : False,
+        'description' : \
+            'Contaminants are added automatically to the database by the search engine. PIPI uses the same contaminants database as MaxQuant',
     },
 }
 

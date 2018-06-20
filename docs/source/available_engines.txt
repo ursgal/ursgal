@@ -81,7 +81,7 @@ OMSSA
 PIPI
 ----
 
-.. autoclass:: ursgal.wrappers.pipi_1_3_0.pipi_1_3_0
+.. autoclass:: ursgal.wrappers.pipi_1_4_5.pipi_1_4_5
    :members:
 
 
