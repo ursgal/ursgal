@@ -40,7 +40,7 @@ class qvality_2_02( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'qvality',
                     'url'            : '',
-                    'zip_md5'        : '4f2c1a6eb697cb66d066047c98c1f114',
+                    'zip_md5'        : 'e578317394afff0cdbc121e0203d128b',
                     'additional_exe' : [],
                 },
             },
@@ -48,7 +48,7 @@ class qvality_2_02( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'qvality',
                     'url'            : '',
-                    'zip_md5'        : '2ddd863add4095b710e6883abbd5efbf',
+                    'zip_md5'        : '50455452da7fb4124a6a433ed198c10d',
                     'additional_exe' : [],
                 },
             },
@@ -56,15 +56,15 @@ class qvality_2_02( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'qvality.exe',
                     'url'            : '',
-                    'zip_md5'        : '45c98d18d99f46578d938362c3302804',
+                    'zip_md5'        : '2b6bb4edc54b5712e61edb44baba41d5',
                     'additional_exe' : [],
                 },
-                '32bit' : {
-                    'exe'            : 'qvality.exe',
-                    'url'            : '',
-                    'zip_md5'        : 'f10aee7feec1340364c64eccc6f75a3c',
-                    'additional_exe' : [],
-                },
+                # '32bit' : {
+                #     'exe'            : 'qvality.exe',
+                #     'url'            : '',
+                #     'zip_md5'        : 'f10aee7feec1340364c64eccc6f75a3c',
+                #     'additional_exe' : [],
+                # },
             },
         },
         'citation' : \

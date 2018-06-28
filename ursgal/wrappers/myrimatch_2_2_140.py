@@ -29,15 +29,15 @@ class myrimatch_2_2_140( myri ):
                 '64bit' : {
                     'exe'            : 'myrimatch.exe',
                     'url'            : '',
-                    'zip_md5'        : 'afc021ece562109e753b49333fe75df1',
+                    'zip_md5'        : '36e6e118ca0a8efda19b2556bd18f41e',
                     'additional_exe' : [],
                 },
-                '32bit' : {
-                    'exe'            : 'myrimatch.exe',
-                    'url'            : '',
-                    'zip_md5'        : '59d00d759ae6f9225f42ed72844a9ca2',
-                    'additional_exe' : [],
-                },
+                # '32bit' : {
+                #     'exe'            : 'myrimatch.exe',
+                #     'url'            : '',
+                #     'zip_md5'        : '59d00d759ae6f9225f42ed72844a9ca2',
+                #     'additional_exe' : [],
+                # },
             },
         },
         'citation' : \

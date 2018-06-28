@@ -34,7 +34,7 @@ class msgfplus_v2016_09_16( ursgal.UNode ):
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
                     'url'            : 'https://omics.pnl.gov/sites/default/files/MSGFPlus.zip',
-                    'zip_md5'        : '80ba46ae6fd3b99a1599ff665d683f6f',
+                    'zip_md5'        : '3496d299fb2423f0dd6b8b5d227588e6',
                     'additional_exe' : [],
                 },
             },

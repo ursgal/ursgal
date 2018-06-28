@@ -116,6 +116,13 @@ class moda_v1_51(ursgal.UNode):
         for mod in self.params['mods']['fix']:
             fixed_mods.append('{0}, {1}'.format(mod['aa'], mod['mass']))
 
+        print(
+            '''
+            [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
+            [ WARNING ] need to be combined for MODa (use of symmetric tolerance window).
+            [ WARNING ] The arithmetic mean is used.
+            '''
+        )
         if translations['PPMTolerance']['precursor_mass_tolerance_unit'] == 'da':
             translations['PeptTolerance'] = \
                 (translations['PPMTolerance']['precursor_mass_tolerance_minus'] +
