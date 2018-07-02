@@ -338,7 +338,12 @@ class msfragger_20170103( ursgal.UNode ):
             self.params['input_dir_path'],
             self.params['file_root'] + '.tsv'
         )
-
+        if os.path.exists(msfragger_output_tsv) is False:
+            msfragger_output_tsv = os.path.join(
+                self.params['input_dir_path'],
+                self.params['file_root'][len(self.params['prefix'])+1:] + '.tsv'
+            )
+        
         csv_out_fobject = open(self.params['translations']['output_file_incl_path'], 'w')
         csv_writer = csv.DictWriter(
             csv_out_fobject,
