@@ -339,6 +339,7 @@ class msfragger_20170103( ursgal.UNode ):
             self.params['file_root'] + '.tsv'
         )
         if os.path.exists(msfragger_output_tsv) is False:
+            print(self.params['file_root'])
             msfragger_output_tsv = os.path.join(
                 self.params['input_dir_path'],
                 self.params['file_root'][len(self.params['prefix'])+1:] + '.tsv'
