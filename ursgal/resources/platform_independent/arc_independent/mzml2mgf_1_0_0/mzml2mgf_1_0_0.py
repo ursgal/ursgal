@@ -94,6 +94,9 @@ def main(
         # works for both generations of pymzml
         spec_ms_level = spec['ms level']
         spectrum_id = spec['id']
+        print('<<<<<<<<<<<<<<<<<<<<')
+        print(spectrum_id)
+        print('<<<<<<<<<<<<<<<<<<<<')
         scan_time, unit = spec['scan time']
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
