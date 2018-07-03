@@ -491,8 +491,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             print('input_file_basename')    
             print(scan_rt_lookup.keys())
-            #print('scan_2_mz')
-            #print(scan_rt_lookup[input_file_basename_for_rt_lookup]['scan_2_mz'].keys())
+            print('input_file_basename_keys')
+            print(scan_rt_lookup[input_file_basename_for_rt_lookup].keys())
+            print('scan_2_mz')
+            print(scan_rt_lookup[input_file_basename_for_rt_lookup]['scan_2_mz'].keys())
 
             precursor_mz = scan_rt_lookup[ input_file_basename_for_rt_lookup ][
                 'scan_2_mz' ][ spectrum_id ]
