@@ -475,9 +475,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             #END Spectrum Title block
             ##########################
             spectrum_id = int(spectrum_id)
-            print(params['prefix'])
-            print('input_file_basename')    
-            print(scan_rt_lookup.keys())
+            #print(params['prefix'])
+            #print('input_file_basename')    
+            #print(scan_rt_lookup.keys())
             retention_time_in_minutes = \
                 scan_rt_lookup[ input_file_basename_for_rt_lookup ][ 'scan_2_rt' ]\
                     [ spectrum_id ]
@@ -489,10 +489,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 rt_corr_factor = 60
             line_dict['Retention Time (s)'] = float( retention_time_in_minutes ) * rt_corr_factor
 
-            #print('input_file_basename')    
-            #print(scan_rt_lookup.keys())
-            #print('scan_2_mz')
-            #print(scan_rt_lookup[input_file_basename_for_rt_lookup]['scan_2_mz'].keys())
+            print('input_file_basename')    
+            print(scan_rt_lookup.keys())
+            print('scan_2_mz')
+            print(scan_rt_lookup[input_file_basename_for_rt_lookup]['scan_2_mz'].keys())
 
             precursor_mz = scan_rt_lookup[ input_file_basename_for_rt_lookup ][
                 'scan_2_mz' ][ spectrum_id ]
