@@ -475,9 +475,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             #END Spectrum Title block
             ##########################
             spectrum_id = int(spectrum_id)
-            #print(params['prefix'])
-            #print('input_file_basename')    
-            #print(scan_rt_lookup.keys())
+            print(params['prefix'])
+            print('input_file_basename')    
+            print(scan_rt_lookup.keys())
             retention_time_in_minutes = \
                 scan_rt_lookup[ input_file_basename_for_rt_lookup ][ 'scan_2_rt' ]\
                     [ spectrum_id ]

@@ -344,6 +344,8 @@ class msfragger_20170103( ursgal.UNode ):
                 '_'.join(self.params['file_root'].split('_')[1:]) + '.tsv'
             )
         
+        print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
+        print(self.params['translations']['output_file_incl_path'])
         csv_out_fobject = open(self.params['translations']['output_file_incl_path'], 'w')
         csv_writer = csv.DictWriter(
             csv_out_fobject,
