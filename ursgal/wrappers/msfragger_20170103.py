@@ -254,6 +254,11 @@ class msfragger_20170103( ursgal.UNode ):
             self.params['input_dir_path'],
             self.params['input_file']
         )
+        print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
+        print(self.input_file)
+        print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
+
+
         if self.input_file.lower().endswith('.mzml') or \
             self.input_file.lower().endswith('.mzml.gz'):
             self.params['translations']['mzml_input_file'] = self.input_file
@@ -361,7 +366,7 @@ class msfragger_20170103( ursgal.UNode ):
             )
             for line_dict in csv_reader:
                 line_dict['Raw data location'] = os.path.abspath(
-                    self.params['translations']['mzml_input_file']
+                    self.params['translations']['mzml_input_file']  #change to self.input_file
                 )
 
                 ############################################
