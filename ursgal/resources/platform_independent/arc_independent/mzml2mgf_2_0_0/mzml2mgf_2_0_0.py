@@ -191,6 +191,10 @@ def main(
     oof.close()
     return tmp
 
+    print('<<<<<<<<<<<<<<<<<')
+    print(tmp['scan_2_mz'].keys())
+    print('<<<<<<<<<<<<<<<<<')
+
 
 if __name__ == '__main__':
     # parsing command line arguments:
