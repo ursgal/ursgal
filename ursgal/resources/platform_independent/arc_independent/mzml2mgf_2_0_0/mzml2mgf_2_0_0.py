@@ -194,7 +194,7 @@ def main(
     print('<<<<<<<<<<<<<<<<<')
     print('###################')
     print('##################')
-    print(tmp)
+    print(tmp['scan_2_rt'].keys())
     return tmp
 
     
