@@ -190,7 +190,7 @@ def main(
 
     oof.close()
     print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
-    print(sort(scan_exclusion_list))
+    print(sorted(scan_exclusion_list))
     print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
     print('<<<<<<<<<<<<<<<<<')
     print(tmp['scan_2_mz'].keys())
