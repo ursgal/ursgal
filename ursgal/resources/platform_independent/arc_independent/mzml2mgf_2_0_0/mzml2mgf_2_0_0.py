@@ -189,6 +189,9 @@ def main(
     )
 
     oof.close()
+    print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
+    print(scan_exclusion_list)
+    print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
     print('<<<<<<<<<<<<<<<<<')
     print(tmp['scan_2_mz'].keys())
     print('<<<<<<<<<<<<<<<<<')
