@@ -192,6 +192,9 @@ def main(
     print('<<<<<<<<<<<<<<<<<')
     print(tmp['scan_2_mz'].keys())
     print('<<<<<<<<<<<<<<<<<')
+    print('###################')
+    print('##################')
+    print(tmp)
     return tmp
 
     
