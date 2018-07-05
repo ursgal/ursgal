@@ -61,7 +61,8 @@ def main( http_url = None, http_output_folder = None):
         print( 
             '[ -<HTPP>- ] \t WARNING! Could not download {0} Check your internet connection!'.format(
                 http_url
-            )
+            ),
+            '[ -<HTPP>- ] For OSX, make sure that certificates are installed (Applications/Python 3.x/Install Certificates.command)'
         )
         os.remove( output_path )
     return output_path

@@ -1341,14 +1341,14 @@ class UNode(object, metaclass=Meta_UNode):
         #     'cross_link_engine',
         #     False
         # )
-        is_quantitation_engine = self.META_INFO['engine_type'].get(
-            'quantitation_engine',
+        is_quantification_engine = self.META_INFO['engine_type'].get(
+            'quantification_engine',
             False
         )
         map_mods_node_exceptions = [
             'unify_csv'
         ]
-        if is_search_engine or is_quantitation_engine:
+        if is_search_engine or is_quantification_engine:
             self.map_mods()
         for engine_short_name in map_mods_node_exceptions:
             if engine_short_name in self.engine:

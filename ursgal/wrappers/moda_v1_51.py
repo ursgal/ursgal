@@ -25,7 +25,7 @@ class moda_v1_51(ursgal.UNode):
         'input_extensions': ['.mgf', '.pkl', '.dta', '.mzXML'],
         'output_extensions': ['.csv'],
         'create_own_folder': True,
-        'in_development': True,
+        'in_development': False,
         'include_in_git': False,
         'distributable': False,
         'utranslation_style': 'moda_style_1',
@@ -219,7 +219,7 @@ class moda_v1_51(ursgal.UNode):
                 elif '>>' in row[0]:
                     out_dict = {}
                     rank = 0
-                    out_dict['Raw data location'] = row[0]
+                    out_dict['Raw data location'] = row[0].strip('>>')
                     out_dict['Exp m/z'] = row[2]
                     out_dict['Charge'] = row[3]
                     out_dict['Spectrum ID'] = row[4]

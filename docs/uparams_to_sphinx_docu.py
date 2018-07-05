@@ -70,6 +70,22 @@ if __name__ == '__main__':
 Ursgal Parameters
 *****************
 
+A Dash script has been built in order to make it easier to explore uparams.
+It allows for searching for specific uparams, filtering by UNodes (i.e. engines),
+and filtering by utags. 
+To install Dash, follow the instructions on 
+    | https://dash.plot.ly/
+
+Afterwards, just go to the docs folder and execute the script::
+
+    user@localhost:~/ursgal/docs$ python3.4 uparams_to_sphinx_docu.py
+
+A local server will be created and view the interactive page: 
+    | http://127.0.0.1:8050/
+
+Besides this, all uparams are still listed here as part of the documentation.
+
+
 .. note:: This sphinx source file was **auto-generated** using
     ursgal/docs/uparams_to_sphinx_docu.py, which parses ursgal/ursgal/uparams.py
     Please **do not** modify this file directly, but commit changes to ursgal.uparams.
@@ -103,7 +119,7 @@ Ursgal Parameters
             desc = udict['description'].strip(),
             default_value = default_value,
             type = udict.get('uvalue_type', ''),
-            rerun = udict.get('trigger_rerun', 'False')
+            rerun = udict.get('triggers_rerun', 'False')
         ))
 
         uprint('''
@@ -113,8 +129,8 @@ Available in unodes
         for unode in udict['available_in_unode']:
             uprint('* {0}'.format( unode ))
         uprint('''
-Ursgal value translations for *{0}*
-""""""""""""""""""""""""""""""""{1}
+Ursgal key translations for *{0}*
+""""""""""""""""""""""""""""""{1}
 '''.format( ursgal_param, '"'*len(ursgal_param)))
         len_longest = determine_longest_string( udict['ukey_translation']  )
         fmt = create_format_string( number_of_columns = 2 )
@@ -138,8 +154,8 @@ Ursgal value translations for *{0}*
         if len( udict['uvalue_translation'] ) == 0:
             continue
         uprint('''
-Ursgal key translations
-"""""""""""""""""""""""
+Ursgal value translations
+"""""""""""""""""""""""""
 ''')
         len_longest = determine_longest_string( udict['uvalue_translation']  )
         fmt = create_format_string(

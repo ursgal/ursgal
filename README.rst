@@ -36,13 +36,15 @@ Summary
 
 Ursgal is a Python module that offers a generalized interface to common bottom-up proteomics tools, e.g.
 
-    a) Peptide spectrum matching with up to five different search engines (some available in multiple versions)
+    a) Peptide spectrum matching with up to eight different search engines (some available in multiple versions), including three open modification search engines
 
     b) Evaluation and post processing of search results with up to two different engines
 
     c) Integration of search results from different search engines
 
-    d) Creation of a target decoy database
+    d) De novo sequencing with up to two different search engines
+
+    e) Miscellaneous tools including the creation of a target decoy database as well as filtering, sanitizing and visualizing of results
 
 Abstract
 ********
@@ -80,6 +82,9 @@ Installation
 
 Ursgal requires `Python`_ 3.4 or higher.
 
+If you want to run Ursgal on a Windows system, Python 3.6 or higher is
+recommended.
+
 Download Ursgal using `GitHub`_ **or** the zip file:
 
 * GitHub version: Starting with this the easiest way is to clone the GitHub repo.::
@@ -110,6 +115,12 @@ Install requirements::
     If this is the case, you can either add the Python scripts directory to your
     PATH env variable or use the path to the pip.exe directly for the
     installation, e.g.: ~/Python34/Scripts/pip.exe install -r requirements.txt
+
+.. note::
+
+    On Mac it may be neccesary to use Python3.6, since it comes with its
+    own OpenSSL now. This may avoid problems when using pip.
+
 
 Install third party engines::
 
@@ -154,12 +165,13 @@ to test the package.
 
 
 
-Participate
-***********
+Questions and Participation
+***************************
 
-Fork us at https://github.com/ursgal/ursgal and open up pull requests! Thanks!
+If you encounter any problems you can open up issues at GitHub, join the conversation at Gitter, or write an email to ursgal.team@gmail.com. Please also check the :ref:`faq`.
 
-If you encounter any problems you can open up issues at GitHub, join the conversation at Gitter, or write an email to ursgal.team@gmail.com
+For any contributions, fork us at https://github.com/ursgal/ursgal and open up pull requests!
+Please also check the :ref:`contribute`. Thanks!
 
 
 Documentation
@@ -178,7 +190,7 @@ as common practice in science, never trust a blackbox :)
 Copyrights
 ***********
 
-Copyright 2014-2017 by authors and contributors in alphabetical order
+Copyright 2014-2018 by authors and contributors in alphabetical order
 
 * Christian Fufezan,
 * Manuel Koesters
@@ -207,13 +219,15 @@ Citation
 
 Ursgal citation
 
-Lukas P. M. Kremer, Johannes Leufken, Purevdulam Oyunchimeg, Stefan Schulze, and Christian Fufezan (2015): `Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis`_, Journal of Proteome research, DOI:10.1021/acs.jproteome.5b00860
+
+Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S., and Fufezan, C. (2016) `Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis`_ Journal of Proteome research 15, 788–794, DOI:10.1021/acs.jproteome.5b00860
 
 .. _Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis: http://dx.doi.org/10.1021/acs.jproteome.5b00860
 
 .. note::
+
     Please cite every tool you use in Ursgal. During runtime the references of
-    the tools you were using are shown.
+    the tools you are using are shown.
 
 Full list of tools with proper citations that are integrated into Ursgal are:
 
@@ -233,3 +247,10 @@ Full list of tools with proper citations that are integrated into Ursgal are:
     * Reisinger, F.; Krishna, R.; Ghali, F.; Ríos, D.; Hermjakob, H.; Antonio Vizcaíno, J.; Jones, A. R. JmzIdentML API: A Java interface to the mzIdentML standard for peptide and protein identification data. Proteomics 2012, 12 (6), 790–794.
     * Tabb, D. L.; Fernando, C. G.; Chambers, M. C. MyriMatch: highly accurate tandem mass spectral peptide identification by multivariate hypergeometric analysis. J Proteome Res. 2008, 6 (2), 654–661.
     * Yu, F., Li, N., Yu, W. PIPI: PTM-Invariant Peptide Identification Using Coding Method. J Prot Res 2016, 15
+    * Barsnes, H., Vaudel, M., Colaert, N., Helsens, K., Sickmann, A., Berven, F. S., and Martens, L. (2011) compomics-utilities: an open-source Java library for computational proteomics. BMC Bioinformatics 12, 70
+    * Leufken, J., Niehues, A., Sarin, L. P., Wessel, F., Hippler, M., Leidel, S. A., and Fufezan, C. (2017) pyQms enables universal and accurate quantification of mass spectrometry data. Mol. Cell. Proteomics 16, 1736–1745
+    * Jaeger, D., Barth, J., Niehues, A., and Fufezan, C. (2014) pyGCluster, a novel hierarchical clustering approach. Bioinformatics 30, 896–898
+    * Bald, T., Barth, J., Niehues, A., Specht, M., Hippler, M., and Fufezan, C. (2012) pymzML--Python module for high-throughput bioinformatics on mass spectrometry data. Bioinformatics 28, 1052–1053
+    * Kösters, M., Leufken, J., Schulze, S., Sugimoto, K., Klein, J., Zahedi, R. P., Hippler, M., Leidel, S. A., and Fufezan, C. (2018) pymzML v2.0: introducing a highly compressed and seekable gzip format. Bioinformatics, 
+
+

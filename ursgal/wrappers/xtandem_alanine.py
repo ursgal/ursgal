@@ -25,7 +25,7 @@ class xtandem_alanine( xtandem ):
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
-        'distributable'               : True,
+        'distributable'               : False,
         'utranslation_style'          : 'xtandem_style_1',
         'engine' : {
             'darwin' : {

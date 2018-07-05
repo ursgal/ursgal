@@ -106,6 +106,14 @@ Record of released Ursgal versions with all notable changes
 
    changelog
 
+Contribution Guidelines
+=======================
+
+.. toctree::
+   :maxdepth: 1
+
+   contribute
+
 
 FAQ
 ===
