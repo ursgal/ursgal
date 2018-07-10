@@ -242,23 +242,35 @@ class moda_v1_51(ursgal.UNode):
 
                     tmp_sequence = ''
                     tmp_mods = []
-                    mod_pattern = re.compile( r'''(?P<mod>[+-]{1}[0-9]+)''' )
-                    prev_match = 0
-                    for match in mod_pattern.finditer(org_sequence):
-                        mod = match.group('mod')
-                        pos = int(match.start())
-                        tmp_mods.append('{0}:{1}'.format(mod, pos))
-                        tmp_sequence += org_sequence[prev_match:pos]
-                        prev_match = pos + len(mod)
-                    sequence = tmp_sequence + \
-                        org_sequence[prev_match:len(org_sequence)]
-
-                    mods = ';'.join(tmp_mods)
-                    if tmp_mods == []:
-                        sequence = org_sequence
+                    regex_pattern = '([+-]{1}[0-9]+)'
+                    peptide_unimod = ursgal.ucore.reformat_peptide(
+                        regex_pattern,
+                        None,
+                        org_sequence
+                    )
+                    if '#' in peptide_unimod:
+                        sequence, mods = peptide_unimod.split('#')
+                    else:
+                        sequence = peptide_unimod
+                        mods = ''
                     out_dict['Sequence'] = sequence
                     out_dict['Modifications'] = mods
                     out_line_dicts.append(out_dict.copy())
+
+
+                    # prev_match = 0
+                    # for match in mod_pattern.finditer(org_sequence):
+                    #     mod = match.group('mod')
+                    #     pos = int(match.start())
+                    #     tmp_mods.append('{0}:{1}'.format(mod, pos))
+                    #     tmp_sequence += org_sequence[prev_match:pos]
+                    #     prev_match = pos + len(mod)
+                    # sequence = tmp_sequence + \
+                    #     org_sequence[prev_match:len(org_sequence)]
+
+                    # mods = ';'.join(tmp_mods)
+                    # if tmp_mods == []:
+                    #     sequence = org_sequence
 
         output_file = self.params['translations']['output_file_incl_path']
         with open(output_file, 'w') as out_file:

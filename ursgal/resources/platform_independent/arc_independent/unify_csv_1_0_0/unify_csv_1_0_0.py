@@ -517,11 +517,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             if single_mod in ['M','']:
                                 continue
                             msfragger_pos, raw_msfragger_mass = single_mod.split('$')
-                            msfragger_mass      = mass_format_string.format(
+                            msfragger_mass = mass_format_string.format(
                                 # mass rounded as defined above
                                 Decimal(raw_msfragger_mass)
                             )
-                            msfragger_pos       = int(msfragger_pos)
+                            msfragger_pos = int(msfragger_pos)
                             if msfragger_mass in mass_to_mod_combo.keys():
                                 explainable_combos = []
                                 for combo in mass_to_mod_combo[msfragger_mass]:
