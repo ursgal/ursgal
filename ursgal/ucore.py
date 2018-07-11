@@ -232,6 +232,8 @@ def reformat_peptide(regex_pattern, unimod_name, peptide):
         original_match_start = match.start()
         original_match_end = match.end()
         match_length = original_match_end - original_match_start
+        if unimod_name is None:
+            unimod_name = match.group(0)
 
         mods.append((
             original_match_start,

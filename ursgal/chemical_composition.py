@@ -226,7 +226,7 @@ class ChemicalComposition(dict):
                     )
                 except:
                     sys.exit(
-                        'Can not map unimod {0}. extracted position argument {1}'.format(
+                        'Cannot map unimod {0}. extracted position argument {1}'.format(
                             unimod, match.start()
                         ))
                 # if occ >= 1:
