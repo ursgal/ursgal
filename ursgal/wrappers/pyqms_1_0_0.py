@@ -143,15 +143,18 @@ class pyqms_1_0_0(ursgal.UNode):
         fixed_labels = {}
         for fixed_mod in self.params['mods']['fix']:
             aa = fixed_mod['aa']
-            comp = fixed_mod['composition']
+            comp = ''
+            for element, count in fixed_mod['composition'].items():
+                comp += '{0}({1})'.format(element, count)
             name = fixed_mod['name']
             if not fixed_labels.get(aa, False):
                 fixed_labels[aa] = []
             fixed_labels[aa].append(
-                {
-                    'element_composition': comp,
-                    'evidence_mod_name': name
-                }
+                comp
+                # {
+                #     'element_composition': comp,
+                #     'evidence_mod_name': name
+                # }
             )
 
         out = main(

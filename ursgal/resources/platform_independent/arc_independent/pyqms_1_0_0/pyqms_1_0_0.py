@@ -30,12 +30,16 @@ def generate_result_pickle(
         mzml_files = [mzml_files]
     print('[ -ENGINE- ] Parse Evidences')
 
-    fixed_labels, evidences, molecules = pyqms.adaptors.parse_evidence(
-        fixed_labels=fixed_labels,
-        evidence_files=evidence_files,
-        molecules=molecules,
-        evidence_score_field=evidence_score_field
-    )
+    if evidence_files is not None:
+        fixed_labels, evidences, molecules = pyqms.adaptors.parse_evidence(
+            fixed_labels=fixed_labels,
+            evidence_files=evidence_files,
+            molecules=molecules,
+            evidence_score_field=evidence_score_field
+        )
+    else:
+        evidences = None
+
 
     params = {
         'molecules': molecules,
@@ -76,7 +80,7 @@ def generate_result_pickle(
                     ),
                     end='\r'
                 )
-            scan_time, unit = spec['scan time']
+            scan_time, unit = spec.scan_time
 
             if unit == 'second':
                 scan_time /= 60
@@ -133,17 +137,17 @@ def main(
         verbose=True
     )
 
-    with open(pickle_name, 'wb') as f:
-        pickle.dump(results, f)
+    # with open(pickle_name, 'wb') as f:
+    #     pickle.dump(results, f)
 
-    results.write_rt_info_file(
-        output_file=rt_summary_file,
-        rt_border_tolerance=float(rt_border_tolerance)
-    )
-    results.calc_amounts_from_rt_info_file(
-        rt_info_file=rt_summary_file,
-        rt_border_tolerance=float(rt_border_tolerance)
-    )
+    # results.write_rt_info_file(
+    #     output_file=rt_summary_file,
+    #     rt_border_tolerance=float(rt_border_tolerance)
+    # )
+    # results.calc_amounts_from_rt_info_file(
+    #     rt_info_file=rt_summary_file,
+    #     rt_border_tolerance=float(rt_border_tolerance)
+    # )
 
     return rt_summary_file
 

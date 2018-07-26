@@ -6,6 +6,7 @@ import csv
 from ursgal import ukb
 from ursgal import UNode
 from collections import Counter, defaultdict
+import time
 
 PROTON = ukb.PROTON
 
@@ -299,6 +300,8 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
     return_value_2 = []
     for fieldname in fieldnames:
         if fieldname == "MS-GF:SpecEValue":
+            #changed here
+            #time1 = time.time()
             values = [d[fieldname] for d in list_of_rowdicts]
             if values == ['' for value in values]:
                 continue
@@ -306,6 +309,10 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
             no_empty_values = [v for v in values if v != '']    
             values_as_floats = [float(value) for value in no_empty_values]
             merged_d[fieldname] = min(values_as_floats)
+            #changed here
+            #time2 = time.time()
+            #print('time2 minus time1')
+            #print(time2 - time1)
 
             most_frequent_values = []
             occurence_of_values = []
@@ -319,6 +326,10 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
 
             if str(min(values_as_floats)) not in most_frequent_values:
                 return_value_2 = list_of_rowdicts
+            #changed here
+            #time3 = time.time()
+            #print('time3 minus time2')
+            #print(time3-time2)
 
         elif fieldname == "Calc m/z":
             values = [d[fieldname] for d in list_of_rowdicts]
@@ -396,6 +407,8 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
 
     #write the new file here ...
 
+    #time4 = time.time()
+
     with open(tmp_file, 'r') as tmp, open('problem_specE_values.csv', 'w', newline='') as out:
         tmp_reader = csv.DictReader(tmp)
         csv_writer = csv.DictWriter(
@@ -406,6 +419,10 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         csv_writer.writeheader()
         for separate_row_dict in separate_row_dict_list:
             csv_writer.writerow(separate_row_dict)
+    #changed here
+    #time5 - time.time()
+    #print('time5 - time4')
+    #prit(time5-time4)
 
 
 
