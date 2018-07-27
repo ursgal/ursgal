@@ -137,8 +137,8 @@ def main(
         verbose=True
     )
 
-    # with open(pickle_name, 'wb') as f:
-    #     pickle.dump(results, f)
+    with open(pickle_name, 'wb') as f:
+        pickle.dump(results, f)
 
     # results.write_rt_info_file(
     #     output_file=rt_summary_file,
