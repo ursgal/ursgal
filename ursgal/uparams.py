@@ -1,4 +1,47 @@
 ursgal_params = {
+    'infere_proteins' : {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'percolator_2_08',
+            'percolator_3_0',
+        ],
+        'default_value' : False,
+        'description' :  ''' Use the picked-protein algorithm to infere protein PEP and FDR in Percolator''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'percolator_style_1' : 'infere_proteins',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'percolator_post_processing': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'percolator_3_0',
+        ],
+        'default_value' : 'mix-max',
+        'description' :  ''' Method to assign FDR and PEP to PSMs''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'percolator_style_1' : '-y',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'pyqms_verbosity': {
         'edit_version' : 1.00,
         'available_in_unode': [
@@ -1099,6 +1142,7 @@ ursgal_params = {
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
+            'percolator_3_0',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
@@ -1910,7 +1954,8 @@ ursgal_params = {
             'mzidentml_lib_1_7',
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
-            'upeptide_mapper_1_0_0'
+            'upeptide_mapper_1_0_0',
+            'percolator_3_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2151,6 +2196,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'percolator_2_08',
+            'percolator_3_0',
             'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2176,6 +2222,7 @@ ursgal_params = {
             'unify_csv_style_1'             : 'enzyme',
             'xtandem_style_1'               : 'protein, cleavage site',
             'msfragger_style_1'             : 'enzyme',
+            'percolator_style_1'            : 'enz',
             'pipi_style_1'                  : 'enzyme',
         },
         'utag' : [
@@ -6691,6 +6738,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'percolator_2_08',
+            'percolator_3_0',
             'qvality_2_02',
             'venndiagram_1_0_0',
             'xtandem_cyclone_2010',
@@ -7565,6 +7613,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'percolator_2_08',
+            'percolator_3_0',
             'unify_csv_1_0_0',
             'upeptide_mapper_1_0_0'
         ],
@@ -9232,6 +9281,7 @@ ursgal_params = {
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
+            'percolator_3_0',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
