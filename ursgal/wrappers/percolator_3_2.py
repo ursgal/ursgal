@@ -26,9 +26,9 @@ def transform_score( score, minimum_score ):
     return transformed_score
 
 
-class percolator_3_0( ursgal.UNode ):
+class percolator_3_2( ursgal.UNode ):
     """
-    Percolator 3_0 UNode
+    Percolator 3_2 UNode
 
     q-value and posterior error probability calculation
     by a semi-supervised learning algorithm that dynamically
@@ -47,7 +47,7 @@ class percolator_3_0( ursgal.UNode ):
         },
         'edit_version'                : 1.00,
         'name'                        : 'percolator',
-        'version'                     : '3.0.0',
+        'version'                     : '3.2.0',
         'release_date'                : None,
         'output_extensions'          : ['.csv'],
         'output_suffix'             : 'percolator_validated',
@@ -64,7 +64,7 @@ class percolator_3_0( ursgal.UNode ):
         'engine': {
             'darwin' : {
                 '64bit' : {
-                    'exe'            : 'percolator_3_0',
+                    'exe'            : 'percolator_3_2',
                     'url'            : '',
                     'zip_md5'        : '',
                     'additional_exe' : [],
@@ -96,7 +96,7 @@ class percolator_3_0( ursgal.UNode ):
     }
 
     def __init__(self, *args, **kwargs):
-        super(percolator_3_0, self).__init__(*args, **kwargs)
+        super(percolator_3_2, self).__init__(*args, **kwargs)
         pass
 
     def preflight( self ):
@@ -633,7 +633,6 @@ class percolator_3_0( ursgal.UNode ):
                 )
                 if psmid_pep_key not in s2l[ pkey ].keys():
                     s2l[ pkey ][ psmid_pep_key ] = line_dict
-
 
         opened_file = open( self.params['translations'][ 'csv_input_file' ], 'r' )
         csv_input = csv.DictReader( row for row in opened_file if not row.startswith('#') )
