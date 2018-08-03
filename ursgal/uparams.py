@@ -3366,7 +3366,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'heatmap_style_1' : 'heatmap_column_order',
+            'heatmap_style_1' : 'heatmap_column_positions',
         },
         'utag' : [
             'visualization',
