@@ -885,6 +885,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'upeptide_mapper_1_0_0',
             'compomics_utilities_4_11_5'
         ],
@@ -1797,6 +1798,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -1909,6 +1911,7 @@ ursgal_params = {
             'mzidentml_lib_1_6_11',
             'mzidentml_lib_1_7',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'xtandem2csv_1_0_0',
             'upeptide_mapper_1_0_0'
         ],
@@ -2152,6 +2155,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'percolator_2_08',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -3739,6 +3743,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4436,6 +4441,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'upeptide_mapper_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -5237,6 +5243,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'upeptide_mapper_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -6984,6 +6991,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -7066,6 +7074,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -7132,6 +7141,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -7566,6 +7576,7 @@ ursgal_params = {
         'available_in_unode' : [
             'percolator_2_08',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'upeptide_mapper_1_0_0'
         ],
         'triggers_rerun' : True,
@@ -7632,6 +7643,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'ucontroller',
         ],
         'triggers_rerun' : True,
@@ -7842,6 +7854,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8691,6 +8704,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -9237,6 +9251,7 @@ ursgal_params = {
             'svm_1_0_0',
             'ucontroller',
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9715,7 +9730,7 @@ ursgal_params = {
             # },
         # },
         'default_value' : {
-            'x_axis' : 600, 
+            'x_axis' : 600,
             'y_axis' : 400,
         },
         'description' : \
@@ -9845,6 +9860,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'unify_csv_1_0_0',
+            'unify_csv_2_0_0',
             'upeptide_mapper_1_0_0',
         ],
         'triggers_rerun' : False,
