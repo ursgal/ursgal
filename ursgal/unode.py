@@ -668,7 +668,7 @@ class UNode(object, metaclass=Meta_UNode):
             used. Returns None if no search engine was used yet.
         '''
         last_search_engine = None
-        last_search_engine = self.get_last_engine( 
+        last_search_engine = self.get_last_engine(
             history=history,
             engine_types=[
                 'cross_link_search_engine',
@@ -751,7 +751,7 @@ class UNode(object, metaclass=Meta_UNode):
         )
         return grouped_psms
 
-    def import_engine_as_python_function( self, function_name = None ):
+    def import_engine_as_python_function( self, function_name=None ):
         '''
         The unode import_engine_as_python_function function
 
@@ -791,6 +791,41 @@ class UNode(object, metaclass=Meta_UNode):
         '''.format( self.exe )
         main_function = getattr( imported_module, function_name)
         return main_function
+
+    def import_engine_as_python_module(self):
+        '''
+        The unode import_engine_as_python_function function
+
+        Imports complete module from a unodes "executable". For unodes
+        that are written completely in python and can be executed by
+        importing them instead of using the command line.
+
+        Examples:
+            >>> us = ursgal.UController()
+            >>> cFDR_unode = us.unodes["combine_FDR_0_1"]["class"]
+            >>> cFDR  = cFDR_unode.import_engine_as_python_module()
+            >>> cFDR.main(
+                input_file_list = ["1.csv", "2.csv"],
+                directory       = "/tmp/",
+            )
+
+        Returns:
+            function: The module that
+            is specified in the engines python script.
+
+        Note:
+            Assertion exception if the executable is not a python
+            script, or has no main function.
+        '''
+        assert os.path.exists( self.exe ), '''
+        Engine needs to be python source file in order to import its main
+        function!
+        '''
+        module_dir_name = os.path.dirname( self.exe )
+        sys.path.insert( 1, module_dir_name )
+        imported_module = importlib.import_module(self.engine)
+
+        return imported_module
 
     def load_json( self, finfo=None, json_path=None):
         j_content = None

@@ -21,7 +21,9 @@ import re
 from collections import defaultdict
 from copy import deepcopy as dc
 import itertools
-from decimal import *
+# from decimal import *
+# ^---- be explicit
+import decimal
 
 # import time
 # increase the field size limit to avoid crash if protein merge tags
@@ -172,8 +174,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         # msfragger mod merge block
         # calculate possbile mod combos...
         # if 15N add artifical mods...
-        getcontext().prec = 8
-        getcontext().rounding = ROUND_UP
+        decimal.getcontext().prec = 8
+        decimal.getcontext().rounding = decimal.ROUND_UP
         # mod_dict_list = params['mods']['opt'] + params['mods']['fix']
         if use15N:
             aminoacids_2_check = set()
@@ -222,7 +224,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             for name_combo in itertools.combinations(mod_names, iter_length):
                 mass = 0
                 for name in name_combo:
-                    mass += Decimal(mod_dict[name]['mass'])
+                    mass += decimal.Decimal(mod_dict[name]['mass'])
                 rounded_mass = mass_format_string.format(mass)
                 if rounded_mass not in mass_to_mod_combo.keys():
                     mass_to_mod_combo[rounded_mass] = set()
@@ -234,6 +236,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     cc = ursgal.ChemicalComposition()
     ursgal.GlobalUnimodMapper._reparseXML()
+
+    #
+    # The below might not need to be defined as we are passing the search_engine
+    # and a corresponding file has to exists otherwise we can not convert ...
+    #
+
     de_novo_engines = [
         'novor',
         'pepnovo',
@@ -255,6 +263,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     de_novo = False
     database_search = False
     open_mod_search = False
+    #
+    # Also the logic below might not be necessary ..
+    #
     for de_novo_engine in de_novo_engines:
         if de_novo_engine in search_engine.lower():
             de_novo = True
@@ -366,7 +377,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             ##########################
             # Spectrum Title block
-            # reformating Spectrum Title, 
+            # reformating Spectrum Title,
             if line_dict['Spectrum Title'] != '':
                 '''
                 Valid for:
@@ -455,7 +466,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             input_file_basename
                         )
                     )
-                    
+
             #END Spectrum Title block
             ##########################
 
@@ -498,7 +509,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             msfragger_pos, raw_msfragger_mass = single_mod.split('$')
                             msfragger_mass      = mass_format_string.format(
                                 # mass rounded as defined above
-                                Decimal(raw_msfragger_mass)
+                                decimal.Decimal(raw_msfragger_mass)
                             )
                             msfragger_pos       = int(msfragger_pos)
                             if msfragger_mass in mass_to_mod_combo.keys():

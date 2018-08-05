@@ -30,7 +30,7 @@ class unify_csv_2_0_0( ursgal.UNode ):
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe' : 'unify_csv_2_0_0.py',
+                    'exe' : 'unify_csv_2_0_0',
                 },
             },
         },
@@ -54,8 +54,9 @@ class unify_csv_2_0_0( ursgal.UNode ):
         Creates a _unified.csv file and returns its path
 
         '''
+
         print('[ -ENGINE- ] Executing conversion ..')
-        unify_csv_main = self.import_engine_as_python_function()
+        unify_csv_2_0_0 = self.import_engine_as_python_module()
         if self.params['output_file'].lower().endswith('.csv') is False:
             raise ValueError('Trying to unify a non-csv file')
 
@@ -67,6 +68,7 @@ class unify_csv_2_0_0( ursgal.UNode ):
             self.params['input_dir_path'],
             self.params['input_file']
         )
+
 
         scan_rt_lookup_path = self.meta_unodes['ucontroller'].scan_rt_lookup_path
 
@@ -84,7 +86,7 @@ Could not load RT lookup dict from this location: {0}
         )
 
         last_search_engine_colname = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]
-        tmp_files = unify_csv_main(
+        tmp_files = unify_csv_2_0_0.main(
             input_file      = input_file,
             output_file     = output_file,
             scan_rt_lookup  = scan_rt_lookup_dict,

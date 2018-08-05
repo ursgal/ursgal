@@ -9,7 +9,6 @@ import ursgal
 import csv
 import pickle
 import os
-
 modifications = [
     'M,opt,any,Oxidation',        # Met oxidation
     'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
@@ -29,7 +28,8 @@ R = ursgal.UController(
         ),
         'modifications' : modifications
     },
-    force  = False
+    force  = False,
+    verbose=False
 )
 R.map_mods()
 
@@ -44,8 +44,7 @@ scan_rt_lookup = pickle.load(
         'rb'
     )
 )
-
-unify_csv_main = R.unodes['unify_csv_1_0_0']['class'].import_engine_as_python_function()
+unify_csv = R.unodes['unify_csv_2_0_0']['class'].import_engine_as_python_module()
 
 input_csv = os.path.join(
     'tests',
@@ -53,6 +52,7 @@ input_csv = os.path.join(
     'omssa_2_1_9',
     'test_BSA1_omssa_2_1_9.csv'
 )
+
 output_csv = os.path.join(
     'tests',
     'data',
@@ -60,7 +60,11 @@ output_csv = os.path.join(
     'test_BSA1_omssa_2_1_9_unified.csv'
 )
 
-unify_csv_main(
+if os.path.exists(output_csv):
+    print('[ REMOVING ] output csv deleted')
+    os.remove(output_csv)
+
+unify_csv.main(
     input_file     = input_csv,
     output_file    = output_csv,
     scan_rt_lookup = scan_rt_lookup,

@@ -14,26 +14,69 @@ import sys
 import os
 import pickle
 import csv
+import copy
+
 import ursgal
+# ^---- why does a standalone program require ursgal ?
 import pprint
 import re
 from collections import defaultdict
 from copy import deepcopy as dc
 import itertools
-from decimal import *
-
-# import time
-# increase the field size limit to avoid crash if protein merge tags
-# become too long does not work under windows
-if sys.platform != 'win32':
-    csv.field_size_limit(sys.maxsize)
+# from decimal import *
+# ^--- be explicit! or
+import decimal
+import unify_csv_2_0_0
 
 
-DIFFERENCE_14N_15N = ursgal.ukb.DIFFERENCE_14N_15N
+def reformat_ursgal_mods(params=None, variables=None):
+    #
+    for mod_type in ['fix', 'opt']:
+        for modification in params['mods'][mod_type]:
+            aa = modification['aa']
+            pos = modification['pos']
+            name = modification['name']
+            if variables['mod_dict'] is None:
+                variables['mod_dict'] = {}
+
+            if name not in variables['mod_dict'].keys():
+                variables['mod_dict'][name] = {
+                    'mass' : modification['mass'],
+                    'aa' : set(),
+                    'pos': set(),
+                }
+            variables['mod_dict'][name]['aa'].add(aa)
+            variables['mod_dict'][name]['aa'].add(pos)
+            if 'N-term' in pos:
+                variables['n_term_replacement'][name] = aa
+            if mod_type == 'fix':
+                if variables['fixed_mods'] is None:
+                    variables['fixed_mods'] = {}
+
+                variables['fixed_mods'][aa] = name
+                if aa == 'C' and name == 'Carbamidomethyl':
+                    cam = True
+                    # allow also Carbamidomnethyl on U, since the mod name gets changed
+                    # already in upeptide_mapper
+                    # According to unimod, the mnodification is also on Selenocystein
+                    # otherwise we should change that back so that it is skipped...
+                    variables['mod_dict']['Carbamidomethyl']['aa'].add('U')
+                    variables['fixed_mods']['U'] = 'Carbamidomethyl'
+            if mod_type == 'opt':
+                if variables['opt_mods'] is None:
+                    variables['opt_mods'] = {}
+                variables['opt_mods'][aa] = name
+    return variables
 
 
-def main(input_file=None, output_file=None, scan_rt_lookup=None,
-         params=None, search_engine=None, score_colname=None):
+def main(
+    input_file=None,
+    output_file=None,
+    scan_rt_lookup=None,
+    params=None,
+    search_engine=None,
+    score_colname=None
+):
     '''
     Arguments:
         input_file (str): input filename of csv which should be unified
@@ -93,6 +136,20 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
           merged modifications have to be corrected.
 
     '''
+
+    # from unify_csv_2_0_0.engines import _engine_independent
+
+
+    # import time
+    # increase the field size limit to avoid crash if protein merge tags
+    # become too long does not work under windows
+    if sys.platform != 'win32':
+        csv.field_size_limit(sys.maxsize)
+
+    # DIFFERENCE_14N_15N = ursgal.ukb.DIFFERENCE_14N_15N
+    # ^--- has to be in main scope as main is imported by ursgal directly ..
+    # is actually not used anymore
+
     print(
         '''
 [ unifycsv ] Converting {0} of engine {1} to unified CSV format...
@@ -102,30 +159,46 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         )
     )
 
+    # NOTE: since we refactor the loops a lot, we need to keep track of all
+    #       variables.
+    # PROPOSAL: let's use a centralized dict for all variable so we can pass
+    #           it through the functions as well, let's say variables
+
+    variables = {}
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
     # psm_defining_colnames = get_psm_defining_colnames(score_colname, search_engine)
     joinchar              = params['translations']['protein_delimiter']
     do_not_delete         = False
     created_tmp_files     = []
-    use15N                = False
+    variables['use15N']   = False
+    variables['search_engine'] = search_engine.lower()
+
+    # ^--- sooner or later this should end up in variables ...
 
     if 'label' in params.keys():
         if params['label'] == '15N':
-            use15N = True
+            variables['use15N'] = True
     else:
         params['label'] = '14N'
-    # print(use15N)
+    # print(variables['use15N'])
     # sys.exit(1)
     # aa_exception_dict = params['translations']['aa_exception_dict']
-    n_term_replacement = {
+    variables['n_term_replacement'] = {
         'Ammonia-loss' : None,
         'Trimethyl'    : None,
         'Gly->Val'     : None,
     }
-    fixed_mods   = {}
-    opt_mods     = {}
-    mod_dict     = {}
-    cam          = False
+    # fixed_mods   = {}
+    # opt_mods     = {}
+    # mod_dict     = {}
+    # cam          = False
+
+    variables['fixed_mods'] = None
+    variables['opt_mods'] = None
+    variables['mod_dict'] = None
+    variables['cam'] = False
+    variables['app_mass_to_name_list_buffer'] = {}
+    variables['cc'] = ursgal.ChemicalComposition()
 
     # modification masses are rounded to allow matching to unimod
     no_decimals = params['translations']['rounded_mass_decimals']
@@ -133,48 +206,49 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         no_decimals = 1
     if 'moda' in search_engine.lower():
         no_decimals = 0
-    mass_format_string = '{{0:3.{0}f}}'.format(no_decimals)
+    variables['mass_format_string'] = '{{0:3.{0}f}}'.format(no_decimals)
 
     # mod pattern
-    mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
+    variables['mod_pattern'] = re.compile( r''':(?P<pos>[0-9]*$)''' )
 
-    for mod_type in ['fix', 'opt']:
-        for modification in params['mods'][mod_type]:
-            aa = modification['aa']
-            pos = modification['pos']
-            name = modification['name']
-            if name not in mod_dict.keys():
-                mod_dict[name] = {
-                    'mass' : modification['mass'],
-                    'aa' : set(),
-                    'pos': set(),
-                }
-            mod_dict[name]['aa'].add(aa)
-            mod_dict[name]['aa'].add(pos)
-            if 'N-term' in pos:
-                n_term_replacement[name] = aa
-            if mod_type == 'fix':
-                fixed_mods[aa] = name
-                if aa == 'C' and name == 'Carbamidomethyl':
-                    cam = True
-                    # allow also Carbamidomnethyl on U, since the mod name gets changed
-                    # already in upeptide_mapper
-                    # According to unimod, the mnodification is also on Selenocystein
-                    # otherwise we should change that back so that it is skipped...
-                    mod_dict['Carbamidomethyl']['aa'].add('U')
-                    fixed_mods['U'] = 'Carbamidomethyl'
-            if mod_type == 'opt':
-                opt_mods[aa] = name
+    variables = reformat_ursgal_mods(params=params, variables=variables)
+    # for mod_type in ['fix', 'opt']:
+    #     for modification in params['mods'][mod_type]:
+    #         aa = modification['aa']
+    #         pos = modification['pos']
+    #         name = modification['name']
+    #         if name not in mod_dict.keys():
+    #             mod_dict[name] = {
+    #                 'mass' : modification['mass'],
+    #                 'aa' : set(),
+    #                 'pos': set(),
+    #             }
+    #         mod_dict[name]['aa'].add(aa)
+    #         mod_dict[name]['aa'].add(pos)
+    #         if 'N-term' in pos:
+    #             n_term_replacement[name] = aa
+    #         if mod_type == 'fix':
+    #             fixed_mods[aa] = name
+    #             if aa == 'C' and name == 'Carbamidomethyl':
+    #                 cam = True
+    #                 # allow also Carbamidomnethyl on U, since the mod name gets changed
+    #                 # already in upeptide_mapper
+    #                 # According to unimod, the mnodification is also on Selenocystein
+    #                 # otherwise we should change that back so that it is skipped...
+    #                 mod_dict['Carbamidomethyl']['aa'].add('U')
+    #                 fixed_mods['U'] = 'Carbamidomethyl'
+    #         if mod_type == 'opt':
+    #             opt_mods[aa] = name
 
     if 'msfragger' in search_engine.lower():
         ##########################
         # msfragger mod merge block
         # calculate possbile mod combos...
         # if 15N add artifical mods...
-        getcontext().prec = 8
-        getcontext().rounding = ROUND_UP
+        decimal.getcontext().prec = 8
+        decimal.getcontext().rounding = decimal.ROUND_UP
         # mod_dict_list = params['mods']['opt'] + params['mods']['fix']
-        if use15N:
+        if variables['use15N']:
             aminoacids_2_check = set()
             for modname in mod_dict.keys():
                 aminoacids_2_check |= mod_dict[modname]['aa']
@@ -221,7 +295,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             for name_combo in itertools.combinations(mod_names, iter_length):
                 mass = 0
                 for name in name_combo:
-                    mass += Decimal(mod_dict[name]['mass'])
+                    mass += decimal.Decimal(mod_dict[name]['mass'])
                 rounded_mass = mass_format_string.format(mass)
                 if rounded_mass not in mass_to_mod_combo.keys():
                     mass_to_mod_combo[rounded_mass] = set()
@@ -231,7 +305,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         #msfragger mod merge block end
         ##############################
 
-    cc = ursgal.ChemicalComposition()
     ursgal.GlobalUnimodMapper._reparseXML()
     de_novo_engines = [
         'novor',
@@ -304,7 +377,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     ze_only_buffer = {}
 
-    app_mass_to_name_list_buffer = {}
+
 
     with open( input_file, 'r' ) as in_file:
         csv_input  = csv.DictReader(
@@ -365,118 +438,70 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             ##########################
             # Spectrum Title block
-            # reformating Spectrum Title,
-            if line_dict['Spectrum Title'] != '':
-                '''
-                Valid for:
-                    OMSSA
-                    MSGF+
-                    X!Tandem
-                '''
-                if 'RTINSECONDS=' in line_dict['Spectrum Title']:
-                    line_2_split = line_dict['Spectrum Title'].split(' ')[0].strip()
-                else:
-                    line_2_split = line_dict['Spectrum Title']
-                line_dict['Spectrum Title'] = line_2_split
-
-                input_file_basename, spectrum_id, _spectrum_id, charge = line_2_split.split('.')
-                pure_input_file_name = ''
-
-            elif 'scan=' in line_dict['Spectrum ID']:
-                pure_input_file_name                = os.path.basename(
-                    line_dict['Raw data location']
-                )
-                input_file_basename = pure_input_file_name.split(".")[0]
-                # not using os.path.splitext because we could have multiple file
-                # extensions (i.e. ".mzml.gz")
-
-                '''
-                Valid for:
-                    myrimatch
-                '''
-                spectrum_id = line_dict['Spectrum ID'].split('=')[-1]
-                line_dict['Spectrum Title'] = '{0}.{1}.{1}.{2}'.format(
-                    input_file_basename,
-                    spectrum_id,
-                    line_dict['Charge']
-                )
-
-            elif line_dict['Spectrum Title'] == '':
-                '''
-                Valid for:
-                    Novor
-                    MSFragger
-                '''
-                pure_input_file_name = os.path.basename(
-                    line_dict['Raw data location']
-                )
-                input_file_basename = pure_input_file_name.split(".")[0]
-                spectrum_id = line_dict['Spectrum ID']
-                line_dict['Spectrum Title'] = '{0}.{1}.{1}.{2}'.format(
-                    input_file_basename,
-                    spectrum_id,
-                    line_dict['Charge']
-                )
-            else:
-                raise Exception( 'New csv format present for engine {0}'.format( engine ) )
-
-            #update spectrum ID from block above
-            line_dict['Spectrum ID'] = spectrum_id
+            # reformatting Spectrum Title,
+            line_dict, variables = unify_csv_2_0_0.engines._engine_independent\
+                .reformat_title(
+                    line_dict,
+                    variables
+            )
+            #END Spectrum Title block
+            ##########################
 
             # now check for the basename in the scan rt lookup
             # possible cases:
             #   - input_file_basename
             #   - input_file_basename + prefix
             #   - input_file_basename - prefix
+            # input_file_basename = None
 
-            input_file_basename_for_rt_lookup = None
-            if input_file_basename in scan_rt_lookup.keys():
-                input_file_basename_for_rt_lookup = input_file_basename
-            else:
-                basename_with_prefix = '{0}_{1}'.format(
-                    params['prefix'],
-                    input_file_basename
-                )
-                basename_without_prefix  = input_file_basename.replace(
-                    params['prefix'],
-                    ''
-                )
-                if basename_with_prefix in scan_rt_lookup.keys():
-                    input_file_basename_for_rt_lookup = basename_with_prefix
-                elif basename_without_prefix in scan_rt_lookup.keys():
-                    input_file_basename_for_rt_lookup = basename_without_prefix
-                else:
-                    print(
-                        '''
-[ WARNING ] Could not find scan ID {0} in scan_rt_lookup[ {1} ]
-                        '''.format(
-                            spectrum_id,
-                            input_file_basename
-                        )
+            possible_rt_lookup_names = [
+                variables['input_file_basename'],
+            ]
+            if 'prefix' in params.keys():
+                possible_rt_lookup_names += [
+                    '{0}_{1}'.format(
+                        params['prefix'],
+                        variables['input_file_basename']
+                    ),
+                    variables['input_file_basename'].replace(params['prefix'], '')
+                ]
+
+            rt_lookup_name = None
+            for rtln in possible_rt_lookup_names:
+                if rtln in scan_rt_lookup.keys():
+                    rt_lookup_name = rtln
+                    break
+            if rt_lookup_name is None:
+                print('''
+[ WARNING ] Could not find scan ID {0} in scan_rt_lookup[ {1} ]'''.format(
+                        line_dict['Spectrum ID'],
+                        variables['input_file_basename']
                     )
+                )
 
-            #END Spectrum Title block
-            ##########################
-
-            retention_time_in_minutes = \
-                scan_rt_lookup[ input_file_basename_for_rt_lookup ][ 'scan_2_rt' ]\
-                    [ spectrum_id ]
+            retention_time_in_minutes = float(
+                scan_rt_lookup[rt_lookup_name][ 'scan_2_rt' ]\
+                    [line_dict['Spectrum ID']]
+            )
 
             # We should check if data has minute format or second format...
-            if scan_rt_lookup[ input_file_basename ]['unit'] == 'second':
+            rt_corr_factor = 60
+            if scan_rt_lookup[rt_lookup_name]['unit'] == 'second':
                 rt_corr_factor = 1
-            else:
-                rt_corr_factor = 60
-            line_dict['Retention Time (s)'] = float( retention_time_in_minutes ) * rt_corr_factor
+
+            line_dict['Retention Time (s)'] = retention_time_in_minutes * \
+                rt_corr_factor
 
             #########################
             # Buffering corrections #
             #########################
-            main_buffer_key = '{Sequence} || {Charge} || {Modifications} || '.format(
+            main_buffer_key = '{Sequence} || {Charge} || {Modifications} || {0}'.format(
+                params['label'],
                 **line_dict
-            ) + params['label']
+            )
+
             if main_buffer_key not in ze_only_buffer.keys():
-                line_dict_update = {}
+                line_dict_update = copy.deepcopy(line_dict)
                 ######################
                 # Modification block #
                 ######################
@@ -497,7 +522,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             msfragger_pos, raw_msfragger_mass = single_mod.split('$')
                             msfragger_mass      = mass_format_string.format(
                                 # mass rounded as defined above
-                                Decimal(raw_msfragger_mass)
+                                decimal.Decimal(raw_msfragger_mass)
                             )
                             msfragger_pos       = int(msfragger_pos)
                             if msfragger_mass in mass_to_mod_combo.keys():
@@ -591,208 +616,40 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 ##################################################
                 # Some engines do not report fixed modifications #
                 ##################################################
-                if fixed_mods != {}:
-                    for pos, aminoacid in enumerate(line_dict['Sequence']):
-                        if aminoacid in fixed_mods.keys():
-                            name = fixed_mods[ aminoacid ]
-                            tmp = '{0}:{1}'.format(
-                                name,
-                                pos + 1
-                            )
-                            if tmp in line_dict['Modifications']:
-                                # everything is ok :)
-                                pass
-                            else:
-                                tmp_mods = line_dict['Modifications'].split(';')
-                                tmp_mods.append(tmp)
-                                line_dict['Modifications'] = ';'.join( tmp_mods )
+
+                if variables['fixed_mods'] is not None:
+                    line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                        .add_missing_fixed_mods(
+                            line_dict_update,
+                            variables
+                        )
+
                 ##################################################################
                 # Myrimatch, MSGF+, and MSFragger can not handle 15N that easily #
                 # Report all AAs moded with unknown modification                 #
                 # Note: masses are checked below to avoid any mismatch           #
                 ##################################################################
-                if use15N:
-                    if 'myrimatch' in search_engine.lower() or \
-                            'msgfplus_v9979' in search_engine.lower():
-                        for p in range(1,len(line_dict['Sequence'])+1):
-                                line_dict['Modifications'] = \
-                                    line_dict['Modifications'].replace(
-                                        'unknown modification:{0}'.format(p),
-                                        '',
-                                        1,
-                                    )
-                    if 'myrimatch' in search_engine.lower():
-                        if 'Carboxymethyl' in line_dict['Modifications'] and cam == True:
-                            line_dict['Modifications'] = line_dict['Modifications'].replace(
-                                'Carboxymethyl',
-                                'Carbamidomethyl'
-                            )
-                        elif 'Delta:H(6)C(3)O(1)' in line_dict['Modifications']:
-                            line_dict['Modifications'] = line_dict['Modifications'].replace(
-                                'Delta:H(6)C(3)O(1)',
-                                'Carbamidomethyl'
-                            )
+                if variables['use15N']:
+                    line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                        .adjust_15N_for_engines_that_are_not_aware_of(
+                            line_dict_update,
+                            variables
+                        )
 
-                tmp_mods = []
-                tmp_mass_diff = []
-                for modification in line_dict['Modifications'].split(';'):
-                    Nterm = False
-                    Cterm = False
-                    skip_mod = False
-                    if modification == '':
-                        continue
-                    pos, mod = None, None
-                    # print(modification)
-                    match = mod_pattern.search( modification )
-                    pos = int( match.group('pos') )
-                    mod = modification[ :match.start() ]
-                    assert pos is not None, '''
-                            The format of the modification {0}
-                            is not recognized by ursgal'''.format(
-                                modification
-                            )
-                    if pos <= 1:
-                        Nterm = True
-                        new_pos = 1
-                    elif pos > len(line_dict['Sequence']):
-                        Cterm = True
-                        new_pos = len(line_dict['Sequence'])
-                    else:
-                        new_pos = pos
-                    aa = line_dict['Sequence'][ new_pos - 1 ].upper()
-                    # if aa in fixed_mods.keys():
-                    #     fixed_mods[ aminoacid ]
-                    #     # fixed mods are corrected/added already
-                    #     continue
-                    if mod in mod_dict.keys():
-                        correct_mod = False
-                        if aa in mod_dict[mod]['aa']:
-                            # everything is ok
-                            correct_mod = True
-                        elif Nterm or Cterm:
-                            if '*' in mod_dict[mod]['aa']:
-                                correct_mod = True
-                                # still is ok
-                        assert correct_mod is True,'''
-                                A modification was reported for an aminoacid for which it was not defined
-                                unify_csv cannot deal with this, please check your parameters and engine output
-                                reported modification: {0} on {1}
-                                modifications in parameters: {2}
-                                '''.format(
-                                    mod,
-                                    aa,
-                                    params['mods']
-                                )
-                    elif 'unknown modification' == mod:
-                        modification_known = False
-                        if aa in opt_mods.keys():
-                            # fixed mods are corrected/added already
-                            modification = '{0}:{1}'.format(opt_mods[aa],new_pos)
-                            modification_known = True
-                        assert modification_known == True,'''
-                                unify csv does not work for the given unknown modification for
-                                {0} {1} aa: {2}
-                                maybe an unknown modification with terminal position was given?
-                                '''.format(
-                                    line_dict['Sequence'], modification, aa
-                                )
-                    else:
-                        float_mod = float(mod)
-                        masses_2_test = [float_mod]
-                        if use15N:
-                            substract_15N_diff = False
-                            if aa in fixed_mods.keys() and 'msgfplus' in search_engine.lower() and pos != 0:
-                                substract_15N_diff = True
-                            if 'msfragger' in search_engine.lower() and float_mod > 4:
-                                # maximum 15N labeling is 3.988 Da (R)
-                                substract_15N_diff = True
-                            if substract_15N_diff:
-                                masses_2_test.append(float_mod - ursgal.ukb.DICT_15N_DIFF[aa])
-                        # try:
-                        #works always but returns empty list...
-                        name_list = []
-                        for mass_2_test in masses_2_test:
-                            mass_buffer_key = mass_format_string.format(mass_2_test)
-                            #buffer increases speed massively...
-                            if mass_buffer_key not in app_mass_to_name_list_buffer.keys():
-                                app_mass_to_name_list_buffer[mass_buffer_key] = ursgal.GlobalUnimodMapper.appMass2name_list(
-                                    float(mass_buffer_key),
-                                    decimal_places = no_decimals
-                                )
-                            name_list += app_mass_to_name_list_buffer[mass_buffer_key]
-                        # print(name_list)
-                        # except:
-                        #     print('''
-                        #         A modification was reported that was not included in the search parameters
-                        #         unify_csv cannot deal with this, please check your parameters and engine output
-                        #         reported modification: {0}
-                        #         modifications in parameters: {1}
-                        #         '''.format(mod, params['translations']['modifications'])
-                        #     )
-                        #     raise Exception('unify_csv failed because a '\
-                        #         'modification was reported that was not '\
-                        #         'given in params: {0}'.format(modification)
-                        #     )
-                        mapped_mod = False
-                        for name in name_list:
-                            if name in mod_dict.keys():
-                                if aa in mod_dict[name]['aa']:
-                                    modification = '{0}:{1}'.format(name,new_pos)
-                                    mapped_mod = True
-                                elif Nterm and '*' in mod_dict[name]['aa']:
-                                    modification = '{0}:{1}'.format(name,0)
-                                    mapped_mod = True
-                                else:
-                                    continue
-                            elif use15N and name in [
-                                'Label:15N(1)',
-                                'Label:15N(2)',
-                                'Label:15N(3)',
-                                'Label:15N(4)'
-                            ]:
-                                mapped_mod = True
-                                skip_mod = True
-                                break
-                        if open_mod_search is True and mapped_mod is False:
-                            skip_mod = True
-                            tmp_mass_diff.append('{0}:{1}'.format(mod, pos))
-                            continue
-                        assert mapped_mod is True, '''
-                                A mass was reported that does not map on any unimod or userdefined modification
-                                or the modified aminoacid is not the specified one
-                                unify_csv cannot deal with this, please check your parameters and engine output
-                                sequence: {4}
-                                reported mass: {0}
-                                maps on: {1}
-                                reported modified aminoacid: {2}
-                                modifications in parameters: {3}
-                                '''.format(
-                                    mod,
-                                    name_list,
-                                    aa,
-                                    params['mods'],
-                                    line_dict['Sequence']
-                                )
-                    if skip_mod is True:
-                        continue
-                    if modification in tmp_mods:
-                        if mod in n_term_replacement.keys() and pos == 1:
-                            if line_dict['Sequence'][0] in mod_dict[mod]['aa']:
-                                modification.replace(
-                                    '{0}:1'.format(mod),
-                                    '{0}:0'.format(mod)
-                                )
-                            else:
-                                continue
-                        else:
-                            continue
-                    tmp_mods.append(modification)
-                line_dict_update['Modifications'] = ';'.join(tmp_mods)
-                line_dict_update['Mass Difference'] = ';'.join(tmp_mass_diff)
+                ##
+                # Reformatting mods
+                ##
+
+                line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                    .convert_mods_to_unimod_style(
+                        line_dict_update,
+                        variables
+                    )
+
                 #
                 # ^^--------- REPLACED MODIFICATIONS! ---------------^
                 #
-                for unimod_name in n_term_replacement.keys():
+                for unimod_name in variables['n_term_replacement'].keys():
                     if '{0}:1'.format(unimod_name) in line_dict_update['Modifications'].split(';'):
                         if unimod_name in mod_dict.keys():
                             aa = mod_dict[unimod_name]['aa']
@@ -813,84 +670,20 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 #
                 # remove the double ';''
                 if line_dict_update['Modifications'] != '':
-                    tmp = []
-                    positions = set()
-                    for e in line_dict_update['Modifications'].split(';'):
-                        if e == '':
-                            # that remove the doubles ....
-                            continue
-                        else:
-                            # other way to do it...
-                            # pos_of_split_point = re.search( ':\d*\Z', e )
-                            # pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
-                            for occ, match in enumerate(mod_pattern.finditer(e)):
-                                mod = e[:match.start()]
-                                mod_pos = e[match.start()+1:]
-                                # mod, pos = e.split(':')
-                                m = (int(mod_pos), mod)
-                                if m not in tmp:
-                                    tmp.append(m)
-                                    positions.add(int(mod_pos))
-                    tmp.sort()
-                    line_dict_update['Modifications'] = ';'.join(
-                        [
-                            '{m}:{p}'.format( m=mod, p=pos) for pos, mod in tmp
-                        ]
-                    )
-                    if len(tmp) != len(positions):
-                        print(
-                            '[ WARNING ] {Sequence}#{Modifications} will be skipped, because it contains two mods at the same position!'.format(
-                                **line_dict_update
-                            )
+                    line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                        .sort_mods_and_mod_differences(
+                            line_dict_update,
+                            variables
                         )
-                        continue
+
 
                 # calculate m/z
-                cc.use(
-                    '{Sequence}#{Modifications}'.format(
-                        **line_dict_update
+                line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                    .correct_mzs(
+                        line_dict_update,
+                        variables,
+                        params
                     )
-                )
-                if use15N:
-                    number_N = dc( cc['N'] )
-                    cc['15N'] = number_N
-                    del cc['N']
-                    if cam:
-                        c_count = line_dict_update['Sequence'].count('C')
-                        cc['14N'] = c_count
-                        cc['15N'] -= c_count
-                    # mass = mass + ( DIFFERENCE_14N_15N * number_N )
-                mass = cc._mass()
-                calc_mz = ursgal.ucore.calculate_mz(
-                    mass,
-                    line_dict['Charge']
-                )
-                # mz_buffer[ buffer_key ] = calc_mz
-
-                line_dict_update['uCalc m/z'] = calc_mz
-                # if 'msamanda' in search_engine.lower():
-                    # ms amanda does not return calculated mz values
-                if line_dict['Calc m/z'] == '':
-                    line_dict_update['Calc m/z'] = calc_mz
-
-                line_dict_update['Accuracy (ppm)'] = \
-                    (float(line_dict['Exp m/z']) - line_dict_update['uCalc m/z'])/line_dict_update['uCalc m/z'] * 1e6
-                prec_m_accuracy = (params['translations']['precursor_mass_tolerance_minus'] + params['translations']['precursor_mass_tolerance_plus'])/2
-                i = 0
-                while abs(line_dict_update['Accuracy (ppm)']) > prec_m_accuracy:
-                    i += 1
-                    if i > len(params['translations']['precursor_isotope_range'].split(','))-1:
-                        break
-                    isotope = params['translations']['precursor_isotope_range'].split(',')[i]
-                    isotope = int(isotope)
-                    if isotope == 0:
-                        continue
-                    calc_mz = ursgal.ucore.calculate_mz(
-                        mass + isotope*1.008664904,
-                        line_dict['Charge']
-                    )
-                    line_dict_update['Accuracy (ppm)'] = \
-                        (float(line_dict['Exp m/z']) - calc_mz)/calc_mz * 1e6
 
                 # ------------
                 # BUFFER END
@@ -1056,13 +849,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     if database_search is True:
         # upapa.purge_fasta_info( fasta_lookup_name )
         if len(non_enzymatic_peps) != 0:
-            print(
-                '''
-                [ WARNING ] The following peptides do not reflect the enzyme
-                [ WARNING ] specificity:
-                [ WARNING ] {0}
-                [ WARNING ] These PSMs are marked 'Complies search criteria' = 'False'
-                '''.format(
+            print('''
+[ WARNING! ] The following peptides do not reflect the enzyme
+[ WARNING! ] specificity:
+[ WARNING! ] {0}
+[ WARNING! ] These PSMs are marked 'Complies search criteria' = 'False'
+    '''.format(
                     non_enzymatic_peps
                 )
             )
