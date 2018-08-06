@@ -136,7 +136,8 @@ class venndiagram_1_0_0( ursgal.UNode ):
             Current number of files: {0}'''.format(len(data))
 
         used_labels = []
-
+        # lookup_dict = {}
+        fieldnames_list = []
         for n, (engine, file_path) in enumerate(data):
             if self.params['translations']['visualization_label_positions'] == {}:
                 label = engine
@@ -155,11 +156,19 @@ class venndiagram_1_0_0( ursgal.UNode ):
                     lambda row: row[0] != '#', file_object
                 )
             )
+            fieldnames = csv_input.fieldnames
+            for f_name in fieldnames:
+                in f_name not in fieldnames_list:
+                    fieldnames_list.append(f_name)
             for line_dict in csv_input:
                 value = ''
                 for column_name in self.params['translations']['visualization_column_names']:
                     value += '||{0}'.format( line_dict[column_name] )
                 column_sets[ label ].add( value )
+                # collect fieldnames
+                # if value not in lookup_dict.keys():
+                #     lookup_dict[value] = []
+                # lookup_dict[value].append(line_dict)
 
         in_sets = []
         for label in used_labels:
@@ -169,5 +178,27 @@ class venndiagram_1_0_0( ursgal.UNode ):
             *in_sets,
             **venn_params
             )
+
+        import pprint
+        pprint.pprint(return_dict)
+
+        translation_dict_label = {
+            'A' : 0,
+            'B' : 1,
+            ... up tp E
+        }
+        translation_dict_operator = {
+            '|' : 'union',
+            '&' : 'intersection',
+            ... up tp E
+        }
+        for key in return_dict.keys():
+            # ceate output file
+            results = return_dict[key]['results']
+            for unique_id in results:
+                line_dict_list = lookup_dict[unique_id]
+                for line_dict in line_dict_list:
+                    # write line_dict to output_file
+
 
         return return_dict

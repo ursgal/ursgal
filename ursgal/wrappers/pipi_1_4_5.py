@@ -299,9 +299,15 @@ class pipi_1_4_5(ursgal.UNode):
             open(self.params['translations']['output_file_incl_path'], 'w'),
             fieldnames=translated_headers
         )
+        new_label = ""
+        if self.params['label'] == '14N':
+            new_label = 'N14'
+
+        if self.params['label'] == '15N':
+            new_label = 'N15'
 
         pipi_output = self.params['translations'][
-            'mgf_input_file'] + '.{0}.pipi.csv'.format(self.params['label'])
+            'mgf_input_file'] + '.{0}.pipi.csv'.format(new_label)
         csv_reader = csv.DictReader(
             open(pipi_output, 'r'),
             fieldnames=translated_headers,
