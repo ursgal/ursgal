@@ -882,7 +882,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 line_dict_update['uCalc m/z'] = calc_mz
                 # if 'msamanda' in search_engine.lower():
                     # ms amanda does not return calculated mz values
-                if line_dict['Calc m/z'] == '':
+                set_mz = False
+                if 'Calc m/z' not in  line_dict.keys():
+                    set_mz = True
+                elif line_dict['Calc m/z'] == '':
+                    set_mz = True
+                else:
+                    pass
+                if set_mz:
                     line_dict_update['Calc m/z'] = calc_mz
 
                 line_dict_update['Accuracy (ppm)'] = \

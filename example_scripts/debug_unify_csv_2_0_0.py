@@ -45,7 +45,7 @@ def main():
                 # 'Mass Difference',
                 'Complies search criteria',
                 'Conflicting uparam',
-                'Is decoy',
+                # 'Is decoy',
                 'Retention Time (s)',
                 # 'Raw data location'
             ],
@@ -57,6 +57,8 @@ def main():
         'omssa', # verified so far
         'xtandem_alanine',
         'msgfplus_v2018_01_30',
+        'msamanda_1_0_0_7504',
+        'novor'
         # 'msfragger'
     ]
 

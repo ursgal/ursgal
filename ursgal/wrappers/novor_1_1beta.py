@@ -246,6 +246,7 @@ class novor_1_1beta( ursgal.UNode ):
             'Spectrum Title',
             'Modifications',
             'Raw data location',
+            'Calc m/z'
         ]
 
         new_line_dict_list = []
