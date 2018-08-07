@@ -164,14 +164,19 @@ def main(
     # PROPOSAL: let's use a centralized dict for all variable so we can pass
     #           it through the functions as well, let's say variables
 
-    variables = {}
+    variables = {
+        'scan_rt_lookup' : scan_rt_lookup,
+        'params'         : params
+    }
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
     # psm_defining_colnames = get_psm_defining_colnames(score_colname, search_engine)
     joinchar              = params['translations']['protein_delimiter']
     do_not_delete         = False
     created_tmp_files     = []
+
     variables['use15N']   = False
     variables['search_engine'] = search_engine.lower()
+    variables['joinchar'] = joinchar
 
     # ^--- sooner or later this should end up in variables ...
 
@@ -211,7 +216,10 @@ def main(
     # mod pattern
     variables['mod_pattern'] = re.compile( r''':(?P<pos>[0-9]*$)''' )
 
-    variables = reformat_ursgal_mods(params=params, variables=variables)
+    variables = reformat_ursgal_mods(
+        params=params,
+        variables=variables
+    )
     # for mod_type in ['fix', 'opt']:
     #     for modification in params['mods'][mod_type]:
     #         aa = modification['aa']
@@ -345,6 +353,11 @@ def main(
         inhibitor_aa  = ''
     allowed_aa += '-'
 
+    variables['cleavage_site'] = cleavage_site
+    variables['allowed_aa']    = allowed_aa
+    variables['inhibitor_aa']  = inhibitor_aa
+
+
     if database_search is True:
         non_enzymatic_peps = set()
         conflicting_uparams = defaultdict(set)
@@ -360,6 +373,8 @@ def main(
             'Sequence Pre AA',
             'Sequence Post AA',
         ]
+        variables['upeptide_map_sort_key'] = 'Protein ID'
+        variables['upeptide_map_other_keys'] = upeptide_map_other_keys
     # psm_counter = Counter()
     # if a PSM with multiple rows is found (i.e. in omssa results), the psm
     # rows are merged afterwards
@@ -383,10 +398,11 @@ def main(
         csv_input  = csv.DictReader(
             in_file
         )
+        csv_fieldnames = list(csv_input.fieldnames)
+        variables['fieldnames'] = copy.deepcopy( csv_fieldnames )
         # recheck if fieldnames are correct. These are corrected in the upeptide
         # mapper but if the search engine is a de novo engine then the fields
         # might be incorrect
-        output_fieldnames = list(csv_input.fieldnames)
         for remove_fieldname in [
             'proteinacc_start_stop_pre_post_;',
             'Start',
@@ -395,9 +411,9 @@ def main(
             'gi',
             'Accession',
         ]:
-            if remove_fieldname not in output_fieldnames:
+            if remove_fieldname not in csv_fieldnames:
                 continue
-            output_fieldnames.remove(remove_fieldname)
+            csv_fieldnames.remove(remove_fieldname)
         new_fieldnames = [
             'uCalc m/z',
             'Accuracy (ppm)',
@@ -412,11 +428,11 @@ def main(
         ]
 
         for new_fieldname in new_fieldnames:
-            if new_fieldname not in output_fieldnames:
-                output_fieldnames.insert( -5, new_fieldname )
+            if new_fieldname not in csv_fieldnames:
+                csv_fieldnames.insert( -5, new_fieldname )
         csv_output = csv.DictWriter(
             output_file_object,
-            output_fieldnames,
+            csv_fieldnames,
             **csv_kwargs
         )
         csv_output.writeheader()
@@ -435,62 +451,44 @@ def main(
                     ),
                     end = '\r'
                 )
+            # Example
+            # if search_engine == 'ommsa_2_1_9':
+            #     # can we solve this more elegantly since we know the engine
+            #     # already...
+            #     line_dict, variables = unify_csv_2_0_0.engines.ommsa_2_1_9\
+            #         .replacement_for_postflight(
+            #             line_dict,
+            #             variables
+            #         )
 
             ##########################
-            # Spectrum Title block
+            # Spectrum Title block   #
+            ##########################
             # reformatting Spectrum Title,
             line_dict, variables = unify_csv_2_0_0.engines._engine_independent\
                 .reformat_title(
                     line_dict,
                     variables
-            )
-            #END Spectrum Title block
-            ##########################
-
-            # now check for the basename in the scan rt lookup
-            # possible cases:
-            #   - input_file_basename
-            #   - input_file_basename + prefix
-            #   - input_file_basename - prefix
-            # input_file_basename = None
-
-            possible_rt_lookup_names = [
-                variables['input_file_basename'],
-            ]
-            if 'prefix' in params.keys():
-                possible_rt_lookup_names += [
-                    '{0}_{1}'.format(
-                        params['prefix'],
-                        variables['input_file_basename']
-                    ),
-                    variables['input_file_basename'].replace(params['prefix'], '')
-                ]
-
-            rt_lookup_name = None
-            for rtln in possible_rt_lookup_names:
-                if rtln in scan_rt_lookup.keys():
-                    rt_lookup_name = rtln
-                    break
-            if rt_lookup_name is None:
-                print('''
-[ WARNING ] Could not find scan ID {0} in scan_rt_lookup[ {1} ]'''.format(
-                        line_dict['Spectrum ID'],
-                        variables['input_file_basename']
-                    )
                 )
 
-            retention_time_in_minutes = float(
-                scan_rt_lookup[rt_lookup_name][ 'scan_2_rt' ]\
-                    [line_dict['Spectrum ID']]
+            ##########################
+            #END Spectrum Title block#
+            ##########################
+
+            ##########################
+            # RT insert block        #
+            ##########################
+            line_dict, variables = unify_csv_2_0_0.engines._engine_independent\
+                .add_retention_time(
+                    line_dict,
+                    variables
             )
-
-            # We should check if data has minute format or second format...
-            rt_corr_factor = 60
-            if scan_rt_lookup[rt_lookup_name]['unit'] == 'second':
-                rt_corr_factor = 1
-
-            line_dict['Retention Time (s)'] = retention_time_in_minutes * \
-                rt_corr_factor
+            # if line_dict['Sequence'] == 'YICDNQDTISSK' and line_dict['Spectrum ID']  =='2590':
+            #     print(line_dict)
+            #     exit()
+            ##########################
+            # END RT insert block    #
+            ##########################
 
             #########################
             # Buffering corrections #
@@ -500,8 +498,13 @@ def main(
                 **line_dict
             )
 
+            # if line_dict['Sequence'] == 'YICDNQDTISSK' and line_dict['Spectrum ID']  =='2590':
+            #     print(line_dict)
+            #     exit()
             if main_buffer_key not in ze_only_buffer.keys():
-                line_dict_update = copy.deepcopy(line_dict)
+                # THIS MUST NOT BE DEEPCOPIED, CEATE EMPTY DICT!!!! and pass both dicts to the dunction
+                line_dict_update = {}
+
                 ######################
                 # Modification block #
                 ######################
@@ -618,21 +621,21 @@ def main(
                 ##################################################
 
                 if variables['fixed_mods'] is not None:
-                    line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                    line_dict = unify_csv_2_0_0.engines._engine_independent\
                         .add_missing_fixed_mods(
-                            line_dict_update,
+                            line_dict,
                             variables
                         )
-
+                 
                 ##################################################################
                 # Myrimatch, MSGF+, and MSFragger can not handle 15N that easily #
                 # Report all AAs moded with unknown modification                 #
                 # Note: masses are checked below to avoid any mismatch           #
                 ##################################################################
                 if variables['use15N']:
-                    line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                    line_dict = unify_csv_2_0_0.engines._engine_independent\
                         .adjust_15N_for_engines_that_are_not_aware_of(
-                            line_dict_update,
+                            line_dict,
                             variables
                         )
 
@@ -640,26 +643,24 @@ def main(
                 # Reformatting mods
                 ##
 
-                line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                line_dict, variables, line_dict_update = unify_csv_2_0_0.engines._engine_independent\
                     .convert_mods_to_unimod_style(
-                        line_dict_update,
-                        variables
+                        line_dict,
+                        variables,
+                        line_dict_update
                     )
 
                 #
                 # ^^--------- REPLACED MODIFICATIONS! ---------------^
                 #
-                for unimod_name in variables['n_term_replacement'].keys():
-                    if '{0}:1'.format(unimod_name) in line_dict_update['Modifications'].split(';'):
-                        if unimod_name in mod_dict.keys():
-                            aa = mod_dict[unimod_name]['aa']
-                            if aa != ['*']:
-                                if line_dict['Sequence'][0] in aa:
-                                    continue
-                        line_dict_update['Modifications'] = line_dict_update['Modifications'].replace(
-                            '{0}:1'.format(unimod_name),
-                            '{0}:0'.format(unimod_name)
-                            )
+
+                # Convert N-terms
+                line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                    .convert_n_terms(
+                        line_dict_update,
+                        variables
+                    )
+                
                 ##########################
                 # Modification block end #
                 ##########################
@@ -668,6 +669,7 @@ def main(
                 #
                 # ^^--------- REPLACED SEQUENCE! ---------------^
                 #
+                
                 # remove the double ';''
                 if line_dict_update['Modifications'] != '':
                     line_dict_update = unify_csv_2_0_0.engines._engine_independent\
@@ -678,11 +680,13 @@ def main(
 
 
                 # calculate m/z
-                line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                line_dict_update['Charge']     = line_dict['Charge']
+                #Charge and Calc m/z is neede for mz calculation
+                line_dict_update, variables = unify_csv_2_0_0.engines._engine_independent\
                     .correct_mzs(
                         line_dict_update,
                         variables,
-                        params
+                        line_dict
                     )
 
                 # ------------
@@ -702,112 +706,42 @@ def main(
                     fasta_lookup_name
                 )
                 if lookup_identifier not in conflicting_uparams.keys():
-                    split_collector = { }
-                    for key in [ upeptide_map_sort_key ] + upeptide_map_other_keys:
-                        split_collector[ key ] = line_dict[key].split(joinchar)
-                    sorted_upeptide_maps = []
-                    for pos, protein_id in enumerate(sorted( split_collector[ upeptide_map_sort_key ] ) ):
-                        dict_2_append = {
-                            upeptide_map_sort_key : protein_id
-                        }
-
-                        for key in upeptide_map_other_keys:
-                            dict_2_append[key] = split_collector[key][pos]
-                        sorted_upeptide_maps.append(
-                            dict_2_append
+                    #check if peptide was mapped
+                    line_dict, variables = unify_csv_2_0_0.engines._engine_independent\
+                        .check_if_peptide_was_mapped(
+                            line_dict,
+                            variables
                         )
-                    # pprint.pprint(line_dict)
-                    # print(sorted_upeptide_maps)
-                    # sys.exit(1)
-                    if sorted_upeptide_maps == []:
+
+                    if variables['sorted_upeptide_maps'] == []:
                         print('''
-[ WARNING ] The peptide {0} could not be mapped to the
-[ WARNING ] given database {1}
-[ WARNING ] {2}
-[ WARNING ] This PSM will be skipped.
+                [ WARNING ] The peptide {0} could not be mapped to the
+                [ WARNING ] given database {1}
+                [ WARNING ] {2}
+                [ WARNING ] This PSM will be skipped.
                             '''.format(
                                 line_dict['Sequence'],
-                                params['translations']['database'],
+                                params['database'],
+                                '' # what goes here???
                             )
                         )
                         continue
-                    peptide_fullfills_enzyme_specificity = False
-                    last_protein_id = None
-                    for major_protein_info_dict in sorted_upeptide_maps:
-                        protein_specifically_cleaved   = False
-                        nterm_correct = False
-                        cterm_correct = False
-                        '''
-                            'Sequence Start',
-                            'Sequence Stop',
-                            'Sequence Pre AA',
-                            'Sequence Post AA',
 
-                        '''
-                        protein_info_dict_buffer = []
-                        if ';' in major_protein_info_dict['Sequence Start']:
-                            tmp_split_collector =defaultdict(list)
-                            for key in upeptide_map_other_keys:
-                                tmp_split_collector[key] = major_protein_info_dict[key].split(';')
-                            for pos, p_id in enumerate(tmp_split_collector['Sequence Start']):
-                                dict_2_append = {
-                                    'Protein ID' : major_protein_info_dict['Protein ID']
-                                }
-                                for key in tmp_split_collector.keys():
-                                    dict_2_append[key] = tmp_split_collector[key][pos]
-                                protein_info_dict_buffer.append(dict_2_append)
-                        else:
-                            protein_info_dict_buffer = [ major_protein_info_dict ]
-
-
-                        for protein_info_dict in protein_info_dict_buffer:
-                            if params['translations']['keep_asp_pro_broken_peps'] is True:
-                                if line_dict['Sequence'][-1] == 'D' and\
-                                        protein_info_dict['Sequence Post AA'] == 'P':
-                                    cterm_correct = True
-                                if line_dict['Sequence'][0] == 'P' and\
-                                        protein_info_dict['Sequence Pre AA'] == 'D':
-                                    nterm_correct = True
-
-                            if cleavage_site == 'C':
-                                if protein_info_dict['Sequence Pre AA'] in allowed_aa\
-                                        or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
-                                    if line_dict['Sequence'][0] not in inhibitor_aa\
-                                            or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
-                                        nterm_correct = True
-                                if protein_info_dict['Sequence Post AA'] not in inhibitor_aa:
-                                    if line_dict['Sequence'][-1] in allowed_aa\
-                                         or protein_info_dict['Sequence Post AA'] == '-':
-                                        cterm_correct = True
-
-                            elif cleavage_site == 'N':
-                                if protein_info_dict['Sequence Post AA'] in allowed_aa:
-                                    if line_dict['Sequence'][-1] not in inhibitor_aa\
-                                            or protein_info_dict['Sequence Post AA'] == '-':
-                                        cterm_correct = True
-                                if protein_info_dict['Sequence Pre AA'] not in inhibitor_aa\
-                                    or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
-                                    if line_dict['Sequence'][0] in allowed_aa\
-                                        or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
-                                        nterm_correct = True
-                            # if line_dict['Sequence'] == 'SPRPGAAPGSR':
-                            #     print(protein_info_dict)
-                            #     print(nterm_correct, cterm_correct)
-                            if params['translations']['semi_enzyme'] is True:
-                                if cterm_correct is True or nterm_correct is True:
-                                    protein_specifically_cleaved = True
-                            elif cterm_correct is True and nterm_correct is True:
-                                protein_specifically_cleaved = True
-                            if protein_specifically_cleaved is True:
-                                peptide_fullfills_enzyme_specificity = True
-                                last_protein_id = protein_info_dict['Protein ID']
-                    # we may test for further criteria to set this flag/fieldname
-                    # e.g. the missed cleavage count etc.
-                    if peptide_fullfills_enzyme_specificity is False:
-                        non_enzymatic_peps.add( line_dict['Sequence'] )
+                    # check for enzyme specificity
+                    line_dict, variables = unify_csv_2_0_0.engines._engine_independent\
+                        .verify_cleavage_specificity(
+                            line_dict,
+                            variables
+                        )
+                    if variables['peptide_fullfills_enzyme_specificity'] is False:
+                        non_enzymatic_peps.add(
+                            line_dict['Sequence']
+                        )
                         conflicting_uparams[lookup_identifier].add(
                             'enzyme'
                         )
+                    # END check for enzyme specificity
+
 
                     #check here if missed cleavage count is correct...
                     missed_cleavage_counter = 0
@@ -841,6 +775,9 @@ def main(
                         sorted(conflicting_uparams[lookup_identifier])
                     )
             csv_output.writerow(line_dict)
+            # if line_dict['Sequence'] == 'YICDNQDTISSK' and line_dict['Spectrum ID']  =='2590':
+            #     print(line_dict)
+            #     exit()
             '''
                 to_be_written_csv_lines.append( line_dict )
             '''

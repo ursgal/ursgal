@@ -1060,6 +1060,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         sorted(conflicting_uparams[lookup_identifier])
                     )
             csv_output.writerow(line_dict)
+            # if line_dict['Sequence'] == 'YICDNQDTISSK' and line_dict['Spectrum ID']  =='2590':
+            #     print(line_dict)
+            #     break
             '''
                 to_be_written_csv_lines.append( line_dict )
             '''

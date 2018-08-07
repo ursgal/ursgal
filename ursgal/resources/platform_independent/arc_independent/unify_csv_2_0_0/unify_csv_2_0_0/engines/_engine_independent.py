@@ -1,4 +1,5 @@
 import ursgal
+from collections import defaultdict
 
 def reformat_title(line_dict, variables):
 
@@ -109,7 +110,7 @@ def adjust_15N_for_engines_that_are_not_aware_of(line_dict, variables):
             )
     return line_dict
 
-def convert_mods_to_unimod_style(line_dict, variables):
+def convert_mods_to_unimod_style(line_dict, variables, line_dict_update):
     tmp_mods = []
     tmp_mass_diff = []
     for modification in line_dict['Modifications'].split(';'):
@@ -266,9 +267,9 @@ def convert_mods_to_unimod_style(line_dict, variables):
                 continue
         tmp_mods.append(modification)
 
-    line_dict['Modifications'] = ';'.join(tmp_mods)
-    line_dict['Mass Difference'] = ';'.join(tmp_mass_diff)
-    return line_dict
+    line_dict_update['Modifications'] = ';'.join(tmp_mods)
+    line_dict_update['Mass Difference'] = ';'.join(tmp_mass_diff)
+    return line_dict, variables, line_dict_update
 
 def sort_mods_and_mod_differences(line_dict, variables):
     # let's split although we had the positions above ...
@@ -305,11 +306,11 @@ def sort_mods_and_mod_differences(line_dict, variables):
 
     return line_dict
 
-def correct_mzs(line_dict, variables, params):
+def correct_mzs(line_dict_update, variables, line_dict):
     # calculate m/z
     variables['cc'].use(
         '{Sequence}#{Modifications}'.format(
-            **line_dict
+            **line_dict_update
         )
     )
     if variables['use15N']:
@@ -317,41 +318,199 @@ def correct_mzs(line_dict, variables, params):
         variables['cc']['15N'] = number_N
         del variables['cc']['N']
         if cam:
-            c_count = line_dict['Sequence'].count('C')
+            c_count = line_dict_update['Sequence'].count('C')
             variables['cc']['14N'] = c_count
             variables['cc']['15N'] -= c_count
         # mass = mass + ( DIFFERENCE_14N_15N * number_N )
     mass = variables['cc']._mass()
     calc_mz = ursgal.ucore.calculate_mz(
         mass,
-        line_dict['Charge']
+        line_dict_update['Charge']
     )
     # mz_buffer[ buffer_key ] = calc_mz
 
-    line_dict['uCalc m/z'] = calc_mz
+    line_dict_update['uCalc m/z'] = calc_mz
 
     # if 'msamanda' in search_engine.lower():
         # ms amanda does not return calculated mz values
     if line_dict['Calc m/z'] == '':
         line_dict['Calc m/z'] = calc_mz
 
-    line_dict['Accuracy (ppm)'] = \
-        (float(line_dict['Exp m/z']) - line_dict['uCalc m/z'])/line_dict['uCalc m/z'] * 1e6
-    prec_m_accuracy = (params['translations']['precursor_mass_tolerance_minus'] + params['translations']['precursor_mass_tolerance_plus'])/2
+    line_dict_update['Accuracy (ppm)'] = \
+        (float(line_dict['Exp m/z']) - line_dict_update['uCalc m/z'])/line_dict_update['uCalc m/z'] * 1e6
+    prec_m_accuracy = (variables['params']['translations']['precursor_mass_tolerance_minus'] + variables['params']['translations']['precursor_mass_tolerance_plus'])/2
     i = 0
-    while abs(line_dict['Accuracy (ppm)']) > prec_m_accuracy:
+    while abs(line_dict_update['Accuracy (ppm)']) > prec_m_accuracy:
         i += 1
-        if i > len(params['translations']['precursor_isotope_range'].split(','))-1:
+        if i > len(variables['params']['translations']['precursor_isotope_range'].split(','))-1:
             break
-        isotope = params['translations']['precursor_isotope_range'].split(',')[i]
+        isotope = variables['params']['translations']['precursor_isotope_range'].split(',')[i]
         isotope = int(isotope)
         if isotope == 0:
             continue
         calc_mz = ursgal.ucore.calculate_mz(
             mass + isotope*1.008664904,
-            line_dict['Charge']
+            line_dict_update['Charge']
         )
-        line_dict['Accuracy (ppm)'] = \
+        line_dict_update['Accuracy (ppm)'] = \
             (float(line_dict['Exp m/z']) - calc_mz)/calc_mz * 1e6
 
+    return line_dict_update, variables
+
+def add_retention_time(line_dict, variables):
+    '''
+    now check for the basename in the scan rt lookup
+    possible cases:
+      - input_file_basename
+      - input_file_basename + prefix
+      - input_file_basename - prefix
+    '''
+    possible_rt_lookup_names = [
+        variables['input_file_basename'],
+    ]
+    if 'prefix' in variables['params'].keys() and variables['params']['prefix'] is not None:
+        possible_rt_lookup_names += [
+            '{0}_{1}'.format(
+                variables['params']['prefix'],
+                variables['input_file_basename']
+            ),
+            variables['input_file_basename'].replace(
+                variables['params']['prefix'],
+                ''
+            )
+        ]
+
+    rt_lookup_name = None
+    for rtln in possible_rt_lookup_names:
+        if rtln in variables['scan_rt_lookup'].keys():
+            rt_lookup_name = rtln
+            break
+    if rt_lookup_name is None:
+        print('''
+[ WARNING ] Could not find scan ID {0} in scan_rt_lookup[ {1} ]'''.format(
+                line_dict['Spectrum ID'],
+                variables['input_file_basename']
+            )
+        )
+
+    retention_time_in_minutes = float(
+        variables['scan_rt_lookup'][rt_lookup_name][ 'scan_2_rt' ]\
+            [line_dict['Spectrum ID']]
+    )
+
+    # We should check if data has minute format or second format...
+    rt_corr_factor = 60
+    if variables['scan_rt_lookup'][rt_lookup_name]['unit'] == 'second':
+        rt_corr_factor = 1
+
+    line_dict['Retention Time (s)'] = retention_time_in_minutes * \
+        rt_corr_factor
+    return line_dict, variables 
+
+def convert_n_terms(line_dict, variables):
+    for unimod_name in variables['n_term_replacement'].keys():
+        if '{0}:1'.format(unimod_name) in line_dict['Modifications'].split(';'):
+            if unimod_name in variables['mod_dict'].keys():
+                aa = variables['mod_dict'][unimod_name]['aa']
+                if aa != ['*']:
+                    if line_dict['Sequence'][0] in aa:
+                        continue
+            line_dict['Modifications'] = line_dict['Modifications'].replace(
+                '{0}:1'.format(unimod_name),
+                '{0}:0'.format(unimod_name)
+                )
+
     return line_dict
+
+def check_if_peptide_was_mapped(line_dict, variables):
+    split_collector = { }
+    for key in [ variables['upeptide_map_sort_key'] ] + variables['upeptide_map_other_keys']:
+        split_collector[ key ] = line_dict[key].split(
+            variables['joinchar']
+        )
+    variables['sorted_upeptide_maps'] = []
+    for pos, protein_id in enumerate(sorted( split_collector[ variables['upeptide_map_sort_key'] ] ) ):
+        dict_2_append = {
+            variables['upeptide_map_sort_key'] : protein_id
+        }
+
+        for key in variables['upeptide_map_other_keys']:
+            dict_2_append[key] = split_collector[key][pos]
+        variables['sorted_upeptide_maps'].append(
+            dict_2_append
+        )
+    return line_dict, variables
+
+def verify_cleavage_specificity(line_dict, variables):
+
+    variables['peptide_fullfills_enzyme_specificity'] = False
+    last_protein_id = None
+    for major_protein_info_dict in variables['sorted_upeptide_maps']:
+        protein_specifically_cleaved   = False
+        nterm_correct = False
+        cterm_correct = False
+        '''
+            'Sequence Start',
+            'Sequence Stop',
+            'Sequence Pre AA',
+            'Sequence Post AA',
+
+        '''
+        protein_info_dict_buffer = []
+        if ';' in major_protein_info_dict['Sequence Start']:
+            tmp_split_collector =defaultdict(list)
+            for key in variables['upeptide_map_other_keys']:
+                tmp_split_collector[key] = major_protein_info_dict[key].split(';')
+            for pos, p_id in enumerate(tmp_split_collector['Sequence Start']):
+                dict_2_append = {
+                    'Protein ID' : major_protein_info_dict['Protein ID']
+                }
+                for key in tmp_split_collector.keys():
+                    dict_2_append[key] = tmp_split_collector[key][pos]
+                protein_info_dict_buffer.append(dict_2_append)
+        else:
+            protein_info_dict_buffer = [ major_protein_info_dict ]
+
+
+        for protein_info_dict in protein_info_dict_buffer:
+            if variables['params']['translations']['keep_asp_pro_broken_peps'] is True:
+                if line_dict['Sequence'][-1] == 'D' and\
+                        protein_info_dict['Sequence Post AA'] == 'P':
+                    cterm_correct = True
+                if line_dict['Sequence'][0] == 'P' and\
+                        protein_info_dict['Sequence Pre AA'] == 'D':
+                    nterm_correct = True
+
+            if variables['cleavage_site'] == 'C':
+                if protein_info_dict['Sequence Pre AA'] in variables['allowed_aa']\
+                        or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                    if line_dict['Sequence'][0] not in variables['inhibitor_aa']\
+                            or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                        nterm_correct = True
+                if protein_info_dict['Sequence Post AA'] not in variables['inhibitor_aa']:
+                    if line_dict['Sequence'][-1] in variables['allowed_aa']\
+                         or protein_info_dict['Sequence Post AA'] == '-':
+                        cterm_correct = True
+
+            elif variables['cleavage_site'] == 'N':
+                if protein_info_dict['Sequence Post AA'] in variables['allowed_aa']:
+                    if line_dict['Sequence'][-1] not in variables['inhibitor_aa']\
+                            or protein_info_dict['Sequence Post AA'] == '-':
+                        cterm_correct = True
+                if protein_info_dict['Sequence Pre AA'] not in variables['inhibitor_aa']\
+                    or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                    if line_dict['Sequence'][0] in variables['allowed_aa']\
+                        or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
+                        nterm_correct = True
+            # if line_dict['Sequence'] == 'SPRPGAAPGSR':
+            #     print(protein_info_dict)
+            #     print(nterm_correct, cterm_correct)
+            if variables['params']['translations']['semi_enzyme'] is True:
+                if cterm_correct is True or nterm_correct is True:
+                    protein_specifically_cleaved = True
+            elif cterm_correct is True and nterm_correct is True:
+                protein_specifically_cleaved = True
+            if protein_specifically_cleaved is True:
+                variables['peptide_fullfills_enzyme_specificity'] = True
+                last_protein_id = protein_info_dict['Protein ID']
+    return line_dict, variables

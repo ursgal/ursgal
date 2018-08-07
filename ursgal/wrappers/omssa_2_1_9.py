@@ -291,12 +291,17 @@ class omssa_2_1_9( ursgal.UNode ):
             float(self.params['translations']['precursor_mass_tolerance_minus'])
         ) / 2.0
 
+        # if self.params['unify_csv_converter_version'] == 'unify_csv_1_0_0':
         self.params['_tmp_output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file'] + '_tmp'
         )
         self.created_tmp_files.append( self.params['_tmp_output_file_incl_path'] )
-
+        # else:
+        #     self.params['_tmp_output_file_incl_path'] = os.path.join(
+        #         self.params['output_dir_path'],
+        #         self.params['output_file']
+        #     )
         self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
             self.params['output_file']
@@ -372,82 +377,85 @@ class omssa_2_1_9( ursgal.UNode ):
                 print(translation_dict)
                 sys.exit(1)
 
+
     def postflight( self ):
         '''
         Will correct the OMSSA headers and add the column retention time to the
         csv file
         '''
-        cached_omssa_output = []
-        result_file = open( self.params['_tmp_output_file_incl_path'], 'r')
-        csv_dict_reader_object = csv.DictReader(
-            row for row in result_file if not row.startswith('#')
-        )
-        headers = csv_dict_reader_object.fieldnames
-        header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
-        translated_headers = []
-        for header in headers:
-            if header in [' E-value',' P-value']:
-                continue
-            translated_headers.append(
-                header_translations.get(header, header)
+        # if self.params['unify_csv_converter_version'] == 'unify_csv_1_0_0':
+        if True:
+            cached_omssa_output = []
+            result_file = open( self.params['_tmp_output_file_incl_path'], 'r')
+            csv_dict_reader_object = csv.DictReader(
+                row for row in result_file if not row.startswith('#')
             )
-        translated_headers += [
-            'Is decoy',
-            'Retention Time (s)',
-            header_translations.get(' E-value', ' E-value'),
-            header_translations.get(' P-value', ' P-value'),
-            'Raw data location',
-        ]
-        print('[ PARSING  ] Loading unformatted OMSSA results ...')
-        for line_dict in csv_dict_reader_object:
-            cached_omssa_output.append( line_dict )
-        result_file.close()
-
-        #
-        result_file = open( self.params['translations']['output_file_incl_path'], 'w')
-        csv_dict_writer_object = csv.DictWriter(
-            result_file,
-            fieldnames = translated_headers
-        )
-        csv_dict_writer_object.writeheader()
-        #
-        # self.parse_fasta()
-        # already_seen_protein_scan_start_stop_combos = set()
-        # database = self.params['translations']['database']
-        for m in cached_omssa_output:
-            tmp = {}
+            headers = csv_dict_reader_object.fieldnames
+            header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
+            translated_headers = []
             for header in headers:
-                translated_header = header_translations.get(
-                    header,
-                    header
+                if header in [' E-value',' P-value']:
+                    continue
+                translated_headers.append(
+                    header_translations.get(header, header)
                 )
-                tmp[ translated_header ] = m[ header ]
-            tmp['Sequence'] = tmp['Sequence'].upper()
+            translated_headers += [
+                'Is decoy',
+                'Retention Time (s)',
+                header_translations.get(' E-value', ' E-value'),
+                header_translations.get(' P-value', ' P-value'),
+                'Raw data location',
+            ]
+            print('[ PARSING  ] Loading unformatted OMSSA results ...')
+            for line_dict in csv_dict_reader_object:
+                cached_omssa_output.append( line_dict )
+            result_file.close()
 
-            translated_mods = []
-            if tmp['Modifications'] != '':
-                splitted_Modifications = tmp['Modifications'].split(',')
-                for mod in splitted_Modifications:
-                    omssa_name, position = mod.split(':')
-                    omssa_name  = omssa_name.strip()
-                    position    = position.strip()
-                    unimod_name = self.lookups[ omssa_name ]['name']
-                    if position.strip() == '1':
-                        # print( self.lookups[ omssa_name ] )
-                        for target in self.lookups[ omssa_name ]['aa_targets']:
-                            if 'N-TERM' in target.upper():
-                                position = '0'
-                    translated_mods.append(
-                        '{0}:{1}'.format(
-                            unimod_name,
-                            position
-                        )
+            #
+            result_file = open( self.params['translations']['output_file_incl_path'], 'w')
+            csv_dict_writer_object = csv.DictWriter(
+                result_file,
+                fieldnames = translated_headers
+            )
+            csv_dict_writer_object.writeheader()
+            #
+            # self.parse_fasta()
+            # already_seen_protein_scan_start_stop_combos = set()
+            # database = self.params['translations']['database']
+            for m in cached_omssa_output:
+                tmp = {}
+                for header in headers:
+                    translated_header = header_translations.get(
+                        header,
+                        header
                     )
+                    tmp[ translated_header ] = m[ header ]
+                tmp['Sequence'] = tmp['Sequence'].upper()
 
-            tmp['Modifications'] = ';'.join( translated_mods )
-            tmp['Raw data location'] = self.params['translations']['mgf_input_file']
+                translated_mods = []
+                if tmp['Modifications'] != '':
+                    splitted_Modifications = tmp['Modifications'].split(',')
+                    for mod in splitted_Modifications:
+                        omssa_name, position = mod.split(':')
+                        omssa_name  = omssa_name.strip()
+                        position    = position.strip()
+                        unimod_name = self.lookups[ omssa_name ]['name']
+                        if position.strip() == '1':
+                            # print( self.lookups[ omssa_name ] )
+                            for target in self.lookups[ omssa_name ]['aa_targets']:
+                                if 'N-TERM' in target.upper():
+                                    position = '0'
+                        translated_mods.append(
+                            '{0}:{1}'.format(
+                                unimod_name,
+                                position
+                            )
+                        )
 
-            csv_dict_writer_object.writerow( tmp )
+                tmp['Modifications'] = ';'.join( translated_mods )
+                tmp['Raw data location'] = self.params['translations']['mgf_input_file']
+
+                csv_dict_writer_object.writerow( tmp )
+        # else:
+        #     pass
         return
-
-
