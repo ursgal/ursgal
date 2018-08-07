@@ -26,7 +26,6 @@ def main():
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 '*,opt,Prot-N-term,Acetyl',    # N-Acteylation
             ],
-            # 'unify_csv_converter_version' : 'unify_csv_1_0_0'
             # use all header mames here? Mega Venn set key :)
             'visualization_column_names' : [
                 'Spectrum ID',
@@ -49,14 +48,16 @@ def main():
                 'Is decoy',
                 'Retention Time (s)',
                 # 'Raw data location'
-            ]
+            ],
+            'msgfplus_mzid_converter_version' : 'msgfplus_C_mzid2csv_v2017_07_04'
         }
     )
 
     engine_list = [
-        # 'omssa', # verified so far
+        'omssa', # verified so far
         'xtandem_alanine',
-        # 'msgfplus_v2016_09_16',
+        'msgfplus_v2018_01_30',
+        # 'msfragger'
     ]
 
     mzML_file = os.path.join(
@@ -102,7 +103,7 @@ def main():
     for engine in engine_list:
         verification_results[engine] = ddict(int)
         unified_file_list = []
-        results = ddict(list)
+        results = ddict(dict)
         for unify_csv_converter_version, mzML_target in unify_csv_engine_and_mzML_list :
             uc.params['unify_csv_converter_version'] = unify_csv_converter_version
             unified_search_result_file = uc.search(
@@ -115,7 +116,10 @@ def main():
             )
 
             for line_dict in csv.DictReader(open(unified_search_result_file,'r')):
-                results[unify_csv_converter_version].append(line_dict)
+                key = '{Spectrum ID}||{Sequence}||{Modifications}||{Charge}'.format(
+                    **line_dict
+                )
+                results[unify_csv_converter_version][ key ] = line_dict
 
         if len(unified_file_list) == 2 :
             uc.visualize(
@@ -126,8 +130,9 @@ def main():
 
         # compare result files
         # order should be the same
-        for pos, line_dict_v1 in enumerate(results['unify_csv_1_0_0']):
-            line_dict_v2 = results['unify_csv_2_0_0'][pos]
+        assert len(results['unify_csv_1_0_0']) == len(results['unify_csv_2_0_0'])
+        for key, line_dict_v1 in results['unify_csv_1_0_0'].items():
+            line_dict_v2 = results['unify_csv_2_0_0'][key]
 
             for k, v in line_dict_v1.items():
                 if k not in uc.params['visualization_column_names']:

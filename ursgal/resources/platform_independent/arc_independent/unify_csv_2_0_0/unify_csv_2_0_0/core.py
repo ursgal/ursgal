@@ -628,7 +628,7 @@ def main(
                 ##################################################
 
                 if variables['fixed_mods'] is not None:
-                    line_dict = unify_csv_2_0_0.engines._engine_independent\
+                    line_dict, variables = unify_csv_2_0_0.engines._engine_independent\
                         .add_missing_fixed_mods(
                             line_dict,
                             variables
@@ -640,7 +640,7 @@ def main(
                 # Note: masses are checked below to avoid any mismatch           #
                 ##################################################################
                 if variables['use15N']:
-                    line_dict = unify_csv_2_0_0.engines._engine_independent\
+                    line_dict, variables = unify_csv_2_0_0.engines._engine_independent\
                         .adjust_15N_for_engines_that_are_not_aware_of(
                             line_dict,
                             variables
@@ -662,7 +662,7 @@ def main(
                 #
 
                 # Convert N-terms
-                line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                line_dict_update, variables = unify_csv_2_0_0.engines._engine_independent\
                     .convert_n_terms(
                         line_dict_update,
                         variables
@@ -679,7 +679,7 @@ def main(
                 
                 # remove the double ';''
                 if line_dict_update['Modifications'] != '':
-                    line_dict_update = unify_csv_2_0_0.engines._engine_independent\
+                    line_dict_update, variables = unify_csv_2_0_0.engines._engine_independent\
                         .sort_mods_and_mod_differences(
                             line_dict_update,
                             variables

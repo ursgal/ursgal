@@ -4,11 +4,14 @@ import re
 
 
 def reformat_title(line_dict, variables):
+    '''
+    Reformats the spectrum title to a generalized format
 
-    # we will set the following
+    input_file_basename.spectrum_id.spectrum_id.charge
+    '''
 
-    variables['input_file_basename'] = None
     spectrum_id = None
+    variables['input_file_basename'] = None
     variables['_spectrum_id'] = None
     variables['charge'] = None
     variables['pure_input_file_name'] = None
@@ -86,7 +89,7 @@ def add_missing_fixed_mods(line_dict, variables):
                 tmp_mods = line_dict['Modifications'].split(';')
                 tmp_mods.append(tmp)
                 line_dict['Modifications'] = ';'.join(tmp_mods)
-    return line_dict
+    return line_dict, variables
 
 def adjust_15N_for_engines_that_are_not_aware_of(line_dict, variables):
     if 'myrimatch' in variables['search_engine'].lower() or \
@@ -110,7 +113,8 @@ def adjust_15N_for_engines_that_are_not_aware_of(line_dict, variables):
                 'Delta:H(6)C(3)O(1)',
                 'Carbamidomethyl'
             )
-    return line_dict
+    return line_dict, variables
+
 
 def convert_mods_to_unimod_style(line_dict, variables, line_dict_update):
     tmp_mods = []
@@ -273,6 +277,7 @@ def convert_mods_to_unimod_style(line_dict, variables, line_dict_update):
     line_dict_update['Mass Difference'] = ';'.join(tmp_mass_diff)
     return line_dict, variables, line_dict_update
 
+
 def sort_mods_and_mod_differences(line_dict, variables):
     # let's split although we had the positions above ...
     tmp = []
@@ -306,7 +311,8 @@ def sort_mods_and_mod_differences(line_dict, variables):
             )
         )
 
-    return line_dict
+    return line_dict, variables
+
 
 def correct_mzs(line_dict_update, variables, line_dict):
     # calculate m/z
@@ -336,7 +342,7 @@ def correct_mzs(line_dict_update, variables, line_dict):
     # if 'msamanda' in search_engine.lower():
         # ms amanda does not return calculated mz values
     if line_dict['Calc m/z'] == '':
-        line_dict['Calc m/z'] = calc_mz
+        line_dict_update['Calc m/z'] = calc_mz
 
     line_dict_update['Accuracy (ppm)'] = \
         (float(line_dict['Exp m/z']) - line_dict_update['uCalc m/z'])/line_dict_update['uCalc m/z'] * 1e6
@@ -358,6 +364,7 @@ def correct_mzs(line_dict_update, variables, line_dict):
             (float(line_dict['Exp m/z']) - calc_mz)/calc_mz * 1e6
 
     return line_dict_update, variables
+
 
 def add_retention_time(line_dict, variables):
     '''
@@ -422,7 +429,8 @@ def convert_n_terms(line_dict, variables):
                 '{0}:0'.format(unimod_name)
                 )
 
-    return line_dict
+    return line_dict, variables
+
 
 def check_if_peptide_was_mapped(line_dict, variables):
     split_collector = { }
@@ -442,6 +450,7 @@ def check_if_peptide_was_mapped(line_dict, variables):
             dict_2_append
         )
     return line_dict, variables
+
 
 def verify_cleavage_specificity(line_dict, variables):
 
@@ -504,9 +513,6 @@ def verify_cleavage_specificity(line_dict, variables):
                     if line_dict['Sequence'][0] in variables['allowed_aa']\
                         or protein_info_dict['Sequence Start'] in ['1', '2', '3']:
                         nterm_correct = True
-            # if line_dict['Sequence'] == 'SPRPGAAPGSR':
-            #     print(protein_info_dict)
-            #     print(nterm_correct, cterm_correct)
             if variables['params']['translations']['semi_enzyme'] is True:
                 if cterm_correct is True or nterm_correct is True:
                     protein_specifically_cleaved = True
@@ -519,6 +525,10 @@ def verify_cleavage_specificity(line_dict, variables):
 
 
 def count_missed_cleavages(line_dict, variables):
+    '''
+    Counts the missed cleavages in the provided Sequence and updates the missed
+    cleavage counter in the variables
+    '''
     variables['missed_cleavage_counter'] = 0
     for aa in variables['allowed_aa']:
         if aa == '-':
