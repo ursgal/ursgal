@@ -1,5 +1,7 @@
 import ursgal
 from collections import defaultdict
+import re
+
 
 def reformat_title(line_dict, variables):
 
@@ -196,7 +198,7 @@ def convert_mods_to_unimod_style(line_dict, variables, line_dict_update):
                 if mass_buffer_key not in  variables['app_mass_to_name_list_buffer'] .keys():
                     variables['app_mass_to_name_list_buffer'] [mass_buffer_key] = ursgal.GlobalUnimodMapper.appMass2name_list(
                         float(mass_buffer_key),
-                        decimal_places = no_decimals
+                        decimal_places = variables['no_decimals']
                     )
                 name_list += variables['app_mass_to_name_list_buffer'][mass_buffer_key]
             # print(name_list)
@@ -232,7 +234,7 @@ def convert_mods_to_unimod_style(line_dict, variables, line_dict_update):
                     mapped_mod = True
                     skip_mod = True
                     break
-            if open_mod_search is True and mapped_mod is False:
+            if variables['open_mod_search'] is True and mapped_mod is False:
                 skip_mod = True
                 tmp_mass_diff.append('{0}:{1}'.format(mod, pos))
                 continue
@@ -514,3 +516,36 @@ def verify_cleavage_specificity(line_dict, variables):
                 variables['peptide_fullfills_enzyme_specificity'] = True
                 last_protein_id = protein_info_dict['Protein ID']
     return line_dict, variables
+
+
+def count_missed_cleavages(line_dict, variables):
+    variables['missed_cleavage_counter'] = 0
+    for aa in variables['allowed_aa']:
+        if aa == '-':
+            continue
+        if variables['cleavage_site'] == 'C':
+            missed_cleavage_pattern = '{0}[^{1}]'.format(
+                aa,
+                variables['inhibitor_aa']
+            )
+            variables['missed_cleavage_counter'] += \
+                len(
+                    re.findall(
+                        missed_cleavage_pattern,
+                        line_dict['Sequence']
+                    )
+                )
+        elif variables['cleavage_site'] == 'N':
+            missed_cleavage_pattern = '[^{1}]{0}'.format(
+                aa,
+                variables['inhibitor_aa']
+            )
+            variables['missed_cleavage_counter'] += \
+                len(
+                    re.findall(
+                        missed_cleavage_pattern,
+                        line_dict['Sequence']
+                    )
+                )
+    return line_dict, variables
+

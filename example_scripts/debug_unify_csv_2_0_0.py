@@ -53,14 +53,9 @@ def main():
         }
     )
 
-    if sys.maxsize > 2 ** 32:
-        xtandem = 'xtandem_vengeance'
-    else:
-        xtandem = 'xtandem_sledgehammer'
-
     engine_list = [
-        'omssa',
-        # xtandem,
+        # 'omssa', # verified so far
+        'xtandem_alanine',
         # 'msgfplus_v2016_09_16',
     ]
 
@@ -102,7 +97,10 @@ def main():
     for pos, (ue, mzML) in enumerate(unify_csv_engine_and_mzML_list):
         uc.params['visualization_label_positions'][str(pos)] = ue
 
+    verification_results = ddict(dict)
+
     for engine in engine_list:
+        verification_results[engine] = ddict(int)
         unified_file_list = []
         results = ddict(list)
         for unify_csv_converter_version, mzML_target in unify_csv_engine_and_mzML_list :
@@ -134,8 +132,8 @@ def main():
             for k, v in line_dict_v1.items():
                 if k not in uc.params['visualization_column_names']:
                     continue
-                if str(v) == str(line_dict_v2[k]):
-                    pass
+                if v == line_dict_v2[k]:
+                    verification_results[engine]['values identical'] += 1
                 else:
                     print(
                         '''
@@ -148,11 +146,25 @@ def main():
                             line_dict_v2[k]
                         )
                     )
+                    verification_results[engine]['values conflicting'] += 1
                     # exit()
-
-
-
-
+                verification_results[engine]['values tested'] += 1
+    print()
+    print('Verification summary')
+    for engine, report_dict in verification_results.items():
+        print(
+            'Engine: {0}'.format(
+                engine
+            )
+        )
+        for k, v in sorted(report_dict.items()):
+            print(
+                '\t{0}: {1}'.format(
+                    k,
+                    v
+                )
+            )
+        print()
     return
 
 

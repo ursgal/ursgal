@@ -207,6 +207,8 @@ def main(
 
     # modification masses are rounded to allow matching to unimod
     no_decimals = params['translations']['rounded_mass_decimals']
+    variables['no_decimals'] = no_decimals
+
     if 'pipi' in search_engine.lower():
         no_decimals = 1
     if 'moda' in search_engine.lower():
@@ -332,18 +334,18 @@ def main(
         'pipi',
         'moda',
     ]
-    de_novo = False
-    database_search = False
-    open_mod_search = False
+    variables['de_novo'] = False
+    variables['database_search'] = False
+    variables['open_mod_search'] = False
     for de_novo_engine in de_novo_engines:
         if de_novo_engine in search_engine.lower():
-            de_novo = True
+            variables['de_novo'] = True
     for db_se in database_search_engines:
         if db_se in search_engine.lower():
-            database_search = True
+            variables['database_search'] = True
     for om_se in open_mod_search_engines:
         if om_se in search_engine.lower():
-            open_mod_search = True
+            variables['open_mod_search'] = True
 
     if params['translations']['enzyme'] != 'nonspecific':
         allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')
@@ -358,7 +360,7 @@ def main(
     variables['inhibitor_aa']  = inhibitor_aa
 
 
-    if database_search is True:
+    if variables['database_search'] is True:
         non_enzymatic_peps = set()
         conflicting_uparams = defaultdict(set)
         fasta_lookup_name = os.path.basename(
@@ -399,7 +401,9 @@ def main(
             in_file
         )
         csv_fieldnames = list(csv_input.fieldnames)
-        variables['fieldnames'] = copy.deepcopy( csv_fieldnames )
+        variables['fieldnames'] = copy.deepcopy(
+            csv_fieldnames
+        )
         # recheck if fieldnames are correct. These are corrected in the upeptide
         # mapper but if the search engine is a de novo engine then the fields
         # might be incorrect
@@ -429,7 +433,10 @@ def main(
 
         for new_fieldname in new_fieldnames:
             if new_fieldname not in csv_fieldnames:
-                csv_fieldnames.insert( -5, new_fieldname )
+                csv_fieldnames.insert(
+                    -5, # why minus 5?
+                    new_fieldname
+                )
         csv_output = csv.DictWriter(
             output_file_object,
             csv_fieldnames,
@@ -698,7 +705,7 @@ def main(
             line_dict.update( line_dict_update )
 
             # protein block, only for database search engine
-            if database_search is True:
+            if variables['database_search'] is True:
                 # check for correct cleavage sites and set a new field to
                 # verify correct enzyme performance
                 lookup_identifier = '{0}><{1}'.format(
@@ -706,7 +713,9 @@ def main(
                     fasta_lookup_name
                 )
                 if lookup_identifier not in conflicting_uparams.keys():
-                    #check if peptide was mapped
+                    #############################
+                    # check peptide mapping     #
+                    #############################
                     line_dict, variables = unify_csv_2_0_0.engines._engine_independent\
                         .check_if_peptide_was_mapped(
                             line_dict,
@@ -717,17 +726,20 @@ def main(
                         print('''
                 [ WARNING ] The peptide {0} could not be mapped to the
                 [ WARNING ] given database {1}
-                [ WARNING ] {2}
                 [ WARNING ] This PSM will be skipped.
                             '''.format(
                                 line_dict['Sequence'],
                                 params['database'],
-                                '' # what goes here???
                             )
                         )
                         continue
+                    #############################
+                    # END checkpeptide mapping  #
+                    #############################
 
-                    # check for enzyme specificity
+                    #############################
+                    # check enzyme specificity  #
+                    #############################
                     line_dict, variables = unify_csv_2_0_0.engines._engine_independent\
                         .verify_cleavage_specificity(
                             line_dict,
@@ -740,28 +752,27 @@ def main(
                         conflicting_uparams[lookup_identifier].add(
                             'enzyme'
                         )
-                    # END check for enzyme specificity
+                    ###############################
+                    # END check enzyme specificity#
+                    ###############################
 
+                    #############################
+                    # check missed cleavages    #
+                    #############################
+                    line_dict, variables = unify_csv_2_0_0.engines._engine_independent\
+                        .count_missed_cleavages(
+                            line_dict,
+                            variables
+                        )
+                    
+                    if variables['missed_cleavage_counter'] > variables['params']['translations']['max_missed_cleavages']:
+                        conflicting_uparams[lookup_identifier].add(
+                            'max_missed_cleavages'
+                        )
+                    #############################
+                    #END check missed cleavages #
+                    #############################
 
-                    #check here if missed cleavage count is correct...
-                    missed_cleavage_counter = 0
-                    for aa in allowed_aa:
-                        if aa == '-':
-                            continue
-                        if cleavage_site == 'C':
-                            missed_cleavage_pattern = '{0}[^{1}]'.format(
-                                aa, inhibitor_aa
-                            )
-                            missed_cleavage_counter += \
-                                len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
-                        elif cleavage_site == 'N':
-                            missed_cleavage_pattern = '[^{1}]{0}'.format(
-                                aa, inhibitor_aa
-                            )
-                            missed_cleavage_counter += \
-                                len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
-                    if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
-                        conflicting_uparams[lookup_identifier].add('max_missed_cleavages')
                 # count each PSM occurence to check whether row-merging is needed:
                 # psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 # psm_counter[psm] += 1
@@ -774,16 +785,15 @@ def main(
                     line_dict['Conflicting uparam'] = ';'.join(
                         sorted(conflicting_uparams[lookup_identifier])
                     )
-            csv_output.writerow(line_dict)
-            # if line_dict['Sequence'] == 'YICDNQDTISSK' and line_dict['Spectrum ID']  =='2590':
-            #     print(line_dict)
-            #     exit()
+            csv_output.writerow(
+                line_dict
+            )
             '''
                 to_be_written_csv_lines.append( line_dict )
             '''
     output_file_object.close()
 
-    if database_search is True:
+    if variables['database_search'] is True:
         # upapa.purge_fasta_info( fasta_lookup_name )
         if len(non_enzymatic_peps) != 0:
             print('''
