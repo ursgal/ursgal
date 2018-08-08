@@ -296,10 +296,7 @@ class msfragger_20170103( ursgal.UNode ):
         '''
         Reads MSFragger tsv output and write final csv output file.
 
-        Adds:
-            * Converts masses in Da to m/z (could be done in unify_csv)
-
-
+        Translates also the headers
         '''
         ms_fragger_header = [
             'ScanID',
@@ -350,9 +347,6 @@ class msfragger_20170103( ursgal.UNode ):
             self.params['input_dir_path'],
             file_root_for_ms_fragger
         )
-        # print(msfragger_output_tsv)
-        # print(self.params['translations']['output_file_incl_path'])
-        # exit()
 
         csv_out_fobject = open(self.params['translations']['output_file_incl_path'], 'w')
         csv_writer = csv.DictWriter(
@@ -368,20 +362,6 @@ class msfragger_20170103( ursgal.UNode ):
                 delimiter = '\t'
             )
             for line_dict in csv_reader:
-                ############################################
-                # all fixing here has to go into unify csv! #
-                ############################################
-
-                # 'Precursor neutral mass (Da)' : '',
-                # 'Neutral mass of peptide' : 'Calc m/z',# (including any variable modifications) (Da) 
-                line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
-                    line_dict['MSFragger:Precursor neutral mass (Da)'],
-                    line_dict['Charge']
-                )
-                line_dict['Calc m/z'] = ursgal.ucore.calculate_mz(
-                    line_dict['MSFragger:Neutral mass of peptide'],
-                    line_dict['Charge']
-                )
                 csv_writer.writerow( line_dict )
 
         csv_out_fobject.close()

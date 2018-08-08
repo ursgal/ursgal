@@ -86,7 +86,17 @@ unify_csv.main(
         'label' : '',
         'mods' : R.params['mods'],
     },
-    search_engine  = 'omssa_2_1_9',
+    
+    meta_info = {
+        'search_engine'  : 'omssa_2_1_9',
+        'score_colname' : None,
+        'raw_data_location' : os.path.join(
+            'tests',
+            'data',
+            'BSA1.mzML'
+        )
+
+    }
 )
 
 ident_list = [ ]

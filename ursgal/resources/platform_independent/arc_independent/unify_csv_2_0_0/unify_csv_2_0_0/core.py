@@ -498,6 +498,12 @@ def main(
                 # check MSFragger crazy mod merge first...
                 if 'msfragger' in variables['search_engine'].lower():
                     line_dict, variables = unify_csv_2_0_0.engines.msfragger\
+                        .convert_mass_to_mz_values(
+                            line_dict,
+                            variables
+                        )
+                    
+                    line_dict, variables = unify_csv_2_0_0.engines.msfragger\
                         .reformat_modifications(
                             line_dict,
                             variables

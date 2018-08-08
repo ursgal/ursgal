@@ -1,8 +1,28 @@
 import decimal
+import ursgal.ucore
+
 
 def translate_headers(line_dict, variables):
 
-    return
+    return line_dict, variables
+
+
+def convert_mass_to_mz_values(line_dict, variables):
+    '''
+    'Precursor neutral mass (Da)' : '',
+    'Neutral mass of peptide' : 'Calc m/z',
+
+    Masses include  any variable modifications (Da)
+    '''
+    line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
+        line_dict['MSFragger:Precursor neutral mass (Da)'],
+        line_dict['Charge']
+    )
+    line_dict['Calc m/z'] = ursgal.ucore.calculate_mz(
+        line_dict['MSFragger:Neutral mass of peptide'],
+        line_dict['Charge']
+    )
+    return line_dict, variables
 
 
 def reformat_modifications(line_dict, variables):
