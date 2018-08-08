@@ -2915,6 +2915,8 @@ True
                       # pass
             input_file = tmp_file_name
         engine_name = self.engine_sanity_check( engine )
+        print('PRINTING HERE PRINTING HERE')
+        print(input_file)
         multi, input_file = self.distinguish_multi_and_single_input( input_file )
         self.input_file_sanity_check( input_file, engine=engine_name, multi=multi )
 

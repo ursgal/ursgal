@@ -157,6 +157,9 @@ class pyqms_1_0_0(ursgal.UNode):
                 # }
             )
 
+        #print(self.params['translations']['molecules_to_quantify'])
+        #print(self.params['mods'])
+
         out = main(
             mzml_file=mzml_files,
             output_file=output_file,
