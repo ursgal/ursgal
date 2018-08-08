@@ -298,36 +298,17 @@ def main(
         ##############################
 
     ursgal.GlobalUnimodMapper._reparseXML()
-    de_novo_engines = [
-        'novor',
-        'pepnovo',
-        'uninovo',
-        'unknown_engine'
-    ]
-    database_search_engines = [
-        'msamanda',
-        'msgf',
-        'myrimatch',
-        'omssa',
-        'xtandem',
-        'msfragger',
-    ]
-    open_mod_search_engines = [
-        'pipi',
-        'moda',
-    ]
-    variables['de_novo'] = False
-    variables['database_search'] = False
-    variables['open_mod_search'] = False
-    for de_novo_engine in de_novo_engines:
-        if de_novo_engine in variables['search_engine'].lower():
-            variables['de_novo'] = True
-    for db_se in database_search_engines:
-        if db_se in variables['search_engine'].lower():
-            variables['database_search'] = True
-    for om_se in open_mod_search_engines:
-        if om_se in variables['search_engine'].lower():
-            variables['open_mod_search'] = True
+
+    # 'cross_link_search_engine'                : False,
+    # 'de_novo_search_engine'                   : False,
+    # 'protein_database_search_engine'          : False,
+    # 'protein_database_open_mod_search_engine' : False,
+    # 'spectral_library_search_engine'          : False,
+
+    # reassignment, because one can use short names and code works as before
+    variables['de_novo']         = variables['meta_info']['de_novo_search_engine']
+    variables['database_search'] = variables['meta_info']['protein_database_search_engine']
+    variables['open_mod_search'] = variables['meta_info']['protein_database_open_mod_search_engine']
 
     if params['translations']['enzyme'] != 'nonspecific':
         allowed_aa, cleavage_site, inhibitor_aa = params['translations']['enzyme'].split(';')

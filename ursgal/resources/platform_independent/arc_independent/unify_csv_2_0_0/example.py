@@ -23,8 +23,7 @@ scan_rt_lookup = pickle.load(
             'tests',
             'data',
             '_test_ursgal_lookup.pkl'
-        )
-        ,
+        ),
         'rb'
     )
 )
@@ -51,7 +50,18 @@ unify_csv_2_0_0.main(
         'label' : '',
         'mods' : mods
     },
-    search_engine  = 'omssa_2_1_9',
+    meta_info = {
+        'search_engine'  : 'omssa_2_1_9',
+        'score_colname' : None,
+        'raw_data_location' : os.path.join(
+            'tests',
+            'data',
+            'BSA1.mzML'
+        ),
+        'cross_link_search_engine'                : False,
+        'de_novo_search_engine'                   : False,
+        'protein_database_search_engine'          : True,
+        'protein_database_open_mod_search_engine' : False,
+        'spectral_library_search_engine'          : False,
+    }
 )
-
-

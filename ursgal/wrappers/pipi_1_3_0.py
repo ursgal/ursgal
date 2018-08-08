@@ -32,7 +32,7 @@ class pipi_1_3_0(ursgal.UNode):
         'include_in_git': False,
         'distributable': False,
         'engine_type': {
-            'protein_database_search_engine': True,
+            'protein_database_open_mod_search_engine': True,
         },
         'engine': {
             'platform_independent': {

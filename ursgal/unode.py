@@ -674,6 +674,7 @@ class UNode(object, metaclass=Meta_UNode):
                 'cross_link_search_engine',
                 'de_novo_search_engine',
                 'protein_database_search_engine',
+                'protein_database_open_mod_search_engine',
                 'spectral_library_search_engine',
             ],
             multiple_engines=multiple_engines,

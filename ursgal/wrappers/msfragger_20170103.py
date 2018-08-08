@@ -42,7 +42,7 @@ class msfragger_20170103( ursgal.UNode ):
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
-        'distributable'           : False,
+        'distributable'               : False,
         'engine_type' : {
             'protein_database_search_engine' : True,
         },
@@ -296,11 +296,12 @@ class msfragger_20170103( ursgal.UNode ):
         '''
         Reads MSFragger tsv output and write final csv output file.
 
-        Adds:
+        Adds for unify_csv_v1:
             * Raw data location, since this can not be added later
             * Converts masses in Da to m/z (could be done in unify_csv)
 
-
+        If we just move the tsv file to the correct folder the header translation
+        can also be done in unify_csv_2_0_0
         '''
         ms_fragger_header = [
             'ScanID',
@@ -389,6 +390,8 @@ class msfragger_20170103( ursgal.UNode ):
                         line_dict['Charge']
                     )
                 else:
+                    # in version unify_csv_2_0_0 this is not longer done here
+                    # the header conversion is still an issue
                     pass
                 csv_writer.writerow( line_dict )
 

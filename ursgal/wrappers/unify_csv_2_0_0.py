@@ -88,15 +88,24 @@ Could not load RT lookup dict from this location: {0}
         last_search_engine_colname = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]
         
         meta_info_for_unify_engine = {
-            'search_engine'        : last_engine,
-            'score_colname'        : last_search_engine_colname,
-
+            'search_engine'                           : last_engine,
+            'score_colname'                           : last_search_engine_colname,
+            'cross_link_search_engine'                : False,
+            'de_novo_search_engine'                   : False,
+            'protein_database_search_engine'          : False,
+            'protein_database_open_mod_search_engine' : False,
+            'spectral_library_search_engine'          : False,
         }
+        # pprint.pprint(self.stats['history'])
+        # exit()
         for history_object in self.stats['history']:
             if history_object['engine'] == last_engine:
                 meta_info_for_unify_engine['raw_data_location'] = os.path.join(
                     history_object['finfo']['dir'],
                     history_object['finfo']['file']
+                )
+                meta_info_for_unify_engine.update(
+                    history_object['META_INFO']['engine_type']
                 )
                 break
         # header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']

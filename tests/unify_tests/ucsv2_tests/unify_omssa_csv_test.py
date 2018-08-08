@@ -93,7 +93,12 @@ unify_csv.main(
             'tests',
             'data',
             'BSA1.mzML'
-        )
+        ),
+        'cross_link_search_engine'                : False,
+        'de_novo_search_engine'                   : False,
+        'protein_database_search_engine'          : True,
+        'protein_database_open_mod_search_engine' : False,
+        'spectral_library_search_engine'          : False,
     }
 )
 
