@@ -86,7 +86,6 @@ unify_csv.main(
         'label' : '',
         'mods' : R.params['mods'],
     },
-    
     meta_info = {
         'search_engine'  : 'omssa_2_1_9',
         'score_colname' : None,
@@ -95,7 +94,6 @@ unify_csv.main(
             'data',
             'BSA1.mzML'
         )
-
     }
 )
 

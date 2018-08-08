@@ -14,14 +14,19 @@ def convert_mass_to_mz_values(line_dict, variables):
 
     Masses include  any variable modifications (Da)
     '''
-    line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
+
+    exp_mz = ursgal.ucore.calculate_mz(
         line_dict['MSFragger:Precursor neutral mass (Da)'],
         line_dict['Charge']
     )
-    line_dict['Calc m/z'] = ursgal.ucore.calculate_mz(
+    calc_mz = ursgal.ucore.calculate_mz(
         line_dict['MSFragger:Neutral mass of peptide'],
         line_dict['Charge']
     )
+
+    line_dict['Exp m/z'] = exp_mz
+    line_dict['Calc m/z'] = calc_mz
+
     return line_dict, variables
 
 

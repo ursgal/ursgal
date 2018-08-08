@@ -409,6 +409,8 @@ def main(
             'Sequence Post AA',
             'Complies search criteria',
             'Conflicting uparam',
+            # 'Exp m/z',
+            # 'Calc m/z'
         ]
 
         for new_fieldname in new_fieldnames:
@@ -448,6 +450,15 @@ def main(
             #             variables
             #         )
 
+            if 'msfragger' in variables['search_engine'].lower():
+                # has to be done for every line, must not be buffered in the
+                # loop below!
+                line_dict, variables = unify_csv_2_0_0.engines.msfragger\
+                    .convert_mass_to_mz_values(
+                        line_dict,
+                        variables
+                    )
+
             ##########################
             # Spectrum Title block   #
             ##########################
@@ -485,9 +496,6 @@ def main(
                 **line_dict
             )
 
-            # if line_dict['Sequence'] == 'YICDNQDTISSK' and line_dict['Spectrum ID']  =='2590':
-            #     print(line_dict)
-            #     exit()
             if main_buffer_key not in ze_only_buffer.keys():
                 # THIS MUST NOT BE DEEPCOPIED, CEATE EMPTY DICT!!!! and pass both dicts to the dunction
                 line_dict_update = {}
@@ -497,12 +505,6 @@ def main(
                 ######################
                 # check MSFragger crazy mod merge first...
                 if 'msfragger' in variables['search_engine'].lower():
-                    line_dict, variables = unify_csv_2_0_0.engines.msfragger\
-                        .convert_mass_to_mz_values(
-                            line_dict,
-                            variables
-                        )
-                    
                     line_dict, variables = unify_csv_2_0_0.engines.msfragger\
                         .reformat_modifications(
                             line_dict,

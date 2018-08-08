@@ -115,6 +115,25 @@ def calculate_mz(mass, charge):
     return calc_mz
 
 
+def calculate_mass(mz, charge):
+    '''
+    Calculate mass function
+
+    Keyword Arguments:
+        mz (float): mz for calculating mass
+        charge (int): charge for calculating mass
+
+
+    Returns:
+        float: calculated m/z
+
+    '''
+    mz = float(mz)
+    charge = int(charge)
+    calc_mass = (mz *charge) - (charge * PROTON)
+    return calc_mass
+
+
 def digest(sequence, enzyme, no_missed_cleavages=False):
     '''
     Amino acid digest function
