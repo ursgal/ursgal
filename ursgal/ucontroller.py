@@ -1307,12 +1307,12 @@ class UController(ursgal.UNode):
             # for json dump.. evals are always done on loaded
             # i_finfo and o_finfo
        
-        print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-        print(self.io['input']['finfo'].keys())
+        #print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
+        #print(self.io['input']['finfo'].keys())
         if self.io['input']['finfo']['json_exists']:
             self.io['input']['finfo']['md5'] = self.io['input']['o_finfo']['md5']
-            print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-            print(self.io['input']['finfo'].keys())
+            #print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
+            #print(self.io['input']['finfo'].keys())
         # setting pickle path ...
         pickle_path = self.io['input'].get(
             'scan_rt_lookup_path',
