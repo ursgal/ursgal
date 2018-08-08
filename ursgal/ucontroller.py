@@ -956,6 +956,8 @@ class UController(ursgal.UNode):
             )
 
         else:
+            print('PRINTING HERE PRINTING HERE')
+            print(merge_duplicates)
             outfile = self.execute_unode(
                 input_file       = input_file,
                 engine           = engine,
@@ -1019,9 +1021,6 @@ class UController(ursgal.UNode):
             input_file       = self.generate_multi_helper_file( input_file )
             self.dump_multi_json( input_file, self.input_file_dicts )
         
-        print('PRINTING HERE PRINTING HERE')
-        print(input_file)
-
         self.set_ios(
             input_file,
             engine = engine_name,
