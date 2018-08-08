@@ -1018,7 +1018,9 @@ class UController(ursgal.UNode):
             # the helper file now acts as the input file:
             input_file       = self.generate_multi_helper_file( input_file )
             self.dump_multi_json( input_file, self.input_file_dicts )
-
+        print('<<<<<<<<<<<<<<<<<<<')
+        print('PRINTING HERE PRINTING HERE PRINTING HERE')
+        print(output_file)
         self.set_ios(
             input_file,
             engine = engine_name,
@@ -2915,8 +2917,8 @@ True
                       # pass
             input_file = tmp_file_name
         engine_name = self.engine_sanity_check( engine )
-        print('PRINTING HERE PRINTING HERE')
-        print(input_file)
+        #print('PRINTING HERE PRINTING HERE')
+        #print(input_file)
         multi, input_file = self.distinguish_multi_and_single_input( input_file )
         self.input_file_sanity_check( input_file, engine=engine_name, multi=multi )
 
