@@ -258,8 +258,13 @@ class msfragger_20170103( ursgal.UNode ):
             self.input_file.lower().endswith('.mzml.gz'):
             self.params['translations']['mzml_input_file'] = self.input_file
         elif self.input_file.lower().endswith('.mgf'):
-            self.params['translations']['mzml_input_file'] = \
-                self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( self.input_file )
+            mzml_file_corresponding_to_mgf = self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf(
+                self.input_file
+            )
+            self.params['translations']['mzml_input_file'] = mzml_file_corresponding_to_mgf
+            self.params['input_file'] = os.path.basename(
+                mzml_file_corresponding_to_mgf
+            )
             self.print_info(
                 'MSFragger can only read Proteowizard MGF input files,'
                 'the corresponding mzML file {0} will be used instead.'.format(
@@ -292,7 +297,6 @@ class msfragger_20170103( ursgal.UNode ):
         Reads MSFragger tsv output and write final csv output file.
 
         Adds:
-            * Raw data location, since this can not be added later
             * Converts masses in Da to m/z (could be done in unify_csv)
 
 
@@ -333,11 +337,22 @@ class msfragger_20170103( ursgal.UNode ):
             'Calc m/z',
 
         ]
-
+        file_root_for_ms_fragger = '{0}{1}'.format(
+            self.params['file_root'],
+            '.tsv'
+        )
+        if self.params['label'] is not None:
+            file_root_for_ms_fragger = file_root_for_ms_fragger.replace(
+                '{0}_'.format(self.params['label']),
+                ''
+            )
         msfragger_output_tsv = os.path.join(
             self.params['input_dir_path'],
-            self.params['file_root'] + '.tsv'
+            file_root_for_ms_fragger
         )
+        # print(msfragger_output_tsv)
+        # print(self.params['translations']['output_file_incl_path'])
+        # exit()
 
         csv_out_fobject = open(self.params['translations']['output_file_incl_path'], 'w')
         csv_writer = csv.DictWriter(
@@ -353,10 +368,6 @@ class msfragger_20170103( ursgal.UNode ):
                 delimiter = '\t'
             )
             for line_dict in csv_reader:
-                line_dict['Raw data location'] = os.path.abspath(
-                    self.params['translations']['mzml_input_file']
-                )
-
                 ############################################
                 # all fixing here has to go into unify csv! #
                 ############################################

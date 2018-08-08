@@ -36,8 +36,8 @@ def reformat_ursgal_mods(params=None, variables=None):
             aa = modification['aa']
             pos = modification['pos']
             name = modification['name']
-            if variables['mod_dict'] is None:
-                variables['mod_dict'] = {}
+            # if variables['mod_dict'] is None:
+            #     variables['mod_dict'] = {}
 
             if name not in variables['mod_dict'].keys():
                 variables['mod_dict'][name] = {
@@ -50,8 +50,8 @@ def reformat_ursgal_mods(params=None, variables=None):
             if 'N-term' in pos:
                 variables['n_term_replacement'][name] = aa
             if mod_type == 'fix':
-                if variables['fixed_mods'] is None:
-                    variables['fixed_mods'] = {}
+                # if variables['fixed_mods'] is None:
+                #     variables['fixed_mods'] = {}
 
                 variables['fixed_mods'][aa] = name
                 if aa == 'C' and name == 'Carbamidomethyl':
@@ -74,8 +74,7 @@ def main(
     output_file=None,
     scan_rt_lookup=None,
     params=None,
-    search_engine=None,
-    score_colname=None
+    meta_info=None,
 ):
     '''
     Arguments:
@@ -136,9 +135,15 @@ def main(
           merged modifications have to be corrected.
 
     '''
-
-    # from unify_csv_2_0_0.engines import _engine_independent
-
+    variables = {
+        'scan_rt_lookup' : scan_rt_lookup,
+        'params'         : params,
+        'meta_info'      : meta_info
+    }
+    variables['search_engine'] = variables['meta_info']['search_engine'].lower() # reassign here
+    # search_engine     = variables['meta_info']['search_engine']
+    # score_colname     = variables['meta_info']['score_colname']
+    # raw_data_location = variables['meta_info']['raw_data_location']
 
     # import time
     # increase the field size limit to avoid crash if protein merge tags
@@ -155,7 +160,7 @@ def main(
 [ unifycsv ] Converting {0} of engine {1} to unified CSV format...
         '''.format(
             os.path.basename(input_file),
-            search_engine,
+            variables['search_engine']
         )
     )
 
@@ -164,10 +169,7 @@ def main(
     # PROPOSAL: let's use a centralized dict for all variable so we can pass
     #           it through the functions as well, let's say variables
 
-    variables = {
-        'scan_rt_lookup' : scan_rt_lookup,
-        'params'         : params
-    }
+
     # get the rows which define a unique PSM (i.e. sequence+spec+score...)
     # psm_defining_colnames = get_psm_defining_colnames(score_colname, search_engine)
     joinchar              = params['translations']['protein_delimiter']
@@ -175,7 +177,7 @@ def main(
     created_tmp_files     = []
 
     variables['use15N']   = False
-    variables['search_engine'] = search_engine.lower()
+
     variables['joinchar'] = joinchar
 
     # ^--- sooner or later this should end up in variables ...
@@ -198,9 +200,9 @@ def main(
     # mod_dict     = {}
     # cam          = False
 
-    variables['fixed_mods'] = None
-    variables['opt_mods'] = None
-    variables['mod_dict'] = None
+    variables['fixed_mods'] = {}
+    variables['opt_mods'] = {}
+    variables['mod_dict'] = {}
     variables['cam'] = False
     variables['app_mass_to_name_list_buffer'] = {}
     variables['cc'] = ursgal.ChemicalComposition()
@@ -209,9 +211,9 @@ def main(
     no_decimals = params['translations']['rounded_mass_decimals']
     variables['no_decimals'] = no_decimals
 
-    if 'pipi' in search_engine.lower():
+    if 'pipi' in variables['search_engine'].lower():
         no_decimals = 1
-    if 'moda' in search_engine.lower():
+    if 'moda' in variables['search_engine'].lower():
         no_decimals = 0
     variables['mass_format_string'] = '{{0:3.{0}f}}'.format(no_decimals)
 
@@ -219,38 +221,11 @@ def main(
     variables['mod_pattern'] = re.compile( r''':(?P<pos>[0-9]*$)''' )
 
     variables = reformat_ursgal_mods(
-        params=params,
-        variables=variables
+        params    = params,
+        variables = variables
     )
-    # for mod_type in ['fix', 'opt']:
-    #     for modification in params['mods'][mod_type]:
-    #         aa = modification['aa']
-    #         pos = modification['pos']
-    #         name = modification['name']
-    #         if name not in mod_dict.keys():
-    #             mod_dict[name] = {
-    #                 'mass' : modification['mass'],
-    #                 'aa' : set(),
-    #                 'pos': set(),
-    #             }
-    #         mod_dict[name]['aa'].add(aa)
-    #         mod_dict[name]['aa'].add(pos)
-    #         if 'N-term' in pos:
-    #             n_term_replacement[name] = aa
-    #         if mod_type == 'fix':
-    #             fixed_mods[aa] = name
-    #             if aa == 'C' and name == 'Carbamidomethyl':
-    #                 cam = True
-    #                 # allow also Carbamidomnethyl on U, since the mod name gets changed
-    #                 # already in upeptide_mapper
-    #                 # According to unimod, the mnodification is also on Selenocystein
-    #                 # otherwise we should change that back so that it is skipped...
-    #                 mod_dict['Carbamidomethyl']['aa'].add('U')
-    #                 fixed_mods['U'] = 'Carbamidomethyl'
-    #         if mod_type == 'opt':
-    #             opt_mods[aa] = name
 
-    if 'msfragger' in search_engine.lower():
+    if 'msfragger' in variables['search_engine'].lower():
         ##########################
         # msfragger mod merge block
         # calculate possbile mod combos...
@@ -260,20 +235,20 @@ def main(
         # mod_dict_list = params['mods']['opt'] + params['mods']['fix']
         if variables['use15N']:
             aminoacids_2_check = set()
-            for modname in mod_dict.keys():
-                aminoacids_2_check |= mod_dict[modname]['aa']
+            for modname in variables['mod_dict'].keys():
+                aminoacids_2_check |= variables['mod_dict'][modname]['aa']
             additional_15N_modifications = []
             for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 if aminoacid not in aminoacids_2_check:
                     continue
-                if '_15N_{0}'.format(aminoacid) in mod_dict.keys():
+                if '_15N_{0}'.format(aminoacid) in variables['mod_dict'].keys():
                     print('''
                         Error in unify_csv
-                        New mod_name already present in mod_dict'
+                        New mod_name already present in variables['mod_dict']'
                         This should never happen'''
                     )
                     sys.exit(1)
-                mod_dict['_15N_{0}'.format(aminoacid)] = {
+                variables['mod_dict']['_15N_{0}'.format(aminoacid)] = {
                     'mass' : N15_Diff,
                     'aa' : set([aminoacid]),
                     'pos': set(['any']),
@@ -288,30 +263,37 @@ def main(
             #     additional_15N_modifications.append(
             #         additional_dict
             #     )
-            # mod_dict_list += additional_15N_modifications
+            # variables['mod_dict']_list += additional_15N_modifications
 
         # mod_lookup = {} #d['name'] for d in self.params['mods']['opt']]
-        # for mod_dict in mod_dict_list:
-        #     if mod_dict['name'] not in mod_lookup.keys():
-        #         mod_lookup[mod_dict['name']] = []
-        #     mod_lookup[ mod_dict['name'] ].append(mod_dict)
+        # for variables['mod_dict'] in variables['mod_dict']_list:
+        #     if variables['mod_dict']['name'] not in mod_lookup.keys():
+        #         mod_lookup[variables['mod_dict']['name']] = []
+        #     mod_lookup[ variables['mod_dict']['name'] ].append(variables['mod_dict'])
 
         mod_names = []
-        for mod in sorted(list(mod_dict.keys())):
-            mod_names.extend(itertools.repeat(mod, len(mod_dict[mod]['aa'])))
-        mass_to_mod_combo = {}
+        for mod in sorted(list(variables['mod_dict'].keys())):
+            mod_names.extend(
+                itertools.repeat(
+                    mod,
+                    len(variables['mod_dict'][mod]['aa'])
+                )
+            )
+        variables['mass_to_mod_combo'] = {}
         # we cover all combocs of mods
         for iter_length in range(2, len(mod_names) + 1):
             for name_combo in itertools.combinations(mod_names, iter_length):
                 mass = 0
                 for name in name_combo:
-                    mass += decimal.Decimal(mod_dict[name]['mass'])
-                rounded_mass = mass_format_string.format(mass)
-                if rounded_mass not in mass_to_mod_combo.keys():
-                    mass_to_mod_combo[rounded_mass] = set()
-                mass_to_mod_combo[ rounded_mass ].add( name_combo )
-        # print(mass_to_mod_combo.keys())
-        # sys.exit(1)
+                    mass += decimal.Decimal(
+                        variables['mod_dict'][name]['mass']
+                    )
+                rounded_mass = variables['mass_format_string'].format(mass)
+                if rounded_mass not in variables['mass_to_mod_combo'].keys():
+                    variables['mass_to_mod_combo'][rounded_mass] = set()
+                variables['mass_to_mod_combo'][ rounded_mass ].add(
+                    name_combo
+                )
         #msfragger mod merge block end
         ##############################
 
@@ -338,13 +320,13 @@ def main(
     variables['database_search'] = False
     variables['open_mod_search'] = False
     for de_novo_engine in de_novo_engines:
-        if de_novo_engine in search_engine.lower():
+        if de_novo_engine in variables['search_engine'].lower():
             variables['de_novo'] = True
     for db_se in database_search_engines:
-        if db_se in search_engine.lower():
+        if db_se in variables['search_engine'].lower():
             variables['database_search'] = True
     for om_se in open_mod_search_engines:
-        if om_se in search_engine.lower():
+        if om_se in variables['search_engine'].lower():
             variables['open_mod_search'] = True
 
     if params['translations']['enzyme'] != 'nonspecific':
@@ -393,8 +375,6 @@ def main(
         csv_kwargs['lineterminator'] = '\r\n'
 
     ze_only_buffer = {}
-
-
 
     with open( input_file, 'r' ) as in_file:
         csv_input  = csv.DictReader(
@@ -516,112 +496,12 @@ def main(
                 # Modification block #
                 ######################
                 # check MSFragger crazy mod merge first...
-                if 'msfragger' in search_engine.lower():
-                    # we have to reformat the modifications
-                    # M|14$15.994915|17$57.021465 to 15.994915:14;57.021465:17
-                    # reformat it in Xtandem style
-                    ms_fragger_reformatted_mods = []
-                    if line_dict['Modifications'] == 'M':
-                        # M stand for Modifications here, not Methionine
-                        line_dict['Modifications'] = ''
-                    else:
-                        mod_list = line_dict['Modifications']
-                        for single_mod in mod_list.split('|'):
-                            if single_mod in ['M','']:
-                                continue
-                            msfragger_pos, raw_msfragger_mass = single_mod.split('$')
-                            msfragger_mass      = mass_format_string.format(
-                                # mass rounded as defined above
-                                decimal.Decimal(raw_msfragger_mass)
-                            )
-                            msfragger_pos       = int(msfragger_pos)
-                            if msfragger_mass in mass_to_mod_combo.keys():
-                                explainable_combos = []
-                                for combo in mass_to_mod_combo[msfragger_mass]:
-                                    combo_explainable = set([True])
-                                    tmp_mods = []
-                                    for new_name in combo:
-                                        meta_mod_info = mod_dict[new_name]
-                                        single_mod_check = set([True])
-                                        '''
-                                        meta_mod_info = {
-                                            'aa': set of aa,
-                                            'mass': 42.010565,
-                                            'pos': set of pos,
-                                        }
-                                        '''
-                                        #check aa
-                                        if '*' not in meta_mod_info['aa'] and \
-                                            line_dict['Sequence'][msfragger_pos] not in meta_mod_info['aa']:
-                                                single_mod_check.add(False)
-                                        # check pos
-                                        if 'any' not in meta_mod_info['pos']:
-                                            pos_to_check = set()
-                                            if 'Prot-N-term' in meta_mod_info['pos'] or\
-                                                'N-term' in meta_mod_info['pos']:
-                                                pos_to_check.add(0)
-                                            elif 'Prot-C-term' in meta_mod_info['pos'] or \
-                                                'C-term' in meta_mod_info['pos']:
-                                                pos_to_check.add(int(len(line_dict['Sequence'])) - 1)
-                                            else:
-                                                pass
-                                            if pos_to_check != set():
-                                                if msfragger_pos not in pos_to_check:
-                                                    single_mod_check.add(False)
-
-                                        if all(single_mod_check):
-                                            # MS Frager starts counting at zero
-                                            pos_in_peptide_for_format_str = msfragger_pos + 1
-                                            # we keep mass here so that the
-                                            # correct name is added later in already
-                                            # existing code
-                                            tmp_mods.append(
-                                                '{0}:{1}'.format(
-                                                    meta_mod_info['mass'],
-                                                    pos_in_peptide_for_format_str
-                                                )
-                                            )
-                                        else:
-                                            combo_explainable.add(False)
-                                    if all(combo_explainable):
-                                        explainable_combos.append(tmp_mods)
-                                if len(explainable_combos) > 1:
-                                    print(
-                                        '''
-                                        [ WARNING ] Multiple modification combinations possible
-                                        [ WARNING ] to explain reported modification mass
-                                        [ WARNING ] The following combination was chosen to continue:
-                                        [ WARNING ] {0}
-                                        '''.format(
-                                            sorted(explainable_combos)[0],
-                                        )
-                                    )
-                                    # pprint.pprint(explainable_combos)
-                                    # ms_fragger_reformatted_mods += sorted(explainable_combos)[0]
-                                    # sys.exit(1)
-                                elif len(explainable_combos) == 1:
-                                    ms_fragger_reformatted_mods += sorted(explainable_combos)[0]
-                                else:
-                                    # no combos explainable
-                                    ms_fragger_reformatted_mods.append(
-                                        '{0}:{1}'.format(
-                                            raw_msfragger_mass,
-                                            msfragger_pos + 1
-                                        )
-                                    )
-                            else:
-                                # MS Frager starts counting at zero
-                                ms_fragger_reformatted_mods.append(
-                                    '{0}:{1}'.format(
-                                        raw_msfragger_mass,
-                                        msfragger_pos + 1
-                                    )
-                                )
-                        # print(line_dict['Modifications'])
-                        # print(mass_to_mod_combo.keys())
-                        # print(ms_fragger_reformatted_mods)
-                        # sys.exit(1)
-                        line_dict['Modifications'] = ';'.join( ms_fragger_reformatted_mods )
+                if 'msfragger' in variables['search_engine'].lower():
+                    line_dict, variables = unify_csv_2_0_0.engines.msfragger\
+                        .reformat_modifications(
+                            line_dict,
+                            variables
+                        )
 
                 ##################################################
                 # Some engines do not report fixed modifications #

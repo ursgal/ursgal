@@ -2,6 +2,7 @@ import ursgal
 from collections import defaultdict
 import re
 import os
+import copy
 
 
 def reformat_title(line_dict, variables):
@@ -16,6 +17,18 @@ def reformat_title(line_dict, variables):
     variables['_spectrum_id'] = None
     variables['charge'] = None
     variables['pure_input_file_name'] = None
+
+    # E.g. MS Fragger does not set a raw data location, so we can generalize it
+    # here since we have the information from the history.
+    set_raw_data_location = False
+    if 'Raw data location' not in line_dict.keys():
+        set_raw_data_location = True
+    elif line_dict['Raw data location'] == '':
+        set_raw_data_location = True
+    else:
+        pass
+    if set_raw_data_location is True:
+        line_dict['Raw data location'] = variables['meta_info']['raw_data_location']
 
     if line_dict['Spectrum Title'] != '':
         '''
@@ -187,7 +200,7 @@ def convert_mods_to_unimod_style(line_dict, variables, line_dict_update):
             masses_2_test = [float_mod]
             if variables['use15N']:
                 substract_15N_diff = False
-                if aa in fixed_mods.keys() and 'msgfplus' in variables['search_engine'].lower() and pos != 0:
+                if aa in variables['fixed_mods'].keys() and 'msgfplus' in variables['search_engine'].lower() and pos != 0:
                     substract_15N_diff = True
                 if 'msfragger' in variables['search_engine'].lower() and float_mod > 4:
                     # maximum 15N labeling is 3.988 Da (R)
@@ -323,10 +336,10 @@ def correct_mzs(line_dict_update, variables, line_dict):
         )
     )
     if variables['use15N']:
-        number_N = dc( variables['cc']['N'] )
+        number_N = copy.deepcopy( variables['cc']['N'] )
         variables['cc']['15N'] = number_N
         del variables['cc']['N']
-        if cam:
+        if variables['cam']:
             c_count = line_dict_update['Sequence'].count('C')
             variables['cc']['14N'] = c_count
             variables['cc']['15N'] -= c_count
@@ -392,11 +405,11 @@ def add_retention_time(line_dict, variables):
                 variables['input_file_basename']
             ),
             variables['input_file_basename'].replace(
-                variables['params']['prefix'],
+                '{0}_'.format(variables['params']['prefix']),
                 ''
             )
         ]
-
+    # print(possible_rt_lookup_names)
     rt_lookup_name = None
     for rtln in possible_rt_lookup_names:
         if rtln in variables['scan_rt_lookup'].keys():
@@ -409,7 +422,7 @@ def add_retention_time(line_dict, variables):
                 variables['input_file_basename']
             )
         )
-
+    # print(rt_lookup_name)
     retention_time_in_minutes = float(
         variables['scan_rt_lookup'][rt_lookup_name][ 'scan_2_rt' ]\
             [line_dict['Spectrum ID']]
