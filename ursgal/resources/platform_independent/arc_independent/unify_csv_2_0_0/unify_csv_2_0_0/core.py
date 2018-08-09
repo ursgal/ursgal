@@ -382,7 +382,7 @@ def main(
         new_fieldnames = [
             'uCalc m/z',
             'Accuracy (ppm)',
-            'Mass Difference',
+            'Mass Difference on AA',
             'Protein ID',
             'Sequence Start',
             'Sequence Stop',

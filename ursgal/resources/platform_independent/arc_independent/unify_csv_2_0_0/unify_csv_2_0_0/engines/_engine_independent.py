@@ -288,7 +288,7 @@ def convert_mods_to_unimod_style(line_dict, variables, line_dict_update):
         tmp_mods.append(modification)
 
     line_dict_update['Modifications'] = ';'.join(tmp_mods)
-    line_dict_update['Mass Difference'] = ';'.join(tmp_mass_diff)
+    line_dict_update['Mass Difference on AA'] = ';'.join(tmp_mass_diff)
     return line_dict, variables, line_dict_update
 
 

@@ -347,6 +347,9 @@ class msfragger_20170103( ursgal.UNode ):
             file_root_for_ms_fragger = file_root_for_ms_fragger.replace(
                 '{0}_'.format(self.params['label']),
                 ''
+            ). replace(
+                '{0}_'.format(self.params['prefix']),
+                ''
             )
         msfragger_output_tsv = os.path.join(
             self.params['input_dir_path'],
