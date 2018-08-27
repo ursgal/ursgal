@@ -1,10 +1,10 @@
 Changelog
 =========
 
-Version 0.6.2    (03.2018)
+Version 0.6.2    (08.2018)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 #. MSFragger version 20171106 and PIPI version 1.4.5 were implemented
-#. Some minor bugfixes (check git log for details)
+#. Some minor bugfixes and added functionality (check git log for details)
 
 
 Version 0.6.1    (03.2018)

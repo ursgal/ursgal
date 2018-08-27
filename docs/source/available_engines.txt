@@ -88,6 +88,9 @@ PIPI
 MS Amanda
 ---------
 
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9706.msamanda_2_0_0_10695
+   :members:
+
 .. autoclass:: ursgal.wrappers.msamanda_2_0_0_9706.msamanda_2_0_0_9706
    :members:
 
