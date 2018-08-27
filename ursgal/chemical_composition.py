@@ -4,14 +4,11 @@
     Ursgal
     ----------
 
-    :copyright: (c) 2014 by C. Fufezan
+    :copyright: (c) 2014 by C. Fufezan, J. Leufken, S. Schulze
     :licence: BSD, see LISCENSE for more details
 
 """
-# pyQms.ChemicalComposition
-# By Johannes Barth and Christian Fufezan
-# module is distributed under the terms of the GNU General Public License V3
-# See LICENSE for more details.
+
 from __future__ import absolute_import
 import sys
 import re

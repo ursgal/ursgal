@@ -95,6 +95,7 @@ def convert_ppm_to_dalton(ppm_value, base_mz=1000.0):
     '''
     return float(ppm_value) / float(base_mz)
 
+
 def convert_dalton_to_ppm(da_value, base_mz=1000.0):
     '''
         Convert the precision in Dalton to ppm
@@ -325,7 +326,7 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         out_file = csv_file_path.strip('.csv') + '_merged_duplicates.csv'
     UNode.print_info(
         'Merging rows of the same PSM...',
-        caller = 'postflight'
+        caller='postflight'
     )
     # print('Merging rows of the same PSM...')
     csv_kwargs = {}
@@ -365,7 +366,7 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         os.remove(tmp_file)
     UNode.print_info(
         'Done.',
-        caller = 'postflight'
+        caller='postflight'
     )
     return out_file
 

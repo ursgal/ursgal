@@ -47,6 +47,8 @@ def main(
     prefix=None,
     scan_skip_modulo_step=None,
     ms_level=2,
+    precursor_min_charge=1,
+    precursor_max_charge=5,
 ):
 
     print(
@@ -76,6 +78,9 @@ def main(
         mz_correction_factor = machine_offset_in_ppm * 1e-6
     else:
         mz_correction_factor = 0
+    precursor_charge_range = '{0}'.format(precursor_min_charge)
+    for charge in range(precursor_min_charge+1, precursor_max_charge+1):
+        precursor_charge_range += ' and {0}'.format(charge)
     mzml_basename = os.path.basename(mzml)
     for n, spec in enumerate(run):
         if n % 500 == 0:
@@ -168,6 +173,13 @@ def main(
             print(
                 'CHARGE={0}'.format(
                     precursor_charge
+                ),
+                file=oof
+            )
+        else:
+            print(
+                'CHARGE={0}'.format(
+                    precursor_charge_range
                 ),
                 file=oof
             )

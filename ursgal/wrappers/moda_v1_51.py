@@ -6,6 +6,7 @@ import csv
 import re
 import sys
 
+
 class moda_v1_51(ursgal.UNode):
     """
     MODa UNode
@@ -256,7 +257,6 @@ class moda_v1_51(ursgal.UNode):
                     out_dict['Sequence'] = sequence
                     out_dict['Modifications'] = mods
                     out_line_dicts.append(out_dict.copy())
-
 
                     # prev_match = 0
                     # for match in mod_pattern.finditer(org_sequence):
