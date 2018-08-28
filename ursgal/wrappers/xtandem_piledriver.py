@@ -17,15 +17,14 @@ class xtandem_piledriver( ursgal.UNode ):
         'version'                     : 'Piledriver',
         'release_date'                : '2015-4-1',
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
-        'input_multi_file'            : False,
         'output_extensions'           : ['.xml'],
         'create_own_folder'           : True,
-        'compress_raw_search_results' : True,
         'in_development'              : False,
         'include_in_git'              : False,
+        'distributable'               : True,
         'utranslation_style'          : 'xtandem_style_1',
         'engine' : {
             'darwin' : {
@@ -176,6 +175,12 @@ class xtandem_piledriver( ursgal.UNode ):
         self.params['translations']['fixed_modifications'] =  ','.join( fixed_mods )
         self.params['translations']['potential_modifications'] = ','.join( potential_mods )
         self.params['translations']['refine_potential_modifications'] = ','.join( refine_potential_mods )
+
+        for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
+            if ion in self.params['translations']['score_ion_list']:
+                self.params['translations']['score_{0}_ions'.format(ion)] = 'yes'
+            else:
+                self.params['translations']['score_{0}_ions'.format(ion)] = 'no'
 
         templates = self.format_templates( )
         for file_name, content in templates.items():

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 # encoding: utf-8
 '''
 
@@ -8,22 +8,11 @@ check the format of node and param.
 from datetime import datetime
 from ursgal import uparams
 from ursgal import UController
-import pprint
+from ursgal import ukb
 
-uc = UController()
-all_node  = uc.unodes
-all_node_name = list(all_node)
-all_node_name.sort()
-remove_list = []
-for node_name in all_node_name:
-    if node_name[0] == '_':
-        if len(node_name) < 5 or node_name[0:5] != '_test':
-            remove_list.append(node_name)
-for remove_name in remove_list:
-    all_node_name.remove(remove_name)
-
+# node format
 node_meta_info = {
-    'cannot_distribute' : {
+    'distributable' : {
         'essential' : False,
         'types'     : [bool],
     },
@@ -31,38 +20,38 @@ node_meta_info = {
         'essential' : True,
         'types'     : [str],
     },
-    'compress_raw_search_results' : {
-        'essential' : False,
-        'types'     : [bool],
-    },
-    'cpu_usage' : {
-        'essential' : False,
-        'types'     : [int],
-    },
+    # 'compress_raw_search_results' : {
+    #     'essential' : False,
+    #     'types'     : [bool],
+    # },
+    # 'cpu_usage' : {
+    #     'essential' : False,
+    #     'types'     : [int],
+    # },
     'create_own_folder' : {
         'essential' : False,
         'types'     : [bool],
     },
     'edit_version' : {
-        'essential' : False,
+        'essential' : True,
         'types'     : [float],
     },
     'engine' : {
         'essential' : False,
         'types'     : [dict],
     },
-    'engine_exe' : {
-        'essential' : False,
-        'types'     : [dict],
-    },
+    # 'engine_exe' : {
+    #     'essential' : False,
+    #     'types'     : [dict],
+    # },
     'engine_type' : {
         'essential' : True,
         'types'     : [dict],
     },
-    'engine_url' : {
-        'essential' : False,
-        'types'     : [dict],
-    },
+    # 'engine_url' : {
+    #     'essential' : False,
+    #     'types'     : [dict],
+    # },
     'group_psms' : {
         'essential' : False,
         'types'     : [bool],
@@ -79,10 +68,10 @@ node_meta_info = {
         'essential' : True,
         'types'     : [list],
     },
-    'input_multi_file' : {
-        'essential' : True,
-        'types'     : [bool],
-    },
+    # 'input_multi_file' : {
+    #     'essential' : True,
+    #     'types'     : [bool],
+    # },
     'mods_to_unimod_correction' : {
         'essential' : False,
         'types'     : [dict],
@@ -121,21 +110,7 @@ node_meta_info = {
     },
 }
 
-style_list = [
-    'ucontroller_style_1',
-]
-
-all_param = uparams.ursgal_params
-all_param_name = list(all_param)
-all_param_name.sort()
-remove_list = []
-for param_name in all_param_name:
-    if param_name[0] == '_':
-        if len(param_name) < 5 or param_name[0:5] != '_test':
-            remove_list.append(param_name)
-for remove_name in remove_list:
-    all_param_name.remove(remove_name)
-
+# param format
 param_info = {
     'available_in_unode' : {
         'essential'   : True,
@@ -151,7 +126,7 @@ param_info = {
         'types'       : [str],
     },
     'edit_version' : {
-        'essential'   : False,
+        'essential'   : True,
         'types'       : [float],
     },
     'triggers_rerun' : {
@@ -180,6 +155,7 @@ param_info = {
     },
 }
 
+# type format
 type_info = {
     'str' : {
         'my_type' : str,
@@ -229,33 +205,32 @@ type_info = {
     'select' : {
         'my_type' : str,
         'option'  : {
-            'combo_box'      : [bool],
-            'radio_button'   : [bool],
-            'initial_value'  : [list],
-            'custom_val_max' : [int],
+            'select_type'       : [str],
+            'available_values'  : [list],
+            'custom_val_max'    : [int],
         },
     },
     'list' : {
         'my_type' : list,
         'option'  : {
-            'title_list'     : [list],
-            'type_dict'      : [dict],
+            'item_title'     : [str],
+            'item_type'      : [str],
             'custom_val_max' : [int],
         },
     },
-    'tuple' : {
-        'my_type' : tuple,
-        'option': {
-            'title_list'     : [list],
-            'type_dict'      : [dict],
-            'custom_val_max' : [int],
-        },
-    },
+    # 'tuple' : {
+    #     'my_type' : tuple,
+    #     'option': {
+    #         'titles'     : [list],
+    #         'type_dict'      : [dict],
+    #         'custom_val_max' : [int],
+    #     },
+    # },
     'dict' : {
         'my_type' : dict,
         'option'  : {
-            'dict_title'     : [dict],
-            'dict_type'      : [dict],
+            'item_titles'     : [dict],
+            'value_types'      : [dict],
         },
     },
     'None' : {
@@ -265,6 +240,36 @@ type_info = {
         },
     },
 }
+
+# styles which is required by system
+style_list = [
+    'ucontroller_style_1',
+]
+
+# pre-treatment of Node format
+uc = UController()
+all_node  = uc.unodes
+all_node_name = list(all_node)
+all_node_name.sort()
+remove_list = []
+for node_name in all_node_name:
+    if node_name[0] == '_':
+        if len(node_name) < 5 or node_name[0:5] != '_test':
+            remove_list.append(node_name)
+for remove_name in remove_list:
+    all_node_name.remove(remove_name)
+
+# pre-treatment of Param format
+all_param = uparams.ursgal_params
+all_param_name = list(all_param)
+all_param_name.sort()
+remove_list = []
+for param_name in all_param_name:
+    if param_name[0] == '_':
+        if len(param_name) < 5 or param_name[0:5] != '_test':
+            remove_list.append(param_name)
+for remove_name in remove_list:
+    all_param_name.remove(remove_name)
 
 
 def chk_dict_keys( parent_name='', key_list=[], dict_item={} ):
@@ -335,11 +340,7 @@ def chk_vals_types( parent_name='', key_name='', vals=[], type_list=[] ):
 def chk_json_item( parent_name='', essential=False, key_list=[], dict_item={}, \
         type_list=[] ):
     if essential is True:
-        chk_dict_keys(
-            parent_name,
-            key_list,
-            dict_item
-        )
+        chk_dict_keys( parent_name, key_list, dict_item )
 
     for key_name in key_list:
         if dict_item.get(key_name) is not None or \
@@ -350,6 +351,7 @@ def chk_json_item( parent_name='', essential=False, key_list=[], dict_item={}, \
 
 
 def chk_format_node( node_name, node_dict ):
+    print(node_name)
     chk_dict_keys(
         parent_name = node_name,
         key_list    = ['META_INFO'],
@@ -370,13 +372,13 @@ def chk_format_node( node_name, node_dict ):
             type_list   = v['types'],
         )
 
-    all_extensions    = list(all_param['_extentions']['default_value'])
+    all_extensions    = list(ukb.FILE_EXTENSIONS)
     output_extensions = node_dict['META_INFO']['output_extensions']
     input_extensions  = node_dict['META_INFO']['input_extensions']
     for ext in (output_extensions + input_extensions):
         if (ext in all_extensions) is False:
             error_msg = '\'' + str(ext) + '\'' + ' could not be found in '\
-                'uparams.ursgal_params[\'_extentions\'][\'default_value\'].keys()'
+                'uparams.ursgal_params[\'_extensions\'][\'default_value\'].keys()'
             raise ValueError(error_msg)
 
     global style_list
@@ -634,8 +636,8 @@ def chk_format_param( param_name, param_dict ):
 
         chk_vals_types(
             parent_name = 'uvalue_option',
-            key_name    = 'initial_value',
-            vals        = uvalue_option['initial_value'],
+            key_name    = 'available_values',
+            vals        = uvalue_option['available_values'],
             type_list   = [my_type],
         )
 
@@ -649,7 +651,7 @@ def chk_format_param( param_name, param_dict ):
             error_msg = 'custom_val_max is more than 0.'
             raise ValueError(error_msg)
 
-    elif uvalue_type == 'list' or uvalue_type == 'tuple':
+    elif uvalue_type == 'list':
         my_type = type_info[uvalue_type]['my_type']
 
         chk_vals_types(
@@ -684,50 +686,61 @@ def chk_format_param( param_name, param_dict ):
                 type_list   = v,
             )
 
-        title_list = uvalue_option['title_list']
-        type_dict  = uvalue_option['type_dict']
+        item_title = uvalue_option['item_title']
+        item_type  = uvalue_option['item_type']
 
-        if default_value is not None:
-            if len(title_list) != len(default_value):
-                error_msg = 'default_value is not exactly number compared '\
-                    'with title_list.'
-                raise ValueError(error_msg)
-        if none_val is not None:
-            if len(title_list) != len(none_val):
-                error_msg = 'none_val is not exactly number compared with '\
-                    'title_list.'
-                raise ValueError(error_msg)
+        # Why should checking for the same number of elements be necessary?
+        # The number of elements in a list is variable
+        # if default_value is not None:
+        #     if len(title_list) != len(default_value):
+        #         error_msg = 'default_value is not exactly number compared '\
+        #             'with title_list.'
+        #         raise ValueError(error_msg)
+        # if none_val is not None:
+        #     if len(title_list) != len(none_val):
+        #         error_msg = 'none_val is not exactly number compared with '\
+        #             'title_list.'
+        #         raise ValueError(error_msg)
 
-        chk_json_item(
-            parent_name = 'uvalue_option',
-            essential   = True,
-            key_list    = title_list,
-            dict_item   = type_dict,
-            type_list   = [str],
-        )
+        # chk_json_item(
+        #     parent_name = 'uvalue_option',
+        #     essential   = True,
+        #     key_list    = [item_title],
+        #     dict_item   = item_type,
+        #     type_list   = [str],
+        # )
 
-        list_type_list = list(set(list(type_dict.values())))
-        for k, v in type_info.items():
-            if (k in list_type_list) is True:
-                chk_json_item(
-                    parent_name = 'uvalue_option',
-                    essential   = True,
-                    key_list    = list(v['option']),
-                    dict_item   = uvalue_option,
-                    type_list   = [dict],
-                )
+        # list_type_list = list(set(list(type_dict.values())))
+        for k, v in type_info[uvalue_type]['option'].items():
+            chk_json_item(
+                parent_name = 'uvalue_option',
+                essential   = True,
+                key_list    = [k],
+                dict_item   = uvalue_option,
+                type_list   = v,
+            )
+        # for k, v in type_info.items():
+        #     if k == item_type:
+        #         chk_json_item(
+        #             parent_name = 'uvalue_option',
+        #             essential   = True,
+        #             key_list    = list(v['option']),
+        #             dict_item   = uvalue_option,
+        #             type_list   = [eval(item_type)],
+        #         )
 
-        for k, v in type_info.items():
-            for title in title_list:
-                if type_dict[title] == k:
-                    for k2, v2 in v['option'].items():
-                        chk_json_item(
-                            parent_name = k2,
-                            essential   = True,
-                            key_list    = [title],
-                            dict_item   = uvalue_option[k2],
-                            type_list   = v2,
-                        )
+        # Just one title for items in list now, so this should not be necessary anymore
+        # for k, v in type_info.items():
+        #     for title in title_list:
+        #         if type_dict[title] == k:
+        #             for k2, v2 in v['option'].items():
+        #                 chk_json_item(
+        #                     parent_name = k2,
+        #                     essential   = True,
+        #                     key_list    = [title],
+        #                     dict_item   = uvalue_option[k2],
+        #                     type_list   = v2,
+        #                 )
 
         chk_vals_types(
             parent_name = 'uvalue_option',
@@ -802,8 +815,8 @@ def chk_format_param( param_name, param_dict ):
                 type_list   = v,
             )
 
-        dict_title = uvalue_option['dict_title']
-        dict_type  = uvalue_option['dict_type']
+        dict_title = uvalue_option['item_titles']
+        dict_type  = uvalue_option['value_types']
 
         title_key_list, title_layer_dict = search_dict_keys(
             dict_item  = dict_title,
@@ -827,14 +840,14 @@ def chk_format_param( param_name, param_dict ):
             error_msg = 'dict_title is single layer.'
             raise ValueError(error_msg)
 
-        for k in key_list:
-            dict_title = dict_title[k]
-        chk_vals_types(
-            parent_name = 'dict_title',
-            key_name    = key_list[-1],
-            vals        = [dict_title],
-            type_list   = [str],
-        )
+        # for k in key_list:
+        #     dict_title2chk = dict_title[k]
+        #     chk_vals_types(
+        #         parent_name = 'item_titles',
+        #         key_name    = k,
+        #         vals        = [dict_title2chk],
+        #         type_list   = [eval(dict_type[k])],
+        #     )
 
         dict_val_search = {
             'default_value' : default_value,
@@ -856,18 +869,18 @@ def chk_format_param( param_name, param_dict ):
                         'compared with dict_title.'
                     raise ValueError(error_msg)
 
-                title_list = list(layer_dict)
-                for k, v in type_info.items():
-                    for title in title_list:
-                        if dict_type[title] == k:
-                            for k2, v2 in v['option'].items():
-                                chk_json_item(
-                                    parent_name = k2,
-                                    essential   = True,
-                                    key_list    = [title],
-                                    dict_item   = uvalue_option[k2],
-                                    type_list   = v2,
-                                )
+                # title_list = list(layer_dict)
+                # for k, v in type_info.items():
+                #     for title in title_list:
+                #         if dict_type[title] == k:
+                #             for k2, v2 in v['option'].items():
+                #                 chk_json_item(
+                #                     parent_name = k2,
+                #                     essential   = True,
+                #                     key_list    = [title],
+                #                     dict_item   = uvalue_option[k2],
+                #                     type_list   = v2,
+                                # )
 
         chk_vals_types(
             parent_name = 'uvalue_option',

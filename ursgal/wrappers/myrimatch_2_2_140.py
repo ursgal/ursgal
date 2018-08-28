@@ -15,15 +15,14 @@ class myrimatch_2_2_140( myri ):
         'version'                     : '2.2.140',
         'release_date'                : None,
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mzML'],
-        'input_multi_file'            : False,
         'output_extensions'           : ['.mzid'],
         'create_own_folder'           : True,
-        'compress_raw_search_results' : True,
         'in_development'              : False,
         'include_in_git'              : False,
+        'distributable'               : True,
         'utranslation_style'          : 'myrimatch_style_1',
         'engine' : {
             'win32' : {

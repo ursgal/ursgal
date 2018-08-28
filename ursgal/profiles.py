@@ -1,6 +1,5 @@
-# Default params are listed in /kb/ucontroller.py and include e.g.:
-#     'score_b_ions'                      : True,
-#     'score_y_ions'                      : True,
+# Default params are listed in uparams.py and include e.g.:
+#     'score_ion_list'                    : [b', 'y'],
 #     'precursor_mass_tolerance_unit'     : 'ppm',
 #     'precursor_mass_tolerance_minus'    : 5,
 #     'precursor_mass_tolerance_plus'     : 5,
@@ -19,14 +18,12 @@ PROFILES = {
 
     'LTQ XL high res' : {
         # MS 1 & MSn orbitrap
-        'score_a_ions'              : True,
+        'score_ion_list'            : ['a', 'b', 'y'],
         'instrument'                : 'high_res_ltq',
     },
 
     'QExactive+' : {
-        'score_a_ions'              : True,
-        'score_imm_ions'            : True, # only MSAmanda
-        'score_int_ions'            : True, # only MSAmanda
+        'score_ion_list'            : ['a', 'b', 'y', 'imm', 'int'],
         'instrument'                : 'q_exactive',
     },
 }

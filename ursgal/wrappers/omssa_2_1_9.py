@@ -29,14 +29,14 @@ class omssa_2_1_9( ursgal.UNode ):
         'version'            : '2.1.9',
         'release_date'       : None,
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'   : [ '.mgf' ],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
         'in_development'     : False,
         'include_in_git'     : False,
+        'distributable'      : True,
         'utranslation_style' : 'omssa_style_1',
         ### Below are the download information ###
         'engine' : {
@@ -194,7 +194,6 @@ class omssa_2_1_9( ursgal.UNode ):
 
         # building command_list !
         translations = self.params['translations']['_grouped_by_translated_key']
-
         blastdb_suffixes = [ '.phr', '.pin', '.psq' ]
         blastdb_present = True
         for blastdb_suffix in blastdb_suffixes:
@@ -288,8 +287,8 @@ class omssa_2_1_9( ursgal.UNode ):
                 )
 
         self.params['_omssa_precursor_error'] = (
-            float(self.params['translations']['precursor_mass_tolerance_plus']) + \
-            float(self.params['translations']['precursor_mass_tolerance_minus']) \
+            float(self.params['translations']['precursor_mass_tolerance_plus']) +
+            float(self.params['translations']['precursor_mass_tolerance_minus'])
         ) / 2.0
 
         self.params['_tmp_output_file_incl_path'] = os.path.join(
@@ -337,12 +336,24 @@ class omssa_2_1_9( ursgal.UNode ):
                 if self.params['_fixed_mods'] != '':
                     self.params['command_list'].extend( ('-mf', self.params['_fixed_mods']) )
                 continue
-            elif translated_key == '-i':
+            elif translated_key == ('-i', '-sct', '-sb1'):
+                ion_translation_dict = {
+                    'a' : '0',
+                    'b' : '1',
+                    'c' : '2',
+                    'x' : '3',
+                    'y' : '4',
+                    'z' : '5',
+                }
                 ions_2_add = []
-                for k, v in translations['-i'].items():
-                    if v != '':
-                        ions_2_add.append(v)
-                self.params['command_list'].extend( ('-i', ','.join(sorted(ions_2_add)) ) )
+                for ion, ommsa_nr in ion_translation_dict.items():
+                    if ion in translation_dict['score_ion_list']:
+                        ions_2_add.append(ommsa_nr)
+                self.params['command_list'].extend(('-i', ','.join(sorted(ions_2_add))))
+                if 'b1' in translation_dict['score_ion_list']:
+                    self.params['command_list'].extend(('-sb1', '0'))
+                if 'c_terminal' in translation_dict['score_ion_list']:
+                    self.params['command_list'].extend(('-sct', '0'))
                 continue
             elif translated_key in [
                 ('-tem','-tom'),
@@ -359,7 +370,7 @@ class omssa_2_1_9( ursgal.UNode ):
             else:
                 print('The translatd key ', translated_key, ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
-                exit(1)
+                sys.exit(1)
 
     def postflight( self ):
         '''

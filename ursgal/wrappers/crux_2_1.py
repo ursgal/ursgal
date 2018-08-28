@@ -15,13 +15,13 @@ class crux_2_1( ursgal.UNode ):
         'version'           : '2.1',
         'release_date'      : None,
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'  : [],
-        'input_multi_file'  : False,
         'output_extensions' : [],
         'in_development'    : True,
         'include_in_git'    : None,
+        'distributable'      : False,
         'utranslation_style' : 'crux_style_1',
         'citation' : \
             '',
@@ -47,7 +47,7 @@ class crux_2_1( ursgal.UNode ):
 
     def write_param_file(self):
         self.params['param_file'] = self.params['output_file_basename_incl_path'] + '_crux_params.txt'
-        cam_mod = ursgal.ursgal_kb.CAM_MOD
+        cam_mod = ursgal.ukb.CAM_MOD
         io = open(self.params['param_file'],'w')
 
         cam = False
@@ -66,7 +66,7 @@ class crux_2_1( ursgal.UNode ):
         if potential_modifications != '':
             print_param_line( 'mod=', potential_modifications )
 
-        for aminoacid, modification in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+        for aminoacid, modification in ursgal.ukb.DICT_15N_DIFF.items():
             if aminoacid == 'C':
                 if cam == True:
                     if self.params['label'] == '15N':

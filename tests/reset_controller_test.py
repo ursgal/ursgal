@@ -10,7 +10,7 @@ class ResetController(unittest.TestCase):
         self.R = ursgal.UController(
             params = {
                 'TEST_PARAMS' : 'New',
-                # this will score score_a_ions ! :)
+                # this will score score_ion_list ! :)
             },
             profile  = 'LTQ XL high res'
         )
@@ -21,7 +21,7 @@ class ResetController(unittest.TestCase):
         self.assertEqual(self.R.params['TEST_PARAMS'] , '2nd')
 
     def test_profile_was_set( self ):
-        self.assertEqual(self.R.params['score_a_ions'] , True)
+        self.assertEqual(self.R.params['score_ion_list'] , ['a', 'b', 'y'])
 
     def test_profile_was_set2( self ):
         self.R.reset_controller()

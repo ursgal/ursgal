@@ -14,14 +14,13 @@ class msamanda_1_0_0_5242( msamanda ):
         'version'            : '1.0.0.5242',
         'release_date'       : None,
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'   : ['.mgf'],
-        'input_multi_file'   : False,
         'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
         'include_in_git'     : None,
-        'cannot_distribute'  : True,
+        'distributable'  : False,
         'in_development'     : False,
         'utranslation_style' : 'msamanda_style_1',
         'engine' : {

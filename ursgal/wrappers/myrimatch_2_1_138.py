@@ -20,15 +20,14 @@ class myrimatch_2_1_138( ursgal.UNode ):
         'version'                     : '2.1.138',
         'release_date'                : None,
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : ['.mzML'],
-        'input_multi_file'            : False,
         'output_extensions'           : ['.mzid'],
         'in_development'              : False,
         'include_in_git'              : False,
+        'distributable'               : True,
         'create_own_folder'           : True,
-        'compress_raw_search_results' : True,
         'utranslation_style'          : 'myrimatch_style_1',
         'engine' : {
             'linux' : {
@@ -80,21 +79,21 @@ class myrimatch_2_1_138( ursgal.UNode ):
 
         self.params['translations']['myrimatch_ions_to_search'] = []
         for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
-            if self.params['translations']['score_{0}_ions'.format(ion)] is True:
-                self.params['translations']['myrimatch_ions_to_search'].append( ion )
-        self.params['translations']['myrimatch_ions_to_search'] = 'manual:'+','.join(self.params['translations']['myrimatch_ions_to_search'] )
+            if ion in self.params['translations']['score_ion_list']:
+                self.params['translations']['myrimatch_ions_to_search'].append(ion)
+        self.params['translations']['myrimatch_ions_to_search'] = 'manual:'+','.join(self.params['translations']['myrimatch_ions_to_search'])
 
         self.params['translations']['myrimatch_config_file_path'] = \
-            '{output_file_incl_path}_myrimatch_params.cfg'.format( **self.params['translations'] )
-        self.created_tmp_files.append( self.params['translations']['myrimatch_config_file_path'] )
-        self.write_param_file( )
+            '{output_file_incl_path}_myrimatch_params.cfg'.format( **self.params['translations'])
+        self.created_tmp_files.append( self.params['translations']['myrimatch_config_file_path'])
+        self.write_param_file()
 
         self.params['command_list'] = [
             self.exe,
             '-cfg', '{myrimatch_config_file_path}'.format(**self.params['translations']),
             '{mzml_input_file}'.format(**self.params['translations']),
-            '-workdir', "{output_dir_path}".format( **self.params ),
-            '-cpus', '{cpus}'.format( **self.params['translations'] ),
+            '-workdir', '{output_dir_path}'.format(**self.params),
+            '-cpus', '{cpus}'.format(**self.params['translations']),
             # '-dump'
         ]
 
@@ -107,7 +106,7 @@ class myrimatch_2_1_138( ursgal.UNode ):
         self.params['translations']['myrimatch_dynamic_mods'] = ''
 
         if self.params['translations']['label'] == '15N':
-            for aminoacid, N15_Diff in ursgal.ursgal_kb.DICT_15N_DIFF.items():
+            for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 existing = False
                 for mod in self.params[ 'mods' ][ 'fix' ]:
                     if aminoacid == mod[ 'aa' ]:

@@ -32,7 +32,7 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
     sequenceFastaDict = ddict(list)
     print("Checking for redundancy of protein sequences...", file = sys.stderr)
     for fastaFile in input_files:
-        for fastaID, sequence in ursgal.ucore.parseFasta( open( fastaFile, "r" ) ):
+        for fastaID, sequence in ursgal.ucore.parse_fasta( open( fastaFile, "r" ) ):
             if 'REVERSED' in fastaID:
                 continue
             sequenceFastaDict[sequence].append(fastaID)
@@ -113,10 +113,16 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
             for n, peptide in enumerate(peptideList):
                 character_to_preserve_C = ''
                 character_to_preserve_N = ''
+                terminal_peptide_N = False
+                terminal_peptide_C = False
+                if n == 0 :
+                    terminal_peptide_N = True
+                if n == len(peptideList)-1:
+                    terminal_peptide_C = True
                 if site == 'C':
                     if peptide[-1] in cleavage_aa:
                         character_to_preserve_C  = peptide[-1]
-                        if peptide[0] in inhibitor and n != 0:
+                        if peptide[0] in inhibitor and terminal_peptide_N is False:
                             character_to_preserve_N = peptide[0]
                             peptideWithoutCleavageAA = peptide[ 1 :-1 ]
                         else:
@@ -125,8 +131,8 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
                         peptideWithoutCleavageAA = peptide
                 elif site == 'N':
                     if peptide[0] in cleavage_aa:
-                        character_to_preserve_N    = peptide[ 0 ]
-                        if peptide[-1] in inhibitor:
+                        character_to_preserve_N = peptide[ 0 ]
+                        if peptide[-1] in inhibitor and terminal_peptide_C is False:
                             character_to_preserve_C = peptide[-1]
                             peptideWithoutCleavageAA = peptide[ 1 :-1 ]
                         else:
@@ -134,8 +140,12 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
                     else:
                         peptideWithoutCleavageAA = peptide
                 else:
-                    print('Where does your enzyme cleave?',enzyme)
-                    exit()
+                    print('''
+                        No cleavage site for {0} defined.
+                        Please add this information to uparams.py
+                        (enzyme --> generate_target_decoy_style_1)
+                        '''.format(enzyme))
+                    sys.exit(1)
                 aaString = ''.join(sorted(peptide))
                 if aaString not in perDict.keys():
                     perDict[ aaString ] =  {
@@ -154,6 +164,17 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
                                 ''.join(permutation),
                                 character_to_preserve_C
                             )
+                            check = check_decoy_sequence(
+                                permuted_sequence=permutedSequence,
+                                cleavage_site=site,
+                                inhibitor=inhibitor,
+                                terminal_peptide_N=terminal_peptide_N,
+                                terminal_peptide_C=terminal_peptide_C, 
+                                preserved_C=character_to_preserve_C,
+                                preserved_N=character_to_preserve_N,
+                            )
+                            if check is False:
+                                continue
                             perDict[ aaString ]['permutations'].append( permutedSequence )
 
                         perDict[ aaString ]['permutations'] = list(
@@ -179,7 +200,17 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
                                 character_to_preserve_C
                             )
 
-                            if shuffled_peptide != peptide:
+                            check = check_decoy_sequence(
+                                permuted_sequence=shuffled_peptide,
+                                cleavage_site=site,
+                                inhibitor=inhibitor,
+                                terminal_peptide_N=terminal_peptide_N,
+                                terminal_peptide_C=terminal_peptide_C, 
+                                preserved_C=character_to_preserve_C,
+                                preserved_N=character_to_preserve_N,
+                            )
+
+                            if shuffled_peptide != peptide and check is True:
                                 if shuffled_peptide not in perDict[ aaString ]['permutations']:
                                     perDict[ aaString ]['permutations'].append( shuffled_peptide )
                                     perDict[ aaString ]['pepProtTuples'].add( (peptide, fastaID) )
@@ -190,10 +221,9 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
                             perDict[ aaString ]['mutable'] = False
                             unmutableTPSet.add( peptide )
 
-
         else:
             print('Mode {0} not specified'.format(mode))
-            exit()
+            sys.exit(1)
 
 
     if mode == 'shuffle_peptide':
@@ -356,15 +386,35 @@ def main( input_files=None, output_file=None, enzyme=None, decoy_tag='decoy_', m
 
     return output_file
 
+def check_decoy_sequence(
+    permuted_sequence=None,
+    cleavage_site=None,
+    inhibitor=None,
+    terminal_peptide_N=False,
+    terminal_peptide_C=False,
+    preserved_C=None,
+    preserved_N=None
+):
+    allowed_decoy = True
+    if cleavage_site == 'C':
+        if permuted_sequence[0] in inhibitor and terminal_peptide_N is False:
+            if permuted_sequence[0] not in preserved_N:
+                allowed_decoy = False
+    elif cleavage_site == 'N':
+        if permuted_sequence[-1] in inhibitor and terminal_peptide_C is False:
+            if permuted_sequence[-1] not in preserved_C:
+                allowed_decoy = False
+    return allowed_decoy
+
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         print(__doc__)
     else:
-        output_file = 'BSA_target_decoy.fasta'
+        output_file = 'BSA_target_decoy_test.fasta'
         name_of_db = main(
             sys.argv[1:],
             output_file,
-            enzyme=('RK', 'C'),
+            enzyme=('RK;C;P'),
             mode='shuffle_peptide'
         )
         print(name_of_db)

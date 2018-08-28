@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 # encoding: utf-8
 
 import ursgal
@@ -22,9 +22,9 @@ def main():
 
     '''
     uc = ursgal.UController(
-        profile = 'LTQ XL low res',
-        params = {
-            'modifications' : [
+        profile='LTQ XL low res',
+        params={
+            'modifications': [
                 'M,opt,any,Oxidation',        # Met oxidation
                 'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
                 '*,opt,Prot-N-term,Acetyl'    # N-Acteylation
@@ -47,7 +47,7 @@ def main():
         uc.params['http_url'] = 'http://sourceforge.net/p/open-ms/code/HEAD/tree/OpenMS/share/OpenMS/examples/BSA/BSA1.mzML?format=raw'
         uc.params['http_output_folder'] = os.path.dirname(mzML_file)
         uc.fetch_file(
-            engine     = 'get_http_files_1_0_0',
+            engine='get_http_files_1_0_0',
         )
         try:
             shutil.move(
@@ -64,15 +64,15 @@ def main():
 
     for engine in engine_list:
         unified_search_result_file = uc.search(
-            input_file = mzML_file,
-            engine     = engine,
-            force      = False
+            input_file=mzML_file,
+            engine=engine,
+            force=False
         )
         unified_file_list.append(unified_search_result_file)
 
     uc.visualize(
-        input_files    = unified_file_list,
-        engine         = 'venndiagram',
+        input_files=unified_file_list,
+        engine='venndiagram',
     )
     return
 

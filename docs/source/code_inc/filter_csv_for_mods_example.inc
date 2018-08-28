@@ -1,6 +1,6 @@
 .. code-block:: python
 
-	#!/usr/bin/env python3.4
+	#!/usr/bin/env python3
 	# encoding: utf-8
 	
 	import ursgal
@@ -23,7 +23,7 @@
 	        'csv_filter_rules': [
 	            ['Modifications', 'contains', 'Carbamidomethyl'],
 	        ],
-	        'write_unfiltered_results':False
+	        'write_unfiltered_results': False
 	
 	    }
 	
@@ -34,11 +34,12 @@
 	        'filter_csv_for_mods_example_omssa_2_1_9_pmap_unified.csv'
 	    )
 	    uc = ursgal.UController(
-	        params = params
+	        params=params
 	    )
 	
-	    filtered_csv = uc.filter_csv(
-	        input_file = csv_file_to_filter,
+	    filtered_csv = uc.execute_misc_engine(
+	        input_file=csv_file_to_filter,
+	        engine='filter_csv_1_0_0',
 	    )
 	
 	

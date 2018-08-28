@@ -3,40 +3,47 @@
 Available Search Engines
 ========================
 
+.. _protein-database-engines:
+
+Protein Database Search Engines
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+MS Amanda
+---------
+
+Available MS Amanda versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9706.msamanda_2_0_0_9706
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9695.msamanda_2_0_0_9695
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7504.msamanda_1_0_0_7504
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7503.msamanda_1_0_0_7503
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5242.msamanda_1_0_0_5242
+   :members:
+
 
 MS-GF+
 ------
 
-.. autoclass:: ursgal.wrappers.msgfplus_v9979.msgfplus_v9979
+Available MS-GF+ versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.msgfplus_v2017_01_27.msgfplus_v2017_01_27
    :members:
 
 .. autoclass:: ursgal.wrappers.msgfplus_v2016_09_16.msgfplus_v2016_09_16
    :members:
 
-
-X!Tandem
---------
-
-.. autoclass:: ursgal.wrappers.xtandem_vengeance.xtandem_vengeance
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_sledgehammer.xtandem_sledgehammer
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_piledriver.xtandem_piledriver
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_jackhammer.xtandem_jackhammer
-   :members:
-
-.. autoclass:: ursgal.wrappers.xtandem_cyclone_2010.xtandem_cyclone_2010
-   :members:
-
-
-OMSSA
------
-
-.. autoclass:: ursgal.wrappers.omssa_2_1_9.omssa_2_1_9
+.. autoclass:: ursgal.wrappers.msgfplus_v9979.msgfplus_v9979
    :members:
 
 
@@ -47,14 +54,12 @@ MSFragger
    :members:
 
 
-MS Amanda
----------
+MODa
+----
 
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5242.msamanda_1_0_0_5242
+.. autoclass:: ursgal.wrappers.moda_v1_51.moda_v1_51
    :members:
 
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
-   :members:
 
 MyriMatch
 ---------
@@ -63,4 +68,94 @@ MyriMatch
    :members:
 
 .. autoclass:: ursgal.wrappers.myrimatch_2_2_140.myrimatch_2_2_140
+   :members:
+
+
+OMSSA
+-----
+
+.. autoclass:: ursgal.wrappers.omssa_2_1_9.omssa_2_1_9
+   :members:
+
+
+PIPI
+----
+
+.. autoclass:: ursgal.wrappers.pipi_1_3_0.pipi_1_3_0
+   :members:
+
+
+MS Amanda
+---------
+
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9706.msamanda_2_0_0_9706
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9695.msamanda_2_0_0_9695
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7504.msamanda_1_0_0_7504
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7503.msamanda_1_0_0_7503
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
+   :members:
+
+.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5242.msamanda_1_0_0_5242
+   :members:
+
+
+X!Tandem
+--------
+
+Available X!Tandem versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.xtandem_alanine.xtandem_alanine
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_vengeance.xtandem_vengeance
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_piledriver.xtandem_piledriver
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_sledgehammer.xtandem_sledgehammer
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_jackhammer.xtandem_jackhammer
+   :members:
+
+.. autoclass:: ursgal.wrappers.xtandem_cyclone_2010.xtandem_cyclone_2010
+   :members:
+
+
+.. _available_de_novo_engines:
+
+De Novo Search Engines
+^^^^^^^^^^^^^^^^^^^^^^
+
+Novor
+-----
+
+.. autoclass:: ursgal.wrappers.novor_1_1beta.novor_1_1beta
+   :members:
+
+PepNovo
+-------
+
+.. autoclass:: ursgal.wrappers.pepnovo_3_1.pepnovo_3_1
+   :members:
+
+
+.. _available_cross_link_engines:
+
+Cross Link Search Engines
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Kojak
+-----
+
+.. autoclass:: ursgal.wrappers.kojak_1_5_3.kojak_1_5_3
    :members:

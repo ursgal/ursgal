@@ -24,7 +24,7 @@ class msgfplus_v2017_01_27( msgf ):
         'version'                     : 'v2017.01.27',
         'release_date'                : '2017-1-27',
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'input_extensions'            : [
             '.mgf',
@@ -34,20 +34,18 @@ class msgfplus_v2017_01_27( msgf ):
             '.pkl',
             '.dta.txt'
         ],
-        'input_multi_file'            : False,
-        'output_extensions'           : ['.mzid'],
-        'compress_raw_search_results' : True,
+        'output_extensions'           : ['.mzid', '.mzid.gz'],
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
         'utranslation_style'          : 'msgfplus_style_1',
-        'cannot_distribute'           : True,
+        'distributable'               : False,
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
                     'url'            : '',
-                    'zip_md5'        : '',
+                    'zip_md5'        : '5936576205838d947a3de36556e92cd8',
                     'additional_exe' : [],
                 },
             },
