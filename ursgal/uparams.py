@@ -3,7 +3,7 @@ ursgal_params = {
         'edit_version': 1.00,
         'available_in_unode' : [
             'percolator_2_08',
-            'percolator_3_0',
+            'percolator_3_2',
         ],
         'default_value' : False,
         'description' :  ''' Use the picked-protein algorithm to infere protein PEP and FDR in Percolator''',
@@ -23,7 +23,7 @@ ursgal_params = {
     'percolator_post_processing': {
         'edit_version': 1.00,
         'available_in_unode' : [
-            'percolator_3_0',
+            'percolator_3_2',
         ],
         'default_value' : 'mix-max',
         'description' :  ''' Method to assign FDR and PEP to PSMs''',
@@ -1142,7 +1142,7 @@ ursgal_params = {
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
-            'percolator_3_0',
+            'percolator_3_2',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
@@ -1955,7 +1955,7 @@ ursgal_params = {
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
             'upeptide_mapper_1_0_0',
-            'percolator_3_0'
+            'percolator_3_2'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2196,7 +2196,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'percolator_2_08',
-            'percolator_3_0',
+            'percolator_3_2',
             'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -3413,7 +3413,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'heatmap_style_1' : 'heatmap_column_order',
+            'heatmap_style_1' : 'heatmap_column_positions',
         },
         'utag' : [
             'visualization',
@@ -6738,7 +6738,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'percolator_2_08',
-            'percolator_3_0',
+            'percolator_3_2',
             'qvality_2_02',
             'venndiagram_1_0_0',
             'xtandem_cyclone_2010',
@@ -7613,7 +7613,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'percolator_2_08',
-            'percolator_3_0',
+            'percolator_3_2',
             'unify_csv_1_0_0',
             'upeptide_mapper_1_0_0'
         ],
@@ -9281,7 +9281,7 @@ ursgal_params = {
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
-            'percolator_3_0',
+            'percolator_3_2',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
