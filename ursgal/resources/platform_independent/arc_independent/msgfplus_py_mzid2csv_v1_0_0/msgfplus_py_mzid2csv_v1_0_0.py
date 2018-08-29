@@ -75,8 +75,6 @@ def main(mzid_file, csv_file):
                             pep_lookup[key]['mods'].append(new)
 
             if element.tag.endswith('}SpectrumIdentificationResult') and event == 'end':
-                if 'spec_title' in globals():
-                    del spec_title
                 for ele in element[::-1]:
                     if ele.attrib.get('name', None) == 'spectrum title':
                         spec_title = ele.attrib['value']
