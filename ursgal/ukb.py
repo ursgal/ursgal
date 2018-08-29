@@ -53,6 +53,14 @@ DICT_15N_DIFF = {
 
 # Dictionary containing all accepted file extensions in Ursgal
 FILE_EXTENSIONS = {
+    '.dat' : {
+        'short_name': 'DAT',
+        'long_name': 'DAT (Mascot)',
+        'same_extension': [],
+        'description': \
+            'Mascot specific identification output format.'
+            'Mixture of csv, xml and configuration style file.'
+    },
     '.csv' : {
             'short_name'     : 'CSV',
             'long_name'      : 'CSV (Comma Delimited)',

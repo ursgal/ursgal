@@ -847,11 +847,15 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         continue
 
                 # calculate m/z
-                cc.use(
-                    '{Sequence}#{Modifications}'.format(
-                        **line_dict_update
+                cc_in_use = True
+                try:
+                    cc.use(
+                        '{Sequence}#{Modifications}'.format(
+                            **line_dict_update
+                        )
                     )
-                )
+                except:
+                    cc_in_use = False
                 if use15N:
                     number_N = dc( cc['N'] )
                     cc['15N'] = number_N
@@ -861,7 +865,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         cc['14N'] = c_count
                         cc['15N'] -= c_count
                     # mass = mass + ( DIFFERENCE_14N_15N * number_N )
-                mass = cc._mass()
+
+                if cc_in_use is False:
+                    mass = 0
+                else:
+                    mass = cc._mass()
                 calc_mz = ursgal.ucore.calculate_mz(
                     mass,
                     line_dict['Charge']
