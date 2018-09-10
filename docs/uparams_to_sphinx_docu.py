@@ -78,7 +78,7 @@ To install Dash, follow the instructions on
 
 Afterwards, just go to the docs folder and execute the script::
 
-    user@localhost:~/ursgal/docs$ python3.4 uparams_to_sphinx_docu.py
+    user@localhost:~/ursgal/docs$ python3.4 uparams_to_dash.py
 
 A local server will be created and view the interactive page: 
     | http://127.0.0.1:8050/

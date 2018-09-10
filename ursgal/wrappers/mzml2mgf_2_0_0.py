@@ -67,5 +67,7 @@ class mzml2mgf_2_0_0( ursgal.UNode ):
             prefix                = self.params.get('prefix',None),
             scan_skip_modulo_step = self.params['translations']['scan_skip_modulo_step'],
             ms_level              = self.params['translations']['ms_level'],
+            precursor_min_charge  = self.params['translations']['precursor_min_charge'],
+            precursor_max_charge  = self.params['translations']['precursor_max_charge'],
         )
         return tmp
