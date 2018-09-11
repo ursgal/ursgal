@@ -90,9 +90,6 @@ def main(
         spec_ms_level = spec.ms_level
         scan_time, scan_time_units = spec.scan_time
         spectrum_id = spec.ID
-        #print('<<<<<<<<<<<<<<<<<<<<')
-        #print(spectrum_id)
-        #print('<<<<<<<<<<<<<<<<<<<<')
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
         tmp['unit'] = 'minute'
@@ -192,7 +189,6 @@ def main(
     return tmp
 
     
-
 if __name__ == '__main__':
     # parsing command line arguments:
     parser = argparse.ArgumentParser()
