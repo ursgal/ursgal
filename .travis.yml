@@ -8,6 +8,7 @@ before_install: pip install codecov
 after_success:  codecov
 
 install:
+  - pip install numpy
   - pip install -r requirements.txt
   - python install_resources.py omssa_2_1_9
 
