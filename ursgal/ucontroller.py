@@ -2591,11 +2591,12 @@ class UController(ursgal.UNode):
 
                         else:
                             print(
-                                'md5 in kb found for {0} on platform {1} and architecture {2} differs from you zip file'.format(
+                                'md5 in kb found for {0} on platform {1} and architecture {2} differs from your zip file.'.format(
                                     engine,
                                     current_platform,
                                     current_architecture
-                                )
+                                ),
+                                'zip file location: {0}'.format(target_folder_for_zips)
                             )
                             os.remove(zip_file_name)
                             message = missing_md5_format_string.format(
@@ -2606,6 +2607,7 @@ class UController(ursgal.UNode):
                             )
                             print( message )
                             update_kb_list.append((engine,message))
+                            print('created zip file has been removed, include correct md5 in META_IFO first')
                 else:
                     print(
                         'No md5 in kb found for {0} on platform {1} and architecture {2}'.format(
