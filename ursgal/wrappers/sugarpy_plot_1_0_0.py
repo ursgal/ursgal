@@ -23,7 +23,7 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
         'output_extensions'  : ['.txt'],
         'output_suffix'      : 'created_files',
         'create_own_folder'  : True,
-        'in_development'     : False,
+        'in_development'     : True,
         'include_in_git'     : False,
         'distributable'      : False,
         'engine'             : {
