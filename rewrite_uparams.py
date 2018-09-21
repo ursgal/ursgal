@@ -6,7 +6,7 @@ import sys
 import re
 import pprint
 import os
-
+import copy
 
 def main():
     '''
@@ -61,41 +61,53 @@ def main():
         # if param != 'force':
         #     continue
         # print(urgsal_dict[param])
-        print('''    '{0}' : {1}'''.format(param, '{'), file=output_file )
+        print('''    '{0}': {1}'''.format(param, '{'), file=output_file )
         for k, v in sorted(urgsal_dict[param].items()):
             # print(k, type(v))
+            if k =='edit_version':
+                continue
+            if k == 'uvalue_option':
+                if 'available_values' in urgsal_dict[param][k].keys():
+                    v = urgsal_dict[param][k]['available_values']
+                    k = 'available_values'
+                elif 'min' in urgsal_dict[param][k].keys() and 'max' in urgsal_dict[param][k].keys():
+                    value_dict = copy.deepcopy(urgsal_dict[param][k])
+                    v = "min: {min},max: {max},".format(
+                        **value_dict
+                    )
+                    k = 'available_values'
             if k == 'description':
-                print('''        '{0}' : '''.format(k), repr(v.strip()), ",", file=output_file)
+                print('''        '{0}': '''.format(k), repr(v.strip()), ",", file=output_file)
             elif type(v) == str:
-                print('''        '{0}' : "{1}",'''.format(k,v), file=output_file)
+                print('''        '{0}': "{1}",'''.format(k,v), file=output_file)
             elif type(v) == dict:
-                print('''        '{0}' : {1}'''.format(k, '{'), file=output_file)
+                print('''        '{0}': {1}'''.format(k, '{'), file=output_file)
                 for k2, v2 in sorted(urgsal_dict[param][k].items()):
                     if type(v2) == dict:
-                        print('''            '{0}' : {1}'''.format(k2, '{'), file=output_file)
+                        print('''            '{0}': {1}'''.format(k2, '{'), file=output_file)
                         for k3, v3 in sorted(urgsal_dict[param][k][k2].items()):
                             if k3 in [True, False]:
                                 if type(v3) != str:
-                                    print('''                {0} : {1},'''.format(k3,v3), file=output_file)
+                                    print('''                {0}: {1},'''.format(k3,v3), file=output_file)
                                 else:
-                                    print('''                {0} : '{1}','''.format(k3,v3), file=output_file)
+                                    print('''                {0}: '{1}','''.format(k3,v3), file=output_file)
                             elif type(v3) != str:
-                                print('''                '{0}' : {1},'''.format(k3,v3), file=output_file)
+                                print('''                '{0}': {1},'''.format(k3,v3), file=output_file)
                             else:
-                                print('''                '{0}' : '{1}','''.format(k3,v3), file=output_file)
+                                print('''                '{0}': '{1}','''.format(k3,v3), file=output_file)
                         print('            },', file=output_file)
                     elif type(v2) != str:
-                        print('''            '{0}' : {1},'''.format(k2,v2), file=output_file)
+                        print('''            '{0}': {1},'''.format(k2,v2), file=output_file)
                     else:
-                        print('''            '{0}' : '{1}','''.format(k2,v2), file=output_file)
+                        print('''            '{0}': '{1}','''.format(k2,v2), file=output_file)
                 print('        },', file=output_file)
             elif type(v) == list:
-                print('''        '{0}' : {1}'''.format(k, '['), file=output_file)
+                print('''        '{0}': {1}'''.format(k, '['), file=output_file)
                 for elem in sorted(v):
                     print('''            '{0}','''.format(elem), file=output_file)
                 print('        ],', file=output_file)
             else:
-                print('''        '{0}' : {1},'''.format(k,v), file=output_file)
+                print('''        '{0}': {1},'''.format(k,v), file=output_file)
         # sys.exit(1)
         # print('''        'trigger_rerun' : True,''', file=output_file)
         print('    },', file=output_file)

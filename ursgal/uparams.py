@@ -431,87 +431,87 @@ ursgal_params = {
         },
         'uvalue_type': "bool",
     },
-    # 'pyQms_colors': {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode': [
-    #         'pyqms_1_0_0',
-    #     ],
-    #     'uvalue_option': {
-    #         'none_val': None,
-    #         'multiple_line': False,
-    #         # 'max': 10000,
-    #         # 'min': 0,
-    #         # 'updownval': 1,
-    #         'custom_val_max': 11,
-    #         'dict_type': {
-    #             '0.0': 'tuple',
-    #             '0.1': 'tuple',
-    #             '0.2': 'tuple',
-    #             '0.3': 'tuple',
-    #             '0.4': 'tuple',
-    #             '0.5': 'tuple',
-    #             '0.6': 'tuple',
-    #             '0.7': 'tuple',
-    #             '0.8': 'tuple',
-    #             '0.9': 'tuple',
-    #             '1.0': 'tuple'
-    #         },
-    #         'dict_title': {
-    #             'Enrichment' : 'Color'
-    #         },
-    #         'title_list' : {
-    #             '0.0' : [],
-    #             '0.1' : [],
-    #             '0.2' : [],
-    #             '0.3' : [],
-    #             '0.4' : [],
-    #             '0.5' : [],
-    #             '0.6' : [],
-    #             '0.7' : [],
-    #             '0.8' : [],
-    #             '0.9' : [],
-    #             '1.0' : []
-    #         },
-    #         'type_dict'  : {
-    #             '0.0': {},
-    #             '0.1': {},
-    #             '0.2': {},
-    #             '0.3': {},
-    #             '0.4': {},
-    #             '0.5': {},
-    #             '0.6': {},
-    #             '0.7': {},
-    #             '0.8': {},
-    #             '0.9': {},
-    #             '1.0': {},
-    #         }
-    #     },
-    #     'default_value': {
-    #         '0.0' : (37  , 37  , 37)  ,
-    #         '0.1' : (99  , 99  , 99)  ,
-    #         '0.2' : (150 , 150 , 150) ,
-    #         '0.3' : (204 , 204 , 204) ,
-    #         '0.4' : (247 , 247 , 247) ,
-    #         '0.5' : (203 , 27  , 29)  ,
-    #         '0.6' : (248 , 120 , 72)  ,
-    #         '0.7' : (253 , 219 , 121) ,
-    #         '0.8' : (209 , 239 , 121) ,
-    #         '0.9' : (129 , 202 , 78)  ,
-    #         '1.0' : (27  , 137 , 62)
-    #     },
-    #     'description': ''' Minimum number of peptide spectrum matches required \
-    #         for considering a peptide for quantification ''',
-    #     'triggers_rerun': True,
-    #     'ukey_translation': {
-    #         'pyqms_style_1': 'COLORS'
-    #     },
-    #     'utag': [
-    #         'quantification',
-    #     ],
-    #     'uvalue_translation': {
-    #     },
-    #     'uvalue_type': "dict",
-    # },
+    'pyQms_colors': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'pyqms_1_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            # 'max': 10000,
+            # 'min': 0,
+            # 'updownval': 1,
+            'custom_val_max': 11,
+            'dict_type': {
+                '0.0': 'tuple',
+                '0.1': 'tuple',
+                '0.2': 'tuple',
+                '0.3': 'tuple',
+                '0.4': 'tuple',
+                '0.5': 'tuple',
+                '0.6': 'tuple',
+                '0.7': 'tuple',
+                '0.8': 'tuple',
+                '0.9': 'tuple',
+                '1.0': 'tuple'
+            },
+            'dict_title': {
+                'Enrichment' : 'Color'
+            },
+            'title_list' : {
+                '0.0' : [],
+                '0.1' : [],
+                '0.2' : [],
+                '0.3' : [],
+                '0.4' : [],
+                '0.5' : [],
+                '0.6' : [],
+                '0.7' : [],
+                '0.8' : [],
+                '0.9' : [],
+                '1.0' : []
+            },
+            'type_dict'  : {
+                '0.0': {},
+                '0.1': {},
+                '0.2': {},
+                '0.3': {},
+                '0.4': {},
+                '0.5': {},
+                '0.6': {},
+                '0.7': {},
+                '0.8': {},
+                '0.9': {},
+                '1.0': {},
+            }
+        },
+        'default_value': {
+            '0.0' : (37  , 37  , 37)  ,
+            '0.1' : (99  , 99  , 99)  ,
+            '0.2' : (150 , 150 , 150) ,
+            '0.3' : (204 , 204 , 204) ,
+            '0.4' : (247 , 247 , 247) ,
+            '0.5' : (203 , 27  , 29)  ,
+            '0.6' : (248 , 120 , 72)  ,
+            '0.7' : (253 , 219 , 121) ,
+            '0.8' : (209 , 239 , 121) ,
+            '0.9' : (129 , 202 , 78)  ,
+            '1.0' : (27  , 137 , 62)
+        },
+        'description': ''' Minimum number of peptide spectrum matches required \
+            for considering a peptide for quantification ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'pyqms_style_1': 'COLORS'
+        },
+        'utag': [
+            'quantification',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "dict",
+    },
     'evidence_score_field': {
         'edit_version' : 1.00,
         'available_in_unode': [
@@ -7598,7 +7598,7 @@ ursgal_params = {
         },
         'default_value' : '<|>',
         'description' : \
-            'This delimiter seperates protein IDs/names in the unified csv',
+            'This delimiter separates protein IDs/names in the unified csv',
     },
     'psm_defining_colnames' : {
         'edit_version' : 1.00,
@@ -8133,524 +8133,6 @@ ursgal_params = {
             'List of ion types that are taken into account by the respective search engine.'\
             'Availabel ion types: a, b, c, x, y, z, -h2o, -nh3, b1, c_terminal, imm (immonium), int (internal), z+1, z+2',
     },
-    #     'score_-h2o_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'msamanda_style_1' : 'series',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'Spectrum: if true, ions loss of H2O are respected in algorithm',
-    # },
-    # 'score_-nh3_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'msamanda_style_1' : 'series',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'Spectrum: if true, ions loss of NH3 are respected in algorithm',
-    # },
-    # 'score_a_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'kojak_1_5_3',
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #         'myrimatch_2_1_138',
-    #         'myrimatch_2_2_140',
-    #         'omssa_2_1_9',
-    #         'xtandem_cyclone_2010',
-    #         'xtandem_jackhammer',
-    #         'xtandem_piledriver',
-    #         'xtandem_sledgehammer',
-    #         'xtandem_vengeance',
-    #         'xtandem_alanine',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'kojak_style_1'     : 'ion_series_A',
-    #         'msamanda_style_1'  : 'series',
-    #         'myrimatch_style_1' : 'FragmentationRule',
-    #         'omssa_style_1'     : '-i',
-    #         'xtandem_style_1'   : 'scoring, a ions',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #         'kojak_style_1' : {
-    #             False : '0',
-    #             True  : '1',
-    #         },
-    #         'omssa_style_1' : {
-    #             False : '',
-    #             True  : '0',
-    #         },
-    #         'xtandem_style_1' : {
-    #             False : 'no',
-    #             True  : 'yes',
-    #         },
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'Spectrum: if true, a ions are used in algorithm',
-    # },
-    # 'score_b1_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'omssa_2_1_9',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'omssa_style_1' : '-sb1',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #         'omssa_style_1' : {
-    #             False : '1',
-    #             True  : '0',
-    #         },
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'first forward (b1) product ions inclued in search',
-    # },
-    # 'score_b_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'kojak_1_5_3',
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #         'myrimatch_2_1_138',
-    #         'myrimatch_2_2_140',
-    #         'omssa_2_1_9',
-    #         'xtandem_cyclone_2010',
-    #         'xtandem_jackhammer',
-    #         'xtandem_piledriver',
-    #         'xtandem_sledgehammer',
-    #         'xtandem_vengeance',
-    #         'xtandem_alanine',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'kojak_style_1'     : 'ion_series_B',
-    #         'msamanda_style_1'  : 'series',
-    #         'myrimatch_style_1' : 'FragmentationRule',
-    #         'omssa_style_1'     : '-i',
-    #         'xtandem_style_1'   : 'scoring, b ions',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #         'kojak_style_1' : {
-    #             False : '0',
-    #             True  : '1',
-    #         },
-    #         'omssa_style_1' : {
-    #             False : '',
-    #             True  : '1',
-    #         },
-    #         'xtandem_style_1' : {
-    #             False : 'no',
-    #             True  : 'yes',
-    #         },
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : True,
-    #     'description' : \
-    #         'Spectrum: if true, b ions are used in algorithm',
-    # },
-    # 'score_c_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'kojak_1_5_3',
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #         'myrimatch_2_1_138',
-    #         'myrimatch_2_2_140',
-    #         'omssa_2_1_9',
-    #         'xtandem_cyclone_2010',
-    #         'xtandem_jackhammer',
-    #         'xtandem_piledriver',
-    #         'xtandem_sledgehammer',
-    #         'xtandem_vengeance',
-    #         'xtandem_alanine',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'kojak_style_1'     : 'ion_series_C',
-    #         'msamanda_style_1'  : 'series',
-    #         'myrimatch_style_1' : 'FragmentationRule',
-    #         'omssa_style_1'     : '-i',
-    #         'xtandem_style_1'   : 'scoring, c ions',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #         'kojak_style_1' : {
-    #             False : '0',
-    #             True  : '1',
-    #         },
-    #         'omssa_style_1' : {
-    #             False : '',
-    #             True  : '2',
-    #         },
-    #         'xtandem_style_1' : {
-    #             False : 'no',
-    #             True  : 'yes',
-    #         },
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'Spectrum: if true, c ions are used in algorithm',
-    # },
-    # 'score_c_terminal_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'omssa_2_1_9',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'omssa_style_1' : '-sct',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #         'omssa_style_1' : {
-    #             False : '1',
-    #             True  : '0',
-    #         },
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : True,
-    #     'description' : \
-    #         'Score c terminal ions',
-    # },
-    # 'score_imm_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'msamanda_style_1' : 'series',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'Spectrum: if true, immonium ions are respected in algorithm',
-    # },
-    # 'score_int_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'msamanda_style_1' : 'series',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'Spectrum: if true, internal fragment ions are respect in algorithm',
-    # },
-    # 'score_x_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'kojak_1_5_3',
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #         'myrimatch_2_1_138',
-    #         'myrimatch_2_2_140',
-    #         'omssa_2_1_9',
-    #         'xtandem_cyclone_2010',
-    #         'xtandem_jackhammer',
-    #         'xtandem_piledriver',
-    #         'xtandem_sledgehammer',
-    #         'xtandem_vengeance',
-    #         'xtandem_alanine',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'kojak_style_1'     : 'ion_series_X',
-    #         'msamanda_style_1'  : 'series',
-    #         'myrimatch_style_1' : 'FragmentationRule',
-    #         'omssa_style_1'     : '-i',
-    #         'xtandem_style_1'   : 'scoring, x ions',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #         'kojak_style_1' : {
-    #             False : '0',
-    #             True  : '1',
-    #         },
-    #         'omssa_style_1' : {
-    #             False : '',
-    #             True  : '3',
-    #         },
-    #         'xtandem_style_1' : {
-    #             False : 'no',
-    #             True  : 'yes',
-    #         },
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'Spectrum: if true, x ions are used in algorithm',
-    # },
-    # 'score_y_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'kojak_1_5_3',
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #         'myrimatch_2_1_138',
-    #         'myrimatch_2_2_140',
-    #         'omssa_2_1_9',
-    #         'xtandem_cyclone_2010',
-    #         'xtandem_jackhammer',
-    #         'xtandem_piledriver',
-    #         'xtandem_sledgehammer',
-    #         'xtandem_vengeance',
-    #         'xtandem_alanine',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'kojak_style_1'     : 'ion_series_Y',
-    #         'msamanda_style_1'  : 'series',
-    #         'myrimatch_style_1' : 'FragmentationRule',
-    #         'omssa_style_1'     : '-i',
-    #         'xtandem_style_1'   : 'scoring, y ions',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #         'kojak_style_1' : {
-    #             False : '0',
-    #             True  : '1',
-    #         },
-    #         'omssa_style_1' : {
-    #             False : '',
-    #             True  : '4',
-    #         },
-    #         'xtandem_style_1' : {
-    #             False : 'no',
-    #             True  : 'yes',
-    #         },
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : True,
-    #     'description' : \
-    #         'Spectrum: if true, y ions are used in algorithm',
-    # },
-    # 'score_z+1_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'msamanda_style_1' : 'series',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'Spectrum: if true, z ion plus 1 Da mass are used in algorithm',
-    # },
-    # 'score_z+2_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'msamanda_style_1' : 'series',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'Spectrum: if true z ion plus 2 Da mass are used in algorithm',
-    # },
-    # 'score_z_ions' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'kojak_1_5_3',
-    #         'msamanda_1_0_0_5242',
-    #         'msamanda_1_0_0_5243',
-    #         'msamanda_1_0_0_6299',
-    #         'msamanda_1_0_0_6300',
-    #         'msamanda_1_0_0_7503',
-    #         'msamanda_1_0_0_7504',
-    #         'myrimatch_2_1_138',
-    #         'myrimatch_2_2_140',
-    #         'omssa_2_1_9',
-    #         'xtandem_cyclone_2010',
-    #         'xtandem_jackhammer',
-    #         'xtandem_piledriver',
-    #         'xtandem_sledgehammer',
-    #         'xtandem_vengeance',
-    #         'xtandem_alanine',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'kojak_style_1'     : 'ion_series_Z',
-    #         'msamanda_style_1'  : 'series',
-    #         'myrimatch_style_1' : 'FragmentationRule',
-    #         'omssa_style_1'     : '-i',
-    #         'xtandem_style_1'   : 'scoring, z ions',
-    #     },
-    #     'utag' : [
-    #         'scoring',
-    #     ],
-    #     'uvalue_translation' : {
-    #         'kojak_style_1' : {
-    #             False : '0',
-    #             True  : '1',
-    #         },
-    #         'omssa_style_1' : {
-    #             False : '',
-    #             True  : '5',
-    #         },
-    #         'xtandem_style_1' : {
-    #             False : 'no',
-    #             True  : 'yes',
-    #         },
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : False,
-    #     'description' : \
-    #         'Spectrum: if true, z ions are used in algorithm',
-    # },
     'search_for_saps' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
