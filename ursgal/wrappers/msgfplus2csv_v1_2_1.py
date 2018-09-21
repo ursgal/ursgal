@@ -108,7 +108,7 @@ class msgfplus2csv_v1_2_1( ursgal.UNode ):
             '-tsv:{0}'.format(self.params['translations']['output_file_incl_path'].strip('.csv')+'.tsv'),
             '-showDecoy',
             '-unroll',
-            '-skipDupIds',
+            # '-skipDupIds',
             # '-singleResult',
         ]
         self.created_tmp_files.append(self.params['translations']['output_file_incl_path'].strip('.csv')+'.tsv')

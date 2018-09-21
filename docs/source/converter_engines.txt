@@ -26,6 +26,18 @@ Convert CSV to Counted Results
 Convert MS-GF+ MZID to CSV
 --------------------------
 
+.. autoclass:: ursgal.wrappers.msgfplus2csv_py_v1_0_0.msgfplus2csv_py_v1_0_0
+   :members:
+
+.. autoclass:: ursgal.wrappers.msgfplus2csv_v1_2_1.msgfplus2csv_v1_2_1
+   :members:
+
+.. autoclass:: ursgal.wrappers.msgfplus2csv_v1_2_0.msgfplus2csv_v1_2_0
+   :members:
+
+.. autoclass:: ursgal.wrappers.msgfplus2csv_v2017_07_04.msgfplus2csv_v2017_07_04
+   :members:
+
 .. autoclass:: ursgal.wrappers.msgfplus2csv_v2017_01_27.msgfplus2csv_v2017_01_27
    :members:
 
