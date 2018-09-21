@@ -22,7 +22,7 @@ class sugarpy_run_1_0_0(ursgal.UNode):
         'input_extensions'   : ['.csv'],
         'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
-        'in_development'     : False,
+        'in_development'     : True,
         'include_in_git'     : False,
         'distributable'      : False,
         'engine'             : {

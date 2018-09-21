@@ -50,8 +50,11 @@ ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_11
 ursgal/resources/platform_independent/arc_independent/moda_v1_51
 ursgal/resources/platform_independent/arc_independent/pipi_1_3_0
 ursgal/resources/platform_independent/arc_independent/msfragger_20170103
-ursgal/resources/platform_independent/arc_independent/msgfplus_C_mzid2csv_v1_2_0
-ursgal/resources/platform_independent/arc_independent/msgfplus_C_mzid2csv_v2017_07_04
+ursgal/resources/platform_independent/arc_independent/msgfplus2csv_v1_2_0/
+ursgal/resources/platform_independent/arc_independent/msgfplus2csv_v2017_07_04/
+ursgal/resources/platform_independent/arc_independent/pipi_1_4_5/
+ursgal/resources/platform_independent/arc_independent/sugarpy_plot_1_0_0/
+ursgal/resources/platform_independent/arc_independent/sugarpy_run_1_0_0/
 ursgal/resources/win32/
 ursgal/resources/darwin/
 example_scripts/logs/

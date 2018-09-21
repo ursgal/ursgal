@@ -2,10 +2,11 @@ version: 1.0.{build}
 
 environment:
   matrix:
-    - PYTHON: "C:\\Python34-x64"
+    - PYTHON: "C:\\Python36-x64"
 
 install:
   - cmd: "%PYTHON%\\python.exe setup.py install"
+  - cmd: "%PYTHON%/Scripts/pip.exe install numpy"
   - cmd: "%PYTHON%/Scripts/pip.exe install -r requirements.txt"
   - cmd: "%PYTHON%\\python.exe install_resources.py omssa_2_1_9"
   - cmd: "%PYTHON%/Scripts/nosetests.exe"
