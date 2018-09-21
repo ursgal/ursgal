@@ -3,9 +3,9 @@ import ursgal
 import os
 
 
-class msgfplus_py_mzid2csv_v1_0_0(ursgal.UNode):
+class msgfplus2csv_py_v1_0_0(ursgal.UNode):
     """
-    msgfplus_py_mzid2csv_v1.0.0 UNode
+    msgfplus2csv_py v1.0.0 UNode
     """
     META_INFO = {
         'edit_version'       : 1.00,
@@ -25,7 +25,7 @@ class msgfplus_py_mzid2csv_v1_0_0(ursgal.UNode):
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'     : 'msgfplus_py_mzid2csv_v1_0_0.py'
+                    'exe'     : 'msgfplus2csv_py_v1_0_0.py'
                 },
             },
         },
@@ -33,7 +33,7 @@ class msgfplus_py_mzid2csv_v1_0_0(ursgal.UNode):
     }
 
     def __init__(self, *args, **kwargs):
-        super(msgfplus_py_mzid2csv_v1_0_0, self).__init__(*args, **kwargs)
+        super(msgfplus2csv_py_v1_0_0, self).__init__(*args, **kwargs)
 
     def _execute(self):
         msgf_mzid2csv = self.import_engine_as_python_function()

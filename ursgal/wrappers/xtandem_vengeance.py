@@ -31,7 +31,7 @@ class xtandem_vengeance( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'tandem',
                     'url'            : '',
-                    'zip_md5'        : '8611a65a9cb87ab0cae59756dffe9213',
+                    'zip_md5'        : 'b6898f00921f6fbd6b826aa734e4fc44',
                     'additional_exe' : [],
                 },
             },
@@ -39,7 +39,7 @@ class xtandem_vengeance( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : '034fa00d6cd0f1d7101f12d845062949',
+                    'zip_md5'        : 'fb4f06cf5061a0807732530eb9fdd006',
                     'additional_exe' : [],
                 },
             },
@@ -47,7 +47,7 @@ class xtandem_vengeance( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : 'b9d2b1da628627f0ff0ba64d8e7b93b1',
+                    'zip_md5'        : '05fe1e0b4db8ec6d4a7867c563d16597',
                     'additional_exe' : [],
                 },
             },

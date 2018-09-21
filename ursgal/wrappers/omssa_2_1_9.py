@@ -44,7 +44,7 @@ class omssa_2_1_9( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'omssacl',
                     'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.macos.tar.gz',
-                    'zip_md5'        : '9cb92a98c4d96c34cc925b9336cbaec7',
+                    'zip_md5'        : '07854ab2c8c6776ab948791e560867ab',
                     'additional_exe' : ['makeblastdb'],
                 },
             },
@@ -52,7 +52,7 @@ class omssa_2_1_9( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'omssacl',
                     'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.linux.tar.gz',
-                    'zip_md5'        : '921e01df9cd2a99d21e9a336b5b862c1',
+                    'zip_md5'        : '287c612ab4fe4b8b96b57dd81e0acfc0',
                     'additional_exe' : ['makeblastdb'],
                 },
             },
@@ -60,15 +60,15 @@ class omssa_2_1_9( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'omssacl.exe',
                     'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
-                    'zip_md5'        : 'b9d9a8aec3cfe77c48ce0f5752aba8f9',
+                    'zip_md5'        : '29ed537ebccfa2345207f24183bd9149',
                     'additional_exe' : ['makeblastdb'],
                 },
-                '32bit' : {
-                    'exe'            : 'omssacl.exe',
-                    'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
-                    'zip_md5'        : 'a05a5cdd45fd8abcfc75b1236f8a2390',
-                    'additional_exe' : ['makeblastdb'],
-                },
+                # '32bit' : {
+                #     'exe'            : 'omssacl.exe',
+                #     'url'            : 'ftp://ftp.ncbi.nih.gov/pub/lewisg/omssa/2.1.9/omssa-2.1.9.win32.exe',
+                #     'zip_md5'        : 'a05a5cdd45fd8abcfc75b1236f8a2390',
+                #     'additional_exe' : ['makeblastdb'],
+                # },
             },
         },
         'mods_to_unimod_correction' : {
@@ -286,6 +286,13 @@ class omssa_2_1_9( ursgal.UNode ):
                     base_mz=self.params['translations']['base_mz']
                 )
 
+        print(
+            '''
+            [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
+            [ WARNING ] need to be combined for pyQms (use of symmetric tolerance window).
+            [ WARNING ] The arithmetic mean is used.
+            '''
+        )
         self.params['_omssa_precursor_error'] = (
             float(self.params['translations']['precursor_mass_tolerance_plus']) +
             float(self.params['translations']['precursor_mass_tolerance_minus'])

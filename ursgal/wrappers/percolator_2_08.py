@@ -57,7 +57,7 @@ class percolator_2_08( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'percolator_2_08',
                     'url'            : '',
-                    'zip_md5'        : 'ecaa830a570f4bd8f010b5beda1c1b7c',
+                    'zip_md5'        : '3a5f5433ec3875532e74ef54c96da3ba',
                     'additional_exe' : [],
                 },
             },
@@ -65,7 +65,7 @@ class percolator_2_08( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'percolator',
                     'url'            : '',
-                    'zip_md5'        : 'b03bf30ef4c4bdda1725de4c70351842',
+                    'zip_md5'        : '6213411f3c56684667d56ba1a8b020ae',
                     'additional_exe' : [],
                 },
             },
@@ -73,15 +73,15 @@ class percolator_2_08( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'percolator.exe',
                     'url'            : '',
-                    'zip_md5'        : 'ca267a3104cedc20887698a499f58859',
+                    'zip_md5'        : '60bc939789ef83e11cde4e75cb4ca9e2',
                     'additional_exe' : [],
                 },
-                '32bit' : {
-                    'exe'            : 'percolator.exe',
-                    'url'            : '',
-                    'zip_md5'        : '8b1387860c15d07e938a517ddd2cfffa',
-                    'additional_exe' : [],
-                },
+                # '32bit' : {
+                #     'exe'            : 'percolator.exe',
+                #     'url'            : '',
+                #     'zip_md5'        : '8b1387860c15d07e938a517ddd2cfffa',
+                #     'additional_exe' : [],
+                # },
             },
         },
         'citation' : \

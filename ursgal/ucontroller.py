@@ -95,9 +95,9 @@ class UController(ursgal.UNode):
         self.unodes = self._collect_all_unode_wrappers()
         # self.unodes = self.collect_all_unodes_from_kb()
         self.determine_availability_of_unodes()
-            # if pymzml generation 2 is used we reset the default conveter version
-        pymzml_release_version = pkg_resources.get_distribution("pymzml").version
-        pymzml_major_version_number = int(pymzml_release_version[0])
+        # if pymzml generation 2 is used we reset the default converter version
+        import pymzml
+        pymzml_major_version_number = int(pymzml.__version__.split('.')[0])
         if pymzml_major_version_number == 2:
             self.params['mzml2mgf_converter_version'] = 'mzml2mgf_2_0_0'
             # default is 1_0_0
@@ -892,7 +892,7 @@ class UController(ursgal.UNode):
                     sys.exit(1)
 
         elif len(self.guess_engine_name(engine)) == 1 and\
-                self.guess_engine_name(engine)[0] in ['mzml2mgf_1_0_0']:
+                self.guess_engine_name(engine)[0] in ['mzml2mgf_1_0_0','mzml2mgf_2_0_0']:
             outfile = self.convert_to_mgf_and_update_rt_lookup(
                 input_file       = input_file,
                 force            = force,
@@ -2591,11 +2591,12 @@ class UController(ursgal.UNode):
 
                         else:
                             print(
-                                'md5 in kb found for {0} on platform {1} and architecture {2} differs from you zip file'.format(
+                                'md5 in kb found for {0} on platform {1} and architecture {2} differs from your zip file.'.format(
                                     engine,
                                     current_platform,
                                     current_architecture
-                                )
+                                ),
+                                'zip file location: {0}'.format(target_folder_for_zips)
                             )
                             os.remove(zip_file_name)
                             message = missing_md5_format_string.format(
@@ -2606,6 +2607,7 @@ class UController(ursgal.UNode):
                             )
                             print( message )
                             update_kb_list.append((engine,message))
+                            print('created zip file has been removed, include correct md5 in META_IFO first')
                 else:
                     print(
                         'No md5 in kb found for {0} on platform {1} and architecture {2}'.format(

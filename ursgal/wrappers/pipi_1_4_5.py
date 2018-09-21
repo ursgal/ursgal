@@ -6,9 +6,10 @@ import csv
 import itertools
 import sys
 
-class pipi_1_3_0(ursgal.UNode):
+class pipi_1_4_5(ursgal.UNode):
     """
-    PIPI unode
+    Unode for PIPI: PTM-Invariant Peptide Identification
+    For furhter information see: http://bioinformatics.ust.hk/pipi.html
 
     Note:
         Please download and extract PIPI manually from 
@@ -22,8 +23,8 @@ class pipi_1_3_0(ursgal.UNode):
     META_INFO = {
         'edit_version': 1.00,
         'name': 'PIPI',
-        'version': '1.3.0',
-        'release_date': '2017-06-20',
+        'version': '1.4.5',
+        'release_date': '2018-06-20',
         'utranslation_style': 'pipi_style_1',
         'input_extensions': ['.mgf', '.mzML', '.mzXML'],
         'output_extensions': ['.csv'],
@@ -37,7 +38,7 @@ class pipi_1_3_0(ursgal.UNode):
         'engine': {
             'platform_independent': {
                 'arc_independent': {
-                    'exe': 'PIPI-1.3.0.jar',
+                    'exe': 'PIPI-1.4.5.jar',
                     'url': 'http://bioinformatics.ust.hk/pipi.html',
                     'zip_md5': '',
                     'additional_exe': [],
@@ -51,7 +52,7 @@ class pipi_1_3_0(ursgal.UNode):
     }
 
     def __init__(self, *args, **kwargs):
-        super(pipi_1_3_0, self).__init__(*args, **kwargs)
+        super(pipi_1_4_5, self).__init__(*args, **kwargs)
         pass
 
     def preflight(self):
@@ -96,11 +97,7 @@ class pipi_1_3_0(ursgal.UNode):
             self.params_to_write[aa] = 0
 
         write_exclusion_list = [
-            # 'precursor_min_mass',
-            # 'precursor_max_mass',
-            # 'precursor_min_charge',
-            # 'precursor_max_charge',
-            'label',
+            # 'label',
             '-Xmx',
             'frag_mass_tolerance_unit',
             'base_mz',
@@ -108,26 +105,26 @@ class pipi_1_3_0(ursgal.UNode):
             # 'validation_score_field'
         ]
 
-        additional_15N_modifications = []
-        if self.params['translations']['label'] == '15N':
-            for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
-                existing = False
-                for mod_dict in self.params['mods']['fix']:
-                    if aminoacid == mod_dict['aa']:
-                        mod_dict['mass'] += N15_Diff
-                        mod_dict['name'] += '_15N_{0}'.format(aminoacid)
-                        existing = True
-                if existing == True:
-                    continue
-                else:
-                    self.params['mods']['fix'].append(
-                        {
-                            'aa': aminoacid,
-                            'mass': N15_Diff,
-                            'name': '_15N_{0}'.format(aminoacid),
-                            'pos': 'any',
-                        }
-                    )
+        # additional_15N_modifications = []
+        # if self.params['translations']['label'] == '15N':
+        #     for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
+        #         existing = False
+        #         for mod_dict in self.params['mods']['fix']:
+        #             if aminoacid == mod_dict['aa']:
+        #                 mod_dict['mass'] += N15_Diff
+        #                 mod_dict['name'] += '_15N_{0}'.format(aminoacid)
+        #                 existing = True
+        #         if existing == True:
+        #             continue
+        #         else:
+        #             self.params['mods']['fix'].append(
+        #                 {
+        #                     'aa': aminoacid,
+        #                     'mass': N15_Diff,
+        #                     'name': '_15N_{0}'.format(aminoacid),
+        #                     'pos': 'any',
+        #                 }
+        #             )
 
         if self.params['translations']['frag_mass_tolerance_unit'] == 'ppm':
             self.params['translations']['_grouped_by_translated_key']['ms2_tolerance'] = {
@@ -269,16 +266,20 @@ class pipi_1_3_0(ursgal.UNode):
             'theo_mass',
             'exp_mass',
             'abs_ppm',
-            'delta_C',
-            'ptm_delta_score',
+            'A_score',
             'protein_ID',
             'score',
-            'naive_q_value',
-            'percolator_score',
-            'posterior_error_prob',
-            'percolator_q_value',
+            'delta_C_n',
             'other_PTM_patterns',
             'MGF_title',
+            'labelling',
+            'isotope_correction',
+            'MS1_pearson_correlation_coefficient',
+            # 'ptm_delta_score',
+            # 'naive_q_value',
+            # 'percolator_score',
+            # 'posterior_error_prob',
+            # 'percolator_q_value',
         ]
 
         translated_headers = []
@@ -293,10 +294,6 @@ class pipi_1_3_0(ursgal.UNode):
             'Modifications',
             'Mass Difference',
         ]
-        # msfragger_output_tsv = self.params['translations']['mzml_input_file'].replace(
-        #     'mzML',
-        #     'tsv'
-        # )
 
         csv_writer = csv.DictWriter(
             open(self.params['translations']['output_file_incl_path'], 'w'),
@@ -304,15 +301,30 @@ class pipi_1_3_0(ursgal.UNode):
         )
 
         pipi_output = self.params['translations'][
-            'mgf_input_file'] + '.pipi.csv'
+            'mgf_input_file'] + '.{0}.pipi.csv'.format(self.params['label'])
         csv_reader = csv.DictReader(
             open(pipi_output, 'r'),
             fieldnames=translated_headers,
         )
-        self.created_tmp_files.append(pipi_output)
+        # self.created_tmp_files.append(pipi_output)
+        # self.created_tmp_files.append(pipi_output.replace('.pipi.csv', '.pipi.pep.xml'))
+        # self.created_tmp_files.append(pipi_output.replace('.pipi.csv', '.input.temp'))
 
         csv_writer.writeheader()
-        for line_dict in csv_reader:
+        for n, line_dict in enumerate(csv_reader):
+            if n == 0:
+                continue
+            # try:
+            #     float(line_dict['PIPI:score'])
+            # except:
+            #     line_dict['Protein ID'] += line_dict['PIPI:score']
+            #     line_dict['PIPI:score'] = line_dict['PIPI:delta_C_n']
+            #     line_dict['PIPI:delta_C_n'] = line_dict['PIPI:other_PTM_patterns']
+            #     line_dict['PIPI:other_PTM_patterns'] = line_dict['Spectrum Title']
+            #     line_dict['Spectrum Title'] = line_dict['label']
+            #     line_dict['label'] = line_dict['PIPI:isotope_correction']
+            #     line_dict['PIPI:isotope_correction'] = line_dict['PIPI:MS1_pearson_correlation_coefficient']
+            #     line_dict['PIPI:MS1_pearson_correlation_coefficient'] = line_dict['Raw data location']
             line_dict['Raw data location'] = os.path.abspath(
                 self.params['translations']['mgf_input_file']
             )
@@ -327,10 +339,10 @@ class pipi_1_3_0(ursgal.UNode):
             for part in line_dict['Sequence'].split('('):
                 if ')' in part:
                     mod, seq = part.split(')')
-                    tmp_seq += seq
                     tmp_mods.append(
                         '{0}:{1}'.format(mod, len(tmp_seq))
                     )
+                    tmp_seq += seq
                 else:
                     tmp_seq += part
             tmp_seq = tmp_seq.replace('c', '')
@@ -341,24 +353,22 @@ class pipi_1_3_0(ursgal.UNode):
 
     def write_params_file(self):
         with open(self.param_file_name, 'w') as io:
-            print('''# 1.3.0
+            print('''# 1.4.5
 # First line is the parameter file version. Don't change it.
 thread_num = {thread_num}
-percolator_path = None
+percolator_path = ursgal/resources/darwin/64bit/percolator_2_08/percolator_2_08
 
 # Database
 db = {db}
+database_type = Others # Different types have different fasta header patterns. Available values: UniProt, SwissProt, TAIR, ITAG, RefSeq, Others
 missed_cleavage = {missed_cleavage}
-min_precursor_mass = {min_precursor_mass}
-max_precursor_mass = {max_precursor_mass}
+min_peptide_length = {min_peptide_length}
+max_peptide_length = {max_peptide_length}
+add_decoy = {add_decoy} # 0 = don't generate and search decoy sequences automatically; 1 = generate and search decoy sequences
+add_contaminant = {add_contaminant} # 0 = don't add contaminant proteins automatically; 1 = add contaminant proteins
 
 # Spectrum
-min_ms1_charge = {min_ms1_charge}
-max_ms1_charge = {max_ms1_charge}
-max_ms2_charge = {max_ms2_charge}
-min_peak_num = {min_peak_num}
-min_potential_charge = {min_potential_charge}
-max_potential_charge = {max_potential_charge}
+ms_level = {ms_level}
 
 # Tolerance
 ms1_tolerance_unit = {ms1_tolerance_unit}
@@ -371,6 +381,9 @@ max_clear_mz = {max_clear_mz}
 # Modification related
 min_ptm_mass = {min_ptm_mass}
 max_ptm_mass = {max_ptm_mass}
+
+# Isotopic labelling strategy
+15N = {15N} # 1: 15N. 0: 14N.
 
 # considered modifications in generating tags
 # specify additional mass and amino acid. DO NOT change the last character.
@@ -390,10 +403,8 @@ mod10 = {mod10}
 # considered peptide/protein N/C-terminal modifications in generating tags
 # empty ones must with value 0.0
 # the maximum number for each terminal is 9
-pepNterm = {pepNterm}
-pepCterm = {pepCterm}
-proNterm = {proNterm}
-proCterm = {proCterm}
+Nterm = {pepNterm}
+Cterm = {pepCterm}
 
 # Fix modification
 G = {G}

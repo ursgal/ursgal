@@ -39,13 +39,13 @@ class msgfplus_v2018_06_28( msgf ):
         'in_development'              : False,
         'include_in_git'              : False,
         'utranslation_style'          : 'msgfplus_style_1',
-        'distributable'               : False,
+        'distributable'               : True,
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
-                    'url'            : '',
-                    'zip_md5'        : '',
+                    'url'            : 'https://github.com/MSGFPlus/msgfplus/releases/download/v2018.06.28/v20180628.zip',
+                    'zip_md5'        : 'c1b35ac5a51fd9b2f3e9f7f16d6e7afc',
                     'additional_exe' : [],
                 },
             },
