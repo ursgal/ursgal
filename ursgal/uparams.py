@@ -1052,6 +1052,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'pipi_1_4_5',
@@ -1205,6 +1206,7 @@ ursgal_params = {
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
+                'moda_v1_61' : True,
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1236,6 +1238,7 @@ ursgal_params = {
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
+                'moda_v1_61' : True,
             },
             'qvality_style_1' : {
                 'None'                 : None,
@@ -1267,6 +1270,7 @@ ursgal_params = {
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
+                'moda_v1_61' : True,
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1298,6 +1302,7 @@ ursgal_params = {
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
+                'moda_v1_61' : True,
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1329,6 +1334,7 @@ ursgal_params = {
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
+                'moda_v1_61' : True,
             },
         },
         'uvalue_type'    : 'select',
@@ -1556,6 +1562,7 @@ ursgal_params = {
                 'kojak_1_5_3' : False,
                 'mascot_x_x_x' : True,
                 'moda_v1_51' : False,
+                'moda_v1_61' : False,
                 'msamanda_1_0_0_5242'  : False,
                 'msamanda_1_0_0_5243'  : False,
                 'msamanda_1_0_0_6299'  : False,
@@ -1748,6 +1755,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'pipi_1_4_5',
+            'moda_v1_61',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -1759,6 +1767,7 @@ ursgal_params = {
             'xtandem_style_1'     : 'spectrum, threads',
             'msfragger_style_1'   : 'num_threads',
             'pipi_style_1'        : 'thread_num',
+            'moda_style_1'        : '-@',
         },
         'utag' : [
             'hardware_resources',
@@ -1780,6 +1789,9 @@ ursgal_params = {
                 -1 : 'max - 1',
             },
             'xtandem_style_1' : {
+                -1 : 'max - 1',
+            },
+            'moda_style_1' : {
                 -1 : 'max - 1',
             },
         },
@@ -1863,6 +1875,7 @@ ursgal_params = {
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2228,6 +2241,7 @@ ursgal_params = {
             'generate_target_decoy_1_0_0',
             'kojak_1_5_3',
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2751,6 +2765,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2814,6 +2829,7 @@ ursgal_params = {
         'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3698,6 +3714,7 @@ ursgal_params = {
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
+            'moda_v1_61',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v2018_01_30',
@@ -4404,6 +4421,7 @@ ursgal_params = {
         'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4545,6 +4563,7 @@ ursgal_params = {
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4635,6 +4654,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
             'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
@@ -4992,6 +5012,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -5047,6 +5068,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
             'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
@@ -5261,6 +5283,7 @@ ursgal_params = {
         'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5298,6 +5321,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5326,6 +5350,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5362,6 +5387,7 @@ ursgal_params = {
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -5717,10 +5743,10 @@ ursgal_params = {
         },
         'uvalue_translation' : {
             'ucontroller_style_1': {
-                'msgfplus_v9979' : 'mzidentml_lib_1_6_10',
-                'msgfplus_v2016_09_16' : 'msgfplus2csv_v2017_09_16',
-                'msgfplus_v2017_01_27' : 'msgfplus2csv_v2017_01_27',
-                'msgfplus_v2018_01_30' : 'msgfplus2csv_v1_2_0',
+                'msgfplus_v9979' : 'msgfplus2csv_py_v1_0_0',
+                'msgfplus_v2016_09_16' : 'msgfplus2csv_py_v1_0_0',
+                'msgfplus_v2017_01_27' : 'msgfplus2csv_py_v1_0_0',
+                'msgfplus_v2018_01_30' : 'msgfplus2csv_py_v1_0_0',
                 'msgfplus_v2018_06_28' : 'msgfplus2csv_py_v1_0_0',
                 'msgfplus_v2018_09_12' : 'msgfplus2csv_py_v1_0_0',
             },
@@ -6825,6 +6851,7 @@ ursgal_params = {
             'generate_target_decoy_1_0_0',
             'merge_csvs_1_0_0',
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7212,6 +7239,7 @@ ursgal_params = {
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7286,6 +7314,7 @@ ursgal_params = {
         'available_in_unode' : [
             'kojak_1_5_3',
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7359,6 +7388,7 @@ ursgal_params = {
         'edit_version' : 1.01,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7820,7 +7850,7 @@ ursgal_params = {
             'Spectrum Title',
             'Sequence',
             'Modifications',
-            'Mass difference',
+            'Mass Difference',
             'Charge',
             'Is decoy',
         ],
@@ -8879,6 +8909,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -9328,6 +9359,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
+            'moda_v1_61',
             'pepnovo_3_1',
         ],
         'triggers_rerun' : True,
@@ -9445,6 +9477,7 @@ ursgal_params = {
                 'msfragger_20170103'   : 0,
                 'pipi_1_4_5'           : 0,
                 'moda_v1_51'           : 0,
+                'moda_v1_61'           : 0,
             },
         },
         'uvalue_type' : 'str',
@@ -9516,6 +9549,7 @@ ursgal_params = {
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
+                'moda_v1_61'           : 'ModA:probability',
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9548,6 +9582,7 @@ ursgal_params = {
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
+                'moda_v1_61'           : 'ModA:probability',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9580,6 +9615,7 @@ ursgal_params = {
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
+                'moda_v1_61'           : 'ModA:probability',
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9612,6 +9648,7 @@ ursgal_params = {
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
+                'moda_v1_61'           : 'ModA:probability',
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9644,6 +9681,7 @@ ursgal_params = {
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
+                'moda_v1_61'           : 'ModA:probability',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9676,6 +9714,7 @@ ursgal_params = {
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
+                'moda_v1_61'           : 'ModA:probability',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9708,6 +9747,7 @@ ursgal_params = {
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
+                'moda_v1_61'           : 'ModA:probability',
             },
         },
         'uvalue_type' : 'str',
