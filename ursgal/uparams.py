@@ -431,19 +431,44 @@ ursgal_params = {
         },
         'uvalue_type': "bool",
     },
-    'pyQms_colors': {
+    'pyqms_colors': {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
         ],
         'uvalue_option': {
-            'none_val': None,
-            'multiple_line': False,
+            'none_val': {
+                '0.0': None,
+                '0.1': None,
+                '0.2': None,
+                '0.3': None,
+                '0.4': None,
+                '0.5': None,
+                '0.6': None,
+                '0.7': None,
+                '0.8': None,
+                '0.9': None,
+                '1.0': None
+            },
+            'multiple_line': {
+                '0.0': False,
+                '0.1': False,
+                '0.2': False,
+                '0.3': False,
+                '0.4': False,
+                '0.5': False,
+                '0.6': False,
+                '0.7': False,
+                '0.8': False,
+                '0.9': False,
+                '1.0': False
+            },
             # 'max': 10000,
             # 'min': 0,
             # 'updownval': 1,
             'custom_val_max': 11,
-            'dict_type': {
+            'custom_type': {},
+            'value_types': {
                 '0.0': 'tuple',
                 '0.1': 'tuple',
                 '0.2': 'tuple',
@@ -456,35 +481,19 @@ ursgal_params = {
                 '0.9': 'tuple',
                 '1.0': 'tuple'
             },
-            'dict_title': {
-                'Enrichment' : 'Color'
+            'item_titles' : {
+                '0.0' : '',
+                '0.1' : '',
+                '0.2' : '',
+                '0.3' : '',
+                '0.4' : '',
+                '0.5' : '',
+                '0.6' : '',
+                '0.7' : '',
+                '0.8' : '',
+                '0.9' : '',
+                '1.0' : ''
             },
-            'title_list' : {
-                '0.0' : [],
-                '0.1' : [],
-                '0.2' : [],
-                '0.3' : [],
-                '0.4' : [],
-                '0.5' : [],
-                '0.6' : [],
-                '0.7' : [],
-                '0.8' : [],
-                '0.9' : [],
-                '1.0' : []
-            },
-            'type_dict'  : {
-                '0.0': {},
-                '0.1': {},
-                '0.2': {},
-                '0.3': {},
-                '0.4': {},
-                '0.5': {},
-                '0.6': {},
-                '0.7': {},
-                '0.8': {},
-                '0.9': {},
-                '1.0': {},
-            }
         },
         'default_value': {
             '0.0' : (37  , 37  , 37)  ,
