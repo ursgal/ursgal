@@ -1888,7 +1888,7 @@ class UController(ursgal.UNode):
             output_file_name = output_file_name,
             engine           = self.params['unify_csv_converter_version'],
             force            = force,
-            merge_duplicates = False,
+            merge_duplicates = True,
         )
         return unified_search_results
 

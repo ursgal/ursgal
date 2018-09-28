@@ -5,9 +5,7 @@ import os
 import sys
 import csv
 import os.path
-import pprint
         
-
 # csv.field_size_limit(sys.maxsize)
 
 class venndiagram_1_0_0( ursgal.UNode ):
@@ -171,7 +169,5 @@ class venndiagram_1_0_0( ursgal.UNode ):
             *in_sets,
             **venn_params
             )
-        
-        pprint.pprint(return_dict)
 
         return return_dict
