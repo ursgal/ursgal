@@ -98,7 +98,8 @@ Did you misspell the field name?'''.format(
                         try:
                             floated_value = float(line_dict[dict_key])
                         except:
-                            floated_value = None
+                            sys.exit(1)
+                            print('[ ERROR] Value to be filtered could not be converted to float')
 
                         if floated_value is None:
                             write_row_bools.add(False)

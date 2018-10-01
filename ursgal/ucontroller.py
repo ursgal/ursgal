@@ -1308,14 +1308,9 @@ class UController(ursgal.UNode):
             # for json dump.. evals are always done on loaded
             # i_finfo and o_finfo
        
-        #print('<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-        #print(self.io['input']['finfo']['md5'])
-        #print('<<<<<<<<<<<<<<<<<<<<<<<<<<')
         if self.io['input']['finfo']['json_exists']:
             self.io['input']['finfo']['md5'] = self.io['input']['o_finfo']['md5']
-            #check to see if it's the output or input md5 that's
-            #print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-            #print(self.io['input']['finfo'].keys())
+        
         # setting pickle path ...
         pickle_path = self.io['input'].get(
             'scan_rt_lookup_path',
@@ -2918,8 +2913,6 @@ True
                       # pass
             input_file = tmp_file_name
         engine_name = self.engine_sanity_check( engine )
-        #print('PRINTING HERE PRINTING HERE')
-        #print(input_file)
         multi, input_file = self.distinguish_multi_and_single_input( input_file )
         self.input_file_sanity_check( input_file, engine=engine_name, multi=multi )
 
@@ -2931,7 +2924,7 @@ True
         )
         if dry_run is True:
             answer = None  # do not execute, even if params changed!
-        
+            
         report = self.run_unode_if_required(
             force, engine_name, answer, 
             merge_duplicates=merge_duplicates

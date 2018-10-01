@@ -254,11 +254,6 @@ class msfragger_20170103( ursgal.UNode ):
             self.params['input_dir_path'],
             self.params['input_file']
         )
-        print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-        print(self.input_file)
-        print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-
-
         if self.input_file.lower().endswith('.mzml') or \
             self.input_file.lower().endswith('.mzml.gz'):
             self.params['translations']['mzml_input_file'] = self.input_file
@@ -343,14 +338,22 @@ class msfragger_20170103( ursgal.UNode ):
             self.params['input_dir_path'],
             self.params['file_root'] + '.tsv'
         )
+
         if os.path.exists(msfragger_output_tsv) is False:
-            msfragger_output_tsv = os.path.join(
+             msfragger_output_tsv = os.path.join(
                 self.params['input_dir_path'],
-                '_'.join(self.params['file_root'].split('_')[1:]) + '.tsv'
-            )
-        
-        print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-        print(self.params['translations']['output_file_incl_path'])
+                self.params['file_root'][len(self.params['prefix'])+1:] + '.tsv'
+                )    
+            if os.path.exists(msfragger_output_tsv) is False:
+
+                msfragger_output_tsv = os.path.join(
+                    self.params['input_dir_path'],
+                    '_'.join(self.params['file_root'].split('_')[1:]) + '.tsv'
+                )
+
+                if os.path.exists(msfragger_output_tsv) is False:
+                    print('[ERROR]: msfragger could not find the correct output tsv file')
+    
         csv_out_fobject = open(self.params['translations']['output_file_incl_path'], 'w')
         csv_writer = csv.DictWriter(
             csv_out_fobject,

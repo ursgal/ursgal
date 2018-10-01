@@ -6,7 +6,7 @@ import csv
 from ursgal import ukb
 from ursgal import UNode
 from collections import Counter, defaultdict
-import time
+
 
 PROTON = ukb.PROTON
 
@@ -289,53 +289,38 @@ def count_distinct_psms(csv_file_path=None, psm_defining_colnames=None):
     return psm_counter
 
 
-def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
+def merge_rowdicts(list_of_rowdicts, joinchar='<|>', psm_colnames_to_merge_multiple_values):
     '''
     Merges CSV rows. If the column values are conflicting, they
     are joined with a character (joinchar).
     '''
     merged_d = {}
     fieldnames = list_of_rowdicts[0].keys()
-    # edited
-    return_value_2 = []
     for fieldname in fieldnames:
-        if fieldname == "MS-GF:SpecEValue":
-            #changed here
-            #time1 = time.time()
+        #############################
+        #develop what you need here
+        if fieldname in psm_colnames_to_merge_multiple_values.keys():
             values = [d[fieldname] for d in list_of_rowdicts]
             if values == ['' for value in values]:
                 continue
 
-            no_empty_values = [v for v in values if v != '']    
+            no_empty_values = [v for v in values if v != '']
             values_as_floats = [float(value) for value in no_empty_values]
-            merged_d[fieldname] = min(values_as_floats)
-            #changed here
-            #time2 = time.time()
-            #print('time2 minus time1')
-            #print(time2 - time1)
+            
+            if psm_colnames_to_merge_multiple_values[fieldname] == 'max':
+                merged_d[fieldname] = max(values_as_floats)
 
-            most_frequent_values = []
-            occurence_of_values = []
-            dict_frequency_of_occurence = {}
-            for value in set(values):
-                occurence_of_values.append(values.count(value))
-                dict_frequency_of_occurence[value] = values.count(value)
-            for value in dict_frequency_of_occurence:
-                if dict_frequency_of_occurence[value] == max(occurence_of_values):
-                    most_frequent_values.append(value)
+            if psm_colnames_to_merge_multiple_values[fieldname] == 'min':
+                merged_d[fieldname] = min(values_as_floats)
 
-            if str(min(values_as_floats)) not in most_frequent_values:
-                return_value_2 = list_of_rowdicts
-            #changed here
-            #time3 = time.time()
-            #print('time3 minus time2')
-            #print(time3-time2)
+            if psm_colnames_to_merge_multiple_values[fieldname] == 'avg':
+                merged_d[fieldname] = sum[values_as_floats]/len[values_as_floats]
 
-        elif fieldname == "Calc m/z":
-            values = [d[fieldname] for d in list_of_rowdicts]
-            no_empty_values = [v for v in values if v != '']    
-            values_as_floats = [float(value) for value in no_empty_values]
-            merged_d[fieldname] = min(values_as_floats)
+            if psm_colnames_to_merge_multiple_values[fieldname] == 'most_freqent':
+                value_occurences = Counter(values_as_floats)
+                merged_d[fieldname] = value_occurences.most_common(1)[0][0]
+    
+        ####################################
 
         else:
             values = [d[fieldname] for d in list_of_rowdicts]
@@ -348,7 +333,7 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
                 else:
                     merged_d[fieldname] = joinchar.join(values)
 
-    return merged_d, return_value_2
+    return merged_d
 
    
 
@@ -376,7 +361,6 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         csv_kwargs['lineterminator'] = '\n'
     else:
         csv_kwargs['lineterminator'] = '\r\n'
-    separate_row_dict_list = []
     with open(tmp_file, 'r') as tmp, open(out_file, 'w', newline='') as out:
         tmp_reader = csv.DictReader(tmp)
         writer = csv.DictWriter(
@@ -401,31 +385,10 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
                 raise Exception("This should never happen.")
         # finished parsing the old unmerged unified csv
         for rows_to_merge in rows_to_merge_dict.values():
-            merged_row_dict, separate_row_dicts = merge_rowdicts(rows_to_merge, joinchar=joinchar)
-            separate_row_dict_list.extend(separate_row_dicts)
-            writer.writerow(merged_row_dict)
-
-    #write the new file here ...
-
-    #time4 = time.time()
-
-    with open(tmp_file, 'r') as tmp, open('problem_specE_values.csv', 'w', newline='') as out:
-        tmp_reader = csv.DictReader(tmp)
-        csv_writer = csv.DictWriter(
-            out,
-            fieldnames=tmp_reader.fieldnames,
-            **csv_kwargs
-        )
-        csv_writer.writeheader()
-        for separate_row_dict in separate_row_dict_list:
-            csv_writer.writerow(separate_row_dict)
-    #changed here
-    #time5 - time.time()
-    #print('time5 - time4')
-    #prit(time5-time4)
-
-
-
+            writer.writerow(
+                merge_rowdicts(rows_to_merge, joinchar=joinchar)
+            )
+            
 
     # remove the old unified csv that contains duplicate rows
     if overwrite_file:
