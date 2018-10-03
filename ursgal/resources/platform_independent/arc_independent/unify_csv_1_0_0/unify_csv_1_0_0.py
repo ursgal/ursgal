@@ -876,7 +876,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     )
                 )
                 all_charges.add(int(line_dict['Charge']))
-                
+
 
                 # ------------
                 # BUFFER END
