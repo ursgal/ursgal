@@ -62,6 +62,11 @@ Available MS-GF+ versions, starting with the newest version:
 MSFragger 
 ---------
 
+Available MSFragger versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.msfragger_20171106.msfragger_20171106
+   :members:
+
 .. autoclass:: ursgal.wrappers.msfragger_20170103.msfragger_20170103
    :members:
 

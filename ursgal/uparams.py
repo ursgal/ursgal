@@ -909,6 +909,7 @@ ursgal_params = {
             'mzidentml_lib_1_6_11',
             'mzidentml_lib_1_7',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
         ],
         'triggers_rerun' : False,
@@ -1028,6 +1029,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'default_value' : True,
         'description' :  ''' Static mods are not considered ''',
@@ -1203,6 +1205,7 @@ ursgal_params = {
                 'xtandem_vengeance' : True,
                 'xtandem_alanine' : True,
                 'msfragger_20170103' : True,
+                'msfragger_20171106' : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
@@ -1235,6 +1238,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
+                'msfragger_20171106'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
@@ -1267,6 +1271,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
+                'msfragger_20171106'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
@@ -1299,6 +1304,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
+                'msfragger_20171106'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
@@ -1331,6 +1337,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : True,
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
+                'msfragger_20171106'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'moda_v1_51' : True,
@@ -1352,6 +1359,7 @@ ursgal_params = {
                 'msamanda_2_0_0_9695',
                 'msamanda_2_0_0_10695',
                 'msfragger_20170103',
+                'msfragger_20171106',
                 'msgfplus_v2016_09_16',
                 'msgfplus_v2017_01_27',
                 'msgfplus_v2018_01_30',
@@ -1447,6 +1455,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'default_value' : False,
         'description' :  ''' Specifies the trimming of a protein N-terminal methionine as a variable modification ''',
@@ -1573,6 +1582,7 @@ ursgal_params = {
                 'msamanda_2_0_0_9695'  : False,
                 'msamanda_2_0_0_10695' : False,
                 'msfragger_20170103'   : False,
+                'msfragger_20171106'   : False,
                 'msgfplus_v2016_09_16' : True,
                 'msgfplus_v2017_01_27' : True,
                 'msgfplus_v2018_01_30' : True,
@@ -1754,6 +1764,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
             'moda_v1_61',
         ],
@@ -1904,6 +1915,7 @@ ursgal_params = {
             'upeptide_mapper_1_0_0',
             'compomics_utilities_4_11_5',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
@@ -2271,6 +2283,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
@@ -2724,6 +2737,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
         ],
         'default_value' : [0.0, 0.0],
@@ -2787,6 +2801,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
@@ -2851,6 +2866,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
@@ -2948,6 +2964,7 @@ ursgal_params = {
         'available_in_unode' : [
             'omssa_2_1_9',
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3267,6 +3284,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'msfragger_20170103',
+            'msfragger_20171106',
             'msgfplus2csv_v2017_07_04',
             'msgfplus2csv_v1_2_0',
             'msgfplus2csv_v1_2_1',
@@ -3814,7 +3832,8 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4447,6 +4466,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
             'pyqms_1_0_0',
         ],
@@ -4531,7 +4551,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4585,6 +4606,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
@@ -4834,6 +4856,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
@@ -4948,6 +4971,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
         ],
         'triggers_rerun' : True,
@@ -4982,6 +5006,7 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5145,6 +5170,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'msfragger_20170103',
+            'msfragger_20171106',
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
@@ -5216,7 +5242,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5254,6 +5281,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5417,6 +5445,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
             'pyqms_1_0_0'
         ],
@@ -5572,6 +5601,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'default_value' : 50,
         'description' :  ''' Suppresses reporting of PSM if top hit has expectation greater than this threshold ''',
@@ -5598,6 +5628,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'default_value' : 0,
         'description' :  ''' Track top N unmodified peptide results separately from main results internally for boosting features. Should be set to a number greater than output_report_topN if zero bin boosting is desired. ''',
@@ -5624,6 +5655,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'default_value' : 0.0,
         'description' :  ''' Ranks a zero-bin hit above all non-zero-bin hit if it has expectation less than this value. ''',
@@ -5650,6 +5682,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'default_value' : 1.0,
         'description' :  ''' Multiplies expect value of PSMs in the zero-bin during results ordering (set to less than 1 for boosting) ''',
@@ -5676,6 +5709,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'default_value' : False,
         'description' :  ''' Inserts complementary ions corresponding to the top N most intense fragments in each experimental spectrum. Useful for recovery of modified peptides near C-terminal in open search. Should be set to 0 (disabled) otherwise. ''',
@@ -5701,6 +5735,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'default_value' : 3,
         'description' :  ''' Minimum number of matched peaks in PSM for inclusion in statistical modeling ''',
@@ -6344,7 +6379,8 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'pepnovo_3_1',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7181,7 +7217,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7268,6 +7305,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
@@ -7343,6 +7381,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
@@ -7416,6 +7455,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pipi_1_4_5',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
@@ -7553,6 +7593,7 @@ ursgal_params = {
             'mzml2mgf_2_0_0',
             'omssa_2_1_9',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7593,6 +7634,7 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7639,6 +7681,7 @@ ursgal_params = {
             'mzml2mgf_2_0_0',
             'omssa_2_1_9',
             'msfragger_20170103',
+            'msfragger_20171106',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7684,6 +7727,7 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7713,6 +7757,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'default_value' : 5,
         'description' :  'True precursor mass tolerance '\
@@ -7744,6 +7789,7 @@ ursgal_params = {
         'edit_version'   : 1.00,
         'available_in_unode' : [
             'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'default_value' : 'ppm',
         'description' :  '''Mass tolerance units fo precursor_true_tolerance''',
@@ -8935,7 +8981,8 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9331,7 +9378,8 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
-            'msfragger_20170103'
+            'msfragger_20170103',
+            'msfragger_20171106',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9475,6 +9523,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 0,
                 'xtandem_alanine'      : 0,
                 'msfragger_20170103'   : 0,
+                'msfragger_20171106'   : 0,
                 'pipi_1_4_5'           : 0,
                 'moda_v1_51'           : 0,
                 'moda_v1_61'           : 0,
@@ -9546,6 +9595,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
@@ -9579,6 +9629,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
@@ -9612,6 +9663,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
@@ -9645,6 +9697,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
@@ -9678,6 +9731,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
@@ -9711,6 +9765,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
@@ -9744,6 +9799,7 @@ ursgal_params = {
                 'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
