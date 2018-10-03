@@ -66,6 +66,13 @@ MSFragger
    :members:
 
 
+Mascot
+______
+
+.. autoclass:: ursgal.wrappers.mascot_x_x_x.mascot_x_x_x
+   :members:
+
+
 MODa
 ----
 
