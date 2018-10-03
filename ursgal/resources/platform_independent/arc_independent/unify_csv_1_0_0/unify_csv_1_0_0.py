@@ -868,7 +868,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 **line_dict_update
                             )
                         )
-                        continu
+                        continue
 
                 all_molecules.add(
                     '{Sequence}#{Modifications}'.format(
