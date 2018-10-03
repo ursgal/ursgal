@@ -67,7 +67,7 @@ def main(folder):
         'ftp_password': 'FI4645a',
 
         'ftp_output_folder_root': folder,
-        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
+        'http_url': 'https://www.sas.upenn.edu/~sschulze/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
         'http_output_folder': os.path.join(
             os.pardir,
             'example_data'
