@@ -59,6 +59,9 @@ def main(folder):
     engine_list = [
         'msgfplus_v9979',
         'msgfplus_v2016_09_16',
+        'msgfplus_v2018_01_30',
+        'msgfplus_v2018_06_28',
+        'msgfplus_v2018_09_12',
     ]
 
     params = {

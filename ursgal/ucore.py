@@ -96,6 +96,21 @@ def convert_ppm_to_dalton(ppm_value, base_mz=1000.0):
     return float(ppm_value) / float(base_mz)
 
 
+def convert_dalton_to_ppm(da_value, base_mz=1000.0):
+    '''
+        Convert the precision in Dalton to ppm
+
+        Keyword Arguments:
+            da_value (float): Dalton value to transform
+            base_mz (float): factor for transformation
+
+
+        Returns:
+            float: value in ppm
+    '''
+    return float(da_value) * float(base_mz)
+
+
 def calculate_mz(mass, charge):
     '''
     Calculate m/z function
@@ -218,6 +233,8 @@ def reformat_peptide(regex_pattern, unimod_name, peptide):
         original_match_start = match.start()
         original_match_end = match.end()
         match_length = original_match_end - original_match_start
+        if unimod_name is None:
+            unimod_name = match.group(0)
 
         mods.append((
             original_match_start,
@@ -284,11 +301,12 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
         values = [d[fieldname] for d in list_of_rowdicts]
         if len(set(values)) == 1:
             merged_d[fieldname] = values[0]
-        elif len([v for v in values if v != '']) == 1:
-            values.remove('')
-            merged_d[fieldname] = values[0]
         else:
-            merged_d[fieldname] = joinchar.join(values)
+            no_empty_values = [v for v in values if v != '']
+            if len(set(no_empty_values)) == 1:
+                merged_d[fieldname] = no_empty_values[0]
+            else:
+                merged_d[fieldname] = joinchar.join(values)
     return merged_d
 
 
@@ -308,7 +326,7 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         out_file = csv_file_path.strip('.csv') + '_merged_duplicates.csv'
     UNode.print_info(
         'Merging rows of the same PSM...',
-        caller = 'postflight'
+        caller='postflight'
     )
     # print('Merging rows of the same PSM...')
     csv_kwargs = {}
@@ -348,7 +366,7 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         os.remove(tmp_file)
     UNode.print_info(
         'Done.',
-        caller = 'postflight'
+        caller='postflight'
     )
     return out_file
 

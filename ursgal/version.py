@@ -1,1 +1,1 @@
-ursgal_version = '0.6.1'
+ursgal_version = '0.6.2'

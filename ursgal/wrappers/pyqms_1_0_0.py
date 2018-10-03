@@ -65,6 +65,35 @@ class pyqms_1_0_0(ursgal.UNode):
                 self.params['input_dir_path'],
                 self.params['input_file']
             )
+        if self.params['translations']['ms_level'] == 1:
+            print(
+                '''
+                [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
+                [ WARNING ] need to be combined for pyQms (use of symmetric tolerance window).
+                [ WARNING ] The arithmetic mean is used.
+                '''
+            )
+            self.params['translations']['REL_MZ_RANGE'] = (
+                float(self.params['translations']['precursor_mass_tolerance_plus']) +
+                float(self.params['translations'][
+                      'precursor_mass_tolerance_minus'])) / 2.0
+            if self.params['translations']['precursor_mass_tolerance_unit'] == 'da':
+                self.params['translations']['REL_MZ_RANGE'] = \
+                    ursgal.ucore.convert_dalton_to_ppm(
+                        self.params['translations']['REL_MZ_RANGE'],
+                        base_mz=self.params['translations']['base_mz']
+                )
+        else:
+            self.params['translations']['REL_MZ_RANGE'] = \
+                self.params['translations']['frag_mass_tolerance']
+            if self.params['translations']['frag_mass_tolerance_unit'] == 'da':
+                self.params['translations']['REL_MZ_RANGE'] = \
+                    ursgal.ucore.convert_dalton_to_ppm(
+                        self.params['translations']['REL_MZ_RANGE'],
+                        base_mz=self.params['translations']['base_mz']
+                )
+        self.params['translations']['REL_MZ_RANGE'] = self.params[
+            'translations']['REL_MZ_RANGE'] * 1e-6
 
         pyqms_params = {
             'PERCENTILE_FORMAT_STRING':
@@ -74,11 +103,14 @@ class pyqms_1_0_0(ursgal.UNode):
             'ELEMENT_MIN_ABUNDANCE':
                 self.params['translations']['min_element_abundance'],
             'MIN_REL_PEAK_INTENSITY_FOR_MATCHING':
-                self.params['translations']['min_rel_peak_intensity_for_matching'],
+                self.params['translations'][
+                    'min_rel_peak_intensity_for_matching'],
             'REQUIRED_PERCENTILE_PEAK_OVERLAP':
-                self.params['translations']['required_percentile_peak_overlap'],
+                self.params['translations'][
+                    'required_percentile_peak_overlap'],
             'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES':
-                self.params['translations']['min_number_of_matched_isotopologues'],
+                self.params['translations'][
+                    'min_number_of_matched_isotopologues'],
             'INTENSITY_TRANSFORMATION_FACTOR':
                 self.params['translations']['intensity_transformation_factor'],
             'UPPER_MZ_LIMIT':
@@ -88,7 +120,7 @@ class pyqms_1_0_0(ursgal.UNode):
             'MZ_TRANSFORMATION_FACTOR':
                 self.params['translations']['mz_transformation_factor'],
             'REL_MZ_RANGE':
-                self.params['translations']['rel_mz_range'],
+                self.params['translations']['REL_MZ_RANGE'],
             'REL_I_RANGE':
                 self.params['translations']['rel_intensity_range'],
             'INTERNAL_PRECISION':
@@ -102,7 +134,8 @@ class pyqms_1_0_0(ursgal.UNode):
             'MACHINE_OFFSET_IN_PPM':
                 self.params['translations']['machine_offset_in_ppm'],
             'FIXED_LABEL_ISOTOPE_ENRICHMENT_LEVELS':
-                self.params['translations']['fixed_label_isotope_enrichment_levels'],
+                self.params['translations'][
+                    'fixed_label_isotope_enrichment_levels'],
             # 'COLORS'                                  :
             #     self.params['pyQms_colors'],
         }
@@ -125,14 +158,17 @@ class pyqms_1_0_0(ursgal.UNode):
             mzml_file=mzml_files,
             output_file=output_file,
             fixed_labels=fixed_labels,
-            evidence_files=self.params['translations']['quantification_evidences'],
+            evidence_files=self.params['translations'][
+                'quantification_evidences'],
             molecules=self.params['translations']['molecules_to_quantify'],
-            rt_border_tolerance=self.params['translations']['rt_border_tolerance'],
+            rt_border_tolerance=self.params[
+                'translations']['rt_border_tolerance'],
             label=self.params['translations']['label'],
             label_percentile=self.params['translations']['label_percentile'],
             min_charge=self.params['translations']['precursor_min_charge'],
             max_charge=self.params['translations']['precursor_max_charge'],
-            evidence_score_field=self.params['translations']['evidence_score_field'],
+            evidence_score_field=self.params[
+                'translations']['evidence_score_field'],
             ms_level=self.params['translations']['ms_level'],
             trivial_names=self.params['translations']['pyqms_trivial_names'],
             pyqms_params=pyqms_params,

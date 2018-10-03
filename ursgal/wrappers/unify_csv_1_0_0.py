@@ -70,7 +70,6 @@ class unify_csv_1_0_0( ursgal.UNode ):
         )
 
         scan_rt_lookup_path = self.meta_unodes['ucontroller'].scan_rt_lookup_path
-
         assert os.path.isfile( scan_rt_lookup_path ), """
 Could not load RT lookup dict from this location: {0}
         """.format( scan_rt_lookup_path )

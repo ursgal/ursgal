@@ -76,7 +76,7 @@ def generate_result_pickle(
                     ),
                     end='\r'
                 )
-            scan_time, unit = spec['scan time']
+            scan_time, unit = spec.scan_time
 
             if unit == 'second':
                 scan_time /= 60

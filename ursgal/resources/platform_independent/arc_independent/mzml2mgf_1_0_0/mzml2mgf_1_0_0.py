@@ -19,8 +19,8 @@ import argparse
 import pymzml
 
 
-def _determine_mzml_name_base( file_name, prefix ):
-    file_name = os.path.basename( file_name )
+def _determine_mzml_name_base(file_name, prefix):
+    file_name = os.path.basename(file_name)
     if file_name.upper().endswith('.MZML.GZ'):
         mzml_name_base = file_name[:-8]
     elif file_name.upper().endswith('.MZML'):
@@ -32,22 +32,22 @@ def _determine_mzml_name_base( file_name, prefix ):
             )
         )
     if prefix is not None and prefix is not '':
-        mzml_name_base = '_'.join( [prefix, mzml_name_base] )
+        mzml_name_base = '_'.join([prefix, mzml_name_base])
     return mzml_name_base
 
 
 def main(
-        mzml                  = None,
-        mgf                   = None,
-        i_decimals            = 5,
-        mz_decimals           = 5,
-        machine_offset_in_ppm = None,
-        scan_exclusion_list   = None,
-        scan_inclusion_list   = None,
-        prefix                = None,
-        scan_skip_modulo_step = None,
-        ms_level              = 2,
-    ):
+    mzml=None,
+    mgf=None,
+    i_decimals=5,
+    mz_decimals=5,
+    machine_offset_in_ppm=None,
+    scan_exclusion_list=None,
+    scan_inclusion_list=None,
+    prefix=None,
+    scan_skip_modulo_step=None,
+    ms_level=2,
+):
 
     print(
         'Converting file:\n\tmzml : {0}\n\tto\n\tmgf : {1}'.format(
@@ -55,11 +55,11 @@ def main(
             mgf,
         )
     )
-    mzml_name_base = _determine_mzml_name_base( mzml, prefix )
+    mzml_name_base = _determine_mzml_name_base(mzml, prefix)
     # rt_lookup = mzml_name_base + '_rt_lookup.pkl'
-    oof = open( mgf , 'w' )
-    reader_kwargs       = {
-        'extraAccessions':[ ('MS:1000016', ['value', 'unitName'] )],
+    oof = open(mgf , 'w')
+    reader_kwargs = {
+        'extraAccessions': [('MS:1000016', ['value', 'unitName'])],
         'obo_version' : '1.1.0'
     }
     run = pymzml.run.Reader(
@@ -67,20 +67,21 @@ def main(
         **reader_kwargs
     )
     tmp = {
-        'rt_2_scan' : {},
-        'scan_2_rt' : {},
+        'rt_2_scan': {},
+        'scan_2_rt': {},
+        'scan_2_mz': {}
     }
     mgf_entries = 0
     if scan_exclusion_list is None:
         scan_exclusion_list = []
     else:
-        scan_exclusion_list = [ int(spec_id) for spec_id in scan_exclusion_list ]
+        scan_exclusion_list = [int(spec_id) for spec_id in scan_exclusion_list]
 
     if machine_offset_in_ppm is not None:
-        mz_correction_factor = machine_offset_in_ppm*1e-6
+        mz_correction_factor = machine_offset_in_ppm * 1e-6
     else:
         mz_correction_factor = 0
-    mzml_basename = os.path.basename( mzml )
+    mzml_basename = os.path.basename(mzml)
     for n, spec in enumerate(run):
         if n % 500 == 0:
             print(
@@ -88,26 +89,35 @@ def main(
                     mzml_basename,
                     n,
                 ),
-                end = '\r'
+                end='\r'
             )
         # works for both generations of pymzml
-        spec_ms_level    = spec['ms level']
+        spec_ms_level = spec['ms level']
+        spectrum_id = spec['id']
+        scan_time, unit = spec['scan time']
+        if unit == 'seconds':
+            scan_time /= 60
+        elif unit != 'minute':
+            print('''
+                [ERROR] The retention time unit is nor recognized.
+                [ERROR] Please specify minute/second (nedded for mzml2mgf conversion).
+            ''')
+        tmp['rt_2_scan'][scan_time] = spectrum_id
+        tmp['scan_2_rt'][spectrum_id] = scan_time
+        tmp['unit'] = 'minute'
+
 
         if spec_ms_level != ms_level:
             continue
 
-
-        scan_time, unit  = spec['scan time']
-        peaks_2_write    = spec.centroidedPeaks
-        spectrum_id      = spec['id']
-        precursor_mz     = spec['precursors'][0]['mz']
+        peaks_2_write = spec.centroidedPeaks
+        precursor_mz = spec['precursors'][0]['mz']
         precursor_charge = spec['precursors'][0]['charge']
-        # spectrum_id = spec['id']
-        if scan_inclusion_list is not None:
-            if int(spectrum_id) not in scan_inclusion_list:
-                continue
 
-        if int(spectrum_id) in scan_exclusion_list:
+        if scan_inclusion_list is not None:
+            if spectrum_id not in scan_inclusion_list:
+                continue
+        if spectrum_id in scan_exclusion_list:
             continue
         mgf_entries += 1
 
@@ -115,13 +125,9 @@ def main(
             if mgf_entries % scan_skip_modulo_step != 0:
                 continue
 
-        tmp['rt_2_scan'][ scan_time ] = '{0}'.format(spectrum_id)
-        tmp['scan_2_rt'][ '{0}'.format(spectrum_id) ] = scan_time
-        tmp['unit'] = unit
-
         print(
             'BEGIN IONS',
-            file = oof
+            file=oof
         )
         print(
             'TITLE={0}.{1}.{1}.{2}'.format(
@@ -129,20 +135,16 @@ def main(
                 spectrum_id,
                 precursor_charge,
             ),
-            file = oof
+            file=oof
         )
         print(
             'SCANS={0}'.format(
                 spectrum_id
             ),
-            file = oof
+            file=oof
         )
 
-        # scan_time, unit = spec['scan time']
-        if unit == 'second':
-            scan_time = float(scan_time)
-        else:
-            scan_time = float(scan_time) * 60
+        scan_time = float(scan_time) * 60
         print(
             'RTINSECONDS={0}'.format(
                 round(
@@ -150,23 +152,23 @@ def main(
                     11
                 )
             ),
-            file = oof
+            file=oof
         )
-        # precursor_mz = spec['precursors'][0]['mz']
 
         precursor_mz += precursor_mz * mz_correction_factor
+        tmp['scan_2_mz'][spectrum_id] = precursor_mz
         print(
             'PEPMASS={0}'.format(
                 precursor_mz
             ),
-            file = oof
+            file=oof
         )
         if precursor_charge is not None:
             print(
                 'CHARGE={0}'.format(
                     precursor_charge
                 ),
-                file = oof
+                file=oof
             )
 
         for mz, intensity in peaks_2_write:
@@ -176,15 +178,15 @@ def main(
                 '{0:<10.{mzDecimals}f} {1:<10.{intensityDecimals}f}'.format(
                     mz,
                     intensity,
-                    mzDecimals        = mz_decimals,
-                    intensityDecimals = i_decimals
+                    mzDecimals=mz_decimals,
+                    intensityDecimals=i_decimals
                 ),
-                file = oof
+                file=oof
             )
 
         print(
             'END IONS\n',
-            file = oof
+            file=oof
         )
     print('')
     print(
@@ -214,10 +216,10 @@ if __name__ == '__main__':
         '-i', '--i_decimals', default=5,
         help='Number of decimals for intensity values', type=int)
 
-    if len( sys.argv ) <= 1:
+    if len(sys.argv) <= 1:
         parser.print_help()
     else:
         args = parser.parse_args()
-        tmp = main( **args.__dict__ )
+        tmp = main(**args.__dict__)
         # print(tmp.keys())
         # print(sorted( tmp['scan_2_rt'].keys() ))

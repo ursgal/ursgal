@@ -24,7 +24,7 @@ class xtandem_jackhammer( tandem ):
                 '64bit' : {
                     'exe'            : 'tandem',
                     'url'            : '',
-                    'zip_md5'        : '65a270dd63acca8c29a66cbe1406c9ba',
+                    'zip_md5'        : '00a58b8f04d31daa23afcf8cbd8535ae',
                     'additional_exe' : [],
                 },
             },
@@ -32,7 +32,7 @@ class xtandem_jackhammer( tandem ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : '4f53c35f9adae43f01106db95fe6419c',
+                    'zip_md5'        : '262376f74f5887f98bfbd09a4e220764',
                     'additional_exe' : [],
                 },
             },
@@ -40,7 +40,7 @@ class xtandem_jackhammer( tandem ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : '0241c62699bde4d81995f2b9df56f781',
+                    'zip_md5'        : '3d142db4365c705c83eb5559665a6d76',
                     'additional_exe' : [],
                 },
             },

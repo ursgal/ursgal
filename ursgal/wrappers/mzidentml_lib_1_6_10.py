@@ -35,7 +35,7 @@ class mzidentml_lib_1_6_10( ursgal.UNode ):
                 'arc_independent' : {
                     'exe'            : 'mzidentml-lib-1.6.10.jar',
                     'url'            : '',
-                    'zip_md5'        : '61451563e924b13eebca24e903340da9',
+                    'zip_md5'        : '849e00f50d814d3c44b29466434c2cfb',
                     'additional_exe' : [],
                 },
             },

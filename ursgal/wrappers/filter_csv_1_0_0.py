@@ -6,7 +6,8 @@ import sys
 import pickle
 import shutil
 
-class filter_csv_1_0_0( ursgal.UNode ):
+
+class filter_csv_1_0_0(ursgal.UNode):
     """filter_csv_1_0_0 UNode
 
     Filters .csv files row-wise according to user-defined rules.
@@ -38,15 +39,14 @@ class filter_csv_1_0_0( ursgal.UNode ):
                 },
             },
         },
-        'citation' : \
-            '',
+        'citation' :
+        '',
     }
-
 
     def __init__(self, *args, **kwargs):
         super(filter_csv_1_0_0, self).__init__(*args, **kwargs)
 
-    def _execute( self ):
+    def _execute(self):
         '''
         Result files (.csv) are filtered for defined filter parameters.
 
@@ -171,13 +171,13 @@ class filter_csv_1_0_0( ursgal.UNode ):
             raise ValueError('Trying to filter a non-csv file')
 
         output_file = os.path.join(
-                self.params['output_dir_path'],
-                self.params['output_file']
-            )
-        input_file  = os.path.join(
-                self.params['input_dir_path'],
-                self.params['input_file']
-            )
+            self.params['output_dir_path'],
+            self.params['output_file']
+        )
+        input_file = os.path.join(
+            self.params['input_dir_path'],
+            self.params['input_file']
+        )
 
         if self.params['translations']['write_unfiltered_results'] is False:
             output_file_unfiltered = None
@@ -200,10 +200,10 @@ class filter_csv_1_0_0( ursgal.UNode ):
             )
 
         filter_csv_main(
-            input_file     = input_file,
-            output_file    = output_file,
-            filter_rules   = self.params['translations']['csv_filter_rules'],
-            output_file_unfiltered = output_file_unfiltered,
+            input_file=input_file,
+            output_file=output_file,
+            filter_rules=self.params['translations']['csv_filter_rules'],
+            output_file_unfiltered=output_file_unfiltered,
         )
 
         # self.print_execution_time(tag='execution')

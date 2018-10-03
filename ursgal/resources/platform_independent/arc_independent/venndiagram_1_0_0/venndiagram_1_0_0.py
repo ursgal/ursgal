@@ -75,7 +75,7 @@ def main( *args, **kwargs ):
         'output_file'            : 'VennDiagram.svg',
         'header'                 : 'ursgal Venn Diagram',
         'width'                  : 1200,
-        'height'                 : 800,
+        'height'                 : 1200,
         'label_A'                : 'A',
         'label_B'                : 'B',
         'label_C'                : 'C',
