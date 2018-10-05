@@ -51,8 +51,7 @@ class percolator_3_2( ursgal.UNode ):
         'release_date'                : None,
         'output_extensions'          : ['.csv'],
         'output_suffix'             : 'percolator_validated',
-        'input_multi_file'          : False,
-        'input_extensions'               : ['.csv'],
+        'input_extensions'          : ['.csv'],
         'create_own_folder'         : False,
         'citation'   : 'Matthew The, Michael J. MacCoss, William S. Noble, Lukas Kall' \
             'Fast and Accurate Protein False Discovery Rates on Large-Scale Proteomics Data Sets with Percolator 3.0',
