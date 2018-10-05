@@ -55,10 +55,10 @@ class percolator_3_2( ursgal.UNode ):
         'create_own_folder'         : False,
         'citation'   : 'Matthew The, Michael J. MacCoss, William S. Noble, Lukas Kall' \
             'Fast and Accurate Protein False Discovery Rates on Large-Scale Proteomics Data Sets with Percolator 3.0',
-        'include_in_git'            : True, # True for now, but upload dat shit later on
+        'include_in_git'            : False, # True for now, but upload dat shit later on
+        'distributable'             : True,
         'group_psms'                : True,
         'in_development'            : False,
-        'cpu_usage'                 : 1,
         'utranslation_style'        : 'percolator_style_1',
         'engine': {
             'darwin' : {
