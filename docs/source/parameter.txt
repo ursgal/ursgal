@@ -55,7 +55,7 @@ Available in unodes
 * mzidentml_lib_1_6_11
 * mzidentml_lib_1_7
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *-xmx*
 """"""""""""""""""""""""""""""""""
@@ -149,7 +149,7 @@ Contaminants are added automatically to the database by the search engine. PIPI 
 Available in unodes
 """""""""""""""""""
 
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *add_contaminants*
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -234,7 +234,7 @@ Available in unodes
 * moda_v1_51
 * omssa_2_1_9
 * pepnovo_3_1
-* pipi_1_4_5
+* pipi_1_4_6
 * pyqms_1_0_0
 * sugarpy_run_1_0_0
 * sugarpy_plot_1_0_0
@@ -391,7 +391,7 @@ Ursgal value translations
  myrimatch_2_1_138         1                         1                         1                         1                         1                        
  myrimatch_2_2_140         1                         1                         1                         1                         1                        
  omssa_2_1_9               0                         0                         0                         0                         0                        
- pipi_1_4_5                1                         1                         1                         1                         1                        
+ pipi_1_4_6                1                         1                         1                         1                         1                        
  xtandem_alanine           1                         1                         1                         1                         1                        
  xtandem_cyclone_2010      1                         1                         1                         1                         1                        
  xtandem_jackhammer        1                         1                         1                         1                         1                        
@@ -706,7 +706,7 @@ Ursgal value translations
  novor_1_1beta        0                   
  omssa_2_1_9          0                   
  pepnovo_3_1          0                   
- pipi_1_4_5           0                   
+ pipi_1_4_6           0                   
  xtandem_alanine      1                   
  xtandem_cyclone_2010 1                   
  xtandem_jackhammer   1                   
@@ -910,7 +910,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *cpus*
 """"""""""""""""""""""""""""""""""
@@ -1067,7 +1067,7 @@ Available in unodes
 * upeptide_mapper_1_0_0
 * compomics_utilities_4_11_5
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *database*
 """"""""""""""""""""""""""""""""""""""
@@ -1387,7 +1387,7 @@ Available in unodes
 * xtandem_sledgehammer
 * xtandem_vengeance
 * xtandem_alanine
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *engine_internal_decoy_generation*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1515,7 +1515,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *enzyme*
 """"""""""""""""""""""""""""""""""""
@@ -1778,7 +1778,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *frag_clear_mz_range*
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -1830,7 +1830,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 * pyqms_1_0_0
 * sugarpy_run_1_0_0
 * sugarpy_plot_1_0_0
@@ -1895,7 +1895,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 * pyqms_1_0_0
 * sugarpy_run_1_0_0
 * sugarpy_plot_1_0_0
@@ -2398,7 +2398,7 @@ Available in unodes
 * msgfplus2csv_v2017_07_04
 * msgfplus2csv_v1_2_0
 * msgfplus2csv_v1_2_1
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *header_translations*
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -3661,7 +3661,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 * pyqms_1_0_0
 
 Ursgal key translations for *label*
@@ -3971,7 +3971,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *max_missed_cleavages*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -4040,7 +4040,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *max_mod_size*
 """"""""""""""""""""""""""""""""""""""""""
@@ -4386,7 +4386,7 @@ Available in unodes
 * myrimatch_2_2_140
 * omssa_2_1_9
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *max_pep_length*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -4605,7 +4605,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *min_mod_size*
 """"""""""""""""""""""""""""""""""""""""""
@@ -4783,7 +4783,7 @@ Available in unodes
 * msamanda_2_0_0_9706
 * msamanda_2_0_0_9695
 * msamanda_2_0_0_10695
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *min_pep_length*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -5224,7 +5224,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 * pyqms_1_0_0
 
 Ursgal key translations for *modifications*
@@ -5505,7 +5505,7 @@ Available in unodes
 * mzml2mgf_2_0_0
 * sugarpy_run_1_0_0
 * sugarpy_plot_1_0_0
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *ms_level*
 """"""""""""""""""""""""""""""""""""""
@@ -7568,7 +7568,7 @@ PIPI mz_bin_offset
 Available in unodes
 """""""""""""""""""
 
-* pipi_1_4_5
+* pipi_1_4_6
 
 Ursgal key translations for *pipi_mz_bin_offset*
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -7761,7 +7761,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 * pyqms_1_0_0
 * sugarpy_run_1_0_0
 * sugarpy_plot_1_0_0
@@ -7835,7 +7835,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 * pyqms_1_0_0
 * sugarpy_run_1_0_0
 * sugarpy_plot_1_0_0
@@ -7907,7 +7907,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
-* pipi_1_4_5
+* pipi_1_4_6
 * pyqms_1_0_0
 * sugarpy_run_1_0_0
 * sugarpy_plot_1_0_0
@@ -10222,7 +10222,7 @@ Ursgal value translations
  myrimatch_2_1_138    0                   
  myrimatch_2_2_140    0                   
  omssa_2_1_9          1e-30               
- pipi_1_4_5           0                   
+ pipi_1_4_6           0                   
  xtandem_alanine      0                   
  xtandem_cyclone_2010 0                   
  xtandem_jackhammer   0                   
@@ -10302,7 +10302,7 @@ Ursgal value translations
  novor_1_1beta             Novor:score               Novor:score               Novor:score               Novor:score               Novor:score               Novor:score               Novor:score              
  omssa_2_1_9               OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue              OMSSA:pvalue             
  pepnovo_3_1               Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr            Pepnovo:PnvScr           
- pipi_1_4_5                PIPI:score                PIPI:score                PIPI:score                PIPI:score                PIPI:score                PIPI:score                PIPI:score               
+ pipi_1_4_6                PIPI:score                PIPI:score                PIPI:score                PIPI:score                PIPI:score                PIPI:score                PIPI:score               
  xtandem_alanine           X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
  xtandem_cyclone_2010      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     
  xtandem_jackhammer        X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore      X\!Tandem:hyperscore     

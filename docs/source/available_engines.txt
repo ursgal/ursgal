@@ -103,7 +103,7 @@ OMSSA
 PIPI
 ----
 
-.. autoclass:: ursgal.wrappers.pipi_1_4_5.pipi_1_4_5
+.. autoclass:: ursgal.wrappers.pipi_1_4_6.pipi_1_4_6
    :members:
 
 

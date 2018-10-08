@@ -6,7 +6,7 @@ import csv
 import itertools
 import sys
 
-class pipi_1_4_5(ursgal.UNode):
+class pipi_1_4_6(ursgal.UNode):
     """
     Unode for PIPI: PTM-Invariant Peptide Identification
     For furhter information see: http://bioinformatics.ust.hk/pipi.html
@@ -23,7 +23,7 @@ class pipi_1_4_5(ursgal.UNode):
     META_INFO = {
         'edit_version': 1.00,
         'name': 'PIPI',
-        'version': '1.4.5',
+        'version': '1.4.6',
         'release_date': '2018-06-20',
         'utranslation_style': 'pipi_style_1',
         'input_extensions': ['.mgf', '.mzML', '.mzXML'],
@@ -38,7 +38,7 @@ class pipi_1_4_5(ursgal.UNode):
         'engine': {
             'platform_independent': {
                 'arc_independent': {
-                    'exe': 'PIPI-1.4.5.jar',
+                    'exe': 'PIPI-1.4.6.jar',
                     'url': 'http://bioinformatics.ust.hk/pipi.html',
                     'zip_md5': '',
                     'additional_exe': [],
@@ -52,7 +52,7 @@ class pipi_1_4_5(ursgal.UNode):
     }
 
     def __init__(self, *args, **kwargs):
-        super(pipi_1_4_5, self).__init__(*args, **kwargs)
+        super(pipi_1_4_6, self).__init__(*args, **kwargs)
         pass
 
     def preflight(self):
@@ -359,7 +359,7 @@ class pipi_1_4_5(ursgal.UNode):
 
     def write_params_file(self):
         with open(self.param_file_name, 'w') as io:
-            print('''# 1.4.5
+            print('''# 1.4.6
 # First line is the parameter file version. Don't change it.
 thread_num = {thread_num}
 percolator_path = ursgal/resources/darwin/64bit/percolator_2_08/percolator_2_08
