@@ -141,14 +141,14 @@ def main(
     with open(pickle_name, 'wb') as f:
         pickle.dump(results, f)
 
-    # results.write_rt_info_file(
-    #     output_file=rt_summary_file,
-    #     rt_border_tolerance=float(rt_border_tolerance)
-    # )
-    # results.calc_amounts_from_rt_info_file(
-    #     rt_info_file=rt_summary_file,
-    #     rt_border_tolerance=float(rt_border_tolerance)
-    # )
+    results.write_rt_info_file(
+        output_file=rt_summary_file,
+        rt_border_tolerance=float(rt_border_tolerance)
+    )
+    results.calc_amounts_from_rt_info_file(
+        rt_info_file=rt_summary_file,
+        rt_border_tolerance=float(rt_border_tolerance)
+    )
 
     return rt_summary_file
 

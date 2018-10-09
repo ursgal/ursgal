@@ -352,7 +352,7 @@ class msfragger_20170103( ursgal.UNode ):
                 )
 
                 if os.path.exists(msfragger_output_tsv) is False:
-                    print('[ERROR]: msfragger could not find the correct output tsv file')
+                    print('[ERROR]: MSFragger could not find the correct output tsv file')
     
         csv_out_fobject = open(self.params['translations']['output_file_incl_path'], 'w')
         csv_writer = csv.DictWriter(

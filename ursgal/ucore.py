@@ -297,8 +297,6 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>', psm_colnames_to_merge_multi
     merged_d = {}
     fieldnames = list_of_rowdicts[0].keys()
     for fieldname in fieldnames:
-        #############################
-        #develop what you need here
         if fieldname in psm_colnames_to_merge_multiple_values.keys():
             values = [d[fieldname] for d in list_of_rowdicts]
             if values == ['' for value in values]:
@@ -316,12 +314,10 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>', psm_colnames_to_merge_multi
             if psm_colnames_to_merge_multiple_values[fieldname] == 'avg':
                 merged_d[fieldname] = sum[values_as_floats]/len[values_as_floats]
 
-            if psm_colnames_to_merge_multiple_values[fieldname] == 'most_freqent':
+            if psm_colnames_to_merge_multiple_values[fieldname] == 'most_frequent':
                 value_occurences = Counter(values_as_floats)
                 merged_d[fieldname] = value_occurences.most_common(1)[0][0]
     
-        ####################################
-
         else:
             values = [d[fieldname] for d in list_of_rowdicts]
             if len(set(values)) == 1:

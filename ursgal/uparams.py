@@ -7716,8 +7716,7 @@ ursgal_params = {
         'description' : \
             'List of column names that are used to define unique PSMs and to merge multiple lines of the same PSM (if specified). The validation_score_field is automatically added to this list. ',
     },
-    ################################
-    #adding new param here
+    
     'psm_colnames_to_merge_multiple_values' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -7733,10 +7732,10 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'list',
-        'uvalue_option' : {
+        'uvalue_type' : 'dict',
+        'uvalue_option' : { 
             'none_val' : None,
-            'item_title' : 'column_name',
+            'item_title' : 'column_name_with_type_of_merge',
             'item_type' : 'str',
             'multiple_line' : False,
             'custom_val_max': 10000,
@@ -7746,46 +7745,18 @@ ursgal_params = {
                 },
             },
         },
-        'default_value' : [
-            'validation_score_field',
-        ],
+        'default_value' : {},
         'description' : \
-            'List of column names that will have multiple values from the same PSM merged into a single value for the column',
-    },
-
-    'best_value_for_merge' : {
-        'edit_version' : 1.00,
-        'available_in_unode' : [
-            'ucontroller',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'ucontroller_style_1' : 'best_value_for_merge',
-        },
-        'utag' : [
-            'conversion',
-            'output',
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'str',
-        'uvalue_option' : {
-            'none_val' : None,
-            'multiple_line' : False,
-        },
-        'default_value' : [
-            'max_value',
-        ],
-        'description' : \
-            'Specifies which value to take when merging multiple values in a column all from the same PSM. \n'\
+            'Defines the column names which should have their different values merged '\
+            'into a single value when merging rows corresponding the same PSM '\
+            'Formatted as a dictionary with keys as the column names and values as '\
+            'a parameter to specify which one of the different values to take '\
             'Available values:'
             '    max_value\n'\
             '    min_value\n'\
             '    most_frequent\n'\
             '    avg',
     },
-
-    #####################################################################
 
     'psm_merge_delimiter' : {
         'edit_version' : 1.00,
