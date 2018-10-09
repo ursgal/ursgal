@@ -47,6 +47,8 @@ def main(
     prefix=None,
     scan_skip_modulo_step=None,
     ms_level=2,
+    precursor_min_charge=1,
+    precursor_max_charge=5,
 ):
 
     print(
@@ -76,6 +78,9 @@ def main(
         mz_correction_factor = machine_offset_in_ppm * 1e-6
     else:
         mz_correction_factor = 0
+    precursor_charge_range = '{0}'.format(precursor_min_charge)
+    for charge in range(precursor_min_charge+1, precursor_max_charge+1):
+        precursor_charge_range += ' and {0}'.format(charge)
     mzml_basename = os.path.basename(mzml)
     for n, spec in enumerate(run):
         if n % 500 == 0:
@@ -88,11 +93,20 @@ def main(
             )
 
         spec_ms_level = spec.ms_level
-        scan_time, scan_time_units = spec.scan_time
+        scan_time, scan_time_unit = spec.scan_time
+        if scan_time_unit == 'seconds':
+            scan_time /= 60
+        elif scan_time_unit != 'minute':
+            print('''
+                [Warning] The retention time unit is nor recognized or not specified.
+                [Warning] It is assumed to be minutes and continues with that.
+            ''')
+            
         spectrum_id = spec.ID
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
         tmp['unit'] = 'minute'
+
 
         if spec_ms_level != ms_level:
             continue
@@ -100,7 +114,11 @@ def main(
         peaks_2_write = spec.peaks('centroided')
 
         precursor_mz = spec.selected_precursors[0]['mz']
-        precursor_charge = spec.selected_precursors[0]['charge']
+
+        try:
+            precursor_charge = spec.selected_precursors[0]['charge']
+        except:
+            precursor_charge = None
 
         if scan_inclusion_list is not None:
             if int(spectrum_id) not in scan_inclusion_list:
@@ -156,6 +174,13 @@ def main(
             print(
                 'CHARGE={0}'.format(
                     precursor_charge
+                ),
+                file=oof
+            )
+        else:
+            print(
+                'CHARGE={0}'.format(
+                    precursor_charge_range
                 ),
                 file=oof
             )

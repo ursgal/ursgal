@@ -68,6 +68,15 @@ unify_csv_main(
             'max_missed_cleavages':2,
             'rounded_mass_decimals' : 3,
             'use_pyqms_for_mz_calculation' : True,
+            'aa_exception_dict' : {
+                'J' : {
+                    'original_aa' : ['L','I'],
+                },
+                'O' : {
+                    'original_aa' : ['K'],
+                    'unimod_name' : 'Methylpyrroline',
+                },
+            },
         },
         'label' : '',
         'mods' : R.params['mods'],

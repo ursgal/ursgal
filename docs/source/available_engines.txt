@@ -13,6 +13,9 @@ MS Amanda
 
 Available MS Amanda versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_10695.msamanda_2_0_0_10695
+   :members:
+
 .. autoclass:: ursgal.wrappers.msamanda_2_0_0_9706.msamanda_2_0_0_9706
    :members:
 
@@ -37,6 +40,15 @@ MS-GF+
 
 Available MS-GF+ versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msgfplus_v2018_09_12.msgfplus_v2018_09_12
+   :members:
+
+.. autoclass:: ursgal.wrappers.msgfplus_v2018_06_28.msgfplus_v2018_06_28
+   :members:
+
+.. autoclass:: ursgal.wrappers.msgfplus_v2018_01_30.msgfplus_v2018_01_30
+   :members:
+
 .. autoclass:: ursgal.wrappers.msgfplus_v2017_01_27.msgfplus_v2017_01_27
    :members:
 
@@ -50,12 +62,22 @@ Available MS-GF+ versions, starting with the newest version:
 MSFragger 
 ---------
 
+Available MSFragger versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.msfragger_20171106.msfragger_20171106
+   :members:
+
 .. autoclass:: ursgal.wrappers.msfragger_20170103.msfragger_20170103
    :members:
 
 
 MODa
 ----
+
+Available MODa versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.moda_v1_61.moda_v1_61
+   :members:
 
 .. autoclass:: ursgal.wrappers.moda_v1_51.moda_v1_51
    :members:
@@ -81,29 +103,7 @@ OMSSA
 PIPI
 ----
 
-.. autoclass:: ursgal.wrappers.pipi_1_3_0.pipi_1_3_0
-   :members:
-
-
-MS Amanda
----------
-
-.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9706.msamanda_2_0_0_9706
-   :members:
-
-.. autoclass:: ursgal.wrappers.msamanda_2_0_0_9695.msamanda_2_0_0_9695
-   :members:
-
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7504.msamanda_1_0_0_7504
-   :members:
-
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_7503.msamanda_1_0_0_7503
-   :members:
-
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5243.msamanda_1_0_0_5243
-   :members:
-
-.. autoclass:: ursgal.wrappers.msamanda_1_0_0_5242.msamanda_1_0_0_5242
+.. autoclass:: ursgal.wrappers.pipi_1_4_5.pipi_1_4_5
    :members:
 
 

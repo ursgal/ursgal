@@ -516,11 +516,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             if single_mod in ['M','']:
                                 continue
                             msfragger_pos, raw_msfragger_mass = single_mod.split('$')
-                            msfragger_mass      = mass_format_string.format(
+                            msfragger_mass = mass_format_string.format(
                                 # mass rounded as defined above
                                 Decimal(raw_msfragger_mass)
                             )
-                            msfragger_pos       = int(msfragger_pos)
+                            msfragger_pos = int(msfragger_pos)
                             if msfragger_mass in mass_to_mod_combo.keys():
                                 explainable_combos = []
                                 for combo in mass_to_mod_combo[msfragger_mass]:
@@ -808,6 +808,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         else:
                             continue
                     tmp_mods.append(modification)
+                if 'msfragger' in search_engine.lower():
+                    org_mass_diff = line_dict['Mass Difference']
+                    tmp_mass_diff.append('{0}:n'.format(org_mass_diff))
                 line_dict_update['Modifications'] = ';'.join(tmp_mods)
                 line_dict_update['Mass Difference'] = ';'.join(tmp_mass_diff)
                 #
@@ -872,7 +875,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     )
                 )
                 all_charges.add(int(line_dict['Charge']))
-                
+
 
                 # ------------
                 # BUFFER END

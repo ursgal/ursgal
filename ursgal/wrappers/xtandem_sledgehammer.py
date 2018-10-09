@@ -31,7 +31,7 @@ class xtandem_sledgehammer( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'tandem',
                     'url'            : '',
-                    'zip_md5'        : '879a5e29abf66a9a2b21ca2053a22689',
+                    'zip_md5'        : 'e153fbd41a51ce8eeb08ca12caa418f4',
                     'additional_exe' : [],
                 },
             },
@@ -39,29 +39,29 @@ class xtandem_sledgehammer( ursgal.UNode ):
                 '64bit' : {
                     'exe'            : 'tandem',
                     'url'            : '',
-                    'zip_md5'        : 'a011c993e9007b80852a7253da101e9e',
+                    'zip_md5'        : 'dfe9e4d850aeb34bfb256b027615544b',
                     'additional_exe' : [],
                 },
-                'i386' : {
-                    'exe'            : 'tandem',
-                    'url'            : '',
-                    'zip_md5'        : '9b11bcdf86137ffdcee08e8940053e19',
-                    'additional_exe' : [],
-                },
+                # 'i386' : {
+                #     'exe'            : 'tandem',
+                #     'url'            : '',
+                #     'zip_md5'        : '9b11bcdf86137ffdcee08e8940053e19',
+                #     'additional_exe' : [],
+                # },
             },
             'win32' : {
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : '01c6da9cf976916888c212e4baf45a99',
+                    'zip_md5'        : '2c5e45292a36500f83c1a22dd62c0bda',
                     'additional_exe' : [],
                 },
-                '32bit' : {
-                    'exe'            : 'tandem.exe',
-                    'url'            : '',
-                    'zip_md5'        : '86b78ea31389ab7d2634d0272ea6371f',
-                    'additional_exe' : [],
-                },
+                # '32bit' : {
+                #     'exe'            : 'tandem.exe',
+                #     'url'            : '',
+                #     'zip_md5'        : '86b78ea31389ab7d2634d0272ea6371f',
+                #     'additional_exe' : [],
+                # },
             },
         },
         'citation' : 'Craig R, Beavis RC. (2004) TANDEM: matching proteins '\

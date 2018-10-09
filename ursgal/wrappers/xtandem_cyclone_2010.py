@@ -24,7 +24,7 @@ class xtandem_cyclone_2010( tandem ):
                 '64bit' : {
                     'exe'            : 'tandem',
                     'url'            : '',
-                    'zip_md5'        : 'cfa6c1c966fc39b6fe8f8cceaa3c6f84',
+                    'zip_md5'        : '1a7043ab013e18d4f9ce0768e4063609',
                     'additional_exe' : [],
                 },
             },
@@ -32,7 +32,7 @@ class xtandem_cyclone_2010( tandem ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : '5803f1bab8f54e46d12d9f6a75734b86',
+                    'zip_md5'        : '68962495adb049f30ecda2d71338ed47',
                     'additional_exe' : [],
                 },
             },
@@ -40,7 +40,7 @@ class xtandem_cyclone_2010( tandem ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : 'b60c83e752bf3e4bfbaf42a9f38220f8',
+                    'zip_md5'        : 'cc38f6c02a9edc73481c7282ac3801ab',
                     'additional_exe' : [],
                 },
             },

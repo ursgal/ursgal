@@ -4,14 +4,11 @@
     Ursgal
     ----------
 
-    :copyright: (c) 2014 by C. Fufezan
+    :copyright: (c) 2014 by C. Fufezan, J. Leufken, S. Schulze
     :licence: BSD, see LISCENSE for more details
 
 """
-# pyQms.ChemicalComposition
-# By Johannes Barth and Christian Fufezan
-# module is distributed under the terms of the GNU General Public License V3
-# See LICENSE for more details.
+
 from __future__ import absolute_import
 import sys
 import re
@@ -226,7 +223,7 @@ class ChemicalComposition(dict):
                     )
                 except:
                     sys.exit(
-                        'Can not map unimod {0}. extracted position argument {1}'.format(
+                        'Cannot map unimod {0}. extracted position argument {1}'.format(
                             unimod, match.start()
                         ))
                 # if occ >= 1:
@@ -354,13 +351,13 @@ class ChemicalComposition(dict):
                 count = 1
             else:
                 count = int(glyc_match.group('count').strip('(').strip(')'))
-            try: 
-                monosacch_compo = self._unimod_parser.name2composition(monosacch)
-            except:
-                if monosacch in self.monosaccharide_compositions.keys():
-                    monosacch_compo = self.monosaccharide_compositions[monosacch]
-                else:
-                    sys.exit('Do not know glycan composition for {0}'.format(monosacch))
+            # try: 
+            #     monosacch_compo = self._unimod_parser.name2composition(monosacch)
+            # except:
+            if monosacch in self.monosaccharide_compositions.keys():
+                monosacch_compo = self.monosaccharide_compositions[monosacch]
+            else:
+                sys.exit('Do not know glycan composition for {0}'.format(monosacch))
             self.add_chemical_formula(monosacch_compo, factor=count)
 
     def _chemical_formula_to_dict(self, chemical_formula):

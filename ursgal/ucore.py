@@ -234,6 +234,8 @@ def reformat_peptide(regex_pattern, unimod_name, peptide):
         original_match_start = match.start()
         original_match_end = match.end()
         match_length = original_match_end - original_match_start
+        if unimod_name is None:
+            unimod_name = match.group(0)
 
         mods.append((
             original_match_start,
@@ -349,7 +351,7 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         out_file = csv_file_path.strip('.csv') + '_merged_duplicates.csv'
     UNode.print_info(
         'Merging rows of the same PSM...',
-        caller = 'postflight'
+        caller='postflight'
     )
     # print('Merging rows of the same PSM...')
     csv_kwargs = {}
@@ -391,7 +393,7 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         os.remove(tmp_file)
     UNode.print_info(
         'Done.',
-        caller = 'postflight'
+        caller='postflight'
     )
     return out_file
 

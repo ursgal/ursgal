@@ -55,11 +55,11 @@ def main(
             mgf,
         )
     )
-    mzml_name_base = _determine_mzml_name_base( mzml, prefix )
+    mzml_name_base = _determine_mzml_name_base(mzml, prefix)
     # rt_lookup = mzml_name_base + '_rt_lookup.pkl'
-    oof = open( mgf , 'w' )
-    reader_kwargs       = {
-        'extraAccessions':[ ('MS:1000016', ['value', 'unitName'] )],
+    oof = open(mgf , 'w')
+    reader_kwargs = {
+        'extraAccessions': [('MS:1000016', ['value', 'unitName'])],
         'obo_version' : '1.1.0'
     }
     run = pymzml.run.Reader(
@@ -95,15 +95,23 @@ def main(
         spec_ms_level = spec['ms level']
         spectrum_id = spec['id']
         scan_time, unit = spec['scan time']
+        if unit == 'seconds':
+            scan_time /= 60
+        elif unit != 'minute':
+            print('''
+                [ERROR] The retention time unit is nor recognized.
+                [ERROR] Please specify minute/second (nedded for mzml2mgf conversion).
+            ''')
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
-        tmp['unit'] = unit
+        tmp['unit'] = 'minute'
+
 
         if spec_ms_level != ms_level:
             continue
 
         peaks_2_write = spec.centroidedPeaks
-        precursor_mz     = spec['precursors'][0]['mz']
+        precursor_mz = spec['precursors'][0]['mz']
         precursor_charge = spec['precursors'][0]['charge']
 
         if scan_inclusion_list is not None:
@@ -119,7 +127,7 @@ def main(
 
         print(
             'BEGIN IONS',
-            file = oof
+            file=oof
         )
         print(
             'TITLE={0}.{1}.{1}.{2}'.format(
@@ -127,7 +135,7 @@ def main(
                 spectrum_id,
                 precursor_charge,
             ),
-            file = oof
+            file=oof
         )
         print(
             'SCANS={0}'.format(
@@ -136,10 +144,7 @@ def main(
             file=oof
         )
 
-        if unit == 'second':
-            scan_time = float(scan_time)
-        else:
-            scan_time = float(scan_time) * 60
+        scan_time = float(scan_time) * 60
         print(
             'RTINSECONDS={0}'.format(
                 round(
@@ -163,7 +168,7 @@ def main(
                 'CHARGE={0}'.format(
                     precursor_charge
                 ),
-                file = oof
+                file=oof
             )
 
         for mz, intensity in peaks_2_write:
@@ -181,7 +186,7 @@ def main(
 
         print(
             'END IONS\n',
-            file = oof
+            file=oof
         )
     print('')
     print(

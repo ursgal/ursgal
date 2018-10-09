@@ -28,7 +28,7 @@ class mzidentml_lib_1_6_11( ml ):
                 'arc_independent' : {
                     'exe'            : 'mzidentml-lib-1.6.11.jar',
                     'url'            : '',
-                    'zip_md5'        : '77757dc40d2eca87c49899a27c3f14a0',
+                    'zip_md5'        : 'dea5903d3586719228ae1227919f6c01',
                     'additional_exe' : [],
                 },
             },
