@@ -120,6 +120,13 @@ FILE_EXTENSIONS = {
         'description'    : \
             'GAML spectra',
     },
+    '.idx.gz' : {
+        'short_name'     : 'igzip',
+        'long_name'      : 'igzipped mzML (MS data)',
+        'same_extension' : [],
+        'description'    : \
+            'Compressed mzML, indexed gzip according to pymzML2.0',
+    },
     '.kojak.txt' : {
         'short_name'     : 'Kojak',
         'long_name'      : 'Kojak (Kojak result)',
