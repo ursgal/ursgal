@@ -21,7 +21,7 @@ class mzml2mgf_2_0_0( ursgal.UNode ):
         'engine_type' : {
             'converter' : True,
         },
-        'input_extensions'   : ['.mzML', '.mzML.gz'],
+        'input_extensions'   : ['.mzML', '.mzML.gz', '.idx.gz'],
         'output_extensions'  : ['.mgf'],
         'output_suffix'      : None,
         'in_development'     : False,
