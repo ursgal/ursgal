@@ -25,6 +25,8 @@ def _determine_mzml_name_base(file_name, prefix):
         mzml_name_base = file_name[:-8]
     elif file_name.upper().endswith('.MZML'):
         mzml_name_base = file_name[:-5]
+    elif file_name.upper().endswith('.IDX.GZ'):
+        mzml_name_base = file_name[:-7]
     else:
         raise Exception(
             "Can not determine mzml base name from {0}".format(
