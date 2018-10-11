@@ -103,6 +103,8 @@ OMSSA
 PIPI
 ----
 
+Available PIPI versions, starting with the newest version:
+
 .. autoclass:: ursgal.wrappers.pipi_1_4_5.pipi_1_4_5
    :members:
 

@@ -50,11 +50,14 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * mzidentml_lib_1_6_10
 * mzidentml_lib_1_6_11
 * mzidentml_lib_1_7
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 
@@ -193,6 +196,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *allow_multiple_variable_mods_on_residue*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -234,6 +238,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 * omssa_2_1_9
 * pepnovo_3_1
 * pipi_1_4_5
@@ -377,6 +382,7 @@ Ursgal value translations
  None                      None                      None                      None                      None                      None                     
  mascot_x_x_x              1                         1                         1                         1                         1                        
  moda_v1_51                1                         1                         1                         1                         1                        
+ moda_v1_61                1                         1                         1                         1                         1                        
  msamanda_1_0_0_5242       1                         1                         1                         1                         1                        
  msamanda_1_0_0_5243       1                         1                         1                         1                         1                        
  msamanda_1_0_0_6299       1                         1                         1                         1                         1                        
@@ -387,9 +393,12 @@ Ursgal value translations
  msamanda_2_0_0_9695       1                         1                         1                         1                         1                        
  msamanda_2_0_0_9706       1                         1                         1                         1                         1                        
  msfragger_20170103        1                         1                         1                         1                         1                        
+ msfragger_20171106        1                         1                         1                         1                         1                        
  msgfplus_v2016_09_16      0                         0                         0                         0                         0                        
  msgfplus_v2017_01_27      0                         0                         0                         0                         0                        
  msgfplus_v2018_01_30      0                         0                         0                         0                         0                        
+ msgfplus_v2018_06_28      0                         0                         0                         0                         0                        
+ msgfplus_v2018_09_12      0                         0                         0                         0                         0                        
  msgfplus_v9979            0                         0                         0                         0                         0                        
  myrimatch_2_1_138         1                         1                         1                         1                         1                        
  myrimatch_2_2_140         1                         1                         1                         1                         1                        
@@ -524,6 +533,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *clip_nterm_m*
 """"""""""""""""""""""""""""""""""""""""""
@@ -691,6 +701,7 @@ Ursgal value translations
  kojak_1_5_3          0                   
  mascot_x_x_x         1                   
  moda_v1_51           0                   
+ moda_v1_61           0                   
  msamanda_1_0_0_5242  0                   
  msamanda_1_0_0_5243  0                   
  msamanda_1_0_0_6299  0                   
@@ -701,9 +712,12 @@ Ursgal value translations
  msamanda_2_0_0_9695  0                   
  msamanda_2_0_0_9706  0                   
  msfragger_20170103   0                   
+ msfragger_20171106   0                   
  msgfplus_v2016_09_16 1                   
  msgfplus_v2017_01_27 1                   
  msgfplus_v2018_01_30 1                   
+ msgfplus_v2018_06_28 1                   
+ msgfplus_v2018_09_12 1                   
  msgfplus_v9979       1                   
  myrimatch_2_1_138    1                   
  myrimatch_2_2_140    1                   
@@ -903,6 +917,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -915,8 +931,10 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
+* moda_v1_61
 
 Ursgal key translations for *cpus*
 """"""""""""""""""""""""""""""""""
@@ -925,6 +943,7 @@ Ursgal key translations for *cpus*
  Style               Translation        
  =================== ===================
  kojak_style_1       cpus               
+ moda_style_1        -@                 
  msfragger_style_1   num_threads        
  msgfplus_style_1    -thread            
  myrimatch_style_1   -cpus              
@@ -937,13 +956,13 @@ Ursgal key translations for *cpus*
 Ursgal value translations
 """""""""""""""""""""""""
 
- =================== =================== =================== =================== =================== =================== ===================
- Ursgal Value        Translated Value                                                                                                       
- ------------------- -----------------------------------------------------------------------------------------------------------------------
- .                   kojak_style_1       msgfplus_style_1    myrimatch_style_1   omssa_style_1       ucontroller_style_1 xtandem_style_1    
- =================== =================== =================== =================== =================== =================== ===================
- -1                  max - 1             max - 1             max - 1             max - 1             max - 1             max - 1            
- =================== =================== =================== =================== =================== =================== ===================
+ =================== =================== =================== =================== =================== =================== =================== ===================
+ Ursgal Value        Translated Value                                                                                                                           
+ ------------------- -------------------------------------------------------------------------------------------------------------------------------------------
+ .                   kojak_style_1       moda_style_1        msgfplus_style_1    myrimatch_style_1   omssa_style_1       ucontroller_style_1 xtandem_style_1    
+ =================== =================== =================== =================== =================== =================== =================== ===================
+ -1                  max - 1             max - 1             max - 1             max - 1             max - 1             max - 1             max - 1            
+ =================== =================== =================== =================== =================== =================== =================== ===================
 
 .. raw:: html
 
@@ -1047,6 +1066,7 @@ Available in unodes
 
 * kojak_1_5_3
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -1059,6 +1079,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -1073,6 +1095,7 @@ Available in unodes
 * upeptide_mapper_1_0_0
 * compomics_utilities_4_11_5
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 
@@ -1387,6 +1410,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * xtandem_cyclone_2010
 * xtandem_jackhammer
@@ -1496,6 +1521,7 @@ Available in unodes
 * generate_target_decoy_1_0_0
 * kojak_1_5_3
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -1508,6 +1534,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -1523,6 +1551,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 
@@ -1787,6 +1816,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 
@@ -1819,6 +1849,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -1840,6 +1871,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 * pyqms_1_0_0
@@ -1885,6 +1917,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -1906,6 +1939,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 * pyqms_1_0_0
@@ -2012,6 +2046,7 @@ Available in unodes
 
 * omssa_2_1_9
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *frag_max_charge*
 """""""""""""""""""""""""""""""""""""""""""""
@@ -2044,6 +2079,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * novor_1_1beta
 
@@ -2407,6 +2444,7 @@ Available in unodes
 * omssa_2_1_9
 * pepnovo_3_1
 * msfragger_20170103
+* msfragger_20171106
 * msgfplus2csv_v2017_07_04
 * msgfplus2csv_v1_2_0
 * msgfplus2csv_v1_2_1
@@ -2932,9 +2970,12 @@ Available in unodes
 
 * kojak_1_5_3
 * moda_v1_51
+* moda_v1_61
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * novor_1_1beta
 
@@ -2985,6 +3026,7 @@ Available in unodes
 
 * omssa_2_1_9
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *intensity_cutoff*
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -3651,6 +3693,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -3663,6 +3706,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -3674,6 +3719,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 * pyqms_1_0_0
@@ -3900,6 +3946,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *max_accounted_observed_peaks*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3964,6 +4011,7 @@ Available in unodes
 
 * kojak_1_5_3
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -3985,8 +4033,11 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 
 Ursgal key translations for *max_missed_cleavages*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -3998,6 +4049,7 @@ Ursgal key translations for *max_missed_cleavages*
  moda_style_1                           MissedCleavage                        
  msamanda_style_1                       missed_cleavages                      
  msfragger_style_1                      allowed_missed_cleavage               
+ msgfplus_style_1                       -maxMissedCleavages                   
  myrimatch_style_1                      MaxMissedCleavages                    
  omssa_style_1                          -v                                    
  pipi_style_1                           missed_cleavage                       
@@ -4055,6 +4107,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 * pipi_1_4_5
 * pipi_1_4_6
 
@@ -4154,6 +4207,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -4295,6 +4350,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 * msamanda_2_0_0_9706
 * msamanda_2_0_0_9695
 * msamanda_2_0_0_10695
@@ -4397,11 +4453,14 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * omssa_2_1_9
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 
@@ -4439,6 +4498,7 @@ Available in unodes
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *max_pep_var*
 """""""""""""""""""""""""""""""""""""""""
@@ -4503,6 +4563,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -4515,6 +4576,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * novor_1_1beta
 * omssa_2_1_9
@@ -4622,6 +4685,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 * pipi_1_4_5
 * pipi_1_4_6
 
@@ -4793,11 +4857,14 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * omssa_2_1_9
 * msfragger_20170103
+* msfragger_20171106
 * msamanda_2_0_0_9706
 * msamanda_2_0_0_9695
 * msamanda_2_0_0_10695
@@ -4908,6 +4975,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *min_required_matched_peaks*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -4947,6 +5015,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *min_required_observed_peaks*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5072,6 +5141,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 
 Ursgal key translations for *moda_blind_mode*
 """""""""""""""""""""""""""""""""""""""""""""
@@ -5114,6 +5184,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 
 Ursgal key translations for *moda_high_res*
 """""""""""""""""""""""""""""""""""""""""""
@@ -5155,6 +5226,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 
 Ursgal key translations for *moda_protocol_id*
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -5216,6 +5288,7 @@ Available in unodes
 
 * kojak_1_5_3
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -5228,6 +5301,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -5243,6 +5318,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 * pyqms_1_0_0
@@ -5560,6 +5636,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *msfragger_add_topN_complementary*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5601,6 +5678,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *msfragger_min_fragments_modelling*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5630,6 +5708,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *msfragger_output_max_expect*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5659,6 +5738,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *msfragger_track_zero_topN*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5688,6 +5768,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *msfragger_zero_bin_accept_expect*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5717,6 +5798,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *msfragger_zero_bin_mult_expect*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -5759,16 +5841,18 @@ Ursgal key translations for *msgfplus_mzid_converter_version*
 Ursgal value translations
 """""""""""""""""""""""""
 
- ======================== ========================
- Ursgal Value             Translated Value        
- ------------------------ ------------------------
- .                        ucontroller_style_1     
- ======================== ========================
- msgfplus_v2016_09_16     msgfplus2csv_v2016_09_16
- msgfplus_v2017_01_27     msgfplus2csv_v2017_01_27
- msgfplus_v2018_01_30     msgfplus2csv_v1_2_0     
- msgfplus_v9979           mzidentml_lib_1_6_10    
- ======================== ========================
+ ====================== ======================
+ Ursgal Value           Translated Value      
+ ---------------------- ----------------------
+ .                      ucontroller_style_1   
+ ====================== ======================
+ msgfplus_v2016_09_16   msgfplus2csv_py_v1_0_0
+ msgfplus_v2017_01_27   msgfplus2csv_py_v1_0_0
+ msgfplus_v2018_01_30   msgfplus2csv_py_v1_0_0
+ msgfplus_v2018_06_28   msgfplus2csv_py_v1_0_0
+ msgfplus_v2018_09_12   msgfplus2csv_py_v1_0_0
+ msgfplus_v9979         msgfplus2csv_py_v1_0_0
+ ====================== ======================
 
 .. raw:: html
 
@@ -5791,6 +5875,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 
 Ursgal key translations for *msgfplus_protocol_id*
@@ -6630,12 +6716,15 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * omssa_2_1_9
 * pepnovo_3_1
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *num_match_spec*
 """"""""""""""""""""""""""""""""""""""""""""
@@ -7173,6 +7262,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 
 Ursgal key translations for *output_add_features*
@@ -7247,6 +7338,7 @@ Available in unodes
 * generate_target_decoy_1_0_0
 * merge_csvs_1_0_0
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -7259,6 +7351,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -7693,6 +7787,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -7706,6 +7802,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *precursor_isotope_range*
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -7757,6 +7854,7 @@ Available in unodes
 
 * kojak_1_5_3
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -7769,6 +7867,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -7783,6 +7883,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 * pyqms_1_0_0
@@ -7832,6 +7933,7 @@ Available in unodes
 
 * kojak_1_5_3
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -7844,6 +7946,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -7858,6 +7962,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 * pyqms_1_0_0
@@ -7906,6 +8011,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -7918,6 +8024,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -7931,6 +8039,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 * pipi_1_4_5
 * pipi_1_4_6
 * pyqms_1_0_0
@@ -8054,12 +8163,15 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * mzml2mgf_2_0_0
 * omssa_2_1_9
 * msfragger_20170103
+* msfragger_20171106
 * pyqms_1_0_0
 * sugarpy_run_1_0_0
 * sugarpy_plot_1_0_0
@@ -8103,6 +8215,7 @@ Available in unodes
 * myrimatch_2_1_138
 * myrimatch_2_2_140
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *precursor_max_mass*
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -8146,10 +8259,13 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * mzml2mgf_2_0_0
 * omssa_2_1_9
 * msfragger_20170103
+* msfragger_20171106
 * pyqms_1_0_0
 * sugarpy_run_1_0_0
 * sugarpy_plot_1_0_0
@@ -8198,6 +8314,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *precursor_min_mass*
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -8230,6 +8347,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *precursor_true_tolerance*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -8259,6 +8377,7 @@ Available in unodes
 """""""""""""""""""
 
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *precursor_true_units*
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -8353,7 +8472,7 @@ psm_defining_colnames
 
 List of column names that are used to define unique PSMs and to merge multiple lines of the same PSM (if specified). The validation_score_field is automatically added to this list.
 
-:Default value: ['Spectrum Title', 'Sequence', 'Modifications', 'Mass difference', 'Charge', 'Is decoy']
+:Default value: ['Spectrum Title', 'Sequence', 'Modifications', 'Mass Difference', 'Charge', 'Is decoy']
 :type: list
 :triggers rerun: True
             
@@ -9156,6 +9275,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 * msamanda_1_0_0_5242
 * msamanda_1_0_0_5243
 * msamanda_1_0_0_6299
@@ -9168,6 +9288,8 @@ Available in unodes
 * msgfplus_v2016_09_16
 * msgfplus_v2017_01_27
 * msgfplus_v2018_01_30
+* msgfplus_v2018_06_28
+* msgfplus_v2018_09_12
 * msgfplus_v9979
 * myrimatch_2_1_138
 * myrimatch_2_2_140
@@ -9180,6 +9302,7 @@ Available in unodes
 * xtandem_vengeance
 * xtandem_alanine
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *semi_enzyme*
 """""""""""""""""""""""""""""""""""""""""
@@ -10055,6 +10178,7 @@ Available in unodes
 
 * pepnovo_3_1
 * msfragger_20170103
+* msfragger_20171106
 
 Ursgal key translations for *use_spectrum_charge*
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -10097,6 +10221,7 @@ Available in unodes
 """""""""""""""""""
 
 * moda_v1_51
+* moda_v1_61
 * pepnovo_3_1
 
 Ursgal key translations for *use_spectrum_mz*
@@ -10230,6 +10355,7 @@ Ursgal value translations
  .                    qvality_style_1     
  ==================== ====================
  moda_v1_51           0                   
+ moda_v1_61           0                   
  msamanda_1_0_0_5242  0                   
  msamanda_1_0_0_5243  0                   
  msamanda_1_0_0_6299  0                   
@@ -10240,9 +10366,12 @@ Ursgal value translations
  msamanda_2_0_0_9695  0                   
  msamanda_2_0_0_9706  0                   
  msfragger_20170103   0                   
+ msfragger_20171106   0                   
  msgfplus_v2016_09_16 1e-100              
  msgfplus_v2017_01_27 1e-100              
  msgfplus_v2018_01_30 1e-100              
+ msgfplus_v2018_06_28 1e-100              
+ msgfplus_v2018_09_12 1e-100              
  msgfplus_v9979       1e-100              
  myrimatch_2_1_138    0                   
  myrimatch_2_2_140    0                   
@@ -10309,6 +10438,7 @@ Ursgal value translations
  ========================= ========================= ========================= ========================= ========================= ========================= ========================= =========================
  mascot_x_x_x              Mascot:Score              Mascot:Score              Mascot:Score              Mascot:Score              Mascot:Score              Mascot:Score              Mascot:Score             
  moda_v1_51                ModA:probability          ModA:probability          ModA:probability          ModA:probability          ModA:probability          ModA:probability          ModA:probability         
+ moda_v1_61                ModA:probability          ModA:probability          ModA:probability          ModA:probability          ModA:probability          ModA:probability          ModA:probability         
  msamanda_1_0_0_5242       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
  msamanda_1_0_0_5243       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
  msamanda_1_0_0_6299       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
@@ -10319,9 +10449,12 @@ Ursgal value translations
  msamanda_2_0_0_9695       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
  msamanda_2_0_0_9706       Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score              Amanda:Score             
  msfragger_20170103        MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore     
+ msfragger_20171106        MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore      MSFragger:Hyperscore     
  msgfplus_v2016_09_16      MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
  msgfplus_v2017_01_27      MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
  msgfplus_v2018_01_30      MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
+ msgfplus_v2018_06_28      MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
+ msgfplus_v2018_09_12      MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
  msgfplus_v9979            MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue          MS-GF:SpecEValue         
  myrimatch_2_1_138         MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH            
  myrimatch_2_2_140         MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH             MyriMatch:MVH            

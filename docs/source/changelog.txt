@@ -6,6 +6,7 @@ Version 0.6.2    (09.2018)
 #. MSFragger version 20171106 was implemented
 #. MODa v1.61 was implemented
 #. PIPI version 1.4.5 replaced PIPI 1.3 due to compatibility issues with PIPI 1.3
+#. PIPI version 1.4.6 implemented (thanks Fengchao)
 #. Added latest versions of MSGF+ (version 2018.06.28 and 2018.09.12) 
    and new python mzid to csv converte msgfplus2csv_py_v1_0_0
 #. Macot wrapper and converter was implemented to allow downstream processing
