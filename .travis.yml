@@ -9,6 +9,6 @@ after_success:  codecov
 
 install:
   - pip install -r requirements.txt
-  - python install_resources.py omssa_2_1_9
+#  - python install_resources.py omssa_2_1_9
 
 script: nosetests --with-coverage

@@ -26,9 +26,9 @@ def transform_score( score, minimum_score ):
     return transformed_score
 
 
-class percolator_3_0( ursgal.UNode ):
+class percolator_3_2( ursgal.UNode ):
     """
-    Percolator 3_0 UNode
+    Percolator 3_2 UNode
 
     q-value and posterior error probability calculation
     by a semi-supervised learning algorithm that dynamically
@@ -47,24 +47,23 @@ class percolator_3_0( ursgal.UNode ):
         },
         'edit_version'                : 1.00,
         'name'                        : 'percolator',
-        'version'                     : '3.0.0',
+        'version'                     : '3.2.0',
         'release_date'                : None,
         'output_extensions'          : ['.csv'],
         'output_suffix'             : 'percolator_validated',
-        'input_multi_file'          : False,
-        'input_extensions'               : ['.csv'],
+        'input_extensions'          : ['.csv'],
         'create_own_folder'         : False,
         'citation'   : 'Matthew The, Michael J. MacCoss, William S. Noble, Lukas Kall' \
             'Fast and Accurate Protein False Discovery Rates on Large-Scale Proteomics Data Sets with Percolator 3.0',
-        'include_in_git'            : True, # True for now, but upload dat shit later on
+        'include_in_git'            : False, # True for now, but upload dat shit later on
+        'distributable'             : True,
         'group_psms'                : True,
         'in_development'            : False,
-        'cpu_usage'                 : 1,
         'utranslation_style'        : 'percolator_style_1',
         'engine': {
             'darwin' : {
                 '64bit' : {
-                    'exe'            : 'percolator_3_0',
+                    'exe'            : 'percolator_3_2',
                     'url'            : '',
                     'zip_md5'        : '',
                     'additional_exe' : [],
@@ -96,7 +95,7 @@ class percolator_3_0( ursgal.UNode ):
     }
 
     def __init__(self, *args, **kwargs):
-        super(percolator_3_0, self).__init__(*args, **kwargs)
+        super(percolator_3_2, self).__init__(*args, **kwargs)
         pass
 
     def preflight( self ):
@@ -633,7 +632,6 @@ class percolator_3_0( ursgal.UNode ):
                 )
                 if psmid_pep_key not in s2l[ pkey ].keys():
                     s2l[ pkey ][ psmid_pep_key ] = line_dict
-
 
         opened_file = open( self.params['translations'][ 'csv_input_file' ], 'r' )
         csv_input = csv.DictReader( row for row in opened_file if not row.startswith('#') )
