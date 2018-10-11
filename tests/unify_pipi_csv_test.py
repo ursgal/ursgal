@@ -39,14 +39,14 @@ unify_csv_main = R.unodes['unify_csv_1_0_0']['class'].import_engine_as_python_fu
 input_csv = os.path.join(
     'tests',
     'data',
-    'pipi_1_3_0',
-    'test_BSA1_pipi_1_3_0.csv'
+    'pipi_1_4_6',
+    'test_BSA1_pipi_1_4_6.csv'
 )
 output_csv = os.path.join(
     'tests',
     'data',
-    'pipi_1_3_0',
-    'test_BSA1_pipi_1_3_0_unified.csv'
+    'pipi_1_4_6',
+    'test_BSA1_pipi_1_4_6_unified.csv'
 )
 unify_csv_main(
     input_file     = input_csv,

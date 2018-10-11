@@ -81,6 +81,7 @@ class pipi_1_4_5(ursgal.UNode):
         # pprint.pprint(self.params)
         # sys.exit(1)
         self.params_to_write = {
+            'version': self.META_INFO['version'],
             'output_percolator_input': 1,
             'mod10': '0.0@X?',
             'pepNterm': 0.0,
@@ -359,7 +360,7 @@ class pipi_1_4_5(ursgal.UNode):
 
     def write_params_file(self):
         with open(self.param_file_name, 'w') as io:
-            print('''# 1.4.5
+            print('''# {version}
 # First line is the parameter file version. Don't change it.
 thread_num = {thread_num}
 percolator_path = ursgal/resources/darwin/64bit/percolator_2_08/percolator_2_08
