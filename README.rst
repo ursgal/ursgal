@@ -192,12 +192,14 @@ Copyrights
 
 Copyright 2014-2018 by authors and contributors in alphabetical order
 
-* Christian Fufezan,
+* Christian Fufezan
+* Aime B. Igiraneza
 * Manuel Koesters
 * Lukas P. M. Kremer
 * Johannes Leufken
 * Purevdulam Oyunchimeg
 * Stefan Schulze
+* Fengchao Yu
 * Lukas Vaut
 
 Contact
