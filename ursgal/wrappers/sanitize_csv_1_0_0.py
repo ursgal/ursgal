@@ -108,6 +108,11 @@ class sanitize_csv_1_0_0( ursgal.UNode ):
 
         if bigger_scores_better is None or validation_score_field is None:
             last_engine = self.get_last_search_engine( history = self.stats['history'] )
+            print('''
+[ WARNING ] Sanitizing based on the raw "{}" scores since
+[ WARNING ] "validation_score_field" and/or "bigger_scores_better"
+[ WARNING ] were not manually specified in the UController.params.
+            '''.format(last_engine))
             if last_engine is None or type(last_engine) == list:
                 print('''
                     Could not determine last_search_engine from input file.
