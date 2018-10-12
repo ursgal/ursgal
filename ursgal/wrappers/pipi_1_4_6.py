@@ -32,7 +32,7 @@ class pipi_1_4_6( pipi ):
         'create_own_folder': True,
         'in_development': False,
         'include_in_git': False,
-        'distributable': False,
+        'distributable': True,
         'engine_type': {
             'protein_database_search_engine': True,
         },
@@ -41,7 +41,7 @@ class pipi_1_4_6( pipi ):
                 'arc_independent': {
                     'exe': 'PIPI-1.4.6.jar',
                     'url': 'http://bioinformatics.ust.hk/pipi.html',
-                    'zip_md5': '',
+                    'zip_md5' : '21f8ebbb90acd0b6c58fec59d0c4f55b',
                     'additional_exe': [],
                 },
             },

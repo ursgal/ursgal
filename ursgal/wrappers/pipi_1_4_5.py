@@ -31,7 +31,7 @@ class pipi_1_4_5(ursgal.UNode):
         'create_own_folder': True,
         'in_development': False,
         'include_in_git': False,
-        'distributable': False,
+        'distributable': True,
         'engine_type': {
             'protein_database_search_engine': True,
         },
@@ -40,7 +40,7 @@ class pipi_1_4_5(ursgal.UNode):
                 'arc_independent': {
                     'exe': 'PIPI-1.4.5.jar',
                     'url': 'http://bioinformatics.ust.hk/pipi.html',
-                    'zip_md5': '',
+                    'zip_md5' : 'f28bf201a1d71da257e0035cf3a95823',
                     'additional_exe': [],
                 },
             },
