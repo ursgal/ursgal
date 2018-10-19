@@ -697,15 +697,28 @@ class UNode(object, metaclass=Meta_UNode):
         '''
         print('[ GROUPING ] Parsing {0}'.format( input_file ))
 
-        if validation_score_field is None:
-            search_engine = self.get_last_search_engine( history = self.stats['history'] )
-            assert search_engine, 'Can\'t convert results from no specified search engine.'
-            assert 'multiple engines:' not in search_engine, 'Can\'t convert merged results from multiple different engines.'
-            validation_score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][search_engine]
-
-        if bigger_scores_better is None:
-            bigger_scores_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][search_engine]
-
+        if bigger_scores_better is None or validation_score_field is None:
+            last_engine = self.get_last_search_engine(
+                history=self.stats['history']
+            )
+            assert last_engine, 'Can\'t convert results from no specified search engine.'
+            assert 'multiple engines:' not in last_engine, 'Can\'t convert merged results from multiple different engines.'
+            if bigger_scores_better is not None or validation_score_field is not None:
+                print('''
+[ WARNING ] Only "validation_score_field" or "bigger_scores_better" was defined
+[ WARNING ] in UController.params. Determining both (!)
+[ WARNING ] automatcally based on the last engine: {},
+                '''.format(last_engine))
+            if last_engine is None or type(last_engine) == list:
+                print('''
+                    Could not determine last_search_engine from input file.
+                    Got {0}
+                    Please specify parameters validation_score_field and bigger_scores_better
+                '''.format(last_engine))
+                sys.exit(1)
+            else:
+                bigger_scores_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][last_engine]
+                validation_score_field = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]
 
         tmp = ddict(list)
         grouped_psms = ddict(list)
