@@ -30,7 +30,7 @@ import ursgal.ucore
 from .profiles import PROFILES
 
 import ursgal.ukb
-
+import ursgal.kb 
 
 GlobalUnimodMapper = UnimodMapper()
 base_dir = os.path.dirname( __file__)

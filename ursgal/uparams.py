@@ -6940,6 +6940,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'venndiagram_1_0_0',
+            'venndiagram_1_1_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -9553,7 +9554,7 @@ ursgal_params = {
                 'msfragger_20170103'   : 0,
                 'msfragger_20171106'   : 0,
                 'pipi_1_4_5'           : 0,
-                'pipi_1_4_6'           : 0,            
+                'pipi_1_4_6'           : 0,
                 'moda_v1_51'           : 0,
                 'moda_v1_61'           : 0,
             },
@@ -9857,6 +9858,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
+            'venndiagram_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9893,6 +9895,7 @@ ursgal_params = {
         'edit_version' : 1.01,
         'available_in_unode' : [
             'venndiagram_1_0_0',
+            'venndiagram_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9965,6 +9968,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
+            'venndiagram_1_1_0',
             'sugarpy_plot_1_0_0',
         ],
         'triggers_rerun' : True,
@@ -9990,6 +9994,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
+            'venndiagram_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -10024,6 +10029,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
+            'venndiagram_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -10051,6 +10057,7 @@ ursgal_params = {
         'edit_version' : 1.01,
         'available_in_unode' : [
             'venndiagram_1_0_0',
+            'venndiagram_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -10102,7 +10109,7 @@ ursgal_params = {
             # },
         # },
         'default_value' : {
-            'x_axis' : 600, 
+            'x_axis' : 600,
             'y_axis' : 400,
         },
         'description' : \
@@ -10113,6 +10120,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
+            'venndiagram_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -10175,6 +10183,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'venndiagram_1_0_0',
+            'venndiagram_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
