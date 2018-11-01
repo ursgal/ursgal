@@ -3108,6 +3108,47 @@ Ursgal key translations for *internal_precision*
 
       <hr />
 
+ion_mode
+###################
+
+
+The ion mode that has been used for acquiring mass spectra (positive or negative)
+
+:Default value: positive
+:type: select
+:triggers rerun: True
+            
+
+Available in unodes
+"""""""""""""""""""
+
+* mzml2mgf_2_0_0
+
+Ursgal key translations for *ion_mode*
+""""""""""""""""""""""""""""""""""""""
+
+ ================ ================
+ Style            Translation     
+ ================ ================
+ mzml2mgf_style_1 ion_mode        
+ ================ ================
+
+Ursgal value translations
+"""""""""""""""""""""""""
+
+ ================ ================
+ Ursgal Value     Translated Value
+ ---------------- ----------------
+ .                mzml2mgf_style_1
+ ================ ================
+ negative         -               
+ positive         +               
+ ================ ================
+
+.. raw:: html
+
+      <hr />
+
 json_extension
 #########################
 
@@ -6666,7 +6707,7 @@ num_i_decimals
 
 Number of decimals for intensity (peak)
 
-:Default value: 5
+:Default value: 7
 :type: int
 :triggers rerun: True
             
@@ -6750,7 +6791,7 @@ num_mz_decimals
 
 Number of decimals for m/z mass
 
-:Default value: 5
+:Default value: 7
 :type: int
 :triggers rerun: True
             
