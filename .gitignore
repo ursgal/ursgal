@@ -12,6 +12,7 @@ __pycache__/*
 build/
 docs/build/
 docs/source/code_inc
+docs/source/code_inc/*
 docs/source/parameter.txt
 example_data/BSA_simple_example_search
 tests/data/_ursgal_lookup.pkl
