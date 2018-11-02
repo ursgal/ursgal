@@ -22,8 +22,6 @@ Quick Start
    quick_start
 
 
-
-
 Module structure
 ----------------
 .. toctree::
@@ -46,6 +44,17 @@ Ursgal module contents
    umapmaster
    chemical_compositions
    unimod_mapper
+
+
+Parameter
+=========
+
+
+.. toctree::
+   :maxdepth: 1
+
+
+   parameters
 
 
 Engines
@@ -72,17 +81,6 @@ How to extend and create new engines ?
    :maxdepth: 2
 
    create_your_own_engine
-
-
-Parameter
-=========
-
-
-.. toctree::
-   :maxdepth: 1
-
-
-   parameter
 
 
 Examples
