@@ -3845,6 +3845,34 @@ ursgal_params = {
             'E.g. to count the number of peptides for these identifiers. '\
             'The parameter "count_column_names" defines the countable elements.',
     },
+    'ion_mode' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'mzml2mgf_2_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'mzml2mgf_style_1' : 'ion_mode',
+        },
+        'utag' : [
+            'ionization',
+        ],
+        'uvalue_translation' : {
+            'mzml2mgf_style_1': {
+                'positive' : '+',
+                'negative' : '-',
+            }
+        },
+        'uvalue_type' : 'select',
+        'uvalue_option' : {
+            'select_type' : 'radio_button',
+            'available_values'  : ['positive', 'negative'],
+            'custom_val_max' : 1,
+        },
+        'default_value' : 'positive',
+        'description' : \
+            'The ion mode that has been used for acquiring mass spectra (positive or negative)'
+    },
     'intensity_cutoff' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -6377,7 +6405,7 @@ ursgal_params = {
             'updownval' : 1,
             'unit'      : ''
         },
-        'default_value' : 5,
+        'default_value' : 7,
         'description' : \
             'Number of decimals for intensity (peak)',
     },
@@ -6457,7 +6485,7 @@ ursgal_params = {
             'updownval' : 1,
             'unit'      : ''
         },
-        'default_value' : 5,
+        'default_value' : 7,
         'description' : \
             'Number of decimals for m/z mass',
     },
