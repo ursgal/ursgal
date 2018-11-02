@@ -46,15 +46,14 @@ Ursgal module contents
    unimod_mapper
 
 
-Parameter
-=========
+Parameters
+==========
 
 
 .. toctree::
    :maxdepth: 1
 
-
-   parameters
+   parameter
 
 
 Engines
