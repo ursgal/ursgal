@@ -31,7 +31,6 @@ from .profiles import PROFILES
 
 import ursgal.ukb
 
-
 GlobalUnimodMapper = UnimodMapper()
 base_dir = os.path.dirname( __file__)
 

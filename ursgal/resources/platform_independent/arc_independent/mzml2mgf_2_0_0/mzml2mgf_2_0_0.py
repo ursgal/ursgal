@@ -25,6 +25,8 @@ def _determine_mzml_name_base(file_name, prefix):
         mzml_name_base = file_name[:-8]
     elif file_name.upper().endswith('.MZML'):
         mzml_name_base = file_name[:-5]
+    elif file_name.upper().endswith('.IDX.GZ'):
+        mzml_name_base = file_name[:-7]
     else:
         raise Exception(
             "Can not determine mzml base name from {0}".format(
@@ -49,6 +51,7 @@ def main(
     ms_level=2,
     precursor_min_charge=1,
     precursor_max_charge=5,
+    ion_mode='+',
 ):
 
     print(
@@ -114,11 +117,7 @@ def main(
         peaks_2_write = spec.peaks('centroided')
 
         precursor_mz = spec.selected_precursors[0]['mz']
-
-        try:
-            precursor_charge = spec.selected_precursors[0]['charge']
-        except:
-            precursor_charge = None
+        precursor_charge = spec.selected_precursors[0].get('charge', None)
 
         if scan_inclusion_list is not None:
             if int(spectrum_id) not in scan_inclusion_list:
@@ -172,15 +171,17 @@ def main(
         )
         if precursor_charge is not None:
             print(
-                'CHARGE={0}'.format(
-                    precursor_charge
+                'CHARGE={0}{1}'.format(
+                    precursor_charge,
+                    ion_mode
                 ),
                 file=oof
             )
         else:
             print(
-                'CHARGE={0}'.format(
-                    precursor_charge_range
+                'CHARGE={0}{1}'.format(
+                    precursor_charge_range,
+                    ion_mode
                 ),
                 file=oof
             )

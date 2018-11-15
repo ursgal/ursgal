@@ -450,13 +450,13 @@ class UController(ursgal.UNode):
                     except TypeError:
                         print('''
 
-                Do you have *args and **kwargs in your Class ?
+                Do you have *args and **kwargs in your Class {0} ?
                 E.g.:
 
                 class msblender_09_2015( ursgal.UNode ):
                     def __init__( self,  *args, **kwargs ):
 
-                            ''')
+                            '''.format(engine))
                         self.unodes[ engine ]['import_status'] = 'Class syntax error?'
                         self.unodes[ engine ]['available'] = False
                         continue
