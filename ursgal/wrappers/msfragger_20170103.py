@@ -388,8 +388,7 @@ class msfragger_20170103(ursgal.UNode):
             )
             for line_dict in csv_reader:
                 line_dict['Raw data location'] = os.path.abspath(
-                    self.input_file
-                    #self.params['translations']['mzml_input_file']  
+                    self.params['translations']['mzml_input_file']  
                 )
 
                 ############################################
