@@ -340,17 +340,15 @@ class msfragger_20170103( ursgal.UNode ):
         )
 
         if os.path.exists(msfragger_output_tsv) is False:
-             msfragger_output_tsv = os.path.join(
+            msfragger_output_tsv = os.path.join(
                 self.params['input_dir_path'],
                 self.params['file_root'][len(self.params['prefix'])+1:] + '.tsv'
-                )    
+            )    
             if os.path.exists(msfragger_output_tsv) is False:
-
                 msfragger_output_tsv = os.path.join(
                     self.params['input_dir_path'],
                     '_'.join(self.params['file_root'].split('_')[1:]) + '.tsv'
                 )
-
                 if os.path.exists(msfragger_output_tsv) is False:
                     print('[ERROR]: MSFragger could not find the correct output tsv file')
     

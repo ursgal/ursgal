@@ -7923,6 +7923,48 @@ ursgal_params = {
         'uvalue_option' : { 
             'none_val' : None,
             'item_title' : 'column_name_with_type_of_merge',
+            'item_titles' : {
+                'font_type' : 'type',
+                'font_size_header' : 'size',
+                'font_size_major' : 'size',
+                'font_size_minor' : 'size',
+                'font_size_venn' : 'size',
+            },
+            'value_types' : {
+                'font_type' : 'str',
+                'font_size_header' : 'int',
+                'font_size_major' : 'int',
+                'font_size_minor' : 'int',
+                'font_size_venn' : 'int',
+            },
+            'multiple_line' : {
+                'font_type' : False,
+            },
+            'max' : {
+                'font_size_header' : 1000,
+                'font_size_major' : 1000,
+                'font_size_minor' : 1000,
+                'font_size_venn' : 1000,
+            },
+            'min' : {
+                'font_size_header' : 0,
+                'font_size_major' : 0,
+                'font_size_minor' : 0,
+                'font_size_venn' : 0,
+            },
+            'updownval' : {
+                'font_size_header' : 1,
+                'font_size_major' : 1,
+                'font_size_minor' : 1,
+                'font_size_venn' : 1,
+            },
+            'unit' : {
+                'font_size_header' : 'pt',
+                'font_size_major' : 'pt',
+                'font_size_minor' : 'pt',
+                'font_size_venn' : 'pt',
+            },
+            'custom_val_max' : 0,
             'item_type' : 'str',
             'multiple_line' : False,
             'custom_val_max': 10000,

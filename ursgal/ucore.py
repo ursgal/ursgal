@@ -291,7 +291,7 @@ def count_distinct_psms(csv_file_path=None, psm_defining_colnames=None):
     return psm_counter
 
 
-def merge_rowdicts(list_of_rowdicts, joinchar='<|>', psm_colnames_to_merge_multiple_values):
+def merge_rowdicts(list_of_rowdicts, joinchar='<|>', psm_colnames_to_merge_multiple_values={}):
     '''
     Merges CSV rows. If the column values are conflicting, they
     are joined with a character (joinchar).
