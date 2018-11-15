@@ -956,7 +956,6 @@ class UController(ursgal.UNode):
             )
 
         else:
-            
             outfile = self.execute_unode(
                 input_file       = input_file,
                 engine           = engine,
@@ -1307,10 +1306,8 @@ class UController(ursgal.UNode):
             # lets propagate md5 information into input finfo
             # for json dump.. evals are always done on loaded
             # i_finfo and o_finfo
-       
         if self.io['input']['finfo']['json_exists']:
-            self.io['input']['finfo']['md5'] = self.io['input']['o_finfo']['md5']
-        
+            self.io['input']['finfo']['md5'] = self.io['input']['o_finfo']['md5']       
         # setting pickle path ...
         pickle_path = self.io['input'].get(
             'scan_rt_lookup_path',
@@ -2925,13 +2922,11 @@ True
             force  = force
         )
         if dry_run is True:
-            answer = None  # do not execute, even if params changed!
-            
+            answer = None  # do not execute, even if params changed!  
         report = self.run_unode_if_required(
             force, engine_name, answer, 
             merge_duplicates=merge_duplicates
         )
-
         return report['output_file']
 
     def distinguish_multi_and_single_input(self, in_input):
