@@ -381,7 +381,7 @@ ursgal_params = {
             'updownval': 1,
             'unit': 'a.u',
         },
-        'default_value': 20,
+        'default_value': 5000,
         'description': ''' Max number of molecules in one matching bin. ''',
         'triggers_rerun': True,
         'ukey_translation': {
@@ -872,7 +872,7 @@ ursgal_params = {
             'sugarpy_plot_1_0_0',
         ],
         'default_value' : 1,
-        'description' :  ''' Retention time border tolerance for curating RT windows ''',
+        'description' :  ''' Retention time border tolerance (in min) for curating RT windows ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pyqms_style_1' : 'rt_border_tolerance',
@@ -2483,6 +2483,7 @@ ursgal_params = {
                 'trypsin_cnbr'          : 'KRM;C;P',
                 'trypsin_gluc'          : 'DEKR;C;P',
                 'trypsin_p'             : 'KR;C;',
+                'nonspecific'           : 'ACDEFGHIKLMNPQRSTVWY;C;'
             },
             'unify_csv_style_1' : {
                 'argc'                  : 'R;C;P',
@@ -2508,6 +2509,7 @@ ursgal_params = {
                 'trypsin_cnbr'          : 'KRM;C;P',
                 'trypsin_gluc'          : 'DEKR;C;P',
                 'trypsin_p'             : 'KR;C;',
+                'nonspecific'           : 'ACDEFGHIKLMNPQRSTVWY;C;'
             },
             'xtandem_style_1' : {
                 'argc'                  : '[R]|{P}',
@@ -2560,6 +2562,7 @@ ursgal_params = {
                 'trypsin_cnbr' : 'KRM;C;P',
                 'trypsin_gluc' : 'DEKR;C;P',
                 'trypsin_p' : 'KR;C;',
+                'nonspecific' : 'ACDEFGHIKLMNPQRSTVWY;C;',
             },
             'pipi_style_1' : {
                 'aspn' : 'AspN;0;D;-',

@@ -1008,15 +1008,21 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         if aa == '-':
                             continue
                         if cleavage_site == 'C':
-                            missed_cleavage_pattern = '{0}[^{1}]'.format(
-                                aa, inhibitor_aa
-                            )
+                            if inhibitor_aa == '':
+                                missed_cleavage_pattern = aa
+                            else:
+                                missed_cleavage_pattern = '{0}[^{1}]'.format(
+                                    aa, inhibitor_aa
+                                )
                             missed_cleavage_counter += \
                                 len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
                         elif cleavage_site == 'N':
-                            missed_cleavage_pattern = '[^{1}]{0}'.format(
-                                aa, inhibitor_aa
-                            )
+                            if inhibitor_aa == '':
+                                missed_cleavage_pattern = aa
+                            else:
+                                missed_cleavage_pattern = '[^{1}]{0}'.format(
+                                    aa, inhibitor_aa
+                                )
                             missed_cleavage_counter += \
                                 len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
                     if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
