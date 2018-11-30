@@ -474,7 +474,7 @@ class percolator_2_08( ursgal.UNode ):
                             final_pre_aa = aa
                             final_post_aa = post_aa[i]
                         if line_dict['Sequence'][-1] in allowed_aa\
-                            or post_aa == ['-']:
+                            or '-' in post_aa:
                             t['enzC'] = 1
                 elif cleavage_site == 'N':
                     for i, aa in enumerate(post_aa):
