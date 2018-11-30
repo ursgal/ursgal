@@ -487,9 +487,10 @@ class percolator_2_08( ursgal.UNode ):
                             t['enzN'] = 1
 
                 t['enzInt'] = 0
-                for aa in line_dict['Sequence'][:-1]:
-                    if aa in allowed_aa:
-                        t['enzInt'] += 1
+                if self.params['translations']['enzyme'] != 'ACDEFGHIKLMNPQRSTVWY;C;':
+                    for aa in line_dict['Sequence'][:-1]:
+                        if aa in allowed_aa:
+                            t['enzInt'] += 1
 
                 t['dM'] = float(line_dict['Calc m/z']) - float(line_dict['Exp m/z'])
                 t['absdM'] = abs(t['dM'])
