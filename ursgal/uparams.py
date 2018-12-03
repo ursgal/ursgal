@@ -11039,6 +11039,27 @@ ursgal_params = {
         'description' : \
             'Contaminants are added automatically to the database by the search engine. PIPI uses the same contaminants database as MaxQuant',
     },
+    'extract_venndiagram_files' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'venndiagram_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'extract_venndiagram_files'
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_option' : {
+        },
+        'uvalue_type' : 'bool',
+        'default_value' : False,
+        'description' : \
+            'The user can retrieve separate files corresponding to each area of the venn diagram',
+    }
 }
 
 
