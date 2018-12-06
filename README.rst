@@ -10,7 +10,7 @@ Introduction
    :alt: Travis CI status
 
 .. |build-status-appveyor| image:: https://ci.appveyor.com/api/projects/status/aygfxqlf5lccm7sx/branch/master?svg=true
-   :target: https://ci.appveyor.com/project/ursgal/ursgal
+   :target: https://ci.appveyor.com/project/fufezan-lab/ursgal
    :alt: AppVeyor CI status
 
 .. |doc-status| image:: http://readthedocs.org/projects/ursgal/badge/?version=latest
