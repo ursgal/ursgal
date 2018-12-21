@@ -382,14 +382,14 @@ Afterwards, just go to the docs folder and execute the script::
 
     user@localhost:~/ursgal/docs$ python3.4 uparams_to_dash.py
 
-A local server will be created and view the interactive page:
+A local server will be created and you can view the interactive page:
     | http://127.0.0.1:8050/
 
 Besides this, all uparams are still listed here as part of the documentation.
 
 
 .. note:: This sphinx source file was **auto-generated** using
-    ursgal/docs/uparams_to_sphinx_docu.py, which parses ursgal/ursgal/uparams.py
+    ursgal/docs/source/conf.py, which parses ursgal/ursgal/uparams.py
     Please **do not** modify this file directly, but commit changes to ursgal.uparams.
 
 
@@ -523,20 +523,6 @@ Ursgal value translations
             row.append( v )
         uprint( fmt.format(*row, width=len_longest))
     uprint( fmt.format(*delimiter_text, width=len_longest))
-uprint('''
-
-.. params ending on _ are links ... one can escape them with \_ but well well
-
-.. _score:
-   http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
-
-.. _proteinacc_start_stop_pre_post:
-    http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
-
-.. _decoy:
-    http://http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/
-
-    ''')
 
 #
 # Example script parsing
