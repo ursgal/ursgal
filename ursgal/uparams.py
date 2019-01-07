@@ -11058,7 +11058,7 @@ ursgal_params = {
         'uvalue_type' : 'bool',
         'default_value' : False,
         'description' : \
-            'The user can retrieve separate files corresponding to each area of the venn diagram',
+            'The user can retrieve separate files corresponding to each unique area of the venn diagram',
     }
 }
 
