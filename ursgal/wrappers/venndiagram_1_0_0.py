@@ -175,14 +175,15 @@ class venndiagram_1_0_0( ursgal.UNode ):
                 # ceate output file
                 name_from_return_dict = return_dict[key]['name']
                 output_name = ''
-                for i, character in enumerate(name_from_return_dict):
-                    if character in translation_dict_label.keys():
-                        output_name += self.params['translations'][
-                            'visualization_label_positions'][translation_dict_label[character]]
+                name_list = name_from_return_dict.split('_')
+                for word in name_list:
+                    if word in translation_dict_label.keys():
+                        output_name = output_name + '_' + self.params['translations'][
+                            'visualization_label_positions'][translation_dict_label[word]]
                     else :
-                        output_name += character
+                        output_name = output_name + '_' + word
 
-                with open(output_name+'.csv', 'w', newline='') as new_csvfile:
+                with open(output_name[1:len(output_name)]+'.csv', 'w', newline='') as new_csvfile:
                     writer = csv.DictWriter(new_csvfile, fieldnames=fieldnames_list)
                     writer.writeheader()
                     results = return_dict[key]['results']
