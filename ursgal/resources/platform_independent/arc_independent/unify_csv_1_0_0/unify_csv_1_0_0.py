@@ -489,7 +489,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             precursor_mz = scan_rt_lookup[ input_file_basename_for_rt_lookup ][
                 'scan_2_mz' ][ spectrum_id ]
             line_dict['Exp m/z'] = round(precursor_mz, 10)
-            
             #########################
             # Buffering corrections #
             #########################
