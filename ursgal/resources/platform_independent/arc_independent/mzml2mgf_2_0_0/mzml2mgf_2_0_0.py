@@ -104,7 +104,6 @@ def main(
                 [Warning] The retention time unit is nor recognized or not specified.
                 [Warning] It is assumed to be minutes and continues with that.
             ''')
-            
         spectrum_id = spec.ID
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
@@ -214,7 +213,6 @@ def main(
     oof.close()
     return tmp
 
-    
 if __name__ == '__main__':
     # parsing command line arguments:
     parser = argparse.ArgumentParser()
