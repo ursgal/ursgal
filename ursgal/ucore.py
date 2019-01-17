@@ -7,7 +7,6 @@ from ursgal import ukb
 from ursgal import UNode
 from collections import Counter, defaultdict
 
-
 PROTON = ukb.PROTON
 
 COLORS = {
@@ -333,7 +332,6 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>', psm_colnames_to_merge_multi
 
     return merged_d
 
-   
 
 def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_colnames=None, joinchar='<|>', overwrite_file=True):
     '''
@@ -385,9 +383,7 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         for rows_to_merge in rows_to_merge_dict.values():
             writer.writerow(
                 merge_rowdicts(rows_to_merge, joinchar=joinchar)
-            )
-            
-
+            )           
     # remove the old unified csv that contains duplicate rows
     if overwrite_file:
         os.remove(tmp_file)
