@@ -1306,6 +1306,7 @@ class UController(ursgal.UNode):
             # lets propagate md5 information into input finfo
             # for json dump.. evals are always done on loaded
             # i_finfo and o_finfo
+            
         if self.io['input']['finfo']['json_exists']:
             self.io['input']['finfo']['md5'] = self.io['input']['o_finfo']['md5']       
         # setting pickle path ...
