@@ -2641,7 +2641,7 @@ class UController(ursgal.UNode):
 
         Keyword Arguments:
             resources (list): list of specific resources that should be
-                downloaded. Is left to None, all possible resources are
+                downloaded. If left to None, all possible resources are
                 downloaded.
         '''
         download_zip_files = []
