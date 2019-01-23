@@ -386,7 +386,7 @@ class percolator_3_2_1(ursgal.UNode):
         else:
             raise Exception('post processing method must be either mix-max or tdc')
 
-        if self.params['infere_proteins'] is True:
+        if self.params['infer_proteins'] is True:
             self.params['command_list'].remove('--only-psms')
             self.params['command_list'] += [
                 '--picked-protein',
@@ -654,8 +654,9 @@ class percolator_3_2_1(ursgal.UNode):
             **csv_kwargs
         )
 
-        if os.path.exists(self.params['translations']['protein_output_target']) and \
-         os.path.exists(self.params['translations']['protein_output_decoy']):
+        if self.params['infer_proteins'] is True:
+        # if os.path.exists(self.params['translations']['protein_output_target']) and \
+        #  os.path.exists(self.params['translations']['protein_output_decoy']):
             with open(self.params['translations']['protein_output_target']) as fin1,\
              open(self.params['translations']['protein_output_decoy']) as fin2:
                 target_proteins_reader = csv.DictReader(
@@ -687,18 +688,19 @@ class percolator_3_2_1(ursgal.UNode):
             if line_dict['Is decoy'].upper() == 'TRUE':
                 psm_type = "decoy"
 
-            line_dict['Protein q-value'] = protein_fdr_lookup.get(
-                line_dict['Protein ID'].replace(' ', '_'),
-                {'q-value': ''}
-            )['q-value']
-            line_dict['Protein PEP'] = protein_fdr_lookup.get(
-                line_dict['Protein ID'].replace(' ', '_'),
-                {'PEP': ''}
-            )['PEP']
-            line_dict['Protein Group'] = protein_fdr_lookup.get(
-                line_dict['Protein ID'].replace(' ', '_'),
-                {'ID': ''}
-            )
+            if self.params['infer_proteins'] is True:
+                line_dict['Protein q-value'] = protein_fdr_lookup.get(
+                    line_dict['Protein ID'].replace(' ', '_'),
+                    {'q-value': ''}
+                )['q-value']
+                line_dict['Protein PEP'] = protein_fdr_lookup.get(
+                    line_dict['Protein ID'].replace(' ', '_'),
+                    {'PEP': ''}
+                )['PEP']
+                line_dict['Protein Group'] = protein_fdr_lookup.get(
+                    line_dict['Protein ID'].replace(' ', '_'),
+                    {'ID': ''}
+                )
             if line_dict['Modifications'].strip() != '':
                 seq_and_mods = '#'.join([line_dict['Sequence'], line_dict['Modifications']])
             else:

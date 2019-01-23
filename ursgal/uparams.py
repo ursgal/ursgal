@@ -1,15 +1,15 @@
 ursgal_params = {
-    'infere_proteins' : {
+    'infer_proteins' : {
         'edit_version': 1.00,
         'available_in_unode' : [
             'percolator_2_08',
             'percolator_3_2_1',
         ],
         'default_value' : False,
-        'description' :  ''' Use the picked-protein algorithm to infere protein PEP and FDR in Percolator''',
+        'description' :  ''' Use the picked-protein algorithm to infer protein PEP and FDR in Percolator''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'percolator_style_1' : 'infere_proteins',
+            'percolator_style_1' : 'infer_proteins',
         },
         'utag' : [
             'validation',
@@ -25,11 +25,11 @@ ursgal_params = {
         'available_in_unode' : [
             'percolator_3_2_1',
         ],
-        'default_value' : 'mix-max',
+        'default_value' : 'tdc',
         'description' :  ''' Method to assign FDR and PEP to PSMs''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'percolator_style_1' : '-y',
+            'percolator_style_1' : ('-y','-Y'),
         },
         'utag' : [
             'validation',
@@ -40,7 +40,12 @@ ursgal_params = {
         },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "str",
+        'uvalue_type' : 'select',
+        'uvalue_option' : {
+            'select_type'    : 'radio_button',
+            'available_values'  : ['mix-max', 'tdc'],
+            'custom_val_max' : 0,
+        },
     },
     'pyqms_verbosity': {
         'edit_version' : 1.00,

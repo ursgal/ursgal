@@ -12,7 +12,7 @@ def main():
     '''
 
     engine_list = [
-        'msfragger',
+        'xtandem_vengeance',
     ]
 
     params = {
@@ -37,11 +37,13 @@ def main():
             'example_data',
             'percolator_version_comparison'
         ),
-        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
+        'http_url': 'https://www.sas.upenn.edu/~sschulze/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
         'http_output_folder': os.path.join(
             os.pardir,
             'example_data'
-        )
+        ),
+        'infer_proteins': False,
+        'percolator_post_processing': 'tdc',
     }
 
     if os.path.exists(params['ftp_output_folder']) is False:
@@ -66,7 +68,7 @@ def main():
 
     validation_engine_list = [
         'percolator_2_08',
-        'percolator_3_2'
+        'percolator_3_2_1'
     ]
     uc.params['visualization_label_positions'] = {}
     for n, vce in enumerate(validation_engine_list):
