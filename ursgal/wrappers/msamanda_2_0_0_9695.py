@@ -113,7 +113,7 @@ class msamanda_2_0_0_9695( ursgal.UNode ):
             '{0}'.format( self.params['translations']['output_file_incl_path'] + '_settings.xml' ),
             '{output_file_incl_path}'.format(**self.params['translations'])
         ]
-        # self.created_tmp_files.append(self.params['translations']['output_file_incl_path'] + '_settings.xml')
+        self.created_tmp_files.append(self.params['translations']['output_file_incl_path'] + '_settings.xml')
 
         score_ions = []
         instruments_file_input = []

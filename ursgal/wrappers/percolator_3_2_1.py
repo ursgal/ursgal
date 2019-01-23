@@ -27,7 +27,7 @@ def transform_score(score, minimum_score):
     return transformed_score
 
 
-class percolator_3_2(ursgal.UNode):
+class percolator_3_2_1(ursgal.UNode):
     """
     Percolator 3_2 UNode
 
@@ -51,7 +51,7 @@ class percolator_3_2(ursgal.UNode):
         'version': '3.2.0',
         'release_date': None,
         'output_extensions': ['.csv'],
-        'output_suffix': 'percolator_validated',
+        'output_suffix': 'percolator_3_2_1_validated',
         'input_extensions': ['.csv'],
         'create_own_folder': False,
         'citation' : 'Matthew The, Michael J. MacCoss, William S. Noble, Lukas Kall' \
@@ -64,7 +64,7 @@ class percolator_3_2(ursgal.UNode):
         'engine': {
             'darwin': {
                 '64bit': {
-                    'exe': 'percolator_3_2',
+                    'exe': 'percolator_3_2_1',
                     'url': '',
                     'zip_md5': '',
                     'additional_exe': [],
@@ -96,7 +96,7 @@ class percolator_3_2(ursgal.UNode):
     }
 
     def __init__(self, *args, **kwargs):
-        super(percolator_3_2, self).__init__(*args, **kwargs)
+        super(percolator_3_2_1, self).__init__(*args, **kwargs)
         pass
 
     def preflight(self):
