@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 0.6.3    (02.2019)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Added Percolator 3.2, including the options to infer protein PEP and FDR
+#. Added latest versions of MSGF+ (version 2019.01.22) and
+   MSAmanda (version 2.0.0.11219)
+#. Some minor bugfixes and improvements (check git log for details)
+
 Version 0.6.2    (09.2018)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 #. MSFragger version 20171106 was implemented
