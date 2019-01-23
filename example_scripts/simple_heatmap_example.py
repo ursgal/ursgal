@@ -34,6 +34,7 @@ def main():
     uc = ursgal.UController(
         profile='LTQ XL low res',
         params={
+            'heatmap_column_positions' : {},
             'heatmap_annotation_field_name': 'map to uniprot',
             'heatmap_identifier_field_name': 'Protein',
             'heatmap_max_value': 3,

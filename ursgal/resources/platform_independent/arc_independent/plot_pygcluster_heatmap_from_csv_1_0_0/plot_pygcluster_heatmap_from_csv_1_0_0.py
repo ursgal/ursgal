@@ -8,7 +8,7 @@ import os
 import pyGCluster
 import csv
 import sys
-
+import pprint
 
 def main(input_file=None, output_file=None, params=None):
     '''
@@ -50,7 +50,7 @@ def main(input_file=None, output_file=None, params=None):
           holding a value (Default: '_mean')
         * heatmap_error_suffix is the suffix of the column name for columns
           holding the error to the value (Default: '_std')
-        * heatmap_column_order defines the order of the columns for plotting
+        * heatmap_column_positions defines the order of the columns for plotting
 
 
     Note:
@@ -65,8 +65,9 @@ def main(input_file=None, output_file=None, params=None):
     csv_reader = csv.DictReader(
         open(input_file, 'r')
     )
+    # pprint.pprint(params)
     params['additional_labels'] = {}
-    if params['heatmap_column_order'] == {}:
+    if params['heatmap_column_positions'] == {}:
         params['all_conditions']    = set()
         for fieldname in csv_reader.fieldnames:
             if fieldname.endswith(params['heatmap_value_suffix']):
@@ -79,7 +80,7 @@ def main(input_file=None, output_file=None, params=None):
         params['all_conditions'] = sorted(list(params['all_conditions']))
     else:
         params['all_conditions'] = [
-            params['heatmap_column_order'][k] for k in sorted(params['heatmap_column_order'].keys())
+            params['heatmap_column_positions'][k] for k in sorted(params['heatmap_column_positions'].keys())
         ]
     plot_collector = {}
     identifiers    = []

@@ -150,6 +150,11 @@ De Novo Search Engines
 Novor
 -----
 
+Available Novor versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.novor_1_05.novor_1_05
+   :members:
+
 .. autoclass:: ursgal.wrappers.novor_1_1beta.novor_1_1beta
    :members:
 

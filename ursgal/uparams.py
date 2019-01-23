@@ -1,4 +1,47 @@
 ursgal_params = {
+    'infere_proteins' : {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'percolator_2_08',
+            'percolator_3_2_1',
+        ],
+        'default_value' : False,
+        'description' :  ''' Use the picked-protein algorithm to infere protein PEP and FDR in Percolator''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'percolator_style_1' : 'infere_proteins',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'percolator_post_processing': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'percolator_3_2_1',
+        ],
+        'default_value' : 'mix-max',
+        'description' :  ''' Method to assign FDR and PEP to PSMs''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'percolator_style_1' : '-y',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
     'pyqms_verbosity': {
         'edit_version' : 1.00,
         'available_in_unode': [
@@ -1058,6 +1101,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'pipi_1_4_5',
@@ -1072,6 +1116,7 @@ ursgal_params = {
             'omssa_style_1'   : 'base_mz',
             'pepnovo_style_1' : 'base_mz',
             'pipi_style_1'    : 'base_mz',
+            'novor_style_1'   : 'base_mz',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
@@ -1167,6 +1212,7 @@ ursgal_params = {
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
+            'percolator_3_2_1',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
@@ -1617,6 +1663,7 @@ ursgal_params = {
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
                 'novor_1_1beta' : False,
+                'novor_1_05' : False,
                 'omssa_2_1_9' : False,
                 'pepnovo_3_1' : False,
                 'pipi_1_4_5' : False,
@@ -2051,7 +2098,8 @@ ursgal_params = {
             'mzidentml_lib_1_7',
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
-            'upeptide_mapper_1_0_0'
+            'upeptide_mapper_1_0_0',
+            'percolator_3_2_1'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2309,9 +2357,11 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'percolator_2_08',
+            'percolator_3_2_1',
             'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2339,6 +2389,7 @@ ursgal_params = {
             'unify_csv_style_1'             : 'enzyme',
             'xtandem_style_1'               : 'protein, cleavage site',
             'msfragger_style_1'             : 'enzyme',
+            'percolator_style_1'            : 'enz',
             'pipi_style_1'                  : 'enzyme',
         },
         'utag' : [
@@ -2731,6 +2782,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'novor_1_1beta',
+            'novor_1_05',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2835,6 +2887,7 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'xtandem_cyclone_2010',
@@ -2902,6 +2955,7 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'xtandem_cyclone_2010',
@@ -3046,6 +3100,7 @@ ursgal_params = {
             'msgfplus_v2019_01_22',
             'msgfplus_v9979',
             'novor_1_1beta',
+            'novor_1_05',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3329,6 +3384,7 @@ ursgal_params = {
             'msgfplus2csv_v2016_09_16',
             'msgfplus2csv_v2017_01_27',
             'novor_1_1beta',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'msfragger_20170103',
@@ -3557,7 +3613,7 @@ ursgal_params = {
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'heatmap_style_1' : 'heatmap_column_order',
+            'heatmap_style_1' : 'heatmap_column_positions',
         },
         'utag' : [
             'visualization',
@@ -3790,6 +3846,7 @@ ursgal_params = {
             'msgfplus_v2019_01_22',
             'msgfplus_v9979',
             'novor_1_1beta',
+            'novor_1_05',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5149,6 +5206,7 @@ ursgal_params = {
             'msgfplus_v2019_01_22',
             'msgfplus_v9979',
             'novor_1_1beta',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'xtandem_cyclone_2010',
@@ -5535,6 +5593,7 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'unify_csv_1_0_0',
@@ -6513,8 +6572,7 @@ ursgal_params = {
         },
         'default_value' : 10,
         'description' : \
-            'Maximum number of peptide spectrum matches to report for each '\
-            'spectrum',
+            'Maximum number of peptide spectrum matches to report for each spectrum',
     },
     'num_mz_decimals' : {
         'edit_version' : 1.00,
@@ -7018,9 +7076,11 @@ ursgal_params = {
             'mzidentml_lib_1_6_11',
             'mzidentml_lib_1_7',
             'novor_1_1beta',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'percolator_2_08',
+            'percolator_3_2_1',
             'qvality_2_02',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7408,6 +7468,7 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'unify_csv_1_0_0',
@@ -7487,6 +7548,7 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'unify_csv_1_0_0',
@@ -7565,6 +7627,7 @@ ursgal_params = {
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'novor_1_1beta',
+            'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
             'xtandem_cyclone_2010',
@@ -7965,6 +8028,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'percolator_2_08',
+            'percolator_3_2_1',
             'unify_csv_1_0_0',
             'upeptide_mapper_1_0_0'
         ],
@@ -9677,6 +9741,7 @@ ursgal_params = {
         'available_in_unode' : [
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
+            'percolator_3_2_1',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
@@ -9719,6 +9784,7 @@ ursgal_params = {
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
                 'novor_1_1beta'        : 'Novor:score',
+                'novor_1_05'           : 'Novor:score',
                 'omssa_2_1_9'          : 'OMSSA:pvalue',
                 'pepnovo_3_1'          : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
@@ -9756,6 +9822,7 @@ ursgal_params = {
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
                 'novor_1_1beta'        : 'Novor:score',
+                'novor_1_05'           : 'Novor:score',
                 'omssa_2_1_9'          : 'OMSSA:pvalue',
                 'pepnovo_3_1'          : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
@@ -9793,6 +9860,7 @@ ursgal_params = {
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
                 'novor_1_1beta'        : 'Novor:score',
+                'novor_1_05'           : 'Novor:score',
                 'omssa_2_1_9'          : 'OMSSA:pvalue',
                 'pepnovo_3_1'          : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
@@ -9830,6 +9898,7 @@ ursgal_params = {
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
                 'novor_1_1beta'        : 'Novor:score',
+                'novor_1_05'           : 'Novor:score',
                 'omssa_2_1_9'          : 'OMSSA:pvalue',
                 'pepnovo_3_1'          : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
@@ -9867,6 +9936,7 @@ ursgal_params = {
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
                 'novor_1_1beta'        : 'Novor:score',
+                'novor_1_05'           : 'Novor:score',
                 'omssa_2_1_9'          : 'OMSSA:pvalue',
                 'pepnovo_3_1'          : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
@@ -9904,6 +9974,7 @@ ursgal_params = {
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
                 'novor_1_1beta'        : 'Novor:score',
+                'novor_1_05'           : 'Novor:score',
                 'omssa_2_1_9'          : 'OMSSA:pvalue',
                 'pepnovo_3_1'          : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
@@ -9941,6 +10012,7 @@ ursgal_params = {
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
                 'novor_1_1beta'        : 'Novor:score',
+                'novor_1_05'           : 'Novor:score',
                 'omssa_2_1_9'          : 'OMSSA:pvalue',
                 'pepnovo_3_1'          : 'Pepnovo:PnvScr',
                 'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
