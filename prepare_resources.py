@@ -13,7 +13,7 @@ def main():
     '''
     uc = ursgal.UController()
     zip_files_list, update_kb_list =uc.prepare_resources(
-        root_zip_target_folder='/Users/sschulze/tmp'
+        root_zip_target_folder='/tmp'
     )
     print()
     print('<<<Summary>>>')
