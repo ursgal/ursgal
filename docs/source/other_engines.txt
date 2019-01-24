@@ -141,9 +141,7 @@ Quantification Engines
 pyQms 1_0_0
 -----------
 
-.. autoclass:: ursgal.resources.platform_independent.arc_independent.pyqms_1_0_0.pyqms_1_0_0
-   :members:
-   :private-members:
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.pyqms_1_0_0.pyqms_1_0_0.main
 
 
 
