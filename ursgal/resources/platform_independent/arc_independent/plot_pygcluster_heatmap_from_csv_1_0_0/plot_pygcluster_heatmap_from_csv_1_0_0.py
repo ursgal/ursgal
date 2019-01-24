@@ -8,7 +8,6 @@ import os
 import pyGCluster
 import csv
 import sys
-import pprint
 
 def main(input_file=None, output_file=None, params=None):
     '''
