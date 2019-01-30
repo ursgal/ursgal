@@ -95,7 +95,7 @@
 	    for MQ_offset, file_name in MQ_OFFSET_TO_FILENAME:
 	        file_2_target_offset[file_name] = {'offsets': []}
 	        for n in range(-20, 20, 2):
-	            file_2_target_offset[file_name]['offsets'].append(n / 1e6)
+	            file_2_target_offset[file_name]['offsets'].append(n)
 	
 	    engine_list = ['xtandem_sledgehammer']
 	
@@ -122,7 +122,7 @@
 	        for ppm_offset in file_2_target_offset[mzML_basename]['offsets']:
 	            R.params['machine_offset_in_ppm'] = ppm_offset
 	            R.params['prefix'] = 'ppm_offset_{0}'.format(
-	                int(ppm_offset * 1e6)
+	                int(ppm_offset)
 	            )
 	            mgf_file = R.convert(
 	                input_file=mzML_path,

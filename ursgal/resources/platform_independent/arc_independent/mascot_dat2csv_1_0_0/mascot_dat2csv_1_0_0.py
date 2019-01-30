@@ -109,7 +109,7 @@ class MascotDatParser(object):
                 else:
                     raise Exception(
                         'Do not know what to do with this line'
-                        f'\n{line}'
+                        '\n{line}'.format(line=line)
                     )
         return pep_info
 
@@ -217,7 +217,7 @@ class MascotDatParser(object):
             raise Exception(
                 'reading mgf with CZ title under windows is not'
                 'supported now due to strange hex strings'
-                f'Title string supplied: {title}'
+                'Title string supplied: {title}'.format(title=title)
             )
         for e in entry_list:
             k_v = e.split('%3a')

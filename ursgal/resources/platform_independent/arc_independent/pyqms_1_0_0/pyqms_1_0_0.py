@@ -80,7 +80,12 @@ def generate_result_pickle(
 
             if unit == 'second':
                 scan_time /= 60
-            
+            elif unit != 'minute':
+                print('''
+                    [Warning] The retention time unit is not recognized or not specified.
+                    [Warning] It is assumed to be minutes and continues with that.
+                ''')
+
             if spec['ms level'] == ms_level:
                 results = lib.match_all(
                     mz_i_list=spec.centroidedPeaks,

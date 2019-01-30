@@ -101,7 +101,7 @@ def main(
             scan_time /= 60
         elif scan_time_unit != 'minute':
             print('''
-                [Warning] The retention time unit is nor recognized or not specified.
+                [Warning] The retention time unit is not recognized or not specified.
                 [Warning] It is assumed to be minutes and continues with that.
             ''')
         spectrum_id = spec.ID

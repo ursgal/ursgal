@@ -128,10 +128,10 @@ MSGF+ version comparison
 Bruderer et al. (2015) X!Tandem comparison incl. machine ppm offset
 -------------------------------------------------------------------
 
-.. autofunction:: qexactive_xtandem_version_comparison.main
+.. autofunction:: xtandem_version_comparison_qexactive.main
 
 
-.. include:: code_inc/qexactive_xtandem_version_comparison.inc
+.. include:: code_inc/xtandem_version_comparison_qexactive.inc
 
 
 
