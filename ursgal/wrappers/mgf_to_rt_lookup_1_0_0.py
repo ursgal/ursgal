@@ -4,8 +4,7 @@ import os
 
 
 class mgf_to_rt_lookup_1_0_0(ursgal.UNode):
-    """
-    Dummy to merge mascot data into usgal workflow
+    """Write RT lookup from mgf file
     """
     META_INFO = {
         'edit_version'                : 1.00,
@@ -51,7 +50,6 @@ class mgf_to_rt_lookup_1_0_0(ursgal.UNode):
                 self.params['input_file']
             )
 
-        # breakpoint()
         main(
             input_file=input_file,
             output_file=output_file,
@@ -60,6 +58,5 @@ class mgf_to_rt_lookup_1_0_0(ursgal.UNode):
             run_id_regex=r'(\w+).\d+.\d+.\d'
         )
         # TODO add spec_id_regex and run_id_regex as uparams, could also be used in unify_csv etc
-
         self.print_execution_time(tag='execution')
         return output_file

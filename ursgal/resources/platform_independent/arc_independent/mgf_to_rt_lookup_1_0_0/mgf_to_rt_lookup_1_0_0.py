@@ -20,6 +20,8 @@ def generate_spectra(fh):
 
     Args:
         fh (IO): file obj
+    Yields:
+        spec_dict (dict): Dict contaning spec data
     """
     for line in fh:
         line = line.strip()
@@ -42,6 +44,18 @@ def generate_spectra(fh):
 
 
 def main(input_file, output_file, rt_pickle_name, spec_id_regex, run_id_regex):
+    """ead mgf file and write RT lookup pickle.
+
+    Args:
+        input_file (str): MGF input file path
+        output_file (str): Outputfile name
+        rt_pickle_name (str): Name of the RT pickle file
+        spec_id_regex (str): Regex to extract spec ID from mgf title
+        run_id_regex (str): Regex to extract run ID from mgf title
+
+    Returns:
+        Outputfile with RT pickle md5 hash
+    """
     PRINT_MISSING_RT_WARNING = True
     lookup_path = os.path.join(
         os.path.dirname(input_file),
@@ -58,7 +72,7 @@ def main(input_file, output_file, rt_pickle_name, spec_id_regex, run_id_regex):
             'rt_2_scan': {},
             'scan_2_rt': {},
             'scan_2_mz': {},
-            'unit': 'minute'  #in mgf, its always seconds, but to stay compatible ..
+            'unit': 'minute'  # in mgf, its always seconds, but to stay compatible ..
         }
         spec_id_regex = re.compile(spec_id_regex)
 
