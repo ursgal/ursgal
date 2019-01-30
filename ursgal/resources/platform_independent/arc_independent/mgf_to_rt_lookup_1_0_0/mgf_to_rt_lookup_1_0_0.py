@@ -81,8 +81,7 @@ def main(input_file, output_file, rt_pickle_name, spec_id_regex, run_id_regex):
         with open(input_file) as fin:
             for spec_dict in generate_spectra(fin):
                 spec_id = spec_id_regex.match(spec_dict['TITLE']).group(1)
-                rt = spec_dict['RTINSECONDS'] / 60
-                # rt -= 1
+                rt = float(spec_dict['RTINSECONDS']) / 60
                 precursor_mz = float(spec_dict['PEPMASS'].strip())
 
                 tmp['rt_2_scan'][rt] = int(spec_id)
