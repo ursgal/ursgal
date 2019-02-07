@@ -5,7 +5,18 @@ import sys
 import re
 import os
 from collections import defaultdict as ddict
+from urllib.parse import unquote
+import pprint
+import re
 
+regexs_for_crazy_mgfs = {
+    'cz' : re.compile(r'''
+        msmsid:F(?P<spec_id>[0-9]*),
+        quan:(?P<quant>[0-9]*),
+        start:(?P<rt_start_in_minutes>\d*\.\d+|\d+),
+        end:(?P<rt_end_in_minutes>\d*\.\d+|\d+),
+    ''', re.VERBOSE)
+}
 
 def add_mascot_to_ursgal_history(file):
     """Add Mascot to history.
@@ -105,7 +116,20 @@ def write_ursgal_pkl_from_mascot_dat(mascot_data_file):
                         k, v = key.split('=')
                         query_dict[k] = v
                 title = query_dict['title']
-                path, spec_id, spec_id, charge = title.replace('%2e', '.').split('.')
+                try:
+                    path, spec_id, spec_id, charge = title.replace('%2e', '.').split('.')
+                except:
+                    path = os.path.basename(fname)
+                    unqstring = unquote(title)
+                    charge = int(query_dict['charge'].replace('+',''))
+                    for _id, pattern in regexs_for_crazy_mgfs.items():
+                        m = pattern.match(unqstring)
+                        if m is not None:
+                            spec_id = int(m.group('spec_id'))
+                            rtinminutes = m.group('rt_start_in_minutes')
+                            query_dict['rtinseconds'] =  float(rtinminutes) / 60.
+                            break
+
                 rt    = query_dict['rtinseconds']
                 t[dat_basename]['rt_2_scan'][float(rt)] = str(spec_id)
                 t[dat_basename]['scan_2_rt'][str(spec_id)] = float(rt)
@@ -115,6 +139,14 @@ def write_ursgal_pkl_from_mascot_dat(mascot_data_file):
 
 
 def main(input_file, database):
+    """
+    Usage:
+
+    ./unify_mascot_dat.py <mascot dat file> <database>
+
+    Note:
+        Modifications are hard coded so please adjust accordingly
+    """
     uc = ursgal.UController()
     uc.params['database'] = database
     uc.params['modifications'] = [
@@ -138,4 +170,7 @@ def main(input_file, database):
     print(unified)
 
 if __name__ == '__main__':
-    main(sys.argv[1], sys.argv[2])
+    if len(sys.argv) !=3:
+        print(main.__doc__)
+    else:
+        main(sys.argv[1], sys.argv[2])
