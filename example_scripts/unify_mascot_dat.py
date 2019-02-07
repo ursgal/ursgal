@@ -8,6 +8,7 @@ from collections import defaultdict as ddict
 from urllib.parse import unquote
 import pprint
 import re
+import json
 
 regexs_for_crazy_mgfs = {
     'cz' : re.compile(r'''
@@ -25,34 +26,29 @@ def add_mascot_to_ursgal_history(file):
         mapped_csv_search_results (str): Path to mapped search results.
     """
     mapped_json = '{0}.u.json'.format(file)
+    iinfo, oinfo, params, history = json.load(open(mapped_json))
     mascot_missing = True
-    lines = []
-    with open(mapped_json, 'r') as org:
-        for line in org:
-            if 'mascot_x_x_x' in line:
-                mascot_missing = False
-                break
-            lines.append(line)
+    for entry in history['history']:
+        engine_type = entry['META_INFO'].get('engine_type', {})
+        is_search_engine = engine_type.get('protein_database_search_engine', False)
+        if is_search_engine and 'mascot' in entry['engine']:
+            mascot_missing = False
 
     if mascot_missing:
-        print('MASCOT MISSING')
-        print('INSERTING ...')
-        with open(mapped_json, 'w') as new:
-            for line in lines:
-                if '"history": [' in line:
-                    print('''
-            "history": [
-              {
+        history['history'].insert(0,
+            {
                 "META_INFO": {
                   "engine_type": {
-                    "protein_database_search_engine": true,
-                    "By Hand" : true
+                    "protein_database_search_engine": True,
+                    "by Hand" : True
                   }
                 },
                 "engine": "mascot_x_x_x"
-              },''', file = new)
-                else:
-                    print(line, end='', file = new)
+          }
+        )
+        with open(mapped_json, "w") as d:
+            json.dump([iinfo, oinfo, params, history], d)
+
 
 
 def write_ursgal_pkl_from_mascot_dat(mascot_data_file):
