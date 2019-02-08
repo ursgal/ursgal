@@ -156,7 +156,9 @@ class MascotDatParser(object):
                     query_dict['retention_time'] =  float(rtinminutes) / 60.
                     charge = query_dict['charge'].replace("+","")
                     query_dict['title'] = '{0}.{1}.{1}.{2}'.format(
-                        os.path.basename(self.search_file),
+                        os.path.splitext(
+                            os.path.basename(self.search_file)
+                        )[0],
                         spec_id,
                         charge
                     )

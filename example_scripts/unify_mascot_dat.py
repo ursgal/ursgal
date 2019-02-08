@@ -14,8 +14,10 @@ regexs_for_crazy_mgfs = {
     'cz' : re.compile(r'''
         msmsid:F(?P<spec_id>[0-9]*),
         quan:(?P<quant>[0-9]*),
-        start:(?P<rt_start_in_minutes>\d*\.\d+|\d+),
-        end:(?P<rt_end_in_minutes>\d*\.\d+|\d+),
+        start:(?P<rt_start_in_seconds>\d*\.\d+|\d+),
+        end:(?P<rt_end_in_seconds>\d*\.\d+|\d+),
+        survey:S(?P<survey>[0-9]*),
+        parent:(?P<precursor_mz>\d*\.\d+|\d+),
     ''', re.VERBOSE)
 }
 
@@ -85,20 +87,24 @@ def write_ursgal_pkl_from_mascot_dat(mascot_data_file):
 
     for f in sections['parameters']:
         if f.startswith('FILE'):
-            fname = f.split('=')[1]
+            full_fname = f.split('=')[1]
+
+            fname = os.path.splitext(os.path.basename(full_fname))[0]
             break
     dat_basename, ext = os.path.splitext(mascot_dat_base)
+
     if os.path.exists(pkl_path):
         t = pickle.load(open(pkl_path, 'rb'))
     else:
         t = {}
-    if dat_basename not in t:
+    if fname not in t:
         t.update(
             {
-                dat_basename : {
+                fname : {
                     'rt_2_scan' : {},
                     'scan_2_rt' : {},
                     'unit'      : 'seconds',
+                    'scan_2_mz' : {}
                 }
             }
         )
@@ -113,7 +119,7 @@ def write_ursgal_pkl_from_mascot_dat(mascot_data_file):
                         query_dict[k] = v
                 title = query_dict['title']
                 try:
-                    path, spec_id, spec_id, charge = title.replace('%2e', '.').split('.')
+                    path, spec_id, spec_id, charge = title.split('.')
                 except:
                     path = os.path.basename(fname)
                     unqstring = unquote(title)
@@ -122,13 +128,15 @@ def write_ursgal_pkl_from_mascot_dat(mascot_data_file):
                         m = pattern.match(unqstring)
                         if m is not None:
                             spec_id = int(m.group('spec_id'))
-                            rtinminutes = m.group('rt_start_in_minutes')
-                            query_dict['rtinseconds'] =  float(rtinminutes) / 60.
+
+                            query_dict['rtinseconds'] = float(m.group('rt_start_in_seconds'))
+                            query_dict['precursor_mz'] = m.group('precursor_mz')
                             break
 
                 rt    = query_dict['rtinseconds']
-                t[dat_basename]['rt_2_scan'][float(rt)] = str(spec_id)
-                t[dat_basename]['scan_2_rt'][str(spec_id)] = float(rt)
+                t[fname]['rt_2_scan'][float(rt)] = int(spec_id)
+                t[fname]['scan_2_rt'][int(spec_id)] = float(rt)
+                t[fname]['scan_2_mz'][int(spec_id)] = float(query_dict['precursor_mz'])
     with open(pkl_path, 'wb') as pkl:
         pickle.dump(t, pkl)
     return pkl_path
@@ -152,11 +160,19 @@ def main(input_file, database):
         '*,opt,N-term,TMT6plex',
         'K,fix,any,TMT6plex',
     ]
+    uc.params['csv_filter_rules'] = [
+        ['Sequence', 'contains_not', 'X'],
+        # ['PEP', 'lte', 0.01],
+    ]
+    uc.params['decoy_tag'] = '###REV###'
     uc.scan_rt_lookup_path = write_ursgal_pkl_from_mascot_dat(input_file)
-
-    converted = uc.execute_unode(
+    converted_unfiltered = uc.execute_unode(
         input_file,
         engine='mascot_dat2csv'
+    )
+    converted = uc.execute_misc_engine(
+        input_file=converted_unfiltered,
+        engine='filter_csv'
     )
     mapped = uc.map_peptides_to_fasta(
         converted

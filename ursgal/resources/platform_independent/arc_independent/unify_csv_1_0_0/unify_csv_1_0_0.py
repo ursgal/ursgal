@@ -397,12 +397,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_2_split = line_dict['Spectrum Title']
                 line_dict['Spectrum Title'] = line_2_split
 
-                try:
-                    input_file_basename, spectrum_id, _spectrum_id, charge = line_2_split.split('.')
-                except:
-                    print(line_2_split)
-                    exit(1)
-
+                input_file_basename, spectrum_id, _spectrum_id, charge = line_2_split.split('.')
                 pure_input_file_name = ''
 
             elif 'scan=' in line_dict['Spectrum ID']:
