@@ -8208,12 +8208,14 @@ ursgal_params = {
             'ucontroller',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'mgf_to_rt_lookup_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'rt_pickle_name',
             'sugarpy_run_style_1' : 'scan_rt_lookup',
             'sugarpy_plot_style_1' : 'scan_rt_lookup',
+            'mgf_to_rt_lookup_style_1': 'rt_pickle_name',
         },
         'utag' : [
             'file_handling',
