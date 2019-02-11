@@ -10,7 +10,7 @@ import pprint
 import re
 import json
 
-regexs_for_crazy_mgfs = {
+regexs_for_non_standard_mgfs = {
     'cz' : re.compile(r'''
         msmsid:F(?P<spec_id>[0-9]*),
         quan:(?P<quant>[0-9]*),
@@ -124,7 +124,7 @@ def write_ursgal_pkl_from_mascot_dat(mascot_data_file):
                     path = os.path.basename(fname)
                     unqstring = unquote(title)
                     charge = int(query_dict['charge'].replace('+',''))
-                    for _id, pattern in regexs_for_crazy_mgfs.items():
+                    for _id, pattern in regexs_for_non_standard_mgfs.items():
                         m = pattern.match(unqstring)
                         if m is not None:
                             spec_id = int(m.group('spec_id'))
