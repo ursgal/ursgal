@@ -9,8 +9,8 @@ Introduction
    :target: https://travis-ci.org/ursgal/ursgal
    :alt: Travis CI status
 
-.. |build-status-appveyor| image:: https://ci.appveyor.com/api/projects/status/aygfxqlf5lccm7sx/branch/master?svg=true
-   :target: https://ci.appveyor.com/project/JB-MS/ursgal
+.. |build-status-appveyor| image:: https://ci.appveyor.com/api/projects/status/hel9rowah1u3rfe1?svg=true
+   :target: https://ci.appveyor.com/project/fufezan-lab/ursgal
    :alt: AppVeyor CI status
 
 .. |doc-status| image:: http://readthedocs.org/projects/ursgal/badge/?version=latest
@@ -192,12 +192,14 @@ Copyrights
 
 Copyright 2014-2018 by authors and contributors in alphabetical order
 
-* Christian Fufezan,
+* Christian Fufezan
+* Aime B. Igiraneza
 * Manuel Koesters
 * Lukas P. M. Kremer
 * Johannes Leufken
 * Purevdulam Oyunchimeg
 * Stefan Schulze
+* Fengchao Yu
 * Lukas Vaut
 
 Contact

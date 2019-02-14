@@ -119,7 +119,7 @@ class pepnovo_3_1( ursgal.UNode ):
         print(
             '''
             [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
-            [ WARNING ] need to be combined for pyQms (use of symmetric tolerance window).
+            [ WARNING ] need to be combined for pepnovo_3_1 (use of symmetric tolerance window).
             [ WARNING ] The arithmetic mean is used.
             '''
         )
@@ -274,6 +274,8 @@ class pepnovo_3_1( ursgal.UNode ):
                     result_dict[line_list[2]] = []
                     id_list.append(line_list[2])
                     spectrumtitle_list.append(line_list[3])
+                if 'No solutions found' in line:
+                    continue
                 if line.startswith('#') and save_headers == True:
                     headers = line.strip('\n').split('\t')
                     save_headers = False
@@ -292,6 +294,7 @@ class pepnovo_3_1( ursgal.UNode ):
         translated_headers.append('Modifications')
         translated_headers.append('Raw data location')
         translated_headers.append('Retention Time (s)')
+        translated_headers.append('Calc m/z')
         translated_headers.insert(1,'Spectrum ID')
 
         #this section extraction from the pepnovo outputfile and stores it with the corresponding

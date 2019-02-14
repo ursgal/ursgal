@@ -14,19 +14,20 @@ General
         http://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
         In Ursgal the parameter `java_-Xmx` can be used to adjust the Java memory
         usage.
-        
+
     * MS-GF+ (or another Java based engine) crashes
-    
+
         Please make sure that you have installed the current Java Runtime Environment
-        Download (Java SE Development Kit 8u131): 
+        Download (Java SE Development Kit 8u131)::
+
             http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
 
 Windows general
 ###############
 
-    * Some modules can not be compiled/installed with python3.4+ using pip. 
-        
+    * Some modules can not be compiled/installed with python3.4+ using pip.
+
         E.g. pyahocorasick can not be installed. This has the consequence, that on Windows
         the old peptide mapper version is used. There are several workarounds to compile and
         install the modules manually, e.g.:
@@ -37,8 +38,8 @@ Windows 10
 ##########
 
     * MS Amanda can not load .fasta files
-    * calculating the md5 can cause problems e.g. while executing test. 
-         This is due to different line endings on Unix and Windows systems. The test functions test for both md5, 
+    * calculating the md5 can cause problems e.g. while executing test.
+         This is due to different line endings on Unix and Windows systems. The test functions test for both md5,
          so this problem should be avoided.
 
 

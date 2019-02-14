@@ -31,19 +31,17 @@ from .profiles import PROFILES
 
 import ursgal.ukb
 
-
 GlobalUnimodMapper = UnimodMapper()
 base_dir = os.path.dirname( __file__)
 
 
-# # We store our version number in a simple text file:
-# version_path = os.path.join(
-#     os.path.dirname(__file__),
-#     'version.txt'
-# )
-# with open(version_path, 'r') as version_file:
-#     ursgal_version = version_file.read().strip()
-from .version import ursgal_version
+# We store our version number in a simple text file:
+version_path = os.path.join(
+    os.path.dirname(__file__),
+    'version.txt'
+)
+with open(version_path, 'r') as version_file:
+    ursgal_version = version_file.read().strip()
 
 __version__  = ursgal_version
 version_info = tuple(map(int, ursgal_version.split(".")))

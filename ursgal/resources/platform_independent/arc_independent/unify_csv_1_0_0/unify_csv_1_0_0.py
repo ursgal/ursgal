@@ -876,7 +876,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     )
                 )
                 all_charges.add(int(line_dict['Charge']))
-                
+
 
                 # ------------
                 # BUFFER END
@@ -952,7 +952,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         else:
                             protein_info_dict_buffer = [ major_protein_info_dict ]
 
-
                         for protein_info_dict in protein_info_dict_buffer:
                             if params['translations']['keep_asp_pro_broken_peps'] is True:
                                 if line_dict['Sequence'][-1] == 'D' and\
@@ -1004,21 +1003,28 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
                     #check here if missed cleavage count is correct...
                     missed_cleavage_counter = 0
-                    for aa in allowed_aa:
-                        if aa == '-':
-                            continue
-                        if cleavage_site == 'C':
-                            missed_cleavage_pattern = '{0}[^{1}]'.format(
-                                aa, inhibitor_aa
-                            )
-                            missed_cleavage_counter += \
-                                len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
-                        elif cleavage_site == 'N':
-                            missed_cleavage_pattern = '[^{1}]{0}'.format(
-                                aa, inhibitor_aa
-                            )
-                            missed_cleavage_counter += \
-                                len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
+                    if params['translations']['enzyme'] != 'ACDEFGHIKLMNPQRSTVWY;C;':
+                        for aa in allowed_aa:
+                            if aa == '-':
+                                continue
+                            if cleavage_site == 'C':
+                                if inhibitor_aa == '':
+                                    missed_cleavage_pattern = aa
+                                else:
+                                    missed_cleavage_pattern = '{0}[^{1}]'.format(
+                                        aa, inhibitor_aa
+                                    )
+                                missed_cleavage_counter += \
+                                    len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
+                            elif cleavage_site == 'N':
+                                if inhibitor_aa == '':
+                                    missed_cleavage_pattern = aa
+                                else:
+                                    missed_cleavage_pattern = '[^{1}]{0}'.format(
+                                        aa, inhibitor_aa
+                                    )
+                                missed_cleavage_counter += \
+                                    len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
                     if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
                         conflicting_uparams[lookup_identifier].add('max_missed_cleavages')
                 # count each PSM occurence to check whether row-merging is needed:

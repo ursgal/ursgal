@@ -53,6 +53,14 @@ DICT_15N_DIFF = {
 
 # Dictionary containing all accepted file extensions in Ursgal
 FILE_EXTENSIONS = {
+    '.dat' : {
+        'short_name': 'DAT',
+        'long_name': 'DAT (Mascot)',
+        'same_extension': [],
+        'description': \
+            'Mascot specific identification output format.'
+            'Mixture of csv, xml and configuration style file.'
+    },
     '.csv' : {
             'short_name'     : 'CSV',
             'long_name'      : 'CSV (Comma Delimited)',
@@ -111,6 +119,13 @@ FILE_EXTENSIONS = {
         'same_extension' : [],
         'description'    : \
             'GAML spectra',
+    },
+    '.idx.gz' : {
+        'short_name'     : 'igzip',
+        'long_name'      : 'igzipped mzML (MS data)',
+        'same_extension' : [],
+        'description'    : \
+            'Compressed mzML, indexed gzip according to pymzML2.0',
     },
     '.kojak.txt' : {
         'short_name'     : 'Kojak',

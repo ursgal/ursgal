@@ -7,7 +7,8 @@ import csv
 import itertools
 import sys
 
-class msfragger_20170103( ursgal.UNode ):
+
+class msfragger_20170103(ursgal.UNode):
     """
     MSFragger unode
 
@@ -56,8 +57,8 @@ class msfragger_20170103( ursgal.UNode ):
                 },
             },
         },
-        'citation'                   : \
-            'Kong, A. T., Leprevost, F. V, Avtonomov, '
+        'citation'                   :
+        'Kong, A. T., Leprevost, F. V, Avtonomov, '
             'D. M., Mellacheruvu, D., and Nesvizhskii, A. I. (2017) MSFragger: '
             'ultrafast and comprehensive peptide identification in mass '
             'spectrometry-based proteomics. Nature Methods 14'
@@ -75,12 +76,12 @@ class msfragger_20170103( ursgal.UNode ):
                         msfragger_param_name,
                         param_value
                     ),
-                    file = io
+                    file=io
                 )
 
         return
 
-    def preflight( self ):
+    def preflight(self):
         '''
         Formatting the command line and writing the param input file via 
         self.params
@@ -92,17 +93,19 @@ class msfragger_20170103( ursgal.UNode ):
             self.params['output_dir_path'],
             'msfragger.params'
         )
-        #further prepare and translate params
+        # further prepare and translate params
 
         # pprint.pprint(self.params['translations']['_grouped_by_translated_key'])
         # pprint.pprint(self.params)
         # exit()
         self.params_to_write = {
-            'output_file_extension' : 'tsv',       #tsv or pepXML we fix it...
-            'output_format'         : 'tsv',                 #pepXML or tsv
+            'output_file_extension' : 'tsv',  # tsv or pepXML we fix it...
+            'output_format'         : 'tsv',  # pepXML or tsv
             'digest_mass_range' : '{0} {1}'.format(
-                self.params['translations']['_grouped_by_translated_key']['precursor_min_mass']['precursor_min_mass'],
-                self.params['translations']['_grouped_by_translated_key']['precursor_max_mass']['precursor_max_mass']
+                self.params['translations']['_grouped_by_translated_key'][
+                    'precursor_min_mass']['precursor_min_mass'],
+                self.params['translations']['_grouped_by_translated_key'][
+                    'precursor_max_mass']['precursor_max_mass']
             )
         }
 
@@ -121,14 +124,14 @@ class msfragger_20170103( ursgal.UNode ):
         if self.params['translations']['_grouped_by_translated_key']['label']['label'] == '15N':
             self.print_info(
                 'Search with label=15N may still be errorprone. Evaluate with care!',
-                caller = 'WARNING'
+                caller='WARNING'
             )
             for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
                 existing = False
-                for mod_dict in self.params[ 'mods' ][ 'fix' ]:
-                    if aminoacid == mod_dict[ 'aa' ]:
-                        mod_dict[ 'mass' ] += N15_Diff
-                        mod_dict[ 'name' ] += '_15N_{0}'.format(aminoacid)
+                for mod_dict in self.params['mods']['fix']:
+                    if aminoacid == mod_dict['aa']:
+                        mod_dict['mass'] += N15_Diff
+                        mod_dict['name'] += '_15N_{0}'.format(aminoacid)
                         existing = True
                 if existing == True:
                     continue
@@ -149,20 +152,25 @@ class msfragger_20170103( ursgal.UNode ):
                     search_enzyme_cutafter = KR
                     search_enzyme_butnotafter = P
                     '''
-                    aa_site, term, inhibitor = param_value.split( ';' )
-                    self.params_to_write[ 'search_enzyme_name' ] = self.params['enzyme']
-                    self.params_to_write[ 'search_enzyme_cutafter' ] = aa_site
-                    self.params_to_write[ 'search_enzyme_butnotafter' ] = inhibitor
+                    aa_site, term, inhibitor = param_value.split(';')
+                    self.params_to_write[
+                        'search_enzyme_name'] = self.params['enzyme']
+                    self.params_to_write['search_enzyme_cutafter'] = aa_site
+                    self.params_to_write[
+                        'search_enzyme_butnotafter'] = inhibitor
                 elif msfragger_param_name == 'num_enzyme_termini':
-                    # num_enzyme_termini = 2 # 2 for enzymatic, 1 for semi-enzymatic, 0 for nonspecific digestion
+                    # num_enzyme_termini = 2 # 2 for enzymatic, 1 for
+                    # semi-enzymatic, 0 for nonspecific digestion
 
                     if self.params['translations']['_grouped_by_translated_key']['enzyme']['enzyme'] == 'nonspecific':
-                        self.params_to_write[ msfragger_param_name ] = 0
+                        self.params_to_write[msfragger_param_name] = 0
                     else:
-                        self.params_to_write[ msfragger_param_name ] = param_value
+                        self.params_to_write[
+                            msfragger_param_name] = param_value
                 elif msfragger_param_name == 'clear_mz_range':
                     min_mz, max_mz = param_value
-                    self.params_to_write[ msfragger_param_name ] = '{0} {1}'.format(min_mz, max_mz)
+                    self.params_to_write[
+                        msfragger_param_name] = '{0} {1}'.format(min_mz, max_mz)
                 elif msfragger_param_name == 'modifications':
                     '''
                     #maximum of 7 mods - amino acid codes, * for any amino acid, [ and ] specifies protein termini, n and c specifies peptide termini
@@ -202,7 +210,7 @@ class msfragger_20170103( ursgal.UNode ):
                             pass
                         else:
                             print(
-                            '''
+                                '''
                             Unknown positional argument for given modification:
                             {0}
                             MSFragger cannot deal with this, please use one of the follwing:
@@ -211,10 +219,11 @@ class msfragger_20170103( ursgal.UNode ):
                             )
                             sys.exit(1)
                         if pos_modifier is not None:
-                            aa_to_append = '{0}{1}'.format(pos_modifier,aa_to_append)
-                        mass_to_mod_aa[mod_dict['mass']].append( aa_to_append )
+                            aa_to_append = '{0}{1}'.format(
+                                pos_modifier, aa_to_append)
+                        mass_to_mod_aa[mod_dict['mass']].append(aa_to_append)
                     for pos, (mass, aa_list) in enumerate(mass_to_mod_aa.items()):
-                        self.params_to_write[ 'variable_mod_0{0}'.format(pos+1) ] = '{0} {1}'.format(
+                        self.params_to_write['variable_mod_0{0}'.format(pos + 1)] = '{0} {1}'.format(
                             mass,
                             ''.join(aa_list)
                         )
@@ -225,7 +234,7 @@ class msfragger_20170103( ursgal.UNode ):
                         if mod_dict['pos'] == 'Prot-N-term':
                             mod_key = 'add_Nterm_protein'
                         elif mod_dict['pos'] == 'Prot-C-term':
-                            mod_key =  'add_Cterm_protein'
+                            mod_key = 'add_Cterm_protein'
                         elif mod_dict['pos'] == 'N-term':
                             mod_key = 'add_Nterm_peptide'
                         elif mod_dict['pos'] == 'C-term':
@@ -233,21 +242,23 @@ class msfragger_20170103( ursgal.UNode ):
                         else:
                             mod_key = 'add_{0}_{1}'.format(
                                 mod_dict['aa'],
-                                ursgal.chemical_composition_kb.aa_names[mod_dict['aa']]
+                                ursgal.chemical_composition_kb.aa_names[
+                                    mod_dict['aa']]
                             )
-                        self.params_to_write[ mod_key ] = mod_dict['mass']
-
+                        self.params_to_write[mod_key] = mod_dict['mass']
 
                 elif msfragger_param_name == 'override_charge':
-                    self.params_to_write[ msfragger_param_name ] = param_value
+                    self.params_to_write[msfragger_param_name] = param_value
                     if param_value == 1:
-                        self.params_to_write[ 'precursor_charge' ] = '{0} {1}'.format(
-                            self.params['translations']['_grouped_by_translated_key']['precursor_min_charge']['precursor_min_charge'],
-                            self.params['translations']['_grouped_by_translated_key']['precursor_max_charge']['precursor_max_charge']
+                        self.params_to_write['precursor_charge'] = '{0} {1}'.format(
+                            self.params['translations']['_grouped_by_translated_key'][
+                                'precursor_min_charge']['precursor_min_charge'],
+                            self.params['translations']['_grouped_by_translated_key'][
+                                'precursor_max_charge']['precursor_max_charge']
                         )
 
                 else:
-                    self.params_to_write[ msfragger_param_name ] = param_value
+                    self.params_to_write[msfragger_param_name] = param_value
         self.write_params_file()
 
         self.input_file = os.path.join(
@@ -255,26 +266,31 @@ class msfragger_20170103( ursgal.UNode ):
             self.params['input_file']
         )
         if self.input_file.lower().endswith('.mzml') or \
-            self.input_file.lower().endswith('.mzml.gz'):
+                self.input_file.lower().endswith('.mzml.gz') or \
+                self.input_file.lower().endswith('.mgf'):
             self.params['translations']['mzml_input_file'] = self.input_file
-        elif self.input_file.lower().endswith('.mgf'):
-            self.params['translations']['mzml_input_file'] = \
-                self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( self.input_file )
-            self.print_info(
-                'MSFragger can only read Proteowizard MGF input files,'
-                'the corresponding mzML file {0} will be used instead.'.format(
-                    os.path.abspath(self.params['translations']['mzml_input_file'])
-                ),
-                caller = "INFO"
-            )
+        # elif self.input_file.lower().endswith('.mgf'):
+        #     self.params['translations']['mzml_input_file'] = \
+        #         self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( self.input_file )
+        #     self.print_info(
+        #         'MSFragger can only read Proteowizard MGF input files,'
+        #         'the corresponding mzML file {0} will be used instead.'.format(
+        #             os.path.abspath(self.params['translations']['mzml_input_file'])
+        #         ),
+        #         caller = "INFO"
+            # )
         else:
-            raise Exception('MSFragger input spectrum file must be in mzML or MGF format!')
+            raise Exception(
+                'MSFragger input spectrum file must be in mzML or MGF format!')
 
         # pprint.pprint(self.params['translations'])
         # exit()
-        self.params[ 'command_list' ] = [
+        self.params['command_list'] = [
             'java',
-            '-Xmx{0}'.format( self.params['translations']['_grouped_by_translated_key']['-Xmx']['-xmx'] ),
+            '-Xmx{0}'.format(
+                self.params['translations'][
+                    '_grouped_by_translated_key']['-Xmx']['-xmx']
+            ),
             '-jar',
             self.exe,
             self.param_file_name,
@@ -309,11 +325,13 @@ class msfragger_20170103( ursgal.UNode ):
             'Protein',
             'Matched fragment ions',
             'Total possible number of matched theoretical fragment ions',
-            'Neutral mass of peptide',# (including any variable modifications) (Da)
+            # (including any variable modifications) (Da)
+            'Neutral mass of peptide',
             'Mass difference',
             'Number of tryptic termini',
             'Number of missed cleavages',
-            'Variable modifications detected', #'(starts with M, separated by |, formated as position,mass)
+            # '(starts with M, separated by |, formated as position,mass)
+            'Variable modifications detected',
             'Hyperscore',
             'Next score',
             'Intercept of expectation model (expectation in log space)',
@@ -321,7 +339,8 @@ class msfragger_20170103( ursgal.UNode ):
         ]
 
         translated_headers = []
-        header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
+        header_translations = self.UNODE_UPARAMS[
+            'header_translations']['uvalue_style_translation']
         for original_header_key in ms_fragger_header:
             ursgal_header_key = header_translations[original_header_key]
             translated_headers.append(ursgal_header_key)
@@ -339,18 +358,19 @@ class msfragger_20170103( ursgal.UNode ):
             self.params['file_root'] + '.tsv'
         )
 
-        csv_out_fobject = open(self.params['translations']['output_file_incl_path'], 'w')
+        csv_out_fobject = open(self.params['translations'][
+                               'output_file_incl_path'], 'w')
         csv_writer = csv.DictWriter(
             csv_out_fobject,
-            fieldnames = translated_headers
+            fieldnames=translated_headers
         )
         csv_writer.writeheader()
 
         with open(msfragger_output_tsv) as temp_tsv:
             csv_reader = csv.DictReader(
                 temp_tsv,
-                fieldnames = translated_headers,
-                delimiter = '\t'
+                fieldnames=translated_headers,
+                delimiter='\t'
             )
             for line_dict in csv_reader:
                 line_dict['Raw data location'] = os.path.abspath(
@@ -362,7 +382,7 @@ class msfragger_20170103( ursgal.UNode ):
                 ############################################
 
                 # 'Precursor neutral mass (Da)' : '',
-                # 'Neutral mass of peptide' : 'Calc m/z',# (including any variable modifications) (Da) 
+                # 'Neutral mass of peptide' : 'Calc m/z',# (including any variable modifications) (Da)
                 line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
                     line_dict['MSFragger:Precursor neutral mass (Da)'],
                     line_dict['Charge']
@@ -371,7 +391,7 @@ class msfragger_20170103( ursgal.UNode ):
                     line_dict['MSFragger:Neutral mass of peptide'],
                     line_dict['Charge']
                 )
-                csv_writer.writerow( line_dict )
+                csv_writer.writerow(line_dict)
 
         csv_out_fobject.close()
         if msfragger_output_tsv.endswith('.tsv'):

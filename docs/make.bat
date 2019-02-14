@@ -14,7 +14,7 @@ if NOT "%PAPER%" == "" (
 )
 
 ./usr/bin/env python parse_example_scripts.py
-./usr/bin/env python format_param_table.py
+./usr/bin/env python uparams_to_sphinx_docu.py
 
 if "%1" == "" goto help
 
