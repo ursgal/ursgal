@@ -12,6 +12,7 @@ __pycache__/*
 build/
 docs/build/
 docs/source/code_inc
+docs/source/code_inc/*
 docs/source/parameter.txt
 example_data/BSA_simple_example_search
 tests/data/_ursgal_lookup.pkl
@@ -35,8 +36,8 @@ tests/data/omssa_2_1_9/test_BSA1_omssa_2_1_9_unified.csv_full_protein_names.txt
 tests/data/xtandem_sledgehammer/test_BSA1_xtandem_sledgehammer_unified.csv_full_protein_names.txt
 tests/data/msfragger_20170103/test_BSA1_msfragger_20170103_unified.csv
 tests/data/msfragger_20170103/test_BSA1_msfragger_20170103_unified.csv_full_protein_names.txt
-tests/data/pipi_1_3_0/test_BSA1_pipi_1_3_0_unified.csv
-tests/data/pipi_1_3_0/test_BSA1_pipi_1_3_0_unified.csv_full_protein_names.txt
+tests/data/pipi_1_4_6/test_BSA1_pipi_1_4_6_unified.csv
+tests/data/pipi_1_4_6/test_BSA1_pipi_1_4_6_unified.csv_full_protein_names.txt
 tests/data/test_upeptide_mapper_pmap.csv
 tests/data/test_upeptide_mapper_pmap.csv_full_protein_names.txt
 tests/data/csv2counted_results_1_0_0/csv2counted_results_test_counted.csv
@@ -51,11 +52,11 @@ ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_10
 ursgal/resources/platform_independent/arc_independent/mzidentml_lib_1_6_11
 ursgal/resources/platform_independent/arc_independent/moda_v1_51
 ursgal/resources/platform_independent/arc_independent/moda_v1_61
-ursgal/resources/platform_independent/arc_independent/pipi_1_3_0
 ursgal/resources/platform_independent/arc_independent/msfragger_20170103
 ursgal/resources/platform_independent/arc_independent/msgfplus2csv_v1_2_0
 ursgal/resources/platform_independent/arc_independent/msgfplus2csv_v2017_07_04
 ursgal/resources/platform_independent/arc_independent/pipi_1_4_5
+ursgal/resources/platform_independent/arc_independent/pipi_1_4_6
 ursgal/resources/platform_independent/arc_independent/sugarpy_plot_1_0_0
 ursgal/resources/platform_independent/arc_independent/sugarpy_run_1_0_0
 ursgal/resources/win32/

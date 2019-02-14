@@ -474,7 +474,8 @@ parameter.
                 'novor_1_1beta',
                 'omssa_2_1_9',
                 'pepnovo_3_1',
-                'pipi_1_3_0'
+                'pipi_1_4_5',
+                'pipi_1_4_6',
                 'xtandem_cyclone_2010',
                 'xtandem_jackhammer',
                 'xtandem_piledriver',

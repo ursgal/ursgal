@@ -22,15 +22,16 @@
 	    Creates a Venn diagram with the peptides obtained by the different versions.
 	
 	    Note:
-	        At the moment 5 XTandem versions are incorporated in Ursgal.
+	        At the moment in total 6 XTandem versions are incorporated in Ursgal.
 	
 	    '''
 	    engine_list = [
-	        'xtandem_cyclone',
+	        # 'xtandem_cyclone',
 	        'xtandem_jackhammer',
 	        'xtandem_sledgehammer',
 	        'xtandem_piledriver',
-	        'xtandem_vengeance'
+	        'xtandem_vengeance',
+	        'xtandem_alanine',
 	
 	    ]
 	
@@ -56,7 +57,7 @@
 	            'example_data',
 	            'xtandem_version_comparison'
 	        ),
-	        'http_url': 'http://www.uni-muenster.de/Biologie.IBBP.AGFufezan/misc/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
+	        'http_url': 'https://www.sas.upenn.edu/~sschulze/Creinhardtii_281_v5_5_CP_MT_with_contaminants_target_decoy.fasta',
 	        'http_output_folder': os.path.join(
 	            os.pardir,
 	            'example_data'

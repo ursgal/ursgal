@@ -11,7 +11,7 @@ class mascot_x_x_x( ursgal.UNode ):
         'name'                        : 'Mascot',
         'version'                     : '2017',
         'engine_type' : {
-            'search_engine' : True,
+            'protein_database_search_engine' : True,
         },
         'output_extensions'           : ['.xml'],
         'create_own_folder'           : True,
@@ -25,4 +25,3 @@ class mascot_x_x_x( ursgal.UNode ):
 
     def __init__(self, *args, **kwargs):
         super(mascot_x_x_x, self).__init__(*args, **kwargs)
-        pass

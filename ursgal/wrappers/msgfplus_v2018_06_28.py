@@ -15,7 +15,7 @@ class msgfplus_v2018_06_28( msgf ):
         Heck AJ, Pevzner PA. (2010) The Generating Function of CID, ETD, and
         CID/ETD Pairs of Tandem Mass Spectra: Applications to Database Search.
 
-    Import node for version 2016 01 27
+    Import node for version 2016_09_16
 
     """
     META_INFO = {

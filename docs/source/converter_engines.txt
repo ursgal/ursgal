@@ -23,6 +23,15 @@ Convert CSV to Counted Results
 .. autofunction:: ursgal.resources.platform_independent.arc_independent.csv2counted_results_1_0_0.csv2counted_results_1_0_0.main
 
 
+Convert Mascot DAT to CSV
+-------------------------
+
+.. autoclass:: ursgal.wrappers.mascot_dat2csv_1_0_0.mascot_dat2csv_1_0_0
+   :members:
+
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.mascot_dat2csv_1_0_0.mascot_dat2csv_1_0_0.main
+
+
 Convert MS-GF+ MZID to CSV
 --------------------------
 
