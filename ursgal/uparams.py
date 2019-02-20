@@ -7850,7 +7850,7 @@ ursgal_params = {
         },
         'default_value' : 7000,
         'description' : \
-            'Maximal parent ion mass. Adjusted to default used by MSFragger',
+            'Maximal parent ion mass in Da. Adjusted to default used by MSFragger',
     },
     'precursor_min_charge' : {
         'edit_version' : 1.00,
@@ -8283,7 +8283,7 @@ ursgal_params = {
         'default_value' : True,
         'description' : \
             'If True, redundant PSMs (e.g. the same identification reported '\
-            'by multiple engined) for the same spectrum are removed. An '\
+            'by multiple engines) for the same spectrum are removed. An '\
             'identification is defined by the combination of \'Sequence\', '\
             '\'Modifications\' and \'Charge\'.',
     },
@@ -11277,6 +11277,29 @@ ursgal_params = {
         'default_value' : False,
         'description' : \
             'Contaminants are added automatically to the database by the search engine. PIPI uses the same contaminants database as MaxQuant',
+    },
+    'wiff_spec_id_key' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'mzml2mgf_2_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'mzml2mgf_style_1' : 'id_dict_key',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : None,
+        'description' : \
+            'For .wiff files, during conversion to mzML, spectrum IDs are formatted differently; pymzml can deal with this by returning an id_dict. Specify here, which entry should be used as spec ID (e.g. "cycle")'
     },
 }
 
