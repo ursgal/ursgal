@@ -76,6 +76,6 @@ class mzml2mgf_2_0_0(ursgal.UNode):
             precursor_max_charge=self.params[
                 'translations']['precursor_max_charge'],
             ion_mode=self.params['translations']['ion_mode'],
-            id_dict_key=self.params['translations']['wiff_spec_id_key'],
+            spec_id_attribute=self.params['translations']['pymzml_spec_id_attribute'],
         )
         return tmp

@@ -52,7 +52,7 @@ def main(
     precursor_min_charge=1,
     precursor_max_charge=5,
     ion_mode='+',
-    id_dict_key=None,
+    spec_id_attribute=None,
 ):
 
     print(
@@ -105,10 +105,21 @@ def main(
                 [Warning] The retention time unit is not recognized or not specified.
                 [Warning] It is assumed to be minutes and continues with that.
             ''')
-        if id_dict_key is None:
+        if spec_id_attribute is None:
             spectrum_id = spec.ID
         else:
-            spectrum_id = spec.id_dict[id_dict_key]
+            id_attribute, id_key = list(spec_id_attribute.items())[0]
+            if id_attribute == 'ID':
+                spectrum_id = spec.ID
+            elif id_attribute == 'index':
+                spectrum_id = spec.index
+            elif id_attribute == 'id_dict':
+                spectrum_id = spec.id_dict[id_key]
+            else:
+                print('''
+                    [ERROR] Please specifiy an available spec_id_attribute for mzml2mgf.
+                    [ERROR] Available: ID, id_dict, index
+                ''')
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
         tmp['unit'] = 'minute'

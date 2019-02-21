@@ -11278,28 +11278,41 @@ ursgal_params = {
         'description' : \
             'Contaminants are added automatically to the database by the search engine. PIPI uses the same contaminants database as MaxQuant',
     },
-    'wiff_spec_id_key' : {
+    'pymzml_spec_id_attribute' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'mzml2mgf_2_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'mzml2mgf_style_1' : 'id_dict_key',
+            'mzml2mgf_style_1' : 'spec_id_attribute',
         },
         'utag' : [
             'conversion',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'str',
+        'uvalue_type' : 'dict',
         'uvalue_option' : {
-            'none_val'      : '',
+            'custom_type' : {
+                'str' : {'multiple_line': False},
+            },
+            'custom_val_max' : 100000,
+            'item_titles' : {
+                'id attribute' : 'Value',
+            },
+            'value_types' : {
+                'str' : 'dict',
+            },
             'multiple_line' : False,
+            'none_val' : {
+            },
         },
-        'default_value' : None,
+        'default_value' : {
+            'ID': None
+        },
         'description' : \
-            'For .wiff files, during conversion to mzML, spectrum IDs are formatted differently; pymzml can deal with this by returning an id_dict. Specify here, which entry should be used as spec ID (e.g. "cycle")'
+            'Specify the spectrum ID attribute to be used to access the spectrum ID (ID, id_dict or index). Given as a dict (key = attribute, value = key in id_dict). For .wiff files, during conversion to mzML, spectrum IDs are formatted differently; pymzml can deal with this by returning an id_dict or accessing the index.'
     },
 }
 
