@@ -2203,7 +2203,8 @@ class UController(ursgal.UNode):
                             csv_file_path=report['output_file'],
                             psm_counter=psm_counter,
                             joinchar=self.params['psm_merge_delimiter'],
-                            psm_defining_colnames=psm_defining_colnames
+                            psm_defining_colnames=psm_defining_colnames,
+                            psm_colnames_to_merge_multiple_values=self.params['psm_colnames_to_merge_multiple_values']
                         )
                         self.print_info(
                             'Result file path: {0}'.format(out_file),

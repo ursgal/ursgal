@@ -20,7 +20,7 @@ if sys.platform != 'win32':
     csv.field_size_limit(sys.maxsize)
 
 
-def main( input_file=None, output_file=None, filter_rules=None, output_file_unfiltered = None):
+def main(input_file=None, output_file=None, filter_rules=None, output_file_unfiltered=None):
     '''
     Filters csvs
     '''
@@ -39,7 +39,7 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
     else:
         csv_kwargs['lineterminator'] = '\r\n'
 
-    output_file_object = open(output_file,'w')
+    output_file_object = open(output_file, 'w')
 
     if output_file_unfiltered is not None:
         unfiltered_output_file_object = open(
@@ -47,8 +47,8 @@ def main( input_file=None, output_file=None, filter_rules=None, output_file_unfi
             'w'
         )
 
-    with open( input_file, 'r' ) as in_file:
-        csv_input  = csv.DictReader( in_file )
+    with open(input_file, 'r') as in_file:
+        csv_input = csv.DictReader(in_file)
         csv_output = csv.DictWriter(
             output_file_object,
             list(csv_input.fieldnames),
@@ -81,9 +81,9 @@ Did you misspell the field name?'''.format(
                     )
                     raise Exception
                 else:
-                    if rule in ['lte', 'gte', 'lt' , 'gt']:
+                    if rule in ['lte', 'gte', 'lt', 'gt']:
                         # requires not None! and to be floatable
-                        if line_dict[ dict_key ] is None:
+                        if line_dict[dict_key] is None:
                             write_row_bools.add(False)
 
                         elif rule == 'lte':
@@ -98,11 +98,17 @@ Did you misspell the field name?'''.format(
                         try:
                             floated_value = float(line_dict[dict_key])
                         except:
-                            floated_value = None
+                            if line_dict[dict_key] is None:
+                                floated_value = None
+                            else:
+                                sys.exit(1)
+                                print(
+                                    '[ ERROR ] Value to be filtered could not be converted to float')
+                                print('Value:' + line_dict[dict_key])
 
                         if floated_value is None:
                             write_row_bools.add(False)
-                        elif cpm_method( floated_value, value):
+                        elif cpm_method(floated_value, value):
                             write_row_bools.add(True)
                         else:
                             write_row_bools.add(False)
@@ -151,20 +157,20 @@ Did you misspell the field name?'''.format(
                             write_row_bools.add(False)
 
                     elif rule == 'mod_at_glycosite':
-                        mods =  line_dict[dict_key].split(';')
+                        mods = line_dict[dict_key].split(';')
                         accepted = False
                         for mod in mods:
                             if value in mod:
                                 pos = int(mod.split(':')[-1])
-                                if line_dict['Sequence'][pos-1] != 'N':
+                                if line_dict['Sequence'][pos - 1] != 'N':
                                     continue
                                 if line_dict['Sequence'][pos] == 'P':
                                     continue
-                                if pos >= len(line_dict['Sequence'])-2:
+                                if pos >= len(line_dict['Sequence']) - 2:
                                     if 'S' not in line_dict['Sequence Post AA'] and 'T' not in line_dict['Sequence Post AA']:
                                         continue
                                 else:
-                                    if line_dict['Sequence'][pos+1] not in ['S', 'T']:
+                                    if line_dict['Sequence'][pos + 1] not in ['S', 'T']:
                                         continue
                                 accepted = True
                             else:
@@ -191,9 +197,9 @@ Did you misspell the field name?'''.format(
                         raise Exception
 
             if len(write_row_bools) == 1 and list(write_row_bools)[0] == True:
-                csv_output.writerow( line_dict )
+                csv_output.writerow(line_dict)
             elif output_file_unfiltered is not None:
-                unfiltered_csv_output.writerow( line_dict )
+                unfiltered_csv_output.writerow(line_dict)
             # break
 
     output_file_object.close()
@@ -211,17 +217,16 @@ if __name__ == '__main__':
     else:
         output_file_unfiltered = sys.argv[3]
 
-
     main(
-        input_file     = sys.argv[1],
-        output_file    = sys.argv[2],
-        filter_rules   =[
+        input_file=sys.argv[1],
+        output_file=sys.argv[2],
+        filter_rules=[
             # ('PEP','lte',0.01),
-            ('Is decoy','equals_not','true'),
+            ('Is decoy', 'equals_not', 'true'),
             # ('Sequence','contains','T'),
             # ('Sequence','contains','S'),
             # ('Sequence','contains','R'),
 
         ],
-        output_file_unfiltered = output_file_unfiltered
+        output_file_unfiltered=output_file_unfiltered
     )
