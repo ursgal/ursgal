@@ -336,7 +336,7 @@ def merge_rowdicts(list_of_rowdicts, psm_colnames_to_merge_multiple_values, join
     return merged_d
 
 
-def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_colnames=None, psm_colnames_to_merge_multiple_values=None, joinchar='<|>', overwrite_file=True):
+def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_colnames=None, psm_colnames_to_merge_multiple_values={}, joinchar='<|>', overwrite_file=True):
     '''
     Rows describing the same PSM (e.g. when two proteins share the
     same peptide) are merged to one row.
