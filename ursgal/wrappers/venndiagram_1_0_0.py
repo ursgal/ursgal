@@ -162,7 +162,7 @@ class venndiagram_1_0_0( ursgal.UNode ):
             )
 
         #retrieve files corresponding to each set, only if the user wants them
-        if self.params['translations']['extract_venndiagram_files'] == True:
+        if self.params['translations']['extract_venndiagram_file'] == True:
             translation_dict_label = {
                 'A' : '0',
                 'B' : '1',
@@ -171,24 +171,47 @@ class venndiagram_1_0_0( ursgal.UNode ):
                 'E' : '4',
             }
 
-            for key in return_dict.keys():
-                # ceate output file
-                name_from_return_dict = return_dict[key]['name']
-                output_name = ''
-                name_list = name_from_return_dict.split('_')
-                for word in name_list:
-                    if word in translation_dict_label.keys():
-                        output_name = output_name + '_' + self.params['translations'][
-                            'visualization_label_positions'][translation_dict_label[word]]
-                    else :
-                        output_name = output_name + '_' + word
+            #adding new columns for venn diagram output
+            fieldnames_list.append('return_dict_nomenclature')
+            fieldnames_list.append('actual_name')
 
-                with open(output_name[1:len(output_name)]+'.csv', 'w', newline='') as new_csvfile:
-                    writer = csv.DictWriter(new_csvfile, fieldnames=fieldnames_list)
-                    writer.writeheader()
+            print('CREATING CSV FILE FROM VENN DIAGRAM ...')
+            with open(output_file_name.replace('.svg','.csv'), 'w', newline='') as new_csvfile:
+                writer = csv.DictWriter(new_csvfile, fieldnames=fieldnames_list)
+                writer.writeheader()
+                for key in return_dict.keys():
+                    # ceate output file
+                    output_name = ''
+                    for character in key:
+                        if character in translation_dict_label.keys():
+                            name_by_user = self.params['translations'][
+                                'visualization_label_positions'][translation_dict_label[character]]
+
+                            assert '_[' not in name_by_user, print(
+                                    'ERROR MESSAGE: your label should not contain "_["')
+
+                            assert ']_' not in name_by_user, print(
+                                    'ERROR MESSAGE: your label should not contain "]_"')
+
+                            assert '(' not in name_by_user, print(
+                                    'ERROR MESSAGE: your label should not contain "("')
+
+                            assert ')' not in name_by_user, print(
+                                    'ERROR MESSAGE: your label should not contain ")"')
+                            output_name = output_name + name_by_user
+                        else :
+                            if character != '(' and character != ')':
+                                output_name = output_name + '_['+character+']_'
+                            else :
+                                output_name = output_name + character
+
                     results = return_dict[key]['results']
+
                     for unique_id in results:
                         line_dict_list = lookup_dict[unique_id]
+
                         for line_dict in line_dict_list:
-                            writer.writerow(line_dict)    
+                            line_dict['return_dict_nomenclature'] = key
+                            line_dict['actual_name'] = output_name
+                            writer.writerow(line_dict)  
         return return_dict
