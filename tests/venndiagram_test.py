@@ -62,6 +62,7 @@ def venndiagram(input1, input2, input3, column_name, output_diagram):
     output_path = uc.visualize(
         input_files=file_list,
         engine='venndiagram_1_0_0',
+        output_file_name='actual_output',
         force=True,
     )
 
@@ -82,8 +83,6 @@ with open(output_csv_file, 'r', newline='') as f:
 	fieldnames = reader.fieldnames
 	sortedList = sorted(reader, key=lambda row: row['Sequence'], reverse=False)
 
-	os.remove(output_csv_file)
-
 	with open(output_csv_file, 'w', newline='') as ff:
 		writer = csv.DictWriter(ff, fieldnames=fieldnames)
 		writer.writeheader()
@@ -94,8 +93,6 @@ with open(output_csv_file, 'r', newline='') as f:
 return_list = []
 for row in csv.DictReader(open(output_csv_file, 'r')):
 	return_list.append(row)
-
-os.remove(output_csv_file)
 
 expected_list = []
 for row in csv.DictReader(open(expected_output, 'r')):
