@@ -481,7 +481,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     [ spectrum_id ]
 
             # We should check if data has minute format or second format...
-            if scan_rt_lookup[ input_file_basename ]['unit'] == 'second':
+            if scan_rt_lookup[ input_file_basename_for_rt_lookup ]['unit'] == 'second':
                 rt_corr_factor = 1
             else:
                 rt_corr_factor = 60
