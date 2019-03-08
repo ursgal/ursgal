@@ -95,9 +95,7 @@ for row in csv.DictReader(open(output_csv_file, 'r')):
 	return_list.append(row)
 
 expected_list = []
-for row in csv.DictReader(open(expected_output, 'r')):
-	row['Spectrum ID'] = row['\ufeffSpectrum ID']
-	row.pop('\ufeffSpectrum ID') 
+for row in csv.DictReader(open(expected_output, 'r')): 
 	expected_list.append(row)
 
 #initial test
