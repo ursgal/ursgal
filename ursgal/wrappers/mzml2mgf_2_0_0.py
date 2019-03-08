@@ -35,7 +35,7 @@ class mzml2mgf_2_0_0(ursgal.UNode):
                 },
             },
         },
-        'citation' :\
+        'citation' :
             'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & '
             'Fufezan, C. (2016) Ursgal, Universal Python Module Combining '
             'Common Bottom-Up Proteomics Tools for Large-Scale Analysis. J. '
@@ -76,5 +76,6 @@ class mzml2mgf_2_0_0(ursgal.UNode):
             precursor_max_charge=self.params[
                 'translations']['precursor_max_charge'],
             ion_mode=self.params['translations']['ion_mode'],
+            spec_id_attribute=self.params['translations']['pymzml_spec_id_attribute'],
         )
         return tmp

@@ -24,22 +24,13 @@ class msamanda_2_0_0_10695( msamanda ):
         'in_development'     : False,
         'utranslation_style' : 'msamanda_style_1',
         'engine' : {
-            'linux' : {
-                '64bit' : {
-                    'exe'            : 'MSAmanda.exe',
-                    'url'            : '',
-                    'zip_md5'        : None,
-                    'additional_exe' : [],
+            'platform_independent' : {
+                'arc_independent' : {
+                    'exe'     : 'MSAmanda.exe',
+                    'url'     : '',
+                    'zip_md5' : '',
                 },
-            },
-            'darwin' : {
-                '64bit' : {
-                    'exe'            : 'MSAmanda.exe',
-                    'url'            : '',
-                    'zip_md5'        : None,
-                    'additional_exe' : [],
-                },
-            },
+            }
         },
         'citation' : \
             'Dorfer V, Pichler P, Stranzl T, Stadlmann J, Taus T, Winkler S, '\

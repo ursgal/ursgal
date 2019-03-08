@@ -45,7 +45,7 @@ class percolator_2_08( ursgal.UNode ):
         },
         'input_extensions'   : ['.csv'],
         'output_extensions'  : ['.csv'],
-        'output_suffix'      : 'percolator_validated',
+        'output_suffix'      : 'percolator_2_08_validated',
         'create_own_folder'  : False,
         'include_in_git'     : False,
         'distributable'      : True,
