@@ -383,7 +383,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             ##########################
             # Spectrum Title block
-            # reformating Spectrum Title, 
+            # reformatting Spectrum Title,
             if line_dict['Spectrum Title'] != '':
                 '''
                 Valid for:
@@ -472,7 +472,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             input_file_basename
                         )
                     )
-                    
+
             #END Spectrum Title block
             ##########################
             spectrum_id = int(spectrum_id)
@@ -1113,7 +1113,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             collected_line_dict['Accuracy (ppm)'] = round(min_accuracy, 5)
 
             csv_output.writerow(collected_line_dict)
-    
+
     output_file_object.close()
 
     if database_search is True:
