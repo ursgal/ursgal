@@ -314,12 +314,13 @@ def merge_rowdicts(list_of_rowdicts, psm_colnames_to_merge_multiple_values, join
 
             elif psm_colnames_to_merge_multiple_values[fieldname] == 'most_frequent':
                 value_occurences = Counter(no_empty_values)
-                most_common_value = value_occurences.most_common(1)[0][0]
+                most_common_value, most_occurences = value_occurences.most_common(1)[0]
                 value_occurences_dict = dict(value_occurences)
                 final_values = []
-                most_common_value_number_occurences = value_occurences_dict[most_common_value]
-                for value in value_occurences_dict:
-                    if value_occurences_dict[value] == most_common_value_number_occurences:
+                for value in no_empty_values:
+                    if value in final_values:
+                        continue
+                    if value_occurences_dict[value] == most_occurences:
                         final_values.append(value)
                 merged_d[fieldname] = joinchar.join(final_values)
         
