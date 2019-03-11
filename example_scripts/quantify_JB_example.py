@@ -77,7 +77,7 @@ def main():
             )
             val = uc.validate(
                 input_file=res,
-                engine='percolator_3_2_1'
+                engine='percolator_2_08'
             )
             results.append(val)
 

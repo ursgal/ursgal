@@ -10183,6 +10183,40 @@ ursgal_params = {
         'description' : \
             'Header of visualization output (e.g. Venn diagram)',
     },
+    'visualization_color_positions' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'venndiagram_1_1_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'visualization_color_position',
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'dict',
+        'uvalue_option' : {
+            'none_val' : None,
+            'item_titles' : {'position':'color'},
+            'value_types' : {'position':'str'},
+            'custom_val_max' : 10000,
+            'multiple_line' : False,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : {},
+        'description' : \
+            'Specifies colors for the datasets that should be visualized. '\
+            'Given as a dict in which the key represents the position '\
+            'of the corresponding dataset in the list, e.g.: '\
+            '{"0" : "#e41a1c", "1" : "#377eb8"}',
+    },
     'visualization_label_positions' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
