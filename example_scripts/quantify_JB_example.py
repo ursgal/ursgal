@@ -37,7 +37,7 @@ def main():
         os.mkdir(params['ftp_output_folder'])
 
     engines = [
-        'msgfplus_v9979',
+        'msgfplus_v2019_01_22',
         'xtandem_vengeance',
         # 'msfragger_20170103'
     ]

@@ -1107,8 +1107,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         min_accuracy = isotopologue_acc
 
             collected_line_dict['uCalc m/z'] = calc_mz
-            if collected_line_dict['Calc m/z'] == '':
-                collected_line_dict['Calc m/z'] = calc_mz
+            if database_search is True:
+                if collected_line_dict['Calc m/z'] == '':
+                    collected_line_dict['Calc m/z'] = calc_mz
 
             collected_line_dict['Accuracy (ppm)'] = round(min_accuracy, 5)
 

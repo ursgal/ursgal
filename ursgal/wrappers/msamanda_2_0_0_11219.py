@@ -2,16 +2,16 @@
 from .msamanda_2_0_0_9695 import msamanda_2_0_0_9695 as msamanda
 
 
-class msamanda_2_0_0_10695( msamanda ):
+class msamanda_2_0_0_11219( msamanda ):
     """
-    MSAmanda 2_0_0_9706 UNode
+    MSAmanda 2_0_0_11219 UNode
 
     Import functions from msamanda_2_0_0_9695
     """
     META_INFO = {
         'edit_version'       : 1.00,
         'name'               : 'MSAmanda',
-        'version'            : '2.0.0.10695',
+        'version'            : '2.0.0.11219',
         'release_date'       : None,
         'engine_type' : {
             'protein_database_search_engine' : True,
