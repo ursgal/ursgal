@@ -5,7 +5,21 @@ import sys
 import re
 import os
 from collections import defaultdict as ddict
+from urllib.parse import unquote
+import pprint
+import re
+import json
 
+regexs_for_non_standard_mgfs = {
+    'cz' : re.compile(r'''
+        msmsid:F(?P<spec_id>[0-9]*),
+        quan:(?P<quant>[0-9]*),
+        start:(?P<rt_start_in_seconds>\d*\.\d+|\d+),
+        end:(?P<rt_end_in_seconds>\d*\.\d+|\d+),
+        survey:S(?P<survey>[0-9]*),
+        parent:(?P<precursor_mz>\d*\.\d+|\d+),
+    ''', re.VERBOSE)
+}
 
 def add_mascot_to_ursgal_history(file):
     """Add Mascot to history.
@@ -14,34 +28,29 @@ def add_mascot_to_ursgal_history(file):
         mapped_csv_search_results (str): Path to mapped search results.
     """
     mapped_json = '{0}.u.json'.format(file)
+    iinfo, oinfo, params, history = json.load(open(mapped_json))
     mascot_missing = True
-    lines = []
-    with open(mapped_json, 'r') as org:
-        for line in org:
-            if 'mascot_x_x_x' in line:
-                mascot_missing = False
-                break
-            lines.append(line)
+    for entry in history['history']:
+        engine_type = entry['META_INFO'].get('engine_type', {})
+        is_search_engine = engine_type.get('protein_database_search_engine', False)
+        if is_search_engine and 'mascot' in entry['engine']:
+            mascot_missing = False
 
     if mascot_missing:
-        print('MASCOT MISSING')
-        print('INSERTING ...')
-        with open(mapped_json, 'w') as new:
-            for line in lines:
-                if '"history": [' in line:
-                    print('''
-            "history": [
-              {
+        history['history'].insert(0,
+            {
                 "META_INFO": {
                   "engine_type": {
-                    "protein_database_search_engine": true,
-                    "By Hand" : true
+                    "protein_database_search_engine": True,
+                    "by Hand" : True
                   }
                 },
                 "engine": "mascot_x_x_x"
-              },''', file = new)
-                else:
-                    print(line, end='', file = new)
+          }
+        )
+        with open(mapped_json, "w") as d:
+            json.dump([iinfo, oinfo, params, history], d)
+
 
 
 def write_ursgal_pkl_from_mascot_dat(mascot_data_file):
@@ -78,20 +87,24 @@ def write_ursgal_pkl_from_mascot_dat(mascot_data_file):
 
     for f in sections['parameters']:
         if f.startswith('FILE'):
-            fname = f.split('=')[1]
+            full_fname = f.split('=')[1]
+
+            fname = os.path.splitext(os.path.basename(full_fname))[0]
             break
     dat_basename, ext = os.path.splitext(mascot_dat_base)
+
     if os.path.exists(pkl_path):
         t = pickle.load(open(pkl_path, 'rb'))
     else:
         t = {}
-    if dat_basename not in t:
+    if fname not in t:
         t.update(
             {
-                dat_basename : {
+                fname : {
                     'rt_2_scan' : {},
                     'scan_2_rt' : {},
                     'unit'      : 'seconds',
+                    'scan_2_mz' : {}
                 }
             }
         )
@@ -105,16 +118,39 @@ def write_ursgal_pkl_from_mascot_dat(mascot_data_file):
                         k, v = key.split('=')
                         query_dict[k] = v
                 title = query_dict['title']
-                path, spec_id, spec_id, charge = title.replace('%2e', '.').split('.')
+                try:
+                    path, spec_id, spec_id, charge = title.split('.')
+                except:
+                    path = os.path.basename(fname)
+                    unqstring = unquote(title)
+                    charge = int(query_dict['charge'].replace('+',''))
+                    for _id, pattern in regexs_for_non_standard_mgfs.items():
+                        m = pattern.match(unqstring)
+                        if m is not None:
+                            spec_id = int(m.group('spec_id'))
+
+                            query_dict['rtinseconds'] = float(m.group('rt_start_in_seconds'))
+                            query_dict['precursor_mz'] = m.group('precursor_mz')
+                            break
+
                 rt    = query_dict['rtinseconds']
-                t[dat_basename]['rt_2_scan'][float(rt)] = str(spec_id)
-                t[dat_basename]['scan_2_rt'][str(spec_id)] = float(rt)
+                t[fname]['rt_2_scan'][float(rt)] = int(spec_id)
+                t[fname]['scan_2_rt'][int(spec_id)] = float(rt)
+                t[fname]['scan_2_mz'][int(spec_id)] = float(query_dict['precursor_mz'])
     with open(pkl_path, 'wb') as pkl:
         pickle.dump(t, pkl)
     return pkl_path
 
 
 def main(input_file, database):
+    """
+    Usage:
+
+    ./unify_mascot_dat.py <mascot dat file> <database>
+
+    Note:
+        Modifications are hard coded so please adjust accordingly
+    """
     uc = ursgal.UController()
     uc.params['database'] = database
     uc.params['modifications'] = [
@@ -124,11 +160,19 @@ def main(input_file, database):
         '*,opt,N-term,TMT6plex',
         'K,fix,any,TMT6plex',
     ]
+    uc.params['csv_filter_rules'] = [
+        ['Sequence', 'contains_not', 'X'],
+        # ['PEP', 'lte', 0.01],
+    ]
+    uc.params['decoy_tag'] = '###REV###'
     uc.scan_rt_lookup_path = write_ursgal_pkl_from_mascot_dat(input_file)
-
-    converted = uc.execute_unode(
+    converted_unfiltered = uc.execute_unode(
         input_file,
         engine='mascot_dat2csv'
+    )
+    converted = uc.execute_misc_engine(
+        input_file=converted_unfiltered,
+        engine='filter_csv'
     )
     mapped = uc.map_peptides_to_fasta(
         converted
@@ -138,4 +182,7 @@ def main(input_file, database):
     print(unified)
 
 if __name__ == '__main__':
-    main(sys.argv[1], sys.argv[2])
+    if len(sys.argv) !=3:
+        print(main.__doc__)
+    else:
+        main(sys.argv[1], sys.argv[2])

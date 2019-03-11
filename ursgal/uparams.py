@@ -8098,6 +8098,88 @@ ursgal_params = {
         'description' : \
             'List of column names that are used to define unique PSMs and to merge multiple lines of the same PSM (if specified). The validation_score_field is automatically added to this list. ',
     },
+    'psm_colnames_to_merge_multiple_values' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'colnames_to_merge_multiple_values',
+        },
+        'utag' : [
+            'conversion',
+            'output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'dict',
+        'uvalue_option' : { 
+            'none_val' : None,
+            'item_title' : 'column_name_with_type_of_merge',
+            'item_titles' : {
+                'font_type' : 'type',
+                'font_size_header' : 'size',
+                'font_size_major' : 'size',
+                'font_size_minor' : 'size',
+                'font_size_venn' : 'size',
+            },
+            'value_types' : {
+                'font_type' : 'str',
+                'font_size_header' : 'int',
+                'font_size_major' : 'int',
+                'font_size_minor' : 'int',
+                'font_size_venn' : 'int',
+            },
+            'multiple_line' : {
+                'font_type' : False,
+            },
+            'max' : {
+                'font_size_header' : 1000,
+                'font_size_major' : 1000,
+                'font_size_minor' : 1000,
+                'font_size_venn' : 1000,
+            },
+            'min' : {
+                'font_size_header' : 0,
+                'font_size_major' : 0,
+                'font_size_minor' : 0,
+                'font_size_venn' : 0,
+            },
+            'updownval' : {
+                'font_size_header' : 1,
+                'font_size_major' : 1,
+                'font_size_minor' : 1,
+                'font_size_venn' : 1,
+            },
+            'unit' : {
+                'font_size_header' : 'pt',
+                'font_size_major' : 'pt',
+                'font_size_minor' : 'pt',
+                'font_size_venn' : 'pt',
+            },
+            'custom_val_max' : 0,
+            'item_type' : 'str',
+            'multiple_line' : False,
+            'custom_val_max': 10000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : {},
+        'description' : \
+            'Defines the column names which should have their different values merged '\
+            'into a single value when merging rows corresponding the same PSM '\
+            'Formatted as a dictionary with keys as the column names and values as '\
+            'a parameter to specify which one of the different values to take '\
+            'Available values:'
+            '    max_value\n'\
+            '    min_value\n'\
+            '    most_frequent\n'\
+            '    avg_value',
+    },
     'psm_merge_delimiter' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -8343,12 +8425,14 @@ ursgal_params = {
             'ucontroller',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'mgf_to_rt_lookup_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'rt_pickle_name',
             'sugarpy_run_style_1' : 'scan_rt_lookup',
             'sugarpy_plot_style_1' : 'scan_rt_lookup',
+            'mgf_to_rt_lookup_style_1': 'rt_pickle_name',
         },
         'utag' : [
             'file_handling',
