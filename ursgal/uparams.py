@@ -11300,7 +11300,7 @@ ursgal_params = {
         'default_value' : False,
         'description' : \
             'The user can retrieve a csv file containing results from the venn diagram',
-    }
+    },
     'pymzml_spec_id_attribute' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
