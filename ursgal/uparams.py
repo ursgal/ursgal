@@ -11280,7 +11280,6 @@ ursgal_params = {
         'description' : \
             'Contaminants are added automatically to the database by the search engine. PIPI uses the same contaminants database as MaxQuant',
     },
-<<<<<<< HEAD
     'extract_venndiagram_file' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -11302,7 +11301,6 @@ ursgal_params = {
         'description' : \
             'The user can retrieve a csv file containing results from the venn diagram',
     }
-=======
     'pymzml_spec_id_attribute' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -11339,7 +11337,6 @@ ursgal_params = {
         'description' : \
             'Specify the spectrum ID attribute to be used to access the spectrum ID (ID, id_dict or index). Given as a dict (key = attribute, value = key in id_dict). For .wiff files, during conversion to mzML, spectrum IDs are formatted differently; pymzml can deal with this by returning an id_dict or accessing the index.'
     },
->>>>>>> upstream/master
 }
 
 
