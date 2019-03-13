@@ -86,6 +86,14 @@ There are two common problems causing your workflow to fail at the point of vali
 1. Your database doesn't contain decoys (check out :ref:`target_decoy_generation_example.py<targetdecoygen>`) or decoys are not recognized (check if the uparam 'decoy_tag' is correct for your database).
 2. Your list of results is too small for proper statistics (the error message is something like "Too good seperation between targets and decoys"). In this case, you need to improve your search parameters (e.g. mass tolerances), database size (e.g. whole proteome instead of a single protein) or MS measurements (i.e. your raw data).
 
+Q: An engine fails with a certain combination of parameter values. Why is that not checked beforehand?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In general, we don't check if a vertain combination of parameter values is allowed or makes sense, since this would be quite some work for all the different engines and use cases. Please check the documentation of the respective engines to avoid these issues.
+
+Examples:
+	* MS-GF+ does not allow to specify a maximum number of missed cleavages wgen using unspecific cleavage -> use params['max_missed_cleavages'] = -1
+
 
 Development
 ###########

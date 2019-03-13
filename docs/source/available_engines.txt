@@ -13,6 +13,9 @@ MS Amanda
 
 Available MS Amanda versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_11219.msamanda_2_0_0_11219
+   :members:
+
 .. autoclass:: ursgal.wrappers.msamanda_2_0_0_10695.msamanda_2_0_0_10695
    :members:
 
@@ -39,6 +42,9 @@ MS-GF+
 ------
 
 Available MS-GF+ versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.msgfplus_v2019_01_22.msgfplus_v2019_01_22
+   :members:
 
 .. autoclass:: ursgal.wrappers.msgfplus_v2018_09_12.msgfplus_v2018_09_12
    :members:
@@ -143,6 +149,11 @@ De Novo Search Engines
 
 Novor
 -----
+
+Available Novor versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.novor_1_05.novor_1_05
+   :members:
 
 .. autoclass:: ursgal.wrappers.novor_1_1beta.novor_1_1beta
    :members:

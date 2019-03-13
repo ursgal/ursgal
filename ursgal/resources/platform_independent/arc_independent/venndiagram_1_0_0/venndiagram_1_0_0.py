@@ -334,21 +334,18 @@ style="position:relative; top:0; left:0; z-index:-1;">
                 'x'      : kwargs['cx'] ,
                 'y'      : kwargs['cy']        ,
                 'results': None,
-                'name'   : 'A_B_intersection'
             },
             'B-A'       : {
                 'value'  : 'B.C',
                 'x'      : kwargs['cx'] + 170 ,
                 'y'      : kwargs['cy']        ,
                 'results': None,
-                'name'   : 'B'
             },
             'A-B'       : {
                 'value'  : 'A.C',
                 'x'      : kwargs['cx'] - 170 ,
                 'y'      : kwargs['cy']        ,
                 'results': None,
-                'name'   : 'A'
             },
         }
     elif len(args) == 3:
@@ -358,49 +355,42 @@ style="position:relative; top:0; left:0; z-index:-1;">
                 'x'      : kwargs['cx'] - 90  ,
                 'y'      : kwargs['cy']        ,
                 'results': None, 
-                'name'   : 'A_B_intersection'
             },
             'B&C-A'     : {
                 'value'  : 'B.C',
                 'x'      : kwargs['cx'] + 90  ,
                 'y'      : kwargs['cy']        ,
                 'results': None,
-                'name'   : 'B_C_intersection'
             },
             'A&C-B'     : {
                 'value'  : 'A.C',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] + 240  ,
                 'results': None,
-                'name'   : 'A_C_intersection'
             },
             'A&B&C'     : {
                 'value'  : 'A.B.C',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] + 100  ,
                 'results': None,
-                'name'   : 'A_B_C_intersection'
             },
             'A-(B|C)'   : {
                 'value'  : 'A',
                 'x'      : kwargs['cx'] - 190 ,
                 'y'      : kwargs['cy']        ,
                 'results': None,
-                'name'   : 'A'
             },
             'C-(A|B)'   : {
                 'value'  : 'C',
                 'x'      : kwargs['cx'] + 190 ,
                 'y'      : kwargs['cy']        ,
                 'results': None,
-                'name'   : 'C'
             },
             'B-(A|C)'   : {
                 'value'  : 'B',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] - 140  ,
                 'results': None,
-                'name'   : 'B'
             },
         }
     elif len(args) == 4:
@@ -410,140 +400,125 @@ style="position:relative; top:0; left:0; z-index:-1;">
                 'x'      : kwargs['cx'] - 140 ,
                 'y'      : kwargs['cy'] - 70   ,
                 'results': None,
-                'name'   : 'A_B_intersection'
             },
             'C&D-(A|B)' : {
                 'value'  : 'C.D',
                 'x'      : kwargs['cx'] + 140 ,
                 'y'      : kwargs['cy'] - 70   ,
                 'results': None,
-                'name'   : 'C_D_intersection'
             },
             'B&C-(A|D)' : {
                 'value'  : 'B.C',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] - 70   ,
                 'results': None,
-                'name'   : 'B_C_intersection'
             },
             'A&B&C&D'   : {
                 'value'  : 'A.B.C.D',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] + 100  ,
                 'results': None,
-                'name'   : 'A_B_C_D_intersection'
             },
             'A&C-(B|D)' : {
                 'value'  : 'A.C',
                 'x'      : kwargs['cx'] - 125 ,
                 'y'      : kwargs['cy'] + 135  ,
                 'results': None,
-                'name'   : 'A_C_intersection'
             },
             'B&D-(A|C)' : {
                 'value'  : 'B.D',
                 'x'      : kwargs['cx'] + 125 ,
                 'y'      : kwargs['cy'] + 135  ,
                 'results': None,
-                'name'   : 'B_D_intersection'
             },
             'A&D-(B|C)' : {
                 'value'  : 'A.D',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] + 240  ,
                 'results': None,
-                'name'   : 'A_D_intersection'
             },
             '(A&C&D)-B' : {
                 'value'  : 'A.C.D',
                 'x'      : kwargs['cx'] - 55  ,
                 'y'      : kwargs['cy'] + 170  ,
                 'results': None,
-                'name'   : 'A_C_D_intersection'
             },
             '(A&B&D)-C' : {
                 'value'  : 'A.B.D',
                 'x'      : kwargs['cx'] + 55  ,
                 'y'      : kwargs['cy'] + 170  ,
                 'results': None,
-                'name'   : 'A_B_D_intersection'
             },
             '(A&B&C)-D' : {
                 'value'  : 'A.B.C',
                 'x'      : kwargs['cx'] - 95  ,
                 'y'      : kwargs['cy'] + 30   ,
                 'results': None,
-                'name'   : 'A_B_C_intersection'
             },
             '(B&C&D)-A' : {
                 'value'  : 'B.C.D',
                 'x'      : kwargs['cx'] + 95  ,
                 'y'      : kwargs['cy'] + 30   ,
                 'results': None,
-                'name'   : 'B_C_D_intersection'
             },
             'A-(B|C|D)' : {
                 'value'  : 'A',
                 'x'      : kwargs['cx'] - 200 ,
                 'y'      : kwargs['cy']        ,
                 'results': None,
-                'name'   : 'A'
             },
             'D-(A|B|C)' : {
                 'value'  : 'D',
                 'x'      : kwargs['cx'] + 200 ,
                 'y'      : kwargs['cy']        ,
                 'results': None,
-                'name'   : 'D'
             },
             'B-(A|C|D)' : {
                 'value'  : 'B',
                 'x'      : kwargs['cx'] - 95  ,
                 'y'      : kwargs['cy'] - 140  ,
                 'results': None,
-                'name'   : 'B'
             },
             'C-(A|B|D)' : {
                 'value'  : 'C',
                 'x'      : kwargs['cx'] + 95  ,
                 'y'      : kwargs['cy'] - 140  ,
                 'results': None,
-                'name'   : 'C'
             },
         }
     elif len(args) == 5:
         returnDict = {
-            'A-(B|C|D|E)'       : {'value' : 'A',         'x': kwargs['cx'] - 270  , 'y' : kwargs['cy'] - 30   , 'results': None , 'name': 'A' },
-            'D-(A|B|C|E)'       : {'value' : 'D',         'x': kwargs['cx'] + 130  , 'y' : kwargs['cy'] + 300  , 'results': None , 'name': 'D' },
-            'B-(A|C|D|E)'       : {'value' : 'B',         'x': kwargs['cx']        , 'y' : kwargs['cy'] - 200  , 'results': None , 'name': 'B' },
-            'C-(A|B|D|E)'       : {'value' : 'C',         'x': kwargs['cx'] + 240  , 'y' : kwargs['cy'] - 10   , 'results': None , 'name': 'C' },
-            'E-(B|C|D|A)'       : {'value' : 'E',         'x': kwargs['cx'] - 180  , 'y' : kwargs['cy'] + 300  , 'results': None , 'name': 'E' },
-            'A&B-(C|D|E)'       : {'value' : 'A.B',       'x': kwargs['cx'] - 110  , 'y' : kwargs['cy'] - 120  , 'results': None , 'name': 'A_B_intersection' },
-            'C&D-(A|B|E)'       : {'value' : 'C.D',       'x': kwargs['cx'] + 170  , 'y' : kwargs['cy'] + 170  , 'results': None , 'name': 'C_D_intersection' },
-            'B&C-(A|D|E)'       : {'value' : 'B.C',       'x': kwargs['cx'] + 135  , 'y' : kwargs['cy'] - 70   , 'results': None , 'name': 'B_C_intersection' },
-            'E&C-(A|D|B)'       : {'value' : 'C.E',       'x': kwargs['cx'] - 175  , 'y' : kwargs['cy'] + 190  , 'results': None , 'name': 'E_C_intersection' },
-            'B&E-(A|D|C)'       : {'value' : 'B.E',       'x': kwargs['cx'] + 40   , 'y' : kwargs['cy'] - 120  , 'results': None , 'name': 'B_E_intersection' },
-            'A&E-(B|D|C)'       : {'value' : 'A.E',       'x': kwargs['cx'] - 230  , 'y' : kwargs['cy'] + 90   , 'results': None , 'name': 'A_E_intersection' },
-            'E&D-(A|C|B)'       : {'value' : 'D.E',       'x': kwargs['cx'] - 50   , 'y' : kwargs['cy'] + 275  , 'results': None , 'name': 'E_D_intersection' },
-            'A&C-(B|D|E)'       : {'value' : 'A.C',       'x': kwargs['cx'] + 185  , 'y' : kwargs['cy'] + 80   , 'results': None , 'name': 'A_C_intersection' },
-            'B&D-(A|C|E)'       : {'value' : 'B.D',       'x': kwargs['cx'] + 50   , 'y' : kwargs['cy'] + 260  , 'results': None , 'name': 'B_D_intersection' },
-            'A&D-(B|C|E)'       : {'value' : 'A.D',       'x': kwargs['cx'] - 175  , 'y' : kwargs['cy'] - 60   , 'results': None , 'name': 'A_D_intersection' },
-            '(A&C&D)-(B|E)'     : {'value' : 'A.C.D',     'x': kwargs['cx'] + 175  , 'y' : kwargs['cy'] + 125  , 'results': None , 'name': 'A_C_D_intersection' },
-            '(A&B&D)-(C|E)'     : {'value' : 'A.B.D',     'x': kwargs['cx'] - 130  , 'y' : kwargs['cy'] - 90   , 'results': None , 'name': 'A_B_D_intersection' },
-            '(A&B&C)-(D|E)'     : {'value' : 'A.B.C',     'x': kwargs['cx'] + 150  , 'y' : kwargs['cy'] + 10   , 'results': None , 'name': 'A_B_C_intersection' },
-            '(B&C&D)-(A|E)'     : {'value' : 'B.C.D',     'x': kwargs['cx'] + 90   , 'y' : kwargs['cy'] + 205  , 'results': None , 'name': 'B_C_D_intersection' },
-            '(B&D&E)-(A|C)'     : {'value' : 'B.D.E',     'x': kwargs['cx'] - 15   , 'y' : kwargs['cy'] + 260  , 'results': None , 'name': 'B_D_E_intersection' },
-            '(E&B&C)-(A|D)'     : {'value' : 'B.C.E',     'x': kwargs['cx'] + 85   , 'y' : kwargs['cy'] - 95   , 'results': None , 'name': 'E_B_C_intersection' },
-            '(C&D&E)-(A|B)'     : {'value' : 'C.D.E',     'x': kwargs['cx'] - 105  , 'y' : kwargs['cy'] + 220  , 'results': None , 'name': 'C_D_E_intersection' },
-            '(A&B&E)-(D|C)'     : {'value' : 'A.B.E',     'x': kwargs['cx'] - 10   , 'y' : kwargs['cy'] - 105  , 'results': None , 'name': 'A_B_E_intersection' },
-            '(A&D&E)-(B|C)'     : {'value' : 'A.D.E',     'x': kwargs['cx'] - 180  , 'y' : kwargs['cy'] + 10   , 'results': None , 'name': 'A_D_E_intersection' },
-            '(A&E&C)-(D|B)'     : {'value' : 'A.C.E',     'x': kwargs['cx'] - 200  , 'y' : kwargs['cy'] + 130  , 'results': None , 'name': 'A_E_C_intersection' },
-            '(A&B&C&D)-E'       : {'value' : 'A.B.C.D',   'x': kwargs['cx'] + 120  , 'y' : kwargs['cy'] + 140  , 'results': None , 'name': 'A_B_C_D_intersection' },
-            '(A&B&C&E)-D'       : {'value' : 'A.B.C.E',   'x': kwargs['cx'] + 75   , 'y' : kwargs['cy'] - 60   , 'results': None , 'name': 'A_B_C_E_intersection' },
-            '(A&B&D&E)-C'       : {'value' : 'A.B.D.E',   'x': kwargs['cx'] - 110  , 'y' : kwargs['cy'] - 55   , 'results': None , 'name': 'A_B_D_E_intersection' },
-            '(A&C&D&E)-B'       : {'value' : 'A.C.D.E',   'x': kwargs['cx'] - 170  , 'y' : kwargs['cy'] + 90   , 'results': None , 'name': 'A_C_D_E_intersection' },
-            '(B&C&D&E)-A'       : {'value' : 'B.C.D.E',   'x': kwargs['cx'] - 20   , 'y' : kwargs['cy'] + 220  , 'results': None , 'name': 'B_C_D_E_intersection' },
-            'A&B&C&D&E'         : {'value' : 'A.B.C.D.E', 'x': kwargs['cx'] - 10   , 'y' : kwargs['cy'] + 50   , 'results': None , 'name': 'A_B_C_D_E_intersection' },
+            'A-(B|C|D|E)'       : {'value' : 'A',         'x': kwargs['cx'] - 270  , 'y' : kwargs['cy'] - 30   , 'results': None },
+            'D-(A|B|C|E)'       : {'value' : 'D',         'x': kwargs['cx'] + 130  , 'y' : kwargs['cy'] + 300  , 'results': None },
+            'B-(A|C|D|E)'       : {'value' : 'B',         'x': kwargs['cx']        , 'y' : kwargs['cy'] - 200  , 'results': None },
+            'C-(A|B|D|E)'       : {'value' : 'C',         'x': kwargs['cx'] + 240  , 'y' : kwargs['cy'] - 10   , 'results': None },
+            'E-(B|C|D|A)'       : {'value' : 'E',         'x': kwargs['cx'] - 180  , 'y' : kwargs['cy'] + 300  , 'results': None },
+            'A&B-(C|D|E)'       : {'value' : 'A.B',       'x': kwargs['cx'] - 110  , 'y' : kwargs['cy'] - 120  , 'results': None },
+            'C&D-(A|B|E)'       : {'value' : 'C.D',       'x': kwargs['cx'] + 170  , 'y' : kwargs['cy'] + 170  , 'results': None },
+            'B&C-(A|D|E)'       : {'value' : 'B.C',       'x': kwargs['cx'] + 135  , 'y' : kwargs['cy'] - 70   , 'results': None },
+            'E&C-(A|D|B)'       : {'value' : 'C.E',       'x': kwargs['cx'] - 175  , 'y' : kwargs['cy'] + 190  , 'results': None },
+            'B&E-(A|D|C)'       : {'value' : 'B.E',       'x': kwargs['cx'] + 40   , 'y' : kwargs['cy'] - 120  , 'results': None },
+            'A&E-(B|D|C)'       : {'value' : 'A.E',       'x': kwargs['cx'] - 230  , 'y' : kwargs['cy'] + 90   , 'results': None },
+            'E&D-(A|C|B)'       : {'value' : 'D.E',       'x': kwargs['cx'] - 50   , 'y' : kwargs['cy'] + 275  , 'results': None },
+            'A&C-(B|D|E)'       : {'value' : 'A.C',       'x': kwargs['cx'] + 185  , 'y' : kwargs['cy'] + 80   , 'results': None },
+            'B&D-(A|C|E)'       : {'value' : 'B.D',       'x': kwargs['cx'] + 50   , 'y' : kwargs['cy'] + 260  , 'results': None },
+            'A&D-(B|C|E)'       : {'value' : 'A.D',       'x': kwargs['cx'] - 175  , 'y' : kwargs['cy'] - 60   , 'results': None },
+            '(A&C&D)-(B|E)'     : {'value' : 'A.C.D',     'x': kwargs['cx'] + 175  , 'y' : kwargs['cy'] + 125  , 'results': None },
+            '(A&B&D)-(C|E)'     : {'value' : 'A.B.D',     'x': kwargs['cx'] - 130  , 'y' : kwargs['cy'] - 90   , 'results': None },
+            '(A&B&C)-(D|E)'     : {'value' : 'A.B.C',     'x': kwargs['cx'] + 150  , 'y' : kwargs['cy'] + 10   , 'results': None },
+            '(B&C&D)-(A|E)'     : {'value' : 'B.C.D',     'x': kwargs['cx'] + 90   , 'y' : kwargs['cy'] + 205  , 'results': None },
+            '(B&D&E)-(A|C)'     : {'value' : 'B.D.E',     'x': kwargs['cx'] - 15   , 'y' : kwargs['cy'] + 260  , 'results': None },
+            '(E&B&C)-(A|D)'     : {'value' : 'B.C.E',     'x': kwargs['cx'] + 85   , 'y' : kwargs['cy'] - 95   , 'results': None },
+            '(C&D&E)-(A|B)'     : {'value' : 'C.D.E',     'x': kwargs['cx'] - 105  , 'y' : kwargs['cy'] + 220  , 'results': None },
+            '(A&B&E)-(D|C)'     : {'value' : 'A.B.E',     'x': kwargs['cx'] - 10   , 'y' : kwargs['cy'] - 105  , 'results': None },
+            '(A&D&E)-(B|C)'     : {'value' : 'A.D.E',     'x': kwargs['cx'] - 180  , 'y' : kwargs['cy'] + 10   , 'results': None },
+            '(A&E&C)-(D|B)'     : {'value' : 'A.C.E',     'x': kwargs['cx'] - 200  , 'y' : kwargs['cy'] + 130  , 'results': None },
+            '(A&B&C&D)-E'       : {'value' : 'A.B.C.D',   'x': kwargs['cx'] + 120  , 'y' : kwargs['cy'] + 140  , 'results': None },
+            '(A&B&C&E)-D'       : {'value' : 'A.B.C.E',   'x': kwargs['cx'] + 75   , 'y' : kwargs['cy'] - 60   , 'results': None },
+            '(A&B&D&E)-C'       : {'value' : 'A.B.D.E',   'x': kwargs['cx'] - 110  , 'y' : kwargs['cy'] - 55   , 'results': None },
+            '(A&C&D&E)-B'       : {'value' : 'A.C.D.E',   'x': kwargs['cx'] - 170  , 'y' : kwargs['cy'] + 90   , 'results': None },
+            '(B&C&D&E)-A'       : {'value' : 'B.C.D.E',   'x': kwargs['cx'] - 20   , 'y' : kwargs['cy'] + 220  , 'results': None },
+            'A&B&C&D&E'         : {'value' : 'A.B.C.D.E', 'x': kwargs['cx'] - 10   , 'y' : kwargs['cy'] + 50   , 'results': None },
             }
     else:
         print('''
