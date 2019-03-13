@@ -57,7 +57,7 @@ setup(
     description='ursgal',
     package_data = {
         'ursgal' : [
-            # 'version.txt',
+            'version.txt',
             'wrappers/*.py',
             'resources/*/*/*',
             'resources/*/*/*/*',
