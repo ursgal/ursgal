@@ -171,7 +171,8 @@ class venndiagram_1_1_0(ursgal.UNode):
 
         '''
         data_list = []
-
+        lookup_dict = {}
+        fieldnames_list = []
         for n, (engine, file_path) in enumerate(data):
             venn_dict = {}
             if str(n) in self.params['translations']['visualization_label_positions']:
@@ -194,17 +195,80 @@ class venndiagram_1_1_0(ursgal.UNode):
                     lambda row: row[0] != '#', file_object
                 )
             )
+            #collect fieldnames
+            fieldnames = csv_input.fieldnames
+            for f_name in fieldnames:
+                if f_name not in fieldnames_list:
+                    fieldnames_list.append(f_name)
+
             venn_dict['data'] = set()
             for line_dict in csv_input:
-                value = ''
+                unique_identifier = ''
                 for column_name in self.params['translations']['visualization_column_names']:
-                    value += '||{0}'.format(line_dict[column_name])
-                venn_dict['data'].add(value)
+                    unique_identifier += '||{0}'.format(line_dict[column_name])
+                venn_dict['data'].add(unique_identifier)
+                if unique_identifier not in lookup_dict.keys():
+                    lookup_dict[unique_identifier] = []
+                lookup_dict[unique_identifier].append(line_dict)
             data_list.append(venn_dict)
 
         return_dict = venndiagram_main(
             data=data_list,
             **venn_params
         )
+
+        #retrieve files corresponding to each set, only if the user wants them
+        if self.params['translations']['extract_venndiagram_file'] == True:
+            translation_dict_label = {
+                'A' : '0',
+                'B' : '1',
+                'C' : '2',
+                'D' : '3',
+                'E' : '4',
+            }
+
+            #adding new columns for venn diagram output
+            fieldnames_list.append('return_dict_nomenclature')
+            fieldnames_list.append('actual_name')
+
+            print('CREATING CSV FILE FROM VENN DIAGRAM ...')
+            with open(output_file_name.replace('.svg','.csv'), 'w', newline='') as new_csvfile:
+                writer = csv.DictWriter(new_csvfile, fieldnames=fieldnames_list)
+                writer.writeheader()
+                for key in return_dict.keys():
+                    # ceate output file
+                    output_name = ''
+                    for character in key:
+                        if character in translation_dict_label.keys():
+                            name_by_user = self.params['translations'][
+                                'visualization_label_positions'][translation_dict_label[character]]
+
+                            assert '_[' not in name_by_user, print(
+                                    'ERROR MESSAGE: your label should not contain "_["')
+
+                            assert ']_' not in name_by_user, print(
+                                    'ERROR MESSAGE: your label should not contain "]_"')
+
+                            assert '(' not in name_by_user, print(
+                                    'ERROR MESSAGE: your label should not contain "("')
+
+                            assert ')' not in name_by_user, print(
+                                    'ERROR MESSAGE: your label should not contain ")"')
+                            output_name = output_name + name_by_user
+                        else :
+                            if character != '(' and character != ')':
+                                output_name = output_name + '_['+character+']_'
+                            else :
+                                output_name = output_name + character
+
+                    results = return_dict[key]['results']
+
+                    for unique_id in results:
+                        line_dict_list = lookup_dict[unique_id]
+
+                        for line_dict in line_dict_list:
+                            line_dict['return_dict_nomenclature'] = key
+                            line_dict['actual_name'] = output_name
+                            writer.writerow(line_dict)
 
         return return_dict
