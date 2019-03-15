@@ -8098,6 +8098,88 @@ ursgal_params = {
         'description' : \
             'List of column names that are used to define unique PSMs and to merge multiple lines of the same PSM (if specified). The validation_score_field is automatically added to this list. ',
     },
+    'psm_colnames_to_merge_multiple_values' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'colnames_to_merge_multiple_values',
+        },
+        'utag' : [
+            'conversion',
+            'output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'dict',
+        'uvalue_option' : { 
+            'none_val' : None,
+            'item_title' : 'column_name_with_type_of_merge',
+            'item_titles' : {
+                'font_type' : 'type',
+                'font_size_header' : 'size',
+                'font_size_major' : 'size',
+                'font_size_minor' : 'size',
+                'font_size_venn' : 'size',
+            },
+            'value_types' : {
+                'font_type' : 'str',
+                'font_size_header' : 'int',
+                'font_size_major' : 'int',
+                'font_size_minor' : 'int',
+                'font_size_venn' : 'int',
+            },
+            'multiple_line' : {
+                'font_type' : False,
+            },
+            'max' : {
+                'font_size_header' : 1000,
+                'font_size_major' : 1000,
+                'font_size_minor' : 1000,
+                'font_size_venn' : 1000,
+            },
+            'min' : {
+                'font_size_header' : 0,
+                'font_size_major' : 0,
+                'font_size_minor' : 0,
+                'font_size_venn' : 0,
+            },
+            'updownval' : {
+                'font_size_header' : 1,
+                'font_size_major' : 1,
+                'font_size_minor' : 1,
+                'font_size_venn' : 1,
+            },
+            'unit' : {
+                'font_size_header' : 'pt',
+                'font_size_major' : 'pt',
+                'font_size_minor' : 'pt',
+                'font_size_venn' : 'pt',
+            },
+            'custom_val_max' : 0,
+            'item_type' : 'str',
+            'multiple_line' : False,
+            'custom_val_max': 10000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : {},
+        'description' : \
+            'Defines the column names which should have their different values merged '\
+            'into a single value when merging rows corresponding the same PSM '\
+            'Formatted as a dictionary with keys as the column names and values as '\
+            'a parameter to specify which one of the different values to take '\
+            'Available values:'
+            '    max_value\n'\
+            '    min_value\n'\
+            '    most_frequent\n'\
+            '    avg_value',
+    },
     'psm_merge_delimiter' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -10184,6 +10266,40 @@ ursgal_params = {
         'default_value' : '',
         'description' : \
             'Header of visualization output (e.g. Venn diagram)',
+    },
+    'visualization_color_positions' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'venndiagram_1_1_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'venndiagram_style_1' : 'visualization_color_position',
+        },
+        'utag' : [
+            'visualization',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'dict',
+        'uvalue_option' : {
+            'none_val' : None,
+            'item_titles' : {'position':'color'},
+            'value_types' : {'position':'str'},
+            'custom_val_max' : 10000,
+            'multiple_line' : False,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : {},
+        'description' : \
+            'Specifies colors for the datasets that should be visualized. '\
+            'Given as a dict in which the key represents the position '\
+            'of the corresponding dataset in the list, e.g.: '\
+            '{"0" : "#e41a1c", "1" : "#377eb8"}',
     },
     'visualization_label_positions' : {
         'edit_version' : 1.00,

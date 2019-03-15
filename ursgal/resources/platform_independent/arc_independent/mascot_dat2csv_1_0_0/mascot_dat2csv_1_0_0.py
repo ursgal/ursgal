@@ -2,6 +2,8 @@
 import re
 from collections import defaultdict as ddict
 import csv
+from urllib.parse import unquote
+import os
 
 pattern = re.compile(
     r'Content-Type: application/x-Mascot; name="(?P<section>[a-z0-9]*)"'
@@ -22,6 +24,16 @@ peptide_match_pattern = re.compile(
     ''',
     re.VERBOSE
 )
+
+
+regexs_for_crazy_mgfs = {
+    'cz' : re.compile(r'''
+        msmsid:F(?P<spec_id>[0-9]*),
+        quan:(?P<quant>[0-9]*),
+        start:(?P<rt_start_in_minutes>\d*\.\d+|\d+),
+        end:(?P<rt_end_in_minutes>\d*\.\d+|\d+),
+    ''', re.VERBOSE)
+}
 
 PROTON = 1.007276466
 
@@ -136,11 +148,29 @@ class MascotDatParser(object):
 
             if query_dict['title'].startswith('msmsid'):
                 # CZ Title
-                title_dict = self._format_cz_title(query_dict['title'])
-                spec_id    = int(title_dict['msmsid'].strip('F'))
-                query_dict['spectrum_id'] = spec_id
-                query_dict['retention_time'] = float(title_dict['peak_rt'])
-                # del query_dict['peak_rt']
+                unqstring = unquote(query_dict['title'])
+                m = regexs_for_crazy_mgfs['cz'].match(unqstring)
+                if m is not None:
+                    spec_id = int(m.group('spec_id'))
+                    rtinminutes = m.group('rt_start_in_minutes')
+                    query_dict['retention_time'] =  float(rtinminutes) / 60.
+                    charge = query_dict['charge'].replace("+","")
+                    query_dict['title'] = '{0}.{1}.{1}.{2}'.format(
+                        os.path.splitext(
+                            os.path.basename(self.search_file)
+                        )[0],
+                        spec_id,
+                        charge
+                    )
+                    query_dict['spectrum_id'] = spec_id
+                else:
+                    print('Do not understand title {title}'.format(**query_dict))
+                    exit(1)
+                # title_dict = self._format_cz_title(query_dict['title'])
+                # spec_id    = int(title_dict['msmsid'].strip('F'))
+                # query_dict['spectrum_id'] = spec_id
+                # query_dict['retention_time'] = float(title_dict['peak_rt'])
+                # # del query_dict['peak_rt']
             else:
                 # TPP style (as used by msconvert)
                 title_dict = {}
@@ -267,7 +297,7 @@ def main(input_file, output_file):
                 d = {
                     'Raw data location': parser.search_file,
                     'Spectrum Title': title,
-                    'Spectrum ID': int(ident['scans']),
+                    'Spectrum ID': int(ident['spectrum_id']),
                     'Exp m/z': (float(ident['peptide_mass']) / charge) + PROTON,
                     'Charge': charge,
                     'Sequence': ident['sequence'],
