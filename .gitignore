@@ -27,6 +27,7 @@ tests/data/omssa_2_1_9/test_Creinhardtii_QE_pH8_omssa_2_1_9*
 tests/data/test_Creinhardtii_target_decoy.fasta.*
 tests/data/*.mgf*
 tests/data/xtandem_sledgehammer/test_BSA1_xtandem_sledgehammer_unified.csv
+tests/data/venndiagram/actual_output.csv
 tests/data/msamanda_1_0_0_5243/test_BSA1_msamanda_1_0_0_5243_unified.csv_full_protein_names.txt
 tests/data/msgfplus_v9979/test_BSA1_msgfplus_v9979_unified.csv_full_protein_names.txt
 tests/data/myrimatch_2_1_138/test_BSA1_myrimatch_2_1_138_unified.csv_full_protein_names.txt
