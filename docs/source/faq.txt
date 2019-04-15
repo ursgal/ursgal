@@ -37,7 +37,7 @@ Generally, Python 3.6 should be used when working with Windows. Here are some
 general remarks for a flawless installation under Windows.
 
 When using Windows 7, additionally install: Microsoft Visual
-C++ Build Tools, http://landinghub.visualstudio.com/visual-cpp-build-tools)
+C++ Build Tools, https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2017)
 
 When using Windows 10, consider additionally installing MS Build Tools 2015
 

@@ -6,28 +6,28 @@ import glob
 input1 = os.path.join(
 	'tests',
     'data',
-    'venndiagram',
+    'venndiagram_1_1_0',
     'venndiagram_test_input1.csv'
 )
 
 input2 = os.path.join(
     'tests',
     'data',
-    'venndiagram',
+    'venndiagram_1_1_0',
     'venndiagram_test_input2.csv'
 )
 
 input3 = os.path.join(
     'tests',
     'data',
-    'venndiagram',
+    'venndiagram_1_1_0',
     'venndiagram_test_input3.csv'
 )
 
 expected_output = os.path.join(
     'tests',
     'data',
-    'venndiagram',
+    'venndiagram_1_1_0',
     'venndiagram_test_expected_output.csv'
 )
 
@@ -61,7 +61,7 @@ def venndiagram(input1, input2, input3, column_name, output_diagram):
 
     output_path = uc.visualize(
         input_files=file_list,
-        engine='venndiagram_1_0_0',
+        engine='venndiagram_1_1_0',
         output_file_name='actual_output',
         force=True,
     )

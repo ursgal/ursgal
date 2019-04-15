@@ -98,8 +98,13 @@ Did you misspell the field name?'''.format(
                         try:
                             floated_value = float(line_dict[dict_key])
                         except:
-                            floated_value = None
-
+                            if line_dict[ dict_key ] is '':
+                                floated_value = None
+                            else:
+                                print('[ ERROR ] Value to be filtered could not be converted to float')
+                                print('Value:'+line_dict[dict_key])
+                                sys.exit(1)
+                                
                         if floated_value is None:
                             write_row_bools.add(False)
                         elif cpm_method( floated_value, value):
