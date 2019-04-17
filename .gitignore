@@ -42,6 +42,10 @@ tests/data/pipi_1_4_6/test_BSA1_pipi_1_4_6_unified.csv_full_protein_names.txt
 tests/data/test_upeptide_mapper_pmap.csv
 tests/data/test_upeptide_mapper_pmap.csv_full_protein_names.txt
 tests/data/csv2counted_results_1_0_0/csv2counted_results_test_counted.csv
+tests/data/TMT_msgfplus_pmap_unified.csv
+tests/data/TMT_msgfplus_pmap_unified.csv_full_protein_names.txt
+tests/data/TMT_xtandem_vengeance_pmap_unified.csv
+tests/data/TMT_xtandem_vengeance_pmap_unified.csv_full_protein_names.txt
 ursgal/resources/platform_independent/arc_independent/msgfplus_v9979
 ursgal/resources/platform_independent/arc_independent/msgfplus2csv_v2016_09_16
 ursgal/resources/platform_independent/arc_independent/msgfplus_v2016_09_16
