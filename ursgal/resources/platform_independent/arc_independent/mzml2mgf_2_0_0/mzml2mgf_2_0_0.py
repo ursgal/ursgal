@@ -112,7 +112,7 @@ def main(
             if id_attribute == 'ID':
                 spectrum_id = spec.ID
             elif id_attribute == 'index':
-                spectrum_id = spec.index
+                spectrum_id = spec.index+1
             elif id_attribute == 'id_dict':
                 spectrum_id = spec.id_dict[id_key]
             else:

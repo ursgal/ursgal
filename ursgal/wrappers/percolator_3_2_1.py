@@ -29,7 +29,7 @@ def transform_score(score, minimum_score):
 
 class percolator_3_2_1(ursgal.UNode):
     """
-    Percolator 3_2 UNode
+    Percolator 3.2.1 UNode
 
     q-value and posterior error probability calculation
     by a semi-supervised learning algorithm that dynamically
@@ -37,6 +37,9 @@ class percolator_3_2_1(ursgal.UNode):
 
     Reference:
     Matthew The, Michael J. MacCoss, William S. Noble, Lukas Käll "Fast and Accurate Protein False Discovery Rates on Large-Scale Proteomics Data Sets with Percolator 3.0"
+
+    Noe:
+    Please download Percolator corresponding to your OS from: https://github.com/percolator/percolator/releases
     """
     META_INFO = {
         'engine_type': {
@@ -57,7 +60,7 @@ class percolator_3_2_1(ursgal.UNode):
         'citation' : 'Matthew The, Michael J. MacCoss, William S. Noble, Lukas Kall' \
             'Fast and Accurate Protein False Discovery Rates on Large-Scale Proteomics Data Sets with Percolator 3.0',
         'include_in_git': False, # True for now, but upload dat shit later on
-        'distributable': True,
+        'distributable': False,
         'group_psms': True,
         'in_development': False,
         'utranslation_style': 'percolator_style_1',
