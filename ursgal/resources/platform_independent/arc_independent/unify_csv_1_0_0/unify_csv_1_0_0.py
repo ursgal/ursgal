@@ -800,7 +800,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     if modification in tmp_mods:
                         if mod in n_term_replacement.keys() and pos == 1:
                             if line_dict['Sequence'][0] in mod_dict[mod]['aa']:
-                                modification.replace(
+                                modification = modification.replace(
                                     '{0}:1'.format(mod),
                                     '{0}:0'.format(mod)
                                 )
