@@ -11009,7 +11009,7 @@ ursgal_params = {
         'default_value' : [
             'plot_glycan_elution_profile',
         ],
-        'description' :  ''' List of plot types that should be created by the SugarPy plotting function. Available are: "plot_molecule_elution_profile", "plot_glycan_elution_profile", "plot_annotated_spectra" ''',
+        'description' :  ''' List of plot types that should be created by the SugarPy plotting function. Available are: "plot_molecule_elution_profile", "plot_glycan_elution_profile", "plot_annotated_spectra", "check_peak_presence", "check_frag_specs" ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'sugarpy_plot_style_1' : 'plot_types',
