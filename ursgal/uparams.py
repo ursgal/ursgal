@@ -11009,7 +11009,7 @@ ursgal_params = {
         'default_value' : [
             'plot_glycan_elution_profile',
         ],
-        'description' :  ''' List of plot types that should be created by the SugarPy plotting function. Available are: "plot_molecule_elution_profile", "plot_glycan_elution_profile", "plot_annotated_spectra" ''',
+        'description' :  ''' List of plot types that should be created by the SugarPy plotting function. Available are: "plot_molecule_elution_profile", "plot_glycan_elution_profile", "plot_annotated_spectra", "check_peak_presence", "check_frag_specs" ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'sugarpy_plot_style_1' : 'plot_types',
@@ -11454,6 +11454,27 @@ ursgal_params = {
         'description' : \
             'Specify the spectrum ID attribute to be used to access the spectrum ID (ID, id_dict or index). Given as a dict (key = attribute, value = key in id_dict). For .wiff files, during conversion to mzML, spectrum IDs are formatted differently; pymzml can deal with this by returning an id_dict or accessing the index.'
     },
+    'convert_aa_in_motif' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'generate_target_decoy_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'generate_target_decoy_style_1': 'convert_aa_in_motif',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : None,
+        'description' : \
+            'Convert a single aminoacid in a sequence motif into another characeter using a string "new_aa,motif,position_to_be_replaced" where new_aa is the new character, motif is the regular expression that identifies the sequenc motif and position_to_be_replaced is the position in the motif that should be replaced (e.g. use "J,N[^P][ST],0" to convert N-X-S/T into J-X-S/T'
+    },
 }
-
-
