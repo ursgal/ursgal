@@ -32,7 +32,6 @@ else:
         def run(self):
             setuptools.command.install_lib.install_lib.run(self)
             for fn in self.get_outputs():
-                print('>>>>>>>>>>>>>>>>>>>', fn )
                 if os.path.basename(fn) in executable_list:
                     # copied from setuptools source - make the binaries executable
                     mode = ((os.stat(fn).st_mode) | 0o555) & 0o7777
