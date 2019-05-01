@@ -11477,4 +11477,32 @@ ursgal_params = {
         'description' : \
             'Convert a single aminoacid in a sequence motif into another characeter using a string "new_aa,motif,position_to_be_replaced" where new_aa is the new character, motif is the regular expression that identifies the sequenc motif and position_to_be_replaced is the position in the motif that should be replaced (e.g. use "J,N[^P][ST],0" to convert N-X-S/T into J-X-S/T'
     },
+    'pparse_options' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'pparse_2_0',
+        ],
+        'default_value' : [
+            ('-F', 'raw'),
+            ('-m', '1'),
+            ('-p', '0')
+        ],
+        'description' :  ''' List of tuples to specify options and their value for pParse. For available options see http://pfind.ict.ac.cn/software/pParse/# ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'pparse_style_1' : 'pparse_options',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_option' : {
+            'none_val' : [],
+            'item_title' : 'Option',
+            'item_type' : 'tuple',
+            'custom_val_max' : 0,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
+    },
 }
