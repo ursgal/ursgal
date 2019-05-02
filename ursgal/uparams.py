@@ -1270,7 +1270,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
-                'pglyco_2_2_0' : True,
+                'pglyco_db_2_2_0' : True,
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1307,7 +1307,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
-                'pglyco_2_2_0' : True,
+                'pglyco_db_2_2_0' : True,
             },
             'qvality_style_1' : {
                 'None'                 : None,
@@ -1344,7 +1344,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
-                'pglyco_2_2_0' : True,
+                'pglyco_db_2_2_0' : True,
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1381,7 +1381,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
-                'pglyco_2_2_0' : True,
+                'pglyco_db_2_2_0' : True,
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1418,7 +1418,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
-                'pglyco_2_2_0' : True,
+                'pglyco_db_2_2_0' : True,
             },
         },
         'uvalue_type'    : 'select',
@@ -1455,7 +1455,7 @@ ursgal_params = {
                 'xtandem_vengeance',
                 'xtandem_alanine',
                 'mascot_x_x_x',
-                'pglyco_2_2_0',
+                'pglyco_db_2_2_0',
             ],
             'custom_val_max' : 0,
         },
@@ -1853,7 +1853,7 @@ ursgal_params = {
             'pipi_1_4_5',
             'pipi_1_4_6',
             'moda_v1_61',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -2017,7 +2017,7 @@ ursgal_params = {
             'msfragger_20171106',
             'pipi_1_4_5',
             'pipi_1_4_6',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2397,7 +2397,7 @@ ursgal_params = {
             'msfragger_20171106',
             'pipi_1_4_5',
             'pipi_1_4_6',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2939,7 +2939,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3009,7 +3009,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3437,7 +3437,7 @@ ursgal_params = {
             'msgfplus2csv_v1_2_1',
             'pipi_1_4_5',
             'pipi_1_4_6',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
             'pglyco_fdr_2_2_0',
         ],
         'triggers_rerun' : True,
@@ -4863,7 +4863,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
-            'pglyco_2_2_0'
+            'pglyco_db_2_2_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4973,7 +4973,7 @@ ursgal_params = {
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_10695',
             'msamanda_2_0_0_11219',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5238,7 +5238,7 @@ ursgal_params = {
             'msfragger_20171106',
             'pipi_1_4_5',
             'pipi_1_4_6',
-            'pglyco_2_2_0'
+            'pglyco_db_2_2_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5326,7 +5326,7 @@ ursgal_params = {
             'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -5451,7 +5451,7 @@ ursgal_params = {
             'msamanda_2_0_0_11219',
             'pipi_1_4_5',
             'pipi_1_4_6',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5730,7 +5730,7 @@ ursgal_params = {
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7609,7 +7609,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7691,7 +7691,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7771,7 +7771,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7954,7 +7954,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'msfragger_20170103',
             'msfragger_20171106',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8051,7 +8051,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
-            'pglyco_2_2_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -10021,7 +10021,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10060,7 +10060,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10099,7 +10099,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10138,7 +10138,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10177,7 +10177,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10216,7 +10216,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10255,7 +10255,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
         },
         'uvalue_type' : 'str',
