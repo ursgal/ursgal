@@ -63,7 +63,7 @@ class pparse_2_0(ursgal.UNode):
         Formatting the command line via self.params
 
         Returns:
-                dict: self.params
+            dict: self.params
 
         Command line options:
             -D datapath               default (D:\data\)
@@ -111,13 +111,10 @@ class pparse_2_0(ursgal.UNode):
             # self.params['translations']['output_file_incl_path']
         ]
 
-        for flag, value in self.params['translations']['pparse_options']:
+        for flag, value in self.params['translations']['pparse_options'].items():
             self.params['command_list'].extend(
                 [flag, value]
             )
-
-        import pprint
-        pprint.pprint(self.params['command_list'])
 
         return self.params
 

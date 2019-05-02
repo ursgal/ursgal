@@ -325,7 +325,11 @@ class ChemicalComposition(dict):
             try:
                 aa_compo = self.aa_compositions[aa + N]
             except:
-                sys.exit('Do not know aa composition for {0}'.format(aa + N))
+                sys.exit(
+                    '''
+                    Do not know aa composition for {0}
+                    in {1}
+                    '''.format(aa + N, peptide))
             self.add_chemical_formula(aa_compo)
 
             composition = self._chemical_formula_to_dict(aa_compo)

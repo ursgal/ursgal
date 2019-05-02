@@ -1270,6 +1270,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'pglyco_2_2_0' : True,
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1306,6 +1307,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'pglyco_2_2_0' : True,
             },
             'qvality_style_1' : {
                 'None'                 : None,
@@ -1342,6 +1344,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'pglyco_2_2_0' : True,
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1378,6 +1381,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'pglyco_2_2_0' : True,
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1414,6 +1418,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'pglyco_2_2_0' : True,
             },
         },
         'uvalue_type'    : 'select',
@@ -1449,7 +1454,8 @@ ursgal_params = {
                 'xtandem_sledgehammer',
                 'xtandem_vengeance',
                 'xtandem_alanine',
-                'mascot_x_x_x'
+                'mascot_x_x_x',
+                'pglyco_2_2_0',
             ],
             'custom_val_max' : 0,
         },
@@ -1847,6 +1853,7 @@ ursgal_params = {
             'pipi_1_4_5',
             'pipi_1_4_6',
             'moda_v1_61',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -1859,6 +1866,7 @@ ursgal_params = {
             'msfragger_style_1'   : 'num_threads',
             'pipi_style_1'        : 'thread_num',
             'moda_style_1'        : '-@',
+            'pglyco_db_style_1'      : 'process',
         },
         'utag' : [
             'hardware_resources',
@@ -1883,6 +1891,15 @@ ursgal_params = {
                 -1 : 'max - 1',
             },
             'moda_style_1' : {
+                -1 : 'max - 1',
+            },
+            'pglyco_db_style_1' : {
+                -1 : 'max - 1',
+            },
+            'pipi_style_1' : {
+                -1 : 'max - 1',
+            },
+            'msfragger_style_1' : {
                 -1 : 'max - 1',
             },
         },
@@ -2000,6 +2017,7 @@ ursgal_params = {
             'msfragger_20171106',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2015,6 +2033,7 @@ ursgal_params = {
             'compomics_utilities_style_1' : 'database',
             'msfragger_style_1'           : 'database_name',
             'pipi_style_1'                : 'db',
+            'pglyco_db_style_1'              : 'fasta'
 
         },
         'utag' : [
@@ -2378,6 +2397,7 @@ ursgal_params = {
             'msfragger_20171106',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2396,6 +2416,7 @@ ursgal_params = {
             'msfragger_style_1'             : 'enzyme',
             'percolator_style_1'            : 'enz',
             'pipi_style_1'                  : 'enzyme',
+            'pglyco_db_style_1'                : 'enzyme',
         },
         'utag' : [
             'database',
@@ -2653,6 +2674,16 @@ ursgal_params = {
                 'lysn' : 'LysN;0;K;-',
                 'trypsin' : 'Trypsin;1;KR;P',
             },
+            'pglyco_db_style_1' : {
+                'trypsin_p' : 'Trypsin_KR-C',
+                'chymotrypsin' : 'Chymotrypsin_FYWL-P-C',
+                'formic_acid_p' : 'FormicAcid_D-C',
+                'lysc' : 'Lys_K-P-C',
+                'lysc_p': 'Lys_K-C',
+                'pepsina' : 'PepsinA_FL-C',
+                'trypsin' : 'Trypsin_KR-P-C',
+                'gluc' : 'GluC_DE-P-C'
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -2908,6 +2939,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2923,6 +2955,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'pglyco_db_style_1'    : 'search_fragment_tolerance',
         },
         'utag' : [
             'fragment',
@@ -2976,6 +3009,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2991,6 +3025,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'pglyco_db_style_1'    : 'search_fragment_tolerance_type',
         },
         'utag' : [
             'fragment',
@@ -3015,7 +3050,10 @@ ursgal_params = {
             'msfragger_style_1' : {
                 'ppm' : 1,
                 'da'  : 0
-            }
+            },
+            'pglyco_db_style_1' : {
+                'da'  : 'Da',
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -3399,6 +3437,8 @@ ursgal_params = {
             'msgfplus2csv_v1_2_1',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'pglyco_2_2_0',
+            'pglyco_fdr_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3410,6 +3450,8 @@ ursgal_params = {
             'pepnovo_style_1'          : 'header_translations',
             'msfragger_style_1'        : 'header_translations',
             'pipi_style_1'             : 'header_translations',
+            'pglyco_db_style_1'        : 'header_translations',
+            'pglyco_fdr_style_1'       : 'header_translations',
         },
         'utag' : [
             'conversion',
@@ -3529,7 +3571,72 @@ ursgal_params = {
                 'Number of missed cleavages':'MSFragger:Number of missed cleavages',
                 'Intercept of expectation model (expectation in log space)':'MSFragger:Intercept of expectation model (expectation in log space)',
                 'Slope of expectation model (expectation in log space)':'MSFragger:Slope of expectation model (expectation in log space)',
-            }
+            },
+            'pglyco_db_style_1' : {
+                'GlySpec': 'Spectrum Title',
+                'PepSpec': 'Spectrum Title',
+                'RawName': 'Spectrum Title',
+                'Scan': 'Spectrum ID',
+                'RT': 'Retention Time (s)',
+                'PrecursorMH': 'Exp Mass',
+                'PrecursorMZ': 'Exp m/z',
+                'Charge': 'Charge',
+                'Rank': 'Rank',
+                'Peptide': 'Sequence',
+                'Mod': 'Modifications',
+                'PeptideMH': 'Calc Mass',
+                'Glycan(H,N,A,G,F)': 'Glycan',
+                'PlausibleStruct': 'Plausible Glycan Structure',
+                'GlyID': 'Glycan ID',
+                'GlyFrag': 'Glycan Fragments',
+                'GlyMass': 'Glycan Mass',
+                'GlySite': 'Glycosite',
+                'TotalScore': 'pGlyco:TotalScore',
+                'PepScore': 'pGlyco:PepScore',
+                'GlyScore': 'pGlyco:GlyScore',
+                'CoreMatched': 'CoreMatched',
+                'CoreFuc': 'CoreFuc',
+                'MassDeviation': 'Mass Difference',
+                'PPM': 'Accuracy (ppm)',
+                'GlyIonRatio': 'GlyIonRatio',
+                'PepIonRatio': 'PepIonRatio',
+                'GlyDecoy': 'GlyDecoy',
+                'PepDecoy': 'PepDecoy',
+            },
+            'pglyco_fdr_style_1' : {
+                'GlySpec': 'Spectrum Title',
+                'PepSpec': 'Spectrum Title',
+                'RawName': 'Spectrum Title',
+                'Scan': 'Spectrum ID',
+                'RT': 'Retention Time (s)',
+                'PrecursorMH': 'Exp Mass',
+                'PrecursorMZ': 'Exp m/z',
+                'Charge': 'Charge',
+                'Rank': 'Rank',
+                'Peptide': 'Sequence',
+                'Mod': 'Modifications',
+                'PeptideMH': 'Calc Mass',
+                'Glycan(H,N,A,G,F)': 'Glycan',
+                'PlausibleStruct': 'Plausible Glycan Structure',
+                'GlyID': 'Glycan ID',
+                'GlyFrag': 'Glycan Fragments',
+                'GlyMass': 'Glycan Mass',
+                'GlySite': 'Glycosite',
+                'TotalScore': 'pGlyco:TotalScore',
+                'PepScore': 'pGlyco:PepScore',
+                'GlyScore': 'pGlyco:GlyScore',
+                'CoreMatched': 'CoreMatched',
+                'CoreFuc': 'CoreFuc',
+                'MassDeviation': 'Mass Difference',
+                'PPM': 'Accuracy (ppm)',
+                'GlyIonRatio': 'GlyIonRatio',
+                'PepIonRatio': 'PepIonRatio',
+                'GlyDecoy': 'GlyDecoy',
+                'PepDecoy': 'PepDecoy',
+                'GlycanFDR': 'Glycan FDR',
+                'PeptideFDR': 'Peptide FDR',
+                'TotalFDR': 'q-value',
+            },
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
@@ -4756,6 +4863,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'pglyco_2_2_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4770,7 +4878,7 @@ ursgal_params = {
             'msfragger_style_1'       : 'allowed_missed_cleavage',
             'pipi_style_1'            : 'missed_cleavage',
             'msgfplus_style_1'        : '-maxMissedCleavages',
-
+            'pglyco_db_style_1'          : 'max_miss_cleave',
         },
         'utag' : [
             'protein',
@@ -4865,6 +4973,7 @@ ursgal_params = {
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_10695',
             'msamanda_2_0_0_11219',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4872,6 +4981,7 @@ ursgal_params = {
             'msgfplus_style_1'  : 'NumMods',
             'myrimatch_style_1' : 'MaxDynamicMods',
             'msamanda_style_1'  : 'MaxNoDynModifs',
+            'pglyco_db_style_1'    : 'max_var_modify_num',
         },
         'utag' : [
             'modifications',
@@ -5128,6 +5238,7 @@ ursgal_params = {
             'msfragger_20171106',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'pglyco_2_2_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5136,6 +5247,7 @@ ursgal_params = {
             'omssa_style_1'     : '-nox',
             'msfragger_style_1' : 'digest_max_length',
             'pipi_style_1' : 'max_peptide_length',
+            'pglyco_db_style_1' : 'max_peptide_len',
         },
         'utag' : [
             'peptide',
@@ -5214,6 +5326,7 @@ ursgal_params = {
             'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'pglyco_2_2_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -5230,6 +5343,7 @@ ursgal_params = {
             'omssa_style_1'    : '-fm',
             'pepnovo_style_1'  : '-file',
             'xtandem_style_1'  : 'spectrum, path',
+            'pglyco_db_style_1'   : 'file1',
         },
         'utag' : [
             'input_files',
@@ -5337,6 +5451,7 @@ ursgal_params = {
             'msamanda_2_0_0_11219',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5345,7 +5460,8 @@ ursgal_params = {
             'omssa_style_1'     : '-no',
             'msfragger_style_1' : 'digest_min_length',
             'msamanda_style_1'  : 'MinimumPepLength',
-            'pipi_style_1'      : 'min_peptide_length'
+            'pipi_style_1'      : 'min_peptide_length',
+            'pglyco_db_style_1'    : 'min_peptide_len',
         },
         'utag' : [
             'peptide',
@@ -5613,7 +5729,8 @@ ursgal_params = {
             'msfragger_20171106',
             'pipi_1_4_5',
             'pipi_1_4_6',
-            'pyqms_1_0_0'
+            'pyqms_1_0_0',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5639,6 +5756,7 @@ ursgal_params = {
                 'protein, quick pyrolidone'
             ),
             'pyqms_style_1' : 'modifications',
+            'pglyco_db_style_1' : 'modifications',
         },
         'utag' : [
             'modifications',
@@ -7491,6 +7609,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7509,6 +7628,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'pglyco_db_style_1'     : 'search_precursor_tolerance',
         },
         'utag' : [
             'precursor',
@@ -7571,6 +7691,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7589,6 +7710,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'pglyco_db_style_1'    : 'search_precursor_tolerance',
         },
         'utag' : [
             'precursor',
@@ -7649,6 +7771,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7665,6 +7788,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'pglyco_db_style_1'    : 'search_precursor_tolerance_type',
         },
         'utag' : [
             'precursor',
@@ -7698,6 +7822,9 @@ ursgal_params = {
                 'ppm' : 1,
                 'da'  : 0
             },
+            'pglyco_db_style_1': {
+                'da' : 'Da'
+            }
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -7827,6 +7954,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'msfragger_20170103',
             'msfragger_20171106',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7834,6 +7962,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'MaxPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_max_mass',
+            'pglyco_db_style_1'    : 'max_peptide_weight',
         },
         'utag' : [
             'precursor',
@@ -7922,6 +8051,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'pglyco_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7929,6 +8059,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'MinPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_min_mass',
+            'pglyco_db_style_1'    : 'min_peptide_weight',
         },
         'utag' : [
             'precursor',
@@ -9890,6 +10021,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9928,6 +10060,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9966,6 +10099,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10004,6 +10138,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10042,6 +10177,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10080,6 +10216,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10118,6 +10255,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_2_2_0'         : 'pGlyco:TotalScore',
             },
         },
         'uvalue_type' : 'str',
@@ -11482,12 +11620,12 @@ ursgal_params = {
         'available_in_unode' : [
             'pparse_2_0',
         ],
-        'default_value' : [
-            ('-F', 'raw'),
-            ('-m', '1'),
-            ('-p', '0')
-        ],
-        'description' :  ''' List of tuples to specify options and their value for pParse. For available options see http://pfind.ict.ac.cn/software/pParse/# ''',
+        'default_value' : {
+            '-F': 'raw',
+            '-m': '1',
+            '-p': '0',
+        },
+        'description' :  ''' Dictionary to specify options and their value for pParse. For available options see http://pfind.ict.ac.cn/software/pParse/# ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pparse_style_1' : 'pparse_options',
@@ -11496,13 +11634,22 @@ ursgal_params = {
             'conversion',
         ],
         'uvalue_option' : {
-            'none_val' : [],
-            'item_title' : 'Option',
-            'item_type' : 'tuple',
-            'custom_val_max' : 0,
+            'custom_type' : {
+                'str' : {'multiple_line': False},
+            },
+            'custom_val_max' : 100000,
+            'item_titles' : {
+                'pparse option' : 'value',
+            },
+            'value_types' : {
+                'str' : 'str',
+            },
+            'multiple_line' : False,
+            'none_val' : {
+            },
         },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "list",
+        'uvalue_type' : "dict",
     },
 }
