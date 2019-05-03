@@ -50,8 +50,8 @@ class thermo_raw_file_parser_1_1_2(ursgal.UNode):
             },
         },
         'citation':
-        'Hulstaert N, Sachsenberg T, Walzer M, Barsnes H, Martens L and'
-            'Perez-Riverol Y (2019) ThermoRawFileParser: modular, scalable and'
+        'Hulstaert N, Sachsenberg T, Walzer M, Barsnes H, Martens L and '
+            'Perez-Riverol Y (2019) ThermoRawFileParser: modular, scalable and '
             'cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852'
     }
 

@@ -63,6 +63,7 @@ Convert MZML to MGF 1_0_0
 .. autofunction:: ursgal.resources.platform_independent.arc_independent.mzml2mgf_1_0_0.mzml2mgf_1_0_0.main
 
 
+
 Convert X!Tandem XML to CSV 1_0_0
 ---------------------------------
 
@@ -85,11 +86,15 @@ MzidLib
    :members:
 
 
-Unify CSV v1_0_0
-----------------
+pParse 2.0
+----------
 
-.. autoclass:: ursgal.wrappers.unify_csv_1_0_0.unify_csv_1_0_0
+.. autoclass:: ursgal.wrappers.pparse_2_0.pparse_2_0
    :members:
-   :private-members:
 
-.. autofunction:: ursgal.resources.platform_independent.arc_independent.unify_csv_1_0_0.unify_csv_1_0_0.main
+
+ThermoRawFileParser
+-------------------
+
+.. autoclass:: ursgal.wrappers.thermo_raw_file_parser_1_1_2.thermo_raw_file_parser_1_1_2
+   :members:
