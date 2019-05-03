@@ -7287,7 +7287,7 @@ ursgal_params = {
                 '.mzml' : 1,
                 'indexed_mzml' : 2,
                 'parquet' : 3,
-                'default' : 0,
+                'default' : 1,
             }
         },
         'uvalue_type' : 'select',
