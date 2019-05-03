@@ -31,7 +31,8 @@ def main(input_path=None):
     for raw_file in input_file_list:
         mzml_file = R.convert(
             input_file=raw_file,
-            engine='thermo_raw_file_parser_1_1_2'
+            engine='thermo_raw_file_parser_1_1_2',
+            output_file_name = raw_file.replace('.raw', '.mzML')
         )
 
 if __name__ == '__main__':
