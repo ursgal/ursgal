@@ -1685,6 +1685,7 @@ ursgal_params = {
                 'xtandem_piledriver' : True,
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance' : True,
+                'pglyco_db_2_2_0' : False,
             },
         },
         'uvalue_type' : 'bool',
@@ -7260,11 +7261,13 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
+            'thermo_raw_file_parser_1_1_2',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1'   : ('-oc', '-ox'),
             'xtandem_style_1' : 'output, mzid',
+            'thermo_raw_file_parser_style_1' : '-f',
         },
         'utag' : [
             'output',
@@ -7279,11 +7282,18 @@ ursgal_params = {
                 '.mzid' : 'yes',
                 'default' : 'no',
             },
+            'thermo_raw_file_parser_style_1': {
+                '.mgf' : 0,
+                '.mzml' : 1,
+                'indexed_mzml' : 2,
+                'parquet' : 3,
+                'default' : 0,
+            }
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
             'select_type' : 'radio_button',
-            'available_values'  : ['.csv', '.mzid', '.omx', 'default'],
+            'available_values'  : ['.csv', '.mzid', '.omx', 'default', '.mgf', '.mzml', 'parquet', 'indexed_mzml'],
             'custom_val_max' : 0,
         },
         'default_value' : 'default',
@@ -11640,6 +11650,43 @@ ursgal_params = {
             'custom_val_max' : 100000,
             'item_titles' : {
                 'pparse option' : 'value',
+            },
+            'value_types' : {
+                'str' : 'str',
+            },
+            'multiple_line' : False,
+            'none_val' : {
+            },
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "dict",
+    },
+    'thermo_raw_file_parser_options' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'thermo_raw_file_parser_1_1_2',
+        ],
+        'default_value' : {
+            '-v': None,
+            '-e': None,
+            '-m': 0,
+        },
+        'description' :  ''' Dictionary to specify options and their value for ThermoRawFileParser. If options are given as a flag only, specify 'None' as their value. For available options see https://github.com/compomics/ThermoRawFileParser ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'thermo_raw_file_parser_style_1' : ('-h', '-m', '-g', '-u', '-k', '-t', '-n', '-v', '-e'),
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_option' : {
+            'custom_type' : {
+                'str' : {'multiple_line': False},
+            },
+            'custom_val_max' : 100000,
+            'item_titles' : {
+                'converter option' : 'value',
             },
             'value_types' : {
                 'str' : 'str',

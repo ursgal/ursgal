@@ -69,7 +69,7 @@ def main(input_raw_file=None, database=None, enzyme=None):
 
     search_result = uc.search_mgf(
         input_file = xtracted_file,
-        engine = 'pglyco_2_2_0',
+        engine = 'pglyco_db_2_2_0',
     )
 
     # converted_result = uc.convert(

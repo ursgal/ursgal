@@ -30,6 +30,7 @@ class pparse_2_0(ursgal.UNode):
         'utranslation_style': 'pparse_style_1',
         'input_extensions': ['.raw'],
         'output_extensions': ['.mgf'],
+        'output_suffix' : None,
         'create_own_folder': False,
         'in_development': False,
         'include_in_git': False,
@@ -127,3 +128,4 @@ class pparse_2_0(ursgal.UNode):
             self.params['translations']['raw_input_file'].replace('.raw', '_HCDFT.mgf'), 
             self.params['translations']['output_file_incl_path']
         )
+        return self.params['translations']['output_file_incl_path']
