@@ -30,7 +30,7 @@ class thermo_raw_file_parser_1_1_2(ursgal.UNode):
         'release_date': '2019-04-25',
         'utranslation_style': 'thermo_raw_file_parser_style_1',
         'input_extensions': ['.raw'],
-        'output_extensions': ['.mgf', '.mzML'],
+        'output_extensions': ['.mzML', '.mgf',],
         'output_suffix': None,
         'create_own_folder': False,
         'in_development': False,
