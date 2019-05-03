@@ -11668,7 +11668,6 @@ ursgal_params = {
             'thermo_raw_file_parser_1_1_2',
         ],
         'default_value' : {
-            '-v': None,
             '-e': None,
             '-m': 0,
         },
