@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-from distutils.core import setup
-import distutils
-from distutils.command.install_lib import install_lib
+from setuptools import setup
+import setuptools
+from setuptools.command.install_lib import install_lib
 import os
 import sys
 
@@ -25,18 +25,17 @@ executable_list = [
 ]
 
 if sys.platform in ['win32']:
-    class my_install_lib(distutils.command.install_lib.install_lib):
+    class my_install_lib(setuptools.command.install_lib.install_lib):
         pass
 else:
-    class my_install_lib(distutils.command.install_lib.install_lib):
+    class my_install_lib(setuptools.command.install_lib.install_lib):
         def run(self):
-            distutils.command.install_lib.install_lib.run(self)
+            setuptools.command.install_lib.install_lib.run(self)
             for fn in self.get_outputs():
-                print('>>>>>>>>>>>>>>>>>>>', fn )
                 if os.path.basename(fn) in executable_list:
-                    # copied from distutils source - make the binaries executable
+                    # copied from setuptools source - make the binaries executable
                     mode = ((os.stat(fn).st_mode) | 0o555) & 0o7777
-                    distutils.log.info("changing mode of %s to %o", fn, mode)
+                    setuptools.log.info("changing mode of %s to %o", fn, mode)
                     os.chmod(fn, mode)
 
 
@@ -64,7 +63,12 @@ setup(
             'resources/*/*/*/*/*',
         ]
     },
-    requires = ['pymzml'],
+    install_requires = [
+        'pymzml',
+        'regex',
+        'pyqms',
+        "pyahocorasick >= 1.1.4;sys_platform!='win32'"
+    ],
     long_description = 'Universal Python module combining common bottom-up proteomics tools for large-scale analysis',
     author = 'Lukas P. M. Kremer, Purevdulam Oyunchimeg, Johannes Barth, Stefan Schulze and Christian Fufezan',
     author_email = 'christian@fufezan.net',
