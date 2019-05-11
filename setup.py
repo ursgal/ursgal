@@ -50,11 +50,11 @@ with open(version_path, 'r') as version_file:
 
 setup(
     name='ursgal',
-    version = ursgal_version,
-    packages = ['ursgal'],
-    package_dir = {'ursgal': 'ursgal'},
+    version=ursgal_version,
+    packages=['ursgal'],
+    package_dir={'ursgal': 'ursgal'},
     description='ursgal',
-    package_data = {
+    package_data={
         'ursgal' : [
             'version.txt',
             'wrappers/*.py',
@@ -63,19 +63,22 @@ setup(
             'resources/*/*/*/*/*',
         ]
     },
-    install_requires = [
+    build_requires=[
+        'numpy',
+    ],
+    install_requires=[
         'pymzml',
         'regex',
         'pyqms',
-        "pyahocorasick >= 1.1.4;sys_platform!='win32'"
+        "pyahocorasick >= 1.1.4;sys_platform!='win32'",
     ],
-    long_description = 'Universal Python module combining common bottom-up proteomics tools for large-scale analysis',
-    author = 'Lukas P. M. Kremer, Purevdulam Oyunchimeg, Johannes Barth, Stefan Schulze and Christian Fufezan',
-    author_email = 'christian@fufezan.net',
-    url = 'http://ursgal.github.com',
-    license = 'Lesser GNU General Public License (LGPL)',
-    platforms = 'any that supports python 3.4',
-    classifiers = [
+    long_description='Universal Python module combining common bottom-up proteomics tools for large-scale analysis',
+    author='Lukas P. M. Kremer, Purevdulam Oyunchimeg, Johannes Barth, Stefan Schulze and Christian Fufezan',
+    author_email='christian@fufezan.net',
+    url='http://ursgal.github.com',
+    license='Lesser GNU General Public License (LGPL)',
+    platforms='any that supports python 3.4',
+    classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Education',
@@ -91,9 +94,7 @@ setup(
         'Topic :: Scientific/Engineering :: Bio-Informatics',
         'Topic :: Scientific/Engineering :: Chemistry',
         'Topic :: Scientific/Engineering :: Medical Science Apps.',
-        'Topic :: Scientific/Engineering :: Education',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    cmdclass= {'install_lib':my_install_lib }
+    cmdclass={'install_lib': my_install_lib}
 )
-
