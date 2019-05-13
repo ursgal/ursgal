@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version 0.6.4    (05.2019)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Added ThermoRawFileParser for conversion of .raw to .mzML/.mgf
+#. Added pGlyco 2.2.0, including pParse 2.0 and pGlycoFDR 2.2.0
+
 Version 0.6.3    (03.2019)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 #. Added Percolator 3.2, including the options to infer protein PEP and FDR

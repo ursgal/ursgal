@@ -246,6 +246,7 @@ class UParamMapper( dict ):
                                     engine, parsed_e2s, style
                                 )
                             )
+                            sys.exit(1)
         return lookup
 
     def _show_params_overview( self, engine=None):

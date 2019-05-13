@@ -1356,7 +1356,7 @@ class UController(ursgal.UNode):
                 'The path is automatically determined by ursgal.'),
                 caller='WARNING'
             )
-        ok_extension = self.decid_output_extension(engine)
+        ok_extension = self.decide_output_extension(engine)
         prefix = self.params['prefix']
         user_fname = os.path.basename( user_fname )
         if ok_extension is None or user_fname.endswith( ok_extension ):
@@ -1443,7 +1443,7 @@ class UController(ursgal.UNode):
                 'history'        : [],
             }
 
-    def decid_output_extension( self, engine ):
+    def decide_output_extension( self, engine ):
         file_extension = None
         file_extensions = self.meta_unodes[ engine ].META_INFO.get(
             'output_extensions',
@@ -1507,7 +1507,7 @@ class UController(ursgal.UNode):
         output_file = '_'.join( file_name_blocks )
 
         # Add file extension if needed (engine-specific, defined in kb)
-        file_extension = self.decid_output_extension(engine)
+        file_extension = self.decide_output_extension(engine)
         if file_extension is None:
             self.print_info(
                 'No file extension ("output_extension") defined in '\
