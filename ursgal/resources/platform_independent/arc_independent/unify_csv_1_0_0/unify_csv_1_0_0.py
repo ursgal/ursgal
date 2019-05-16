@@ -400,7 +400,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 if 'RTINSECONDS=' in line_dict['Spectrum Title']:
                     line_2_split = line_dict['Spectrum Title'].split(' ')[0].strip()
                 elif line_dict['Spectrum Title'].endswith('.dta'):
-                    line_2_split = line_dict['Spectrum Title'].strip('.dta')
+                    '.'.join(line_2_split = line_dict['Spectrum Title'].split('.')[:-2])
                 else:
                     line_2_split = line_dict['Spectrum Title']
                 line_dict['Spectrum Title'] = line_2_split
