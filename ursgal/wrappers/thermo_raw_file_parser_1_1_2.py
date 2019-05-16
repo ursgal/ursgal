@@ -8,19 +8,18 @@ import sys
 
 class thermo_raw_file_parser_1_1_2(ursgal.UNode):
     """
-    Unode for pParse included in pGlyco 2.2.0
+    Unode for ThermoRawFileParser
     For further information visit
-    http://pfind.ict.ac.cn/software/pParse/#Downloads
+    https://github.com/compomics/ThermoRawFileParser
 
     Note:
-        Please download pParse manually as part of pGlyco 2.2.0
-        https://github.com/pFindStudio/pGlyco2
+        Please download ThermoRawFileParser manually from
+        https://github.com/compomics/ThermoRawFileParser
 
     Reference:
-    Yuan ZF, Liu C, Wang HP, Sun RX, Fu Y, Zhang JF, Wang LH,
-    Chi H, Li Y, Xiu LY, Wang WP, He SM (2012)
-    pParse: a method for accurate determination of monoisotopic peaks 
-    in high-resolution mass spectra. Proteomics 12(2)
+    Hulstaert N, Sachsenberg T, Walzer M, Barsnes H, Martens L and 
+    Perez-Riverol Y (2019) ThermoRawFileParser: modular, scalable and 
+    cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852
     """
 
     META_INFO = {
