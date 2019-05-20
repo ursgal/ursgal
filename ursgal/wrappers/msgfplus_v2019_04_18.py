@@ -44,8 +44,8 @@ class msgfplus_v2019_04_18( msgf ):
             'platform_independent' : {
                 'arc_independent' : {
                     'exe'            : 'MSGFPlus.jar',
-                    'url'            : '',
-                    'zip_md5'        : '',
+                    'url'            : 'https://github.com/MSGFPlus/msgfplus/releases/tag/v2019.04.18',
+                    'zip_md5'        : '539bcfe9426d9fd55dfdd2427a4499c4',
                     'additional_exe' : [],
                 },
             },
