@@ -1117,6 +1117,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1128,6 +1129,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'deepnovo_style_1': 'base_mz',
         },
         'utag' : [
             'conversion'
@@ -1193,10 +1195,12 @@ ursgal_params = {
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
             'msamanda_2_0_0_11219',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
             'msamanda_style_1'  : 'LoadedSpectraAtOnce',
+            'deepnovo_style_1'  : 'buffer_size'
         },
         'utag' : [
             'hardware_resources',
@@ -2041,6 +2045,7 @@ ursgal_params = {
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2056,7 +2061,8 @@ ursgal_params = {
             'compomics_utilities_style_1' : 'database',
             'msfragger_style_1'           : 'database_name',
             'pipi_style_1'                : 'db',
-            'pglyco_db_style_1'              : 'fasta'
+            'pglyco_db_style_1'           : 'fasta',
+            'deepnovo_0_0_1'              : 'db_fasta_file',
 
         },
         'utag' : [
@@ -2267,27 +2273,33 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-model_dir',
+            'deepnovo_style_1': 'train_dir',
         },
         'utag' : [
             'model',
             'file_handling',
         ],
         'uvalue_translation' : {
+            'pepnovo_style_1' : {
+                'default' : None
+            },
+            'deepnovo_style_1': {
+                'default' : 'train.example'
+            },
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : '',
             'multiple_line' : False,
         },
-        'default_value' : None,
+        'default_value' : 'default',
         'description' : \
-            'Directory containing the model files for PepNovo. If \'None\', '\
-            'it is supposed to be in :\n\n'\
-            'resources/<platform>/<architecture>/pepnovo_3_1'\
+            'Directory containing the model files de novo sequencing. Use "default" for the default folder of the engine (DeepNovo: <deepnovo_resources>/train.example; PepNovo: resources/<platform>/<architecture>/pepnovo_3_1)'
     },
     'engine_internal_decoy_generation' : {
         'edit_version' : 1.00,
@@ -2424,6 +2436,7 @@ ursgal_params = {
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2442,7 +2455,8 @@ ursgal_params = {
             'msfragger_style_1'             : 'enzyme',
             'percolator_style_1'            : 'enz',
             'pipi_style_1'                  : 'enzyme',
-            'pglyco_db_style_1'                : 'enzyme',
+            'pglyco_db_style_1'             : 'enzyme',
+            'deepnovo_style_1'              : 'cleavage_rule',
         },
         'utag' : [
             'database',
@@ -2710,6 +2724,15 @@ ursgal_params = {
                 'trypsin' : 'Trypsin_KR-P-C',
                 'gluc' : 'GluC_DE-P-C'
             },
+            'deepnovo_style_1' : {
+                'argc': 'arg-c':,
+                'aspn': 'asp-n',
+                'clostripain': 'clostripain',
+                'cnbr': 'cnbr',
+                'formic_acid': 'formic acid',
+                'lysc': 'lysc',
+                'trypsin': 'trypsin',
+            }
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -4902,7 +4925,8 @@ ursgal_params = {
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
             'msgfplus_v2019_04_18',
-            'pglyco_db_2_2_0'
+            'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4917,7 +4941,8 @@ ursgal_params = {
             'msfragger_style_1'       : 'allowed_missed_cleavage',
             'pipi_style_1'            : 'missed_cleavage',
             'msgfplus_style_1'        : '-maxMissedCleavages',
-            'pglyco_db_style_1'          : 'max_miss_cleave',
+            'pglyco_db_style_1'       : 'max_miss_cleave',
+            'deepnovo_style_1'        : 'num_missed_cleavage',
         },
         'utag' : [
             'protein',
@@ -7686,6 +7711,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7704,7 +7730,8 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
-            'pglyco_db_style_1'     : 'search_precursor_tolerance',
+            'pglyco_db_style_1'  : 'search_precursor_tolerance',
+            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm')
         },
         'utag' : [
             'precursor',
@@ -7770,6 +7797,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7788,7 +7816,8 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
-            'pglyco_db_style_1'    : 'search_precursor_tolerance',
+            'pglyco_db_style_1'  : 'search_precursor_tolerance',
+            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm')
         },
         'utag' : [
             'precursor',
@@ -7852,6 +7881,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7868,7 +7898,8 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
-            'pglyco_db_style_1'    : 'search_precursor_tolerance_type',
+            'pglyco_db_style_1'  : 'search_precursor_tolerance_type',
+            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm')
         },
         'utag' : [
             'precursor',
@@ -11794,5 +11825,218 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "dict",
+    },
+    'deepnovo_direction' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'deepnovo_0_0_1',
+        ],
+        'default_value' : 'bi_directional',
+        'description' :  ''' Defines the direction for DeepNovo ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'deepnovo_style_1' : 'direction',
+        },
+        'utag' : [
+            'de novo',
+        ],
+        'uvalue_option' : {
+            'select_type'   : 'radio_button',
+            'available_values'  : [
+                'bi_directional',
+                'forward',
+                'reverse',
+            ],
+            'custom_val_max' : 0,
+        },
+        'uvalue_translation' : {
+            'bi_directional': 2,
+            'forward' : 0,
+            'reverse' : 1,
+        },
+        'uvalue_type' : "select",
+    },
+    'deepnovo_use_intensity': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+        },
+        'default_value': True,
+        'description': ''' DeepNovo uses intensity ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'use_intensity',
+        },
+        'utag': [
+            'de novo',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'deepnovo_shared_weights': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+        },
+        'default_value': True,
+        'description': ''' DeepNovo uses shared weights ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'shared',
+        },
+        'utag': [
+            'de novo',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'deepnovo_use_lstm': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+        },
+        'default_value': True,
+        'description': ''' DeepNovo uses lstm ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'use_lstm',
+        },
+        'utag': [
+            'de novo',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'deepnovo_build_knapsack': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+        },
+        'default_value': True,
+        'description': ''' DeepNovo builds the knapsack matrix ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'knapsack_build',
+        },
+        'utag': [
+            'de novo',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'deepnovo_beam_search': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+        },
+        'default_value': True,
+        'description': ''' DeepNovo builds beam search ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'beam_search',
+        },
+        'utag': [
+            'de novo',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'deepnovo_beam_size': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 5,
+        'description': """ Number of optimal paths to search during decoding """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'beam_size'
+        },
+        'utag': [
+            'de novo'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'deepnovo_mode' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'deepnovo_0_0_1',
+        ],
+        'default_value' : 'search_denovo',
+        'description' :  ''' Defines the search mode for DeepNovo ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'deepnovo_style_1': ('search_denovo', 'search_hybrid', 'search_db'),
+        },
+        'utag' : [
+            'de novo',
+        ],
+        'uvalue_option' : {
+            'select_type'   : 'radio_button',
+            'available_values'  : [
+                'search_denovo',
+                'search_hybrid',
+                'search_db',
+            ],
+            'custom_val_max' : 0,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "select",
     },
 }

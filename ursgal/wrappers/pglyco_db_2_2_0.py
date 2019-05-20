@@ -92,10 +92,6 @@ class pglyco_db_2_2_0(ursgal.UNode):
             'input_file' : self.params['translations']['mgf_input_file'],
         }
 
-        # write_exclusion_list = [
-        #     'file1'
-        # ]
-
         precursor_tolerance = []
         opt_mods = []
         fix_mods = []

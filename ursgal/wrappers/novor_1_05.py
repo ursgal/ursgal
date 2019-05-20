@@ -11,7 +11,7 @@ class novor_1_05( ursgal.UNode ):
     Parameter options at http://rapidnovor.com/
 
     Reference:
-    Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software.
+    Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing Software. J Am Soc Mass Spectrom 26 (11)
 
     Import node for version novor_1_1beta
 
@@ -50,7 +50,7 @@ class novor_1_05( ursgal.UNode ):
         },
         'citation' : \
             'Bin Ma (2015) Novor: Real-Time Peptide de Novo Sequencing '\
-            'Software.',
+            'Software. J Am Soc Mass Spectrom 26 (11)',
     }
 
     def __init__(self, *args, **kwargs):
