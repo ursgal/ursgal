@@ -35,7 +35,7 @@ else:
                 if os.path.basename(fn) in executable_list:
                     # copied from setuptools source - make the binaries executable
                     mode = ((os.stat(fn).st_mode) | 0o555) & 0o7777
-                    setuptools.log.info("changing mode of %s to %o", fn, mode)
+                    print("changing mode of %s to %o", fn, mode)
                     os.chmod(fn, mode)
 
 
