@@ -96,7 +96,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     pGlyco
         * reformat modifications
-        * reformat glycan - TO DO
+        * reformat glycan
     '''
     print(
         '''
@@ -256,6 +256,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         'novor',
         'pepnovo',
         'uninovo',
+        'deepnovo',
         'unknown_engine'
     ]
     database_search_engines = [
@@ -431,6 +432,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 '''
                 Valid for:
                     Novor
+                    DeepNovo
                     MSFragger
                 '''
                 pure_input_file_name = os.path.basename(

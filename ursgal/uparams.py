@@ -1280,6 +1280,7 @@ ursgal_params = {
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
                 'pglyco_db_2_2_0' : True,
+                'deepnovo_0_0_1' : True,
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1319,6 +1320,7 @@ ursgal_params = {
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
                 'pglyco_db_2_2_0' : True,
+                'deepnovo_0_0_1' : True,
             },
             'qvality_style_1' : {
                 'None'                 : None,
@@ -1358,6 +1360,7 @@ ursgal_params = {
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
                 'pglyco_db_2_2_0' : True,
+                'deepnovo_0_0_1' : True,
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1397,6 +1400,7 @@ ursgal_params = {
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
                 'pglyco_db_2_2_0' : True,
+                'deepnovo_0_0_1' : True,
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1436,6 +1440,7 @@ ursgal_params = {
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
                 'pglyco_db_2_2_0' : True,
+                'deepnovo_0_0_1' : True,
             },
         },
         'uvalue_type'    : 'select',
@@ -1708,6 +1713,7 @@ ursgal_params = {
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance' : True,
                 'pglyco_db_2_2_0' : False,
+                'deepnovo_0_0_1' : False,
             },
         },
         'uvalue_type' : 'bool',
@@ -2062,7 +2068,7 @@ ursgal_params = {
             'msfragger_style_1'           : 'database_name',
             'pipi_style_1'                : 'db',
             'pglyco_db_style_1'           : 'fasta',
-            'deepnovo_0_0_1'              : 'db_fasta_file',
+            'deepnovo_style_1'            : 'db_fasta_file',
 
         },
         'utag' : [
@@ -2287,9 +2293,6 @@ ursgal_params = {
         'uvalue_translation' : {
             'pepnovo_style_1' : {
                 'default' : None
-            },
-            'deepnovo_style_1': {
-                'default' : 'train.example'
             },
         },
         'uvalue_type' : 'str',
@@ -2725,7 +2728,7 @@ ursgal_params = {
                 'gluc' : 'GluC_DE-P-C'
             },
             'deepnovo_style_1' : {
-                'argc': 'arg-c':,
+                'argc': 'arg-c',
                 'aspn': 'asp-n',
                 'clostripain': 'clostripain',
                 'cnbr': 'cnbr',
@@ -3494,6 +3497,7 @@ ursgal_params = {
             'pipi_1_4_6',
             'pglyco_db_2_2_0',
             'pglyco_fdr_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3507,6 +3511,7 @@ ursgal_params = {
             'pipi_style_1'             : 'header_translations',
             'pglyco_db_style_1'        : 'header_translations',
             'pglyco_fdr_style_1'       : 'header_translations',
+            'deepnovo_style_1'         : 'header_translations',
         },
         'utag' : [
             'conversion',
@@ -3691,6 +3696,12 @@ ursgal_params = {
                 'GlycanFDR': 'Glycan FDR',
                 'PeptideFDR': 'Peptide FDR',
                 'TotalFDR': 'q-value',
+            },
+            'deepnovo_style_1' : {
+                'predicted_position_score': 'DeepNovo:aaScore',
+                'predicted_sequence': 'Sequence',
+                'scan': 'Spectrum ID',
+                'predicted_score': 'DeepNovo:score',
             },
         },
         'uvalue_type' : 'str',
@@ -5372,6 +5383,7 @@ ursgal_params = {
     'mgf_input_file' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
+            'deepnovo_0_0_1',
             'moda_v1_51',
             'moda_v1_61',
             'msamanda_1_0_0_5242',
@@ -5413,7 +5425,8 @@ ursgal_params = {
             'omssa_style_1'    : '-fm',
             'pepnovo_style_1'  : '-file',
             'xtandem_style_1'  : 'spectrum, path',
-            'pglyco_db_style_1'   : 'file1',
+            'pglyco_db_style_1': 'file1',
+            'deepnovo_style_1' : ('denovo_input_file', 'hybrid_input_file', 'db_input_file'),
         },
         'utag' : [
             'input_files',
@@ -5807,6 +5820,7 @@ ursgal_params = {
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5833,6 +5847,7 @@ ursgal_params = {
             ),
             'pyqms_style_1' : 'modifications',
             'pglyco_db_style_1' : 'modifications',
+            'deepnovo_style_1' : 'modifications',
         },
         'utag' : [
             'modifications',
@@ -10147,7 +10162,8 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10188,7 +10204,8 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10229,7 +10246,8 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10270,7 +10288,8 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10311,7 +10330,8 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10352,7 +10372,8 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10393,7 +10414,8 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
-                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
         },
         'uvalue_type' : 'str',
@@ -11850,9 +11872,11 @@ ursgal_params = {
             'custom_val_max' : 0,
         },
         'uvalue_translation' : {
-            'bi_directional': 2,
-            'forward' : 0,
-            'reverse' : 1,
+            'deepnovo_style_1': {
+                'bi_directional': 2,
+                'forward' : 0,
+                'reverse' : 1,
+            },
         },
         'uvalue_type' : "select",
     },
@@ -11947,7 +11971,7 @@ ursgal_params = {
             'updownval': 1,
             'unit': 'psms',
         },
-        'default_value': True,
+        'default_value': False,
         'description': ''' DeepNovo builds the knapsack matrix ''',
         'triggers_rerun': True,
         'ukey_translation': {
@@ -12021,7 +12045,7 @@ ursgal_params = {
         'description' :  ''' Defines the search mode for DeepNovo ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'deepnovo_style_1': ('search_denovo', 'search_hybrid', 'search_db'),
+            'deepnovo_style_1': ('search_denovo', 'search_hybrid', 'search_db', 'decode'),
         },
         'utag' : [
             'de novo',
@@ -12032,11 +12056,35 @@ ursgal_params = {
                 'search_denovo',
                 'search_hybrid',
                 'search_db',
+                'decode',
             ],
             'custom_val_max' : 0,
         },
         'uvalue_translation' : {
         },
         'uvalue_type' : "select",
+    },
+    'deepnovo_knapsack_file' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'deepnovo_0_0_1',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'deepnovo_style_1': 'knapsack_file',
+        },
+        'utag' : [
+            'de novo',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : 'default',
+        'description' : \
+            'Path to the knapsack matrix for DeepNovo. Use "default" for the default file location in the resources'
     },
 }
