@@ -153,6 +153,12 @@ Available X!Tandem versions, starting with the newest version:
 De Novo Search Engines
 ^^^^^^^^^^^^^^^^^^^^^^
 
+DeepNovo
+--------
+
+.. autoclass:: ursgal.wrappers.deepnovo_0_0_1.deepnovo_0_0_1
+   :members:
+
 Novor
 -----
 
