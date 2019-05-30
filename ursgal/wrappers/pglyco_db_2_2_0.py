@@ -5,6 +5,7 @@ from collections import defaultdict as ddict
 import csv
 import itertools
 import sys
+import re
 
 class pglyco_db_2_2_0(ursgal.UNode):
     """
@@ -82,23 +83,48 @@ class pglyco_db_2_2_0(ursgal.UNode):
             self.params['translations']['output_file_incl_path'].strip('.csv')
             + '_pGlyco.cfg'
         )
-        # self.created_tmp_files.append(self.param_file_name)
+        self.created_tmp_files.append(self.param_file_name)
 
-        # pprint.pprint(self.params['translations']['_grouped_by_translated_key'])
-        # pprint.pprint(self.params)
-        # sys.exit(1)
         self.params_to_write = {
             'output_dir_path' : self.params['output_dir_path'],
             'input_file' : self.params['translations']['mgf_input_file'],
         }
+
+        db_file = self.params['translations']['database']
+        db_N2J = db_file.repalce('.fasta', '_N2J.fasta')
+        self.params['translations']['_grouped_by_translated_key']['fasta'] = db_N2J
+
+        if sys.platform == 'win32':
+            line_ending = '\n'
+        else:
+            line_ending = '\r\n'
+        if os.path.is_file(db_N2J) is False:
+            with open(db_N2J, 'w') as out_fasta:
+                with open(db_file, 'r') as in_fasta:
+                    for fastaID, sequence in ursgal.ucore.parse_fasta(in_fasta):
+                        matches = []
+                        for match in re.finditer('N[^P][ST]', sequence):
+                            matches.append(match.span())
+                        new_sequence = ''
+                        prev_end = 0
+                        for start, end in matches:
+                            new_sequence += sequence[prev_end:start]
+                            new_sequence += sequence[start:start + int(position)] + new_aa +\
+                                sequence[start + int(position) + 1:end]
+                            prev_end = end
+                        new_sequence += sequence[prev_end:len(sequence)]
+                        print(">{0}".format(fastaID), file=out_fasta, end=line_ending)
+                        for pos, aa in enumerate(new_sequence):
+                            print(aa, end="", file=out_fasta)
+                            if (pos + 1) % 80 == 0:
+                                print(file=opened_output_file, end=line_ending)
+                        print('', file=opened_output_file, end=line_ending)
 
         precursor_tolerance = []
         opt_mods = []
         fix_mods = []
         for pglyco_param_name in self.params['translations']['_grouped_by_translated_key'].keys():
             for ursgal_param_name, param_value in self.params['translations']['_grouped_by_translated_key'][pglyco_param_name].items():
-                # if pglyco_param_name in write_exclusion_list:
-                #     continue
                 if pglyco_param_name == 'search_precursor_tolerance':
                     precursor_tolerance.append(param_value)
                 elif pglyco_param_name == 'modifications':

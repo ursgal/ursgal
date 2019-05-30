@@ -995,7 +995,7 @@ ursgal_params = {
         ],
         'default_value' : {
             'J' : {
-                'original_aa' : ['L','I'],
+                'original_aa' : ['N','L','I'],
             },
             'O' : {
                 'original_aa' : ['K'],

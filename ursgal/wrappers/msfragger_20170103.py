@@ -4,7 +4,6 @@ import os
 import pprint
 from collections import defaultdict as ddict
 import csv
-import itertools
 import sys
 
 

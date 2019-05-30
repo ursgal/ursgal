@@ -155,7 +155,7 @@ class deepnovo_0_0_1(ursgal.UNode):
         print(
             '''
             [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
-            [ WARNING ] need to be combined for Novor (use of symmetric tolerance window).
+            [ WARNING ] need to be combined for DeepNovo (use of symmetric tolerance window).
             [ WARNING ] The arithmetic mean is used.
             '''
         )
@@ -352,8 +352,6 @@ class deepnovo_0_0_1(ursgal.UNode):
             self.exe,
             '--{0}'.format(self.params['translations']['deepnovo_mode'])
         ]
-        print('executing command list')
-        print(' '.join(self.params['command_list']))
 
         return self.params
 
