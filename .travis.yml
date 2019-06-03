@@ -1,15 +1,36 @@
 language: python
 python:
-  - "3.5"
   - "3.6"
 sudo: false
 
-before_install: pip install codecov
-after_success:  codecov
+branches:
+  only:
+    - master
 
-install:
-  - pip install numpy
-  - pip install -r requirements.txt
-  - python install_resources.py omssa_2_1_9
+matrix:
+  include:
+    - python: 3.5
+      env: TOXENV=py35
+    - python: 3.6
+      env: TOXENV=py36
+    - python: 3.7
+      env: TOXENV=py37
+      dist: xenial
+    - python: 3.6
+      env: TOXENV=docu
+    - python: 3.6
+      env: TOXENV=example_scripts
 
-script: nosetests --with-coverage
+
+script:
+  - tox
+  - |
+    if [[ $TRAVIS_TAG ]]; then
+      # upload package to pypi
+      python setup.py sdist
+      python setup.py bdist_wheel --universal
+      pip install twine
+      twine upload --repository-url https://test.pypi.org/legacy/ -u $TWINE_USERNAMEE -p $TWINE_TEST_PASSWORD dist/*
+      twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD dist/*
+      # upload docu
+    fi

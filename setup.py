@@ -47,6 +47,8 @@ version_path = os.path.join(
 with open(version_path, 'r') as version_file:
     ursgal_version = version_file.read().strip()
 
+with open('requirements.txt') as req:
+    requirements = req.readlines()
 
 setup(
     name='ursgal',
@@ -66,12 +68,7 @@ setup(
     build_requires=[
         'numpy',
     ],
-    install_requires=[
-        'pymzml',
-        'regex',
-        'pyqms',
-        "pyahocorasick >= 1.1.4;sys_platform!='win32'",
-    ],
+    install_requires=requirements,
     long_description='Universal Python module combining common bottom-up proteomics tools for large-scale analysis',
     author='Lukas P. M. Kremer, Purevdulam Oyunchimeg, Johannes Barth, Stefan Schulze and Christian Fufezan',
     author_email='christian@fufezan.net',
