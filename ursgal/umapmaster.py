@@ -12,6 +12,7 @@ from collections import defaultdict as ddict
 import multiprocessing
 import os
 import time
+import sys
 
 try:
     import regex as regex
@@ -220,9 +221,11 @@ class UParamMapper( dict ):
                     # print()
                 styles_seen = set()
                 for engine in udict['available_in_unode']:
+                    # if style != self.unodes[ engine ]['META_INFO']['utranslation_style']:
+                    #     continue
                     # if vvv:
                     #     print(engine )
-                    if style_basename not in engine:
+                    if engine.startswith(style_basename) is False:
                         continue
                     # this style 2 engine lookup is not quite right ...
                     # This function requires unode meta info for proper

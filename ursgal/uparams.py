@@ -1281,6 +1281,7 @@ ursgal_params = {
                 'moda_v1_61' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
+                'pnovo_3_1_3' : True,
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1321,6 +1322,7 @@ ursgal_params = {
                 'moda_v1_61' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
+                'pnovo_3_1_3' : True,
             },
             'qvality_style_1' : {
                 'None'                 : None,
@@ -1361,6 +1363,7 @@ ursgal_params = {
                 'moda_v1_61' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
+                'pnovo_3_1_3' : True,
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1401,6 +1404,7 @@ ursgal_params = {
                 'moda_v1_61' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
+                'pnovo_3_1_3' : True,
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1441,6 +1445,7 @@ ursgal_params = {
                 'moda_v1_61' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
+                'pnovo_3_1_3' : True,
             },
         },
         'uvalue_type'    : 'select',
@@ -1885,6 +1890,7 @@ ursgal_params = {
             'pipi_1_4_6',
             'moda_v1_61',
             'pglyco_db_2_2_0',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -1897,7 +1903,8 @@ ursgal_params = {
             'msfragger_style_1'   : 'num_threads',
             'pipi_style_1'        : 'thread_num',
             'moda_style_1'        : '-@',
-            'pglyco_db_style_1'      : 'process',
+            'pglyco_db_style_1'   : 'process',
+            'pnovo_style_1'       : 'thread',
         },
         'utag' : [
             'hardware_resources',
@@ -1933,6 +1940,9 @@ ursgal_params = {
             'msfragger_style_1' : {
                 -1 : 'max - 1',
             },
+            'pnovo_style_1' : {
+                -1 : 'max - 1',
+            }
         },
         'uvalue_type' : 'int _uevaluation_req',
         'uvalue_option' : {
@@ -2440,6 +2450,7 @@ ursgal_params = {
             'pipi_1_4_6',
             'pglyco_db_2_2_0',
             'deepnovo_0_0_1',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2460,6 +2471,7 @@ ursgal_params = {
             'pipi_style_1'                  : 'enzyme',
             'pglyco_db_style_1'             : 'enzyme',
             'deepnovo_style_1'              : 'cleavage_rule',
+            'pnovo_style_1'                 : 'enzyme',
         },
         'utag' : [
             'database',
@@ -2735,7 +2747,19 @@ ursgal_params = {
                 'formic_acid': 'formic acid',
                 'lysc': 'lysc',
                 'trypsin': 'trypsin',
-            }
+            },
+            'pnovo_style_1': {
+                'trypsin_p' : 'Trypsin KR _ C',
+                'chymotrypsin' : 'Chymotrypsin_P FYWML P C',
+                'formic_acid_p' : 'FormicAcid D _ C',
+                'lysc' : 'Lys-K_P K P C',
+                'lysc_p': 'Lys-K K _ C',
+                'pepsina' : 'PepsinA-FL FL _ C',
+                'trypsin' : 'Trypsin_P KR P C',
+                'gluc' : 'GluC_P DE P C',
+                'argc': 'Arg-C R P C',
+                'aspn': 'Asp-N D _ N'
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -2994,6 +3018,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3009,7 +3034,8 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
-            'pglyco_db_style_1'    : 'search_fragment_tolerance',
+            'pglyco_db_style_1' : 'search_fragment_tolerance',
+            'pnovo_style_1'     : 'frag_tol',
         },
         'utag' : [
             'fragment',
@@ -3065,6 +3091,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3080,7 +3107,8 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
-            'pglyco_db_style_1'    : 'search_fragment_tolerance_type',
+            'pglyco_db_style_1' : 'search_fragment_tolerance_type',
+            'pnovo_style_1'     : 'frag_tol_type_ppm',
         },
         'utag' : [
             'fragment',
@@ -3108,6 +3136,10 @@ ursgal_params = {
             },
             'pglyco_db_style_1' : {
                 'da'  : 'Da',
+            },
+            'pnovo_style_1': {
+                'ppm' : 1,
+                'da'  : 0,
             },
         },
         'uvalue_type' : 'select',
@@ -3201,11 +3233,13 @@ ursgal_params = {
             'msgfplus_v9979',
             'novor_1_1beta',
             'novor_1_05',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1' : '-m',
             'novor_style_1'    : 'fragmentation',
+            'pnovo_style_1'    : 'activation_type',
         },
         'utag' : [
             'instrument',
@@ -3220,6 +3254,11 @@ ursgal_params = {
             },
             'novor_style_1' : {
                 'cid' : 'CID',
+                'hcd' : 'HCD',
+            },
+            'pnovo_style_1' : {
+                'cid' : 'CID',
+                'etd' : 'ETD',
                 'hcd' : 'HCD',
             },
         },
@@ -5409,6 +5448,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'pglyco_db_2_2_0',
+            'pnovo_3_1_3',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -5427,6 +5467,7 @@ ursgal_params = {
             'xtandem_style_1'  : 'spectrum, path',
             'pglyco_db_style_1': 'file1',
             'deepnovo_style_1' : ('denovo_input_file', 'hybrid_input_file', 'db_input_file'),
+            'pnovo_style_1'    : 'spec_path1',
         },
         'utag' : [
             'input_files',
@@ -5821,6 +5862,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'pglyco_db_2_2_0',
             'deepnovo_0_0_1',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5848,6 +5890,7 @@ ursgal_params = {
             'pyqms_style_1' : 'modifications',
             'pglyco_db_style_1' : 'modifications',
             'deepnovo_style_1' : 'modifications',
+            'pnovo_style_1' : 'modifications',
         },
         'utag' : [
             'modifications',
@@ -6770,6 +6813,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -6778,7 +6822,8 @@ ursgal_params = {
             'myrimatch_style_1' : 'MaxResultRank',
             'omssa_style_1'     : '-hc',
             'pepnovo_style_1'   : '-num_solutions',
-            'msfragger_style_1' : 'output_report_topN'
+            'msfragger_style_1' : 'output_report_topN',
+            'pnovo_style_1'     : 'report_pep',
         },
         'utag' : [
             'output',
@@ -7727,6 +7772,7 @@ ursgal_params = {
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
             'deepnovo_0_0_1',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7746,7 +7792,8 @@ ursgal_params = {
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'  : 'search_precursor_tolerance',
-            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm')
+            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
+            'pnovo_style_1'      : 'pep_tol',
         },
         'utag' : [
             'precursor',
@@ -7813,6 +7860,7 @@ ursgal_params = {
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
             'deepnovo_0_0_1',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7832,7 +7880,8 @@ ursgal_params = {
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'  : 'search_precursor_tolerance',
-            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm')
+            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
+            'pnovo_style_1'      : 'pep_tol',
         },
         'utag' : [
             'precursor',
@@ -7897,6 +7946,7 @@ ursgal_params = {
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
             'deepnovo_0_0_1',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7914,7 +7964,8 @@ ursgal_params = {
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'  : 'search_precursor_tolerance_type',
-            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm')
+            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
+            'pnovo_style_1'      : 'pep_tol_type_ppm',
         },
         'utag' : [
             'precursor',
@@ -7950,7 +8001,11 @@ ursgal_params = {
             },
             'pglyco_db_style_1': {
                 'da' : 'Da'
-            }
+            },
+            'pnovo_style_1': {
+                'ppm' : 1,
+                'da'  : 0,
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -8084,6 +8139,7 @@ ursgal_params = {
             'msfragger_20171106',
             'msfragger_20190222',
             'pglyco_db_2_2_0',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8091,7 +8147,8 @@ ursgal_params = {
             'myrimatch_style_1' : 'MaxPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_max_mass',
-            'pglyco_db_style_1'    : 'max_peptide_weight',
+            'pglyco_db_style_1' : 'max_peptide_weight',
+            'pnovo_style_1'     : 'mass_upper_bound',
         },
         'utag' : [
             'precursor',
@@ -8184,6 +8241,7 @@ ursgal_params = {
             'msfragger_20171106',
             'msfragger_20190222',
             'pglyco_db_2_2_0',
+            'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8191,7 +8249,8 @@ ursgal_params = {
             'myrimatch_style_1' : 'MinPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_min_mass',
-            'pglyco_db_style_1'    : 'min_peptide_weight',
+            'pglyco_db_style_1' : 'min_peptide_weight',
+            'pnovo_style_1'     : 'mass_lower_bound',
         },
         'utag' : [
             'precursor',
@@ -10164,6 +10223,7 @@ ursgal_params = {
                 'moda_v1_61'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10206,6 +10266,7 @@ ursgal_params = {
                 'moda_v1_61'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10248,6 +10309,7 @@ ursgal_params = {
                 'moda_v1_61'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10290,6 +10352,7 @@ ursgal_params = {
                 'moda_v1_61'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10332,6 +10395,7 @@ ursgal_params = {
                 'moda_v1_61'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10374,6 +10438,7 @@ ursgal_params = {
                 'moda_v1_61'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10416,6 +10481,7 @@ ursgal_params = {
                 'moda_v1_61'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'pnovo_3_1_3'          : 'pNovo:Score',
             },
         },
         'uvalue_type' : 'str',

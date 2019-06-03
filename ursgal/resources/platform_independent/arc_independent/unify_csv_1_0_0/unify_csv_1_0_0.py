@@ -257,6 +257,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         'pepnovo',
         'uninovo',
         'deepnovo',
+        'pnovo',
         'unknown_engine'
     ]
     database_search_engines = [
@@ -397,6 +398,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     MSGF+
                     X!Tandem
                     pGlyco
+                    pNovo
                 '''
                 if 'RTINSECONDS=' in line_dict['Spectrum Title']:
                     line_2_split = line_dict['Spectrum Title'].split(' ')[0].strip()
@@ -408,6 +410,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
                 input_file_basename, spectrum_id, _spectrum_id, charge = line_2_split.split('.')[:4]
                 pure_input_file_name = ''
+
+                if line_dict['Charge'] == '':
+                    line_dict['Charge'] = charge
+                if line_dict['Spectrum ID'] == '':
+                    line_dict['Spectrum ID'] = spectrum_id
 
             elif 'scan=' in line_dict['Spectrum ID']:
                 pure_input_file_name                = os.path.basename(

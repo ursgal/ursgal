@@ -34,7 +34,7 @@ class pglyco_db_2_2_0(ursgal.UNode):
         'input_extensions': ['.mgf'],
         'output_extensions': ['.csv'],
         'create_own_folder': True,
-        'in_development': True,
+        'in_development': False,
         'include_in_git': False,
         'distributable': False,
         'engine_type': {
@@ -51,7 +51,7 @@ class pglyco_db_2_2_0(ursgal.UNode):
             },
         },
         'citation':
-        'Liu MQ, Zeng WF,, Fang P, Cao WQ, Liu C, Yan GQ, Zhang Y, Peng C, Wu JQ,'
+        'Liu MQ, Zeng WF, Fang P, Cao WQ, Liu C, Yan GQ, Zhang Y, Peng C, Wu JQ,'
             'Zhang XJ, Tu HJ, Chi H, Sun RX, Cao Y, Dong MQ, Jiang BY, Huang JM, Shen HL,'
             'Wong CCL, He SM, Yang PY. (2017) pGlyco 2.0 enables precision N-glycoproteomics '
             'with comprehensive quality control and one-step mass spectrometry'
