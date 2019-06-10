@@ -668,7 +668,7 @@ class UNode(object, metaclass=Meta_UNode):
             used. Returns None if no search engine was used yet.
         '''
         last_search_engine = None
-        last_search_engine = self.get_last_engine( 
+        last_search_engine = self.get_last_engine(
             history=history,
             engine_types=[
                 'cross_link_search_engine',
@@ -1212,8 +1212,6 @@ class UNode(object, metaclass=Meta_UNode):
         self.postflight_return_code = 0
         self.stats = {}
 
-
-
     def generate_empty_report( self ):
         empty_report = {
             'preflight' : None,
@@ -1239,6 +1237,56 @@ class UNode(object, metaclass=Meta_UNode):
         o_finfo = self.io['output']['finfo']
         self.params['output_dir_path'] = o_finfo['dir']
         self.params['output_file'] = o_finfo['file']
+
+    def fix_md5_and_file_in_json(self, ifile=None, json_path=None):
+        '''
+        Fixes supplementary output json
+        '''
+        self.print_info(
+            'Preparing json fix',
+            caller = 'fix_md5'
+        )
+        if ifile is None:
+            ifile = json_path.replace('.u.json', '')
+            if os.path.exists(ifile) is False:
+                raise IOError('file corresponding to {0} does not exists'.format(json_path))
+        elif json_path is None:
+            json_path = ifile+'.u.json'
+            if os.path.exists(json_path) is False:
+                raise IOError('json ({0}) corresponding to {1} does not exists'.format(json_path, ifile))
+        i_finfo, o_finfo, params, stats = self.load_json(json_path=json_path)
+
+        file_root, file_extention = os.path.splitext(os.path.basename(ifile))
+        new_o_finfo = {
+            'dir': os.path.dirname(ifile),
+            'file': os.path.basename(ifile),
+            'file_root': file_root,
+            'file_extention': file_extention,
+            'full': ifile,
+            'is_compressed': False,
+             'json': os.path.basename(json_path),
+             'json_exists': True,
+             'md5' : self.calc_md5(ifile)
+        }
+
+        j_content = [
+            i_finfo,
+            new_o_finfo,
+            params,
+            stats,
+        ]
+        with open(json_path , 'w') as file_object:
+            json.dump(
+                j_content,
+                file_object,
+                sort_keys = True,
+                indent = 2
+            )
+        self.print_info(
+            'New json dumped {0}'.format(os.path.basename(json_path)),
+            caller = 'fix_md5'
+        )
+
 
     def run(self, json_path=None ):
         '''
