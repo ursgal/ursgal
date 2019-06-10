@@ -333,19 +333,19 @@ style="position:relative; top:0; left:0; z-index:-1;">
                 'value'  : 'A.B',
                 'x'      : kwargs['cx'] ,
                 'y'      : kwargs['cy']        ,
-                'results': None
+                'results': None,
             },
             'B-A'       : {
                 'value'  : 'B.C',
                 'x'      : kwargs['cx'] + 170 ,
                 'y'      : kwargs['cy']        ,
-                'results': None
+                'results': None,
             },
             'A-B'       : {
                 'value'  : 'A.C',
                 'x'      : kwargs['cx'] - 170 ,
                 'y'      : kwargs['cy']        ,
-                'results': None
+                'results': None,
             },
         }
     elif len(args) == 3:
@@ -354,43 +354,43 @@ style="position:relative; top:0; left:0; z-index:-1;">
                 'value'  : 'A.B',
                 'x'      : kwargs['cx'] - 90  ,
                 'y'      : kwargs['cy']        ,
-                'results': None
+                'results': None, 
             },
             'B&C-A'     : {
                 'value'  : 'B.C',
                 'x'      : kwargs['cx'] + 90  ,
                 'y'      : kwargs['cy']        ,
-                'results': None
+                'results': None,
             },
             'A&C-B'     : {
                 'value'  : 'A.C',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] + 240  ,
-                'results': None
+                'results': None,
             },
             'A&B&C'     : {
                 'value'  : 'A.B.C',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] + 100  ,
-                'results': None
+                'results': None,
             },
             'A-(B|C)'   : {
                 'value'  : 'A',
                 'x'      : kwargs['cx'] - 190 ,
                 'y'      : kwargs['cy']        ,
-                'results': None
+                'results': None,
             },
             'C-(A|B)'   : {
                 'value'  : 'C',
                 'x'      : kwargs['cx'] + 190 ,
                 'y'      : kwargs['cy']        ,
-                'results': None
+                'results': None,
             },
             'B-(A|C)'   : {
                 'value'  : 'B',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] - 140  ,
-                'results': None
+                'results': None,
             },
         }
     elif len(args) == 4:
@@ -399,91 +399,91 @@ style="position:relative; top:0; left:0; z-index:-1;">
                 'value'  : 'A.B',
                 'x'      : kwargs['cx'] - 140 ,
                 'y'      : kwargs['cy'] - 70   ,
-                'results': None
+                'results': None,
             },
             'C&D-(A|B)' : {
                 'value'  : 'C.D',
                 'x'      : kwargs['cx'] + 140 ,
                 'y'      : kwargs['cy'] - 70   ,
-                'results': None
+                'results': None,
             },
             'B&C-(A|D)' : {
                 'value'  : 'B.C',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] - 70   ,
-                'results': None
+                'results': None,
             },
             'A&B&C&D'   : {
                 'value'  : 'A.B.C.D',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] + 100  ,
-                'results': None
+                'results': None,
             },
             'A&C-(B|D)' : {
                 'value'  : 'A.C',
                 'x'      : kwargs['cx'] - 125 ,
                 'y'      : kwargs['cy'] + 135  ,
-                'results': None
+                'results': None,
             },
             'B&D-(A|C)' : {
                 'value'  : 'B.D',
                 'x'      : kwargs['cx'] + 125 ,
                 'y'      : kwargs['cy'] + 135  ,
-                'results': None
+                'results': None,
             },
             'A&D-(B|C)' : {
                 'value'  : 'A.D',
                 'x'      : kwargs['cx']       ,
                 'y'      : kwargs['cy'] + 240  ,
-                'results': None
+                'results': None,
             },
             '(A&C&D)-B' : {
                 'value'  : 'A.C.D',
                 'x'      : kwargs['cx'] - 55  ,
                 'y'      : kwargs['cy'] + 170  ,
-                'results': None
+                'results': None,
             },
             '(A&B&D)-C' : {
                 'value'  : 'A.B.D',
                 'x'      : kwargs['cx'] + 55  ,
                 'y'      : kwargs['cy'] + 170  ,
-                'results': None
+                'results': None,
             },
             '(A&B&C)-D' : {
                 'value'  : 'A.B.C',
                 'x'      : kwargs['cx'] - 95  ,
                 'y'      : kwargs['cy'] + 30   ,
-                'results': None
+                'results': None,
             },
             '(B&C&D)-A' : {
                 'value'  : 'B.C.D',
                 'x'      : kwargs['cx'] + 95  ,
                 'y'      : kwargs['cy'] + 30   ,
-                'results': None
+                'results': None,
             },
             'A-(B|C|D)' : {
                 'value'  : 'A',
                 'x'      : kwargs['cx'] - 200 ,
                 'y'      : kwargs['cy']        ,
-                'results': None
+                'results': None,
             },
             'D-(A|B|C)' : {
                 'value'  : 'D',
                 'x'      : kwargs['cx'] + 200 ,
                 'y'      : kwargs['cy']        ,
-                'results': None
+                'results': None,
             },
             'B-(A|C|D)' : {
                 'value'  : 'B',
                 'x'      : kwargs['cx'] - 95  ,
                 'y'      : kwargs['cy'] - 140  ,
-                'results': None
+                'results': None,
             },
             'C-(A|B|D)' : {
                 'value'  : 'C',
                 'x'      : kwargs['cx'] + 95  ,
                 'y'      : kwargs['cy'] - 140  ,
-                'results': None
+                'results': None,
             },
         }
     elif len(args) == 5:

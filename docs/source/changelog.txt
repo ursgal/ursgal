@@ -1,6 +1,15 @@
 Changelog
 =========
 
+Version 0.6.3    (03.2019)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Added Percolator 3.2, including the options to infer protein PEP and FDR
+#. Added latest versions of MSGF+ (version 2019.01.22) and
+   MSAmanda (version 2.0.0.11219) and Novor (version 1.05)
+#. Added support for conversion of mzML files originating from .wiff files
+   based on the id_dict property in the latest pymzML version (2.1.0)
+#. Some minor bugfixes and improvements (check git log for details)
+
 Version 0.6.2    (09.2018)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 #. MSFragger version 20171106 was implemented

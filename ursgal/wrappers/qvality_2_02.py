@@ -28,7 +28,7 @@ class qvality_2_02( ursgal.UNode ):
         },
         'input_extensions'   : ['.csv'],
         'output_extensions'  : ['.csv'],
-        'output_suffix'      : 'qvality_validated',
+        'output_suffix'      : 'qvality_2_02_validated',
         'create_own_folder'  : False,
         'include_in_git'     : False,
         'group_psms'         : True,

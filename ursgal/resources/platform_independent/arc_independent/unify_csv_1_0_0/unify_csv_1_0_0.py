@@ -383,7 +383,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             ##########################
             # Spectrum Title block
-            # reformating Spectrum Title, 
+            # reformatting Spectrum Title,
             if line_dict['Spectrum Title'] != '':
                 '''
                 Valid for:
@@ -472,7 +472,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             input_file_basename
                         )
                     )
-                    
+
             #END Spectrum Title block
             ##########################
             spectrum_id = int(spectrum_id)
@@ -481,7 +481,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     [ spectrum_id ]
 
             # We should check if data has minute format or second format...
-            if scan_rt_lookup[ input_file_basename ]['unit'] == 'second':
+            if scan_rt_lookup[ input_file_basename_for_rt_lookup ]['unit'] == 'second':
                 rt_corr_factor = 1
             else:
                 rt_corr_factor = 60
@@ -800,7 +800,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     if modification in tmp_mods:
                         if mod in n_term_replacement.keys() and pos == 1:
                             if line_dict['Sequence'][0] in mod_dict[mod]['aa']:
-                                modification.replace(
+                                modification = modification.replace(
                                     '{0}:1'.format(mod),
                                     '{0}:0'.format(mod)
                                 )
@@ -1107,13 +1107,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         min_accuracy = isotopologue_acc
 
             collected_line_dict['uCalc m/z'] = calc_mz
-            if collected_line_dict['Calc m/z'] == '':
-                collected_line_dict['Calc m/z'] = calc_mz
+            if database_search is True:
+                if collected_line_dict['Calc m/z'] == '':
+                    collected_line_dict['Calc m/z'] = calc_mz
 
             collected_line_dict['Accuracy (ppm)'] = round(min_accuracy, 5)
 
             csv_output.writerow(collected_line_dict)
-    
+
     output_file_object.close()
 
     if database_search is True:

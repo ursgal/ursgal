@@ -3,7 +3,7 @@ import ursgal
 import os
 
 
-class xtandem_vengeance( ursgal.UNode ):
+class xtandem_vengeance(ursgal.UNode):
     """
     X!Tandem UNode
     Parameter options at http://www.thegpm.org/TANDEM/api/
@@ -52,8 +52,8 @@ class xtandem_vengeance( ursgal.UNode ):
                 },
             },
         },
-        'citation' : \
-            'Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem '\
+        'citation' :
+            'Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem '
             'mass spectra.',
     }
 
@@ -61,7 +61,7 @@ class xtandem_vengeance( ursgal.UNode ):
         super(xtandem_vengeance, self).__init__(*args, **kwargs)
         pass
 
-    def preflight( self ):
+    def preflight(self):
         '''
         Formatting the command line via self.params
 
@@ -93,12 +93,10 @@ class xtandem_vengeance( ursgal.UNode ):
 
         for file_name in xml_required:
             file_info_key = file_name.replace('.xml', '')
-            xml_file_path = os.path.join(
-                self.params['output_dir_path'],
-                file_name
-            )
-            self.params['translations'][ file_info_key ] = xml_file_path
-            self.created_tmp_files.append( xml_file_path )
+            xml_file_path = self.params['translations']['output_file_incl_path'].strip(
+                '.xml') + file_name
+            self.params['translations'][file_info_key] = xml_file_path
+            self.created_tmp_files.append(xml_file_path)
         #
         # building command_list !
         #
@@ -108,11 +106,13 @@ class xtandem_vengeance( ursgal.UNode ):
         ]
 
         if self.params['translations']['label'] == '15N':
-            self.params['translations']['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">{15N-masses}</note>'.format(**self.params['translations'])
+            self.params['translations'][
+                '15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">{15N-masses}</note>'.format(**self.params['translations'])
             # translations['protein, modified residue mass file']['label'] = \
             #     '<note label="protein, modified residue mass file" type="input">{15N-masses}</note>'.format(**self.params['translations'])
         else:
-            self.params['translations']['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">no</note>'
+            self.params['translations'][
+                '15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">no</note>'
             # translations['protein, modified residue mass file']['label'] = \
             #     '<note label="protein, modified residue mass file" type="input">no</note>'
 
@@ -122,33 +122,33 @@ class xtandem_vengeance( ursgal.UNode ):
         fixed_mods = []
         self.params['translations']['Prot-N-term'] = 0.0
         self.params['translations']['Prot-C-term'] = 0.0
-        for mod in self.params[ 'mods' ][ 'fix' ]:
+        for mod in self.params['mods']['fix']:
             if mod['pos'] == 'N-term':
                 mod['aa'] = '['
             elif mod['pos'] == 'C-term':
                 mod['aa'] = ']'
 
             fixed_mods.append(
-                '{0}@{1}'.format(mod[ 'mass' ], mod[ 'aa' ] )
+                '{0}@{1}'.format(mod['mass'], mod['aa'])
             )
 
         self.params['translations']['acetyl_N_term'] = 'no'
         self.params['translations']['pyro_glu'] = 'no'
         pyro_glu = 0
         potentially_modified_aa = set()
-        for mod in self.params[ 'mods' ][ 'opt' ]:
-            if mod[ 'aa' ] == '*' and mod[ 'name' ] == 'Acetyl' and mod[ 'pos' ] == 'Prot-N-term' :
+        for mod in self.params['mods']['opt']:
+            if mod['aa'] == '*' and mod['name'] == 'Acetyl' and mod['pos'] == 'Prot-N-term' :
                 self.params['translations']['acetyl_N_term'] = 'yes'
                 continue
-            if mod[ 'aa' ] == '*' and mod[ 'name' ] == 'Gln->pyro-Glu' and mod[ 'pos' ] == 'Pep-N-term' :
+            if mod['aa'] == '*' and mod['name'] == 'Gln->pyro-Glu' and mod['pos'] == 'Pep-N-term' :
                 pyro_glu += 1
                 continue
-            if mod[ 'aa' ] == '*' and mod[ 'name' ] == 'Glu->pyro-Glu' and mod[ 'pos' ] == 'Pep-N-term' :
+            if mod['aa'] == '*' and mod['name'] == 'Glu->pyro-Glu' and mod['pos'] == 'Pep-N-term' :
                 pyro_glu += 1
                 continue
             for term in ['Prot-N-term', 'Prot-C-term']:
-                if mod[ 'pos' ] == term:
-                    if mod[ 'aa' ] == '*':
+                if mod['pos'] == term:
+                    if mod['aa'] == '*':
                         if self.params['translations'][term] != 0.0:
                             print(
                                 '''
@@ -157,13 +157,13 @@ class xtandem_vengeance( ursgal.UNode ):
                             )
                             continue
                         else:
-                            self.params['translations'][term] = mod[ 'mass' ]
+                            self.params['translations'][term] = mod['mass']
                     else:
                         print(
-                                '''
+                            '''
 [ WARNING ] X!Tandem does not support specific amino acids for terminal modifications
 [ WARNING ] Continue without modification {0} '''.format(mod, term, **mod)
-                            )
+                        )
                         continue
             if mod['aa'] in potentially_modified_aa:
                 print(
@@ -178,7 +178,8 @@ class xtandem_vengeance( ursgal.UNode ):
                 if mod['name'] in self.params['translations']['forbidden_cterm_mods']:
                     forbidden_cterm = ']'
                 if mod['name'] in self.params['translations']['max_num_per_mod_name_specific'].keys():
-                    max_num_per_mod_name_specific = self.params['translations']['max_num_per_mod_name_specific'][mod['name']]
+                    max_num_per_mod_name_specific = self.params['translations'][
+                        'max_num_per_mod_name_specific'][mod['name']]
 
                 if mod['pos'] == 'N-term':
                     mod['aa'] = '['
@@ -187,13 +188,13 @@ class xtandem_vengeance( ursgal.UNode ):
 
                 potential_mods.append(
                     '{0}@{1}{2}{3}'.format(
-                        mod[ 'mass' ],
+                        mod['mass'],
                         max_num_per_mod_name_specific,
                         forbidden_cterm,
-                        mod[ 'aa' ],
+                        mod['aa'],
                     )
                 )
-                potentially_modified_aa.add( mod['aa'] )
+                potentially_modified_aa.add(mod['aa'])
 
         if pyro_glu == 2:
             self.params['translations']['pyro_glu'] = 'yes'
@@ -202,41 +203,46 @@ class xtandem_vengeance( ursgal.UNode ):
 [ WARNING ] X!Tandem looks for Gln->pyro-Glu and Glu->pyro-Glu
 [ WARNING ] at the same time, please include both or none
 [ WARNING ] Continue without modification {0} '''.format(mod, **mod)
-            )
-        self.params['translations']['fixed_modifications'] =  ','.join( fixed_mods )
-        self.params['translations']['potential_modifications'] = ','.join( potential_mods )
-        self.params['translations']['refine_potential_modifications'] = ','.join( refine_potential_mods )
+                  )
+        self.params['translations']['fixed_modifications'] = ','.join(
+            fixed_mods
+        )
+        self.params['translations']['potential_modifications'] = ','.join(
+            potential_mods
+        )
+        self.params['translations']['refine_potential_modifications'] = ','.join(
+            refine_potential_mods
+        )
 
         for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
             if ion in self.params['translations']['score_ion_list']:
-                self.params['translations']['score_{0}_ions'.format(ion)] = 'yes'
+                self.params['translations'][
+                    'score_{0}_ions'.format(ion)] = 'yes'
             else:
-                self.params['translations']['score_{0}_ions'.format(ion)] = 'no'
+                self.params['translations'][
+                    'score_{0}_ions'.format(ion)] = 'no'
 
-        templates = self.format_templates( )
+        templates = self.format_templates()
         for file_name, content in templates.items():
             if file_name == '15N-masses.xml' and self.params['translations']['label'] == '14N':
                 continue
-            xml_file_path = os.path.join(
-                self.params['output_dir_path'],
-                file_name
-            )
-            with open( xml_file_path, 'w') as out:
-                print( content, file = out)
+            xml_file_path = self.params['translations']['output_file_incl_path'].strip(
+                '.xml') + file_name
+            with open(xml_file_path, 'w') as out:
+                print(content, file=out)
                 self.print_info(
-                    'Wrote input file {0}'.format( file_name ),
-                    caller = 'preflight'
+                    'Wrote input file {0}'.format(file_name),
+                    caller='preflight'
                 )
 
-                self.created_tmp_files.append( xml_file_path )
+                self.created_tmp_files.append(xml_file_path)
         return self.params
 
-
-    def postflight( self ):
+    def postflight(self):
         # convert_xtandemXML_to_identcsv( self.params )
         pass
 
-    def format_templates( self ):
+    def format_templates(self):
         '''Returns formatted X!Tandem input files
 
         The formating is taken from self.params
@@ -246,7 +252,7 @@ class xtandem_vengeance( ursgal.UNode ):
 
         '''
         templates = {
-            '15N-masses.xml' : \
+            '15N-masses.xml' :
 '''<?xml version="1.0"?>
     <bioml title="peptide residue molecular mass values for an all 15N organisms">
         <aa type="A" mass="72.034148698" />
@@ -280,7 +286,7 @@ class xtandem_vengeance( ursgal.UNode ):
 ''',
             # -------------------------
             # -------------------------
-            'taxonomy.xml' : \
+            'taxonomy.xml' :
 '''<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml label="x! taxon-to-file matching list">
         <taxon label="{database_taxonomy}">
@@ -290,7 +296,8 @@ class xtandem_vengeance( ursgal.UNode ):
 '''.format(**self.params['translations']),
             # -------------------------
             # -------------------------
-            'input.xml' : '''<?xml version='1.0' encoding='iso-8859-1'?>
+            'input.xml' :
+'''<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml>
         <note label="list path, default parameters" type="input">{default_input}</note>
         <note label="list path, taxonomy information" type="input">{taxonomy}</note>
@@ -298,7 +305,8 @@ class xtandem_vengeance( ursgal.UNode ):
         <note label="output, path" type="input">{output_file_incl_path}</note>
     </bioml>'''.format( **self.params['translations'] ),
 
-        'default_input.xml' : '''<?xml version='1.0' encoding='iso-8859-1'?>
+            'default_input.xml' : 
+'''<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml label="ursgal">
     <note type="heading">
 
@@ -401,5 +409,5 @@ class xtandem_vengeance( ursgal.UNode ):
     <note type="input" label="output, histogram column width">30</note>
     <note type="input" label="output, mzid">{output_file_type}</note>
     </bioml>'''.format(**self.params['translations'])
-            }
+        }
         return templates

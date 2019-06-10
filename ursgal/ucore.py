@@ -290,7 +290,7 @@ def count_distinct_psms(csv_file_path=None, psm_defining_colnames=None):
     return psm_counter
 
 
-def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
+def merge_rowdicts(list_of_rowdicts, psm_colnames_to_merge_multiple_values, joinchar='<|>'):
     '''
     Merges CSV rows. If the column values are conflicting, they
     are joined with a character (joinchar).
@@ -298,19 +298,46 @@ def merge_rowdicts(list_of_rowdicts, joinchar='<|>'):
     merged_d = {}
     fieldnames = list_of_rowdicts[0].keys()
     for fieldname in fieldnames:
-        values = [d[fieldname] for d in list_of_rowdicts]
-        if len(set(values)) == 1:
-            merged_d[fieldname] = values[0]
-        else:
+        if fieldname in psm_colnames_to_merge_multiple_values.keys():
+            values = [d[fieldname] for d in list_of_rowdicts]
             no_empty_values = [v for v in values if v != '']
-            if len(set(no_empty_values)) == 1:
-                merged_d[fieldname] = no_empty_values[0]
+            values_as_floats = [float(value) for value in no_empty_values]
+
+            if psm_colnames_to_merge_multiple_values[fieldname] == 'max_value':
+                merged_d[fieldname] = max(values_as_floats)
+
+            elif psm_colnames_to_merge_multiple_values[fieldname] == 'min_value':
+                merged_d[fieldname] = min(values_as_floats)
+
+            elif psm_colnames_to_merge_multiple_values[fieldname] == 'avg_value':
+                merged_d[fieldname] = sum(values_as_floats)/len(values_as_floats)
+
+            elif psm_colnames_to_merge_multiple_values[fieldname] == 'most_frequent':
+                value_occurences = Counter(no_empty_values)
+                most_common_value, most_occurences = value_occurences.most_common(1)[0]
+                value_occurences_dict = dict(value_occurences)
+                final_values = []
+                for value in no_empty_values:
+                    if value in final_values:
+                        continue
+                    if value_occurences_dict[value] == most_occurences:
+                        final_values.append(value)
+                merged_d[fieldname] = joinchar.join(final_values)
+        
+        else:
+            values = [d[fieldname] for d in list_of_rowdicts]
+            if len(set(values)) == 1:
+                merged_d[fieldname] = values[0]
             else:
-                merged_d[fieldname] = joinchar.join(values)
+                no_empty_values = [v for v in values if v != '']
+                if len(set(no_empty_values)) == 1:
+                    merged_d[fieldname] = no_empty_values[0]
+                else:
+                    merged_d[fieldname] = joinchar.join(values)
     return merged_d
 
 
-def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_colnames=None, joinchar='<|>', overwrite_file=True):
+def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_colnames=None, psm_colnames_to_merge_multiple_values={}, joinchar='<|>', overwrite_file=True):
     '''
     Rows describing the same PSM (e.g. when two proteins share the
     same peptide) are merged to one row.
@@ -359,7 +386,7 @@ def merge_duplicate_psm_rows(csv_file_path=None, psm_counter=None, psm_defining_
         # finished parsing the old unmerged unified csv
         for rows_to_merge in rows_to_merge_dict.values():
             writer.writerow(
-                merge_rowdicts(rows_to_merge, joinchar=joinchar)
+                merge_rowdicts(rows_to_merge, psm_colnames_to_merge_multiple_values, joinchar=joinchar)
             )
     # remove the old unified csv that contains duplicate rows
     if overwrite_file:

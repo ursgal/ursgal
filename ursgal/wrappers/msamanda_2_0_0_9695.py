@@ -113,7 +113,7 @@ class msamanda_2_0_0_9695( ursgal.UNode ):
             '{0}'.format( self.params['translations']['output_file_incl_path'] + '_settings.xml' ),
             '{output_file_incl_path}'.format(**self.params['translations'])
         ]
-        # self.created_tmp_files.append(self.params['translations']['output_file_incl_path'] + '_settings.xml')
+        self.created_tmp_files.append(self.params['translations']['output_file_incl_path'] + '_settings_1.xml')
 
         score_ions = []
         instruments_file_input = []
@@ -129,7 +129,7 @@ class msamanda_2_0_0_9695( ursgal.UNode ):
         print(
             '''
             [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
-            [ WARNING ] need to be combined for pyQms (use of symmetric tolerance window).
+            [ WARNING ] need to be combined for MS Amanda (use of symmetric tolerance window).
             [ WARNING ] The arithmetic mean is used.
             '''
         )
@@ -203,18 +203,21 @@ class msamanda_2_0_0_9695( ursgal.UNode ):
 
         templates = self.format_templates( )
         for file_name, content in templates.items():
+            file2write = self.params['translations']['output_file_incl_path'] + file_name
             with open(
-                    self.params['translations']['output_file_incl_path'] + file_name,
+                    file2write,
                     'w'
                 ) as out:
                 print(content, file=out)
                 self.print_info(
-                    'Wrote input file {0}'.format( file_name),
+                    'Wrote input file {0}'.format(
+                        file2write
+                    ),
                     caller = 'Info'
                 )
                 self.created_tmp_files.append(
-                    self.params['translations']['output_file_incl_path'] + file_name
-                    )
+                    file2write
+                )
         return self.params
 
     def postflight( self ):

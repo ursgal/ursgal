@@ -155,6 +155,13 @@ Kojak tailored Percolator 2_08
    :members:
 
 
+Percolator 3_2_1
+----------------
+
+.. autoclass:: ursgal.wrappers.percolator_3_2_1.percolator_3_2_1
+   :members:
+
+
 Percolator 2_08
 ---------------
 

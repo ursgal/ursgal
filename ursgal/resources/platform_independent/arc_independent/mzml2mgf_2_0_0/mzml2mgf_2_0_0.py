@@ -52,6 +52,7 @@ def main(
     precursor_min_charge=1,
     precursor_max_charge=5,
     ion_mode='+',
+    spec_id_attribute=None,
 ):
 
     print(
@@ -82,7 +83,7 @@ def main(
     else:
         mz_correction_factor = 0
     precursor_charge_range = '{0}'.format(precursor_min_charge)
-    for charge in range(precursor_min_charge+1, precursor_max_charge+1):
+    for charge in range(precursor_min_charge + 1, precursor_max_charge + 1):
         precursor_charge_range += ' and {0}'.format(charge)
     mzml_basename = os.path.basename(mzml)
     for n, spec in enumerate(run):
@@ -104,11 +105,24 @@ def main(
                 [Warning] The retention time unit is not recognized or not specified.
                 [Warning] It is assumed to be minutes and continues with that.
             ''')
-        spectrum_id = spec.ID
+        if spec_id_attribute is None:
+            spectrum_id = spec.ID
+        else:
+            id_attribute, id_key = list(spec_id_attribute.items())[0]
+            if id_attribute == 'ID':
+                spectrum_id = spec.ID
+            elif id_attribute == 'index':
+                spectrum_id = spec.index+1
+            elif id_attribute == 'id_dict':
+                spectrum_id = spec.id_dict[id_key]
+            else:
+                print('''
+                    [ERROR] Please specifiy an available spec_id_attribute for mzml2mgf.
+                    [ERROR] Available: ID, id_dict, index
+                ''')
         tmp['rt_2_scan'][scan_time] = spectrum_id
         tmp['scan_2_rt'][spectrum_id] = scan_time
         tmp['unit'] = 'minute'
-
 
         if spec_ms_level != ms_level:
             continue
