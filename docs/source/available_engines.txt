@@ -176,6 +176,12 @@ PepNovo
 .. autoclass:: ursgal.wrappers.pepnovo_3_1.pepnovo_3_1
    :members:
 
+pNovo
+-----
+
+.. autoclass:: ursgal.wrappers.pnovo_3_1_3.pnovo_3_1_3
+   :members:
+
 
 .. _available_cross_link_engines:
 
