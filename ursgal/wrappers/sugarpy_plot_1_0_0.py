@@ -137,7 +137,7 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
                 sugarpy_params[translated_key] = list(
                     translation_dict.values())[0]
             else:
-                print('The translatd key ', translated_key,
+                print('The translated key ', translated_key,
                       ' maps on more than one ukey, but no special rules have been defined')
                 print(translation_dict)
                 sys.exit(1)

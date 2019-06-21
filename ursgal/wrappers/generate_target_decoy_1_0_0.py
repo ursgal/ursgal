@@ -123,7 +123,8 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
             output_file = self.params['translations']['output_file_incl_path'],
             enzyme      = self.params['translations']['enzyme'],
             mode        = self.params['translations']['decoy_generation_mode'],
-            decoy_tag   = self.params['translations']['decoy_tag']
+            decoy_tag   = self.params['translations']['decoy_tag'],
+            convert_aa_in_motif = self.params['translations']['convert_aa_in_motif'],
         )
 
         # self.print_execution_time(tag='execution')

@@ -954,12 +954,14 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'mzidentml_lib_1_6_10',
             'mzidentml_lib_1_6_11',
             'mzidentml_lib_1_7',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
         ],
@@ -1081,6 +1083,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : True,
         'description' :  ''' Static mods are not considered ''',
@@ -1114,6 +1117,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1125,6 +1129,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'deepnovo_style_1': 'base_mz',
         },
         'utag' : [
             'conversion'
@@ -1190,10 +1195,12 @@ ursgal_params = {
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
             'msamanda_2_0_0_11219',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
             'msamanda_style_1'  : 'LoadedSpectraAtOnce',
+            'deepnovo_style_1'  : 'buffer_size'
         },
         'utag' : [
             'hardware_resources',
@@ -1253,6 +1260,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : False,
                 'msgfplus_v2018_09_12' : False,
                 'msgfplus_v2019_01_22' : False,
+                'msgfplus_v2019_04_18' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -1265,11 +1273,14 @@ ursgal_params = {
                 'xtandem_alanine' : True,
                 'msfragger_20170103' : True,
                 'msfragger_20171106' : True,
+                'msfragger_20190222'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'pglyco_db_2_2_0' : True,
+                'deepnovo_0_0_1' : True,
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1289,6 +1300,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : False,
                 'msgfplus_v2018_09_12' : False,
                 'msgfplus_v2019_01_22' : False,
+                'msgfplus_v2019_04_18' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -1301,11 +1313,14 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
+                'msfragger_20190222'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'pglyco_db_2_2_0' : True,
+                'deepnovo_0_0_1' : True,
             },
             'qvality_style_1' : {
                 'None'                 : None,
@@ -1325,6 +1340,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : False,
                 'msgfplus_v2018_09_12' : False,
                 'msgfplus_v2019_01_22' : False,
+                'msgfplus_v2019_04_18' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -1337,11 +1353,14 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
+                'msfragger_20190222'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'pglyco_db_2_2_0' : True,
+                'deepnovo_0_0_1' : True,
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1361,6 +1380,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : False,
                 'msgfplus_v2018_09_12' : False,
                 'msgfplus_v2019_01_22' : False,
+                'msgfplus_v2019_04_18' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -1373,11 +1393,14 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
+                'msfragger_20190222'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'pglyco_db_2_2_0' : True,
+                'deepnovo_0_0_1' : True,
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1397,6 +1420,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : False,
                 'msgfplus_v2018_09_12' : False,
                 'msgfplus_v2019_01_22' : False,
+                'msgfplus_v2019_04_18' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -1409,11 +1433,14 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
+                'msfragger_20190222'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'pglyco_db_2_2_0' : True,
+                'deepnovo_0_0_1' : True,
             },
         },
         'uvalue_type'    : 'select',
@@ -1433,12 +1460,14 @@ ursgal_params = {
                 'msamanda_2_0_0_11219',
                 'msfragger_20170103',
                 'msfragger_20171106',
+                'msfragger_20190222',
                 'msgfplus_v2016_09_16',
                 'msgfplus_v2017_01_27',
                 'msgfplus_v2018_01_30',
                 'msgfplus_v2018_06_28',
                 'msgfplus_v2018_09_12',
                 'msgfplus_v2019_01_22',
+                'msgfplus_v2019_04_18',
                 'msgfplus_v9979',
                 'myrimatch_2_1_138',
                 'myrimatch_2_2_140',
@@ -1449,7 +1478,8 @@ ursgal_params = {
                 'xtandem_sledgehammer',
                 'xtandem_vengeance',
                 'xtandem_alanine',
-                'mascot_x_x_x'
+                'mascot_x_x_x',
+                'pglyco_db_2_2_0',
             ],
             'custom_val_max' : 0,
         },
@@ -1530,6 +1560,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : False,
         'description' :  ''' Specifies the trimming of a protein N-terminal methionine as a variable modification ''',
@@ -1658,12 +1689,14 @@ ursgal_params = {
                 'msamanda_2_0_0_11219' : False,
                 'msfragger_20170103'   : False,
                 'msfragger_20171106'   : False,
+                'msfragger_20190222'   : False,
                 'msgfplus_v2016_09_16' : True,
                 'msgfplus_v2017_01_27' : True,
                 'msgfplus_v2018_01_30' : True,
                 'msgfplus_v2018_06_28' : True,
                 'msgfplus_v2018_09_12' : True,
                 'msgfplus_v2019_01_22' : True,
+                'msgfplus_v2019_04_18' : True,
                 'msgfplus_v9979' : True,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -1679,6 +1712,8 @@ ursgal_params = {
                 'xtandem_piledriver' : True,
                 'xtandem_sledgehammer' : True,
                 'xtandem_vengeance' : True,
+                'pglyco_db_2_2_0' : False,
+                'deepnovo_0_0_1' : False,
             },
         },
         'uvalue_type' : 'bool',
@@ -1831,6 +1866,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -1844,9 +1880,11 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'moda_v1_61',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -1859,6 +1897,7 @@ ursgal_params = {
             'msfragger_style_1'   : 'num_threads',
             'pipi_style_1'        : 'thread_num',
             'moda_style_1'        : '-@',
+            'pglyco_db_style_1'      : 'process',
         },
         'utag' : [
             'hardware_resources',
@@ -1883,6 +1922,15 @@ ursgal_params = {
                 -1 : 'max - 1',
             },
             'moda_style_1' : {
+                -1 : 'max - 1',
+            },
+            'pglyco_db_style_1' : {
+                -1 : 'max - 1',
+            },
+            'pipi_style_1' : {
+                -1 : 'max - 1',
+            },
+            'msfragger_style_1' : {
                 -1 : 'max - 1',
             },
         },
@@ -1983,6 +2031,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -1998,8 +2047,11 @@ ursgal_params = {
             'compomics_utilities_4_11_5',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2015,6 +2067,8 @@ ursgal_params = {
             'compomics_utilities_style_1' : 'database',
             'msfragger_style_1'           : 'database_name',
             'pipi_style_1'                : 'db',
+            'pglyco_db_style_1'           : 'fasta',
+            'deepnovo_style_1'            : 'db_fasta_file',
 
         },
         'utag' : [
@@ -2225,27 +2279,30 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'pepnovo_3_1',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-model_dir',
+            'deepnovo_style_1': 'train_dir',
         },
         'utag' : [
             'model',
             'file_handling',
         ],
         'uvalue_translation' : {
+            'pepnovo_style_1' : {
+                'default' : None
+            },
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
             'none_val'      : '',
             'multiple_line' : False,
         },
-        'default_value' : None,
+        'default_value' : 'default',
         'description' : \
-            'Directory containing the model files for PepNovo. If \'None\', '\
-            'it is supposed to be in :\n\n'\
-            'resources/<platform>/<architecture>/pepnovo_3_1'\
+            'Directory containing the model files de novo sequencing. Use "default" for the default folder of the engine (DeepNovo: <deepnovo_resources>/train.example; PepNovo: resources/<platform>/<architecture>/pepnovo_3_1)'
     },
     'engine_internal_decoy_generation' : {
         'edit_version' : 1.00,
@@ -2266,6 +2323,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2358,6 +2416,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -2376,8 +2435,11 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2396,6 +2458,8 @@ ursgal_params = {
             'msfragger_style_1'             : 'enzyme',
             'percolator_style_1'            : 'enz',
             'pipi_style_1'                  : 'enzyme',
+            'pglyco_db_style_1'             : 'enzyme',
+            'deepnovo_style_1'              : 'cleavage_rule',
         },
         'utag' : [
             'database',
@@ -2653,6 +2717,25 @@ ursgal_params = {
                 'lysn' : 'LysN;0;K;-',
                 'trypsin' : 'Trypsin;1;KR;P',
             },
+            'pglyco_db_style_1' : {
+                'trypsin_p' : 'Trypsin_KR-C',
+                'chymotrypsin' : 'Chymotrypsin_FYWL-P-C',
+                'formic_acid_p' : 'FormicAcid_D-C',
+                'lysc' : 'Lys_K-P-C',
+                'lysc_p': 'Lys_K-C',
+                'pepsina' : 'PepsinA_FL-C',
+                'trypsin' : 'Trypsin_KR-P-C',
+                'gluc' : 'GluC_DE-P-C'
+            },
+            'deepnovo_style_1' : {
+                'argc': 'arg-c',
+                'aspn': 'asp-n',
+                'clostripain': 'clostripain',
+                'cnbr': 'cnbr',
+                'formic_acid': 'formic acid',
+                'lysc': 'lysc',
+                'trypsin': 'trypsin',
+            }
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -2836,6 +2919,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
         ],
@@ -2903,11 +2987,13 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2923,6 +3009,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'pglyco_db_style_1'    : 'search_fragment_tolerance',
         },
         'utag' : [
             'fragment',
@@ -2971,11 +3058,13 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2991,6 +3080,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'pglyco_db_style_1'    : 'search_fragment_tolerance_type',
         },
         'utag' : [
             'fragment',
@@ -3015,7 +3105,10 @@ ursgal_params = {
             'msfragger_style_1' : {
                 'ppm' : 1,
                 'da'  : 0
-            }
+            },
+            'pglyco_db_style_1' : {
+                'da'  : 'Da',
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -3070,6 +3163,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3103,6 +3197,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'novor_1_1beta',
             'novor_1_05',
@@ -3394,11 +3489,15 @@ ursgal_params = {
             'pepnovo_3_1',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'msgfplus2csv_v2017_07_04',
             'msgfplus2csv_v1_2_0',
             'msgfplus2csv_v1_2_1',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'pglyco_db_2_2_0',
+            'pglyco_fdr_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3410,6 +3509,9 @@ ursgal_params = {
             'pepnovo_style_1'          : 'header_translations',
             'msfragger_style_1'        : 'header_translations',
             'pipi_style_1'             : 'header_translations',
+            'pglyco_db_style_1'        : 'header_translations',
+            'pglyco_fdr_style_1'       : 'header_translations',
+            'deepnovo_style_1'         : 'header_translations',
         },
         'utag' : [
             'conversion',
@@ -3529,7 +3631,78 @@ ursgal_params = {
                 'Number of missed cleavages':'MSFragger:Number of missed cleavages',
                 'Intercept of expectation model (expectation in log space)':'MSFragger:Intercept of expectation model (expectation in log space)',
                 'Slope of expectation model (expectation in log space)':'MSFragger:Slope of expectation model (expectation in log space)',
-            }
+            },
+            'pglyco_db_style_1' : {
+                'GlySpec': 'Spectrum Title',
+                'PepSpec': 'Spectrum Title',
+                'RawName': 'Spectrum Title',
+                'Scan': 'Spectrum ID',
+                'RT': 'Retention Time (s)',
+                'PrecursorMH': 'Exp Mass',
+                'PrecursorMZ': 'Exp m/z',
+                'Charge': 'Charge',
+                'Rank': 'Rank',
+                'Peptide': 'Sequence',
+                'Mod': 'Modifications',
+                'PeptideMH': 'Calc Mass',
+                'Glycan(H,N,A,G,F)': 'Glycan',
+                'PlausibleStruct': 'Plausible Glycan Structure',
+                'GlyID': 'Glycan ID',
+                'GlyFrag': 'Glycan Fragments',
+                'GlyMass': 'Glycan Mass',
+                'GlySite': 'Glycosite',
+                'TotalScore': 'pGlyco:TotalScore',
+                'PepScore': 'pGlyco:PepScore',
+                'GlyScore': 'pGlyco:GlyScore',
+                'CoreMatched': 'CoreMatched',
+                'CoreFuc': 'CoreFuc',
+                'MassDeviation': 'Mass Difference',
+                'PPM': 'Accuracy (ppm)',
+                'GlyIonRatio': 'GlyIonRatio',
+                'PepIonRatio': 'PepIonRatio',
+                'GlyDecoy': 'GlyDecoy',
+                'PepDecoy': 'PepDecoy',
+            },
+            'pglyco_fdr_style_1' : {
+                'GlySpec': 'Spectrum Title',
+                'PepSpec': 'Spectrum Title',
+                'RawName': 'Spectrum Title',
+                'Scan': 'Spectrum ID',
+                'RT': 'Retention Time (s)',
+                'PrecursorMH': 'Exp Mass',
+                'PrecursorMZ': 'Exp m/z',
+                'Charge': 'Charge',
+                'Rank': 'Rank',
+                'Peptide': 'Sequence',
+                'Mod': 'Modifications',
+                'PeptideMH': 'Calc Mass',
+                'Glycan(H,N,A,G,F)': 'Glycan',
+                'PlausibleStruct': 'Plausible Glycan Structure',
+                'GlyID': 'Glycan ID',
+                'GlyFrag': 'Glycan Fragments',
+                'GlyMass': 'Glycan Mass',
+                'GlySite': 'Glycosite',
+                'TotalScore': 'pGlyco:TotalScore',
+                'PepScore': 'pGlyco:PepScore',
+                'GlyScore': 'pGlyco:GlyScore',
+                'CoreMatched': 'CoreMatched',
+                'CoreFuc': 'CoreFuc',
+                'MassDeviation': 'Mass Difference',
+                'PPM': 'Accuracy (ppm)',
+                'GlyIonRatio': 'GlyIonRatio',
+                'PepIonRatio': 'PepIonRatio',
+                'GlyDecoy': 'GlyDecoy',
+                'PepDecoy': 'PepDecoy',
+                'GlycanFDR': 'Glycan FDR',
+                'PeptideFDR': 'Peptide FDR',
+                'TotalFDR': 'q-value',
+            },
+            'deepnovo_style_1' : {
+                'predicted_position_score': 'DeepNovo:aaScore',
+                'predicted_sequence': 'Sequence',
+                'scan': 'Spectrum ID',
+                'predicted_score': 'DeepNovo:score',
+            },
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
@@ -3849,6 +4022,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'novor_1_1beta',
             'novor_1_05',
@@ -3974,6 +4148,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4597,6 +4772,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4609,6 +4785,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
@@ -4696,6 +4873,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4751,11 +4929,15 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
+            'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4770,7 +4952,8 @@ ursgal_params = {
             'msfragger_style_1'       : 'allowed_missed_cleavage',
             'pipi_style_1'            : 'missed_cleavage',
             'msgfplus_style_1'        : '-maxMissedCleavages',
-
+            'pglyco_db_style_1'       : 'max_miss_cleave',
+            'deepnovo_style_1'        : 'num_missed_cleavage',
         },
         'utag' : [
             'protein',
@@ -4858,6 +5041,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -4865,6 +5049,7 @@ ursgal_params = {
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_10695',
             'msamanda_2_0_0_11219',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4872,6 +5057,7 @@ ursgal_params = {
             'msgfplus_style_1'  : 'NumMods',
             'myrimatch_style_1' : 'MaxDynamicMods',
             'msamanda_style_1'  : 'MaxNoDynModifs',
+            'pglyco_db_style_1'    : 'max_var_modify_num',
         },
         'utag' : [
             'modifications',
@@ -5009,6 +5195,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
@@ -5120,14 +5307,17 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'pglyco_db_2_2_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5136,6 +5326,7 @@ ursgal_params = {
             'omssa_style_1'     : '-nox',
             'msfragger_style_1' : 'digest_max_length',
             'pipi_style_1' : 'max_peptide_length',
+            'pglyco_db_style_1' : 'max_peptide_len',
         },
         'utag' : [
             'peptide',
@@ -5162,6 +5353,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5191,6 +5383,7 @@ ursgal_params = {
     'mgf_input_file' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
+            'deepnovo_0_0_1',
             'moda_v1_51',
             'moda_v1_61',
             'msamanda_1_0_0_5242',
@@ -5209,11 +5402,13 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'novor_1_1beta',
             'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
+            'pglyco_db_2_2_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -5230,6 +5425,8 @@ ursgal_params = {
             'omssa_style_1'    : '-fm',
             'pepnovo_style_1'  : '-file',
             'xtandem_style_1'  : 'spectrum, path',
+            'pglyco_db_style_1': 'file1',
+            'deepnovo_style_1' : ('denovo_input_file', 'hybrid_input_file', 'db_input_file'),
         },
         'utag' : [
             'input_files',
@@ -5325,18 +5522,21 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
             'msamanda_2_0_0_11219',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5345,7 +5545,8 @@ ursgal_params = {
             'omssa_style_1'     : '-no',
             'msfragger_style_1' : 'digest_min_length',
             'msamanda_style_1'  : 'MinimumPepLength',
-            'pipi_style_1'      : 'min_peptide_length'
+            'pipi_style_1'      : 'min_peptide_length',
+            'pglyco_db_style_1'    : 'min_peptide_len',
         },
         'utag' : [
             'peptide',
@@ -5406,6 +5607,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5444,6 +5646,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5594,6 +5797,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -5611,9 +5815,12 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
-            'pyqms_1_0_0'
+            'pyqms_1_0_0',
+            'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5639,6 +5846,8 @@ ursgal_params = {
                 'protein, quick pyrolidone'
             ),
             'pyqms_style_1' : 'modifications',
+            'pglyco_db_style_1' : 'modifications',
+            'deepnovo_style_1' : 'modifications',
         },
         'utag' : [
             'modifications',
@@ -5735,6 +5944,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
         ],
         'triggers_rerun' : True,
@@ -5769,6 +5979,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 50,
         'description' :  ''' Suppresses reporting of PSM if top hit has expectation greater than this threshold ''',
@@ -5796,6 +6007,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 0,
         'description' :  ''' Track top N unmodified peptide results separately from main results internally for boosting features. Should be set to a number greater than output_report_topN if zero bin boosting is desired. ''',
@@ -5823,6 +6035,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 0.0,
         'description' :  ''' Ranks a zero-bin hit above all non-zero-bin hit if it has expectation less than this value. ''',
@@ -5850,6 +6063,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 1.0,
         'description' :  ''' Multiplies expect value of PSMs in the zero-bin during results ordering (set to less than 1 for boosting) ''',
@@ -5877,6 +6091,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : False,
         'description' :  ''' Inserts complementary ions corresponding to the top N most intense fragments in each experimental spectrum. Useful for recovery of modified peptides near C-terminal in open search. Should be set to 0 (disabled) otherwise. ''',
@@ -5903,6 +6118,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 3,
         'description' :  ''' Minimum number of matched peaks in PSM for inclusion in statistical modeling ''',
@@ -5952,6 +6168,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'msgfplus2csv_py_v1_0_0',
                 'msgfplus_v2018_09_12' : 'msgfplus2csv_py_v1_0_0',
                 'msgfplus_v2019_01_22' : 'msgfplus2csv_py_v1_0_0',
+                'msgfplus_v2019_04_18' : 'msgfplus2csv_py_v1_0_0',
             },
         },
         'uvalue_type' : "str",
@@ -6544,6 +6761,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -6551,6 +6769,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7008,6 +7227,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
         ],
         'triggers_rerun' : True,
@@ -7074,6 +7294,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -7142,11 +7363,13 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
+            'thermo_raw_file_parser_1_1_2',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1'   : ('-oc', '-ox'),
             'xtandem_style_1' : 'output, mzid',
+            'thermo_raw_file_parser_style_1' : '-f',
         },
         'utag' : [
             'output',
@@ -7161,11 +7384,18 @@ ursgal_params = {
                 '.mzid' : 'yes',
                 'default' : 'no',
             },
+            'thermo_raw_file_parser_style_1': {
+                '.mgf' : 0,
+                '.mzml' : 1,
+                'indexed_mzml' : 2,
+                'parquet' : 3,
+                'default' : 1,
+            }
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
             'select_type' : 'radio_button',
-            'available_values'  : ['.csv', '.mzid', '.omx', 'default'],
+            'available_values'  : ['.csv', '.mzid', '.omx', 'default', '.mgf', '.mzml', 'parquet', 'indexed_mzml'],
             'custom_val_max' : 0,
         },
         'default_value' : 'default',
@@ -7382,6 +7612,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -7396,6 +7627,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7470,6 +7702,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -7486,11 +7719,14 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7509,6 +7745,8 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'pglyco_db_style_1'  : 'search_precursor_tolerance',
+            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm')
         },
         'utag' : [
             'precursor',
@@ -7550,6 +7788,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -7566,11 +7805,14 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7589,6 +7831,8 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'pglyco_db_style_1'  : 'search_precursor_tolerance',
+            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm')
         },
         'utag' : [
             'precursor',
@@ -7629,6 +7873,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -7644,11 +7889,14 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'pglyco_db_2_2_0',
+            'deepnovo_0_0_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7665,6 +7913,8 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'pglyco_db_style_1'  : 'search_precursor_tolerance_type',
+            'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm')
         },
         'utag' : [
             'precursor',
@@ -7698,6 +7948,9 @@ ursgal_params = {
                 'ppm' : 1,
                 'da'  : 0
             },
+            'pglyco_db_style_1': {
+                'da' : 'Da'
+            }
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -7779,6 +8032,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -7786,6 +8040,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7827,6 +8082,8 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7834,6 +8091,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'MaxPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_max_mass',
+            'pglyco_db_style_1'    : 'max_peptide_weight',
         },
         'utag' : [
             'precursor',
@@ -7871,11 +8129,13 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'mzml2mgf_2_0_0',
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7922,6 +8182,8 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
+            'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7929,6 +8191,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'MinPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_min_mass',
+            'pglyco_db_style_1'    : 'min_peptide_weight',
         },
         'utag' : [
             'precursor',
@@ -7952,6 +8215,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 5,
         'description' :  'True precursor mass tolerance '\
@@ -7984,6 +8248,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 'ppm',
         'description' :  '''Mass tolerance units fo precursor_true_tolerance''',
@@ -9252,6 +9517,7 @@ ursgal_params = {
             'msgfplus_v2018_06_28',
             'msgfplus_v2018_09_12',
             'msgfplus_v2019_01_22',
+            'msgfplus_v2019_04_18',
             'msgfplus_v9979',
             'myrimatch_2_1_138',
             'myrimatch_2_2_140',
@@ -9265,6 +9531,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9662,6 +9929,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9795,6 +10063,7 @@ ursgal_params = {
                 'msgfplus_v2017_01_27' : 1e-100,
                 'msgfplus_v2018_09_12' : 1e-100,
                 'msgfplus_v2019_01_22' : 1e-100,
+                'msgfplus_v2019_04_18' : 1e-100,
                 'msgfplus_v2018_06_28' : 1e-100,
                 'msgfplus_v9979'       : 1e-100,
                 'myrimatch_2_1_138'    : 0,
@@ -9808,6 +10077,7 @@ ursgal_params = {
                 'xtandem_alanine'      : 0,
                 'msfragger_20170103'   : 0,
                 'msfragger_20171106'   : 0,
+                'msfragger_20190222'   : 0,
                 'pipi_1_4_5'           : 0,
                 'pipi_1_4_6'           : 0,
                 'moda_v1_51'           : 0,
@@ -9870,6 +10140,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -9885,11 +10156,14 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9908,6 +10182,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -9923,11 +10198,14 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9946,6 +10224,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -9961,11 +10240,14 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -9984,6 +10266,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -9999,11 +10282,14 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10022,6 +10308,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -10037,11 +10324,14 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10060,6 +10350,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -10075,11 +10366,14 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10098,6 +10392,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -10113,11 +10408,14 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
+                'deepnovo_0_0_1'       : 'DeepNovo:score',
             },
         },
         'uvalue_type' : 'str',
@@ -11009,7 +11307,7 @@ ursgal_params = {
         'default_value' : [
             'plot_glycan_elution_profile',
         ],
-        'description' :  ''' List of plot types that should be created by the SugarPy plotting function. Available are: "plot_molecule_elution_profile", "plot_glycan_elution_profile", "plot_annotated_spectra" ''',
+        'description' :  ''' List of plot types that should be created by the SugarPy plotting function. Available are: "plot_molecule_elution_profile", "plot_glycan_elution_profile", "plot_annotated_spectra", "check_peak_presence", "check_frag_specs" ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'sugarpy_plot_style_1' : 'plot_types',
@@ -11454,6 +11752,339 @@ ursgal_params = {
         'description' : \
             'Specify the spectrum ID attribute to be used to access the spectrum ID (ID, id_dict or index). Given as a dict (key = attribute, value = key in id_dict). For .wiff files, during conversion to mzML, spectrum IDs are formatted differently; pymzml can deal with this by returning an id_dict or accessing the index.'
     },
+    'convert_aa_in_motif' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'generate_target_decoy_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'generate_target_decoy_style_1': 'convert_aa_in_motif',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : None,
+        'description' : \
+            'Convert a single aminoacid in a sequence motif into another characeter using a string "new_aa,motif,position_to_be_replaced" where new_aa is the new character, motif is the regular expression that identifies the sequenc motif and position_to_be_replaced is the position in the motif that should be replaced (e.g. use "J,N[^P][ST],0" to convert N-X-S/T into J-X-S/T'
+    },
+    'pparse_options' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'pparse_2_0',
+        ],
+        'default_value' : {
+            '-F': 'raw',
+            '-m': '1',
+            '-p': '0',
+        },
+        'description' :  ''' Dictionary to specify options and their value for pParse. For available options see http://pfind.ict.ac.cn/software/pParse/# ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'pparse_style_1' : 'pparse_options',
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_option' : {
+            'custom_type' : {
+                'str' : {'multiple_line': False},
+            },
+            'custom_val_max' : 100000,
+            'item_titles' : {
+                'pparse option' : 'value',
+            },
+            'value_types' : {
+                'str' : 'str',
+            },
+            'multiple_line' : False,
+            'none_val' : {
+            },
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "dict",
+    },
+    'thermo_raw_file_parser_options' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'thermo_raw_file_parser_1_1_2',
+        ],
+        'default_value' : {
+            '-e': None,
+            '-m': 0,
+        },
+        'description' :  ''' Dictionary to specify options and their value for ThermoRawFileParser. If options are given as a flag only, specify 'None' as their value. For available options see https://github.com/compomics/ThermoRawFileParser ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'thermo_raw_file_parser_style_1' : ('-h', '-m', '-g', '-u', '-k', '-t', '-n', '-v', '-e'),
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_option' : {
+            'custom_type' : {
+                'str' : {'multiple_line': False},
+            },
+            'custom_val_max' : 100000,
+            'item_titles' : {
+                'converter option' : 'value',
+            },
+            'value_types' : {
+                'str' : 'str',
+            },
+            'multiple_line' : False,
+            'none_val' : {
+            },
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "dict",
+    },
+    'deepnovo_direction' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'deepnovo_0_0_1',
+        ],
+        'default_value' : 'bi_directional',
+        'description' :  ''' Defines the direction for DeepNovo ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'deepnovo_style_1' : 'direction',
+        },
+        'utag' : [
+            'de novo',
+        ],
+        'uvalue_option' : {
+            'select_type'   : 'radio_button',
+            'available_values'  : [
+                'bi_directional',
+                'forward',
+                'reverse',
+            ],
+            'custom_val_max' : 0,
+        },
+        'uvalue_translation' : {
+            'deepnovo_style_1': {
+                'bi_directional': 2,
+                'forward' : 0,
+                'reverse' : 1,
+            },
+        },
+        'uvalue_type' : "select",
+    },
+    'deepnovo_use_intensity': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+        },
+        'default_value': True,
+        'description': ''' DeepNovo uses intensity ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'use_intensity',
+        },
+        'utag': [
+            'de novo',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'deepnovo_shared_weights': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+        },
+        'default_value': True,
+        'description': ''' DeepNovo uses shared weights ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'shared',
+        },
+        'utag': [
+            'de novo',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'deepnovo_use_lstm': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+        },
+        'default_value': True,
+        'description': ''' DeepNovo uses lstm ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'use_lstm',
+        },
+        'utag': [
+            'de novo',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'deepnovo_build_knapsack': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+        },
+        'default_value': False,
+        'description': ''' DeepNovo builds the knapsack matrix ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'knapsack_build',
+        },
+        'utag': [
+            'de novo',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'deepnovo_beam_search': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'psms',
+        },
+        'default_value': True,
+        'description': ''' DeepNovo builds beam search ''',
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'beam_search',
+        },
+        'utag': [
+            'de novo',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "bool",
+    },
+    'deepnovo_beam_size': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'deepnovo_0_0_1',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 5,
+        'description': """ Number of optimal paths to search during decoding """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'deepnovo_style_1': 'beam_size'
+        },
+        'utag': [
+            'de novo'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'deepnovo_mode' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'deepnovo_0_0_1',
+        ],
+        'default_value' : 'search_denovo',
+        'description' :  ''' Defines the search mode for DeepNovo ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'deepnovo_style_1': ('search_denovo', 'search_hybrid', 'search_db', 'decode'),
+        },
+        'utag' : [
+            'de novo',
+        ],
+        'uvalue_option' : {
+            'select_type'   : 'radio_button',
+            'available_values'  : [
+                'search_denovo',
+                'search_hybrid',
+                'search_db',
+                'decode',
+            ],
+            'custom_val_max' : 0,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "select",
+    },
+    'deepnovo_knapsack_file' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'deepnovo_0_0_1',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'deepnovo_style_1': 'knapsack_file',
+        },
+        'utag' : [
+            'de novo',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : 'default',
+        'description' : \
+            'Path to the knapsack matrix for DeepNovo. Use "default" for the default file location in the resources'
+    },
 }
-
-
