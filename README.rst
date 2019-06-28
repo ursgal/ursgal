@@ -193,7 +193,7 @@ as common practice in science, never trust a blackbox :)
 Copyrights
 ***********
 
-Copyright 2014-2018 by authors and contributors in alphabetical order
+Copyright 2014-2019 by authors and contributors in alphabetical order
 
 * Christian Fufezan
 * Aime B. Igiraneza
@@ -202,8 +202,9 @@ Copyright 2014-2018 by authors and contributors in alphabetical order
 * Johannes Leufken
 * Purevdulam Oyunchimeg
 * Stefan Schulze
-* Fengchao Yu
 * Lukas Vaut
+* David Yang
+* Fengchao Yu
 
 Contact
 *******
