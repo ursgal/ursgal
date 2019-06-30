@@ -498,8 +498,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 rt_corr_factor = 60
             line_dict['Retention Time (s)'] = float( retention_time_in_minutes ) * rt_corr_factor
 
+            # try:
             precursor_mz = scan_rt_lookup[ input_file_basename_for_rt_lookup ][
                 'scan_2_mz' ][ spectrum_id ]
+            # except:
+            #     print('\n\n\n')
+            #     print(input_file_basename_for_rt_lookup)
+            #     print('spectrum_id', spectrum_id, type(spectrum_id))
+            #     exit(1)
             line_dict['Exp m/z'] = round(precursor_mz, 10)
 
             #########################
@@ -651,9 +657,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                             pass
 
                             if append_mod:
-
-                                print('>>', mod_dict, fixed_mods)
-
                                 tmp_mods = line_dict['Modifications'].split(';')
                                 tmp_mods.append(tmp)
                                 line_dict['Modifications'] = ';'.join( tmp_mods )
