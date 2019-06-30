@@ -90,8 +90,8 @@ def unify_csv(file, engine):
     reader_produced = [line for line in csv.DictReader(open(output_csv))]
     reader_exptected = [line for line in csv.DictReader(open(output_csv+'_expected.csv'))]
     for pos, line in enumerate(reader_produced):
-        print(f'#{pos:0>5} Produced:', line['Modifications'])
-        print(f'#{pos:0>5} Expected:', reader_exptected[pos]['Modifications'])
+        print(f'#{pos:0>5} Produced: {line["Modifications"]}')
+        print(f'#{pos:0>5} Expected: {reader_exptected[pos]["Modifications"]}')
         assert line['Modifications'] == reader_exptected[pos]['Modifications']
 
 
