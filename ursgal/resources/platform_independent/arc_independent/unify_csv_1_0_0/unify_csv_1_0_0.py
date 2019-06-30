@@ -32,6 +32,7 @@ if sys.platform != 'win32':
 
 
 DIFFERENCE_14N_15N = ursgal.ukb.DIFFERENCE_14N_15N
+MOD_POS_PATTERN = re.compile(r'(?P<modname>.*):(?P<pos>[0-9]*)$')
 
 
 def main(input_file=None, output_file=None, scan_rt_lookup=None,
@@ -639,9 +640,15 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             elif ':{0}'.format(pos + 1) in line_dict['Modifications']:
                                 # there is a mod at that position but is it the right one ?
                                 for _m in line_dict['Modifications'].split(';'):
-                                    mod, pos = _m.split(':')
-                                    if round(mod_dict[name]['mass'], 5) == round(float(mod), 5):
-                                        append_mod = False
+                                    match = MOD_POS_PATTERN.search(_m)
+                                    if match is not None:
+                                        mod = match.group('modname')
+                                        pos = match.group('pos')
+                                        try:
+                                            if round(mod_dict[name]['mass'], 5) == round(float(mod), 5):
+                                                append_mod = False
+                                        except:
+                                            pass
 
                             if append_mod:
 

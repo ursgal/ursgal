@@ -92,7 +92,7 @@ def unify_csv(file, engine):
     for pos, line in enumerate(reader_produced):
         print(f'#{pos:0>5} Produced:', line['Modifications'])
         print(f'#{pos:0>5} Expected:', reader_exptected[pos]['Modifications'])
-        assert line['Modifications'] == reader_exptected[pos]['Modifications']+'..'
+        assert line['Modifications'] == reader_exptected[pos]['Modifications']
 
 
     # with open(output_csv) as fout:
