@@ -512,6 +512,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 ######################
                 # Modification block #
                 ######################
+
                 # check MSFragger crazy mod merge first...
                 if 'msfragger' in search_engine:
                     # we have to reformat the modifications
@@ -626,15 +627,26 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 if fixed_mods != {}:
                     for pos, aminoacid in enumerate(line_dict['Sequence']):
                         if aminoacid in fixed_mods.keys():
-                            name = fixed_mods[ aminoacid ]
+                            name = fixed_mods[aminoacid]
                             tmp = '{0}:{1}'.format(
                                 name,
                                 pos + 1
                             )
+                            append_mod = True
                             if tmp in line_dict['Modifications']:
                                 # everything is ok :)
-                                pass
-                            else:
+                                append_mod = False
+                            elif ':{0}'.format(pos + 1) in line_dict['Modifications']:
+                                # there is a mod at that position but is it the right one ?
+                                for _m in line_dict['Modifications'].split(';'):
+                                    mod, pos = _m.split(':')
+                                    if round(mod_dict[name]['mass'], 5) == round(float(mod), 5):
+                                        append_mod = False
+
+                            if append_mod:
+
+                                print('>>', mod_dict, fixed_mods)
+
                                 tmp_mods = line_dict['Modifications'].split(';')
                                 tmp_mods.append(tmp)
                                 line_dict['Modifications'] = ';'.join( tmp_mods )
@@ -654,7 +666,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                         1,
                                     )
                     if 'myrimatch' in search_engine:
-                        if 'Carboxymethyl' in line_dict['Modifications'] and cam == True:
+                        if 'Carboxymethyl' in line_dict['Modifications'] and cam is True:
                             line_dict['Modifications'] = line_dict['Modifications'].replace(
                                 'Carboxymethyl',
                                 'Carbamidomethyl'
@@ -668,6 +680,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 tmp_mods = []
                 tmp_mass_diff = []
                 for modification in line_dict['Modifications'].split(';'):
+                    raw_modification = modification
                     Nterm = False
                     Cterm = False
                     skip_mod = False
@@ -778,10 +791,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         for name in name_list:
                             if name in mod_dict.keys():
                                 if aa in mod_dict[name]['aa']:
-                                    modification = '{0}:{1}'.format(name,new_pos)
+                                    modification = '{0}:{1}'.format(name, new_pos)
                                     mapped_mod = True
                                 elif Nterm and '*' in mod_dict[name]['aa']:
-                                    modification = '{0}:{1}'.format(name,0)
+                                    modification = '{0}:{1}'.format(name, 0)
                                     mapped_mod = True
                                 else:
                                     continue
@@ -794,6 +807,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 mapped_mod = True
                                 skip_mod = True
                                 break
+
                         if open_mod_search is True and mapped_mod is False:
                             skip_mod = True
                             tmp_mass_diff.append('{0}:{1}'.format(mod, pos))
@@ -814,19 +828,24 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                     params['mods'],
                                     line_dict['Sequence']
                                 )
+                    if modification in tmp_mods:
+                        add_n_term_mod = False
+                        _mod, _pos = modification.split(':')
+                        _aa = line_dict['Sequence'][int(_pos) - 1]
+                        if _aa in mod_dict[_mod]['aa']:
+                            if 'N-term' in mod_dict[_mod]['aa']:
+                                add_n_term_mod = True
+                            elif 'Prot-N-term' in mod_dict[_mod]['aa']:
+                                add_n_term_mod = True
+                        if add_n_term_mod:
+                            modification = modification.replace(
+                                '{0}:1'.format(_mod),
+                                '{0}:0'.format(_mod)
+                            )
+                        # else:
+                        #     skip_mod = True
                     if skip_mod is True:
                         continue
-                    if modification in tmp_mods:
-                        if mod in n_term_replacement.keys() and pos == 1:
-                            if line_dict['Sequence'][0] in mod_dict[mod]['aa']:
-                                modification = modification.replace(
-                                    '{0}:1'.format(mod),
-                                    '{0}:0'.format(mod)
-                                )
-                            else:
-                                continue
-                        else:
-                            continue
                     tmp_mods.append(modification)
                 if 'msfragger' in search_engine:
                     org_mass_diff = line_dict['Mass Difference']
