@@ -38,8 +38,6 @@ def main(input_raw_file=None, database=None, enzyme=None):
             'frag_mass_tolerance_unit'  : 'ppm',
             'precursor_mass_tolerance_plus' : 5,
             'precursor_mass_tolerance_minus' : 5,
-            'decoy_generation_mode' : 'shuffle_peptide',
-            'convert_aa_in_motif'   : 'J,N[^P][ST],0',
             'aa_exception_dict' : {},
         }
     )
