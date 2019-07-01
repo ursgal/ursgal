@@ -273,3 +273,6 @@ Full list of tools with proper citations that are integrated into Ursgal are:
     * Devabhaktuni, A.; Lin, S.; Zhang, L.; Swaminathan, K.; Gonzalez, CG.; Olsson, N.; Pearlman, SM.; Rawson, K.; Elias, JE.
     (2019) TagGraph reveals vast protein modification landscapes from large tandem mass spectrometry datasets.
     Nat Biotechnol. 37(4)
+    * Yang, H; Chi, H; Zhou, W; Zeng, WF; He, K; Liu, C; Sun, RX; He, SM. (2017)
+    Open-pNovo: De Novo Peptide Sequencing with Thousands of Protein Modifications.
+    J Proteome Res. 16(2)
