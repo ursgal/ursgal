@@ -66,8 +66,16 @@ def main(
                 # if psm in psm_names and remove_redundant_psms is True:
                 #     continue
                 if log10_threshold is True:
-                    if abs(math.log10(best_score)) - abs(math.log10(score)) >= score_diff_threshold:
-                        break
+                    if best_score != 0:
+                        log_best_score = abs(math.log10(best_score))
+                    else:
+                        log_best_score = 0
+                    if score != 0:
+                        log_score = abs(math.log10(score))
+                    else:
+                        log_score = 0
+                    if log_best_score - log_score >= score_diff_threshold:
+                         break
                     else:
                         spec_line_dicts.append(line_dict)
                         psm_names.add(psm)
