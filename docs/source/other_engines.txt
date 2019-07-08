@@ -169,6 +169,13 @@ Percolator 2_08
    :members:
 
 
+pGlyco FDR 2.2.0
+----------------
+
+.. autoclass:: ursgal.wrappers.pglyco_fdr_2_2_0.pglyco_fdr_2_2_0
+   :members:
+
+
 qvality 2_02
 ------------
 

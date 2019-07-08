@@ -1,6 +1,24 @@
 Changelog
 =========
 
+Version 0.6.5    (05.2019)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Added ThermoRawFileParser for conversion of .raw to .mzML/.mgf
+#. Added pGlyco 2.2.0, including pParse 2.0 and pGlycoFDR 2.2.0
+#. Added DeepNovo 0.0.1 (so far only search_denovo functionality)
+#. Added latest version of MSGF+ (version 2019.04.18) 
+   and MSFragger (version 20190222)
+
+Version 0.6.4    (05.2019)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Fixed bug in unify csv where N-terminal mods were not assigned the
+   correct position
+#. Added possibility to write result groups of venndiagram to csv
+#. Use setuptools instead of distutils in setup.py
+#. Allowed installation via PyPI
+
 Version 0.6.3    (03.2019)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 #. Added Percolator 3.2, including the options to infer protein PEP and FDR

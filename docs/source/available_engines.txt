@@ -43,6 +43,9 @@ MS-GF+
 
 Available MS-GF+ versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msgfplus_v2019_04_18.msgfplus_v2019_04_18
+   :members:
+
 .. autoclass:: ursgal.wrappers.msgfplus_v2019_01_22.msgfplus_v2019_01_22
    :members:
 
@@ -69,6 +72,9 @@ MSFragger
 ---------
 
 Available MSFragger versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.msfragger_20190222.msfragger_20190222
+   :members:
 
 .. autoclass:: ursgal.wrappers.msfragger_20171106.msfragger_20171106
    :members:
@@ -147,6 +153,12 @@ Available X!Tandem versions, starting with the newest version:
 De Novo Search Engines
 ^^^^^^^^^^^^^^^^^^^^^^
 
+DeepNovo
+--------
+
+.. autoclass:: ursgal.wrappers.deepnovo_0_0_1.deepnovo_0_0_1
+   :members:
+
 Novor
 -----
 
@@ -174,4 +186,13 @@ Kojak
 -----
 
 .. autoclass:: ursgal.wrappers.kojak_1_5_3.kojak_1_5_3
+   :members:
+
+Glycosylation Search Engines
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pGlyco
+------
+
+.. autoclass:: ursgal.wrappers.pglyco_db_2_2_0.pglyco_db_2_2_0
    :members:

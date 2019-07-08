@@ -839,8 +839,8 @@ class UController(ursgal.UNode):
             output_file_name (str or None): Desired output file name
                 excluding path (optional). If None, output file name will
                 be auto-generated.
-            guess_engine (bool): The converter engine is guessed based on 
-                the input file. This works so far for mzml2mgf conversion and 
+            guess_engine (bool): The converter engine is guessed based on
+                the input file. This works so far for mzml2mgf conversion and
                 conversion of search_engine result files to csv.
 
         Example::
@@ -925,7 +925,7 @@ class UController(ursgal.UNode):
             output_file_name (str or None): Desired output file name
                 excluding path (optional). If None, output file name will
                 be auto-generated.
-            merge_duplicates (bool): If True, the produced output file will 
+            merge_duplicates (bool): If True, the produced output file will
                 be checked for duplicated PSMs, which will be merged into a single line.
                 Caution, the original output file will be overwritten!
 
@@ -1251,8 +1251,8 @@ class UController(ursgal.UNode):
             msg    = 'Setting self.io["input"]',
             caller = 'set_ios'
         )
-        self.io['input']['finfo'] = self.set_file_info_dict( input_file )
-        self.take_care_of_params_and_stats( io_mode = 'input')
+        self.io['input']['finfo'] = self.set_file_info_dict(input_file)
+        self.take_care_of_params_and_stats(io_mode = 'input')
         # setting status ...
         self.io['input']['stats']['run_status'] = 'scheduled'
         # setting default if no json was loaded ...
@@ -1295,7 +1295,7 @@ class UController(ursgal.UNode):
                             i_json_value
                         )
                     )
-                    self.io['input']['params'][ i_json_param ] = default_value
+                    self.io['input']['params'][i_json_param] = default_value
             if number_of_diffs_between_json_and_params > 0:
                 self.print_info(
                     'Updated {0} params in self.io["input"]["params"]'.format(
@@ -1356,7 +1356,7 @@ class UController(ursgal.UNode):
                 'The path is automatically determined by ursgal.'),
                 caller='WARNING'
             )
-        ok_extension = self.decid_output_extension(engine)
+        ok_extension = self.decide_output_extension(engine)
         prefix = self.params['prefix']
         user_fname = os.path.basename( user_fname )
         if ok_extension is None or user_fname.endswith( ok_extension ):
@@ -1443,7 +1443,7 @@ class UController(ursgal.UNode):
                 'history'        : [],
             }
 
-    def decid_output_extension( self, engine ):
+    def decide_output_extension( self, engine ):
         file_extension = None
         file_extensions = self.meta_unodes[ engine ].META_INFO.get(
             'output_extensions',
@@ -1507,7 +1507,7 @@ class UController(ursgal.UNode):
         output_file = '_'.join( file_name_blocks )
 
         # Add file extension if needed (engine-specific, defined in kb)
-        file_extension = self.decid_output_extension(engine)
+        file_extension = self.decide_output_extension(engine)
         if file_extension is None:
             self.print_info(
                 'No file extension ("output_extension") defined in '\
@@ -2926,7 +2926,7 @@ True
         if dry_run is True:
             answer = None  # do not execute, even if params changed!
         report = self.run_unode_if_required(
-            force, engine_name, answer, 
+            force, engine_name, answer,
             merge_duplicates=merge_duplicates
         )
         return report['output_file']
