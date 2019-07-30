@@ -1,7 +1,6 @@
 import csv
 import os
 import pickle
-import unittest
 import ursgal
 
 
@@ -88,11 +87,13 @@ def unify_csv(file, engine):
         },
         search_engine=engine,
     )
-    with open(output_csv) as fout:
-        reader = csv.DictReader(fout)
-        ident_line = next(reader)
-        err = 'Mod should be TMT6plex:0;TMT6plex:1 but is {0}'.format(ident_line['Modifications'])
-        assert ident_line['Modifications'] == 'TMT6plex:0;TMT6plex:1', err
+    reader_produced = [line for line in csv.DictReader(open(output_csv))]
+    reader_expected = [line for line in csv.DictReader(open(output_csv+'_expected.csv'))]
+    for pos, line in enumerate(reader_produced):
+        print('#{pos:0>5} Produced: {mod}'.format(pos=pos, mod=line["Modifications"]))
+        print('#{pos:0>5} Expected: {mod}'.format(pos=pos, mod=reader_expected[pos]["Modifications"]))
+        assert line['Modifications'] == reader_expected[pos]['Modifications']
+
 
 if __name__ == '__main__':
     for i, params_l in enumerate(test_case_list):

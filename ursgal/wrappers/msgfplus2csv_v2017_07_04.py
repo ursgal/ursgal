@@ -61,7 +61,7 @@ class msgfplus2csv_v2017_07_04( ursgal.UNode ):
             except FileNotFoundError:
                 print(
                     '''
-        ERROR: MSGF+ mzid C vonverter requires Mono.
+        ERROR: MSGF+ mzid C converter requires Mono.
         Installation: http://www.mono-project.com/download
                     '''
                 )
