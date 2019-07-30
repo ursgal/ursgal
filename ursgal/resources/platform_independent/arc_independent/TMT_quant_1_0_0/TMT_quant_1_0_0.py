@@ -239,7 +239,7 @@ def main(mzml_file, output_file, param_dict):
 
     for i, spec in enumerate(reader):
         if i % 500 == 0:
-            print(f"Process spec {i}", end="\r")
+            print("Process spec {i}".format(i), end="\r")
         if spec.ms_level == 1:
             ms1_spec = spec
             if len(previous_ms2_idents) > 0:
@@ -477,7 +477,7 @@ def main2(mzml_file, output_file, param_dict):
 
     for i, spec in enumerate(reader):
         if i % 500 == 0:
-            print(f"Process spec {i}", end="\r")
+            print("Process spec {i}".format(i), end="\r")
         if spec.ms_level == 1:
             ms1_spec = spec
             if len(previous_ms2_idents) > 0:
