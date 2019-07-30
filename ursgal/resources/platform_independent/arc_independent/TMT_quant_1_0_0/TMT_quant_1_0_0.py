@@ -531,7 +531,6 @@ def main2(mzml_file, output_file, param_dict):
 
             previous_ms2_idents.append(spec.ID)
 
-    print(f'Skipped {EMPTY} specs.')
     flat = [line for line in data_colletions.values()]
     dataframe = pd.DataFrame(flat)
     tmt_cols = [col for col in dataframe.columns if col.startswith('1')]
