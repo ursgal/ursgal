@@ -16,7 +16,7 @@ import pandas as pd
 import pymzml
 import pyqms
 
-PROTON = 1.007_276_466_583
+PROTON = 1.007276466583
 
 
 # @profile
