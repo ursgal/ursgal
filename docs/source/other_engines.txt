@@ -143,6 +143,11 @@ pyQms 1_0_0
 
 .. autofunction:: ursgal.resources.platform_independent.arc_independent.pyqms_1_0_0.pyqms_1_0_0.main
 
+TMT_quant 1_0_0
+----------------
+
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.TMT_quant_1_0_0.TMT_quant_1_0_0.main
+
 
 
 Validation Engines
