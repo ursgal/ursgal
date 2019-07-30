@@ -1,4 +1,137 @@
 ursgal_params = {
+    'reporter_ion_tolerance': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'TMT_quant_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'TMT_quant_style_1': 'reporter_ion_tolerance',
+        },
+        'utag' : [
+            'reporter',
+            'accuracy'
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'float',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 10000000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : '',
+            'f-point'   : 0.2
+        },
+        'default_value' : 0.002,
+        'description' : \
+            'Lower reporter mass tolerance; maximum negative deviation of measured from calculated reporter ion mass.',
+    },
+    'reporter_ion_tolerance_unit': {
+        'edit_version' : 1.01,
+        'available_in_unode' : [
+            'TMT_quant_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'TMT_quant_style_1': 'reporter_ion_tolerance_unit',
+        },
+        'utag' : [
+            'reporter',
+            'accuracy'
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'select',
+        'uvalue_option' : {
+            'select_type' : 'radio_button',
+            'available_values'  : ['da', 'mmu', 'ppm'],
+            'custom_val_max' : 0,
+        },
+        'default_value' : 'da',
+        'description' : \
+            'reporter mass tolerance unit: available in ppm '\
+            '(parts-per-millon), da (Dalton) or mmu (Milli mass unit)',
+    },
+    'impurity_matrix': {
+        'edit_version' : 1.01,
+        'available_in_unode' : [
+            'TMT_quant_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'TMT_quant_style_1': 'impurity_matrix',
+        },
+        'utag' : [
+            'reporter',
+            'accuracy'
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'select',
+        'uvalue_option' : {
+            'select_type' : 'radio_button',
+            'available_values'  : ['da', 'mmu', 'ppm'],
+            'custom_val_max' : 0,
+        },
+        'default_value' : '''
+Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
+126,0.92048137463,0.00417403803988,0.0587149294683,0.0,0.00384616691329,0.0,0.0,0.0,0.0,0.0,0.0
+127L,0.00619612281462,0.900667547057,0.0221106415412,0.056756557396,0.0,0.00336298002748,0.0,0.0,0.0,0.0,0.0
+127H,0.00849174724589,0.0,0.919886648804,0.0042812036856,0.0514567152392,0.0,0.00353336477389,0.0,0.0,0.0,0.0
+128L,0.0,0.00819531631876,0.00557034275631,0.904200326705,0.0238942113867,0.0479658854406,0.0,0.00274980930335,0.0,0.0,0.0
+128H,0.0,0.0,0.0148826706851,0.0,0.920354911702,0.00407441326769,0.0416243485347,0.0,0.003048713424,0.0,0.0
+129L,0.0,0.0,0.0,0.0148088852717,0.00563317274792,0.924006221484,0.0,0.0407297385733,0.0,0.00280137752717,0.0
+129H,0.0,0.0,0.0,0.00209994968005,0.0219584782296,0.0,0.926572835987,0.00343018728874,0.0352243843091,0.0,0.00220633892969
+130L,0.0,0.0,0.0,0.00184737739711,0.0,0.0226891566799,0.00637595993929,0.908083634915,0.0201297814059,0.0327456482015,0.0
+130H,0.0,0.0,0.0,0.0,0.00226685881517,0.0,0.0270021540993,0.0,0.929046590085,0.0037428792119,0.0277780298204
+131L,0.0,0.0,0.0,0.0,0.0,0.00214048204202,0.0,0.0278155481012,0.00600576057087,0.943689752776,0.0114510264682
+131H,0.0,0.0,0.0,0.0,0.0,0.0,0.00233662045211,0.0,0.0256287420956,0.0,0.958053930181
+''',
+        'description' : 'Matrix describing impurities of reporter ion channels',
+    },
+    'reporter_ion_mzs':{
+        'edit_version' : 1.01,
+        'available_in_unode' : [
+            'TMT_quant_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'TMT_quant_style_1': 'reporter_ion_mzs',
+        },
+        'utag' : [
+            'reporter',
+            'mass'
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'dict',
+        'uvalue_option' : {
+            'select_type' : 'radio_button',
+            'available_values'  : ['da', 'mmu', 'ppm'],
+            'custom_val_max' : 0,
+            'none_val': None,
+            'item_titles': {'126': '126'},
+            'value_types': {},
+        },
+        'default_value' : {
+            '126'  : 126.127726,
+            '127L' : 127.124761,
+            '127H' : 127.131081,
+            '128L' : 128.128116,
+            '128H' : 128.134436,
+            '129L' : 129.131471,
+            '129H' : 129.137790,
+            '130L' : 130.134825,
+            '130H' : 130.141145,
+            '131L' : 131.138180,
+            '131H' : 131.144499,
+        },
+        'description' : \
+            'reporter mass tolerance unit: available in ppm '\
+            '(parts-per-millon), da (Dalton) or mmu (Milli mass unit)',
+    },
+
     'infer_proteins' : {
         'edit_version': 1.00,
         'available_in_unode' : [
@@ -614,12 +747,14 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            # 'TMT_quant_1_0_0'
         ],
         'default_value': None,
         'description':  ''' Molecules to quantify. Can be either a list of strings or a csv file ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'evidences'
+            'pyqms_style_1': 'evidences',
+            # 'TMT_quant_style_1': 'evidences'
         },
         'uvalue_option': {
             'none_val': [None],
@@ -5821,6 +5956,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'pglyco_db_2_2_0',
             'deepnovo_0_0_1',
+            'TMT_quant_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5848,6 +5984,7 @@ ursgal_params = {
             'pyqms_style_1' : 'modifications',
             'pglyco_db_style_1' : 'modifications',
             'deepnovo_style_1' : 'modifications',
+            'TMT_quant_style_1': 'modifications',
         },
         'utag' : [
             'modifications',
@@ -8691,6 +8828,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'mgf_to_rt_lookup_1_0_0',
+            'TMT_quant_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8698,6 +8836,7 @@ ursgal_params = {
             'sugarpy_run_style_1' : 'scan_rt_lookup',
             'sugarpy_plot_style_1' : 'scan_rt_lookup',
             'mgf_to_rt_lookup_style_1': 'rt_pickle_name',
+            'TMT_quant_style_1': 'scan_rt_lookup',
         },
         'utag' : [
             'file_handling',
