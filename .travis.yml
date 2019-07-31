@@ -1,36 +1,31 @@
 language: python
 python:
-  - "3.6"
+- '3.6'
 sudo: false
-
-branches:
-  only:
-    - master
-
 matrix:
   include:
-    - python: 3.5
-      env: TOXENV=py35
-    - python: 3.6
-      env: TOXENV=py36
-    - python: 3.7
-      env: TOXENV=py37
-      dist: xenial
-    - python: 3.6
-      env: TOXENV=docu
-    - python: 3.6
-      env: TOXENV=example_scripts
-
-
-script:
-  - tox
-  - |
-    if [[ $TRAVIS_TAG ]]; then
-      # upload package to pypi
-      python setup.py sdist
-      python setup.py bdist_wheel --universal
-      pip install twine
-      twine upload --repository-url https://test.pypi.org/legacy/ -u $TWINE_USERNAMEE -p $TWINE_TEST_PASSWORD dist/*
-      twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD dist/*
-      # upload docu
-    fi
+  - python: 3.5
+    env: TOXENV=py35
+  - python: 3.6
+    env: TOXENV=py36
+  - python: 3.7
+    env: TOXENV=py37
+    dist: xenial
+  - python: 3.6
+    env: TOXENV=docu
+  - python: 3.6
+    env: TOXENV=coverage
+  - python: 3.6
+    env: TOXENV=example_scripts
+script: tox
+deploy:
+  provider: pypi
+  user: pyratez
+  password:
+    secure: "HeCtDqHQzZMn7ccPFpq4WgtxlIaSYu2ZfluMDXZFz+ybkFqA5KgA2vm9YSooYlNtFwy3VyUvMkGIKA3uHgiqNRe6rXxHVRsLk7ny4ImYz5Y7jUUHEi+XC0FwgANqt2bpqpAcE7imacFKnPknrWA8ZZYRx8Vb+d5YDkBB/J7P19xCDlkxUHIi3pi/lvgR6wBtiSqRq1jWTaaT69GkwiFZ9LjdxsUZYg6NwXM0SodV+11f9vGuelSRN9TjuxEjEQAS2mb3dupn99MG9v+Bka1kv6StlOjPfGtPO9s32kSNwyE8NQBWa6rlI5OWTwzT/UHJTViZ44owLiGdlRz+8H7HsbZZhF1Dq580Ql8d2taPv/ZzacfWfiHAW5ZR6J0LabsGzKQWbs4P9nFBDGf/O1VxneFXxOVswYcMYoJ3GzP48gtLSUnTX6WkyZDJfHPjih25AD0GetWRYa2rx984uyTgjdoPdYdzn1CJEIAIR2UstZz9e1sNRsB96PG1/UADiKQZYAT96c64TzyDn4PPzqbUSOYLtptROTYLwFMFfCf7ymKWs0ZJ4EwETwGArg6c5F9DeQwTnHNXgzD4yaNjqgkGHl+jabeKZdJnh41Bkzjt9lPwj6EWEIx7PBVsadjTmwI2+i9qq2B8euk/IQKu7F7APx/tjhhet48bTL7cWuf5mJA="
+  distributions: sdist bdist_wheel bdist_egg
+  on:
+    tags: true
+    all_branches: true
+    skip_existing: true
+    skip_cleanup: true
