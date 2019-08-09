@@ -28,7 +28,7 @@ class TMT_quant_1_0_0(ursgal.UNode):
         "distributable": True,
         "utranslation_style": "TMT_quant_style_1",
         "engine": {
-            "platform_independent": {"arc_independent": {"exe": "TMT_quant_0_0_1.py"}}
+            "platform_independent": {"arc_independent": {"exe": "TMT_quant_1_0_0.py"}}
         },
         "citation": "",
     }
