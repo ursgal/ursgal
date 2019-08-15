@@ -70,6 +70,8 @@ setup(
         'pymzml',
         'regex',
         'pyqms',
+        'pandas',
+        'numpy',
         "pyahocorasick >= 1.1.4;sys_platform!='win32'",
     ],
     long_description='Universal Python module combining common bottom-up proteomics tools for large-scale analysis',
