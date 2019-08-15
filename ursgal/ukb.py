@@ -329,3 +329,120 @@ for engine_type, ucontoller_function in ENGINE_TYPES.items():
     if ucontoller_function not in UCONTROLLER_FUNCTIONS.keys():
         UCONTROLLER_FUNCTIONS[ucontoller_function] = []
     UCONTROLLER_FUNCTIONS[ucontoller_function].append(engine_type)
+
+
+# UFragger
+
+# keep it alphabetically sorted
+neutral_losses = {
+    'A' : [{}],
+    'C' : [{}],
+    'D': [
+        {
+            'name': '-H2O',
+            'cc' : {'H': -2, 'O': -1}
+        },
+        {}
+    ],
+    'E': [
+        {
+            'name': '-H2O',
+            'cc' : {'H': -2, 'O': -1}
+        },
+        {}
+    ],
+    'F' : [{}],
+    'G' : [{}],
+    'H' : [
+        {
+            'name': '+H2O',
+            'cc': {'H': +2, 'O': +1},
+            'available_in_series': ['b']
+        },
+        {}
+    ],
+    'I': [{}],
+    'K': [
+        {
+            'name': '-NH3',
+            'cc': {'N': -1, 'H': -3},
+        },
+        {
+            'name': '+H2O',
+            'cc': {'H': +2, 'O': +1},
+            'available_in_series': ['b']
+        },
+        {}
+    ],
+    'L': [{}],
+    'M' : [
+        {
+            'name': '-SOCH4',
+            'requires_unimod': ['Oxidation'],
+            'cc': {'H': -4, 'C': -1, 'O': -1, 'S': -1},
+        },
+        {}  # Additional empty dict {} indicates loss is optional
+    ],
+    'N': [
+        {
+            'name': '-NH3',
+            'cc': {'N': -1, 'H': -3},
+        },
+        {}
+    ],
+    'P': [{}],
+    'Q': [
+        {
+            'name': '-NH3',
+            'cc': {'N': -1, 'H': -3},
+        },
+        {}
+    ],
+    'R': [
+        {
+            'name': '-NH3',
+            'cc': {'N': -1, 'H': -3},
+        },
+        {
+            'name': '+H2O',
+            'cc': {'H': +2, 'O': +1},
+            'available_in_series': ['b']
+        },
+        {}
+    ],
+    'S': [
+        {
+            'name': '-P',
+            'requires_unimod': ['Phospho'],
+            'cc': {'H': -3, 'O': -4, 'P': -1},
+        },
+        {
+            'name': '-H2O',
+            'requires_unimod': [''],
+            'cc' : {'H': -2, 'O': -1}
+        },
+        {}  # Additional empty dict {} indicates loss is optional
+    ],
+    'T': [
+        {
+            'name': '-P',
+            'requires_unimod': ['Phospho'],
+            'cc': {'H': -3, 'O': -4, 'P': -1},
+        },
+        {
+            'name': '-H2O',
+            'cc' : {'H': -2, 'O': -1}
+        },
+        {}  # Additional empty dict {} indicates loss is optional
+    ],
+    'V': [{}],
+    'W': [{}],
+    'Y': [
+        {
+            'name': '-P',
+            'requires_unimod': ['Phospho'],
+            'cc': {'H': -3, 'O': -4, 'P': -1},
+        },
+        {}  # Additional empty dict {} indicates loss is optional
+    ],
+}

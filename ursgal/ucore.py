@@ -323,7 +323,7 @@ def merge_rowdicts(list_of_rowdicts, psm_colnames_to_merge_multiple_values, join
                     if value_occurences_dict[value] == most_occurences:
                         final_values.append(value)
                 merged_d[fieldname] = joinchar.join(final_values)
-        
+
         else:
             values = [d[fieldname] for d in list_of_rowdicts]
             if len(set(values)) == 1:

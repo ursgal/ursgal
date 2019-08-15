@@ -22,6 +22,8 @@ from .unode import UNode
 from .ucontroller import UController
 from .ucore import COLORS
 
+from .upepfragger import UPeptideFragmentor
+
 from .chemical_composition import ChemicalComposition as ChemicalComposition
 from . import chemical_composition_kb
 from .unimod_mapper import UnimodMapper
@@ -32,7 +34,7 @@ from .profiles import PROFILES
 import ursgal.ukb
 
 GlobalUnimodMapper = UnimodMapper()
-base_dir = os.path.dirname( __file__)
+base_dir = os.path.dirname(__file__)
 
 
 # We store our version number in a simple text file:
