@@ -1,58 +1,4 @@
 ursgal_params = {
-    'reporter_ion_tolerance': {
-        'edit_version': 1.00,
-        'available_in_unode' : [
-            'TMT_quant_1_0_0',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'TMT_quant_style_1': 'reporter_ion_tolerance',
-        },
-        'utag' : [
-            'reporter',
-            'accuracy'
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'float',
-        'uvalue_option' : {
-            'none_val'  : None,
-            'max'       : 10000000,
-            'min'       : 0,
-            'updownval' : 1,
-            'unit'      : '',
-            'f-point'   : 0.2
-        },
-        'default_value' : 0.002,
-        'description' : \
-            'Lower reporter mass tolerance; maximum negative deviation of measured from calculated reporter ion mass.',
-    },
-    'reporter_ion_tolerance_unit': {
-        'edit_version' : 1.01,
-        'available_in_unode' : [
-            'TMT_quant_1_0_0',
-        ],
-        'triggers_rerun' : True,
-        'ukey_translation' : {
-            'TMT_quant_style_1': 'reporter_ion_tolerance_unit',
-        },
-        'utag' : [
-            'reporter',
-            'accuracy'
-        ],
-        'uvalue_translation' : {
-        },
-        'uvalue_type' : 'select',
-        'uvalue_option' : {
-            'select_type' : 'radio_button',
-            'available_values'  : ['da', 'mmu', 'ppm'],
-            'custom_val_max' : 0,
-        },
-        'default_value' : 'da',
-        'description' : \
-            'reporter mass tolerance unit: available in ppm '\
-            '(parts-per-millon), da (Dalton) or mmu (Milli mass unit)',
-    },
     'impurity_matrix': {
         'edit_version' : 1.01,
         'available_in_unode' : [
@@ -68,11 +14,10 @@ ursgal_params = {
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'select',
+        'uvalue_type' : 'str',
         'uvalue_option' : {
-            'select_type' : 'radio_button',
-            'available_values'  : ['da', 'mmu', 'ppm'],
-            'custom_val_max' : 0,
+            'none_val': None,
+            'multiple_line': True,
         },
         'default_value' : '''
 Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
@@ -107,12 +52,11 @@ Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
         },
         'uvalue_type' : 'dict',
         'uvalue_option' : {
-            'select_type' : 'radio_button',
-            'available_values'  : ['da', 'mmu', 'ppm'],
-            'custom_val_max' : 0,
             'none_val': None,
-            'item_titles': {'126': '126'},
+            'item_titles': {'Trivial name': 'Reporter mass'},
             'value_types': {},
+            'custom_val_max': 20,
+            'custom_type': {},
         },
         'default_value' : {
             '126'  : 126.127726,
@@ -128,10 +72,8 @@ Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
             '131H' : 131.144499,
         },
         'description' : \
-            'reporter mass tolerance unit: available in ppm '\
-            '(parts-per-millon), da (Dalton) or mmu (Milli mass unit)',
+            'Dict mapping the trivial name of the reporter ion to their m/z value',
     },
-
     'infer_proteins' : {
         'edit_version': 1.00,
         'available_in_unode' : [
@@ -3129,6 +3071,7 @@ Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'TMT_quant_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3145,6 +3088,7 @@ Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'    : 'search_fragment_tolerance',
+            'TMT_quant_style_1': 'reporter_ion_tolerance'
         },
         'utag' : [
             'fragment',
@@ -3200,6 +3144,7 @@ Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'TMT_quant_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3216,6 +3161,8 @@ Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'    : 'search_fragment_tolerance_type',
+            'TMT_quant_style_1': 'reporter_ion_tolerance_unit'
+
         },
         'utag' : [
             'fragment',
@@ -8516,7 +8463,7 @@ Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
         'uvalue_translation' : {
         },
         'uvalue_type' : 'dict',
-        'uvalue_option' : { 
+        'uvalue_option' : {
             'none_val' : None,
             'item_title' : 'column_name_with_type_of_merge',
             'item_titles' : {
@@ -8828,7 +8775,7 @@ Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'mgf_to_rt_lookup_1_0_0',
-            'TMT_quant_1_0_0',
+            # 'TMT_quant_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {

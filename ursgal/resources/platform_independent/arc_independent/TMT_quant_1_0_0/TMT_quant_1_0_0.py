@@ -19,13 +19,11 @@ import pyqms
 PROTON = 1.007276466583
 
 
-# @profile
 def fix_crosstalk_linalg_solve(channels, matrix):
     corrected_intensities = linalg.solve(matrix, channels)
     return corrected_intensities
 
 
-# @profile
 def fix_crosstalk_dot(channels, impurity_matrix_inversed, params=None):
     """Correct crosstalk between TMT channels.
 
@@ -38,7 +36,6 @@ def fix_crosstalk_dot(channels, impurity_matrix_inversed, params=None):
     return corrected_intensities
 
 
-# @profile
 def get_intensities(
     masses, all_peaks, tolerance_unit="da", tolerance_ppm=5e-6, tolerance_da=0.002
 ):
@@ -67,8 +64,7 @@ def get_intensities(
     return signals
 
 
-# @profile
-def extract_reporter_signals(ms2_spectrum, reporter_ions, tolerance):
+def extract_reporter_signals(ms2_spectrum, reporter_ions, tolerance, unit):
     """Extract signals of given reporter ions.
 
     Args:
@@ -85,19 +81,13 @@ def extract_reporter_signals(ms2_spectrum, reporter_ions, tolerance):
         sliced_peaks = all_peaks
         signals = np.array([0 for x in range(len(reporter_ions))])
         if len(sliced_peaks) > 0:
-            for i, (triv_name, rep_ion_mz) in enumerate(reporter_ions.items()):
-                mass_diffs = abs(sliced_peaks[:, 0] - rep_ion_mz)
-                idx = mass_diffs < tolerance
+            for i, (triv_name, rep_ion_mz) in enumerate(sorted(reporter_ions.items())):
+                if unit.lower() == "ppm":
+                    tolerance = tolerance * rep_ion_mz * 5e-6
+                idx = abs(sliced_peaks[:, 0] - rep_ion_mz) <= tolerance
                 test = sliced_peaks[idx]
                 if len(test) == 1:
                     signals[i] = test[0][1]
-                elif len(test) > 1:
-                    mass_diffs = mass_diffs[mass_diffs < tolerance]
-                    # if in doubt, pick peak with lowest mass diff
-                    low_mass_diff_idx = np.argmin(mass_diffs)
-                    signals[i] = test[low_mass_diff_idx][1]
-                    # print()
-                    # print('found multiple peaks in channel {0} ({1})'.format(triv_name, test))
                 else:
                     signals[i] = 0
         else:
@@ -107,7 +97,6 @@ def extract_reporter_signals(ms2_spectrum, reporter_ions, tolerance):
     return signals
 
 
-# @profile
 def calculate_S2I(ms1_spectrum, peptide, charge, isolation_window_borders):
     """Calculate Signal to Intensity.
 
@@ -138,7 +127,6 @@ def calculate_S2I(ms1_spectrum, peptide, charge, isolation_window_borders):
     return S2I
 
 
-# @profile
 def calculate_P2T(ms1_spectrum, peptide, charge, isolation_window_borders):
     """Calculate Precursor to Threshold.
 
@@ -168,7 +156,6 @@ def calculate_P2T(ms1_spectrum, peptide, charge, isolation_window_borders):
     return P2T
 
 
-# @profile
 def correct_S2I(raw_channels, S2I):
     """Correct Signal 2 Intensity.
 
@@ -190,7 +177,6 @@ def correct_S2I(raw_channels, S2I):
     return corrected_channels
 
 
-# @profile
 def interpolate_qc(qc_e, qc_l, RT_e, RT_l, RT_ms2):
     """Calculate time weighted linear combination to extrapolate quality control values.
 
@@ -208,7 +194,6 @@ def interpolate_qc(qc_e, qc_l, RT_e, RT_l, RT_ms2):
     return (RT_ms2 - RT_e) * ((qc_l - qc_e) / (RT_l - RT_e)) + qc_e
 
 
-# @profile
 def main(mzml_file, output_file, param_dict):
     """
     Perform quantification based on mzML input file.
@@ -222,10 +207,17 @@ def main(mzml_file, output_file, param_dict):
         param_dict (dict): dict with all node related parameters
 
     """
-    param_dict["reporter_ion_mzs"] = ODict(param_dict["reporter_ion_mzs"])
-    trivial_names = param_dict["reporter_ion_mzs"].keys()
+    param_dict["reporter_ion_mzs"] = ODict(
+        list(param_dict["reporter_ion_mzs"].values())[0]
+    )
+    trivial_names = list(param_dict["reporter_ion_mzs"].keys())
 
-    impurity_data = StringIO(param_dict["impurity_matrix"])
+    reporter_ion_tolerance = list(param_dict["reporter_ion_tolerance"].values())[0]
+    reporter_ion_tolerance_unit = list(
+        param_dict["reporter_ion_tolerance_unit"].values()
+    )[0]
+
+    impurity_data = StringIO(list(param_dict["impurity_matrix"].values())[0])
     impurity_data = pd.read_csv(impurity_data)
 
     impurity_matrix = impurity_data.drop(columns="Mass-Tag").values
@@ -289,7 +281,6 @@ def main(mzml_file, output_file, param_dict):
                         # breakpoint()
                         nd = {**all_lines[ident_info["ID"]]}
                         nd["Quant Ion"] = list(trivial_names)[i]
-                        nd["raw Intensity"] = tmt_data[ident_info["ID"]]["unfixed"][i]
                         nd["rel Intensity"] = tmt_data[ident_info["ID"]]["normalized"][
                             i
                         ]
@@ -304,7 +295,8 @@ def main(mzml_file, output_file, param_dict):
             raw_channels = extract_reporter_signals(
                 ms2_spec,
                 param_dict["reporter_ion_mzs"],
-                param_dict["reporter_ion_tolerance"],
+                reporter_ion_tolerance,
+                reporter_ion_tolerance_unit,
             )
             # fixed_channels = fix_crosstalk_dot(raw_channels, impurity_matrix_transposed)
             fixed_channels = fix_crosstalk_linalg_solve(
@@ -315,12 +307,9 @@ def main(mzml_file, output_file, param_dict):
             # assert np.allclose(fixed_channels, fixed_channels2), f'{fixed_channels}\n{fixed_channels2}'
             normalized_channels = fixed_channels / fixed_channels.sum()
             if spec.ID not in tmt_data:
-                tmt_data[spec.ID] = {"raw": None, "fixed": None, "unfixed": None}
-
+                tmt_data[spec.ID] = {"raw": None, "fixed": None}
             tmt_data[spec.ID]["raw"] = fixed_channels
             tmt_data[spec.ID]["normalized"] = normalized_channels
-            tmt_data[spec.ID]["unfixed"] = raw_channels
-
             if spec.ID not in all_data:
                 all_data[spec.ID] = []
 
@@ -369,10 +358,9 @@ def main(mzml_file, output_file, param_dict):
                     "Spectrum ID": ms2_spec.ID,
                     "Charge": charge,
                     "RT": ms2_spec.scan_time_in_minutes(),
-                    "Quant Ion": None,  # list(trivial_names),
-                    "rel Intensity": None,  # normalized_channels,
-                    "abs Intensity": None,  # fixed_channels,
-                    "raw Intensity": None,  # raw_channels,
+                    "Quant Ion": list(trivial_names),
+                    "rel Intensity": normalized_channels,
+                    "abs Intensity": fixed_channels,
                     "S2I": None,
                     "P2T": None,
                 }
@@ -386,169 +374,3 @@ def main(mzml_file, output_file, param_dict):
     final_df["rel Intensity"] += 0.0
     final_df["abs Intensity"] += 0.0
     final_df.to_csv(output_file, index=False)
-
-
-# @profile
-def process_previous_idents(scan_numbers, ms1_spec, data_collections):
-    for scan in scan_numbers:
-        line = data_collections[scan]
-        line["RT After"] = ms1_spec.scan_time_in_minutes()
-        S2I = calculate_S2I(
-            ms1_spec,
-            line["Iso mz"],
-            line["charge"],
-            (
-                line["lower isolation window border"],
-                line["upper isolation window border"],
-            ),
-        )
-        P2T = calculate_P2T(
-            ms1_spec,
-            line["Iso mz"],
-            line["charge"],
-            (
-                line["lower isolation window border"],
-                line["upper isolation window border"],
-            ),
-        )
-
-        line["S2I After"] = S2I
-        line["P2T After"] = P2T
-
-        interpol_S2I = interpolate_qc(
-            line["S2I Before"],
-            line["S2I After"],
-            line["RT Before"],
-            line["RT After"],
-            line["Retention time (minutes)"],
-        )
-        interpol_P2T = interpolate_qc(
-            line["P2T Before"],
-            line["P2T After"],
-            line["RT Before"],
-            line["RT After"],
-            line["Retention time (minutes)"],
-        )
-
-        line["S2I interpolated"] = interpol_S2I
-        line["P2T interpolated"] = interpol_P2T
-
-
-# @profile
-def normalize_row(row):
-    tmt_cols = [key for key in row.keys() if key.startswith("1")]
-    normalized = row[tmt_cols] / row[tmt_cols].sum()
-    return normalized
-
-
-# @profile
-def correct_S2I_row(row):
-    """Correct Signal 2 Intensity.
-
-    Args:
-        row (pandas.core.series.Series): row from a pandas dataframe
-
-    Returns:
-        np.ndarray: row with S2I corrected channels.
-
-    """
-    S2I = row["S2I interpolated"]
-    tmt_cols = [col for col in row.keys() if col.startswith("1")]
-    raw_channels = row[tmt_cols]
-    normalized_channels = raw_channels / (raw_channels.sum() + 1e-5)
-    interfering_signal = sum(raw_channels * (1 - S2I))
-    interfering_signal_per_reporter = normalized_channels * interfering_signal
-    no_inference_channels = raw_channels - interfering_signal_per_reporter
-    corrected_channels = no_inference_channels / (raw_channels.sum() + 1e-5)
-    return corrected_channels
-
-
-# @profile
-def main2(mzml_file, output_file, param_dict):
-    param_dict["reporter_ion_mzs"] = ODict(param_dict["reporter_ion_mzs"])
-    trivial_names = list(param_dict["reporter_ion_mzs"].keys())
-
-    impurity_data = StringIO(param_dict["impurity_matrix"])
-    impurity_data = pd.read_csv(impurity_data)
-
-    impurity_matrix = impurity_data.drop(columns="Mass-Tag").values
-    impurity_matrix_transposed = impurity_matrix.T
-    impurity_matrix_inversed = np.linalg.inv(impurity_matrix_transposed)
-
-    reader = pymzml.run.Reader(mzml_file)
-    previous_ms2_idents = []
-
-    data_colletions = {}
-    EMPTY = 0
-
-    for i, spec in enumerate(reader):
-        if i % 500 == 0:
-            print("Process spec {i}".format(i), end="\r")
-        if spec.ms_level == 1:
-            ms1_spec = spec
-            if len(previous_ms2_idents) > 0:
-                process_previous_idents(previous_ms2_idents, ms1_spec, data_colletions)
-            previous_ms2_idents = []
-        elif spec.ms_level == 2:
-            ms2_spec = spec
-            raw_channels = extract_reporter_signals(
-                ms2_spec,
-                param_dict["reporter_ion_mzs"],
-                param_dict["reporter_ion_tolerance"],
-                # param_dict["reporter_ion_tolerance_unit"],
-            )
-            fixed_channels = fix_crosstalk_dot(raw_channels, impurity_matrix_transposed)
-            # fixed_channels = fix_crosstalk_linalg_solve(raw_channels, impurity_matrix_inversed)
-            if all(fixed_channels == 0):
-                EMPTY += 1
-                continue
-            if spec.ID not in data_colletions:
-                data_colletions[spec.ID] = {}
-            iso_mz = spec["isolation window target m/z"]
-            lower_border = iso_mz - spec["isolation window lower offset"]
-            upper_border = iso_mz + spec["isolation window upper offset"]
-            charge = int(spec["charge state"])
-
-            for i, name in enumerate(trivial_names):
-                data_colletions[spec.ID][name] = fixed_channels[i]
-
-            S2I = calculate_S2I(ms1_spec, iso_mz, charge, (lower_border, upper_border))
-            P2T = calculate_P2T(ms1_spec, iso_mz, charge, (lower_border, upper_border))
-
-            data_colletions[spec.ID]["charge"] = charge
-            data_colletions[spec.ID]["Iso mz"] = iso_mz
-            data_colletions[spec.ID]["lower isolation window border"] = lower_border
-            data_colletions[spec.ID]["upper isolation window border"] = upper_border
-            data_colletions[spec.ID][
-                "Retention time (minutes)"
-            ] = ms2_spec.scan_time_in_minutes()
-            data_colletions[spec.ID]["Spectrum ID"] = spec.ID
-            data_colletions[spec.ID]["S2I Before"] = S2I
-            data_colletions[spec.ID]["P2T Before"] = P2T
-            data_colletions[spec.ID]["RT Before"] = ms1_spec.scan_time_in_minutes()
-
-            previous_ms2_idents.append(spec.ID)
-
-    flat = [line for line in data_colletions.values()]
-    dataframe = pd.DataFrame(flat)
-    tmt_cols = [col for col in dataframe.columns if col.startswith("1")]
-    not_tmt_cols = [col for col in dataframe.columns if not col.startswith("1")]
-
-    # normalize over peptides
-    all_intensities = dataframe[tmt_cols].aggregate("sum")
-    medians = dataframe[tmt_cols].aggregate("median")
-    dataframe[tmt_cols] = dataframe[tmt_cols] / all_intensities
-
-    # normalize over channels
-    # normalize channels
-    # dataframe[tmt_cols] = dataframe.apply(normalize, axis=1)
-
-    # correct S2I
-    dataframe[tmt_cols] = dataframe.apply(correct_S2I_row, axis=1)
-    dataframe[tmt_cols] = dataframe.apply(normalize_row, axis=1)
-
-    # melto to longformat
-    dataframe = dataframe.melt(
-        id_vars=not_tmt_cols, var_name="Quant Ion", value_name="Intensity"
-    )
-    dataframe.to_csv(output_file, index=False)
