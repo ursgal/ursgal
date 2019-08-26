@@ -79,7 +79,7 @@ def _correct_S2I(S2I, result):
 
 
 def test_correct_S2I():
-    cases =  [(1, [0.25, 0.5, 0.25]), (0.5, [0.125, 0.25, 0.125]), (0, [0, 0, 0])]
+    cases = [(1, [0.25, 0.5, 0.25]), (0.5, [0.125, 0.25, 0.125]), (0, [0, 0, 0])]
     for c in cases:
         yield _correct_S2I, c[0], c[1]
 
@@ -99,7 +99,7 @@ def _fix_crosstalk_dot(matrix, result):
 
 
 def test_fix_crosstalk():
-    cases =  [
+    cases = [
         (ISOTOPE_OVERLAP1, [95, 100, 105]),
         (ISOTOPE_OVERLAP2, [100, 50, 150]),
         (ISOTOPE_OVERLAP3, [50, 100, 150]),
@@ -159,7 +159,7 @@ def test_compare_crosstalk_solvers():
 
 def _get_intensities(mz, peaks, unit, tol, expected_result):
     """Test extracting intensities for given masses from peak list.
-    
+
     Args:
         mz (list): mz to extract
         peaks (np.array): peak list
@@ -245,7 +245,7 @@ def test_get_intensities():
 
 # def _calc_isotope_envelopes(peptides, charges, expected_results):
 #     """Test calculation of isotope envelopes.
-    
+
 #     Args:
 #         peptides (list): list of peptide sequences
 #         charges (list): list of charge states
@@ -267,9 +267,10 @@ def test_get_intensities():
 #     for c in cases:
 #         yield _calc_isotope_envelopes, c[0], c[1], c[2]
 
+
 def _calculate_S2I(ms1_spec, peptide, charge, window, result):
     """Test signal 2 intensity calculation
-    
+
     Args:
         ms1_spec (Spectrum): spectrum class with peaks() and estimated_noise_level methods
         peptide (str): peptide sequence
@@ -279,7 +280,7 @@ def _calculate_S2I(ms1_spec, peptide, charge, window, result):
     """
     # cc_obj = ChemicalComposition()
     # lib = lib = calc_isotope_envelopes([peptide], [charge])
-    s2i = calculate_S2I(ms1_spec, peptide, charge, window)
+    s2i = calculate_S2I(ms1_spec, peptide, charge, window, 0)
     assert np.isclose(s2i, result)
 
 
@@ -324,7 +325,7 @@ def test_calcuate_S2I():
 def _calculate_P2T(ms1_spec, peptide, charge, window, result):
     # cc_obj = ChemicalComposition()
     # lib = lib = calc_isotope_envelopes([peptide], [charge])
-    p2t = calculate_P2T(ms1_spec, peptide, charge, window)
+    p2t = calculate_P2T(ms1_spec, peptide, charge, window, 0)
     assert np.isclose(p2t, result)
 
 
