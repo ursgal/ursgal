@@ -42,4 +42,4 @@ class TMT_quant_1_0_0(ursgal.UNode):
             self.params["input_dir_path"], self.params["input_file"]
         )
         out = os.path.join(self.params["output_dir_path"], self.params["output_file"])
-        main(mzml_file, out, self.params["translations"])
+        main(mzml_file, out, self.params["translations"]["_grouped_by_translated_key"])

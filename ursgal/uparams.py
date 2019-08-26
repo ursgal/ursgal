@@ -4912,6 +4912,7 @@ Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'TMT_quant_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4919,6 +4920,7 @@ Mass-Tag,126,127L,127H,128L,128H,129L,129H,130L,130H,131L,131H
             'pyqms_style_1'    : 'MACHINE_OFFSET_IN_PPM',
             'sugarpy_run_style_1'  : 'MACHINE_OFFSET_IN_PPM',
             'sugarpy_plot_style_1'  : 'MACHINE_OFFSET_IN_PPM',
+            'TMT_quant_style_1': 'machine_offset_in_ppm',
         },
         'utag' : [
             'conversion',

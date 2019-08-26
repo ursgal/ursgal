@@ -37,7 +37,12 @@ def fix_crosstalk_dot(channels, impurity_matrix_inversed, params=None):
 
 
 def get_intensities(
-    masses, all_peaks, tolerance_unit="da", tolerance_ppm=5e-6, tolerance_da=0.002
+    masses,
+    all_peaks,
+    tolerance_unit="da",
+    tolerance_ppm=5e-6,
+    tolerance_da=0.002,
+    offset=0,
 ):
     """Extract given masses with intensities from spectrum.
 
@@ -64,7 +69,7 @@ def get_intensities(
     return signals
 
 
-def extract_reporter_signals(ms2_spectrum, reporter_ions, tolerance, unit):
+def extract_reporter_signals(ms2_spectrum, reporter_ions, tolerance, unit, offset):
     """Extract signals of given reporter ions.
 
     Args:
@@ -77,6 +82,7 @@ def extract_reporter_signals(ms2_spectrum, reporter_ions, tolerance, unit):
 
     """
     all_peaks = ms2_spectrum.peaks("centroided")
+    all_peaks[:, 0] += all_peaks[:, 0] * offset
     if not len(all_peaks) == 0:
         sliced_peaks = all_peaks
         signals = np.array([0 for x in range(len(reporter_ions))])
@@ -97,7 +103,7 @@ def extract_reporter_signals(ms2_spectrum, reporter_ions, tolerance, unit):
     return signals
 
 
-def calculate_S2I(ms1_spectrum, peptide, charge, isolation_window_borders):
+def calculate_S2I(ms1_spectrum, peptide, charge, isolation_window_borders, offset):
     """Calculate Signal to Intensity.
 
     For that, the sum of all isotope intensities in the isolation windows is divided by
@@ -112,13 +118,14 @@ def calculate_S2I(ms1_spectrum, peptide, charge, isolation_window_borders):
     """
     lower_border, upper_border = isolation_window_borders
     mz = ms1_spectrum.peaks("centroided")
+    mz[:, 0] += mz[:, 0] * offset
     all_ions_in_iso_border = mz[lower_border < mz[:, 0]]
     all_ions_in_iso_border = all_ions_in_iso_border[
         upper_border > all_ions_in_iso_border[:, 0]
     ]
     isotope_mz = [peptide, peptide + (PROTON / charge)]
     isotope_int = get_intensities(
-        isotope_mz, all_ions_in_iso_border, tolerance_unit="ppm"
+        isotope_mz, all_ions_in_iso_border, tolerance_unit="ppm", offset=offset
     )
 
     isotope_int_sum = sum(isotope_int.values())
@@ -127,7 +134,7 @@ def calculate_S2I(ms1_spectrum, peptide, charge, isolation_window_borders):
     return S2I
 
 
-def calculate_P2T(ms1_spectrum, peptide, charge, isolation_window_borders):
+def calculate_P2T(ms1_spectrum, peptide, charge, isolation_window_borders, offset):
     """Calculate Precursor to Threshold.
 
     Divide the sum of all isotope intensities in isolation window by the noise level.
@@ -141,13 +148,14 @@ def calculate_P2T(ms1_spectrum, peptide, charge, isolation_window_borders):
     """
     lower_border, upper_border = isolation_window_borders
     mz = ms1_spectrum.peaks("centroided")
+    mz[:, 0] += mz[:, 0] * offset
     all_ions_in_iso_border = mz[lower_border < mz[:, 0]]
     all_ions_in_iso_border = all_ions_in_iso_border[
         upper_border > all_ions_in_iso_border[:, 0]
     ]
     isotope_mz = [peptide, peptide + (PROTON / charge)]
     isotope_int = get_intensities(
-        isotope_mz, all_ions_in_iso_border, tolerance_unit="ppm"
+        isotope_mz, all_ions_in_iso_border, tolerance_unit="ppm", offset=offset
     )
 
     isotope_int_sum = sum(isotope_int.values())
@@ -217,9 +225,11 @@ def main(mzml_file, output_file, param_dict):
         param_dict["reporter_ion_tolerance_unit"].values()
     )[0]
 
+    ppm_offset = list(param_dict["machine_offset_in_ppm"].values())[0]
+    offset = ppm_offset * 1e-6
+
     impurity_data = StringIO(list(param_dict["impurity_matrix"].values())[0])
     impurity_data = pd.read_csv(impurity_data)
-
     impurity_matrix = impurity_data.drop(columns="Mass-Tag").values
     impurity_matrix_transposed = impurity_matrix.T
     impurity_matrix_inversed = np.linalg.inv(impurity_matrix_transposed)
@@ -235,7 +245,12 @@ def main(mzml_file, output_file, param_dict):
 
     for i, spec in enumerate(reader):
         if i % 500 == 0:
-            print("Process spec {i}".format(i=i), end="\r")
+            print(
+                "Process spec {i} with MS level {level}".format(
+                    i=i, level=spec.ms_level
+                ),
+                end="\r",
+            )
         if spec.ms_level == 1:
             ms1_spec = spec
             if len(previous_ms2_idents) > 0:
@@ -247,6 +262,7 @@ def main(mzml_file, output_file, param_dict):
                         ident_info["mz"],
                         ident_info["charge"],
                         ident_info["isolation_window_borders"],
+                        offset,
                     )
                     s2i_spec_data["S2I_after"] = S2I
                     s2i_spec_data["RT_after"] = ms1_spec.scan_time_in_minutes()
@@ -255,6 +271,7 @@ def main(mzml_file, output_file, param_dict):
                         ident_info["mz"],
                         ident_info["charge"],
                         ident_info["isolation_window_borders"],
+                        offset,
                     )
                     p2t_spec_data["P2T_after"] = P2T
                     p2t_spec_data["RT_after"] = ms1_spec.scan_time_in_minutes()
@@ -275,7 +292,6 @@ def main(mzml_file, output_file, param_dict):
                     s2i_corrected_channels = correct_S2I(
                         tmt_data[ident_info["ID"]]["raw"], interpol_S2I
                     )
-                    # breakpoint()
                     # Implement normalization over peptides
                     for i, channel in enumerate(tmt_data[ident_info["ID"]]["raw"]):
                         # breakpoint()
@@ -297,13 +313,14 @@ def main(mzml_file, output_file, param_dict):
                 param_dict["reporter_ion_mzs"],
                 reporter_ion_tolerance,
                 reporter_ion_tolerance_unit,
+                offset,
             )
             # fixed_channels = fix_crosstalk_dot(raw_channels, impurity_matrix_transposed)
             fixed_channels = fix_crosstalk_linalg_solve(
                 raw_channels, impurity_matrix_inversed
             )
-            if all(fixed_channels == 0):
-                continue
+            # if all(fixed_channels == 0):
+            #     continue
             # assert np.allclose(fixed_channels, fixed_channels2), f'{fixed_channels}\n{fixed_channels2}'
             normalized_channels = fixed_channels / fixed_channels.sum()
             if spec.ID not in tmt_data:
@@ -330,6 +347,7 @@ def main(mzml_file, output_file, param_dict):
                 ident_info["mz"],
                 ident_info["charge"],
                 ident_info["isolation_window_borders"],
+                offset,
             )
             if ms2_spec.ID not in S2I_data:
                 S2I_data[ms2_spec.ID] = {
@@ -344,6 +362,7 @@ def main(mzml_file, output_file, param_dict):
                 ident_info["mz"],
                 ident_info["charge"],
                 ident_info["isolation_window_borders"],
+                offset,
             )
             if ms2_spec.ID not in P2T_data:
                 P2T_data[ms2_spec.ID] = {
