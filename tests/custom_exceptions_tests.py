@@ -4,7 +4,7 @@ import os
 from nose.tools import raises
 
 import ursgal
-from ursgal.exceptions import UrsgalError, EmptyUrsgalCsvError
+from ursgal.exceptions import UrsgalError, EmptylCsvUrsgaError
 
 database = os.path.join("tests", "data", "BSA.fasta")
 test_file = os.path.join("tests", "data", "empty_search_results.csv")
@@ -12,7 +12,7 @@ R = ursgal.UController(params={"database": database})
 print("set up stuff")
 
 
-@raises(EmptyUrsgalCsvError)
+@raises(EmptylCsvUrsgaError)
 def empty_file_raises_EmptyUrsgalCsvError_in_peptide_mapper_v4_test():
     R = ursgal.UController(
         params={
@@ -34,7 +34,7 @@ def empty_file_raises_UrsgalError_in_peptide_mapper_v4_test():
     R.map_peptides_to_fasta(test_file, force=True)
 
 
-@raises(EmptyUrsgalCsvError)
+@raises(EmptylCsvUrsgaError)
 def empty_file_raises_EmptyUrsgalCsvError_in_peptide_mapper_v3_test():
     R = ursgal.UController(
         params={
@@ -56,7 +56,7 @@ def empty_file_raises_UrsgalError_in_peptide_mapper_v3_test():
     R.map_peptides_to_fasta(test_file, force=True)
 
 
-@raises(EmptyUrsgalCsvError)
+@raises(EmptylCsvUrsgaError)
 def empty_file_raises_EmptyUrsgalCsvError_in_peptide_mapper_v2_test():
     R = ursgal.UController(
         params={
