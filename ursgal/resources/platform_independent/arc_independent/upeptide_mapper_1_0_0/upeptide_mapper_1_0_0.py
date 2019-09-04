@@ -223,10 +223,7 @@ def main(input_file=None, output_file=None, params=None):
             tmp_peptide_set.add( line_dict['Sequence'] )
         num_peptides = len(tmp_peptide_set)
         if num_peptides == 0:
-            # delete already created outputfiles
-            os.remove(output_file)
-            os.remove(output_file + '_full_protein_names.txt')
-            raise ursgal.exceptions.EmptyUrsgalCsvError("Empty Input file, cant map peptides.")
+            raise ursgal.exceptions.EmptyCsvUrsgalError("Empty Input file, cant map peptides.")
         print('''[ map_peps ] Parsing and buffering csv done''')
         print(
             '''[ map_peps ] Mapping {0} peptides using mapper {1}'''.format(
