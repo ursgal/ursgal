@@ -358,6 +358,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Sequence Post AA',
             'Complies search criteria',
             'Conflicting uparam',
+            'Search Engine',
         ]
 
         for new_fieldname in new_fieldnames:
@@ -388,6 +389,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     end = '\r'
                 )
 
+            line_dict['Search Engine'] = search_engine
             ##########################
             # Spectrum Title block
             # reformatting Spectrum Title,
