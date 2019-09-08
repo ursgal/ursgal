@@ -1,2 +1,2 @@
-sphinxcontrib-exceltable==0.2.0
+sphinxcontrib-exceltable==0.2.2
 sphinx_rtd_theme
