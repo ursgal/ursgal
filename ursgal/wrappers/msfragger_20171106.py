@@ -40,7 +40,7 @@ class msfragger_20171106( msfragger ):
         'release_date'                : '2017-11-06',
         'utranslation_style'          : 'msfragger_style_1',
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML'],
-        'output_extensions'           : ['.csv'],
+        'output_extensions'           : ['.csv', '.pepXML'],
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,

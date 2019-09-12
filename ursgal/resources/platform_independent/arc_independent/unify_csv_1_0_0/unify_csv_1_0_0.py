@@ -94,6 +94,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         * 15N modification have to be removed from Modifications and the
           merged modifications have to be corrected.
 
+    pGlyco
+        * reformat modifications
+        * reformat glycan - TO DO
     '''
     print(
         '''
@@ -110,6 +113,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     do_not_delete         = False
     created_tmp_files     = []
     use15N                = False
+    search_engine         = search_engine.lower()
 
     if 'label' in params.keys():
         if params['label'] == '15N':
@@ -133,9 +137,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     # modification masses are rounded to allow matching to unimod
     no_decimals = params['translations']['rounded_mass_decimals']
-    if 'pipi' in search_engine.lower():
+    if 'pipi' in search_engine:
         no_decimals = 1
-    if 'moda' in search_engine.lower():
+    if 'moda' in search_engine:
         no_decimals = 0
     mass_format_string = '{{0:3.{0}f}}'.format(no_decimals)
 
@@ -170,7 +174,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             if mod_type == 'opt':
                 opt_mods[aa] = name
 
-    if 'msfragger' in search_engine.lower():
+    if 'msfragger' in search_engine:
         ##########################
         # msfragger mod merge block
         # calculate possbile mod combos...
@@ -261,6 +265,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         'omssa',
         'xtandem',
         'msfragger',
+        'pglyco',
     ]
     open_mod_search_engines = [
         'pipi',
@@ -270,13 +275,13 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     database_search = False
     open_mod_search = False
     for de_novo_engine in de_novo_engines:
-        if de_novo_engine in search_engine.lower():
+        if de_novo_engine in search_engine:
             de_novo = True
     for db_se in database_search_engines:
-        if db_se in search_engine.lower():
+        if db_se in search_engine:
             database_search = True
     for om_se in open_mod_search_engines:
-        if om_se in search_engine.lower():
+        if om_se in search_engine:
             open_mod_search = True
 
     if params['translations']['enzyme'] != 'nonspecific':
@@ -390,14 +395,17 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     OMSSA
                     MSGF+
                     X!Tandem
+                    pGlyco
                 '''
                 if 'RTINSECONDS=' in line_dict['Spectrum Title']:
                     line_2_split = line_dict['Spectrum Title'].split(' ')[0].strip()
+                elif line_dict['Spectrum Title'].endswith('.dta'):
+                    line_2_split = line_dict['Spectrum Title'].strip('.dta')
                 else:
                     line_2_split = line_dict['Spectrum Title']
                 line_dict['Spectrum Title'] = line_2_split
 
-                input_file_basename, spectrum_id, _spectrum_id, charge = line_2_split.split('.')
+                input_file_basename, spectrum_id, _spectrum_id, charge = line_2_split.split('.')[:4]
                 pure_input_file_name = ''
 
             elif 'scan=' in line_dict['Spectrum ID']:
@@ -503,7 +511,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 # Modification block #
                 ######################
                 # check MSFragger crazy mod merge first...
-                if 'msfragger' in search_engine.lower():
+                if 'msfragger' in search_engine:
                     # we have to reformat the modifications
                     # M|14$15.994915|17$57.021465 to 15.994915:14;57.021465:17
                     # reformat it in Xtandem style
@@ -634,8 +642,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 # Note: masses are checked below to avoid any mismatch           #
                 ##################################################################
                 if use15N:
-                    if 'myrimatch' in search_engine.lower() or \
-                            'msgfplus_v9979' in search_engine.lower():
+                    if 'myrimatch' in search_engine or \
+                            'msgfplus_v9979' in search_engine:
                         for p in range(1,len(line_dict['Sequence'])+1):
                                 line_dict['Modifications'] = \
                                     line_dict['Modifications'].replace(
@@ -643,7 +651,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                         '',
                                         1,
                                     )
-                    if 'myrimatch' in search_engine.lower():
+                    if 'myrimatch' in search_engine:
                         if 'Carboxymethyl' in line_dict['Modifications'] and cam == True:
                             line_dict['Modifications'] = line_dict['Modifications'].replace(
                                 'Carboxymethyl',
@@ -661,13 +669,22 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     Nterm = False
                     Cterm = False
                     skip_mod = False
-                    if modification == '':
+                    if modification == '' or modification == 'null':
                         continue
                     pos, mod = None, None
-                    # print(modification)
-                    match = mod_pattern.search( modification )
-                    pos = int( match.group('pos') )
-                    mod = modification[ :match.start() ]
+                    if 'pglyco' in search_engine:
+                        try:
+                            pos = int(modification.split(',')[0])
+                            mod_pglyco = ','.join(modification.split(',')[1:])
+                            mod = mod_pglyco.split('[')[0]
+                        except:
+                            match = mod_pattern.search( modification )
+                            pos = int( match.group('pos') )
+                            mod = modification[ :match.start() ]
+                    else:
+                        match = mod_pattern.search( modification )
+                        pos = int( match.group('pos') )
+                        mod = modification[ :match.start() ]
                     assert pos is not None, '''
                             The format of the modification {0}
                             is not recognized by ursgal'''.format(
@@ -723,9 +740,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         masses_2_test = [float_mod]
                         if use15N:
                             substract_15N_diff = False
-                            if aa in fixed_mods.keys() and 'msgfplus' in search_engine.lower() and pos != 0:
+                            if aa in fixed_mods.keys() and 'msgfplus' in search_engine and pos != 0:
                                 substract_15N_diff = True
-                            if 'msfragger' in search_engine.lower() and float_mod > 4:
+                            if 'msfragger' in search_engine and float_mod > 4:
                                 # maximum 15N labeling is 3.988 Da (R)
                                 substract_15N_diff = True
                             if substract_15N_diff:
@@ -809,9 +826,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         else:
                             continue
                     tmp_mods.append(modification)
-                if 'msfragger' in search_engine.lower():
+                if 'msfragger' in search_engine:
                     org_mass_diff = line_dict['Mass Difference']
                     tmp_mass_diff.append('{0}:n'.format(org_mass_diff))
+                if 'pglyco' in search_engine:
+                    line_dict['Sequence'] = line_dict['Sequence'].replace('J', 'N')
                 line_dict_update['Modifications'] = ';'.join(tmp_mods)
                 line_dict_update['Mass Difference'] = ';'.join(tmp_mass_diff)
                 #
@@ -885,6 +904,21 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             line_dict_update = ze_only_buffer[ main_buffer_key ]
             line_dict.update( line_dict_update )
+
+            if 'pglyco' in search_engine:
+                try:
+                    Hex, HexNAc, NeuAc, NeuGc, dHex = line_dict[
+                        'Glycan'].strip(' ').split(' ')
+                except:
+                    print(line_dict['Glycan'])
+                    exit()
+                line_dict['Glycan'] = 'Hex({0})HexNac({1})NeuAc({2})NeuGc({3})dHex({4})'.format(
+                    Hex,
+                    HexNAc,
+                    NeuAc,
+                    NeuGc,
+                    dHex,
+                )
 
             # protein block, only for database search engine
             if database_search is True:
@@ -1049,7 +1083,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         # build IsotopologueLibrary
         molecule2hill_dict = {}
         for molecule in all_molecules:
-            cc.use(molecule)
+            if 'X' in molecule.upper():
+                cc.use(molecule.replace('X', ''))
+            else:
+                cc.use(molecule)
             if use15N:
                 number_N = dc( cc['N'] )
                 cc['15N'] = number_N
@@ -1108,7 +1145,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
             collected_line_dict['uCalc m/z'] = calc_mz
             if database_search is True:
-                if collected_line_dict['Calc m/z'] == '':
+                if 'Calc m/z' in collected_line_dict.keys() and\
+                    collected_line_dict['Calc m/z'] == '':
                     collected_line_dict['Calc m/z'] = calc_mz
 
             collected_line_dict['Accuracy (ppm)'] = round(min_accuracy, 5)
@@ -1162,7 +1200,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 #         'Charge',
 #         'Is decoy',
 #     ]
-#     if 'msfragger' in search_engine.lower():
+#     if 'msfragger' in search_engine:
 #         psm.append('MSFragger:Neutral mass of peptide')
 #     if score_colname:
 #         psm.append(score_colname)

@@ -72,6 +72,13 @@ FILE_EXTENSIONS = {
                 'character.\n'\
             '(DataTypes.net; https://datatypes.net)',
     },
+    '.cfg' : {
+            'short_name'     : 'CFG',
+            'long_name'      : 'CFG (pGlyco)',
+            'same_extension' : [],
+            'description'    : \
+                'pGlyco specific parameter file format.',
+    },
     '.den' : {
         'short_name'     : 'DEN',
         'long_name'      : 'DEN (XMVB Density Data)',

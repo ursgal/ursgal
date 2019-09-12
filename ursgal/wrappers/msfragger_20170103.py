@@ -39,7 +39,7 @@ class msfragger_20170103(ursgal.UNode):
         'release_date'                : '2017-01-03',
         'utranslation_style'          : 'msfragger_style_1',
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML'],
-        'output_extensions'           : ['.csv'],
+        'output_extensions'           : ['.csv', '.pepXML'],
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
@@ -266,19 +266,19 @@ class msfragger_20170103(ursgal.UNode):
             self.params['input_file']
         )
         if self.input_file.lower().endswith('.mzml') or \
-                self.input_file.lower().endswith('.mzml.gz') or \
-                self.input_file.lower().endswith('.mgf'):
+                self.input_file.lower().endswith('.mzml.gz'):#or \
+                # self.input_file.lower().endswith('.mgf'):
             self.params['translations']['mzml_input_file'] = self.input_file
-        # elif self.input_file.lower().endswith('.mgf'):
-        #     self.params['translations']['mzml_input_file'] = \
-        #         self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( self.input_file )
-        #     self.print_info(
-        #         'MSFragger can only read Proteowizard MGF input files,'
-        #         'the corresponding mzML file {0} will be used instead.'.format(
-        #             os.path.abspath(self.params['translations']['mzml_input_file'])
-        #         ),
-        #         caller = "INFO"
-            # )
+        elif self.input_file.lower().endswith('.mgf'):
+            self.params['translations']['mzml_input_file'] = \
+                self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( self.input_file )
+            self.print_info(
+                'MSFragger can only read Proteowizard MGF input files,'
+                'the corresponding mzML file {0} will be used instead.'.format(
+                    os.path.abspath(self.params['translations']['mzml_input_file'])
+                ),
+                caller = "INFO"
+            )
         else:
             raise Exception(
                 'MSFragger input spectrum file must be in mzML or MGF format!')

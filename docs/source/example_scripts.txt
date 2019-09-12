@@ -36,6 +36,13 @@ Target decoy generation
 
 .. include:: code_inc/target_decoy_generation_example.inc
 
+Convert .raw to .mzML
+---------------------
+
+.. autofunction:: convert_raw_to_mzml.main
+
+
+.. include:: code_inc/convert_raw_to_mzml.inc
 
 Mgf conversion loop examples
 ----------------------------
@@ -89,6 +96,15 @@ Complete workflow for human BR dataset analysis
 
 .. include:: code_inc/human_br_complete_workflow.inc
 
+
+Complete workflow for analysis with pGlyco
+------------------------------------------
+
+
+.. autofunction:: simple_example_pglyco_workflow.main
+
+
+.. include:: code_inc/simple_example_pglyco_workflow.inc
 
 
 Example search for 15N labeling and no label

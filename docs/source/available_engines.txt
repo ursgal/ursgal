@@ -175,3 +175,12 @@ Kojak
 
 .. autoclass:: ursgal.wrappers.kojak_1_5_3.kojak_1_5_3
    :members:
+
+Glycosylation Search Engines
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pGlyco
+------
+
+.. autoclass:: ursgal.wrappers.pglyco_db_2_2_0.pglyco_db_2_2_0
+   :members:
