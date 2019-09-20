@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # ursgal documentation build configuration file, created by
@@ -380,7 +380,7 @@ To install Dash, follow the instructions on
 
 Afterwards, just go to the docs folder and execute the script::
 
-    user@localhost:~/ursgal/docs$ python3.4 uparams_to_dash.py
+    user@localhost:~/ursgal/docs$ python uparams_to_dash.py
 
 A local server will be created and you can view the interactive page:
     | http://127.0.0.1:8050/

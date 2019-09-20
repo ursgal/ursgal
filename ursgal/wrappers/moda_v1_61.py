@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 from .moda_v1_51 import moda_v1_51 as moda
 
 

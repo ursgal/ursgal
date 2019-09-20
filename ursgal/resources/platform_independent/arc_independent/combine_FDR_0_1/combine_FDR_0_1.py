@@ -1,4 +1,4 @@
-#!/usr/bin/python3.4
+#!/usr/bin/python
 
 # ./combined_FDR2.py /media/lukas/storage/uni/uSearch/combined_FDR --label 15N --cutoff 0.01
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 import ursgal
 import os
 import tempfile
@@ -51,7 +51,7 @@ class _test_node( ursgal.UNode ):
         )
         with open( out_path, 'w') as oof:
             print('Testing 1,2,3 ...', file = oof)
-        # # python3.4 _test_node.py -i x -o test.txt -t1 a -t2 3
+        # # python _test_node.py -i x -o test.txt -t1 a -t2 3
         # self.params['command_list'] = [
         #     'python',
         #     self.exe,
