@@ -7,7 +7,7 @@ import re
 import sys
 
 
-class moda_v1_61(ursgal.UNode):
+class moda_v1_62(ursgal.UNode):
     """
     MODa UNode
     Check http://prix.hanyang.ac.kr/download/moda.jsp for download, new versions and contact information
@@ -18,8 +18,8 @@ class moda_v1_61(ursgal.UNode):
     META_INFO = {
         'edit_version': 1.00,
         'name': 'MODa',
-        'version': 'v1.61',
-        'release_date': '2018-6-15',
+        'version': 'v1.62',
+        'release_date': '2019-6-12',
         'engine_type': {
             'protein_database_search_engine': True,
         },
@@ -33,7 +33,7 @@ class moda_v1_61(ursgal.UNode):
         'engine': {
             'platform_independent': {
                 'arc_independent': {
-                    'exe': 'moda_v1.61.jar',
+                    'exe': 'moda_v1.62.jar',
                     'url': '',
                     'zip_md5': '',
                     'additional_exe': [],
@@ -46,7 +46,7 @@ class moda_v1_61(ursgal.UNode):
     }
 
     def __init__(self, *args, **kwargs):
-        super(moda_v1_61, self).__init__(*args, **kwargs)
+        super(moda_v1_62, self).__init__(*args, **kwargs)
         pass
 
     def preflight(self):
