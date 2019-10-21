@@ -104,7 +104,7 @@ def main():
 
     uc.visualize(
         input_files=filtered_files_list,
-        engine='venndiagram',
+        engine='venndiagram_1_1_0',
     )
 
     for key, duration in time_collector.items():

@@ -117,7 +117,7 @@ def main():
         files_2_merge[label] = validated_and_filtered_files_list
         uc.visualize(
             input_files=validated_and_filtered_files_list,
-            engine='venndiagram',
+            engine='venndiagram_1_1_0',
         )
     uc.params['prefix'] = None
     uc.params['label'] = ''
