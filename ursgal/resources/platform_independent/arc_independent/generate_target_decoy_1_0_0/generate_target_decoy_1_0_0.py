@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 # encoding: utf-8
 """
 Generates a taget decoy database with consitent shuffled peptides

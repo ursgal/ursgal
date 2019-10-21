@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 
 from .myrimatch_2_1_138 import myrimatch_2_1_138 as myri
 

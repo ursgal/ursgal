@@ -74,7 +74,7 @@ setup(
     author_email='christian@fufezan.net',
     url='http://ursgal.github.com',
     license='Lesser GNU General Public License (LGPL)',
-    platforms='any that supports python 3.4',
+    platforms='any that supports python 3.5',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
@@ -87,7 +87,7 @@ setup(
         'Operating System :: POSIX :: SunOS/Solaris',
         'Operating System :: Unix',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Topic :: Scientific/Engineering :: Bio-Informatics',
         'Topic :: Scientific/Engineering :: Chemistry',
         'Topic :: Scientific/Engineering :: Medical Science Apps.',

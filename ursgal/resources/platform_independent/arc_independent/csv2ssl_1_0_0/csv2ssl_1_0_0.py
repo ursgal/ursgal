@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 '''
 Convert unified .csv files to .ssl files.
 

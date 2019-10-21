@@ -65,6 +65,10 @@ DOI:10.1021/acs.jproteome.5b00860*
 Download
 ********
 
+Install via pip
+
+    | pip install ursgal
+
 Get the latest version via GitHub:
     | https://github.com/ursgal/ursgal
 
@@ -127,7 +131,7 @@ Install requirements::
 
 Install third party engines::
 
-    user@localhost:~/ursgal$ python3.4 install_resources.py
+    user@localhost:~/ursgal$ python install_resources.py
 
 .. note::
 
@@ -137,13 +141,13 @@ Install third party engines::
 
 Install Ursgal::
 
-    user@localhost:~/ursgal$ python3.4 setup.py install
+    user@localhost:~/ursgal$ python setup.py install
 
 
 .. note::
 
     Under Linux, it may be required to change the permission in the
-    python3.4 site-package folder so that all files are executable
+    python site-package folder so that all files are executable
 
 (You might need administrator privileges to write in the Python site-package folder.
 On Linux or OS X, use ```sudo python setup.py install``` or write into a user folder
@@ -155,16 +159,22 @@ start the command line with administrator privileges.)
 Tests
 *****
 
-Run nosetests in root folder. You might need to install `nose`_ for Python3 first
-although it is in the requirements.txt (above) thus pip3.4 install -r requirements
+Run tox in root folder. You might need to install `tox`_ for Python3 first
+although it is in the requirements_dev.txt (above) thus pip install -r requirements_dev.txt
 should have installed it already. Then just execute::
 
-    user@localhost:~/ursgal$ nosetests3
+    user@localhost:~/ursgal$ tox
+
+In case you only want to test one python version (e.g because you only have one installed), run for e.g. python3.5
+    
+    user@localhost:~/ursgal$ tox -e py35
+
+For other environments to run, check out the tox.ini file
 
 to test the package.
 
-.. _nose:
-    https://nose.readthedocs.org/en/latest/
+.. _tox:
+    https://tox.readthedocs.io/en/latest/
 
 
 

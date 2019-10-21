@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 import ursgal
 import pprint
 import xml.etree.ElementTree
