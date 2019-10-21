@@ -444,6 +444,7 @@ class percolator_3_2_1(ursgal.UNode):
             for m, (score, line_dict) in enumerate(
                     self.params['grouped_psms'][spectrum_title]):
                 t = {}
+
                 if bigger_scores_better is True:
                     rank_of_score = bisect.bisect_right(
                         self.params['_score_list'],
@@ -455,10 +456,9 @@ class percolator_3_2_1(ursgal.UNode):
                         score
                     )
                     rank_of_score = len(self.params['_score_list']) - rank_of_score
-                #
-                # t['lnrSp'] = math.log( 1 + rank_of_score )
-                # t['Sp'] = rank_of_score
-                #
+                
+                t['lnrSp'] = math.log( 1 + rank_of_score )
+                t['Sp'] = rank_of_score
 
                 charge      = float(line_dict['Charge'])
                 exp_mz      = float(line_dict['Exp m/z'])
@@ -584,7 +584,7 @@ class percolator_3_2_1(ursgal.UNode):
         # marking temporary files for deletion:
         self.created_tmp_files += [
             self.params['translations']['decoy_output_file_incl_path'],
-            # self.params['translations']['percolator_in'],
+            self.params['translations']['percolator_in'],
             '{output_file_incl_path}.psms'.format(
                 **self.params['translations']
             ),
@@ -686,6 +686,7 @@ class percolator_3_2_1(ursgal.UNode):
                     }
 
         csv_output.writeheader()
+        not_found_psms = 0
         for line_dict in csv_input:
             psm_type = "target"
             if line_dict['Is decoy'].upper() == 'TRUE':
@@ -717,12 +718,13 @@ class percolator_3_2_1(ursgal.UNode):
                 line_dict['q-value'] = s2l[psm_type][_psmid_pep_key]['q-value']
                 csv_output.writerow(line_dict)
             else:
-                print(
-                    'Original PSM :{0} could not be found in percolator output file, most probably because PSM was filtered by percolator, (multiple peptides to one spectrum match)'.format(
-                        _psmid_pep_key
-                    )
-                )
-
+                not_found_psms += 1
+        self.print_info(
+            '{0} original PSMs could not be found in percolator output file, most probably because PSM was filtered by percolator, (multiple peptides to one spectrum match)'.format(
+                not_found_psms
+            ),
+            caller = 'Info',
+        )
     def generating_score_list(self):
         scores = []
         for k, v in self.params['grouped_psms'].items():

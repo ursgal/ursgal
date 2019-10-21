@@ -233,7 +233,11 @@ class venndiagram_1_1_0(ursgal.UNode):
 
             print('CREATING CSV FILE FROM VENN DIAGRAM ...')
             with open(output_file_name.replace('.svg','.csv'), 'w', newline='') as new_csvfile:
-                writer = csv.DictWriter(new_csvfile, fieldnames=fieldnames_list)
+                if sys.platform == 'win32':
+                    lineterminator = '\n'
+                else:
+                    lineterminator = '\r\n'
+                writer = csv.DictWriter(new_csvfile, fieldnames=fieldnames_list, lineterminator=lineterminator)
                 writer.writeheader()
                 for key in return_dict.keys():
                     # ceate output file

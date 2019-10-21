@@ -4,6 +4,7 @@ ursgal_params = {
         'available_in_unode' : [
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
         ],
         'default_value' : False,
         'description' :  ''' Use the picked-protein algorithm to infer protein PEP and FDR in Percolator''',
@@ -24,6 +25,7 @@ ursgal_params = {
         'edit_version': 1.00,
         'available_in_unode' : [
             'percolator_3_2_1',
+            'percolator_3_4_0',
         ],
         'default_value' : 'tdc',
         'description' :  ''' Method to assign FDR and PEP to PSMs''',
@@ -1109,6 +1111,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
@@ -1225,6 +1228,7 @@ ursgal_params = {
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
@@ -1279,6 +1283,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
                 'pnovo_3_1_3' : True,
@@ -1320,6 +1325,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
                 'pnovo_3_1_3' : True,
@@ -1361,6 +1367,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
                 'pnovo_3_1_3' : True,
@@ -1402,6 +1409,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
                 'pnovo_3_1_3' : True,
@@ -1443,6 +1451,7 @@ ursgal_params = {
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
                 'pnovo_3_1_3' : True,
@@ -1682,6 +1691,7 @@ ursgal_params = {
                 'mascot_x_x_x' : True,
                 'moda_v1_51' : False,
                 'moda_v1_61' : False,
+                'moda_v1_62' : False,
                 'msamanda_1_0_0_5242'  : False,
                 'msamanda_1_0_0_5243'  : False,
                 'msamanda_1_0_0_6299'  : False,
@@ -1865,6 +1875,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
+            'moda_v1_62',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v2018_01_30',
@@ -1888,7 +1899,6 @@ ursgal_params = {
             'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
-            'moda_v1_61',
             'pglyco_db_2_2_0',
             'pnovo_3_1_3',
         ],
@@ -2025,6 +2035,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2168,7 +2179,8 @@ ursgal_params = {
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
             'upeptide_mapper_1_0_0',
-            'percolator_3_2_1'
+            'percolator_3_2_1',
+            'percolator_3_4_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2410,6 +2422,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2436,6 +2449,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
             'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -2987,6 +3001,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3060,6 +3075,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4055,6 +4071,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v2018_01_30',
@@ -4795,6 +4812,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4945,6 +4963,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -5045,6 +5064,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'pipi_1_4_5',
             'pipi_1_4_6',
         ],
@@ -5425,6 +5445,7 @@ ursgal_params = {
             'deepnovo_0_0_1',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -5490,6 +5511,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'pipi_1_4_5',
             'pipi_1_4_6',
         ],
@@ -5718,6 +5740,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5756,6 +5779,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5785,6 +5809,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5822,6 +5847,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7323,6 +7349,7 @@ ursgal_params = {
             'merge_csvs_1_0_0',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7352,6 +7379,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
             'qvality_2_02',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7731,6 +7759,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7819,6 +7848,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7906,6 +7936,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -8359,6 +8390,7 @@ ursgal_params = {
         'available_in_unode' : [
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
             'unify_csv_1_0_0',
             'upeptide_mapper_1_0_0'
         ],
@@ -8387,12 +8419,15 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
-            'sanitize_csv_1_0_0'
+            'sanitize_csv_1_0_0',
+            'combine_pep_1_0_0',
+            'combine_pep_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'psm_defining_colnames',
             'sanitize_csv_style_1': 'psm_defining_colnames',
+            'combine_pep_style_1': 'columns_for_grouping',
         },
         'utag' : [
             'conversion',
@@ -9562,6 +9597,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -10019,6 +10055,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'pepnovo_3_1',
         ],
         'triggers_rerun' : True,
@@ -10143,6 +10180,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 0,
                 'moda_v1_51'           : 0,
                 'moda_v1_61'           : 0,
+                'moda_v1_62'           : 0,
             },
         },
         'uvalue_type' : 'str',
@@ -10163,6 +10201,7 @@ ursgal_params = {
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
@@ -10223,6 +10262,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
@@ -10266,6 +10306,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
@@ -10309,6 +10350,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
@@ -10352,6 +10394,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
@@ -10395,6 +10438,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
@@ -10438,6 +10482,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
@@ -10481,6 +10526,7 @@ ursgal_params = {
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
@@ -10888,6 +10934,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'combine_pep_1_0_0',
+            'combine_pep_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -12154,5 +12201,56 @@ ursgal_params = {
         'default_value' : 'default',
         'description' : \
             'Path to the knapsack matrix for DeepNovo. Use "default" for the default file location in the resources'
+    },
+    'group_for_q_value' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'combine_pep_1_1_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'combine_pep_style_1': 'combine_by',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'select',
+        'uvalue_option' : {
+            'select_type'    : 'radio_button',
+            'available_values'  : ['engine_group', 'sequence_length'],
+            'custom_val_max' : 0,
+        },
+        'default_value' : 'engine_group',
+        'description' : \
+            'Defines how PSMs with Bayes PEP will be grouped before q-value calculation. Available: "engine_group", "sequence_length"'
+    },
+    'signal_to_noise_threshold': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'mzml2mgf_2_0_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
+        },
+        'default_value': 0.0,
+        'description': """ Only peaks above the given signal to noise (S/N) threshold will be accepted """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'mzml2mgf_style_1' : 'signal_to_noise_threshold',
+        },
+        'utag': [
+            'conversion',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
     },
 }

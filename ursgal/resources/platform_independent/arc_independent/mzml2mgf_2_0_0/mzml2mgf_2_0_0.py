@@ -53,6 +53,7 @@ def main(
     precursor_max_charge=5,
     ion_mode='+',
     spec_id_attribute=None,
+    signal_to_noise_threshold=None,
 ):
 
     print(
@@ -127,7 +128,14 @@ def main(
         if spec_ms_level != ms_level:
             continue
 
-        peaks_2_write = spec.peaks('centroided')
+        if signal_to_noise_threshold is not None:
+            spec = spec.remove_noise(
+                mode='median',
+                signal_to_noise_threshold=signal_to_noise_threshold,
+            )
+            peaks_2_write = spec.peaks('centroided')
+        else:
+            peaks_2_write = spec.peaks('centroided')
 
         precursor_mz = spec.selected_precursors[0]['mz']
         precursor_charge = spec.selected_precursors[0].get('charge', None)

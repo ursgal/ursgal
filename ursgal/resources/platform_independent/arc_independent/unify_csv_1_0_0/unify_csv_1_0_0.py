@@ -455,6 +455,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             else:
                 raise Exception( 'New csv format present for engine {0}'.format( engine ) )
 
+            if line_dict['Spectrum Title'].endswith('None'):
+                line_dict['Spectrum Title'] = line_dict['Spectrum Title'].replace(
+                    '.None',
+                    '.{0}'.format(line_dict['Charge'])
+                )
+
             #update spectrum ID from block above
             line_dict['Spectrum ID'] = spectrum_id
 
