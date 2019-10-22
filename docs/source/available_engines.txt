@@ -46,6 +46,9 @@ MS-GF+
 
 Available MS-GF+ versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msgfplus_v2019_07_03.msgfplus_v2019_07_03
+   :members:
+   
 .. autoclass:: ursgal.wrappers.msgfplus_v2019_04_18.msgfplus_v2019_04_18
    :members:
 
