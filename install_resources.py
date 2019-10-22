@@ -3,14 +3,15 @@
 import ursgal
 import sys
 
-def main( resources ):
+
+def main(resources):
     '''
     Download all resources from our webpage.
 
     '''
     uc = ursgal.UController()
     # uc.params['ursgal_resource_url'] = 'http://plan-a.uni-muenster.de/'
-    downloaded_zips = uc.download_resources( resources = resources)
+    downloaded_zips = uc.download_resources(resources=resources)
     # uses uc.params['ursgal_resource_url']  :)
     print()
 
@@ -19,7 +20,7 @@ def main( resources ):
     else:
         print(
             '[ INFO ] Downloaded and installed {0} engine(s)'.format(
-                len( downloaded_zips )
+                len(downloaded_zips)
             )
         )
         for engine, zip_file in downloaded_zips:

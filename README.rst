@@ -24,16 +24,6 @@ Introduction
    :alt: Join the chat at https://gitter.im/ursgal/ursgal
    :target: https://gitter.im/ursgal/ursgal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-Update to v0.6.0 Warning
-************************
-
-Please note that, due to significant reorganization of UController functions as well as some uparams,
-compatibility of v0.6.0 with previous versions is not given in all cases.
-Most likely, your previous results will not be recognized, i.e. previously executed runs will be executed again.
-Please consider this before updating to v0.6.0, check the Changelog or ask us if you have any doubts.
-We are sorry for the inconvenience but changes were necessary for further development.
-If you want to continue using (and modifying) v0.5.0 you can use the branch v0.5.0.
-
 Summary
 *******
 
@@ -45,7 +35,7 @@ Ursgal is a Python module that offers a generalized interface to common bottom-u
 
     c) Integration of search results from different search engines
 
-    d) De novo sequencing with up to two different search engines
+    d) De novo sequencing with up to three different search engines
 
     e) Miscellaneous tools including the creation of a target decoy database as well as filtering, sanitizing and visualizing of results
 
@@ -60,49 +50,94 @@ DOI:10.1021/acs.jproteome.5b00860*
 
 .. _publicationtitle: http://dx.doi.org/10.1021/acs.jproteome.5b00860
 .. |publicationtitle| replace:: *Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
-.. _download:
 
-Download
-********
 
-Install via pip
-
-    | pip install ursgal
-
-Get the latest version via GitHub:
-    | https://github.com/ursgal/ursgal
-
-as .zip package:
-   | https://github.com/ursgal/ursgal/archive/master.zip
-
-or via git clone URL:
-   | https://github.com/ursgal/ursgal.git
+Documentation
+*************
 
 The complete Documentation can be found at
    | http://ursgal.readthedocs.org/
 
+Besides the `Download and Installation`_ steps,
+this includes a `Quick Start Tutorial`_, 
+detailed documentation of the `Modules`_ and `Available Engines`_,
+as well as a broad set of `Examples Scripts`_ and many more.
+
+
+.. _Download and Installation:
+    https://ursgal.readthedocs.io/en/latest/intro.html#installation
+
+.. _Quick Start Tutorial:
+    https://ursgal.readthedocs.io/en/latest/quick_start.html
+
+.. _Example Scripts:
+    https://ursgal.readthedocs.io/en/latest/example_scripts.html
+
+.. _Modules:
+    https://ursgal.readthedocs.io/en/latest/index.html#module-structure
+
+.. _Availabel Engines:
+    https://ursgal.readthedocs.io/en/latest/index.html#engines
 
 .. _installation:
 
-Installation
-************
+Download and Installation
+*************************
 
 Ursgal requires `Python`_ 3.4 or higher.
 
 If you want to run Ursgal on a Windows system, Python 3.6 or higher is
 recommended.
 
-Download Ursgal using `GitHub`_ **or** the zip file:
-
-* GitHub version: Starting with this the easiest way is to clone the GitHub repo.::
-
-   user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
-
-
-* ZIP version: Alternatively, download and extract the `ursgal zip file`_
+There are two recommended ways for installing Ursgal:
+    * Installation via pip
+    * Installation from the source (GitHub)
 
 .. _Python:
    https://www.python.org/downloads/
+
+.. _install_pip:
+
+Installation via pip
+~~~~~~~~~~~~~~~~~~~~
+
+Execute the following command from your command line::
+
+    user@localhost:~$ pip install ursgal
+
+This installs Python into your Python site-packages.
+You can now use it with all engines that we have built
+or that we are allowed to distribute.
+For all other third-party engines, a manual download from the respective
+homepage is required (see also: `How to install third party engines`_)
+
+.. note::
+
+    Pip is included in Python 3.4 and higher. However, it might not be
+    included in in your system's PATH environment variable.
+    If this is the case, you can either add the Python scripts directory to your
+    PATH env variable or use the path to the pip.exe directly for the
+    installation, e.g.: ~/Python34/Scripts/pip.exe install ursgal
+
+.. note::
+
+    On Mac it may be neccesary to use Python3.6, since it comes with its
+    own OpenSSL now. This may avoid problems when using pip.
+
+.. _How to install thrid party engines:
+    https://ursgal.readthedocs.io/en/latest/faq.html#q-how-do-i-add-an-engine-that-is-not-installed-via-install-resources-py
+
+
+Installation from the source
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Download Ursgal using `GitHub`_ **or** the zip file:
+
+* GitHub version: Starting from your command line, the easiest way is to clone the GitHub repo.::
+
+   user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
+
+* ZIP version: Alternatively, download and extract the `ursgal zip file`_
 
 .. _GitHub:
    https://github.com/ursgal/ursgal
@@ -110,7 +145,7 @@ Download Ursgal using `GitHub`_ **or** the zip file:
 .. _ursgal zip file:
    https://github.com/ursgal/ursgal/archive/master.zip
 
-Install requirements::
+2. Next, navigate into the Ursgal folder and install the requirements::
 
     user@localhost:~$ cd ursgal
     user@localhost:~/ursgal$ pip3.4 install -r requirements.txt
@@ -128,18 +163,17 @@ Install requirements::
     On Mac it may be neccesary to use Python3.6, since it comes with its
     own OpenSSL now. This may avoid problems when using pip.
 
-
-Install third party engines::
+3. Install third party engines::
 
     user@localhost:~/ursgal$ python install_resources.py
 
 .. note::
 
     Since we are not allowed to distribute all third party engines, you might need to
-    download and install them on your own. See FAQ (:ref:`not-installed-engines`) and
+    download and install them on your own. See FAQ (`How to install thrid party engines`_) and
     the respective engine documentation for more information.
 
-Install Ursgal::
+4. Finally, install Ursgal into the Python site-packages::
 
     user@localhost:~/ursgal$ python setup.py install
 
@@ -165,33 +199,41 @@ should have installed it already. Then just execute::
 
     user@localhost:~/ursgal$ tox
 
-In case you only want to test one python version (e.g because you only have one installed), run for e.g. python3.5
+In case you only want to test one python version (e.g because you only have one installed), run for e.g. python3.5::
     
     user@localhost:~/ursgal$ tox -e py35
 
 For other environments to run, check out the tox.ini file
-
 to test the package.
 
 .. _tox:
     https://tox.readthedocs.io/en/latest/
 
 
+Update to v0.6.0 Warning
+************************
+
+Please note that, due to significant reorganization of UController functions as well as some uparams,
+compatibility of v0.6.0 with previous versions is not given in all cases.
+Most likely, your previous results will not be recognized, i.e. previously executed runs will be executed again.
+Please consider this before updating to v0.6.0, check the Changelog or ask us if you have any doubts.
+We are sorry for the inconvenience but changes were necessary for further development.
+If you want to continue using (and modifying) v0.5.0 you can use the branch v0.5.0.
+
 
 Questions and Participation
 ***************************
 
-If you encounter any problems you can open up issues at GitHub, join the conversation at Gitter, or write an email to ursgal.team@gmail.com. Please also check the :ref:`faq`.
+If you encounter any problems you can open up issues at GitHub, join the conversation at Gitter, or write an email to ursgal.team@gmail.com. Please also check the `Frequently Asked Questions`_.
 
 For any contributions, fork us at https://github.com/ursgal/ursgal and open up pull requests!
-Please also check the :ref:`contribute`. Thanks!
+Please also check the `Contribution Guidelines`. Thanks!
 
+.. _Frequently Asked Questions:
+    https://ursgal.readthedocs.io/en/latest/faq.html#frequently-asked-questions
 
-Documentation
-*************
-
-For more detailed documentation of the modules and examples, please refer to
-the documentation folder or http://ursgal.readthedocs.org
+.. _Contribution Guidelines:
+    https://ursgal.readthedocs.io/en/latest/contribute.html#contribute
 
 
 Disclaimer
@@ -233,8 +275,8 @@ Contact
 Citation
 ********
 
-Ursgal citation
-
+In an academic world, citations are the only credit that one can hope for ;)
+Therefore, please do not forget to cite us if you use Ursagl:
 
 Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S., and Fufezan, C. (2016) `Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis`_ Journal of Proteome research 15, 788–794, DOI:10.1021/acs.jproteome.5b00860
 
@@ -242,7 +284,7 @@ Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S., and Fufezan, C. (201
 
 .. note::
 
-    Please cite every tool you use in Ursgal. During runtime the references of
+    Please also cite every tool you use in Ursgal. During runtime the references of
     the tools you are using are shown.
 
 Full list of tools with proper citations that are integrated into Ursgal are:
