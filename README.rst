@@ -59,9 +59,9 @@ The complete Documentation can be found at
    | http://ursgal.readthedocs.org/
 
 Besides the `Download and Installation`_ steps,
-this includes a `Quick Start Tutorial`_, 
-detailed documentation of the `Modules`_ and `Available Engines`_,
-as well as a broad set of `Examples Scripts`_ and many more.
+this includes a `Quick Start Tutorial`_ 
+detailed documentation of the `Modules`_ and `Available Engines`_
+as well as a broad set of `Example Scripts`_ and many more.
 
 
 .. _Download and Installation:
@@ -76,7 +76,7 @@ as well as a broad set of `Examples Scripts`_ and many more.
 .. _Modules:
     https://ursgal.readthedocs.io/en/latest/index.html#module-structure
 
-.. _Availabel Engines:
+.. _Available Engines:
     https://ursgal.readthedocs.io/en/latest/index.html#engines
 
 .. _installation:
