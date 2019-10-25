@@ -163,20 +163,17 @@ Installation from the source
     On Mac it may be neccesary to use Python3.6, since it comes with its
     own OpenSSL now. This may avoid problems when using pip.
 
-3. Install third party engines::
+3. Finally, use setup.py to download third-party engines 
+    (those that we are allowed to distribute)
+    and to install Ursgal into the Python site-packages::
 
-    user@localhost:~/ursgal$ python install_resources.py
+    user@localhost:~/ursgal$ python setup.py install
 
 .. note::
 
     Since we are not allowed to distribute all third party engines, you might need to
     download and install them on your own. See FAQ (`How to install thrid party engines`_) and
     the respective engine documentation for more information.
-
-4. Finally, install Ursgal into the Python site-packages::
-
-    user@localhost:~/ursgal$ python setup.py install
-
 
 .. note::
 

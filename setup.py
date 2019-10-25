@@ -3,6 +3,8 @@
 from setuptools import setup
 import setuptools
 from setuptools.command.install_lib import install_lib
+import setuptools.command.build_py
+import install_resources
 import os
 import sys
 
@@ -37,6 +39,13 @@ else:
                     mode = ((os.stat(fn).st_mode) | 0o555) & 0o7777
                     print("changing mode of %s to %o", fn, mode)
                     os.chmod(fn, mode)
+
+class BuildPyWithResources(setuptools.command.build_py.build_py):
+  """Includes install_resources.py before the setuptools build"""
+
+  def run(self):
+    install_resources.main(None)
+    setuptools.command.build_py.build_py.run(self)
 
 
 # We store our version number in a simple text file:
@@ -93,5 +102,8 @@ setup(
         'Topic :: Scientific/Engineering :: Medical Science Apps.',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    cmdclass={'install_lib': my_install_lib}
+    cmdclass={
+        'install_lib': my_install_lib,
+        'build_py': BuildPyWithResources,
+    }
 )
