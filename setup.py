@@ -4,7 +4,7 @@ from setuptools import setup
 import setuptools
 from setuptools.command.install_lib import install_lib
 import setuptools.command.build_py
-from . import install_resources
+from install_resources import main as install_resources_main
 import os
 import sys
 
@@ -44,7 +44,7 @@ class BuildPyWithResources(setuptools.command.build_py.build_py):
   """Includes install_resources.py before the setuptools build"""
 
   def run(self):
-    install_resources.main(None)
+    install_resources_main(None)
     setuptools.command.build_py.build_py.run(self)
 
 
