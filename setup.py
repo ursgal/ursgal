@@ -4,7 +4,7 @@ from setuptools import setup
 import setuptools
 from setuptools.command.install_lib import install_lib
 import setuptools.command.build_py
-from install_resources import main as install_resources_main
+from .install_resources import main as install_resources_main
 import os
 import sys
 
