@@ -15,7 +15,6 @@ matrix:
     env: TOXENV=docu
   - python: 3.6
     env: TOXENV=coverage
-before_script: cd ursgal/ursgal
 script: tox
 deploy:
   provider: pypi

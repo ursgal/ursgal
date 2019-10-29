@@ -70,7 +70,6 @@ build: false  # Not a C# project, build stuff at the test step instead.
 before_test:
   - "%CMD_IN_ENV% pip install tox"
   - ps: 'ls C:\Python35\Scripts'
-  - ps: 'cd C:\projects\ursgal'
 
 test_script:
   - "%CMD_IN_ENV% tox -e %TOXENV%"
