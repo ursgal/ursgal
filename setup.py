@@ -9,7 +9,6 @@ import distutils.log
 import subprocess
 import os
 import sys
-import ursgal
 
 
 executable_list = [
@@ -70,7 +69,11 @@ class InstallResourcesCommand(distutils.cmd.Command):
 
         '''
         command = [sys.executable]
-        command.append(os.path.join(os.getcwd(), 'install_resources.py'))
+        if 'ursgal' in os.path.basename(os.getcwd()):
+            ursgal_directory = os.getcwd()
+        else:
+            ursgal_directory = 'C:/projects/ursgal'
+        command.append(os.path.join(ursgal_directory, 'install_resources.py'))
         self.announce(
             'Running command: %s' % str(command),
             level=distutils.log.INFO)
