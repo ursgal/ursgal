@@ -4,10 +4,12 @@ from setuptools import setup
 import setuptools
 from setuptools.command.install_lib import install_lib
 import setuptools.command.build_py
+import distutils.cmd
+import distutils.log
+import subprocess
 import os
 import sys
 import ursgal
-# from .install_resources import main as install_resources_main
 
 
 executable_list = [
@@ -32,22 +34,47 @@ if sys.platform in ['win32']:
         pass
 else:
     class my_install_lib(setuptools.command.install_lib.install_lib):
+
         def run(self):
             setuptools.command.install_lib.install_lib.run(self)
             for fn in self.get_outputs():
                 if os.path.basename(fn) in executable_list:
-                    # copied from setuptools source - make the binaries executable
+                    # copied from setuptools source - make the binaries
+                    # executable
                     mode = ((os.stat(fn).st_mode) | 0o555) & 0o7777
                     print("changing mode of %s to %o", fn, mode)
                     os.chmod(fn, mode)
 
+
 class BuildPyWithResources(setuptools.command.build_py.build_py):
-  """Includes install_resources.py before the setuptools build"""
+    """Includes install_resources.py before the setuptools build"""
 
-  def run(self):
-    install_resources_main(None)
-    # setuptools.command.build_py.build_py.run(self)
+    def run(self):
+        self.run_command('install_resources')
+        setuptools.command.build_py.build_py.run(self)
 
+
+class InstallResourcesCommand(distutils.cmd.Command):
+    """Download resources from webpage and install into ursgal/resources"""
+    description = 'Download and install third party engines'
+    user_options = []
+
+    def initialize_options(self):
+        return
+    def finalize_options(self):
+        return
+
+    def run(self):
+        '''
+        Download all resources from our webpage to ursgal/resources.
+
+        '''
+        command = [sys.executable]
+        command.append(os.path.join(os.getcwd(), 'install_resources.py'))
+        self.announce(
+            'Running command: %s' % str(command),
+            level=distutils.log.INFO)
+        subprocess.check_call(command)
 
 # We store our version number in a simple text file:
 version_path = os.path.join(
@@ -106,5 +133,6 @@ setup(
     cmdclass={
         'install_lib': my_install_lib,
         'build_py': BuildPyWithResources,
+        'install_resources': InstallResourcesCommand,
     }
 )
