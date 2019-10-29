@@ -72,7 +72,8 @@ class InstallResourcesCommand(distutils.cmd.Command):
         if 'ursgal' in os.path.basename(os.getcwd()):
             ursgal_directory = os.getcwd()
         else:
-            ursgal_directory = 'C:/projects/ursgal'
+            print('Could not find ursgal directory')
+            sys.exit(1)
         command.append(os.path.join(ursgal_directory, 'install_resources.py'))
         self.announce(
             'Running command: %s' % str(command),
