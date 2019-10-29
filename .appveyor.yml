@@ -63,8 +63,9 @@ install:
   # Check that we have the expected version and architecture for Python
   - "python --version"
   - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
-  - ps: 'cd C:\projects\ursgal'
 
+before_build:
+  - ps: 'cd C:\projects\ursgal'
 
 build: false  # Not a C# project, build stuff at the test step instead.
 
