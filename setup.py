@@ -4,9 +4,10 @@ from setuptools import setup
 import setuptools
 from setuptools.command.install_lib import install_lib
 import setuptools.command.build_py
-from .install_resources import main as install_resources_main
 import os
 import sys
+import ursgal
+# from .install_resources import main as install_resources_main
 
 
 executable_list = [
@@ -45,7 +46,7 @@ class BuildPyWithResources(setuptools.command.build_py.build_py):
 
   def run(self):
     install_resources_main(None)
-    setuptools.command.build_py.build_py.run(self)
+    # setuptools.command.build_py.build_py.run(self)
 
 
 # We store our version number in a simple text file:
