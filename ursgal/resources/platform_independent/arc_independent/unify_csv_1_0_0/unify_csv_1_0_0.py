@@ -698,8 +698,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                             pass
 
                             if append_mod:
-                                pass
-                            else:
                                 tmp_mods = line_dict['Modifications'].split(';')
                                 tmp_mods.append(tmp)
                                 line_dict['Modifications'] = ';'.join( tmp_mods )
@@ -897,17 +895,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             )
                     if skip_mod is True:
                         continue
-                    # if modification in tmp_mods:
-                    #     if mod in n_term_replacement.keys() and pos == 1:
-                    #         if line_dict['Sequence'][0] in mod_dict[mod]['aa']:
-                    #             modification = modification.replace(
-                    #                 '{0}:1'.format(mod),
-                    #                 '{0}:0'.format(mod)
-                    #             )
-                    #         else:
-                    #             continue
-                    #     else:
-                    #         continue
                     tmp_mods.append(modification)
                 if 'msfragger' in search_engine:
                     org_mass_diff = line_dict['Mass Difference']
