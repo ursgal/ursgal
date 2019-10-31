@@ -211,6 +211,13 @@ FILE_EXTENSIONS = {
         'description'    : \
             'Kojak result',
     },
+    '.pepXML': {
+        'short_name'     : 'pepXML',
+        'long_name'      : 'pepXML',
+        'same_extension' : [],
+        'description'    : \
+            'open data format for different MS/MS search engines',
+    },
     '.perc.inter.txt' : {
         'short_name'     : 'perc.inter.txt',
         'long_name'      : 'perc.inter.txt (Kojak result)',

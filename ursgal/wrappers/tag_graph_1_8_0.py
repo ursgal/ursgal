@@ -26,7 +26,7 @@ class tag_graph_1_8_0(ursgal.UNode):
         'name'                        : 'TagGraph',
         'version'                     : '1.8.0',
         'release_date'                : '2019-10-13',
-        'utranslation_style'          : 'taggraph_style_1',
+        'utranslation_style'          : 'tag_graph_style_1',
         'input_extensions'            : ['.mzML', '.mzXML'],
         'output_extensions'           : ['.csv', '.pepXML'],
         'create_own_folder'           : True,
