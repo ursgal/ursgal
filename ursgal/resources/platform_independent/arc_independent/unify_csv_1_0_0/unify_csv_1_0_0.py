@@ -168,7 +168,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     cam = True
                     # allow also Carbamidomnethyl on U, since the mod name gets changed
                     # already in upeptide_mapper
-                    # According to unimod, the mnodification is also on Selenocystein
+                    # According to unimod, the modification is also on Selenocystein
                     # otherwise we should change that back so that it is skipped...
                     mod_dict['Carbamidomethyl']['aa'].add('U')
                     fixed_mods['U'] = 'Carbamidomethyl'
@@ -350,6 +350,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             output_fieldnames.remove(remove_fieldname)
         new_fieldnames = [
             'uCalc m/z',
+            'uCalc Mass',
             'Accuracy (ppm)',
             'Mass Difference',
             'Protein ID',
@@ -361,7 +362,15 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Conflicting uparam',
             'Search Engine',
         ]
-
+        if de_novo:
+            new_fieldnames = [
+                'uCalc m/z',
+                'uCalc Mass',
+                'Accuracy (ppm)',
+                'Mass Difference',
+                'Local Score or Confidence',
+                'Average Score or Confidence',
+            ]
         for new_fieldname in new_fieldnames:
             if new_fieldname not in output_fieldnames:
                 output_fieldnames.insert( -5, new_fieldname )
@@ -513,15 +522,32 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 rt_corr_factor = 60
             line_dict['Retention Time (s)'] = float( retention_time_in_minutes ) * rt_corr_factor
 
-            # try:
             precursor_mz = scan_rt_lookup[ input_file_basename_for_rt_lookup ][
                 'scan_2_mz' ][ spectrum_id ]
-            # except:
-            #     print('\n\n\n')
-            #     print(input_file_basename_for_rt_lookup)
-            #     print('spectrum_id', spectrum_id, type(spectrum_id))
-            #     exit(1)
             line_dict['Exp m/z'] = round(precursor_mz, 10)
+
+            #################
+            # de novo block #
+            #################
+
+            if de_novo:
+                if 'deepnovo' in search_engine:
+                    local_conf = line_dict['DeepNovo:aaScore'].split(',')
+                    transformed_conf = []
+                    for org_conf in local_conf:
+                        transformed_score = 100+(float(org_conf)*5)
+                        transformed_conf.append(str(round(transformed_score)))
+                    line_dict['Local Score or Confidence'] = ' '.join(transformed_conf)
+                    transformed_avg = str(round(100+(float(line_dict['DeepNovo:score'])*5)))
+                    line_dict['Average Score or Confidence'] = transformed_avg
+                elif 'novor' in search_engine:
+                    local_conf = line_dict['Novor:aaScore'].split('-')
+                    transformed_conf = []
+                    for org_conf in local_conf:
+                        transformed_score = round(float(org_conf))
+                        transformed_conf.append(transformed_score)
+                    line_dict['Local Score or Confidence'] = ' '.join(local_conf)
+                    line_dict['Average Score or Confidence'] = round(float(line_dict['Novor:score']))
 
             #########################
             # Buffering corrections #
@@ -672,6 +698,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                             pass
 
                             if append_mod:
+                                pass
+                            else:
                                 tmp_mods = line_dict['Modifications'].split(';')
                                 tmp_mods.append(tmp)
                                 line_dict['Modifications'] = ';'.join( tmp_mods )
@@ -867,10 +895,19 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 '{0}:1'.format(_mod),
                                 '{0}:0'.format(_mod)
                             )
-                        # else:
-                        #     skip_mod = True
                     if skip_mod is True:
                         continue
+                    # if modification in tmp_mods:
+                    #     if mod in n_term_replacement.keys() and pos == 1:
+                    #         if line_dict['Sequence'][0] in mod_dict[mod]['aa']:
+                    #             modification = modification.replace(
+                    #                 '{0}:1'.format(mod),
+                    #                 '{0}:0'.format(mod)
+                    #             )
+                    #         else:
+                    #             continue
+                    #     else:
+                    #         continue
                     tmp_mods.append(modification)
                 if 'msfragger' in search_engine:
                     org_mass_diff = line_dict['Mass Difference']
@@ -1157,6 +1194,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 **collected_line_dict
             )
             cc_hill = molecule2hill_dict[molecule].strip('+')
+            cc.use(molecule2hill_dict[molecule])
+            calc_mass = cc._mass()
             charge = int(collected_line_dict['Charge'])
             if pyqms_mz_calc:
                 isotopologue_mzs = isotopologue_dict[cc_hill][
@@ -1171,16 +1210,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     else:
                         min_accuracy = isotopologue_acc
             else:
-                cc.use(molecule2hill_dict[molecule])
-                mass = cc._mass()
                 calc_mz = ursgal.ucore.calculate_mz(
-                    mass,
+                    calc_mass,
                     int(collected_line_dict['Charge'])
                 )
                 min_accuracy = (float(collected_line_dict['Exp m/z']) - calc_mz)/calc_mz * 1e6
                 for isotope in range(1,6):
                     iso_mz = ursgal.ucore.calculate_mz(
-                        mass + isotope*1.008664904,
+                        calc_mass + isotope*1.008664904,
                         int(collected_line_dict['Charge'])
                     )
                     isotopologue_acc = (float(collected_line_dict['Exp m/z']) - iso_mz)/iso_mz * 1e6
@@ -1194,7 +1231,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 if 'Calc m/z' in collected_line_dict.keys() and\
                     collected_line_dict['Calc m/z'] == '':
                     collected_line_dict['Calc m/z'] = calc_mz
-
+            collected_line_dict['uCalc Mass'] = calc_mass
             collected_line_dict['Accuracy (ppm)'] = round(min_accuracy, 5)
 
             csv_output.writerow(collected_line_dict)

@@ -994,7 +994,8 @@ ursgal_params = {
         'available_in_unode' : [
             'unify_csv_1_0_0',
             'upeptide_mapper_1_0_0',
-            'compomics_utilities_4_11_5'
+            'compomics_utilities_4_11_5',
+            'tag_graph_1_8_0',
         ],
         'default_value' : {
             'J' : {
@@ -1004,23 +1005,32 @@ ursgal_params = {
                 'original_aa' : ['K'],
                 'unimod_name' : 'Methylpyrroline',
             },
+
             # 'U' : {
             #     'original_aa' : 'C',
-            #     'unimod_name' : 'Delta:S(-1)Se(1)',
-            #     'unimod_name_with_cam' : 'SecCarbamidomethyl',
+            #     'name': 'Selenocysteine',
+            #     '3_letter_code': 'Sec',
+            #     'chemical_composition': 'C3H7NO2Se',
+            #     'monoisotopic_mass': 150.953636,
+            #     'avg_mass': 151.0388,
             # },
         },
         'description' : \
             'Unusual aminoacids that are not accepted (e.g. by unify_csv_1_0_0), '
             'but reported by some engines. Given as a dictionary mapping on he '
             'original_aa as well as the unimod modification name. '
-            'U is now accepted as regular amino acid (2017/03/30)'
+            'U is now accepted as regular amino acid (2017/03/30).'
+            'In Tag Graph this can be used to define amino acids other than'
+            'the standard 20 to be included in the search.'
+            'For those, chemical composition, monoisotopic mass and avg mass'
+            'as well as name and 3-letter code need to be given.'
         ,
         'triggers_rerun' : True,
         'ukey_translation' : {
             'unify_csv_style_1' : 'aa_exception_dict',
             'upeptide_mapper_style_1' : 'aa_exception_dict',
-            'compomics_utilities_style_1' : 'aa_exception_dict'
+            'compomics_utilities_style_1' : 'aa_exception_dict',
+            'tag_graph_style_1': 'Amino Acids',
         },
         'utag' : [
             'conversion',
@@ -1122,6 +1132,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'deepnovo_0_0_1',
+            'tag_graph_1_8_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1134,6 +1145,7 @@ ursgal_params = {
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'deepnovo_style_1': 'base_mz',
+            'tag_graph_style_1': 'base_mz',
         },
         'utag' : [
             'conversion'
@@ -2093,6 +2105,7 @@ ursgal_params = {
             'pipi_1_4_6',
             'pglyco_db_2_2_0',
             'deepnovo_0_0_1',
+            'tag_graph_1_8_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2110,7 +2123,7 @@ ursgal_params = {
             'pipi_style_1'                : 'db',
             'pglyco_db_style_1'           : 'fasta',
             'deepnovo_style_1'            : 'db_fasta_file',
-
+            'tag_graph_style_1'           : 'fmindex',
         },
         'utag' : [
             'database',
@@ -2490,6 +2503,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'deepnovo_0_0_1',
             'pnovo_3_1_3',
+            'tag_graph_1_8_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2511,6 +2525,7 @@ ursgal_params = {
             'pglyco_db_style_1'             : 'enzyme',
             'deepnovo_style_1'              : 'cleavage_rule',
             'pnovo_style_1'                 : 'enzyme',
+            'tag_graph_style_1'             : 'Enzyme',
         },
         'utag' : [
             'database',
@@ -2807,6 +2822,15 @@ ursgal_params = {
                 'argc': 'Arg-C R P C',
                 'aspn': 'Asp-N D _ N'
             },
+            'tag_graph_style_1' : {
+                'trypsin_p': 'K|R;.*',
+                'trypsin': 'K|R;[^P].*',
+                'gluc' : 'D|E;[^P].*',
+                'lysc' : 'K;[^P].*',
+                'formic_acid' : 'D;[^P].*',
+                'argc' : 'R;[^P].*',
+                'aspn' : '.*;D',
+            },
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -3068,6 +3092,7 @@ ursgal_params = {
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
             'pnovo_3_1_3',
+            'tag_graph_1_8_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3085,6 +3110,7 @@ ursgal_params = {
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1' : 'search_fragment_tolerance',
             'pnovo_style_1'     : 'frag_tol',
+            'tag_graph_style_1' : 'ppmstd',
         },
         'utag' : [
             'fragment',
@@ -3143,6 +3169,7 @@ ursgal_params = {
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
             'pnovo_3_1_3',
+            'tag_graph_1_8_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3160,6 +3187,7 @@ ursgal_params = {
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1' : 'search_fragment_tolerance_type',
             'pnovo_style_1'     : 'frag_tol_type_ppm',
+            'tag_graph_style_1' : 'frag_mass_tolerance_unit',
         },
         'utag' : [
             'fragment',
@@ -4792,14 +4820,16 @@ ursgal_params = {
             'number of top scoring single peptides to combine in relaxed '\
             'analysis',
     },
-    'kojak_truncate_prot_names' : {
+    'max_protein_name' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
+            'tag_graph_1_8_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1' : 'kojak_truncate_prot_names',
+            'tag_graph_style_1': 'DisplayProtNum',
         },
         'utag' : [
             'output',
@@ -4814,9 +4844,9 @@ ursgal_params = {
             'updownval' : 1,
             'unit'      : ''
         },
-        'default_value' : 0,
+        'default_value' : 5,
         'description' : \
-            'Max protein name character to export, 0=off',
+            'Max protein name for output. For kojak, this defines the number of character (0=off), for TagGraph the number of protein names',
     },
     'kojak_turbo_button' : {
         'edit_version' : 1.00,
@@ -5944,6 +5974,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'deepnovo_0_0_1',
             'pnovo_3_1_3',
+            'tag_graph_1_8_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5972,6 +6003,7 @@ ursgal_params = {
             'pglyco_db_style_1' : 'modifications',
             'deepnovo_style_1' : 'modifications',
             'pnovo_style_1' : 'modifications',
+            'tag_graph_style_1' : 'modifications',
         },
         'utag' : [
             'modifications',
@@ -7499,12 +7531,14 @@ ursgal_params = {
             'xtandem_vengeance',
             'xtandem_alanine',
             'thermo_raw_file_parser_1_1_2',
+            'tag_graph_1_8_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1'   : ('-oc', '-ox'),
             'xtandem_style_1' : 'output, mzid',
             'thermo_raw_file_parser_style_1' : '-f',
+            'tag_graph_style_1' : 'generatePepXML',
         },
         'utag' : [
             'output',
@@ -7525,12 +7559,16 @@ ursgal_params = {
                 'indexed_mzml' : 2,
                 'parquet' : 3,
                 'default' : 1,
+            },
+            'tag_graph_style_1' : {
+                '.pepXML' : True,
+                'default' : False,
             }
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
             'select_type' : 'radio_button',
-            'available_values'  : ['.csv', '.mzid', '.omx', 'default', '.mgf', '.mzml', 'parquet', 'indexed_mzml'],
+            'available_values'  : ['.csv', '.mzid', '.omx', 'default', '.mgf', '.mzml', 'parquet', 'indexed_mzml', '.pepXML'],
             'custom_val_max' : 0,
         },
         'default_value' : 'default',
@@ -8808,10 +8846,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
+            'tag_graph_1_8_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'remove_temporary_files',
+            'tag_graph_style_1' : ('cleanInputDataFilesFromOutput', 'cleanIntermediateFiles'),
         },
         'utag' : [
             'file_handling',
@@ -12295,29 +12335,283 @@ ursgal_params = {
         'description' : \
             'Path to the knapsack matrix for DeepNovo. Use "default" for the default file location in the resources'
     },
-    'group_for_q_value' : {
+    'tag_graph_log_em_threshold': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'tag_graph_1_8_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 2,
+        'description': """ p-value threshold applied to output by TagGraph """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'tag_graph_style_1': 'logEMCutoff'
+        },
+        'utag': [
+            'output',
+            'scoring'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'tag_graph_fdr_threshold': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'tag_graph_1_8_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
+        },
+        'default_value': 0.01,
+        'description': """ FDR threshold applied to output by TagGraph """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'tag_graph_style_1' : 'FDRCutoff',
+        },
+        'utag': [
+            'scoring',
+            'output'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'de_novo_results' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
-            'combine_pep_1_1_0',
+            'tag_graph_1_8_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'combine_pep_style_1': 'combine_by',
+            'tag_graph_style_1': 'de_novo',
+        },
+        'utag' : [
+            'de novo',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : None,
+        'description' : \
+            'Path to the unified de novo results used as input for TagGraph'
+    },
+    'tag_graph_model_file' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'tag_graph_1_8_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'tag_graph_style_1': 'model',
         },
         'utag' : [
             'scoring',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'select',
+        'uvalue_type' : 'str',
         'uvalue_option' : {
-            'select_type'    : 'radio_button',
-            'available_values'  : ['engine_group', 'sequence_length'],
-            'custom_val_max' : 0,
+            'none_val'      : '',
+            'multiple_line' : False,
         },
-        'default_value' : 'engine_group',
+        'default_value' : 'default',
         'description' : \
-            'Defines how PSMs with Bayes PEP will be grouped before q-value calculation. Available: "engine_group", "sequence_length"'
+            'Path to pickled (python-serialized) probabilistic model file. Use "default" for the default file location in the resources'
+    },
+    'tag_graph_config_file' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'tag_graph_1_8_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'tag_graph_style_1': 'config',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : 'default',
+        'description' : \
+            'Path to pickled (python-serialized) model configuration file. Use "default" for the default file location in the resources'
+    },
+    'tag_graph_unimod_file' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'tag_graph_1_8_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'tag_graph_style_1': 'unimoddict',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : 'default',
+        'description' : \
+            'Path to pickled (python-serialized) unimod dictionary. Use "default" for the default file location in the resources'
+    },
+    'modification_mass_tolerance': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'tag_graph_1_8_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
+        },
+        'default_value': 0.1,
+        'description': """ Maximum absolute deviation (Da) between experimental and database modification mass """,
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'tag_graph_style_1' : 'modtolerance',
+        },
+        'utag': [
+            'modifications',
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "float",
+    },
+    'max_num_substring_mod_pep': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'tag_graph_1_8_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 200,
+        'description': """ Maximum number of times a de novo-produced substring can occur in the protein sequence database for TagGraph to consider it as a modified peptide match""",
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'tag_graph_style_1': 'modmaxcounts'
+        },
+        'utag': [
+            'scoring'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'max_num_substring_pep': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'tag_graph_1_8_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 400,
+        'description': """ Maximum number of times a de novo-produced substring can occur in the protein sequence database for TagGraph to consider it as a modified peptide match""",
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'tag_graph_style_1': 'maxcounts'
+        },
+        'utag': [
+            'scoring'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'tag_graph_init_iterations': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'tag_graph_1_8_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 20,
+        'description': """ Number of iterations in initial EM over all results""",
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'tag_graph_style_1': 'initIterations'
+        },
+        'utag': [
+            'scoring'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
+    },
+    'tag_graph_max_iterations': {
+        'edit_version' : 1.00,
+        'available_in_unode': [
+            'tag_graph_1_8_0',
+        ],
+        'uvalue_option': {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 1000,
+            'min': 0,
+            'updownval': 1,
+            'unit': '',
+        },
+        'default_value': 100,
+        'description': """ Maximum number of expectation maximization iterations for FDR assignment""",
+        'triggers_rerun': True,
+        'ukey_translation': {
+            'tag_graph_style_1': 'maxIterations'
+        },
+        'utag': [
+            'scoring'
+        ],
+        'uvalue_translation': {
+        },
+        'uvalue_type': "int",
     },
     'signal_to_noise_threshold': {
         'edit_version' : 1.00,

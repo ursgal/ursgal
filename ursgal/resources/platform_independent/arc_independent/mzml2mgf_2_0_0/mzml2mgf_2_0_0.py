@@ -83,9 +83,12 @@ def main(
         mz_correction_factor = machine_offset_in_ppm * 1e-6
     else:
         mz_correction_factor = 0
-    precursor_charge_range = '{0}'.format(precursor_min_charge)
-    for charge in range(precursor_min_charge + 1, precursor_max_charge + 1):
-        precursor_charge_range += ' and {0}'.format(charge)
+    if precursor_min_charge is not None and precursor_max_charge is not None:
+        precursor_charge_range = '{0}'.format(precursor_min_charge)
+        for charge in range(precursor_min_charge + 1, precursor_max_charge + 1):
+            precursor_charge_range += ' and {0}'.format(charge)
+    else:
+        precursor_charge_range = None
     mzml_basename = os.path.basename(mzml)
     for n, spec in enumerate(run):
         if n % 500 == 0:
@@ -198,12 +201,17 @@ def main(
                 ),
                 file=oof
             )
-        else:
+        elif precursor_charge_range is not None:
             print(
                 'CHARGE={0}{1}'.format(
                     precursor_charge_range,
                     ion_mode
                 ),
+                file=oof
+            )
+        else:
+            print(
+                'CHARGE=',
                 file=oof
             )
 
