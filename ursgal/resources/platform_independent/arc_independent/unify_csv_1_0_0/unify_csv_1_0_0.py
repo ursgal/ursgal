@@ -358,6 +358,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Sequence Stop',
             'Sequence Pre AA',
             'Sequence Post AA',
+            'Enzyme Specificity',
             'Complies search criteria',
             'Conflicting uparam',
             'Search Engine',
@@ -1029,11 +1030,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         )
                         continue
                     peptide_fullfills_enzyme_specificity = False
+                    peptide_enzyme_specificity = []
                     last_protein_id = None
                     for major_protein_info_dict in sorted_upeptide_maps:
-                        protein_specifically_cleaved   = False
-                        nterm_correct = False
-                        cterm_correct = False
+                        protein_enzyme_specificity = []
                         '''
                             'Sequence Start',
                             'Sequence Stop',
@@ -1057,6 +1057,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             protein_info_dict_buffer = [ major_protein_info_dict ]
 
                         for protein_info_dict in protein_info_dict_buffer:
+                            nterm_correct = False
+                            cterm_correct = False
                             if params['translations']['keep_asp_pro_broken_peps'] is True:
                                 if line_dict['Sequence'][-1] == 'D' and\
                                         protein_info_dict['Sequence Post AA'] == 'P':
@@ -1089,14 +1091,22 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             # if line_dict['Sequence'] == 'SPRPGAAPGSR':
                             #     print(protein_info_dict)
                             #     print(nterm_correct, cterm_correct)
-                            if params['translations']['semi_enzyme'] is True:
-                                if cterm_correct is True or nterm_correct is True:
-                                    protein_specifically_cleaved = True
-                            elif cterm_correct is True and nterm_correct is True:
-                                protein_specifically_cleaved = True
-                            if protein_specifically_cleaved is True:
+                            if cterm_correct is True and nterm_correct is True:
+                                protein_enzyme_specificity.append('full')
+                                protein_complies = True
+                            elif cterm_correct is True or nterm_correct is True:
+                                protein_enzyme_specificity.append('semi')
+                                if params['translations']['semi_enzyme'] is True:
+                                    protein_complies = True
+                                else:
+                                    protein_complies = False
+                            else:
+                                protein_enzyme_specificity.append('nonspecific')
+                                protein_complies = False
+                            if protein_complies is True:
                                 peptide_fullfills_enzyme_specificity = True
                                 last_protein_id = protein_info_dict['Protein ID']
+                        peptide_enzyme_specificity.append(';'.join(protein_enzyme_specificity))
                     # we may test for further criteria to set this flag/fieldname
                     # e.g. the missed cleavage count etc.
                     if peptide_fullfills_enzyme_specificity is False:
@@ -1104,6 +1114,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         conflicting_uparams[lookup_identifier].add(
                             'enzyme'
                         )
+                    line_dict['Enzyme Specificity'] = joinchar.join(peptide_enzyme_specificity)
 
                     #check here if missed cleavage count is correct...
                     missed_cleavage_counter = 0
