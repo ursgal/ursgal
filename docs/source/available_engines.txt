@@ -79,6 +79,9 @@ MSFragger
 
 Available MSFragger versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msfragger_20190628.msfragger_20190628
+   :members:
+
 .. autoclass:: ursgal.wrappers.msfragger_20190222.msfragger_20190222
    :members:
 

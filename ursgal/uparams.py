@@ -965,6 +965,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
         ],
@@ -973,6 +974,7 @@ ursgal_params = {
             'msgfplus_style_1'  : '-Xmx',
             'mzidentml_style_1' : '-Xmx',
             'msfragger_style_1' : '-Xmx',
+            'msfrag_20190628_style_1' : '-Xmx',
             'pipi_style_1'      : '-Xmx',
         },
         'utag' : [
@@ -1097,12 +1099,14 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'default_value' : True,
         'description' :  ''' Static mods are not considered ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'allow_multiple_variable_mods_on_residue',
+            'msfrag_20190628_style_1' : 'allow_multiple_variable_mods_on_residue',
         },
         'utag' : [
             'modifications'
@@ -1111,6 +1115,10 @@ ursgal_params = {
         },
         'uvalue_translation' : {
             'msfragger_style_1' : {
+                False : 0,
+                True : 1,
+            },
+            'msfrag_20190628_style_1' : {
                 False : 0,
                 True : 1,
             }
@@ -1295,6 +1303,7 @@ ursgal_params = {
                 'msfragger_20170103' : True,
                 'msfragger_20171106' : True,
                 'msfragger_20190222'   : True,
+                'msfragger_20190628'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
@@ -1339,6 +1348,7 @@ ursgal_params = {
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
                 'msfragger_20190222'   : True,
+                'msfragger_20190628'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
@@ -1383,6 +1393,7 @@ ursgal_params = {
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
                 'msfragger_20190222'   : True,
+                'msfragger_20190628'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
@@ -1427,6 +1438,7 @@ ursgal_params = {
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
                 'msfragger_20190222'   : True,
+                'msfragger_20190628'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
@@ -1471,6 +1483,7 @@ ursgal_params = {
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
                 'msfragger_20190222'   : True,
+                'msfragger_20190628'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
@@ -1501,6 +1514,7 @@ ursgal_params = {
                 'msfragger_20170103',
                 'msfragger_20171106',
                 'msfragger_20190222',
+                'msfragger_20190628',
                 'msgfplus_v2016_09_16',
                 'msgfplus_v2017_01_27',
                 'msgfplus_v2018_01_30',
@@ -1602,12 +1616,14 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'default_value' : False,
         'description' :  ''' Specifies the trimming of a protein N-terminal methionine as a variable modification ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'clip_nTerm_M',
+            'msfrag_20190628_style_1' : 'clip_nTerm_M',
         },
         'utag' : [
         ],
@@ -1617,7 +1633,11 @@ ursgal_params = {
             'msfragger_style_1' : {
                 False : 0,
                 True : 1,
-            }
+            },
+            'msfrag_20190628_style_1' : {
+                False : 0,
+                True : 1,
+            },
         },
         'uvalue_type' : "bool",
     },
@@ -1733,6 +1753,7 @@ ursgal_params = {
                 'msfragger_20170103'   : False,
                 'msfragger_20171106'   : False,
                 'msfragger_20190222'   : False,
+                'msfragger_20190628'   : False,
                 'msgfplus_v2016_09_16' : True,
                 'msgfplus_v2017_01_27' : True,
                 'msgfplus_v2018_01_30' : True,
@@ -1927,6 +1948,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pglyco_db_2_2_0',
@@ -1941,6 +1963,7 @@ ursgal_params = {
             'ucontroller_style_1' : 'cpus',
             'xtandem_style_1'     : 'spectrum, threads',
             'msfragger_style_1'   : 'num_threads',
+            'msfrag_20190628_style_1'   : 'num_threads',
             'pipi_style_1'        : 'thread_num',
             'moda_style_1'        : '-@',
             'pglyco_db_style_1'   : 'process',
@@ -1978,6 +2001,9 @@ ursgal_params = {
                 -1 : 'max - 1',
             },
             'msfragger_style_1' : {
+                -1 : 'max - 1',
+            },
+            'msfrag_20190628_style_1' : {
                 -1 : 'max - 1',
             },
             'pnovo_style_1' : {
@@ -2101,6 +2127,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pglyco_db_2_2_0',
@@ -2120,6 +2147,7 @@ ursgal_params = {
             'upeptide_mapper_style_1'     : 'database',
             'compomics_utilities_style_1' : 'database',
             'msfragger_style_1'           : 'database_name',
+            'msfrag_20190628_style_1'           : 'database_name',
             'pipi_style_1'                : 'db',
             'pglyco_db_style_1'           : 'fasta',
             'deepnovo_style_1'            : 'db_fasta_file',
@@ -2214,6 +2242,7 @@ ursgal_params = {
             'upeptide_mapper_1_0_0',
             'percolator_3_2_1',
             'percolator_3_4_0',
+            'msfragger_20190628',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2224,7 +2253,7 @@ ursgal_params = {
             'unify_csv_style_1'             : 'decoy_tag',
             'xtandem2csv_style_1'           : 'decoy_tag',
             'upeptide_mapper_style_1'       : 'decoy_tag',
-
+            'msfrag_20190628_style_1'             : 'decoy_prefix',
         },
         'utag' : [
             'database',
@@ -2498,6 +2527,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pglyco_db_2_2_0',
@@ -2520,6 +2550,7 @@ ursgal_params = {
             'unify_csv_style_1'             : 'enzyme',
             'xtandem_style_1'               : 'protein, cleavage site',
             'msfragger_style_1'             : 'enzyme',
+            'msfrag_20190628_style_1'             : 'enzyme',
             'percolator_style_1'            : 'enz',
             'pipi_style_1'                  : 'enzyme',
             'pglyco_db_style_1'             : 'enzyme',
@@ -2783,6 +2814,32 @@ ursgal_params = {
                 'trypsin_p' : 'KR;C;',
                 'nonspecific' : 'ACDEFGHIKLMNPQRSTVWY;C;',
             },
+            'msfrag_20190628_style_1' : {
+                'argc' : 'R;C;P',
+                'aspn' : 'D;N;',
+                'chymotrypsin' : 'FMWY;C;P',
+                'chymotrypsin_p' : 'FMWY;C;',
+                'clostripain' : 'R;C;',
+                'cnbr' : 'M;C;P',
+                'elastase' : 'AGILV;C;P',
+                'formic_acid' : 'D;C;P',
+                'gluc' : 'DE;C;P',
+                'gluc_bicarb' : 'E;C;P',
+                'iodosobenzoate' : 'W;C;',
+                'lysc' : 'K;C;P',
+                'lysc_gluc' : 'DEK;C;P',
+                'lysc_p' : 'K;C;',
+                'lysn' : 'K;N;',
+                'lysn_promisc' : 'AKRS;N;',
+                'pepsina' : 'FL;C;',
+                'protein_endopeptidase' : 'P;C;',
+                'staph_protease' : 'E;C;',
+                'trypsin' : 'KR;C;P',
+                'trypsin_cnbr' : 'KRM;C;P',
+                'trypsin_gluc' : 'DEKR;C;P',
+                'trypsin_p' : 'KR;C;',
+                'nonspecific' : 'ACDEFGHIKLMNPQRSTVWY;C;',
+            },
             'pipi_style_1' : {
                 'aspn' : 'AspN;0;D;-',
                 'chymotrypsin' : 'Chymotrypsin;1;FMWY;P',
@@ -3015,6 +3072,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
         ],
@@ -3023,6 +3081,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'clear_mz_range',
+            'msfrag_20190628_style_1' : 'clear_mz_range',
             'pipi_style_1' : 'frag_clear_mz_range',
         },
         'utag' : [
@@ -3085,6 +3144,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
@@ -3104,6 +3164,7 @@ ursgal_params = {
             'pepnovo_style_1'   : '-fragment_tolerance',
             'xtandem_style_1'   : 'spectrum, fragment monoisotopic mass error',
             'msfragger_style_1' : 'fragment_mass_tolerance',
+            'msfrag_20190628_style_1' : 'fragment_mass_tolerance',
             'pipi_style_1'      : 'ms2_tolerance',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
@@ -3162,6 +3223,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
@@ -3181,6 +3243,7 @@ ursgal_params = {
             'pepnovo_style_1'   : 'frag_mass_tolerance_unit',
             'xtandem_style_1'   : 'spectrum, fragment monoisotopic mass error units',
             'msfragger_style_1' : 'fragment_mass_units',
+            'msfrag_20190628_style_1' : 'fragment_mass_units',
             'pipi_style_1'      : 'frag_mass_tolerance_unit',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
@@ -3210,6 +3273,10 @@ ursgal_params = {
                 'da' : 'Daltons',
             },
             'msfragger_style_1' : {
+                'ppm' : 1,
+                'da'  : 0
+            },
+            'msfrag_20190628_style_1' : {
                 'ppm' : 1,
                 'da'  : 0
             },
@@ -3275,11 +3342,13 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-zoh',
             'msfragger_style_1': 'max_fragment_charge',
+            'msfrag_20190628_style_1': 'max_fragment_charge',
         },
         'utag' : [
             'fragment',
@@ -3610,6 +3679,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'msgfplus2csv_v2017_07_04',
             'msgfplus2csv_v1_2_0',
             'msgfplus2csv_v1_2_1',
@@ -3628,6 +3698,7 @@ ursgal_params = {
             'omssa_style_1'            : 'header_translations',
             'pepnovo_style_1'          : 'header_translations',
             'msfragger_style_1'        : 'header_translations',
+            'msfrag_20190628_style_1'        : 'header_translations',
             'pipi_style_1'             : 'header_translations',
             'pglyco_db_style_1'        : 'header_translations',
             'pglyco_fdr_style_1'       : 'header_translations',
@@ -3751,6 +3822,32 @@ ursgal_params = {
                 'Number of missed cleavages':'MSFragger:Number of missed cleavages',
                 'Intercept of expectation model (expectation in log space)':'MSFragger:Intercept of expectation model (expectation in log space)',
                 'Slope of expectation model (expectation in log space)':'MSFragger:Slope of expectation model (expectation in log space)',
+            },
+            'msfrag_20190628_style_1' : {
+                'scannum' : 'Spectrum ID',
+                'peptide' : 'Sequence',
+                'charge': 'Charge',
+                'peptide_prev_aa': 'Sequence Pre AA',
+                'peptide_next_aa' : 'Sequence Post AA',
+                'protein' : 'Protein ID',
+                'modification_info':'Modifications', #'(starts with M, separated by |, formated as position,mass)
+                'retention_time': 'Retention Time (s)',
+                'precursor_neutral_mass' : 'MSFragger:Precursor neutral mass (Da)',
+                'calc_neutral_pep_mass' : 'MSFragger:Neutral mass of peptide',# (including any variable modifications) (Da)
+                'hit_rank':'Rank',
+                'massdiff':'Mass Difference',
+                'num_matched_ions':'MSFragger:Matched fragment ions',
+                'tot_num_ions':'MSFragger:Total possible number of matched theoretical fragment ions',
+                'hyperscore':'MSFragger:Hyperscore',
+                'nextscore':'MSFragger:Next score',
+                'num_tol_term':'MSFragger:Number of tryptic termini',
+                'num_missed_cleavages':'MSFragger:Number of missed cleavages',
+                'expectscore':'MSFragger:expect score',
+                'best_locs': 'MSFragger:best_locs',
+                'score_without_delta_mass': 'MSFragger:score_without_delta_mass',
+                'best_score_with_delta_mass': 'MSFragger:best_score_with_delta_mass',
+                'second_best_score_with_delta_mass': 'MSFragger:second_best_score_with_delta_mass',
+                'delta_score': 'MSFragger:delta_score',
             },
             'pglyco_db_style_1' : {
                 'GlySpec': 'Spectrum Title',
@@ -4271,11 +4368,13 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-cl',
-            'msfragger_style_1': 'minimum_ratio'
+            'msfragger_style_1': 'minimum_ratio',
+            'msfrag_20190628_style_1': 'minimum_ratio'
         },
         'utag' : [
             'spectrum',
@@ -4913,6 +5012,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
@@ -4926,6 +5026,7 @@ ursgal_params = {
             'omssa_style_1'     : ('-tem', '-tom'),
             'xtandem_style_1'   : 'protein, modified residue mass file',
             'msfragger_style_1' : 'label',
+            'msfrag_20190628_style_1' : 'label',
             'pipi_style_1'      : '15N',
             'pyqms_style_1'     : 'label'
         },
@@ -5001,13 +5102,15 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'kojak_style_1'     : 'max_accounted_observed_peaks',
             'myrimatch_style_1' : 'MaxPeakCount',
             'xtandem_style_1'   : 'spectrum, total peaks',
-            'msfragger_style_1' : 'use_topN_peaks'
+            'msfragger_style_1' : 'use_topN_peaks',
+            'msfrag_20190628_style_1' : 'use_topN_peaks',
         },
         'utag' : [
             'spectrum',
@@ -5059,6 +5162,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'msgfplus_v2018_06_28',
@@ -5080,6 +5184,7 @@ ursgal_params = {
             'unify_csv_style_1'       : 'max_missed_cleavages',
             'upeptide_mapper_style_1' : 'max_missed_cleavages',
             'msfragger_style_1'       : 'allowed_missed_cleavage',
+            'msfrag_20190628_style_1'       : 'allowed_missed_cleavage',
             'pipi_style_1'            : 'missed_cleavage',
             'msgfplus_style_1'        : '-maxMissedCleavages',
             'pglyco_db_style_1'       : 'max_miss_cleave',
@@ -5332,6 +5437,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
@@ -5343,6 +5449,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'max_variable_mods_per_mod',
+            'msfrag_20190628_style_1' : 'max_variable_mods_per_mod',
             'msamanda_style_1'  : 'MaxNoModifs',
         },
         'utag' : [
@@ -5453,6 +5560,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pglyco_db_2_2_0'
@@ -5463,6 +5571,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'MaxPeptideLength',
             'omssa_style_1'     : '-nox',
             'msfragger_style_1' : 'digest_max_length',
+            'msfrag_20190628_style_1' : 'digest_max_length',
             'pipi_style_1' : 'max_peptide_length',
             'pglyco_db_style_1' : 'max_peptide_len',
         },
@@ -5492,13 +5601,15 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msgfplus_style_1'  : '-maxLength',
             'myrimatch_style_1' : 'MaxPeptideVariants',
             'omssa_style_1'     : '-nox',
-            'msfragger_style_1' : 'max_variable_mods_combinations'
+            'msfragger_style_1' : 'max_variable_mods_combinations',
+            'msfrag_20190628_style_1' : 'max_variable_mods_combinations',
         },
         'utag' : [
             'peptide',
@@ -5675,6 +5786,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
@@ -5690,6 +5802,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'MinPeptideLength',
             'omssa_style_1'     : '-no',
             'msfragger_style_1' : 'digest_min_length',
+            'msfrag_20190628_style_1' : 'digest_min_length',
             'msamanda_style_1'  : 'MinimumPepLength',
             'pipi_style_1'      : 'min_peptide_length',
             'pglyco_db_style_1'    : 'min_peptide_len',
@@ -5754,13 +5867,15 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'myrimatch_style_1' : 'MinMatchedFragments',
             'omssa_style_1'     : '-hm',
             'xtandem_style_1'   : 'scoring, minimum ion count',
-            'msfragger_style_1' : 'min_matched_fragments'
+            'msfragger_style_1' : 'min_matched_fragments',
+            'msfrag_20190628_style_1' : 'min_matched_fragments',
         },
         'utag' : [
             'fragment',
@@ -5793,12 +5908,14 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-hs',
             'xtandem_style_1' : 'spectrum, minimum peaks',
             'msfragger_style_1': 'minimum_peaks',
+            'msfrag_20190628_style_1': 'minimum_peaks',
         },
         'utag' : [
             'fragment',
@@ -5968,6 +6085,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
@@ -5989,6 +6107,7 @@ ursgal_params = {
             'unify_csv_style_1'       : 'modifications',
             'upeptide_mapper_style_1' : 'modifications',
             'msfragger_style_1'       : 'modifications',
+            'msfrag_20190628_style_1'       : 'modifications',
             'pipi_style_1'            : 'modifications',
             'xtandem_style_1'         : (
                 'residue, modification mass',
@@ -6137,12 +6256,14 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'default_value' : 50,
         'description' :  ''' Suppresses reporting of PSM if top hit has expectation greater than this threshold ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'output_max_expect',
+            'msfrag_20190628_style_1' : 'output_max_expect',
         },
         'utag' : [
             'output',
@@ -6165,12 +6286,14 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'default_value' : 0,
         'description' :  ''' Track top N unmodified peptide results separately from main results internally for boosting features. Should be set to a number greater than output_report_topN if zero bin boosting is desired. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'track_zero_topN',
+            'msfrag_20190628_style_1' : 'track_zero_topN',
         },
         'utag' : [
             'output',
@@ -6193,12 +6316,14 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'default_value' : 0.0,
         'description' :  ''' Ranks a zero-bin hit above all non-zero-bin hit if it has expectation less than this value. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'zero_bin_accept_expect',
+            'msfrag_20190628_style_1' : 'zero_bin_accept_expect',
         },
         'utag' : [
             'scoring'
@@ -6221,12 +6346,14 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'default_value' : 1.0,
         'description' :  ''' Multiplies expect value of PSMs in the zero-bin during results ordering (set to less than 1 for boosting) ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'zero_bin_mult_expect',
+            'msfrag_20190628_style_1' : 'zero_bin_mult_expect',
         },
         'utag' : [
             'scoring'
@@ -6249,12 +6376,14 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'default_value' : False,
         'description' :  ''' Inserts complementary ions corresponding to the top N most intense fragments in each experimental spectrum. Useful for recovery of modified peptides near C-terminal in open search. Should be set to 0 (disabled) otherwise. ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'add_topN_complementary',
+            'msfrag_20190628_style_1' : 'add_topN_complementary',
         },
         'utag' : [
             'scoring',
@@ -6264,6 +6393,10 @@ ursgal_params = {
         },
         'uvalue_translation' : {
             'msfragger_style_1' : {
+                False : 0,
+                True : 1,
+            },
+            'msfrag_20190628_style_1' : {
                 False : 0,
                 True : 1,
             }
@@ -6276,12 +6409,14 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'default_value' : 3,
         'description' :  ''' Minimum number of matched peaks in PSM for inclusion in statistical modeling ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'min_fragments_modelling',
+            'msfrag_20190628_style_1' : 'min_fragments_modelling',
         },
         'utag' : [
             'spectrum',
@@ -6930,6 +7065,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
@@ -6940,6 +7076,7 @@ ursgal_params = {
             'omssa_style_1'     : '-hc',
             'pepnovo_style_1'   : '-num_solutions',
             'msfragger_style_1' : 'output_report_topN',
+            'msfrag_20190628_style_1' : 'output_report_topN',
             'pnovo_style_1'     : 'report_pep',
         },
         'utag' : [
@@ -7802,6 +7939,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7813,6 +7951,7 @@ ursgal_params = {
             'unify_csv_style_1' : 'precursor_isotope_range',
             'xtandem_style_1' : 'spectrum, parent monoisotopic mass isotope error',
             'msfragger_style_1' : 'isotope_error',
+            'msfrag_20190628_style_1' : 'isotope_error',
         },
         'utag' : [
             'precursor',
@@ -7839,6 +7978,11 @@ ursgal_params = {
                 '0,2'   : 'yes',
             },
             'msfragger_style_1' : {
+                '0' : '0',
+                '0,1' : '0/1',
+                '0,2' : '0/1/2',
+            },
+            'msfrag_20190628_style_1' : {
                 '0' : '0',
                 '0,1' : '0/1',
                 '0,2' : '0/1/2',
@@ -7897,6 +8041,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
@@ -7919,6 +8064,7 @@ ursgal_params = {
             'unify_csv_style_1'  : 'precursor_mass_tolerance_minus',
             'xtandem_style_1'    : 'spectrum, parent monoisotopic mass error minus',
             'msfragger_style_1'  : 'precursor_mass_tolerance',
+            'msfrag_20190628_style_1'  : 'precursor_mass_tolerance',
             'pipi_style_1'       : 'ms1_tolerance',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
@@ -7988,6 +8134,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
@@ -8010,6 +8157,7 @@ ursgal_params = {
             'unify_csv_style_1' : ' precursor_mass_tolerance_minus',
             'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error plus',
             'msfragger_style_1' : 'precursor_mass_tolerance',
+            'msfrag_20190628_style_1' : 'precursor_mass_tolerance',
             'pipi_style_1'      : 'ms1_tolerance',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
@@ -8077,6 +8225,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
@@ -8097,6 +8246,7 @@ ursgal_params = {
             'pepnovo_style_1'   : 'precursor_mass_tolerance_unit',
             'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error units',
             'msfragger_style_1' : 'precursor_mass_units',
+            'msfrag_20190628_style_1' : 'precursor_mass_units',
             'pipi_style_1'      : 'ms1_tolerance_unit',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
@@ -8130,6 +8280,10 @@ ursgal_params = {
                 'da'  : 'Daltons',
             },
             'msfragger_style_1' : {
+                'ppm' : 1,
+                'da'  : 0
+            },
+            'msfrag_20190628_style_1' : {
                 'ppm' : 1,
                 'da'  : 0
             },
@@ -8237,6 +8391,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -8248,6 +8403,7 @@ ursgal_params = {
             'myrimatch_style_1': 'NumChargeStates',
             'omssa_style_1': '-zh',
             'msfragger_style_1': 'precursor_max_charge',
+            'msfrag_20190628_style_1': 'precursor_max_charge',
             'pyqms_style_1': 'precursor_max_charge',
             'sugarpy_run_style_1': 'max_charge',
             'sugarpy_plot_style_1': 'max_charge',
@@ -8279,6 +8435,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pglyco_db_2_2_0',
             'pnovo_3_1_3',
         ],
@@ -8288,6 +8445,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'MaxPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_max_mass',
+            'msfrag_20190628_style_1' : 'precursor_max_mass',
             'pglyco_db_style_1' : 'max_peptide_weight',
             'pnovo_style_1'     : 'mass_upper_bound',
         },
@@ -8336,6 +8494,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -8346,6 +8505,7 @@ ursgal_params = {
             'msgfplus_style_1': '-minCharge',
             'omssa_style_1': '-zl',
             'msfragger_style_1': 'precursor_min_charge',
+            'msfrag_20190628_style_1': 'precursor_min_charge',
             'pyqms_style_1': 'precursor_min_charge',
             'sugarpy_run_style_1': 'min_charge',
             'sugarpy_plot_style_1': 'min_charge',
@@ -8383,6 +8543,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
             'pglyco_db_2_2_0',
             'pnovo_3_1_3',
         ],
@@ -8392,6 +8553,7 @@ ursgal_params = {
             'myrimatch_style_1' : 'MinPeptideMass',
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_min_mass',
+            'msfrag_20190628_style_1' : 'precursor_min_mass',
             'pglyco_db_style_1' : 'min_peptide_weight',
             'pnovo_style_1'     : 'mass_lower_bound',
         },
@@ -8418,6 +8580,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'default_value' : 5,
         'description' :  'True precursor mass tolerance '\
@@ -8429,6 +8592,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'precursor_true_tolerance',
+            'msfrag_20190628_style_1' : 'precursor_true_tolerance',
         },
         'utag' : [
             'precursor',
@@ -8451,12 +8615,14 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'default_value' : 'ppm',
         'description' :  '''Mass tolerance units fo precursor_true_tolerance''',
         'triggers_rerun' : True,
         'ukey_translation' : {
             'msfragger_style_1' : 'precursor_true_units',
+            'msfrag_20190628_style_1' : 'precursor_true_units',
         },
         'utag' : [
             'precursor',
@@ -8468,6 +8634,10 @@ ursgal_params = {
         },
         'uvalue_translation' : {
             'msfragger_style_1' : {
+                'ppm' : 1,
+                'da'  : 0
+            },
+            'msfrag_20190628_style_1' : {
                 'ppm' : 1,
                 'da'  : 0
             }
@@ -9746,6 +9916,7 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9756,7 +9927,8 @@ ursgal_params = {
             'omssa_style_1'     : 'semi_enzyme',
             'unify_csv_style_1' : 'semi_enzyme',
             'xtandem_style_1'   : 'protein, cleavage semi',
-            'msfragger_style_1' : 'num_enzyme_termini'
+            'msfragger_style_1' : 'num_enzyme_termini',
+            'msfrag_20190628_style_1' : 'num_enzyme_termini',
         },
         'utag' : [
             'protein',
@@ -9784,6 +9956,10 @@ ursgal_params = {
                 True  : 'yes',
             },
             'msfragger_style_1': {
+                True : 1,
+                False : 2
+            },
+            'msfrag_20190628_style_1': {
                 True : 1,
                 False : 2
             }
@@ -10144,11 +10320,13 @@ ursgal_params = {
             'msfragger_20170103',
             'msfragger_20171106',
             'msfragger_20190222',
+            'msfragger_20190628',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'pepnovo_style_1' : '-use_spectrum_charge',
-            'msfragger_style_1': 'override_charge'
+            'msfragger_style_1': 'override_charge',
+            'msfrag_20190628_style_1': 'override_charge',
         },
         'utag' : [
             'precursor',
@@ -10158,7 +10336,11 @@ ursgal_params = {
             'msfragger_style_1' : {
                 True : 0,
                 False : 1,
-            }
+            },
+            'msfrag_20190628_style_1' : {
+                True : 0,
+                False : 1,
+            },
         },
         'uvalue_type' : 'bool',
         'uvalue_option' : {
@@ -10295,6 +10477,7 @@ ursgal_params = {
                 'msfragger_20170103'   : 0,
                 'msfragger_20171106'   : 0,
                 'msfragger_20190222'   : 0,
+                'msfragger_20190628'   : 0,
                 'pipi_1_4_5'           : 0,
                 'pipi_1_4_6'           : 0,
                 'moda_v1_51'           : 0,
@@ -10378,6 +10561,8 @@ ursgal_params = {
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'msfragger_20190222'   : 'MSFragger:Hyperscore',
+                'msfragger_20190628'   : 'MSFragger:Hyperscore',
+
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
@@ -10424,6 +10609,7 @@ ursgal_params = {
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'msfragger_20190222'   : 'MSFragger:Hyperscore',
+                'msfragger_20190628'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
@@ -10470,6 +10656,7 @@ ursgal_params = {
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'msfragger_20190222'   : 'MSFragger:Hyperscore',
+                'msfragger_20190628'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
@@ -10516,6 +10703,7 @@ ursgal_params = {
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'msfragger_20190222'   : 'MSFragger:Hyperscore',
+                'msfragger_20190628'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
@@ -10562,6 +10750,7 @@ ursgal_params = {
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'msfragger_20190222'   : 'MSFragger:Hyperscore',
+                'msfragger_20190628'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
@@ -10608,6 +10797,7 @@ ursgal_params = {
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'msfragger_20190222'   : 'MSFragger:Hyperscore',
+                'msfragger_20190628'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
@@ -10654,6 +10844,7 @@ ursgal_params = {
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
                 'msfragger_20190222'   : 'MSFragger:Hyperscore',
+                'msfragger_20190628'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
@@ -12639,5 +12830,55 @@ ursgal_params = {
         'uvalue_translation': {
         },
         'uvalue_type': "float",
+    },
+    'calibrate_mass' : {
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'msfragger_20190628',
+        ],
+        'default_value' : False,
+        'description' :  ''' Perform mass calibration ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'msfrag_20190628_style_1' : 'calibrate_mass',
+        },
+        'utag' : [
+            'scoring',
+            'spectrum'
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+            'msfrag_20190628_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'uvalue_type' : "bool",
+    },
+    'localize_delta_mass' : {
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'msfragger_20190628',
+        ],
+        'default_value' : True,
+        'description' :  ''' Generate and use mass difference fragment index in addition to the regular fragment index for search. This allows shifted fragment ions - fragment ions with mass increased by the calculated mass difference, to be included in scoring. ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'msfrag_20190628_style_1' : 'localize_delta_mass',
+        },
+        'utag' : [
+            'scoring',
+            'spectrum'
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+            'msfrag_20190628_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'uvalue_type' : "bool",
     },
 }

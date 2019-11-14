@@ -468,7 +468,10 @@ class UNode(object, metaclass=Meta_UNode):
 
         if proc is not None:
             for line in proc.stdout:
-                line_decoded = line.strip().decode('utf')
+                try:
+                    line_decoded = line.strip().decode('utf')
+                except:
+                    line_decoded = line.strip().decode('unicode_escape')
                 print( line_decoded )
                 execute_answer.append( line_decoded )
 

@@ -297,7 +297,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     if database_search is True:
         non_enzymatic_peps = set()
-        conflicting_uparams = defaultdict(set)
+        database_lookup = {}
         fasta_lookup_name = os.path.basename(
             os.path.abspath(
                 params['translations']['database']
@@ -999,7 +999,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_dict['Sequence'],
                     fasta_lookup_name
                 )
-                if lookup_identifier not in conflicting_uparams.keys():
+                if lookup_identifier not in database_lookup.keys():
+                    database_lookup[lookup_identifier] = {
+                        'enzyme_specificity' : '',
+                        'conflicting_uparams': set()
+                    }
                     split_collector = { }
                     for key in [ upeptide_map_sort_key ] + upeptide_map_other_keys:
                         split_collector[ key ] = line_dict[key].split(joinchar)
@@ -1031,7 +1035,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         continue
                     peptide_fullfills_enzyme_specificity = False
                     peptide_enzyme_specificity = []
-                    last_protein_id = None
+                    # last_protein_id = None
                     for major_protein_info_dict in sorted_upeptide_maps:
                         protein_enzyme_specificity = []
                         '''
@@ -1105,16 +1109,16 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 protein_complies = False
                             if protein_complies is True:
                                 peptide_fullfills_enzyme_specificity = True
-                                last_protein_id = protein_info_dict['Protein ID']
+                                # last_protein_id = protein_info_dict['Protein ID']
                         peptide_enzyme_specificity.append(';'.join(protein_enzyme_specificity))
                     # we may test for further criteria to set this flag/fieldname
                     # e.g. the missed cleavage count etc.
                     if peptide_fullfills_enzyme_specificity is False:
                         non_enzymatic_peps.add( line_dict['Sequence'] )
-                        conflicting_uparams[lookup_identifier].add(
+                        database_lookup[lookup_identifier]['conflicting_uparams'].add(
                             'enzyme'
                         )
-                    line_dict['Enzyme Specificity'] = joinchar.join(peptide_enzyme_specificity)
+                    database_lookup[lookup_identifier]['enzyme_specificity'] = joinchar.join(peptide_enzyme_specificity)
 
                     #check here if missed cleavage count is correct...
                     missed_cleavage_counter = 0
@@ -1141,19 +1145,20 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 missed_cleavage_counter += \
                                     len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
                     if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
-                        conflicting_uparams[lookup_identifier].add('max_missed_cleavages')
+                        database_lookup[lookup_identifier]['conflicting_uparams'].add('max_missed_cleavages')
                 # count each PSM occurence to check whether row-merging is needed:
                 # psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 # psm_counter[psm] += 1
 
-                if len(conflicting_uparams[lookup_identifier]) == 0:
+                if len(database_lookup[lookup_identifier]['conflicting_uparams']) == 0:
                     # all tested search criteria true
                     line_dict['Complies search criteria'] = 'true'
                 else:
                     line_dict['Complies search criteria'] = 'false'
                     line_dict['Conflicting uparam'] = ';'.join(
-                        sorted(conflicting_uparams[lookup_identifier])
+                        sorted(database_lookup[lookup_identifier]['conflicting_uparams'])
                     )
+                line_dict['Enzyme Specificity'] = database_lookup[lookup_identifier]['enzyme_specificity']
             line_dict_collector.append(line_dict)
 
         # --------------------------------
