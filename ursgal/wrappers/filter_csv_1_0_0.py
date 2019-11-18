@@ -205,6 +205,10 @@ class filter_csv_1_0_0(ursgal.UNode):
             filter_rules=self.params['translations']['csv_filter_rules'],
             output_file_unfiltered=output_file_unfiltered,
         )
+        if output_file_unfiltered is not None:
+            self.fix_md5_and_file_in_json(
+                json_path='{0}.u.json'.format(output_file_unfiltered)
+            )
 
         # self.print_execution_time(tag='execution')
         return output_file

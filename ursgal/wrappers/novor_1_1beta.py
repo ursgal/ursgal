@@ -145,17 +145,18 @@ class novor_1_1beta( ursgal.UNode ):
                     if mod['name'] not in not_available_mods.keys():
                         not_available_mods[mod['name']] = []
                     not_available_mods[mod['name']].append(mod['aa'])
+                    continue
                 mod_type['mods'].append('{0} ({1})'.format(mod[ 'name' ], mod[ 'aa' ] ))
 
             for mod in not_available_mods.keys():
-                if '{0} ({1})'.format(mod, ''.join(sorted(not_available_modsp[mod]))) not in available_mods:
+                if '{0} ({1})'.format(mod, ''.join(sorted(not_available_mods[mod]))) not in available_mods:
                     print('''
             [ WARNING ] Novor does not support your given modification
-            [ WARNING ] Continue without modification {0} ({1})'''.format(mod, ''.join(sorted(not_available_modsp[mod])))
+            [ WARNING ] Continue without modification {0} ({1})'''.format(mod, ''.join(sorted(not_available_mods[mod])))
                         )
                     continue
                 else:
-                    mod_type['mods'].append('{0} ({1})'.format(mod, ''.join(sorted(not_available_modsp[mod]))))
+                    mod_type['mods'].append('{0} ({1})'.format(mod, ''.join(sorted(not_available_mods[mod]))))
 
         self.params['translations']['fixed_modifications'] =  ','.join( fixed_mods['mods'] )
         self.params['translations']['potential_modifications'] = ','.join( potential_mods['mods'] )
