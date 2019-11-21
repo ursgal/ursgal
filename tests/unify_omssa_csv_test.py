@@ -130,7 +130,7 @@ def unify_omssa( test_dict ):
             expected_value  = round(float(expected_value), 4)
 
         assert test_value == expected_value, '''
-  Unexpected value in column "{0}":
+    Unexpected value in column "{0}":
     test value:     {1}
     expected value: {2}
             '''.format(key, test_value, expected_value)

@@ -36,7 +36,11 @@ def main(*args, **kwargs):
                 'field': <A - E> Optional otherwise position in list
             }
 
+        include_percentages (bool):
+            For each field in the Venn Diagram, percentages (of the overall total) are given
+
         output_file (str): well...
+
 
     Old Style:
 
@@ -105,7 +109,8 @@ def main(*args, **kwargs):
         'demo'                   : False,
         'font'                   : 'Helvetica',
         'stroke-width'           : 2,
-        'opacity'                : 0.3
+        'opacity'                : 0.3,
+        'include_percentages'    : False,
     }
     assert 'data' in kwargs.keys(), '''NEW STYLE required '''
     data = kwargs['data']
@@ -288,6 +293,12 @@ def main(*args, **kwargs):
     for k, v in vdTypeSpecific[vdLen].items():
         vdTypeSpecific[vdLen][k]['label'] = kwargs['label_{0}'.format(k)]
         vdTypeSpecific[vdLen][k]['setSize'] = len(eval(k))
+        if kwargs['include_percentages'] is True:
+            vdTypeSpecific[vdLen][k]['setPercentage'] = ' ({0}%)'.format(
+                round(100*(len(eval(k))/kwargs['total_n']))
+            )
+        else:
+            vdTypeSpecific[vdLen][k]['setPercentage'] = ''
         vdTypeSpecific[vdLen][k]['label font-size major'] = \
             kwargs['label font-size major']
         vdTypeSpecific[vdLen][k]['label font-size minor'] = \
@@ -334,7 +345,7 @@ style="position:relative; top:0; left:0; z-index:-1;">
     for setKey in sorted(vdTypeSpecific[len(data)].keys()):
         print('''
         <text transform="translate({text-pos-x} {text-pos-y})"  font-size="{label font-size major}" text-anchor="{text-anchor}">{label}</text>
-        <text transform="translate({text-pos-x} {y2})"  font-size="{label font-size minor}" text-anchor="{text-anchor}" font-style="italic">n = {setSize}</text>
+        <text transform="translate({text-pos-x} {y2})"  font-size="{label font-size minor}" text-anchor="{text-anchor}" font-style="italic">n = {setSize}{setPercentage}</text>
         '''.format(
                     y2=kwargs[setKey]['text-pos-y'] + 30,
                     **kwargs[setKey]
@@ -549,7 +560,16 @@ style="position:relative; top:0; left:0; z-index:-1;">
         returnDict[k]['results'] = r
     print('<g font-family="{font}" font-size="{label font-size venn}" >'.format(**kwargs), file = io)
     for labelDict in returnDict.values():
-        print('<text transform="translate({x} {y})" text-anchor="middle" stroke="#777777" stroke-width="0.5" >{value}</text>'.format(**labelDict),file=io)
+        if kwargs['include_percentages'] is True:
+            labelDict['percentage'] = ' ({0}%)'.format(
+                round(100*labelDict['value']/kwargs['total_n'])
+            )
+        else:
+            labelDict['percentage'] = ''
+        print('<text transform="translate({x} {y})" text-anchor="middle" stroke="#777777" stroke-width="0.5" >{value}{percentage}</text>'.format(
+            **labelDict),
+            file=io
+        )
     print('</g>', file=io)
     print("</svg>", file=io)
     print('Saved VennDiagram as {output_file}'.format(**kwargs))

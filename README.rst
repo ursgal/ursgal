@@ -193,7 +193,7 @@ as common practice in science, never trust a blackbox :)
 Copyrights
 ***********
 
-Copyright 2014-2018 by authors and contributors in alphabetical order
+Copyright 2014-2019 by authors and contributors in alphabetical order
 
 * Christian Fufezan
 * Aime B. Igiraneza
@@ -202,8 +202,9 @@ Copyright 2014-2018 by authors and contributors in alphabetical order
 * Johannes Leufken
 * Purevdulam Oyunchimeg
 * Stefan Schulze
-* Fengchao Yu
 * Lukas Vaut
+* David Yang
+* Fengchao Yu
 
 Contact
 *******
@@ -269,4 +270,10 @@ Full list of tools with proper citations that are integrated into Ursgal are:
     * Hulstaert, N.; Sachsenberg, T.; Walzer, M.; Barsnes, H.; Martens, L. and 
     Perez-Riverol, Y. (2019) ThermoRawFileParser: modular, scalable and 
     cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852
-
+    * Tran, N.H.; Zhang, X.; Xin, L.; Shan, B.; Li, M. (2017) De novo peptide sequencing by deep learning. PNAS 114 (31) 
+    * Devabhaktuni, A.; Lin, S.; Zhang, L.; Swaminathan, K.; Gonzalez, CG.; Olsson, N.; Pearlman, SM.; Rawson, K.; Elias, JE.
+    (2019) TagGraph reveals vast protein modification landscapes from large tandem mass spectrometry datasets.
+    Nat Biotechnol. 37(4)
+    * Yang, H; Chi, H; Zhou, W; Zeng, WF; He, K; Liu, C; Sun, RX; He, SM. (2017)
+    Open-pNovo: De Novo Peptide Sequencing with Thousands of Protein Modifications.
+    J Proteome Res. 16(2)

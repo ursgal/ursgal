@@ -5,6 +5,7 @@ from collections import defaultdict as ddict
 import csv
 import itertools
 import sys
+import re
 
 class pglyco_db_2_2_0(ursgal.UNode):
     """
@@ -33,7 +34,7 @@ class pglyco_db_2_2_0(ursgal.UNode):
         'input_extensions': ['.mgf'],
         'output_extensions': ['.csv'],
         'create_own_folder': True,
-        'in_development': True,
+        'in_development': False,
         'include_in_git': False,
         'distributable': False,
         'engine_type': {
@@ -50,7 +51,7 @@ class pglyco_db_2_2_0(ursgal.UNode):
             },
         },
         'citation':
-        'Liu MQ, Zeng WF,, Fang P, Cao WQ, Liu C, Yan GQ, Zhang Y, Peng C, Wu JQ,'
+        'Liu MQ, Zeng WF, Fang P, Cao WQ, Liu C, Yan GQ, Zhang Y, Peng C, Wu JQ,'
             'Zhang XJ, Tu HJ, Chi H, Sun RX, Cao Y, Dong MQ, Jiang BY, Huang JM, Shen HL,'
             'Wong CCL, He SM, Yang PY. (2017) pGlyco 2.0 enables precision N-glycoproteomics '
             'with comprehensive quality control and one-step mass spectrometry'
@@ -82,27 +83,48 @@ class pglyco_db_2_2_0(ursgal.UNode):
             self.params['translations']['output_file_incl_path'].strip('.csv')
             + '_pGlyco.cfg'
         )
-        # self.created_tmp_files.append(self.param_file_name)
+        self.created_tmp_files.append(self.param_file_name)
 
-        # pprint.pprint(self.params['translations']['_grouped_by_translated_key'])
-        # pprint.pprint(self.params)
-        # sys.exit(1)
         self.params_to_write = {
             'output_dir_path' : self.params['output_dir_path'],
             'input_file' : self.params['translations']['mgf_input_file'],
         }
 
-        # write_exclusion_list = [
-        #     'file1'
-        # ]
+        db_file = self.params['translations']['database']
+        db_N2J = db_file.repalce('.fasta', '_N2J.fasta')
+        self.params['translations']['_grouped_by_translated_key']['fasta'] = db_N2J
+
+        if sys.platform == 'win32':
+            line_ending = '\n'
+        else:
+            line_ending = '\r\n'
+        if os.path.is_file(db_N2J) is False:
+            with open(db_N2J, 'w') as out_fasta:
+                with open(db_file, 'r') as in_fasta:
+                    for fastaID, sequence in ursgal.ucore.parse_fasta(in_fasta):
+                        matches = []
+                        for match in re.finditer('N[^P][ST]', sequence):
+                            matches.append(match.span())
+                        new_sequence = ''
+                        prev_end = 0
+                        for start, end in matches:
+                            new_sequence += sequence[prev_end:start]
+                            new_sequence += sequence[start:start + int(position)] + new_aa +\
+                                sequence[start + int(position) + 1:end]
+                            prev_end = end
+                        new_sequence += sequence[prev_end:len(sequence)]
+                        print(">{0}".format(fastaID), file=out_fasta, end=line_ending)
+                        for pos, aa in enumerate(new_sequence):
+                            print(aa, end="", file=out_fasta)
+                            if (pos + 1) % 80 == 0:
+                                print(file=opened_output_file, end=line_ending)
+                        print('', file=opened_output_file, end=line_ending)
 
         precursor_tolerance = []
         opt_mods = []
         fix_mods = []
         for pglyco_param_name in self.params['translations']['_grouped_by_translated_key'].keys():
             for ursgal_param_name, param_value in self.params['translations']['_grouped_by_translated_key'][pglyco_param_name].items():
-                # if pglyco_param_name in write_exclusion_list:
-                #     continue
                 if pglyco_param_name == 'search_precursor_tolerance':
                     precursor_tolerance.append(param_value)
                 elif pglyco_param_name == 'modifications':
@@ -148,7 +170,7 @@ class pglyco_db_2_2_0(ursgal.UNode):
                         if 'term' in mod_dict['pos']:
                             if mod_dict['aa'] == '*':
                                 mod_dict['aa'] = ''
-                            opt_mods.append('fix{0}={1}[{2}{3}]'.format(
+                            opt_mods.append('var{0}={1}[{2}{3}]'.format(
                                 sum_opt_mods,
                                 mod_dict['name'],
                                 mod_dict['pos'],
@@ -161,7 +183,7 @@ class pglyco_db_2_2_0(ursgal.UNode):
                                 {0}
                                 '''.format(mod_dict['org']))
                                 sys.exit(1)
-                            opt_mods.append('fix{0}={1}[{2}]'.format(
+                            opt_mods.append('var{0}={1}[{2}]'.format(
                                 sum_opt_mods,
                                 mod_dict['name'],
                                 mod_dict['aa'],
@@ -312,40 +334,9 @@ class pglyco_db_2_2_0(ursgal.UNode):
         for n, line_dict in enumerate(csv_reader):
             if n == 0:
                 continue
-            # try:
-            #     float(line_dict['PIPI:score'])
-            # except:
-            #     line_dict['Protein ID'] += line_dict['PIPI:score']
-            #     line_dict['PIPI:score'] = line_dict['PIPI:delta_C_n']
-            #     line_dict['PIPI:delta_C_n'] = line_dict['PIPI:other_PTM_patterns']
-            #     line_dict['PIPI:other_PTM_patterns'] = line_dict['Spectrum Title']
-            #     line_dict['Spectrum Title'] = line_dict['label']
-            #     line_dict['label'] = line_dict['PIPI:isotope_correction']
-            #     line_dict['PIPI:isotope_correction'] = line_dict['PIPI:MS1_pearson_correlation_coefficient']
-            #     line_dict['PIPI:MS1_pearson_correlation_coefficient'] = line_dict['Raw data location']
             line_dict['Raw data location'] = os.path.abspath(
                 self.params['translations']['mgf_input_file']
             )
-
-        #     ############################################
-        #     # all fixing here has to go into unify csv! #
-        #     ############################################
-
-            # tmp_seq = ''
-            # tmp_mods = []
-            # line_dict['Sequence'] = line_dict['Sequence'].replace('J', 'N')
-            # for part in line_dict['Sequence'].split('('):
-            #     if ')' in part:
-            #         mod, seq = part.split(')')
-            #         tmp_mods.append(
-            #             '{0}:{1}'.format(mod, len(tmp_seq))
-            #         )
-            #         tmp_seq += seq
-            #     else:
-            #         tmp_seq += part
-            # tmp_seq = tmp_seq.replace('c', '')
-            # line_dict['Sequence'] = tmp_seq
-            # line_dict['Modifications'] = ';'.join(tmp_mods)
             csv_writer.writerow(line_dict)
         return
 

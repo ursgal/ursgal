@@ -87,7 +87,12 @@ def unify_novor_test():
 
 
 def unify_novor( test_dict ):
-    assert 'uCalc m/z' in test_dict.keys()
+    for k in [
+        'uCalc m/z',
+        'Local Score or Confidence',
+        'Average Score or Confidence'
+    ]:
+        assert k in test_dict.keys()
 
     for key in [
             'Retention Time (s)',

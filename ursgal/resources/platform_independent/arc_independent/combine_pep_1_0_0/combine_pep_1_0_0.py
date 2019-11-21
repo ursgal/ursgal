@@ -290,6 +290,8 @@ class CombinedPEP(object):
                 sliding_window(sorted_decoy_bools, self.window_size)):
 
                 n_false_positives = 2 * n_decoys
+                if n_false_positives > current_win_size:
+                    n_false_positives = current_win_size
                 intersection_PEP = n_false_positives / current_win_size
                 current_PSM_key = psms_sorted_by_bayes_pep[i][0]
                 self.score_dict[engine_combo][current_PSM_key]['combined PEP'] = \

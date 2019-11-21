@@ -9,11 +9,15 @@ import shutil
 
 def main(input_raw_file=None, database=None, enzyme=None):
     '''
-    This script executes four steps:
-        - generate a target decoy database with J-X-S/T replacing N-X-S/T
+    This script executes three steps:
         - convert .raw file using pParse
         - search the resulting .mgf file using pGlyco
         - validate results using pGlycoFDR
+
+    Since pGlyco does not support providing a custom target-decoy database,
+    a database including only target sequences must be provided.
+    In this database, the N-glycosylation motif N-X-S/T needs to be replaced
+    with J-X-S/T, which will be done by the pGlyco wrapper.
 
     usage:
         ./simple_example_pglyco_workflow.py <input_raw_file> <database> <enzyme>
@@ -34,26 +38,9 @@ def main(input_raw_file=None, database=None, enzyme=None):
             'frag_mass_tolerance_unit'  : 'ppm',
             'precursor_mass_tolerance_plus' : 5,
             'precursor_mass_tolerance_minus' : 5,
-            'decoy_generation_mode' : 'shuffle_peptide',
-            'convert_aa_in_motif'   : 'J,N[^P][ST],0',
             'aa_exception_dict' : {},
         }
     )
-
-    fasta_database_list = [
-        database,
-        os.path.join(
-            os.path.dirname(database),
-            'crap.fasta',
-        )
-    ]
-
-    new_target_decoy_db_name = uc.generate_target_decoy(
-        input_files       = fasta_database_list,
-        output_file_name = '{0}_cRAP_target_decoy_{1}_N2J.fasta'.format(database.strip('.fasta'), enzyme),
-    )
-    print('Generated target decoy database: {0}'.format(new_target_decoy_db_name))
-    uc.params['database'] = new_target_decoy_db_name
 
     xtracted_file = uc.convert(
         input_file = input_raw_file,

@@ -12,6 +12,7 @@ from collections import defaultdict as ddict
 import multiprocessing
 import os
 import time
+import sys
 
 try:
     import regex as regex
@@ -44,7 +45,8 @@ class UParamMapper( dict ):
         else:
             params_dict = args[0]
 
-        self.update( params_dict )
+        self.update(params_dict)
+        # self.unodes = ursgal.UController._collect_all_unode_wrappers()
         self.lookup = self.group_styles()
         self._eval_functions = {
             'cpus' : {
@@ -205,6 +207,44 @@ class UParamMapper( dict ):
             # print( uparam, end = '\t')
             # if uparam == 'force':
             #     print(udict)
+
+            # -------------------
+            #     NEW_VERSION
+            # -------------------
+            # for engine in udict['available_in_unode']:
+            #     style = ursgal.all_unodes[engine]['META_INFO']['utranslation_style']
+            #     if style not in udict['ukey_translation'].keys():
+            #         print('Translation Error @ uparam {0}'.format(uparam))
+            #         print('style {0} for engine {0} is not part of ukey_translation'.format(style, engine))
+            #         exit(1)
+
+            #     styles_seen = set()
+            #     lookup['style_2_engine'][style].add(engine)
+            #     lookup['engine_2_params'][engine].append(uparam)
+
+            #     if style not in styles_seen:
+            #         lookup['style_2_params'][style].append(uparam)
+            #         if udict.get('triggers_rerun', True):
+            #             lookup['params_triggering_rerun'][style].append(uparam)
+            #         styles_seen.add(style)
+
+            #         parsed_e2s = lookup['engine_2_style'].get(engine, None)
+            #         if parsed_e2s is None:
+            #             lookup['engine_2_style'][engine] = style
+            #         else:
+            #             if parsed_e2s != style:
+            #                 print(
+            #                     '{0} was found to map on style {1} and {2}'.format(
+            #                         engine, parsed_e2s, style
+            #                     )
+            #                 )
+            #                 sys.exit(1)
+
+
+
+            # -----------------
+            #    OLD_VERSION
+            # -----------------
             for style in udict['ukey_translation'].keys():
                 try:
                     style_basename, style_version = style.split('_style_')
@@ -220,9 +260,11 @@ class UParamMapper( dict ):
                     # print()
                 styles_seen = set()
                 for engine in udict['available_in_unode']:
+                    # if style != self.unodes[ engine ]['META_INFO']['utranslation_style']:
+                    #     continue
                     # if vvv:
                     #     print(engine )
-                    if style_basename not in engine:
+                    if engine.startswith(style_basename) is False:
                         continue
                     # this style 2 engine lookup is not quite right ...
                     # This function requires unode meta info for proper
@@ -247,6 +289,7 @@ class UParamMapper( dict ):
                                 )
                             )
                             sys.exit(1)
+
         return lookup
 
     def _show_params_overview( self, engine=None):
