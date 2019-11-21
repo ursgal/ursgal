@@ -8703,7 +8703,6 @@ ursgal_params = {
             'ucontroller',
             'sanitize_csv_1_0_0',
             'combine_pep_1_0_0',
-            'combine_pep_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -11258,7 +11257,6 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'combine_pep_1_0_0',
-            'combine_pep_1_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
