@@ -19,11 +19,11 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
         },
         'utranslation_style' : 'sugarpy_plot_style_1',
         'citation'           : '',
-        'input_extensions'   : ['.mzML', '.csv'],
+        'input_extensions'   : ['.mzML', '.csv', '.idx.gz'],
         'output_extensions'  : ['.txt'],
         'output_suffix'      : 'created_files',
         'create_own_folder'  : True,
-        'in_development'     : True,
+        'in_development'     : False,
         'include_in_git'     : False,
         'distributable'      : False,
         'engine'             : {

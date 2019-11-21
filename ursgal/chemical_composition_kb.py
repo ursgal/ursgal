@@ -94,9 +94,9 @@ monosaccharide_compositions = {
     'dHexN'     : 'C6H11O3N',
     'HexN'      : 'C6H11O4N',
     'MeHexA'    : 'C7H10O6',
-    'NOHCNFmPse': 'C14H22O8N2',
-    'dHexNSpep' : 'C13H23O8N3S',
     'Hep'       : 'C7H12O6',
+    'SQv'       : 'C6H10O7S',
+    'SO3Hex'    : 'C6H10O8S1',
 }
 
 aa_names = {
