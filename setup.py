@@ -85,7 +85,7 @@ class InstallResourcesCommand(distutils.cmd.Command):
         else:
             print('Could not find ursgal directory')
             sys.exit(1)
-        command.append(os.path.join(ursgal_directory, 'install_resources.py'))
+        command.append(os.path.join(ursgal_directory, 'ursgal', 'install_resources.py'))
         self.announce(
             'Running command: %s' % str(command),
             level=distutils.log.INFO)
