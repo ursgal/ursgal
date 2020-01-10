@@ -5,8 +5,6 @@ import setuptools
 from setuptools.command.install_lib import install_lib
 import setuptools.command.build_py
 import distutils.cmd
-import distutils.log
-import subprocess
 import os
 import sys
 
@@ -68,21 +66,10 @@ class InstallResourcesCommand(distutils.cmd.Command):
         Download all resources from our webpage to ursgal/resources.
 
         '''
-        # command = [sys.executable]
-        # # if 'ursgal' in os.path.basename(os.getcwd()):
-        # #     ursgal_directory = os.getcwd()
-        # # else:
-        # #     print(os.path.dirname(os.path.realpath(__file__)))
-        # #     print(os.getcwd())
-        # #     print('Could not find ursgal directory')
-        # #     return
-        ursgal_directory = os.path.join(
+        working_directory = os.path.join(
             os.path.dirname(os.path.realpath(__file__)),
         )
-        print(ursgal_directory)
-        if os.path.exists(os.path.join(ursgal_directory, 'ursgal')):
-            print('ursgal directory found!')
-        else:
+        if os.path.exists(os.path.join(working_directory, 'ursgal')) is False:
             print('Could not find ursgal directory')
             sys.exit(1)
         import ursgal
@@ -103,11 +90,6 @@ class InstallResourcesCommand(distutils.cmd.Command):
                         zip_file
                     )
                 )
-        # command.append(os.path.join(ursgal_directory, 'ursgal', 'install_resources.py'))
-        # self.announce(
-        #     'Running command: %s' % str(command),
-        #     level=distutils.log.INFO)
-        # subprocess.check_call(command)
 
 # We store our version number in a simple text file:
 version_path = os.path.join(
