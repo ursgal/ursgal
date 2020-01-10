@@ -68,14 +68,14 @@ class InstallResourcesCommand(distutils.cmd.Command):
         Download all resources from our webpage to ursgal/resources.
 
         '''
-        command = [sys.executable]
-        # if 'ursgal' in os.path.basename(os.getcwd()):
-        #     ursgal_directory = os.getcwd()
-        # else:
-        #     print(os.path.dirname(os.path.realpath(__file__)))
-        #     print(os.getcwd())
-        #     print('Could not find ursgal directory')
-        #     return
+        # command = [sys.executable]
+        # # if 'ursgal' in os.path.basename(os.getcwd()):
+        # #     ursgal_directory = os.getcwd()
+        # # else:
+        # #     print(os.path.dirname(os.path.realpath(__file__)))
+        # #     print(os.getcwd())
+        # #     print('Could not find ursgal directory')
+        # #     return
         ursgal_directory = os.path.join(
             os.path.dirname(os.path.realpath(__file__)),
         )
@@ -85,11 +85,29 @@ class InstallResourcesCommand(distutils.cmd.Command):
         else:
             print('Could not find ursgal directory')
             sys.exit(1)
-        command.append(os.path.join(ursgal_directory, 'ursgal', 'install_resources.py'))
-        self.announce(
-            'Running command: %s' % str(command),
-            level=distutils.log.INFO)
-        subprocess.check_call(command)
+        import ursgal
+        uc = ursgal.UController()
+        downloaded_zips = uc.download_resources(resources=resources)
+        if len(downloaded_zips) == 0:
+            print('[ INFO ] No engines were downloaded, all should be available')
+        else:
+            print(
+                '[ INFO ] Downloaded and installed {0} engine(s)'.format(
+                    len(downloaded_zips)
+                )
+            )
+            for engine, zip_file in downloaded_zips:
+                print(
+                    '[ INFO ] Engine: {0} has been installed from {1}'.format(
+                        engine,
+                        zip_file
+                    )
+                )
+        # command.append(os.path.join(ursgal_directory, 'ursgal', 'install_resources.py'))
+        # self.announce(
+        #     'Running command: %s' % str(command),
+        #     level=distutils.log.INFO)
+        # subprocess.check_call(command)
 
 # We store our version number in a simple text file:
 version_path = os.path.join(
