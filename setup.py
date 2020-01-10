@@ -69,13 +69,22 @@ class InstallResourcesCommand(distutils.cmd.Command):
 
         '''
         command = [sys.executable]
-        if 'ursgal' in os.path.basename(os.getcwd()):
-            ursgal_directory = os.getcwd()
+        # if 'ursgal' in os.path.basename(os.getcwd()):
+        #     ursgal_directory = os.getcwd()
+        # else:
+        #     print(os.path.dirname(os.path.realpath(__file__)))
+        #     print(os.getcwd())
+        #     print('Could not find ursgal directory')
+        #     return
+        ursgal_directory = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+        )
+        print(ursgal_directory)
+        if os.path.exists(os.path.join(ursgal_directory, 'ursgal')):
+            print('ursgal directory found!')
         else:
-            print(os.path.dirname(os.path.realpath(__file__)))
-            print(os.getcwd())
             print('Could not find ursgal directory')
-            return
+            sys.exit(1)
         command.append(os.path.join(ursgal_directory, 'install_resources.py'))
         self.announce(
             'Running command: %s' % str(command),
