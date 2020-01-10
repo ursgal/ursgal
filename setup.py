@@ -87,7 +87,7 @@ class InstallResourcesCommand(distutils.cmd.Command):
             sys.exit(1)
         import ursgal
         uc = ursgal.UController()
-        downloaded_zips = uc.download_resources(resources=resources)
+        downloaded_zips = uc.download_resources(resources=None)
         if len(downloaded_zips) == 0:
             print('[ INFO ] No engines were downloaded, all should be available')
         else:
