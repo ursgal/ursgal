@@ -6557,7 +6557,7 @@ ursgal_params = {
             'none_val'      : None,
             'multiple_line' : False,
         },
-        'default_value' : 'mzml2mgf_1_0_0',
+        'default_value' : 'mzml2mgf_2_0_0',
         'description' : \
             'mzml to mgf converter version: version name',
     },
@@ -8413,7 +8413,7 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : 'dict',
-        'uvalue_option' : { 
+        'uvalue_option' : {
             'none_val' : None,
             'item_title' : 'column_name_with_type_of_merge',
             'item_titles' : {
