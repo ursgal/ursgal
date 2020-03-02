@@ -4,6 +4,7 @@ ursgal_params = {
         'available_in_unode' : [
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
         ],
         'default_value' : False,
         'description' :  ''' Use the picked-protein algorithm to infer protein PEP and FDR in Percolator''',
@@ -24,6 +25,7 @@ ursgal_params = {
         'edit_version': 1.00,
         'available_in_unode' : [
             'percolator_3_2_1',
+            'percolator_3_4_0',
         ],
         'default_value' : 'tdc',
         'description' :  ''' Method to assign FDR and PEP to PSMs''',
@@ -1228,6 +1230,7 @@ ursgal_params = {
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
@@ -2178,7 +2181,8 @@ ursgal_params = {
             'xtandem2csv_1_0_0',
             'upeptide_mapper_1_0_0',
             'percolator_3_2_1'
-        ],
+
+'percolator_3_4_0',        ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'decoy_tag',
@@ -2449,6 +2453,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
             'unify_csv_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
@@ -7358,6 +7363,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
             'qvality_2_02',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -8360,6 +8366,7 @@ ursgal_params = {
         'available_in_unode' : [
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
             'unify_csv_1_0_0',
             'upeptide_mapper_1_0_0'
         ],
@@ -8439,7 +8446,7 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : 'dict',
-        'uvalue_option' : { 
+        'uvalue_option' : {
             'none_val' : None,
             'item_title' : 'column_name_with_type_of_merge',
             'item_titles' : {
@@ -10168,6 +10175,7 @@ ursgal_params = {
             'add_estimated_fdr_1_0_0',
             'percolator_2_08',
             'percolator_3_2_1',
+            'percolator_3_4_0',
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
