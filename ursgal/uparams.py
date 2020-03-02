@@ -7793,7 +7793,7 @@ ursgal_params = {
             'pepnovo_style_1'    : '-pm_tolerance',
             'unify_csv_style_1'  : 'precursor_mass_tolerance_minus',
             'xtandem_style_1'    : 'spectrum, parent monoisotopic mass error minus',
-            'msfragger_style_1'  : 'precursor_mass_tolerance',
+            'msfragger_style_1'  : 'precursor_mass_lower',
             'pipi_style_1'       : 'ms1_tolerance',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
@@ -7881,7 +7881,7 @@ ursgal_params = {
             'pepnovo_style_1'   : '-pm_tolerance',
             'unify_csv_style_1' : ' precursor_mass_tolerance_minus',
             'xtandem_style_1'   : 'spectrum, parent monoisotopic mass error plus',
-            'msfragger_style_1' : 'precursor_mass_tolerance',
+            'msfragger_style_1' : 'precursor_mass_upper',
             'pipi_style_1'      : 'ms1_tolerance',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
@@ -8439,7 +8439,7 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : 'dict',
-        'uvalue_option' : { 
+        'uvalue_option' : {
             'none_val' : None,
             'item_title' : 'column_name_with_type_of_merge',
             'item_titles' : {
