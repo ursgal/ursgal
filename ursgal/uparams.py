@@ -2180,9 +2180,9 @@ ursgal_params = {
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
             'upeptide_mapper_1_0_0',
-            'percolator_3_2_1'
-
-'percolator_3_4_0',        ],
+            'percolator_3_2_1',
+            'percolator_3_4_0',
+        ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'generate_target_decoy_style_1' : 'decoy_tag',
