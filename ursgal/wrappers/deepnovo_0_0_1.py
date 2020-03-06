@@ -347,7 +347,6 @@ class deepnovo_0_0_1(ursgal.UNode):
                 #     self.params_to_write['mass_AA'] = mass_AA
                 #     self.params_to_write['vocab_reverse'] = vocab_reverse
                 else:
-                    print(deepnovo_param)
                     self.params_to_write[deepnovo_param] = param_value
 
         self.write_params_file()
