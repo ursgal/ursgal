@@ -35,7 +35,7 @@ Ursgal is a Python module that offers a generalized interface to common bottom-u
 
     c) Integration of search results from different search engines
 
-    d) De novo sequencing with up to three different search engines
+    d) De novo sequencing with up to four different search engines
 
     e) Miscellaneous tools including the creation of a target decoy database as well as filtering, sanitizing and visualizing of results
 
@@ -55,8 +55,7 @@ DOI:10.1021/acs.jproteome.5b00860*
 Documentation
 *************
 
-The complete Documentation can be found at
-   | http://ursgal.readthedocs.org/
+The complete Documentation can be found at `Read the Docs`_
 
 Besides the `Download and Installation`_ steps,
 this includes a `Quick Start Tutorial`_ 
@@ -79,17 +78,20 @@ as well as a broad set of `Example Scripts`_ and many more.
 .. _Available Engines:
     https://ursgal.readthedocs.io/en/latest/index.html#engines
 
+.. _Read the Docs:
+    http://ursgal.readthedocs.org/
+
 .. _installation:
 
 Download and Installation
 *************************
 
 Ursgal requires `Python`_ 3.4 or higher.
-
 If you want to run Ursgal on a Windows system, Python 3.6 or higher is
 recommended.
 
 There are two recommended ways for installing Ursgal:
+
     * Installation via pip
     * Installation from the source (GitHub)
 
@@ -148,7 +150,7 @@ Installation from the source
 2. Next, navigate into the Ursgal folder and install the requirements::
 
     user@localhost:~$ cd ursgal
-    user@localhost:~/ursgal$ pip3.4 install -r requirements.txt
+    user@localhost:~/ursgal$ pip install -r requirements.txt
 
 .. note::
 
@@ -168,6 +170,11 @@ Installation from the source
     and to install Ursgal into the Python site-packages::
 
     user@localhost:~/ursgal$ python setup.py install
+
+    If you want to install the third-party engines without
+    installing Ursgal into the Python site-packages you can use::
+
+    user@localhost:~/ursgal$ python setup.py install_resources
 
 .. note::
 
@@ -242,7 +249,7 @@ as common practice in science, never trust a blackbox :)
 Copyrights
 ***********
 
-Copyright 2014-2019 by authors and contributors in alphabetical order
+Copyright 2014-2020 by authors and contributors in alphabetical order
 
 * Christian Fufezan
 * Aime B. Igiraneza
@@ -259,15 +266,10 @@ Contact
 *******
 
     | Dr. Christian Fufezan
-    | Institute of Plant Biology and Biotechnology
-    | Schlossplatz 8 , R 105
-    | University of Muenster
+    | Institute of Pharmacy and Molecular Biotechnology
+    | Heidelberg University
     | Germany
     | eMail: christian@fufezan.net
-    | Tel: +049 251 83 24861
-    |
-    | http://www.uni-muenster.de/Biologie.IBBP.AGFufezan
-
 
 Citation
 ********
