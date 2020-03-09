@@ -383,6 +383,7 @@ Afterwards, just go to the docs folder and execute the script::
     user@localhost:~/ursgal/docs$ python uparams_to_dash.py
 
 A local server will be created and you can view the interactive page:
+
     | http://127.0.0.1:8050/
 
 Besides this, all uparams are still listed here as part of the documentation.

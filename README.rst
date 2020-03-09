@@ -165,14 +165,13 @@ Installation from the source
     On Mac it may be neccesary to use Python3.6, since it comes with its
     own OpenSSL now. This may avoid problems when using pip.
 
-3. Finally, use setup.py to download third-party engines 
-    (those that we are allowed to distribute)
-    and to install Ursgal into the Python site-packages::
+3. Finally, use setup.py to download third-party engines (those that we are allowed to distribute) 
+and to install Ursgal into the Python site-packages::
 
     user@localhost:~/ursgal$ python setup.py install
 
-    If you want to install the third-party engines without
-    installing Ursgal into the Python site-packages you can use::
+If you want to install the third-party engines without installing Ursgal
+into the Python site-packages you can use::
 
     user@localhost:~/ursgal$ python setup.py install_resources
 
@@ -309,16 +308,7 @@ Full list of tools with proper citations that are integrated into Ursgal are:
     * Jaeger, D., Barth, J., Niehues, A., and Fufezan, C. (2014) pyGCluster, a novel hierarchical clustering approach. Bioinformatics 30, 896–898
     * Bald, T., Barth, J., Niehues, A., Specht, M., Hippler, M., and Fufezan, C. (2012) pymzML--Python module for high-throughput bioinformatics on mass spectrometry data. Bioinformatics 28, 1052–1053
     * Kösters, M., Leufken, J., Schulze, S., Sugimoto, K., Klein, J., Zahedi, R. P., Hippler, M., Leidel, S. A., and Fufezan, C. (2018) pymzML v2.0: introducing a highly compressed and seekable gzip format. Bioinformatics 34, 2513-2514
-    * Liu, M.Q.; Zeng, W.F.; Fang, P.; Cao, W.Q.; Liu, C.; Yan, G.Q.; Zhang, Y.; Peng, C.; Wu, J.Q.;
-    Zhang, X.J.; Tu, H.J.; Chi, H.; Sun, R.X.; Cao, Y.; Dong, M.Q.; Jiang, B.Y.; Huang, J.M.; Shen, H.L.;
-    Wong ,C.C.L.; He, S.M.; Yang, P.Y. (2017) pGlyco 2.0 enables precision N-glycoproteomics
-    with comprehensive quality control and one-step mass spectrometry
-    for intact glycopeptide identification. Nat Commun 8(1)
-    * Yuan, Z.F.; Liu, C.; Wang, H.P.; Sun, R.X.; Fu, Y.; Zhang, J.F.; Wang, L.H.;
-    Chi, H.; Li, Y.; Xiu, L.Y.; Wang, W.P.; He, S.M. (2012)
-    pParse: a method for accurate determination of monoisotopic peaks 
-    in high-resolution mass spectra. Proteomics 12(2)
-    * Hulstaert, N.; Sachsenberg, T.; Walzer, M.; Barsnes, H.; Martens, L. and 
-    Perez-Riverol, Y. (2019) ThermoRawFileParser: modular, scalable and 
-    cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852
+    * Liu, M.Q.; Zeng, W.F.; Fang, P.; Cao, W.Q.; Liu, C.; Yan, G.Q.; Zhang, Y.; Peng, C.; Wu, J.Q.; Zhang, X.J.; Tu, H.J.; Chi, H.; Sun, R.X.; Cao, Y.; Dong, M.Q.; Jiang, B.Y.; Huang, J.M.; Shen, H.L.; Wong ,C.C.L.; He, S.M.; Yang, P.Y. (2017) pGlyco 2.0 enables precision N-glycoproteomics with comprehensive quality control and one-step mass spectrometry for intact glycopeptide identification. Nat Commun 8(1)
+    * Yuan, Z.F.; Liu, C.; Wang, H.P.; Sun, R.X.; Fu, Y.; Zhang, J.F.; Wang, L.H.; Chi, H.; Li, Y.; Xiu, L.Y.; Wang, W.P.; He, S.M. (2012) pParse: a method for accurate determination of monoisotopic peaks in high-resolution mass spectra. Proteomics 12(2)
+    * Hulstaert, N.; Sachsenberg, T.; Walzer, M.; Barsnes, H.; Martens, L. and Perez-Riverol, Y. (2019) ThermoRawFileParser: modular, scalable and    cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852
 
