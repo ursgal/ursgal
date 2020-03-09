@@ -18,6 +18,16 @@ import os
 import argparse
 import pymzml
 
+try:
+    version = pymzml.__version__
+except AttributeError:
+    version = '0.x.x'
+if version.split('.')[0] != '0':
+    raise RuntimeError(
+        'Using mzml2mgf converter V1, however pymzML version {version} is installed\n'.format(version=version),
+        'Please install pymzML version 0.x.x or set the mzml2mgf_converter_version param to mzml2mgf_2_0_0'
+    )
+
 
 def _determine_mzml_name_base(file_name, prefix):
     file_name = os.path.basename(file_name)

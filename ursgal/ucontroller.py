@@ -96,11 +96,6 @@ class UController(ursgal.UNode):
         # self.unodes = self.collect_all_unodes_from_kb()
         self.determine_availability_of_unodes()
         # if pymzml generation 2 is used we reset the default converter version
-        import pymzml
-        pymzml_major_version_number = int(pymzml.__version__.split('.')[0])
-        if pymzml_major_version_number == 2:
-            self.params['mzml2mgf_converter_version'] = 'mzml2mgf_2_0_0'
-            # default is 1_0_0
         if self.verbose:
             self.show_unode_overview()
 
