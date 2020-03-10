@@ -13,6 +13,9 @@ MS Amanda
 
 Available MS Amanda versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_13723.msamanda_2_0_0_13723
+   :members:
+
 .. autoclass:: ursgal.wrappers.msamanda_2_0_0_11219.msamanda_2_0_0_11219
    :members:
 
