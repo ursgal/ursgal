@@ -193,7 +193,7 @@ as common practice in science, never trust a blackbox :)
 Copyrights
 ***********
 
-Copyright 2014-2018 by authors and contributors in alphabetical order
+Copyright 2014-2019 by authors and contributors in alphabetical order
 
 * Christian Fufezan
 * Aime B. Igiraneza
@@ -202,8 +202,9 @@ Copyright 2014-2018 by authors and contributors in alphabetical order
 * Johannes Leufken
 * Purevdulam Oyunchimeg
 * Stefan Schulze
-* Fengchao Yu
 * Lukas Vaut
+* David Yang
+* Fengchao Yu
 
 Contact
 *******
@@ -256,6 +257,17 @@ Full list of tools with proper citations that are integrated into Ursgal are:
     * Leufken, J., Niehues, A., Sarin, L. P., Wessel, F., Hippler, M., Leidel, S. A., and Fufezan, C. (2017) pyQms enables universal and accurate quantification of mass spectrometry data. Mol. Cell. Proteomics 16, 1736–1745
     * Jaeger, D., Barth, J., Niehues, A., and Fufezan, C. (2014) pyGCluster, a novel hierarchical clustering approach. Bioinformatics 30, 896–898
     * Bald, T., Barth, J., Niehues, A., Specht, M., Hippler, M., and Fufezan, C. (2012) pymzML--Python module for high-throughput bioinformatics on mass spectrometry data. Bioinformatics 28, 1052–1053
-    * Kösters, M., Leufken, J., Schulze, S., Sugimoto, K., Klein, J., Zahedi, R. P., Hippler, M., Leidel, S. A., and Fufezan, C. (2018) pymzML v2.0: introducing a highly compressed and seekable gzip format. Bioinformatics, 
-
+    * Kösters, M., Leufken, J., Schulze, S., Sugimoto, K., Klein, J., Zahedi, R. P., Hippler, M., Leidel, S. A., and Fufezan, C. (2018) pymzML v2.0: introducing a highly compressed and seekable gzip format. Bioinformatics 34, 2513-2514
+    * Liu, M.Q.; Zeng, W.F.; Fang, P.; Cao, W.Q.; Liu, C.; Yan, G.Q.; Zhang, Y.; Peng, C.; Wu, J.Q.;
+    Zhang, X.J.; Tu, H.J.; Chi, H.; Sun, R.X.; Cao, Y.; Dong, M.Q.; Jiang, B.Y.; Huang, J.M.; Shen, H.L.;
+    Wong ,C.C.L.; He, S.M.; Yang, P.Y. (2017) pGlyco 2.0 enables precision N-glycoproteomics
+    with comprehensive quality control and one-step mass spectrometry
+    for intact glycopeptide identification. Nat Commun 8(1)
+    * Yuan, Z.F.; Liu, C.; Wang, H.P.; Sun, R.X.; Fu, Y.; Zhang, J.F.; Wang, L.H.;
+    Chi, H.; Li, Y.; Xiu, L.Y.; Wang, W.P.; He, S.M. (2012)
+    pParse: a method for accurate determination of monoisotopic peaks 
+    in high-resolution mass spectra. Proteomics 12(2)
+    * Hulstaert, N.; Sachsenberg, T.; Walzer, M.; Barsnes, H.; Martens, L. and 
+    Perez-Riverol, Y. (2019) ThermoRawFileParser: modular, scalable and 
+    cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852
 

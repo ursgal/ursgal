@@ -92,10 +92,6 @@ class pglyco_db_2_2_0(ursgal.UNode):
             'input_file' : self.params['translations']['mgf_input_file'],
         }
 
-        # write_exclusion_list = [
-        #     'file1'
-        # ]
-
         precursor_tolerance = []
         opt_mods = []
         fix_mods = []
@@ -148,7 +144,7 @@ class pglyco_db_2_2_0(ursgal.UNode):
                         if 'term' in mod_dict['pos']:
                             if mod_dict['aa'] == '*':
                                 mod_dict['aa'] = ''
-                            opt_mods.append('fix{0}={1}[{2}{3}]'.format(
+                            opt_mods.append('var{0}={1}[{2}{3}]'.format(
                                 sum_opt_mods,
                                 mod_dict['name'],
                                 mod_dict['pos'],
@@ -161,7 +157,7 @@ class pglyco_db_2_2_0(ursgal.UNode):
                                 {0}
                                 '''.format(mod_dict['org']))
                                 sys.exit(1)
-                            opt_mods.append('fix{0}={1}[{2}]'.format(
+                            opt_mods.append('var{0}={1}[{2}]'.format(
                                 sum_opt_mods,
                                 mod_dict['name'],
                                 mod_dict['aa'],
@@ -312,40 +308,9 @@ class pglyco_db_2_2_0(ursgal.UNode):
         for n, line_dict in enumerate(csv_reader):
             if n == 0:
                 continue
-            # try:
-            #     float(line_dict['PIPI:score'])
-            # except:
-            #     line_dict['Protein ID'] += line_dict['PIPI:score']
-            #     line_dict['PIPI:score'] = line_dict['PIPI:delta_C_n']
-            #     line_dict['PIPI:delta_C_n'] = line_dict['PIPI:other_PTM_patterns']
-            #     line_dict['PIPI:other_PTM_patterns'] = line_dict['Spectrum Title']
-            #     line_dict['Spectrum Title'] = line_dict['label']
-            #     line_dict['label'] = line_dict['PIPI:isotope_correction']
-            #     line_dict['PIPI:isotope_correction'] = line_dict['PIPI:MS1_pearson_correlation_coefficient']
-            #     line_dict['PIPI:MS1_pearson_correlation_coefficient'] = line_dict['Raw data location']
             line_dict['Raw data location'] = os.path.abspath(
                 self.params['translations']['mgf_input_file']
             )
-
-        #     ############################################
-        #     # all fixing here has to go into unify csv! #
-        #     ############################################
-
-            # tmp_seq = ''
-            # tmp_mods = []
-            # line_dict['Sequence'] = line_dict['Sequence'].replace('J', 'N')
-            # for part in line_dict['Sequence'].split('('):
-            #     if ')' in part:
-            #         mod, seq = part.split(')')
-            #         tmp_mods.append(
-            #             '{0}:{1}'.format(mod, len(tmp_seq))
-            #         )
-            #         tmp_seq += seq
-            #     else:
-            #         tmp_seq += part
-            # tmp_seq = tmp_seq.replace('c', '')
-            # line_dict['Sequence'] = tmp_seq
-            # line_dict['Modifications'] = ';'.join(tmp_mods)
             csv_writer.writerow(line_dict)
         return
 
