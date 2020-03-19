@@ -960,6 +960,7 @@ ursgal_params = {
             'mzidentml_lib_1_7',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
         ],
@@ -1081,6 +1082,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : True,
         'description' :  ''' Static mods are not considered ''',
@@ -1106,6 +1108,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'novor_1_05',
             'omssa_2_1_9',
             'pepnovo_3_1',
@@ -1221,6 +1224,7 @@ ursgal_params = {
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1229,6 +1233,7 @@ ursgal_params = {
             'qvality_style_1'           : '-r',
             'sanitize_csv_style_1'      : 'bigger_scores_better',
             'svm_style_1'               : 'bigger_scores_better',
+            'ptminer_style_1'           : 'bigger_scores_better',
         },
         'utag' : [
             'scoring',
@@ -1265,11 +1270,13 @@ ursgal_params = {
                 'xtandem_alanine' : True,
                 'msfragger_20170103' : True,
                 'msfragger_20171106' : True,
+                'msfragger_20190222' : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
             },
             'percolator_style_1' : {
@@ -1302,11 +1309,13 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
+                'msfragger_20190222'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
             },
             'qvality_style_1' : {
@@ -1339,11 +1348,13 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
+                'msfragger_20190222'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
             },
             'sanitize_csv_style_1' : {
@@ -1376,11 +1387,13 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
+                'msfragger_20190222'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
             },
             'svm_style_1' : {
@@ -1413,11 +1426,52 @@ ursgal_params = {
                 'xtandem_alanine'    : True,
                 'msfragger_20170103'   : True,
                 'msfragger_20171106'   : True,
+                'msfragger_20190222'   : True,
                 'mascot_x_x_x'  : True,
                 'pipi_1_4_5' : True,
                 'pipi_1_4_6' : True,
                 'moda_v1_51' : True,
                 'moda_v1_61' : True,
+                'moda_v1_62' : True,
+                'pglyco_db_2_2_0' : True,
+            },
+            'ptminer_style_1' : {
+                'None'                 : None,
+                'msamanda_1_0_0_5242'  : True,
+                'msamanda_1_0_0_5243'  : True,
+                'msamanda_1_0_0_6299'  : True,
+                'msamanda_1_0_0_6300'  : True,
+                'msamanda_1_0_0_7503'  : True,
+                'msamanda_1_0_0_7504'  : True,
+                'msamanda_2_0_0_9706'  : True,
+                'msamanda_2_0_0_9695'  : True,
+                'msamanda_2_0_0_10695' : True,
+                'msamanda_2_0_0_11219' : True,
+                'msgfplus_v2016_09_16' : False,
+                'msgfplus_v2017_01_27' : False,
+                'msgfplus_v2018_01_30' : False,
+                'msgfplus_v2018_06_28' : False,
+                'msgfplus_v2018_09_12' : False,
+                'msgfplus_v2019_01_22' : False,
+                'msgfplus_v9979'       : False,
+                'myrimatch_2_1_138'    : True,
+                'myrimatch_2_2_140'    : True,
+                'omssa_2_1_9'          : False,
+                'xtandem_cyclone_2010' : True,
+                'xtandem_jackhammer'   : True,
+                'xtandem_piledriver'   : True,
+                'xtandem_sledgehammer' : True,
+                'xtandem_vengeance' : True,
+                'xtandem_alanine' : True,
+                'msfragger_20170103' : True,
+                'msfragger_20171106' : True,
+                'msfragger_20190222' : True,
+                'mascot_x_x_x'  : True,
+                'pipi_1_4_5' : True,
+                'pipi_1_4_6' : True,
+                'moda_v1_51' : True,
+                'moda_v1_61' : True,
+                'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
             },
         },
@@ -1438,6 +1492,7 @@ ursgal_params = {
                 'msamanda_2_0_0_11219',
                 'msfragger_20170103',
                 'msfragger_20171106',
+                'msfragger_20190222',
                 'msgfplus_v2016_09_16',
                 'msgfplus_v2017_01_27',
                 'msgfplus_v2018_01_30',
@@ -1536,6 +1591,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : False,
         'description' :  ''' Specifies the trimming of a protein N-terminal methionine as a variable modification ''',
@@ -1652,6 +1708,7 @@ ursgal_params = {
                 'mascot_x_x_x' : True,
                 'moda_v1_51' : False,
                 'moda_v1_61' : False,
+                'moda_v1_62' : False,
                 'msamanda_1_0_0_5242'  : False,
                 'msamanda_1_0_0_5243'  : False,
                 'msamanda_1_0_0_6299'  : False,
@@ -1664,6 +1721,7 @@ ursgal_params = {
                 'msamanda_2_0_0_11219' : False,
                 'msfragger_20170103'   : False,
                 'msfragger_20171106'   : False,
+                'msfragger_20190222'   : False,
                 'msgfplus_v2016_09_16' : True,
                 'msgfplus_v2017_01_27' : True,
                 'msgfplus_v2018_01_30' : True,
@@ -1851,9 +1909,11 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'moda_v1_61',
+            'moda_v1_62',
             'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : False,
@@ -1985,6 +2045,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2016,9 +2077,11 @@ ursgal_params = {
             'compomics_utilities_4_11_5',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2034,7 +2097,8 @@ ursgal_params = {
             'compomics_utilities_style_1' : 'database',
             'msfragger_style_1'           : 'database_name',
             'pipi_style_1'                : 'db',
-            'pglyco_db_style_1'              : 'fasta'
+            'pglyco_db_style_1'              : 'fasta',
+            'ptminer_style_1'             : 'protein_database',
 
         },
         'utag' : [
@@ -2124,7 +2188,8 @@ ursgal_params = {
             'unify_csv_1_0_0',
             'xtandem2csv_1_0_0',
             'upeptide_mapper_1_0_0',
-            'percolator_3_2_1'
+            'percolator_3_2_1',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2135,7 +2200,7 @@ ursgal_params = {
             'unify_csv_style_1'             : 'decoy_tag',
             'xtandem2csv_style_1'           : 'decoy_tag',
             'upeptide_mapper_style_1'       : 'decoy_tag',
-
+            'ptminer_style_1'               : 'decoy_tag',
         },
         'utag' : [
             'database',
@@ -2362,6 +2427,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2396,6 +2462,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pglyco_db_2_2_0',
@@ -2868,6 +2935,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
         ],
@@ -2911,6 +2979,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -2935,12 +3004,14 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2957,6 +3028,7 @@ ursgal_params = {
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'    : 'search_fragment_tolerance',
+            'ptminer_style_1'   : 'fragment_tol',
         },
         'utag' : [
             'fragment',
@@ -2981,6 +3053,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -3005,12 +3078,14 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3027,6 +3102,7 @@ ursgal_params = {
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'    : 'search_fragment_tolerance_type',
+            'ptminer_style_1'   : 'fragment_tol_type',
         },
         'utag' : [
             'fragment',
@@ -3055,6 +3131,10 @@ ursgal_params = {
             'pglyco_db_style_1' : {
                 'da'  : 'Da',
             },
+            'ptminer_style_1' : {
+                'ppm' : 1,
+                'da'  : 0 
+            }
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -3109,6 +3189,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3433,6 +3514,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'msgfplus2csv_v2017_07_04',
             'msgfplus2csv_v1_2_0',
             'msgfplus2csv_v1_2_1',
@@ -3951,6 +4033,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
             'msgfplus_v2018_01_30',
@@ -4082,6 +4165,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4689,6 +4773,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4717,6 +4802,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
@@ -4804,6 +4890,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4836,6 +4923,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -4859,6 +4947,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'msgfplus_v2018_06_28',
@@ -4932,13 +5021,16 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'MaxModSize',
             'pipi_style_1' : 'max_ptm_mass',
+            'ptminer_style_1'   : 'precursor_matching_tolerance',
         },
         'utag' : [
             'modifications',
@@ -5000,6 +5092,32 @@ ursgal_params = {
         'default_value' : 3,
         'description' : \
             'Maximal number of modifications per peptide',
+    },
+    'min_num_mods' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptminer_style_1'   : 'min_mod_number',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'int',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 100000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : 'mods'
+        },
+        'default_value' : 5,
+        'description'   : \
+            'Minimal number of modifications per peptide',
     },
     'max_num_mod_sites' : {
         'edit_version' : 1.00,
@@ -5120,6 +5238,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
@@ -5237,6 +5356,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pglyco_db_2_2_0'
@@ -5275,6 +5395,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5301,11 +5422,36 @@ ursgal_params = {
         'description' : \
             'Maximal peptide variants, new default defined by msfragger',
     },
+    'mgf_input_files_list' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptminer_style_1'  : 'mgf_input_files_list',
+        },
+        'utag' : [
+            'input_files',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val'         : '',
+            'multiple_line'    : False,
+        },
+        'default_value' : None,
+        'description' : \
+            'List of paths to input .mgf files\n'\
+            '    \'\' : None',
+    },
     'mgf_input_file' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -5334,6 +5480,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5345,6 +5492,7 @@ ursgal_params = {
             'pepnovo_style_1'  : '-file',
             'xtandem_style_1'  : 'spectrum, path',
             'pglyco_db_style_1'   : 'file1',
+            'ptminer_style_1'  : 'mgf_input_file',
         },
         'utag' : [
             'input_files',
@@ -5367,13 +5515,16 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'MinModSize',
             'pipi_style_1' : 'min_ptm_mass',
+            'ptminer_style_1': 'precursor_matching_tolerance',
         },
         'utag' : [
             'modifications',
@@ -5446,6 +5597,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'msamanda_2_0_0_9706',
             'msamanda_2_0_0_9695',
             'msamanda_2_0_0_10695',
@@ -5523,6 +5675,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5561,6 +5714,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5591,6 +5745,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5629,6 +5784,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5658,6 +5814,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5695,6 +5852,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -5728,10 +5886,12 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5758,6 +5918,7 @@ ursgal_params = {
             ),
             'pyqms_style_1' : 'modifications',
             'pglyco_db_style_1' : 'modifications',
+            'ptminer_style_1' : 'modifications',
         },
         'utag' : [
             'modifications',
@@ -5888,6 +6049,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 50,
         'description' :  ''' Suppresses reporting of PSM if top hit has expectation greater than this threshold ''',
@@ -5915,6 +6077,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 0,
         'description' :  ''' Track top N unmodified peptide results separately from main results internally for boosting features. Should be set to a number greater than output_report_topN if zero bin boosting is desired. ''',
@@ -5942,6 +6105,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 0.0,
         'description' :  ''' Ranks a zero-bin hit above all non-zero-bin hit if it has expectation less than this value. ''',
@@ -5969,6 +6133,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 1.0,
         'description' :  ''' Multiplies expect value of PSMs in the zero-bin during results ordering (set to less than 1 for boosting) ''',
@@ -5996,6 +6161,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : False,
         'description' :  ''' Inserts complementary ions corresponding to the top N most intense fragments in each experimental spectrum. Useful for recovery of modified peptides near C-terminal in open search. Should be set to 0 (disabled) otherwise. ''',
@@ -6022,6 +6188,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 3,
         'description' :  ''' Minimum number of matched peaks in PSM for inclusion in statistical modeling ''',
@@ -6670,6 +6837,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7177,6 +7345,7 @@ ursgal_params = {
             'merge_csvs_1_0_0',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7216,6 +7385,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7235,6 +7405,7 @@ ursgal_params = {
             'sugarpy_plot_style_1'          : 'output_file',
             'venndiagram_style_1'           : 'output_file',
             'xtandem_style_1'               : 'output, path',
+            'ptminer_style_1'               : 'output_file_incl_path',
         },
         'utag' : [
             'output',
@@ -7524,6 +7695,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7582,6 +7754,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7614,12 +7787,14 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7639,6 +7814,7 @@ ursgal_params = {
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'     : 'search_precursor_tolerance',
+            'ptminer_style_1'   : 'precursor_tol',
         },
         'utag' : [
             'precursor',
@@ -7664,6 +7840,7 @@ ursgal_params = {
             'kojak_1_5_3',
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7696,12 +7873,14 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7721,6 +7900,7 @@ ursgal_params = {
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'    : 'search_precursor_tolerance',
+            'ptminer_style_1'   : 'precursor_tol',
         },
         'utag' : [
             'precursor',
@@ -7745,6 +7925,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -7776,12 +7957,14 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pipi_1_4_5',
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7799,6 +7982,7 @@ ursgal_params = {
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'    : 'search_precursor_tolerance_type',
+            'ptminer_style_1'   : 'precursor_tol_type',
         },
         'utag' : [
             'precursor',
@@ -7834,6 +8018,10 @@ ursgal_params = {
             },
             'pglyco_db_style_1': {
                 'da' : 'Da'
+            },
+            'ptminer_style_1': {
+                'da'    : 0,
+                'ppm'   : 1
             }
         },
         'uvalue_type' : 'select',
@@ -7923,6 +8111,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -7964,6 +8153,7 @@ ursgal_params = {
             'myrimatch_2_2_140',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
@@ -8015,6 +8205,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
@@ -8061,6 +8252,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
             'pglyco_db_2_2_0',
         ],
         'triggers_rerun' : True,
@@ -8093,6 +8285,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 5,
         'description' :  'True precursor mass tolerance '\
@@ -8125,6 +8318,7 @@ ursgal_params = {
         'available_in_unode' : [
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'default_value' : 'ppm',
         'description' :  '''Mass tolerance units fo precursor_true_tolerance''',
@@ -8204,6 +8398,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
+            'ptminer_1_0'
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9377,6 +9572,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'msamanda_1_0_0_5242',
             'msamanda_1_0_0_5243',
             'msamanda_1_0_0_6299',
@@ -9406,6 +9602,7 @@ ursgal_params = {
             'xtandem_alanine',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9803,6 +10000,7 @@ ursgal_params = {
             'pepnovo_3_1',
             'msfragger_20170103',
             'msfragger_20171106',
+            'msfragger_20190222',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9831,6 +10029,7 @@ ursgal_params = {
         'available_in_unode' : [
             'moda_v1_51',
             'moda_v1_61',
+            'moda_v1_62',
             'pepnovo_3_1',
         ],
         'triggers_rerun' : True,
@@ -9949,10 +10148,12 @@ ursgal_params = {
                 'xtandem_alanine'      : 0,
                 'msfragger_20170103'   : 0,
                 'msfragger_20171106'   : 0,
+                'msfragger_20190222'   : 0,
                 'pipi_1_4_5'           : 0,
                 'pipi_1_4_6'           : 0,
                 'moda_v1_51'           : 0,
                 'moda_v1_61'           : 0,
+                'moda_v1_62'           : 0,
             },
         },
         'uvalue_type' : 'str',
@@ -9978,6 +10179,7 @@ ursgal_params = {
             'svm_1_0_0',
             'ucontroller',
             'unify_csv_1_0_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9988,6 +10190,7 @@ ursgal_params = {
             'svm_style_1'               : 'validation_score_field',
             'ucontroller_style_1'       : 'validation_score_field',
             'unify_csv_style_1'         : 'validation_score_field',
+            'ptminer_style_1'           : 'validation_score_field',
         },
         'utag' : [
             'validation',
@@ -10011,6 +10214,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -10026,11 +10230,13 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'percolator_style_1' : {
@@ -10050,6 +10256,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -10065,11 +10272,13 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'qvality_style_1' : {
@@ -10089,6 +10298,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -10104,11 +10314,13 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'sanitize_csv_style_1' : {
@@ -10128,6 +10340,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -10143,11 +10356,13 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'svm_style_1' : {
@@ -10167,6 +10382,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -10182,11 +10398,13 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
             'ucontroller_style_1' : {
@@ -10206,6 +10424,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -10221,12 +10440,15 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
+                'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -10245,6 +10467,7 @@ ursgal_params = {
                 'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
@@ -10260,11 +10483,55 @@ ursgal_params = {
                 'xtandem_alanine'      : 'X\!Tandem:hyperscore',
                 'msfragger_20170103'   : 'MSFragger:Hyperscore',
                 'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
                 'moda_v1_51'           : 'ModA:probability',
                 'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
+                'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
+            },
+            'ptminer_style_1' : {
+                'msamanda_1_0_0_5242'  : 'Amanda:Score',
+                'msamanda_1_0_0_5243'  : 'Amanda:Score',
+                'msamanda_1_0_0_6299'  : 'Amanda:Score',
+                'msamanda_1_0_0_6300'  : 'Amanda:Score',
+                'msamanda_1_0_0_7503'  : 'Amanda:Score',
+                'msamanda_1_0_0_7504'  : 'Amanda:Score',
+                'msamanda_2_0_0_9706'  : 'Amanda:Score',
+                'msamanda_2_0_0_9695'  : 'Amanda:Score',
+                'msamanda_2_0_0_10695' : 'Amanda:Score',
+                'msamanda_2_0_0_11219' : 'Amanda:Score',
+                'msgfplus_v2016_09_16' : 'MS-GF:SpecEValue',
+                'msgfplus_v2017_01_27' : 'MS-GF:SpecEValue',
+                'msgfplus_v2018_01_30' : 'MS-GF:SpecEValue',
+                'msgfplus_v2018_06_28' : 'MS-GF:SpecEValue',
+                'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
+                'msgfplus_v9979'       : 'MS-GF:SpecEValue',
+                'myrimatch_2_1_138'    : 'MyriMatch:MVH',
+                'myrimatch_2_2_140'    : 'MyriMatch:MVH',
+                'novor_1_1beta'        : 'Novor:score',
+                'novor_1_05'           : 'Novor:score',
+                'omssa_2_1_9'          : 'OMSSA:pvalue',
+                'pepnovo_3_1'          : 'Pepnovo:PnvScr',
+                'xtandem_cyclone_2010' : 'X\!Tandem:hyperscore',
+                'xtandem_jackhammer'   : 'X\!Tandem:hyperscore',
+                'xtandem_piledriver'   : 'X\!Tandem:hyperscore',
+                'xtandem_sledgehammer' : 'X\!Tandem:hyperscore',
+                'xtandem_vengeance'    : 'X\!Tandem:hyperscore',
+                'xtandem_alanine'      : 'X\!Tandem:hyperscore',
+                'msfragger_20170103'   : 'MSFragger:Hyperscore',
+                'msfragger_20171106'   : 'MSFragger:Hyperscore',
+                'msfragger_20190222'   : 'MSFragger:Hyperscore',
+                'mascot_x_x_x'         : 'Mascot:Score',
+                'pipi_1_4_5'           : 'PIPI:score',
+                'pipi_1_4_6'           : 'PIPI:score',
+                'moda_v1_51'           : 'ModA:probability',
+                'moda_v1_61'           : 'ModA:probability',
+                'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'         : 'pGlyco:TotalScore',
             },
         },
@@ -11697,5 +11964,112 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : "dict",
+    },
+    'fdr_method' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'fdr_method',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                'global'    : 1,
+                'separate'  : 2,
+                'transferred'   : 3,
+            }
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_type' : 'str',
+        'default_value' : 'transferred',
+        'description'   : 'specifying the fdr method to use'
+    },
+    'determine_localization' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'is_localized',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'localization',
+        ],
+        'uvalue_type'   : 'bool',
+        'default_value' : True,
+        'description'   : 'specifying whether positions for mass shifts should be determined or not',
+    },
+    'use_prior_probability' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'use_prior',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_type'   : 'bool',
+        'default_value' : True,
+        'description'   : 'specifying whether the prior probability should be used or not',
+    },
+    'determine_unimod_annotation' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'is_annotated',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'annotation',
+            'output',
+        ],
+        'uvalue_type'   : 'bool',
+        'default_value' : True,
+        'description'   : 'specifying whether mass shifts should be annotated or not',
+    },
+    'is_open_search' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'open_search',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_type'   : 'bool',
+        'default_value' : True,
+        'description'   : 'specifying whether this is an open search or not',
     },
 }
