@@ -72,4 +72,3 @@ if __name__ == '__main__':
         postflight_ptminer(line, content_file1)
     for line in content_file1:
         postflight_ptminer(line, content_file2)
-
