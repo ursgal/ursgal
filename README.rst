@@ -12,7 +12,7 @@ Introduction
    :target: https://travis-ci.org/ursgal/ursgal
    :alt: Travis CI status
 
-.. |build-status-appveyor| image:: https://ci.appveyor.com/api/projects/status/hel9rowah1u3rfe1?svg=true
+.. |build-status-appveyor| image:: https://ci.appveyor.com/api/projects/status/github/ursgal/ursgal?branch=master&svg=true
    :target: https://ci.appveyor.com/project/fufezan-lab/ursgal
    :alt: AppVeyor CI status
 
@@ -23,16 +23,6 @@ Introduction
 .. |Gitter| image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
    :alt: Join the chat at https://gitter.im/ursgal/ursgal
    :target: https://gitter.im/ursgal/ursgal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-
-Update to v0.6.0 Warning
-************************
-
-Please note that, due to significant reorganization of UController functions as well as some uparams,
-compatibility of v0.6.0 with previous versions is not given in all cases.
-Most likely, your previous results will not be recognized, i.e. previously executed runs will be executed again.
-Please consider this before updating to v0.6.0, check the Changelog or ask us if you have any doubts.
-We are sorry for the inconvenience but changes were necessary for further development.
-If you want to continue using (and modifying) v0.5.0 you can use the branch v0.5.0.
 
 Summary
 *******
@@ -45,7 +35,7 @@ Ursgal is a Python module that offers a generalized interface to common bottom-u
 
     c) Integration of search results from different search engines
 
-    d) De novo sequencing with up to two different search engines
+    d) De novo sequencing with up to four different search engines
 
     e) Miscellaneous tools including the creation of a target decoy database as well as filtering, sanitizing and visualizing of results
 
@@ -60,45 +50,96 @@ DOI:10.1021/acs.jproteome.5b00860*
 
 .. _publicationtitle: http://dx.doi.org/10.1021/acs.jproteome.5b00860
 .. |publicationtitle| replace:: *Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
-.. _download:
 
-Download
-********
 
-Get the latest version via GitHub:
-    | https://github.com/ursgal/ursgal
+Documentation
+*************
 
-as .zip package:
-   | https://github.com/ursgal/ursgal/archive/master.zip
+The complete Documentation can be found at `Read the Docs`_
 
-or via git clone URL:
-   | https://github.com/ursgal/ursgal.git
+Besides the `Download and Installation`_ steps,
+this includes a `Quick Start Tutorial`_ 
+detailed documentation of the `Modules`_ and `Available Engines`_
+as well as a broad set of `Example Scripts`_ and many more.
 
-The complete Documentation can be found at
-   | http://ursgal.readthedocs.org/
 
+.. _Download and Installation:
+    https://ursgal.readthedocs.io/en/latest/intro.html#installation
+
+.. _Quick Start Tutorial:
+    https://ursgal.readthedocs.io/en/latest/quick_start.html
+
+.. _Example Scripts:
+    https://ursgal.readthedocs.io/en/latest/example_scripts.html
+
+.. _Modules:
+    https://ursgal.readthedocs.io/en/latest/index.html#module-structure
+
+.. _Available Engines:
+    https://ursgal.readthedocs.io/en/latest/index.html#engines
+
+.. _Read the Docs:
+    http://ursgal.readthedocs.org/
 
 .. _installation:
 
-Installation
-************
+Download and Installation
+*************************
 
 Ursgal requires `Python`_ 3.4 or higher.
-
 If you want to run Ursgal on a Windows system, Python 3.6 or higher is
 recommended.
 
-Download Ursgal using `GitHub`_ **or** the zip file:
+There are two recommended ways for installing Ursgal:
 
-* GitHub version: Starting with this the easiest way is to clone the GitHub repo.::
-
-   user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
-
-
-* ZIP version: Alternatively, download and extract the `ursgal zip file`_
+    * Installation via pip
+    * Installation from the source (GitHub)
 
 .. _Python:
    https://www.python.org/downloads/
+
+.. _install_pip:
+
+Installation via pip
+~~~~~~~~~~~~~~~~~~~~
+
+Execute the following command from your command line::
+
+    user@localhost:~$ pip install ursgal
+
+This installs Python into your Python site-packages.
+You can now use it with all engines that we have built
+or that we are allowed to distribute.
+For all other third-party engines, a manual download from the respective
+homepage is required (see also: `How to install third party engines`_)
+
+.. note::
+
+    Pip is included in Python 3.4 and higher. However, it might not be
+    included in in your system's PATH environment variable.
+    If this is the case, you can either add the Python scripts directory to your
+    PATH env variable or use the path to the pip.exe directly for the
+    installation, e.g.: ~/Python34/Scripts/pip.exe install ursgal
+
+.. note::
+
+    On Mac it may be neccesary to use Python3.6, since it comes with its
+    own OpenSSL now. This may avoid problems when using pip.
+
+.. _How to install thrid party engines:
+    https://ursgal.readthedocs.io/en/latest/faq.html#q-how-do-i-add-an-engine-that-is-not-installed-via-install-resources-py
+
+
+Installation from the source
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Download Ursgal using `GitHub`_ **or** the zip file:
+
+* GitHub version: Starting from your command line, the easiest way is to clone the GitHub repo.::
+
+   user@localhost:~$ git clone https://github.com/ursgal/ursgal.git
+
+* ZIP version: Alternatively, download and extract the `ursgal zip file`_
 
 .. _GitHub:
    https://github.com/ursgal/ursgal
@@ -106,10 +147,10 @@ Download Ursgal using `GitHub`_ **or** the zip file:
 .. _ursgal zip file:
    https://github.com/ursgal/ursgal/archive/master.zip
 
-Install requirements::
+2. Next, navigate into the Ursgal folder and install the requirements::
 
     user@localhost:~$ cd ursgal
-    user@localhost:~/ursgal$ pip3.4 install -r requirements.txt
+    user@localhost:~/ursgal$ pip install -r requirements.txt
 
 .. note::
 
@@ -124,26 +165,26 @@ Install requirements::
     On Mac it may be neccesary to use Python3.6, since it comes with its
     own OpenSSL now. This may avoid problems when using pip.
 
+3. Finally, use setup.py to download third-party engines (those that we are allowed to distribute) 
+and to install Ursgal into the Python site-packages::
 
-Install third party engines::
+    user@localhost:~/ursgal$ python setup.py install
 
-    user@localhost:~/ursgal$ python3.4 install_resources.py
+If you want to install the third-party engines without installing Ursgal
+into the Python site-packages you can use::
+
+    user@localhost:~/ursgal$ python setup.py install_resources
 
 .. note::
 
     Since we are not allowed to distribute all third party engines, you might need to
-    download and install them on your own. See FAQ (:ref:`not-installed-engines`) and
+    download and install them on your own. See FAQ (`How to install thrid party engines`_) and
     the respective engine documentation for more information.
-
-Install Ursgal::
-
-    user@localhost:~/ursgal$ python3.4 setup.py install
-
 
 .. note::
 
     Under Linux, it may be required to change the permission in the
-    python3.4 site-package folder so that all files are executable
+    python site-package folder so that all files are executable
 
 (You might need administrator privileges to write in the Python site-package folder.
 On Linux or OS X, use ```sudo python setup.py install``` or write into a user folder
@@ -155,33 +196,47 @@ start the command line with administrator privileges.)
 Tests
 *****
 
-Run nosetests in root folder. You might need to install `nose`_ for Python3 first
-although it is in the requirements.txt (above) thus pip3.4 install -r requirements
+Run tox in root folder. You might need to install `tox`_ for Python3 first
+although it is in the requirements_dev.txt (above) thus pip install -r requirements_dev.txt
 should have installed it already. Then just execute::
 
-    user@localhost:~/ursgal$ nosetests3
+    user@localhost:~/ursgal$ tox
 
+In case you only want to test one python version (e.g because you only have one installed), run for e.g. python3.5::
+    
+    user@localhost:~/ursgal$ tox -e py35
+
+For other environments to run, check out the tox.ini file
 to test the package.
 
-.. _nose:
-    https://nose.readthedocs.org/en/latest/
+.. _tox:
+    https://tox.readthedocs.io/en/latest/
 
+
+Update to v0.6.0 Warning
+************************
+
+Please note that, due to significant reorganization of UController functions as well as some uparams,
+compatibility of v0.6.0 with previous versions is not given in all cases.
+Most likely, your previous results will not be recognized, i.e. previously executed runs will be executed again.
+Please consider this before updating to v0.6.0, check the Changelog or ask us if you have any doubts.
+We are sorry for the inconvenience but changes were necessary for further development.
+If you want to continue using (and modifying) v0.5.0 you can use the branch v0.5.0.
 
 
 Questions and Participation
 ***************************
 
-If you encounter any problems you can open up issues at GitHub, join the conversation at Gitter, or write an email to ursgal.team@gmail.com. Please also check the :ref:`faq`.
+If you encounter any problems you can open up issues at GitHub, join the conversation at Gitter, or write an email to ursgal.team@gmail.com. Please also check the `Frequently Asked Questions`_.
 
 For any contributions, fork us at https://github.com/ursgal/ursgal and open up pull requests!
-Please also check the :ref:`contribute`. Thanks!
+Please also check the `Contribution Guidelines`. Thanks!
 
+.. _Frequently Asked Questions:
+    https://ursgal.readthedocs.io/en/latest/faq.html#frequently-asked-questions
 
-Documentation
-*************
-
-For more detailed documentation of the modules and examples, please refer to
-the documentation folder or http://ursgal.readthedocs.org
+.. _Contribution Guidelines:
+    https://ursgal.readthedocs.io/en/latest/contribute.html#contribute
 
 
 Disclaimer
@@ -193,7 +248,7 @@ as common practice in science, never trust a blackbox :)
 Copyrights
 ***********
 
-Copyright 2014-2019 by authors and contributors in alphabetical order
+Copyright 2014-2020 by authors and contributors in alphabetical order
 
 * Christian Fufezan
 * Aime B. Igiraneza
@@ -210,21 +265,16 @@ Contact
 *******
 
     | Dr. Christian Fufezan
-    | Institute of Plant Biology and Biotechnology
-    | Schlossplatz 8 , R 105
-    | University of Muenster
+    | Institute of Pharmacy and Molecular Biotechnology
+    | Heidelberg University
     | Germany
     | eMail: christian@fufezan.net
-    | Tel: +049 251 83 24861
-    |
-    | http://www.uni-muenster.de/Biologie.IBBP.AGFufezan
-
 
 Citation
 ********
 
-Ursgal citation
-
+In an academic world, citations are the only credit that one can hope for ;)
+Therefore, please do not forget to cite us if you use Ursagl:
 
 Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S., and Fufezan, C. (2016) `Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis`_ Journal of Proteome research 15, 788–794, DOI:10.1021/acs.jproteome.5b00860
 
@@ -232,7 +282,7 @@ Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S., and Fufezan, C. (201
 
 .. note::
 
-    Please cite every tool you use in Ursgal. During runtime the references of
+    Please also cite every tool you use in Ursgal. During runtime the references of
     the tools you are using are shown.
 
 Full list of tools with proper citations that are integrated into Ursgal are:
@@ -258,16 +308,7 @@ Full list of tools with proper citations that are integrated into Ursgal are:
     * Jaeger, D., Barth, J., Niehues, A., and Fufezan, C. (2014) pyGCluster, a novel hierarchical clustering approach. Bioinformatics 30, 896–898
     * Bald, T., Barth, J., Niehues, A., Specht, M., Hippler, M., and Fufezan, C. (2012) pymzML--Python module for high-throughput bioinformatics on mass spectrometry data. Bioinformatics 28, 1052–1053
     * Kösters, M., Leufken, J., Schulze, S., Sugimoto, K., Klein, J., Zahedi, R. P., Hippler, M., Leidel, S. A., and Fufezan, C. (2018) pymzML v2.0: introducing a highly compressed and seekable gzip format. Bioinformatics 34, 2513-2514
-    * Liu, M.Q.; Zeng, W.F.; Fang, P.; Cao, W.Q.; Liu, C.; Yan, G.Q.; Zhang, Y.; Peng, C.; Wu, J.Q.;
-    Zhang, X.J.; Tu, H.J.; Chi, H.; Sun, R.X.; Cao, Y.; Dong, M.Q.; Jiang, B.Y.; Huang, J.M.; Shen, H.L.;
-    Wong ,C.C.L.; He, S.M.; Yang, P.Y. (2017) pGlyco 2.0 enables precision N-glycoproteomics
-    with comprehensive quality control and one-step mass spectrometry
-    for intact glycopeptide identification. Nat Commun 8(1)
-    * Yuan, Z.F.; Liu, C.; Wang, H.P.; Sun, R.X.; Fu, Y.; Zhang, J.F.; Wang, L.H.;
-    Chi, H.; Li, Y.; Xiu, L.Y.; Wang, W.P.; He, S.M. (2012)
-    pParse: a method for accurate determination of monoisotopic peaks 
-    in high-resolution mass spectra. Proteomics 12(2)
-    * Hulstaert, N.; Sachsenberg, T.; Walzer, M.; Barsnes, H.; Martens, L. and 
-    Perez-Riverol, Y. (2019) ThermoRawFileParser: modular, scalable and 
-    cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852
+    * Liu, M.Q.; Zeng, W.F.; Fang, P.; Cao, W.Q.; Liu, C.; Yan, G.Q.; Zhang, Y.; Peng, C.; Wu, J.Q.; Zhang, X.J.; Tu, H.J.; Chi, H.; Sun, R.X.; Cao, Y.; Dong, M.Q.; Jiang, B.Y.; Huang, J.M.; Shen, H.L.; Wong ,C.C.L.; He, S.M.; Yang, P.Y. (2017) pGlyco 2.0 enables precision N-glycoproteomics with comprehensive quality control and one-step mass spectrometry for intact glycopeptide identification. Nat Commun 8(1)
+    * Yuan, Z.F.; Liu, C.; Wang, H.P.; Sun, R.X.; Fu, Y.; Zhang, J.F.; Wang, L.H.; Chi, H.; Li, Y.; Xiu, L.Y.; Wang, W.P.; He, S.M. (2012) pParse: a method for accurate determination of monoisotopic peaks in high-resolution mass spectra. Proteomics 12(2)
+    * Hulstaert, N.; Sachsenberg, T.; Walzer, M.; Barsnes, H.; Martens, L. and Perez-Riverol, Y. (2019) ThermoRawFileParser: modular, scalable and    cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852
 

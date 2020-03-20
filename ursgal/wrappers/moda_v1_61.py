@@ -1,11 +1,10 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 import ursgal
 import os
 import subprocess
 import csv
 import re
 import sys
-
 
 class moda_v1_61(ursgal.UNode):
     """
