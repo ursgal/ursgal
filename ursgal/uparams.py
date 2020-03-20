@@ -5521,8 +5521,17 @@ ursgal_params = {
         },
         'uvalue_type' : 'list',
         'uvalue_option' : {
-            'none_val'         : '',
+            'none_val'         : [],
             'multiple_line'    : False,
+            'item_title'       : 'mgf input file',
+            'item_type'        : 'str',
+            'input_extensions' : ['.mgf'],
+            'custom_val_max' : 1000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
         },
         'default_value' : None,
         'description' : \
@@ -12124,7 +12133,12 @@ ursgal_params = {
         'utag' : [
             'validation',
         ],
+        'uvalue_option' : {
+            'none_val' : '',
+            'multiple_line': False,
+        },
         'uvalue_type' : 'str',
+        'triggers_rerun' : True,
         'default_value' : 'transferred',
         'description'   : 'specifying the fdr method to use'
     },
@@ -12145,7 +12159,10 @@ ursgal_params = {
         'utag' : [
             'localization',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
         'default_value' : True,
         'description'   : 'specifying whether positions for mass shifts should be determined or not',
     },
@@ -12166,7 +12183,10 @@ ursgal_params = {
         'utag' : [
             'validation',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
         'default_value' : True,
         'description'   : 'specifying whether the prior probability should be used or not',
     },
@@ -12188,7 +12208,10 @@ ursgal_params = {
             'annotation',
             'output',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
         'default_value' : True,
         'description'   : 'specifying whether mass shifts should be annotated or not',
     },
@@ -12209,7 +12232,10 @@ ursgal_params = {
         'utag' : [
             'modifications',
         ],
+        'uvalue_option' : {
+        },
         'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
         'default_value' : True,
         'description'   : 'specifying whether this is an open search or not',
     },

@@ -17,7 +17,7 @@ class ptminer_1_0(ursgal.UNode):
         'edit_version': 1.0,
         'name': 'PTMiner',
         'version': '1.0',
-        'release_date': '2017-07',
+        'release_date': '2017-07-01',
         'utranslation_style': 'ptminer_style_1',
         'input_extensions': ['.mgf', '.csv'],
         'output_extensions': ['.csv'],
