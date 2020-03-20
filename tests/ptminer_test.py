@@ -11,7 +11,7 @@ import os
 
 uc = ursgal.UController()
 
-postflight_function = uc.unodes['ptminer_1_0']['class'].import_engine_as_python_function('postflight')
+ptminer_wrapper = uc.unodes['ptminer_1_0']['_wrapper_class']()
 
 ursgal_input_csv = os.path.join(
     'tests',
@@ -41,7 +41,7 @@ expected_output_csv = os.path.join(
     'test_ptminer_1_0_expected_results.csv'
 )
 
-output_csv = postflight_function(
+output_csv = ptminer_wrapper.postflight(
     anno_result=ptminer_input_csv, 
     csv_input=ursgal_input_csv,
     merged_results_csv=output_csv
@@ -72,4 +72,3 @@ if __name__ == '__main__':
         postflight_ptminer(line, content_file1)
     for line in content_file1:
         postflight_ptminer(line, content_file2)
-
