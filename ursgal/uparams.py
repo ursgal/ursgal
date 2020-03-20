@@ -6584,7 +6584,7 @@ ursgal_params = {
             'none_val'      : None,
             'multiple_line' : False,
         },
-        'default_value' : 'mzml2mgf_1_0_0',
+        'default_value' : 'mzml2mgf_2_0_0',
         'description' : \
             'mzml to mgf converter version: version name',
     },

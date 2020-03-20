@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 '''
     usage:
         svm.py unified_input.csv engine_score_column_name

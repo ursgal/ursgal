@@ -94,21 +94,22 @@ You have already seen the :meth:`.UController.search` function in section 2. :me
 Currently, the following UController workflow functions are available:
     * :meth:`.UController.combine_search_results`
         Statistical integration of search results from multiple engines
+    * :meth:`.UController.convert`
+        Conversion from and into different file formats (:ref:`converter-engines`)
+    * :meth:`.UController.execute_misc_engine`
+        Can be used to execute any available engine (:ref:`misc-engines`)
     * :meth:`.UController.fetch_file`
         Downloads files (HTTP or FTP)
-    * :meth:`.UController.filter_csv`
-        Filters csv files row-wise according to custom filtering rules
-    * :meth:`.UController.generate_target_decoy`
-        Generates a target-decoy database from a regular fasta database
-    * :meth:`.UController.merge_csvs`
-        Merges csv files
+    * :meth:`.UController.quantify`
+        Quantification of identified molecules.
     * :meth:`.UController.search`
         Peptide spectrum matching
     * :meth:`.UController.validate`
         Statistical post-processing of search results to calculate the
         false-discovery rate (FDR, q-value) and/or posterior error probability (PEP)
+        (:ref:`validation-engines`)
     * :meth:`.UController.visualize`
-        Visualization of results
+        Visualization of results (:ref:`visualizer`)
 
 
 5. Building Custom workflows

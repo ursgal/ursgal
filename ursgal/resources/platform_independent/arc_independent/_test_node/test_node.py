@@ -1,5 +1,5 @@
 '''
-usage: python3.4 _test_node.py -i x -o test.txt -t1 a -t2 3
+usage: python _test_node.py -i x -o test.txt -t1 a -t2 3
 '''
 import argparse
 

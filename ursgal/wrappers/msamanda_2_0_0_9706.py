@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 from .msamanda_2_0_0_9695 import msamanda_2_0_0_9695 as msamanda
 
 
