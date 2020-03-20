@@ -39,7 +39,7 @@ class msfragger_20170103(ursgal.UNode):
         'release_date'                : '2017-01-03',
         'utranslation_style'          : 'msfragger_style_1',
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML'],
-        'output_extensions'           : ['.csv', '.pepXML'],
+        'output_extensions'           : ['.csv'],
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
