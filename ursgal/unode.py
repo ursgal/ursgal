@@ -66,7 +66,22 @@ class Meta_UNode(type):
         initd_klass.UNODE_UPARAMS_GROUPED_BY_TAG = ddict(list)
         # initd_klass.TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY = {}
         initd_klass.PARAMS_TRIGGERING_RERUN = set()
-        for mDict in Meta_UNode._uparam_mapper.mapping_dicts( engine ):
+        translation_style = initd_klass.META_INFO.get(
+            'utranslation_style',
+            None
+        )
+        if translation_style is not None:
+            Meta_UNode._uparam_mapper.lookup['style_2_engine'][translation_style].add(
+                engine
+            )
+            Meta_UNode._uparam_mapper.lookup['engine_2_style'][engine] = translation_style
+        else:
+            print('''META_INFO for engine {0} does not contain a utranslatation_style'''.format(
+                engine   
+            ))
+            sys.exit(1)
+        # print(engine)
+        for mDict in Meta_UNode._uparam_mapper.mapping_dicts(engine):
             for tag in mDict['utag']:
                 initd_klass.UNODE_UPARAMS_GROUPED_BY_TAG[ tag ].append(
                     mDict['ukey']
@@ -80,14 +95,6 @@ class Meta_UNode(type):
             if mDict['triggers_rerun']:
                 initd_klass.PARAMS_TRIGGERING_RERUN.add( mDict['ukey'] )
 
-        translation_style = initd_klass.META_INFO.get(
-            'utranslation_style',
-            None
-        )
-        if translation_style is not None:
-            Meta_UNode._uparam_mapper.lookup[ 'style_2_engine' ][ translation_style ].add(
-                engine
-            )
 
         alternative_exe_folder = initd_klass.META_INFO.get(
             'uses_unode',

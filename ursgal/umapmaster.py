@@ -13,6 +13,7 @@ import multiprocessing
 import os
 import time
 import sys
+import glob
 
 try:
     import regex as regex
@@ -46,7 +47,7 @@ class UParamMapper( dict ):
             params_dict = args[0]
 
         self.update(params_dict)
-        # self.unodes = ursgal.UController._collect_all_unode_wrappers()
+        # self.unodes = self.ursgal.UController._collect_all_unode_wrappers()
         self.lookup = self.group_styles()
         self._eval_functions = {
             'cpus' : {
@@ -79,12 +80,13 @@ class UParamMapper( dict ):
             lookup_key = 'engine_2_params'
             style = self.lookup['engine_2_style'].get(engine_or_engine_style, None)
 
-        for uparam in self.lookup[ lookup_key ].get(engine_or_engine_style, []):
-            sup = self[ uparam ]
+        for uparam in self.lookup[lookup_key].get(engine_or_engine_style, []):
+            # print(uparam)
+            sup = self[uparam]
 
             uvalue_style_translation = sup['uvalue_translation'].get(style, {})
             assert isinstance(uvalue_style_translation, dict), '''
-            Syntax error in ursgal/uparams.py at key {0}
+                Syntax error in ursgal/uparams.py at key {0}
             '''.format( uparam )
             if len(uvalue_style_translation.keys()) != 0:
                 # can be translated, at least by some engine
@@ -111,12 +113,12 @@ class UParamMapper( dict ):
                 'available_in_unode'
             ]
             for k in keys_to_delete:
-                del template[ k ]
+                del template[k]
             template.update(
                 {
                     'style'                    : style,
                     'ukey'                     : uparam,
-                    'ukey_translated'          : sup['ukey_translation'][ style ],
+                    'ukey_translated'          : sup['ukey_translation'][style],
                     'default_value_translated' : translated_value,
                     'uvalue_style_translation' : uvalue_style_translation,
                     'triggers_rerun'           : sup.get('triggers_rerun', True)
@@ -161,11 +163,15 @@ class UParamMapper( dict ):
                 all_params.append( ukey )
         return all_params
 
-    def group_styles(self):
+    def group_styles(self, engine=None):
         '''
         Parses self.items() and build up lookups.
-        Additionally, consistency check is performed to guarantee that each
-        engine is mapping only on one style.
+        Consistency check (to guarantee that each engine is mapping
+        only on one style) is no longer performed here, but in
+        ucontroller._collect_all_unode_wrappers() instead.
+        engine_2_style and style_2_engine translations are also
+        not built here anymore, but collected from the wrappers
+        (just setting placeholders here).
 
         The lookup build and returned looks like::
 
@@ -203,6 +209,10 @@ class UParamMapper( dict ):
             'style_2_params': ddict(list),
             'params_triggering_rerun' : ddict(list)
         }
+
+        # if engine is None:
+        #     return lookup
+
         for uparam, udict in sorted(self.items()):
             # print( uparam, end = '\t')
             # if uparam == 'force':
@@ -211,26 +221,54 @@ class UParamMapper( dict ):
             # -------------------
             #     NEW_VERSION
             # -------------------
-            # for engine in udict['available_in_unode']:
-            #     style = ursgal.all_unodes[engine]['META_INFO']['utranslation_style']
-            #     if style not in udict['ukey_translation'].keys():
-            #         print('Translation Error @ uparam {0}'.format(uparam))
-            #         print('style {0} for engine {0} is not part of ukey_translation'.format(style, engine))
+            for engine in udict['available_in_unode']:
+                lookup['engine_2_params'][engine].append(uparam)
+                # style = ursgal.all_unodes[engine]['META_INFO']['utranslation_style']
+            for style in udict['ukey_translation'].keys():
+                lookup['style_2_params'][style].append(uparam)
+                if udict.get('triggers_rerun', True):
+                    lookup['params_triggering_rerun'][style].append(uparam)
+
+
+            # -----------------
+            #    OLD_VERSION
+            # -----------------
+            # for style in udict['ukey_translation'].keys():
+            #     try:
+            #         style_basename, style_version = style.split('_style_')
+            #     except:
+            #         print('Syntax Error @ uparam {0}'.format(uparam))
+            #         print('style : {0}'.format( style ))
             #         exit(1)
-
+            #     vvv = False
+            #     if style_basename == 'ucontroller':
+            #         vvv = True
+            #         # print('UController params {0}'.format( uparam ))
+            #     # else:
+            #         # print()
             #     styles_seen = set()
-            #     lookup['style_2_engine'][style].add(engine)
-            #     lookup['engine_2_params'][engine].append(uparam)
+            #     for engine in udict['available_in_unode']:
+            #         # if style != self.unodes[ engine ]['META_INFO']['utranslation_style']:
+            #         #     continue
+            #         # if vvv:
+            #         #     print(engine )
+            #         if engine.startswith(style_basename) is False:
+            #             continue
+            #         # this style 2 engine lookup is not quite right ...
+            #         # This function requires unode meta info for proper
+            #         # mapping ....
+            #         # lookup['style_2_engine'][ style ].add( engine )
+            #         lookup['engine_2_params'][ engine ].append( uparam )
 
-            #     if style not in styles_seen:
-            #         lookup['style_2_params'][style].append(uparam)
-            #         if udict.get('triggers_rerun', True):
-            #             lookup['params_triggering_rerun'][style].append(uparam)
-            #         styles_seen.add(style)
+            #         if style not in styles_seen:
+            #             lookup['style_2_params'][ style ].append( uparam )
+            #             if udict.get('triggers_rerun', True):
+            #                 lookup['params_triggering_rerun'][ style ].append( uparam )
+            #             styles_seen.add( style )
 
-            #         parsed_e2s = lookup['engine_2_style'].get(engine, None)
+            #         parsed_e2s = lookup['engine_2_style'].get( engine, None)
             #         if parsed_e2s is None:
-            #             lookup['engine_2_style'][engine] = style
+            #             lookup['engine_2_style'][ engine ] = style
             #         else:
             #             if parsed_e2s != style:
             #                 print(
@@ -239,56 +277,6 @@ class UParamMapper( dict ):
             #                     )
             #                 )
             #                 sys.exit(1)
-
-
-
-            # -----------------
-            #    OLD_VERSION
-            # -----------------
-            for style in udict['ukey_translation'].keys():
-                try:
-                    style_basename, style_version = style.split('_style_')
-                except:
-                    print('Syntax Error @ uparam {0}'.format(uparam))
-                    print('style : {0}'.format( style ))
-                    exit(1)
-                vvv = False
-                if style_basename == 'ucontroller':
-                    vvv = True
-                    # print('UController params {0}'.format( uparam ))
-                # else:
-                    # print()
-                styles_seen = set()
-                for engine in udict['available_in_unode']:
-                    # if style != self.unodes[ engine ]['META_INFO']['utranslation_style']:
-                    #     continue
-                    # if vvv:
-                    #     print(engine )
-                    if engine.startswith(style_basename) is False:
-                        continue
-                    # this style 2 engine lookup is not quite right ...
-                    # This function requires unode meta info for proper
-                    # mapping ....
-                    # lookup['style_2_engine'][ style ].add( engine )
-                    lookup['engine_2_params'][ engine ].append( uparam )
-
-                    if style not in styles_seen:
-                        lookup['style_2_params'][ style ].append( uparam )
-                        if udict.get('triggers_rerun', True):
-                            lookup['params_triggering_rerun'][ style ].append( uparam )
-                        styles_seen.add( style )
-
-                    parsed_e2s = lookup['engine_2_style'].get( engine, None)
-                    if parsed_e2s is None:
-                        lookup['engine_2_style'][ engine ] = style
-                    else:
-                        if parsed_e2s != style:
-                            print(
-                                '{0} was found to map on style {1} and {2}'.format(
-                                    engine, parsed_e2s, style
-                                )
-                            )
-                            sys.exit(1)
 
         return lookup
 

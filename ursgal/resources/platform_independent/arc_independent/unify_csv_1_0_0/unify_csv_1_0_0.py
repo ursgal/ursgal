@@ -146,6 +146,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     # mod pattern
     mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
+    mod_pattern_msfragger = re.compile( r'''(?P<pos>[0-9]*)(?P<aa>[A-Z])\((?P<mass>[0-9]*\.[0-9]*)\)''' )
 
     for mod_type in ['fix', 'opt']:
         for modification in params['mods'][mod_type]:
@@ -416,7 +417,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 if 'RTINSECONDS=' in line_dict['Spectrum Title']:
                     line_2_split = line_dict['Spectrum Title'].split(' ')[0].strip()
                 elif line_dict['Spectrum Title'].endswith('.dta'):
-                    '.'.join(line_2_split = line_dict['Spectrum Title'].split('.')[:-2])
+                    line_2_split = '.'.join(line_dict['Spectrum Title'].split('.')[:-2])
                 else:
                     line_2_split = line_dict['Spectrum Title']
                 line_dict['Spectrum Title'] = line_2_split
@@ -572,16 +573,36 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         # M stand for Modifications here, not Methionine
                         line_dict['Modifications'] = ''
                     else:
-                        mod_list = line_dict['Modifications']
-                        for single_mod in mod_list.split('|'):
-                            if single_mod in ['M','']:
-                                continue
-                            msfragger_pos, raw_msfragger_mass = single_mod.split('$')
-                            msfragger_mass = mass_format_string.format(
-                                # mass rounded as defined above
-                                Decimal(raw_msfragger_mass)
-                            )
-                            msfragger_pos = int(msfragger_pos)
+                        mod_string = line_dict['Modifications']
+                        if mod_string == '':
+                            mod_list = []
+                        elif '|' in mod_string:
+                            mod_list = []
+                            for single_mod in mod_string.split('|'):
+                                if single_mod in ['M','']:
+                                    continue
+                                msfragger_pos, raw_msfragger_mass = single_mod.split('$')
+                                msfragger_mass = mass_format_string.format(
+                                    # mass rounded as defined above
+                                    Decimal(raw_msfragger_mass)
+                                )
+                                msfragger_pos = int(msfragger_pos)
+                                mod_list.append((msfragger_mass, raw_msfragger_mass, msfragger_pos))
+                        else:
+                            mod_list = []
+                            for single_mod in mod_string.split(', '):
+                                match = mod_pattern_msfragger.search(single_mod)
+                                msfragger_pos = int(match.group('pos'))
+                                if msfragger_pos != 0:
+                                    msfragger_pos -= 1
+                                raw_msfragger_mass = float(match.group('mass'))
+                                msfragger_mass = mass_format_string.format(
+                                    # mass rounded as defined above
+                                    Decimal(raw_msfragger_mass)
+                                )
+                                mod_list.append((msfragger_mass, raw_msfragger_mass, msfragger_pos))
+                        for single_mod in mod_list:
+                            msfragger_mass, raw_msfragger_mass, msfragger_pos = single_mod
                             if msfragger_mass in mass_to_mod_combo.keys():
                                 explainable_combos = []
                                 for combo in mass_to_mod_combo[msfragger_mass]:
@@ -981,9 +1002,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     Hex, HexNAc, NeuAc, NeuGc, dHex = line_dict[
                         'Glycan'].strip(' ').split(' ')
                 except:
+                    '[ Error ] pGlyco glycan format was not recognized:'
                     print(line_dict['Glycan'])
                     exit()
-                line_dict['Glycan'] = 'Hex({0})HexNac({1})NeuAc({2})NeuGc({3})dHex({4})'.format(
+                line_dict['Glycan'] = 'Hex({0})HexNAc({1})NeuAc({2})NeuGc({3})dHex({4})'.format(
                     Hex,
                     HexNAc,
                     NeuAc,

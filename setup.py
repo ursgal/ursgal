@@ -65,6 +65,7 @@ setup(
             'resources/*/*/*/*/*',
         ]
     },
+    python_requires  = '>=3.5.0',
     build_requires=[
         'numpy',
     ],
@@ -72,7 +73,7 @@ setup(
     long_description='Universal Python module combining common bottom-up proteomics tools for large-scale analysis',
     author='Lukas P. M. Kremer, Purevdulam Oyunchimeg, Johannes Barth, Stefan Schulze and Christian Fufezan',
     author_email='christian@fufezan.net',
-    url='http://ursgal.github.com',
+    url='https://github.com/ursgal/ursgal',
     license='Lesser GNU General Public License (LGPL)',
     platforms='any that supports python 3.4',
     classifiers=[

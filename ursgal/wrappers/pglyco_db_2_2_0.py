@@ -91,17 +91,20 @@ class pglyco_db_2_2_0(ursgal.UNode):
         }
 
         db_file = self.params['translations']['database']
-        db_N2J = db_file.repalce('.fasta', '_N2J.fasta')
-        self.params['translations']['_grouped_by_translated_key']['fasta'] = db_N2J
+        db_N2J = db_file.replace('.fasta', '_N2J.fasta')
+        self.params['translations']['_grouped_by_translated_key']['fasta'] = {
+            'database' : db_N2J
+        }
 
         if sys.platform == 'win32':
             line_ending = '\n'
         else:
             line_ending = '\r\n'
-        if os.path.is_file(db_N2J) is False:
+        if os.path.isfile(db_N2J) is False:
             with open(db_N2J, 'w') as out_fasta:
                 with open(db_file, 'r') as in_fasta:
                     for fastaID, sequence in ursgal.ucore.parse_fasta(in_fasta):
+                        org_length = len(sequence)
                         matches = []
                         for match in re.finditer('N[^P][ST]', sequence):
                             matches.append(match.span())
@@ -109,16 +112,16 @@ class pglyco_db_2_2_0(ursgal.UNode):
                         prev_end = 0
                         for start, end in matches:
                             new_sequence += sequence[prev_end:start]
-                            new_sequence += sequence[start:start + int(position)] + new_aa +\
-                                sequence[start + int(position) + 1:end]
+                            new_sequence += 'J' + sequence[start+1:end]
                             prev_end = end
                         new_sequence += sequence[prev_end:len(sequence)]
+                        assert len(new_sequence) == org_length, 'converting error'
                         print(">{0}".format(fastaID), file=out_fasta, end=line_ending)
                         for pos, aa in enumerate(new_sequence):
                             print(aa, end="", file=out_fasta)
                             if (pos + 1) % 80 == 0:
-                                print(file=opened_output_file, end=line_ending)
-                        print('', file=opened_output_file, end=line_ending)
+                                print(file=out_fasta, end=line_ending)
+                        print('', file=out_fasta, end=line_ending)
 
         precursor_tolerance = []
         opt_mods = []
@@ -322,7 +325,6 @@ class pglyco_db_2_2_0(ursgal.UNode):
             'pGlycoDB-GP.txt'
         )
         translated_headers.insert(0, 'Spectrum Title')
-        translated_headers.insert(0, 'Spectrum Title')
         csv_reader = csv.DictReader(
             open(pglyco_output, 'r'),
             fieldnames=translated_headers,
@@ -337,6 +339,8 @@ class pglyco_db_2_2_0(ursgal.UNode):
             line_dict['Raw data location'] = os.path.abspath(
                 self.params['translations']['mgf_input_file']
             )
+            new_sequence = line_dict['Sequence'].replace('J', 'N')
+            line_dict['Sequence'] = new_sequence
             csv_writer.writerow(line_dict)
         return
 

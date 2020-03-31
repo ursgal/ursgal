@@ -116,12 +116,15 @@ def main(*args, **kwargs):
     data = kwargs['data']
     A, B, C, D, E = set(), set(), set(), set(), set()
     data_sets = [A, B, C, D, E]
+    set_letters = ['A', 'B', 'C', 'D', 'E']
     for pos, d_dict in enumerate(data):
         label_at_pos = defaultValues['label_{0}'.format(pos)]
         if 'label' not in d_dict.keys():
             d_dict['label'] = label_at_pos
         defaultValues['label_{0}'.format(label_at_pos)] = d_dict['label']
         data_sets[pos] |= set(d_dict['data'])
+        if 'color' in d_dict.keys():
+            kwargs['color_{0}'.format(set_letters[pos])] = d_dict['color']
 
     for k, v in defaultValues.items():
         if k not in kwargs.keys():
@@ -573,6 +576,7 @@ style="position:relative; top:0; left:0; z-index:-1;">
     print('</g>', file=io)
     print("</svg>", file=io)
     print('Saved VennDiagram as {output_file}'.format(**kwargs))
+    # return kwargs['output_file']
     return returnDict
 
 

@@ -30,7 +30,7 @@ class tag_graph_1_8_0(ursgal.UNode):
         'input_extensions'            : ['.mzML', '.mzXML'],
         'output_extensions'           : ['.csv', '.pepXML'],
         'create_own_folder'           : True,
-        'in_development'              : False,
+        'in_development'              : True,
         'include_in_git'              : False,
         'distributable'               : False,
         'engine_type' : {
@@ -438,13 +438,7 @@ class tag_graph_1_8_0(ursgal.UNode):
 
     def postflight(self):
         '''
-        Reads MSFragger tsv output and write final csv output file.
-
-        Adds:
-            * Raw data location, since this can not be added later
-            * Converts masses in Da to m/z (could be done in unify_csv)
-
-
+        Reads TagGraph output file and writes final csv output file.
         '''
         ms_fragger_header = [
             'ScanID',

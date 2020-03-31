@@ -183,8 +183,8 @@ class venndiagram_1_1_0(ursgal.UNode):
             if str(n) in self.params['translations']['visualization_color_positions']:
                 color = self.params['translations'][
                     'visualization_color_positions'][str(n)]
+                venn_dict['color'] = color
             venn_dict['label'] = label
-            venn_dict['color'] = label
             print('[ Reading  ] Venn set {0} / file #{1} : {0}'.format(
                 n,
                 file_path)

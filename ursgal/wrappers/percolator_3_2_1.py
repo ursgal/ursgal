@@ -395,7 +395,7 @@ class percolator_3_2_1(ursgal.UNode):
                 '--picked-protein',
                 self.params['database'],
                 '-P',
-                '{decoy_tag}'.format(**self.params),
+                '{decoy_tag}'.format(**self.params['translations']),
                 '--results-proteins',
                 '{protein_output_target}'.format(**self.params['translations']),
                 '--decoy-results-proteins',

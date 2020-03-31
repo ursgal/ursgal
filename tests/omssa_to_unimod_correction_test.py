@@ -72,10 +72,10 @@ def map_mods_test():
         yield map_mods, test_dict
 
 
-def map_mods( test_dict ):
+def map_mods(test_dict):
     if IS_AVAILABLE:
         uc.params['modifications'] = test_dict['modifications']
-        omssa_class = cl=uc.unodes['omssa_2_1_9']['_wrapper_class']()
+        omssa_class = cl = uc.unodes['omssa_2_1_9']['_wrapper_class']()
         cl.exe = os.path.join(uc.unodes['omssa_2_1_9']['resource_folder'],'omssacl')
         cl._load_omssa_xml()
         for unimod_id in test_dict['result_dict'].keys():

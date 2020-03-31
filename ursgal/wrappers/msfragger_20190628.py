@@ -36,11 +36,11 @@ class msfragger_20190628(ursgal.UNode):
         'name'                        : 'MSFragger',
         'version'                     : '20190628',
         'release_date'                : '2019-06-28',
-        'utranslation_style'          : 'msfrag_20190628_style_1',
+        'utranslation_style'          : 'msfragger_style_2',
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML'],
         'output_extensions'           : ['.csv'],
         'create_own_folder'           : True,
-        'in_development'              : True,
+        'in_development'              : False,
         'include_in_git'              : False,
         'distributable'               : False,
         'engine_type' : {
@@ -171,6 +171,9 @@ class msfragger_20190628(ursgal.UNode):
                     min_mz, max_mz = param_value
                     self.params_to_write[
                         msfragger_param_name] = '{0} {1}'.format(min_mz, max_mz)
+                elif msfragger_param_name == 'precursor_mass_lower':
+                    self.params_to_write[
+                        msfragger_param_name] = -1*param_value
                 elif msfragger_param_name == 'modifications':
                     '''
                     #maximum of 7 mods - amino acid codes, * for any amino acid, [ and ] specifies protein termini, n and c specifies peptide termini
@@ -266,19 +269,19 @@ class msfragger_20190628(ursgal.UNode):
             self.params['input_file']
         )
         if self.input_file.lower().endswith('.mzml') or \
-                self.input_file.lower().endswith('.mzml.gz'): # or \
-                # self.input_file.lower().endswith('.mgf'):
+                self.input_file.lower().endswith('.mzml.gz') or \
+                self.input_file.lower().endswith('.mgf'):
             self.params['translations']['mzml_input_file'] = self.input_file
-        elif self.input_file.lower().endswith('.mgf'):
-            self.params['translations']['mzml_input_file'] = \
-                self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( self.input_file )
-            self.print_info(
-                'MSFragger can only read Proteowizard MGF input files,'
-                'the corresponding mzML file {0} will be used instead.'.format(
-                    os.path.abspath(self.params['translations']['mzml_input_file'])
-                ),
-                caller = "INFO"
-            )
+        # elif self.input_file.lower().endswith('.mgf'):
+        #     self.params['translations']['mzml_input_file'] = \
+        #         self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( self.input_file )
+        #     self.print_info(
+        #         'MSFragger can only read Proteowizard MGF input files,'
+        #         'the corresponding mzML file {0} will be used instead.'.format(
+        #             os.path.abspath(self.params['translations']['mzml_input_file'])
+        #         ),
+        #         caller = "INFO"
+        #     )
         else:
             raise Exception(
                 'MSFragger input spectrum file must be in mzML or MGF format!')
@@ -325,7 +328,6 @@ class msfragger_20190628(ursgal.UNode):
             'protein',
             'num_matched_ions',
             'tot_num_ions',
-            'Total possible number of matched theoretical fragment ions',
             'calc_neutral_pep_mass',
             'massdiff',
             'num_tol_term',
@@ -344,8 +346,6 @@ class msfragger_20190628(ursgal.UNode):
         translated_headers = []
         header_translations = self.UNODE_UPARAMS[
             'header_translations']['uvalue_style_translation']
-        import pprint
-        pprint.pprint(header_translations)
         for original_header_key in ms_fragger_header:
             ursgal_header_key = header_translations[original_header_key]
             translated_headers.append(ursgal_header_key)
@@ -362,6 +362,7 @@ class msfragger_20190628(ursgal.UNode):
             self.params['input_dir_path'],
             self.params['file_root'] + '.tsv'
         )
+        self.created_tmp_files.append(msfragger_output_tsv)
 
         if os.path.exists(msfragger_output_tsv) is False:
             msfragger_output_tsv = os.path.join(
@@ -390,6 +391,7 @@ class msfragger_20190628(ursgal.UNode):
                 fieldnames=translated_headers,
                 delimiter='\t'
             )
+            next(csv_reader, None)
             for line_dict in csv_reader:
                 line_dict['Raw data location'] = os.path.abspath(
                     self.params['translations']['mzml_input_file']
