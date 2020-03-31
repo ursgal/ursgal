@@ -71,8 +71,9 @@ class UParamMapper( dict ):
 
         return rvalue
 
-    def mapping_dicts( self, engine_or_engine_style):
+    def mapping_dicts( self, engine_or_engine_style, ext_lookup={}):
         '''yields all mapping dicts'''
+        self.lookup.update(ext_lookup)
         if '_style_' in engine_or_engine_style:
             lookup_key = 'style_2_params'
             style = engine_or_engine_style
@@ -81,9 +82,7 @@ class UParamMapper( dict ):
             style = self.lookup['engine_2_style'].get(engine_or_engine_style, None)
 
         for uparam in self.lookup[lookup_key].get(engine_or_engine_style, []):
-            # print(uparam)
             sup = self[uparam]
-
             uvalue_style_translation = sup['uvalue_translation'].get(style, {})
             assert isinstance(uvalue_style_translation, dict), '''
                 Syntax error in ursgal/uparams.py at key {0}
