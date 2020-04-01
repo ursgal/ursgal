@@ -47,28 +47,38 @@ output_csv = ptminer_wrapper.postflight(
     merged_results_csv=output_csv
     )
 
-# ident_list = [ ]
-# for line_dict in csv.DictReader(open(output_csv, 'r')):
-#     ident_list.append( line_dict )
-#check if the two files are the same
-content_file1 = None
-content_file2 = None
-with open(output_csv, 'r') as file1, open(expected_output_csv, 'r') as file2:
-    content_file1 = file1.readlines()
-    content_file2 = file2.readlines()
+ptminer_line_dicts = []
+for line_dict in csv.DictReader(open(output_csv, 'r')):
+    ptminer_line_dicts.append(sorted(line_dict.items()))
+sorted_ptminer_line_dicts = sorted(ptminer_line_dicts)
+
+expected_line_dicts = []
+for line_dict in csv.DictReader(open(expected_output_csv, 'r')):
+    expected_line_dicts.append(sorted(line_dict.items()))
+sorted_expected_line_dicts = sorted(expected_line_dicts)
+
 
 def postflight_ptminer_test():
-    for line in content_file2:
-        yield postflight_ptminer, line, content_file1
-    for line in content_file1:
-        yield postflight_ptminer, line, content_file2
+    for test_id, test_dict_items in enumerate(sorted_ptminer_line_dicts):
+        expected_dict_items = sorted_expected_line_dicts[test_id]
+        yield postflight_ptminer, test_dict_items, expected_dict_items
 
-def postflight_ptminer(line, content_file):
-    assert line in content_file
+def postflight_ptminer(test_dict_items, expected_dict_items):
+    for i, test_item in enumerate(test_dict_items):
+        test_key, test_value = test_item
+        expected_item = expected_dict_items[i]
+        expected_key, expected_value = expected_item
+        assert test_key == expected_key, '''
+        test_key = {0}
+        expected_key = {1}
+        '''.format(test_key, expected_key)
+        assert test_value == expected_value, '''
+        test_value = {0}
+        expected_value = {1}
+        '''.format(test_value, expected_value)
 
 if __name__ == '__main__':
     print(__doc__)
-    for line in content_file2:
-        postflight_ptminer(line, content_file1)
-    for line in content_file1:
-        postflight_ptminer(line, content_file2)
+    for test_id, test_dict in enumerate(sorted(ptminer_line_dicts)):
+        expected_dict = sprted(expcted_line_dicts)[test_id]
+        postflight_ptminer(test_dict, expected_dict)
