@@ -740,7 +740,8 @@ class UController(ursgal.UNode):
 
             search_engines_of_merged_files = []
             for d in self.io['output']['params']['input_file_dicts']:
-                search_engines_of_merged_files.append( d["last_engine"] )
+                search_engines_of_merged_files.append(d.get("last_engine", "unknown"))
+
 
             report = self.run_unode_if_required(
                 force, engine_name, answer,

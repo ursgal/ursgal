@@ -33,7 +33,7 @@ def _determine_mzml_name_base(file_name, prefix):
                 file_name
             )
         )
-    if prefix is not None and prefix is not '':
+    if prefix is not None and prefix != '':
         mzml_name_base = '_'.join([prefix, mzml_name_base])
     return mzml_name_base
 

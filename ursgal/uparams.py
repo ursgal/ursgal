@@ -9267,6 +9267,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'mgf_to_rt_lookup_1_0_0',
+            'unify_csv_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9274,6 +9275,7 @@ ursgal_params = {
             'sugarpy_run_style_1' : 'scan_rt_lookup',
             'sugarpy_plot_style_1' : 'scan_rt_lookup',
             'mgf_to_rt_lookup_style_1': 'rt_pickle_name',
+            'unify_csv_style_1': 'scan_rt_lookup_path',
         },
         'utag' : [
             'file_handling',
@@ -11028,6 +11030,7 @@ ursgal_params = {
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'unknown'              : '',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
