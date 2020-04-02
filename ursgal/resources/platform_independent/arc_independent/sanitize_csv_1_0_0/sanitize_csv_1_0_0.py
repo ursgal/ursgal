@@ -51,11 +51,10 @@ def main(
             score, line_dict = grouped_psm
             if n == 0:
                 best_score = score
-                psm_names.add(line_dict['Sequence']+line_dict['Spectrum Title'])
+                psm_names.add(line_dict['Sequence']+line_dict['Modifications']+line_dict['Charge'])
                 spec_line_dicts.append(line_dict)
             elif n < num_compared_psms:
-                #psm = line_dict['Sequence']+line_dict['Modifications']+line_dict['Charge']
-                psm = line_dict['Sequence']+line_dict['Spectrum Title']
+                psm = line_dict['Sequence']+line_dict['Modifications']+line_dict['Charge']
                 if psm in psm_names and remove_redundant_psms is True:
                     continue
                 if log10_threshold is True:
@@ -70,7 +69,7 @@ def main(
                     else:
                         spec_line_dicts.append(line_dict)
                         psm_names.add(psm)
-        if accept_conflicting_psms is False and len(psm_names) >= 2:
+        if accept_conflicting_psms is False and len(spec_line_dicts) >= 2:
             continue   
         else:
             all_line_dicts.extend(spec_line_dicts)

@@ -205,7 +205,7 @@ class venndiagram_1_1_0(ursgal.UNode):
             for line_dict in csv_input:
                 unique_identifier = ''
                 for column_name in self.params['translations']['visualization_column_names']:
-                    unique_identifier += '||{0}'.format('.'.join(line_dict[column_name].split('.')[:4]))
+                    unique_identifier += '||{0}'.format(line_dict[column_name])
                 venn_dict['data'].add(unique_identifier)
                 if unique_identifier not in lookup_dict.keys():
                     lookup_dict[unique_identifier] = []
