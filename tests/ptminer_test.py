@@ -50,13 +50,12 @@ output_csv = ptminer_wrapper.postflight(
 ptminer_line_dicts = []
 for line_dict in csv.DictReader(open(output_csv, 'r')):
     ptminer_line_dicts.append(sorted(line_dict.items()))
-sorted_ptminer_line_dicts = sorted(ptminer_line_dicts)
+sorted_ptminer_line_dicts = sorted(ptminer_line_dicts, key=lambda item: item[0])
 
 expected_line_dicts = []
 for line_dict in csv.DictReader(open(expected_output_csv, 'r')):
     expected_line_dicts.append(sorted(line_dict.items()))
-sorted_expected_line_dicts = sorted(expected_line_dicts)
-
+sorted_expected_line_dicts = sorted(expected_line_dicts, key=lambda item: item[0])
 
 def postflight_ptminer_test():
     for test_id, test_dict_items in enumerate(sorted_ptminer_line_dicts):
@@ -80,5 +79,5 @@ def postflight_ptminer(test_dict_items, expected_dict_items):
 if __name__ == '__main__':
     print(__doc__)
     for test_id, test_dict in enumerate(sorted(ptminer_line_dicts)):
-        expected_dict = sprted(expcted_line_dicts)[test_id]
+        expected_dict = sorted(expcted_line_dicts)[test_id]
         postflight_ptminer(test_dict, expected_dict)

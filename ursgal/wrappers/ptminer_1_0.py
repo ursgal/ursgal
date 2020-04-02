@@ -329,7 +329,7 @@ class ptminer_1_0(ursgal.UNode):
                     added_annotation_columns = True
 
                 else:
-                    if not added_annotation_columns:
+                    if not added_annotation_columns:#this is a new PSM
                         annotated_rows['#'.join([previous_row['Spectrum Title'], previous_row['Sequence'], previous_row['Modifications']])].append(previous_row)
                     added_annotation_columns = False
 
@@ -338,11 +338,7 @@ class ptminer_1_0(ursgal.UNode):
                     subrow['Sequence'] = row['Sequence']
                     subrow['Charge'] = row['Charge']
                     subrow['Mass Shift'] = row['Mass Shift']
-                    # print('here here here')
-                    # print(row)
-                    # print(row['ObsMH'], row['Charge'], row['Charge'])
-                    # print('here here here')
-                    subrow['Exp m/z'] = (float(row['ObsMH']) + (ukb.PROTON * (float(row['Charge']) - 1)))/float(row['Charge'])
+                    #subrow['Exp m/z'] = (float(row['ObsMH']) + (ukb.PROTON * (float(row['Charge']) - 1)))/float(row['Charge'])
 
                     pos = row['Identified Mod Position'].split(';')
                     mod = row['Identified Mod Name'].split(';')
@@ -404,8 +400,8 @@ class ptminer_1_0(ursgal.UNode):
                 if str(row['New Sequence']).strip() != '' and row['New Sequence'] is not None:
                     #we assume there is only one position for the new modification
                     #we first separate AA from modification
-                    row['AA'] = str(row['New Mod']).split(' ', 2)[1][1:-1]
-                    row['New Modification'] = '%s:%s' % (str(row['New Mod']).split(' ', 2)[0], row['New Mod Position'])
+                    row['AA'] = str(row['New Mod']).split(' ', 1)[1][1:-1]
+                    row['New Modification'] = '%s:%s' % (str(row['New Mod']).split(' ', 1)[0], row['New Mod Position'])
                     row['Mass Difference'] = ''
                     row.pop('Position', None)
                     row.pop('New Mod Position', None)
@@ -429,7 +425,7 @@ class ptminer_1_0(ursgal.UNode):
                         for aa in aa_pos.keys():
                             for p in aa_pos[aa]:
                                 new_row = copy.deepcopy(row)
-                                new_row['Mass Difference'] = '%s:%s' % (row['Mass Shift'], p)
+                                new_row['Mass Difference'] = '%s:%s' % (original_rows[key][0]['Mass Difference'].split(':')[0], p)#we maintain the original mass
                                 new_row['AA'] = aa
                                 new_row.pop('Position', None)
                                 new_row.pop('New Sequence', None)
@@ -439,26 +435,12 @@ class ptminer_1_0(ursgal.UNode):
                                 rows.append(new_row)
                     else:
                         if row['Annotated Mod'] is None or row['Annotated Mod'] == '':#this is the case where only annotated mass is given without further identification
-                            # for aa in aa_pos.keys():
-                            #     for p in aa_pos[aa]:
-                            #         new_row = copy.deepcopy(row)
-                            #         new_row['Mass Difference'] = '%s:%s' % (row['Annotated Mass'], p)
-                            #         new_row['AA'] = aa
-                            #         new_row.pop('Position', None)
-                            #         new_row.pop('New Mod Position', None)
-                            #         new_row.pop('Annotated Mod', None)
-                            #         new_row.pop('Annotated Mass', None)
-                            #         new_row.pop('New Sequence', None)
-                            #         new_row.pop('New Mod', None)
-                            #         new_row.pop('Mass Shift', None)
-                            #         new_row.pop('Annotated Mod Site', None)
-                            #         rows.append(new_row)
                             continue
                         else:
-                            aa = str(row['Annotated Mod']).split(' ', 2)[1][1:-1]
+                            aa = str(row['Annotated Mod']).split(' ', 1)[1][1:-1]
                             for p in aa_pos[aa]:
                                 new_row = copy.deepcopy(row)
-                                new_row['Modifications'] = '%s;%s:%s' % (row['Modifications'], str(row['Annotated Mod']).split(' ', 2)[0], p)
+                                new_row['Modifications'] = '%s;%s:%s' % (row['Modifications'], str(row['Annotated Mod']).split(' ', 1)[0], p)
                                 if str(row['Modifications']) == '':
                                     new_row['Modifications'] = new_row['Modifications'][1:]
                                 new_row['Modifications'].strip(';')
