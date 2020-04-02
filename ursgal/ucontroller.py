@@ -181,7 +181,7 @@ class UController(ursgal.UNode):
                     {1}
                     {2}
                 '''.format(
-                    engine,
+                    wrapper_module_name,
                     engine_2_style[wrapper_module_name],
                     style
                 )
@@ -450,6 +450,7 @@ class UController(ursgal.UNode):
                         self.unodes[ engine ]['class'] = _wrapper_class(
                             engine_path = engine_exe_path
                         )
+                        self.unodes[engine]['engine_exe_path'] = engine_exe_path
                     except TypeError:
                         print('''
 
