@@ -96,12 +96,7 @@ def main(folder=None, profile=None, target_decoy_database=None, validated_file=N
                 engine=validation_engine,
                 )
 
-            filtered_validated_results = uc.execute_misc_engine(
-                input_file=validated_csv,
-                engine='filter_csv_1_0_0',
-                )
-
-            result_all_files_each_engine.append(filtered_validated_results)
+            result_all_files_each_engine.append(validated_csv)
 
         
         merged_results = uc.execute_misc_engine(
@@ -119,6 +114,11 @@ def main(folder=None, profile=None, target_decoy_database=None, validated_file=N
             engine='ptminer',
             force=True,
             #output_file_name='ptminer_test'
+        )
+
+        filtered_validated_results = uc.execute_misc_engine(
+            input_file=ptminer_results,
+            engine='filter_csv_1_0_0',
         )
 
 if __name__ == '__main__':
