@@ -76,16 +76,22 @@ class msgfplus_v2019_07_03( ursgal.UNode ):
             self.params['input_file']
         )
 
-        os.symlink(
-            os.path.join(
-                os.path.dirname(self.exe),
-                'params',
-            ),
-            os.path.join(
-                os.getcwd(),
-                'params',
-            )
+        enzyme_txt_path = os.path.join(
+            os.getcwd(),
+            'params',
+            'enzymes.txt'
         )
+        if os.path.exists(enzyme_txt_path) is False:
+            os.symlink(
+                os.path.join(
+                    os.path.dirname(self.exe),
+                    'params',
+                ),
+                os.path.join(
+                    os.getcwd(),
+                    'params',
+                )
+            )
         self.created_tmp_files.append(
             os.path.join(
                 os.getcwd(),

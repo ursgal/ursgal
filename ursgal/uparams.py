@@ -7976,7 +7976,7 @@ ursgal_params = {
         'available_in_unode' : [
             'upeptide_mapper_1_0_0',
         ],
-        'default_value' : 'UPeptideMapper_v3',
+        'default_value' : 'UPeptideMapper_v4',
         'description' :  '''version 3 and 4 are the fastest and most memory efficient class versions, version 2 is the classic approach ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
