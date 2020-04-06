@@ -5,9 +5,9 @@ Version 0.6.7    (10.2019)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Implemented pNovo 3.1.3
-# Implemented pGlyco 2.2.2
+#. Implemented pGlyco 2.2.2
 #. Implemented Percolator 3.4.0
-#. Implemented latest version of MODa (v1.62), MSAmanda (version 2.0.0.13723),
+#. Implemented latest version of MODa (v1.62), MSAmanda (version 2.0.0.14665),
    MSFragger (20190628, 2.3)
 #. Implemented MS-GF+ v2019.07.03 and included enzymes.txt for more and customized options
 #. PSM defining columns for sanitize_csv and combine_PEP are now

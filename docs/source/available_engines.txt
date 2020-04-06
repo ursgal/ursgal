@@ -13,6 +13,9 @@ MS Amanda
 
 Available MS Amanda versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_14665.msamanda_2_0_0_14665
+   :members:
+
 .. autoclass:: ursgal.wrappers.msamanda_2_0_0_13723.msamanda_2_0_0_13723
    :members:
 
@@ -79,6 +82,9 @@ MSFragger
 
 Available MSFragger versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msfragger_2_3.msfragger_2_3
+   :members:
+
 .. autoclass:: ursgal.wrappers.msfragger_20190628.msfragger_20190628
    :members:
 
@@ -96,6 +102,9 @@ MODa
 ----
 
 Available MODa versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.moda_v1_62.moda_v1_62
+   :members:
 
 .. autoclass:: ursgal.wrappers.moda_v1_61.moda_v1_61
    :members:
@@ -126,10 +135,10 @@ PIPI
 
 Available PIPI versions, starting with the newest version:
 
-.. autoclass:: ursgal.wrappers.pipi_1_4_5.pipi_1_4_5
+.. autoclass:: ursgal.wrappers.pipi_1_4_6.pipi_1_4_6
    :members:
 
-.. autoclass:: ursgal.wrappers.pipi_1_4_6.pipi_1_4_6
+.. autoclass:: ursgal.wrappers.pipi_1_4_5.pipi_1_4_5
    :members:
 
 
@@ -208,6 +217,11 @@ Glycosylation Search Engines
 
 pGlyco
 ------
+
+Available pGlyci versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.pglyco_db_2_2_2.pglyco_db_2_2_2
+   :members:
 
 .. autoclass:: ursgal.wrappers.pglyco_db_2_2_0.pglyco_db_2_2_0
    :members:

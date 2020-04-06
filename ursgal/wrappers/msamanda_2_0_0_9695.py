@@ -280,6 +280,10 @@ class msamanda_2_0_0_9695(ursgal.UNode):
             'tsv',
             'csv'
         )
+        if sys.platform == 'win32':
+            lineterminator = '\n'
+        else:
+            lineterminator = '\r\n'
         with open(
             os.path.join(
                 self.params['output_dir_path'],
@@ -289,7 +293,8 @@ class msamanda_2_0_0_9695(ursgal.UNode):
         ) as result_file:
             csv_dict_writer_object = csv.DictWriter(
                 result_file,
-                fieldnames=translated_headers
+                fieldnames=translated_headers,
+                lineterminator=lineterminator
             )
             csv_dict_writer_object.writeheader()
             self.print_info(
