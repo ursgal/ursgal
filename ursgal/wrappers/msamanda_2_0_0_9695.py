@@ -5,6 +5,7 @@ import csv
 import subprocess
 import sys
 import copy
+import time
 
 
 class msamanda_2_0_0_9695(ursgal.UNode):
@@ -218,6 +219,8 @@ class msamanda_2_0_0_9695(ursgal.UNode):
 
         templates = self.format_templates()
         for file_name, content in templates.items():
+            if os.path.exists(file_name):
+                file_name = file_name.replace('.xml', '{0}.xml'.format(time.time()))
             file2write = self.params['translations'][
                 'output_file_incl_path'] + file_name
             with open(
