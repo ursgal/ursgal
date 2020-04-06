@@ -281,7 +281,7 @@ class deepnovo_0_0_1(ursgal.UNode):
                          'N,opt,any,Deamidated',
                          'Q,opt,any,Deamidated']
                     [ ERROR ] You specified instead: {0}
-                    '''.format(deepnovo_param)
+                    '''.format(param_value)
                 #     cc = ursgal.ChemicalComposition()
                 #     for mod_dict in self.params['mods']['opt']:
                 #         '''
