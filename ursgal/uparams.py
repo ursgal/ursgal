@@ -1148,6 +1148,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'deepnovo_0_0_1',
+            'deepnovo_v2',
             'tag_graph_1_8_0',
         ],
         'triggers_rerun' : True,
@@ -1325,6 +1326,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : True,
                 'pglyco_db_2_2_2' : True,
                 'deepnovo_0_0_1' : True,
+                'deepnovo_v2': True,
                 'pnovo_3_1_3' : True,
             },
             'percolator_style_1' : {
@@ -1373,6 +1375,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : True,
                 'pglyco_db_2_2_2' : True,
                 'deepnovo_0_0_1' : True,
+                'deepnovo_v2': True,
                 'pnovo_3_1_3' : True,
             },
             'qvality_style_1' : {
@@ -1421,6 +1424,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : True,
                 'pglyco_db_2_2_2' : True,
                 'deepnovo_0_0_1' : True,
+                'deepnovo_v2': True,
                 'pnovo_3_1_3' : True,
             },
             'sanitize_csv_style_1' : {
@@ -1469,6 +1473,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : True,
                 'pglyco_db_2_2_2' : True,
                 'deepnovo_0_0_1' : True,
+                'deepnovo_v2': True,
                 'pnovo_3_1_3' : True,
             },
             'svm_style_1' : {
@@ -1517,6 +1522,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : True,
                 'pglyco_db_2_2_2' : True,
                 'deepnovo_0_0_1' : True,
+                'deepnovo_v2': True,
                 'pnovo_3_1_3' : True,
             },
         },
@@ -1816,6 +1822,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : False,
                 'pglyco_db_2_2_2' : False,
                 'deepnovo_0_0_1' : False,
+                'deepnovo_v2' : False,
             },
         },
         'uvalue_type' : 'bool',
@@ -2416,6 +2423,7 @@ ursgal_params = {
         'available_in_unode' : [
             'pepnovo_3_1',
             'deepnovo_0_0_1',
+            'deepnovo_v2',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2587,6 +2595,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
+            'deepnovo_v2',
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
         ],
@@ -3240,6 +3249,7 @@ ursgal_params = {
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
+            'deepnovo_v2',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3260,6 +3270,7 @@ ursgal_params = {
             'pglyco_db_style_1' : 'search_fragment_tolerance',
             'pnovo_style_1'     : 'frag_tol',
             'tag_graph_style_1' : 'ppmstd',
+            'deepnovo_style_1' : 'AA_MATCH_PRECISION',
         },
         'utag' : [
             'fragment',
@@ -3322,7 +3333,8 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
-            'tag_graph_1_8_0'
+            'tag_graph_1_8_0',
+            'deepnovo_v2',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3343,6 +3355,7 @@ ursgal_params = {
             'pglyco_db_style_1' : 'search_fragment_tolerance_type',
             'pnovo_style_1'     : 'frag_tol_type_ppm',
             'tag_graph_style_1' : 'frag_mass_tolerance_unit',
+            'deepnovo_style_1' : 'AA_MATCH_PRECISION',
         },
         'utag' : [
             'fragment',
@@ -3790,6 +3803,7 @@ ursgal_params = {
             'pglyco_fdr_2_2_0',
             'pglyco_fdr_2_2_2',
             'deepnovo_0_0_1',
+            'deepnovo_v2',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -4048,6 +4062,9 @@ ursgal_params = {
                 'predicted_sequence': 'Sequence',
                 'scan': 'Spectrum ID',
                 'predicted_score': 'DeepNovo:score',
+                'precursor_mz': 'Exp m/z',
+                'precursor_charge': 'Charge',
+                'scan_list_middle': 'Spectrum ID',
             },
         },
         'uvalue_type' : 'str',
@@ -5238,6 +5255,7 @@ ursgal_params = {
             'msfragger_20190222',
             'msfragger_20190628',
             'msfragger_2_3',
+            'deepnovo_v2',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5247,6 +5265,7 @@ ursgal_params = {
             'msfragger_style_1' : 'use_topN_peaks',
             'msfragger_style_2' : 'use_topN_peaks',
             'msfragger_style_3' : 'use_topN_peaks',
+            'deepnovo_style_1' : 'MAX_NUM_PEAK',
         },
         'utag' : [
             'spectrum',
@@ -8246,6 +8265,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
+            'deepnovo_v2',
             'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
@@ -8343,6 +8363,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
+            'deepnovo_v2',
             'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
@@ -8438,6 +8459,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
+            'deepnovo_v2',
             'pnovo_3_1_3',
         ],
         'triggers_rerun' : True,
@@ -8654,6 +8676,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
+            'deepnovo_v2',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8665,6 +8688,7 @@ ursgal_params = {
             'msfragger_style_3' : 'precursor_max_mass',
             'pglyco_db_style_1' : 'max_peptide_weight',
             'pnovo_style_1'     : 'mass_upper_bound',
+            'deepnovo_style_1'  : 'MZ_MAX',
         },
         'utag' : [
             'precursor',
@@ -10822,6 +10846,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'percolator_style_1' : {
@@ -10872,6 +10897,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'qvality_style_1' : {
@@ -10922,6 +10948,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'sanitize_csv_style_1' : {
@@ -10972,6 +10999,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'svm_style_1' : {
@@ -11022,6 +11050,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
             },
             'ucontroller_style_1' : {
@@ -11072,6 +11101,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
                 'unknown'              : '',
             },
@@ -11123,6 +11153,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
             },
         },
@@ -12645,6 +12676,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'deepnovo_0_0_1',
+            'deepnovo_v2',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -12723,6 +12755,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'deepnovo_0_0_1',
+            'deepnovo_v2',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -12749,6 +12782,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'deepnovo_0_0_1',
+            'deepnovo_v2',
         ],
         'default_value' : 'search_denovo',
         'description' :  ''' Defines the search mode for DeepNovo ''',
@@ -12777,6 +12811,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'deepnovo_0_0_1',
+            'deepnovo_v2',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {

@@ -103,7 +103,7 @@ class pnovo_3_1_3(ursgal.UNode):
         for pnovo_param_name in self.params['translations']['_grouped_by_translated_key'].keys():
             for ursgal_param_name, param_value in self.params['translations']['_grouped_by_translated_key'][pnovo_param_name].items():
                 if pnovo_param_name == 'spec_path1':
-                    self.params_to_write[pnovo_param_name] =  self.params['translations']['mgf_input_file']
+                    self.params_to_write[pnovo_param_name] =  self.params['translations']['mgf_input_file'].replace('.mgf', '.ms2')
                     self.params_to_write['out_path'] =  os.path.dirname(
                         self.params['translations']['output_file_incl_path']
                     )
@@ -393,7 +393,7 @@ frag_tol_type_ppm={frag_tol_type_ppm},
 
 #DTA/MS2/MGF are valid options.if DTA is specified, 
 #please set the following path(s) as the folder containing the DTA file(s)
-spec_type=MGF
+spec_type=MS2
 
 #1:means only one activation type, CID/HCD/ETD, is used
 #       spec_path1 should be set as the path of the data
