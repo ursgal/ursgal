@@ -442,10 +442,10 @@ class deepnovo_v2(ursgal.UNode):
         ]
 
         mod_lookup = {
-            'Cmod': ('C', 'Carbamidomethyl'),
-            'Mmod': ('M', 'Oxidation'),
-            # 'Nmod': ('N', 'Deamidated'),
-            # 'Qmod': ('Q', 'Deamidated'),
+            'C(Carbamidomethylation)': ('C', 'Carbamidomethyl'),
+            'M(Oxidation)': ('M', 'Oxidation'),
+            'N(Deamidation)': ('N', 'Deamidated'),
+            'Q(Deamidation)': ('Q', 'Deamidated'),
         }
 
         translated_headers = []
