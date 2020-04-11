@@ -503,7 +503,7 @@ class deepnovo_v2(ursgal.UNode):
             seq_list = line_dict['Sequence'].split(',')
             tmp_mods = []
             for n, aa in enumerate(seq_list):
-                if 'mod' in aa:
+                if '(' in aa:
                     org_aa, mod = mod_lookup[aa]
                     tmp_mods.append(
                         '{0}:{1}'.format(mod, n+1)
