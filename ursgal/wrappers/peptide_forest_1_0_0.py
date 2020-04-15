@@ -205,7 +205,6 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                         [ ERROR ] This should never happen.
                         [ ERROR ] PSM-ID: {0}
                     '''.format(psm_id))
-                    exit()
                 out_tmp_psm_dicts[psm_id] = [reduced_line_dict]            
 
         input_file_dicts = self.params['input_file_dicts']
@@ -240,7 +239,11 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                 lineterminator=lineterminator
             ) 
             csv_writer.writeheader()
+            import pprint
             for psm_id in out_tmp_psm_dicts.keys():
+                if 'TN_CSF_062617_02.10.10.3' in psm_id:
+                    pprint.pprint(out_tmp_psm_dicts[psm_id])
+                    print('===================================')
                 if len(out_tmp_psm_dicts[psm_id]) > 1:
                     merged_row_dict = ursgal.ucore.merge_rowdicts(
                         out_tmp_psm_dicts[psm_id], 
@@ -248,7 +251,9 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                         joinchar=';',
                     )
                     csv_writer.writerow(merged_row_dict)
+                    pprint.pprint(merged_row_dict)
                 else:
                     csv_writer.writerow(out_tmp_psm_dicts[psm_id][0])
-
+                    pprint.pprint(out_tmp_psm_dicts[psm_id][0])
+                # exit()
         return

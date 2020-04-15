@@ -13332,7 +13332,6 @@ ursgal_params = {
             },
         },
         'uvalue_type' : "bool",
-        'default_value' : '',
         'description' : \
             'Name of the engine that is just for the initial scoring in PeptideForest'
     },
