@@ -3,6 +3,7 @@ import ursgal
 import os
 import json
 import sys
+import csv
 
 
 class peptide_forest_1_0_0( ursgal.UNode ):
@@ -11,7 +12,7 @@ class peptide_forest_1_0_0( ursgal.UNode ):
         'edit_version'       : 1.00,
         'name'               : 'PeptideForest',
         'version'            : '1.0.0',
-        'release_date'       : '20206-3-4',
+        'release_date'       : '2020-3-4',
         'engine_type' : {
             'validation_engine' : True,
         },
@@ -46,9 +47,15 @@ class peptide_forest_1_0_0( ursgal.UNode ):
             self.params['output_dir_path'],
             self.params['output_file']
         )
+        self.params['translations']['tmp_output_file'] = self.params[
+            'translations']['output_file_incl_path'].replace('.csv', '_tmp.csv')
+
+        self.created_tmp_files.append(
+            self.params['translations']['tmp_output_file']
+        )
 
         input_file_dicts = self.params['input_file_dicts']
-        ursgal_path_dict = {}
+        self.params['ursgal_path_dict'] = {}
         if self.params['translations']['peptide_forest_file_params'] == {}:
             for result_pos, result_file_dict in enumerate(input_file_dicts):
                 last_search_engine = result_file_dict.get('last_engine', False)
@@ -67,7 +74,7 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                     result_file_dict['dir'],
                     result_file_dict['file']
                 )
-                ursgal_path_dict[file_path] = {
+                self.params['ursgal_path_dict'][file_path] = {
                     'engine': last_search_engine,
                     'score_col': score_col,
                     'score_bigger_better': score_bigger_better
@@ -85,17 +92,40 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                         to "peptide_forest_file_params".
                     '''.format(result_pos))
                     sys.exit(1)
-                ursgal_path_dict[file_path] = {}
+                self.params['ursgal_path_dict'][file_path] = {}
                 for k, v in self.params['translations']['peptide_forest_file_params'][result_pos].items():
-                    ursgal_path_dict[file_path][k] = v
+                    self.params['ursgal_path_dict'][file_path][k] = v
 
-        self.write_input_file_json(ursgal_path_dict)
+        self.write_input_file_json(self.params['ursgal_path_dict'])
 
         kwargs = {}
         translations = self.params['translations']['_grouped_by_translated_key']
         for translated_key, translation_dict in translations.items():
-            if translated_key in ['score_bigger_better', 'score_col', 'ursgal_path_dict']:
+            if translated_key in [
+                'score_bigger_better',
+                'score_col',
+                'ursgal_path_dict',
+                'psm_defining_colnames',
+                'psm_colnames_to_merge_multiple_values',
+            ]:
                 continue
+            elif translated_key == 'initial_engine':
+                ukey, translated_value = list(translation_dict.items())[0]
+                if translated_value == '':
+                    last_search_engine = self.get_last_search_engine(
+                        history=self.stats['history']
+                    )
+                    if type(last_search_engine) is list:
+                        print('''
+                            [ERROR] Cannot automatically determine last search engine
+                            Please specify which engine should be used for initial scoring
+                            (i.e. "peptide_forest_initial_engine"). E.g., choose one of these:
+                            {0}
+                        '''.format(last_search_engine))
+                        sys.exit(1)
+                    kwargs[translated_key] = last_search_engine
+                else:
+                    kwargs[translated_key] = translated_value
             elif len(translation_dict.keys()) == 1:
                 ukey, translated_value = list(translation_dict.items())[0]
                 if ukey == 'peptide_forest_general_params':
@@ -110,9 +140,9 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                     {0}
                 '''.format(translated_key))
 
-        peptide_forest_main = self.import_engine_as_python_function()
+        peptide_forest_main = self.import_engine_as_python_function(function_name='run_peptide_forest')
         peptide_forest_output_path = peptide_forest_main(
-            output_file=self.params['translations']['output_file_incl_path'],
+            output_file=self.params['translations']['tmp_output_file'],
             **kwargs
         )
         # self.print_execution_time(tag='execution')
@@ -130,3 +160,94 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                 param_json,
                 indent=2,
             )
+
+    def postflight(self):
+        '''
+        map input file line dicts to output file PSMs
+        '''
+        output_file = self.params['translations']['output_file_incl_path']
+        tmp_output_file = self.params['translations']['tmp_output_file']
+        psm_colnames = self.params['translations']['psm_defining_colnames']
+
+        out_fieldnames = []
+        remove_columns = [
+            'Mass',
+            'dM',
+            'enzN',
+            'enzC',
+            'enzInt',
+            'PepLen',
+            'CountProt',
+        ]
+        out_tmp_psm_dicts = {}
+        with open(tmp_output_file, 'r') as out_tmp:
+            csv_reader = csv.DictReader(out_tmp)
+            out_tmp_fieldnames = csv_reader.fieldnames
+            for fn in out_tmp_fieldnames:
+                if fn not in remove_columns and fn.startswith('top_target') is False:
+                    out_fieldnames.append(fn)
+            for line_dict in csv_reader:
+                reduced_line_dict = {}
+                for k, v in line_dict.items():
+                    if k not in out_fieldnames:
+                        continue
+                    reduced_line_dict[k] = v
+                if reduced_line_dict['Modifications'] == 'None':
+                    reduced_line_dict['Modifications'] = ''
+                psm_id = []
+                for colname in psm_colnames:
+                    psm_id.append(reduced_line_dict[colname])
+                psm_id = '||'.join(psm_id)
+                if psm_id in out_tmp_psm_dicts.keys():
+                    # out_tmp_psm_dicts[psm_id] = []
+                    print('''
+                        [ ERROR ] Multiple lines for the same PSM in PeptideForest output
+                        [ ERROR ] This should never happen.
+                        [ ERROR ] PSM-ID: {0}
+                    '''.format(psm_id))
+                out_tmp_psm_dicts[psm_id] = [reduced_line_dict]            
+
+        input_file_dicts = self.params['input_file_dicts']
+        for result_file_dict in input_file_dicts:
+            input_file_path = os.path.join(
+                result_file_dict['dir'],
+                result_file_dict['file']
+            )
+            with open(input_file_path, 'r') as in_file:
+                csv_reader = csv.DictReader(in_file)
+                in_fieldnames = csv_reader.fieldnames
+                for fn in in_fieldnames:
+                    if fn not in out_fieldnames:
+                        out_fieldnames.append(fn)
+                for line_dict in csv_reader:
+                    psm_id = []
+                    for colname in psm_colnames:
+                        psm_id.append(line_dict[colname])
+                    psm_id = '||'.join(psm_id)
+                    if psm_id not in out_tmp_psm_dicts.keys():
+                        out_tmp_psm_dicts[psm_id] = []
+                    out_tmp_psm_dicts[psm_id].append(line_dict)
+
+        if sys.platform == 'win32':
+            lineterminator = '\n'
+        else:
+            lineterminator = '\r\n'
+        with open(output_file, 'w') as out_file:
+            csv_writer = csv.DictWriter(
+                out_file,
+                fieldnames=out_fieldnames,
+                lineterminator=lineterminator
+            ) 
+            csv_writer.writeheader()
+            for psm_id in out_tmp_psm_dicts.keys():
+                if len(out_tmp_psm_dicts[psm_id]) > 1:
+                    merged_row_dict = ursgal.ucore.merge_rowdicts(
+                        out_tmp_psm_dicts[psm_id], 
+                        self.params['translations']['psm_colnames_to_merge_multiple_values'],
+                        joinchar=';',
+                    )
+                    csv_writer.writerow(merged_row_dict)
+                else:
+                    csv_writer.writerow(out_tmp_psm_dicts[psm_id][0])
+
+        return

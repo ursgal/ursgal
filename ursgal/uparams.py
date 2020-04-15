@@ -8441,10 +8441,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
+            'peptide_forest_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'psm_defining_colnames',
+            'peptide_forest_style_1' : 'psm_defining_colnames',
         },
         'utag' : [
             'conversion',
@@ -8480,10 +8482,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
+            'peptide_forest_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'colnames_to_merge_multiple_values',
+            'peptide_forest_style_1': 'psm_colnames_to_merge_multiple_values',
         },
         'utag' : [
             'conversion',
@@ -12267,6 +12271,29 @@ ursgal_params = {
         'description' : \
             'Path to the knapsack matrix for DeepNovo. Use "default" for the default file location in the resources'
     },
+    'peptide_forest_initial_engine' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'peptide_forest_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'peptide_forest_style_1': 'initial_engine',
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'str',
+        'uvalue_option' : {
+            'none_val'      : '',
+            'multiple_line' : False,
+        },
+        'default_value' : '',
+        'description' : \
+            'Name of the engine that is just for the initial scoring in PeptideForest'
+    },
     'peptide_forest_classifier' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -12282,17 +12309,21 @@ ursgal_params = {
         'uvalue_option' : {
             'select_type'   : 'radio_button',
             'available_values'  : [
-                'search_denovo',
-                'search_hybrid',
-                'search_db',
-                'decode',
+                'rf-reg',
+                'rf',
+                'svm',
             ],
             'custom_val_max' : 0,
         },
         'uvalue_translation' : {
+            'peptide_forest_style_1': {
+                'rf-reg': 'RF-reg',
+                'rf': 'RF',
+                'svm': 'SVM',
+            },
         },
         'uvalue_type' : "select",
-        'default_value' : 'RF-reg',
+        'default_value' : 'rf-reg',
         'description' :  ''' Defines classifier that is used in PeptideForest ''',
     },
     'peptide_forest_general_params' : {

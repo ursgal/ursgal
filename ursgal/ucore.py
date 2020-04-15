@@ -296,10 +296,17 @@ def merge_rowdicts(list_of_rowdicts, psm_colnames_to_merge_multiple_values, join
     are joined with a character (joinchar).
     '''
     merged_d = {}
-    fieldnames = list_of_rowdicts[0].keys()
+    fieldnames = []
+    for rowdict in list_of_rowdicts:
+        for k in rowdict.keys():
+            if k not in fieldnames:
+                fieldnames.append(k)
     for fieldname in fieldnames:
+        values = []
+        for d in list_of_rowdicts:
+            if fieldname in d.keys():
+                values.append(d[fieldname])
         if fieldname in psm_colnames_to_merge_multiple_values.keys():
-            values = [d[fieldname] for d in list_of_rowdicts]
             no_empty_values = [v for v in values if v != '']
             values_as_floats = [float(value) for value in no_empty_values]
 
@@ -325,7 +332,6 @@ def merge_rowdicts(list_of_rowdicts, psm_colnames_to_merge_multiple_values, join
                 merged_d[fieldname] = joinchar.join(final_values)
         
         else:
-            values = [d[fieldname] for d in list_of_rowdicts]
             if len(set(values)) == 1:
                 merged_d[fieldname] = values[0]
             else:
