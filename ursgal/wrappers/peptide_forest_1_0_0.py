@@ -205,6 +205,7 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                         [ ERROR ] This should never happen.
                         [ ERROR ] PSM-ID: {0}
                     '''.format(psm_id))
+                    exit()
                 out_tmp_psm_dicts[psm_id] = [reduced_line_dict]            
 
         input_file_dicts = self.params['input_file_dicts']
