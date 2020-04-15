@@ -251,9 +251,13 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                         joinchar=';',
                     )
                     csv_writer.writerow(merged_row_dict)
-                    pprint.pprint(merged_row_dict)
+                    if 'TN_CSF_062617_02.10.10.3' in psm_id:
+                        pprint.pprint(merged_row_dict)
+                        print('------------------------')
                 else:
                     csv_writer.writerow(out_tmp_psm_dicts[psm_id][0])
-                    pprint.pprint(out_tmp_psm_dicts[psm_id][0])
+                    if 'TN_CSF_062617_02.10.10.3' in psm_id:
+                        pprint.pprint(out_tmp_psm_dicts[psm_id][0])
+                        print('______________________________')
                 # exit()
         return
