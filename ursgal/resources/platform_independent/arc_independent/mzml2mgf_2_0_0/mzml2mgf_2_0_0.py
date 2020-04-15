@@ -43,7 +43,7 @@ def _determine_mzml_name_base(file_name, prefix):
                 file_name
             )
         )
-    if prefix is not None and prefix != '':
+    if prefix is not None and prefix is not '':
         mzml_name_base = '_'.join([prefix, mzml_name_base])
     return mzml_name_base
 
@@ -63,7 +63,6 @@ def main(
     precursor_max_charge=5,
     ion_mode='+',
     spec_id_attribute=None,
-    signal_to_noise_threshold=None,
 ):
 
     print(
@@ -93,12 +92,9 @@ def main(
         mz_correction_factor = machine_offset_in_ppm * 1e-6
     else:
         mz_correction_factor = 0
-    if precursor_min_charge is not None and precursor_max_charge is not None:
-        precursor_charge_range = '{0}'.format(precursor_min_charge)
-        for charge in range(precursor_min_charge + 1, precursor_max_charge + 1):
-            precursor_charge_range += ' and {0}'.format(charge)
-    else:
-        precursor_charge_range = None
+    precursor_charge_range = '{0}'.format(precursor_min_charge)
+    for charge in range(precursor_min_charge + 1, precursor_max_charge + 1):
+        precursor_charge_range += ' and {0}'.format(charge)
     mzml_basename = os.path.basename(mzml)
     for n, spec in enumerate(run):
         if n % 500 == 0:
@@ -141,14 +137,7 @@ def main(
         if spec_ms_level != ms_level:
             continue
 
-        if signal_to_noise_threshold is not None:
-            spec = spec.remove_noise(
-                mode='median',
-                signal_to_noise_threshold=signal_to_noise_threshold,
-            )
-            peaks_2_write = spec.peaks('centroided')
-        else:
-            peaks_2_write = spec.peaks('centroided')
+        peaks_2_write = spec.peaks('centroided')
 
         precursor_mz = spec.selected_precursors[0]['mz']
         precursor_charge = spec.selected_precursors[0].get('charge', None)
@@ -211,17 +200,12 @@ def main(
                 ),
                 file=oof
             )
-        elif precursor_charge_range is not None:
+        else:
             print(
                 'CHARGE={0}{1}'.format(
                     precursor_charge_range,
                     ion_mode
                 ),
-                file=oof
-            )
-        else:
-            print(
-                'CHARGE=',
                 file=oof
             )
 
