@@ -1523,6 +1523,7 @@ ursgal_params = {
                 'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
+                'deepnovo_v2': True,
             },
             'peptide_forest_style_1' : {
                 'None'                 : None,
@@ -1544,6 +1545,7 @@ ursgal_params = {
                 'msgfplus_v2018_09_12' : False,
                 'msgfplus_v2019_01_22' : False,
                 'msgfplus_v2019_04_18' : False,
+                'msgfplus_v2019_07_03' : False,
                 'msgfplus_v9979'       : False,
                 'myrimatch_2_1_138'    : True,
                 'myrimatch_2_2_140'    : True,
@@ -11207,6 +11209,7 @@ ursgal_params = {
                 'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
+                'deepnovo_v2'          : 'DeepNovo:score',
             },
             'peptide_forest_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11227,6 +11230,7 @@ ursgal_params = {
                 'msgfplus_v2018_09_12' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_01_22' : 'MS-GF:SpecEValue',
                 'msgfplus_v2019_04_18' : 'MS-GF:SpecEValue',
+                'msgfplus_v2019_07_03' : 'MS-GF:SpecEValue',
                 'msgfplus_v9979'       : 'MS-GF:SpecEValue',
                 'myrimatch_2_1_138'    : 'MyriMatch:MVH',
                 'myrimatch_2_2_140'    : 'MyriMatch:MVH',
