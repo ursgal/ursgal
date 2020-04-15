@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 '''
 Convert .csv files to counted result files (.csv)
 

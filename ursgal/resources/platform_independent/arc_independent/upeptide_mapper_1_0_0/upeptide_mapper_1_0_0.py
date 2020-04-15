@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 '''
 usage:
     ./upeptide_mapper_1_0_0.py <input_file> <output_file>

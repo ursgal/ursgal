@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import gzip
 import xml.etree.ElementTree as ElementTree
 import csv

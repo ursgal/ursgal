@@ -1,4 +1,4 @@
-#!/media/lukas/storage/uni/forschungsmodul_proteomics/pypercolator/pypercolator/bin/python3.4
+#!/media/lukas/storage/uni/forschungsmodul_proteomics/pypercolator/pypercolator/bin/python
 
 '''
 Parses a target/decoy search result file and adds a column called "estimated_FDR".

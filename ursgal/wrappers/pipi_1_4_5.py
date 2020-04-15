@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 import ursgal
 import os
 from collections import defaultdict as ddict

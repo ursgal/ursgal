@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 
 from .xtandem_sledgehammer import xtandem_sledgehammer as tandem
 
