@@ -194,6 +194,12 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                     reduced_line_dict[k] = v
                 if reduced_line_dict['Modifications'] == 'None':
                     reduced_line_dict['Modifications'] = ''
+                if reduced_line_dict['Is decoy'] == 'True':
+                    reduced_line_dict['Is decoy'] = 'true'
+                elif reduced_line_dict['Is decoy'] == 'False':
+                    reduced_line_dict['Is decoy'] = 'false'
+                else:
+                    print(reduced_line_dict['Is decoy'])
                 psm_id = []
                 for colname in psm_colnames:
                     psm_id.append(reduced_line_dict[colname])
@@ -241,9 +247,9 @@ class peptide_forest_1_0_0( ursgal.UNode ):
             csv_writer.writeheader()
             import pprint
             for psm_id in out_tmp_psm_dicts.keys():
-                if 'TN_CSF_062617_02.10.10.3' in psm_id:
-                    pprint.pprint(out_tmp_psm_dicts[psm_id])
-                    print('===================================')
+                # if 'TN_CSF_062617_02.10.10.3' in psm_id:
+                    # pprint.pprint(out_tmp_psm_dicts[psm_id])
+                    # print('===================================')
                 if len(out_tmp_psm_dicts[psm_id]) > 1:
                     merged_row_dict = ursgal.ucore.merge_rowdicts(
                         out_tmp_psm_dicts[psm_id], 
@@ -251,13 +257,13 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                         joinchar=';',
                     )
                     csv_writer.writerow(merged_row_dict)
-                    if 'TN_CSF_062617_02.10.10.3' in psm_id:
-                        pprint.pprint(merged_row_dict)
-                        print('------------------------')
+                    # if 'TN_CSF_062617_02.10.10.3' in psm_id:
+                        # pprint.pprint(merged_row_dict)
+                        # print('------------------------')
                 else:
                     csv_writer.writerow(out_tmp_psm_dicts[psm_id][0])
-                    if 'TN_CSF_062617_02.10.10.3' in psm_id:
-                        pprint.pprint(out_tmp_psm_dicts[psm_id][0])
-                        print('______________________________')
+                    # if 'TN_CSF_062617_02.10.10.3' in psm_id:
+                        # pprint.pprint(out_tmp_psm_dicts[psm_id][0])
+                        # print('______________________________')
                 # exit()
         return
