@@ -91,6 +91,7 @@ unify_csv_main(
         },
         'label' : '',
         'mods' : R.params['mods'],
+        'prefix' : '',
     },
     search_engine  = 'omssa_2_1_9',
 )
