@@ -420,6 +420,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_2_split = '.'.join(line_dict['Spectrum Title'].split('.')[:-2])
                 else:
                     line_2_split = line_dict['Spectrum Title']
+                if line_2_split.startswith(params['prefix']):
+                    line_2_split = line_2_split.replace(
+                        params['prefix'],
+                        ''
+                    )
                 line_dict['Spectrum Title'] = line_2_split
 
                 input_file_basename, spectrum_id, _spectrum_id, charge = line_2_split.split('.')[:4]

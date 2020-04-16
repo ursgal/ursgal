@@ -50,7 +50,7 @@ class UController(ursgal.UNode):
             'internal' : True,
         },
         'utranslation_style'        : 'ucontroller_style_1',
-        'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis. J. Proteome res. acs.jproteome.5b00860 (2015). doi:10.1021/acs.jproteome.5b00860'
+        'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis (2016). J. Proteome Res. 15(3):788-94. doi: 10.1021/acs.jproteome.5b00860'
     }
 
     def __init__( self, *args, **kwargs):
