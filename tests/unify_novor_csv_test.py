@@ -72,6 +72,7 @@ unify_csv_main(
         },
         'label' : '',
         'mods' : R.params['mods'],
+        'prefix' : '',
     },
     search_engine  = 'novor_1_1beta',
 )
