@@ -4139,7 +4139,7 @@ ursgal_params = {
                 'Mod Ambig Edges': 'TagGraph:Mod Ambig Edges',
                 'Mod Ranges': 'TagGraph:Mod Ranges',
                 'Proteins': 'Protein ID',
-                'De Novo Peptide': 'De Novo Peptide':,
+                'De Novo Peptide': 'De Novo Peptide',
                 'De Novo Score': 'De Novo Score',
                 'Matching Tag Length': 'Matching Tag Length',
                 'Num Matches': 'Num DB Matches',
