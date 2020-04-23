@@ -438,110 +438,91 @@ class tag_graph_1_8_0(ursgal.UNode):
 
     def postflight(self):
         '''
-        Reads MSFragger tsv output and write final csv output file.
-
-        Adds:
-            * Raw data location, since this can not be added later
-            * Converts masses in Da to m/z (could be done in unify_csv)
-
-
+        Reads TagGraph tdv output and write final csv output file.
         '''
-        ms_fragger_header = [
-            'ScanID',
-            'Precursor neutral mass (Da)',
-            'Retention time (minutes)',
-            'Precursor charge',
-            'Hit rank',
-            'Peptide Sequence',
-            'Upstream Amino Acid',
-            'Downstream Amino Acid',
-            'Protein',
-            'Matched fragment ions',
-            'Total possible number of matched theoretical fragment ions',
-            # (including any variable modifications) (Da)
-            'Neutral mass of peptide',
-            'Mass difference',
-            'Number of tryptic termini',
-            'Number of missed cleavages',
-            # '(starts with M, separated by |, formated as position,mass)
-            'Variable modifications detected',
-            'Hyperscore',
-            'Next score',
-            'Intercept of expectation model (expectation in log space)',
-            'Slope of expectation model (expectation in log space)',
+        taggraph_header = [
+            'ScanF',
+            'Charge',
+            'Retention Time',
+            'Obs M+H',
+            'Theo M+H',
+            'PPM',
+            'EM Probability',
+            '1-lg10 EM',
+            'Spectrum Score',
+            'Alignment Score',
+            'Composite Score',
+            'Unique Siblings',
+            'Context Mod Variants',
+            'Num Mod Occurrences',
+            'Context',
+            # 'Mod Context',
+            'Mods',
+            'Mod Ambig Edges',
+            'Mod Ranges',
+            'Proteins',
+            'De Novo Peptide',
+            'De Novo Score',
+            'Matching Tag Length',
+            'Num Matches',
         ]
 
         translated_headers = []
         header_translations = self.UNODE_UPARAMS[
             'header_translations']['uvalue_style_translation']
-        for original_header_key in ms_fragger_header:
+        for original_header_key in taggraph_header:
             ursgal_header_key = header_translations[original_header_key]
             translated_headers.append(ursgal_header_key)
 
         translated_headers += [
             'Spectrum Title',
             'Raw data location',
-            'Exp m/z',
             'Calc m/z',
-
         ]
 
-        msfragger_output_tsv = os.path.join(
-            self.params['input_dir_path'],
-            self.params['file_root'] + '.tsv'
+        taggrapg_output_tdv = os.path.join(
+            self.tag_graph_tmp_dir,
+            'EM_output'
+            '{0}_TopResults.tdv'.format(
+                self.params['output_file'].replace('.csv', '')
+            )
         )
 
-        if os.path.exists(msfragger_output_tsv) is False:
-            msfragger_output_tsv = os.path.join(
-                self.params['input_dir_path'],
-                self.params['file_root'][len(self.params['prefix'])+1:] + '.tsv'
-            )    
-            if os.path.exists(msfragger_output_tsv) is False:
-                msfragger_output_tsv = os.path.join(
-                    self.params['input_dir_path'],
-                    '_'.join(self.params['file_root'].split('_')[1:]) + '.tsv'
-                )
-                if os.path.exists(msfragger_output_tsv) is False:
-                    print('[ERROR]: MSFragger could not find the correct output tsv file')
-
-        csv_out_fobject = open(self.params['translations'][
-                               'output_file_incl_path'], 'w')
+        csv_out_fobject = open(
+            self.params['translations']['output_file_incl_path'],
+            'w'
+        )
         csv_writer = csv.DictWriter(
             csv_out_fobject,
             fieldnames=translated_headers
         )
         csv_writer.writeheader()
 
-        with open(msfragger_output_tsv) as temp_tsv:
+        with open(taggrapg_output_tdv, 'r') as temp_tsv:
             csv_reader = csv.DictReader(
                 temp_tsv,
-                fieldnames=translated_headers,
                 delimiter='\t'
             )
             for line_dict in csv_reader:
-                line_dict['Raw data location'] = os.path.abspath(
-                    self.params['translations']['mzml_input_file']
-                )
+                out_line_dict = {}
 
                 ############################################
                 # all fixing here has to go into unify csv! #
                 ############################################
 
-                # 'Precursor neutral mass (Da)' : '',
-                # 'Neutral mass of peptide' : 'Calc m/z',# (including any variable modifications) (Da)
-                line_dict['Exp m/z'] = ursgal.ucore.calculate_mz(
-                    line_dict['MSFragger:Precursor neutral mass (Da)'],
-                    line_dict['Charge']
-                )
-                line_dict['Calc m/z'] = ursgal.ucore.calculate_mz(
-                    line_dict['MSFragger:Neutral mass of peptide'],
-                    line_dict['Charge']
+                for column in taggraph_header:
+                    if column == 'ScanF':
+                        out_line_dict[header_translations[column]] = line_dict[column].split(':')[1]
+                    elif column == 'Context':
+                        out_line_dict[header_translations[column]] = line_dict[column].split('.')[1]
+                    else:
+                        out_line_dict[header_translations[column]] = line_dict[column]
+                out_line_dict['Raw data location'] = os.path.abspath(
+                    self.params['translations']['mzml_input_file']
                 )
                 csv_writer.writerow(line_dict)
 
         csv_out_fobject.close()
-        if msfragger_output_tsv.endswith('.tsv'):
-            os.remove(msfragger_output_tsv)
         return
 
     def write_params_file(self):

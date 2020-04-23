@@ -274,6 +274,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     open_mod_search_engines = [
         'pipi',
         'moda',
+        'tag_graph'
     ]
     de_novo = False
     database_search = False
@@ -462,11 +463,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     Novor
                     DeepNovo
                     MSFragger
+                    TagGraph
                 '''
                 pure_input_file_name = os.path.basename(
                     line_dict['Raw data location']
                 )
-                input_file_basename = pure_input_file_name.split(".")[0]
+                input_file_basename = '.'.join(pure_input_file_name.split(".")[:-1])
                 spectrum_id = line_dict['Spectrum ID']
                 line_dict['Spectrum Title'] = '{0}.{1}.{1}.{2}'.format(
                     input_file_basename,
@@ -698,6 +700,30 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         # sys.exit(1)
                         line_dict['Modifications'] = ';'.join( ms_fragger_reformatted_mods )
 
+                if 'tag_graph' in search_engine:
+                    tg_tmp_mods = []
+                    tg_mod_list = eval(line_dict['Modifications'])
+                    for tg_mod in tg_mod_list:
+                        tg_mod_pos = int(tg_mod[2])+1
+                        tg_mod_name = tg_mod[0][0]
+                        tg_mod_mass = tg_mod[0][1]
+                        try:
+                            tg_mod_aa = tg_mod[1][0]
+                        except:
+                            print('skipping:', tg_mod)
+                            continue
+                        if 'N-term' in tg_mod_aa:
+                            tg_mod_pos += -1
+                        elif 'C-term' in tg_mod_aa:
+                            tg_mod_pos += 1
+                        tg_tmp_mods.append(
+                            '{0}<|>{1}:{2}'.format(
+                                tg_mod_name,
+                                tg_mod_mass,
+                                tg_mod_pos
+                            )
+                        )
+                    line_dict['Modifications'] = ';'.join(tg_tmp_mods)
                 ##################################################
                 # Some engines do not report fixed modifications #
                 ##################################################
@@ -785,6 +811,32 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             is not recognized by ursgal'''.format(
                                 modification
                             )
+                    if 'tag_graph' in search_engine:
+                        try:
+                            unimod_name, mod_mass = mod.split('<|>')
+                        except: #added fixed mods
+                            tmp_mods.append(modification)
+                            continue
+                        unimod_id = ursgal.GlobalUnimodMapper.name2id(
+                            unimod_name
+                        )
+                        if unimod_id is None:
+                            tmp_mass_diff.append(
+                                '{0}({1}):{2}'.format(
+                                    mod_mass,
+                                    unimod_name,
+                                    pos
+                                )
+                            )
+                        else:
+                            tmp_mods.append(
+                                '{0}:{1}'.format(
+                                    unimod_name,
+                                    pos
+                                )
+                            )
+                        continue
+
                     if pos <= 1:
                         Nterm = True
                         new_pos = 1
