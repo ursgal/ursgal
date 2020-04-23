@@ -421,7 +421,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_2_split = '.'.join(line_dict['Spectrum Title'].split('.')[:-2])
                 else:
                     line_2_split = line_dict['Spectrum Title']
-                if params['prefix'] is None:
+                if params['prefix'] is None or params['prefix'] == '':
                     pass
                 elif line_2_split.startswith(params['prefix']):
                     line_2_split = line_2_split.replace(
