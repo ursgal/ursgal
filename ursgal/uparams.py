@@ -3873,6 +3873,7 @@ ursgal_params = {
             'pglyco_db_style_1'        : 'header_translations',
             'pglyco_fdr_style_1'       : 'header_translations',
             'deepnovo_style_1'         : 'header_translations',
+            'tag_graph_style_1'        : 'header_translations',
         },
         'utag' : [
             'conversion',
