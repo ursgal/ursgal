@@ -113,9 +113,6 @@ class UParamMapper( dict ):
             ]
             for k in keys_to_delete:
                 del template[k]
-            print(style)
-            import pprint
-            pprint.pprint(sup['ukey_translation'])
             template.update(
                 {
                     'style'                    : style,
