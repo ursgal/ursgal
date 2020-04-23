@@ -3,6 +3,7 @@ import ursgal
 import os
 import csv
 import sys
+import shutil
 
 
 class flash_lfq_1_1_1(ursgal.UNode):
@@ -16,7 +17,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
         "release_date": "22-04-2020",
         "engine_type": {"quantification_engine": True,},
         "input_extensions": [".mzML"],
-        "output_extensions": [".tsv"],
+        "output_extensions": [".csv"],
         "in_development": False,
         "create_own_folder": True,
         "include_in_git": False,
@@ -27,10 +28,10 @@ class flash_lfq_1_1_1(ursgal.UNode):
             "darwin": {"64bit": {"exe": "CMD.exe",}},
             "win32": {"64bit": {"exe": "CMD.exe",}},
         },
-        "citation": "",
+        "citation": "ADD THE CITATION!!!",
     }
 
-    def rewrite_psm_input(self, unified_csv, mod_types):
+    def rewrite_psm_input(self, unified_csv):
         fieldnames = [
             "File Name",
             "Scan Retention Time",
@@ -51,8 +52,9 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 if line["Modifications"] == "":
                     full_seq = line["Sequence"]
                 else:
+                    # continue
                     full_seq = self.insert_mods(
-                        line["Sequence"], line["Modifications"], mod_types
+                        line["Sequence"], line["Modifications"]
                     )
                 line_to_write = {
                     "File Name": os.path.splitext(
@@ -68,29 +70,84 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 writer.writerow(line_to_write)
         return out_name
 
-    def insert_mods(self, sequence, ursgal_mods, mod_map):
+    def insert_mods(self, sequence, ursgal_mods):
         base_seq = sequence
         mods_sorted = sorted(
-            [(m.split(":")[0], m.split(":")[1]) for m in ursgal_mods.split(";")],
+            [(m.split(":")[0], int(m.split(":")[1])) for m in ursgal_mods.split(";")],
             key=lambda x: x[1],
             reverse=True,
         )
+        # add mods as the following
+        # just split a ; and write whole string in []
+        # check if acetyl can be anywhere or before or after first AA
+        # if plain massshift in mod string, add it explicitly!!
         for m in mods_sorted:
             name, pos = m
-            pos = int(pos)
             sequence = list(sequence)
-            aa = base_seq[pos - 1]
-            type = mod_map[aa]
-            sequence.insert(pos, f"[Common {type}:{name} on {aa}]")
+            sequence.insert(pos, f"[{name}:{pos}]")
             sequence = "".join(sequence)
         return sequence
 
     def rewrite_as_csv(self, tsv_path):
-        pass
+        base, ext = os.path.splitext(tsv_path)
+        csv_path = base + '.csv'
+        with open(tsv_path) as fin, open(csv_path, 'wt') as fout:
+            reader = csv.DictReader(fin, delimiter='\t')
+            fieldnames = reader.fieldnames
+            writer = csv.DictWriter(fout, fieldnames=fieldnames)
+            writer.writeheader()
+            for line in reader:
+                # use header translations param to translate headers of output
+                writer.writerow(line)
+        return csv_path
+
+    def rewrite_as_translated_csv(self, tsv_path):
+        header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
+        flash_lfq_headers = [
+            "File Name",
+            "Base Sequence",
+            "Full Sequence",
+            "Protein Group",
+            "Peptide Monoisotopic Mass",
+            "Precursor Charge",
+            "Theoretical MZ",
+            "Peak Apex Mass Error (ppm)",
+            "MBR Score",
+            "Peak Detection Type",
+            "PSMs Mapped",
+            "Peak Split Valley RT",
+            "Base Sequences Mapped",
+            "Full Sequences Mapped",
+            "Peak intensity",
+            "Peak RT Start",
+            "Peak RT Apex",
+            "Peak RT End",
+            "Peak MZ",
+            "Peak Charge",
+            "Num Charge States Observed",
+            "MS2 Retention Time",
+        ]
+        translated_headers = []
+        for original_header_key in flash_lfq_headers:
+            ursgal_header_key = header_translations[original_header_key]
+            translated_headers.append(ursgal_header_key)
+        base, ext = os.path.splitext(tsv_path)
+        csv_path = base + '.csv'
+        with open(tsv_path) as fin, open(csv_path, 'wt') as fout:
+            reader = csv.DictReader(fin, delimiter='\t')
+            fieldnames = translated_headers
+            writer = csv.DictWriter(fout, fieldnames=translated_headers)
+            writer.writeheader()
+            for line in reader:
+                out_line_dict = {}
+                for column in flash_lfq_headers:
+                    translated_col = header_translations[column]
+                    out_line_dict[translated_col] = line[column]
+                writer.writerow(out_line_dict)
+        return csv_path
 
     def __init__(self, *args, **kwargs):
         super(flash_lfq_1_1_1, self).__init__(*args, **kwargs)
-        pass
 
     def preflight(self):
         print("[ -ENGINE- ] Executing quantification ..")
@@ -127,13 +184,13 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 fieldnames = ["FileName", "Condition", "Biorep", "Fraction", "Techrep"]
                 writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
                 writer.writeheader()
-                for line_dict in experiment_setup:
-                    row = dict(zip(fieldnames, line_dict))
-                    print(row)
-                    writer.writerow(row)
+                for i, line_dict in experiment_setup.items():
+                    writer.writerow(line_dict)
 
         # Convert unified csv to FlashLFQ input
         unified_csv = self.params["translations"]["quantification_evidences"]
+        mod_map = {}
+        mods = self.map_mods()
         psm_input = self.rewrite_psm_input(unified_csv)
 
         command_list = []
@@ -147,7 +204,17 @@ class flash_lfq_1_1_1(ursgal.UNode):
         command_list.extend(["--idt", psm_input])
         command_list.extend(["--out", self.params["output_dir_path"]])
         # add all other parameters here
-        breakpoint()
+        grouped = self.params['translations']['_grouped_by_translated_key']
+        for key in grouped.keys():
+            if not key.startswith('--'):
+                continue
+            val = str(list(grouped[key].values())[0])
+            if val != 'False':
+                if val == 'True':
+                    command_list.append(key)
+                else:
+                    command_list.append(key)
+                    command_list.append(val)
         self.params["command_list"] = command_list
 
     def postflight(self):
@@ -161,9 +228,16 @@ class flash_lfq_1_1_1(ursgal.UNode):
         for file in output_files_basenames:
             path = os.path.join(self.params["output_dir_path"], file)
             if os.path.exists(path):
-                csv_file = self.rewrite_as_csv(path)
-                suffix = os.path.splitext(csv_file)[0]
-                outname, ext = os.path.splitext(csv_file)
-                new_out = "{out_name}_{suffix}.{ext}"
+                if file == 'QuantifiedPeaks.tsv':
+                    csv_file = self.rewrite_as_translated_csv(path)
+                else:
+                    csv_file = self.rewrite_as_csv(path)
+                suffix, ext = os.path.splitext(os.path.basename(csv_file))
+                out_name = os.path.splitext(self.params['output_file'])[0]
+                if file == 'QuantifiedPeaks.tsv':
+                    # without suffix
+                    new_out = '{out_name}{ext}'.format(out_name=out_name, ext='.csv')
+                else:
+                    new_out = "{out_name}_{suffix}{ext}".format(out_name=out_name, suffix=suffix, ext=ext)
                 new_path = os.path.join(self.params["output_dir_path"], new_out)
-                shutil.mv(path, new_path)
+                os.rename(csv_file, new_path)
