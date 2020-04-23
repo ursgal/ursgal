@@ -4119,7 +4119,7 @@ ursgal_params = {
                 'precursor_charge': 'Charge',
                 'scan_list_middle': 'Spectrum ID',
             },
-            'tag_graph_style_1':
+            'tag_graph_style_1': {
                 'ScanF': 'Spectrum ID',
                 'Charge': 'Charge',
                 'Retention Time': 'Retention Time (s)',
@@ -4139,10 +4139,11 @@ ursgal_params = {
                 'Mod Ambig Edges': 'TagGraph:Mod Ambig Edges',
                 'Mod Ranges': 'TagGraph:Mod Ranges',
                 'Proteins': 'Protein ID',
-                'De Novo Peptide': 'De Novo Peptide':,
+                'De Novo Peptide': 'De Novo Peptide',
                 'De Novo Score': 'De Novo Score',
                 'Matching Tag Length': 'Matching Tag Length',
                 'Num Matches': 'Num DB Matches',
+            },
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
