@@ -1,5 +1,313 @@
 ursgal_params = {
-    'infer_proteins' : {
+    'experiment_setup': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : [],
+        'description' :  ''' ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '''experiment_setup
+Format:
+{"1": {"FileName": <filename as in identfile>, "Condition":<str>, "Biorep": <int>, "Fraction": <int>, "Techrep": <int>},
+"2": ....
+}
+''',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "dict",
+    },
+    'isotopic_distribution_tolerance': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : 5,
+        'description' :  '''isotopic distribution tolerance in ppm''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--iso',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'normalize_intensities': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''normalize intensity results''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--nor',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'integrate_peak_areas': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''integrate peak areas''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--int',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'only_precursor_charge': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''use only precursor charge state''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--chg',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'match_between_runs': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''Quantify PSMs identified in other runs''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--mbr',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'match_between_runs_RT_window': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''Max RT differenence in minutes of peptides to be considered for MBR''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--mrt',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'require_msms_id': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''Require MS/MS match in condition to consider quantification''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--rmc',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'bayesian_fold_change': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''Perform Bayesian protein fold change analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--bay',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'bayesian_fold_change_control_condition': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''Control condition for bayesian fold change analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--ctr',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'fold_change_cutoff': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : 0.1,
+        'description' :  '''fold-change cutoff for Bayesian protein fold-change analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--fcc',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'markov_chain_iterations': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : 3000,
+        'description' :  '''number of markov-chain monte carlo iterations for the Bayesian protein fold-change analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--mcm',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'markov_chain_burn_in_iterations': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : 1000,
+        'description' :  '''number of markov-chain monte carlo burn in iterations for the Bayesian protein fold-change analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--bur',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'use_shared_peptides': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''use shared peptides for protein quantification''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--sha',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'random_seed': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : None,
+        'description' :  '''Random seed for random number generators''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--rns',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+
+
+
+    'infer_proteins': {
         'edit_version': 1.00,
         'available_in_unode' : [
             'percolator_2_08',
@@ -199,6 +507,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'flash_lfq_1_1_1',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -209,12 +518,13 @@ ursgal_params = {
             'unit': '',
         },
         'default_value': 2,
-        'description': """ Min number of matched isotopologues for pyqms to consider for quantification """,
+        'description': """ Min number of matched isotopologues to consider for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES',
             'sugarpy_run_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES',
             'sugarpy_plot_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES',
+            'flash_lfq_style_1': '--nis',
         },
         'utag': [
             'quantification',
@@ -616,12 +926,14 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'flash_lfq_1_1_1',
         ],
         'default_value': None,
         'description':  ''' Molecules to quantify. Can be either a list of strings or a csv file ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'evidences'
+            'pyqms_style_1': 'evidences',
+            'flash_lfq_style_1': 'evidences',
         },
         'uvalue_option': {
             'none_val': [None],
@@ -2049,6 +2361,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
+            'flash_lfq_1_1_1',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -2065,6 +2378,7 @@ ursgal_params = {
             'moda_style_1'        : '-@',
             'pglyco_db_style_1'   : 'process',
             'pnovo_style_1'       : 'thread',
+            'flash_lfq_style_1': '--thr',
         },
         'utag' : [
             'hardware_resources',
@@ -3857,6 +4171,7 @@ ursgal_params = {
             'deepnovo_0_0_1',
             'deepnovo_v2',
             'tag_graph_1_8_0',
+            'flash_lfq_1_1_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3874,6 +4189,7 @@ ursgal_params = {
             'pglyco_fdr_style_1'       : 'header_translations',
             'deepnovo_style_1'         : 'header_translations',
             'tag_graph_style_1'        : 'header_translations',
+            'flash_lfq_style_1'        : 'header_translations',
         },
         'utag' : [
             'conversion',
@@ -4144,6 +4460,32 @@ ursgal_params = {
                 'De Novo Score': 'De Novo Score',
                 'Matching Tag Length': 'Matching Tag Length',
                 'Num Matches': 'Num DB Matches',
+            },
+            'flash_lfq_style_1': {
+                'File Name': 'Raw Filename',
+                'Precursor Charge': 'Charge',
+                'Peak RT Apex': 'Retention Time (s)',
+                'Peptide Monoisotopic Mass': 'Calc mass',
+                'Peak Apex Mass Error (ppm)': 'Accuracy (ppm)',
+                'Base Sequence': 'Sequence',
+                'Full Sequence': 'FlashLFQ:Full Sequence',
+                'Protein Group': 'Protein ID',
+                "Theoretical MZ": 'FlashLFQ:Theoretical MZ',
+                'Peak MZ': 'FlashLFQ:Peak MZ',
+                'MBR Score': "FlashLFQ:MBR Score",
+                'Peak Detection Type': "FlashLFQ:Peak Detection Type",
+                'PSMs Mapped': "FlashLFQ:PSMs Mapped",
+                'Peak Split Valley RT': "FlashLFQ:Peak Split Valley RT",
+                'Base Sequences Mapped': "FlashLFQ:Base Sequences Mapped",
+                'Full Sequences Mapped': "FlashLFQ:Full Sequences Mapped",
+                'Peak intensity': "FlashLFQ:Peak intensity",
+                'Peak RT Start': "FlashLFQ:Peak RT Start",
+                'Peak RT Apex': "FlashLFQ:Peak RT Apex",
+                'Peak RT End': "FlashLFQ:Peak RT End",
+                'Peak MZ': "FlashLFQ:Peak MZ",
+                'Peak Charge': "FlashLFQ:Peak Charge",
+                'Num Charge States Observed': "FlashLFQ:Num Charge States Observed",
+                'MS2 Retention Time': "FlashLFQ:MS2 Retention Time",
             },
         },
         'uvalue_type' : 'str',
@@ -6357,6 +6699,7 @@ ursgal_params = {
             'deepnovo_0_0_1',
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
+            'flash_lfq_1_1_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -6388,6 +6731,7 @@ ursgal_params = {
             'deepnovo_style_1' : 'modifications',
             'pnovo_style_1' : 'modifications',
             'tag_graph_style_1' : 'modifications',
+            'flash_lfq_style_1': 'modifications',
         },
         'utag' : [
             'modifications',
@@ -8444,6 +8788,7 @@ ursgal_params = {
             'deepnovo_0_0_1',
             'deepnovo_v2',
             'pnovo_3_1_3',
+            'flash_lfq_1_1_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8467,6 +8812,7 @@ ursgal_params = {
             'pglyco_db_style_1'  : 'search_precursor_tolerance',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol',
+            'flash_lfq_style_1'  : '--ppm',
         },
         'utag' : [
             'precursor',
