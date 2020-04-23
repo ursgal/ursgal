@@ -4143,6 +4143,7 @@ ursgal_params = {
                 'De Novo Score': 'De Novo Score',
                 'Matching Tag Length': 'Matching Tag Length',
                 'Num Matches': 'Num DB Matches',
+            },
         },
         'uvalue_type' : 'str',
         'uvalue_option' : {
