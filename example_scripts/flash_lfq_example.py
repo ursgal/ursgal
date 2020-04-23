@@ -17,17 +17,17 @@ def main():
         ],
         'database': '/media/external/Projects/proteomics_blog_hackathon/data/Uniprot_swissprot_TREMBL_cRAP_target_decoy.fasta',
         "isotopic_distribution_tolerance": 5,
-        "normalize_intensities": False,
+        "normalize_intensities": True,
         "integrate_peak_areas": False,
         "only_precursor_charge": False,
-        "match_between_runs": False,
+        "match_between_runs": True,
         "match_between_runs_RT_window": 0.5,
         "require_msms_id": False,
         "bayesian_fold_change": True,
         "bayesian_fold_change_control_condition": "WT",
         "fold_change_cutoff": 0.1,
-        "markov_chain_iterations": 2999,
-        "markov_chain_burn_in_iterations": 999,
+        "markov_chain_iterations": 3000,
+        "markov_chain_burn_in_iterations": 1000,
         "use_shared_peptides": False,
         "random_seed": 200,
     }
@@ -36,15 +36,11 @@ def main():
         profile='QExactive+',
         params=params
     )
-    uc.params['experiment_setup'] = [
-        {"FileName": "TN_CSF_062617_03.mzML", "Condition": "WT", "Biorep": 1, "Fraction": 1, "Techrep":1},
-        {"FileName": "TN_CSF_062617_04.mzML", "Condition": "KO", "Biorep": 1, "Fraction": 1, "Techrep":1},
-    ]
+    uc.params['experiment_setup'] = {
+        "1": {"FileName": "TN_CSF_062617_03", "Condition": "WT", "Biorep": 1, "Fraction": 1, "Techrep":1},
+        "2": {"FileName": "TN_CSF_062617_04", "Condition": "KO", "Biorep": 1, "Fraction": 1, "Techrep":1},
+    }
 
-    uc.params['experiment_setup'] = [
-        ["TN_CSF_062617_03",  "WT",  1,  1, 1],
-        ["TN_CSF_062617_04",  "KO",  1,  1, 1],
-    ]
     mzml_files = [
         '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_03.mzML',
         '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_04.mzML',

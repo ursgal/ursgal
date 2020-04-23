@@ -209,12 +209,18 @@ class flash_lfq_1_1_1(ursgal.UNode):
             if not key.startswith('--'):
                 continue
             val = str(list(grouped[key].values())[0])
+            if key == '--ppm':
+                print('[ WARNING ] Assymetric precursor window not supported, take 2 times precursor_mass_tolerance_plus')
+                val = str(2* int(val))
+
+            # print(f'{key}={val}')
             if val != 'False':
                 if val == 'True':
                     command_list.append(key)
                 else:
                     command_list.append(key)
                     command_list.append(val)
+        # print(command_list)
         self.params["command_list"] = command_list
 
     def postflight(self):

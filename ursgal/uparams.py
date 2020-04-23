@@ -8783,6 +8783,7 @@ ursgal_params = {
             'deepnovo_0_0_1',
             'deepnovo_v2',
             'pnovo_3_1_3',
+            'flash_lfq_1_1_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8806,6 +8807,7 @@ ursgal_params = {
             'pglyco_db_style_1'  : 'search_precursor_tolerance',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol',
+            'flash_lfq_style_1'  : '--ppm',
         },
         'utag' : [
             'precursor',
