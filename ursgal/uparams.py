@@ -4119,7 +4119,7 @@ ursgal_params = {
                 'precursor_charge': 'Charge',
                 'scan_list_middle': 'Spectrum ID',
             },
-            'tag_graph_style_1':
+            'tag_graph_style_1': {
                 'ScanF': 'Spectrum ID',
                 'Charge': 'Charge',
                 'Retention Time': 'Retention Time (s)',
