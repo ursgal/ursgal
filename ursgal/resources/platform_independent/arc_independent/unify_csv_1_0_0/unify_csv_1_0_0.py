@@ -469,6 +469,13 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_dict['Raw data location']
                 )
                 input_file_basename = '.'.join(pure_input_file_name.split(".")[:-1])
+                if params['prefix'] is None or params['prefix'] == '':
+                    pass
+                elif input_file_basename.startswith(params['prefix']):
+                    input_file_basename = line_2_split.replace(
+                        params['prefix']+'_',
+                        ''
+                    )
                 spectrum_id = line_dict['Spectrum ID']
                 line_dict['Spectrum Title'] = '{0}.{1}.{1}.{2}'.format(
                     input_file_basename,
