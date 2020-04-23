@@ -8,7 +8,12 @@ ursgal_params = {
         'description' :  ''' ''',
         'triggers_rerun' : True,
         'ukey_translation' : {
-            'flash_lfq_style_1' : 'experiment_setup',
+            'flash_lfq_style_1' : '''experiment_setup
+Format:
+{"1": {"FileName": <filename as in identfile>, "Condition":<str>, "Biorep": <int>, "Fraction": <int>, "Techrep": <int>},
+"2": ....
+}
+''',
         },
         'utag' : [
             'quantification',
@@ -17,7 +22,7 @@ ursgal_params = {
         },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "list",
+        'uvalue_type' : "dict",
     },
     'isotopic_distribution_tolerance': {
         'edit_version': 1.00,
