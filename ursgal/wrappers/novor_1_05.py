@@ -215,7 +215,7 @@ class novor_1_05( ursgal.UNode ):
         regex_list = [
             ('\(Cam\)','Carbamidomethyl'),
             ('\(O\)','Oxidation'),
-            ('\((N-term|Acetyl)\)','Acetyl'),
+            ('\(N-term|Acetyl\)','Acetyl'),
             ('\[Acetyl\]','Acetyl'),
             ('\(Acetyl\)','Acetyl'),
             ('\[Amidated\]','Amidated'),
