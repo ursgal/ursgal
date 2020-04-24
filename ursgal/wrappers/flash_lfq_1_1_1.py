@@ -84,7 +84,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
         for m in mods_sorted:
             name, pos = m
             sequence = list(sequence)
-            sequence.insert(pos, f"[{name}:{pos}]")
+            sequence.insert(pos, "[{0}:{1}]".format(name, pos))
             sequence = "".join(sequence)
         return sequence
 
