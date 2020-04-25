@@ -482,7 +482,7 @@ class tag_graph_1_8_0(ursgal.UNode):
 
         taggrapg_output_tdv = os.path.join(
             self.tag_graph_tmp_dir,
-            'EM_output'
+            'EM_output',
             '{0}_TopResults.tdv'.format(
                 self.params['output_file'].replace('.csv', '')
             )
@@ -520,7 +520,7 @@ class tag_graph_1_8_0(ursgal.UNode):
                 out_line_dict['Raw data location'] = os.path.abspath(
                     self.params['translations']['mzml_input_file']
                 )
-                csv_writer.writerow(line_dict)
+                csv_writer.writerow(out_line_dict)
 
         csv_out_fobject.close()
         return
