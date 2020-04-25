@@ -1276,7 +1276,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         for molecule in all_molecules:
             if 'X' in molecule.split('#')[0]:
                 cc.use('{0}#{1}'.format(
-                    molecule.split('#')[0].replace('X', '')
+                    molecule.split('#')[0].replace('X', ''),
                     molecule.split('#')[1]
                 ))
             else:
