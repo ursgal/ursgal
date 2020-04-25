@@ -409,7 +409,9 @@ class tag_graph_1_8_0(ursgal.UNode):
         self.params['command_list'] = [
             'docker',
             'run',
-            '--name', 'taggraph', '--rm',
+            #'--name',
+            #'taggraph',
+            '--rm',
             '-v', self.docker_mount,
             # '-w', self.docker_dir_path,
             '-i', '-t',
