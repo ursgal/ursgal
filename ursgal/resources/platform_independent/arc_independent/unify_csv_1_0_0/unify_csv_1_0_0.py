@@ -839,10 +839,25 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         if do_not_map:
                             unimod_id = None
                         else:
-                            unimod_name = '{0}{1}'.format(
-                                unimod_name[0].upper(),
-                                unimod_name[1:]
-                            )
+                            if '->' in unimod_name:
+                                aa_1, aa_2 = unimod_name.split('->')
+                                aa_1 = '{0}{1}'.format(
+                                    aa_1[0].upper(),
+                                    aa_1[1:]
+                                )
+                                aa_2 = '{0}{1}'.format(
+                                    aa_2[0].upper(),
+                                    aa_2[1:]
+                                )
+                                unimod_name = '{0}->{1}'.format(
+                                    aa_1,
+                                    aa_2,
+                                )
+                            else:
+                                unimod_name = '{0}{1}'.format(
+                                    unimod_name[0].upper(),
+                                    unimod_name[1:]
+                                )
                             unimod_id = ursgal.GlobalUnimodMapper.name2id(
                                 unimod_name
                             )
