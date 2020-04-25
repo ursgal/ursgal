@@ -717,7 +717,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         try:
                             tg_mod_aa = tg_mod[1][0]
                         except:
-                            print('skipping:', tg_mod)
+                            if 'Isobaric Substitution' not in tg_mod[0][0]:
+                                print('skipping:', tg_mod)
                             continue
                         if 'N-term' in tg_mod_aa:
                             tg_mod_pos += -1
@@ -824,9 +825,21 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         except: #added fixed mods
                             tmp_mods.append(modification)
                             continue
-                        unimod_id = ursgal.GlobalUnimodMapper.name2id(
-                            unimod_name
-                        )
+                        do_not_map = False
+                        for mass_shift_name in [
+                            'Undefined Mass Shift',
+                            'Insertion',
+                            'PrecursorError',
+                            'precursorerror',
+                        ]:
+                            if mass_shift_name in unimod_name:
+                                do_not_map= True
+                        if do_not_map:
+                            unimod_id = None
+                        else:
+                            unimod_id = ursgal.GlobalUnimodMapper.name2id(
+                                unimod_name
+                            )
                         if unimod_id is None:
                             tmp_mass_diff.append(
                                 '{0}({1}):{2}'.format(

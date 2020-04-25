@@ -222,6 +222,7 @@ class ChemicalComposition(dict):
 
             for occ, match in enumerate(pattern.finditer(unimod)):
                 try:
+                    print(unimod[:match.start()])
                     unimodcomposition = self._unimod_parser.name2composition(
                         unimod[:match.start()]
                     )
