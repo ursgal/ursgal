@@ -830,6 +830,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         for mass_shift_name in [
                             'Undefined Mass Shift',
                             'Insertion',
+                            'Deletion',
                             'PrecursorError',
                             'precursorerror',
                         ]:
@@ -841,6 +842,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             unimod_id = ursgal.GlobalUnimodMapper.name2id(
                                 unimod_name
                             )
+                            if unimod_id is None:
+                                unimod_name = '{0}{1}'.format(
+                                    unimod_name[0].upper(),
+                                    unimod_name[1:]
+                                )
+                                unimod_id = ursgal.GlobalUnimodMapper.name2id(
+                                unimod_name
+                            )   
                         if mod_aa in fixed_mods.keys():
                             if unimod_name != fixed_mods[mod_aa]:
                                 unimod_id = None
