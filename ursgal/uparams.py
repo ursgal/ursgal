@@ -19,10 +19,14 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val' : [],
+            'item_title' : '',
+            'item_type' : 'str',
+            'custom_val_max' : 0,
         },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "dict",
+        'uvalue_type' : "list",
     },
     'isotopic_distribution_tolerance': {
         'edit_version': 1.00,
@@ -39,6 +43,13 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
         },
         'uvalue_translation' : {
         },
@@ -129,7 +140,7 @@ Format:
         'available_in_unode' : [
             'flash_lfq_1_1_1',
         ],
-        'default_value' : False,
+        'default_value' : 1,
         'description' :  '''Max RT differenence in minutes of peptides to be considered for MBR''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -139,6 +150,13 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
         },
         'uvalue_translation' : {
         },
@@ -219,6 +237,13 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
         },
         'uvalue_translation' : {
         },
@@ -239,6 +264,13 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'abundance',
+            'f-point': 1
         },
         'uvalue_translation' : {
         },
@@ -259,6 +291,13 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'abundance',
+            'f-point': 1
         },
         'uvalue_translation' : {
         },
@@ -289,7 +328,7 @@ Format:
         'available_in_unode' : [
             'flash_lfq_1_1_1',
         ],
-        'default_value' : None,
+        'default_value' : 10,
         'description' :  '''Random seed for random number generators''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -299,14 +338,18 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'abundance',
+            'f-point': 1
         },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
     },
-
-
-
     'infer_proteins': {
         'edit_version': 1.00,
         'available_in_unode' : [

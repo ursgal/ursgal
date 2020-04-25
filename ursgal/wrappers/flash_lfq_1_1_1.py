@@ -14,7 +14,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
         "edit_version": 1.00,
         "name": "FlashLFQ",
         "version": "1.1.1",
-        "release_date": "22-04-2020",
+        "release_date": "2020-04-22",
         "engine_type": {"quantification_engine": True,},
         "input_extensions": [".mzML"],
         "output_extensions": [".csv"],
