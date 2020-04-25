@@ -196,7 +196,6 @@ class ChemicalComposition(dict):
         return
 
     def _parse_sequence_unimod_style(self, sequence):
-        print(sequence)
         minPos = sequence.index("#")
         peptide = sequence[:minPos]
         addon = sequence[minPos + 1:]
@@ -222,7 +221,6 @@ class ChemicalComposition(dict):
 
             for occ, match in enumerate(pattern.finditer(unimod)):
                 try:
-                    print(unimod[:match.start()])
                     unimodcomposition = self._unimod_parser.name2composition(
                         unimod[:match.start()]
                     )
