@@ -717,7 +717,9 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         try:
                             tg_mod_aa = tg_mod[1][0]
                         except:
-                            if 'Isobaric Substitution' not in tg_mod[0][0]:
+                            if 'undefined mass shift' in tg_mod[0][0]:
+                                tg_mod_aa = 'Any'
+                            elif 'Isobaric Substitution' not in tg_mod[0][0]:
                                 print('skipping:', tg_mod)
                             continue
                         if 'N-term' in tg_mod_aa:
