@@ -177,7 +177,7 @@ class tag_graph_1_8_0(ursgal.UNode):
 
         self.tag_graph_tmp_dir = os.path.join(
             self.params['output_dir_path'],
-            'tag_graph_tmp',
+            '{prefix}_tag_graph_tmp'.format(prefix=os.path.basename(self.params['translations']['mzml_input_file']).replace('.mzML', '')),
         )
         if os.path.exists(self.tag_graph_tmp_dir) is False:
             os.mkdir(self.tag_graph_tmp_dir)
@@ -272,13 +272,13 @@ class tag_graph_1_8_0(ursgal.UNode):
                     self.ini_to_write['Specificity'] = param_value
                 elif taggraph_param_name == 'modifications':
                     '''
-                    ; mod_name: AA mod_mass 
+                    ; mod_name: AA mod_mass
                     ; use N-Term for N-terminus and C-Term for C-terminus
                     [Static Mods]
                     Carbamidomethylated Cysteine: C 57.021464
 
-                    ; mod_name: AA(can be list of AAs such as STY, etc.) mod_mass overide_static_mod mod_symbol 
-                    ; mod_symbol optional and will be chosen automatically if not given 
+                    ; mod_name: AA(can be list of AAs such as STY, etc.) mod_mass overide_static_mod mod_symbol
+                    ; mod_symbol optional and will be chosen automatically if not given
                     ; override_static_mod is either 0 or 1, 1 means add mod_mass to original AA mass, not statically modified mass
                     [Diff Mods]
                     Oxidation: M 15.994915 0 #
@@ -346,7 +346,7 @@ class tag_graph_1_8_0(ursgal.UNode):
                                     opt_mods[unimod]['mass'],
                                 ))
                     self.ini_to_write['Diff_Mods'] = '\n'.join(opt_mod_list)
-                    
+
                     fix_mods = {}
                     for mod_dict in self.params['mods']['fix']:
                         # if mod_dict['pos'] == 'Prot-N-term':
@@ -389,7 +389,7 @@ class tag_graph_1_8_0(ursgal.UNode):
                     self.ini_to_write['Static_Mods'] = '\n'.join(fix_mod_list)
                 else:
                     self.params_to_write[taggraph_param_name] = param_value
-        
+
         reformatted_input = self.reformat_de_novo_file(
             unified_de_novo_results = self.params_to_write['de_novo'],
             mod2mass = mod2mass,
@@ -409,11 +409,10 @@ class tag_graph_1_8_0(ursgal.UNode):
         self.params['command_list'] = [
             'docker',
             'run',
-            '--name', 'taggraph', '--rm',
+            '--rm',
             '-v', self.docker_mount,
-            # '-w', self.docker_dir_path,
             '-i', '-t',
-            'inf/taggraph:v1',
+            'inf/taggraph:v1_debug',
             'bash', '-c',
             'cd {0} && python /opt/bio/tools/taggraph/TagGraph.1.8/scripts/BuildFMIndex.py -f {1}\
              {2} && python /opt/bio/tools/taggraph/TagGraph.1.8/runTG.py {3}'.format(
@@ -422,18 +421,8 @@ class tag_graph_1_8_0(ursgal.UNode):
                 rm_str,
                 os.path.basename(self.param_file_name)
             )
-            # '\"cd', self.docker_dir_path,
-            # '&&',
-            # 'python',
-            # '/opt/bio/tools/taggraph/TagGraph.1.8/scripts/BuildFMIndex.py',
-            # '-f', self.database,
-            # '&&',
-            # 'python',
-            # '/opt/bio/tools/taggraph/TagGraph.1.8/runTG.py',
-            # os.path.basename(self.param_file_name),
-            # '\"',
         ]
-        print(' '.join(self.params['command_list']))
+        print(' '.join(self.params['command_listq']))
         return self.params
 
     def postflight(self):
@@ -473,7 +462,6 @@ class tag_graph_1_8_0(ursgal.UNode):
         for original_header_key in taggraph_header:
             ursgal_header_key = header_translations[original_header_key]
             translated_headers.append(ursgal_header_key)
-
         translated_headers += [
             'Spectrum Title',
             'Raw data location',
@@ -482,7 +470,7 @@ class tag_graph_1_8_0(ursgal.UNode):
 
         taggrapg_output_tdv = os.path.join(
             self.tag_graph_tmp_dir,
-            'EM_output'
+            'EM_output',
             '{0}_TopResults.tdv'.format(
                 self.params['output_file'].replace('.csv', '')
             )
@@ -520,8 +508,10 @@ class tag_graph_1_8_0(ursgal.UNode):
                 out_line_dict['Raw data location'] = os.path.abspath(
                     self.params['translations']['mzml_input_file']
                 )
-                csv_writer.writerow(line_dict)
-
+                try:
+                    csv_writer.writerow(out_line_dict)
+                except ValueError:
+                    import pdb;pdb.post_mortem()
         csv_out_fobject.close()
         return
 
@@ -550,8 +540,8 @@ DisplayProteinNum = {DisplayProtNum}
 
 ##### De Novo Settings #####
 [DeNovo]
-# File mapping: 
-# If de novo sequencing program creates a single output text file, simply enter that text file; 
+# File mapping:
+# If de novo sequencing program creates a single output text file, simply enter that text file;
 # Otherwise, if de novo sequencing program generates one text output per input raw data file and there are multiple raw data input files, enter the folder which contains all de novo files: e.g.:
 # de_novo= /project_folder/de_novo_results/denovo_output.csv OR de_novo=/project_folder/de_novo_results/
 de_novo        = {dataDirectory}
@@ -559,7 +549,7 @@ de_novo        = {dataDirectory}
 # If de novo sequencing program generates one text output per input file, enter mapping here, linking each de novo file to the root name of the corresponding input raw data file via a pipe (|) separating each de novo / raw file pair by semicolons, e.g.: denovoMZML =216.csv|ath017216;217.csv|ath017217, otherwise, leave blank.
 denovoMZML      = {de_novo}|{mzml_file}
 
-# De novo output file parsing  
+# De novo output file parsing
 # De novo output file parsing: Header lines to ignore
 # Enter number lines in de novo input file which contains descriptive information (e.g., column headers) to ignore.  e.g.,:Ignore rows= 1
 ignoreRows       =1
@@ -569,14 +559,14 @@ denovoFileDelimiter=,
 
 # Column assignment
 # Column assignment: Multiple raw file / Fraction designation:
-# When searching multiple input raw files in one batch, does the de novo software assign a unique identifier to each input raw file (e.g., a fraction number)?  If so, enter the column number which contains this information (left-most column = 1) e.g.,:fractionID= 1 
+# When searching multiple input raw files in one batch, does the de novo software assign a unique identifier to each input raw file (e.g., a fraction number)?  If so, enter the column number which contains this information (left-most column = 1) e.g.,:fractionID= 1
 fractionID      =
 
 # Column assignment: Scan designation
 # Enter column number which contains scan mapping information for given peptide (left-most column = 1) if it's multiple scan IDs, then include the scanSplitter (eg: deepnovo sequences) e.g.,scan= 10
 scan            =8
 
-# De novo output file parsing: Scan parsing: 
+# De novo output file parsing: Scan parsing:
 #If de novo sequencing program aggregates multiple scans which contributed to a peptide identification (e.g., "2333;2567;2673"), enter the character which delimits each scan (i.e., "/"). e.g., scanSplitter= ;
 scanSplitter    =
 
@@ -588,7 +578,7 @@ charge          =17
 # Enter column number which contains peptide sequence (left-most column = 1) e.g., : peptide = 3
 peptide         =6
 
-# De novo output file parsing: Peptide parsing: 
+# De novo output file parsing: Peptide parsing:
 # If de novo sequencing program enters a character between each returned amino acid (e.g., "P.E.P.T.I.D.E"), enter that character (i.e., ".").  TagGraph will ignore this character in the peptide sequence: e.g.,denovoDelimeter= .
 peptideDelimiter=
 
@@ -617,7 +607,7 @@ output         = {output}
 # Initialization file used to configure TAG-GRAPH. See README for detailed information.
 init           = {init}
 
-# Location and name of fmindex to search.  This fmindex location should include multiple related files as described in the README. 
+# Location and name of fmindex to search.  This fmindex location should include multiple related files as described in the README.
 fmindex        = {fmindex}
 
 # Expected standard deviation in ppm error distributions of fragment ions. Recommend 5 for HCD 30,000 resolution
@@ -648,7 +638,7 @@ config         = {config}
 
 ##### EM Settings #####
 [EM]
-# Number of iterations in initial EM over all results. Recommend 20 iterations. 
+# Number of iterations in initial EM over all results. Recommend 20 iterations.
 initIterations = {initIterations}
 
 # Maximum number of expectation maximization iterations for FDR assignment. Recommend 100 iterations.
@@ -679,13 +669,13 @@ Specificity: {Specificity}
 [Amino Acids]
 {Amino_Acids}
 
-; mod_name: AA mod_mass 
+; mod_name: AA mod_mass
 ; use N-Term for N-terminus and C-Term for C-terminus
 [Static Mods]
 {Static_Mods}
 
-; mod_name: AA(can be list of AAs such as STY, etc.) mod_mass overide_static_mod mod_symbol 
-; mod_symbol optional and will be chosen automatically if not given 
+; mod_name: AA(can be list of AAs such as STY, etc.) mod_mass overide_static_mod mod_symbol
+; mod_symbol optional and will be chosen automatically if not given
 ; override_static_mod is either 0 or 1, 1 means add mod_mass to original AA mass, not statically modified mass
 [Diff Mods]
 {Diff_Mods}
