@@ -19,10 +19,14 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val' : [],
+            'item_title' : '',
+            'item_type' : 'str',
+            'custom_val_max' : 0,
         },
         'uvalue_translation' : {
         },
-        'uvalue_type' : "dict",
+        'uvalue_type' : "list",
     },
     'isotopic_distribution_tolerance': {
         'edit_version': 1.00,
@@ -39,6 +43,13 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
         },
         'uvalue_translation' : {
         },
@@ -129,7 +140,7 @@ Format:
         'available_in_unode' : [
             'flash_lfq_1_1_1',
         ],
-        'default_value' : False,
+        'default_value' : 1,
         'description' :  '''Max RT differenence in minutes of peptides to be considered for MBR''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -139,6 +150,13 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
         },
         'uvalue_translation' : {
         },
@@ -219,6 +237,13 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
         },
         'uvalue_translation' : {
         },
@@ -239,6 +264,13 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'abundance',
+            'f-point': 1
         },
         'uvalue_translation' : {
         },
@@ -259,6 +291,13 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'abundance',
+            'f-point': 1
         },
         'uvalue_translation' : {
         },
@@ -289,7 +328,7 @@ Format:
         'available_in_unode' : [
             'flash_lfq_1_1_1',
         ],
-        'default_value' : None,
+        'default_value' : 10,
         'description' :  '''Random seed for random number generators''',
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -299,14 +338,18 @@ Format:
             'quantification',
         ],
         'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'abundance',
+            'f-point': 1
         },
         'uvalue_translation' : {
         },
         'uvalue_type' : "int",
     },
-
-
-
     'infer_proteins': {
         'edit_version': 1.00,
         'available_in_unode' : [
@@ -1642,6 +1685,7 @@ Format:
                 'deepnovo_0_0_1' : True,
                 'deepnovo_v2': True,
                 'pnovo_3_1_3' : True,
+                'tag_graph_1_8_0': True,
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1691,6 +1735,7 @@ Format:
                 'deepnovo_0_0_1' : True,
                 'deepnovo_v2': True,
                 'pnovo_3_1_3' : True,
+                'tag_graph_1_8_0': True,
             },
             'qvality_style_1' : {
                 'None'                 : None,
@@ -1740,6 +1785,7 @@ Format:
                 'deepnovo_0_0_1' : True,
                 'deepnovo_v2': True,
                 'pnovo_3_1_3' : True,
+                'tag_graph_1_8_0': True,
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1789,6 +1835,7 @@ Format:
                 'deepnovo_0_0_1' : True,
                 'deepnovo_v2': True,
                 'pnovo_3_1_3' : True,
+                'tag_graph_1_8_0': True,
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1836,6 +1883,7 @@ Format:
                 'pglyco_db_2_2_0' : True,
                 'deepnovo_0_0_1' : True,
                 'deepnovo_v2': True,
+                'tag_graph_1_8_0': True,
             },
             'peptide_forest_style_1' : {
                 'None'                 : None,
@@ -1884,6 +1932,7 @@ Format:
                 'deepnovo_0_0_1' : True,
                 'deepnovo_v2': True,
                 'pnovo_3_1_3' : True,
+                'tag_graph_1_8_0': True,
             },
         },
         'uvalue_type'    : 'select',
@@ -1929,6 +1978,7 @@ Format:
                 'mascot_x_x_x',
                 'pglyco_db_2_2_0',
                 'pglyco_db_2_2_2',
+                'tag_graph_1_8_0',
             ],
             'custom_val_max' : 0,
         },
@@ -11278,6 +11328,7 @@ Format:
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11329,6 +11380,7 @@ Format:
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11380,6 +11432,7 @@ Format:
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11431,6 +11484,7 @@ Format:
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11482,6 +11536,7 @@ Format:
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11534,6 +11589,7 @@ Format:
                 'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
                 'unknown'              : '',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11583,6 +11639,7 @@ Format:
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'deepnovo_v2'          : 'DeepNovo:score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'peptide_forest_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11633,6 +11690,7 @@ Format:
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
                 'deepnovo_v2'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
         },
         'uvalue_type' : 'str',

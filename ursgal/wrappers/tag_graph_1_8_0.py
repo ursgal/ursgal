@@ -508,10 +508,8 @@ class tag_graph_1_8_0(ursgal.UNode):
                 out_line_dict['Raw data location'] = os.path.abspath(
                     self.params['translations']['mzml_input_file']
                 )
-                try:
-                    csv_writer.writerow(out_line_dict)
-                except ValueError:
-                    import pdb;pdb.post_mortem()
+                csv_writer.writerow(out_line_dict)
+
         csv_out_fobject.close()
         return
 

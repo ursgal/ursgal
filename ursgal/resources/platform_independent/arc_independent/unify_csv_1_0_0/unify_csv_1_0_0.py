@@ -717,16 +717,20 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         try:
                             tg_mod_aa = tg_mod[1][0]
                         except:
-                            print('skipping:', tg_mod)
+                            if 'undefined mass shift' in tg_mod[0][0]:
+                                tg_mod_aa = 'Any'
+                            elif 'Isobaric Substitution' not in tg_mod[0][0]:
+                                print('skipping:', tg_mod)
                             continue
                         if 'N-term' in tg_mod_aa:
                             tg_mod_pos += -1
                         elif 'C-term' in tg_mod_aa:
                             tg_mod_pos += 1
                         tg_tmp_mods.append(
-                            '{0}<|>{1}:{2}'.format(
+                            '{0}<|>{1}<|>{2}:{3}'.format(
                                 tg_mod_name,
                                 tg_mod_mass,
+                                tg_mod_aa,
                                 tg_mod_pos
                             )
                         )
@@ -820,13 +824,48 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             )
                     if 'tag_graph' in search_engine:
                         try:
-                            unimod_name, mod_mass = mod.split('<|>')
+                            unimod_name, mod_mass, mod_aa = mod.split('<|>')
                         except: #added fixed mods
                             tmp_mods.append(modification)
                             continue
-                        unimod_id = ursgal.GlobalUnimodMapper.name2id(
-                            unimod_name
-                        )
+                        do_not_map = False
+                        for mass_shift_name in [
+                            'Undefined Mass Shift',
+                            'Insertion',
+                            'Deletion',
+                            'PrecursorError',
+                            'precursorerror',
+                        ]:
+                            if mass_shift_name in unimod_name:
+                                do_not_map= True
+                        if do_not_map:
+                            unimod_id = None
+                        else:
+                            if '->' in unimod_name:
+                                aa_1, aa_2 = unimod_name.split('->')
+                                aa_1 = '{0}{1}'.format(
+                                    aa_1[0].upper(),
+                                    aa_1[1:]
+                                )
+                                aa_2 = '{0}{1}'.format(
+                                    aa_2[0].upper(),
+                                    aa_2[1:]
+                                )
+                                unimod_name = '{0}->{1}'.format(
+                                    aa_1,
+                                    aa_2,
+                                )
+                            else:
+                                unimod_name = '{0}{1}'.format(
+                                    unimod_name[0].upper(),
+                                    unimod_name[1:]
+                                )
+                            unimod_id = ursgal.GlobalUnimodMapper.name2id(
+                                unimod_name
+                            )
+                        if mod_aa in fixed_mods.keys():
+                            if unimod_name != fixed_mods[mod_aa]:
+                                unimod_id = None
                         if unimod_id is None:
                             tmp_mass_diff.append(
                                 '{0}({1}):{2}'.format(
@@ -1257,8 +1296,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         # build IsotopologueLibrary
         molecule2hill_dict = {}
         for molecule in all_molecules:
-            if 'X' in molecule.upper():
-                cc.use(molecule.replace('X', ''))
+            if 'X' in molecule.split('#')[0]:
+                cc.use('{0}#{1}'.format(
+                    molecule.split('#')[0].replace('X', ''),
+                    molecule.split('#')[1]
+                ))
             else:
                 cc.use(molecule)
             if use15N:
