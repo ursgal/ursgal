@@ -412,7 +412,7 @@ class tag_graph_1_8_0(ursgal.UNode):
             '--rm',
             '-v', self.docker_mount,
             '-i', '-t',
-            'inf/taggraph:v1_debug',
+            'inf/taggraph:v1',
             'bash', '-c',
             'cd {0} && python /opt/bio/tools/taggraph/TagGraph.1.8/scripts/BuildFMIndex.py -f {1}\
              {2} && python /opt/bio/tools/taggraph/TagGraph.1.8/runTG.py {3}'.format(
@@ -422,7 +422,7 @@ class tag_graph_1_8_0(ursgal.UNode):
                 os.path.basename(self.param_file_name)
             )
         ]
-        print(' '.join(self.params['command_listq']))
+        print(' '.join(self.params['command_list']))
         return self.params
 
     def postflight(self):
