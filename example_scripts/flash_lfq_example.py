@@ -17,13 +17,13 @@ def main():
         ],
         'database': '/media/external/Projects/proteomics_blog_hackathon/data/Uniprot_swissprot_TREMBL_cRAP_target_decoy.fasta',
         "isotopic_distribution_tolerance": 5,
-        "normalize_intensities": True,
+        "normalize_intensities": False,
         "integrate_peak_areas": False,
         "only_precursor_charge": False,
         "match_between_runs": True,
         "match_between_runs_RT_window": 0.5,
         "require_msms_id": False,
-        "bayesian_fold_change": True,
+        "bayesian_fold_change": False,
         "bayesian_fold_change_control_condition": "WT",
         "fold_change_cutoff": 0.1,
         "markov_chain_iterations": 3000,
@@ -37,19 +37,20 @@ def main():
         params=params
     )
     uc.params['experiment_setup'] = {
-        "1": {"FileName": "TN_CSF_062617_03", "Condition": "WT", "Biorep": 1, "Fraction": 1, "Techrep":1},
-        "2": {"FileName": "TN_CSF_062617_04", "Condition": "KO", "Biorep": 1, "Fraction": 1, "Techrep":1},
+        # "1": {"FileName": "TN_CSF_062617_03", "Condition": "WT", "Biorep": 1, "Fraction": 1, "Techrep":1},
+        # "2": {"FileName": "TN_CSF_062617_04", "Condition": "KO", "Biorep": 1, "Fraction": 1, "Techrep":1},
     }
 
     mzml_files = [
         '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_03.mzML',
-        '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_04.mzML',
+        # '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_04.mzML',
     ]
     all_res = []
     for file in mzml_files:
 
         res = uc.search(
             input_file=file,
+            # force=True,
             engine='xtandem_alanine',
         )
         val = uc.validate(
@@ -62,13 +63,16 @@ def main():
         all_res.append(fil)
 
     merged_res = uc.merge_csvs(input_files=all_res)
-
+    merged_res = '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/All_merged_results.csv'
     uc.params['quantification_evidences'] = merged_res
+    print(mzml_files)
+    print()
+    mzml_files = '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_03.mzML'
     uc.quantify(
         input_file=mzml_files,
         engine='flash_lfq_1_1_1',
-        force=False,
-        multi=True,
+        force=True,
+        multi=False,
     )
 
 
