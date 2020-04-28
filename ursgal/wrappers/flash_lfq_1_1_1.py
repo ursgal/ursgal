@@ -56,10 +56,8 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 # Check Mass differences column!!
                 # Check Glycan mass column
                 # Check Glycan name column
-                # pprint(line)
-                # breakpoint()
                 if 'X' in line['Sequence']:
-                    # not supported
+                    # X in sequence not supported
                     continue
                 if line["Modifications"] == "":
                     full_seq = line["Sequence"]
@@ -72,7 +70,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                         line
                     )
                 if line["Retention Time (s)"] == '':
-                    # breakpoint()
+                    # sanitize rt
                     file = line['Spectrum Title'].split('.')[0]
                     unit = self.scan_lookup[file]['unit']
                     rt = self.scan_lookup[file]['scan_2_rt'][int(line['Spectrum ID'])]
@@ -81,11 +79,12 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 else:
                     rt = line['Retention Time (s)']
                 if ';' in line["uCalc Mass"]:
+                    # sanitize mass
                     mass = float(line["uCalc Mass"].split(';')[0])
                 else:
                     mass = float(line["uCalc Mass"])
                 if line.get('Mass Difference', '') != '':
-                    # breakpoint()
+                    # add mass difference
                     print(line['Mass Difference'])
                     mass_diff = float(line['Mass Difference'].split(':')[0].split('(')[0])
                     print(mass_diff)
@@ -93,6 +92,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     mass += mass_diff
                 if line.get('Glycan Mass', '') != '':
                     # breakpoint()
+                    # add glycan mass
                     mass += float(line['Glycan Mass'])
                 line_to_write = {
                     "File Name": os.path.splitext(
@@ -114,6 +114,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
         sequence = line['Sequence']
         all_mods = [(m.rsplit(":", maxsplit=1)[0], int(m.rsplit(":", maxsplit=1)[1])) for m in line['Modifications'].split(";")]
         if line.get('Mass Difference', '') != '':
+            # add mass diff col to mod annotation
             print(line.get('Mass Difference', ''))
             # print()
             tmp_mods = []
@@ -132,7 +133,10 @@ class flash_lfq_1_1_1(ursgal.UNode):
             all_mods += tmp_mods
             # all_mods += [(m.rsplit(":", maxsplit=1)[0], int(m.rsplit(":", maxsplit=1)[1])) for m in line['Mass Difference'].split(";")]
         if line.get('Glycan Mass', '') != '':
+            # add Glycan mass to mod annotation
+            # use glycan mass or name here?
             m = line['Glycan Mass']
+            m = line['Glycan']
             p = line['Glycosite']
             all_mods.append((m, int(p)))
         mods_sorted = sorted(
