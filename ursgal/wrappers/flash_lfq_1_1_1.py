@@ -4,6 +4,10 @@ import os
 import csv
 import sys
 import shutil
+from pprint import pprint
+import pickle
+
+from ursgal.ukb import PROTON
 
 
 class flash_lfq_1_1_1(ursgal.UNode):
@@ -49,31 +53,94 @@ class flash_lfq_1_1_1(ursgal.UNode):
             writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
             writer.writeheader()
             for line in reader:
+                # Check Mass differences column!!
+                # Check Glycan mass column
+                # Check Glycan name column
+                if 'X' in line['Sequence']:
+                    # X in sequence not supported
+                    continue
                 if line["Modifications"] == "":
                     full_seq = line["Sequence"]
                 else:
                     # continue
+                    # full_seq = self.insert_mods(
+                        # line["Sequence"], line["Modifications"]
+                    # )
                     full_seq = self.insert_mods(
-                        line["Sequence"], line["Modifications"]
+                        line
                     )
+                if line["Retention Time (s)"] == '':
+                    # sanitize rt
+                    file = line['Spectrum Title'].split('.')[0]
+                    unit = self.scan_lookup[file]['unit']
+                    rt = self.scan_lookup[file]['scan_2_rt'][int(line['Spectrum ID'])]
+                    if unit == 'minute':
+                        rt /= 60
+                else:
+                    rt = line['Retention Time (s)']
+                if ';' in line["uCalc Mass"]:
+                    # sanitize mass
+                    mass = float(line["uCalc Mass"].split(';')[0])
+                else:
+                    mass = float(line["uCalc Mass"])
+                if line.get('Mass Difference', '') != '':
+                    # add mass difference
+                    print(line['Mass Difference'])
+                    mass_diff = float(line['Mass Difference'].split(':')[0].split('(')[0])
+                    print(mass_diff)
+                    print()
+                    mass += mass_diff
+                if line.get('Glycan Mass', '') != '':
+                    # breakpoint()
+                    # add glycan mass
+                    mass += float(line['Glycan Mass'])
                 line_to_write = {
                     "File Name": os.path.splitext(
                         os.path.basename(line["Raw data location"])
                     )[0],
-                    "Scan Retention Time": float(line["Retention Time (s)"]) / 60,
+                    "Scan Retention Time": rt,
                     "Precursor Charge": line["Charge"],
                     "Base Sequence": line["Sequence"],
                     "Full Sequence": full_seq,
-                    "Peptide Monoisotopic Mass": line["uCalc Mass"],
+                    "Peptide Monoisotopic Mass": mass,
                     "Protein Accession": line["Protein ID"],
                 }
                 writer.writerow(line_to_write)
         return out_name
 
-    def insert_mods(self, sequence, ursgal_mods):
-        base_seq = sequence
+    # def insert_mods(self, sequence, ursgal_mods):
+    def insert_mods(self, line):
+        base_seq = line['Sequence']
+        sequence = line['Sequence']
+        all_mods = [(m.rsplit(":", maxsplit=1)[0], int(m.rsplit(":", maxsplit=1)[1])) for m in line['Modifications'].split(";")]
+        if line.get('Mass Difference', '') != '':
+            # add mass diff col to mod annotation
+            print(line.get('Mass Difference', ''))
+            # print()
+            tmp_mods = []
+            for m in line['Mass Difference'].split(';'):
+                split = m.rsplit(':', maxsplit=1)
+                # sometimes the mod looks like this -300:3;5
+                # sometimes like this -300:3
+                if len(split) == 2:
+                    m = split[0]
+                    if split[1] == '' or split[1] == 'n':
+                        p = 0
+                    else:
+                        p = int(split[1])
+                    print(m, p)
+                    tmp_mods.append((m, p))
+            all_mods += tmp_mods
+            # all_mods += [(m.rsplit(":", maxsplit=1)[0], int(m.rsplit(":", maxsplit=1)[1])) for m in line['Mass Difference'].split(";")]
+        if line.get('Glycan Mass', '') != '':
+            # add Glycan mass to mod annotation
+            # use glycan mass or name here?
+            m = line['Glycan Mass']
+            m = line['Glycan']
+            p = line['Glycosite']
+            all_mods.append((m, int(p)))
         mods_sorted = sorted(
-            [(m.split(":")[0], int(m.split(":")[1])) for m in ursgal_mods.split(";")],
+            all_mods,
             key=lambda x: x[1],
             reverse=True,
         )
@@ -152,7 +219,6 @@ class flash_lfq_1_1_1(ursgal.UNode):
     def preflight(self):
         print("[ -ENGINE- ] Executing quantification ..")
         self.time_point(tag="execution")
-
         if self.params["input_file"].endswith(".json"):
             mzml_files = []
             for fdict in self.params["input_file_dicts"]:
@@ -161,6 +227,11 @@ class flash_lfq_1_1_1(ursgal.UNode):
             mzml_files = os.path.join(
                 self.params["input_dir_path"], self.params["input_file"]
             )
+        if isinstance(mzml_files, list):
+            self.scan_lookup = pickle.load(open(os.path.join(os.path.dirname(mzml_files[0]), '_ursgal_lookup.pkl'), 'rb'))
+        else:
+            self.scan_lookup = pickle.load(open(os.path.join(os.path.dirname(mzml_files), '_ursgal_lookup.pkl'), 'rb'))
+
         # assert all mzml files are in the same folder
         if isinstance(mzml_files, list):
             mzml_dirs = []
@@ -177,6 +248,8 @@ class flash_lfq_1_1_1(ursgal.UNode):
         # Write ExperimentDesign.tsv
         # TODO move to own method
         experiment_setup = self.params["translations"]["experiment_setup"]
+        if os.path.exists(os.path.join(input_file_dir, "ExperimentalDesign.tsv")):
+            os.remove(os.path.join(input_file_dir, "ExperimentalDesign.tsv"))
         if len(experiment_setup) > 0:
             with open(
                 os.path.join(input_file_dir, "ExperimentalDesign.tsv"), "wt"
