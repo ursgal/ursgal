@@ -9434,6 +9434,7 @@ Format:
             'sanitize_csv_1_0_0',
             'combine_pep_1_0_0',
             'peptide_forest_1_0_0',
+            'unify_csv_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9441,6 +9442,7 @@ Format:
             'sanitize_csv_style_1': 'psm_defining_colnames',
             'combine_pep_style_1': 'columns_for_grouping',
             'peptide_forest_style_1' : 'psm_defining_colnames',
+            'unify_csv_style_1': 'psm_defining_colnames',
         },
         'utag' : [
             'conversion',
