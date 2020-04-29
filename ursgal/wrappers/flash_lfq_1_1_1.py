@@ -29,9 +29,10 @@ class flash_lfq_1_1_1(ursgal.UNode):
         "distributable": False,
         "utranslation_style": "flash_lfq_style_1",
         "engine": {
-            "linux": {"64bit": {"exe": "CMD.exe",}},
-            "darwin": {"64bit": {"exe": "CMD.exe",}},
-            "win32": {"64bit": {"exe": "CMD.exe",}},
+            # "linux": {"64bit": {"exe": "CMD.exe",}},
+            # "darwin": {"64bit": {"exe": "CMD.exe",}},
+            # "win32": {"64bit": {"exe": "CMD.exe",}},
+            "platform_independent": {"arc_independent": {"exe": "CMD.exe",}},
         },
         "citation": "ADD THE CITATION!!!",
     }
