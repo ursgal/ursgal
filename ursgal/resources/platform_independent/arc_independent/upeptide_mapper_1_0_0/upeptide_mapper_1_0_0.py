@@ -146,6 +146,7 @@ def main(input_file=None, output_file=None, params=None):
         tmp_peptide_set = set()
         print('[ map_peps ] Checking for I <--> L conversions: building set of variants')
         for n, non_mappable_peptide in enumerate(non_mappable_peps):
+            print(non_mappable_peptide)
             if n % 500 == 0:
                 print(
                     '[ map_peps ] building variant: {0}/{1} '.format(
