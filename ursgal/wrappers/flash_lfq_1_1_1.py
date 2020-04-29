@@ -159,8 +159,9 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 split = m.rsplit(':', maxsplit=1)
                 # sometimes the mod looks like this -300:3;5
                 # sometimes like this -300:3
-                if split[1] == 'n':
-                    continue
+                if len(split) >= 2:
+                    if split[1] == 'n':
+                        continue
                 if len(split) == 2:
                     m = split[0]
                     if split[1] == '' or split[1] == 'n':
