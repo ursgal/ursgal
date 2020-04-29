@@ -145,7 +145,15 @@ def main(input_file=None, output_file=None, params=None):
         sequence_variants = defaultdict(set)
         tmp_peptide_set = set()
         print('[ map_peps ] Checking for I <--> L conversions: building set of variants')
-        for non_mappable_peptide in non_mappable_peps:
+        for n, non_mappable_peptide in enumerate(non_mappable_peps):
+            if n % 500 == 0:
+                print(
+                    '[ map_peps ] building variant: {0}/{1} '.format(
+                        n,
+                        len(non_mappable_peps),
+                    ),
+                    end = '\r'
+                )
             if non_mappable_peptide == '':
                 continue
             # check L <--> I variants first
