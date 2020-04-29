@@ -63,7 +63,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
             reader = csv.DictReader(fin)
             writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
             writer.writeheader()
-            total_length = sum(1 for row in reader)
+            # total_length = sum(1 for row in reader)
             for i, line in enumerate(reader):
                 if i % 500 == 0:
                     print('Rewrite line {0} of total {1}'.format(i, total_length), end='\r')
