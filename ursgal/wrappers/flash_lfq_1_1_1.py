@@ -114,7 +114,9 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 mass = cc._mass()
                 # add mass difference
                 if line.get('Mass Difference', '') != '':
-                    if line['Mass Difference'].split(':')[1] == 'n':
+                    if len(line['Mass Difference'].split(':')) < 2:
+                        mass_diff = float(line['Mass Difference'].rsplit(':', maxsplit=1)[0].split('(')[0])
+                    elif line['Mass Difference'].split(':')[1] == 'n':
                         mass_diff = 0
                     else:
                         # mass_diff = float(line['Mass Difference'].split(':')[0].split('(')[0])
