@@ -116,7 +116,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 if line.get('Mass Difference', '') != '':
                     if line['Mass Difference'].split(':')[1] == 'n':
                         mass_diff = 0
-                    else
+                    else:
                         # mass_diff = float(line['Mass Difference'].split(':')[0].split('(')[0])
                         mass_diff = float(line['Mass Difference'].rsplit(':', maxsplit=1)[0].split('(')[0])
                     mass += mass_diff
