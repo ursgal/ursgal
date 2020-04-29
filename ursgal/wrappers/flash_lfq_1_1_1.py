@@ -132,7 +132,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     "Base Sequence": line["Sequence"],
                     "Full Sequence": full_seq,
                     "Peptide Monoisotopic Mass": mass,
-                    "Protein Accession": line["Protein ID"],
+                    "Protein Accession": line["Protein ID"]+'|###|'+full_seq,
                 }
                 # self.mass_to_identity.setdefault(mass, []).append(line_to_write)
                 # self.full_sequence_to_mass[full_seq] = mass
