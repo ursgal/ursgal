@@ -389,14 +389,14 @@ class flash_lfq_1_1_1(ursgal.UNode):
         self.params["command_list"] = command_list
 
     def postflight(self):
-        i = 0
-        for id, masses in self.identity_to_mass.items():
-            if len(set(masses)) > 1:
-                i += 1
-                print(id)
-                print(set(masses))
-                print()
-        print(i)
+        # i = 0
+        # for id, masses in self.identity_to_mass.items():
+        #     if len(set(masses)) > 1:
+        #         i += 1
+        #         print(id)
+        #         print(set(masses))
+        #         print()
+        # print(i)
         output_files_basenames = [
             "QuantifiedPeaks.tsv",
             "QuantifiedPeptides.tsv",
