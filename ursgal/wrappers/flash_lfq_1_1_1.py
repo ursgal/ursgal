@@ -50,12 +50,12 @@ class flash_lfq_1_1_1(ursgal.UNode):
             self.params["output_dir_path"], "flash_lfq_psm_input.tsv"
         )
         # map mass to all variants with that mass
-        self.mass_to_identity = {}
+        # self.mass_to_identity = {}
         # remember mass of the full seq to rewrite QuantifiedPeaks.tsv
-        self.full_sequence_to_mass = {}
+        # self.full_sequence_to_mass = {}
         # only to debug
-        self.identity_to_mass = {}
-        written_identities = set()
+        # self.identity_to_mass = {}
+        # written_identities = set()
         cc = ChemicalComposition()
         failed = 0
         with open(unified_csv) as fin, open(out_name, "wt") as fout:
@@ -124,12 +124,12 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     "Peptide Monoisotopic Mass": mass,
                     "Protein Accession": line["Protein ID"],
                 }
-                self.mass_to_identity.setdefault(mass, []).append(line_to_write)
-                self.full_sequence_to_mass[full_seq] = mass
-                self.identity_to_mass.setdefault(full_seq, []).append(mass)
+                # self.mass_to_identity.setdefault(mass, []).append(line_to_write)
+                # self.full_sequence_to_mass[full_seq] = mass
+                # self.identity_to_mass.setdefault(full_seq, []).append(mass)
                 # if full_seq not in written_identities:
                 writer.writerow(line_to_write)
-                written_identities.add(full_seq)
+                # written_identities.add(full_seq)
         print(failed)
         return out_name
 
