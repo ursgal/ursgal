@@ -166,7 +166,7 @@ def main(input_file=None, output_file=None, params=None):
                 for i, aa in zip(indices, combo):
                     aa_list[i] = aa
                 variants.add(''.join(aa_list))
-            sequence_variants[non_mappable_peptide] = variants
+            # sequence_variants[non_mappable_peptide] = variants
             tmp_peptide_set |= variants
 
         # reset buffer...
