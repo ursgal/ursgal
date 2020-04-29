@@ -411,6 +411,8 @@ def write_output_file(
                 )
                 if lookup_identifier not in pep_map_lookup.keys():
                     tmp_decoy = set()
+                    if seq_variant not in p2p_mappings.keys():
+                        continue
                     upeptide_maps = p2p_mappings[seq_variant]
                     if upeptide_maps == []:
                         continue
