@@ -95,11 +95,11 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     full_seq = self.insert_mods(
                         line
                     )
+                file = line['Spectrum Title'].split('.')[0]
+                if file.startswith('open_mod'):
+                    file = file.replace('open_mod_', '')
                 if line["Retention Time (s)"] == '':
                     # sanitize rt
-                    file = line['Spectrum Title'].split('.')[0]
-                    if file.startswith('open_mod'):
-                        file = file.replace('open_mod_', '')
                     unit = self.scan_lookup[file]['unit']
                     rt = self.scan_lookup[file]['scan_2_rt'][int(line['Spectrum ID'])]
                     if unit == 'minute':
@@ -112,9 +112,13 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 # pprint(line)
                 cc.use(seq_mod)
                 mass = cc._mass()
+                # add mass difference
                 if line.get('Mass Difference', '') != '':
-                    # add mass difference
-                    mass_diff = float(line['Mass Difference'].split(':')[0].split('(')[0])
+                    if line['Mass Difference'].split(':')[1] == 'n':
+                        mass_diff = 0
+                    else
+                        # mass_diff = float(line['Mass Difference'].split(':')[0].split('(')[0])
+                        mass_diff = float(line['Mass Difference'].rsplit(':', maxsplit=1)[0].split('(')[0])
                     mass += mass_diff
                 if line.get('Glycan Mass', '') != '':
                     mass += float(line['Glycan Mass'])
@@ -153,6 +157,8 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 split = m.rsplit(':', maxsplit=1)
                 # sometimes the mod looks like this -300:3;5
                 # sometimes like this -300:3
+                if split[1] == 'n':
+                    continue
                 if len(split) == 2:
                     m = split[0]
                     if split[1] == '' or split[1] == 'n':
