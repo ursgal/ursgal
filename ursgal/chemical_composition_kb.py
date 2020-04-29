@@ -112,7 +112,8 @@ isotopic_distributions = {
     ],
     'Hg':[(200.592, 1)],
     'As':[(74.921595, 1)],
-}
+    'Mo':[(95.95, 1)],
+} 
 
 
 aa_compositions = {
