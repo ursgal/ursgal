@@ -63,9 +63,10 @@ class flash_lfq_1_1_1(ursgal.UNode):
             reader = csv.DictReader(fin)
             writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
             writer.writeheader()
+            sum(1 for row in reader)
             for i, line in enumerate(reader):
                 if i % 500 == 0:
-                    print('Rewrite line {0} of total {1}'.format(i, len(reader)), end='\r')
+                    print('Rewrite line {0} of total {1}'.format(i, total_length), end='\r')
                 # Check Mass differences column!!
                 # Check Glycan mass column
                 # Check Glycan name column
