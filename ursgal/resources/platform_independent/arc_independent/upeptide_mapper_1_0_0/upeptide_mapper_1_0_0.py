@@ -144,6 +144,7 @@ def main(input_file=None, output_file=None, params=None):
         print('[ map_peps ] Attempting re-map of non-mappable peptides')
         sequence_variants = defaultdict(set)
         tmp_peptide_set = set()
+        print('[ map_peps ] Checking for I <--> L conversions: building set of variants')
         for non_mappable_peptide in non_mappable_peps:
             if non_mappable_peptide == '':
                 continue
@@ -161,6 +162,7 @@ def main(input_file=None, output_file=None, params=None):
             tmp_peptide_set |= variants
 
         # reset buffer...
+        print('[ map_peps ] Checking for I <--> L conversions: mapping {0} variants'.format(len(tmp_peptide_set)))
         upapa.peptide_2_protein_mappings[fasta_lookup_name] = defaultdict(list)
         p2p_mappings  = upapa.map_peptides(
             list(tmp_peptide_set),
