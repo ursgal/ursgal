@@ -66,7 +66,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
             # total_length = sum(1 for row in reader)
             for i, line in enumerate(reader):
                 if i % 500 == 0:
-                    print('Rewrite line {0} of total {1}'.format(i, total_length), end='\r')
+                    print('Rewrite line {0}'.format(i), end='\r')
                 if 'TN_CSF_062617_59' in line['Spectrum Title']:
                     continue
                 # Check Mass differences column!!
