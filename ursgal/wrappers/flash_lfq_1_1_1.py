@@ -65,7 +65,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
             writer.writeheader()
             for i, line in enumerate(reader):
                 if i % 500 == 0:
-                    print('Rewrite line {i:5}'.format(i=i), end='\r')
+                    print('Rewrite line {0} of total {1}'.format(i, len(reader)), end='\r')
                 # Check Mass differences column!!
                 # Check Glycan mass column
                 # Check Glycan name column
