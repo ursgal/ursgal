@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import ursgal
+from ursgal.chemical_composition import ChemicalComposition
 import os
 import csv
 import sys
@@ -48,6 +49,15 @@ class flash_lfq_1_1_1(ursgal.UNode):
         out_name = os.path.join(
             self.params["output_dir_path"], "flash_lfq_psm_input.tsv"
         )
+        # map mass to all variants with that mass
+        self.mass_to_identity = {}
+        # remember mass of the full seq to rewrite QuantifiedPeaks.tsv
+        self.full_sequence_to_mass = {}
+        # only to debug
+        self.identity_to_mass = {}
+        written_identities = set()
+        cc = ChemicalComposition()
+        failed = 0
         with open(unified_csv) as fin, open(out_name, "wt") as fout:
             reader = csv.DictReader(fin)
             writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
@@ -59,13 +69,23 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 if 'X' in line['Sequence']:
                     # X in sequence not supported
                     continue
-                if line["Modifications"] == "":
+                if line["Modifications"] == "" and line["Mass Difference"] == "" and line["Glycan Mass"] == "":
                     full_seq = line["Sequence"]
                 else:
-                    # continue
-                    # full_seq = self.insert_mods(
-                        # line["Sequence"], line["Modifications"]
-                    # )
+                    if '->' in line['Modifications']:
+                        # sanitize mass for AA exchange
+                        # breakpoint()
+                        # for m in line['Modifications'].split(";"):
+                        #     if '->' in m:
+                        #         breakpoint()
+                        #         aa1, aa2 = m.split(':')[0].split('->')
+                        #         cc.use(aa1)
+                        #         mass1 = cc._mass()
+                        #         cc.use(aa2)
+                        #         mass2 = cc._mass()
+                        #         delta_m = max(mass2, mass1) - min(mass2, mass1)
+                        #         Δm = max(mass2, mass1) - min(mass2, mass1) # yes, unicode letters work as variables :)
+                        pass
                     full_seq = self.insert_mods(
                         line
                     )
@@ -77,23 +97,35 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     if unit == 'minute':
                         rt /= 60
                 else:
-                    rt = line['Retention Time (s)']
-                if ';' in line["uCalc Mass"]:
-                    # sanitize mass
-                    mass = float(line["uCalc Mass"].split(';')[0])
-                else:
-                    mass = float(line["uCalc Mass"])
+                    rt = float(line['Retention Time (s)'])
+                    rt /= 60
+                # if ';' in line["uCalc Mass"]:
+                #     # sanitize mass
+                #     mass = float(line["uCalc Mass"].split(';')[0])
+                # else:
+                #     mass = float(line["uCalc Mass"])
+                # TODO use pyqms isotopolgue lib for more accurate masses
+                seq_mod = '{seq}#{mods}'.format(seq=line['Sequence'], mods=line['Modifications'])
+                # pprint(line)
+                try:
+                    cc.use(seq_mod)
+                except:
+                    print(seq_mod)
+                    print(line.get("PTMiner:Result # for PSM", 'NOPE'))
+                    failed += 1
+                mass = cc._mass()
                 if line.get('Mass Difference', '') != '':
                     # add mass difference
-                    print(line['Mass Difference'])
+                    # print(line['Mass Difference'])
                     mass_diff = float(line['Mass Difference'].split(':')[0].split('(')[0])
-                    print(mass_diff)
-                    print()
+                    # print(mass_diff)
+                    # print()
                     mass += mass_diff
                 if line.get('Glycan Mass', '') != '':
                     # breakpoint()
                     # add glycan mass
                     mass += float(line['Glycan Mass'])
+                mass = str(round(mass, 5))
                 line_to_write = {
                     "File Name": os.path.splitext(
                         os.path.basename(line["Raw data location"])
@@ -105,17 +137,26 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     "Peptide Monoisotopic Mass": mass,
                     "Protein Accession": line["Protein ID"],
                 }
+                self.mass_to_identity.setdefault(mass, []).append(line_to_write)
+                self.full_sequence_to_mass[full_seq] = mass
+                self.identity_to_mass.setdefault(full_seq, []).append(mass)
+                # if full_seq not in written_identities:
                 writer.writerow(line_to_write)
+                written_identities.add(full_seq)
+        print(failed)
+        breakpoint()
         return out_name
 
     # def insert_mods(self, sequence, ursgal_mods):
     def insert_mods(self, line):
         base_seq = line['Sequence']
         sequence = line['Sequence']
-        all_mods = [(m.rsplit(":", maxsplit=1)[0], int(m.rsplit(":", maxsplit=1)[1])) for m in line['Modifications'].split(";")]
+        all_mods = []
+        if line.get('Modifications', '') != '':
+            all_mods = [(m.rsplit(":", maxsplit=1)[0], int(m.rsplit(":", maxsplit=1)[1])) for m in line['Modifications'].split(";")]
         if line.get('Mass Difference', '') != '':
             # add mass diff col to mod annotation
-            print(line.get('Mass Difference', ''))
+            # print(line.get('Mass Difference', ''))
             # print()
             tmp_mods = []
             for m in line['Mass Difference'].split(';'):
@@ -128,17 +169,19 @@ class flash_lfq_1_1_1(ursgal.UNode):
                         p = 0
                     else:
                         p = int(split[1])
-                    print(m, p)
+                    # print(m, p)
                     tmp_mods.append((m, p))
             all_mods += tmp_mods
             # all_mods += [(m.rsplit(":", maxsplit=1)[0], int(m.rsplit(":", maxsplit=1)[1])) for m in line['Mass Difference'].split(";")]
         if line.get('Glycan Mass', '') != '':
+            # breakpoint()
             # add Glycan mass to mod annotation
             # use glycan mass or name here?
             m = line['Glycan Mass']
             m = line['Glycan']
             p = line['Glycosite']
             all_mods.append((m, int(p)))
+            # print(all_mods)
         mods_sorted = sorted(
             all_mods,
             key=lambda x: x[1],
@@ -163,8 +206,40 @@ class flash_lfq_1_1_1(ursgal.UNode):
             fieldnames = reader.fieldnames
             writer = csv.DictWriter(fout, fieldnames=fieldnames)
             writer.writeheader()
+            # if 'peptide' in tsv_path.lower():
+            #     for line in reader:
+            #         # only header translation for quantifiedPeaks
+            #         # lines = []
+            #         mass = self.full_sequence_to_mass[line['Sequence']]
+            #         if mass in self.mass_to_identity:
+            #             unique_lines = []
+            #             copy_lines = [line]
+            #             added_identities = set()
+            #             for d in self.mass_to_identity[mass]:
+            #                 if d['Full Sequence'] not in added_identities:
+            #                     unique_lines.append(d)
+            #                     added_identities.add(d['Full Sequence'])
+            #             if len(unique_lines) > 1:
+            #                 # breakpoint()
+            #                 # print('Write multiple lines in QuantifiedPeptides.tsv')
+            #                 # print(line['Sequence'])
+            #                 # print(mass)
+            #                 for ul in unique_lines:
+            #                     copy_line = {k: v for k, v in line.items()}
+            #                     copy_line['Base Sequence'] = ul['Base Sequence']
+            #                     copy_line['Sequence'] = ul['Full Sequence']
+            #                     copy_lines.append(copy_line)
+            #                 # print(copy_lines)
+            #                 # print()
+
+            #         # Write all versions of one mass
+            #             for cl in copy_lines:
+            #                 writer.writerow(cl)
+            #         else:
+            #             sys.exit('THIS SHOULD NOT HAPPEN')
+            # else:
             for line in reader:
-                # use header translations param to translate headers of output
+                # only header translation for quantifiedPeaks
                 writer.writerow(line)
         return csv_path
 
@@ -200,17 +275,48 @@ class flash_lfq_1_1_1(ursgal.UNode):
             translated_headers.append(ursgal_header_key)
         base, ext = os.path.splitext(tsv_path)
         csv_path = base + '.csv'
+        lines_to_write = []
         with open(tsv_path) as fin, open(csv_path, 'wt') as fout:
             reader = csv.DictReader(fin, delimiter='\t')
             fieldnames = translated_headers
             writer = csv.DictWriter(fout, fieldnames=translated_headers)
             writer.writeheader()
             for line in reader:
+                # copy lines where there are multiple identities for a mass and write the same line for each identity
+                # if line['Peptide Monoisotopic Mass'] in self.mass_to_identity:
+                #     unique_lines = []
+                #     copy_lines = [line]
+                #     added_identities = set()
+                #     for d in self.mass_to_identity[line['Peptide Monoisotopic Mass']]:
+                #         if d['Full Sequence'] not in added_identities:
+                #             unique_lines.append(d)
+                #             added_identities.add(d['Full Sequence'])
+                #     if len(unique_lines) > 1:
+                #         # breakpoint()
+                #         for ul in unique_lines:
+                #             copy_line = {k: v for k, v in line.items()}
+                #             copy_line['Base Sequence'] = ul['Base Sequence']
+                #             copy_line['Full Sequence'] = ul['Full Sequence']
+                #             copy_lines.append(copy_line)
+
+                #     # Write all versions of one mass
+                #     for cl in copy_lines:
+                #         out_line_dict = {}
+                #         for column in flash_lfq_headers:
+                #             translated_col = header_translations[column]
+                #             out_line_dict[translated_col] = cl[column]
+                #         lines_to_write.append(out_line_dict)
+                # else:  # if not in self.mass_to_identity, simple write the only existing mass without copying
+                # all lines are in self.mass_to_identity, this clause is never used!
                 out_line_dict = {}
                 for column in flash_lfq_headers:
                     translated_col = header_translations[column]
                     out_line_dict[translated_col] = line[column]
-                writer.writerow(out_line_dict)
+                lines_to_write.append(out_line_dict)
+
+            print(len(lines_to_write))
+            for line in lines_to_write:
+                writer.writerow(line)
         return csv_path
 
     def __init__(self, *args, **kwargs):
@@ -297,6 +403,14 @@ class flash_lfq_1_1_1(ursgal.UNode):
         self.params["command_list"] = command_list
 
     def postflight(self):
+        i = 0
+        for id, masses in self.identity_to_mass.items():
+            if len(set(masses)) > 1:
+                i += 1
+                print(id)
+                print(set(masses))
+                print()
+        print(i)
         output_files_basenames = [
             "QuantifiedPeaks.tsv",
             "QuantifiedPeptides.tsv",

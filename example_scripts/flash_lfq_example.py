@@ -63,7 +63,7 @@ def main():
         all_res.append(fil)
 
     merged_res = uc.merge_csvs(input_files=all_res)
-    merged_res = '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/All_merged_results.csv'
+    merged_res = '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/All_merged_results_accepted.csv'
     uc.params['quantification_evidences'] = merged_res
     print(mzml_files)
     print()
