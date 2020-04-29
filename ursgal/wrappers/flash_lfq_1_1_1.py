@@ -100,31 +100,16 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 else:
                     rt = float(line['Retention Time (s)'])
                     rt /= 60
-                # if ';' in line["uCalc Mass"]:
-                #     # sanitize mass
-                #     mass = float(line["uCalc Mass"].split(';')[0])
-                # else:
-                #     mass = float(line["uCalc Mass"])
                 # TODO use pyqms isotopolgue lib for more accurate masses
                 seq_mod = '{seq}#{mods}'.format(seq=line['Sequence'], mods=line['Modifications'])
                 # pprint(line)
-                try:
-                    cc.use(seq_mod)
-                except:
-                    print(seq_mod)
-                    print(line.get("PTMiner:Result # for PSM", 'NOPE'))
-                    failed += 1
+                cc.use(seq_mod)
                 mass = cc._mass()
                 if line.get('Mass Difference', '') != '':
                     # add mass difference
-                    # print(line['Mass Difference'])
                     mass_diff = float(line['Mass Difference'].split(':')[0].split('(')[0])
-                    # print(mass_diff)
-                    # print()
                     mass += mass_diff
                 if line.get('Glycan Mass', '') != '':
-                    # breakpoint()
-                    # add glycan mass
                     mass += float(line['Glycan Mass'])
                 mass = str(round(mass, 5))
                 line_to_write = {
@@ -145,7 +130,6 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 writer.writerow(line_to_write)
                 written_identities.add(full_seq)
         print(failed)
-        breakpoint()
         return out_name
 
     # def insert_mods(self, sequence, ursgal_mods):
@@ -175,7 +159,6 @@ class flash_lfq_1_1_1(ursgal.UNode):
             all_mods += tmp_mods
             # all_mods += [(m.rsplit(":", maxsplit=1)[0], int(m.rsplit(":", maxsplit=1)[1])) for m in line['Mass Difference'].split(";")]
         if line.get('Glycan Mass', '') != '':
-            # breakpoint()
             # add Glycan mass to mod annotation
             # use glycan mass or name here?
             m = line['Glycan Mass']
