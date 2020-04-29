@@ -234,13 +234,14 @@ class ChemicalComposition(dict):
                         ))
                 # if occ >= 1:
                 position = int(match.group('pos'))
-                if position in self.unimod_at_pos.keys():
-                    print('{0} <<- Two unimods at the same position ? '.format(
-                        sequence
-                    ))
-                    raise Exception
+                if position not in self.unimod_at_pos.keys():
+                    self.unimod_at_pos[position] = [unimod[:match.start()]]
+                self.unimod_at_pos[position].append(unimod[:match.start()])
+                    # print('{0} <<- Two unimods at the same position ? '.format(
+                    #     sequence
+                    # ))
+                    # raise Exception
 
-                self.unimod_at_pos[position] = unimod[:match.start()]
             # match = re.search( position_re_pattern, unimod)
             # if match is not None:
             #     end = match.start()
