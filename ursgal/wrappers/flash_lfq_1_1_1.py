@@ -62,7 +62,9 @@ class flash_lfq_1_1_1(ursgal.UNode):
             reader = csv.DictReader(fin)
             writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
             writer.writeheader()
-            for line in reader:
+            for i, line in enumerate(reader):
+                if i % 500 == 0:
+                    print('Rewrite line {i:5}'.format(i=i), end='\r')
                 # Check Mass differences column!!
                 # Check Glycan mass column
                 # Check Glycan name column
@@ -398,7 +400,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
             "QuantifiedPeaks.tsv",
             "QuantifiedPeptides.tsv",
             "QuantifiedProteins.tsv",
-            "BayesianAnalysisBla.tsv",
+            "BayesianFoldChangeAnalysis.tsv",
         ]
         # rewrite to csv and rename
         for file in output_files_basenames:
