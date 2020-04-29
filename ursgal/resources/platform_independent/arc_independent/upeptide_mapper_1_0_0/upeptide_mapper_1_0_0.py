@@ -208,11 +208,14 @@ def main(input_file=None, output_file=None, params=None):
                 tmp_peptide_set |= variants
 
             print('[ map_peps ] Checking for X in sequence: mapping {0} variants'.format(len(tmp_peptide_set)))
-            upapa.peptide_2_protein_mappings[fasta_lookup_name] = defaultdict(list)
-            p2p_mappings  = upapa.map_peptides(
-                list(tmp_peptide_set),
-                *class_etxra_args
-            )
+            if len(tmp_peptide_set) == 0:
+                p2p_mappings={}
+            else:
+                upapa.peptide_2_protein_mappings[fasta_lookup_name] = defaultdict(list)
+                p2p_mappings  = upapa.map_peptides(
+                    list(tmp_peptide_set),
+                    *class_etxra_args
+                )
 
             final_non_mappable_peps, final_non_mappable_linedicts, new_td_peps, new_dnd = write_output_file(
                 output_file=output_file,
