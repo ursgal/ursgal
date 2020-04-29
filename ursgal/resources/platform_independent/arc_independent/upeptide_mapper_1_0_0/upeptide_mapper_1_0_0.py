@@ -146,17 +146,8 @@ def main(input_file=None, output_file=None, params=None):
         tmp_peptide_set = set()
         print('[ map_peps ] Checking for I <--> L conversions: building set of variants')
         for n, non_mappable_peptide in enumerate(non_mappable_peps):
-            print(non_mappable_peptide)
-            if len(non_mappable_peptide) > 50:
+            if len(non_mappable_peptide) > 60:
                 continue
-            if n % 500 == 0:
-                print(
-                    '[ map_peps ] building variant: {0}/{1} '.format(
-                        n,
-                        len(non_mappable_peps),
-                    ),
-                    end = '\r'
-                )
             if non_mappable_peptide == '':
                 continue
             # check L <--> I variants first
@@ -205,6 +196,8 @@ def main(input_file=None, output_file=None, params=None):
             sequence_variants = defaultdict(set)
             tmp_peptide_set = set()
             for non_mappable_peptide in still_non_mappable_peps:
+                if len(non_mappable_peptide) > 60:
+                    continue
                 variants = set()
                 aa_list = list(non_mappable_peptide)
                 for pos, aa in enumerate(aa_list):
@@ -214,6 +207,7 @@ def main(input_file=None, output_file=None, params=None):
                 sequence_variants[non_mappable_peptide] = variants
                 tmp_peptide_set |= variants
 
+            print('[ map_peps ] Checking for X in sequence: mapping {0} variants'.format(len(tmp_peptide_set)))
             upapa.peptide_2_protein_mappings[fasta_lookup_name] = defaultdict(list)
             p2p_mappings  = upapa.map_peptides(
                 list(tmp_peptide_set),
