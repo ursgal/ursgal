@@ -147,6 +147,8 @@ def main(input_file=None, output_file=None, params=None):
         print('[ map_peps ] Checking for I <--> L conversions: building set of variants')
         for n, non_mappable_peptide in enumerate(non_mappable_peps):
             print(non_mappable_peptide)
+            if len(non_mappable_peptide) > 50:
+                continue
             if n % 500 == 0:
                 print(
                     '[ map_peps ] building variant: {0}/{1} '.format(
@@ -167,7 +169,7 @@ def main(input_file=None, output_file=None, params=None):
                 for i, aa in zip(indices, combo):
                     aa_list[i] = aa
                 variants.add(''.join(aa_list))
-            # sequence_variants[non_mappable_peptide] = variants
+            sequence_variants[non_mappable_peptide] = variants
             tmp_peptide_set |= variants
 
         # reset buffer...
