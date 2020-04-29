@@ -98,6 +98,8 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 if line["Retention Time (s)"] == '':
                     # sanitize rt
                     file = line['Spectrum Title'].split('.')[0]
+                    if file.startswith('open_mod'):
+                        file = file.replace('open_mod_', '')
                     unit = self.scan_lookup[file]['unit']
                     rt = self.scan_lookup[file]['scan_2_rt'][int(line['Spectrum ID'])]
                     if unit == 'minute':
@@ -118,9 +120,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     mass += float(line['Glycan Mass'])
                 mass = str(round(mass, 5))
                 line_to_write = {
-                    "File Name": os.path.splitext(
-                        os.path.basename(line["Raw data location"])
-                    )[0],
+                    "File Name": file,
                     "Scan Retention Time": rt,
                     "Precursor Charge": line["Charge"],
                     "Base Sequence": line["Sequence"],
