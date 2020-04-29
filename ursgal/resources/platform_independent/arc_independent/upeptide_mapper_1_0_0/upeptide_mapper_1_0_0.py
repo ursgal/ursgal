@@ -590,7 +590,15 @@ class UPeptideMapper_v2( dict ):
         '''
         if fasta_name not in self.peptide_2_protein_mappings.keys():
             self.peptide_2_protein_mappings[fasta_name] = defaultdict(list)
-        for peptide in peptide_list:
+        for n, peptide in enumerate(peptide_list):
+            if n % 500 == 0:
+                print(
+                    '[ map_peps ] Processing peptide #: {0}/{1} '.format(
+                        n,
+                        len(peptide_list),
+                    ),
+                    end = '\r'
+                )
             self.peptide_2_protein_mappings[fasta_name][peptide] = self.map_peptide(
                 peptide,
                 fasta_name = fasta_name,
