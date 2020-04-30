@@ -164,7 +164,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
         full_seq = '{0}#{1}#{2}'.format(seq_mod, mass_diff_name, glycan_name)
         full_mass = round(seq_mod_mass + mass_diff_mass + glycan_mass, 5)
 
-    return full_seq, full_mass
+        return full_seq, full_mass
 
     # def insert_mods(self, sequence, ursgal_mods):
     def insert_mods(self, line):
