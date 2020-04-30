@@ -51,7 +51,7 @@ class UnimodMapper( object ):
                     'ext',
                     'userdefined_unimod.xml'
                 ))
-            xmlFiles = [unimodXML, userdefined_unimodXML] 
+            xmlFiles = [unimodXML, userdefined_unimodXML]
         else:
             xmlFiles = [xmlFile]
         data_list = []
@@ -414,7 +414,11 @@ class UnimodMapper( object ):
             umass = entry['mono_mass']
             rounded_umass = round( float(umass), decimal_places )
             if abs(rounded_umass - mass) <= sys.float_info.epsilon:
-                return_list.append( entry[ entry_key ] )
+                return_list.append(entry[entry_key])
+        try:
+            return_list.sort()
+        except TypeError:
+            pass
         return return_list
 
     def _map_key_2_index_2_value(self, map_key, return_key):
@@ -441,7 +445,7 @@ class UnimodMapper( object ):
 
     def writeXML(self, modification_dict, xmlFile = None):
         '''
-        Writes a unimod-style userdefined_unimod.xml file in 
+        Writes a unimod-style userdefined_unimod.xml file in
         ursal/resources/platform_independent/arc_independent/ext
 
         Args:
