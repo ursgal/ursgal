@@ -108,7 +108,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 self.spec_sequence_dict[spec_seq_id]['masses'].append(full_mass)
                 self.spec_sequence_dict[spec_seq_id]['names'].append(full_seq_name)
                 self.spec_sequence_dict[spec_seq_id]['line_dicts'].append(line_to_write)
-                
+
                 # self.mass_to_identity.setdefault(mass, []).append(line_to_write)
                 # self.full_sequence_to_mass[full_seq] = mass
                 # self.identity_to_mass.setdefault(full_seq, []).append(mass)
@@ -127,7 +127,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                         self.spec_sequence_dict[spec_sequence]['masses']
                     )
                     full_seq = '|||'.join(sorted(self.spec_sequence_dict[spec_sequence]['names']))
-                for line_dict in self.spec_sequence_dict[spec_sequence]['line_dicts']
+                for line_dict in self.spec_sequence_dict[spec_sequence]['line_dicts']:
                     line_dict["Full Sequence"] = full_seq
                     line_dict["Peptide Monoisotopic Mass"] = monoisotopic_mass
                     # line_dict["Protein Accession"] += '|###|{0}'.format(full_seq)
