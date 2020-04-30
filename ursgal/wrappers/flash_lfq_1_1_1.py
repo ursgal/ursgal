@@ -7,6 +7,7 @@ import sys
 import shutil
 from pprint import pprint
 import pickle
+import statistics
 
 from ursgal.ukb import PROTON
 
@@ -50,98 +51,120 @@ class flash_lfq_1_1_1(ursgal.UNode):
         out_name = os.path.join(
             self.params["output_dir_path"], "flash_lfq_psm_input.tsv"
         )
-        # # map mass to all variants with that mass
-        # # self.mass_to_identity = {}
-        # # remember mass of the full seq to rewrite QuantifiedPeaks.tsv
-        # # self.full_sequence_to_mass = {}
-        # # only to debug
-        # # self.identity_to_mass = {}
-        # # written_identities = set()
-        # cc = ChemicalComposition()
-        # failed = 0
-        # with open(unified_csv) as fin, open(out_name, "wt") as fout:
-        #     reader = csv.DictReader(fin)
-        #     writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
-        #     writer.writeheader()
-        #     # total_length = sum(1 for row in reader)
-        #     for i, line in enumerate(reader):
-        #         if i % 500 == 0:
-        #             print('Rewrite line {0}'.format(i), end='\r')
-        #         if 'TN_CSF_062617_59' in line['Spectrum Title']:
-        #             continue
-        #         # Check Mass differences column!!
-        #         # Check Glycan mass column
-        #         # Check Glycan name column
-        #         if 'X' in line['Sequence']:
-        #             # X in sequence not supported
-        #             continue
-        #         if line["Modifications"] == "" and line["Mass Difference"] == "" and line["Glycan Mass"] == "":
-        #             full_seq = line["Sequence"]
-        #         else:
-        #             if '->' in line['Modifications']:
-        #                 # sanitize mass for AA exchange
-        #                 # breakpoint()
-        #                 # for m in line['Modifications'].split(";"):
-        #                 #     if '->' in m:
-        #                 #         breakpoint()
-        #                 #         aa1, aa2 = m.split(':')[0].split('->')
-        #                 #         cc.use(aa1)
-        #                 #         mass1 = cc._mass()
-        #                 #         cc.use(aa2)
-        #                 #         mass2 = cc._mass()
-        #                 #         delta_m = max(mass2, mass1) - min(mass2, mass1)
-        #                 #         Δm = max(mass2, mass1) - min(mass2, mass1) # yes, unicode letters work as variables :)
-        #                 pass
-        #             full_seq = self.insert_mods(
-        #                 line
-        #             )
-        #         file = line['Spectrum Title'].split('.')[0]
-        #         if file.startswith('open_mod'):
-        #             file = file.replace('open_mod_', '')
-        #         if line["Retention Time (s)"] == '':
-        #             # sanitize rt
-        #             unit = self.scan_lookup[file]['unit']
-        #             rt = self.scan_lookup[file]['scan_2_rt'][int(line['Spectrum ID'])]
-        #             if unit == 'minute':
-        #                 rt /= 60
-        #         else:
-        #             rt = float(line['Retention Time (s)'])
-        #             rt /= 60
-        #         # TODO use pyqms isotopolgue lib for more accurate masses
-        #         seq_mod = '{seq}#{mods}'.format(seq=line['Sequence'], mods=line['Modifications'])
-        #         # pprint(line)
-        #         cc.use(seq_mod)
-        #         mass = cc._mass()
-        #         # add mass difference
-        #         if line.get('Mass Difference', '') != '':
-        #             if len(line['Mass Difference'].split(':')) < 2:
-        #                 mass_diff = float(line['Mass Difference'].rsplit(':', maxsplit=1)[0].split('(')[0])
-        #             elif line['Mass Difference'].split(':')[1] == 'n':
-        #                 mass_diff = 0
-        #             else:
-        #                 # mass_diff = float(line['Mass Difference'].split(':')[0].split('(')[0])
-        #                 mass_diff = float(line['Mass Difference'].rsplit(':', maxsplit=1)[0].split('(')[0])
-        #             mass += mass_diff
-        #         if line.get('Glycan Mass', '') != '':
-        #             mass += float(line['Glycan Mass'])
-        #         mass = str(round(mass, 5))
-        #         line_to_write = {
-        #             "File Name": file,
-        #             "Scan Retention Time": rt,
-        #             "Precursor Charge": line["Charge"],
-        #             "Base Sequence": line["Sequence"],
-        #             "Full Sequence": full_seq,
-        #             "Peptide Monoisotopic Mass": mass,
-        #             "Protein Accession": line["Protein ID"]#+'|###|'+full_seq,
-        #         }
-        #         # self.mass_to_identity.setdefault(mass, []).append(line_to_write)
-        #         # self.full_sequence_to_mass[full_seq] = mass
-        #         # self.identity_to_mass.setdefault(full_seq, []).append(mass)
-        #         # if full_seq not in written_identities:
-        #         writer.writerow(line_to_write)
-        #         # written_identities.add(full_seq)
-        print(failed)
+        # map mass to all variants with that mass
+        self.mass_to_identity = {}
+        # remember mass of the full seq to rewrite QuantifiedPeaks.tsv
+        self.full_sequence_to_mass = {}
+        # only to debug
+        self.identity_to_mass = {}
+        # written_identities = set()
+        self.spec_sequence_dict = {}
+        with open(unified_csv) as fin:
+            reader = csv.DictReader(fin)
+            # total_length = sum(1 for row in reader)
+            for i, line in enumerate(reader):
+                if i % 500 == 0:
+                    print('Rewrite line {0}'.format(i), end='\r')
+                if 'TN_CSF_062617_59' in line['Spectrum Title']:
+                    continue
+                # Check Mass differences column
+                # Check Glycan mass column
+                # Check Glycan name column
+                if 'X' in line['Sequence']:
+                    # X in sequence not supported
+                    continue
+                full_seq_name, full_mass = get_full_seq_and_mass(line)
+                file = line['Spectrum Title'].split('.')[0]
+                if file.startswith('open_mod'):
+                    file = file.replace('open_mod_', '')
+                if line["Retention Time (s)"] == '':
+                    print('No RT for')
+                    print(line['Spectrum Title'], line('Sequence'), line['Modifications'])
+                    # # sanitize rt
+                    unit = self.scan_lookup[file]['unit']
+                    rt = self.scan_lookup[file]['scan_2_rt'][int(line['Spectrum ID'])]
+                    if unit != 'minute':
+                        rt /= 60
+                else:
+                    rt = float(line['Retention Time (s)'])
+                    rt /= 60
+                line_to_write = {
+                    "File Name": file,
+                    "Scan Retention Time": rt,
+                    "Precursor Charge": line["Charge"],
+                    "Base Sequence": line["Sequence"],
+                    "Full Sequence": full_seq_name,
+                    "Peptide Monoisotopic Mass": full_mass,
+                    "Protein Accession": line["Protein ID"]#+'|###|'+full_seq,
+                }
+
+                spec_seq_id = '{0}#{1}'.format(line['Spectrum Title'], line['Sequence'])
+                if spec_seq_id not in self.spec_sequence_dict.keys():
+                    self.spec_sequence_dict[spec_seq_id] = {
+                        'masses' : [],
+                        'names' : [],
+                        'line_dicts' : [],
+                    }
+                self.spec_sequence_dict[spec_seq_id]['masses'].append(full_mass)
+                self.spec_sequence_dict[spec_seq_id]['names'].append(full_seq_name)
+                self.spec_sequence_dict[spec_seq_id]['line_dicts'].append(line_to_write)
+                
+                # self.mass_to_identity.setdefault(mass, []).append(line_to_write)
+                # self.full_sequence_to_mass[full_seq] = mass
+                # self.identity_to_mass.setdefault(full_seq, []).append(mass)
+                # if full_seq not in written_identities:
+                # written_identities.add(full_seq)
+
+        with open(out_name, "wt") as fout:
+            writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
+            writer.writeheader()
+            for spec_sequence in self.spec_sequence_dict.keys():
+                if len(set(self.spec_sequence_dict[spec_sequence]['masses'])) == 1:
+                    monoisotopic_mass = self.spec_sequence_dict[spec_sequence]['masses'][0]
+                    full_seq = '|||'.join(sorted(self.spec_sequence_dict[spec_sequence]['names']))
+                else:
+                    monoisotopic_mass = statistics.mean(
+                        self.spec_sequence_dict[spec_sequence]['masses']
+                    )
+                    full_seq = '|||'.join(sorted(self.spec_sequence_dict[spec_sequence]['names']))
+                for line_dict in self.spec_sequence_dict[spec_sequence]['line_dicts']
+                    line_dict["Full Sequence"] = full_seq
+                    line_dict["Peptide Monoisotopic Mass"] = monoisotopic_mass
+                    # line_dict["Protein Accession"] += '|###|{0}'.format(full_seq)
+                    writer.writerow(line_dict)
         return out_name
+
+    def get_full_seq_and_mass(self, full_line_dict):
+        sequence = full_line_dict['Sequence']
+        modifications = full_line_dict['Modifications']
+        mass_diff = full_line_dict['Mass Difference']
+        glycan_mass = full_line_dict['Glycan Mass']
+
+        seq_mod = '{0}#{1}'.format(sequence, modifications)
+        self.cc.use(seq_mod)
+        seq_mod_mass = cc._mass()
+
+        if mass_diff.strip() == '':
+            mass_diff_mass = 0
+            mass_diff_name = ''
+        elif mass_diff.endswith(':n'):
+            mass_diff_mass = 0
+            mass_diff_name = ''
+        else:
+            mass_diff_mass = float(line['Mass Difference'].rsplit(':', maxsplit=1)[0].split('(')[0])
+            mass_diff_name = mass_diff
+
+        if glycan_mass.strip() == '':
+            glycan_name = ''
+            glycan_mass = 0
+        else:
+            glycan_mass = float(glycan_mass)
+            glycan_name = full_line_dict['Glycan']
+
+        full_seq = '{0}#{1}#{2}'.format(seq_mod, mass_diff_name, glycan_name)
+        full_mass = round(seq_mod_mass + mass_diff_mass + glycan_mass, 5)
+
+    return full_seq, full_mass
 
     # def insert_mods(self, sequence, ursgal_mods):
     def insert_mods(self, line):
@@ -366,8 +389,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
 
         # Convert unified csv to FlashLFQ input
         unified_csv = self.params["translations"]["quantification_evidences"]
-        mod_map = {}
-        mods = self.map_mods()
+        self.cc = ChemicalComposition()
         psm_input = self.rewrite_psm_input(unified_csv)
 
         command_list = []
