@@ -73,7 +73,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 if 'X' in line['Sequence']:
                     # X in sequence not supported
                     continue
-                full_seq_name, full_mass = get_full_seq_and_mass(line)
+                full_seq_name, full_mass = self.get_full_seq_and_mass(line)
                 file = line['Spectrum Title'].split('.')[0]
                 if file.startswith('open_mod'):
                     file = file.replace('open_mod_', '')
@@ -142,7 +142,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
 
         seq_mod = '{0}#{1}'.format(sequence, modifications)
         self.cc.use(seq_mod)
-        seq_mod_mass = cc._mass()
+        seq_mod_mass = self.cc._mass()
 
         if mass_diff.strip() == '':
             mass_diff_mass = 0
@@ -151,7 +151,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
             mass_diff_mass = 0
             mass_diff_name = ''
         else:
-            mass_diff_mass = float(line['Mass Difference'].rsplit(':', maxsplit=1)[0].split('(')[0])
+            mass_diff_mass = float(mass_diff.rsplit(':', maxsplit=1)[0].split('(')[0])
             mass_diff_name = mass_diff
 
         if glycan_mass.strip() == '':
