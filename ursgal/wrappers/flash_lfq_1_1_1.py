@@ -52,11 +52,11 @@ class flash_lfq_1_1_1(ursgal.UNode):
             self.params["output_dir_path"], "flash_lfq_psm_input.tsv"
         )
         # map mass to all variants with that mass
-        self.mass_to_identity = {}
+        # self.mass_to_identity = {}
         # remember mass of the full seq to rewrite QuantifiedPeaks.tsv
-        self.full_sequence_to_mass = {}
+        # self.full_sequence_to_mass = {}
         # only to debug
-        self.identity_to_mass = {}
+        # self.identity_to_mass = {}
         # written_identities = set()
         self.spec_sequence_dict = {}
         with open(unified_csv) as fin:
@@ -65,18 +65,16 @@ class flash_lfq_1_1_1(ursgal.UNode):
             for i, line in enumerate(reader):
                 if i % 500 == 0:
                     print('Rewrite line {0}'.format(i), end='\r')
-                if 'TN_CSF_062617_59' in line['Spectrum Title']:
-                    continue
                 # Check Mass differences column
                 # Check Glycan mass column
                 # Check Glycan name column
                 if 'X' in line['Sequence']:
                     # X in sequence not supported
                     continue
-                full_seq_name, full_mass = self.get_full_seq_and_mass(line)
                 file = line['Spectrum Title'].split('.')[0]
-                if file.startswith('open_mod'):
-                    file = file.replace('open_mod_', '')
+                if file not in self.all_filenames:
+                    continue
+                full_seq_name, full_mass = self.get_full_seq_and_mass(line)
                 if line["Retention Time (s)"] == '':
                     print('No RT for')
                     print(line['Spectrum Title'], line('Sequence'), line['Modifications'])
@@ -121,16 +119,16 @@ class flash_lfq_1_1_1(ursgal.UNode):
             for spec_sequence in self.spec_sequence_dict.keys():
                 if len(set(self.spec_sequence_dict[spec_sequence]['masses'])) == 1:
                     monoisotopic_mass = self.spec_sequence_dict[spec_sequence]['masses'][0]
-                    full_seq = '|||'.join(sorted(self.spec_sequence_dict[spec_sequence]['names']))
+                    full_seq = '|||'.join(sorted(set(self.spec_sequence_dict[spec_sequence]['names'])))
                 else:
                     monoisotopic_mass = statistics.mean(
                         self.spec_sequence_dict[spec_sequence]['masses']
                     )
-                    full_seq = '|||'.join(sorted(self.spec_sequence_dict[spec_sequence]['names']))
+                    full_seq = '|||'.join(sorted(set(self.spec_sequence_dict[spec_sequence]['names'])))
                 for line_dict in self.spec_sequence_dict[spec_sequence]['line_dicts']:
                     line_dict["Full Sequence"] = full_seq
                     line_dict["Peptide Monoisotopic Mass"] = monoisotopic_mass
-                    # line_dict["Protein Accession"] += '|###|{0}'.format(full_seq)
+                    line_dict["Protein Accession"] += '|###|{0}'.format(full_seq)
                     writer.writerow(line_dict)
         return out_name
 
@@ -165,59 +163,6 @@ class flash_lfq_1_1_1(ursgal.UNode):
         full_mass = round(seq_mod_mass + mass_diff_mass + glycan_mass, 5)
 
         return full_seq, full_mass
-
-    # def insert_mods(self, sequence, ursgal_mods):
-    def insert_mods(self, line):
-        base_seq = line['Sequence']
-        sequence = line['Sequence']
-        all_mods = []
-        if line.get('Modifications', '') != '':
-            all_mods = [(m.rsplit(":", maxsplit=1)[0], int(m.rsplit(":", maxsplit=1)[1])) for m in line['Modifications'].split(";")]
-        if line.get('Mass Difference', '') != '':
-            # add mass diff col to mod annotation
-            # print(line.get('Mass Difference', ''))
-            # print()
-            tmp_mods = []
-            for m in line['Mass Difference'].split(';'):
-                split = m.rsplit(':', maxsplit=1)
-                # sometimes the mod looks like this -300:3;5
-                # sometimes like this -300:3
-                if len(split) >= 2:
-                    if split[1] == 'n':
-                        continue
-                if len(split) == 2:
-                    m = split[0]
-                    if split[1] == '' or split[1] == 'n':
-                        p = 0
-                    else:
-                        p = int(split[1])
-                    # print(m, p)
-                    tmp_mods.append((m, p))
-            all_mods += tmp_mods
-            # all_mods += [(m.rsplit(":", maxsplit=1)[0], int(m.rsplit(":", maxsplit=1)[1])) for m in line['Mass Difference'].split(";")]
-        if line.get('Glycan Mass', '') != '':
-            # add Glycan mass to mod annotation
-            # use glycan mass or name here?
-            m = line['Glycan Mass']
-            m = line['Glycan']
-            p = line['Glycosite']
-            all_mods.append((m, int(p)))
-            # print(all_mods)
-        mods_sorted = sorted(
-            all_mods,
-            key=lambda x: x[1],
-            reverse=True,
-        )
-        # add mods as the following
-        # just split a ; and write whole string in []
-        # check if acetyl can be anywhere or before or after first AA
-        # if plain massshift in mod string, add it explicitly!!
-        for m in mods_sorted:
-            name, pos = m
-            sequence = list(sequence)
-            sequence.insert(pos, "[{0}:{1}]".format(name, pos))
-            sequence = "".join(sequence)
-        return sequence
 
     def rewrite_as_csv(self, tsv_path):
         base, ext = os.path.splitext(tsv_path)
@@ -374,6 +319,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
 
         # Write ExperimentDesign.tsv
         # TODO move to own method
+        self.all_filenames = set()
         experiment_setup = self.params["translations"]["experiment_setup"]
         if os.path.exists(os.path.join(input_file_dir, "ExperimentalDesign.tsv")):
             os.remove(os.path.join(input_file_dir, "ExperimentalDesign.tsv"))
@@ -385,6 +331,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
                 writer.writeheader()
                 for i, line_dict in experiment_setup.items():
+                    self.all_filenames.add(line_dict['FileName'])
                     writer.writerow(line_dict)
 
         # Convert unified csv to FlashLFQ input
