@@ -55,6 +55,7 @@ class UnimodMapper( object ):
         else:
             xmlFiles = [xmlFile]
         data_list = []
+        extra_unimod_id = 10001
         for xmlFile in xmlFiles:
             if os.path.exists( xmlFile ):
                 unimodXML = ET.iterparse(
@@ -65,8 +66,13 @@ class UnimodMapper( object ):
                 for event, element in unimodXML:
                     if event == b'start':
                         if element.tag.endswith('}mod'):
+                            try:
+                                unimod_id = element.attrib['record_id']
+                            except KeyError:
+                                unimod_id = extra_unimod_id
+                                extra_unimod_id+=1
                             tmp = {
-                                'unimodID' : element.attrib['record_id'],
+                                'unimodID' : unimod_id,
                                 'unimodname' : element.attrib['title'],
                                 'element' : {}
                             }
