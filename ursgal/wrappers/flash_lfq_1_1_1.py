@@ -68,6 +68,8 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 # Check Mass differences column
                 # Check Glycan mass column
                 # Check Glycan name column
+                # if i > 10000:
+                #     break
                 if 'X' in line['Sequence']:
                     # X in sequence not supported
                     continue
@@ -125,10 +127,12 @@ class flash_lfq_1_1_1(ursgal.UNode):
                         self.spec_sequence_dict[spec_sequence]['masses']
                     )
                     full_seq = '|||'.join(sorted(set(self.spec_sequence_dict[spec_sequence]['names'])))
+                seq = full_seq.split('#')[0]
+                seq_mod = '{0}[{1}]'.format(seq, full_seq)
                 for line_dict in self.spec_sequence_dict[spec_sequence]['line_dicts']:
                     line_dict["Full Sequence"] = full_seq
                     line_dict["Peptide Monoisotopic Mass"] = monoisotopic_mass
-                    line_dict["Protein Accession"] += '|###|{0}'.format(full_seq)
+                    line_dict["Protein Accession"] #+= '|###|{0}'.format(full_seq)
                     writer.writerow(line_dict)
         return out_name
 
