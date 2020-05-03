@@ -130,7 +130,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 seq = full_seq.split('#')[0]
                 seq_mod = '{0}[{1}]'.format(seq, full_seq)
                 for line_dict in self.spec_sequence_dict[spec_sequence]['line_dicts']:
-                    line_dict["Full Sequence"] = full_seq
+                    line_dict["Full Sequence"] = seq_mod
                     line_dict["Peptide Monoisotopic Mass"] = monoisotopic_mass
                     line_dict["Protein Accession"] #+= '|###|{0}'.format(full_seq)
                     writer.writerow(line_dict)
