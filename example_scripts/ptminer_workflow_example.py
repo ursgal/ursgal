@@ -97,7 +97,6 @@ def main(folder=None, target_decoy_database=None):
                 )
             result_all_files_each_engine.append(validated_csv)
 
-
         #7. Merge all result files
         merged_results = uc.execute_misc_engine(
             input_file=result_all_files_each_engine,
@@ -123,6 +122,11 @@ def main(folder=None, target_decoy_database=None):
         #9. Filter results to remove decoys and for PEP<=1%
         filtered_validated_results = uc.execute_misc_engine(
             input_file=validated_csv,
+            engine='filter_csv_1_0_0',
+        )
+
+        filtered_validated_results = uc.execute_misc_engine(
+            input_file=ptminer_results,
             engine='filter_csv_1_0_0',
         )
 
