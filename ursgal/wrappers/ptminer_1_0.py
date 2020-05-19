@@ -1,15 +1,13 @@
 #!/usr/bin/env python3.4
 import ursgal
-import importlib
 import os
 import sys
-import pickle
-import shutil
 import csv
 import copy
 import re
 from ursgal import ukb
 import pprint
+import re
 
 class ptminer_1_0(ursgal.UNode):
     """ptminer_1_0 used for mass shifts localization and peptides anotation"""
@@ -72,78 +70,8 @@ class ptminer_1_0(ursgal.UNode):
         selected_columns = []
         # mod pattern
         mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
+        
         #convert csv file into PTMiner input file
-        with open(self.params['translations']['csv_input_file'], 'r') as csv_file:
-            csv_reader = csv.DictReader(csv_file)
-            # find the last search/denovo engine:
-            # if validation_score_field is None, do as before
-            # else use that (user defines this in workflow as well as bigger_score_better)
-            # check if last_engine is list and print error
-
-            last_search_engine_colname = self.params['translations']['validation_score_field']
-            last_engine_bigger_scores_better = self.params['translations']['bigger_scores_better']
-
-            if last_search_engine_colname is None:
-                last_engine = self.get_last_search_engine(
-                    history = self.stats['history'],
-                )
-                if type(last_engine) is list:
-                    raise Exception('''
-                        You need to specify validation_score_field param.
-                        Each of these engines %s may define that param differently
-                        ''' % last_engine) 
-                last_search_engine_colname = self.UNODE_UPARAMS['validation_score_field']['uvalue_style_translation'][last_engine]
-
-            if last_engine_bigger_scores_better is None:
-                last_engine = self.get_last_search_engine(
-                    history = self.stats['history'],
-                )
-                if type(last_engine) is list:
-                    raise Exception('''
-                        You need to specify bigger_scores_better param.
-                        Each of these engines %s may define that param differently
-                        ''' % last_engine)
-                last_engine_bigger_scores_better = self.UNODE_UPARAMS['bigger_scores_better']['uvalue_style_translation'][last_engine]
-
-    
-            for row in csv_reader:
-                #taking into account cases where there are multiple mass differences:positions for same PSM
-                mass_diffs = row['Mass Difference'].split(';')
-                mass_diffs_sum = 0
-                for mass in mass_diffs:
-                    if mass == '':
-                        continue
-                    mass_diffs_sum += float(mass.split(':')[0])
-                
-                tmp_dict = {}
-                tmp_dict['Mass Shift'] = mass_diffs_sum
-                tmp_dict['Dataset Name'] = merged_mgf_file
-                tmp_dict['Spectrum Name'] = row['Spectrum Title']
-                tmp_dict['Sequence'] = row['Sequence']
-                tmp_dict['Charge'] = row['Charge']
-                tmp_dict['ObsMH'] = (float(row['Exp m/z']) * float(row['Charge'])) - (ukb.PROTON * (float(row['Charge']) - 1))
-                tmp_dict['Main Score'] = row[last_search_engine_colname]
-                tmp_dict['High Score Better'] = last_engine_bigger_scores_better
-
-                #taking into account cases where there are multiple modifications:positions
-                mods = row['Modifications'].split(';')
-                mod_name_list = []
-                pos_list = []
-                for mod in mods:
-                    if mod == '':
-                        continue
-                    match = mod_pattern.search(mod)
-                    pos = match.group('pos')
-                    pos_list.append(pos)
-                    mod_name = mod[:match.start()]
-                    mod_name_list.append(mod_name)
-                tmp_dict['Identified Mod Name'] = ';'.join(mod_name_list)
-                tmp_dict['Identified Mod Position'] = ';'.join(pos_list)
-                tmp_dict['Protein Access'] = row['Protein ID']
-                tmp_dict['Before AA'] = row['Sequence Pre AA'] 
-                tmp_dict['After AA'] = row['Sequence Post AA']
-                selected_columns.append(tmp_dict)
-
         fieldnames_list = [ 'Dataset Name', 
                             'Spectrum Name', 
                             'Sequence', 
@@ -164,8 +92,81 @@ class ptminer_1_0(ursgal.UNode):
         with open(ptminer_input, 'w', newline='') as new_csvfile:
             writer = csv.DictWriter(new_csvfile, fieldnames=fieldnames_list, delimiter='\t')
             writer.writeheader()
-            for row in selected_columns:
-                writer.writerow(row)
+            # for row in selected_columns:
+            #     writer.writerow(row)
+
+            with open(self.params['translations']['csv_input_file'], 'r') as csv_file:
+                csv_reader = csv.DictReader(csv_file)
+                # find the last search/denovo engine:
+                # if validation_score_field is None, do as before
+                # else use that (user defines this in workflow as well as bigger_score_better)
+                # check if last_engine is list and print error
+
+                last_search_engine_colname = self.params['translations']['validation_score_field']
+                last_engine_bigger_scores_better = self.params['translations']['bigger_scores_better']
+
+                if last_search_engine_colname is None:
+                    last_engine = self.get_last_search_engine(
+                        history = self.stats['history'],
+                    )
+                    if type(last_engine) is list:
+                        raise Exception('''
+                            You need to specify validation_score_field param.
+                            Each of these engines %s may define that param differently
+                            ''' % last_engine) 
+                    last_search_engine_colname = self.UNODE_UPARAMS[
+                        'validation_score_field']['uvalue_style_translation'][last_engine]
+
+                if last_engine_bigger_scores_better is None:
+                    last_engine = self.get_last_search_engine(
+                        history = self.stats['history'],
+                    )
+                    if type(last_engine) is list:
+                        raise Exception('''
+                            You need to specify bigger_scores_better param.
+                            Each of these engines %s may define that param differently
+                            ''' % last_engine)
+                    last_engine_bigger_scores_better = self.UNODE_UPARAMS[
+                        'bigger_scores_better']['uvalue_style_translation'][last_engine]
+
+        
+                for row in csv_reader:
+                    #taking into account cases where there are multiple mass differences:positions for same PSM
+                    mass_diffs = row['Mass Difference'].split(';')
+                    mass_diffs_sum = 0
+                    for mass in mass_diffs:
+                        if mass == '':
+                            continue
+                        mass_diffs_sum += float(mass.split(':')[0])
+                    
+                    tmp_dict = {}
+                    tmp_dict['Mass Shift'] = mass_diffs_sum
+                    tmp_dict['Dataset Name'] = merged_mgf_file
+                    tmp_dict['Spectrum Name'] = row['Spectrum Title']
+                    tmp_dict['Sequence'] = row['Sequence']
+                    tmp_dict['Charge'] = row['Charge']
+                    tmp_dict['ObsMH'] = (float(row['Exp m/z']) * float(row['Charge'])) - (ukb.PROTON * (float(row['Charge']) - 1))
+                    tmp_dict['Main Score'] = row[last_search_engine_colname]
+                    tmp_dict['High Score Better'] = last_engine_bigger_scores_better
+
+                    #taking into account cases where there are multiple modifications:positions
+                    mods = row['Modifications'].split(';')
+                    mod_name_list = []
+                    pos_list = []
+                    for mod in mods:
+                        if mod == '':
+                            continue
+                        match = mod_pattern.search(mod)
+                        pos = match.group('pos')
+                        pos_list.append(pos)
+                        mod_name = mod[:match.start()]
+                        mod_name_list.append(mod_name)
+                    tmp_dict['Identified Mod Name'] = ';'.join(mod_name_list)
+                    tmp_dict['Identified Mod Position'] = ';'.join(pos_list)
+                    tmp_dict['Protein Access'] = row['Protein ID']
+                    tmp_dict['Before AA'] = row['Sequence Pre AA'] 
+                    tmp_dict['After AA'] = row['Sequence Post AA']
+                    writer.writerow(tmp_dict)
 
         self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
@@ -262,31 +263,19 @@ class ptminer_1_0(ursgal.UNode):
             self.exe,
             self.param_file_name,
         ]
+        print(self.params['command_list'])
         self.created_tmp_files.append(self.param_file_name)
         self.created_tmp_files.append(merged_mgf_file)
+
         return self.params
+
+
     def postflight(self, anno_result=None, csv_input=None, merged_results_csv=None):
         #fields from anno_result
         #Posterior Probability; Position; AA; SDP Score; Annotation Type; New Sequence; New Mod; New Mod Position; # Mass, Mod; 
         #Annotated Mass; Annotated Mod; Annotated Mod Site; Annotated Mod Term Spec; Annotated Mod Classification;
 
-        anno_result_csv = anno_result
-        if anno_result is None:
-            filtered_result = os.path.join(self.params_to_write['output'],'filtered_result.txt')
-            loc_result = os.path.join(self.params_to_write['output'],'loc_result.txt')
-            prior_probability = os.path.join(self.params_to_write['output'],'prior_probability.txt')
-            self.created_tmp_files.append(filtered_result)
-            self.created_tmp_files.append(loc_result)
-            self.created_tmp_files.append(prior_probability)
-            anno_result = os.path.join(self.params_to_write['output'],'anno_result.txt')
-
-            #convert anno_result.txt into csv file unless a csv file is already provided
-            anno_result_csv = os.path.join(self.params['output_dir_path'], 'anno_result.csv')
-            input_txt = csv.reader(open(anno_result, 'r'), delimiter = '\t')
-            output_csv = csv.writer(open(anno_result_csv, 'w'))
-            output_csv.writerows(input_txt)
-            self.created_tmp_files.append(anno_result)
-
+        print('read original input csv ...')
         if csv_input is None:
             csv_input = self.params['translations']['csv_input_file']
         original_rows = {}
@@ -296,196 +285,199 @@ class ptminer_1_0(ursgal.UNode):
             reader = csv.DictReader(csvfile)
             fieldnames = reader.fieldnames
             for row in reader:
-                psm_identifier = '#'.join([row['Spectrum Title'], row['Sequence'], row['Modifications']])
+                psm_identifier = '||'.join([row['Spectrum Title'], row['Sequence'], row['Modifications']])
                 if psm_identifier not in original_rows:
                     original_rows[psm_identifier] = [row]
                 else:
                     original_rows[psm_identifier].append(row)
 
-        second_row_translations = { 'Dataset Name': '# Mass, Mod', 
-                                    'Spectrum Name': 'Annotated Mass',
-                                    'Sequence': 'Annotated Mod',
-                                    'Charge': 'Annotated Mod Site',
-                                    'ObsMH': 'Annotated Mod Term Spec',
-                                    'Mass Shift': 'Annotated Mod Classification',
-                                }
-        annotated_rows = {}
+        #prepare output file and write it on the fly
+        if merged_results_csv is None:
+            merged_results_csv = os.path.join(
+                self.params['translations']['output_file_incl_path']
+            )
+        print('Writing result file:', merged_results_csv)
+        print('While parsing PTMiner annotated results file')
+        fieldnames.extend([
+            'PTMiner:Result # for PSM',
+            'PTMiner:Posterior Probability',
+            'PTMiner:SDP Score',
+            'PTMiner:Annotation Type', 
+            'PTMiner:Annotated Mod Pos within Pep or Prot',
+            'PTMiner:Annotated Mod Classification',
+            'PTMiner:# Mass, Mod',  
+        ])
+        if sys.platform == 'win32':
+            lineterminator = '\n'
+        else:
+            lineterminator = '\r\n'
+
+        print('read annotated results txt ...')
+        anno_result_csv = anno_result
+        if anno_result is None:
+            filtered_result = os.path.join(self.params_to_write['output'],'filtered_result.txt')
+            loc_result = os.path.join(self.params_to_write['output'],'loc_result.txt')
+            prior_probability = os.path.join(self.params_to_write['output'],'prior_probability.txt')
+            # self.created_tmp_files.append(filtered_result)
+            # self.created_tmp_files.append(loc_result)
+            # self.created_tmp_files.append(prior_probability)
+            anno_result = os.path.join(self.params_to_write['output'],'anno_result.txt')
+            # self.created_tmp_files.append(anno_result)
+
         #read from annotated results csv file
-        with open(anno_result_csv, 'r') as anno_file:
-            reader = csv.DictReader(anno_file)
+        new_psms = {}
+        with open(anno_result, 'r') as anno_file, open(merged_results_csv, 'w') as out_file:
+            writer = csv.DictWriter(out_file, fieldnames=fieldnames, lineterminator=lineterminator)
+            writer.writeheader()
+            reader = csv.DictReader(anno_file, delimiter = '\t')
             previous_row = {}
-            added_annotation_columns = True
             for row in reader:
                 #skip the second line, which is part of the headers
                 if row['Dataset Name'] == '# Mass, Mod':
                     continue
                
-                if row['#'] == '*':
-                    copy_prev_row = copy.deepcopy(previous_row)
-                    for k, v in second_row_translations.items():
-                        copy_prev_row[v] = row[k]
-                    psm_identifier = '#'.join([copy_prev_row['Spectrum Title'], copy_prev_row['Sequence'], copy_prev_row['Modifications']])
-                    annotated_rows[psm_identifier].append(copy_prev_row)
-                    added_annotation_columns = True
+                if row['#'] != '*':
+                    n = 0
+                    spectrum_title = row['Spectrum Name']
+                    sequence = row['Sequence']
 
-                else:
-                    if not added_annotation_columns:#this is a new PSM
-                        annotated_rows['#'.join([previous_row['Spectrum Title'], previous_row['Sequence'], previous_row['Modifications']])].append(previous_row)
-                    added_annotation_columns = False
-
-                    subrow = {}
-                    subrow['Spectrum Title'] = row['Spectrum Name']
-                    subrow['Sequence'] = row['Sequence']
-                    subrow['Charge'] = row['Charge']
-                    subrow['Mass Shift'] = row['Mass Shift']
-                    #subrow['Exp m/z'] = (float(row['ObsMH']) + (ukb.PROTON * (float(row['Charge']) - 1)))/float(row['Charge'])
-
-                    pos = row['Identified Mod Position'].split(';')
-                    mod = row['Identified Mod Name'].split(';')
+                    pos_list = row['Identified Mod Position'].split(';')
+                    mod_list = row['Identified Mod Name'].split(';')
                     mod_pos_list = []
-                    for m, p in zip(mod, pos):
+                    for m, p in zip(mod_list, pos_list):
                         if m == '':
                             continue
-                        mod_pos_list.append(m+':'+p)
-                    mod_pos = ';'.join(mod_pos_list)
+                        mod_pos_list.append('{0}:{1}'.format(m,p))
+                    modifications = ';'.join(mod_pos_list)
+                    psm_identifier = '||'.join([spectrum_title, sequence, modifications])
+                    if psm_identifier not in original_rows.keys():
+                        if psm_identifier not in new_psms.keys():
+                            new_psms[psm_identifier] = []
+                        new_psms[psm_identifier].append(row)
+                        continue
 
-                    subrow['Modifications'] = mod_pos
-                    subrow['Protein ID'] = row['Protein Access']
-                    subrow['Sequence Pre AA'] = row['Before AA']
-                    subrow['Sequence Post AA'] = row['After AA']
-                    subrow['Posterior Probability'] = row['Posterior Probability']
-                    subrow['Position'] = row['Position']
-                    subrow['AA'] = row['AA']
-                    subrow['SDP Score'] = row['SDP Score']
-                    subrow['Annotation Type'] = row['Annotation Type']
-                    subrow['New Sequence'] = row['New Sequence']
-                    subrow['New Mod'] = row['New Mod']
-                    subrow['New Mod Position'] = row['New Mod Position']
-
-                    psm_identifier = '#'.join([subrow['Spectrum Title'], subrow['Sequence'], subrow['Modifications']])
-                    if psm_identifier not in annotated_rows:
-                        annotated_rows[psm_identifier] = []
+                    mass_shift = float(row['Mass Shift'])
+                    mass_shift_pos = row['Position']
+                    ptminer_posterior_probability = row['Posterior Probability']
+                    ptminer_sdp_score = row['SDP Score']
+                    annotation_type = row['Annotation Type']
+                    
+                    for line_dict in original_rows[psm_identifier]:
+                        line_dict['Mass Difference'] = '{0}:{1}'.format(mass_shift, mass_shift_pos)
+                        line_dict['PTMiner:Posterior Probability'] = ptminer_posterior_probability
+                        line_dict['PTMiner:SDP Score'] = ptminer_sdp_score
+                        line_dict['PTMiner:Annotation Type'] = annotation_type
+                        line_dict['PTMiner:Result # for PSM'] = 0
+                        # line_dict['PTMiner:Annotated Mod Pos within Pep or Prot'] = ''
+                        # line_dict['PTMiner:Annotated Mod Classification'] = ''
+                        # line_dict['PTMiner:# Mass, Mod'] = ''
+                        writer.writerow(line_dict)
 
                     #check if there is new sequence, and if so create a new row for it
                     if str(row['New Sequence']).strip() != '' and row['New Sequence'] is not None:
-                        new_row = copy.deepcopy(subrow)
-                        subrow['New Sequence'] = ''
-                        subrow['New Mod'] = ''
-                        subrow['New Mod Position'] = ''
-                        annotated_rows[psm_identifier].append(new_row)
-
-                    previous_row = subrow
-
-        self.created_tmp_files.append(anno_result_csv)
-        
-
-        #merge the two dictionaries
-        rows = []
-        keys_from_annotated_file_and_ursgal_results = set()
-        for key in original_rows.keys():
-            if key not in annotated_rows.keys():
-                #add the row anyways
-                for subrow in original_rows[key]:
-                    rows.append(subrow)
-                continue
-            keys_from_annotated_file_and_ursgal_results.add(key)
-            #the same row in the original results file can generate multiple rows after annotation by PTMiner 
-            for row in annotated_rows[key]:
-                #add missing keys from the search engine's results to the annotated results
-                for column_name in original_rows[key][0].keys():
-                    if column_name in row.keys():
-                        continue
-                    row[column_name] = original_rows[key][0][column_name]
-                #deal with new modification from new sequence
-                if str(row['New Sequence']).strip() != '' and row['New Sequence'] is not None:
-                    #we assume there is only one position for the new modification
-                    #we first separate AA from modification
-                    row['AA'] = str(row['New Mod']).split(' ', 1)[1][1:-1]
-                    row['New Modification'] = '%s:%s' % (str(row['New Mod']).split(' ', 1)[0], row['New Mod Position'])
-                    row['Mass Difference'] = ''
-                    row.pop('Position', None)
-                    row.pop('New Mod Position', None)
-                    row.pop('Mass Shift', None)
-                    row.pop('New Mod', None)
-                    rows.append(row)
-                else:
-                    #merge old modifications with annotated modifications
-                    #AA to position correspondance
-                    positions = str(row['Position']).split(';')
-                    AAs = row['AA'].split(';')
-                    aa_pos = {}
-                    for p,aa in zip(positions, AAs):
-                        if aa in aa_pos:
-                            aa_pos[aa].append(p)
-                        else:
-                            aa_pos[aa] = [p]
-
-                    #create a new row for each possible positions for an aa
-                    if 'Annotated Mod' not in row: #this is the case where there is no annotation nor annotated mass
-                        for aa in aa_pos.keys():
-                            for p in aa_pos[aa]:
-                                new_row = copy.deepcopy(row)
-                                new_row['Mass Difference'] = '%s:%s' % (original_rows[key][0]['Mass Difference'].split(':')[0], p)#we maintain the original mass
-                                new_row['AA'] = aa
-                                new_row.pop('Position', None)
-                                new_row.pop('New Sequence', None)
-                                new_row.pop('New Mod', None)
-                                new_row.pop('New Mod Position', None)
-                                new_row.pop('Mass Shift', None)
-                                rows.append(new_row)
-                    else:
-                        if row['Annotated Mod'] is None or row['Annotated Mod'] == '':#this is the case where only annotated mass is given without further identification
-                            continue
-                        else:
-                            aa = str(row['Annotated Mod']).split(' ', 1)[1][1:-1]
-                            for p in aa_pos[aa]:
-                                new_row = copy.deepcopy(row)
-                                new_row['Modifications'] = '%s;%s:%s' % (row['Modifications'], str(row['Annotated Mod']).split(' ', 1)[0], p)
-                                if str(row['Modifications']) == '':
-                                    new_row['Modifications'] = new_row['Modifications'][1:]
-                                new_row['Modifications'].strip(';')
-                                new_row['Mass Difference'] = '%s:%s' % (row['Annotated Mass'], p)
-                                new_row['AA'] = aa
-                                new_row.pop('Position', None)
-                                new_row.pop('New Mod Position', None)
-                                new_row.pop('Annotated Mod', None)
-                                new_row.pop('Annotated Mass', None)
-                                new_row.pop('New Sequence', None)
-                                new_row.pop('New Mod', None)
-                                new_row.pop('New Mod Position', None)
-                                new_row.pop('Mass Shift', None)
-                                new_row.pop('Annotated Mod Site', None)
-                                rows.append(new_row)
+                        for line_dict in original_rows[psm_identifier]:
+                            new_row = copy.deepcopy(line_dict)
+                            new_row['Sequence'] = row['New Sequence'].strip()
+                            new_mod_pos = row['New Mod Position']
+                            new_mod_name = row['New Mod'].split(' (')[0]
+                            unimod_id = ursgal.GlobalUnimodMapper.name2id(
+                                new_mod_name.strip()
+                            )
+                            if unimod_id is None:
+                                new_row['Mass Difference'] = '{0}({1}):{2}'.format(
+                                        mass_shift,
+                                        new_mod_name,
+                                        new_mod_pos
+                                    )
+                                new_mod_pos_list = mod_pos_list
+                            else:
+                                new_row['Mass Difference'] = ''
+                                new_mod_pos_list = [x for x in mod_pos_list]
+                                new_mod_pos_list.append(
+                                    '{0}:{1}'.format(new_mod_name, new_mod_pos)
+                                )
+                            new_row['Modifications'] = self.sort_mods(new_mod_pos_list)
+                            new_row['PTMiner:Result # for PSM'] = -1
+                            writer.writerow(new_row)
                     
-        for key in annotated_rows:
-            if key not in keys_from_annotated_file_and_ursgal_results:
-                #this case should never happen
-                raise KeyError('For some reason, PTMiner created this PSM: %s' % key)
+                else:
+                    if psm_identifier not in original_rows.keys():
+                        if psm_identifier not in new_psms.keys():
+                            new_psms[psm_identifier] = []
+                        new_psms[psm_identifier].append(row)
+                        continue
+                    n += 1
+                    annotated_mass = row['Spectrum Name']
+                    if row['Sequence'] is not None and row['Sequence'] != '':
+                        annotated_mod = row['Sequence'].split(' (')[0]
+                    else:
+                        annotated_mod = ''
+                    if annotated_mod == '':
+                        unimod_id = None
+                        unimod_name = annotated_mass
+                    else:
+                        unimod_id = ursgal.GlobalUnimodMapper.name2id(
+                            annotated_mod.strip()
+                        )
+                        unimod_name = annotated_mod
+                    if unimod_id is None:
+                        new_mass_shift = '{0}({1}):{2}'.format(
+                            mass_shift,
+                            unimod_name,
+                            mass_shift_pos
+                        )
+                        new_modifications = modifications
+                    else:
+                        new_mass_shift = ''
+                        new_mod_pos_list = [x for x in mod_pos_list]
+                        new_mod_pos_list.append(
+                            '{0}:{1}'.format(unimod_name, mass_shift_pos)
+                        )
+                        new_modifications = self.sort_mods(new_mod_pos_list)
+                    for line_dict in original_rows[psm_identifier]:
+                        line_dict['PTMiner:Posterior Probability'] = ptminer_posterior_probability
+                        line_dict['PTMiner:SDP Score'] = ptminer_sdp_score
+                        line_dict['PTMiner:Annotation Type'] = annotation_type
+                        line_dict['PTMiner:Result # for PSM'] = n
+                        line_dict['PTMiner:Annotated Mod Pos within Pep or Prot'] = row['ObsMH']
+                        line_dict['PTMiner:Annotated Mod Classification'] = row['Mass Shift']
+                        line_dict['PTMiner:# Mass, Mod'] = row['Dataset Name']
+                        line_dict['Mass Difference'] = new_mass_shift
+                        line_dict['Modifications'] = new_modifications
+                        writer.writerow(line_dict)
 
-        #write merged final csv
-        if merged_results_csv is None:
-            merged_results_csv = os.path.join(
-                self.params['translations']['output_file_incl_path']
+        new_psms_list = list(new_psms.keys())
+        print('''
+            [ WARNING ] {0} PSMs from PTMiner results were not present in the original results
+            [ WARNING ] These have been skipped (truncated to 100):
+            [ WARNING ] {1}'''.format(
+                len(new_psms_list),
+                new_psms_list if len(new_psms_list) <100 else new_psms_list[:99],
             )
-        print(merged_results_csv)
-        fieldnames.extend([
-            'New Sequence',
-            'New Modification',
-            'Annotation Type', 
-            '# Mass, Mod',  
-            'Annotated Mod Term Spec', 
-            'Annotated Mod Classification',
-            'AA',
-            'Posterior Probability',
-            'SDP Score',
-        ])
+        )
 
-        with open(merged_results_csv, 'w', newline='') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            for row in rows:
-                writer.writerow(row)
         return merged_results_csv
+
+    def sort_mods(self, modifications):
+        mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
+        tmp = []
+        positions = set()
+        for e in modifications:
+            for occ, match in enumerate(mod_pattern.finditer(e)):
+                mod = e[:match.start()]
+                mod_pos = e[match.start()+1:]
+                m = (int(mod_pos), mod)
+                if m not in tmp:
+                    tmp.append(m)
+                    positions.add(int(mod_pos))
+        tmp.sort()
+        sorted_modifications = ';'.join(
+            [
+                '{m}:{p}'.format( m=mod, p=pos) for pos, mod in tmp
+            ]
+        )
+        return sorted_modifications
+
     def write_params_file(self):
         with open(self.param_file_name, 'w') as io:
             print('''[Search]
