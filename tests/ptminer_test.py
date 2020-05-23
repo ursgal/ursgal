@@ -24,7 +24,7 @@ ptminer_input_csv = os.path.join(
     'tests',
     'data',
     'ptminer_1_0',
-    'test_ptminer_1_0_annotated_results.csv'
+    'test_ptminer_1_0_annotated_results.txt'
 )
 
 output_csv = os.path.join(

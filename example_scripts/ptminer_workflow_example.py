@@ -109,6 +109,9 @@ def main(folder=None, target_decoy_database=None):
             'mgf_input_files_list' : mgf_files,
             'validation_score_field': 'PEP',
             'bigger_scores_better': False,
+            'precursor_mass_tolerance_plus' : 5,
+            'precursor_mass_tolerance_minus' : 5,
+            'precursor_mass_tolerance_unit' : 'ppm',
         })
 
         #8. Run PTMiner

@@ -423,31 +423,51 @@ class ptminer_1_0(ursgal.UNode):
                             annotated_mod.strip()
                         )
                         unimod_name = annotated_mod
+                    mass_shift_aa = row['Charge']
                     if unimod_id is None:
-                        new_mass_shift = '{0}({1}):{2}'.format(
-                            mass_shift,
-                            unimod_name,
-                            mass_shift_pos
-                        )
-                        new_modifications = modifications
+                        if mass_shift_aa == '':
+                            new_mass_shift = '{0}({1}):{2}'.format(
+                                mass_shift,
+                                unimod_name,
+                                '<|>'.join(mass_shift_pos)
+                            )
+                            new_modifications = [modifications]
+                        else:
+                            new_mass_shift_pos = []
+                            for pos in mass_shift_pos:
+                                if sequence[int(pos)-1] == mass_shift_aa:
+                                    new_mass_shift_pos.append(pos)
+                            new_mass_shift = '{0}({1}):{2}'.format(
+                                mass_shift,
+                                unimod_name,
+                                '<|>'.join(new_mass_shift_pos)
+                            )
+                            new_modifications = [modifications]
                     else:
                         new_mass_shift = ''
                         new_mod_pos_list = [x for x in mod_pos_list]
-                        new_mod_pos_list.append(
-                            '{0}:{1}'.format(unimod_name, mass_shift_pos)
-                        )
-                        new_modifications = self.sort_mods(new_mod_pos_list)
-                    for line_dict in original_rows[psm_identifier]:
-                        line_dict['PTMiner:Posterior Probability'] = ptminer_posterior_probability
-                        line_dict['PTMiner:SDP Score'] = ptminer_sdp_score
-                        line_dict['PTMiner:Annotation Type'] = annotation_type
-                        line_dict['PTMiner:Result # for PSM'] = n
-                        line_dict['PTMiner:Annotated Mod Pos within Pep or Prot'] = row['ObsMH']
-                        line_dict['PTMiner:Annotated Mod Classification'] = row['Mass Shift']
-                        line_dict['PTMiner:# Mass, Mod'] = row['Dataset Name']
-                        line_dict['Mass Difference'] = new_mass_shift
-                        line_dict['Modifications'] = new_modifications
-                        writer.writerow(line_dict)
+                        new_modifications = []
+                        for pos in mass_shift_pos:
+                            if sequence[int(pos)-1] == mass_shift_aa:
+                                new_modifications.append(
+                                    self.sort_mods(
+                                        new_mod_pos_list + [
+                                            '{0}:{1}'.format(unimod_name, pos)
+                                        ]    
+                                    )
+                                )
+                    for new_mod in new_modifications:
+                        for line_dict in original_rows[psm_identifier]:
+                            line_dict['PTMiner:Posterior Probability'] = ptminer_posterior_probability
+                            line_dict['PTMiner:SDP Score'] = ptminer_sdp_score
+                            line_dict['PTMiner:Annotation Type'] = annotation_type
+                            line_dict['PTMiner:Result # for PSM'] = n
+                            line_dict['PTMiner:Annotated Mod Pos within Pep or Prot'] = row['ObsMH']
+                            line_dict['PTMiner:Annotated Mod Classification'] = row['Mass Shift']
+                            line_dict['PTMiner:# Mass, Mod'] = row['Dataset Name']
+                            line_dict['Mass Difference'] = new_mass_shift
+                            line_dict['Modifications'] = new_mod
+                            writer.writerow(line_dict)
 
         new_psms_list = list(new_psms.keys())
         print('''
