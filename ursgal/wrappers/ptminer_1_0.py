@@ -326,6 +326,7 @@ class ptminer_1_0(ursgal.UNode):
 
         #read from annotated results csv file
         new_psms = {}
+        found_psm_identifier = set()
         with open(anno_result, 'r') as anno_file, open(merged_results_csv, 'w') as out_file:
             writer = csv.DictWriter(out_file, fieldnames=fieldnames, lineterminator=lineterminator)
             writer.writeheader()
@@ -356,14 +357,15 @@ class ptminer_1_0(ursgal.UNode):
                         new_psms[psm_identifier].append(row)
                         continue
 
+                    found_psm_identifier.add(psm_identifier)
                     mass_shift = float(row['Mass Shift'])
-                    mass_shift_pos = row['Position']
+                    mass_shift_pos = row['Position'].split(';')
                     ptminer_posterior_probability = row['Posterior Probability']
                     ptminer_sdp_score = row['SDP Score']
                     annotation_type = row['Annotation Type']
                     
                     for line_dict in original_rows[psm_identifier]:
-                        line_dict['Mass Difference'] = '{0}:{1}'.format(mass_shift, mass_shift_pos)
+                        line_dict['Mass Difference'] = '{0}:{1}'.format(mass_shift, '<|>'.join(mass_shift_pos))
                         line_dict['PTMiner:Posterior Probability'] = ptminer_posterior_probability
                         line_dict['PTMiner:SDP Score'] = ptminer_sdp_score
                         line_dict['PTMiner:Annotation Type'] = annotation_type
@@ -378,7 +380,7 @@ class ptminer_1_0(ursgal.UNode):
                         for line_dict in original_rows[psm_identifier]:
                             new_row = copy.deepcopy(line_dict)
                             new_row['Sequence'] = row['New Sequence'].strip()
-                            new_mod_pos = row['New Mod Position']
+                            new_mod_pos = row['New Mod Position'].split()
                             new_mod_name = row['New Mod'].split(' (')[0]
                             unimod_id = ursgal.GlobalUnimodMapper.name2id(
                                 new_mod_name.strip()
@@ -387,14 +389,14 @@ class ptminer_1_0(ursgal.UNode):
                                 new_row['Mass Difference'] = '{0}({1}):{2}'.format(
                                         mass_shift,
                                         new_mod_name,
-                                        new_mod_pos
+                                        '<|>'.join(new_mod_pos)
                                     )
                                 new_mod_pos_list = mod_pos_list
                             else:
                                 new_row['Mass Difference'] = ''
                                 new_mod_pos_list = [x for x in mod_pos_list]
                                 new_mod_pos_list.append(
-                                    '{0}:{1}'.format(new_mod_name, new_mod_pos)
+                                    '{0}:{1}'.format(new_mod_name, '<|>'.join(new_mod_pos))
                                 )
                             new_row['Modifications'] = self.sort_mods(new_mod_pos_list)
                             new_row['PTMiner:Result # for PSM'] = -1
@@ -406,6 +408,7 @@ class ptminer_1_0(ursgal.UNode):
                             new_psms[psm_identifier] = []
                         new_psms[psm_identifier].append(row)
                         continue
+                    found_psm_identifier.add(psm_identifier)
                     n += 1
                     annotated_mass = row['Spectrum Name']
                     if row['Sequence'] is not None and row['Sequence'] != '':
@@ -455,6 +458,17 @@ class ptminer_1_0(ursgal.UNode):
                 new_psms_list if len(new_psms_list) <100 else new_psms_list[:99],
             )
         )
+
+        lost_psm_identifier = set(original_rows.keys()) - found_psm_identifier
+        if len(lost_psm_identifier) > 0:
+            print('''
+                [ WARNING ] {0} PSMs from the original results were not found in the PTMiner results
+                [ WARNING ] These have been skipped (truncated to 100):
+                [ WARNING ] {1}'''.format(
+                    len(lost_psm_identifier),
+                    list(lost_psm_identifier) if len(lost_psm_identifier) <100 else list(lost_psm_identifier)[:99],
+                )
+            )
 
         return merged_results_csv
 
