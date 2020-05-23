@@ -469,6 +469,10 @@ class ptminer_1_0(ursgal.UNode):
                             line_dict['Modifications'] = new_mod
                             writer.writerow(line_dict)
 
+            for psm_identifier in set(original_rows.keys()) - found_psm_identifier:
+                for line_dict in original_rows[psm_identifier]:
+                    writer.writerow(line_dict)
+
         new_psms_list = list(new_psms.keys())
         print('''
             [ WARNING ] {0} PSMs from PTMiner results were not present in the original results
@@ -479,16 +483,16 @@ class ptminer_1_0(ursgal.UNode):
             )
         )
 
-        lost_psm_identifier = set(original_rows.keys()) - found_psm_identifier
-        if len(lost_psm_identifier) > 0:
-            print('''
-                [ WARNING ] {0} PSMs from the original results were not found in the PTMiner results
-                [ WARNING ] These have been skipped (truncated to 100):
-                [ WARNING ] {1}'''.format(
-                    len(lost_psm_identifier),
-                    list(lost_psm_identifier) if len(lost_psm_identifier) <100 else list(lost_psm_identifier)[:99],
-                )
-            )
+        # lost_psm_identifier = set(original_rows.keys()) - found_psm_identifier
+        # if len(lost_psm_identifier) > 0:
+        #     print('''
+        #         [ WARNING ] {0} PSMs from the original results were not found in the PTMiner results
+        #         [ WARNING ] These have been skipped (truncated to 100):
+        #         [ WARNING ] {1}'''.format(
+        #             len(lost_psm_identifier),
+        #             list(lost_psm_identifier) if len(lost_psm_identifier) <100 else list(lost_psm_identifier)[:99],
+        #         )
+        #     )
 
         return merged_results_csv
 
