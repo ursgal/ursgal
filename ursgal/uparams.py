@@ -390,6 +390,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -407,6 +408,7 @@ ursgal_params = {
             'pyqms_style_1': 'INTERNAL_PRECISION',
             'sugarpy_run_style_1': 'INTERNAL_PRECISION',
             'sugarpy_plot_style_1': 'INTERNAL_PRECISION',
+            'glycopeptide_fragmentor_style_1': 'internal_precision',
         },
         'utag': [
             'quantification',
@@ -1150,6 +1152,7 @@ ursgal_params = {
             'deepnovo_0_0_1',
             'deepnovo_v2',
             'tag_graph_1_8_0',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1163,6 +1166,7 @@ ursgal_params = {
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'deepnovo_style_1': 'base_mz',
             'tag_graph_style_1': 'base_mz',
+            'glycopeptide_fragmentor_style_1': 'base_mz'
         },
         'utag' : [
             'conversion'
@@ -3250,6 +3254,7 @@ ursgal_params = {
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
             'deepnovo_v2',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3271,6 +3276,7 @@ ursgal_params = {
             'pnovo_style_1'     : 'frag_tol',
             'tag_graph_style_1' : 'ppmstd',
             'deepnovo_style_1' : 'AA_MATCH_PRECISION',
+            'glycopeptide_fragmentor_style_1': 'frag_mass_tolerance',
         },
         'utag' : [
             'fragment',
@@ -3335,6 +3341,7 @@ ursgal_params = {
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
             'deepnovo_v2',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3356,6 +3363,7 @@ ursgal_params = {
             'pnovo_style_1'     : 'frag_tol_type_ppm',
             'tag_graph_style_1' : 'frag_mass_tolerance_unit',
             'deepnovo_style_1' : 'AA_MATCH_PRECISION',
+            'glycopeptide_fragmentor_style_1': 'frag_mass_tolerance_unit'
         },
         'utag' : [
             'fragment',
@@ -11846,31 +11854,35 @@ ursgal_params = {
         },
         'uvalue_type' : "dict",
     },
-    'mzml_input_file' : {
+    'mzml_input_files' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'sugarpy_run_style_1': 'mzml_file',
             'sugarpy_plot_style_1': 'mzml_file',
+            'glycopeptide_fragmentor_style_1': 'mzml_file_list',
         },
         'utag' : [
             'input_files',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'str',
+        'uvalue_type' : 'list',
         'uvalue_option' : {
-            'none_val'      : '',
-            'multiple_line' : False,
-            'input_extensions' : ['.mzML']
+            'none_val' : [],
+            'item_title' : 'file path',
+            'item_type' : 'str',
+            'custom_val_max' : 0,
+            'input_extensions' : ['.mzML', '.idx.gz']
         },
         'default_value' : None,
         'description' : \
-            'Path to the mzML input file'
+            'List of paths to the mzML input files'
     },
     'sugarpy_results_pkl' : {
         'edit_version' : 1.00,
@@ -12313,10 +12325,12 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'sugarpy_plot_1_0_0',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'sugarpy_plot_style_1': 'decoy_glycan',
+            'glycopeptide_fragmentor_style_1': 'decoy_glycan',
         },
         'utag' : [
             'scoring',
@@ -12335,6 +12349,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'sugarpy_plot_1_0_0',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -12348,7 +12363,8 @@ ursgal_params = {
         'description': """ Min number of oxonium ions that need to be matched in an MS/MS spectrum, to be accepted as containing oxonium ions (i.e. considered as glycopeptide) """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'sugarpy_plot_style_1': 'min_oxonium_ions'
+            'sugarpy_plot_style_1': 'min_oxonium_ions',
+            'glycopeptide_fragmentor_style_1': 'min_oxonium_ions'
         },
         'utag': [
             'scoring'
@@ -12361,6 +12377,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'sugarpy_plot_1_0_0',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -12374,7 +12391,8 @@ ursgal_params = {
         'description': """ Min number of Y-ions that need to be matched in an MS/MS spectrum, to be accepted as containing Y-ions (i.e. considered as glycopeptide) """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'sugarpy_plot_style_1': 'min_Y_ions'
+            'sugarpy_plot_style_1': 'min_Y_ions',
+            'glycopeptide_fragmentor_style_1': 'min_Y_ions',
         },
         'utag': [
             'scoring'
