@@ -74,7 +74,7 @@ class glycopeptide_fragmentor_1_0_0(ursgal.UNode):
                         )
         glycopep_params['glycopep_ident_file'] = input_file
         glycopep_params['output_file'] = output_file
-        glycopep_params['mzml_file_list'] = self.params['translations']['mzml_file_list']
+        glycopep_params['mzml_file_list'] = self.params['translations']['mzml_input_files']
         glycopep_params['internal_precision'] = self.params['translations']['internal_precision']
         glycopep_params['decoy_glycan'] = self.params['translations']['decoy_glycan']
         glycopep_params['min_Y_ions'] = self.params['translations']['min_Y_ions']
