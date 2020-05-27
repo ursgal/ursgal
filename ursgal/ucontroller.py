@@ -1018,16 +1018,11 @@ class UController(ursgal.UNode):
         # a helper file is generated (contains input filenames and their MD5s)
         # the helper file acts as the new input file. A basic json is dumped
         # for the helper file, too.
-        if isinstance(input_file, list):
-            self.input_file_dicts = self.generate_multi_file_dicts(
-                input_file,
-            )
+        if isinstance( input_file, list ):
+            self.input_file_dicts = self.generate_multi_file_dicts(input_file)
             # the helper file now acts as the input file:
-            input_file = self.generate_multi_helper_file(
-                input_file,
-                userdefined_output_fname = output_file,
-            )
-            self.dump_multi_json(input_file, self.input_file_dicts)
+            input_file = self.generate_multi_helper_file( input_file )
+            self.dump_multi_json( input_file, self.input_file_dicts )
 
         self.set_ios(
             input_file,
@@ -1057,6 +1052,8 @@ class UController(ursgal.UNode):
         return answer
 
     def generate_multi_dir_and_basename( self, input_files ):
+        self.input_file_sanity_check( input_files, multi=True )
+
         common_fname_w_ext = "_".join(
             self.determine_common_head_tail_part_of_names( input_files )
         )
@@ -1066,7 +1063,7 @@ class UController(ursgal.UNode):
         )
         return common_dir, common_fname.strip("_")
 
-    def generate_multi_helper_file(self, input_files, userdefined_output_fname=None):
+    def generate_multi_helper_file( self, input_files ):
         '''
         for UNodes that take multiple input files.
         generates a temporary single input helper file,
@@ -1074,11 +1071,8 @@ class UController(ursgal.UNode):
         routines (set_io, write history) work normally
         with multiple files.
         '''
-        self.input_file_sanity_check(input_files, multi=True)
-        directory, basename = self.generate_multi_dir_and_basename(input_files)
+        directory, basename = self.generate_multi_dir_and_basename( input_files )
         extension           = self.params['helper_extension']
-        if userdefined_output_fname is not None:
-            basename = userdefined_output_fname
 
         '''
         # TODO: confirm that this code block is not needed anymore:
