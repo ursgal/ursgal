@@ -16,7 +16,7 @@ class deepnovo_0_0_1(ursgal.UNode):
         and download the model from https://drive.google.com/open?id=0By9IxqHK5MdWalJLSGliWW1RY2c
 
     Reference:
-    Tran, N.H.; Zhang, X.; Xin, L.; Shan, B.; Li, M. (2017) De novo peptide sequencing by deep learning. PNAS 114 (31) 
+    Tran, N.H.; Zhang, X.; Xin, L.; Shan, B.; Li, M. (2017) De novo peptide sequencing by deep learning. PNAS 114 (31)
 
     """
     META_INFO = {
@@ -175,7 +175,7 @@ class deepnovo_0_0_1(ursgal.UNode):
                     base_mz=self.params['translations']['base_mz']
             )
             self.params_to_write['precursor_mass_tolerance_ppm'] = \
-                self.params['translations']['precursor_mass_tolerance'] 
+                self.params['translations']['precursor_mass_tolerance']
         elif self.params['translations']['precursor_mass_tolerance_unit'] == 'da':
             self.params_to_write['precursor_mass_tolerance_ppm'] = \
                 ursgal.ucore.convert_dalton_to_ppm(
@@ -261,14 +261,18 @@ class deepnovo_0_0_1(ursgal.UNode):
                             os.path.dirname(self.exe),
                             'knapsack.npy'
                         )
-                        self.params_to_write['knapsack_file'] = knapsack_file
+                    else:
+                        knapsack_file = param_value
+                    self.params_to_write['knapsack_file'] = knapsack_file
                 elif deepnovo_param == 'train_dir':
                     if param_value is None or param_value == 'default':
                         train_dir = os.path.join(
                             os.path.dirname(self.exe),
                             'train.example'
                         )
-                        self.params_to_write['train_dir'] = train_dir
+                    else:
+                        train_dir = param_value
+                    self.params_to_write['train_dir'] = train_dir
                 elif deepnovo_param == 'modifications':
                     assert set(param_value) == set(
                         ['M,opt,any,Oxidation',
@@ -281,7 +285,7 @@ class deepnovo_0_0_1(ursgal.UNode):
                          'N,opt,any,Deamidated',
                          'Q,opt,any,Deamidated']
                     [ ERROR ] You specified instead: {0}
-                    '''.format(deepnovo_param)
+                    '''.format(param_value)
                 #     cc = ursgal.ChemicalComposition()
                 #     for mod_dict in self.params['mods']['opt']:
                 #         '''

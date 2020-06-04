@@ -668,7 +668,7 @@ class UNode(object, metaclass=Meta_UNode):
             used. Returns None if no search engine was used yet.
         '''
         last_search_engine = None
-        last_search_engine = self.get_last_engine(
+        last_search_engine = self.get_last_engine( 
             history=history,
             engine_types=[
                 'cross_link_search_engine',
@@ -1407,7 +1407,8 @@ class UNode(object, metaclass=Meta_UNode):
             False
         )
         map_mods_node_exceptions = [
-            'unify_csv'
+            'unify_csv',
+            'ptminer'
         ]
         if is_search_engine or is_quantification_engine:
             self.map_mods()
