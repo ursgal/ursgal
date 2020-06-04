@@ -134,6 +134,9 @@ class sugarpy_run_1_0_0(ursgal.UNode):
                     translation_dict.values())[0]
             elif 'charge' in translated_key:
                 continue
+            elif translated_key == 'mzml_file':
+                sugarpy_params[translated_key] = list(
+                    translation_dict.values())[0][0]
             elif len(translation_dict) == 1:
                 sugarpy_params[translated_key] = list(
                     translation_dict.values())[0]

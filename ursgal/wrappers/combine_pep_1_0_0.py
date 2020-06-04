@@ -116,8 +116,8 @@ class combine_pep_1_0_0(ursgal.UNode):
             search_engine = input_file_dict["last_engine"]
             search_engine_list_for_cPEP.append(search_engine)
 
-        features_that_define_unique_psm = \
-            ['Sequence', 'Modifications', 'Spectrum Title', 'Is decoy']#, 'Charge', 'Is decoy']
+        # features_that_define_unique_psm = \
+        #     ['Sequence', 'Modifications', 'Spectrum Title', 'Is decoy']#, 'Charge', 'Is decoy']
 
         output_csv_full_path = os.path.join(
             self.params['output_dir_path'],
@@ -128,7 +128,7 @@ class combine_pep_1_0_0(ursgal.UNode):
             'input_csvs': input_file_list_for_cPEP,
             'input_engines': search_engine_list_for_cPEP,
             'output_csv': output_csv_full_path,
-            'columns_for_grouping': features_that_define_unique_psm,
+            'columns_for_grouping': self.params['translations']['psm_defining_colnames'],
             'input_sep': ',',  # input csv separating char
             'output_sep': ',',  # output csv separating char
             'join_sep': ';',  # char to join multiple values in same field

@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.4
 # coding: latin1
 import ursgal
-from .percolator_3_2_1 import percolator_3_2_1
+from .percolator_3_2_1 import percolator_3_2_1 as percolator
 
-
-class percolator_3_4_0(percolator_3_2_1):
+class percolator_3_4_0(percolator):
     """
     Percolator 3.4.0 UNode
 
@@ -74,7 +73,3 @@ class percolator_3_4_0(percolator_3_2_1):
             },
         }
     }
-
-    def __init__(self, *args, **kwargs):
-        super(percolator_3_4_0, self).__init__(*args, **kwargs)
-

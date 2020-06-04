@@ -85,7 +85,8 @@ unify_csv_main(
             },
         },
         'label' : '15N',
-        'mods' : R.params['mods']
+        'mods' : R.params['mods'],
+        'prefix' : '',
     },
     search_engine  = 'msfragger_20170103',
 )

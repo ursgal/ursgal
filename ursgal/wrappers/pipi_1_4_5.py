@@ -314,8 +314,8 @@ class pipi_1_4_5(ursgal.UNode):
             fieldnames=translated_headers,
         )
         # self.created_tmp_files.append(pipi_output)
-        # self.created_tmp_files.append(pipi_output.replace('.pipi.csv', '.pipi.pep.xml'))
-        # self.created_tmp_files.append(pipi_output.replace('.pipi.csv', '.input.temp'))
+        self.created_tmp_files.append(pipi_output.replace('.pipi.csv', '.pipi.pep.xml'))
+        self.created_tmp_files.append(pipi_output.replace('.pipi.csv', '.input.temp'))
 
         csv_writer.writeheader()
         for n, line_dict in enumerate(csv_reader):
@@ -363,7 +363,7 @@ class pipi_1_4_5(ursgal.UNode):
             print('''# {version}
 # First line is the parameter file version. Don't change it.
 thread_num = {thread_num}
-percolator_path = ursgal/resources/darwin/64bit/percolator_2_08/percolator_2_08
+percolator_path = ursgal/resources/linux/64bit/percolator_2_08/percolator
 
 # Database
 db = {db}

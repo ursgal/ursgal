@@ -81,6 +81,7 @@ unify_csv_main(
         },
         'label' : '15N',
         'mods' : R.params['mods'],
+        'prefix' : '',
     },
     search_engine  = 'myrimatch_2_1_138',
 )
