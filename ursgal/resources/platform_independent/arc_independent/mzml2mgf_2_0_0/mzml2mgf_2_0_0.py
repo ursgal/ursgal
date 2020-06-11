@@ -155,6 +155,9 @@ def main(
             if mgf_entries % scan_skip_modulo_step != 0:
                 continue
 
+        if len(peaks_2_write) == 0:
+            continue
+
         print(
             'BEGIN IONS',
             file=oof
