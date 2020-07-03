@@ -147,6 +147,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     # mod pattern
     mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
     mod_pattern_msfragger = re.compile( r'''(?P<pos>[0-9]*)(?P<aa>[A-Z])\((?P<mass>[0-9]*\.[0-9]*)\)''' )
+    mod_pattern_msfragger_term = re.compile( r'''.-term\((?P<mass>[0-9]*\.[0-9]*)\)''' )
 
     for mod_type in ['fix', 'opt']:
         for modification in params['mods'][mod_type]:
@@ -611,10 +612,16 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         else:
                             mod_list = []
                             for single_mod in mod_string.split(', '):
-                                match = mod_pattern_msfragger.search(single_mod)
-                                msfragger_pos = int(match.group('pos'))
-                                if msfragger_pos != 0:
-                                    msfragger_pos -= 1
+                                if single_mod.startswith('N-term'):
+                                    msfragger_pos = 0
+                                    match = mod_pattern_msfragger_term.search(single_mod)
+                                elif single_mod.startswith('C-term'):
+                                    msfragger_pos = len(line_dict['Sequence'])
+                                else:
+                                    match = mod_pattern_msfragger.search(single_mod)
+                                    msfragger_pos = int(match.group('pos'))
+                                    if msfragger_pos != 0:
+                                        msfragger_pos -= 1
                                 raw_msfragger_mass = float(match.group('mass'))
                                 msfragger_mass = mass_format_string.format(
                                     # mass rounded as defined above

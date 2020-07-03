@@ -245,7 +245,7 @@ class peptide_forest_1_0_0( ursgal.UNode ):
                 lineterminator=lineterminator
             ) 
             csv_writer.writeheader()
-            import pprint
+            # import pprint
             for psm_id in out_tmp_psm_dicts.keys():
                 # if 'TN_CSF_062617_02.10.10.3' in psm_id:
                     # pprint.pprint(out_tmp_psm_dicts[psm_id])
