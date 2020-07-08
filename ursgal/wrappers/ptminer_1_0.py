@@ -53,7 +53,10 @@ class ptminer_1_0(ursgal.UNode):
         )
         mgf_input_files = self.params['translations']['mgf_input_files_list']
         #merge the input mgf files
-        merged_mgf_file = mgf_input_files[0].strip('.mgf') + '_merged.mgf'
+        merged_mgf_file = os.path.join(
+            os.path.dirname(mgf_input_files[0]),
+            'PTMiner_merged.mgf'
+        )
         first_file = True
         print('merging mgf files. This may take a while ...')
         with open(merged_mgf_file, 'w') as merged_mgf:
