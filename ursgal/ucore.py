@@ -181,6 +181,60 @@ def digest(sequence, enzyme, no_missed_cleavages=False):
         additionals += result
     return additionals
 
+def pyteomics_cleave(sequence, rule, missed_cleavages=0, min_length=None, max_length=100):
+    import itertools as it
+    from collections import deque
+    """This function has been taken and modified from Pyteomics
+
+    Levitsky, L.I.; Klein, J.; Ivanov, M.V.; and Gorshkov, M.V. (2018)
+    "Pyteomics 4.0: five years of development of a Python proteomics framework",
+    Journal of Proteome Research. DOI: 10.1021/acs.jproteome.8b00717
+
+    Cleaves a polypeptide sequence using a given rule.
+
+    Parameters
+    ----------
+    sequence : str
+        The sequence of a polypeptide (in one-letter uppercase notation).
+
+    rule : regex
+        a `regular expression <https://docs.python.org/library/re.html#regular-expression-syntax>`_
+        describing the site of cleavage. It is recommended
+        to design the regex so that it matches only the residue whose C-terminal
+        bond is to be cleaved. All additional requirements should be specified
+        using `lookaround assertions
+        <http://www.regular-expressions.info/lookaround.html>`_.
+    missed_cleavages : int, optional
+        Maximum number of allowed missed cleavages. Defaults to 0.
+    min_length : int or None, optional
+        Minimum peptide length. Defaults to :py:const:`None`.
+    max_length: int or None, optional
+        Maximum peptide length. Defaults to 100.
+
+    Returns
+    -------
+    out : list
+        A list of tuples with (peptide sequence, start position, stop position).
+        Positions are starting with 1 for the first amino acid.
+    """
+    peptides = []
+    ml = missed_cleavages+2
+    trange = range(ml)
+    cleavage_sites = deque([0], maxlen=ml)
+    if min_length is None:
+        min_length = 1
+    cl = 1
+    for i in it.chain([x.end() for x in re.finditer(rule, sequence)],
+                   [None]):
+        cleavage_sites.append(i)
+        if cl < ml:
+            cl += 1
+        for j in trange[:cl-1]:
+            seq = sequence[cleavage_sites[j]:cleavage_sites[-1]]
+            if seq and min_length <= len(seq) <= max_length:
+                peptides.append((seq, j, cleavage_sites[-1]))
+    return peptides
+
 
 def parse_fasta(io):
     '''

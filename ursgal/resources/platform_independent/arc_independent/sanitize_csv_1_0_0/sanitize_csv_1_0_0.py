@@ -29,7 +29,12 @@ def main(
     log10_threshold=True,
     accept_conflicting_psms=False,
     num_compared_psms=2,
-    remove_redundant_psms=False,
+    # remove_redundant_psms=False,
+    psm_defining_colnames=[
+        'Spectrum Title',
+        'Sequence',
+        'Modifications',
+    ]
 ):
     '''
     Spectra with multiple PSMs are sanitized, i.e. only the PSM with best PEP score is accepted
@@ -49,16 +54,27 @@ def main(
         psm_names = set()
         for n, grouped_psm in enumerate(grouped_psm_list):
             score, line_dict = grouped_psm
+            psm = ''
+            for column in psm_defining_colnames:
+                psm += '|{0}'.format(line_dict[column])
             if n == 0:
                 best_score = score
-                psm_names.add(line_dict['Sequence']+line_dict['Modifications']+line_dict['Charge'])
+                psm_names.add(psm)
                 spec_line_dicts.append(line_dict)
             elif n < num_compared_psms:
-                psm = line_dict['Sequence']+line_dict['Modifications']+line_dict['Charge']
-                if psm in psm_names and remove_redundant_psms is True:
-                    continue
+                # psm = line_dict['Sequence']+line_dict['Modifications']+line_dict['Charge']
+                # if psm in psm_names and remove_redundant_psms is True:
+                #     continue
                 if log10_threshold is True:
-                    if abs(math.log10(best_score)) - abs(math.log10(score)) >= score_diff_threshold:
+                    if best_score != 0:
+                        log_best_score = abs(math.log10(best_score))
+                    else:
+                        log_best_score = 0
+                    if score != 0:
+                        log_score = abs(math.log10(score))
+                    else:
+                        log_score = 0
+                    if log_best_score - log_score >= score_diff_threshold:
                         break
                     else:
                         spec_line_dicts.append(line_dict)
@@ -69,7 +85,7 @@ def main(
                     else:
                         spec_line_dicts.append(line_dict)
                         psm_names.add(psm)
-        if accept_conflicting_psms is False and len(spec_line_dicts) >= 2:
+        if accept_conflicting_psms is False and len(psm_names) >= 2:
             continue   
         else:
             all_line_dicts.extend(spec_line_dicts)

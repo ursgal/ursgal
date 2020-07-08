@@ -80,6 +80,7 @@ unify_csv_main(
         },
         'label' : '',
         'mods' : R.params['mods'],
+        'prefix' : '',
     },
     search_engine  = 'msamanda_1_0_0_5243',
 )

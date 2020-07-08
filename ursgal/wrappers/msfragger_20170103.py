@@ -4,7 +4,6 @@ import os
 import pprint
 from collections import defaultdict as ddict
 import csv
-import itertools
 import sys
 
 
@@ -43,7 +42,7 @@ class msfragger_20170103(ursgal.UNode):
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
-        'distributable'           : False,
+        'distributable'               : False,
         'engine_type' : {
             'protein_database_search_engine' : True,
         },
@@ -171,6 +170,9 @@ class msfragger_20170103(ursgal.UNode):
                     min_mz, max_mz = param_value
                     self.params_to_write[
                         msfragger_param_name] = '{0} {1}'.format(min_mz, max_mz)
+                elif msfragger_param_name == 'precursor_mass_lower':
+                    self.params_to_write[
+                        msfragger_param_name] = -1*param_value
                 elif msfragger_param_name == 'modifications':
                     '''
                     #maximum of 7 mods - amino acid codes, * for any amino acid, [ and ] specifies protein termini, n and c specifies peptide termini
@@ -266,7 +268,7 @@ class msfragger_20170103(ursgal.UNode):
             self.params['input_file']
         )
         if self.input_file.lower().endswith('.mzml') or \
-                self.input_file.lower().endswith('.mzml.gz'):#or \
+                self.input_file.lower().endswith('.mzml.gz'): # or \
                 # self.input_file.lower().endswith('.mgf'):
             self.params['translations']['mzml_input_file'] = self.input_file
         elif self.input_file.lower().endswith('.mgf'):

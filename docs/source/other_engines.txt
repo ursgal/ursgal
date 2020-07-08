@@ -117,17 +117,9 @@ Mapper class v4 (dev)
    :members:
    :private-members:
 
-
-Mapper class v3 (dev)
-~~~~~~~~~~~~~~~~~~~~~
-
 .. autoclass:: ursgal.resources.platform_independent.arc_independent.upeptide_mapper_1_0_0.upeptide_mapper_1_0_0.UPeptideMapper_v3
    :members:
    :private-members:
-
-
-Mapper class v2 (deprecated)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: ursgal.resources.platform_independent.arc_independent.upeptide_mapper_1_0_0.upeptide_mapper_1_0_0.UPeptideMapper_v2
    :members:
@@ -155,15 +147,16 @@ Kojak tailored Percolator 2_08
    :members:
 
 
-Percolator 3_2_1
-----------------
+Percolator
+----------
+
+Available Percolator versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.percolator_3_4_0.percolator_3_4_0
+   :members:
 
 .. autoclass:: ursgal.wrappers.percolator_3_2_1.percolator_3_2_1
    :members:
-
-
-Percolator 2_08
----------------
 
 .. autoclass:: ursgal.wrappers.percolator_2_08.percolator_2_08
    :members:

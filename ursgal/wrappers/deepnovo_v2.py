@@ -5,25 +5,20 @@ import csv
 import sys
 
 
-class deepnovo_0_0_1(ursgal.UNode):
+class deepnovo_v2(ursgal.UNode):
     """
-    DeepNovo UNode
-    For further information, see https://github.com/nh2tran/DeepNovo
-
-    Note:
-        Please download manually from https://github.com/StSchulze/DeepNovo?organization=StSchulze&organization=StSchulze
-        or using git clone https://github.com/StSchulze/DeepNovo.git
-        and download the model from https://drive.google.com/open?id=0By9IxqHK5MdWalJLSGliWW1RY2c
+    DeepNovoV2 UNode
+    For further information, see https://github.com/volpato30/PointNovo/
 
     Reference:
-    Tran, N.H.; Zhang, X.; Xin, L.; Shan, B.; Li, M. (2017) De novo peptide sequencing by deep learning. PNAS 114 (31)
+    Tran, N.H.; Zhang, X.; Xin, L.; Shan, B.; Li, M. (2017) De novo peptide sequencing by deep learning. PNAS 114 (31) 
 
     """
     META_INFO = {
         'edit_version'       : 1.00,
-        'name'               : 'DeepNovo',
-        'version'            : '0.0.1',
-        'release_date'       : '2017-11-29',
+        'name'               : 'DeepNovoV2',
+        'version'            : 'v2',
+        'release_date'       : '2019-05-21',
         'engine_type' : {
             'de_novo_search_engine' : True,
         },
@@ -37,8 +32,8 @@ class deepnovo_0_0_1(ursgal.UNode):
         'engine' : {
             'platform_independent'    : {
                 'arc_independent' : {
-                    'exe'            : 'deepnovo_main.py',
-                    'url'            : 'https://github.com/nh2tran/DeepNovo',
+                    'exe'            : 'main.py',
+                    'url'            : 'https://github.com/volpato30/DeepNovoV2',
                     'zip_md5'        : '',
                     'additional_exe' : [],
                 },
@@ -50,7 +45,7 @@ class deepnovo_0_0_1(ursgal.UNode):
     }
 
     def __init__(self, *args, **kwargs):
-        super(deepnovo_0_0_1, self).__init__(*args, **kwargs)
+        super(deepnovo_v2, self).__init__(*args, **kwargs)
         pass
 
     def preflight(self):
@@ -78,19 +73,27 @@ class deepnovo_0_0_1(ursgal.UNode):
             self.params['translations']['mgf_new_input_file']
         )
 
+        self.params['translations']['feature_file'] = os.path.join(
+            self.params['input_dir_path'],
+            self.params['file_root'] + '_features.csv'
+        )
+        self.created_tmp_files.append(
+            self.params['translations']['feature_file']
+        )
+
         self.params['translations']['tmp_output_file_incl_path'] = os.path.join(
             self.params['translations']['mgf_new_input_file'] + '.tsv'
         )
-        # self.created_tmp_files.append(
-        #     self.params['translations']['tmp_output_file_incl_path']
-        # )
+        self.created_tmp_files.append(
+            self.params['translations']['tmp_output_file_incl_path']
+        )
 
         self.params['translations']['params_file'] = os.path.join(
             os.path.dirname(self.exe),
-            'deepnovo_config.py'
+            'config.py'
         )
-        # self.created_tmp_files.append(
-        #     self.params['translations']['params_file'])
+        self.created_tmp_files.append(
+            self.params['translations']['params_file'])
 
         self.params['translations']['output_file_incl_path'] = os.path.join(
             self.params['output_dir_path'],
@@ -103,54 +106,93 @@ class deepnovo_0_0_1(ursgal.UNode):
         lines = mgf_org_input_file.readlines()
         mgf_org_input_file.close()
 
+
+        feature_headers = [
+            'spec_group_id',
+            'm/z',
+            'z',
+            'rt_mean',
+            'seq',
+            'scans',
+            'profile',
+            'feature area',
+            'irt',
+        ]
+        if sys.platform == 'win32':
+            lineterminator = '\n'
+        else:
+            lineterminator = '\r\n'
         self.scan_lookup = {}
         print('rewriting mgf input file to include SEQ')
         with open(
             self.params['translations']['mgf_new_input_file'], 'w', encoding='UTF-8'
         ) as mgf_new_input_file:
-            for n, line in enumerate(lines):
-                line = line.strip()
-                if line.startswith('BEGIN IONS'):
-                    entry = [line]
-                    entry_dict = {}
-                elif line.startswith('TITLE='):
-                    entry_dict['TITLE'] = line
-                elif line.startswith('SEQ='):
-                    entry_dict['SEQ'] = line
-                elif line.startswith('PEPMASS='):
-                    entry_dict['PEPMASS'] = line
-                elif line.startswith('CHARGE='):
-                    entry_dict['CHARGE'] = line
-                elif line.startswith('SCANS='):
-                    entry_dict['SCANS'] = line
-                elif line.startswith('RTINSECONDS='):
-                    entry_dict['RTINSECONDS'] = line
-                elif line.startswith('END IONS'):
-                    entry.append(line)
-                    entry.append('')
-                    # if 'SEQ' not in entry_dict:
-                    #     entry_dict['SEQ'] = 'SEQ= '
-                    scan = entry_dict['SCANS'].split('=')[1]
-                    charge = entry_dict['CHARGE'].split('=')[1].strip('+')
-                    self.scan_lookup[scan] = charge
-                    for n, write_line in enumerate(entry):
-                        if n == 1:
-                            for header in [
-                                'TITLE',
-                                'PEPMASS',
-                                'CHARGE',
-                                'SCANS',
-                                'RTINSECONDS',
-                                # 'SEQ',
-                            ]:
-                                print(
-                                    entry_dict[header],
-                                    file=mgf_new_input_file
-                                )
-                        print(write_line, file=mgf_new_input_file)
-                else:
-                    entry.append(line)
-        mgf_new_input_file.close()
+            with open(
+                self.params['translations']['feature_file'], 'w', encoding='UTF-8'
+            ) as feature_in:
+                feature_csv = csv.DictWriter(
+                    feature_in,
+                    fieldnames=feature_headers,
+                    lineterminator=lineterminator
+                )
+                feature_csv.writeheader()
+                spec_group = 0
+                for n, line in enumerate(lines):
+                    line = line.strip()
+                    if line.startswith('BEGIN IONS'):
+                        spec_group += 1
+                        entry = [line]
+                        entry_dict = {}
+                        feature_dict = {
+                            'spec_group_id': spec_group,
+                            'seq': '',
+                            'profile': '',
+                            'feature area': 0,
+                            'irt': 0,
+                        }
+                    elif line.startswith('TITLE='):
+                        entry_dict['TITLE'] = line
+                    elif line.startswith('SEQ='):
+                        entry_dict['SEQ'] = line
+                        feature_dict['seq'] = line.split('=')[1]
+                    elif line.startswith('PEPMASS='):
+                        feature_dict['m/z'] = line.split('=')[1]
+                        entry_dict['PEPMASS'] = line
+                    elif line.startswith('CHARGE='):
+                        feature_dict['z'] = line.split('=')[1].strip('+')
+                        entry_dict['CHARGE'] = line
+                    elif line.startswith('SCANS='):
+                        feature_dict['scans'] = line.split('=')[1]
+                        entry_dict['SCANS'] = line
+                    elif line.startswith('RTINSECONDS='):
+                        feature_dict['rt_mean'] = line.split('=')[1]
+                        entry_dict['RTINSECONDS'] = line
+                    elif line.startswith('END IONS'):
+                        entry.append(line)
+                        entry.append('')
+                        # if 'SEQ' not in entry_dict:
+                        #     entry_dict['SEQ'] = 'SEQ= '
+                        scan = entry_dict['SCANS'].split('=')[1]
+                        charge = entry_dict['CHARGE'].split('=')[1].strip('+')
+                        self.scan_lookup[scan] = charge
+                        for n, write_line in enumerate(entry):
+                            if n == 1:
+                                for header in [
+                                    'TITLE',
+                                    'PEPMASS',
+                                    'CHARGE',
+                                    'SCANS',
+                                    'RTINSECONDS',
+                                    # 'SEQ',
+                                ]:
+                                    print(
+                                        entry_dict[header],
+                                        file=mgf_new_input_file
+                                    )
+                            print(write_line, file=mgf_new_input_file)
+                        feature_csv.writerow(feature_dict)
+                    else:
+                        entry.append(line)
 
         print(
             '''
@@ -163,6 +205,7 @@ class deepnovo_0_0_1(ursgal.UNode):
         self.params_to_write = {
             'mgf_new_input_file' : self.params['translations']['mgf_new_input_file'],
             'output_path' : self.params['translations']['tmp_output_file_incl_path'],
+            'feature_file': self.params['translations']['feature_file']
         }
         self.params['translations']['precursor_mass_tolerance'] = (float(self.params['precursor_mass_tolerance_plus']) +
                                                                    float(self.params['precursor_mass_tolerance_minus']) ) \
@@ -175,7 +218,7 @@ class deepnovo_0_0_1(ursgal.UNode):
                     base_mz=self.params['translations']['base_mz']
             )
             self.params_to_write['precursor_mass_tolerance_ppm'] = \
-                self.params['translations']['precursor_mass_tolerance']
+                self.params['translations']['precursor_mass_tolerance'] 
         elif self.params['translations']['precursor_mass_tolerance_unit'] == 'da':
             self.params_to_write['precursor_mass_tolerance_ppm'] = \
                 ursgal.ucore.convert_dalton_to_ppm(
@@ -184,6 +227,16 @@ class deepnovo_0_0_1(ursgal.UNode):
             )
             self.params_to_write['precursor_mass_tolerance_da'] = \
                 self.params['translations']['precursor_mass_tolerance']
+
+        if self.params['translations']['frag_mass_tolerance_unit'] == 'ppm':
+            self.params_to_write['frag_mass_tolerance_da'] = \
+                ursgal.ucore.convert_ppm_to_dalton(
+                    self.params['translations']['frag_mass_tolerance'],
+                    base_mz=self.params['translations']['base_mz']
+            )
+        elif self.params['translations']['frag_mass_tolerance_unit'] == 'da':
+            self.params_to_write['frag_mass_tolerance_da'] = \
+                self.params['translations']['frag_mass_tolerance']
 
         assert self.params['translations']['deepnovo_mode'] == 'search_denovo', '''
             [ ERROR ] Only search_denovo supported as deepnovo_mmode so far!
@@ -251,6 +304,11 @@ class deepnovo_0_0_1(ursgal.UNode):
         # import pprint
         # pprint.pprint(self.params['translations'])
         # exit()
+        # self.params_to_write['feature_file'] = os.path.join(
+        #     os.path.dirname(self.exe),
+        #     'features.csv'
+        # )
+
         for deepnovo_param in self.params['translations']['_grouped_by_translated_key'].keys():
             for ursgal_param_name, param_value in self.params['translations']['_grouped_by_translated_key'][deepnovo_param].items():
                 if type(deepnovo_param) is tuple:
@@ -259,33 +317,36 @@ class deepnovo_0_0_1(ursgal.UNode):
                     if param_value is None or param_value == 'default':
                         knapsack_file = os.path.join(
                             os.path.dirname(self.exe),
-                            'knapsack.npy'
+                            'fix_C_var_NMQ_knapsack.npy'
                         )
-                    else:
-                        knapsack_file = param_value
-                    self.params_to_write['knapsack_file'] = knapsack_file
+                        self.params_to_write['knapsack_file'] = knapsack_file
                 elif deepnovo_param == 'train_dir':
                     if param_value is None or param_value == 'default':
                         train_dir = os.path.join(
                             os.path.dirname(self.exe),
-                            'train.example'
+                            'train'
                         )
-                    else:
-                        train_dir = param_value
-                    self.params_to_write['train_dir'] = train_dir
+                        self.params_to_write['train_dir'] = train_dir
                 elif deepnovo_param == 'modifications':
                     assert set(param_value) == set(
                         ['M,opt,any,Oxidation',
                          'C,fix,any,Carbamidomethyl',
                          'N,opt,any,Deamidated',
-                         'Q,opt,any,Deamidated']), '''
+                         'Q,opt,any,Deamidated'
+                         ]),'''
                     [ ERROR ] The default model of DeepNovo only supports the following modification list:
                         ['M,opt,any,Oxidation',
-                         'C,fix,any,Carbamidomethyl',
-                         'N,opt,any,Deamidated',
-                         'Q,opt,any,Deamidated']
+                         'C,fix,any,Carbamidomethyl'],
                     [ ERROR ] You specified instead: {0}
-                    '''.format(param_value)
+                    '''.format(param_value) 
+                    #      '''
+                    # [ ERROR ] The default model of DeepNovo only supports the following modification list:
+                    #     ['M,opt,any,Oxidation',
+                    #      'C,fix,any,Carbamidomethyl',
+                    #      'N,opt,any,Deamidated',
+                    #      'Q,opt,any,Deamidated']
+                    # [ ERROR ] You specified instead: {0}
+                    # '''.format(param_value)
                 #     cc = ursgal.ChemicalComposition()
                 #     for mod_dict in self.params['mods']['opt']:
                 #         '''
@@ -354,7 +415,9 @@ class deepnovo_0_0_1(ursgal.UNode):
         self.params['command_list'] = [
             sys.executable,
             self.exe,
-            '--{0}'.format(self.params['translations']['deepnovo_mode'])
+            '--{0}'.format(self.params['translations']['deepnovo_mode']),
+            '--beam_size', str(self.params['translations']['deepnovo_beam_size']),
+            '--train_dir', self.params_to_write['train_dir'],
         ]
 
         return self.params
@@ -365,33 +428,41 @@ class deepnovo_0_0_1(ursgal.UNode):
         Reformats the DeepNovo output file
         '''
         deepnovo_header = [
-            'scan',
+            'feature_id',
+            'feature_area',
             'predicted_sequence',
             'predicted_score',
             'predicted_position_score',
+            'precursor_mz',
+            'precursor_charge',
+            'protein_access_id',
+            'scan_list_middle',
+            'scan_list_original',
+            'predicted_score_max',
         ]
 
         mod_lookup = {
-            'Cmod': ('C', 'Carbamidomethyl'),
-            'Mmod': ('M', 'Oxidation'),
-            'Nmod': ('N', 'Deamidated'),
-            'Qmod': ('Q', 'Deamidated'),
+            'C(Carbamidomethylation)': ('C', 'Carbamidomethyl'),
+            'M(Oxidation)': ('M', 'Oxidation'),
+            'N(Deamidation)': ('N', 'Deamidated'),
+            'Q(Deamidation)': ('Q', 'Deamidated'),
         }
 
         translated_headers = []
         header_translations = self.UNODE_UPARAMS[
             'header_translations']['uvalue_style_translation']
         for original_header_key in deepnovo_header:
-            ursgal_header_key = header_translations[original_header_key]
+            if original_header_key not in header_translations.keys():
+                ursgal_header_key = original_header_key     
+            else:
+                ursgal_header_key = header_translations[original_header_key]
             if ursgal_header_key not in translated_headers:
                 translated_headers.append(ursgal_header_key)
 
         translated_headers += [
             'Raw data location',
             'Spectrum Title',
-            'Charge',
             'Retention Time (s)',
-            'Exp m/z',
             'Modifications',
         ]
 
@@ -432,7 +503,7 @@ class deepnovo_0_0_1(ursgal.UNode):
             seq_list = line_dict['Sequence'].split(',')
             tmp_mods = []
             for n, aa in enumerate(seq_list):
-                if 'mod' in aa:
+                if '(' in aa:
                     org_aa, mod = mod_lookup[aa]
                     tmp_mods.append(
                         '{0}:{1}'.format(mod, n+1)
@@ -450,9 +521,7 @@ class deepnovo_0_0_1(ursgal.UNode):
     def write_params_file(self):
         with open(self.params['translations']['params_file'], 'w') as io:
             print('''
-# Copyright 2017 Hieu Tran. All Rights Reserved.
-#
-# DeepNovo is publicly available for non-commercial uses.
+# DeepNovoV2 is publicly available for non-commercial uses.
 # ==============================================================================
 
 from __future__ import absolute_import
@@ -460,83 +529,33 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import tensorflow.compat.v1 as tf
-
+import argparse
+from itertools import combinations
 
 # ==============================================================================
 # FLAGS (options) for this app
 # ==============================================================================
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--train_dir", type=str, default="train")
+parser.add_argument("--beam_size", type=int, default="5")
+parser.add_argument("--train", dest="train", action="store_true")
+parser.add_argument("--search_denovo", dest="search_denovo", action="store_true")
+parser.add_argument("--search_db", dest="search_db", action="store_true")
+parser.add_argument("--valid", dest="valid", action="store_true")
+parser.add_argument("--test", dest="test", action="store_true")
 
-tf.app.flags.DEFINE_string("train_dir", # flag_name
-                           r"{train_dir}", # default_value
-                           "Training directory.") # docstring
+parser.set_defaults(train=False)
+parser.set_defaults(search_denovo=False)
+parser.set_defaults(search_db=False)
+parser.set_defaults(test=False)
+parser.set_defaults(valid=False)
 
-tf.app.flags.DEFINE_integer("direction",
-                            {direction},
-                            "Set to 0/1/2 for Forward/Backward/Bi-directional.")
+args = parser.parse_args()
 
-tf.app.flags.DEFINE_boolean("use_intensity",
-                            {use_intensity},
-                            "Set to True to use intensity-model.")
-
-tf.app.flags.DEFINE_boolean("shared",
-                            {shared},
-                            "Set to True to use shared weights.")
-
-tf.app.flags.DEFINE_boolean("use_lstm",
-                            {use_lstm},
-                            "Set to True to use lstm-model.")
-
-tf.app.flags.DEFINE_boolean("knapsack_build",
-                            {knapsack_build},
-                            "Set to True to build knapsack matrix.")
-
-tf.app.flags.DEFINE_boolean("train",
-                            False,
-                            "Set to True for training.")
-
-tf.app.flags.DEFINE_boolean("test_true_feeding",
-                            False,
-                            "Set to True for testing.")
-
-tf.app.flags.DEFINE_boolean("decode",
-                            False,
-                            "Set to True for decoding.")
-
-tf.app.flags.DEFINE_boolean("beam_search",
-                            {beam_search},
-                            "Set to True for beam search.")
-
-tf.app.flags.DEFINE_integer("beam_size",
-                            {beam_size},
-                            "Number of optimal paths to search during decoding.")
-
-tf.app.flags.DEFINE_boolean("search_db",
-                            False,
-                            "Set to True to do a database search.")
-
-tf.app.flags.DEFINE_boolean("search_denovo",
-                            False,
-                            "Set to True to do a denovo search.")
-
-tf.app.flags.DEFINE_boolean("search_hybrid",
-                            False,
-                            "Set to True to do a hybrid, db+denovo, search.")
-
-tf.app.flags.DEFINE_boolean("test",
-                            False,
-                            "Set to True to test the prediction accuracy.")
-
-tf.app.flags.DEFINE_boolean("header_seq",
-                            False,
-                            "Set to False if peptide sequence is not provided.")
-
-tf.app.flags.DEFINE_boolean("decoy",
-                            False,
-                            "Set to True to search decoy database.")
-
-FLAGS = tf.app.flags.FLAGS
+FLAGS = args
+train_dir = FLAGS.train_dir
+use_lstm = {use_lstm}
 
 
 # ==============================================================================
@@ -553,24 +572,24 @@ _START_VOCAB = [_PAD, _GO, _EOS]
 PAD_ID = 0
 GO_ID = 1
 EOS_ID = 2
-
+assert PAD_ID == 0
 vocab_reverse = ['A',
                  'R',
                  'N',
-                 'Nmod',
+                 'N(Deamidation)',
                  'D',
                  #~ 'C',
-                 'Cmod',
+                 'C(Carbamidomethylation)',
                  'E',
                  'Q',
-                 'Qmod',
+                 'Q(Deamidation)',
                  'G',
                  'H',
                  'I',
                  'L',
                  'K',
                  'M',
-                 'Mmod',
+                 'M(Oxidation)',
                  'F',
                  'P',
                  'S',
@@ -590,6 +609,75 @@ vocab_size = len(vocab_reverse)
 print("vocab_size ", vocab_size)
 
 
+# database search parameter
+## the PTMs to be included in the database search
+fix_mod_dict = dict([("C", "C(Carbamidomethylation)")])
+# var_mod_dict = dict([("N", "N(Deamidation)"), ('Q', 'Q(Deamidation)'), ('M', 'M(Oxidation)')])
+var_mod_dict = dict([('M', 'M(Oxidation)')])
+max_num_mod = 3
+db_ppm_tolenrance = 20.
+semi_cleavage = False
+
+normalizing_std_n = 150
+normalizing_mean_n = 10
+
+inference_value_max_batch_size = 20
+num_psm_per_scan_for_percolator = 10
+db_fasta_file = "fasta_files/uniprot_sprot_human_with_decoy.fasta"
+num_db_searcher_worker = 8
+fragment_ion_mz_diff_threshold = 0.02
+quick_scorer = "num_matched_ions"
+
+
+def _fix_transform(aa: str):
+    def trans(peptide: list):
+        return [x if x != aa else fix_mod_dict[x] for x in peptide]
+    return trans
+
+
+def fix_mod_peptide_transform(peptide: list):
+    """
+    apply fix modification transform on a peptide
+    :param peptide:
+    :return:
+    """
+    for aa in fix_mod_dict.keys():
+        trans = _fix_transform(aa)
+        peptide = trans(peptide)
+    return peptide
+
+
+def _find_all_ptm(peptide, position_list):
+    if len(position_list) == 0:
+        return [peptide]
+    position = position_list[0]
+    aa = peptide[position]
+    result = []
+    temp = peptide[:]
+    temp[position] = var_mod_dict[aa]
+    result += _find_all_ptm(temp, position_list[1:])
+    return result
+
+
+def var_mod_peptide_transform(peptide: list):
+    """
+    apply var modification transform on a peptide, the max number of var mod is max_num_mod
+    :param peptide:
+    :return:
+    """
+    position_list = [position for position, aa in enumerate(peptide) if aa in var_mod_dict]
+    position_count = len(position_list)
+    num_mod = min(position_count, max_num_mod)
+    position_combination_list = []
+    for x in range(1, num_mod+1):
+        position_combination_list += combinations(position_list, x)
+    # find all ptm peptides
+    ptm_peptide_list = []
+    for position_combination in position_combination_list:
+        ptm_peptide_list += _find_all_ptm(peptide, position_combination)
+    return ptm_peptide_list
+
+
 # ==============================================================================
 # GLOBAL VARIABLES for THEORETICAL MASS
 # ==============================================================================
@@ -603,35 +691,33 @@ mass_C_terminus = 17.0027
 mass_CO = 27.9949
 
 mass_AA = dict([
-           ('_PAD', 0.0),
-           ('_GO', mass_N_terminus-mass_H),
-           ('_EOS', mass_C_terminus+mass_H),
-           ('A', 71.03711),
-           ('R', 156.10111),
-           ('N', 114.04293),
-           ('Nmod', 115.02695),
-           ('D', 115.02694),
-           # ('C', 103.00919),
-           ('Cmod', 160.03065),
-           # ('Cmod', 161.01919),
-           ('E', 129.04259),
-           ('Q', 128.05858),
-           ('Qmod', 129.0426),
-           ('G', 57.02146),
-           ('H', 137.05891),
-           ('I', 113.08406),
-           ('L', 113.08406),
-           ('K', 128.09496),
-           ('M', 131.04049),
-           ('Mmod', 147.0354),
-           ('F', 147.06841),
-           ('P', 97.05276),
-           ('S', 87.03203),
-           ('T', 101.04768),
-           ('W', 186.07931),
-           ('Y', 163.06333),
-           ('V', 99.06841),
-          ])
+('_PAD', 0.0),
+('_GO', mass_N_terminus-mass_H),
+('_EOS', mass_C_terminus+mass_H),
+('A', 71.03711),
+('R', 156.10111),
+('N', 114.04293),
+('N(Deamidation)', 115.02695),
+('D', 115.02694),
+('C(Carbamidomethylation)', 160.03065),
+('E', 129.04259),
+('Q', 128.05858),
+('Q(Deamidation)', 129.0426),
+('G', 57.02146),
+('H', 137.05891),
+('I', 113.08406),
+('L', 113.08406),
+('K', 128.09496),
+('M', 131.04049),
+('M(Oxidation)', 147.0354),
+('F', 147.06841),
+('P', 97.05276),
+('S', 87.03203),
+('T', 101.04768),
+('W', 186.07931),
+('Y', 163.06333),
+('V', 99.06841),
+])
 
 mass_ID = [mass_AA[vocab_reverse[x]] for x in range(vocab_size)]
 mass_ID_np = np.array(mass_ID, dtype=np.float32)
@@ -643,42 +729,25 @@ mass_AA_min = mass_AA["G"] # 57.02146
 # GLOBAL VARIABLES for PRECISION, RESOLUTION, temp-Limits of MASS & LEN
 # ==============================================================================
 
+MZ_MAX = {MZ_MAX}
 
-# if change, need to re-compile cython_speedup
-SPECTRUM_RESOLUTION = 10 # bins for 1.0 Da = precision 0.1 Da
-#~ SPECTRUM_RESOLUTION = 20 # bins for 1.0 Da = precision 0.05 Da
-#~ SPECTRUM_RESOLUTION = 40 # bins for 1.0 Da = precision 0.025 Da
-#~ SPECTRUM_RESOLUTION = 50 # bins for 1.0 Da = precision 0.02 Da
-#~ SPECTRUM_RESOLUTION = 80 # bins for 1.0 Da = precision 0.0125 Da
-print("SPECTRUM_RESOLUTION ", SPECTRUM_RESOLUTION)
-
-# if change, need to re-compile cython_speedup
-WINDOW_SIZE = 10 # 10 bins
-print("WINDOW_SIZE ", WINDOW_SIZE)
-
-MZ_MAX = 3000.0
-MZ_SIZE = int(MZ_MAX * SPECTRUM_RESOLUTION) # 30k
+MAX_NUM_PEAK = {MAX_NUM_PEAK}
 
 KNAPSACK_AA_RESOLUTION = 10000 # 0.0001 Da
 mass_AA_min_round = int(round(mass_AA_min * KNAPSACK_AA_RESOLUTION)) # 57.02146
 KNAPSACK_MASS_PRECISION_TOLERANCE = 100 # 0.01 Da
 num_position = 0
 
-PRECURSOR_MASS_PRECISION_TOLERANCE = 0.01
+PRECURSOR_MASS_PRECISION_TOLERANCE = {precursor_mass_tolerance_da}
 
 # ONLY for accuracy evaluation
 #~ PRECURSOR_MASS_PRECISION_INPUT_FILTER = 0.01
-PRECURSOR_MASS_PRECISION_INPUT_FILTER = 1000
-AA_MATCH_PRECISION = 0.1
+#~ PRECURSOR_MASS_PRECISION_INPUT_FILTER = 1000
+AA_MATCH_PRECISION = {frag_mass_tolerance_da}
 
 # skip (x > MZ_MAX,MAX_LEN)
-MAX_LEN = 50 if FLAGS.decode else 30
+MAX_LEN = 50 if args.search_denovo else 30
 print("MAX_LEN ", MAX_LEN)
-
-# We use a number of buckets and pad to the closest one for efficiency.
-_buckets = [12, 22, 32]
-#~ _buckets = [12,22,32,42,52] # for decode
-print("_buckets ", _buckets)
 
 
 # ==============================================================================
@@ -686,11 +755,11 @@ print("_buckets ", _buckets)
 # ==============================================================================
 
 
-num_ion = 8 # 2
+num_ion = 12
 print("num_ion ", num_ion)
 
-l2_loss_weight = 0.0 # 0.0
-print("l2_loss_weight ", l2_loss_weight)
+weight_decay = 0.0  # no weight decay lead to better result.
+print("weight_decay ", weight_decay)
 
 #~ encoding_cnn_size = 4 * (RESOLUTION//10) # 4 # proportion to RESOLUTION
 #~ encoding_cnn_filter = 4
@@ -700,35 +769,24 @@ print("l2_loss_weight ", l2_loss_weight)
 embedding_size = 512
 print("embedding_size ", embedding_size)
 
-num_layers = 1
-num_units = 512
-print("num_layers ", num_layers)
+num_lstm_layers = 1
+num_units = 64
+lstm_hidden_units = 512
+print("num_lstm_layers ", num_lstm_layers)
 print("num_units ", num_units)
 
-keep_conv = 0.75
-keep_dense = 0.5
-print("keep_conv ", keep_conv)
-print("keep_dense ", keep_dense)
+dropout_rate = 0.25
 
-batch_size = 128
+batch_size = 16
+num_workers = 6
 print("batch_size ", batch_size)
 
-epoch_stop = 20 # 50
-print("epoch_stop ", epoch_stop)
+num_epoch = 20
 
-train_stack_size = 4500
-valid_stack_size = 15000 # 10%
-test_stack_size = 4000
-buffer_size = {buffer_size}
-print("train_stack_size ", train_stack_size)
-print("valid_stack_size ", valid_stack_size)
-print("test_stack_size ", test_stack_size)
-print("buffer_size ", buffer_size)
+init_lr = 1e-3
 
-steps_per_checkpoint = 100 # 20 # 100 # 2 # 4 # 200
-random_test_batches = 10
-print("steps_per_checkpoint ", steps_per_checkpoint)
-print("random_test_batches ", random_test_batches)
+steps_per_validation = 300  # 100 # 2 # 4 # 200
+print("steps_per_validation ", steps_per_validation)
 
 max_gradient_norm = 5.0
 print("max_gradient_norm ", max_gradient_norm)
@@ -738,42 +796,64 @@ print("max_gradient_norm ", max_gradient_norm)
 # DATASETS
 # ==============================================================================
 
-# YEAST-LOW-COON_2013-PEAKS-DB-DUP
 data_format = "mgf"
 cleavage_rule = "{cleavage_rule}"
-num_missed_cleavage = {num_missed_cleavage}
-fixed_mod_list = ['C']
-var_mod_list = ['N', 'Q', 'M']
-precursor_mass_tolerance = {precursor_mass_tolerance_da} # Da
-precursor_mass_ppm = {precursor_mass_tolerance_ppm}/1000000 # ppm (20 better) # instead of absolute 0.01 Da
+num_missed_cleavage = 2
 knapsack_file = r"{knapsack_file}"
-# training/testing/decoding files
-# input_file_train = r"data.training/dia.xchen.nov27/fraction_1.mgf.split.train.dup"
-# input_file_valid = r"data.training/dia.xchen.nov27/fraction_1.mgf.split.valid.dup"
-# input_file_test = r"C:\\Users\\Admin\\Desktop\\ursgal_dev\\ursgal\\ursgal\\resources\\platform_independent\\arc_independent\\deepnovo_0_0_1\\data.training\\yeast.low.coon_2013\\peaks.db.mgf.test.dup"
-decode_test_file = r"{mgf_new_input_file}"
-decode_output_file = r"{output_path}"
+
+input_spectrum_file_train = "ABRF_DDA/spectrums.mgf"
+input_feature_file_train = "ABRF_DDA/features.csv.identified.train.nodup"
+input_spectrum_file_valid = "ABRF_DDA/spectrums.mgf"
+input_feature_file_valid = "ABRF_DDA/features.csv.identified.valid.nodup"
+input_spectrum_file_test = "data.training/dia.hla.elife.jurkat_oxford/testing_jurkat_oxford.spectrum.mgf"
+input_feature_file_test = "data.training/dia.hla.elife.jurkat_oxford/testing_jurkat_oxford.feature.csv"
 # denovo files
-denovo_input_file = r"{mgf_new_input_file}"
+denovo_input_spectrum_file = r"{mgf_new_input_file}"
+denovo_input_feature_file = r"{feature_file}"
 denovo_output_file = r"{output_path}"
-# db files
-db_fasta_file = r"{db_fasta_file}"
-db_input_file = r"{mgf_new_input_file}"
-db_output_file = r"{output_path}"
-if FLAGS.decoy:
-  db_output_file += ".decoy"
-# hybrid files
-hybrid_input_file = r"{mgf_new_input_file}"
-hybrid_denovo_file = hybrid_input_file + ".deepnovo_hybrid_denovo"
-hybrid_output_file = r"{output_path}"
-# if FLAGS.decoy:
-#   hybrid_output_file += ".decoy"
+
+# db search files
+search_db_input_spectrum_file = "Lumos_data/PXD008999/export_0.mgf"
+search_db_input_feature_file = "Lumos_data/PXD008999/export_0.csv"
+db_output_file = search_db_input_feature_file + '.pin'
+
 # test accuracy
-# predicted_format = "deepnovo"
-# target_file = "data.training/dia.xchen.nov27/fraction_1.mgf.split.test.dup.target"
-# predicted_file = denovo_output_file
-# accuracy_file = predicted_file + ".accuracy"
+predicted_format = "deepnovo"
+target_file = denovo_input_feature_file
+predicted_file = denovo_output_file
+
+accuracy_file = predicted_file + ".accuracy"
+denovo_only_file = predicted_file + ".denovo_only"
+scan2fea_file = predicted_file + ".scan2fea"
+multifea_file = predicted_file + ".multifea"
 # ==============================================================================
+# feature file column format
+col_feature_id = "spec_group_id"
+col_precursor_mz = "m/z"
+col_precursor_charge = "z"
+col_rt_mean = "rt_mean"
+col_raw_sequence = "seq"
+col_scan_list = "scans"
+col_feature_area = "feature area"
+
+# predicted file column format
+pcol_feature_id = 0
+pcol_feature_area = 1
+pcol_sequence = 2
+pcol_score = 3
+pcol_position_score = 4
+pcol_precursor_mz = 5
+pcol_precursor_charge = 6
+pcol_protein_id = 7
+pcol_scan_list_middle = 8
+pcol_scan_list_original = 9
+pcol_score_max = 10
+
+distance_scale_factor = 100.
+sinusoid_base = 30000.
+spectrum_reso = 10
+n_position = int(MZ_MAX) * spectrum_reso
+
 '''.format(
                 **self.params_to_write),
                 file=io

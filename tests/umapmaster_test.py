@@ -41,25 +41,37 @@ TEST_DICT = {
     },
 }
 
+style_lookup = {
+    'style_2_engine' : {
+        'omssa_style_1': set(['omssa']),
+        'xtandem_style_1': set(['xtandem'])
+    },
+    'engine_2_style' : {
+        'omssa': 'omssa_style_1',
+        'xtandem': 'xtandem_style_1',
+    },
+}
+
 
 class UMapMaster(unittest.TestCase):
+
     def setUp(self):
-        self.umama_small = umama.UParamMapper( TEST_DICT )
+        self.umama_small = umama.UParamMapper(TEST_DICT)
         self.umama_default = umama.UParamMapper()
 
     def test_all_mappings_by_style(self):
         results = []
-        for mDict in self.umama_small.mapping_dicts('omssa'):
-            results.append( (mDict['ukey'], mDict['default_value']) )
+        for mDict in self.umama_small.mapping_dicts('omssa', ext_lookup=style_lookup):
+            results.append((mDict['ukey'], mDict['default_value']))
         self.assertEqual(
             sorted(results),
             sorted([
                 ('enzyme', 'trypsin'),
-                ('frag_mass_type', 'monoisotopic' )
+                ('frag_mass_type', 'monoisotopic')
             ])
         )
 
-    def test_get_masked_params( self ):
+    def test_get_masked_params(self):
         mask = ['default_value', 'description']
         masked_params = self.umama_small.get_masked_params(mask=mask)
         self.assertEqual(
@@ -67,13 +79,11 @@ class UMapMaster(unittest.TestCase):
             len(TEST_DICT.keys())
         )
         self.assertEqual(
-             len(masked_params['enzyme'].keys()), len(mask)
+            len(masked_params['enzyme'].keys()), len(mask)
         )
         self.assertEqual(
             list(sorted(masked_params['enzyme'].keys())), sorted(mask)
         )
-
-
 
 
 if __name__ == '__main__':

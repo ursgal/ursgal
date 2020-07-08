@@ -492,7 +492,7 @@ class percolator_2_08( ursgal.UNode ):
                         if aa in allowed_aa:
                             t['enzInt'] += 1
 
-                t['dM'] = float(line_dict['Calc m/z']) - float(line_dict['Exp m/z'])
+                t['dM'] = float(line_dict['uCalc m/z']) - float(line_dict['Exp m/z'])
                 t['absdM'] = abs(t['dM'])
 
                 mods = line_dict['Modifications']

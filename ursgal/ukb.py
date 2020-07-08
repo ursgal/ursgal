@@ -120,6 +120,13 @@ FILE_EXTENSIONS = {
             'single-letter codes.\n'\
             '(DataTypes.net; https://datatypes.net)',
     },
+    '.fm.1' : {
+        'short_name'     : 'FM index',
+        'long_name'      : 'FM index',
+        'same_extension' : [],
+        'description'    : \
+            'FM index file format',
+    },
     '.gaml' : {
         'short_name'     : 'GAML',
         'long_name'      : 'GAML (GAML spectra)',
@@ -203,6 +210,13 @@ FILE_EXTENSIONS = {
         'same_extension' : [],
         'description'    : \
             'Kojak result',
+    },
+    '.pepXML': {
+        'short_name'     : 'pepXML',
+        'long_name'      : 'pepXML',
+        'same_extension' : [],
+        'description'    : \
+            'open data format for different MS/MS search engines',
     },
     '.perc.inter.txt' : {
         'short_name'     : 'perc.inter.txt',

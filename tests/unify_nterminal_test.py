@@ -84,6 +84,7 @@ def unify_csv(file, engine):
             },
             'label': '',
             'mods': uc.params['mods'],
+            'prefix' : '',
         },
         search_engine=engine,
     )
