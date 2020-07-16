@@ -561,9 +561,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             #########################
             # Buffering corrections #
             #########################
-            main_buffer_key = '{Sequence} || {Charge} || {Modifications} || '.format(
-                **line_dict
-            ) + params['label']
+            main_buffer_key_list = []
+            for colname in params['psm_defining_colnames']:
+                if colname in line_dict.keys():
+                    main_buffer_key_list.append(line_dict[colname])
+            main_buffer_key_list.append(params['label'])
+            main_buffer_key = '||'.join(main_buffer_key_list)
             if main_buffer_key not in ze_only_buffer.keys():
                 line_dict_update = {}
                 ######################

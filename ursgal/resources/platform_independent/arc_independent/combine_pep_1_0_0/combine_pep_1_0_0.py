@@ -321,45 +321,45 @@ class CombinedPEP(object):
                         psm_rows_from_all_engines.append(
                             self.psm_dicts[engine][psm_key]
                         )
-                    out_row = self.merge_rowdicts(
-                        psm_rows_from_all_engines,
-                        sep = self.join_sep,
-                    )
-
-                    # add column that lists all engines that found the PSM:
-                    out_row['engines'] = self.join_sep.join(engine_combo)
-                    # add columns with Bayes PEP and combined PEP:
-                    for score_field in new_scores:
-                        out_row[score_field] = score_dict_val[score_field]
-                    writer.writerow(out_row)
+                    # out_row = ursgal.ucore.merge_rowdicts(
+                    #     psm_rows_from_all_engines,
+                    #     joinchar = self.join_sep,
+                    # )
+                    for out_row in psm_rows_from_all_engines:
+                        # add column that lists all engines that found the PSM:
+                        out_row['engines'] = self.join_sep.join(engine_combo)
+                        # add columns with Bayes PEP and combined PEP:
+                        for score_field in new_scores:
+                            out_row[score_field] = score_dict_val[score_field]
+                        writer.writerow(out_row)
         return
 
-    def merge_rowdicts(self, rows_to_merge, sep=';'):
-        '''
-        Merges different DictReader rows (=dictionaries) to a single merged
-        dictionary. If all values are in agreement, only that value is entered.
-        If there are conflicting values, they are joined with a separator
-        (i.e. ';').
-        '''
-        md = {}  # merged rowdict
-        for row in rows_to_merge:
-            for col_name, field_val in row.items():
+    # def merge_rowdicts(self, rows_to_merge, sep=';'):
+    #     '''
+    #     Merges different DictReader rows (=dictionaries) to a single merged
+    #     dictionary. If all values are in agreement, only that value is entered.
+    #     If there are conflicting values, they are joined with a separator
+    #     (i.e. ';').
+    #     '''
+    #     md = {}  # merged rowdict
+    #     for row in rows_to_merge:
+    #         for col_name, field_val in row.items():
 
-                if col_name not in md:
-                    # value is not there yet, so add it
-                    md[col_name] = field_val
-                    continue
+    #             if col_name not in md:
+    #                 # value is not there yet, so add it
+    #                 md[col_name] = field_val
+    #                 continue
 
-                if md[col_name] == field_val:
-                    # value is already there, no need to add it
-                    continue
+    #             if md[col_name] == field_val:
+    #                 # value is already there, no need to add it
+    #                 continue
 
-                # Different value(s) are already there! join them (i.e. with ';')
-                old_vals = set(md[col_name].split(sep))
-                old_vals.add(field_val)
-                old_vals.discard('')
-                md[col_name] = sep.join(sorted(old_vals))
-        return md
+    #             # Different value(s) are already there! join them (i.e. with ';')
+    #             old_vals = set(md[col_name].split(sep))
+    #             old_vals.add(field_val)
+    #             old_vals.discard('')
+    #             md[col_name] = sep.join(sorted(old_vals))
+    #     return md
 
 def main(columns_for_grouping=None, input_csvs=None, output_csv=None,
          input_sep=None, output_sep=None, join_sep=None, pep_colname=None,
