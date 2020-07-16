@@ -124,8 +124,9 @@ class pparse_2_0(ursgal.UNode):
         '''
         Rename output file, since that naming the output file is not properly working in pParse
         '''
-        os.rename(
-            self.params['translations']['raw_input_file'].replace('.raw', '_HCDFT.mgf'), 
-            self.params['translations']['output_file_incl_path']
-        )
+        if os.path.exists(self.params['translations']['raw_input_file'].replace('.raw', '_HCDFT.mgf')):
+            os.rename(
+                self.params['translations']['raw_input_file'].replace('.raw', '_HCDFT.mgf'), 
+                self.params['translations']['output_file_incl_path']
+            )
         return self.params['translations']['output_file_incl_path']
