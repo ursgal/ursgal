@@ -68,6 +68,7 @@ class UnimodMapper( object ):
                             tmp = {
                                 'unimodID' : element.attrib['record_id'],
                                 'unimodname' : element.attrib['title'],
+                                'unimoddescription': element.attrib['full_name'],
                                 'element' : {}
                             }
                         elif element.tag.endswith('}delta'):
@@ -128,6 +129,10 @@ class UnimodMapper( object ):
                 else:
                     if value not in mapper.keys():
                         mapper[ value ] = index
+                    else:
+                        assert index == mapper[ value ], '''
+                        [ERROR] Unimod ID or name occurs multiple times with different index.
+                        '''
         return mapper
 
     # name 2 ....

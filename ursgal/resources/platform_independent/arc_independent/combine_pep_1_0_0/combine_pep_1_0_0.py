@@ -307,7 +307,7 @@ class CombinedPEP(object):
         print('\n========== DONE! ===========\nWriting output CSV with combined PEPs '\
             'and Bayes PEPs to\n{} ...\n'.format(os.path.relpath(output_csv_path)))
         new_scores = ['combined PEP', 'Bayes PEP']
-        fieldnames = list(self.input_csv_fieldnames) + new_scores + ['engines']
+        fieldnames = list(self.input_csv_fieldnames) + new_scores + ['combined PEP engines']
         with open(output_csv_path, 'w', encoding='utf8') as out_obj:
             writer = csv.DictWriter(out_obj, fieldnames=fieldnames)
             writer.writeheader()
@@ -327,7 +327,7 @@ class CombinedPEP(object):
                     # )
                     for out_row in psm_rows_from_all_engines:
                         # add column that lists all engines that found the PSM:
-                        out_row['engines'] = self.join_sep.join(engine_combo)
+                        out_row['combined PEP engines'] = self.join_sep.join(engine_combo)
                         # add columns with Bayes PEP and combined PEP:
                         for score_field in new_scores:
                             out_row[score_field] = score_dict_val[score_field]

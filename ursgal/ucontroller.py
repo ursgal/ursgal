@@ -475,15 +475,15 @@ class UController(ursgal.UNode):
                 else:
                     self.unodes[ engine ]['import_status'] = 'cant find exe'
                     self.unodes[ engine ]['available'] = False
-                    in_development = self.unodes[ engine ]['META_INFO']['in_development']
-                    if not in_development:
-                        if self.verbose:
-                            print(
-                                '[ WARNiNG! ] Engine {0} is not available in {1}'.format(
-                                    engine,
-                                    engine_folder_path
-                                )
-                            )
+                    # in_development = self.unodes[ engine ]['META_INFO']['in_development']
+                    # if not in_development:
+                    #     if self.verbose:
+                    #         print(
+                    #             '[ WARNiNG! ] Engine {0} is not available in {1}'.format(
+                    #                 engine,
+                    #                 engine_folder_path
+                    #             )
+                    #         )
         return
 
     def engine_sanity_check( self, short_engine):
