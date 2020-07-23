@@ -127,7 +127,9 @@ class UnimodMapper( object ):
                         mapper[ value ] = []
                     mapper[ value ].append( index )
                 else:
-                    if value not in mapper.keys() and value is not None:
+                    if value is None:
+                        continue
+                    if value not in mapper.keys():
                         mapper[ value ] = index
                     else:
                         assert index == mapper[ value ], '''
