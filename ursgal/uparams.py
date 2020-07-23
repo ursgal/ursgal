@@ -9285,30 +9285,29 @@ ursgal_params = {
             'CSV suffix of raw indentification: this is the conversion result '\
             'after CSV conversion but before adding retention time',
     },
-    # 'remove_redundant_psms' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'sanitize_csv_1_0_0',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'sanitize_csv_style_1' : 'remove_redundant_psms',
-    #     },
-    #     'utag' : [
-    #         'output'
-    #     ],
-    #     'uvalue_translation' : {
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : True,
-    #     'description' : \
-    #         'If True, redundant PSMs (e.g. the same identification reported '\
-    #         'by multiple engines) for the same spectrum are removed. An '\
-    #         'identification is defined by the combination of \'Sequence\', '\
-    #         '\'Modifications\' and \'Charge\'.',
-    # },
+    'remove_redundant_psms' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1' : 'remove_redundant_psms',
+        },
+        'utag' : [
+            'output'
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+        'uvalue_option' : {
+        },
+        'default_value' : True,
+        'description' : \
+            'If True, redundant PSMs (e.g. the same identification reported '\
+            'by multiple engines) for the same spectrum are removed. An '\
+            'identification is defined by psm_defining_colnames'
+    },
     'remove_temporary_files' : {
         'edit_version' : 1.00,
         'available_in_unode' : [

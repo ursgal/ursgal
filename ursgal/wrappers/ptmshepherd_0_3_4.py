@@ -169,7 +169,10 @@ class ptmshepherd_0_3_4(ursgal.UNode):
         # Build lookup from global.profile.tsv
         internal_precision = 1000000
         global_profile = 'global.profile.tsv'
+        rawloc_file = '01.rawlocalize'
+        rawsimrt_file = '01.rawsimrt'
         global_mod_dict = {}
+        print('[ POSTFLGH ] reading global.profil.tsv')
         with open(global_profile, 'r') as gp_in:
             gp_reader = csv.DictReader(gp_in, delimiter = '\t')
             for row in gp_reader:
@@ -190,20 +193,51 @@ class ptmshepherd_0_3_4(ursgal.UNode):
                     '''.format(mass)
                     global_mod_dict[mass] = (peak_mass, modifications)
 
-        print('read original input csv ...')
+        print('[ POSTFLGH ] reading rawlocalize')
+        rawloc_dict = {}
+        with open(rawloc_file, 'r') as rawloc_in:
+            rawloc_reader = csv.DictReader(rawloc_in, delimiter = '\t')
+            for rawloc_line_dict in rawloc_reader:
+                spec_pep_key = '{0}||{1}'.format(rawloc_line_dict['Spectrum'], rawloc_line_dict['Peptide'])
+                if spec_pep_key not in rawloc_dict.keys():
+                    rawloc_dict[spec_pep_key] = []
+                tmp_dict = {}
+                for k in [
+                    'Localized_Pep',
+                    'MaxHyper_Unloc',
+                    'MaxHyper_Loc',
+                    'MaxPeaks_Unloc',
+                    'MaxPeaks_Loc',
+                ]:
+                    tmp_dict[k] = rawloc_line_dict[k]
+                rawloc_dict[spec_pep_key].append(tmp_dict)
+
+        print('[ POSTFLGH ] reading rawsimrt')
+        simrt_dict = {}
+        with open(rawsimrt_file, 'r') as rawsimrt_in:
+            simrt_reader = csv.DictReader(rawsimrt_in, delimiter = '\t')
+            for simrt_line_dict in simrt_reader:
+                spec_pep_key = '{0}||{1}'.format(simrt_line_dict['Spectrum'], simrt_line_dict['Peptide'])
+                if spec_pep_key not in simrt_dict.keys():
+                    simrt_dict[spec_pep_key] = []
+                tmp_dict = {}
+                for k in [
+                    'DeltaRT',
+                    'nZeroSpecs_DeltaRT',
+                    'Avg_Sim',
+                    'Avg_ZeroSim',
+                ]:
+                    tmp_dict[k] = simrt_line_dict[k]
+                simrt_dict[spec_pep_key].append(tmp_dict)
+
+        print('read original input csv and writing output ...')
         if csv_input is None:
             csv_input = self.params['translations']['csv_input_file']
         csv_output = self.params['translations']['output_file_incl_path']
-        rawloc_file = '01.rawlocalize'
-        rawsimrt_file = '01.rawsimrt'
         #read from original input csv file
         with open(csv_input, 'r') as csv_in, \
-            open(csv_output, 'w') as csv_out, \
-            open(rawloc_file, 'r') as rawloc_in, \
-            open(rawsimrt_file, 'r') as rawsimrt_in:
+            open(csv_output, 'w') as csv_out:
             csv_reader = csv.DictReader(csv_in)
-            rawloc_reader = csv.DictReader(rawloc_in, delimiter = '\t')
-            rawsimrt_reader = csv.DictReader(rawsimrt_in, delimiter = '\t')
             fieldnames = csv_reader.fieldnames
             fieldnames.extend([
                 'Mass Difference Annotations',
@@ -226,25 +260,40 @@ class ptmshepherd_0_3_4(ursgal.UNode):
             for n, line_dict in enumerate(csv_reader):
                 total_mass_shift = 0
                 for single_mass_shift in line_dict['Mass Difference'].split(';'):
+                    if single_mass_shift == '':
+                        continue
                     total_mass_shift += float(single_mass_shift.split(':')[0])
-                peak_mass, annot_modifications = global_mod_dict[int(total_mass_shift*internal_precision)]
+                    # break
+                transformed_mass_shift = int(total_mass_shift*internal_precision)
+                peak_mass, annot_modifications = global_mod_dict.get(
+                    transformed_mass_shift,
+                    (line_dict['Mass Difference'], '')
+                )
                 line_dict['Mass Difference'] = '{0}:n'.format(peak_mass)
                 line_dict['Mass Difference Annotations'] = annot_modifications
-                rawloc_line_dict =  next(rawloc_reader)
+                spec_pep_key = '{0}||{1}'.format(line_dict['Spectrum Title'], line_dict['Sequence'])
+                # rawloc_line_dict =  next(rawloc_reader)
                 # print(rawloc_line_dict)
-                assert rawloc_line_dict['Spectrum'] == line_dict['Spectrum Title'], '''
-                [ERROR] Spectrum Title differes between input csv and rawlocalize file
-                '''
+                assert len(rawloc_dict[spec_pep_key]) == 1, '''
+                [ERROR] Spectrum Title + Peptide from original input matches to multiple
+                [ERROR] entries in rawlocalization output
+                {0}
+                '''.format(rawloc_dict[spec_pep_key])
+                # for rawloc_line_dict in rawloc_dict[spec_pep_key]:
+                rawloc_line_dict = rawloc_dict[spec_pep_key][0]
                 line_dict['PTM-Shepherd:Localized_Pep'] = rawloc_line_dict['Localized_Pep']
                 line_dict['PTM-Shepherd:MaxHyper_Unloc'] = rawloc_line_dict['MaxHyper_Unloc']
                 line_dict['PTM-Shepherd:MaxHyper_Loc'] = rawloc_line_dict['MaxHyper_Loc']
                 line_dict['PTM-Shepherd:MaxPeaks_Unloc'] = rawloc_line_dict['MaxPeaks_Unloc']
                 line_dict['PTM-Shepherd:MaxPeaks_Loc'] = rawloc_line_dict['MaxPeaks_Loc']
-                rawsimrt_line_dict =  next(rawsimrt_reader)
+                # rawsimrt_line_dict =  next(rawsimrt_reader)
                 # print(rawsimrt_line_dict)
-                assert rawsimrt_line_dict['Spectrum'] == line_dict['Spectrum Title'], '''
-                [ERROR] Spectrum Title differes between input csv and rawsimrt file
-                '''
+                assert len(simrt_dict[spec_pep_key]) == 1, '''
+                [ERROR] Spectrum Title + Peptide from original input matches to multiple
+                [ERROR] entries in rawsimrt output
+                {0}
+                '''.format(simrt_dict[spec_pep_key])
+                rawsimrt_line_dict = simrt_dict[spec_pep_key][0]
                 line_dict['PTM-Shepherd:DeltaRT'] = rawsimrt_line_dict['DeltaRT']
                 line_dict['PTM-Shepherd:nZeroSpecs_DeltaRT'] = rawsimrt_line_dict['nZeroSpecs_DeltaRT']
                 line_dict['PTM-Shepherd:Avg_Sim'] = rawsimrt_line_dict['Avg_Sim']

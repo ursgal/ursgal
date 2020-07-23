@@ -29,7 +29,7 @@ def main(
     log10_threshold=True,
     accept_conflicting_psms=False,
     num_compared_psms=2,
-    # remove_redundant_psms=False,
+    remove_redundant_psms=False,
     psm_defining_colnames=[
         'Spectrum Title',
         'Sequence',
@@ -45,7 +45,11 @@ def main(
     # grouped_psms = un._group_psms( input_file, validation_score_field=validation_score_field, bigger_scores_better=bigger_scores_better )
 
     if grouped_psms is None:
-        grouped_psms = group_psms( input_file, validation_score_field=validation_score_field, bigger_scores_better=bigger_scores_better )
+        grouped_psms = group_psms(
+            input_file,
+            validation_score_field=validation_score_field,
+            bigger_scores_better=bigger_scores_better
+        )
 
     all_line_dicts = []
     for spec_title, grouped_psm_list in grouped_psms.items():
@@ -63,8 +67,8 @@ def main(
                 spec_line_dicts.append(line_dict)
             elif n < num_compared_psms:
                 # psm = line_dict['Sequence']+line_dict['Modifications']+line_dict['Charge']
-                # if psm in psm_names and remove_redundant_psms is True:
-                #     continue
+                if psm in psm_names and remove_redundant_psms is True:
+                    continue
                 if log10_threshold is True:
                     if best_score != 0:
                         log_best_score = abs(math.log10(best_score))
