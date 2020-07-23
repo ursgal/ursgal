@@ -269,7 +269,6 @@ def reformat_peptide(regex_pattern, unimod_name, peptide):
     (ac)SSSLM(ox)RPGPSR --> SSSLMRPGPSR#Acetyl:0;Oxidation:5
 
     '''
-    print('test')
     mods = []
     peptide = peptide.strip()
     if '#' in peptide:
