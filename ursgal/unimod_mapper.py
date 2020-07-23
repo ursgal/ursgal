@@ -68,7 +68,7 @@ class UnimodMapper( object ):
                             tmp = {
                                 'unimodID' : element.attrib['record_id'],
                                 'unimodname' : element.attrib['title'],
-                                'unimoddescription': element.attrib['full_name'],
+                                'unimoddescription': element.attrib.get('full_name', None),
                                 'element' : {}
                             }
                         elif element.tag.endswith('}delta'):

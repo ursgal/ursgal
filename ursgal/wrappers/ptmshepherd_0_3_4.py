@@ -361,7 +361,9 @@ class ptmshepherd_0_3_4(ursgal.UNode):
             for row in csv_reader:
                 mass_diffs = row['Mass Difference'].split(';')
                 mass_diffs_sum = 0.0
-                for mass in mass_diffs:
+                for n, mass in enumerate(mass_diffs):
+                    if n > 0:
+                        continue
                     if mass == '':
                         continue
                     mass_diffs_sum += float(mass.split(':')[0])
