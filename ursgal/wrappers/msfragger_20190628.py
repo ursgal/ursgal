@@ -90,7 +90,7 @@ class msfragger_20190628(ursgal.UNode):
         '''
         self.param_file_name = os.path.join(
             self.params['output_dir_path'],
-            'msfragger.params'
+            '{0}_msfragger.params'.format(self.input_file)
         )
         self.created_tmp_files.append(self.param_file_name)
         # further prepare and translate params

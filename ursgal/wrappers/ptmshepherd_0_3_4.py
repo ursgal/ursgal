@@ -367,7 +367,7 @@ class ptmshepherd_0_3_4(ursgal.UNode):
                     if mass == '':
                         continue
                     mass_diffs_sum += float(mass.split(':')[0])
-                if mass_diffs_sum > 4000:
+                if mass_diffs_sum > 3995:
                     continue
 
                 if '<|>' in row['Protein ID']:
