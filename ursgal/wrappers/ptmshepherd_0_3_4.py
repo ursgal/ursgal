@@ -10,6 +10,7 @@ from ursgal import ukb
 import pprint
 import re
 import itertools
+import pymzml
 
 class ptmshepherd_0_3_4(ursgal.UNode):
     """
@@ -34,7 +35,7 @@ class ptmshepherd_0_3_4(ursgal.UNode):
         'engine': {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe'            : 'ptmshepherd-0.3.4.jar',
+                    'exe'            : 'ptmshepherd-0.3.5.jar',
                     'url'            : 'https://github.com/Nesvilab/PTM-Shepherd/releases/download/v0.3.4/ptmshepherd-0.3.4.jar',
                     'zip_md5'        : '',
                     'additional_exe' : [],
@@ -309,20 +310,20 @@ class ptmshepherd_0_3_4(ursgal.UNode):
             'global.profile.tsv',
             self.params['translations']['output_file_incl_path'].replace('.csv', '_profile.tsv')
         )
-        self.created_tmp_files.extend([
-            'global.modsummary.tsv',
-            'global.profile.tsv',
-            '01.histo',
-            '01.locprofile.txt',
-            '01.ms2counts',
-            '01.rawlocalize',
-            '01.rawsimrt',
-            '01.simrtprofile.txt',
-            'combined.histo',
-            'global.locprofile.txt',
-            'global.simrtprofile.txt',
-        ])
-        shutil.rmtree(self.tmp_dir)
+        # self.created_tmp_files.extend([
+        #     'global.modsummary.tsv',
+        #     'global.profile.tsv',
+        #     '01.histo',
+        #     '01.locprofile.txt',
+        #     '01.ms2counts',
+        #     '01.rawlocalize',
+        #     '01.rawsimrt',
+        #     '01.simrtprofile.txt',
+        #     'combined.histo',
+        #     'global.locprofile.txt',
+        #     'global.simrtprofile.txt',
+        # ])
+        # shutil.rmtree(self.tmp_dir)
         return
 
     def write_input_tsv(self, input_csv, tmp_dir):
@@ -374,6 +375,30 @@ class ptmshepherd_0_3_4(ursgal.UNode):
                     is_unique = 'false'
                 else:
                     is_unique = 'true'
+
+                rt = row['Retention Time (s)']
+                if rt == '':
+                    raw_file_name = os.path.basename(
+                        row['Raw data location']
+                    )
+                    for mzml in self.params['translations']['mzml_input_files']:
+                        if raw_file_name.replace('.mgf', '.mzML') not in mzml:
+                            continue
+                        run = pymzml.run.Reader(
+                            mzml
+                        )
+                        for n, spec in enumerate(run):
+                            spectrum_id = int(spec.ID)
+                            if spectrum_id == int(row['Spectrum ID']):
+                                scan_time, scan_time_unit = spec.scan_time
+                                if scan_time_unit != 'minute':
+                                    print('[ERROR] Scan time is expected to be in minutes')
+                                    sys.exit(1)
+                                row['Retention Time (s)'] = scan_time * 60
+                                break
+                assert row['Retention Time (s)'] != '', '''
+                [ERROR] Retention Time needs to be given for each row.
+                '''
                     
                 tmp_dict = {}
                 tmp_dict['Spectrum'] = row['Spectrum Title']

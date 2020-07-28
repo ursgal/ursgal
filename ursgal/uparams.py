@@ -1979,6 +1979,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
+            'moda_v1_61',
             'moda_v1_62',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.4
-from .moda_v1_51 import moda_v1_51 as moda
+from .moda_v1_62 import moda_v1_62 as moda
 
 
 class moda_v1_61( moda ):
