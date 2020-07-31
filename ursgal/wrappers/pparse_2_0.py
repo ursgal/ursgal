@@ -24,7 +24,7 @@ class pparse_2_0(ursgal.UNode):
 
     META_INFO = {
         'edit_version': 1.00,
-        'name': 'pAarse',
+        'name': 'pParse',
         'version': '2.0',
         'release_date': '2018-11-02',
         'utranslation_style': 'pparse_style_1',

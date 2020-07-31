@@ -1,12 +1,29 @@
 Changelog
 =========
 
+Version 0.6.7    (4.2020)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Implemented pNovo 3.1.3
+#. Implemented pGlyco 2.2.2
+#. Implemented latest version of MODa (v1.62), MSAmanda (version 2.0.0.14665),
+   MSFragger (20190628, 2.3), DeepNovo (v2)
+#. Implemented MS-GF+ v2019.07.03 and included enzymes.txt for more and customized options
+#. PSM defining columns for sanitize_csv and combine_PEP are now
+   specified though uparams
+#. Added advanced protein digest functionality (to ucore)
+   adapted from Pyteomics' cleave function
+#. venndiagram_1_1_0 can now also print percentages for each field
+#. Added signal_to_noise_threshold option for mzml2mgf conversion
+#. internal changes to the mapping of styles and uparams in umapmaster 
+
 Version 0.6.6    (03.2020)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Setup.py (and pip) installs resources now
 #. Added Percolator 3.4
-#. Dropped pymzml v0.7.x support - mzml2mgf v2.0.0 is default. If pymzml v.07 is required change default mzml2mgf converter back to 1.0.0
+#. Dropped pymzml v0.7.x support - mzml2mgf v2.0.0 is default. 
+   If pymzml v.07 is required change default mzml2mgf converter back to 1.0.0
 #. Dropped Python 3.4 support
 
 Version 0.6.5    (05.2019)

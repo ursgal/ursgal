@@ -3,6 +3,8 @@
 '''
 import os
 import ursgal
+import sys
+import importlib
 
 
 class sugarpy_plot_1_0_0(ursgal.UNode):
@@ -19,11 +21,11 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
         },
         'utranslation_style' : 'sugarpy_plot_style_1',
         'citation'           : '',
-        'input_extensions'   : ['.mzML', '.csv'],
+        'input_extensions'   : ['.mzML', '.csv', '.idx.gz'],
         'output_extensions'  : ['.txt'],
         'output_suffix'      : 'created_files',
         'create_own_folder'  : True,
-        'in_development'     : True,
+        'in_development'     : False,
         'include_in_git'     : False,
         'distributable'      : False,
         'engine'             : {
@@ -144,6 +146,16 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
         sugarpy_params['pyqms_params'] = pyqms_params
         sugarpy_params['mzml_file'] = input_file
         sugarpy_params['output_file'] = output_file
+        sys.path.insert(1, os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            '..',
+            'resources',
+            'platform_independent',
+            'arc_independent',
+            'venndiagram_1_1_0',
+        ))
+        imported_module = importlib.import_module('venndiagram_1_1_0')
+        sugarpy_params['venndiagram_function'] = getattr(imported_module, 'main')
 
         out = main(**sugarpy_params)
 

@@ -5,6 +5,7 @@ from collections import defaultdict as ddict
 import csv
 import itertools
 import sys
+import re
 
 class pglyco_db_2_2_0(ursgal.UNode):
     """
@@ -33,7 +34,7 @@ class pglyco_db_2_2_0(ursgal.UNode):
         'input_extensions': ['.mgf'],
         'output_extensions': ['.csv'],
         'create_own_folder': True,
-        'in_development': True,
+        'in_development': False,
         'include_in_git': False,
         'distributable': False,
         'engine_type': {
@@ -50,7 +51,7 @@ class pglyco_db_2_2_0(ursgal.UNode):
             },
         },
         'citation':
-        'Liu MQ, Zeng WF,, Fang P, Cao WQ, Liu C, Yan GQ, Zhang Y, Peng C, Wu JQ,'
+        'Liu MQ, Zeng WF, Fang P, Cao WQ, Liu C, Yan GQ, Zhang Y, Peng C, Wu JQ,'
             'Zhang XJ, Tu HJ, Chi H, Sun RX, Cao Y, Dong MQ, Jiang BY, Huang JM, Shen HL,'
             'Wong CCL, He SM, Yang PY. (2017) pGlyco 2.0 enables precision N-glycoproteomics '
             'with comprehensive quality control and one-step mass spectrometry'
@@ -82,23 +83,51 @@ class pglyco_db_2_2_0(ursgal.UNode):
             self.params['translations']['output_file_incl_path'].strip('.csv')
             + '_pGlyco.cfg'
         )
-        # self.created_tmp_files.append(self.param_file_name)
+        self.created_tmp_files.append(self.param_file_name)
 
-        # pprint.pprint(self.params['translations']['_grouped_by_translated_key'])
-        # pprint.pprint(self.params)
-        # sys.exit(1)
         self.params_to_write = {
             'output_dir_path' : self.params['output_dir_path'],
             'input_file' : self.params['translations']['mgf_input_file'],
         }
+
+        db_file = self.params['translations']['database']
+        db_N2J = db_file.replace('.fasta', '_N2J.fasta')
+        self.params['translations']['_grouped_by_translated_key']['fasta'] = {
+            'database' : db_N2J
+        }
+
+        if sys.platform == 'win32':
+            line_ending = '\n'
+        else:
+            line_ending = '\r\n'
+        if os.path.isfile(db_N2J) is False:
+            with open(db_N2J, 'w') as out_fasta:
+                with open(db_file, 'r') as in_fasta:
+                    for fastaID, sequence in ursgal.ucore.parse_fasta(in_fasta):
+                        org_length = len(sequence)
+                        matches = []
+                        for match in re.finditer('N[^P][ST]', sequence):
+                            matches.append(match.span())
+                        new_sequence = ''
+                        prev_end = 0
+                        for start, end in matches:
+                            new_sequence += sequence[prev_end:start]
+                            new_sequence += 'J' + sequence[start+1:end]
+                            prev_end = end
+                        new_sequence += sequence[prev_end:len(sequence)]
+                        assert len(new_sequence) == org_length, 'converting error'
+                        print(">{0}".format(fastaID), file=out_fasta, end=line_ending)
+                        for pos, aa in enumerate(new_sequence):
+                            print(aa, end="", file=out_fasta)
+                            if (pos + 1) % 80 == 0:
+                                print(file=out_fasta, end=line_ending)
+                        print('', file=out_fasta, end=line_ending)
 
         precursor_tolerance = []
         opt_mods = []
         fix_mods = []
         for pglyco_param_name in self.params['translations']['_grouped_by_translated_key'].keys():
             for ursgal_param_name, param_value in self.params['translations']['_grouped_by_translated_key'][pglyco_param_name].items():
-                # if pglyco_param_name in write_exclusion_list:
-                #     continue
                 if pglyco_param_name == 'search_precursor_tolerance':
                     precursor_tolerance.append(param_value)
                 elif pglyco_param_name == 'modifications':
@@ -296,7 +325,6 @@ class pglyco_db_2_2_0(ursgal.UNode):
             'pGlycoDB-GP.txt'
         )
         translated_headers.insert(0, 'Spectrum Title')
-        translated_headers.insert(0, 'Spectrum Title')
         csv_reader = csv.DictReader(
             open(pglyco_output, 'r'),
             fieldnames=translated_headers,
@@ -311,6 +339,8 @@ class pglyco_db_2_2_0(ursgal.UNode):
             line_dict['Raw data location'] = os.path.abspath(
                 self.params['translations']['mgf_input_file']
             )
+            new_sequence = line_dict['Sequence'].replace('J', 'N')
+            line_dict['Sequence'] = new_sequence
             csv_writer.writerow(line_dict)
         return
 

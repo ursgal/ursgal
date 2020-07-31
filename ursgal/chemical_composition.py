@@ -214,7 +214,10 @@ class ChemicalComposition(dict):
             unimod = unimod.strip()
             if ':' not in unimod:
                 sys.exit(
-                    'This unimod: {0} requires positional information'.format(unimod))
+                    '''
+                    Error in chemical_composition.py:
+                    This unimod: {0} requires positional information
+                    '''.format(unimod))
 
             for occ, match in enumerate(pattern.finditer(unimod)):
                 try:
@@ -223,18 +226,22 @@ class ChemicalComposition(dict):
                     )
                 except:
                     sys.exit(
-                        'Cannot map unimod {0}. extracted position argument {1}'.format(
+                        '''
+                        Error in chemical_composition.py:
+                        Cannot map unimod {0}. extracted position argument {1}
+                        '''.format(
                             unimod, match.start()
                         ))
                 # if occ >= 1:
                 position = int(match.group('pos'))
-                if position in self.unimod_at_pos.keys():
-                    print('{0} <<- Two unimods at the same position ? '.format(
-                        sequence
-                    ))
-                    raise Exception
+                if position not in self.unimod_at_pos.keys():
+                    self.unimod_at_pos[position] = [unimod[:match.start()]]
+                self.unimod_at_pos[position].append(unimod[:match.start()])
+                    # print('{0} <<- Two unimods at the same position ? '.format(
+                    #     sequence
+                    # ))
+                    # raise Exception
 
-                self.unimod_at_pos[position] = unimod[:match.start()]
             # match = re.search( position_re_pattern, unimod)
             # if match is not None:
             #     end = match.start()
@@ -327,9 +334,11 @@ class ChemicalComposition(dict):
             except:
                 sys.exit(
                     '''
+                    Error in chemical_composition.py:
                     Do not know aa composition for {0}
                     in {1}
-                    '''.format(aa + N, peptide))
+                    '''.format(aa + N, peptide)
+                )
             self.add_chemical_formula(aa_compo)
 
             composition = self._chemical_formula_to_dict(aa_compo)
@@ -348,7 +357,7 @@ class ChemicalComposition(dict):
                 available monosaccharides are listed in chemical_composition_kb
         '''
         pattern = re.compile(
-            r'''(?P<monosacch>[A-z]*)(?P<count>\([0-9]*\))''' )
+            r'''(?P<monosacch>[A-z0-9]*)(?P<count>\([0-9]*\))''' )
         for glyc_match in pattern.finditer(glycan):
             monosacch = glyc_match.group('monosacch')
             if glyc_match.group('count') == '':
@@ -508,7 +517,10 @@ class ChemicalComposition(dict):
         elif mode == 'subtraction':
             sign = -1
         else:
-            sys.exit('Do not know which mode to use for _merge')
+            sys.exit('''
+                Error in chemical_composition.py:
+                Do not know which mode to use for _merge
+            ''')
         if isinstance(chemical_formula, str):
             chemical_formula = self._chemical_formula_to_dict(chemical_formula)
         for element, count in chemical_formula.items():

@@ -50,7 +50,7 @@ class UController(ursgal.UNode):
             'internal' : True,
         },
         'utranslation_style'        : 'ucontroller_style_1',
-        'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis. J. Proteome res. acs.jproteome.5b00860 (2015). doi:10.1021/acs.jproteome.5b00860'
+        'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis (2016). J. Proteome Res. 15(3):788-94. doi: 10.1021/acs.jproteome.5b00860'
     }
 
     def __init__( self, *args, **kwargs):
@@ -99,7 +99,7 @@ class UController(ursgal.UNode):
         if self.verbose:
             self.show_unode_overview()
 
-    def _collect_all_unode_wrappers( self ):
+    def _collect_all_unode_wrappers(self):
         '''
         The ucontroller function to collect all unode wrappers
 
@@ -115,8 +115,9 @@ class UController(ursgal.UNode):
         wrappers_path_glob = os.path.join(
             ursgal.base_dir, 'wrappers', '*.py'
         )
-        for wrapper_file in glob.glob( wrappers_path_glob ):
-            filename = os.path.basename( wrapper_file )
+        engine_2_style = {}
+        for wrapper_file in glob.glob(wrappers_path_glob):
+            filename = os.path.basename(wrapper_file)
             if filename.startswith('__'):
                 continue
             if wrapper_file.startswith('.'):
@@ -124,41 +125,20 @@ class UController(ursgal.UNode):
             wrapper_module_name = filename.replace('.py', '')
 
             wrapper_module = importlib.__import__(
-                "ursgal.wrappers.{0}".format( wrapper_module_name ),
-                fromlist = [ wrapper_module_name ]
+                "ursgal.wrappers.{0}".format(wrapper_module_name),
+                fromlist = [wrapper_module_name]
             )
-            assert hasattr(wrapper_module, wrapper_module_name ), '''
-            wrappers/{0}.py contains no class named {0}
-            '''.format( wrapper_module_name )
-
-
+            assert hasattr(wrapper_module, wrapper_module_name), '''
+                wrappers/{0}.py contains no class named {0}
+            '''.format(wrapper_module_name)
+            
             wrapper_class = getattr(wrapper_module, wrapper_module_name)
-        #     try:
-        #         initialized_wrapper_class = wrapper_class(
-        #             engine_path = engine_exe_path
-        #         )
-        #     except TypeError:
-        #         print('''
 
-        # Do you have *args and **kwargs in your Class ?
+            assert hasattr(wrapper_class, 'META_INFO'), '''
+                META_INFO for engine {0} does not exist in wrapper
+            '''.format(wrapper_module_name)
 
-        # E.g.:
-
-        # class msblender_09_2015( ursgal.UNode ):
-        #     def __init__( self,  *args, **kwargs ):
-
-        #         ''')
-
-            '''NOTE: This has to be assert in the final version '''
-
-            # assert hasattr(wrapper_class, 'META_INFO' ), '''
-            # wrappers/{0}.py contains class attribute META_INFO
-            # '''.format( wrapper_module_name )
-
-            if hasattr(wrapper_class, 'META_INFO' ):
-                wrapper_meta_info = getattr(wrapper_class, 'META_INFO')
-            else:
-                wrapper_meta_info = {}
+            wrapper_meta_info = getattr(wrapper_class, 'META_INFO')
             engine            = wrapper_meta_info.get(
                 'engine',
                 None
@@ -179,8 +159,31 @@ class UController(ursgal.UNode):
                 'distributable',
                 True
             )
+            style = wrapper_meta_info.get(
+                'utranslation_style',
+                None
+            )
+            assert style is not None, '''
+                META_INFO for wrapper {0} does not contain a utranslatation_style
+                '''.format(
+                   wrapper_module_name   
+                )
+            if wrapper_module_name in engine_2_style.keys():
+                assert engine_2_style[wrapper_module_name] == style, '''
+                    Same engine uses multiple styles, this is not allowed.
+                    engine: {0}
+                    styles:
+                    {1}
+                    {2}
+                '''.format(
+                    wrapper_module_name,
+                    engine_2_style[wrapper_module_name],
+                    style
+                )
+            else:
+                engine_2_style[wrapper_module_name] = style
 
-            unodes[ wrapper_module_name ] = {
+            unodes[wrapper_module_name] = {
                 'available'         : False,
                 'type'              : None,
                 'class'             : None,
@@ -442,6 +445,7 @@ class UController(ursgal.UNode):
                         self.unodes[ engine ]['class'] = _wrapper_class(
                             engine_path = engine_exe_path
                         )
+                        self.unodes[engine]['engine_exe_path'] = engine_exe_path
                     except TypeError:
                         print('''
 
@@ -732,7 +736,8 @@ class UController(ursgal.UNode):
 
             search_engines_of_merged_files = []
             for d in self.io['output']['params']['input_file_dicts']:
-                search_engines_of_merged_files.append( d["last_engine"] )
+                search_engines_of_merged_files.append(d.get("last_engine", "unknown"))
+
 
             report = self.run_unode_if_required(
                 force, engine_name, answer,

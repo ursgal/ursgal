@@ -1,4 +1,4 @@
-prune Documentation/html/.doctrees/
+prune Documentation/html/.doctrees
 exclude Documentation/html/.buildinfo
 
 recursive-include Documentation/html *
@@ -7,13 +7,9 @@ recursive-include Documentation/html/_static *
 
 include example_scripts/*.py
 
-
-
 include example_data/misc/*.csv
 include example_data/BSA.fasta
 include example_data/BSA1.mzML
-
-
 
 recursive-include ursgal/resources/*
 
@@ -26,16 +22,11 @@ include tests/data/test*.json
 include tests/data/_test*.pkl
 include tests/*.py
 
-
-
-
-recursive-include ursgal/kb *.py
-recursive-include ursgal/engines *.py
-recursive-include ursgal/kb/ext *.xml
+recursive-include ursgal/wrappers *.py
 
 include COPYING.txt
-include Documentation/ursgal.pdf
+include CONTRIBUTING.rst
 include AUTHORS.txt
-include README.txt
+include README.rst
 include requirements.txt
 

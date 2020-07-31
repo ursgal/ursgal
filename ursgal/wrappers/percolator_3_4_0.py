@@ -77,4 +77,3 @@ class percolator_3_4_0(percolator_3_2_1):
 
     def __init__(self, *args, **kwargs):
         super(percolator_3_4_0, self).__init__(*args, **kwargs)
-
