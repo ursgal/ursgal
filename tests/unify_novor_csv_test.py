@@ -20,7 +20,7 @@ modifications = [
 R = ursgal.UController(
     params = {
         'modifications' : modifications
-    }    
+    }
 )
 R.map_mods()
 
@@ -73,6 +73,14 @@ unify_csv_main(
         'label' : '',
         'mods' : R.params['mods'],
         'prefix' : '',
+        'psm_defining_colnames': [
+            'Spectrum Title',
+            'Sequence',
+            'Modifications',
+            'Mass Difference',
+            'Charge',
+            'Is decoy',
+        ],
     },
     search_engine  = 'novor_1_1beta',
 )

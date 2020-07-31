@@ -4,9 +4,9 @@
 
 Test the unify_csv function for msfragger engine
 
-Covers 
+Covers
     * Reassignment of merged 15N + e.g. Oxidation modifications back to normal
-      Oxidation and removement of any 
+      Oxidation and removement of any
 
 '''
 import ursgal
@@ -87,6 +87,14 @@ unify_csv_main(
         'label' : '15N',
         'mods' : R.params['mods'],
         'prefix' : '',
+        'psm_defining_colnames': [
+            'Spectrum Title',
+            'Sequence',
+            'Modifications',
+            'Mass Difference',
+            'Charge',
+            'Is decoy',
+        ],
     },
     search_engine  = 'msfragger_20170103',
 )
