@@ -137,7 +137,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
-            'ptmshepherd_0_3_4'
+            'ptmshepherd_0_3_5'
         ],
         'uvalue_option': {
             'none_val': None,
@@ -973,7 +973,7 @@ ursgal_params = {
             'msfragger_2_3',
             'pipi_1_4_5',
             'pipi_1_4_6',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -1157,7 +1157,7 @@ ursgal_params = {
             'deepnovo_v2',
             'tag_graph_1_8_0',
             'glycopeptide_fragmentor_1_0_0',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2010,7 +2010,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -3264,7 +3264,7 @@ ursgal_params = {
             'tag_graph_1_8_0',
             'deepnovo_v2',
             'glycopeptide_fragmentor_1_0_0',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3353,7 +3353,7 @@ ursgal_params = {
             'tag_graph_1_8_0',
             'deepnovo_v2',
             'glycopeptide_fragmentor_1_0_0',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5277,7 +5277,7 @@ ursgal_params = {
             'msfragger_20190628',
             'msfragger_2_3',
             'deepnovo_v2',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -6301,7 +6301,7 @@ ursgal_params = {
             'deepnovo_0_0_1',
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8172,7 +8172,7 @@ ursgal_params = {
             'msfragger_20190222',
             'msfragger_20190628',
             'msfragger_2_3',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8299,7 +8299,7 @@ ursgal_params = {
             'deepnovo_0_0_1',
             'deepnovo_v2',
             'pnovo_3_1_3',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8399,7 +8399,7 @@ ursgal_params = {
             'deepnovo_0_0_1',
             'deepnovo_v2',
             'pnovo_3_1_3',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8497,7 +8497,7 @@ ursgal_params = {
             'deepnovo_0_0_1',
             'deepnovo_v2',
             'pnovo_3_1_3',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -11895,7 +11895,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'glycopeptide_fragmentor_1_0_0',
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -13285,7 +13285,7 @@ ursgal_params = {
     'mass_diff_bin_size' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -13313,7 +13313,7 @@ ursgal_params = {
     'num_bins_for_smoothing' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -13341,7 +13341,7 @@ ursgal_params = {
     'ptmshepherd_peak_picking_params' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'default_value' : {
             'peakpicking_promRatio': 0.3,
@@ -13384,7 +13384,7 @@ ursgal_params = {
     'ptmshepherd_localization_background' : {
         'edit_version' : 1.01,
         'available_in_unode' : [
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -13414,7 +13414,7 @@ ursgal_params = {
     'mass_offset_list' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
-            'ptmshepherd_0_3_4',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -13441,5 +13441,38 @@ ursgal_params = {
         'default_value' : [],
         'description' : \
             'List of mass offsets at which modification peaks will be checked for (e.g. [0, 79.9663])',
+    },
+    'preferred_engines' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'preferred_engines',
+        },
+        'utag' : [
+            'conversion',
+            'output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val' : None,
+            'item_title' : 'column_name',
+            'item_type' : 'str',
+            'multiple_line' : False,
+            'custom_val_max': 10000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : [
+        ],
+        'description' : \
+            'List of engines that should be preferred when sanitizing results. In combination with "accept_conflicting_psms"=True, conflicting PSMs for only the preferred engine are selected. If no PSMs for that engine exist, the second preferred engine is used, and so on',
     },
 }

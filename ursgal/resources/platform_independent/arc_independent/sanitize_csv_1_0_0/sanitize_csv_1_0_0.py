@@ -34,7 +34,9 @@ def main(
         'Spectrum Title',
         'Sequence',
         'Modifications',
-    ]
+    ],
+    preferred_engines=[],
+    max_output_psms=1,
 ):
     '''
     Spectra with multiple PSMs are sanitized, i.e. only the PSM with best PEP score is accepted
@@ -90,9 +92,26 @@ def main(
                         spec_line_dicts.append(line_dict)
                         psm_names.add(psm)
         if accept_conflicting_psms is False and len(psm_names) >= 2:
-            continue   
+            continue
+        elif preferred_engines != []:
+            preferred_spec_line_dicts = ddict(list)
+            for ld in spec_line_dicts:
+                for engine in preferred_engines:
+                    if engine in ld['Search Engine']:
+                        preferred_spec_line_dicts[engine].append(ld)
+            for engine in preferred_engines:
+                if len(preferred_spec_line_dicts[engine]) != 0:
+                    all_line_dicts.extend(preferred_spec_line_dicts[engine][:max_output_psms])
+                    # if len(preferred_spec_line_dicts[engine]) > 1:
+                    #     print('Multiple PSMs for preferred engine for spec {0}'.format(
+                    #         ld['Spectrum ID']
+                    #     ))
+                    #     import pprint
+                    #     pprint.pprint(preferred_spec_line_dicts)
+                    #     exit()
+                    break
         else:
-            all_line_dicts.extend(spec_line_dicts)
+            all_line_dicts.extend(spec_line_dicts[:max_output_psms])
 
 
     csv_kwargs = {}
