@@ -68,7 +68,6 @@ def main(
                 psm_names.add(psm)
                 spec_line_dicts.append(line_dict)
             elif n < num_compared_psms:
-                # psm = line_dict['Sequence']+line_dict['Modifications']+line_dict['Charge']
                 if psm in psm_names and remove_redundant_psms is True:
                     continue
                 if log10_threshold is True:
@@ -102,13 +101,6 @@ def main(
             for engine in preferred_engines:
                 if len(preferred_spec_line_dicts[engine]) != 0:
                     all_line_dicts.extend(preferred_spec_line_dicts[engine][:max_output_psms])
-                    # if len(preferred_spec_line_dicts[engine]) > 1:
-                    #     print('Multiple PSMs for preferred engine for spec {0}'.format(
-                    #         ld['Spectrum ID']
-                    #     ))
-                    #     import pprint
-                    #     pprint.pprint(preferred_spec_line_dicts)
-                    #     exit()
                     break
         else:
             all_line_dicts.extend(spec_line_dicts[:max_output_psms])
