@@ -7627,14 +7627,16 @@ Format:
             'Maximum number of PSMs (sorted by score, starting with the best '\
             'scoring PSM) that are compared',
     },
-    'num_hits_retain_spec' : {
+    'max_num_psms_per_spec' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'omssa_2_1_9',
+            'sanitize_csv_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'omssa_style_1' : '-hl',
+            'sanitize_csv_style_1': 'max_output_psms',
         },
         'utag' : [
             'output',
@@ -7652,8 +7654,7 @@ Format:
         },
         'default_value' : 30,
         'description' : \
-            'Maximum number of hits retained per precursor charge state per '\
-            'spectrum during the search',
+            'Maximum number of PSMs retained per spectrum'
     },
     'num_i_decimals' : {
         'edit_version' : 1.00,
