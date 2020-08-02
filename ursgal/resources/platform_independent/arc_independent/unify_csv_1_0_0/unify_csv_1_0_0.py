@@ -354,6 +354,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         new_fieldnames = [
             'uCalc m/z',
             'uCalc Mass',
+            'Retention Time (s)',
             'Accuracy (ppm)',
             'Mass Difference',
             'Protein ID',

@@ -488,6 +488,7 @@ Format:
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'ptmshepherd_0_3_5'
         ],
         'uvalue_option': {
             'none_val': None,
@@ -505,6 +506,7 @@ Format:
             'pyqms_style_1' : 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING',
             'sugarpy_run_style_1' : 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING',
             'sugarpy_plot_style_1': 'MIN_REL_PEAK_INTENSITY_FOR_MATCHING',
+            'ptmshepherd_style_1': 'spectra_condRatio',
         },
         'utag': [
             'quantification',
@@ -743,6 +745,7 @@ Format:
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -760,6 +763,7 @@ Format:
             'pyqms_style_1': 'INTERNAL_PRECISION',
             'sugarpy_run_style_1': 'INTERNAL_PRECISION',
             'sugarpy_plot_style_1': 'INTERNAL_PRECISION',
+            'glycopeptide_fragmentor_style_1': 'internal_precision',
         },
         'utag': [
             'quantification',
@@ -1324,6 +1328,7 @@ Format:
             'msfragger_2_3',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -1333,6 +1338,7 @@ Format:
             'msfragger_style_2' : '-Xmx',
             'msfragger_style_3' : '-Xmx',
             'pipi_style_1'      : '-Xmx',
+            'ptmshepherd_style_1': '-Xmx',
         },
         'utag' : [
             'hardware_resources',
@@ -1505,6 +1511,8 @@ Format:
             'deepnovo_0_0_1',
             'deepnovo_v2',
             'tag_graph_1_8_0',
+            'glycopeptide_fragmentor_1_0_0',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1518,6 +1526,8 @@ Format:
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'deepnovo_style_1': 'base_mz',
             'tag_graph_style_1': 'base_mz',
+            'glycopeptide_fragmentor_style_1': 'base_mz',
+            'ptmshepherd_style_1': 'base_mz',
         },
         'utag' : [
             'conversion'
@@ -2328,6 +2338,7 @@ Format:
         'edit_version' : 1.00,
         'available_in_unode' : [
             'kojak_1_5_3',
+            'moda_v1_61',
             'moda_v1_62',
             'msgfplus_v2016_09_16',
             'msgfplus_v2017_01_27',
@@ -2361,6 +2372,7 @@ Format:
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
             'flash_lfq_1_1_1',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : False,
         'ukey_translation' : {
@@ -2378,6 +2390,7 @@ Format:
             'pglyco_db_style_1'   : 'process',
             'pnovo_style_1'       : 'thread',
             'flash_lfq_style_1': '--thr',
+            'ptmshepherd_style_1' : 'threads',
         },
         'utag' : [
             'hardware_resources',
@@ -3613,6 +3626,8 @@ Format:
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
             'deepnovo_v2',
+            'glycopeptide_fragmentor_1_0_0',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3634,6 +3649,8 @@ Format:
             'pnovo_style_1'     : 'frag_tol',
             'tag_graph_style_1' : 'ppmstd',
             'deepnovo_style_1' : 'AA_MATCH_PRECISION',
+            'glycopeptide_fragmentor_style_1': 'frag_mass_tolerance',
+            'ptmshepherd_style_1': 'spectra_ppmtol',
         },
         'utag' : [
             'fragment',
@@ -3698,6 +3715,8 @@ Format:
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
             'deepnovo_v2',
+            'glycopeptide_fragmentor_1_0_0',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3719,6 +3738,8 @@ Format:
             'pnovo_style_1'     : 'frag_tol_type_ppm',
             'tag_graph_style_1' : 'frag_mass_tolerance_unit',
             'deepnovo_style_1' : 'AA_MATCH_PRECISION',
+            'glycopeptide_fragmentor_style_1': 'frag_mass_tolerance_unit',
+            'ptmshepherd_style_1': 'spectra_ppmtol',
         },
         'utag' : [
             'fragment',
@@ -5674,6 +5695,7 @@ Format:
             'msfragger_20190628',
             'msfragger_2_3',
             'deepnovo_v2',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5684,6 +5706,7 @@ Format:
             'msfragger_style_2' : 'use_topN_peaks',
             'msfragger_style_3' : 'use_topN_peaks',
             'deepnovo_style_1' : 'MAX_NUM_PEAK',
+            'ptmshepherd_style_1': 'spectra_condPeaks'
         },
         'utag' : [
             'spectrum',
@@ -5699,7 +5722,7 @@ Format:
             'updownval' : 1,
             'unit'      : ''
         },
-        'default_value' : 100,
+        'default_value' : 150,
         'description' : \
             'Maximum number of peaks from a spectrum used.',
     },
@@ -6697,6 +6720,7 @@ Format:
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
             'flash_lfq_1_1_1',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -6729,6 +6753,7 @@ Format:
             'pnovo_style_1' : 'modifications',
             'tag_graph_style_1' : 'modifications',
             'flash_lfq_style_1': 'modifications',
+            'ptmshepherd_style_1': 'varmod_masses',
         },
         'utag' : [
             'modifications',
@@ -8567,6 +8592,7 @@ Format:
             'msfragger_20190222',
             'msfragger_20190628',
             'msfragger_2_3',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8580,6 +8606,7 @@ Format:
             'msfragger_style_1' : 'isotope_error',
             'msfragger_style_2' : 'isotope_error',
             'msfragger_style_3' : 'isotope_error',
+            'ptmshepherd_style_1': 'isotope_error',
         },
         'utag' : [
             'precursor',
@@ -8616,6 +8643,11 @@ Format:
                 '0,2' : '0/1/2',
             },
             'msfragger_style_3' : {
+                '0' : '0',
+                '0,1' : '0/1',
+                '0,2' : '0/1/2',
+            },
+            'ptmshepherd_style_1' : {
                 '0' : '0',
                 '0,1' : '0/1',
                 '0,2' : '0/1/2',
@@ -8687,6 +8719,7 @@ Format:
             'deepnovo_0_0_1',
             'deepnovo_v2',
             'pnovo_3_1_3',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8710,6 +8743,7 @@ Format:
             'pglyco_db_style_1'  : 'search_precursor_tolerance',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol',
+            'ptmshepherd_style_1': 'precursor_tol',
         },
         'utag' : [
             'precursor',
@@ -8786,6 +8820,7 @@ Format:
             'deepnovo_v2',
             'pnovo_3_1_3',
             'flash_lfq_1_1_1',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8810,6 +8845,7 @@ Format:
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol',
             'flash_lfq_style_1'  : '--ppm',
+            'ptmshepherd_style_1': 'precursor_tol'
         },
         'utag' : [
             'precursor',
@@ -8883,6 +8919,7 @@ Format:
             'deepnovo_0_0_1',
             'deepnovo_v2',
             'pnovo_3_1_3',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8904,6 +8941,7 @@ Format:
             'pglyco_db_style_1'  : 'search_precursor_tolerance_type',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol_type_ppm',
+            'ptmshepherd_style_1': 'precursor_mass_units'
         },
         'utag' : [
             'precursor',
@@ -8952,6 +8990,10 @@ Format:
                 'ppm' : 1,
                 'da'  : 0,
             },
+            'ptmshepherd_style_1': {
+                'ppm' : 1,
+                'da'  : 0
+            }
         },
         'uvalue_type' : 'select',
         'uvalue_option' : {
@@ -9666,30 +9708,29 @@ Format:
             'CSV suffix of raw indentification: this is the conversion result '\
             'after CSV conversion but before adding retention time',
     },
-    # 'remove_redundant_psms' : {
-    #     'edit_version' : 1.00,
-    #     'available_in_unode' : [
-    #         'sanitize_csv_1_0_0',
-    #     ],
-    #     'triggers_rerun' : True,
-    #     'ukey_translation' : {
-    #         'sanitize_csv_style_1' : 'remove_redundant_psms',
-    #     },
-    #     'utag' : [
-    #         'output'
-    #     ],
-    #     'uvalue_translation' : {
-    #     },
-    #     'uvalue_type' : 'bool',
-    #     'uvalue_option' : {
-    #     },
-    #     'default_value' : True,
-    #     'description' : \
-    #         'If True, redundant PSMs (e.g. the same identification reported '\
-    #         'by multiple engines) for the same spectrum are removed. An '\
-    #         'identification is defined by the combination of \'Sequence\', '\
-    #         '\'Modifications\' and \'Charge\'.',
-    # },
+    'remove_redundant_psms' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1' : 'remove_redundant_psms',
+        },
+        'utag' : [
+            'output'
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'bool',
+        'uvalue_option' : {
+        },
+        'default_value' : True,
+        'description' : \
+            'If True, redundant PSMs (e.g. the same identification reported '\
+            'by multiple engines) for the same spectrum are removed. An '\
+            'identification is defined by psm_defining_colnames'
+    },
     'remove_temporary_files' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -12274,31 +12315,37 @@ Format:
         },
         'uvalue_type' : "dict",
     },
-    'mzml_input_file' : {
+    'mzml_input_files' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'glycopeptide_fragmentor_1_0_0',
+            'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'sugarpy_run_style_1': 'mzml_file',
             'sugarpy_plot_style_1': 'mzml_file',
+            'glycopeptide_fragmentor_style_1': 'mzml_file_list',
+            'ptmshepherd_style_1': 'dataset',
         },
         'utag' : [
             'input_files',
         ],
         'uvalue_translation' : {
         },
-        'uvalue_type' : 'str',
+        'uvalue_type' : 'list',
         'uvalue_option' : {
-            'none_val'      : '',
-            'multiple_line' : False,
-            'input_extensions' : ['.mzML']
+            'none_val' : [],
+            'item_title' : 'file path',
+            'item_type' : 'str',
+            'custom_val_max' : 0,
+            'input_extensions' : ['.mzML', '.idx.gz']
         },
         'default_value' : None,
         'description' : \
-            'Path to the mzML input file'
+            'List of paths to the mzML input files'
     },
     'sugarpy_results_pkl' : {
         'edit_version' : 1.00,
@@ -12741,10 +12788,12 @@ Format:
         'edit_version' : 1.00,
         'available_in_unode' : [
             'sugarpy_plot_1_0_0',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'sugarpy_plot_style_1': 'decoy_glycan',
+            'glycopeptide_fragmentor_style_1': 'decoy_glycan',
         },
         'utag' : [
             'scoring',
@@ -12763,6 +12812,7 @@ Format:
         'edit_version' : 1.00,
         'available_in_unode': [
             'sugarpy_plot_1_0_0',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -12776,7 +12826,8 @@ Format:
         'description': """ Min number of oxonium ions that need to be matched in an MS/MS spectrum, to be accepted as containing oxonium ions (i.e. considered as glycopeptide) """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'sugarpy_plot_style_1': 'min_oxonium_ions'
+            'sugarpy_plot_style_1': 'min_oxonium_ions',
+            'glycopeptide_fragmentor_style_1': 'min_oxonium_ions'
         },
         'utag': [
             'scoring'
@@ -12789,6 +12840,7 @@ Format:
         'edit_version' : 1.00,
         'available_in_unode': [
             'sugarpy_plot_1_0_0',
+            'glycopeptide_fragmentor_1_0_0',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -12802,7 +12854,8 @@ Format:
         'description': """ Min number of Y-ions that need to be matched in an MS/MS spectrum, to be accepted as containing Y-ions (i.e. considered as glycopeptide) """,
         'triggers_rerun': True,
         'ukey_translation': {
-            'sugarpy_plot_style_1': 'min_Y_ions'
+            'sugarpy_plot_style_1': 'min_Y_ions',
+            'glycopeptide_fragmentor_style_1': 'min_Y_ions',
         },
         'utag': [
             'scoring'
@@ -13654,5 +13707,198 @@ Format:
             },
         },
         'uvalue_type' : "bool",
+    },
+    'mass_diff_bin_size' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ptmshepherd_0_3_5',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptmshepherd_style_1' : 'histo_bindivs',
+        },
+        'utag' : [
+            'accuracy',
+            'hardware_resources'
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'int',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 100000,
+            'min'       : 0,
+            'f-point'   : 1e03,
+            'updownval' : 1,
+            'unit'      : ''
+        },
+        'default_value' : 5000,
+        'description' : \
+            'Number of bins per dalton to be used for mass shift binning. That means 5000 bins correspond to a bin size of 0.0002 Da ',
+    },
+    'num_bins_for_smoothing' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ptmshepherd_0_3_5',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptmshepherd_style_1' : 'histo_smoothbins',
+        },
+        'utag' : [
+            'accuracy',
+            'hardware_resources'
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'int',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 100000,
+            'min'       : 0,
+            'f-point'   : 10,
+            'updownval' : 1,
+            'unit'      : ''
+        },
+        'default_value' : 3,
+        'description' : \
+            'Number of bins on each side of a bin that the weight of the bin is smoothed across. This smoothing traces a normal distribution.',
+    },
+    'ptmshepherd_peak_picking_params' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ptmshepherd_0_3_5',
+        ],
+        'default_value' : {
+            'peakpicking_promRatio': 0.3,
+            'peakpicking_mass_units': 0,
+            'peakpicking_width': 0.002,
+            'peakpicking_topN': 5000,
+        },
+        'description' :  '''Dictionary to specify options for peak picking for PTM-Shepherd.''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptmshepherd_style_1' : (
+                'peakpicking_promRatio',
+                'peakpicking_mass_units',
+                'peakpicking_width',
+                'peakpicking_topN'
+            ),
+        },
+        'utag' : [
+            'conversion',
+        ],
+        'uvalue_option' : {
+            'custom_type' : {
+                'str' : {'multiple_line': False},
+            },
+            'custom_val_max' : 100000,
+            'item_titles' : {
+                'converter option' : 'value',
+            },
+            'value_types' : {
+                'str' : 'str',
+            },
+            'multiple_line' : False,
+            'none_val' : {
+            },
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "dict",
+    },
+    'ptmshepherd_localization_background' : {
+        'edit_version' : 1.01,
+        'available_in_unode' : [
+            'ptmshepherd_0_3_5',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptmshepherd_style_1' : 'localization_background',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+            'ptmshepherd_style_1' : {
+                'peptides_same_bin' : 1,
+                'psms_same_bin' : 2,
+                'peptides_entire_dataset' : 3,
+                'psms_entire_dataset' : 3,
+            },
+        },
+        'uvalue_type' : 'select',
+        'uvalue_option' : {
+            'select_type' : 'radio_button',
+            'available_values'  : ['peptides_same_bin', 'psms_same_bin', 'peptides_entire_dataset', 'psms_entire_dataset'],
+            'custom_val_max' : 0,
+        },
+        'default_value' : 'peptides_entire_dataset',
+        'description' : \
+            'Background of peptides against which localization enrichment scores are calculated',
+    },
+    'mass_offset_list' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ptmshepherd_0_3_5',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptmshepherd_style_1': 'mass_offsets',
+        },
+        'utag' : [
+            'scoring',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val' : None,
+            'item_title' : 'mass offset',
+            'item_type' : 'str',
+            'multiple_line' : False,
+            'custom_val_max': 10000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : [],
+        'description' : \
+            'List of mass offsets at which modification peaks will be checked for (e.g. [0, 79.9663])',
+    },
+    'preferred_engines' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'sanitize_csv_1_0_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'sanitize_csv_style_1': 'preferred_engines',
+        },
+        'utag' : [
+            'conversion',
+            'output',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val' : None,
+            'item_title' : 'column_name',
+            'item_type' : 'str',
+            'multiple_line' : False,
+            'custom_val_max': 10000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : [
+        ],
+        'description' : \
+            'List of engines that should be preferred when sanitizing results. In combination with "accept_conflicting_psms"=True, conflicting PSMs for only the preferred engine are selected. If no PSMs for that engine exist, the second preferred engine is used, and so on',
     },
 }

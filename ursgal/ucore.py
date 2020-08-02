@@ -306,11 +306,12 @@ def reformat_peptide(regex_pattern, unimod_name, peptide):
         original_match_end = match.end()
         match_length = original_match_end - original_match_start
         if unimod_name is None:
-            unimod_name = match.group(0)
-
+            mod_name = match.group(0)
+        else:
+            mod_name = unimod_name
         mods.append((
             original_match_start,
-            unimod_name,
+            mod_name,
             'new',
             match_length
         ))

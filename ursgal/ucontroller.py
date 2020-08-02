@@ -470,15 +470,15 @@ class UController(ursgal.UNode):
                 else:
                     self.unodes[ engine ]['import_status'] = 'cant find exe'
                     self.unodes[ engine ]['available'] = False
-                    in_development = self.unodes[ engine ]['META_INFO']['in_development']
-                    if not in_development:
-                        if self.verbose:
-                            print(
-                                '[ WARNiNG! ] Engine {0} is not available in {1}'.format(
-                                    engine,
-                                    engine_folder_path
-                                )
-                            )
+                    # in_development = self.unodes[ engine ]['META_INFO']['in_development']
+                    # if not in_development:
+                    #     if self.verbose:
+                    #         print(
+                    #             '[ WARNiNG! ] Engine {0} is not available in {1}'.format(
+                    #                 engine,
+                    #                 engine_folder_path
+                    #             )
+                    #         )
         return
 
     def engine_sanity_check( self, short_engine):
@@ -1016,7 +1016,7 @@ class UController(ursgal.UNode):
         if isinstance( input_file, list ):
             self.input_file_dicts = self.generate_multi_file_dicts(input_file)
             # the helper file now acts as the input file:
-            input_file       = self.generate_multi_helper_file( input_file )
+            input_file = self.generate_multi_helper_file( input_file )
             self.dump_multi_json( input_file, self.input_file_dicts )
 
         self.set_ios(

@@ -88,9 +88,14 @@ class msfragger_20190628(ursgal.UNode):
         Returns:
                 dict: self.params
         '''
+        self.input_file = os.path.join(
+            self.params['input_dir_path'],
+            self.params['input_file']
+        )
+        
         self.param_file_name = os.path.join(
             self.params['output_dir_path'],
-            'msfragger.params'
+            '{0}_msfragger.params'.format(self.input_file)
         )
         self.created_tmp_files.append(self.param_file_name)
         # further prepare and translate params
@@ -262,12 +267,9 @@ class msfragger_20190628(ursgal.UNode):
 
                 else:
                     self.params_to_write[msfragger_param_name] = param_value
-        self.write_params_file()
 
-        self.input_file = os.path.join(
-            self.params['input_dir_path'],
-            self.params['input_file']
-        )
+        self.write_params_file()
+        
         if self.input_file.lower().endswith('.mzml') or \
                 self.input_file.lower().endswith('.mzml.gz') or \
                 self.input_file.lower().endswith('.mgf'):

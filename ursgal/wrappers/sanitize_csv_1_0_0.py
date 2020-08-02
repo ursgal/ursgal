@@ -154,8 +154,9 @@ class sanitize_csv_1_0_0( ursgal.UNode ):
             score_diff_threshold    = self.params['translations']['score_diff_threshold'],
             accept_conflicting_psms = self.params['translations']['accept_conflicting_psms'],
             num_compared_psms       = self.params['translations']['num_compared_psms'],
-            # remove_redundant_psms   = self.params['translations']['remove_redundant_psms'],
+            remove_redundant_psms   = self.params['translations']['remove_redundant_psms'],
             psm_defining_colnames   = self.params['translations']['psm_defining_colnames'],
+            preferred_engines       = self.params['translations']['preferred_engines'],
         )
 
         # self.print_execution_time(tag='execution')
