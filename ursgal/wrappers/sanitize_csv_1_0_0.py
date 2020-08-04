@@ -157,6 +157,7 @@ class sanitize_csv_1_0_0( ursgal.UNode ):
             remove_redundant_psms   = self.params['translations']['remove_redundant_psms'],
             psm_defining_colnames   = self.params['translations']['psm_defining_colnames'],
             preferred_engines       = self.params['translations']['preferred_engines'],
+            max_output_psms         = self.params['translations']['max_num_psms_per_spec'],
         )
 
         # self.print_execution_time(tag='execution')

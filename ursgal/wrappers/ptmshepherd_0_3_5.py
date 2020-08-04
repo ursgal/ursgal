@@ -4,12 +4,7 @@ import os
 import sys
 import shutil
 import csv
-import copy
 import re
-from ursgal import ukb
-import pprint
-import re
-import itertools
 import pickle
 
 class ptmshepherd_0_3_5(ursgal.UNode):
@@ -357,8 +352,8 @@ class ptmshepherd_0_3_5(ursgal.UNode):
             os.path.dirname(self.params['translations']['mzml_input_files'][0]),
             '_ursgal_lookup.pkl'
         )
-        with open(scan_rt_lookup_path, 'rb') as scan_rt_in:
-            scan_rt_lookup_dict = pickle.load(scan_rt_in)
+        # with open(scan_rt_lookup_path, 'rb') as scan_rt_in:
+        #     scan_rt_lookup_dict = pickle.load(scan_rt_in)
 
         with open(ptmshep_input, 'w', newline='') as new_csvfile, \
             open(self.params['translations']['csv_input_file'], 'r') as csv_file:
