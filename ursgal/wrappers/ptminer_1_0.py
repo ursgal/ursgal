@@ -57,6 +57,9 @@ class ptminer_1_0(ursgal.UNode):
             os.path.dirname(mgf_input_files[0]),
             'PTMiner_merged.mgf'
         )
+        # if os.path.exists(merged_mgf_file):
+        #     pass
+        # else:
         first_file = True
         print('merging mgf files. This may take a while ...')
         with open(merged_mgf_file, 'w') as merged_mgf:
@@ -166,9 +169,10 @@ class ptminer_1_0(ursgal.UNode):
                         mod_name_list.append(mod_name)
                     tmp_dict['Identified Mod Name'] = ';'.join(mod_name_list)
                     tmp_dict['Identified Mod Position'] = ';'.join(pos_list)
-                    tmp_dict['Protein Access'] = row['Protein ID']
-                    tmp_dict['Before AA'] = row['Sequence Pre AA'] 
-                    tmp_dict['After AA'] = row['Sequence Post AA']
+                    #PTMiner uses semicolon as separation between proteins
+                    tmp_dict['Protein Access'] = row['Protein ID'].replace(';', '').split('<|>')[0]
+                    tmp_dict['Before AA'] = row['Sequence Pre AA'].split('<|>')[0].split(';')[0]
+                    tmp_dict['After AA'] = row['Sequence Post AA'].split('<|>')[0].split(';')[0]
                     writer.writerow(tmp_dict)
 
         self.params['translations']['output_file_incl_path'] = os.path.join(
@@ -269,6 +273,7 @@ class ptminer_1_0(ursgal.UNode):
         print(self.params['command_list'])
         self.created_tmp_files.append(self.param_file_name)
         self.created_tmp_files.append(merged_mgf_file)
+        self.created_tmp_files.append(ptminer_input)
 
         return self.params
 
@@ -321,11 +326,11 @@ class ptminer_1_0(ursgal.UNode):
             filtered_result = os.path.join(self.params_to_write['output'],'filtered_result.txt')
             loc_result = os.path.join(self.params_to_write['output'],'loc_result.txt')
             prior_probability = os.path.join(self.params_to_write['output'],'prior_probability.txt')
-            # self.created_tmp_files.append(filtered_result)
-            # self.created_tmp_files.append(loc_result)
-            # self.created_tmp_files.append(prior_probability)
+            self.created_tmp_files.append(filtered_result)
+            self.created_tmp_files.append(loc_result)
+            self.created_tmp_files.append(prior_probability)
             anno_result = os.path.join(self.params_to_write['output'],'anno_result.txt')
-            # self.created_tmp_files.append(anno_result)
+            self.created_tmp_files.append(anno_result)
 
         #read from annotated results csv file
         new_psms = {}
@@ -438,8 +443,20 @@ class ptminer_1_0(ursgal.UNode):
                         else:
                             new_mass_shift_pos = []
                             for pos in mass_shift_pos:
+                                # try:
+                                if int(pos) == 0:
+                                    pos = '1'
+                                elif int(pos) == len(sequence)+1:
+                                    pos = '{0}'.format(len(sequence))
                                 if sequence[int(pos)-1] == mass_shift_aa:
                                     new_mass_shift_pos.append(pos)
+                                # except:
+                                #     print(pos)
+                                #     print(psm_identifier)
+                                #     print(sequence)
+                                #     print(int(pos)-1)
+                                #     print(sequence[int(pos)-1])
+                                #     exit()
                             new_mass_shift = '{0}({1}):{2}'.format(
                                 mass_shift,
                                 unimod_name,
@@ -451,6 +468,10 @@ class ptminer_1_0(ursgal.UNode):
                         new_mod_pos_list = [x for x in mod_pos_list]
                         new_modifications = []
                         for pos in mass_shift_pos:
+                            if int(pos) == 0:
+                                pos = '1'
+                            elif int(pos) == len(sequence)+1:
+                                pos = '{0}'.format(len(sequence))
                             if sequence[int(pos)-1] == mass_shift_aa:
                                 new_modifications.append(
                                     self.sort_mods(

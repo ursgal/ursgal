@@ -2192,6 +2192,7 @@ ursgal_params = {
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
             'tag_graph_1_8_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3277,7 +3278,7 @@ ursgal_params = {
             'pipi_style_1'      : 'ms2_tolerance',
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
-            'sugarpy_plot_style_1': 'REL_MZ_RANGE'
+            'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'ptminer_style_1'   : 'fragment_tol',
             'pglyco_db_style_1' : 'search_fragment_tolerance',
             'pnovo_style_1'     : 'frag_tol',
@@ -3412,7 +3413,7 @@ ursgal_params = {
             'ptminer_style_1' : {
                 'ppm' : 1,
                 'da'  : 0 
-            }
+            },
             'pnovo_style_1': {
                 'ppm' : 1,
                 'da'  : 0,
@@ -5924,7 +5925,6 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
-            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -5936,7 +5936,6 @@ ursgal_params = {
             'pepnovo_style_1'  : '-file',
             'xtandem_style_1'  : 'spectrum, path',
             'pglyco_db_style_1': 'file1',
-            'ptminer_style_1'  : 'mgf_input_file',
             'deepnovo_style_1' : ('denovo_input_file', 'hybrid_input_file', 'db_input_file'),
             'pnovo_style_1'    : 'spec_path1',
         },
@@ -8625,7 +8624,7 @@ ursgal_params = {
             'ptminer_style_1': {
                 'da'    : 0,
                 'ppm'   : 1
-            }
+            },
             'pnovo_style_1': {
                 'ppm' : 1,
                 'da'  : 0,
