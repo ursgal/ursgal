@@ -5,9 +5,10 @@ import csv
 import sys
 
 
-class deepnovo_v2(ursgal.UNode):
+class deepnovo_pointnovo(ursgal.UNode):
     """
-    DeepNovoV2 UNode
+    PointNovo UNode
+    pytorch re-implementation of DeepNovo
     For further information, see https://github.com/volpato30/PointNovo/
 
     Reference:
@@ -16,8 +17,8 @@ class deepnovo_v2(ursgal.UNode):
     """
     META_INFO = {
         'edit_version'       : 1.00,
-        'name'               : 'DeepNovoV2',
-        'version'            : 'v2',
+        'name'               : 'PointNovo',
+        'version'            : 'DeepNovo v2',
         'release_date'       : '2019-05-21',
         'engine_type' : {
             'de_novo_search_engine' : True,
@@ -45,7 +46,7 @@ class deepnovo_v2(ursgal.UNode):
     }
 
     def __init__(self, *args, **kwargs):
-        super(deepnovo_v2, self).__init__(*args, **kwargs)
+        super(deepnovo_pointnovo, self).__init__(*args, **kwargs)
         pass
 
     def preflight(self):

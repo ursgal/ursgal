@@ -2,21 +2,21 @@ Wrapper to check
 ================
 
 - [ ] flash_lfq
-- [ ] deep_novo_v2 \-
-- [ ] tag_graph    /-
-- [ ] PTMiner/PTMShepherd (merge and check)
+- [StS] deep_novo_v2 \- (working on)
+- [StS] tag_graph    /- (working on)
+- [StS] PTMiner (working on) / PTMShepherd (done)
 
 Resource to check
 ==================
 
-- [ ] unify csv (check for open mod unifying bugs)
+- [StS] unify csv (check for open mod unifying bugs) (done)
 - [ ] tag graph
 
 Resources to upload
 ====================
 
 - [ ] percolator (v3.4)
-- [ ] deepnovo (v2.0)
+- [x] deepnovo (v2.0) --> pytorch implementation, needs to be locally done, right?
 - [ ] ask msfragger people if we can upload msfragger to ursgal/box
 - [ ] flash_lfq ( check license first)
 - [ ] tag_graph ( ask tag_graph people to dont sue us)
@@ -26,5 +26,10 @@ Write example scripts (integration tests)
 
 - [ ] flash_lfq ( check )
 - [ ] tag_graph ( merge and check )
-- [ ] open_modification script for all open mode search engines
+- [ ] open_modification script for all open mod search engines
 - [ ] PTMiner/PTMShepherd
+
+Documentation
+=============
+
+- [ ] include changes in doc 

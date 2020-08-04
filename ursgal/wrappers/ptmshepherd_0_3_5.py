@@ -4,12 +4,7 @@ import os
 import sys
 import shutil
 import csv
-import copy
 import re
-from ursgal import ukb
-import pprint
-import re
-import itertools
 import pickle
 
 class ptmshepherd_0_3_5(ursgal.UNode):
@@ -21,7 +16,7 @@ class ptmshepherd_0_3_5(ursgal.UNode):
         'edit_version': 1.0,
         'name': 'PTM-Shepherd',
         'version': '1.0',
-        'release_date': '2020-07-22',
+        'release_date': '2020-07-30',
         'utranslation_style': 'ptmshepherd_style_1',
         'input_extensions': ['.csv'],
         'output_extensions': ['.csv'],
@@ -357,8 +352,8 @@ class ptmshepherd_0_3_5(ursgal.UNode):
             os.path.dirname(self.params['translations']['mzml_input_files'][0]),
             '_ursgal_lookup.pkl'
         )
-        with open(scan_rt_lookup_path, 'rb') as scan_rt_in:
-            scan_rt_lookup_dict = pickle.load(scan_rt_in)
+        # with open(scan_rt_lookup_path, 'rb') as scan_rt_in:
+        #     scan_rt_lookup_dict = pickle.load(scan_rt_in)
 
         with open(ptmshep_input, 'w', newline='') as new_csvfile, \
             open(self.params['translations']['csv_input_file'], 'r') as csv_file:
@@ -379,7 +374,7 @@ class ptmshepherd_0_3_5(ursgal.UNode):
                     if mass == '':
                         continue
                     mass_diffs_sum += float(mass.split(':')[0])
-                # if mass_diffs_sum > 3995:
+                # if mass_diffs_sum > 4000:
                 #     continue
 
                 if '<|>' in row['Protein ID']:
@@ -388,16 +383,16 @@ class ptmshepherd_0_3_5(ursgal.UNode):
                     is_unique = 'true'
 
                 rt = row.get('Retention Time (s)','')
-                if rt == '':
-                    spectrum_id = int(row['Spectrum ID'])
-                    raw_file_name = os.path.basename(
-                        row['Raw data location']
-                    )
-                    input_file_basename_for_rt_lookup = raw_file_name.replace('.mgf','')
-                    retention_time_in_minutes = \
-                        scan_rt_lookup_dict[input_file_basename_for_rt_lookup]['scan_2_rt']\
-                            [spectrum_id]
-                    row['Retention Time (s)'] = retention_time_in_minutes * 60
+                # if rt == '':
+                #     spectrum_id = int(row['Spectrum ID'])
+                #     raw_file_name = os.path.basename(
+                #         row['Raw data location']
+                #     )
+                #     input_file_basename_for_rt_lookup = raw_file_name.replace('.mgf','')
+                #     retention_time_in_minutes = \
+                #         scan_rt_lookup_dict[input_file_basename_for_rt_lookup]['scan_2_rt']\
+                #             [spectrum_id]
+                #     row['Retention Time (s)'] = retention_time_in_minutes * 60
                 assert row['Retention Time (s)'] != '', '''
                 [ERROR] Retention Time needs to be given for each row.
                 '''
