@@ -59,18 +59,20 @@ class ptminer_1_0(ursgal.UNode):
         )
         # if os.path.exists(merged_mgf_file):
         #     pass
-        # else:
-        first_file = True
-        print('merging mgf files. This may take a while ...')
-        with open(merged_mgf_file, 'w') as merged_mgf:
-            for mgf_file in mgf_input_files:
-                #avoid empty line at the beginning if this is the first mgf file
-                if not first_file:
-                    merged_mgf.write('\n')
-                first_file = False
-                with open(mgf_file) as mgf:
-                    for line in mgf:
-                        merged_mgf.write(line)
+        if len(mgf_input_files) == 1:
+            merged_mgf_file = mgf_input_files[0]
+        else:
+            first_file = True
+            print('merging mgf files. This may take a while ...')
+            with open(merged_mgf_file, 'w') as merged_mgf:
+                for mgf_file in mgf_input_files:
+                    #avoid empty line at the beginning if this is the first mgf file
+                    if not first_file:
+                        merged_mgf.write('\n')
+                    first_file = False
+                    with open(mgf_file) as mgf:
+                        for line in mgf:
+                            merged_mgf.write(line)
 
         ptminer_input = self.params['translations']['csv_input_file'].strip('.csv') + '.txt'
         selected_columns = []
@@ -92,7 +94,7 @@ class ptminer_1_0(ursgal.UNode):
                             'Before AA',
                             'After AA',
                         ]
-
+        # self.protein_lookup = {}
         if os.path.exists(ptminer_input):
             os.remove(ptminer_input)
         with open(ptminer_input, 'w', newline='') as new_csvfile:
@@ -170,7 +172,9 @@ class ptminer_1_0(ursgal.UNode):
                     tmp_dict['Identified Mod Name'] = ';'.join(mod_name_list)
                     tmp_dict['Identified Mod Position'] = ';'.join(pos_list)
                     #PTMiner uses semicolon as separation between proteins
-                    tmp_dict['Protein Access'] = row['Protein ID'].replace(';', '').split('<|>')[0]
+                    tmp_dict['Protein Access'] = row['Protein ID'].split('<|>')[0].split(' ')[0]
+                    # if tmp_dict['Protein Access'] not in self.protein_lookup.keys():
+                    #     self.protein_lookup[tmp_dict['Protein Access']] = row['Protein ID']
                     tmp_dict['Before AA'] = row['Sequence Pre AA'].split('<|>')[0].split(';')[0]
                     tmp_dict['After AA'] = row['Sequence Post AA'].split('<|>')[0].split(';')[0]
                     writer.writerow(tmp_dict)
@@ -271,9 +275,9 @@ class ptminer_1_0(ursgal.UNode):
             self.param_file_name,
         ]
         print(self.params['command_list'])
-        self.created_tmp_files.append(self.param_file_name)
-        self.created_tmp_files.append(merged_mgf_file)
-        self.created_tmp_files.append(ptminer_input)
+        # self.created_tmp_files.append(self.param_file_name)
+        # self.created_tmp_files.append(merged_mgf_file)
+        # self.created_tmp_files.append(ptminer_input)
 
         return self.params
 
@@ -307,6 +311,8 @@ class ptminer_1_0(ursgal.UNode):
         print('Writing result file:', merged_results_csv)
         print('While parsing PTMiner annotated results file')
         fieldnames.extend([
+            'Mass Difference Annotations',
+            'PTMiner:Mass Shift Localization',
             'PTMiner:Result # for PSM',
             'PTMiner:Posterior Probability',
             'PTMiner:SDP Score',
@@ -326,11 +332,11 @@ class ptminer_1_0(ursgal.UNode):
             filtered_result = os.path.join(self.params_to_write['output'],'filtered_result.txt')
             loc_result = os.path.join(self.params_to_write['output'],'loc_result.txt')
             prior_probability = os.path.join(self.params_to_write['output'],'prior_probability.txt')
-            self.created_tmp_files.append(filtered_result)
-            self.created_tmp_files.append(loc_result)
-            self.created_tmp_files.append(prior_probability)
+            # self.created_tmp_files.append(filtered_result)
+            # self.created_tmp_files.append(loc_result)
+            # self.created_tmp_files.append(prior_probability)
             anno_result = os.path.join(self.params_to_write['output'],'anno_result.txt')
-            self.created_tmp_files.append(anno_result)
+            # self.created_tmp_files.append(anno_result)
 
         #read from annotated results csv file
         new_psms = {}
@@ -344,7 +350,6 @@ class ptminer_1_0(ursgal.UNode):
                 #skip the second line, which is part of the headers
                 if row['Dataset Name'] == '# Mass, Mod':
                     continue
-               
                 if row['#'] != '*':
                     n = 0
                     spectrum_title = row['Spectrum Name']
@@ -373,7 +378,8 @@ class ptminer_1_0(ursgal.UNode):
                     annotation_type = row['Annotation Type']
                     
                     for line_dict in original_rows[psm_identifier]:
-                        line_dict['Mass Difference'] = '{0}:{1}'.format(mass_shift, '<|>'.join(mass_shift_pos))
+                        # line_dict['Mass Difference'] = '{0}:{1}'.format(mass_shift, '<|>'.join(mass_shift_pos))
+                        line_dict['PTMiner:Mass Shift Localization'] = ';'.join(mass_shift_pos)
                         line_dict['PTMiner:Posterior Probability'] = ptminer_posterior_probability
                         line_dict['PTMiner:SDP Score'] = ptminer_sdp_score
                         line_dict['PTMiner:Annotation Type'] = annotation_type
@@ -387,27 +393,36 @@ class ptminer_1_0(ursgal.UNode):
                     if str(row['New Sequence']).strip() != '' and row['New Sequence'] is not None:
                         for line_dict in original_rows[psm_identifier]:
                             new_row = copy.deepcopy(line_dict)
-                            new_row['Sequence'] = row['New Sequence'].strip()
-                            new_mod_pos = row['New Mod Position'].split()
+                            # new_row['Sequence'] = row['New Sequence'].strip()
+                            new_seq = row['New Sequence'].strip()
+                            new_mod_pos = row['New Mod Position'].strip()
                             new_mod_name = row['New Mod'].split(' (')[0]
-                            unimod_id = ursgal.GlobalUnimodMapper.name2id(
-                                new_mod_name.strip()
-                            )
-                            if unimod_id is None:
-                                new_row['Mass Difference'] = '{0}({1}):{2}'.format(
-                                        mass_shift,
-                                        new_mod_name,
-                                        '<|>'.join(new_mod_pos)
-                                    )
-                                new_mod_pos_list = mod_pos_list
+                            # unimod_id = ursgal.GlobalUnimodMapper.name2id(
+                            #     new_mod_name.strip()
+                            # )
+                            if new_mod_name == '':
+                                new_row['Mass Difference Annotations'] = new_seq
+                            # if unimod_id is None:
+                                # new_row['Mass Difference'] = '{0}({1}):{2}'.format(
+                                #         mass_shift,
+                                #         new_mod_name,
+                                #         '<|>'.join(new_mod_pos)
+                                #     )
+                                # new_mod_pos_list = mod_pos_list
                             else:
-                                new_row['Mass Difference'] = ''
-                                new_mod_pos_list = [x for x in mod_pos_list]
-                                new_mod_pos_list.append(
-                                    '{0}:{1}'.format(new_mod_name, '<|>'.join(new_mod_pos))
+                                new_row['Mass Difference Annotations'] = '{0}#{1}:{2}'.format(
+                                    new_seq,
+                                    new_mod_name,
+                                    new_mod_pos,
                                 )
-                            new_row['Modifications'] = self.sort_mods(new_mod_pos_list)
+                                # new_row['Mass Difference'] = ''
+                                # new_mod_pos_list = [x for x in mod_pos_list]
+                                # new_mod_pos_list.append(
+                                #     '{0}:{1}'.format(new_mod_name, '<|>'.join(new_mod_pos))
+                                # )
+                            # new_row['Modifications'] = self.sort_mods(new_mod_pos_list)
                             new_row['PTMiner:Result # for PSM'] = -1
+                            new_row['PTMiner:Mass Shift Localization'] = ''
                             writer.writerow(new_row)
                     
                 else:
@@ -432,24 +447,25 @@ class ptminer_1_0(ursgal.UNode):
                         )
                         unimod_name = annotated_mod
                     mass_shift_aa = row['Charge']
-                    if unimod_id is None:
-                        if mass_shift_aa == '':
-                            new_mass_shift = '{0}({1}):{2}'.format(
-                                mass_shift,
-                                unimod_name,
-                                '<|>'.join(mass_shift_pos)
-                            )
-                            new_modifications = [modifications]
-                        else:
-                            new_mass_shift_pos = []
-                            for pos in mass_shift_pos:
-                                # try:
-                                if int(pos) == 0:
-                                    pos = '1'
-                                elif int(pos) == len(sequence)+1:
-                                    pos = '{0}'.format(len(sequence))
-                                if sequence[int(pos)-1] == mass_shift_aa:
-                                    new_mass_shift_pos.append(pos)
+                    # if unimod_id is None:
+                    if mass_shift_aa == '':
+                        new_mass_shift_pos = mass_shift_pos
+                            # new_mass_shift = '{0}({1}):{2}'.format(
+                            #     mass_shift,
+                            #     unimod_name,
+                            #     '<|>'.join(mass_shift_pos)
+                            # )
+                            # new_modifications = [modifications]
+                    else:
+                        new_mass_shift_pos = []
+                        for pos in mass_shift_pos:
+                            # try:
+                            if int(pos) == 0:
+                                pos = '1'
+                            elif int(pos) == len(sequence)+1:
+                                pos = '{0}'.format(len(sequence))
+                            if sequence[int(pos)-1] == mass_shift_aa:
+                                new_mass_shift_pos.append(pos)
                                 # except:
                                 #     print(pos)
                                 #     print(psm_identifier)
@@ -457,41 +473,47 @@ class ptminer_1_0(ursgal.UNode):
                                 #     print(int(pos)-1)
                                 #     print(sequence[int(pos)-1])
                                 #     exit()
-                            new_mass_shift = '{0}({1}):{2}'.format(
-                                mass_shift,
-                                unimod_name,
-                                '<|>'.join(new_mass_shift_pos)
-                            )
-                            new_modifications = [modifications]
+                            # new_mass_shift = '{0}({1}):{2}'.format(
+                            #     mass_shift,
+                            #     unimod_name,
+                            #     '<|>'.join(new_mass_shift_pos)
+                            # )
+                            # new_modifications = [modifications]
+                    new_mass_shift_pos = ';'.join(new_mass_shift_pos)
+                    if unimod_id is None:
+                        new_mass_shift_anno = 'Unannotated mass-shift {0}'.format(annotated_mass)
                     else:
-                        new_mass_shift = ''
-                        new_mod_pos_list = [x for x in mod_pos_list]
-                        new_modifications = []
-                        for pos in mass_shift_pos:
-                            if int(pos) == 0:
-                                pos = '1'
-                            elif int(pos) == len(sequence)+1:
-                                pos = '{0}'.format(len(sequence))
-                            if sequence[int(pos)-1] == mass_shift_aa:
-                                new_modifications.append(
-                                    self.sort_mods(
-                                        new_mod_pos_list + [
-                                            '{0}:{1}'.format(unimod_name, pos)
-                                        ]    
-                                    )
-                                )
-                    for new_mod in new_modifications:
-                        for line_dict in original_rows[psm_identifier]:
-                            line_dict['PTMiner:Posterior Probability'] = ptminer_posterior_probability
-                            line_dict['PTMiner:SDP Score'] = ptminer_sdp_score
-                            line_dict['PTMiner:Annotation Type'] = annotation_type
-                            line_dict['PTMiner:Result # for PSM'] = n
-                            line_dict['PTMiner:Annotated Mod Pos within Pep or Prot'] = row['ObsMH']
-                            line_dict['PTMiner:Annotated Mod Classification'] = row['Mass Shift']
-                            line_dict['PTMiner:# Mass, Mod'] = row['Dataset Name']
-                            line_dict['Mass Difference'] = new_mass_shift
-                            line_dict['Modifications'] = new_mod
-                            writer.writerow(line_dict)
+                        new_mass_shift_anno = unimod_name
+                        # new_mass_shift = ''
+                        # new_mod_pos_list = [x for x in mod_pos_list]
+                        # new_modifications = []
+                        # for pos in mass_shift_pos:
+                        #     if int(pos) == 0:
+                        #         pos = '1'
+                        #     elif int(pos) == len(sequence)+1:
+                        #         pos = '{0}'.format(len(sequence))
+                        #     if sequence[int(pos)-1] == mass_shift_aa:
+                        #         new_modifications.append(
+                        #             self.sort_mods(
+                        #                 new_mod_pos_list + [
+                        #                     '{0}:{1}'.format(unimod_name, pos)
+                        #                 ]    
+                        #             )
+                        #         )
+                    # for new_mod in new_modifications:
+                    for line_dict in original_rows[psm_identifier]:
+                        line_dict['Mass Difference Annotations'] = new_mass_shift_anno
+                        line_dict['PTMiner:Mass Shift Localization'] = new_mass_shift_pos
+                        line_dict['PTMiner:Posterior Probability'] = ptminer_posterior_probability
+                        line_dict['PTMiner:SDP Score'] = ptminer_sdp_score
+                        line_dict['PTMiner:Annotation Type'] = annotation_type
+                        line_dict['PTMiner:Result # for PSM'] = n
+                        line_dict['PTMiner:Annotated Mod Pos within Pep or Prot'] = row['ObsMH']
+                        line_dict['PTMiner:Annotated Mod Classification'] = row['Mass Shift']
+                        line_dict['PTMiner:# Mass, Mod'] = row['Dataset Name']
+                        # line_dict['Mass Difference'] = new_mass_shift
+                        # line_dict['Modifications'] = new_mod
+                        writer.writerow(line_dict)
 
             for psm_identifier in set(original_rows.keys()) - found_psm_identifier:
                 for line_dict in original_rows[psm_identifier]:

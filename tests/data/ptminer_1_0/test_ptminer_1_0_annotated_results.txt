@@ -1,29 +1,15 @@
 #	Dataset Name	Spectrum Name	Sequence	Charge	ObsMH	Mass Shift	Main Score	High Score Better	Identified Mod Name	Identified Mod Position	Protein Access	Before AA	After AA	Posterior Probability	Position	AA	SDP Score	Annotation Type	New Sequence	New Mod	New Mod Position
-
 *	# Mass, Mod	Annotated Mass	Annotated Mod	Annotated Mod Site	Annotated Mod Term Spec	Annotated Mod Classification															
-
 1	C:\Users\pohlab-adm\Desktop\bioinformatics\datasets\second_trial\F20180928-KTG-35.mgf	F20180928-KTG-35.16648.16648.3	DNLTLWTSDMQGDGEEQNKEALQDVEDENQ	3	3452.48032	-1.0089	18.4765	0			sp|P62258|1433E_HUMAN 14-3-3 protein epsilon OS=Homo sapiens OX=9606 GN=YWHAE PE=1 SV=1	R	-	0.189	15;16;20	E;E;E	-1	Fully			
-
 *	1,1	0.997035	Label:15N(1) (E)	E	Anywhere	Isotopic label															
-
 2	C:\Users\pohlab-adm\Desktop\bioinformatics\datasets\second_trial\F20180928-KTG-35.mgf	F20180928-KTG-35.15217.15217.2	DNLTLWTSDQQDEEAGEGN	2	2121.88872	1.0086	20.6959	0			sp|Q04917|1433F_HUMAN 14-3-3 protein eta OS=Homo sapiens OX=9606 GN=YWHAH PE=1 SV=4	R	-	0.2757	14	E	-1	None			
-
 5	C:\Users\pohlab-adm\Desktop\bioinformatics\datasets\second_trial\F20180928-KTG-35.mgf	F20180928-KTG-35.3396.3396.3	YQDEDAPHDHSLPR	3	1679.742161	1.0034	21.9217	0			sp|Q15700|DLG2_HUMAN Disks large homolog 2 OS=Homo sapiens OX=9606 GN=DLG2 PE=1 SV=3	R	L	0.3643	4	E	-1	Fully	QDEDAPHDHSLPR	Diisopropylphosphate (Any N-term)	0
-
 *	1,1	0.997035	Label:15N(1) (E)	E	Anywhere	Isotopic label															
-
 6	C:\Users\pohlab-adm\Desktop\bioinformatics\datasets\second_trial\F20180928-KTG-35.mgf	F20180928-KTG-35.5592.5592.4	VHTECCHGDLLECADDR	4	2086.839499	1.0046	22.0453	0	Carbamidomethyl;Carbamidomethyl;Carbamidomethyl	5;6;13	sp|P02768|ALBU_HUMAN Serum albumin OS=Homo sapiens OX=9606 GN=ALB PE=1 SV=2_NumberOfIdenticalSequences_2	K	A	0.9207	12	E	-1	Fully	ECCHGDLLECADDR	ESP (Any N-term)	0
-
-654	C:\Users\pohlab-adm\Desktop\bioinformatics\datasets\merged_test\F20180928-KTG-33_merged.mgf	F20180928-KTG-33.16079.16079.3	AACEQLHQQQQQQQEETAAATLLLQGEEEGEED	3	3740.659763	0.9975	22.9612	0	Carbamidomethyl	3	sp|Q00577|PURA_HUMAN Transcriptional activator protein Pur-alpha OS=Homo sapiens OX=9606 GN=PURA PE=1 SV=2	R	-	0.075	14;15;16;17;18;19	Q;E;E;T;A;A	-1	Fully	CEQLHQQQQQQQEETAAATLLLQGEEEGEED	Nethylmaleimide+water (C)	1
-
+654	C:\Users\pohlab-adm\Desktop\bioinformatics\datasets\merged_test\F20180928-KTG-33_merged.mgf	F20180928-KTG-33.16079.16079.3	AACEQLHQQQQQQQEETAAATLLLQGEEEGEED	3	3740.659763	0.9975	22.9612	0	Carbamidomethyl	3	sp|Q00577|PURA_HUMAN Transcriptional activator protein Pur-alpha OS=Homo sapiens OX=9606 GN=PURA PE=1 SV=2	R	-	0.075	14;15;16;17;18;19	Q;E;E;T;A;A	-1	Fully	CEQLHQQQQQQQEETAAATLLLQGEEEGEED	Nethylmaleimide (C)	1
 *	1,0	0.984016																			
-
 *	1,1	0.984016	Deamidated (Q)	Q	Anywhere	Artefact															
-
 *	1,2	0.984016	Gln->Glu (Q)	Q	Anywhere	AA substitution															
-
 *	2,1	0.997035	Label:15N(1) (E)	E	Anywhere	Isotopic label															
-
 *	2,2	0.997035	Label:15N(1) (T)	T	Anywhere	Isotopic label															
-
 *	2,3	0.997035	Label:15N(1) (A)	A	Anywhere	Isotopic label															

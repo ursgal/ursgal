@@ -11,7 +11,7 @@ import os
 
 uc = ursgal.UController()
 
-ptminer_wrapper = uc.unodes['ptminer_1_0']['_wrapper_class']()
+ptminer_wrapper = uc.unodes['ptminer_1_0']['_wrapper_class']
 
 ursgal_input_csv = os.path.join(
     'tests',
@@ -42,10 +42,11 @@ expected_output_csv = os.path.join(
 )
 
 output_csv = ptminer_wrapper.postflight(
-    anno_result=ptminer_input_csv, 
+    None,
+    anno_result=ptminer_input_csv,
     csv_input=ursgal_input_csv,
     merged_results_csv=output_csv
-    )
+)
 
 ptminer_line_dicts = []
 for line_dict in csv.DictReader(open(output_csv, 'r')):
@@ -72,12 +73,13 @@ def postflight_ptminer(test_dict_items, expected_dict_items):
         expected_key = {1}
         '''.format(test_key, expected_key)
         assert test_value == expected_value, '''
+        column = {2}
         test_value = {0}
         expected_value = {1}
-        '''.format(test_value, expected_value)
+        '''.format(test_value, expected_value,test_key)
 
 if __name__ == '__main__':
     print(__doc__)
     for test_id, test_dict in enumerate(sorted(ptminer_line_dicts)):
-        expected_dict = sorted(expcted_line_dicts)[test_id]
+        expected_dict = sorted(expected_line_dicts)[test_id]
         postflight_ptminer(test_dict, expected_dict)

@@ -1418,7 +1418,7 @@ class UNode(object, metaclass=Meta_UNode):
         )
         map_mods_node_exceptions = [
             'unify_csv',
-            'ptmshepherd'
+            'ptmshepherd',
             'ptminer'
         ]
         if is_search_engine or is_quantification_engine:

@@ -2675,7 +2675,7 @@ Format:
             'xtandem2csv_1_0_0',
             'upeptide_mapper_1_0_0',
             'percolator_3_2_1',
-	    'ptminer_1_0',
+	        'ptminer_1_0',
             'percolator_3_4_0',
             'msfragger_20190628',
             'msfragger_2_3',
@@ -9512,7 +9512,6 @@ Format:
         'edit_version' : 1.00,
         'available_in_unode' : [
             'ucontroller',
-            'ptminer_1_0'
             'sanitize_csv_1_0_0',
             'combine_pep_1_0_0',
             'unify_csv_1_0_0',
