@@ -54,7 +54,7 @@ class percolator_3_4_0(percolator_3_2_1):
                 '64bit': {
                     'exe': 'percolator',
                     'url': '',
-                    'zip_md5': '',
+                    'zip_md5': '6c1848249c2fc1a88c39fbf4a14babac',
                     'additional_exe': [],
                 },
             },
