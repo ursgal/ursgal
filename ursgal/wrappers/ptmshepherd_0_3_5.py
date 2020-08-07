@@ -16,7 +16,7 @@ class ptmshepherd_0_3_5(ursgal.UNode):
         'edit_version': 1.0,
         'name': 'PTM-Shepherd',
         'version': '1.0',
-        'release_date': '2020-07-22',
+        'release_date': '2020-07-30',
         'utranslation_style': 'ptmshepherd_style_1',
         'input_extensions': ['.csv'],
         'output_extensions': ['.csv'],
@@ -374,7 +374,7 @@ class ptmshepherd_0_3_5(ursgal.UNode):
                     if mass == '':
                         continue
                     mass_diffs_sum += float(mass.split(':')[0])
-                # if mass_diffs_sum > 3995:
+                # if mass_diffs_sum > 4000:
                 #     continue
 
                 if '<|>' in row['Protein ID']:
