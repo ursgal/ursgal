@@ -30,12 +30,9 @@ class flash_lfq_1_1_1(ursgal.UNode):
         "distributable": False,
         "utranslation_style": "flash_lfq_style_1",
         "engine": {
-            # "linux": {"64bit": {"exe": "CMD.exe",}},
-            # "darwin": {"64bit": {"exe": "CMD.exe",}},
-            # "win32": {"64bit": {"exe": "CMD.exe",}},
             "platform_independent": {"arc_independent": {"exe": "CMD.exe",}},
         },
-        "citation": "ADD THE CITATION!!!",
+        "citation": "Millikin RJ, Solntsev SK, Shortreed MR, Smith LM. Ultrafast Peptide Label-Free Quantification with FlashLFQ. J Proteome Res. 2018;17(1):386-391. doi:10.1021/acs.jproteome.7b00608",
     }
 
     def rewrite_psm_input(self, unified_csv):
@@ -78,8 +75,8 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     continue
                 full_seq_name, full_mass = self.get_full_seq_and_mass(line)
                 if line["Retention Time (s)"] == '':
-                    print('No RT for')
-                    print(line['Spectrum Title'], line('Sequence'), line['Modifications'])
+                    # print('No RT for')
+                    # print(line['Spectrum Title'], line('Sequence'), line['Modifications'])
                     # # sanitize rt
                     unit = self.scan_lookup[file]['unit']
                     rt = self.scan_lookup[file]['scan_2_rt'][int(line['Spectrum ID'])]
