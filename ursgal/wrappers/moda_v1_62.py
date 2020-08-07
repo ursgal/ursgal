@@ -71,10 +71,10 @@ class moda_v1_62(ursgal.UNode):
             self.params['output_dir_path'],
             self.params['output_file']
         )
-        # self.created_tmp_files.append(
-        #     self.params['translations'][
-        #         'output_file_incl_path'].replace('.csv', '.tsv')
-        # )
+        self.created_tmp_files.append(
+            self.params['translations'][
+                'output_file_incl_path'].replace('.csv', '.tsv')
+        )
         translations['-o']['output_file_incl_path'] = \
             self.params['translations']['output_file_incl_path']
 
@@ -83,9 +83,8 @@ class moda_v1_62(ursgal.UNode):
             '-jar',
             self.exe,
             '-i', self.params['translations']['params_input_file'],
-            # '-o', self.params['translations'][
-            #     'output_file_incl_path'].replace('.csv', '.tsv'),
-            '-o', self.params['output_dir_path'],
+            '-o', self.params['translations'][
+                'output_file_incl_path'].replace('.csv', '.tsv'),
             '-@', str(self.params['translations']['cpus']),
         ]
 
@@ -220,13 +219,10 @@ class moda_v1_62(ursgal.UNode):
             'Rank',
             'Raw data location',
         ]
-        org_moda_out = os.path.join(
-            self.params['output_dir_path'],
-            self.params['input_file']
-        ).replace('.mgf', '.moda.txt')
-        self.created_tmp_files.append(org_moda_out)
-        # org_moda_out = self.params['translations'][
-        #     'output_file_incl_path'].replace('.csv', '.tsv')
+
+        org_moda_out = self.params['translations'][
+            'output_file_incl_path'].replace('.csv', '.tsv')
+
         out_line_dicts = []
         with open(org_moda_out, 'r') as org_out:
             out_reader = csv.reader(org_out, delimiter='\t')

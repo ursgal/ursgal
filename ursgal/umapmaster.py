@@ -113,6 +113,7 @@ class UParamMapper( dict ):
             ]
             for k in keys_to_delete:
                 del template[k]
+
             template.update(
                 {
                     'style'                    : style,

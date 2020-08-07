@@ -1631,6 +1631,7 @@ Format:
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1639,6 +1640,7 @@ Format:
             'qvality_style_1'           : '-r',
             'sanitize_csv_style_1'      : 'bigger_scores_better',
             'svm_style_1'               : 'bigger_scores_better',
+            'ptminer_style_1'           : 'bigger_scores_better',
         },
         'utag' : [
             'scoring',
@@ -2562,6 +2564,7 @@ Format:
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
             'tag_graph_1_8_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2580,6 +2583,7 @@ Format:
             'msfragger_style_3'           : 'database_name',
             'pipi_style_1'                : 'db',
             'pglyco_db_style_1'           : 'fasta',
+            'ptminer_style_1'             : 'protein_database',
             'deepnovo_style_1'            : 'db_fasta_file',
             'tag_graph_style_1'           : 'fmindex',
         },
@@ -2671,6 +2675,7 @@ Format:
             'xtandem2csv_1_0_0',
             'upeptide_mapper_1_0_0',
             'percolator_3_2_1',
+	        'ptminer_1_0',
             'percolator_3_4_0',
             'msfragger_20190628',
             'msfragger_2_3',
@@ -2684,6 +2689,7 @@ Format:
             'unify_csv_style_1'             : 'decoy_tag',
             'xtandem2csv_style_1'           : 'decoy_tag',
             'upeptide_mapper_style_1'       : 'decoy_tag',
+            'ptminer_style_1'               : 'decoy_tag',
             'msfragger_style_2'             : 'decoy_prefix',
             'msfragger_style_3'             : 'decoy_prefix',
             'percolator_style_1'            : '-P',
@@ -3622,6 +3628,7 @@ Format:
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
@@ -3645,6 +3652,7 @@ Format:
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'ptminer_style_1'   : 'fragment_tol',
             'pglyco_db_style_1' : 'search_fragment_tolerance',
             'pnovo_style_1'     : 'frag_tol',
             'tag_graph_style_1' : 'ppmstd',
@@ -3711,6 +3719,7 @@ Format:
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
@@ -3734,6 +3743,7 @@ Format:
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'ptminer_style_1'   : 'fragment_tol_type',
             'pglyco_db_style_1' : 'search_fragment_tolerance_type',
             'pnovo_style_1'     : 'frag_tol_type_ppm',
             'tag_graph_style_1' : 'frag_mass_tolerance_unit',
@@ -3775,6 +3785,10 @@ Format:
             },
             'pglyco_db_style_1' : {
                 'da'  : 'Da',
+            },
+            'ptminer_style_1' : {
+                'ppm' : 1,
+                'da'  : 0 
             },
             'pnovo_style_1': {
                 'ppm' : 1,
@@ -5844,11 +5858,13 @@ Format:
             'moda_v1_62',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'MaxModSize',
             'pipi_style_1' : 'max_ptm_mass',
+            'ptminer_style_1'   : 'precursor_matching_tolerance',
         },
         'utag' : [
             'modifications',
@@ -5915,6 +5931,32 @@ Format:
         'default_value' : 3,
         'description' : \
             'Maximal number of modifications per peptide',
+    },
+    'min_num_mods' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptminer_style_1'   : 'min_mod_number',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'int',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 100000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : 'mods'
+        },
+        'default_value' : 5,
+        'description'   : \
+            'Minimal number of modifications per peptide',
     },
     'max_num_mod_sites' : {
         'edit_version' : 1.00,
@@ -6242,6 +6284,39 @@ Format:
         'description' : \
             'Maximal peptide variants, new default defined by msfragger',
     },
+    'mgf_input_files_list' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptminer_style_1'  : 'mgf_input_files_list',
+        },
+        'utag' : [
+            'input_files',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val'         : [],
+            'multiple_line'    : False,
+            'item_title'       : 'mgf input file',
+            'item_type'        : 'str',
+            'input_extensions' : ['.mgf'],
+            'custom_val_max' : 1000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : None,
+        'description' : \
+            'List of paths to input .mgf files\n'\
+            '    \'\' : None',
+    },
     'mgf_input_file' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -6321,11 +6396,13 @@ Format:
             'moda_v1_62',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'MinModSize',
             'pipi_style_1' : 'min_ptm_mass',
+            'ptminer_style_1': 'precursor_matching_tolerance',
         },
         'utag' : [
             'modifications',
@@ -6715,6 +6792,7 @@ Format:
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
             'pnovo_3_1_3',
@@ -6749,6 +6827,7 @@ Format:
             ),
             'pyqms_style_1' : 'modifications',
             'pglyco_db_style_1' : 'modifications',
+            'ptminer_style_1' : 'modifications',
             'deepnovo_style_1' : 'modifications',
             'pnovo_style_1' : 'modifications',
             'tag_graph_style_1' : 'modifications',
@@ -8274,6 +8353,7 @@ Format:
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -8293,6 +8373,7 @@ Format:
             'sugarpy_plot_style_1'          : 'output_file',
             'venndiagram_style_1'           : 'output_file',
             'xtandem_style_1'               : 'output, path',
+            'ptminer_style_1'               : 'output_file_incl_path',
         },
         'utag' : [
             'output',
@@ -8716,6 +8797,7 @@ Format:
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
             'deepnovo_pointnovo',
@@ -8741,6 +8823,7 @@ Format:
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'ptminer_style_1'    : 'precursor_tol',
             'pglyco_db_style_1'  : 'search_precursor_tolerance',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol',
@@ -8816,6 +8899,7 @@ Format:
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
             'deepnovo_pointnovo',
@@ -8842,6 +8926,7 @@ Format:
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'ptminer_style_1'    : 'precursor_tol',
             'pglyco_db_style_1'  : 'search_precursor_tolerance',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol',
@@ -8916,6 +9001,7 @@ Format:
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
             'deepnovo_pointnovo',
@@ -8939,6 +9025,7 @@ Format:
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'ptminer_style_1'    : 'precursor_tol_type',
             'pglyco_db_style_1'  : 'search_precursor_tolerance_type',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol_type_ppm',
@@ -8986,6 +9073,10 @@ Format:
             },
             'pglyco_db_style_1': {
                 'da' : 'Da'
+            },
+            'ptminer_style_1': {
+                'da'    : 0,
+                'ppm'   : 1
             },
             'pnovo_style_1': {
                 'ppm' : 1,
@@ -11247,6 +11338,7 @@ Format:
             'svm_1_0_0',
             'ucontroller',
             'unify_csv_1_0_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -11257,6 +11349,7 @@ Format:
             'svm_style_1'               : 'validation_score_field',
             'ucontroller_style_1'       : 'validation_score_field',
             'unify_csv_style_1'         : 'validation_score_field',
+            'ptminer_style_1'           : 'validation_score_field',
         },
         'utag' : [
             'validation',
@@ -13069,6 +13162,130 @@ Format:
         'uvalue_translation' : {
         },
         'uvalue_type' : "dict",
+    },
+    'fdr_method' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'fdr_method',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                'global'    : 1,
+                'separate'  : 2,
+                'transferred'   : 3,
+            }
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+            'none_val' : '',
+            'multiple_line': False,
+        },
+        'uvalue_type' : 'str',
+        'triggers_rerun' : True,
+        'default_value' : 'transferred',
+        'description'   : 'specifying the fdr method to use'
+    },
+    'determine_localization' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'is_localized',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'localization',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
+        'default_value' : True,
+        'description'   : 'specifying whether positions for mass shifts should be determined or not',
+    },
+    'use_prior_probability' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'use_prior',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
+        'default_value' : True,
+        'description'   : 'specifying whether the prior probability should be used or not',
+    },
+    'determine_unimod_annotation' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'is_annotated',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'annotation',
+            'output',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
+        'default_value' : True,
+        'description'   : 'specifying whether mass shifts should be annotated or not',
+    },
+    'is_open_search' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'open_search',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
+        'default_value' : True,
+        'description'   : 'specifying whether this is an open search or not',
     },
     'deepnovo_direction' : {
         'edit_version' : 1.00,
