@@ -119,16 +119,10 @@ class comet_2019_01_rev_5(ursgal.UNode):
             '-D{database}'.format(**self.params),
             '-N{alternate_output_base_name}'.format(**self.params['translations']),
         ]
-        # for key, value in self.UNODE_UPARAMS.items():
-        #     print(f"{key:>30s}: {value}")
-        for key, value in self.params.items():
-            print(f"{key:>30s}: {value}")
-        # print(self.params['translations'])
 
-        print(self.UNODE_UPARAMS['header_translations']['uvalue_style_translation'])
-        print("Command line:")
+        print("\nCommand line:")
         print(' '.join(self.params['command_list']))
-
+        print("")
         return self.params
 
     def postflight(self):
@@ -137,22 +131,8 @@ class comet_2019_01_rev_5(ursgal.UNode):
         # print(rows_dict)
         output_file = self.params['translations']['tmp_output_file_incl_path'].replace('.pep.xml', '.csv')
         print(f"[{'Write':^10s}] Writing file: {output_file}")
-        # output_file = self.params['translations']['tmp_output_file_incl_path'].replace('.pep.xml', '.csv')
         raw_input_file = os.path.abspath(self.params['input_file'])
         #
-        # header_translations = {
-        #     'spectrumNativeID': 'Spectrum Title',
-        #     'start_scan': 'Spectrum ID',
-        #     'assumed_charge': 'Charge',
-        #     'retention_time_sec': 'Retention Time (s)',
-        #     'peptide': 'Sequence',
-        #     'expect': 'Comet:evalue',
-        #     'xcorr': 'Comet:xcorr',
-        #     'spscore': 'Comet:spscore',
-        #     'deltacn': 'Comet:deltacn',
-        #     'protein': 'proteinacc_start_stop_pre_post_;',
-        #     'hit_rank': 'Rank'
-        # }
         NEW_HEADERS = [
             'Raw data location',
             'Spectrum ID',
@@ -185,6 +165,7 @@ class comet_2019_01_rev_5(ursgal.UNode):
             csv_dict_write_object = csv.DictWriter(result_file, fieldnames=NEW_HEADERS)
             csv_dict_write_object.writeheader()
             total_docs = len(rows_dict)
+            padding = len(str(total_docs))
             self.print_info(f"Total number of lines: {total_docs}", caller='info')
             for cache_pos, row_info in rows_dict.items():
                 line_dict = {}
@@ -199,14 +180,8 @@ class comet_2019_01_rev_5(ursgal.UNode):
                 line_dict['Is decoy'] = decoy_tag in line_dict['proteinacc_start_stop_pre_post_;']
                 line_dict['Raw data location'] = raw_input_file
                 csv_dict_write_object.writerow(line_dict)
-                if cache_pos % 100 == 0:
-                    print(
-                        '[ INFO ] Processing line number:    {0}/{1}'.format(
-                            cache_pos,
-                            total_docs
-                        ),
-                        end='\r'
-                    )
+                if cache_pos % 500 == 0:
+                    print(f"[{'Info':^10s}] Processing line number: {cache_pos:>{padding}}/{total_docs:>{padding}}",  end='\r')
 
         return output_file
 
@@ -268,6 +243,10 @@ class comet_2019_01_rev_5(ursgal.UNode):
                                 proteins.append(search_hit_entry.attrib['protein'])
 
                         out[row] = {**info_spectrum_query, **search_hit_info, **{'protein': ';'.join(proteins)}}
+
+                        if row % 500 == 0:
+                            print(f"[{'Info':^10s}] Processing line number: {row}",  end='\r')
+
             if out:
                 print(f"[{'Ok':^10s}] All good with information extraction!")
         return out
