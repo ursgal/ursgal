@@ -1291,6 +1291,7 @@ ursgal_params = {
                 'moda_v1_62': True,
                 'pglyco_db_2_2_0': True,
                 'deepnovo_0_0_1': True,
+                'comet_2019_01_rev_5': False,
             },
             'percolator_style_1': {
                 'None': None,
@@ -1333,6 +1334,7 @@ ursgal_params = {
                 'moda_v1_62': True,
                 'pglyco_db_2_2_0': True,
                 'deepnovo_0_0_1': True,
+                'comet_2019_01_rev_5': False,
             },
             'qvality_style_1': {
                 'None': None,
@@ -1375,6 +1377,7 @@ ursgal_params = {
                 'moda_v1_62': True,
                 'pglyco_db_2_2_0': True,
                 'deepnovo_0_0_1': True,
+                'comet_2019_01_rev_5': False,
             },
             'sanitize_csv_style_1': {
                 'None': None,
@@ -1417,6 +1420,7 @@ ursgal_params = {
                 'moda_v1_62': True,
                 'pglyco_db_2_2_0': True,
                 'deepnovo_0_0_1': True,
+                'comet_2019_01_rev_5': False,
             },
             'svm_style_1': {
                 'None': None,
@@ -1459,6 +1463,7 @@ ursgal_params = {
                 'moda_v1_62': True,
                 'pglyco_db_2_2_0': True,
                 'deepnovo_0_0_1': True,
+                'comet_2019_01_rev_5': False,
             },
         },
         'uvalue_type': 'select',
@@ -10345,6 +10350,8 @@ ursgal_params = {
                 'moda_v1_62': 'ModA:probability',
                 'pglyco_db_2_2_0': 'pGlyco:TotalScore',
                 'deepnovo_0_0_1': 'DeepNovo:score',
+                'comet_2019_01_rev_5': 'Comet:evalue',
+                
             },
             'percolator_style_1': {
                 'msamanda_1_0_0_5242': 'Amanda:Score',
@@ -10389,6 +10396,7 @@ ursgal_params = {
                 'moda_v1_62': 'ModA:probability',
                 'pglyco_db_2_2_0': 'pGlyco:TotalScore',
                 'deepnovo_0_0_1': 'DeepNovo:score',
+                'comet_2019_01_rev_5': 'Comet:evalue',
             },
             'qvality_style_1': {
                 'msamanda_1_0_0_5242': 'Amanda:Score',
@@ -10433,6 +10441,7 @@ ursgal_params = {
                 'moda_v1_62': 'ModA:probability',
                 'pglyco_db_2_2_0': 'pGlyco:TotalScore',
                 'deepnovo_0_0_1': 'DeepNovo:score',
+                'comet_2019_01_rev_5': 'Comet:evalue',
             },
             'sanitize_csv_style_1': {
                 'msamanda_1_0_0_5242': 'Amanda:Score',
@@ -10477,6 +10486,7 @@ ursgal_params = {
                 'moda_v1_62': 'ModA:probability',
                 'pglyco_db_2_2_0': 'pGlyco:TotalScore',
                 'deepnovo_0_0_1': 'DeepNovo:score',
+                'comet_2019_01_rev_5': 'Comet:evalue',
             },
             'svm_style_1': {
                 'msamanda_1_0_0_5242': 'Amanda:Score',
@@ -10521,6 +10531,7 @@ ursgal_params = {
                 'moda_v1_62': 'ModA:probability',
                 'pglyco_db_2_2_0': 'pGlyco:TotalScore',
                 'deepnovo_0_0_1': 'DeepNovo:score',
+                'comet_2019_01_rev_5': 'Comet:evalue',
             },
             'ucontroller_style_1': {
                 'msamanda_1_0_0_5242': 'Amanda:Score',
@@ -10565,6 +10576,7 @@ ursgal_params = {
                 'moda_v1_62': 'ModA:probability',
                 'pglyco_db_2_2_0': 'pGlyco:TotalScore',
                 'deepnovo_0_0_1': 'DeepNovo:score',
+                'comet_2019_01_rev_5': 'Comet:evalue',
             },
             'unify_csv_style_1': {
                 'msamanda_1_0_0_5242': 'Amanda:Score',
@@ -10609,6 +10621,7 @@ ursgal_params = {
                 'moda_v1_62': 'ModA:probability',
                 'pglyco_db_2_2_0': 'pGlyco:TotalScore',
                 'deepnovo_0_0_1': 'DeepNovo:score',
+                'comet_2019_01_rev_5': 'Comet:evalue',
             },
         },
         'uvalue_type': 'str',
