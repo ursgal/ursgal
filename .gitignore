@@ -73,3 +73,7 @@ ursgal/resources/platform_independent/arc_independent/sugarpy_run_1_0_0
 ursgal/resources/win32/
 ursgal/resources/darwin/
 example_scripts/logs/
+.idea/
+.ipynb_checkpoints/
+*.ipynb*
+venv/
