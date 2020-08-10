@@ -48,13 +48,6 @@ class flash_lfq_1_1_1(ursgal.UNode):
         out_name = os.path.join(
             self.params["output_dir_path"], "flash_lfq_psm_input.tsv"
         )
-        # map mass to all variants with that mass
-        # self.mass_to_identity = {}
-        # remember mass of the full seq to rewrite QuantifiedPeaks.tsv
-        # self.full_sequence_to_mass = {}
-        # only to debug
-        # self.identity_to_mass = {}
-        # written_identities = set()
         self.spec_sequence_dict = {}
         with open(unified_csv) as fin:
             reader = csv.DictReader(fin)
@@ -62,11 +55,6 @@ class flash_lfq_1_1_1(ursgal.UNode):
             for i, line in enumerate(reader):
                 if i % 500 == 0:
                     print('Rewrite line {0}'.format(i), end='\r')
-                # Check Mass differences column
-                # Check Glycan mass column
-                # Check Glycan name column
-                # if i > 10000:
-                #     break
                 if 'X' in line['Sequence']:
                     # X in sequence not supported
                     continue
@@ -75,8 +63,6 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     continue
                 full_seq_name, full_mass = self.get_full_seq_and_mass(line)
                 if line["Retention Time (s)"] == '':
-                    # print('No RT for')
-                    # print(line['Spectrum Title'], line('Sequence'), line['Modifications'])
                     # # sanitize rt
                     unit = self.scan_lookup[file]['unit']
                     rt = self.scan_lookup[file]['scan_2_rt'][int(line['Spectrum ID'])]
@@ -106,12 +92,6 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 self.spec_sequence_dict[spec_seq_id]['names'].append(full_seq_name)
                 self.spec_sequence_dict[spec_seq_id]['line_dicts'].append(line_to_write)
 
-                # self.mass_to_identity.setdefault(mass, []).append(line_to_write)
-                # self.full_sequence_to_mass[full_seq] = mass
-                # self.identity_to_mass.setdefault(full_seq, []).append(mass)
-                # if full_seq not in written_identities:
-                # written_identities.add(full_seq)
-
         with open(out_name, "wt") as fout:
             writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
             writer.writeheader()
@@ -137,7 +117,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
         sequence = full_line_dict['Sequence']
         modifications = full_line_dict['Modifications']
         mass_diff = full_line_dict['Mass Difference']
-        glycan_mass = full_line_dict['Glycan Mass']
+        glycan_mass = full_line_dict.get('Glycan Mass', '')
 
         seq_mod = '{0}#{1}'.format(sequence, modifications)
         self.cc.use(seq_mod)
@@ -173,38 +153,6 @@ class flash_lfq_1_1_1(ursgal.UNode):
             fieldnames = reader.fieldnames
             writer = csv.DictWriter(fout, fieldnames=fieldnames)
             writer.writeheader()
-            # if 'peptide' in tsv_path.lower():
-            #     for line in reader:
-            #         # only header translation for quantifiedPeaks
-            #         # lines = []
-            #         mass = self.full_sequence_to_mass[line['Sequence']]
-            #         if mass in self.mass_to_identity:
-            #             unique_lines = []
-            #             copy_lines = [line]
-            #             added_identities = set()
-            #             for d in self.mass_to_identity[mass]:
-            #                 if d['Full Sequence'] not in added_identities:
-            #                     unique_lines.append(d)
-            #                     added_identities.add(d['Full Sequence'])
-            #             if len(unique_lines) > 1:
-            #                 # breakpoint()
-            #                 # print('Write multiple lines in QuantifiedPeptides.tsv')
-            #                 # print(line['Sequence'])
-            #                 # print(mass)
-            #                 for ul in unique_lines:
-            #                     copy_line = {k: v for k, v in line.items()}
-            #                     copy_line['Base Sequence'] = ul['Base Sequence']
-            #                     copy_line['Sequence'] = ul['Full Sequence']
-            #                     copy_lines.append(copy_line)
-            #                 # print(copy_lines)
-            #                 # print()
-
-            #         # Write all versions of one mass
-            #             for cl in copy_lines:
-            #                 writer.writerow(cl)
-            #         else:
-            #             sys.exit('THIS SHOULD NOT HAPPEN')
-            # else:
             for line in reader:
                 # only header translation for quantifiedPeaks
                 writer.writerow(line)
@@ -249,39 +197,11 @@ class flash_lfq_1_1_1(ursgal.UNode):
             writer = csv.DictWriter(fout, fieldnames=translated_headers)
             writer.writeheader()
             for line in reader:
-                # copy lines where there are multiple identities for a mass and write the same line for each identity
-                # if line['Peptide Monoisotopic Mass'] in self.mass_to_identity:
-                #     unique_lines = []
-                #     copy_lines = [line]
-                #     added_identities = set()
-                #     for d in self.mass_to_identity[line['Peptide Monoisotopic Mass']]:
-                #         if d['Full Sequence'] not in added_identities:
-                #             unique_lines.append(d)
-                #             added_identities.add(d['Full Sequence'])
-                #     if len(unique_lines) > 1:
-                #         # breakpoint()
-                #         for ul in unique_lines:
-                #             copy_line = {k: v for k, v in line.items()}
-                #             copy_line['Base Sequence'] = ul['Base Sequence']
-                #             copy_line['Full Sequence'] = ul['Full Sequence']
-                #             copy_lines.append(copy_line)
-
-                #     # Write all versions of one mass
-                #     for cl in copy_lines:
-                #         out_line_dict = {}
-                #         for column in flash_lfq_headers:
-                #             translated_col = header_translations[column]
-                #             out_line_dict[translated_col] = cl[column]
-                #         lines_to_write.append(out_line_dict)
-                # else:  # if not in self.mass_to_identity, simple write the only existing mass without copying
-                # all lines are in self.mass_to_identity, this clause is never used!
                 out_line_dict = {}
                 for column in flash_lfq_headers:
                     translated_col = header_translations[column]
                     out_line_dict[translated_col] = line[column]
                 lines_to_write.append(out_line_dict)
-
-            print(len(lines_to_write))
             for line in lines_to_write:
                 writer.writerow(line)
         return csv_path
@@ -346,6 +266,9 @@ class flash_lfq_1_1_1(ursgal.UNode):
         else:
             command_list = ["mono"]
 
+        # TODO?
+        # move all files in dir but not in input files to tmp folder
+        # and move back to original folder in postflight
         command_list.append(self.exe)
         command_list.extend(["--rep", input_file_dir])
         command_list.extend(["--idt", psm_input])
@@ -367,18 +290,10 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 else:
                     command_list.append(key)
                     command_list.append(val)
-        # print(command_list)
+        print(' '.join(command_list))
         self.params["command_list"] = command_list
 
     def postflight(self):
-        # i = 0
-        # for id, masses in self.identity_to_mass.items():
-        #     if len(set(masses)) > 1:
-        #         i += 1
-        #         print(id)
-        #         print(set(masses))
-        #         print()
-        # print(i)
         output_files_basenames = [
             "QuantifiedPeaks.tsv",
             "QuantifiedPeptides.tsv",
@@ -396,7 +311,6 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 suffix, ext = os.path.splitext(os.path.basename(csv_file))
                 out_name = os.path.splitext(self.params['output_file'])[0]
                 if file == 'QuantifiedPeaks.tsv':
-                    # without suffix
                     new_out = '{out_name}{ext}'.format(out_name=out_name, ext='.csv')
                 else:
                     new_out = "{out_name}_{suffix}{ext}".format(out_name=out_name, suffix=suffix, ext=ext)
