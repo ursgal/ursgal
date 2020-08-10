@@ -6539,7 +6539,7 @@ ursgal_params = {
             'msfragger_20171106',
             'msfragger_20190222',
             'msfragger_20190628',
-            'msfragger_2_3'
+            'msfragger_2_3',
             'msfragger_3_0',
         ],
         'default_value' : 50,
