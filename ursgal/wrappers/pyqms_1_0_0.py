@@ -104,7 +104,7 @@ class pyqms_1_0_0(ursgal.UNode):
                 self.params['translations']['min_element_abundance'],
             'MIN_REL_PEAK_INTENSITY_FOR_MATCHING':
                 self.params['translations'][
-                    'min_rel_peak_intensity_for_matching'],
+                    'pyqms_min_rel_isotope_peak_intensity'],
             'REQUIRED_PERCENTILE_PEAK_OVERLAP':
                 self.params['translations'][
                     'required_percentile_peak_overlap'],
@@ -122,7 +122,7 @@ class pyqms_1_0_0(ursgal.UNode):
             'REL_MZ_RANGE':
                 self.params['translations']['REL_MZ_RANGE'],
             'REL_I_RANGE':
-                self.params['translations']['rel_intensity_range'],
+                self.params['translations']['rel_intensity_error'],
             'INTERNAL_PRECISION':
                 self.params['translations']['internal_precision'],
             'MAX_MOLECULES_PER_MATCH_BIN':

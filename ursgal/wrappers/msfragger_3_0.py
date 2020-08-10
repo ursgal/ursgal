@@ -7,7 +7,7 @@ import csv
 import sys
 
 
-class msfragger_20190628(ursgal.UNode):
+class msfragger_3_0(ursgal.UNode):
     """
     MSFragger unode
 
@@ -34,9 +34,9 @@ class msfragger_20190628(ursgal.UNode):
     META_INFO = {
         'edit_version'                : 1.00,
         'name'                        : 'MSFragger',
-        'version'                     : '20190628',
-        'release_date'                : '2019-06-28',
-        'utranslation_style'          : 'msfragger_style_2',
+        'version'                     : '3.0',
+        'release_date'                : '2019-06-05',
+        'utranslation_style'          : 'msfragger_style_3',
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML'],
         'output_extensions'           : ['.csv'],
         'create_own_folder'           : True,
@@ -49,22 +49,21 @@ class msfragger_20190628(ursgal.UNode):
         'engine'                      : {
             'platform_independent'    : {
                 'arc_independent' : {
-                    'exe'            : 'MSFragger-20190628.jar',
+                    'exe'            : 'MSFragger-3.0.jar',
                     'url'            : 'http://www.nesvilab.org/software.html',
                     'zip_md5'        : '',
                     'additional_exe' : [],
                 },
             },
         },
-        'citation'                   :
-        'Kong, A. T., Leprevost, F. V, Avtonomov, '
-            'D. M., Mellacheruvu, D., and Nesvizhskii, A. I. (2017) MSFragger: '
-            'ultrafast and comprehensive peptide identification in mass '
-            'spectrometry-based proteomics. Nature Methods 14'
+        'citation'                   :\
+            'Polasky, D.A.; Yu, F.; Teo, G.C.; Nesvizhskii A.I. (2020).'\
+            'Fast and Comprehensive N- and O-glycoproteomics analysis with MSFragger-Glyco'\
+            'bioRxiv 2020.05.18.102665; doi: https://doi.org/10.1101/2020.05.18.102665 '
     }
 
     def __init__(self, *args, **kwargs):
-        super(msfragger_20190628, self).__init__(*args, **kwargs)
+        super(msfragger_3_0, self).__init__(*args, **kwargs)
         pass
 
     def write_params_file(self):
@@ -97,7 +96,7 @@ class msfragger_20190628(ursgal.UNode):
             self.params['output_dir_path'],
             '{0}_msfragger.params'.format(self.input_file)
         )
-        self.created_tmp_files.append(self.param_file_name)
+        # self.created_tmp_files.append(self.param_file_name)
         # further prepare and translate params
 
         # pprint.pprint(self.params['translations']['_grouped_by_translated_key'])
@@ -180,6 +179,10 @@ class msfragger_20190628(ursgal.UNode):
                     min_mz, max_mz = param_value
                     self.params_to_write[
                         msfragger_param_name] = '{0},{1}'.format(min_mz, max_mz)
+                elif msfragger_param_name == 'delta_mass_exclude_ranges':
+                    min_mz, max_mz = param_value
+                    self.params_to_write[
+                        msfragger_param_name] = '({0},{1})'.format(min_mz, max_mz)
                 elif msfragger_param_name == 'precursor_mass_lower':
                     self.params_to_write[
                         msfragger_param_name] = -1*param_value
@@ -268,7 +271,74 @@ class msfragger_20190628(ursgal.UNode):
                             self.params['translations']['_grouped_by_translated_key'][
                                 'precursor_max_charge']['precursor_max_charge']
                         )
-
+                elif msfragger_param_name == 'fragment_ion_series':
+                    ion_list = []
+                    for ion in param_value:
+                        if ion not in [
+                            'a',
+                            'b',
+                            'c',
+                            'y~',
+                            'x',
+                            'y',
+                            'z',
+                            'b~',
+                            'y-18',
+                            'b-18',
+                            'Y',
+                        ]:
+                            print('''
+                                [ WARNING ] MSFragger does not allow the following ion:
+                                {0}
+                                This ion will be skipped, i.e. not included in the search.
+                            '''.format(ion))
+                            continue
+                        ion_list.append(ion)
+                    self.params_to_write[msfragger_param_name] = ','.join(ion_list)
+                elif msfragger_param_name in [
+                    'mass_offsets',
+                    'Y_type_masses',
+                ]:
+                    cc = ursgal.ChemicalComposition()
+                    umama = ursgal.UnimodMapper()
+                    masses = []
+                    for m in param_value['masses']:
+                        masses.append(str(m))
+                    for m in param_value['glycans']:
+                        cc.clear()
+                        cc.add_glycan(m)
+                        masses.append(str(cc._mass()))
+                    for m in param_value['chemical_formulas']:
+                        cc.clear()
+                        cc.add_chemical_formula(m)
+                        masses.append(str(cc._mass()))
+                    for m in param_value['unimods']:
+                        unimod_mass = umama.name2mass(m)
+                        masses.append(str(unimod_mass))
+                    self.params_to_write[msfragger_param_name] = '/'.join(masses)
+                elif msfragger_param_name == 'diagnostic_fragments':
+                    cc = ursgal.ChemicalComposition()
+                    umama = ursgal.UnimodMapper()
+                    masses = []
+                    for m in param_value['masses']:
+                        masses.append(m)
+                    for m in param_value['glycans']:
+                        cc.clear()
+                        cc.add_glycan(m)
+                        masses.append(cc._mass())
+                    for m in param_value['chemical_formulas']:
+                        cc.clear()
+                        cc.add_chemical_formula(m)
+                        masses.append(cc._mass())
+                    for m in param_value['unimods']:
+                        unimod_mass = umama.name2mass(m)
+                        masses.append(unimod_mass)
+                    mzs = []
+                    for mass in masses:
+                        mzs.append(
+                            str(ursgal.ucore.calculate_mz(mass, 1))
+                        )
+                    self.params_to_write[msfragger_param_name] = '/'.join(mzs)
                 else:
                     self.params_to_write[msfragger_param_name] = param_value
 
@@ -292,8 +362,6 @@ class msfragger_20190628(ursgal.UNode):
             raise Exception(
                 'MSFragger input spectrum file must be in mzML or MGF format!')
 
-        # pprint.pprint(self.params['translations'])
-        # exit()
         self.params['command_list'] = [
             'java',
             '-Xmx{0}'.format(
@@ -368,7 +436,7 @@ class msfragger_20190628(ursgal.UNode):
             self.params['input_dir_path'],
             self.params['file_root'] + '.tsv'
         )
-        self.created_tmp_files.append(msfragger_output_tsv)
+        # self.created_tmp_files.append(msfragger_output_tsv)
 
         if os.path.exists(msfragger_output_tsv) is False:
             msfragger_output_tsv = os.path.join(
