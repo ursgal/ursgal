@@ -79,22 +79,22 @@ class BuildPyWithResources(setuptools.command.build_py.build_py):
         setuptools.command.build_py.build_py.run(self)
 
 
-# class InstallResourcesCommand(distutils.cmd.Command):
-#     """Download resources from webpage and install into ursgal/resources"""
-#     description = 'Download and install third party engines'
-#     user_options = []
+class InstallResourcesCommand(distutils.cmd.Command):
+    """Download resources from webpage and install into ursgal/resources"""
+    description = 'Download and install third party engines'
+    user_options = []
 
-#     def initialize_options(self):
-#         return
-#     def finalize_options(self):
-#         return
+    def initialize_options(self):
+        return
+    def finalize_options(self):
+        return
 
-#     def run(self):
-#         '''
-#         Download all resources from our webpage to ursgal/resources.
+    def run(self):
+        '''
+        Download all resources from our webpage to ursgal/resources.
 
-#         '''
-#         install_resources()
+        '''
+        install_resources()
 
 # We store our version number in a simple text file:
 version_path = os.path.join(
@@ -153,6 +153,6 @@ setup(
     cmdclass={
         'install_lib': my_install_lib,
         'build_py': BuildPyWithResources,
-        # 'install_resources': InstallResourcesCommand,
+        'install_resources': InstallResourcesCommand,
     }
 )
