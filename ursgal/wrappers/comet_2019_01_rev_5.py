@@ -1,7 +1,8 @@
 import os
 import ursgal
-import csv
-import xml.etree.ElementTree as etree
+# import sys
+# import csv
+# import xml.etree.ElementTree as etree
 
 
 class comet_2019_01_rev_5(ursgal.UNode):
@@ -111,130 +112,6 @@ class comet_2019_01_rev_5(ursgal.UNode):
         print(' '.join(self.params['command_list']))
         print("")
         return self.params
-
-    def postflight(self):
-        """Convert xml dict to csv"""
-        # EXTRACTING INFO FROM PEP.XML FILE
-        rows_dict = self.cometxml2dict()
-        output_file = self.params['translations']['tmp_output_file_incl_path'].replace('.pep.xml', '.csv')
-        print(f"[{'Write':^10s}] Writing file: {output_file}")
-        raw_input_file = os.path.abspath(self.params['input_file'])
-        #
-        NEW_HEADERS = [
-            'Raw data location',
-            'Spectrum ID',
-            'Spectrum Title',
-            'Retention Time (s)',
-            'Rank',
-            'Calc m/z',
-            'Exp m/z',
-            'Charge',
-            'Sequence',
-            'Modifications',
-            'Comet:evalue',
-            'Comet:xcorr',
-            'Comet:spscore',
-            'Comet:deltacn',
-            'proteinacc_start_stop_pre_post_;',
-            'Is decoy',
-            'Start',
-            'Stop',
-        ]
-
-        PROTON = 1.00727646677
-        decoy_tag = self.params.get('decoy_tag', 'decoy_')
-
-        with open(output_file, 'w') as result_file:
-            self.print_info(
-                'Writing Comet results, this can take a while...',
-                caller='Info'
-            )
-            csv_dict_write_object = csv.DictWriter(result_file, fieldnames=NEW_HEADERS)
-            csv_dict_write_object.writeheader()
-            total_docs = len(rows_dict)
-            padding = len(str(total_docs))
-            self.print_info(f"Total number of lines: {total_docs}", caller='info')
-            for cache_pos, row_info in rows_dict.items():
-                line_dict = {}
-                for header, new_header in self.UNODE_UPARAMS['header_translations']['uvalue_style_translation'].items():
-                    line_dict[new_header] = row_info.get(header, None)
-                line_dict['Modifications'] = row_info.get('Modifications', None)
-                line_dict['Exp m/z'] = (float(row_info['precursor_neutral_mass']) / float(
-                    row_info['assumed_charge'])) + PROTON
-                line_dict['Calc m/z'] = (float(row_info['calc_neutral_pep_mass']) / float(
-                    row_info['assumed_charge'])) + PROTON
-
-                line_dict['Is decoy'] = decoy_tag in line_dict['proteinacc_start_stop_pre_post_;']
-                line_dict['Raw data location'] = raw_input_file
-                csv_dict_write_object.writerow(line_dict)
-                if cache_pos % 500 == 0:
-                    print(f"[{'Info':^10s}] Processing line number: {cache_pos:>{padding}}/{total_docs:>{padding}}",
-                          end='\r')
-
-        return output_file
-
-    def cometxml2dict(self):
-        """Convert pep.xml to dict"""
-        xml_input_file = self.params['translations']['tmp_output_file_incl_path']
-        print(f"[{'Sub':^10s}] Extracting info from XML file; {xml_input_file}")
-        tree = etree.parse(xml_input_file)
-        row = 0
-        out = {}
-        for elem in tree.getroot():
-            for spectrum_query in elem:
-                if 'spectrum_query' not in spectrum_query.tag:
-                    continue
-
-                for search_result in spectrum_query:
-
-                    n_search_hits = len(search_result)
-                    if n_search_hits == 0:
-                        continue
-
-                    # General information about the Spectrum
-                    info_spectrum_query = spectrum_query.attrib
-                    for search_hit in search_result:
-                        row += 1
-
-                        search_hit_info = search_hit.attrib
-                        # Protein ID
-                        proteins = [search_hit_info['protein']]
-
-                        for search_hit_entry in search_hit:
-                            # Peptide Modifications
-                            tmp_mods = []
-                            # Entry name
-                            search_hit_tag = search_hit_entry.tag
-                            if 'modification_info' in search_hit_tag:
-                                # Extract all peptide modifications
-                                for modification_entry in search_hit_entry:
-                                    modification_entry_info = modification_entry.attrib
-                                    position = modification_entry_info['position']
-                                    mod_mass = modification_entry_info[
-                                        'variable'] if 'variable' in modification_entry_info else \
-                                        modification_entry_info['static']
-                                    # mod_name = mass2unimod_name[mod_mass]
-                                    # Formatting modification
-                                    new_mod = '{0}:{1}'.format(mod_mass, position)
-                                    # new_mod = '{0}:{1}'.format(mod_name, position)
-                                    tmp_mods.append(new_mod)
-                                # Concatenate into a string
-                                modifications_ursgal_format = ';'.join(tmp_mods)
-                                search_hit_info = {**search_hit_info, **{'Modifications': modifications_ursgal_format}}
-                            elif 'search_score' in search_hit_tag:
-                                score_info = search_hit_entry.attrib
-                                search_hit_info = {**search_hit_info, **{score_info['name']: score_info['value']}}
-                            elif 'alternative_protein' in search_hit_tag:
-                                proteins.append(search_hit_entry.attrib['protein'])
-
-                        out[row] = {**info_spectrum_query, **search_hit_info, **{'protein': ';'.join(proteins)}}
-
-                        if row % 500 == 0:
-                            print(f"[{'Info':^10s}] Processing line number: {row}", end='\r')
-
-            if out:
-                print(f"[{'Ok':^10s}] All good with information extraction!")
-        return out
 
     def create_comet_param_file(self):
         """Create the comet.param"""
