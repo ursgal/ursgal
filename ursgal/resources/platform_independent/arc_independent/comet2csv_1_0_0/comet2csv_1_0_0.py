@@ -3,7 +3,6 @@
 Converts Comet.pep.xml files into .csv
 """
 import sys
-# import os
 import csv
 import xml.etree.ElementTree as cElementTree
 
@@ -15,7 +14,6 @@ if sys.platform != 'win32':
 def main(input_file=None, decoy_tag=None, output_file=None):
     '''
         Converts Comet.pep.xml files into .csv
-
     '''
     print("Converting Comet XML into CSV: {0}".format(input_file))
     NEW_HEADERS = [
@@ -53,18 +51,6 @@ def main(input_file=None, decoy_tag=None, output_file=None):
         'hit_rank': 'Rank'
     }
 
-    # translated_headers = []
-    # translated_headers.extend(list(HEADER_TRANSLATIONS.values()))
-    #
-    # translated_headers += [
-    #     'Raw data location',
-    #     'Calc m/z',
-    #     'Exp m/z',
-    #     'Modifications',
-    #     'Is decoy',
-    #     'Start',
-    #     'Stop'
-    # ]
     PROTON = 1.00727646677
 
     with open(output_file, 'w') as result_file:
@@ -81,6 +67,9 @@ def main(input_file=None, decoy_tag=None, output_file=None):
             n_elements = len(elem.findall('{http://regis-web.systemsbiology.net/pepXML}spectrum_query'))
             print(f"[{'Info':^10s}] Total scans: {n_elements}")
             padding = len(str(n_elements))
+
+            spectra_info = elem.attrib
+            raw_data_location = raw_file = spectra_info['base_name'] + spectra_info['raw_data']
             for spectrum_query in elem:
 
                 if 'spectrum_query' not in spectrum_query.tag:
@@ -134,13 +123,13 @@ def main(input_file=None, decoy_tag=None, output_file=None):
                         line_to_write = {}
                         for comet_header, translated_header in HEADER_TRANSLATIONS.items():
                             line_to_write[translated_header] = search_hit_info.get(comet_header, None)
+                        line_to_write['Raw data location'] = raw_data_location
                         line_to_write['Modifications'] = search_hit_info.get('Modifications', None)
                         line_to_write['Exp m/z'] = (float(search_hit_info['precursor_neutral_mass']) / float(
                             search_hit_info['assumed_charge'])) + PROTON
                         line_to_write['Calc m/z'] = (float(search_hit_info['calc_neutral_pep_mass']) / float(
                             search_hit_info['assumed_charge'])) + PROTON
                         line_to_write['Is decoy'] = decoy_tag in line_to_write['proteinacc_start_stop_pre_post_;']
-                        # line_to_write['Raw data location'] = raw_input_file
                         csv_dict_write_object.writerow(line_to_write)
 
     return output_file
