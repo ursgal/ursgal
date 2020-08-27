@@ -13385,7 +13385,7 @@ Format:
             'updownval': 1,
             'unit': 'psms',
         },
-        'default_value': True,
+        'default_value': False,
         'description': ''' DeepNovo uses lstm ''',
         'triggers_rerun': True,
         'ukey_translation': {
