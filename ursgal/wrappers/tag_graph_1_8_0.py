@@ -471,9 +471,13 @@ class tag_graph_1_8_0(ursgal.UNode):
         taggrapg_output_tdv = os.path.join(
             self.tag_graph_tmp_dir,
             'EM_output',
-            '{0}_TopResults.tdv'.format(
+            # '{0}_TopResults.tdv'.format(
+            #     self.params['output_file'].replace('.csv', '')
+            # )
+            '{0}_TopResults.txt'.format(
                 self.params['output_file'].replace('.csv', '')
             )
+
         )
 
         csv_out_fobject = open(
@@ -643,7 +647,7 @@ initIterations = {initIterations}
 maxIterations = {maxIterations}
 
 # Filename Prefix to use for the output EM results files. Must not contain spaces.
-resultsPrefix = TG_result
+resultsPrefix = EM_Results
 ##### End EM Settings #####
 
 '''.format(
