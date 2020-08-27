@@ -321,6 +321,8 @@ class deepnovo_pointnovo(ursgal.UNode):
                             'fix_C_var_NMQ_knapsack.npy'
                         )
                         self.params_to_write['knapsack_file'] = knapsack_file
+                    else:
+                        self.params_to_write['knapsack_file'] = param_value
                 elif deepnovo_param == 'train_dir':
                     if param_value is None or param_value == 'default':
                         train_dir = os.path.join(
@@ -328,6 +330,8 @@ class deepnovo_pointnovo(ursgal.UNode):
                             'train'
                         )
                         self.params_to_write['train_dir'] = train_dir
+                    else:
+                        self.params_to_write['train_dir'] = param_value
                 elif deepnovo_param == 'modifications':
                     assert set(param_value) == set(
                         ['M,opt,any,Oxidation',
