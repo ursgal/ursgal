@@ -4,7 +4,7 @@ Wrapper to check
 - [MK] flash_lfq
 - [StS] deep_novo_v2 \- (working on)
 - [StS] tag_graph    /- (working on)
-- [StS] PTMiner (working on) / PTMShepherd (done)
+- [StS] PTMiner (in contact with PTMiner people to solve last bugs) / PTMShepherd (done)
 
 Resource to check
 ==================
@@ -25,9 +25,9 @@ Write example scripts (integration tests)
 ==========================================
 
 - [MK] flash_lfq ( check )
-- [ ] tag_graph ( merge and check )
-- [ ] open_modification script for all open mod search engines
-- [ ] PTMiner/PTMShepherd
+- [StS] tag_graph (merged, needs to be run to check if everything works fine)
+- [StS] open_modification script for all open mod search engines (working on)
+- [StS] PTMiner/PTMShepherd (working on)
 
 Documentation
 =============

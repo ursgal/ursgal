@@ -9,16 +9,13 @@ import shutil
 
 def main(database=None,ms_file=None):
     '''
-    Executes a search with OMSSA, XTandem and MS-GF+ on the BSA1.mzML
-    input_file
+    Example workflow for the open modification search engine TagGraph
+
+    The MS file is first searched with two de novo engines,
+    results of those searches are merged and used for the TagGraph search.
 
     usage:
-        ./simple_example_search.py
-
-    Note:
-        Myrimatch does not work with this file.
-        To use MSAmanda on unix platforms, please install mono 
-        (http://www.mono-project.com/download)
+        ./example_taggraph_workflow.py <mzML_file> <database.fasta>
 
     '''
     uc = ursgal.UController(
@@ -48,7 +45,7 @@ def main(database=None,ms_file=None):
     )
 
     denovo_list = [
-        'deepnovo_0_0_1',
+        'deepnovo_pointnovo',
         'novor_1_05',
     ]
 
@@ -77,17 +74,6 @@ def main(database=None,ms_file=None):
         input_files    = unified_file_list,
         engine         = 'venndiagram_1_1_0',
     )
-
-    # indexed_fasta = uc.execute_misc_engine(
-    #     input_file=database,
-    #     engine='index_fasta_tag_graph_1_7_1',
-    # )
-
-    # uc.params['database'] = os.path.join(
-    #     '..',
-    #     'example_data',
-    #     'human_uniprot_12092014_crap.fm'
-    # )
 
     uc.params['de_novo_results'] = merged_files
     taggraph_search_result = uc.search(

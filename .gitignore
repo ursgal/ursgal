@@ -46,6 +46,7 @@ tests/data/TMT_msgfplus_pmap_unified.csv
 tests/data/TMT_msgfplus_pmap_unified.csv_full_protein_names.txt
 tests/data/TMT_xtandem_vengeance_pmap_unified.csv
 tests/data/TMT_xtandem_vengeance_pmap_unified.csv_full_protein_names.txt
+tests/data/ptminer_1_0/test_ptminer_1_0_merged_results.csv
 tests/data/test_BSA1.u.json
 tests/data/test_BSA1.u.json.u.json
 tests/data/test_BSA1_venndiagram.svg
