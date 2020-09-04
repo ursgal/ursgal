@@ -122,9 +122,6 @@ setup(
             'resources/*/*/*/*/*',
         ]
     },
-    build_requires=[
-        'numpy',
-    ],
     install_requires=requirements,
     long_description='Universal Python module combining common bottom-up proteomics tools for large-scale analysis',
     author='Lukas P. M. Kremer, Purevdulam Oyunchimeg, Johannes Barth, Stefan Schulze and Christian Fufezan',
