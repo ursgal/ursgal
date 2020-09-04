@@ -63,7 +63,7 @@ install:
   # Check that we have the expected version and architecture for Python
   - "python --version"
   - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
-  - "c:\python37\python.exe -m pip install --upgrade pip"
+  - "python -m pip install --upgrade pip"
 
 build: false  # Not a C# project, build stuff at the test step instead.
 
