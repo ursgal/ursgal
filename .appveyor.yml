@@ -46,6 +46,7 @@ init:
   - ps: ls C:\Python*
 
 install:
+  - pip install --upgrade pip
   # - python -u ci\appveyor-bootstrap.py
   # Download setup scripts and unzip
   - ps: "wget https://github.com/cloudify-cosmo/appveyor-utils/archive/master.zip -OutFile ./master.zip"
