@@ -1027,7 +1027,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             if line_dict.get('Glycan', '') != '':
                 sorted_glycans = []
                 for glycan in line_dict['Glycan'].split(';'):
-                    sort_glycan.append(sort_glycan(glycan))
+                    sorted_glycans.append(sort_glycan(glycan))
                 line_dict['Glycan'] = ';'.join(sorted_glycans)
 
             # protein block, only for database search engine

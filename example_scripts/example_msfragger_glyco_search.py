@@ -31,6 +31,7 @@ def main(database=None,ms_file=None):
                 ['Is decoy', 'equals', 'false'],
                 ['PEP','lte', 0.01],
             ],
+            'use_pyqms_for_mz_calculation' : False,
             'use_spectrum_charge' : False,
             'enzyme': 'trypsin',
             'percolator_post_processing': 'mix-max',

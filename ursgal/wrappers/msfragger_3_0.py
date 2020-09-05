@@ -96,7 +96,7 @@ class msfragger_3_0(ursgal.UNode):
             self.params['output_dir_path'],
             '{0}_msfragger.params'.format(self.input_file)
         )
-        # self.created_tmp_files.append(self.param_file_name)
+        self.created_tmp_files.append(self.param_file_name)
         # further prepare and translate params
 
         # pprint.pprint(self.params['translations']['_grouped_by_translated_key'])
@@ -146,6 +146,8 @@ class msfragger_3_0(ursgal.UNode):
                     )
                     self.params_to_write[mod_key] = N15_Diff
 
+        self.mass_shift_lookup = {}
+        self.mass_glycan_lookup = {}
         for msfragger_param_name in self.params['translations']['_grouped_by_translated_key'].keys():
             for ursgal_param_name, param_value in self.params['translations']['_grouped_by_translated_key'][msfragger_param_name].items():
                 if msfragger_param_name in write_exclusion_list:
@@ -307,14 +309,31 @@ class msfragger_3_0(ursgal.UNode):
                     for m in param_value['glycans']:
                         cc.clear()
                         cc.add_glycan(m)
-                        masses.append(str(cc._mass()))
+                        mass = cc._mass()
+                        masses.append(str(mass))
+                        # for tm in self.transform_mass_add_error(mass):
+                        tm = round(mass*1e5)
+                        if tm not in self.mass_glycan_lookup.keys():
+                            self.mass_glycan_lookup[tm] = set()
+                        self.mass_glycan_lookup[tm].add(m)
                     for m in param_value['chemical_formulas']:
                         cc.clear()
                         cc.add_chemical_formula(m)
-                        masses.append(str(cc._mass()))
+                        mass = cc._mass()
+                        masses.append(str(mass))
+                        # for tm in self.transform_mass_add_error(mass):
+                        tm = round(mass*1e5)
+                        if tm not in self.mass_shift_lookup.keys():
+                            self.mass_shift_lookup[tm] = set()
+                        self.mass_shift_lookup[tm].add(m)
                     for m in param_value['unimods']:
                         unimod_mass = umama.name2mass(m)
                         masses.append(str(unimod_mass))
+                        # for tm in self.transform_mass_add_error(unimod_mass):
+                        tm = round(mass*1e5)
+                        if tm not in self.mass_shift_lookup.keys():
+                            self.mass_shift_lookup[tm] = set()
+                        self.mass_shift_lookup[tm].add(m)
                     self.params_to_write[msfragger_param_name] = '/'.join(masses)
                 elif msfragger_param_name == 'diagnostic_fragments':
                     cc = ursgal.ChemicalComposition()
@@ -380,6 +399,27 @@ class msfragger_3_0(ursgal.UNode):
         )
         return self.params
 
+    def transform_mass_add_error(self, mass):
+        if self.params['translations']['precursor_mass_tolerance_unit'] != 'ppm':
+            lower_mass = mass - self.params['translations'][
+                'precursor_mass_tolerance_minus'] * mass / 1e6
+            upper_mass = mass + self.params['translations'][
+                'precursor_mass_tolerance_plus'] * mass / 1e6
+        elif self.params['translations']['precursor_mass_tolerance_unit'] != 'Da':
+            lower_mass = mass - self.params['translations'][
+                'precursor_mass_tolerance_minus']
+            upper_mass = mass + self.params['translations'][
+                'precursor_mass_tolerance_plus']
+        else:
+            print('[ERROR] mass tolerance unit {0} not supported'.format(
+                self.params['translations']['precursor_mass_tolerance_unit']
+            ))
+            sys.exit(1)
+        transformed_mass_range = []
+        for m in range(round(lower_mass*1e5), round(((upper_mass*1e5)+1))):
+            transformed_mass_range.append(m)
+        return transformed_mass_range
+
     def postflight(self):
         '''
         Reads MSFragger tsv output and write final csv output file.
@@ -429,8 +469,12 @@ class msfragger_3_0(ursgal.UNode):
             'Raw data location',
             'Exp m/z',
             'Calc m/z',
-
         ]
+        if self.params['translations']['msfragger_labile_mode'] in ['labile', 'nglycan']:
+            translated_headers += [
+                'Mass Difference Annotations',
+                'Glycan'
+            ]
 
         msfragger_output_tsv = os.path.join(
             self.params['input_dir_path'],
@@ -485,6 +529,28 @@ class msfragger_3_0(ursgal.UNode):
                     float(line_dict['MSFragger:Neutral mass of peptide']),
                     float(line_dict['Charge'])
                 )
+                if self.params['translations']['msfragger_labile_mode'] in['labile', 'nglycan']:
+                    annotated = False
+                    mass_diff = float(line_dict['Mass Difference'])
+                    matching_glycans = []
+                    matching_annotations = []
+                    for t_mass_diff in self.transform_mass_add_error(mass_diff):
+                    # t_mass_diff = round(float(line_dict['Mass Difference']) * 1e5)
+                        if t_mass_diff in self.mass_glycan_lookup.keys():
+                            matching_glycans.extend(sorted(self.mass_glycan_lookup[t_mass_diff]))
+                            annotated = True
+                        elif t_mass_diff in self.mass_shift_lookup.keys():
+                            matching_annotations.extend(sorted(self.mass_shift_lookup[t_mass_diff]))
+                            annotated = True
+                    if annotated is False:
+                        mass_diff = mass_diff - ursgal.ukb.PROTON
+                        for t_mass_diff in self.transform_mass_add_error(mass_diff):
+                            if t_mass_diff in self.mass_glycan_lookup.keys():
+                                matching_glycans.extend(sorted(self.mass_glycan_lookup[t_mass_diff]))
+                            elif t_mass_diff in self.mass_shift_lookup.keys():
+                                matching_annotations.extend(sorted(self.mass_shift_lookup[t_mass_diff]))
+                    line_dict['Glycan'] = ';'.join(matching_glycans)
+                    line_dict['Mass Difference Annotations'] = ';'.join(matching_annotations)
                 csv_writer.writerow(line_dict)
 
         csv_out_fobject.close()
