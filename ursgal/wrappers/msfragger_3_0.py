@@ -480,7 +480,7 @@ class msfragger_3_0(ursgal.UNode):
             self.params['input_dir_path'],
             self.params['file_root'] + '.tsv'
         )
-        # self.created_tmp_files.append(msfragger_output_tsv)
+        self.created_tmp_files.append(msfragger_output_tsv)
 
         if os.path.exists(msfragger_output_tsv) is False:
             msfragger_output_tsv = os.path.join(
