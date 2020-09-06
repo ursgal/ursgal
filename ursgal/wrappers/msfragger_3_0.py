@@ -531,6 +531,7 @@ class msfragger_3_0(ursgal.UNode):
                 )
                 if self.params['translations']['msfragger_labile_mode'] in['labile', 'nglycan']:
                     annotated = False
+                    n = 0
                     mass_diff = float(line_dict['Mass Difference'])
                     matching_glycans = []
                     matching_annotations = []
@@ -542,13 +543,18 @@ class msfragger_3_0(ursgal.UNode):
                         elif t_mass_diff in self.mass_shift_lookup.keys():
                             matching_annotations.extend(sorted(self.mass_shift_lookup[t_mass_diff]))
                             annotated = True
-                    if annotated is False:
+                    while annotated is False:
+                        n += 1
                         mass_diff = mass_diff - ursgal.ukb.PROTON
+                        if n == 4:
+                            break
                         for t_mass_diff in self.transform_mass_add_error(mass_diff):
                             if t_mass_diff in self.mass_glycan_lookup.keys():
                                 matching_glycans.extend(sorted(self.mass_glycan_lookup[t_mass_diff]))
+                                annotated = True
                             elif t_mass_diff in self.mass_shift_lookup.keys():
                                 matching_annotations.extend(sorted(self.mass_shift_lookup[t_mass_diff]))
+                                annotated = True
                     line_dict['Glycan'] = ';'.join(matching_glycans)
                     line_dict['Mass Difference Annotations'] = ';'.join(matching_annotations)
                 csv_writer.writerow(line_dict)
