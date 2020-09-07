@@ -4476,7 +4476,7 @@ Format:
                 'Theo M+H': 'Calc mass',
                 'PPM': 'Accuracy (ppm)',
                 'EM Probability': 'TagGraph:EM Probability',
-                '1-lg10 EM': 'TagGraph:: 1-log10 EM',
+                '1-lg10 EM': 'TagGraph: 1-log10 EM',
                 'Spectrum Score': 'TagGraph:Spectrum Score',
                 'Alignment Score': 'TagGraph:Alignment Score',
                 'Composite Score': 'TagGraph:Composite Score',
