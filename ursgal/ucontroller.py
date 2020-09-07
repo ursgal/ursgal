@@ -283,6 +283,8 @@ class UController(ursgal.UNode):
                 )
                 if engine_name is None:
                     engine_name = self.UNODE_UPARAMS['msgfplus_mzid_converter_version']['uvalue_style_translation'][last_engine]
+            elif 'comet' in last_engine:
+                engine_name = self.params['pepxml_converter_version']
             else:
                 engine_name = self.params['mzidentml_converter_version']
 

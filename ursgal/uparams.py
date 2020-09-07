@@ -760,7 +760,7 @@ ursgal_params = {
             'sugarpy_run_style_1' : 'ms_level',
             'sugarpy_plot_style_1' : 'ms_level',
             'pipi_style_1' : 'ms_level',
-            'comet_style_2': 'ms_level',
+            'comet_style_1': 'ms_level',
         },
         'utag': [
             'spectrum'
@@ -1926,7 +1926,7 @@ ursgal_params = {
             'pipi_style_1'        : 'thread_num',
             'moda_style_1'        : '-@',
             'pglyco_db_style_1'      : 'process',
-            'comet_style_2': 'cpus',
+            'comet_style_1': 'cpus',
         },
         'utag' : [
             'hardware_resources',
@@ -1962,7 +1962,7 @@ ursgal_params = {
             'msfragger_style_1' : {
                 -1 : 'max - 1',
             },
-            'comet_style_2'     : {
+            'comet_style_1'     : {
                 -1 : 'max - 1',
             },
         },
@@ -2104,7 +2104,7 @@ ursgal_params = {
             'pipi_style_1'                : 'db',
             'pglyco_db_style_1'           : 'fasta',
             'deepnovo_style_1'            : 'db_fasta_file',
-            'comet_style_2'               : 'database',
+            'comet_style_1'               : 'database',
 
         },
         'utag' : [
@@ -2196,7 +2196,8 @@ ursgal_params = {
             'upeptide_mapper_1_0_0',
             'percolator_3_2_1',
             'percolator_3_4_0',
-            'comet2csv_1_0_0',
+            'pepxml2csv_1_0_0',
+            'comet_2019_01_rev_5',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2207,7 +2208,8 @@ ursgal_params = {
             'unify_csv_style_1'             : 'decoy_tag',
             'xtandem2csv_style_1'           : 'decoy_tag',
             'upeptide_mapper_style_1'       : 'decoy_tag',
-            'comet2csv_style_1'             : 'decoy_tag',
+            'pepxml2csv_style_1'            : 'decoy_tag',
+            'comet_style_1'                 : 'decoy_tag',
         },
         'utag' : [
             'database',
@@ -2504,7 +2506,7 @@ ursgal_params = {
             'pipi_style_1'                  : 'enzyme',
             'pglyco_db_style_1'             : 'enzyme',
             'deepnovo_style_1'              : 'cleavage_rule',
-            'comet_style_2'                 : 'enzyme',
+            'comet_style_1'                 : 'enzyme',
         },
         'utag' : [
             'database',
@@ -2781,7 +2783,7 @@ ursgal_params = {
                 'lysc': 'lysc',
                 'trypsin': 'trypsin',
             },
-            'comet_style_2'     : {
+            'comet_style_1'     : {
                 # 'alpha_lp'              : '8',
                 'argc': '5',
                 'aspn': '6',
@@ -3202,7 +3204,7 @@ ursgal_params = {
         'ukey_translation' : {
             'omssa_style_1' : '-tom',
             'xtandem_style_1' : 'spectrum, fragment mass type',
-            'comet_style_2'   : 'frag_mass_type',
+            'comet_style_1'   : 'frag_mass_type',
         },
         'utag' : [
             'fragment',
@@ -3213,7 +3215,7 @@ ursgal_params = {
                 'average'      : '1',
                 'monoisotopic' : '0',
             },
-            'comet_style_2': {
+            'comet_style_1': {
                 'average'      : '0',
                 'monoisotopic' : '1'
             }
@@ -3241,7 +3243,7 @@ ursgal_params = {
         'ukey_translation' : {
             'omssa_style_1' : '-zoh',
             'msfragger_style_1': 'max_fragment_charge',
-            'comet_style_2': 'max_fragment_charge',
+            'comet_style_1': 'max_fragment_charge',
         },
         'utag' : [
             'fragment',
@@ -3587,7 +3589,7 @@ ursgal_params = {
             'pglyco_db_style_1'        : 'header_translations',
             'pglyco_fdr_style_1'       : 'header_translations',
             'deepnovo_style_1'         : 'header_translations',
-            'comet_style_2'            : 'header_translations',
+            'comet_style_1'            : 'header_translations',
         },
         'utag' : [
             'conversion',
@@ -5036,7 +5038,7 @@ ursgal_params = {
             'msgfplus_style_1'        : '-maxMissedCleavages',
             'pglyco_db_style_1'       : 'max_miss_cleave',
             'deepnovo_style_1'        : 'num_missed_cleavage',
-            'comet_style_2'           : 'max_missed_cleavages',
+            'comet_style_1'           : 'max_missed_cleavages',
         },
         'utag' : [
             'protein',
@@ -5066,7 +5068,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'protein, ptm complexity',
-            'comet_style_2': 'max_mod_alternatives',
+            'comet_style_1': 'max_mod_alternatives',
         },
         'utag' : [
             'modifications',
@@ -5299,7 +5301,7 @@ ursgal_params = {
         'ukey_translation' : {
             'msfragger_style_1' : 'max_variable_mods_per_mod',
             'msamanda_style_1'  : 'MaxNoModifs',
-            'comet_style_2'     : 'max_num_per_mod',
+            'comet_style_1'     : 'max_num_per_mod',
         },
         'utag' : [
             'modifications',
@@ -5421,7 +5423,7 @@ ursgal_params = {
             'msfragger_style_1' : 'digest_max_length',
             'pipi_style_1' : 'max_peptide_length',
             'pglyco_db_style_1' : 'max_peptide_len',
-            'comet_style_2'     : 'max_peptide_len',
+            'comet_style_1'     : 'max_peptide_len',
         },
         'utag' : [
             'peptide',
@@ -5647,7 +5649,7 @@ ursgal_params = {
             'msamanda_style_1'  : 'MinimumPepLength',
             'pipi_style_1'      : 'min_peptide_length',
             'pglyco_db_style_1'    : 'min_peptide_len',
-            'comet_style_2'     : 'min_peptide_length',
+            'comet_style_1'     : 'min_peptide_length',
         },
         'utag' : [
             'peptide',
@@ -5755,7 +5757,7 @@ ursgal_params = {
             'omssa_style_1' : '-hs',
             'xtandem_style_1' : 'spectrum, minimum peaks',
             'msfragger_style_1': 'minimum_peaks',
-            'comet_style_2'    : 'min_required_observed_peaks',
+            'comet_style_1'    : 'min_required_observed_peaks',
         },
         'utag' : [
             'fragment',
@@ -5957,7 +5959,7 @@ ursgal_params = {
             'pyqms_style_1' : 'modifications',
             'pglyco_db_style_1' : 'modifications',
             'deepnovo_style_1' : 'modifications',
-            'comet_style_2'    : 'modifications'
+            'comet_style_1'    : 'modifications'
         },
         'utag' : [
             'modifications',
@@ -6659,7 +6661,7 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'xtandem_style_1' : 'spectrum, use neutral loss window',
-            'comet_style_2'   : 'neutral_loss_enabled',
+            'comet_style_1'   : 'neutral_loss_enabled',
         },
         'utag' : [
             'fragment',
@@ -6670,7 +6672,7 @@ ursgal_params = {
                 False : 'no',
                 True  : 'yes',
             },
-            'comet_style_2'   : {
+            'comet_style_1'   : {
                 False :  0,
                 True  :  1,
             },
@@ -7458,7 +7460,7 @@ ursgal_params = {
             'sugarpy_plot_style_1'          : 'output_file',
             'venndiagram_style_1'           : 'output_file',
             'xtandem_style_1'               : 'output, path',
-            'comet_style_2'                 :  'output_file_incl_path',
+            'comet_style_1'                 :  'output_file_incl_path',
         },
         'utag' : [
             'output',
@@ -8044,7 +8046,7 @@ ursgal_params = {
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
             'pglyco_db_style_1'  : 'search_precursor_tolerance_type',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
-            'comet_style_2'     : 'precursor_mass_tolerance_unit'
+            'comet_style_1'     : 'precursor_mass_tolerance_unit'
         },
         'utag' : [
             'precursor',
@@ -8081,7 +8083,7 @@ ursgal_params = {
             'pglyco_db_style_1': {
                 'da' : 'Da'
             },
-            'comet_style_2': {
+            'comet_style_1': {
                 'ppm' : 2,
                 'mmu' : 1
             },
@@ -8121,7 +8123,7 @@ ursgal_params = {
             'msamanda_style_1' : 'monoisotopic',
             'myrimatch_style_1' : 'PrecursorMzToleranceRule',
             'omssa_style_1' : '-tem',
-            'comet_style_2' : 'precursor_mass_type',
+            'comet_style_1' : 'precursor_mass_type',
         },
         'utag' : [
             'precursor',
@@ -8139,7 +8141,7 @@ ursgal_params = {
                 'average' : '1',
                 'monoisotopic' : '0',
             },
-            'comet_style_2': {
+            'comet_style_1': {
                 'average'      : '0',
                 'monoisotopic' : '1',
             },
@@ -8199,7 +8201,7 @@ ursgal_params = {
             'sugarpy_run_style_1': 'max_charge',
             'sugarpy_plot_style_1': 'max_charge',
             'mzml2mgf_style_1': 'precursor_max_charge',
-            'comet_style_2'   : 'precursor_max_charge',
+            'comet_style_1'   : 'precursor_max_charge',
         },
         'utag' : [
             'precursor',
@@ -8237,7 +8239,7 @@ ursgal_params = {
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_max_mass',
             'pglyco_db_style_1'    : 'max_peptide_weight',
-            'comet_style_2'     : 'precursor_max_mass',
+            'comet_style_1'     : 'precursor_max_mass',
         },
         'utag' : [
             'precursor',
@@ -8298,7 +8300,7 @@ ursgal_params = {
             'sugarpy_run_style_1': 'min_charge',
             'sugarpy_plot_style_1': 'min_charge',
             'mzml2mgf_style_1': 'precursor_min_charge',
-            'comet_style_2'   : 'precursor_min_charge',
+            'comet_style_1'   : 'precursor_min_charge',
         },
         'utag' : [
             'precursor',
@@ -8342,7 +8344,7 @@ ursgal_params = {
             'xtandem_style_1'   : 'spectrum, minimum parent m+h',
             'msfragger_style_1' : 'precursor_min_mass',
             'pglyco_db_style_1'    : 'min_peptide_weight',
-            'comet_style_2'     : 'precursor_min_mass',
+            'comet_style_1'     : 'precursor_min_mass',
         },
         'utag' : [
             'precursor',
@@ -9074,7 +9076,7 @@ ursgal_params = {
                 'scoring, b ions',
                 'scoring, c ions',
             ),
-            'comet_style_2'     : 'score_ion_list',
+            'comet_style_1'     : 'score_ion_list',
         },
         'utag' : [
             'scoring',
@@ -9701,7 +9703,7 @@ ursgal_params = {
             'unify_csv_style_1' : 'semi_enzyme',
             'xtandem_style_1'   : 'protein, cleavage semi',
             'msfragger_style_1' : 'num_enzyme_termini',
-            'comet_style_2'     : 'semi_enzyme',
+            'comet_style_1'     : 'semi_enzyme',
         },
         'utag' : [
             'protein',
@@ -9732,7 +9734,7 @@ ursgal_params = {
                 True : 1,
                 False : 2
             },
-            'comet_style_2': {
+            'comet_style_1': {
                 True  : '1',
                 False : '2'
             },
@@ -11094,6 +11096,28 @@ ursgal_params = {
         'triggers_rerun' : True,
         'ukey_translation' : {
             'ucontroller_style_1' : 'xtandem_converter_version',
+        },
+        'utag' : [
+            'node_versions',
+        ],
+        'uvalue_option' : {
+            'none_val'     : '',
+            'multiple_line' : False,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "str",
+    },
+    'pepxml_converter_version' : {
+        'edit_version'   : 1.00,
+        'available_in_unode' : [
+            'ucontroller',
+        ],
+        'default_value' : 'pepxml2csv_1_0_0',
+        'description' :  ''' Determines which pep.xml conversion node should be used e.g. "pepxml2csv_1_0_0"''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ucontroller_style_1' : 'pepxml_converter_version',
         },
         'utag' : [
             'node_versions',

@@ -7,10 +7,9 @@ import ursgal
 
 class comet_2019_01_rev_5(ursgal.UNode):
     """
-    MODa UNode
+    Comet UNode
     Check http://comet-ms.sourceforge.net/ for download, new versions and contact information
 
-    Not implemented yet
     """
     META_INFO = {
         'edit_version': 1.00,
@@ -21,12 +20,12 @@ class comet_2019_01_rev_5(ursgal.UNode):
             'protein_database_search_engine': True,
         },
         'input_extensions': ['.mgf', '.mzML', '.mzXML', '.ms2'],
-        'output_extensions': ['.csv', '.txt', '.xml', ],
+        'output_extensions': ['.pep.xml', ],
         'create_own_folder': True,
         'in_development': False,
-        'include_in_git': None,
+        'include_in_git': False,
         'distributable': False,
-        'utranslation_style': 'comet_style_2',
+        'utranslation_style': 'comet_style_1',
         'citation':
             ' - A Deeper Look into Comet - Implementation and Features. '
             '   Eng JK, Hoopmann MR, Jahan TA, Egertson JD, Noble WS, MacCoss MJ. '
@@ -40,7 +39,7 @@ class comet_2019_01_rev_5(ursgal.UNode):
                 '64bit': {
                     'exe': 'comet.2019015.linux.exe',
                     'url': '',
-                    'zip_md5': '4b62c06b9885753a4c9ee2586fd072d8',
+                    'zip_md5': '',
                     'additional_exe': [],
                 },
             },
@@ -48,7 +47,7 @@ class comet_2019_01_rev_5(ursgal.UNode):
                 '64bit': {
                     'exe': 'comet.2019015.linux.exe',
                     'url': '',
-                    'zip_md5': '4b62c06b9885753a4c9ee2586fd072d8',
+                    'zip_md5': '',
                     'additional_exe': [],
                 },
             },
@@ -56,13 +55,13 @@ class comet_2019_01_rev_5(ursgal.UNode):
                 '64bit': {
                     'exe': 'comet.2019015.win64.exe',
                     'url': '',
-                    'zip_md5': '4b62c06b9885753a4c9ee2586fd072d8',
+                    'zip_md5': '',
                     'additional_exe': [],
                 },
                 '32bit': {
-                    'exe': 'comet.2019015.win32.exee',
+                    'exe': 'comet.2019015.win32.exe',
                     'url': '',
-                    'zip_md5': '4b62c06b9885753a4c9ee2586fd072d8',
+                    'zip_md5': '',
                     'additional_exe': [],
                 },
             },

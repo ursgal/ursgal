@@ -199,35 +199,35 @@ FILE_EXTENSIONS = {
     },
     '.pep.xml' : {
         'short_name'     : 'pep.xml',
-        'long_name'      : 'pep.xml (Kojak result)',
+        'long_name'      : 'pep.xml (PSM format)',
         'same_extension' : [],
         'description'    : \
             'Kojak result',
     },
     '.perc.inter.txt' : {
         'short_name'     : 'perc.inter.txt',
-        'long_name'      : 'perc.inter.txt (Kojak result)',
+        'long_name'      : 'perc.inter.txt (Percolator result)',
         'same_extension' : [],
         'description'    : \
             'Kojak result',
     },
     '.perc.intra.txt' : {
         'short_name'     : 'perc.intra.txt',
-        'long_name'      : 'perc.intra.txt (Kojak result)',
+        'long_name'      : 'perc.intra.txt (Percolator result)',
         'same_extension' : [],
         'description'    : \
             'Kojak result',
     },
     '.perc.loop.txt' : {
         'short_name'     : 'perc.loop.txt',
-        'long_name'      : 'perc.loop.txt (Kojak result)',
+        'long_name'      : 'perc.loop.txt (Percolator result)',
         'same_extension' : [],
         'description'    : \
             'Kojak result',
     },
     '.perc.single.txt' : {
         'short_name'     : 'perc.single.txt',
-        'long_name'      : 'perc.single.txt (Kojak result)',
+        'long_name'      : 'perc.single.txt (Percolator result)',
         'same_extension' : [],
         'description'    : \
             'Kojak result',

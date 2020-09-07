@@ -5,11 +5,11 @@ import os
 # import sys
 # import pickle
 
-class comet2csv_1_0_0( ursgal.UNode ):
-    """comet2csv_1_0_0 UNode"""
+class pepxml2csv_1_0_0( ursgal.UNode ):
+    """pepxml2csv_1_0_0 UNode"""
     META_INFO = {
         'edit_version'      : 1.00,
-        'name'              : 'comet2csv_1_0_0',
+        'name'              : 'pepxml2csv_1_0_0',
         'version'           : '1.0.0',
         'release_date'      : None,
         'engine_type' : {
@@ -21,11 +21,11 @@ class comet2csv_1_0_0( ursgal.UNode ):
         'in_development'    : False,
         'include_in_git'    : True,
         'distributable'      : True,
-        'utranslation_style' : 'comet2csv_style_1',
+        'utranslation_style' : 'pepxml2csv_style_1',
         'engine' : {
             'platform_independent' : {
                 'arc_independent' : {
-                    'exe' : 'comet2csv_1_0_0.py',
+                    'exe' : 'pepxml2csv_1_0_0.py',
                 },
             },
         },
@@ -34,7 +34,7 @@ class comet2csv_1_0_0( ursgal.UNode ):
     }
 
     def __init__(self, *args, **kwargs):
-        super(comet2csv_1_0_0, self).__init__(*args, **kwargs)
+        super(pepxml2csv_1_0_0, self).__init__(*args, **kwargs)
 
     def _execute( self ):
         '''
