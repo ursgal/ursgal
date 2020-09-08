@@ -2,19 +2,42 @@ language: python
 python:
 - '3.6'
 sudo: false
+
+
 matrix:
   include:
   - python: 3.5
     env: TOXENV=py35
+    os: linux
   - python: 3.6
     env: TOXENV=py36
+    os: linux
   - python: 3.7
     env: TOXENV=py37
     dist: xenial
+    os: linux
   - python: 3.6
     env: TOXENV=docu
+    os: linux
   - python: 3.6
     env: TOXENV=coverage
+    os: linux
+  - python: 3.5
+    env: TOXENV=py35
+    os: windows
+  - python: 3.6
+    env: TOXENV=py36
+    os: windows
+  - python: 3.7
+    env: TOXENV=py37
+    dist: xenial
+    os: windows
+  - python: 3.6
+    env: TOXENV=docu
+    os: windows
+  - python: 3.6
+    env: TOXENV=coverage
+    os: windows
 script: tox
 deploy:
   provider: pypi
