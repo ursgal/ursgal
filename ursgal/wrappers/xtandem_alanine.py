@@ -48,7 +48,7 @@ class xtandem_alanine( xtandem ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : '78ed3c76271f3596aceea8ea5bc904bc',
+                    'zip_md5'        : '6ad716f0f4c82ca53547ea0ae79d7949',
                     'additional_exe' : [],
                 },
             },
