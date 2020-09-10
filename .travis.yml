@@ -21,11 +21,10 @@ py36-steps: &py36-steps
 py37-steps: &py37-steps
   env:
   env:
-    - PATH=/c/Users/travis/AppData/Roaming/Python/Python36/Scripts:/c/Python36:/c/Python36/Scripts:/c/Users/travis/AppData/Roaming/Python/Python36/Scripts:$PATH
+    - PATH=/c/Users/travis/AppData/Roaming/Python/Python37/Scripts:/c/Python37:/c/Python37/Scripts:/c/Users/travis/AppData/Roaming/Python/Python37/Scripts:$PATH
     - TOXENV=py37
   before_install:
     - choco install python --version 3.7.8
-    - python -m pip install --upgrade pip
     - pip install --user tox
 
 matrix:
