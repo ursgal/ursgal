@@ -1,21 +1,78 @@
-language: python
-python:
-- '3.6'
 sudo: false
+
+py35-steps: &py35-steps
+  env:
+    - PATH=/c/Users/travis/AppData/Roaming/Python/Python35/Scripts:/c/Python35:/c/Python35/Scripts:/c/Users/travis/AppData/Roaming/Python/Python35/Scripts:$PATH
+    - TOXENV=py35
+  before_install:
+    - choco install python --version 3.5.4
+    - python -m pip install --upgrade pip
+    - pip install --user tox
+
+py36-steps: &py36-steps
+  env:
+    - PATH=/c/Users/travis/AppData/Roaming/Python/Python36/Scripts:/c/Python36:/c/Python36/Scripts:/c/Users/travis/AppData/Roaming/Python/Python36/Scripts:$PATH
+    - TOXENV=py36
+  before_install:
+    - choco install python --version 3.6.8
+    - python -m pip install --upgrade pip
+    - pip install --user tox
+
+py37-steps: &py37-steps
+  env:
+  env:
+    - PATH=/c/Users/travis/AppData/Roaming/Python/Python37/Scripts:/c/Python37:/c/Python37/Scripts:/c/Users/travis/AppData/Roaming/Python/Python37/Scripts:$PATH
+    - TOXENV=py37
+  before_install:
+    - choco install python --version 3.7.8
+    - pip install --user tox
+
 matrix:
   include:
-  - python: 3.5
+  - name: 'py35-linux'
+    python: 3.5
     env: TOXENV=py35
-  - python: 3.6
+    os: linux
+    language: python
+  - name: 'py36-linux'
+    python: 3.6
     env: TOXENV=py36
-  - python: 3.7
+    os: linux
+    language: python
+  - name: 'py37-linux'
+    python: 3.7
     env: TOXENV=py37
     dist: xenial
-  - python: 3.6
+    os: linux
+    language: python
+  - name: 'docu'
+    python: 3.6
     env: TOXENV=docu
-  - python: 3.6
+    os: linux
+    language: python
+  - name: 'coverage'
+    python: 3.6
     env: TOXENV=coverage
-script: tox
+    os: linux
+    language: python
+  - name: 'py35-windows'
+    python: 3.5
+    env: TOXENV=py35
+    os: windows
+    language: shell
+    <<: *py35-steps
+  - name: 'py36-windows'
+    env: TOXENV=py36
+    os: windows
+    language: shell
+    <<: *py36-steps
+  - name: 'py37-windows'
+    env: TOXENV=py37
+    os: windows
+    language: shell
+    <<: *py37-steps
+script:
+  - tox -e "${TOXENV}"
 deploy:
   provider: pypi
   user: pyratez
@@ -27,3 +84,4 @@ deploy:
     all_branches: true
     skip_existing: true
     skip_cleanup: true
+
