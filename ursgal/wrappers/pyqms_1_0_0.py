@@ -154,12 +154,16 @@ class pyqms_1_0_0(ursgal.UNode):
                 }
             )
 
+        evidence_files = self.params['translations'][
+                'quantification_evidences']
+        if isinstance(evidence_files, str):
+            evidence_files = [evidence_files]
+
         out = main(
             mzml_file=mzml_files,
             output_file=output_file,
             fixed_labels=fixed_labels,
-            evidence_files=self.params['translations'][
-                'quantification_evidences'],
+            evidence_files=evidence_files,
             molecules=self.params['translations']['molecules_to_quantify'],
             rt_border_tolerance=self.params[
                 'translations']['rt_border_tolerance'],

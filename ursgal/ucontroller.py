@@ -131,7 +131,7 @@ class UController(ursgal.UNode):
             assert hasattr(wrapper_module, wrapper_module_name), '''
                 wrappers/{0}.py contains no class named {0}
             '''.format(wrapper_module_name)
-            
+
             wrapper_class = getattr(wrapper_module, wrapper_module_name)
 
             assert hasattr(wrapper_class, 'META_INFO'), '''
@@ -166,7 +166,7 @@ class UController(ursgal.UNode):
             assert style is not None, '''
                 META_INFO for wrapper {0} does not contain a utranslatation_style
                 '''.format(
-                   wrapper_module_name   
+                   wrapper_module_name
                 )
             if wrapper_module_name in engine_2_style.keys():
                 assert engine_2_style[wrapper_module_name] == style, '''
@@ -839,8 +839,8 @@ class UController(ursgal.UNode):
             output_file_name (str or None): Desired output file name
                 excluding path (optional). If None, output file name will
                 be auto-generated.
-            guess_engine (bool): The converter engine is guessed based on 
-                the input file. This works so far for mzml2mgf conversion and 
+            guess_engine (bool): The converter engine is guessed based on
+                the input file. This works so far for mzml2mgf conversion and
                 conversion of search_engine result files to csv.
 
         Example::
@@ -925,7 +925,7 @@ class UController(ursgal.UNode):
             output_file_name (str or None): Desired output file name
                 excluding path (optional). If None, output file name will
                 be auto-generated.
-            merge_duplicates (bool): If True, the produced output file will 
+            merge_duplicates (bool): If True, the produced output file will
                 be checked for duplicated PSMs, which will be merged into a single line.
                 Caution, the original output file will be overwritten!
 
@@ -1684,7 +1684,7 @@ class UController(ursgal.UNode):
             print('We are compressing now and renaming the shiznit')
             sys.exit(1)
 
-    def search_mgf(self, input_file, engine=None, force=None, output_file_name=None):
+    def search_mgf(self, input_file, engine=None, force=None, output_file_name=None, multi=False):
         '''
         The UController search_mgf function
 
@@ -1729,7 +1729,8 @@ class UController(ursgal.UNode):
         self.input_file_sanity_check(
             input_file,
             engine=engine_name,
-            extensions=['.mgf']
+            extensions=['.mgf'],
+            multi=multi,
         )
         for search_engine_type in [
             'protein_database_search_engine',
@@ -1767,7 +1768,7 @@ class UController(ursgal.UNode):
         )
         return report['output_file']
 
-    def search(self, input_file, engine=None, force=None, output_file_name=None):
+    def search(self, input_file, engine=None, force=None, output_file_name=None, multi=False):
         '''
         The ucontroller search function
 
@@ -2926,7 +2927,7 @@ True
         if dry_run is True:
             answer = None  # do not execute, even if params changed!
         report = self.run_unode_if_required(
-            force, engine_name, answer, 
+            force, engine_name, answer,
             merge_duplicates=merge_duplicates
         )
         return report['output_file']

@@ -29,7 +29,6 @@ def generate_result_pickle(
     if isinstance(mzml_files, str):
         mzml_files = [mzml_files]
     print('[ -ENGINE- ] Parse Evidences')
-
     fixed_labels, evidences, molecules = pyqms.adaptors.parse_evidence(
         fixed_labels=fixed_labels,
         evidence_files=evidence_files,
@@ -149,6 +148,7 @@ def main(
         rt_info_file=rt_summary_file,
         rt_border_tolerance=float(rt_border_tolerance)
     )
-
+    results.write_result_csv(
+        output_file_name=output_file.replace('.csv', '') + 'all_psms.csv'
+    )
     return rt_summary_file
-

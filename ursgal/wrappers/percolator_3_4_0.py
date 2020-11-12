@@ -37,7 +37,7 @@ class percolator_3_4_0(percolator_3_2_1):
         'citation' : 'Matthew The, Michael J. MacCoss, William S. Noble, Lukas Kall' \
             'Fast and Accurate Protein False Discovery Rates on Large-Scale Proteomics Data Sets with Percolator 3.0',
         'include_in_git': False, # True for now, but upload dat shit later on
-        'distributable': False,
+        'distributable': True,
         'group_psms': True,
         'in_development': False,
         'utranslation_style': 'percolator_style_1',
