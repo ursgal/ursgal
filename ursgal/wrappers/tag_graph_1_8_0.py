@@ -197,7 +197,7 @@ class tag_graph_1_8_0(ursgal.UNode):
         input_file = []
         for i, f in enumerate(self.input_file):
             stem, ext = os.path.splitext(f)
-            new_f = f'{stem}_F{i+1:02d}{ext}'
+            new_f = '{stem}_F{i:02d}{ext}'.format(stem=stem, i=i+1, ext=ext)
             input_file.append(new_f)
         self.input_file = input_file
 
