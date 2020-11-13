@@ -549,7 +549,7 @@ class tag_graph_1_8_0(ursgal.UNode):
 
             file_input_lines = []
             for denovo, mzml in zip(self.params_to_write['de_novo'], self.params_to_write['mzml_file']):
-                file_input_lines.append(f'{denovo}|{mzml}')
+                file_input_lines.append('{denovo}|{mzml}'.format(denovo=denovo, mzml=mzml))
 
             with open(os.path.join(self.tag_graph_tmp_dir, self.params_to_write['de_novo'][0])) as fin:
                 fn = fin.readline().strip().split(',')
