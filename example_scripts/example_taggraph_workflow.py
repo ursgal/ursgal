@@ -41,6 +41,8 @@ def main(database=None,ms_file=None):
             'frag_mass_tolerance_unit'  : 'ppm',
             'precursor_mass_tolerance_plus' : 5,
             'precursor_mass_tolerance_minus' : 5,
+            "deepnovo_knapsack_file": "/mnt/Gits/Science/Ursgal/Ursgal/ursgal_feature2/ursgal/resources/platform_independent/arc_independent/deepnovo_pointnovo/knapsack.py",
+            "deepnovo_use_lstm": False,
         }
     )
 
@@ -75,11 +77,17 @@ def main(database=None,ms_file=None):
         engine         = 'venndiagram_1_1_0',
     )
 
-    uc.params['de_novo_results'] = merged_files
-    taggraph_search_result = uc.search(
-        input_file = ms_file,
+    uc.params['de_novo_results'] = [merged_files]
+    taggraph_search_result = uc.execute_misc_engine(
+        input_file = [ms_file],
         engine = 'tag_graph_1_8_0',
     )
+
+    # uc.params['de_novo_results'] = merged_files
+    # taggraph_search_result = uc.search(
+    #     input_file =[ ms_file],
+    #     engine = 'tag_graph_1_8_0',
+    # )
     return
 
 

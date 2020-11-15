@@ -456,7 +456,7 @@ class percolator_3_2_1(ursgal.UNode):
                         score
                     )
                     rank_of_score = len(self.params['_score_list']) - rank_of_score
-                
+
                 t['lnrSp'] = math.log( 1 + rank_of_score )
                 t['Sp'] = rank_of_score
 
@@ -643,7 +643,7 @@ class percolator_3_2_1(ursgal.UNode):
         csv_input = csv.DictReader(row for row in opened_file if not row.startswith('#'))
 
         if "PEP" not in csv_input.fieldnames and "q-value" not in csv_input.fieldnames:
-            csv_input.fieldnames += ['PEP', 'q-value']
+            csv_input.fieldnames += ['PEP', 'q-value', 'Percolator:SVM Score']
         csv_kwargs = {}
 
         if sys.platform == 'win32':
@@ -689,6 +689,7 @@ class percolator_3_2_1(ursgal.UNode):
         not_found_psms = 0
         for line_dict in csv_input:
             psm_type = "target"
+            # breakpoint()
             if line_dict['Is decoy'].upper() == 'TRUE':
                 psm_type = "decoy"
 
@@ -716,6 +717,7 @@ class percolator_3_2_1(ursgal.UNode):
             if _psmid_pep_key in s2l[psm_type].keys():
                 line_dict['PEP'] = s2l[psm_type][_psmid_pep_key]['posterior_error_prob']
                 line_dict['q-value'] = s2l[psm_type][_psmid_pep_key]['q-value']
+                line_dict['Percolator:SVM Score'] = s2l[psm_type][_psmid_pep_key]['score']
                 csv_output.writerow(line_dict)
             else:
                 not_found_psms += 1

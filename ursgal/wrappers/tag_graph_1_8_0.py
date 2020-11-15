@@ -7,6 +7,7 @@ import pprint
 import re
 import shutil
 
+
 class tag_graph_1_8_0(ursgal.UNode):
     """
     TagGraph unode
@@ -57,99 +58,103 @@ class tag_graph_1_8_0(ursgal.UNode):
         pass
 
     def reformat_de_novo_file(self, unified_de_novo_results=None, mod2mass=None):
-        reformatted_input = os.path.join(
-            self.tag_graph_tmp_dir,
-            os.path.basename(unified_de_novo_results).replace('.csv', '_tmp.csv')
-        )
-        header_translations = {
-            'Fraction': '',
-            'Scan': 'Spectrum ID',
-            'Source File': 'Raw data location',
-            'Peptide': 'Sequence', # add modificaions
-            'Tag Length': '', # len(Sequence)
-            'ALC (%)': 'Average Score or Confidence',
-            'length': '', # len(Sequence)
-            'm/z': 'Exp m/z',
-            'z': 'Charge',
-            'RT': 'Retention Time (s)', # convert to min
-            'Area': '',
-            'Mass': 'uCalc Mass',
-            'ppm': 'Accuracy (ppm)',
-            'PTM': 'Modifications', # reformat
-            'local confidence (%)': 'Local Score or Confidence',
-            'tag (>=0%)': 'Sequence', # add modificaions
-            'mode': '',
-        }
-        mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
-        new_header = sorted(header_translations.keys())
-        with open(unified_de_novo_results, 'r') as in_file, open(reformatted_input, 'w') as out_file:
-            csv_reader = csv.DictReader(in_file)
-            csv_writer = csv.DictWriter(
-                out_file,
-                fieldnames=new_header
-            )
-            csv_writer.writeheader()
-            for line_dict in csv_reader:
-                new_line_dict = {}
-                for translated_header in header_translations.keys():
-                    if translated_header in [
-                        'Fraction',
-                        'Area',
-                        'mode',
-                    ]:
-                        new_line_dict[translated_header] = ''
-                    elif translated_header == 'Source File':
-                        new_line_dict[translated_header] = os.path.basename(
-                            line_dict[header_translations[translated_header]]
-                        )
-                    elif translated_header in ['Peptide', 'tag (>=0%)', 'PTM']:
-                        mods = {}
-                        for mod in line_dict['Modifications'].split(';'):
-                            for occ, match in enumerate(mod_pattern.finditer(mod)):
-                                unimod = mod[:match.start()]
-                                pos = int(mod[match.start()+1:])
-                                if pos in mods.keys():
-                                    print('''
-                                    [ERROR] Multiple mods at the same position.
-                                    [ERROR] Check de novo result file or reformatting.
-                                    ''')
-                                    sys.exit(1)
-                                mods[pos] = unimod
-                        mod_list = []
-                        new_sequence = ''
-                        for n, aa in enumerate(line_dict['Sequence']):
-                            # Does not work for terminal mods yet
-                            # not sure how terminal mods are formatted in PEAKS
-                            if n+1 in mods.keys():
-                                add_plus = ''
-                                name = mods[n+1]
-                                mass = mod2mass[name]
-                                if mass >= 0:
-                                    add_plus = '+'
-                                new_sequence += '{0}({1}{2})'.format(
-                                    aa,
-                                    add_plus,
-                                    round(mass, 2)
-                                )
-                                mod_list.append(
-                                    '{0} ({1})'.format(name, aa)
-                                )
-                            else:
-                                new_sequence += aa
-                        new_line_dict['Peptide'] = new_sequence
-                        # new_line_dict['Peptide'] = line_dict['Sequence']
-                        new_line_dict['tag (>=0%)'] = new_sequence
-                        new_line_dict['PTM'] = '; '.join(mod_list)
-                    elif translated_header in ['Tag Length', 'length']:
-                        new_line_dict[translated_header] = len(line_dict['Sequence'])
-                    elif translated_header == 'RT':
-                        new_line_dict[translated_header] = float(
-                            line_dict[header_translations[translated_header]])/60
-                    else:
-                        new_line_dict[translated_header] = line_dict[header_translations[translated_header]]
-                csv_writer.writerow(new_line_dict)
+        reformatted_inputs = []
 
-        return reformatted_input
+        for i, unified_de_novo_result in enumerate(unified_de_novo_results):
+            reformatted_input = os.path.join(
+                self.tag_graph_tmp_dir,
+                os.path.basename(unified_de_novo_result).replace('.csv', '_tmp.csv')
+            )
+            reformatted_inputs.append(reformatted_input)
+            header_translations = {
+                'Fraction': i+1,  # start with fraction 1
+                'Scan': 'Spectrum ID',
+                'Source File': 'Raw data location',
+                'Peptide': 'Sequence', # add modificaions
+                'Tag Length': '', # len(Sequence)
+                'ALC (%)': 'Average Score or Confidence',
+                'length': '', # len(Sequence)
+                'm/z': 'Exp m/z',
+                'z': 'Charge',
+                'RT': 'Retention Time (s)', # convert to min
+                'Area': '',
+                'Mass': 'uCalc Mass',
+                'ppm': 'Accuracy (ppm)',
+                'PTM': 'Modifications', # reformat
+                'local confidence (%)': 'Local Score or Confidence',
+                'tag (>=0%)': 'Sequence', # add modificaions
+                'mode': '',
+            }
+            mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
+            new_header = sorted(header_translations.keys())
+            with open(unified_de_novo_result, 'r') as in_file, open(reformatted_input, 'w') as out_file:
+                csv_reader = csv.DictReader(in_file)
+                csv_writer = csv.DictWriter(
+                    out_file,
+                    fieldnames=new_header
+                )
+                csv_writer.writeheader()
+                for line_dict in csv_reader:
+                    new_line_dict = {}
+                    for translated_header in header_translations.keys():
+                        if translated_header in [
+                            'Fraction',
+                            'Area',
+                            'mode',
+                        ]:
+                            new_line_dict[translated_header] = ''
+                        elif translated_header == 'Source File':
+                            new_line_dict[translated_header] = os.path.basename(
+                                line_dict[header_translations[translated_header]]
+                            )
+                        elif translated_header in ['Peptide', 'tag (>=0%)', 'PTM']:
+                            mods = {}
+                            for mod in line_dict['Modifications'].split(';'):
+                                for occ, match in enumerate(mod_pattern.finditer(mod)):
+                                    unimod = mod[:match.start()]
+                                    pos = int(mod[match.start()+1:])
+                                    if pos in mods.keys():
+                                        print('''
+                                        [ERROR] Multiple mods at the same position.
+                                        [ERROR] Check de novo result file or reformatting.
+                                        ''')
+                                        sys.exit(1)
+                                    mods[pos] = unimod
+                            mod_list = []
+                            new_sequence = ''
+                            for n, aa in enumerate(line_dict['Sequence']):
+                                # Does not work for terminal mods yet
+                                # not sure how terminal mods are formatted in PEAKS
+                                if n+1 in mods.keys():
+                                    add_plus = ''
+                                    name = mods[n+1]
+                                    mass = mod2mass[name]
+                                    if mass >= 0:
+                                        add_plus = '+'
+                                    new_sequence += '{0}({1}{2})'.format(
+                                        aa,
+                                        add_plus,
+                                        round(mass, 2)
+                                    )
+                                    mod_list.append(
+                                        '{0} ({1})'.format(name, aa)
+                                    )
+                                else:
+                                    new_sequence += aa
+                            new_line_dict['Peptide'] = new_sequence
+                            # new_line_dict['Peptide'] = line_dict['Sequence']
+                            new_line_dict['tag (>=0%)'] = new_sequence
+                            new_line_dict['PTM'] = '; '.join(mod_list)
+                        elif translated_header in ['Tag Length', 'length']:
+                            new_line_dict[translated_header] = len(line_dict['Sequence'])
+                        elif translated_header == 'RT':
+                            new_line_dict[translated_header] = float(
+                                line_dict[header_translations[translated_header]])/60
+                        else:
+                            new_line_dict[translated_header] = line_dict[header_translations[translated_header]]
+                    csv_writer.writerow(new_line_dict)
+
+        return reformatted_inputs
 
     def preflight(self):
         '''
@@ -163,27 +168,48 @@ class tag_graph_1_8_0(ursgal.UNode):
             self.params['input_dir_path'],
             self.params['input_file']
         )
+        breakpoint()
+        multi_input = False
         if self.input_file.lower().endswith('.mzml') or \
                 self.input_file.lower().endswith('.mzml.gz'):
-            self.params['translations']['mzml_input_file'] = self.input_file
+            self.params['translations']['mzml_input_file'] = [self.input_file]
+            self.input_file = [self.input_file]
         elif self.input_file.lower().endswith('.mgf'):
             self.params['translations']['mzml_input_file'] = \
-                self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf(
-                    self.input_file
-                )
+                [self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf(
+                                    self.input_file
+                                )]
+            self.input_file = [self.input_file]
+        elif self.input_file.lower().endswith('.json'):
+            multi_input = True
+            self.input_file = [os.path.join(d['dir'], d['file']) for d in self.params['input_file_dicts']]
+            self.params['translations']['mzml_input_file'] = self.input_file
         else:
             raise Exception(
                 'TagGraph input spectrum file must be in mzML format!')
-
         self.tag_graph_tmp_dir = os.path.join(
             self.params['output_dir_path'],
-            '{prefix}_tag_graph_tmp'.format(prefix=os.path.basename(self.params['translations']['mzml_input_file']).replace('.mzML', '')),
+            'tag_graph_tmp',
         )
         if os.path.exists(self.tag_graph_tmp_dir) is False:
             os.mkdir(self.tag_graph_tmp_dir)
         # self.created_tmp_files.append(self.tag_graph_tmp_dir)
+        input_file = []
+        for i, f in enumerate(self.input_file):
+            stem, ext = os.path.splitext(f)
+            new_f = '{stem}_F{i:02d}{ext}'.format(stem=stem, i=i+1, ext=ext)
+            input_file.append(new_f)
+        self.input_file = input_file
 
-        shutil.copy(self.params['translations']['mzml_input_file'], self.tag_graph_tmp_dir)
+        if isinstance(self.params['translations']['mzml_input_file'], list):
+            for i, f in enumerate(self.params['translations']['mzml_input_file']):
+                # add fraction here
+                # stem, ext = os.path.splitext(os.path.basename(f))
+                # new_f = f'{stem}_F{i+1:02d}{ext}'
+                # shutil.copy(f, os.path.join(self.tag_graph_tmp_dir, new_f))
+                shutil.copy(f, self.tag_graph_tmp_dir)
+        else:
+            shutil.copy(self.params['translations']['mzml_input_file'], self.tag_graph_tmp_dir)
 
         self.docker_dir_path = '/mnt/ursgal_taggraph/'
         self.docker_mount = '{0}:{1}'.format(
@@ -206,19 +232,14 @@ class tag_graph_1_8_0(ursgal.UNode):
         )
         # self.created_tmp_files.append(self.ini_file_name)
 
-
         self.params_to_write = {
-            'mzml_file': os.path.basename(self.params['translations']['mzml_input_file']).replace('.mzML', ''),
+            'mzml_file': [os.path.basename(x).replace('.mzML', '') for x in self.input_file],
             'output' : os.path.join(self.docker_dir_path, 'EM_output'),
             'dataDirectory' : self.docker_dir_path,
             'init': os.path.join(self.docker_dir_path, os.path.basename(self.ini_file_name)),
             'ExperimentName': self.params['output_file'].replace('.csv', '')
         }
         self.ini_to_write = {}
-
-        # pprint.pprint(self.params['translations']['_grouped_by_translated_key'])
-        # pprint.pprint(self.params)
-        # exit()
 
         file_locations = {
             'unimoddict' : '/opt/bio/tools/taggraph/TagGraph.1.8/resources/unimodDict_noLabels_20160724.pck',
@@ -390,13 +411,13 @@ class tag_graph_1_8_0(ursgal.UNode):
                 else:
                     self.params_to_write[taggraph_param_name] = param_value
 
-        reformatted_input = self.reformat_de_novo_file(
+        reformatted_inputs = self.reformat_de_novo_file(
             unified_de_novo_results = self.params_to_write['de_novo'],
             mod2mass = mod2mass,
         )
-        print(reformatted_input)
+        # print(reformatted_inputs)
         # self.created_tmp_files.append(reformatted_input)
-        self.params_to_write['de_novo'] = os.path.basename(reformatted_input)
+        self.params_to_write['de_novo'] = [os.path.basename(reformatted_input) for reformatted_input in reformatted_inputs]
         print(self.params_to_write['de_novo'])
         self.write_params_file()
         self.write_ini_file()
@@ -409,10 +430,10 @@ class tag_graph_1_8_0(ursgal.UNode):
         self.params['command_list'] = [
             'docker',
             'run',
-            '--rm',
+            # '--rm',
             '-v', self.docker_mount,
             '-i', '-t',
-            'inf/taggraph:v1',
+            'inf/taggraph:v1_debug',
             'bash', '-c',
             'cd {0} && python /opt/bio/tools/taggraph/TagGraph.1.8/scripts/BuildFMIndex.py -f {1}\
              {2} && python /opt/bio/tools/taggraph/TagGraph.1.8/runTG.py {3}'.format(
@@ -423,6 +444,7 @@ class tag_graph_1_8_0(ursgal.UNode):
             )
         ]
         print(' '.join(self.params['command_list']))
+        # breakpoint()
         return self.params
 
     def postflight(self):
@@ -509,8 +531,12 @@ class tag_graph_1_8_0(ursgal.UNode):
                         out_line_dict[header_translations[column]] = line_dict[column].split('.')[1]
                     else:
                         out_line_dict[header_translations[column]] = line_dict[column]
+                from pprint import pprint
+                pprint(line_dict)
+                breakpoint()
                 out_line_dict['Raw data location'] = os.path.abspath(
-                    self.params['translations']['mzml_input_file']
+                    os.path.join(os.path.dirname(self.params['translations']['mzml_input_file'][0]),
+                    line_dict['ScanF'].split(':')[0]+'.mzML')
                 )
                 csv_writer.writerow(out_line_dict)
 
@@ -519,6 +545,50 @@ class tag_graph_1_8_0(ursgal.UNode):
 
     def write_params_file(self):
         with open(self.param_file_name, 'w') as io:
+            assert len(self.params_to_write['de_novo']) == len(self.params_to_write['mzml_file']), 'Must have same number of denovo results as input files'
+
+            file_input_lines = []
+            for denovo, mzml in zip(self.params_to_write['de_novo'], self.params_to_write['mzml_file']):
+                file_input_lines.append('{denovo}|{mzml}'.format(denovo=denovo, mzml=mzml))
+
+            with open(os.path.join(self.tag_graph_tmp_dir, self.params_to_write['de_novo'][0])) as fin:
+                fn = fin.readline().strip().split(',')
+
+            new_name = os.path.splitext(self.params['output_file'])[0] + 'deepnovo_pointnovo_unified_tmp_denovo_merged.csv'
+
+            merged_path = os.path.join(self.tag_graph_tmp_dir, new_name)
+            # with open(merged_path, 'w') as fout:
+            #     writer = csv.DictWriter(fout, fieldnames=['Source File', 'Fraction'])
+            #     writer.writeheader()
+            #     for i, f in enumerate(self.input_file):
+            #         writer.writerow({'Source File': os.path.basename(f), 'Fraction': i+1})
+
+            with open(merged_path, 'w') as fout:
+                writer = csv.DictWriter(fout, fieldnames=['Fraction'] + fn)
+                writer.writeheader()
+                for i, denovo_file in enumerate(self.params_to_write['de_novo']):
+                    with open(os.path.join(self.tag_graph_tmp_dir, denovo_file)) as fin:
+                        reader = csv.DictReader(fin)
+                        for line in reader:
+                            frac = i + 1
+                            line['Fraction'] = frac
+                            writer.writerow(line)
+            # breakpoint()
+            self.params_to_write['denovo_mzml_input_line'] = ';'.join(file_input_lines)
+            # self.params_to_write['denovo_mzml_input_line'] = ''
+            # self.params_to_write['de_novo_tag_graph'] = self.params_to_write['de_novo'][0]
+            # self.params_to_write['de_novo'] = merged_path
+            self.params_to_write['de_novo'] = self.tag_graph_tmp_dir
+            # self.params_to_write['de_novo_tag_graph'] = ';'.join(file_input_lines)
+            # should be a csv with column Source File and Fraction
+            mapping_file = os.path.join(self.params_to_write['dataDirectory'], os.path.basename(merged_path))
+            # print(mapping_file)
+            breakpoint()
+            self.params_to_write['de_novo_tag_graph'] = mapping_file
+
+            # TODO rewrite denovo files to to file and include fraction column!
+
+
             print('''##### General Settings #####
 [General]
 # Not used at this time, place-holder for the capabilities to only run the TG step, or the EM step if TG was run previously
@@ -549,7 +619,7 @@ DisplayProteinNum = {DisplayProtNum}
 de_novo        = {dataDirectory}
 
 # If de novo sequencing program generates one text output per input file, enter mapping here, linking each de novo file to the root name of the corresponding input raw data file via a pipe (|) separating each de novo / raw file pair by semicolons, e.g.: denovoMZML =216.csv|ath017216;217.csv|ath017217, otherwise, leave blank.
-denovoMZML      = {de_novo}|{mzml_file}
+denovoMZML      = {denovo_mzml_input_line}
 
 # De novo output file parsing
 # De novo output file parsing: Header lines to ignore
@@ -601,7 +671,7 @@ dataDirectory  = {dataDirectory}
 ExperimentName = {ExperimentName}
 
 # Location of input de novo search results exported from de novo sequencing program in .csv or .pepXML format. See README for format requirements/examples or more details.
-de_novo        = {de_novo}
+de_novo        = {de_novo_tag_graph}
 
 # Path to folder TagGraph will create to store output. Should not already exist.
 output         = {output}
