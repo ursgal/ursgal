@@ -495,7 +495,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 )
 
             #update spectrum ID from block above
-            line_dict['Raw data location'] = line_dict['Raw data location'].replace('_tmp.mgf', '.mgf')
+            if 'Raw data location' in line_dict.keys():
+                line_dict['Raw data location'] = line_dict['Raw data location'].replace('_tmp.mgf', '.mgf')
             line_dict['Spectrum ID'] = spectrum_id
 
             # now check for the basename in the scan rt lookup

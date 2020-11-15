@@ -33,7 +33,7 @@ def main():
     )
 
     engine_list = [
-        'novor',
+        'novor_1_05',
         'pepnovo',
     ]
 
