@@ -54,8 +54,16 @@ Convert MS-GF+ MZID to CSV
    :members:
 
 
-Convert MZML to MGF 1_0_0
--------------------------
+Convert MZML to MGF
+-------------------
+
+The mzML to mgf converter version 2.0.0 requires pymzML 2.0, 
+while the previous version can be used with older pymzML versions.
+
+.. autoclass:: ursgal.wrappers.mzml2mgf_2_0_0.mzml2mgf_2_0_0
+   :members:
+
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.mzml2mgf_2_0_0.mzml2mgf_2_0_0.main
 
 .. autoclass:: ursgal.wrappers.mzml2mgf_1_0_0.mzml2mgf_1_0_0
    :members:
