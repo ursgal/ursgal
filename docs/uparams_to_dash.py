@@ -229,8 +229,7 @@ for which the corresponding parameters should be displayed
 )
 def set_uparams_dropdown(selected_uparams):
     if selected_uparams == "all_uparams":
-        #return [{"disabled": True}]
-        return [{'label': '', 'value': ''}]
+        return [{'label': '', 'value': '', 'disabled': True}]
     if selected_uparams == "select_uparams":
         return [{"label": i, "value": i} for i in sorted(ursgal_params) if i != ""]
 
@@ -269,8 +268,7 @@ def set_engines_value(selected_uparams):
 )
 def set_engines_dropdown(selected_engines):
     if selected_engines == "all_engines":
-        #return [{"disabled": True}]
-        return [{'label': '', 'value': ''}]
+        return [{'label': '', 'value': '', 'disabled': True}]
     if selected_engines == "select_engines":
         return [{"label": i, "value": i} for i in sorted(available_engines) if i != ""]
 
@@ -309,8 +307,7 @@ def set_engines_value(selected_engines):
 )
 def set_engines_dropdown(selected_tags):
     if selected_tags == "all_tags":
-        #return [{"disabled": True}]
-        return [{'label': '', 'value': ''}]
+        return [{'label': '', 'value': '', 'disabled': True}]
     if selected_tags == "select_tags":
         return [{"label": i, "value": i} for i in sorted(available_tags) if i != ""]
 
