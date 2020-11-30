@@ -366,7 +366,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Complies search criteria',
             'Conflicting uparam',
             'Search Engine',
-            'Retention Time (s)',
         ]
         if de_novo:
             new_fieldnames = [

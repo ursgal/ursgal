@@ -327,3 +327,11 @@ Full list of tools with proper citations that are integrated into Ursgal are:
     * Yang, H; Chi, H; Zhou, W; Zeng, WF; He, K; Liu, C; Sun, RX; He, SM. (2017)
     Open-pNovo: De Novo Peptide Sequencing with Thousands of Protein Modifications.
     J Proteome Res. 16(2)
+    * Polasky, DA; Yu, F; Teo, GC; Nesvizhskii, AI (2020) Fast and comprehensive N- and O-glycoproteomics analysis 
+    with MSFragger-Glyco. Nat Methods 17 (11)
+    * Geiszler, DJ; Kong, AT; Avtonomov, DM; Yu, F; Leprevost, FV; Nesvizhskii, AI (2020) PTM-Shepherd: 
+    analysis and summarization of post-translational and chemical modifications from open search results. 
+    bioRxiv doi: https://doi.org/10.1101/2020.07.08.192583
+    * An, Z; Zhai, L; Ying, W; Qian, X; Gong, F; Tan, M; Fu, Y. (2019) PTMiner: Localization and Quality Control of 
+    Protein Modifications Detected in an Open Search and Its Application to Comprehensive Post-translational Modification
+    Characterization in Human Proteome.  Mol Cell Proteomics 18 (2)
