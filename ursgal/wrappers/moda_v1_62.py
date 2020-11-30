@@ -194,7 +194,7 @@ class moda_v1_62(ursgal.UNode):
 
         params_input_file.close()
 
-        print(self.params['command_list'])
+        print(' '.join(self.params['command_list']))
 
         return self.params
 
@@ -219,8 +219,10 @@ class moda_v1_62(ursgal.UNode):
             'Rank',
             'Raw data location',
         ]
+
         org_moda_out = self.params['translations'][
             'output_file_incl_path'].replace('.csv', '.tsv')
+
         out_line_dicts = []
         with open(org_moda_out, 'r') as org_out:
             out_reader = csv.reader(org_out, delimiter='\t')

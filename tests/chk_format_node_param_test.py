@@ -288,6 +288,7 @@ def chk_vals_types( parent_name='', key_name='', vals=[], type_list=[] ):
         return
 
     for v in vals:
+        # datetime_chk = False
         v_type = type(v)
         if ('datetime' in type_list) is True and v_type is str:
             num = len(v) - len(v.replace('-', '').replace(':', ''))

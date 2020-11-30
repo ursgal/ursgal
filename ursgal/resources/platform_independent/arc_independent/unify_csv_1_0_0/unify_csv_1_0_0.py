@@ -147,6 +147,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     # mod pattern
     mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
     mod_pattern_msfragger = re.compile( r'''(?P<pos>[0-9]*)(?P<aa>[A-Z])\((?P<mass>[0-9]*\.[0-9]*)\)''' )
+    mod_pattern_msfragger_term = re.compile( r'''.-term\((?P<mass>[0-9]*\.[0-9]*)\)''' )
 
     for mod_type in ['fix', 'opt']:
         for modification in params['mods'][mod_type]:
@@ -274,6 +275,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     open_mod_search_engines = [
         'pipi',
         'moda',
+        'tag_graph'
     ]
     de_novo = False
     database_search = False
@@ -364,6 +366,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Complies search criteria',
             'Conflicting uparam',
             'Search Engine',
+            'Retention Time (s)',
         ]
         if de_novo:
             new_fieldnames = [
@@ -421,11 +424,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_2_split = '.'.join(line_dict['Spectrum Title'].split('.')[:-2])
                 else:
                     line_2_split = line_dict['Spectrum Title']
-                if params['prefix'] is None:
+                if params['prefix'] is None or params['prefix'] == '':
                     pass
                 elif line_2_split.startswith(params['prefix']):
                     line_2_split = line_2_split.replace(
-                        params['prefix'],
+                        params['prefix']+'_',
                         ''
                     )
                 line_dict['Spectrum Title'] = line_2_split
@@ -463,11 +466,19 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     Novor
                     DeepNovo
                     MSFragger
+                    TagGraph
                 '''
                 pure_input_file_name = os.path.basename(
                     line_dict['Raw data location']
                 )
-                input_file_basename = pure_input_file_name.split(".")[0]
+                input_file_basename = '.'.join(pure_input_file_name.split(".")[:-1])
+                if params['prefix'] is None or params['prefix'] == '':
+                    pass
+                elif input_file_basename.startswith(params['prefix']):
+                    input_file_basename = line_2_split.replace(
+                        params['prefix']+'_',
+                        ''
+                    )
                 spectrum_id = line_dict['Spectrum ID']
                 line_dict['Spectrum Title'] = '{0}.{1}.{1}.{2}'.format(
                     input_file_basename,
@@ -484,6 +495,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 )
 
             #update spectrum ID from block above
+            if 'Raw data location' in line_dict.keys():
+                line_dict['Raw data location'] = line_dict['Raw data location'].replace('_tmp.mgf', '.mgf')
             line_dict['Spectrum ID'] = spectrum_id
 
             # now check for the basename in the scan rt lookup
@@ -602,10 +615,16 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         else:
                             mod_list = []
                             for single_mod in mod_string.split(', '):
-                                match = mod_pattern_msfragger.search(single_mod)
-                                msfragger_pos = int(match.group('pos'))
-                                if msfragger_pos != 0:
-                                    msfragger_pos -= 1
+                                if single_mod.startswith('N-term'):
+                                    msfragger_pos = 0
+                                    match = mod_pattern_msfragger_term.search(single_mod)
+                                elif single_mod.startswith('C-term'):
+                                    msfragger_pos = len(line_dict['Sequence'])
+                                else:
+                                    match = mod_pattern_msfragger.search(single_mod)
+                                    msfragger_pos = int(match.group('pos'))
+                                    if msfragger_pos != 0:
+                                        msfragger_pos -= 1
                                 raw_msfragger_mass = float(match.group('mass'))
                                 msfragger_mass = mass_format_string.format(
                                     # mass rounded as defined above
@@ -702,6 +721,34 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         # sys.exit(1)
                         line_dict['Modifications'] = ';'.join( ms_fragger_reformatted_mods )
 
+                if 'tag_graph' in search_engine:
+                    tg_tmp_mods = []
+                    tg_mod_list = eval(line_dict['Modifications'])
+                    for tg_mod in tg_mod_list:
+                        tg_mod_pos = int(tg_mod[2])+1
+                        tg_mod_name = tg_mod[0][0]
+                        tg_mod_mass = tg_mod[0][1]
+                        try:
+                            tg_mod_aa = tg_mod[1][0]
+                        except:
+                            if 'undefined mass shift' in tg_mod[0][0]:
+                                tg_mod_aa = 'Any'
+                            elif 'Isobaric Substitution' not in tg_mod[0][0]:
+                                print('skipping:', tg_mod)
+                            continue
+                        if 'N-term' in tg_mod_aa:
+                            tg_mod_pos += -1
+                        elif 'C-term' in tg_mod_aa:
+                            tg_mod_pos += 1
+                        tg_tmp_mods.append(
+                            '{0}<|>{1}<|>{2}:{3}'.format(
+                                tg_mod_name,
+                                tg_mod_mass,
+                                tg_mod_aa,
+                                tg_mod_pos
+                            )
+                        )
+                    line_dict['Modifications'] = ';'.join(tg_tmp_mods)
                 ##################################################
                 # Some engines do not report fixed modifications #
                 ##################################################
@@ -789,6 +836,67 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             is not recognized by ursgal'''.format(
                                 modification
                             )
+                    if 'tag_graph' in search_engine:
+                        try:
+                            unimod_name, mod_mass, mod_aa = mod.split('<|>')
+                        except: #added fixed mods
+                            tmp_mods.append(modification)
+                            continue
+                        do_not_map = False
+                        for mass_shift_name in [
+                            'Undefined Mass Shift',
+                            'Insertion',
+                            'Deletion',
+                            'PrecursorError',
+                            'precursorerror',
+                        ]:
+                            if mass_shift_name in unimod_name:
+                                do_not_map= True
+                        if do_not_map:
+                            unimod_id = None
+                        else:
+                            if '->' in unimod_name:
+                                aa_1, aa_2 = unimod_name.split('->')
+                                aa_1 = '{0}{1}'.format(
+                                    aa_1[0].upper(),
+                                    aa_1[1:]
+                                )
+                                aa_2 = '{0}{1}'.format(
+                                    aa_2[0].upper(),
+                                    aa_2[1:]
+                                )
+                                unimod_name = '{0}->{1}'.format(
+                                    aa_1,
+                                    aa_2,
+                                )
+                            else:
+                                unimod_name = '{0}{1}'.format(
+                                    unimod_name[0].upper(),
+                                    unimod_name[1:]
+                                )
+                            unimod_id = ursgal.GlobalUnimodMapper.name2id(
+                                unimod_name
+                            )
+                        if mod_aa in fixed_mods.keys():
+                            if unimod_name != fixed_mods[mod_aa]:
+                                unimod_id = None
+                        if unimod_id is None:
+                            tmp_mass_diff.append(
+                                '{0}({1}):{2}'.format(
+                                    mod_mass,
+                                    unimod_name,
+                                    pos
+                                )
+                            )
+                        else:
+                            tmp_mods.append(
+                                '{0}:{1}'.format(
+                                    unimod_name,
+                                    pos
+                                )
+                            )
+                        continue
+
                     if pos <= 1:
                         Nterm = True
                         new_pos = 1
@@ -1208,8 +1316,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         # build IsotopologueLibrary
         molecule2hill_dict = {}
         for molecule in all_molecules:
-            if 'X' in molecule.upper():
-                cc.use(molecule.replace('X', ''))
+            if 'X' in molecule.split('#')[0]:
+                cc.use('{0}#{1}'.format(
+                    molecule.split('#')[0].replace('X', ''),
+                    molecule.split('#')[1]
+                ))
             else:
                 cc.use(molecule)
             if use15N:

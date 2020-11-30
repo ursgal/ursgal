@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 # encoding: utf-8
 """
     Ursgal MappOrs
@@ -113,6 +113,7 @@ class UParamMapper( dict ):
             ]
             for k in keys_to_delete:
                 del template[k]
+
             template.update(
                 {
                     'style'                    : style,

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 import re
 import sys
 import os
@@ -128,6 +128,24 @@ def calculate_mz(mass, charge):
     charge = int(charge)
     calc_mz = (mass + (charge * PROTON)) / charge
     return calc_mz
+
+def calculate_mass(mz, charge):
+    '''
+    Calculate mass function
+
+    Keyword Arguments:
+        mz (float): mz of molecule/peak
+        charge (int): charge for calculating mass
+
+
+    Returns:
+        float: calculated mass
+
+    '''
+    mz = float(mz)
+    charge = int(charge)
+    calc_mass = mz * charge - (charge * PROTON)
+    return calc_mass
 
 
 def digest(sequence, enzyme, no_missed_cleavages=False):
@@ -351,10 +369,17 @@ def merge_rowdicts(list_of_rowdicts, psm_colnames_to_merge_multiple_values, join
     are joined with a character (joinchar).
     '''
     merged_d = {}
-    fieldnames = list_of_rowdicts[0].keys()
+    fieldnames = []
+    for rowdict in list_of_rowdicts:
+        for k in rowdict.keys():
+            if k not in fieldnames:
+                fieldnames.append(k)
     for fieldname in fieldnames:
+        values = []
+        for d in list_of_rowdicts:
+            if fieldname in d.keys():
+                values.append(d[fieldname])
         if fieldname in psm_colnames_to_merge_multiple_values.keys():
-            values = [d[fieldname] for d in list_of_rowdicts]
             no_empty_values = [v for v in values if v != '']
             values_as_floats = [float(value) for value in no_empty_values]
 
@@ -380,7 +405,6 @@ def merge_rowdicts(list_of_rowdicts, psm_colnames_to_merge_multiple_values, join
                 merged_d[fieldname] = joinchar.join(final_values)
         
         else:
-            values = [d[fieldname] for d in list_of_rowdicts]
             if len(set(values)) == 1:
                 merged_d[fieldname] = values[0]
             else:

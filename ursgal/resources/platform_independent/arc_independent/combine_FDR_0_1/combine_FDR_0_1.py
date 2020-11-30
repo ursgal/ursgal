@@ -1,4 +1,4 @@
-#!/usr/bin/python3.4
+#!/usr/bin/python
 
 # ./combined_FDR2.py /media/lukas/storage/uni/uSearch/combined_FDR --label 15N --cutoff 0.01
 
@@ -469,7 +469,7 @@ class MultiScorer(object):
         engines_string = ' and '.join( [i.engine for i in used_engines] )
         other_engines_string = ' or '.join( [i.engine for i in other_engines] )
         
-        if len(other_engines) is 0:
+        if len(other_engines) == 0:
             return 'Scoring PSMs that were identified by all {0} engines...'.format( len(used_engines) )
         else:
             return 'Scoring PSMs that were identified by {0}, but not by {1}...'.format( engines_string, other_engines_string )

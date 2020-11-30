@@ -123,6 +123,16 @@ MyriMatch
    :members:
 
 
+TagGraph
+--------
+
+This open modification search engine uses de novo search engine results
+but takes a protein database into account as well.
+
+.. autoclass:: ursgal.wrappers.tag_graph_1_8_0.tag_graph_1_8_0
+   :members:
+
+
 OMSSA
 -----
 
@@ -173,6 +183,11 @@ De Novo Search Engines
 
 DeepNovo
 --------
+
+Available DeepNovo versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.deepnovo_pointnovo.deepnovo_pointnovo
+   :members:
 
 .. autoclass:: ursgal.wrappers.deepnovo_0_0_1.deepnovo_0_0_1
    :members:

@@ -17,7 +17,7 @@ modifications = [
 R = ursgal.UController(
     params = {
         'modifications' : modifications
-    }    
+    }
 )
 R.map_mods()
 

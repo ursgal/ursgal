@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 import sys
 import os
 import glob
@@ -96,11 +96,6 @@ class UController(ursgal.UNode):
         # self.unodes = self.collect_all_unodes_from_kb()
         self.determine_availability_of_unodes()
         # if pymzml generation 2 is used we reset the default converter version
-        import pymzml
-        pymzml_major_version_number = int(pymzml.__version__.split('.')[0])
-        if pymzml_major_version_number == 2:
-            self.params['mzml2mgf_converter_version'] = 'mzml2mgf_2_0_0'
-            # default is 1_0_0
         if self.verbose:
             self.show_unode_overview()
 
@@ -136,7 +131,7 @@ class UController(ursgal.UNode):
             assert hasattr(wrapper_module, wrapper_module_name), '''
                 wrappers/{0}.py contains no class named {0}
             '''.format(wrapper_module_name)
-            
+
             wrapper_class = getattr(wrapper_module, wrapper_module_name)
 
             assert hasattr(wrapper_class, 'META_INFO'), '''
@@ -171,7 +166,7 @@ class UController(ursgal.UNode):
             assert style is not None, '''
                 META_INFO for wrapper {0} does not contain a utranslatation_style
                 '''.format(
-                   wrapper_module_name   
+                   wrapper_module_name
                 )
             if wrapper_module_name in engine_2_style.keys():
                 assert engine_2_style[wrapper_module_name] == style, '''
@@ -1256,8 +1251,8 @@ class UController(ursgal.UNode):
             msg    = 'Setting self.io["input"]',
             caller = 'set_ios'
         )
-        self.io['input']['finfo'] = self.set_file_info_dict(input_file)
-        self.take_care_of_params_and_stats(io_mode = 'input')
+        self.io['input']['finfo'] = self.set_file_info_dict( input_file )
+        self.take_care_of_params_and_stats( io_mode = 'input')
         # setting status ...
         self.io['input']['stats']['run_status'] = 'scheduled'
         # setting default if no json was loaded ...
@@ -1300,7 +1295,7 @@ class UController(ursgal.UNode):
                             i_json_value
                         )
                     )
-                    self.io['input']['params'][i_json_param] = default_value
+                    self.io['input']['params'][ i_json_param ] = default_value
             if number_of_diffs_between_json_and_params > 0:
                 self.print_info(
                     'Updated {0} params in self.io["input"]["params"]'.format(
@@ -1689,7 +1684,7 @@ class UController(ursgal.UNode):
             print('We are compressing now and renaming the shiznit')
             sys.exit(1)
 
-    def search_mgf(self, input_file, engine=None, force=None, output_file_name=None):
+    def search_mgf(self, input_file, engine=None, force=None, output_file_name=None, multi=False):
         '''
         The UController search_mgf function
 
@@ -1734,7 +1729,8 @@ class UController(ursgal.UNode):
         self.input_file_sanity_check(
             input_file,
             engine=engine_name,
-            extensions=['.mgf']
+            extensions=['.mgf'],
+            multi=multi,
         )
         for search_engine_type in [
             'protein_database_search_engine',
@@ -1772,7 +1768,7 @@ class UController(ursgal.UNode):
         )
         return report['output_file']
 
-    def search(self, input_file, engine=None, force=None, output_file_name=None):
+    def search(self, input_file, engine=None, force=None, output_file_name=None, multi=False):
         '''
         The ucontroller search function
 

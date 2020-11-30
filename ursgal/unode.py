@@ -1,4 +1,4 @@
-#!/usr/bin/python3.4
+#!/usr/bin/python
 import json
 import os
 import ursgal
@@ -678,7 +678,7 @@ class UNode(object, metaclass=Meta_UNode):
             used. Returns None if no search engine was used yet.
         '''
         last_search_engine = None
-        last_search_engine = self.get_last_engine(
+        last_search_engine = self.get_last_engine( 
             history=history,
             engine_types=[
                 'cross_link_search_engine',
@@ -1418,7 +1418,8 @@ class UNode(object, metaclass=Meta_UNode):
         )
         map_mods_node_exceptions = [
             'unify_csv',
-            'ptmshepherd'
+            'ptmshepherd',
+            'ptminer'
         ]
         if is_search_engine or is_quantification_engine:
             self.map_mods()

@@ -1,9 +1,10 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 # coding: latin1
 import ursgal
-from .percolator_3_2_1 import percolator_3_2_1 as percolator
+from .percolator_3_2_1 import percolator_3_2_1
 
-class percolator_3_4_0(percolator):
+
+class percolator_3_4_0(percolator_3_2_1):
     """
     Percolator 3.4.0 UNode
 
@@ -35,8 +36,8 @@ class percolator_3_4_0(percolator):
         'create_own_folder': False,
         'citation' : 'Matthew The, Michael J. MacCoss, William S. Noble, Lukas Kall' \
             'Fast and Accurate Protein False Discovery Rates on Large-Scale Proteomics Data Sets with Percolator 3.0',
-        'include_in_git': False, # True for now, but upload dat shit later on
-        'distributable': False,
+        'include_in_git': False,
+        'distributable': True,
         'group_psms': True,
         'in_development': False,
         'utranslation_style': 'percolator_style_1',
@@ -53,7 +54,7 @@ class percolator_3_4_0(percolator):
                 '64bit': {
                     'exe': 'percolator',
                     'url': '',
-                    'zip_md5': '',
+                    'zip_md5': '6c1848249c2fc1a88c39fbf4a14babac',
                     'additional_exe': [],
                 },
             },
@@ -61,15 +62,12 @@ class percolator_3_4_0(percolator):
                 '64bit': {
                     'exe': 'percolator.exe',
                     'url': '',
-                    'zip_md5': '',
-                    'additional_exe': [],
-                },
-                '32bit': {
-                    'exe': 'percolator.exe',
-                    'url': '',
-                    'zip_md5': '',
+                    'zip_md5': '7d53ff24d5d5de3600d7b703eb962086',
                     'additional_exe': [],
                 },
             },
         }
     }
+
+    def __init__(self, *args, **kwargs):
+        super(percolator_3_4_0, self).__init__(*args, **kwargs)

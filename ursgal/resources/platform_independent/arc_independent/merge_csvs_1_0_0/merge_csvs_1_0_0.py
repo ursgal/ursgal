@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 '''
 Merges csvs into one single one.
 
@@ -23,15 +23,15 @@ def main(csv_files=None, output=None):
     all_fieldnames = []
     all_fieldnames_the_same = True
     for i, csv_file in enumerate( csv_files ):
-        file_object = open( csv_file , 'r' )
-        buffered_input_files[ csv_file ] = csv.DictReader(
-            row for row in file_object if not row.startswith('#')
-        )
-        for fieldname in buffered_input_files[ csv_file ].fieldnames:
-            if fieldname not in all_fieldnames:
-                all_fieldnames.append( fieldname )
-                if i != 0:
-                    all_fieldnames_the_same = False
+        with open( csv_file , 'r' ) as file_object:
+            buffered_input_files[ csv_file ] = csv.DictReader(
+                row for row in file_object if not row.startswith('#')
+            )
+            for fieldname in buffered_input_files[ csv_file ].fieldnames:
+                if fieldname not in all_fieldnames:
+                    all_fieldnames.append( fieldname )
+                    if i != 0:
+                        all_fieldnames_the_same = False
 
     if all_fieldnames_the_same is False:
         print('''

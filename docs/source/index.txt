@@ -30,6 +30,7 @@ Module structure
    general_structure
 
 
+.. _index_modules:
 
 Ursgal module contents
 ======================
@@ -55,6 +56,8 @@ Parameters
 
    parameter
 
+
+.. _index_engines:
 
 Engines
 =======

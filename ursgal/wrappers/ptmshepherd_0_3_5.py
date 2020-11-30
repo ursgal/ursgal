@@ -371,6 +371,12 @@ class ptmshepherd_0_3_5(ursgal.UNode):
                 for n, mass in enumerate(mass_diffs):
                     if mass == '':
                         continue
+                    if 'moda' in row['Search Engine'] and mass.startswith('+'):
+                        exp_mass = ursgal.ucore.calculate_mass(
+                            float(row['Exp m/z']),
+                            int(row['Charge'])
+                        )
+                        mass = '{}'.format(exp_mass - float(row['uCalc Mass']))
                     mass_diffs_sum += float(mass.split(':')[0])
 
                 if '<|>' in row['Protein ID']:

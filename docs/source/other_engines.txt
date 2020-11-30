@@ -46,6 +46,7 @@ Combine PEP 1_0_0
    :private-members:
 
 
+.. _misc-engines:
 
 Misc Engines
 ^^^^^^^^^^^^
@@ -136,6 +137,15 @@ pyQms 1_0_0
 .. autofunction:: ursgal.resources.platform_independent.arc_independent.pyqms_1_0_0.pyqms_1_0_0.main
 
 
+FlashLFQ 1_1_1
+--------------
+
+.. autoclass:: ursgal.wrappers.flash_lfq_1_1_1.flash_lfq_1_1_1
+   :members:
+
+
+.. _validation-engines:
+
 
 Validation Engines
 ^^^^^^^^^^^^^^^^^^
@@ -162,6 +172,20 @@ Available Percolator versions, starting with the newest version:
    :members:
 
 
+PTMiner 1.0
+-----------
+
+.. autoclass:: ursgal.wrappers.ptminer_1_0.ptminer_1_0
+   :members:
+   
+
+PTM-Sheperd 0.3.5
+-----------------
+
+.. autoclass:: ursgal.wrappers.ptmshepherd_0_3_5.ptmshepherd_0_3_5
+   :members:
+
+
 pGlyco FDR 2.2.0
 ----------------
 
@@ -176,6 +200,8 @@ qvality 2_02
    :members:
 
 
+
+.. _visualizer:
 
 Visualizer
 ^^^^^^^^^^

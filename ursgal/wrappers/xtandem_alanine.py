@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 import ursgal
 import os
 
@@ -25,7 +25,7 @@ class xtandem_alanine( xtandem ):
         'create_own_folder'           : True,
         'in_development'              : False,
         'include_in_git'              : False,
-        'distributable'               : False,
+        'distributable'               : True,
         'utranslation_style'          : 'xtandem_style_1',
         'engine' : {
             'darwin' : {
@@ -40,7 +40,7 @@ class xtandem_alanine( xtandem ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : '37f087c213dfed3c95e62a865d843fb9',
+                    'zip_md5'        : '04dfe8287cadcf6cab4562a8fb29a25b',
                     'additional_exe' : [],
                 },
             },
@@ -48,7 +48,7 @@ class xtandem_alanine( xtandem ):
                 '64bit' : {
                     'exe'            : 'tandem.exe',
                     'url'            : '',
-                    'zip_md5'        : '78ed3c76271f3596aceea8ea5bc904bc',
+                    'zip_md5'        : '6ad716f0f4c82ca53547ea0ae79d7949',
                     'additional_exe' : [],
                 },
             },

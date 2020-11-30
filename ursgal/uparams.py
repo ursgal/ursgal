@@ -1,5 +1,356 @@
 ursgal_params = {
-    'infer_proteins' : {
+    'experiment_setup': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : [],
+        'description' :  ''' ''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '''experiment_setup
+Format:
+{"1": {"FileName": <filename as in identfile>, "Condition":<str>, "Biorep": <int>, "Fraction": <int>, "Techrep": <int>},
+"2": ....
+}
+''',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+            'none_val' : [],
+            'item_title' : '',
+            'item_type' : 'str',
+            'custom_val_max' : 0,
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "list",
+    },
+    'isotopic_distribution_tolerance': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : 5,
+        'description' :  '''isotopic distribution tolerance in ppm''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--iso',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'normalize_intensities': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''normalize intensity results''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--nor',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'integrate_peak_areas': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''integrate peak areas''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--int',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'only_precursor_charge': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''use only precursor charge state''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--chg',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'match_between_runs': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''Quantify PSMs identified in other runs''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--mbr',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'match_between_runs_RT_window': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : 1,
+        'description' :  '''Max RT differenence in minutes of peptides to be considered for MBR''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--mrt',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'require_msms_id': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''Require MS/MS match in condition to consider quantification''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--rmc',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'bayesian_fold_change': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''Perform Bayesian protein fold change analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--bay',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'bayesian_fold_change_control_condition': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''Control condition for bayesian fold change analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--ctr',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'fold_change_cutoff': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : 0.1,
+        'description' :  '''fold-change cutoff for Bayesian protein fold-change analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--fcc',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 0.001,
+            'unit': 'abundance',
+            'f-point': 1e-02
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "float",
+    },
+    'markov_chain_iterations': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : 3000,
+        'description' :  '''number of markov-chain monte carlo iterations for the Bayesian protein fold-change analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--mcm',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'abundance',
+            'f-point': 1
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'markov_chain_burn_in_iterations': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : 1000,
+        'description' :  '''number of markov-chain monte carlo burn in iterations for the Bayesian protein fold-change analysis''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--bur',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'abundance',
+            'f-point': 1
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'use_shared_peptides': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : False,
+        'description' :  '''use shared peptides for protein quantification''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--sha',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "bool",
+    },
+    'random_seed': {
+        'edit_version': 1.00,
+        'available_in_unode' : [
+            'flash_lfq_1_1_1',
+        ],
+        'default_value' : 10,
+        'description' :  '''Random seed for random number generators''',
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'flash_lfq_style_1' : '--rns',
+        },
+        'utag' : [
+            'quantification',
+        ],
+        'uvalue_option' : {
+            'none_val': None,
+            'multiple_line': False,
+            'max': 10000,
+            'min': 0,
+            'updownval': 1,
+            'unit': 'abundance',
+            'f-point': 1
+        },
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : "int",
+    },
+    'infer_proteins': {
         'edit_version': 1.00,
         'available_in_unode' : [
             'percolator_2_08',
@@ -199,6 +550,7 @@ ursgal_params = {
             'pyqms_1_0_0',
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
+            'flash_lfq_1_1_1',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -209,12 +561,13 @@ ursgal_params = {
             'unit': '',
         },
         'default_value': 2,
-        'description': """ Min number of matched isotopologues for pyqms to consider for quantification """,
+        'description': """ Min number of matched isotopologues to consider for quantification """,
         'triggers_rerun': True,
         'ukey_translation': {
             'pyqms_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES',
             'sugarpy_run_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES',
             'sugarpy_plot_style_1': 'MINIMUM_NUMBER_OF_MATCHED_ISOTOPOLOGUES',
+            'flash_lfq_style_1': '--nis',
         },
         'utag': [
             'quantification',
@@ -618,12 +971,14 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'pyqms_1_0_0',
+            'flash_lfq_1_1_1',
         ],
         'default_value': None,
         'description':  ''' Molecules to quantify. Can be either a list of strings or a csv file ''',
         'triggers_rerun': True,
         'ukey_translation': {
-            'pyqms_style_1': 'evidences'
+            'pyqms_style_1': 'evidences',
+            'flash_lfq_style_1': 'evidences',
         },
         'uvalue_option': {
             'none_val': [None],
@@ -1154,7 +1509,7 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
             'tag_graph_1_8_0',
             'glycopeptide_fragmentor_1_0_0',
             'ptmshepherd_0_3_5',
@@ -1276,6 +1631,7 @@ ursgal_params = {
             'qvality_2_02',
             'sanitize_csv_1_0_0',
             'svm_1_0_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -1284,6 +1640,7 @@ ursgal_params = {
             'qvality_style_1'           : '-r',
             'sanitize_csv_style_1'      : 'bigger_scores_better',
             'svm_style_1'               : 'bigger_scores_better',
+            'ptminer_style_1'           : 'bigger_scores_better',
         },
         'utag' : [
             'scoring',
@@ -1337,8 +1694,9 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : True,
                 'pglyco_db_2_2_2' : True,
                 'deepnovo_0_0_1' : True,
-                'deepnovo_v2': True,
+                'deepnovo_pointnovo': True,
                 'pnovo_3_1_3' : True,
+                'tag_graph_1_8_0': True,
             },
             'percolator_style_1' : {
                 'None'                 : None,
@@ -1387,8 +1745,9 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : True,
                 'pglyco_db_2_2_2' : True,
                 'deepnovo_0_0_1' : True,
-                'deepnovo_v2': True,
+                'deepnovo_pointnovo': True,
                 'pnovo_3_1_3' : True,
+                'tag_graph_1_8_0': True,
             },
             'qvality_style_1' : {
                 'None'                 : None,
@@ -1437,8 +1796,9 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : True,
                 'pglyco_db_2_2_2' : True,
                 'deepnovo_0_0_1' : True,
-                'deepnovo_v2': True,
+                'deepnovo_pointnovo': True,
                 'pnovo_3_1_3' : True,
+                'tag_graph_1_8_0': True,
             },
             'sanitize_csv_style_1' : {
                 'None'                 : None,
@@ -1487,8 +1847,9 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : True,
                 'pglyco_db_2_2_2' : True,
                 'deepnovo_0_0_1' : True,
-                'deepnovo_v2': True,
+                'deepnovo_pointnovo': True,
                 'pnovo_3_1_3' : True,
+                'tag_graph_1_8_0': True,
             },
             'svm_style_1' : {
                 'None'                 : None,
@@ -1535,10 +1896,9 @@ ursgal_params = {
                 'moda_v1_61' : True,
                 'moda_v1_62' : True,
                 'pglyco_db_2_2_0' : True,
-                'pglyco_db_2_2_2' : True,
                 'deepnovo_0_0_1' : True,
-                'deepnovo_v2': True,
-                'pnovo_3_1_3' : True,
+                'deepnovo_pointnovo': True,
+                'tag_graph_1_8_0': True,
             },
         },
         'uvalue_type'    : 'select',
@@ -1585,6 +1945,7 @@ ursgal_params = {
                 'mascot_x_x_x',
                 'pglyco_db_2_2_0',
                 'pglyco_db_2_2_2',
+                'tag_graph_1_8_0',
             ],
             'custom_val_max' : 0,
         },
@@ -1840,7 +2201,7 @@ ursgal_params = {
                 'pglyco_db_2_2_0' : False,
                 'pglyco_db_2_2_2' : False,
                 'deepnovo_0_0_1' : False,
-                'deepnovo_v2' : False,
+                'deepnovo_pointnovo' : False,
             },
         },
         'uvalue_type' : 'bool',
@@ -2016,9 +2377,12 @@ ursgal_params = {
             'msfragger_3_0',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'moda_v1_62',
+            'moda_v1_61',
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
+            'flash_lfq_1_1_1',
             'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : False,
@@ -2036,6 +2400,7 @@ ursgal_params = {
             'moda_style_1'        : '-@',
             'pglyco_db_style_1'   : 'process',
             'pnovo_style_1'       : 'thread',
+            'flash_lfq_style_1': '--thr',
             'ptmshepherd_style_1' : 'threads',
         },
         'utag' : [
@@ -2209,6 +2574,7 @@ ursgal_params = {
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
             'tag_graph_1_8_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2227,6 +2593,7 @@ ursgal_params = {
             'msfragger_style_3'           : 'database_name',
             'pipi_style_1'                : 'db',
             'pglyco_db_style_1'           : 'fasta',
+            'ptminer_style_1'             : 'protein_database',
             'deepnovo_style_1'            : 'db_fasta_file',
             'tag_graph_style_1'           : 'fmindex',
         },
@@ -2318,6 +2685,7 @@ ursgal_params = {
             'xtandem2csv_1_0_0',
             'upeptide_mapper_1_0_0',
             'percolator_3_2_1',
+	        'ptminer_1_0',
             'percolator_3_4_0',
             'msfragger_20190628',
             'msfragger_2_3',
@@ -2332,6 +2700,7 @@ ursgal_params = {
             'unify_csv_style_1'             : 'decoy_tag',
             'xtandem2csv_style_1'           : 'decoy_tag',
             'upeptide_mapper_style_1'       : 'decoy_tag',
+            'ptminer_style_1'               : 'decoy_tag',
             'msfragger_style_2'             : 'decoy_prefix',
             'msfragger_style_3'             : 'decoy_prefix',
             'percolator_style_1'            : '-P',
@@ -2461,7 +2830,7 @@ ursgal_params = {
         'available_in_unode' : [
             'pepnovo_3_1',
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -2634,7 +3003,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
         ],
@@ -3287,10 +3656,11 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
             'glycopeptide_fragmentor_1_0_0',
             'ptmshepherd_0_3_5',
         ],
@@ -3310,6 +3680,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'ptminer_style_1'   : 'fragment_tol',
             'pglyco_db_style_1' : 'search_fragment_tolerance',
             'pnovo_style_1'     : 'frag_tol',
             'tag_graph_style_1' : 'ppmstd',
@@ -3377,10 +3748,11 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
             'glycopeptide_fragmentor_1_0_0',
             'ptmshepherd_0_3_5',
         ],
@@ -3400,6 +3772,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'ptminer_style_1'   : 'fragment_tol_type',
             'pglyco_db_style_1' : 'search_fragment_tolerance_type',
             'pnovo_style_1'     : 'frag_tol_type_ppm',
             'tag_graph_style_1' : 'frag_mass_tolerance_unit',
@@ -3441,6 +3814,10 @@ ursgal_params = {
             },
             'pglyco_db_style_1' : {
                 'da'  : 'Da',
+            },
+            'ptminer_style_1' : {
+                'ppm' : 1,
+                'da'  : 0 
             },
             'pnovo_style_1': {
                 'ppm' : 1,
@@ -3855,7 +4232,9 @@ ursgal_params = {
             'pglyco_fdr_2_2_0',
             'pglyco_fdr_2_2_2',
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
+            'tag_graph_1_8_0',
+            'flash_lfq_1_1_1',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -3872,6 +4251,8 @@ ursgal_params = {
             'pglyco_db_style_1'        : 'header_translations',
             'pglyco_fdr_style_1'       : 'header_translations',
             'deepnovo_style_1'         : 'header_translations',
+            'tag_graph_style_1'        : 'header_translations',
+            'flash_lfq_style_1'        : 'header_translations',
         },
         'utag' : [
             'conversion',
@@ -4117,6 +4498,57 @@ ursgal_params = {
                 'precursor_mz': 'Exp m/z',
                 'precursor_charge': 'Charge',
                 'scan_list_middle': 'Spectrum ID',
+            },
+            'tag_graph_style_1': {
+                'ScanF': 'Spectrum ID',
+                'Charge': 'Charge',
+                'Retention Time': 'Retention Time (s)',
+                'Obs M+H': 'Exp Mass',
+                'Theo M+H': 'Calc mass',
+                'PPM': 'Accuracy (ppm)',
+                'EM Probability': 'TagGraph:EM Probability',
+                '1-lg10 EM': 'TagGraph: 1-log10 EM',
+                'Spectrum Score': 'TagGraph:Spectrum Score',
+                'Alignment Score': 'TagGraph:Alignment Score',
+                'Composite Score': 'TagGraph:Composite Score',
+                'Unique Siblings': 'Unique Siblings',
+                'Context Mod Variants': 'Context Mod Variants',
+                'Num Mod Occurrences': 'Num Mod Occurrences',
+                'Context': 'Sequence',
+                'Mods': 'Modifications',
+                'Mod Ambig Edges': 'TagGraph:Mod Ambig Edges',
+                'Mod Ranges': 'TagGraph:Mod Ranges',
+                'Proteins': 'Protein ID',
+                'De Novo Peptide': 'De Novo Peptide',
+                'De Novo Score': 'De Novo Score',
+                'Matching Tag Length': 'Matching Tag Length',
+                'Num Matches': 'Num DB Matches',
+            },
+            'flash_lfq_style_1': {
+                'File Name': 'Raw Filename',
+                'Precursor Charge': 'Charge',
+                'Peak RT Apex': 'Retention Time (s)',
+                'Peptide Monoisotopic Mass': 'Calc mass',
+                'Peak Apex Mass Error (ppm)': 'Accuracy (ppm)',
+                'Base Sequence': 'Sequence',
+                'Full Sequence': 'FlashLFQ:Full Sequence',
+                'Protein Group': 'Protein ID',
+                "Theoretical MZ": 'FlashLFQ:Theoretical MZ',
+                'Peak MZ': 'FlashLFQ:Peak MZ',
+                'MBR Score': "FlashLFQ:MBR Score",
+                'Peak Detection Type': "FlashLFQ:Peak Detection Type",
+                'PSMs Mapped': "FlashLFQ:PSMs Mapped",
+                'Peak Split Valley RT': "FlashLFQ:Peak Split Valley RT",
+                'Base Sequences Mapped': "FlashLFQ:Base Sequences Mapped",
+                'Full Sequences Mapped': "FlashLFQ:Full Sequences Mapped",
+                'Peak intensity': "FlashLFQ:Peak intensity",
+                'Peak RT Start': "FlashLFQ:Peak RT Start",
+                'Peak RT Apex': "FlashLFQ:Peak RT Apex",
+                'Peak RT End': "FlashLFQ:Peak RT End",
+                'Peak MZ': "FlashLFQ:Peak MZ",
+                'Peak Charge': "FlashLFQ:Peak Charge",
+                'Num Charge States Observed': "FlashLFQ:Num Charge States Observed",
+                'MS2 Retention Time': "FlashLFQ:MS2 Retention Time",
             },
         },
         'uvalue_type' : 'str',
@@ -5339,7 +5771,7 @@ ursgal_params = {
             'msfragger_20190628',
             'msfragger_2_3',
             'msfragger_3_0',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
             'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
@@ -5490,11 +5922,13 @@ ursgal_params = {
             'moda_v1_62',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'MaxModSize',
             'pipi_style_1' : 'max_ptm_mass',
+            'ptminer_style_1'   : 'precursor_matching_tolerance',
         },
         'utag' : [
             'modifications',
@@ -5561,6 +5995,32 @@ ursgal_params = {
         'default_value' : 3,
         'description' : \
             'Maximal number of modifications per peptide',
+    },
+    'min_num_mods' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptminer_style_1'   : 'min_mod_number',
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'int',
+        'uvalue_option' : {
+            'none_val'  : None,
+            'max'       : 100000,
+            'min'       : 0,
+            'updownval' : 1,
+            'unit'      : 'mods'
+        },
+        'default_value' : 5,
+        'description'   : \
+            'Minimal number of modifications per peptide',
     },
     'max_num_mod_sites' : {
         'edit_version' : 1.00,
@@ -5891,6 +6351,39 @@ ursgal_params = {
         'description' : \
             'Maximal peptide variants, new default defined by msfragger',
     },
+    'mgf_input_files_list' : {
+        'edit_version' : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'triggers_rerun' : True,
+        'ukey_translation' : {
+            'ptminer_style_1'  : 'mgf_input_files_list',
+        },
+        'utag' : [
+            'input_files',
+        ],
+        'uvalue_translation' : {
+        },
+        'uvalue_type' : 'list',
+        'uvalue_option' : {
+            'none_val'         : [],
+            'multiple_line'    : False,
+            'item_title'       : 'mgf input file',
+            'item_type'        : 'str',
+            'input_extensions' : ['.mgf'],
+            'custom_val_max' : 1000,
+            'custom_type' : {
+                'str' : {
+                    'multiple_line' : False,
+                },
+            },
+        },
+        'default_value' : None,
+        'description' : \
+            'List of paths to input .mgf files\n'\
+            '    \'\' : None',
+    },
     'mgf_input_file' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -5970,11 +6463,13 @@ ursgal_params = {
             'moda_v1_62',
             'pipi_1_4_5',
             'pipi_1_4_6',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
             'moda_style_1' : 'MinModSize',
             'pipi_style_1' : 'min_ptm_mass',
+            'ptminer_style_1': 'precursor_matching_tolerance',
         },
         'utag' : [
             'modifications',
@@ -6351,7 +6846,7 @@ ursgal_params = {
             'omssa_2_1_9',
             'pepnovo_3_1',
             'unify_csv_1_0_0',
-            'upeptide_mapper_1_0_0',
+            # 'upeptide_mapper_1_0_0',
             'xtandem_cyclone_2010',
             'xtandem_jackhammer',
             'xtandem_piledriver',
@@ -6368,10 +6863,12 @@ ursgal_params = {
             'pipi_1_4_6',
             'pyqms_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
             'pnovo_3_1_3',
             'tag_graph_1_8_0',
+            'flash_lfq_1_1_1',
             'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
@@ -6385,7 +6882,7 @@ ursgal_params = {
             'omssa_style_1'           : ('-mv', 'mf'),
             'pepnovo_style_1'         : '-PTMs',
             'unify_csv_style_1'       : 'modifications',
-            'upeptide_mapper_style_1' : 'modifications',
+            # 'upeptide_mapper_style_1' : 'modifications',
             'msfragger_style_1'       : 'modifications',
             'msfragger_style_2'       : 'modifications',
             'msfragger_style_3'       : 'modifications',
@@ -6401,9 +6898,11 @@ ursgal_params = {
             ),
             'pyqms_style_1' : 'modifications',
             'pglyco_db_style_1' : 'modifications',
+            'ptminer_style_1' : 'modifications',
             'deepnovo_style_1' : 'modifications',
             'pnovo_style_1' : 'modifications',
             'tag_graph_style_1' : 'modifications',
+            'flash_lfq_style_1': 'modifications',
             'ptmshepherd_style_1': 'varmod_masses',
         },
         'utag' : [
@@ -7128,7 +7627,7 @@ ursgal_params = {
             'none_val'      : None,
             'multiple_line' : False,
         },
-        'default_value' : 'mzml2mgf_1_0_0',
+        'default_value' : 'mzml2mgf_2_0_0',
         'description' : \
             'mzml to mgf converter version: version name',
     },
@@ -7932,6 +8431,7 @@ ursgal_params = {
             'xtandem_sledgehammer',
             'xtandem_vengeance',
             'xtandem_alanine',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -7951,6 +8451,7 @@ ursgal_params = {
             'sugarpy_plot_style_1'          : 'output_file',
             'venndiagram_style_1'           : 'output_file',
             'xtandem_style_1'               : 'output, path',
+            'ptminer_style_1'               : 'output_file_incl_path',
         },
         'utag' : [
             'output',
@@ -8376,9 +8877,10 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
             'pnovo_3_1_3',
             'ptmshepherd_0_3_5',
         ],
@@ -8401,6 +8903,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'ptminer_style_1'    : 'precursor_tol',
             'pglyco_db_style_1'  : 'search_precursor_tolerance',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol',
@@ -8477,10 +8980,12 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
             'pnovo_3_1_3',
+            'flash_lfq_1_1_1',
             'ptmshepherd_0_3_5',
         ],
         'triggers_rerun' : True,
@@ -8502,9 +9007,11 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'ptminer_style_1'    : 'precursor_tol',
             'pglyco_db_style_1'  : 'search_precursor_tolerance',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol',
+            'flash_lfq_style_1'  : '--ppm',
             'ptmshepherd_style_1': 'precursor_tol'
         },
         'utag' : [
@@ -8576,9 +9083,10 @@ ursgal_params = {
             'sugarpy_run_1_0_0',
             'sugarpy_plot_1_0_0',
             'pglyco_db_2_2_0',
+            'ptminer_1_0',
             'pglyco_db_2_2_2',
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
             'pnovo_3_1_3',
             'ptmshepherd_0_3_5',
         ],
@@ -8599,6 +9107,7 @@ ursgal_params = {
             'pyqms_style_1'      : 'REL_MZ_RANGE',
             'sugarpy_run_style_1': 'REL_MZ_RANGE',
             'sugarpy_plot_style_1': 'REL_MZ_RANGE',
+            'ptminer_style_1'    : 'precursor_tol_type',
             'pglyco_db_style_1'  : 'search_precursor_tolerance_type',
             'deepnovo_style_1'   : ('precursor_mass_tolerance', 'precursor_mass_ppm'),
             'pnovo_style_1'      : 'pep_tol_type_ppm',
@@ -8646,6 +9155,10 @@ ursgal_params = {
             },
             'pglyco_db_style_1': {
                 'da' : 'Da'
+            },
+            'ptminer_style_1': {
+                'da'    : 0,
+                'ppm'   : 1
             },
             'pnovo_style_1': {
                 'ppm' : 1,
@@ -8803,7 +9316,7 @@ ursgal_params = {
             'pglyco_db_2_2_0',
             'pglyco_db_2_2_2',
             'pnovo_3_1_3',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -9144,7 +9657,7 @@ ursgal_params = {
         'uvalue_translation' : {
         },
         'uvalue_type' : 'dict',
-        'uvalue_option' : { 
+        'uvalue_option' : {
             'none_val' : None,
             'item_title' : 'column_name_with_type_of_merge',
             'item_titles' : {
@@ -10919,6 +11432,7 @@ ursgal_params = {
             'svm_1_0_0',
             'ucontroller',
             'unify_csv_1_0_0',
+            'ptminer_1_0',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {
@@ -10929,6 +11443,7 @@ ursgal_params = {
             'svm_style_1'               : 'validation_score_field',
             'ucontroller_style_1'       : 'validation_score_field',
             'unify_csv_style_1'         : 'validation_score_field',
+            'ptminer_style_1'           : 'validation_score_field',
         },
         'utag' : [
             'validation',
@@ -10975,7 +11490,6 @@ ursgal_params = {
                 'msfragger_20190628'   : 'MSFragger:Hyperscore',
                 'msfragger_2_3'        : 'MSFragger:Hyperscore',
                 'msfragger_3_0'        : 'MSFragger:Hyperscore',
-
                 'mascot_x_x_x'         : 'Mascot:Score',
                 'pipi_1_4_5'           : 'PIPI:score',
                 'pipi_1_4_6'           : 'PIPI:score',
@@ -10985,8 +11499,9 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
-                'deepnovo_v2'          : 'DeepNovo:score',
+                'deepnovo_pointnovo'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'percolator_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11037,8 +11552,9 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
-                'deepnovo_v2'          : 'DeepNovo:score',
+                'deepnovo_pointnovo'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'qvality_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11089,8 +11605,9 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
-                'deepnovo_v2'          : 'DeepNovo:score',
+                'deepnovo_pointnovo'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'sanitize_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11141,8 +11658,9 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
-                'deepnovo_v2'          : 'DeepNovo:score',
+                'deepnovo_pointnovo'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'svm_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11193,8 +11711,9 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
-                'deepnovo_v2'          : 'DeepNovo:score',
+                'deepnovo_pointnovo'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'ucontroller_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11245,9 +11764,10 @@ ursgal_params = {
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
                 'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
-                'deepnovo_v2'          : 'DeepNovo:score',
+                'deepnovo_pointnovo'          : 'DeepNovo:score',
                 'pnovo_3_1_3'          : 'pNovo:Score',
                 'unknown'              : '',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
             'unify_csv_style_1' : {
                 'msamanda_1_0_0_5242'  : 'Amanda:Score',
@@ -11296,10 +11816,9 @@ ursgal_params = {
                 'moda_v1_61'           : 'ModA:probability',
                 'moda_v1_62'           : 'ModA:probability',
                 'pglyco_db_2_2_0'      : 'pGlyco:TotalScore',
-                'pglyco_db_2_2_2'      : 'pGlyco:TotalScore',
                 'deepnovo_0_0_1'       : 'DeepNovo:score',
-                'deepnovo_v2'          : 'DeepNovo:score',
-                'pnovo_3_1_3'          : 'pNovo:Score',
+                'deepnovo_pointnovo'          : 'DeepNovo:score',
+                'tag_graph_1_8_0'      : 'TagGraph:: 1-log10 EM',
             },
         },
         'uvalue_type' : 'str',
@@ -12745,6 +13264,130 @@ ursgal_params = {
         },
         'uvalue_type' : "dict",
     },
+    'fdr_method' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'fdr_method',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                'global'    : 1,
+                'separate'  : 2,
+                'transferred'   : 3,
+            }
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+            'none_val' : '',
+            'multiple_line': False,
+        },
+        'uvalue_type' : 'str',
+        'triggers_rerun' : True,
+        'default_value' : 'transferred',
+        'description'   : 'specifying the fdr method to use'
+    },
+    'determine_localization' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'is_localized',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'localization',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
+        'default_value' : True,
+        'description'   : 'specifying whether positions for mass shifts should be determined or not',
+    },
+    'use_prior_probability' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'use_prior',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'validation',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
+        'default_value' : True,
+        'description'   : 'specifying whether the prior probability should be used or not',
+    },
+    'determine_unimod_annotation' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'is_annotated',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'annotation',
+            'output',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
+        'default_value' : True,
+        'description'   : 'specifying whether mass shifts should be annotated or not',
+    },
+    'is_open_search' : {
+        'edit_version'  : 1.00,
+        'available_in_unode' : [
+            'ptminer_1_0',
+        ],
+        'ukey_translation' : {
+            'ptminer_style_1' : 'open_search',
+        },
+        'uvalue_translation' : {
+            'ptminer_style_1' : {
+                False : 0,
+                True : 1,
+            }
+        },
+        'utag' : [
+            'modifications',
+        ],
+        'uvalue_option' : {
+        },
+        'uvalue_type'   : 'bool',
+        'triggers_rerun' : True,
+        'default_value' : True,
+        'description'   : 'specifying whether this is an open search or not',
+    },
     'deepnovo_direction' : {
         'edit_version' : 1.00,
         'available_in_unode' : [
@@ -12833,7 +13476,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -12843,7 +13486,7 @@ ursgal_params = {
             'updownval': 1,
             'unit': 'psms',
         },
-        'default_value': True,
+        'default_value': False,
         'description': ''' DeepNovo uses lstm ''',
         'triggers_rerun': True,
         'ukey_translation': {
@@ -12912,7 +13555,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode': [
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
         ],
         'uvalue_option': {
             'none_val': None,
@@ -12939,7 +13582,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
         ],
         'default_value' : 'search_denovo',
         'description' :  ''' Defines the search mode for DeepNovo ''',
@@ -12968,7 +13611,7 @@ ursgal_params = {
         'edit_version' : 1.00,
         'available_in_unode' : [
             'deepnovo_0_0_1',
-            'deepnovo_v2',
+            'deepnovo_pointnovo',
         ],
         'triggers_rerun' : True,
         'ukey_translation' : {

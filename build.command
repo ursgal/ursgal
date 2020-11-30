@@ -22,7 +22,7 @@ cp -R docs/build/html/* Website/
 
 rm -rf dist/*
 # Creating Python packages
-python3.4 setup.py sdist --formats=bztar,gztar,zip
+python setup.py sdist --formats=bztar,gztar,zip
 # python3.4 setup.py sdist --formats=zip
 cd dist
 tar xvfj *.bz2

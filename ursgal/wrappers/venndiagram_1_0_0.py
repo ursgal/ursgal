@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python
 import ursgal
 import importlib
 import os
@@ -152,6 +152,8 @@ class venndiagram_1_0_0( ursgal.UNode ):
                 column_sets[ label ].add( unique_identifier )
                 if unique_identifier not in lookup_dict.keys():
                     lookup_dict[unique_identifier] = []
+                line_dict['original_input_label'] = default_label[n].split('_')[1]
+                line_dict['original_input_actual_name'] = label
                 lookup_dict[unique_identifier].append(line_dict)
         in_sets = []
         for label in used_labels:
@@ -172,8 +174,12 @@ class venndiagram_1_0_0( ursgal.UNode ):
             }
 
             #adding new columns for venn diagram output
-            fieldnames_list.append('return_dict_nomenclature')
-            fieldnames_list.append('actual_name')
+            fieldnames_list.extend([
+                'return_dict_nomenclature',
+                'actual_name',
+                'original_input_label',
+                'original_input_actual_name',
+            ])
 
             print('CREATING CSV FILE FROM VENN DIAGRAM ...')
             with open(output_file_name.replace('.svg','.csv'), 'w', newline='') as new_csvfile:

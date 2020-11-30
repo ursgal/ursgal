@@ -4,9 +4,9 @@
 
 Test the unify_csv function for msfragger engine
 
-Covers 
+Covers
     * Reassignment of merged 15N + e.g. Oxidation modifications back to normal
-      Oxidation and removement of any 
+      Oxidation and removement of any
 
 '''
 import ursgal
