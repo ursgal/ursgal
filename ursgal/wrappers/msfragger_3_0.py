@@ -7,7 +7,7 @@ import csv
 import sys
 
 
-class msfragger_20190628(ursgal.UNode):
+class msfragger_3_0(ursgal.UNode):
     """
     MSFragger unode
 
@@ -34,9 +34,9 @@ class msfragger_20190628(ursgal.UNode):
     META_INFO = {
         'edit_version'                : 1.00,
         'name'                        : 'MSFragger',
-        'version'                     : '20190628',
-        'release_date'                : '2019-06-28',
-        'utranslation_style'          : 'msfragger_style_2',
+        'version'                     : '3.0',
+        'release_date'                : '2019-06-05',
+        'utranslation_style'          : 'msfragger_style_3',
         'input_extensions'            : ['.mgf', '.mzML', '.mzXML'],
         'output_extensions'           : ['.csv'],
         'create_own_folder'           : True,
@@ -49,22 +49,21 @@ class msfragger_20190628(ursgal.UNode):
         'engine'                      : {
             'platform_independent'    : {
                 'arc_independent' : {
-                    'exe'            : 'MSFragger-20190628.jar',
+                    'exe'            : 'MSFragger-3.0.jar',
                     'url'            : 'http://www.nesvilab.org/software.html',
                     'zip_md5'        : '',
                     'additional_exe' : [],
                 },
             },
         },
-        'citation'                   :
-        'Kong, A. T., Leprevost, F. V, Avtonomov, '
-            'D. M., Mellacheruvu, D., and Nesvizhskii, A. I. (2017) MSFragger: '
-            'ultrafast and comprehensive peptide identification in mass '
-            'spectrometry-based proteomics. Nature Methods 14'
+        'citation'                   :\
+            'Polasky, D.A.; Yu, F.; Teo, G.C.; Nesvizhskii A.I. (2020).'\
+            'Fast and Comprehensive N- and O-glycoproteomics analysis with MSFragger-Glyco'\
+            'bioRxiv 2020.05.18.102665; doi: https://doi.org/10.1101/2020.05.18.102665 '
     }
 
     def __init__(self, *args, **kwargs):
-        super(msfragger_20190628, self).__init__(*args, **kwargs)
+        super(msfragger_3_0, self).__init__(*args, **kwargs)
         pass
 
     def write_params_file(self):
@@ -147,6 +146,8 @@ class msfragger_20190628(ursgal.UNode):
                     )
                     self.params_to_write[mod_key] = N15_Diff
 
+        self.mass_shift_lookup = {}
+        self.mass_glycan_lookup = {}
         for msfragger_param_name in self.params['translations']['_grouped_by_translated_key'].keys():
             for ursgal_param_name, param_value in self.params['translations']['_grouped_by_translated_key'][msfragger_param_name].items():
                 if msfragger_param_name in write_exclusion_list:
@@ -180,6 +181,10 @@ class msfragger_20190628(ursgal.UNode):
                     min_mz, max_mz = param_value
                     self.params_to_write[
                         msfragger_param_name] = '{0},{1}'.format(min_mz, max_mz)
+                elif msfragger_param_name == 'delta_mass_exclude_ranges':
+                    min_mz, max_mz = param_value
+                    self.params_to_write[
+                        msfragger_param_name] = '({0},{1})'.format(min_mz, max_mz)
                 elif msfragger_param_name == 'precursor_mass_lower':
                     self.params_to_write[
                         msfragger_param_name] = -1*param_value
@@ -268,7 +273,91 @@ class msfragger_20190628(ursgal.UNode):
                             self.params['translations']['_grouped_by_translated_key'][
                                 'precursor_max_charge']['precursor_max_charge']
                         )
-
+                elif msfragger_param_name == 'fragment_ion_series':
+                    ion_list = []
+                    for ion in param_value:
+                        if ion not in [
+                            'a',
+                            'b',
+                            'c',
+                            'y~',
+                            'x',
+                            'y',
+                            'z',
+                            'b~',
+                            'y-18',
+                            'b-18',
+                            'Y',
+                        ]:
+                            print('''
+                                [ WARNING ] MSFragger does not allow the following ion:
+                                {0}
+                                This ion will be skipped, i.e. not included in the search.
+                            '''.format(ion))
+                            continue
+                        ion_list.append(ion)
+                    self.params_to_write[msfragger_param_name] = ','.join(ion_list)
+                elif msfragger_param_name in [
+                    'mass_offsets',
+                    'Y_type_masses',
+                ]:
+                    cc = ursgal.ChemicalComposition()
+                    umama = ursgal.UnimodMapper()
+                    masses = []
+                    for m in param_value['masses']:
+                        masses.append(str(m))
+                    for m in param_value['glycans']:
+                        cc.clear()
+                        cc.add_glycan(m)
+                        mass = cc._mass()
+                        masses.append(str(mass))
+                        # for tm in self.transform_mass_add_error(mass):
+                        tm = round(mass*1e5)
+                        if tm not in self.mass_glycan_lookup.keys():
+                            self.mass_glycan_lookup[tm] = set()
+                        self.mass_glycan_lookup[tm].add(m)
+                    for m in param_value['chemical_formulas']:
+                        cc.clear()
+                        cc.add_chemical_formula(m)
+                        mass = cc._mass()
+                        masses.append(str(mass))
+                        # for tm in self.transform_mass_add_error(mass):
+                        tm = round(mass*1e5)
+                        if tm not in self.mass_shift_lookup.keys():
+                            self.mass_shift_lookup[tm] = set()
+                        self.mass_shift_lookup[tm].add(m)
+                    for m in param_value['unimods']:
+                        unimod_mass = umama.name2mass(m)
+                        masses.append(str(unimod_mass))
+                        # for tm in self.transform_mass_add_error(unimod_mass):
+                        tm = round(mass*1e5)
+                        if tm not in self.mass_shift_lookup.keys():
+                            self.mass_shift_lookup[tm] = set()
+                        self.mass_shift_lookup[tm].add(m)
+                    self.params_to_write[msfragger_param_name] = '/'.join(masses)
+                elif msfragger_param_name == 'diagnostic_fragments':
+                    cc = ursgal.ChemicalComposition()
+                    umama = ursgal.UnimodMapper()
+                    masses = []
+                    for m in param_value['masses']:
+                        masses.append(m)
+                    for m in param_value['glycans']:
+                        cc.clear()
+                        cc.add_glycan(m)
+                        masses.append(cc._mass())
+                    for m in param_value['chemical_formulas']:
+                        cc.clear()
+                        cc.add_chemical_formula(m)
+                        masses.append(cc._mass())
+                    for m in param_value['unimods']:
+                        unimod_mass = umama.name2mass(m)
+                        masses.append(unimod_mass)
+                    mzs = []
+                    for mass in masses:
+                        mzs.append(
+                            str(ursgal.ucore.calculate_mz(mass, 1))
+                        )
+                    self.params_to_write[msfragger_param_name] = '/'.join(mzs)
                 else:
                     self.params_to_write[msfragger_param_name] = param_value
 
@@ -292,8 +381,6 @@ class msfragger_20190628(ursgal.UNode):
             raise Exception(
                 'MSFragger input spectrum file must be in mzML or MGF format!')
 
-        # pprint.pprint(self.params['translations'])
-        # exit()
         self.params['command_list'] = [
             'java',
             '-Xmx{0}'.format(
@@ -311,6 +398,27 @@ class msfragger_20190628(ursgal.UNode):
             self.params['output_file']
         )
         return self.params
+
+    def transform_mass_add_error(self, mass):
+        if self.params['translations']['precursor_mass_tolerance_unit'] != 'ppm':
+            lower_mass = mass - self.params['translations'][
+                'precursor_mass_tolerance_minus'] * mass / 1e6
+            upper_mass = mass + self.params['translations'][
+                'precursor_mass_tolerance_plus'] * mass / 1e6
+        elif self.params['translations']['precursor_mass_tolerance_unit'] != 'Da':
+            lower_mass = mass - self.params['translations'][
+                'precursor_mass_tolerance_minus']
+            upper_mass = mass + self.params['translations'][
+                'precursor_mass_tolerance_plus']
+        else:
+            print('[ERROR] mass tolerance unit {0} not supported'.format(
+                self.params['translations']['precursor_mass_tolerance_unit']
+            ))
+            sys.exit(1)
+        transformed_mass_range = []
+        for m in range(round(lower_mass*1e5), round(((upper_mass*1e5)+1))):
+            transformed_mass_range.append(m)
+        return transformed_mass_range
 
     def postflight(self):
         '''
@@ -361,8 +469,12 @@ class msfragger_20190628(ursgal.UNode):
             'Raw data location',
             'Exp m/z',
             'Calc m/z',
-
         ]
+        if self.params['translations']['msfragger_labile_mode'] in ['labile', 'nglycan']:
+            translated_headers += [
+                'Mass Difference Annotations',
+                'Glycan'
+            ]
 
         msfragger_output_tsv = os.path.join(
             self.params['input_dir_path'],
@@ -417,6 +529,34 @@ class msfragger_20190628(ursgal.UNode):
                     float(line_dict['MSFragger:Neutral mass of peptide']),
                     float(line_dict['Charge'])
                 )
+                if self.params['translations']['msfragger_labile_mode'] in['labile', 'nglycan']:
+                    annotated = False
+                    n = 0
+                    mass_diff = float(line_dict['Mass Difference'])
+                    matching_glycans = []
+                    matching_annotations = []
+                    for t_mass_diff in self.transform_mass_add_error(mass_diff):
+                    # t_mass_diff = round(float(line_dict['Mass Difference']) * 1e5)
+                        if t_mass_diff in self.mass_glycan_lookup.keys():
+                            matching_glycans.extend(sorted(self.mass_glycan_lookup[t_mass_diff]))
+                            annotated = True
+                        elif t_mass_diff in self.mass_shift_lookup.keys():
+                            matching_annotations.extend(sorted(self.mass_shift_lookup[t_mass_diff]))
+                            annotated = True
+                    while annotated is False:
+                        n += 1
+                        mass_diff = mass_diff - ursgal.ukb.PROTON
+                        if n == 4:
+                            break
+                        for t_mass_diff in self.transform_mass_add_error(mass_diff):
+                            if t_mass_diff in self.mass_glycan_lookup.keys():
+                                matching_glycans.extend(sorted(self.mass_glycan_lookup[t_mass_diff]))
+                                annotated = True
+                            elif t_mass_diff in self.mass_shift_lookup.keys():
+                                matching_annotations.extend(sorted(self.mass_shift_lookup[t_mass_diff]))
+                                annotated = True
+                    line_dict['Glycan'] = ';'.join(matching_glycans)
+                    line_dict['Mass Difference Annotations'] = ';'.join(matching_annotations)
                 csv_writer.writerow(line_dict)
 
         csv_out_fobject.close()

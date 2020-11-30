@@ -1132,6 +1132,12 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     dHex,
                 )
 
+            if line_dict.get('Glycan', '') != '':
+                sorted_glycans = []
+                for glycan in line_dict['Glycan'].split(';'):
+                    sorted_glycans.append(sort_glycan(glycan))
+                line_dict['Glycan'] = ';'.join(sorted_glycans)
+
             # protein block, only for database search engine
             if database_search is True:
                 # check for correct cleavage sites and set a new field to
@@ -1416,6 +1422,28 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         created_tmp_files.append( output_file + '_full_protein_names.txt' )
     return created_tmp_files
 
+def sort_glycan(glycan):
+    '''
+    Sorts glycan
+    '''
+    pattern = re.compile(
+        r'''(?P<monosacch>[A-z0-9]*)(?P<count>\([A-z0-9]*\))''' )
+    glycan_dict = {}
+    for glyc_match in pattern.finditer(glycan):
+        monosacch = glyc_match.group('monosacch')
+        if monosacch == 'End':
+            count = glyc_match.group('count').strip('(').strip(')')
+            if count == 'None':
+                count = None
+        elif glyc_match.group('count') == '':
+            count = 1
+        else:
+            count = int(glyc_match.group('count').strip('(').strip(')'))
+        glycan_dict[monosacch] = count
+    sorted_glycan = ''
+    for k, v in sorted(glycan_dict.items()):
+        sorted_glycan += '{0}({1})'.format(k, v)
+    return sorted_glycan
 
 # def get_psm_defining_colnames(score_colname, search_engine):
 #     '''
