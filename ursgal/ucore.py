@@ -148,7 +148,7 @@ def calculate_mass(mz, charge):
     return calc_mass
 
 
-def digest(sequence, enzyme, no_missed_cleavages=False):
+def digest(sequence, enzyme, count_missed_cleavages=None, no_missed_cleavages=False):
     '''
     Amino acid digest function
 
@@ -156,15 +156,23 @@ def digest(sequence, enzyme, no_missed_cleavages=False):
         sequence (str): amino acid sequence to digest
         enzyme (tuple): enzyme properties used for cleavage ('aminoacid(s)', 'N/C(terminus)')
                         e.g. ('KR','C') for trypsin
-        no_missed_cleavages (bool): allow missed cleavages or not
+        count_missed_cleavages (int): number of miss cleavages allowed
 
     Returns:
-        list: list of digestes peptides
+        list: list of digested peptides
 
     '''
     tmp = ''
     result = []
     additionals = list()
+    # for backwards compatibility e.g. sole use of kwarg "no_missed_cleavages"
+    # and no use of no_missed_cleavages
+    if count_missed_cleavages is None: # i.e. not set
+        if no_missed_cleavages is False:
+            count_missed_cleavages = 2
+        else:
+            count_missed_cleavages = 0
+
     cleavage_aa, site = enzyme
     for p, aa in enumerate(sequence):
         if aa == '*':
@@ -181,21 +189,27 @@ def digest(sequence, enzyme, no_missed_cleavages=False):
                 tmp += aa
     if tmp != '':
         result.append(tmp)
-    if no_missed_cleavages:
+    if count_missed_cleavages > len(result):
+        count_missed_cleavages = len(result)
+
+    if count_missed_cleavages == 0:
         additionals = result
     else:
-        for _ in range(len(result) - 1):
-            try:
-                additionals.append(
-                    result[_] + result[_ + 1]
-                )
-            except:
-                pass
-            try:
-                additionals.append(
-                    result[_] + result[_ + 1] + result[_ + 2])
-            except:
-                pass
+        for r in range(len(result)):
+            # r is the index of each fully-cleaved peptide in the list from above
+            for mc in range(r, len(result) + 1):
+                # now starting with 'r' we interrogate all other pepitdes and build further peptides
+                # up to the desired number of missed cleavages
+                if mc - r >= count_missed_cleavages:
+                    continue
+                if mc + 2 > len(result):
+                    # i.e. if are over end of list
+                    continue
+                # need to add 2 to mc a it's a location marker.
+                # mc is essentially the first peptide in the list
+                newpep = ''.join(result[r: mc + 2])
+                if newpep != '':
+                    additionals.append(newpep)
         additionals += result
     return additionals
 
