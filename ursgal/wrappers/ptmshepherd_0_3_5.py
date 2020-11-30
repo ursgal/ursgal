@@ -369,13 +369,9 @@ class ptmshepherd_0_3_5(ursgal.UNode):
                 mass_diffs = row['Mass Difference'].split(';')
                 mass_diffs_sum = 0.0
                 for n, mass in enumerate(mass_diffs):
-                    if n > 0:
-                        continue
                     if mass == '':
                         continue
                     mass_diffs_sum += float(mass.split(':')[0])
-                # if mass_diffs_sum > 4000:
-                #     continue
 
                 if '<|>' in row['Protein ID']:
                     is_unique = 'false'
