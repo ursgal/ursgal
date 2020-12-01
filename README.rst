@@ -309,29 +309,12 @@ Full list of tools with proper citations that are integrated into Ursgal are:
     * Bald, T., Barth, J., Niehues, A., Specht, M., Hippler, M., and Fufezan, C. (2012) pymzML--Python module for high-throughput bioinformatics on mass spectrometry data. Bioinformatics 28, 1052–1053
     * Kösters, M., Leufken, J., Schulze, S., Sugimoto, K., Klein, J., Zahedi, R. P., Hippler, M., Leidel, S. A., and Fufezan, C. (2018) pymzML v2.0: introducing a highly compressed and seekable gzip format. Bioinformatics 34, 2513-2514
     * Liu, M.Q.; Zeng, W.F.; Fang, P.; Cao, W.Q.; Liu, C.; Yan, G.Q.; Zhang, Y.; Peng, C.; Wu, J.Q.;
-    * Zhang, X.J.; Tu, H.J.; Chi, H.; Sun, R.X.; Cao, Y.; Dong, M.Q.; Jiang, B.Y.; Huang, J.M.; Shen, H.L.;
-    Wong ,C.C.L.; He, S.M.; Yang, P.Y. (2017) pGlyco 2.0 enables precision N-glycoproteomics
-    with comprehensive quality control and one-step mass spectrometry
-    for intact glycopeptide identification. Nat Commun 8(1)
-    * Yuan, Z.F.; Liu, C.; Wang, H.P.; Sun, R.X.; Fu, Y.; Zhang, J.F.; Wang, L.H.;
-    Chi, H.; Li, Y.; Xiu, L.Y.; Wang, W.P.; He, S.M. (2012)
-    pParse: a method for accurate determination of monoisotopic peaks 
-    in high-resolution mass spectra. Proteomics 12(2)
-    * Hulstaert, N.; Sachsenberg, T.; Walzer, M.; Barsnes, H.; Martens, L. and 
-    Perez-Riverol, Y. (2019) ThermoRawFileParser: modular, scalable and 
-    cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852
+    * Zhang, X.J.; Tu, H.J.; Chi, H.; Sun, R.X.; Cao, Y.; Dong, M.Q.; Jiang, B.Y.; Huang, J.M.; Shen, H.L.; Wong ,C.C.L.; He, S.M.; Yang, P.Y. (2017) pGlyco 2.0 enables precision N-glycoproteomics with comprehensive quality control and one-step mass spectrometry for intact glycopeptide identification. Nat Commun 8(1)
+    * Yuan, Z.F.; Liu, C.; Wang, H.P.; Sun, R.X.; Fu, Y.; Zhang, J.F.; Wang, L.H.; Chi, H.; Li, Y.; Xiu, L.Y.; Wang, W.P.; He, S.M. (2012) pParse: a method for accurate determination of monoisotopic peaks in high-resolution mass spectra. Proteomics 12(2)
+    * Hulstaert, N.; Sachsenberg, T.; Walzer, M.; Barsnes, H.; Martens, L. and Perez-Riverol, Y. (2019) ThermoRawFileParser: modular, scalable and cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852
     * Tran, N.H.; Zhang, X.; Xin, L.; Shan, B.; Li, M. (2017) De novo peptide sequencing by deep learning. PNAS 114 (31) 
-    * Devabhaktuni, A.; Lin, S.; Zhang, L.; Swaminathan, K.; Gonzalez, CG.; Olsson, N.; Pearlman, SM.; Rawson, K.; Elias, JE.
-    (2019) TagGraph reveals vast protein modification landscapes from large tandem mass spectrometry datasets.
-    Nat Biotechnol. 37(4)
-    * Yang, H; Chi, H; Zhou, W; Zeng, WF; He, K; Liu, C; Sun, RX; He, SM. (2017)
-    Open-pNovo: De Novo Peptide Sequencing with Thousands of Protein Modifications.
-    J Proteome Res. 16(2)
-    * Polasky, DA; Yu, F; Teo, GC; Nesvizhskii, AI (2020) Fast and comprehensive N- and O-glycoproteomics analysis 
-    with MSFragger-Glyco. Nat Methods 17 (11)
-    * Geiszler, DJ; Kong, AT; Avtonomov, DM; Yu, F; Leprevost, FV; Nesvizhskii, AI (2020) PTM-Shepherd: 
-    analysis and summarization of post-translational and chemical modifications from open search results. 
-    bioRxiv doi: https://doi.org/10.1101/2020.07.08.192583
-    * An, Z; Zhai, L; Ying, W; Qian, X; Gong, F; Tan, M; Fu, Y. (2019) PTMiner: Localization and Quality Control of 
-    Protein Modifications Detected in an Open Search and Its Application to Comprehensive Post-translational Modification
-    Characterization in Human Proteome.  Mol Cell Proteomics 18 (2)
+    * Devabhaktuni, A.; Lin, S.; Zhang, L.; Swaminathan, K.; Gonzalez, CG.; Olsson, N.; Pearlman, SM.; Rawson, K.; Elias, JE. (2019) TagGraph reveals vast protein modification landscapes from large tandem mass spectrometry datasets. Nat Biotechnol. 37(4)
+    * Yang, H; Chi, H; Zhou, W; Zeng, WF; He, K; Liu, C; Sun, RX; He, SM. (2017) Open-pNovo: De Novo Peptide Sequencing with Thousands of Protein Modifications. J Proteome Res. 16(2)
+    * Polasky, DA; Yu, F; Teo, GC; Nesvizhskii, AI (2020) Fast and comprehensive N- and O-glycoproteomics analysis with MSFragger-Glyco. Nat Methods 17 (11)
+    * Geiszler, DJ; Kong, AT; Avtonomov, DM; Yu, F; Leprevost, FV; Nesvizhskii, AI (2020) PTM-Shepherd: analysis and summarization of post-translational and chemical modifications from open search results. bioRxiv doi: https://doi.org/10.1101/2020.07.08.192583
+    * An, Z; Zhai, L; Ying, W; Qian, X; Gong, F; Tan, M; Fu, Y. (2019) PTMiner: Localization and Quality Control of Protein Modifications Detected in an Open Search and Its Application to Comprehensive Post-translational Modification Characterization in Human Proteome.  Mol Cell Proteomics 18 (2)
