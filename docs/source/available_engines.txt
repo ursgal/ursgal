@@ -82,6 +82,9 @@ MSFragger
 
 Available MSFragger versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msfragger_3_0.msfragger_3_0
+   :members:
+
 .. autoclass:: ursgal.wrappers.msfragger_2_3.msfragger_2_3
    :members:
 

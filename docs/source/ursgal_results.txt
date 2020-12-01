@@ -1,0 +1,168 @@
+Ursgal Results
+==============
+
+The main Ursgal result file format is a comma separated value file (CSV).
+This is a table format that can be easily viewed and further processed.
+In general, each row contains a PSM and each column contains distinct properties of that PSM.
+The number of columns can vary depending on the engines (unodes) that have been run,
+but the most unified columns and other common columns are briefly described here.
+
+Raw data location
+#################
+
+    Location and file name of the file (.mgf or .mzML) that contains
+    the MS information leading to the identification of the PSM
+
+Spectrum ID
+###########
+
+    ID of the mass spectrum leading to the identification of the PSM
+
+Spectrum Title
+##############
+
+    Information about the spectrum leading to the identification of the PSM
+    in the format '<file_name>.<spectrum_id>.<spectrum_id>.<charge>'
+
+Retention Time (s)
+##################
+
+    Retention time corresponding to the mass spectrum leading to 
+    the identification of the PSM
+
+Sequence
+########
+
+    Peptide sequence matched to the spectrum
+
+Protein ID
+##########
+
+    Protein ID corresponding to the peptide sequence matched to the spectrum.
+    If multiple Protein IDs correspond to the same peptide sequence,
+    they are separated by '<|>'
+
+Sequence Start
+##############
+
+    Start of the peptide sequence in the corresponding protein sequence.
+    Counting starts at 1 (not 0).
+    Multiple start points are separated by ';' and start points of multiple
+    corresponding proteins are separated by '<|>'
+
+Sequence Stop
+#############
+
+    Stop of the peptide sequence in the corresponding protein sequence.
+    Multiple stop points are separated by ';' and stop points of multiple
+    corresponding proteins are separated by '<|>'
+
+Sequence Pre AA
+###############
+
+    Amino acid before the start of the peptide sequence in the corresponding protein sequence.
+    If a pre aa does not exist (start of the protein), this is indicated by '-'.
+    Multiple pre aa are separated by ';' and pre aa of multiple
+    corresponding proteins are separated by '<|>'
+
+Sequence Post AA
+################
+
+    Amino acid after the end of the peptide sequence in the corresponding protein sequence.
+    If a post aa does not exist (end of the protein), this is indicated by '-'.
+    Multiple post aa are separated by ';' and post aa of multiple
+    corresponding proteins are separated by '<|>'
+
+Charge
+######
+
+    Charge of the (precursor) ion leading to the identification of the PSM.
+
+Exp m/z
+#######
+
+    Experimental m/z of the (precursor) ion leading to the identification of the PSM.
+
+uCalc m/z
+#########
+    
+    Theoretical m/z of the peptide (including modifications) calculated by Ursgal. 
+    This can vary from the 'Calc m/z' which is reported by the engine corresponding to the PSM.
+
+uCalc mass
+##########
+    
+    Theoretical mass of the peptide (including modifications) calculated by Ursgal. 
+
+Accuracy (ppm)
+##############
+
+    Accuracy of the PSM based on the 'uCalc m/z' and 'Exp m/z'
+
+Modifications
+#############
+
+    Modifications of the peptide sequence given in the following format:
+    '<modification_name>:<position>'
+    The modification name is given as PSI-MS name,
+    the position corresponds to the position of the modification in the peptide.
+    Position 0 corresponds to N-terminal modifications,
+    position peptide_length+1 corresponds to C-terminal modifications.
+    Multiple modifications within the same peptide sequence are separated by ';'
+
+Mass Difference
+###############
+
+    Mass Difference (between the matched peptide and the precursor mass)
+    as reported by open modification search engines.
+    Multiple modifications within the same peptide sequence are separated by ';'
+
+Mass Difference Annotations
+###########################
+
+    Annotations of mass differences as reported by engines processing
+    mass differences from open modification search engines.
+    Multiple annotations within the same peptide sequence are separated by ';'
+
+Complies search criteria
+########################
+
+    True or False, indicating if any conflicts with specified search parameters were identified.
+    Conflicts are repoted in the column 'Conflicting uparam'
+
+Enzyme Specificity
+##################
+
+    Indicated whether the matched peptide sequence originated from full enzymatic cleavage,
+    semienzymatic cleave or nonspecific cleavage.
+
+Is decoy
+########
+
+    True or False, indicating whether the protein sequence corresponding to the PSM
+    is a decoy sequence.
+
+PEP
+###
+
+    Posterior error probability of the PSM as determined by engines performing
+    statistical post-processing.
+
+q-value
+#######
+
+    q-value of the PSM as determined by engines performing
+    statistical post-processing.
+
+combined PEP
+############
+
+    Combined PEP reported by the combined PEP approach used to combine
+    results from multiple search engines.
+    The basis for the combined PEP is the Bayes PEP which is calculated
+    from the PEPs of each PSM reported by individual search engines.
+
+Search Engine
+#############
+
+    Indicates which engine(s) reported the PSM.
