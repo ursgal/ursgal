@@ -50,7 +50,7 @@ class UController(ursgal.UNode):
             'internal' : True,
         },
         'utranslation_style'        : 'ucontroller_style_1',
-        'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis. J. Proteome res. acs.jproteome.5b00860 (2015). doi:10.1021/acs.jproteome.5b00860'
+        'citation' : 'Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. & Fufezan, C. Ursgal, universal Python module combining common bottom-up proteomics tools for large-scale analysis (2016). J. Proteome Res. 15(3):788-94. doi: 10.1021/acs.jproteome.5b00860'
     }
 
     def __init__( self, *args, **kwargs):
@@ -99,7 +99,7 @@ class UController(ursgal.UNode):
         if self.verbose:
             self.show_unode_overview()
 
-    def _collect_all_unode_wrappers( self ):
+    def _collect_all_unode_wrappers(self):
         '''
         The ucontroller function to collect all unode wrappers
 
@@ -115,8 +115,9 @@ class UController(ursgal.UNode):
         wrappers_path_glob = os.path.join(
             ursgal.base_dir, 'wrappers', '*.py'
         )
-        for wrapper_file in glob.glob( wrappers_path_glob ):
-            filename = os.path.basename( wrapper_file )
+        engine_2_style = {}
+        for wrapper_file in glob.glob(wrappers_path_glob):
+            filename = os.path.basename(wrapper_file)
             if filename.startswith('__'):
                 continue
             if wrapper_file.startswith('.'):
@@ -124,41 +125,20 @@ class UController(ursgal.UNode):
             wrapper_module_name = filename.replace('.py', '')
 
             wrapper_module = importlib.__import__(
-                "ursgal.wrappers.{0}".format( wrapper_module_name ),
-                fromlist = [ wrapper_module_name ]
+                "ursgal.wrappers.{0}".format(wrapper_module_name),
+                fromlist = [wrapper_module_name]
             )
-            assert hasattr(wrapper_module, wrapper_module_name ), '''
-            wrappers/{0}.py contains no class named {0}
-            '''.format( wrapper_module_name )
-
+            assert hasattr(wrapper_module, wrapper_module_name), '''
+                wrappers/{0}.py contains no class named {0}
+            '''.format(wrapper_module_name)
 
             wrapper_class = getattr(wrapper_module, wrapper_module_name)
-        #     try:
-        #         initialized_wrapper_class = wrapper_class(
-        #             engine_path = engine_exe_path
-        #         )
-        #     except TypeError:
-        #         print('''
 
-        # Do you have *args and **kwargs in your Class ?
+            assert hasattr(wrapper_class, 'META_INFO'), '''
+                META_INFO for engine {0} does not exist in wrapper
+            '''.format(wrapper_module_name)
 
-        # E.g.:
-
-        # class msblender_09_2015( ursgal.UNode ):
-        #     def __init__( self,  *args, **kwargs ):
-
-        #         ''')
-
-            '''NOTE: This has to be assert in the final version '''
-
-            # assert hasattr(wrapper_class, 'META_INFO' ), '''
-            # wrappers/{0}.py contains class attribute META_INFO
-            # '''.format( wrapper_module_name )
-
-            if hasattr(wrapper_class, 'META_INFO' ):
-                wrapper_meta_info = getattr(wrapper_class, 'META_INFO')
-            else:
-                wrapper_meta_info = {}
+            wrapper_meta_info = getattr(wrapper_class, 'META_INFO')
             engine            = wrapper_meta_info.get(
                 'engine',
                 None
@@ -179,8 +159,31 @@ class UController(ursgal.UNode):
                 'distributable',
                 True
             )
+            style = wrapper_meta_info.get(
+                'utranslation_style',
+                None
+            )
+            assert style is not None, '''
+                META_INFO for wrapper {0} does not contain a utranslatation_style
+                '''.format(
+                   wrapper_module_name
+                )
+            if wrapper_module_name in engine_2_style.keys():
+                assert engine_2_style[wrapper_module_name] == style, '''
+                    Same engine uses multiple styles, this is not allowed.
+                    engine: {0}
+                    styles:
+                    {1}
+                    {2}
+                '''.format(
+                    wrapper_module_name,
+                    engine_2_style[wrapper_module_name],
+                    style
+                )
+            else:
+                engine_2_style[wrapper_module_name] = style
 
-            unodes[ wrapper_module_name ] = {
+            unodes[wrapper_module_name] = {
                 'available'         : False,
                 'type'              : None,
                 'class'             : None,
@@ -442,6 +445,7 @@ class UController(ursgal.UNode):
                         self.unodes[ engine ]['class'] = _wrapper_class(
                             engine_path = engine_exe_path
                         )
+                        self.unodes[engine]['engine_exe_path'] = engine_exe_path
                     except TypeError:
                         print('''
 
@@ -466,15 +470,15 @@ class UController(ursgal.UNode):
                 else:
                     self.unodes[ engine ]['import_status'] = 'cant find exe'
                     self.unodes[ engine ]['available'] = False
-                    in_development = self.unodes[ engine ]['META_INFO']['in_development']
-                    if not in_development:
-                        if self.verbose:
-                            print(
-                                '[ WARNiNG! ] Engine {0} is not available in {1}'.format(
-                                    engine,
-                                    engine_folder_path
-                                )
-                            )
+                    # in_development = self.unodes[ engine ]['META_INFO']['in_development']
+                    # if not in_development:
+                    #     if self.verbose:
+                    #         print(
+                    #             '[ WARNiNG! ] Engine {0} is not available in {1}'.format(
+                    #                 engine,
+                    #                 engine_folder_path
+                    #             )
+                    #         )
         return
 
     def engine_sanity_check( self, short_engine):
@@ -732,7 +736,8 @@ class UController(ursgal.UNode):
 
             search_engines_of_merged_files = []
             for d in self.io['output']['params']['input_file_dicts']:
-                search_engines_of_merged_files.append( d["last_engine"] )
+                search_engines_of_merged_files.append(d.get("last_engine", "unknown"))
+
 
             report = self.run_unode_if_required(
                 force, engine_name, answer,
@@ -1011,7 +1016,7 @@ class UController(ursgal.UNode):
         if isinstance( input_file, list ):
             self.input_file_dicts = self.generate_multi_file_dicts(input_file)
             # the helper file now acts as the input file:
-            input_file       = self.generate_multi_helper_file( input_file )
+            input_file = self.generate_multi_helper_file( input_file )
             self.dump_multi_json( input_file, self.input_file_dicts )
 
         self.set_ios(
@@ -1246,8 +1251,8 @@ class UController(ursgal.UNode):
             msg    = 'Setting self.io["input"]',
             caller = 'set_ios'
         )
-        self.io['input']['finfo'] = self.set_file_info_dict(input_file)
-        self.take_care_of_params_and_stats(io_mode = 'input')
+        self.io['input']['finfo'] = self.set_file_info_dict( input_file )
+        self.take_care_of_params_and_stats( io_mode = 'input')
         # setting status ...
         self.io['input']['stats']['run_status'] = 'scheduled'
         # setting default if no json was loaded ...
@@ -1290,7 +1295,7 @@ class UController(ursgal.UNode):
                             i_json_value
                         )
                     )
-                    self.io['input']['params'][i_json_param] = default_value
+                    self.io['input']['params'][ i_json_param ] = default_value
             if number_of_diffs_between_json_and_params > 0:
                 self.print_info(
                     'Updated {0} params in self.io["input"]["params"]'.format(
@@ -1679,7 +1684,7 @@ class UController(ursgal.UNode):
             print('We are compressing now and renaming the shiznit')
             sys.exit(1)
 
-    def search_mgf(self, input_file, engine=None, force=None, output_file_name=None):
+    def search_mgf(self, input_file, engine=None, force=None, output_file_name=None, multi=False):
         '''
         The UController search_mgf function
 
@@ -1724,7 +1729,8 @@ class UController(ursgal.UNode):
         self.input_file_sanity_check(
             input_file,
             engine=engine_name,
-            extensions=['.mgf']
+            extensions=['.mgf'],
+            multi=multi,
         )
         for search_engine_type in [
             'protein_database_search_engine',
@@ -1762,7 +1768,7 @@ class UController(ursgal.UNode):
         )
         return report['output_file']
 
-    def search(self, input_file, engine=None, force=None, output_file_name=None):
+    def search(self, input_file, engine=None, force=None, output_file_name=None, multi=False):
         '''
         The ucontroller search function
 

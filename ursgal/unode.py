@@ -66,7 +66,22 @@ class Meta_UNode(type):
         initd_klass.UNODE_UPARAMS_GROUPED_BY_TAG = ddict(list)
         # initd_klass.TRANSLATIONS_GROUPED_BY_TRANSLATED_KEY = {}
         initd_klass.PARAMS_TRIGGERING_RERUN = set()
-        for mDict in Meta_UNode._uparam_mapper.mapping_dicts( engine ):
+        translation_style = initd_klass.META_INFO.get(
+            'utranslation_style',
+            None
+        )
+        if translation_style is not None:
+            Meta_UNode._uparam_mapper.lookup['style_2_engine'][translation_style].add(
+                engine
+            )
+            Meta_UNode._uparam_mapper.lookup['engine_2_style'][engine] = translation_style
+        else:
+            print('''META_INFO for engine {0} does not contain a utranslatation_style'''.format(
+                engine   
+            ))
+            sys.exit(1)
+        # print(engine)
+        for mDict in Meta_UNode._uparam_mapper.mapping_dicts(engine):
             for tag in mDict['utag']:
                 initd_klass.UNODE_UPARAMS_GROUPED_BY_TAG[ tag ].append(
                     mDict['ukey']
@@ -80,14 +95,6 @@ class Meta_UNode(type):
             if mDict['triggers_rerun']:
                 initd_klass.PARAMS_TRIGGERING_RERUN.add( mDict['ukey'] )
 
-        translation_style = initd_klass.META_INFO.get(
-            'utranslation_style',
-            None
-        )
-        if translation_style is not None:
-            Meta_UNode._uparam_mapper.lookup[ 'style_2_engine' ][ translation_style ].add(
-                engine
-            )
 
         alternative_exe_folder = initd_klass.META_INFO.get(
             'uses_unode',
@@ -468,7 +475,10 @@ class UNode(object, metaclass=Meta_UNode):
 
         if proc is not None:
             for line in proc.stdout:
-                line_decoded = line.strip().decode('utf')
+                try:
+                    line_decoded = line.strip().decode('utf')
+                except:
+                    line_decoded = line.strip().decode('unicode_escape')
                 print( line_decoded )
                 execute_answer.append( line_decoded )
 
@@ -668,7 +678,7 @@ class UNode(object, metaclass=Meta_UNode):
             used. Returns None if no search engine was used yet.
         '''
         last_search_engine = None
-        last_search_engine = self.get_last_engine(
+        last_search_engine = self.get_last_engine( 
             history=history,
             engine_types=[
                 'cross_link_search_engine',
@@ -1407,7 +1417,9 @@ class UNode(object, metaclass=Meta_UNode):
             False
         )
         map_mods_node_exceptions = [
-            'unify_csv'
+            'unify_csv',
+            'ptmshepherd',
+            'ptminer'
         ]
         if is_search_engine or is_quantification_engine:
             self.map_mods()

@@ -356,8 +356,6 @@ class deepnovo_0_0_1(ursgal.UNode):
             self.exe,
             '--{0}'.format(self.params['translations']['deepnovo_mode'])
         ]
-        print('executing command list')
-        print(' '.join(self.params['command_list']))
 
         return self.params
 
@@ -462,7 +460,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 
 # ==============================================================================

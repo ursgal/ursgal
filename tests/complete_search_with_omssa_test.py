@@ -52,7 +52,7 @@ R = ursgal.UController(
         'database': 'tests/data/test_Creinhardtii_target_decoy.fasta',
         'modifications':[
             '*,opt,Prot-N-term,Acetyl'    # N-Acteylation[]
-        ]
+        ],
     },
     force=True
 )

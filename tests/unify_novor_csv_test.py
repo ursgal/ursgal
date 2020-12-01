@@ -20,7 +20,7 @@ modifications = [
 R = ursgal.UController(
     params = {
         'modifications' : modifications
-    }    
+    }
 )
 R.map_mods()
 
@@ -72,6 +72,15 @@ unify_csv_main(
         },
         'label' : '',
         'mods' : R.params['mods'],
+        'prefix' : '',
+        'psm_defining_colnames': [
+            'Spectrum Title',
+            'Sequence',
+            'Modifications',
+            'Mass Difference',
+            'Charge',
+            'Is decoy',
+        ],
     },
     search_engine  = 'novor_1_1beta',
 )
@@ -87,7 +96,12 @@ def unify_novor_test():
 
 
 def unify_novor( test_dict ):
-    assert 'uCalc m/z' in test_dict.keys()
+    for k in [
+        'uCalc m/z',
+        'Local Score or Confidence',
+        'Average Score or Confidence'
+    ]:
+        assert k in test_dict.keys()
 
     for key in [
             'Retention Time (s)',

@@ -3,6 +3,11 @@
 Example Scripts
 =================
 
+This is a collection of example scripts for some of Ursgal's functionality.
+The simple example scripts are designed to get familiar with executing engines through Ursgal.
+Examles of complete workflows can be modified for different needs.
+Further example scripts can also be found in ~\ursgal\example_scripts
+
 Simple Example Scripts
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -26,6 +31,20 @@ Simple example using combined fdr (or pep)
 .. include:: code_inc/simple_combined_fdr_score.inc
 
 
+Simple de novo search
+---------------------
+
+.. autofunction:: simple_de_novo_search.main
+
+.. include:: code_inc/simple_de_novo_search.inc
+
+
+Simple crosslink search
+-----------------------
+
+.. include:: code_inc/simple_crosslink_search.inc
+
+
 .. _targetdecoygen:
 
 Target decoy generation
@@ -44,6 +63,16 @@ Convert .raw to .mzML
 
 .. include:: code_inc/convert_raw_to_mzml.inc
 
+
+Simple mgf conversion
+---------------------
+
+.. autofunction:: simple_mgf_conversion.main
+
+
+.. include:: code_inc/simple_mgf_conversion.inc
+
+
 Mgf conversion loop examples
 ----------------------------
 
@@ -51,6 +80,16 @@ Mgf conversion loop examples
 
 
 .. include:: code_inc/mgf_conversion_inside_and_outside_loop.inc
+
+
+Simple Venn diagram
+-------------------
+
+.. autofunction:: simple_venn_example.main
+
+
+.. include:: code_inc/simple_venn_example.inc
+
 
 
 Test node execution
@@ -101,10 +140,20 @@ Complete workflow for analysis with pGlyco
 ------------------------------------------
 
 
-.. autofunction:: simple_example_pglyco_workflow.main
+.. autofunction:: example_pglyco_workflow.main
 
 
-.. include:: code_inc/simple_example_pglyco_workflow.inc
+.. include:: code_inc/example_pglyco_workflow.inc
+
+
+Complete workflow for analysis with TagGrapg
+--------------------------------------------
+
+
+.. autofunction:: example_pglyco_workflow.main
+
+
+.. include:: code_inc/example_pglyco_workflow.inc
 
 
 Example search for 15N labeling and no label

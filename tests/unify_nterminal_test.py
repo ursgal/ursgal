@@ -84,6 +84,15 @@ def unify_csv(file, engine):
             },
             'label': '',
             'mods': uc.params['mods'],
+            'prefix' : '',
+            'psm_defining_colnames': [
+                'Spectrum Title',
+                'Sequence',
+                'Modifications',
+                'Mass Difference',
+                'Charge',
+                'Is decoy',
+            ],
         },
         search_engine=engine,
     )

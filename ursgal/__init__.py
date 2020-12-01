@@ -13,6 +13,7 @@ import ursgal.uparams
 # to access params since they are translated,
 # grouped and so on ...
 
+base_dir = os.path.dirname( __file__)
 from .umapmaster import UParamMapper
 # from .umapmaster import UPeptideMapper
 
@@ -32,7 +33,6 @@ from .profiles import PROFILES
 import ursgal.ukb
 
 GlobalUnimodMapper = UnimodMapper()
-base_dir = os.path.dirname( __file__)
 
 
 # We store our version number in a simple text file:

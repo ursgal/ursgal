@@ -42,14 +42,31 @@ def main(input_raw_file=None, database=None, enzyme=None):
         }
     )
 
-    xtracted_file = uc.convert(
-        input_file = input_raw_file,
-        engine = 'pparse_2_0',
-        # force = True,
+    mzml_file = uc.convert(
+        input_file=input_raw_file,
+        engine='thermo_raw_file_parser_1_1_2',
     )
 
     mgf_file = uc.convert(
-        input_file = input_raw_file.replace('.raw', '.idx.gz'),
+        input_file = mzml_file,
+        engine = 'mzml2mgf_2_0_0',
+        # force = True,
+    )
+    os.remove(mgf_file+'u.json')
+
+    xtracted_file = uc.convert(
+        input_file = input_raw_file,
+        engine = 'pparse_2_2_1',
+        # force = True,
+    )
+
+    search_result = uc.search_mgf(
+        input_file = xtracted_file,
+        engine = 'pglyco_db_2_2_2',
+    )
+
+    mgf_file = uc.convert(
+        input_file = input_raw_file.replace('.raw', '.mzML'),
         engine = 'mzml2mgf_2_0_0',
         # force = True,
     )
@@ -58,11 +75,6 @@ def main(input_raw_file=None, database=None, enzyme=None):
         input_file = xtracted_file,
         engine = 'pglyco_db_2_2_0',
     )
-
-    # converted_result = uc.convert(
-    #     input_file=search_result,
-    #     guess_engine = True,
-    # )
         
     mapped_results = uc.execute_misc_engine(
         input_file=search_result,

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3.4
 '''
 Sanitize the result csvs
 
@@ -30,6 +30,13 @@ def main(
     accept_conflicting_psms=False,
     num_compared_psms=2,
     remove_redundant_psms=False,
+    psm_defining_colnames=[
+        'Spectrum Title',
+        'Sequence',
+        'Modifications',
+    ],
+    preferred_engines=[],
+    max_output_psms=1,
 ):
     '''
     Spectra with multiple PSMs are sanitized, i.e. only the PSM with best PEP score is accepted
@@ -40,25 +47,41 @@ def main(
     # grouped_psms = un._group_psms( input_file, validation_score_field=validation_score_field, bigger_scores_better=bigger_scores_better )
 
     if grouped_psms is None:
-        grouped_psms = group_psms( input_file, validation_score_field=validation_score_field, bigger_scores_better=bigger_scores_better )
+        grouped_psms = group_psms(
+            input_file,
+            validation_score_field=validation_score_field,
+            bigger_scores_better=bigger_scores_better
+        )
 
     all_line_dicts = []
+    removed_psms = set()
+    conflicting_specs = set()
     for spec_title, grouped_psm_list in grouped_psms.items():
         spec_line_dicts = []
         best_score = None
         psm_names = set()
         for n, grouped_psm in enumerate(grouped_psm_list):
             score, line_dict = grouped_psm
+            psm = ''
+            for column in psm_defining_colnames:
+                psm += '|{0}'.format(line_dict[column])
             if n == 0:
                 best_score = score
-                psm_names.add(line_dict['Sequence']+line_dict['Modifications']+line_dict['Charge'])
+                psm_names.add(psm)
                 spec_line_dicts.append(line_dict)
             elif n < num_compared_psms:
-                psm = line_dict['Sequence']+line_dict['Modifications']+line_dict['Charge']
                 if psm in psm_names and remove_redundant_psms is True:
                     continue
                 if log10_threshold is True:
-                    if abs(math.log10(best_score)) - abs(math.log10(score)) >= score_diff_threshold:
+                    if best_score != 0:
+                        log_best_score = abs(math.log10(best_score))
+                    else:
+                        log_best_score = 0
+                    if score != 0:
+                        log_score = abs(math.log10(score))
+                    else:
+                        log_score = 0
+                    if log_best_score - log_score >= score_diff_threshold:
                         break
                     else:
                         spec_line_dicts.append(line_dict)
@@ -69,11 +92,30 @@ def main(
                     else:
                         spec_line_dicts.append(line_dict)
                         psm_names.add(psm)
-        if accept_conflicting_psms is False and len(spec_line_dicts) >= 2:
-            continue   
+        if accept_conflicting_psms is False and len(psm_names) >= 2:
+            for psm in psm_names:
+                removed_psms.add(psm)
+                conflicting_specs.add(spec_line_dicts[0]['Spectrum Title'])
+            continue
+        elif preferred_engines != []:
+            preferred_spec_line_dicts = ddict(list)
+            for ld in spec_line_dicts:
+                for engine in preferred_engines:
+                    if engine in ld['Search Engine']:
+                        preferred_spec_line_dicts[engine].append(ld)
+            psm_engines = []
+            for engine in preferred_engines:
+                if len(preferred_spec_line_dicts[engine]) != 0:
+                    psm_engines.append(engine)
+            line_dict_list = preferred_spec_line_dicts[psm_engines[-1]][:max_output_psms]
+            for ld in line_dict_list:
+                ld['Search Engine'] = ';'.join(psm_engines)
+                all_line_dicts.append(ld)
+                    # break
         else:
-            all_line_dicts.extend(spec_line_dicts)
+            all_line_dicts.extend(spec_line_dicts[:max_output_psms])
 
+    print('sanitize removed {0} PSMs for {1} spectra'.format(len(removed_psms), len(conflicting_specs)))
 
     csv_kwargs = {}
     if sys.platform == 'win32':
