@@ -45,6 +45,7 @@ Ursgal module contents
    umapmaster
    chemical_compositions
    unimod_mapper
+   ursgal_results
 
 
 Parameters

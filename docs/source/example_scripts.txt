@@ -91,6 +91,14 @@ Simple Venn diagram
 .. include:: code_inc/simple_venn_example.inc
 
 
+Sanitize csv
+------------
+
+.. autofunction:: sanitize_combined_results.main
+
+
+.. include:: code_inc/sanitize_combined_results.inc
+
 
 Test node execution
 -------------------
@@ -146,7 +154,7 @@ Complete workflow for analysis with pGlyco
 .. include:: code_inc/example_pglyco_workflow.inc
 
 
-Complete workflow for analysis with TagGrapg
+Complete workflow for analysis with TagGraph
 --------------------------------------------
 
 
@@ -163,6 +171,39 @@ Example search for 15N labeling and no label
 
 
 .. include:: code_inc/search_with_label_15N.inc
+
+
+Open Modification Search Scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Open modification search with three engines and combined PEP
+------------------------------------------------------------
+
+
+.. autofunction:: open_modification_search_incl_combined_pep.main
+
+
+.. include:: code_inc/open_modification_search_incl_combined_pep.inc
+
+
+Complete workflow for analysis with TagGraph
+--------------------------------------------
+
+
+.. autofunction:: example_pglyco_workflow.main
+
+
+.. include:: code_inc/example_pglyco_workflow.inc
+
+
+Processing of mass differences using PTM-Shepherd
+-------------------------------------------------
+
+
+.. autofunction:: ptmshepherd_mass_difference_processing.main
+
+
+.. include:: code_inc/ptmshepherd_mass_difference_processing.inc
 
 
 
