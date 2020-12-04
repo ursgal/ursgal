@@ -24,7 +24,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
         "engine_type": {"quantification_engine": True,},
         "input_extensions": [".mzML"],
         "output_extensions": [".csv"],
-        "in_development": False,
+        "in_development": True,
         "create_own_folder": True,
         "include_in_git": False,
         "distributable": False,
