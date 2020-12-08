@@ -73,6 +73,11 @@ TESTS = [
        'unformated_peptide':   ' SCCPCCM(O)ALHAGC(Carboxymethyl)R',
        'regex_list': [  ('\(Carboxymethyl\)','Carboxymethyl'), ('\(O\)','Oxidation') ],
        'result':  'SCCPCCMALHAGCR#Oxidation:7;Carboxymethyl:13'
+    },
+    {
+       'unformated_peptide':   ' SCCPCCM+123ALHAGC-1337R',
+       'regex_list': [('([+-]{1}[0-9]+)', None)],
+       'result':  'SCCPCCMALHAGCR#+123:7;-1337:13'
     }
 ]
 

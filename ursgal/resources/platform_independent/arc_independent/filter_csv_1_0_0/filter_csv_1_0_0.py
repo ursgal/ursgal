@@ -98,7 +98,7 @@ Did you misspell the field name?'''.format(
                         try:
                             floated_value = float(line_dict[dict_key])
                         except:
-                            if line_dict[ dict_key ] is '':
+                            if line_dict[ dict_key ] == '':
                                 floated_value = None
                             else:
                                 print('[ ERROR ] Value to be filtered could not be converted to float')

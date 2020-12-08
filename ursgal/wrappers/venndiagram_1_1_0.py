@@ -183,8 +183,8 @@ class venndiagram_1_1_0(ursgal.UNode):
             if str(n) in self.params['translations']['visualization_color_positions']:
                 color = self.params['translations'][
                     'visualization_color_positions'][str(n)]
+                venn_dict['color'] = color
             venn_dict['label'] = label
-            venn_dict['color'] = label
             print('[ Reading  ] Venn set {0} / file #{1} : {0}'.format(
                 n,
                 file_path)
@@ -209,6 +209,8 @@ class venndiagram_1_1_0(ursgal.UNode):
                 venn_dict['data'].add(unique_identifier)
                 if unique_identifier not in lookup_dict.keys():
                     lookup_dict[unique_identifier] = []
+                line_dict['original_input_label'] = default_label[n].split('_')[1]
+                line_dict['original_input_actual_name'] = label
                 lookup_dict[unique_identifier].append(line_dict)
             data_list.append(venn_dict)
 
@@ -228,12 +230,20 @@ class venndiagram_1_1_0(ursgal.UNode):
             }
 
             #adding new columns for venn diagram output
-            fieldnames_list.append('return_dict_nomenclature')
-            fieldnames_list.append('actual_name')
+            fieldnames_list.extend([
+                'return_dict_nomenclature',
+                'actual_name',
+                'original_input_label',
+                'original_input_actual_name',
+            ])
 
             print('CREATING CSV FILE FROM VENN DIAGRAM ...')
             with open(output_file_name.replace('.svg','.csv'), 'w', newline='') as new_csvfile:
-                writer = csv.DictWriter(new_csvfile, fieldnames=fieldnames_list)
+                if sys.platform == 'win32':
+                    lineterminator = '\n'
+                else:
+                    lineterminator = '\r\n'
+                writer = csv.DictWriter(new_csvfile, fieldnames=fieldnames_list, lineterminator=lineterminator)
                 writer.writeheader()
                 for key in return_dict.keys():
                     # ceate output file

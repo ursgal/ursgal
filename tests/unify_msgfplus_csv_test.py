@@ -20,7 +20,7 @@ modifications = [
 R = ursgal.UController(
     params = {
         'modifications' : modifications
-    }    
+    }
 )
 R.map_mods()
 
@@ -83,6 +83,15 @@ unify_csv_main(
         },
         'label' : '15N',
         'mods' : R.params['mods'],
+        'prefix' : '',
+        'psm_defining_colnames': [
+            'Spectrum Title',
+            'Sequence',
+            'Modifications',
+            'Mass Difference',
+            'Charge',
+            'Is decoy',
+        ],
     },
     search_engine  = 'msgfplus_v9979',
 )

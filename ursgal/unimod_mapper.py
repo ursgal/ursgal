@@ -51,10 +51,11 @@ class UnimodMapper( object ):
                     'ext',
                     'userdefined_unimod.xml'
                 ))
-            xmlFiles = [unimodXML, userdefined_unimodXML] 
+            xmlFiles = [unimodXML, userdefined_unimodXML]
         else:
             xmlFiles = [xmlFile]
         data_list = []
+        extra_unimod_id = 1
         for xmlFile in xmlFiles:
             if os.path.exists( xmlFile ):
                 unimodXML = ET.iterparse(
@@ -65,9 +66,15 @@ class UnimodMapper( object ):
                 for event, element in unimodXML:
                     if event == b'start':
                         if element.tag.endswith('}mod'):
+                            try:
+                                unimod_id = element.attrib['record_id']
+                            except KeyError:
+                                unimod_id = 'u{0}'.format(extra_unimod_id)
+                                extra_unimod_id+=1
                             tmp = {
-                                'unimodID' : element.attrib['record_id'],
+                                'unimodID' : unimod_id,
                                 'unimodname' : element.attrib['title'],
+                                'unimoddescription': element.attrib.get('full_name', None),
                                 'element' : {}
                             }
                         elif element.tag.endswith('}delta'):
@@ -126,8 +133,14 @@ class UnimodMapper( object ):
                         mapper[ value ] = []
                     mapper[ value ].append( index )
                 else:
+                    if value is None:
+                        continue
                     if value not in mapper.keys():
                         mapper[ value ] = index
+                    else:
+                        assert index == mapper[ value ], '''
+                        [ERROR] Unimod ID or name occurs multiple times with different index.
+                        '''
         return mapper
 
     # name 2 ....
@@ -414,7 +427,11 @@ class UnimodMapper( object ):
             umass = entry['mono_mass']
             rounded_umass = round( float(umass), decimal_places )
             if abs(rounded_umass - mass) <= sys.float_info.epsilon:
-                return_list.append( entry[ entry_key ] )
+                return_list.append(entry[entry_key])
+        try:
+            return_list.sort()
+        except TypeError:
+            pass
         return return_list
 
     def _map_key_2_index_2_value(self, map_key, return_key):
@@ -441,7 +458,7 @@ class UnimodMapper( object ):
 
     def writeXML(self, modification_dict, xmlFile = None):
         '''
-        Writes a unimod-style userdefined_unimod.xml file in 
+        Writes a unimod-style userdefined_unimod.xml file in
         ursal/resources/platform_independent/arc_independent/ext
 
         Args:

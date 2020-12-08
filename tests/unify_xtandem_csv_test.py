@@ -82,6 +82,15 @@ unify_csv_main(
         },
         'label' : '',
         'mods' : R.params['mods'],
+        'prefix' : '',
+        'psm_defining_colnames': [
+            'Spectrum Title',
+            'Sequence',
+            'Modifications',
+            'Mass Difference',
+            'Charge',
+            'Is decoy',
+        ],
 
     },
     search_engine  = 'xtandem_sledgehammer',
@@ -108,6 +117,7 @@ def unify_xtandem( test_dict ):
             'Modifications',
             'Spectrum Title',
             'Complies search criteria',
+            'Enzyme Specificity',
         ]:
         test_value = test_dict[key]
         expected_value = test_dict['Expected {0}'.format(key)]
@@ -116,9 +126,10 @@ def unify_xtandem( test_dict ):
             expected_value = round(float(expected_value), 4)
 
         assert test_value == expected_value, '''
-        test_value = {0}
-        expected_value = {1}
-        '''.format(test_value, expected_value)
+        Unexpected value in column "{0}":
+        test_value = {1}
+        expected_value = {2}
+        '''.format(key, test_value, expected_value)
 
 
 if __name__ == '__main__':

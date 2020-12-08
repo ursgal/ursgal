@@ -43,11 +43,39 @@ else:
                     os.chmod(fn, mode)
 
 
+def install_resources():
+    working_directory = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+    )
+    if os.path.exists(os.path.join(working_directory, 'ursgal')) is False:
+        print('Could not find ursgal directory')
+        sys.exit(1)
+    import ursgal
+    uc = ursgal.UController()
+    downloaded_zips = uc.download_resources(resources=['msgfplus_v2019_01_22'])
+    if len(downloaded_zips) == 0:
+        print('[ INFO ] No engines were downloaded, all should be available')
+    else:
+        print(
+            '[ INFO ] Downloaded and installed {0} engine(s)'.format(
+                len(downloaded_zips)
+            )
+        )
+        for engine, zip_file in downloaded_zips:
+            print(
+                '[ INFO ] Engine: {0} has been installed from {1}'.format(
+                    engine,
+                    zip_file
+                )
+            )
+
+
 class BuildPyWithResources(setuptools.command.build_py.build_py):
     """Includes install_resources.py before the setuptools build"""
 
     def run(self):
-        self.run_command('install_resources')
+        # self.run_command('install_resources')
+        install_resources()
         setuptools.command.build_py.build_py.run(self)
 
 
@@ -66,30 +94,7 @@ class InstallResourcesCommand(distutils.cmd.Command):
         Download all resources from our webpage to ursgal/resources.
 
         '''
-        working_directory = os.path.join(
-            os.path.dirname(os.path.realpath(__file__)),
-        )
-        if os.path.exists(os.path.join(working_directory, 'ursgal')) is False:
-            print('Could not find ursgal directory')
-            sys.exit(1)
-        import ursgal
-        uc = ursgal.UController()
-        downloaded_zips = uc.download_resources(resources=None)
-        if len(downloaded_zips) == 0:
-            print('[ INFO ] No engines were downloaded, all should be available')
-        else:
-            print(
-                '[ INFO ] Downloaded and installed {0} engine(s)'.format(
-                    len(downloaded_zips)
-                )
-            )
-            for engine, zip_file in downloaded_zips:
-                print(
-                    '[ INFO ] Engine: {0} has been installed from {1}'.format(
-                        engine,
-                        zip_file
-                    )
-                )
+        install_resources()
 
 # We store our version number in a simple text file:
 version_path = os.path.join(
@@ -117,9 +122,6 @@ setup(
             'resources/*/*/*/*/*',
         ]
     },
-    build_requires=[
-        'numpy',
-    ],
     install_requires=requirements,
     long_description='Universal Python module combining common bottom-up proteomics tools for large-scale analysis',
     author='Lukas P. M. Kremer, Purevdulam Oyunchimeg, Johannes Barth, Stefan Schulze and Christian Fufezan',

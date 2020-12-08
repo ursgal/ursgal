@@ -24,7 +24,7 @@ class pparse_2_0(ursgal.UNode):
 
     META_INFO = {
         'edit_version': 1.00,
-        'name': 'pAarse',
+        'name': 'pParse',
         'version': '2.0',
         'release_date': '2018-11-02',
         'utranslation_style': 'pparse_style_1',
@@ -124,8 +124,9 @@ class pparse_2_0(ursgal.UNode):
         '''
         Rename output file, since that naming the output file is not properly working in pParse
         '''
-        os.rename(
-            self.params['translations']['raw_input_file'].replace('.raw', '_HCDFT.mgf'), 
-            self.params['translations']['output_file_incl_path']
-        )
+        if os.path.exists(self.params['translations']['raw_input_file'].replace('.raw', '_HCDFT.mgf')):
+            os.rename(
+                self.params['translations']['raw_input_file'].replace('.raw', '_HCDFT.mgf'), 
+                self.params['translations']['output_file_incl_path']
+            )
         return self.params['translations']['output_file_incl_path']

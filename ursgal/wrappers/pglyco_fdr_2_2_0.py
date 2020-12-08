@@ -174,5 +174,10 @@ class pglyco_fdr_2_2_0(ursgal.UNode):
         for n, line_dict in enumerate(csv_reader):
             if n == 0:
                 continue
+            # line_dict['Raw data location'] = os.path.abspath(
+            #     self.params['translations']['mgf_input_file']
+            # )
+            new_sequence = line_dict['Sequence'].replace('J', 'N')
+            line_dict['Sequence'] = new_sequence
             csv_writer.writerow(line_dict)
         return

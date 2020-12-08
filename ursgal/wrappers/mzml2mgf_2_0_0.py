@@ -77,5 +77,6 @@ class mzml2mgf_2_0_0(ursgal.UNode):
                 'translations']['precursor_max_charge'],
             ion_mode=self.params['translations']['ion_mode'],
             spec_id_attribute=self.params['translations']['pymzml_spec_id_attribute'],
+            signal_to_noise_threshold=self.params['translations']['signal_to_noise_threshold'],
         )
         return tmp

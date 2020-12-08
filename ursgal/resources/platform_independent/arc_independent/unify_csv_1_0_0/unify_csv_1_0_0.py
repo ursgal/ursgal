@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3.4
 '''
 Unifies the result csvs
 
@@ -146,6 +146,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     # mod pattern
     mod_pattern = re.compile( r''':(?P<pos>[0-9]*$)''' )
+    mod_pattern_msfragger = re.compile( r'''(?P<pos>[0-9]*)(?P<aa>[A-Z])\((?P<mass>[0-9]*\.[0-9]*)\)''' )
+    mod_pattern_msfragger_term = re.compile( r'''.-term\((?P<mass>[0-9]*\.[0-9]*)\)''' )
 
     for mod_type in ['fix', 'opt']:
         for modification in params['mods'][mod_type]:
@@ -168,7 +170,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     cam = True
                     # allow also Carbamidomnethyl on U, since the mod name gets changed
                     # already in upeptide_mapper
-                    # According to unimod, the mnodification is also on Selenocystein
+                    # According to unimod, the modification is also on Selenocystein
                     # otherwise we should change that back so that it is skipped...
                     mod_dict['Carbamidomethyl']['aa'].add('U')
                     fixed_mods['U'] = 'Carbamidomethyl'
@@ -258,6 +260,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         'pepnovo',
         'uninovo',
         'deepnovo',
+        'pnovo',
         'unknown_engine'
     ]
     database_search_engines = [
@@ -272,6 +275,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
     open_mod_search_engines = [
         'pipi',
         'moda',
+        'tag_graph'
     ]
     de_novo = False
     database_search = False
@@ -296,7 +300,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
 
     if database_search is True:
         non_enzymatic_peps = set()
-        conflicting_uparams = defaultdict(set)
+        database_lookup = {}
         fasta_lookup_name = os.path.basename(
             os.path.abspath(
                 params['translations']['database']
@@ -349,6 +353,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             output_fieldnames.remove(remove_fieldname)
         new_fieldnames = [
             'uCalc m/z',
+            'uCalc Mass',
+            'Retention Time (s)',
             'Accuracy (ppm)',
             'Mass Difference',
             'Protein ID',
@@ -356,11 +362,20 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             'Sequence Stop',
             'Sequence Pre AA',
             'Sequence Post AA',
+            'Enzyme Specificity',
             'Complies search criteria',
             'Conflicting uparam',
             'Search Engine',
         ]
-
+        if de_novo:
+            new_fieldnames = [
+                'uCalc m/z',
+                'uCalc Mass',
+                'Accuracy (ppm)',
+                'Mass Difference',
+                'Local Score or Confidence',
+                'Average Score or Confidence',
+            ]
         for new_fieldname in new_fieldnames:
             if new_fieldname not in output_fieldnames:
                 output_fieldnames.insert( -5, new_fieldname )
@@ -400,17 +415,30 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     MSGF+
                     X!Tandem
                     pGlyco
+                    pNovo
                 '''
                 if 'RTINSECONDS=' in line_dict['Spectrum Title']:
                     line_2_split = line_dict['Spectrum Title'].split(' ')[0].strip()
                 elif line_dict['Spectrum Title'].endswith('.dta'):
-                    '.'.join(line_2_split = line_dict['Spectrum Title'].split('.')[:-2])
+                    line_2_split = '.'.join(line_dict['Spectrum Title'].split('.')[:-2])
                 else:
                     line_2_split = line_dict['Spectrum Title']
+                if params['prefix'] is None or params['prefix'] == '':
+                    pass
+                elif line_2_split.startswith(params['prefix']):
+                    line_2_split = line_2_split.replace(
+                        params['prefix']+'_',
+                        ''
+                    )
                 line_dict['Spectrum Title'] = line_2_split
 
                 input_file_basename, spectrum_id, _spectrum_id, charge = line_2_split.split('.')[:4]
                 pure_input_file_name = ''
+
+                if line_dict['Charge'] == '':
+                    line_dict['Charge'] = charge
+                if line_dict['Spectrum ID'] == '':
+                    line_dict['Spectrum ID'] = spectrum_id
 
             elif 'scan=' in line_dict['Spectrum ID']:
                 pure_input_file_name                = os.path.basename(
@@ -437,11 +465,19 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     Novor
                     DeepNovo
                     MSFragger
+                    TagGraph
                 '''
                 pure_input_file_name = os.path.basename(
                     line_dict['Raw data location']
                 )
-                input_file_basename = pure_input_file_name.split(".")[0]
+                input_file_basename = '.'.join(pure_input_file_name.split(".")[:-1])
+                if params['prefix'] is None or params['prefix'] == '':
+                    pass
+                elif input_file_basename.startswith(params['prefix']):
+                    input_file_basename = line_2_split.replace(
+                        params['prefix']+'_',
+                        ''
+                    )
                 spectrum_id = line_dict['Spectrum ID']
                 line_dict['Spectrum Title'] = '{0}.{1}.{1}.{2}'.format(
                     input_file_basename,
@@ -451,7 +487,15 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
             else:
                 raise Exception( 'New csv format present for engine {0}'.format( engine ) )
 
+            if line_dict['Spectrum Title'].endswith('None'):
+                line_dict['Spectrum Title'] = line_dict['Spectrum Title'].replace(
+                    '.None',
+                    '.{0}'.format(line_dict['Charge'])
+                )
+
             #update spectrum ID from block above
+            if 'Raw data location' in line_dict.keys():
+                line_dict['Raw data location'] = line_dict['Raw data location'].replace('_tmp.mgf', '.mgf')
             line_dict['Spectrum ID'] = spectrum_id
 
             # now check for the basename in the scan rt lookup
@@ -500,22 +544,42 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 rt_corr_factor = 60
             line_dict['Retention Time (s)'] = float( retention_time_in_minutes ) * rt_corr_factor
 
-            # try:
             precursor_mz = scan_rt_lookup[ input_file_basename_for_rt_lookup ][
                 'scan_2_mz' ][ spectrum_id ]
-            # except:
-            #     print('\n\n\n')
-            #     print(input_file_basename_for_rt_lookup)
-            #     print('spectrum_id', spectrum_id, type(spectrum_id))
-            #     exit(1)
             line_dict['Exp m/z'] = round(precursor_mz, 10)
+
+            #################
+            # de novo block #
+            #################
+
+            if de_novo:
+                if 'deepnovo' in search_engine:
+                    local_conf = line_dict['DeepNovo:aaScore'].split(',')
+                    transformed_conf = []
+                    for org_conf in local_conf:
+                        transformed_score = 100+(float(org_conf)*5)
+                        transformed_conf.append(str(round(transformed_score)))
+                    line_dict['Local Score or Confidence'] = ' '.join(transformed_conf)
+                    transformed_avg = str(round(100+(float(line_dict['DeepNovo:score'])*5)))
+                    line_dict['Average Score or Confidence'] = transformed_avg
+                elif 'novor' in search_engine:
+                    local_conf = line_dict['Novor:aaScore'].split('-')
+                    transformed_conf = []
+                    for org_conf in local_conf:
+                        transformed_score = round(float(org_conf))
+                        transformed_conf.append(transformed_score)
+                    line_dict['Local Score or Confidence'] = ' '.join(local_conf)
+                    line_dict['Average Score or Confidence'] = round(float(line_dict['Novor:score']))
 
             #########################
             # Buffering corrections #
             #########################
-            main_buffer_key = '{Sequence} || {Charge} || {Modifications} || '.format(
-                **line_dict
-            ) + params['label']
+            main_buffer_key_list = []
+            for colname in params['psm_defining_colnames']:
+                if colname in line_dict.keys():
+                    main_buffer_key_list.append(line_dict[colname])
+            main_buffer_key_list.append(params['label'])
+            main_buffer_key = '||'.join(main_buffer_key_list)
             if main_buffer_key not in ze_only_buffer.keys():
                 line_dict_update = {}
                 ######################
@@ -532,16 +596,42 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         # M stand for Modifications here, not Methionine
                         line_dict['Modifications'] = ''
                     else:
-                        mod_list = line_dict['Modifications']
-                        for single_mod in mod_list.split('|'):
-                            if single_mod in ['M','']:
-                                continue
-                            msfragger_pos, raw_msfragger_mass = single_mod.split('$')
-                            msfragger_mass = mass_format_string.format(
-                                # mass rounded as defined above
-                                Decimal(raw_msfragger_mass)
-                            )
-                            msfragger_pos = int(msfragger_pos)
+                        mod_string = line_dict['Modifications']
+                        if mod_string == '':
+                            mod_list = []
+                        elif '|' in mod_string:
+                            mod_list = []
+                            for single_mod in mod_string.split('|'):
+                                if single_mod in ['M','']:
+                                    continue
+                                msfragger_pos, raw_msfragger_mass = single_mod.split('$')
+                                msfragger_mass = mass_format_string.format(
+                                    # mass rounded as defined above
+                                    Decimal(raw_msfragger_mass)
+                                )
+                                msfragger_pos = int(msfragger_pos)
+                                mod_list.append((msfragger_mass, raw_msfragger_mass, msfragger_pos))
+                        else:
+                            mod_list = []
+                            for single_mod in mod_string.split(', '):
+                                if single_mod.startswith('N-term'):
+                                    msfragger_pos = 0
+                                    match = mod_pattern_msfragger_term.search(single_mod)
+                                elif single_mod.startswith('C-term'):
+                                    msfragger_pos = len(line_dict['Sequence'])
+                                else:
+                                    match = mod_pattern_msfragger.search(single_mod)
+                                    msfragger_pos = int(match.group('pos'))
+                                    if msfragger_pos != 0:
+                                        msfragger_pos -= 1
+                                raw_msfragger_mass = float(match.group('mass'))
+                                msfragger_mass = mass_format_string.format(
+                                    # mass rounded as defined above
+                                    Decimal(raw_msfragger_mass)
+                                )
+                                mod_list.append((msfragger_mass, raw_msfragger_mass, msfragger_pos))
+                        for single_mod in mod_list:
+                            msfragger_mass, raw_msfragger_mass, msfragger_pos = single_mod
                             if msfragger_mass in mass_to_mod_combo.keys():
                                 explainable_combos = []
                                 for combo in mass_to_mod_combo[msfragger_mass]:
@@ -630,6 +720,34 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         # sys.exit(1)
                         line_dict['Modifications'] = ';'.join( ms_fragger_reformatted_mods )
 
+                if 'tag_graph' in search_engine:
+                    tg_tmp_mods = []
+                    tg_mod_list = eval(line_dict['Modifications'])
+                    for tg_mod in tg_mod_list:
+                        tg_mod_pos = int(tg_mod[2])+1
+                        tg_mod_name = tg_mod[0][0]
+                        tg_mod_mass = tg_mod[0][1]
+                        try:
+                            tg_mod_aa = tg_mod[1][0]
+                        except:
+                            if 'undefined mass shift' in tg_mod[0][0]:
+                                tg_mod_aa = 'Any'
+                            elif 'Isobaric Substitution' not in tg_mod[0][0]:
+                                print('skipping:', tg_mod)
+                            continue
+                        if 'N-term' in tg_mod_aa:
+                            tg_mod_pos += -1
+                        elif 'C-term' in tg_mod_aa:
+                            tg_mod_pos += 1
+                        tg_tmp_mods.append(
+                            '{0}<|>{1}<|>{2}:{3}'.format(
+                                tg_mod_name,
+                                tg_mod_mass,
+                                tg_mod_aa,
+                                tg_mod_pos
+                            )
+                        )
+                    line_dict['Modifications'] = ';'.join(tg_tmp_mods)
                 ##################################################
                 # Some engines do not report fixed modifications #
                 ##################################################
@@ -717,6 +835,67 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             is not recognized by ursgal'''.format(
                                 modification
                             )
+                    if 'tag_graph' in search_engine:
+                        try:
+                            unimod_name, mod_mass, mod_aa = mod.split('<|>')
+                        except: #added fixed mods
+                            tmp_mods.append(modification)
+                            continue
+                        do_not_map = False
+                        for mass_shift_name in [
+                            'Undefined Mass Shift',
+                            'Insertion',
+                            'Deletion',
+                            'PrecursorError',
+                            'precursorerror',
+                        ]:
+                            if mass_shift_name in unimod_name:
+                                do_not_map= True
+                        if do_not_map:
+                            unimod_id = None
+                        else:
+                            if '->' in unimod_name:
+                                aa_1, aa_2 = unimod_name.split('->')
+                                aa_1 = '{0}{1}'.format(
+                                    aa_1[0].upper(),
+                                    aa_1[1:]
+                                )
+                                aa_2 = '{0}{1}'.format(
+                                    aa_2[0].upper(),
+                                    aa_2[1:]
+                                )
+                                unimod_name = '{0}->{1}'.format(
+                                    aa_1,
+                                    aa_2,
+                                )
+                            else:
+                                unimod_name = '{0}{1}'.format(
+                                    unimod_name[0].upper(),
+                                    unimod_name[1:]
+                                )
+                            unimod_id = ursgal.GlobalUnimodMapper.name2id(
+                                unimod_name
+                            )
+                        if mod_aa in fixed_mods.keys():
+                            if unimod_name != fixed_mods[mod_aa]:
+                                unimod_id = None
+                        if unimod_id is None:
+                            tmp_mass_diff.append(
+                                '{0}({1}):{2}'.format(
+                                    mod_mass,
+                                    unimod_name,
+                                    pos
+                                )
+                            )
+                        else:
+                            tmp_mods.append(
+                                '{0}:{1}'.format(
+                                    unimod_name,
+                                    pos
+                                )
+                            )
+                        continue
+
                     if pos <= 1:
                         Nterm = True
                         new_pos = 1
@@ -854,8 +1033,6 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 '{0}:1'.format(_mod),
                                 '{0}:0'.format(_mod)
                             )
-                        # else:
-                        #     skip_mod = True
                     if skip_mod is True:
                         continue
                     tmp_mods.append(modification)
@@ -943,15 +1120,22 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     Hex, HexNAc, NeuAc, NeuGc, dHex = line_dict[
                         'Glycan'].strip(' ').split(' ')
                 except:
+                    '[ Error ] pGlyco glycan format was not recognized:'
                     print(line_dict['Glycan'])
                     exit()
-                line_dict['Glycan'] = 'Hex({0})HexNac({1})NeuAc({2})NeuGc({3})dHex({4})'.format(
+                line_dict['Glycan'] = 'Hex({0})HexNAc({1})NeuAc({2})NeuGc({3})dHex({4})'.format(
                     Hex,
                     HexNAc,
                     NeuAc,
                     NeuGc,
                     dHex,
                 )
+
+            if line_dict.get('Glycan', '') != '':
+                sorted_glycans = []
+                for glycan in line_dict['Glycan'].split(';'):
+                    sorted_glycans.append(sort_glycan(glycan))
+                line_dict['Glycan'] = ';'.join(sorted_glycans)
 
             # protein block, only for database search engine
             if database_search is True:
@@ -961,7 +1145,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     line_dict['Sequence'],
                     fasta_lookup_name
                 )
-                if lookup_identifier not in conflicting_uparams.keys():
+                if lookup_identifier not in database_lookup.keys():
+                    database_lookup[lookup_identifier] = {
+                        'enzyme_specificity' : '',
+                        'conflicting_uparams': set()
+                    }
                     split_collector = { }
                     for key in [ upeptide_map_sort_key ] + upeptide_map_other_keys:
                         split_collector[ key ] = line_dict[key].split(joinchar)
@@ -992,11 +1180,10 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                         )
                         continue
                     peptide_fullfills_enzyme_specificity = False
-                    last_protein_id = None
+                    peptide_enzyme_specificity = []
+                    # last_protein_id = None
                     for major_protein_info_dict in sorted_upeptide_maps:
-                        protein_specifically_cleaved   = False
-                        nterm_correct = False
-                        cterm_correct = False
+                        protein_enzyme_specificity = []
                         '''
                             'Sequence Start',
                             'Sequence Stop',
@@ -1020,6 +1207,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             protein_info_dict_buffer = [ major_protein_info_dict ]
 
                         for protein_info_dict in protein_info_dict_buffer:
+                            nterm_correct = False
+                            cterm_correct = False
                             if params['translations']['keep_asp_pro_broken_peps'] is True:
                                 if line_dict['Sequence'][-1] == 'D' and\
                                         protein_info_dict['Sequence Post AA'] == 'P':
@@ -1052,21 +1241,30 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                             # if line_dict['Sequence'] == 'SPRPGAAPGSR':
                             #     print(protein_info_dict)
                             #     print(nterm_correct, cterm_correct)
-                            if params['translations']['semi_enzyme'] is True:
-                                if cterm_correct is True or nterm_correct is True:
-                                    protein_specifically_cleaved = True
-                            elif cterm_correct is True and nterm_correct is True:
-                                protein_specifically_cleaved = True
-                            if protein_specifically_cleaved is True:
+                            if cterm_correct is True and nterm_correct is True:
+                                protein_enzyme_specificity.append('full')
+                                protein_complies = True
+                            elif cterm_correct is True or nterm_correct is True:
+                                protein_enzyme_specificity.append('semi')
+                                if params['translations']['semi_enzyme'] is True:
+                                    protein_complies = True
+                                else:
+                                    protein_complies = False
+                            else:
+                                protein_enzyme_specificity.append('nonspecific')
+                                protein_complies = False
+                            if protein_complies is True:
                                 peptide_fullfills_enzyme_specificity = True
-                                last_protein_id = protein_info_dict['Protein ID']
+                                # last_protein_id = protein_info_dict['Protein ID']
+                        peptide_enzyme_specificity.append(';'.join(protein_enzyme_specificity))
                     # we may test for further criteria to set this flag/fieldname
                     # e.g. the missed cleavage count etc.
                     if peptide_fullfills_enzyme_specificity is False:
                         non_enzymatic_peps.add( line_dict['Sequence'] )
-                        conflicting_uparams[lookup_identifier].add(
+                        database_lookup[lookup_identifier]['conflicting_uparams'].add(
                             'enzyme'
                         )
+                    database_lookup[lookup_identifier]['enzyme_specificity'] = joinchar.join(peptide_enzyme_specificity)
 
                     #check here if missed cleavage count is correct...
                     missed_cleavage_counter = 0
@@ -1093,19 +1291,20 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                                 missed_cleavage_counter += \
                                     len(re.findall(missed_cleavage_pattern, line_dict['Sequence']))
                     if missed_cleavage_counter > params['translations']['max_missed_cleavages']:
-                        conflicting_uparams[lookup_identifier].add('max_missed_cleavages')
+                        database_lookup[lookup_identifier]['conflicting_uparams'].add('max_missed_cleavages')
                 # count each PSM occurence to check whether row-merging is needed:
                 # psm = tuple([line_dict[x] for x in psm_defining_colnames])
                 # psm_counter[psm] += 1
 
-                if len(conflicting_uparams[lookup_identifier]) == 0:
+                if len(database_lookup[lookup_identifier]['conflicting_uparams']) == 0:
                     # all tested search criteria true
                     line_dict['Complies search criteria'] = 'true'
                 else:
                     line_dict['Complies search criteria'] = 'false'
                     line_dict['Conflicting uparam'] = ';'.join(
-                        sorted(conflicting_uparams[lookup_identifier])
+                        sorted(database_lookup[lookup_identifier]['conflicting_uparams'])
                     )
+                line_dict['Enzyme Specificity'] = database_lookup[lookup_identifier]['enzyme_specificity']
             line_dict_collector.append(line_dict)
 
         # --------------------------------
@@ -1116,8 +1315,11 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         # build IsotopologueLibrary
         molecule2hill_dict = {}
         for molecule in all_molecules:
-            if 'X' in molecule.upper():
-                cc.use(molecule.replace('X', ''))
+            if 'X' in molecule.split('#')[0]:
+                cc.use('{0}#{1}'.format(
+                    molecule.split('#')[0].replace('X', ''),
+                    molecule.split('#')[1]
+                ))
             else:
                 cc.use(molecule)
             if use15N:
@@ -1144,6 +1346,8 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 **collected_line_dict
             )
             cc_hill = molecule2hill_dict[molecule].strip('+')
+            cc.use(molecule2hill_dict[molecule])
+            calc_mass = cc._mass()
             charge = int(collected_line_dict['Charge'])
             if pyqms_mz_calc:
                 isotopologue_mzs = isotopologue_dict[cc_hill][
@@ -1158,16 +1362,14 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                     else:
                         min_accuracy = isotopologue_acc
             else:
-                cc.use(molecule2hill_dict[molecule])
-                mass = cc._mass()
                 calc_mz = ursgal.ucore.calculate_mz(
-                    mass,
+                    calc_mass,
                     int(collected_line_dict['Charge'])
                 )
                 min_accuracy = (float(collected_line_dict['Exp m/z']) - calc_mz)/calc_mz * 1e6
                 for isotope in range(1,6):
                     iso_mz = ursgal.ucore.calculate_mz(
-                        mass + isotope*1.008664904,
+                        calc_mass + isotope*1.008664904,
                         int(collected_line_dict['Charge'])
                     )
                     isotopologue_acc = (float(collected_line_dict['Exp m/z']) - iso_mz)/iso_mz * 1e6
@@ -1181,7 +1383,7 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
                 if 'Calc m/z' in collected_line_dict.keys() and\
                     collected_line_dict['Calc m/z'] == '':
                     collected_line_dict['Calc m/z'] = calc_mz
-
+            collected_line_dict['uCalc Mass'] = calc_mass
             collected_line_dict['Accuracy (ppm)'] = round(min_accuracy, 5)
 
             csv_output.writerow(collected_line_dict)
@@ -1219,6 +1421,28 @@ def main(input_file=None, output_file=None, scan_rt_lookup=None,
         created_tmp_files.append( output_file + '_full_protein_names.txt' )
     return created_tmp_files
 
+def sort_glycan(glycan):
+    '''
+    Sorts glycan
+    '''
+    pattern = re.compile(
+        r'''(?P<monosacch>[A-z0-9]*)(?P<count>\([A-z0-9]*\))''' )
+    glycan_dict = {}
+    for glyc_match in pattern.finditer(glycan):
+        monosacch = glyc_match.group('monosacch')
+        if monosacch == 'End':
+            count = glyc_match.group('count').strip('(').strip(')')
+            if count == 'None':
+                count = None
+        elif glyc_match.group('count') == '':
+            count = 1
+        else:
+            count = int(glyc_match.group('count').strip('(').strip(')'))
+        glycan_dict[monosacch] = count
+    sorted_glycan = ''
+    for k, v in sorted(glycan_dict.items()):
+        sorted_glycan += '{0}({1})'.format(k, v)
+    return sorted_glycan
 
 # def get_psm_defining_colnames(score_colname, search_engine):
 #     '''

@@ -91,6 +91,15 @@ unify_csv_main(
         },
         'label' : '',
         'mods' : R.params['mods'],
+        'prefix' : '',
+        'psm_defining_colnames': [
+            'Spectrum Title',
+            'Sequence',
+            'Modifications',
+            'Mass Difference',
+            'Charge',
+            'Is decoy',
+        ],
     },
     search_engine  = 'omssa_2_1_9',
 )
@@ -130,7 +139,7 @@ def unify_omssa( test_dict ):
             expected_value  = round(float(expected_value), 4)
 
         assert test_value == expected_value, '''
-  Unexpected value in column "{0}":
+    Unexpected value in column "{0}":
     test value:     {1}
     expected value: {2}
             '''.format(key, test_value, expected_value)

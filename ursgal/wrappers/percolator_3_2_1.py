@@ -395,7 +395,7 @@ class percolator_3_2_1(ursgal.UNode):
                 '--picked-protein',
                 self.params['database'],
                 '-P',
-                '{decoy_tag}'.format(**self.params),
+                '{decoy_tag}'.format(**self.params['translations']),
                 '--results-proteins',
                 '{protein_output_target}'.format(**self.params['translations']),
                 '--decoy-results-proteins',
@@ -444,6 +444,7 @@ class percolator_3_2_1(ursgal.UNode):
             for m, (score, line_dict) in enumerate(
                     self.params['grouped_psms'][spectrum_title]):
                 t = {}
+
                 if bigger_scores_better is True:
                     rank_of_score = bisect.bisect_right(
                         self.params['_score_list'],
@@ -455,10 +456,9 @@ class percolator_3_2_1(ursgal.UNode):
                         score
                     )
                     rank_of_score = len(self.params['_score_list']) - rank_of_score
-                #
-                # t['lnrSp'] = math.log( 1 + rank_of_score )
-                # t['Sp'] = rank_of_score
-                #
+
+                t['lnrSp'] = math.log( 1 + rank_of_score )
+                t['Sp'] = rank_of_score
 
                 charge      = float(line_dict['Charge'])
                 exp_mz      = float(line_dict['Exp m/z'])
@@ -545,7 +545,7 @@ class percolator_3_2_1(ursgal.UNode):
                     if aa in allowed_aa:
                         t['enzInt'] += 1
 
-                t['dM'] = float(line_dict['Calc m/z']) - float(line_dict['Exp m/z'])
+                t['dM'] = float(line_dict['uCalc m/z']) - float(line_dict['Exp m/z'])
                 t['absdM'] = abs(t['dM'])
 
                 mods = line_dict['Modifications']
@@ -584,7 +584,7 @@ class percolator_3_2_1(ursgal.UNode):
         # marking temporary files for deletion:
         self.created_tmp_files += [
             self.params['translations']['decoy_output_file_incl_path'],
-            # self.params['translations']['percolator_in'],
+            self.params['translations']['percolator_in'],
             '{output_file_incl_path}.psms'.format(
                 **self.params['translations']
             ),
@@ -643,7 +643,7 @@ class percolator_3_2_1(ursgal.UNode):
         csv_input = csv.DictReader(row for row in opened_file if not row.startswith('#'))
 
         if "PEP" not in csv_input.fieldnames and "q-value" not in csv_input.fieldnames:
-            csv_input.fieldnames += ['PEP', 'q-value']
+            csv_input.fieldnames += ['PEP', 'q-value', 'Percolator:SVM Score']
         csv_kwargs = {}
 
         if sys.platform == 'win32':
@@ -686,8 +686,10 @@ class percolator_3_2_1(ursgal.UNode):
                     }
 
         csv_output.writeheader()
+        not_found_psms = 0
         for line_dict in csv_input:
             psm_type = "target"
+            # breakpoint()
             if line_dict['Is decoy'].upper() == 'TRUE':
                 psm_type = "decoy"
 
@@ -715,14 +717,16 @@ class percolator_3_2_1(ursgal.UNode):
             if _psmid_pep_key in s2l[psm_type].keys():
                 line_dict['PEP'] = s2l[psm_type][_psmid_pep_key]['posterior_error_prob']
                 line_dict['q-value'] = s2l[psm_type][_psmid_pep_key]['q-value']
+                line_dict['Percolator:SVM Score'] = s2l[psm_type][_psmid_pep_key]['score']
                 csv_output.writerow(line_dict)
             else:
-                print(
-                    'Original PSM :{0} could not be found in percolator output file, most probably because PSM was filtered by percolator, (multiple peptides to one spectrum match)'.format(
-                        _psmid_pep_key
-                    )
-                )
-
+                not_found_psms += 1
+        self.print_info(
+            '{0} original PSMs could not be found in percolator output file, most probably because PSM was filtered by percolator, (multiple peptides to one spectrum match)'.format(
+                not_found_psms
+            ),
+            caller = 'Info',
+        )
     def generating_score_list(self):
         scores = []
         for k, v in self.params['grouped_psms'].items():

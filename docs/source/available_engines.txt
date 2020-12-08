@@ -13,6 +13,9 @@ MS Amanda
 
 Available MS Amanda versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msamanda_2_0_0_14665.msamanda_2_0_0_14665
+   :members:
+
 .. autoclass:: ursgal.wrappers.msamanda_2_0_0_13723.msamanda_2_0_0_13723
    :members:
 
@@ -46,6 +49,9 @@ MS-GF+
 
 Available MS-GF+ versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msgfplus_v2019_07_03.msgfplus_v2019_07_03
+   :members:
+   
 .. autoclass:: ursgal.wrappers.msgfplus_v2019_04_18.msgfplus_v2019_04_18
    :members:
 
@@ -76,6 +82,15 @@ MSFragger
 
 Available MSFragger versions, starting with the newest version:
 
+.. autoclass:: ursgal.wrappers.msfragger_3_0.msfragger_3_0
+   :members:
+
+.. autoclass:: ursgal.wrappers.msfragger_2_3.msfragger_2_3
+   :members:
+
+.. autoclass:: ursgal.wrappers.msfragger_20190628.msfragger_20190628
+   :members:
+
 .. autoclass:: ursgal.wrappers.msfragger_20190222.msfragger_20190222
    :members:
 
@@ -90,6 +105,9 @@ MODa
 ----
 
 Available MODa versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.moda_v1_62.moda_v1_62
+   :members:
 
 .. autoclass:: ursgal.wrappers.moda_v1_61.moda_v1_61
    :members:
@@ -108,6 +126,16 @@ MyriMatch
    :members:
 
 
+TagGraph
+--------
+
+This open modification search engine uses de novo search engine results
+but takes a protein database into account as well.
+
+.. autoclass:: ursgal.wrappers.tag_graph_1_8_0.tag_graph_1_8_0
+   :members:
+
+
 OMSSA
 -----
 
@@ -120,10 +148,10 @@ PIPI
 
 Available PIPI versions, starting with the newest version:
 
-.. autoclass:: ursgal.wrappers.pipi_1_4_5.pipi_1_4_5
+.. autoclass:: ursgal.wrappers.pipi_1_4_6.pipi_1_4_6
    :members:
 
-.. autoclass:: ursgal.wrappers.pipi_1_4_6.pipi_1_4_6
+.. autoclass:: ursgal.wrappers.pipi_1_4_5.pipi_1_4_5
    :members:
 
 
@@ -159,6 +187,11 @@ De Novo Search Engines
 DeepNovo
 --------
 
+Available DeepNovo versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.deepnovo_pointnovo.deepnovo_pointnovo
+   :members:
+
 .. autoclass:: ursgal.wrappers.deepnovo_0_0_1.deepnovo_0_0_1
    :members:
 
@@ -179,6 +212,12 @@ PepNovo
 .. autoclass:: ursgal.wrappers.pepnovo_3_1.pepnovo_3_1
    :members:
 
+pNovo
+-----
+
+.. autoclass:: ursgal.wrappers.pnovo_3_1_3.pnovo_3_1_3
+   :members:
+
 
 .. _available_cross_link_engines:
 
@@ -196,6 +235,11 @@ Glycosylation Search Engines
 
 pGlyco
 ------
+
+Available pGlyci versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.pglyco_db_2_2_2.pglyco_db_2_2_2
+   :members:
 
 .. autoclass:: ursgal.wrappers.pglyco_db_2_2_0.pglyco_db_2_2_0
    :members:

@@ -39,30 +39,37 @@ def main(input_raw_file=None, database=None, enzyme=None):
             'precursor_mass_tolerance_plus' : 5,
             'precursor_mass_tolerance_minus' : 5,
             'aa_exception_dict' : {},
+            "csv_filter_rules": [
+                ["Is decoy", "equals", "false"],
+                ["q-value", "lte", 0.01],
+                ["Conflicting uparam", "contains_not", "enzyme"]
+            ],
         }
     )
 
     xtracted_file = uc.convert(
         input_file = input_raw_file,
-        engine = 'pparse_2_0',
+        engine = 'pparse_2_2_1',
         # force = True,
     )
 
+    mzml_file = uc.convert(
+        input_file=input_raw_file,
+        engine='thermo_raw_file_parser_1_1_2',
+    )
+
+    # os.remove(mzml_file.replace('.mzML', '.mgf'))
+    # os.remove(mzml_file.replace('.mzML', '.mgf.u.json'))
     mgf_file = uc.convert(
-        input_file = input_raw_file.replace('.raw', '.idx.gz'),
+        input_file = mzml_file,
         engine = 'mzml2mgf_2_0_0',
-        # force = True,
+        force = True,
     )
 
     search_result = uc.search_mgf(
         input_file = xtracted_file,
-        engine = 'pglyco_db_2_2_0',
+        engine = 'pglyco_db_2_2_2',
     )
-
-    # converted_result = uc.convert(
-    #     input_file=search_result,
-    #     guess_engine = True,
-    # )
         
     mapped_results = uc.execute_misc_engine(
         input_file=search_result,
@@ -87,6 +94,11 @@ def main(input_raw_file=None, database=None, enzyme=None):
     unified_validated_results = uc.execute_misc_engine(
         input_file = mapped_validated_results,
         engine='unify_csv'
+    )
+
+    filtered_validated_results = uc.execute_misc_engine(
+        input_file = unified_validated_results,
+        engine='filter_csv',
     )
 
     return

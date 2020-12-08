@@ -129,8 +129,26 @@ def calculate_mz(mass, charge):
     calc_mz = (mass + (charge * PROTON)) / charge
     return calc_mz
 
+def calculate_mass(mz, charge):
+    '''
+    Calculate mass function
 
-def digest(sequence, enzyme, no_missed_cleavages=False):
+    Keyword Arguments:
+        mz (float): mz of molecule/peak
+        charge (int): charge for calculating mass
+
+
+    Returns:
+        float: calculated mass
+
+    '''
+    mz = float(mz)
+    charge = int(charge)
+    calc_mass = mz * charge - (charge * PROTON)
+    return calc_mass
+
+
+def digest(sequence, enzyme, count_missed_cleavages=None, no_missed_cleavages=False):
     '''
     Amino acid digest function
 
@@ -138,15 +156,23 @@ def digest(sequence, enzyme, no_missed_cleavages=False):
         sequence (str): amino acid sequence to digest
         enzyme (tuple): enzyme properties used for cleavage ('aminoacid(s)', 'N/C(terminus)')
                         e.g. ('KR','C') for trypsin
-        no_missed_cleavages (bool): allow missed cleavages or not
+        count_missed_cleavages (int): number of miss cleavages allowed
 
     Returns:
-        list: list of digestes peptides
+        list: list of digested peptides
 
     '''
     tmp = ''
     result = []
     additionals = list()
+    # for backwards compatibility e.g. sole use of kwarg "no_missed_cleavages"
+    # and no use of no_missed_cleavages
+    if count_missed_cleavages is None: # i.e. not set
+        if no_missed_cleavages is False:
+            count_missed_cleavages = 2
+        else:
+            count_missed_cleavages = 0
+
     cleavage_aa, site = enzyme
     for p, aa in enumerate(sequence):
         if aa == '*':
@@ -163,23 +189,83 @@ def digest(sequence, enzyme, no_missed_cleavages=False):
                 tmp += aa
     if tmp != '':
         result.append(tmp)
-    if no_missed_cleavages:
+    if count_missed_cleavages > len(result):
+        count_missed_cleavages = len(result)
+
+    if count_missed_cleavages == 0:
         additionals = result
     else:
-        for _ in range(len(result) - 1):
-            try:
-                additionals.append(
-                    result[_] + result[_ + 1]
-                )
-            except:
-                pass
-            try:
-                additionals.append(
-                    result[_] + result[_ + 1] + result[_ + 2])
-            except:
-                pass
+        for r in range(len(result)):
+            # r is the index of each fully-cleaved peptide in the list from above
+            for mc in range(r, len(result) + 1):
+                # now starting with 'r' we interrogate all other pepitdes and build further peptides
+                # up to the desired number of missed cleavages
+                if mc - r >= count_missed_cleavages:
+                    continue
+                if mc + 2 > len(result):
+                    # i.e. if are over end of list
+                    continue
+                # need to add 2 to mc a it's a location marker.
+                # mc is essentially the first peptide in the list
+                newpep = ''.join(result[r: mc + 2])
+                if newpep != '':
+                    additionals.append(newpep)
         additionals += result
     return additionals
+
+def pyteomics_cleave(sequence, rule, missed_cleavages=0, min_length=None, max_length=100):
+    import itertools as it
+    from collections import deque
+    """This function has been taken and modified from Pyteomics
+
+    Levitsky, L.I.; Klein, J.; Ivanov, M.V.; and Gorshkov, M.V. (2018)
+    "Pyteomics 4.0: five years of development of a Python proteomics framework",
+    Journal of Proteome Research. DOI: 10.1021/acs.jproteome.8b00717
+
+    Cleaves a polypeptide sequence using a given rule.
+
+    Parameters
+    ----------
+    sequence : str
+        The sequence of a polypeptide (in one-letter uppercase notation).
+
+    rule : regex
+        a `regular expression <https://docs.python.org/library/re.html#regular-expression-syntax>`_
+        describing the site of cleavage. It is recommended
+        to design the regex so that it matches only the residue whose C-terminal
+        bond is to be cleaved. All additional requirements should be specified
+        using `lookaround assertions
+        <http://www.regular-expressions.info/lookaround.html>`_.
+    missed_cleavages : int, optional
+        Maximum number of allowed missed cleavages. Defaults to 0.
+    min_length : int or None, optional
+        Minimum peptide length. Defaults to :py:const:`None`.
+    max_length: int or None, optional
+        Maximum peptide length. Defaults to 100.
+
+    Returns
+    -------
+    out : list
+        A list of tuples with (peptide sequence, start position, stop position).
+        Positions are starting with 1 for the first amino acid.
+    """
+    peptides = []
+    ml = missed_cleavages+2
+    trange = range(ml)
+    cleavage_sites = deque([0], maxlen=ml)
+    if min_length is None:
+        min_length = 1
+    cl = 1
+    for i in it.chain([x.end() for x in re.finditer(rule, sequence)],
+                   [None]):
+        cleavage_sites.append(i)
+        if cl < ml:
+            cl += 1
+        for j in trange[:cl-1]:
+            seq = sequence[cleavage_sites[j]:cleavage_sites[-1]]
+            if seq and min_length <= len(seq) <= max_length:
+                peptides.append((seq, j, cleavage_sites[-1]))
+    return peptides
 
 
 def parse_fasta(io):
@@ -234,11 +320,12 @@ def reformat_peptide(regex_pattern, unimod_name, peptide):
         original_match_end = match.end()
         match_length = original_match_end - original_match_start
         if unimod_name is None:
-            unimod_name = match.group(0)
-
+            mod_name = match.group(0)
+        else:
+            mod_name = unimod_name
         mods.append((
             original_match_start,
-            unimod_name,
+            mod_name,
             'new',
             match_length
         ))
@@ -296,10 +383,17 @@ def merge_rowdicts(list_of_rowdicts, psm_colnames_to_merge_multiple_values, join
     are joined with a character (joinchar).
     '''
     merged_d = {}
-    fieldnames = list_of_rowdicts[0].keys()
+    fieldnames = []
+    for rowdict in list_of_rowdicts:
+        for k in rowdict.keys():
+            if k not in fieldnames:
+                fieldnames.append(k)
     for fieldname in fieldnames:
+        values = []
+        for d in list_of_rowdicts:
+            if fieldname in d.keys():
+                values.append(d[fieldname])
         if fieldname in psm_colnames_to_merge_multiple_values.keys():
-            values = [d[fieldname] for d in list_of_rowdicts]
             no_empty_values = [v for v in values if v != '']
             values_as_floats = [float(value) for value in no_empty_values]
 
@@ -325,7 +419,6 @@ def merge_rowdicts(list_of_rowdicts, psm_colnames_to_merge_multiple_values, join
                 merged_d[fieldname] = joinchar.join(final_values)
         
         else:
-            values = [d[fieldname] for d in list_of_rowdicts]
             if len(set(values)) == 1:
                 merged_d[fieldname] = values[0]
             else:

@@ -118,17 +118,9 @@ Mapper class v4 (dev)
    :members:
    :private-members:
 
-
-Mapper class v3 (dev)
-~~~~~~~~~~~~~~~~~~~~~
-
 .. autoclass:: ursgal.resources.platform_independent.arc_independent.upeptide_mapper_1_0_0.upeptide_mapper_1_0_0.UPeptideMapper_v3
    :members:
    :private-members:
-
-
-Mapper class v2 (deprecated)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: ursgal.resources.platform_independent.arc_independent.upeptide_mapper_1_0_0.upeptide_mapper_1_0_0.UPeptideMapper_v2
    :members:
@@ -145,7 +137,15 @@ pyQms 1_0_0
 .. autofunction:: ursgal.resources.platform_independent.arc_independent.pyqms_1_0_0.pyqms_1_0_0.main
 
 
+FlashLFQ 1_1_1
+--------------
+
+.. autoclass:: ursgal.wrappers.flash_lfq_1_1_1.flash_lfq_1_1_1
+   :members:
+
+
 .. _validation-engines:
+
 
 Validation Engines
 ^^^^^^^^^^^^^^^^^^
@@ -157,17 +157,32 @@ Kojak tailored Percolator 2_08
    :members:
 
 
-Percolator 3_2_1
-----------------
+Percolator
+----------
+
+Available Percolator versions, starting with the newest version:
+
+.. autoclass:: ursgal.wrappers.percolator_3_4_0.percolator_3_4_0
+   :members:
 
 .. autoclass:: ursgal.wrappers.percolator_3_2_1.percolator_3_2_1
    :members:
 
-
-Percolator 2_08
----------------
-
 .. autoclass:: ursgal.wrappers.percolator_2_08.percolator_2_08
+   :members:
+
+
+PTMiner 1.0
+-----------
+
+.. autoclass:: ursgal.wrappers.ptminer_1_0.ptminer_1_0
+   :members:
+   
+
+PTM-Sheperd 0.3.5
+-----------------
+
+.. autoclass:: ursgal.wrappers.ptmshepherd_0_3_5.ptmshepherd_0_3_5
    :members:
 
 
@@ -183,6 +198,7 @@ qvality 2_02
 
 .. autoclass:: ursgal.wrappers.qvality_2_02.qvality_2_02
    :members:
+
 
 
 .. _visualizer:
