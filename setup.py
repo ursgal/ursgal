@@ -151,5 +151,8 @@ setup(
         'install_lib': my_install_lib,
         'build_py': BuildPyWithResources,
         'install_resources': InstallResourcesCommand,
-    }
+    },
+    entry_points = {
+        'console_scripts': ['ursgal-install-resources=ursgal.UController().download_resources()'],
+    },
 )
