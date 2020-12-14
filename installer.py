@@ -2,6 +2,6 @@
 
 import ursgal
 
-uc = usrgal.ucontroller.UController()
+uc = ursgal.ucontroller.UController()
 
 uc.download_resources()
