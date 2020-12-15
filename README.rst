@@ -109,7 +109,7 @@ Execute the following command from your command line::
 
 This installs Python into your Python site-packages. 
 
-To download the executables, whcih we are allowed to dsitribute run::
+To download the executables, whcih we are allowed to distribute run::
 
     user@localhost:~$ ursgal-install-resources
 
