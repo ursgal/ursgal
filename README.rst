@@ -136,8 +136,8 @@ homepage is required (see also: `How to install third party engines`_)
     https://ursgal.readthedocs.io/en/latest/faq.html#q-how-do-i-add-an-engine-that-is-not-installed-via-install-resources-py
 
 
-Installation from the source
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Installation from  source
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Download Ursgal using `GitHub`_ **or** the zip file:
 
