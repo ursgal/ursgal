@@ -107,7 +107,13 @@ Execute the following command from your command line::
 
     user@localhost:~$ pip install ursgal
 
-This installs Python into your Python site-packages.
+This installs Python into your Python site-packages. 
+
+To download the executables, whcih we are allowed to dsitribute run::
+
+    user@localhost:~$ ursgal-install-resources
+
+
 You can now use it with all engines that we have built
 or that we are allowed to distribute.
 For all other third-party engines, a manual download from the respective
