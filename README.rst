@@ -25,9 +25,9 @@ Summary
 
 Ursgal is a Python module that offers a generalized interface to common bottom-up proteomics tools, e.g.
 
-    a) Peptide spectrum matching with up to eight different search engines (some available in multiple versions), including three open modification search engines
+    a) Peptide spectrum matching with up to eight different search engines (some available in multiple versions), including four open modification search engines
 
-    b) Evaluation and post processing of search results with up to two different engines
+    b) Evaluation and post processing of search results with up to two different engines for protein database searches as well as two engines for the post processing of mass difference results from open modification engines
 
     c) Integration of search results from different search engines
 
