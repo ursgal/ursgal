@@ -34,8 +34,6 @@ from .profiles import PROFILES
 
 import ursgal.ukb
 
-# from .uinstaller import install_resources
-
 GlobalUnimodMapper = UnimodMapper()
 
 
