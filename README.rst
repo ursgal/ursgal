@@ -3,7 +3,7 @@ Introduction
 
 *Ursgal - Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
 
-|pypi| |build-status-travis| |build-status-appveyor| |doc-status| |Gitter|
+|pypi| |build-status-travis| |doc-status| |Gitter|
 
 .. |pypi| image:: https://badge.fury.io/py/ursgal.svg
     :target: https://badge.fury.io/py/ursgal
@@ -11,10 +11,6 @@ Introduction
 .. |build-status-travis| image:: https://travis-ci.org/ursgal/ursgal.svg?branch=master
    :target: https://travis-ci.org/ursgal/ursgal
    :alt: Travis CI status
-
-.. |build-status-appveyor| image:: https://ci.appveyor.com/api/projects/status/github/ursgal/ursgal?branch=master&svg=true
-   :target: https://ci.appveyor.com/project/fufezan-lab/ursgal
-   :alt: AppVeyor CI status
 
 .. |doc-status| image:: http://readthedocs.org/projects/ursgal/badge/?version=latest
    :target: http://ursgal.readthedocs.io/en/latest/?badge=latest
