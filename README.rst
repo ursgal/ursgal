@@ -132,7 +132,7 @@ homepage is required (see also: `How to install third party engines`_)
     On Mac it may be neccesary to use Python3.6, since it comes with its
     own OpenSSL now. This may avoid problems when using pip.
 
-.. _How to install thrid party engines:
+.. _How to install third party engines:
     https://ursgal.readthedocs.io/en/latest/faq.html#q-how-do-i-add-an-engine-that-is-not-installed-via-install-resources-py
 
 
@@ -184,7 +184,7 @@ into the Python site-packages you can use::
 .. note::
 
     Since we are not allowed to distribute all third party engines, you might need to
-    download and install them on your own. See FAQ (`How to install thrid party engines`_) and
+    download and install them on your own. See FAQ (`How to install third party engines`_) and
     the respective engine documentation for more information.
 
 .. note::
