@@ -6,6 +6,7 @@
 from __future__ import absolute_import
 import sys
 import os
+from packaging.version import parse as parse_version
 
 import ursgal.uparams
 
@@ -43,7 +44,7 @@ with open(version_path, "r") as version_file:
     ursgal_version = version_file.read().strip()
 
 __version__ = ursgal_version
-version_info = tuple(map(int, ursgal_version.split(".")))
+version_info = parse_version(ursgal_version)
 
 if not hasattr(sys, "version_info") or sys.version_info < (3, 4):
     raise RuntimeError("Ursgal requires Python 3.4 or later.")
