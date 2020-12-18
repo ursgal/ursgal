@@ -10,8 +10,8 @@ Version 0.6.7    (11.2020)
 #. Implemented PTM-Shepherd 0.3.5
 #. Implemented TagGraph 1.8.0
 #. Implemented latest version of MODa (v1.62), MSAmanda (version 2.0.0.14665),
-   MSFragger (20190628, 2.3, 3.1), DeepNovo (PointNovo)
-*. Implemented glycopeptide search functionality for MSFragger 3.1
+   MSFragger (20190628, 2.3, 3.0), DeepNovo (PointNovo)
+*. Implemented glycopeptide search functionality for MSFragger 3.0
 #. Implemented MS-GF+ v2019.07.03 and included enzymes.txt for more and customized options
 #. PSM defining columns for sanitize_csv and combine_PEP are now
    specified though uparams

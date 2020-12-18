@@ -22,14 +22,16 @@ def main(csv_files=None, output=None):
     buffered_input_files = {}
     all_fieldnames = []
     all_fieldnames_the_same = True
-    for i, csv_file in enumerate( csv_files ):
-        with open( csv_file , 'r' ) as file_object:
-            buffered_input_files[ csv_file ] = csv.DictReader(
-                row for row in file_object if not row.startswith('#')
-            )
-            for fieldname in buffered_input_files[ csv_file ].fieldnames:
+    for i, csv_file in enumerate(csv_files):
+        with open(csv_file , 'r') as file_object:
+            csv_dict = csv.DictReader(file_object)
+            fieldnames = csv_dict.fieldnames
+            buffered_input_files[csv_file] = [
+                row for row in csv_dict if not row[fieldnames[0]].startswith('#')
+            ]
+            for fieldname in fieldnames:
                 if fieldname not in all_fieldnames:
-                    all_fieldnames.append( fieldname )
+                    all_fieldnames.append(fieldname)
                     if i != 0:
                         all_fieldnames_the_same = False
 
@@ -39,7 +41,7 @@ def main(csv_files=None, output=None):
     WARNING!   Not all fieldnames / headers of the input csvs were the same!
     WARNING!
         ''')
-    out_csv = open( output, 'w')
+    out_csv = open(output, 'w')
     csv_kwargs = {}
     if sys.platform == 'win32':
         csv_kwargs['lineterminator'] = '\n'
@@ -54,7 +56,7 @@ def main(csv_files=None, output=None):
 
     for csv_file, csv_dict_reader in buffered_input_files.items():
         for line_dict in csv_dict_reader:
-            csv_writer.writerow( line_dict )
+            csv_writer.writerow(line_dict)
     out_csv.close()
     return None
 
@@ -66,6 +68,6 @@ if __name__ == '__main__':
         sys.exit(1)
     else:
         main(
-            csv_files = sys.argv[1:],
-            output = 'merged_csv.py'
+            csv_files=sys.argv[1:],
+            output='merged_csv.py'
         )
