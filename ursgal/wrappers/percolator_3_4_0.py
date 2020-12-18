@@ -44,9 +44,9 @@ class percolator_3_4_0(percolator_3_2_1):
         'engine': {
             'darwin': {
                 '64bit': {
-                    'exe': 'percolator_3_4_0',
+                    'exe': 'percolator',
                     'url': '',
-                    'zip_md5': '',
+                    'zip_md5': 'df491a77621a2c6f96debcae422ad0b4',
                     'additional_exe': [],
                 },
             },
