@@ -359,6 +359,7 @@ class msfragger_20170103(ursgal.UNode):
             self.params['input_dir_path'],
             self.params['file_root'] + '.tsv'
         )
+        self.created_tmp_files.append(msfragger_output_tsv)
 
         if os.path.exists(msfragger_output_tsv) is False:
             msfragger_output_tsv = os.path.join(
@@ -409,6 +410,6 @@ class msfragger_20170103(ursgal.UNode):
                 csv_writer.writerow(line_dict)
 
         csv_out_fobject.close()
-        if msfragger_output_tsv.endswith('.tsv'):
-            os.remove(msfragger_output_tsv)
+        # if msfragger_output_tsv.endswith('.tsv'):
+        #     os.remove(msfragger_output_tsv)
         return
