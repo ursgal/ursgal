@@ -91,6 +91,24 @@ Sanitize CSV 1_0_0
 .. autofunction:: ursgal.resources.platform_independent.arc_independent.sanitize_csv_1_0_0.sanitize_csv_1_0_0.main
 
 
+SugarPy v1_0_0
+--------------
+
+Contains run and plot functionality
+
+.. autoclass:: ursgal.wrappers.sugarpy_run_1_0_0.sugarpy_run_1_0_0
+   :members:
+   :private-members:
+
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.sugarpy_run_1_0_0.sugarpy_run_1_0_0.main
+
+.. autoclass:: ursgal.wrappers.sugarpy_plot_1_0_0.sugarpy_plot_1_0_0
+   :members:
+   :private-members:
+
+.. autofunction:: ursgal.resources.platform_independent.arc_independent.sugarpy_plot_1_0_0.sugarpy_plot_1_0_0.main
+
+
 Unify CSV 1_0_0
 ---------------
 

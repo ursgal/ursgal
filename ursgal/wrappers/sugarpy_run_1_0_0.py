@@ -22,8 +22,8 @@ class sugarpy_run_1_0_0(ursgal.UNode):
         'input_extensions'   : ['.csv'],
         'output_extensions'  : ['.csv'],
         'create_own_folder'  : True,
-        'in_development'     : True,
-        'include_in_git'     : False,
+        'in_development'     : False,
+        'include_in_git'     : True,
         'distributable'      : False,
         'engine'             : {
             'platform_independent' : {
@@ -32,6 +32,10 @@ class sugarpy_run_1_0_0(ursgal.UNode):
                 },
             },
         },
+        'citation':
+        'citation':
+        'S. Schulze, A. Oltmanns, C. Fufezan, J. Krägenbring, M. Mormann, M. Pohlschröder and M. Hippler (2020).'
+            'SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics',
     }
 
     def __init__(self, *args, **kwargs):
@@ -58,16 +62,6 @@ class sugarpy_run_1_0_0(ursgal.UNode):
             self.params['input_dir_path'],
             self.params['input_file']
         )
-
-        # mzml_files = []
-
-        # for input_file_dict in self.params['input_file_dicts']:
-        #     mzml_files.append(
-        #         os.path.join(
-        #             input_file_dict['dir'],
-        #             input_file_dict['file']
-        #         )
-        #     )
 
         translations = self.params['translations'][
             '_grouped_by_translated_key']

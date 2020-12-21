@@ -26,7 +26,7 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
         'output_suffix'      : 'created_files',
         'create_own_folder'  : True,
         'in_development'     : False,
-        'include_in_git'     : False,
+        'include_in_git'     : True,
         'distributable'      : False,
         'engine'             : {
             'platform_independent' : {
@@ -35,6 +35,9 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
                 },
             },
         },
+        'citation':
+        'S. Schulze, A. Oltmanns, C. Fufezan, J. Krägenbring, M. Mormann, M. Pohlschröder and M. Hippler (2020).'
+            'SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics',
     }
 
     def __init__(self, *args, **kwargs):
