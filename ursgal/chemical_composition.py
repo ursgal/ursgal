@@ -235,7 +235,7 @@ class ChemicalComposition(dict):
                 # if occ >= 1:
                 position = int(match.group('pos'))
                 if position not in self.unimod_at_pos.keys():
-                    self.unimod_at_pos[position] = [unimod[:match.start()]]
+                    self.unimod_at_pos[position] = []
                 self.unimod_at_pos[position].append(unimod[:match.start()])
                     # print('{0} <<- Two unimods at the same position ? '.format(
                     #     sequence
