@@ -2655,6 +2655,7 @@ class UController(ursgal.UNode):
             resources = self.unodes.keys()
         for engine in resources:
             if 'resource_folder' in self.unodes[engine].keys():
+                ursgal_folder = os.path.dirname(os.path.realpath(__file__))
                 if self.unodes[engine]['available'] is False:
                     include_in_git = self.unodes[engine].get('include_in_git')
                     in_development = self.unodes[engine].get('in_development', False)
@@ -2724,7 +2725,12 @@ class UController(ursgal.UNode):
 
                     #check if resource folder is present
                     if os.path.exists( self.unodes[engine]['resource_folder'] ) is False:
-                        os.makedirs( self.unodes[engine]['resource_folder'] )
+                        os.makedirs(
+                            os.path.join(
+                                ursgal_folder,
+                                self.unodes[engine]['resource_folder']
+                            )
+                        )
 
                     # now check online md presence!
                     tmp_http_get_params = {}
@@ -2737,6 +2743,7 @@ class UController(ursgal.UNode):
                         )
                     ).replace('\\','/')
                     tmp_http_get_params[ 'http_output_folder'] = os.path.join(
+                        ursgal_folder,
                         self.unodes[engine]['resource_folder'],
                         # engine
                     )
@@ -2794,7 +2801,10 @@ class UController(ursgal.UNode):
                             )
                         )
                         # check md5 of zip!!!
-                        calculated_zip_md5 = self.calc_md5( zip_file_name )
+                        calculated_zip_md5 = self.calc_md5( os.path.join(
+                            os.path.dirname(ursgal_folder),
+                            zip_file_name
+                        ))
                         if calculated_zip_md5 != md5_in_kb:
                             print(
                                 '''
@@ -2803,7 +2813,10 @@ class UController(ursgal.UNode):
         [  INFO   ] Please contact the Ursgal team!
                                 '''.format(zip_file_name)
                             )
-                            os.remove( zip_file_name )
+                            os.remove(os.path.join(
+                                os.path.dirname(ursgal_folder),
+                                zip_file_name
+                            ))
                             continue
 
                         download_zip_files.append(
@@ -2813,13 +2826,19 @@ class UController(ursgal.UNode):
                             )
                         )
                         executables_list = [
-                            self.unodes[engine]['engine'][ current_platform ][current_architecture]['exe']
+                            self.unodes[engine]['engine'][current_platform][current_architecture]['exe']
                         ]
-                        executables_list += self.unodes[engine]['engine'][ current_platform ][current_architecture].get(
+                        executables_list += self.unodes[engine]['engine'][current_platform][current_architecture].get(
                             'additional_exe',
                             []
                         )
-                        with zipfile.ZipFile(zip_file_name, 'r') as io:
+                        with zipfile.ZipFile(
+                            os.path.join(
+                                os.path.dirname(ursgal_folder),
+                                zip_file_name
+                            ),
+                            'r'
+                        ) as io:
                             for name in io.namelist():
                                 io.extract(
                                     member = name,
@@ -2837,8 +2856,18 @@ class UController(ursgal.UNode):
                                         target_file,
                                         current_stat | stat.S_IXUSR | stat.S_IXGRP
                                     )
-                        print('Remove tmp file: {0}'.format(zip_file_name))
-                        os.remove( zip_file_name )
+                        print('Remove tmp file: {0}'.format(
+                            os.path.join(
+                                os.path.dirname(ursgal_folder),
+                                zip_file_name
+                            )
+                        ))
+                        os.remove( 
+                            os.path.join(
+                                os.path.dirname(ursgal_folder),
+                                zip_file_name
+                            )
+                        )
                     else:
                         print(
                             '''
