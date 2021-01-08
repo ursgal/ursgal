@@ -8,25 +8,23 @@
 
 
 PROFILES = {
-    'LTQ XL low res' : {
+    "LTQ XL low res": {
         # MS 1 orbitrap & MSn iontrap
-        'frag_mass_tolerance'       : 0.5,
-        'frag_mass_tolerance_unit'  : 'da',
-        'instrument'                : 'low_res_ltq',
-        'frag_method'               : 'cid'
+        "frag_mass_tolerance": 0.5,
+        "frag_mass_tolerance_unit": "da",
+        "instrument": "low_res_ltq",
+        "frag_method": "cid",
     },
-
-    'LTQ XL high res' : {
+    "LTQ XL high res": {
         # MS 1 & MSn orbitrap
-        'score_ion_list'            : ['a', 'b', 'y'],
-        'instrument'                : 'high_res_ltq',
+        "score_ion_list": ["a", "b", "y"],
+        "instrument": "high_res_ltq",
     },
-
-    'QExactive+' : {
-        'score_ion_list'            : ['a', 'b', 'y', 'imm', 'int'],
-        'instrument'                : 'q_exactive',
+    "QExactive+": {
+        "score_ion_list": ["a", "b", "y", "imm", "int"],
+        "instrument": "q_exactive",
     },
 }
 
-# score ions for HCD spectra, according to 
+# score ions for HCD spectra, according to
 # Michalski et al (2012): A systematic investigation into the nature of tryptic HCD spectra. J Proteome Res (11)

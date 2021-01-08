@@ -13,15 +13,16 @@ from ursgal.ukb import PROTON
 
 
 class flash_lfq_1_1_1(ursgal.UNode):
-    """
-    """
+    """"""
 
     META_INFO = {
         "edit_version": 1.00,
         "name": "FlashLFQ",
         "version": "1.1.1",
         "release_date": "2020-04-22",
-        "engine_type": {"quantification_engine": True,},
+        "engine_type": {
+            "quantification_engine": True,
+        },
         "input_extensions": [".mzML"],
         "output_extensions": [".csv"],
         "in_development": True,
@@ -30,7 +31,11 @@ class flash_lfq_1_1_1(ursgal.UNode):
         "distributable": False,
         "utranslation_style": "flash_lfq_style_1",
         "engine": {
-            "platform_independent": {"arc_independent": {"exe": "CMD.exe",}},
+            "platform_independent": {
+                "arc_independent": {
+                    "exe": "CMD.exe",
+                }
+            },
         },
         "citation": "Millikin RJ, Solntsev SK, Shortreed MR, Smith LM. Ultrafast Peptide Label-Free Quantification with FlashLFQ. J Proteome Res. 2018;17(1):386-391. doi:10.1021/acs.jproteome.7b00608",
     }
@@ -54,22 +59,22 @@ class flash_lfq_1_1_1(ursgal.UNode):
             # total_length = sum(1 for row in reader)
             for i, line in enumerate(reader):
                 if i % 500 == 0:
-                    print('Rewrite line {0}'.format(i), end='\r')
-                if 'X' in line['Sequence']:
+                    print("Rewrite line {0}".format(i), end="\r")
+                if "X" in line["Sequence"]:
                     # X in sequence not supported
                     continue
-                file = line['Spectrum Title'].split('.')[0]
+                file = line["Spectrum Title"].split(".")[0]
                 if file not in self.all_filenames:
                     continue
                 full_seq_name, full_mass = self.get_full_seq_and_mass(line)
-                if line["Retention Time (s)"] == '':
+                if line["Retention Time (s)"] == "":
                     # # sanitize rt
-                    unit = self.scan_lookup[file]['unit']
-                    rt = self.scan_lookup[file]['scan_2_rt'][int(line['Spectrum ID'])]
-                    if unit != 'minute':
+                    unit = self.scan_lookup[file]["unit"]
+                    rt = self.scan_lookup[file]["scan_2_rt"][int(line["Spectrum ID"])]
+                    if unit != "minute":
                         rt /= 60
                 else:
-                    rt = float(line['Retention Time (s)'])
+                    rt = float(line["Retention Time (s)"])
                     rt /= 60
                 line_to_write = {
                     "File Name": file,
@@ -78,78 +83,84 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     "Base Sequence": line["Sequence"],
                     "Full Sequence": full_seq_name,
                     "Peptide Monoisotopic Mass": full_mass,
-                    "Protein Accession": line["Protein ID"]#+'|###|'+full_seq,
+                    "Protein Accession": line["Protein ID"],  # +'|###|'+full_seq,
                 }
 
-                spec_seq_id = '{0}#{1}'.format(line['Spectrum Title'], line['Sequence'])
+                spec_seq_id = "{0}#{1}".format(line["Spectrum Title"], line["Sequence"])
                 if spec_seq_id not in self.spec_sequence_dict.keys():
                     self.spec_sequence_dict[spec_seq_id] = {
-                        'masses' : [],
-                        'names' : [],
-                        'line_dicts' : [],
+                        "masses": [],
+                        "names": [],
+                        "line_dicts": [],
                     }
-                self.spec_sequence_dict[spec_seq_id]['masses'].append(full_mass)
-                self.spec_sequence_dict[spec_seq_id]['names'].append(full_seq_name)
-                self.spec_sequence_dict[spec_seq_id]['line_dicts'].append(line_to_write)
+                self.spec_sequence_dict[spec_seq_id]["masses"].append(full_mass)
+                self.spec_sequence_dict[spec_seq_id]["names"].append(full_seq_name)
+                self.spec_sequence_dict[spec_seq_id]["line_dicts"].append(line_to_write)
 
         with open(out_name, "wt") as fout:
             writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
             writer.writeheader()
             for spec_sequence in self.spec_sequence_dict.keys():
-                if len(set(self.spec_sequence_dict[spec_sequence]['masses'])) == 1:
-                    monoisotopic_mass = self.spec_sequence_dict[spec_sequence]['masses'][0]
-                    full_seq = '|||'.join(sorted(set(self.spec_sequence_dict[spec_sequence]['names'])))
+                if len(set(self.spec_sequence_dict[spec_sequence]["masses"])) == 1:
+                    monoisotopic_mass = self.spec_sequence_dict[spec_sequence][
+                        "masses"
+                    ][0]
+                    full_seq = "|||".join(
+                        sorted(set(self.spec_sequence_dict[spec_sequence]["names"]))
+                    )
                 else:
                     monoisotopic_mass = statistics.mean(
-                        self.spec_sequence_dict[spec_sequence]['masses']
+                        self.spec_sequence_dict[spec_sequence]["masses"]
                     )
-                    full_seq = '|||'.join(sorted(set(self.spec_sequence_dict[spec_sequence]['names'])))
-                seq = full_seq.split('#')[0]
-                seq_mod = '{0}[{1}]'.format(seq, full_seq)
-                for line_dict in self.spec_sequence_dict[spec_sequence]['line_dicts']:
+                    full_seq = "|||".join(
+                        sorted(set(self.spec_sequence_dict[spec_sequence]["names"]))
+                    )
+                seq = full_seq.split("#")[0]
+                seq_mod = "{0}[{1}]".format(seq, full_seq)
+                for line_dict in self.spec_sequence_dict[spec_sequence]["line_dicts"]:
                     line_dict["Full Sequence"] = seq_mod
                     line_dict["Peptide Monoisotopic Mass"] = monoisotopic_mass
-                    line_dict["Protein Accession"] #+= '|###|{0}'.format(full_seq)
+                    line_dict["Protein Accession"]  # += '|###|{0}'.format(full_seq)
                     writer.writerow(line_dict)
         return out_name
 
     def get_full_seq_and_mass(self, full_line_dict):
-        sequence = full_line_dict['Sequence']
-        modifications = full_line_dict['Modifications']
-        mass_diff = full_line_dict['Mass Difference']
-        glycan_mass = full_line_dict.get('Glycan Mass', '')
+        sequence = full_line_dict["Sequence"]
+        modifications = full_line_dict["Modifications"]
+        mass_diff = full_line_dict["Mass Difference"]
+        glycan_mass = full_line_dict.get("Glycan Mass", "")
 
-        seq_mod = '{0}#{1}'.format(sequence, modifications)
+        seq_mod = "{0}#{1}".format(sequence, modifications)
         self.cc.use(seq_mod)
         seq_mod_mass = self.cc._mass()
 
-        if mass_diff.strip() == '':
+        if mass_diff.strip() == "":
             mass_diff_mass = 0
-            mass_diff_name = ''
-        elif mass_diff.endswith(':n'):
+            mass_diff_name = ""
+        elif mass_diff.endswith(":n"):
             mass_diff_mass = 0
-            mass_diff_name = ''
+            mass_diff_name = ""
         else:
-            mass_diff_mass = float(mass_diff.rsplit(':', maxsplit=1)[0].split('(')[0])
+            mass_diff_mass = float(mass_diff.rsplit(":", maxsplit=1)[0].split("(")[0])
             mass_diff_name = mass_diff
 
-        if glycan_mass.strip() == '':
-            glycan_name = ''
+        if glycan_mass.strip() == "":
+            glycan_name = ""
             glycan_mass = 0
         else:
             glycan_mass = float(glycan_mass)
-            glycan_name = full_line_dict['Glycan']
+            glycan_name = full_line_dict["Glycan"]
 
-        full_seq = '{0}#{1}#{2}'.format(seq_mod, mass_diff_name, glycan_name)
+        full_seq = "{0}#{1}#{2}".format(seq_mod, mass_diff_name, glycan_name)
         full_mass = round(seq_mod_mass + mass_diff_mass + glycan_mass, 5)
 
         return full_seq, full_mass
 
     def rewrite_as_csv(self, tsv_path):
         base, ext = os.path.splitext(tsv_path)
-        csv_path = base + '.csv'
-        with open(tsv_path) as fin, open(csv_path, 'wt') as fout:
-            reader = csv.DictReader(fin, delimiter='\t')
+        csv_path = base + ".csv"
+        with open(tsv_path) as fin, open(csv_path, "wt") as fout:
+            reader = csv.DictReader(fin, delimiter="\t")
             fieldnames = reader.fieldnames
             writer = csv.DictWriter(fout, fieldnames=fieldnames)
             writer.writeheader()
@@ -159,7 +170,9 @@ class flash_lfq_1_1_1(ursgal.UNode):
         return csv_path
 
     def rewrite_as_translated_csv(self, tsv_path):
-        header_translations = self.UNODE_UPARAMS['header_translations']['uvalue_style_translation']
+        header_translations = self.UNODE_UPARAMS["header_translations"][
+            "uvalue_style_translation"
+        ]
         flash_lfq_headers = [
             "File Name",
             "Base Sequence",
@@ -189,10 +202,10 @@ class flash_lfq_1_1_1(ursgal.UNode):
             ursgal_header_key = header_translations[original_header_key]
             translated_headers.append(ursgal_header_key)
         base, ext = os.path.splitext(tsv_path)
-        csv_path = base + '.csv'
+        csv_path = base + ".csv"
         lines_to_write = []
-        with open(tsv_path) as fin, open(csv_path, 'wt') as fout:
-            reader = csv.DictReader(fin, delimiter='\t')
+        with open(tsv_path) as fin, open(csv_path, "wt") as fout:
+            reader = csv.DictReader(fin, delimiter="\t")
             fieldnames = translated_headers
             writer = csv.DictWriter(fout, fieldnames=translated_headers)
             writer.writeheader()
@@ -221,9 +234,19 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 self.params["input_dir_path"], self.params["input_file"]
             )
         if isinstance(mzml_files, list):
-            self.scan_lookup = pickle.load(open(os.path.join(os.path.dirname(mzml_files[0]), '_ursgal_lookup.pkl'), 'rb'))
+            self.scan_lookup = pickle.load(
+                open(
+                    os.path.join(os.path.dirname(mzml_files[0]), "_ursgal_lookup.pkl"),
+                    "rb",
+                )
+            )
         else:
-            self.scan_lookup = pickle.load(open(os.path.join(os.path.dirname(mzml_files), '_ursgal_lookup.pkl'), 'rb'))
+            self.scan_lookup = pickle.load(
+                open(
+                    os.path.join(os.path.dirname(mzml_files), "_ursgal_lookup.pkl"),
+                    "rb",
+                )
+            )
 
         # assert all mzml files are in the same folder
         if isinstance(mzml_files, list):
@@ -252,7 +275,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
                 writer.writeheader()
                 for i, line_dict in experiment_setup.items():
-                    self.all_filenames.add(line_dict['FileName'])
+                    self.all_filenames.add(line_dict["FileName"])
                     writer.writerow(line_dict)
 
         # Convert unified csv to FlashLFQ input
@@ -274,23 +297,25 @@ class flash_lfq_1_1_1(ursgal.UNode):
         command_list.extend(["--idt", psm_input])
         command_list.extend(["--out", self.params["output_dir_path"]])
         # add all other parameters here
-        grouped = self.params['translations']['_grouped_by_translated_key']
+        grouped = self.params["translations"]["_grouped_by_translated_key"]
         for key in grouped.keys():
-            if not key.startswith('--'):
+            if not key.startswith("--"):
                 continue
             val = str(list(grouped[key].values())[0])
-            if key == '--ppm':
-                print('[ WARNING ] Assymetric precursor window not supported, take 2 times precursor_mass_tolerance_plus')
-                val = str(2* int(val))
+            if key == "--ppm":
+                print(
+                    "[ WARNING ] Assymetric precursor window not supported, take 2 times precursor_mass_tolerance_plus"
+                )
+                val = str(2 * int(val))
 
             # print(f'{key}={val}')
-            if val != 'False':
-                if val == 'True':
+            if val != "False":
+                if val == "True":
                     command_list.append(key)
                 else:
                     command_list.append(key)
                     command_list.append(val)
-        print(' '.join(command_list))
+        print(" ".join(command_list))
         self.params["command_list"] = command_list
 
     def postflight(self):
@@ -304,15 +329,17 @@ class flash_lfq_1_1_1(ursgal.UNode):
         for file in output_files_basenames:
             path = os.path.join(self.params["output_dir_path"], file)
             if os.path.exists(path):
-                if file == 'QuantifiedPeaks.tsv':
+                if file == "QuantifiedPeaks.tsv":
                     csv_file = self.rewrite_as_translated_csv(path)
                 else:
                     csv_file = self.rewrite_as_csv(path)
                 suffix, ext = os.path.splitext(os.path.basename(csv_file))
-                out_name = os.path.splitext(self.params['output_file'])[0]
-                if file == 'QuantifiedPeaks.tsv':
-                    new_out = '{out_name}{ext}'.format(out_name=out_name, ext='.csv')
+                out_name = os.path.splitext(self.params["output_file"])[0]
+                if file == "QuantifiedPeaks.tsv":
+                    new_out = "{out_name}{ext}".format(out_name=out_name, ext=".csv")
                 else:
-                    new_out = "{out_name}_{suffix}{ext}".format(out_name=out_name, suffix=suffix, ext=ext)
+                    new_out = "{out_name}_{suffix}{ext}".format(
+                        out_name=out_name, suffix=suffix, ext=ext
+                    )
                 new_path = os.path.join(self.params["output_dir_path"], new_out)
                 os.rename(csv_file, new_path)

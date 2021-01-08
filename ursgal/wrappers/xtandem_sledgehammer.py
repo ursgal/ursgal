@@ -3,7 +3,7 @@ import ursgal
 import os
 
 
-class xtandem_sledgehammer( ursgal.UNode ):
+class xtandem_sledgehammer(ursgal.UNode):
     """
     X!Tandem UNode
     Parameter options at http://www.thegpm.org/TANDEM/api/
@@ -11,36 +11,37 @@ class xtandem_sledgehammer( ursgal.UNode ):
     Reference:
     Craig R, Beavis RC. (2004) TANDEM: matching proteins with tandem mass spectra.
     """
+
     META_INFO = {
-        'edit_version'                : 1.00,
-        'name'                        : 'X!Tandem',
-        'version'                     : 'Sledgehammer',
-        'release_date'                : '2013-9-1',
-        'engine_type' : {
-            'protein_database_search_engine' : True,
+        "edit_version": 1.00,
+        "name": "X!Tandem",
+        "version": "Sledgehammer",
+        "release_date": "2013-9-1",
+        "engine_type": {
+            "protein_database_search_engine": True,
         },
-        'input_extensions'            : ['.mgf', '.gaml', '.dta', '.pkl', '.mzData', '.mzXML'],
-        'output_extensions'           : ['.xml'],
-        'create_own_folder'           : True,
-        'in_development'              : False,
-        'include_in_git'              : False,
-        'distributable'               : True,
-        'utranslation_style'          : 'xtandem_style_1',
-        'engine' : {
-            'darwin' : {
-                '64bit' : {
-                    'exe'            : 'tandem',
-                    'url'            : '',
-                    'zip_md5'        : 'e153fbd41a51ce8eeb08ca12caa418f4',
-                    'additional_exe' : [],
+        "input_extensions": [".mgf", ".gaml", ".dta", ".pkl", ".mzData", ".mzXML"],
+        "output_extensions": [".xml"],
+        "create_own_folder": True,
+        "in_development": False,
+        "include_in_git": False,
+        "distributable": True,
+        "utranslation_style": "xtandem_style_1",
+        "engine": {
+            "darwin": {
+                "64bit": {
+                    "exe": "tandem",
+                    "url": "",
+                    "zip_md5": "e153fbd41a51ce8eeb08ca12caa418f4",
+                    "additional_exe": [],
                 },
             },
-            'linux' : {
-                '64bit' : {
-                    'exe'            : 'tandem',
-                    'url'            : '',
-                    'zip_md5'        : 'dfe9e4d850aeb34bfb256b027615544b',
-                    'additional_exe' : [],
+            "linux": {
+                "64bit": {
+                    "exe": "tandem",
+                    "url": "",
+                    "zip_md5": "dfe9e4d850aeb34bfb256b027615544b",
+                    "additional_exe": [],
                 },
                 # 'i386' : {
                 #     'exe'            : 'tandem',
@@ -49,12 +50,12 @@ class xtandem_sledgehammer( ursgal.UNode ):
                 #     'additional_exe' : [],
                 # },
             },
-            'win32' : {
-                '64bit' : {
-                    'exe'            : 'tandem.exe',
-                    'url'            : '',
-                    'zip_md5'        : '2c5e45292a36500f83c1a22dd62c0bda',
-                    'additional_exe' : [],
+            "win32": {
+                "64bit": {
+                    "exe": "tandem.exe",
+                    "url": "",
+                    "zip_md5": "2c5e45292a36500f83c1a22dd62c0bda",
+                    "additional_exe": [],
                 },
                 # '32bit' : {
                 #     'exe'            : 'tandem.exe',
@@ -64,16 +65,16 @@ class xtandem_sledgehammer( ursgal.UNode ):
                 # },
             },
         },
-        'citation' : 'Craig R, Beavis RC. (2004) TANDEM: matching proteins '\
-        'with tandem mass spectra.',
+        "citation": "Craig R, Beavis RC. (2004) TANDEM: matching proteins "
+        "with tandem mass spectra.",
     }
 
     def __init__(self, *args, **kwargs):
         super(xtandem_sledgehammer, self).__init__(*args, **kwargs)
         pass
 
-    def preflight( self ):
-        '''
+    def preflight(self):
+        """
         Formatting the command line via self.params
 
         Input files from format_templates are created in the output folder
@@ -81,149 +82,170 @@ class xtandem_sledgehammer( ursgal.UNode ):
 
         Returns:
             dict: self.params
-        '''
+        """
 
-        self.params['translations']['mgf_input_file'] = os.path.join(
-            self.params['input_dir_path'],
-            self.params['input_file']
+        self.params["translations"]["mgf_input_file"] = os.path.join(
+            self.params["input_dir_path"], self.params["input_file"]
         )
         xml_required = [
-            'default_input.xml',
-            'taxonomy.xml',
-            '15N-masses.xml',
-            'input.xml'
+            "default_input.xml",
+            "taxonomy.xml",
+            "15N-masses.xml",
+            "input.xml",
         ]
-        self.params['translations']['output_file_incl_path'] = os.path.join(
-            self.params['output_dir_path'],
-            self.params['output_file']
+        self.params["translations"]["output_file_incl_path"] = os.path.join(
+            self.params["output_dir_path"], self.params["output_file"]
         )
         for file_name in xml_required:
-            file_info_key = file_name.replace('.xml','')
-            xml_file_path = os.path.join(
-                self.params['output_dir_path'],
-                file_name
-            )
-            self.params['translations'][ file_info_key ] = xml_file_path
-            self.created_tmp_files.append( xml_file_path )
+            file_info_key = file_name.replace(".xml", "")
+            xml_file_path = os.path.join(self.params["output_dir_path"], file_name)
+            self.params["translations"][file_info_key] = xml_file_path
+            self.created_tmp_files.append(xml_file_path)
         #
         # building command_list !
         #
-        self.params['command_list'] =[
+        self.params["command_list"] = [
             self.exe,
-            '{input}'.format(**self.params['translations']),
+            "{input}".format(**self.params["translations"]),
         ]
 
-        if self.params['translations']['label'] == '15N':
-            self.params['translations']['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">{15N-masses}</note>'.format(**self.params['translations'])
+        if self.params["translations"]["label"] == "15N":
+            self.params["translations"][
+                "15N_default_input_addon"
+            ] = '<note label="protein, modified residue mass file" type="input">{15N-masses}</note>'.format(
+                **self.params["translations"]
+            )
         else:
-            self.params['translations']['15N_default_input_addon'] = '<note label="protein, modified residue mass file" type="input">no</note>'
+            self.params["translations"][
+                "15N_default_input_addon"
+            ] = '<note label="protein, modified residue mass file" type="input">no</note>'
 
         # modifications
         potential_mods = []
         refine_potential_mods = []
         fixed_mods = []
-        self.params['translations']['Prot-N-term'] = 0.0
-        self.params['translations']['Prot-C-term'] = 0.0
-        for mod in self.params[ 'mods' ][ 'fix' ]:
-            fixed_mods.append(
-                '{0}@{1}'.format(mod[ 'mass' ], mod[ 'aa' ] )
-            )
+        self.params["translations"]["Prot-N-term"] = 0.0
+        self.params["translations"]["Prot-C-term"] = 0.0
+        for mod in self.params["mods"]["fix"]:
+            fixed_mods.append("{0}@{1}".format(mod["mass"], mod["aa"]))
 
-        self.params['translations']['acetyl_N_term'] = 'no'
-        self.params['translations']['pyro_glu'] = 'no'
+        self.params["translations"]["acetyl_N_term"] = "no"
+        self.params["translations"]["pyro_glu"] = "no"
         pyro_glu = 0
         potentially_modified_aa = set()
-        for mod in self.params[ 'mods' ][ 'opt' ]:
-            if mod[ 'aa' ] == '*' and mod[ 'name' ] == 'Acetyl' and mod[ 'pos' ] == 'Prot-N-term' :
-                self.params['translations']['acetyl_N_term'] = 'yes'
+        for mod in self.params["mods"]["opt"]:
+            if (
+                mod["aa"] == "*"
+                and mod["name"] == "Acetyl"
+                and mod["pos"] == "Prot-N-term"
+            ):
+                self.params["translations"]["acetyl_N_term"] = "yes"
                 continue
-            if mod[ 'aa' ] == '*' and mod[ 'name' ] == 'Gln->pyro-Glu' and mod[ 'pos' ] == 'Pep-N-term' :
+            if (
+                mod["aa"] == "*"
+                and mod["name"] == "Gln->pyro-Glu"
+                and mod["pos"] == "Pep-N-term"
+            ):
                 pyro_glu += 1
                 continue
-            if mod[ 'aa' ] == '*' and mod[ 'name' ] == 'Glu->pyro-Glu' and mod[ 'pos' ] == 'Pep-N-term' :
+            if (
+                mod["aa"] == "*"
+                and mod["name"] == "Glu->pyro-Glu"
+                and mod["pos"] == "Pep-N-term"
+            ):
                 pyro_glu += 1
                 continue
-            for term in ['Prot-N-term', 'Prot-C-term']:
-                if mod[ 'pos' ] == term:
-                    if mod[ 'aa' ] == '*':
-                        if self.params['translations'][term] != 0.0:
+            for term in ["Prot-N-term", "Prot-C-term"]:
+                if mod["pos"] == term:
+                    if mod["aa"] == "*":
+                        if self.params["translations"][term] != 0.0:
                             print(
-                                '''
+                                """
             [ WARNING ] X!Tandem does not allow two mods on the same position {1}
-            [ WARNING ] Continue without modification {0} '''.format(mod, term, **mod)
+            [ WARNING ] Continue without modification {0} """.format(
+                                    mod, term, **mod
+                                )
                             )
                             continue
                         else:
-                            self.params['translations'][term] = mod[ 'mass' ]
+                            self.params["translations"][term] = mod["mass"]
                     else:
                         print(
-                                '''
+                            """
             [ WARNING ] X!Tandem does not support specific aminoacids for terminal modifications
-            [ WARNING ] Continue without modification {0} '''.format(mod, term, **mod)
+            [ WARNING ] Continue without modification {0} """.format(
+                                mod, term, **mod
                             )
+                        )
                         continue
-            if mod['aa'] in potentially_modified_aa:
+            if mod["aa"] in potentially_modified_aa:
                 print(
-                    '''
+                    """
             [ WARNING ] X!Tandem does not allow two potential mods on the same aminoacid!
-            [ WARNING ] Continue without modification {0} '''.format(mod, **mod)
+            [ WARNING ] Continue without modification {0} """.format(
+                        mod, **mod
+                    )
                 )
                 continue
             else:
-                potential_mods.append(
-                    '{0}@{1}'.format(mod[ 'mass' ], mod[ 'aa' ] )
-                )
-                potentially_modified_aa.add( mod['aa'] )
+                potential_mods.append("{0}@{1}".format(mod["mass"], mod["aa"]))
+                potentially_modified_aa.add(mod["aa"])
 
         if pyro_glu == 2:
-            self.params['translations']['pyro_glu'] = 'yes'
+            self.params["translations"]["pyro_glu"] = "yes"
         if pyro_glu == 1:
-            print('''
+            print(
+                """
     [ WARNING ] X!Tandem looks for Gln->pyro-Glu and Glu->pyro-Glu
     [ WARNING ] at the same time, please include both or none
-    [ WARNING ] Continue without modification {0} '''.format(mod, **mod)
+    [ WARNING ] Continue without modification {0} """.format(
+                    mod, **mod
+                )
             )
-        self.params['translations']['fixed_modifications'] =  ','.join( fixed_mods )
-        self.params['translations']['potential_modifications'] = ','.join( potential_mods )
-        self.params['translations']['refine_potential_modifications'] = ','.join( refine_potential_mods )
+        self.params["translations"]["fixed_modifications"] = ",".join(fixed_mods)
+        self.params["translations"]["potential_modifications"] = ",".join(
+            potential_mods
+        )
+        self.params["translations"]["refine_potential_modifications"] = ",".join(
+            refine_potential_mods
+        )
 
-        for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
-            if ion in self.params['translations']['score_ion_list']:
-                self.params['translations']['score_{0}_ions'.format(ion)] = 'yes'
+        for ion in ["a", "b", "c", "x", "y", "z"]:
+            if ion in self.params["translations"]["score_ion_list"]:
+                self.params["translations"]["score_{0}_ions".format(ion)] = "yes"
             else:
-                self.params['translations']['score_{0}_ions'.format(ion)] = 'no'
+                self.params["translations"]["score_{0}_ions".format(ion)] = "no"
 
-        templates = self.format_templates( )
+        templates = self.format_templates()
         for file_name, content in templates.items():
-            if file_name == '15N-masses.xml' and self.params['translations']['label'] == '14N':
+            if (
+                file_name == "15N-masses.xml"
+                and self.params["translations"]["label"] == "14N"
+            ):
                 continue
-            xml_file_path = os.path.join(
-                self.params['output_dir_path'],
-                file_name
-            )
-            with open( xml_file_path, 'w') as out:
-                print( content, file=out)
-                self.print_info('wrote input file {0}'.format( file_name ))
+            xml_file_path = os.path.join(self.params["output_dir_path"], file_name)
+            with open(xml_file_path, "w") as out:
+                print(content, file=out)
+                self.print_info("wrote input file {0}".format(file_name))
 
-                self.created_tmp_files.append( xml_file_path )
+                self.created_tmp_files.append(xml_file_path)
         return self.params
 
-
-    def postflight( self ):
+    def postflight(self):
         # convert_xtandemXML_to_identcsv( self.params )
         pass
 
-    def format_templates( self ):
-        '''Returns formatted X!Tandem input files
+    def format_templates(self):
+        """Returns formatted X!Tandem input files
 
         The formating is taken from self.params
 
         Returns:
             dict: keys are the names of the three templates (15N-masses.xml, taxonomy.xml, input.xml)
 
-        '''
+        """
         templates = {
-            '15N-masses.xml' : '''\
+            "15N-masses.xml": """\
 <?xml version="1.0"?>
     <bioml title="peptide residue molecular mass values for an all 15N organisms">
         <aa type="A" mass="72.034148698" />
@@ -254,28 +276,30 @@ class xtandem_sledgehammer( ursgal.UNode ):
         <molecule type="NH3" mass="18.02358311" />
         <molecule type="H2O" mass="18.01056470" />
     </bioml>
-''',
+""",
             # -------------------------
             # -------------------------
-            'taxonomy.xml' : \
-'''<?xml version='1.0' encoding='iso-8859-1'?>
+            "taxonomy.xml": """<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml label="x! taxon-to-file matching list">
       <taxon label="{database_taxonomy}">
        <file URL="{database}" format="peptide" />
      </taxon>
     </bioml>
-'''.format(**self.params['translations']),
+""".format(
+                **self.params["translations"]
+            ),
             # -------------------------
             # -------------------------
-            'input.xml' : '''<?xml version='1.0' encoding='iso-8859-1'?>
+            "input.xml": """<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml>
       <note label="list path, default parameters" type="input">{default_input}</note>
       <note label="list path, taxonomy information" type="input">{taxonomy}</note>
       <note label="spectrum, path" type="input">{mgf_input_file}</note>
       <note label="output, path" type="input">{output_file_incl_path}</note>
-    </bioml>'''.format( **self.params['translations'] ),
-
-        'default_input.xml' : '''<?xml version='1.0' encoding='iso-8859-1'?>
+    </bioml>""".format(
+                **self.params["translations"]
+            ),
+            "default_input.xml": """<?xml version='1.0' encoding='iso-8859-1'?>
     <bioml label="ursgal">
     <note type="heading">
 
@@ -369,6 +393,8 @@ class xtandem_sledgehammer( ursgal.UNode ):
     <note type="input" label="output, results">all</note>
     <note type="input" label="output, maximum valid expectation value">{max_output_e_value}</note>
     <note type="input" label="output, histogram column width">30</note>
-    </bioml>'''.format(**self.params['translations'])
-            }
+    </bioml>""".format(
+                **self.params["translations"]
+            ),
+        }
         return templates

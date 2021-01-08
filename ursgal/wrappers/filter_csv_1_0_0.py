@@ -17,37 +17,34 @@ class filter_csv_1_0_0(ursgal.UNode):
     """
 
     META_INFO = {
-        'edit_version'           : 1.00,
-        'name'                   : 'Filter CSV',
-        'version'                : '1.0.0',
-        'release_date'           : None,
-        'engine_type' : {
-            'misc_engine' : True
-        },
-        'input_extensions'       : ['.csv'],
-        'output_extensions'      : ['.csv'],
-        'output_suffix'          : 'accepted',
-        'rejected_output_suffix' : 'rejected',
-        'in_development'         : False,
-        'include_in_git'         : True,
-        'distributable'      : True,
-        'utranslation_style'     : 'filter_csv_style_1',
-        'engine' : {
-            'platform_independent' : {
-                'arc_independent' : {
-                    'exe' : 'filter_csv_1_0_0.py',
+        "edit_version": 1.00,
+        "name": "Filter CSV",
+        "version": "1.0.0",
+        "release_date": None,
+        "engine_type": {"misc_engine": True},
+        "input_extensions": [".csv"],
+        "output_extensions": [".csv"],
+        "output_suffix": "accepted",
+        "rejected_output_suffix": "rejected",
+        "in_development": False,
+        "include_in_git": True,
+        "distributable": True,
+        "utranslation_style": "filter_csv_style_1",
+        "engine": {
+            "platform_independent": {
+                "arc_independent": {
+                    "exe": "filter_csv_1_0_0.py",
                 },
             },
         },
-        'citation' :
-        '',
+        "citation": "",
     }
 
     def __init__(self, *args, **kwargs):
         super(filter_csv_1_0_0, self).__init__(*args, **kwargs)
 
     def _execute(self):
-        '''
+        """
         Result files (.csv) are filtered for defined filter parameters.
 
         Input file has to be a .csv
@@ -163,51 +160,42 @@ class filter_csv_1_0_0(ursgal.UNode):
             'false' has to be lower case, even if the spreadsheet tool displays
             it as 'FALSE'.
 
-        '''
-        print('[ -ENGINE- ] Executing conversion ..')
+        """
+        print("[ -ENGINE- ] Executing conversion ..")
         # self.time_point(tag = 'execution')
         filter_csv_main = self.import_engine_as_python_function()
-        if self.params['output_file'].lower().endswith('.csv') is False:
-            raise ValueError('Trying to filter a non-csv file')
+        if self.params["output_file"].lower().endswith(".csv") is False:
+            raise ValueError("Trying to filter a non-csv file")
 
         output_file = os.path.join(
-            self.params['output_dir_path'],
-            self.params['output_file']
+            self.params["output_dir_path"], self.params["output_file"]
         )
         input_file = os.path.join(
-            self.params['input_dir_path'],
-            self.params['input_file']
+            self.params["input_dir_path"], self.params["input_file"]
         )
 
-        if self.params['translations']['write_unfiltered_results'] is False:
+        if self.params["translations"]["write_unfiltered_results"] is False:
             output_file_unfiltered = None
         else:
-            file_extension = self.META_INFO.get(
-                'output_suffix',
-                None
-            )
-            new_file_extension = self.META_INFO.get(
-                'rejected_output_suffix',
-                None
-            )
+            file_extension = self.META_INFO.get("output_suffix", None)
+            new_file_extension = self.META_INFO.get("rejected_output_suffix", None)
             output_file_unfiltered = output_file.replace(
-                file_extension,
-                new_file_extension
+                file_extension, new_file_extension
             )
             shutil.copyfile(
-                '{0}.u.json'.format(output_file),
-                '{0}.u.json'.format(output_file_unfiltered)
+                "{0}.u.json".format(output_file),
+                "{0}.u.json".format(output_file_unfiltered),
             )
 
         filter_csv_main(
             input_file=input_file,
             output_file=output_file,
-            filter_rules=self.params['translations']['csv_filter_rules'],
+            filter_rules=self.params["translations"]["csv_filter_rules"],
             output_file_unfiltered=output_file_unfiltered,
         )
         if output_file_unfiltered is not None:
             self.fix_md5_and_file_in_json(
-                json_path='{0}.u.json'.format(output_file_unfiltered)
+                json_path="{0}.u.json".format(output_file_unfiltered)
             )
 
         # self.print_execution_time(tag='execution')

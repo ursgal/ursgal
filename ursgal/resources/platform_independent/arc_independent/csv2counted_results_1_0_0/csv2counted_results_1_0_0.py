@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-'''
+"""
 Convert .csv files to counted result files (.csv)
 
 usage:
@@ -8,14 +8,14 @@ usage:
 Note:
     The input_file should be a unified, merged (if applicable) result file
 
-'''
+"""
 
 import sys
 import os
 import csv
 import ursgal
 
-if sys.platform != 'win32':
+if sys.platform != "win32":
     csv.field_size_limit(sys.maxsize)
 
 
@@ -28,7 +28,7 @@ def main(
     convert2sfinx=False,
     keep_column_names=None,  # list of fieldnames
 ):
-    '''
+    """
     Results (.csv) are summarized as table (.csv) containing all identified
     proteins, peptides, or other specified identifiers. For each sample,
     the peptide or spectral count for each identifier is given.
@@ -56,18 +56,18 @@ def main(
         keep_column_names (list): list of column headers which
             are not used as identifiers but kept in the output,
             e.g. when counting ['Sequence', 'Modifications'] the column
-            ['Protein ID'] could be specified here. Multiple entries 
+            ['Protein ID'] could be specified here. Multiple entries
             for one identifier (e.g. when identifier_column_names = ['Potein ID']
-            and keep_column_names = ['Sequence']) are seperated by '<#>'. 
-    '''
+            and keep_column_names = ['Sequence']) are seperated by '<#>'.
+    """
 
     csv_kwargs = {}
-    if sys.platform == 'win32':
-        csv_kwargs['lineterminator'] = '\n'
+    if sys.platform == "win32":
+        csv_kwargs["lineterminator"] = "\n"
     else:
-        csv_kwargs['lineterminator'] = '\r\n'
+        csv_kwargs["lineterminator"] = "\r\n"
 
-    output_file_object = open(output_file, 'w')
+    output_file_object = open(output_file, "w")
 
     count_dict, all_filenames = count_results(
         identifier_colum_names=identifier_colum_names,
@@ -77,7 +77,7 @@ def main(
         keep_column_names=keep_column_names,
     )
     if convert2sfinx:
-        new_fieldnames = ['rownames']
+        new_fieldnames = ["rownames"]
     else:
         new_fieldnames = []
         for fieldname in identifier_colum_names:
@@ -89,25 +89,19 @@ def main(
     for filename in sorted(all_filenames):
         new_fieldnames.append(filename)
 
-    csv_output = csv.DictWriter(
-        output_file_object,
-        new_fieldnames,
-        **csv_kwargs
-    )
+    csv_output = csv.DictWriter(output_file_object, new_fieldnames, **csv_kwargs)
     csv_output.writeheader()
 
     for identifier in count_dict.keys():
         out_dict = {}
         for i, fieldname in enumerate(identifier_colum_names):
-            out_dict[fieldname] = identifier.split('<#>')[i]
+            out_dict[fieldname] = identifier.split("<#>")[i]
         for filename in all_filenames:
             count = len(count_dict[identifier].get(filename, []))
             out_dict[filename] = count
         if keep_column_names is not None:
             for column_name in keep_column_names:
-                out_dict[column_name] = '<#>'.join(
-                    count_dict[identifier][column_name]
-                )
+                out_dict[column_name] = "<#>".join(count_dict[identifier][column_name])
         csv_output.writerow(out_dict)
 
 
@@ -119,50 +113,53 @@ def count_results(
     keep_column_names=None,  # list of fieldnames
 ):
     count_dict = {}
-    all_filenames = set(['all'])
-    with open(input_file, 'r') as in_file:
+    all_filenames = set(["all"])
+    with open(input_file, "r") as in_file:
         csv_input = csv.DictReader(in_file)
         for csv_line_dict in csv_input:
             identifier = []
             for column_name in identifier_colum_names:
                 identifier.append(csv_line_dict[column_name])
-            identifier = '<#>'.join(identifier)
+            identifier = "<#>".join(identifier)
             if identifier not in count_dict.keys():
-                count_dict[identifier] = {'all': set()}
+                count_dict[identifier] = {"all": set()}
             countable = []
             for column_name in count_column_names:
                 countable.append(csv_line_dict[column_name])
-            countable = '<#>'.join(countable)
+            countable = "<#>".join(countable)
             if count_by_file:
-                filename = csv_line_dict['Spectrum Title'].split('.')[0]
+                filename = csv_line_dict["Spectrum Title"].split(".")[0]
             else:
-                filename = 'all'
+                filename = "all"
             all_filenames.add(filename)
             if filename not in count_dict[identifier].keys():
                 count_dict[identifier][filename] = set()
             count_dict[identifier][filename].add(countable)
-            count_dict[identifier]['all'].add(countable)
+            count_dict[identifier]["all"].add(countable)
             if keep_column_names is not None:
                 for column_name in keep_column_names:
-                    assert column_name not in all_filenames, '''
+                    assert (
+                        column_name not in all_filenames
+                    ), """
                     Column names in 'keep_column_names' cannot be equal
                     to file names.
                     conflicting column/file name: {0}
-                    '''.format(column_name)
+                    """.format(
+                        column_name
+                    )
                     if column_name not in count_dict[identifier]:
                         count_dict[identifier][column_name] = set()
-                    count_dict[identifier][column_name].add(
-                        csv_line_dict[column_name]
-                    )
+                    count_dict[identifier][column_name].add(csv_line_dict[column_name])
 
     return count_dict, all_filenames
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main(
         input_file=sys.argv[1],
         output_file=sys.argv[2],
-        identifier_colum_names=['Protein ID'],
-        count_column_names=['Sequence'],
+        identifier_colum_names=["Protein ID"],
+        count_column_names=["Sequence"],
         count_by_file=True,
-        keep_column_names=['Modifications'],
+        keep_column_names=["Modifications"],
     )

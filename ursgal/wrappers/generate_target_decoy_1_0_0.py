@@ -5,27 +5,27 @@ import os
 import sys
 import pprint
 
-class generate_target_decoy_1_0_0( ursgal.UNode ):
+
+class generate_target_decoy_1_0_0(ursgal.UNode):
     """Generate Target Decoy 1_0_0 UNode"""
+
     META_INFO = {
-        'edit_version'       : 1.00,
-        'name'               : 'Generate Target Decoy',
-        'version'            : '1.0.0',
-        'release_date'       : None,
-        'engine_type' : {
-            'misc_engine' : True
-        },
-        'input_extensions'   : [],
-        'output_extensions'  : ['.fasta'],
-        'output_suffix'      : 'target_decoy',
-        'in_development'     : False,
-        'include_in_git'     : True,
-        'distributable'      : True,
-        'utranslation_style' : 'generate_target_decoy_style_1',
-        'engine' : {
-            'platform_independent' : {
-                'arc_independent' : {
-                    'exe' : 'generate_target_decoy_1_0_0.py',
+        "edit_version": 1.00,
+        "name": "Generate Target Decoy",
+        "version": "1.0.0",
+        "release_date": None,
+        "engine_type": {"misc_engine": True},
+        "input_extensions": [],
+        "output_extensions": [".fasta"],
+        "output_suffix": "target_decoy",
+        "in_development": False,
+        "include_in_git": True,
+        "distributable": True,
+        "utranslation_style": "generate_target_decoy_style_1",
+        "engine": {
+            "platform_independent": {
+                "arc_independent": {
+                    "exe": "generate_target_decoy_1_0_0.py",
                 },
             },
         },
@@ -35,15 +35,14 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         # 'engine_url' : {
         #     'internal' : True,
         # },
-        'citation' : \
-            '',
+        "citation": "",
     }
 
     def __init__(self, *args, **kwargs):
         super(generate_target_decoy_1_0_0, self).__init__(*args, **kwargs)
 
-    def _execute( self ):
-        '''
+    def _execute(self):
+        """
         Creates a target decoy database based on shuffling of peptides or
         complete reversing the protein sequence.
 
@@ -90,42 +89,37 @@ class generate_target_decoy_1_0_0( ursgal.UNode ):
         Available enzymes and their cleavage site can be found in the knowledge
         base of generate_target_decoy_1_0_0.
 
-        '''
+        """
 
-        print('[ -ENGINE- ] Executing conversion ..')
+        print("[ -ENGINE- ] Executing conversion ..")
         # self.time_point(tag = 'execution')
         generate_target_decoy_main = self.import_engine_as_python_function()
 
         input_files = []
-        if 'input_file_dicts' in self.params.keys():
-            for input_file_dict in self.params['input_file_dicts']:
+        if "input_file_dicts" in self.params.keys():
+            for input_file_dict in self.params["input_file_dicts"]:
                 input_files.append(
-                    os.path.join(
-                        input_file_dict['dir'],
-                        input_file_dict['file']
-                    )
+                    os.path.join(input_file_dict["dir"], input_file_dict["file"])
                 )
         else:
             input_files.append(
                 os.path.join(
-                    self.io['input']['finfo']['dir'],
-                    self.io['input']['finfo']['file']
+                    self.io["input"]["finfo"]["dir"], self.io["input"]["finfo"]["file"]
                 )
             )
 
-        self.params['translations']['output_file_incl_path'] = os.path.join(
-            self.params['output_dir_path'],
-            self.params['output_file']
+        self.params["translations"]["output_file_incl_path"] = os.path.join(
+            self.params["output_dir_path"], self.params["output_file"]
         )
 
         generate_target_decoy_main(
-            input_files = input_files,
-            output_file = self.params['translations']['output_file_incl_path'],
-            enzyme      = self.params['translations']['enzyme'],
-            mode        = self.params['translations']['decoy_generation_mode'],
-            decoy_tag   = self.params['translations']['decoy_tag'],
-            convert_aa_in_motif = self.params['translations']['convert_aa_in_motif'],
+            input_files=input_files,
+            output_file=self.params["translations"]["output_file_incl_path"],
+            enzyme=self.params["translations"]["enzyme"],
+            mode=self.params["translations"]["decoy_generation_mode"],
+            decoy_tag=self.params["translations"]["decoy_tag"],
+            convert_aa_in_motif=self.params["translations"]["convert_aa_in_motif"],
         )
 
         # self.print_execution_time(tag='execution')
-        return self.params['output_file_incl_path']
+        return self.params["output_file_incl_path"]

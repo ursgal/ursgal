@@ -18,55 +18,56 @@ class percolator_3_4_0(percolator_3_2_1):
     Noe:
     Please download Percolator corresponding to your OS from: https://github.com/percolator/percolator/releases
     """
+
     META_INFO = {
-        'engine_type': {
-            'controller': False,
-            'converter': False,
-            'validation_engine': True,
-            'search_engine': False,
-            'meta_engine': False
+        "engine_type": {
+            "controller": False,
+            "converter": False,
+            "validation_engine": True,
+            "search_engine": False,
+            "meta_engine": False,
         },
-        'edit_version': 1.00,
-        'name': 'percolator',
-        'version': '3.4.0',
-        'release_date': None,
-        'output_extensions': ['.csv'],
-        'output_suffix': 'percolator_3_4_0_validated',
-        'input_extensions': ['.csv'],
-        'create_own_folder': False,
-        'citation' : 'Matthew The, Michael J. MacCoss, William S. Noble, Lukas Kall' \
-            'Fast and Accurate Protein False Discovery Rates on Large-Scale Proteomics Data Sets with Percolator 3.0',
-        'include_in_git': False,
-        'distributable': True,
-        'group_psms': True,
-        'in_development': False,
-        'utranslation_style': 'percolator_style_1',
-        'engine': {
-            'darwin': {
-                '64bit': {
-                    'exe': 'percolator',
-                    'url': '',
-                    'zip_md5': 'df491a77621a2c6f96debcae422ad0b4',
-                    'additional_exe': [],
+        "edit_version": 1.00,
+        "name": "percolator",
+        "version": "3.4.0",
+        "release_date": None,
+        "output_extensions": [".csv"],
+        "output_suffix": "percolator_3_4_0_validated",
+        "input_extensions": [".csv"],
+        "create_own_folder": False,
+        "citation": "Matthew The, Michael J. MacCoss, William S. Noble, Lukas Kall"
+        "Fast and Accurate Protein False Discovery Rates on Large-Scale Proteomics Data Sets with Percolator 3.0",
+        "include_in_git": False,
+        "distributable": True,
+        "group_psms": True,
+        "in_development": False,
+        "utranslation_style": "percolator_style_1",
+        "engine": {
+            "darwin": {
+                "64bit": {
+                    "exe": "percolator",
+                    "url": "",
+                    "zip_md5": "df491a77621a2c6f96debcae422ad0b4",
+                    "additional_exe": [],
                 },
             },
-            'linux': {
-                '64bit': {
-                    'exe': 'percolator',
-                    'url': '',
-                    'zip_md5': '6c1848249c2fc1a88c39fbf4a14babac',
-                    'additional_exe': [],
+            "linux": {
+                "64bit": {
+                    "exe": "percolator",
+                    "url": "",
+                    "zip_md5": "6c1848249c2fc1a88c39fbf4a14babac",
+                    "additional_exe": [],
                 },
             },
-            'win32': {
-                '64bit': {
-                    'exe': 'percolator.exe',
-                    'url': '',
-                    'zip_md5': '7d53ff24d5d5de3600d7b703eb962086',
-                    'additional_exe': [],
+            "win32": {
+                "64bit": {
+                    "exe": "percolator.exe",
+                    "url": "",
+                    "zip_md5": "7d53ff24d5d5de3600d7b703eb962086",
+                    "additional_exe": [],
                 },
             },
-        }
+        },
     }
 
     def __init__(self, *args, **kwargs):
