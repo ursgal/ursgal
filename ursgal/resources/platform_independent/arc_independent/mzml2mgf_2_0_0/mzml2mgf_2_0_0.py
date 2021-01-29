@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.4
-'''
+"""
 Converts mzML to mgf
 
 Usage:
@@ -8,7 +8,7 @@ Usage:
 Note:
 1) A new mgf file will be created at the same location as the mzML file
 2) only ms2 are converted to mgf
-'''
+"""
 # 18.11.2014
 # By C. Fufezan
 
@@ -21,20 +21,16 @@ import pymzml
 
 def _determine_mzml_name_base(file_name, prefix):
     file_name = os.path.basename(file_name)
-    if file_name.upper().endswith('.MZML.GZ'):
+    if file_name.upper().endswith(".MZML.GZ"):
         mzml_name_base = file_name[:-8]
-    elif file_name.upper().endswith('.MZML'):
+    elif file_name.upper().endswith(".MZML"):
         mzml_name_base = file_name[:-5]
-    elif file_name.upper().endswith('.IDX.GZ'):
+    elif file_name.upper().endswith(".IDX.GZ"):
         mzml_name_base = file_name[:-7]
     else:
-        raise Exception(
-            "Can not determine mzml base name from {0}".format(
-                file_name
-            )
-        )
-    if prefix is not None and prefix != '':
-        mzml_name_base = '_'.join([prefix, mzml_name_base])
+        raise Exception("Can not determine mzml base name from {0}".format(file_name))
+    if prefix is not None and prefix != "":
+        mzml_name_base = "_".join([prefix, mzml_name_base])
     return mzml_name_base
 
 
@@ -51,28 +47,22 @@ def main(
     ms_level=2,
     precursor_min_charge=1,
     precursor_max_charge=5,
-    ion_mode='+',
+    ion_mode="+",
     spec_id_attribute=None,
     signal_to_noise_threshold=None,
 ):
 
     print(
-        'Converting file:\n\tmzml : {0}\n\tto\n\tmgf : {1}'.format(
+        "Converting file:\n\tmzml : {0}\n\tto\n\tmgf : {1}".format(
             mzml,
             mgf,
         )
     )
     mzml_name_base = _determine_mzml_name_base(mzml, prefix)
     # rt_lookup = mzml_name_base + '_rt_lookup.pkl'
-    oof = open(mgf , 'w')
-    run = pymzml.run.Reader(
-        mzml
-    )
-    tmp = {
-        'rt_2_scan' : {},
-        'scan_2_rt' : {},
-        'scan_2_mz': {}
-    }
+    oof = open(mgf, "w")
+    run = pymzml.run.Reader(mzml)
+    tmp = {"rt_2_scan": {}, "scan_2_rt": {}, "scan_2_mz": {}}
     mgf_entries = 0
     if scan_exclusion_list is None:
         scan_exclusion_list = []
@@ -84,64 +74,68 @@ def main(
     else:
         mz_correction_factor = 0
     if precursor_min_charge is not None and precursor_max_charge is not None:
-        precursor_charge_range = '{0}'.format(precursor_min_charge)
+        precursor_charge_range = "{0}".format(precursor_min_charge)
         for charge in range(precursor_min_charge + 1, precursor_max_charge + 1):
-            precursor_charge_range += ' and {0}'.format(charge)
+            precursor_charge_range += " and {0}".format(charge)
     else:
         precursor_charge_range = None
     mzml_basename = os.path.basename(mzml)
     for n, spec in enumerate(run):
         if n % 500 == 0:
             print(
-                'File : {0:^40} : Processing spectrum {1}'.format(
+                "File : {0:^40} : Processing spectrum {1}".format(
                     mzml_basename,
                     n,
                 ),
-                end='\r'
+                end="\r",
             )
 
         spec_ms_level = spec.ms_level
         scan_time, scan_time_unit = spec.scan_time
-        if scan_time_unit == 'seconds':
+        if scan_time_unit == "seconds":
             scan_time /= 60
-        elif scan_time_unit != 'minute':
-            print('''
+        elif scan_time_unit != "minute":
+            print(
+                """
                 [Warning] The retention time unit is not recognized or not specified.
                 [Warning] It is assumed to be minutes and continues with that.
-            ''')
+            """
+            )
         if spec_id_attribute is None:
             spectrum_id = spec.ID
         else:
             id_attribute, id_key = list(spec_id_attribute.items())[0]
-            if id_attribute == 'ID':
+            if id_attribute == "ID":
                 spectrum_id = spec.ID
-            elif id_attribute == 'index':
-                spectrum_id = spec.index+1
-            elif id_attribute == 'id_dict':
+            elif id_attribute == "index":
+                spectrum_id = spec.index + 1
+            elif id_attribute == "id_dict":
                 spectrum_id = spec.id_dict[id_key]
             else:
-                print('''
+                print(
+                    """
                     [ERROR] Please specifiy an available spec_id_attribute for mzml2mgf.
                     [ERROR] Available: ID, id_dict, index
-                ''')
-        tmp['rt_2_scan'][scan_time] = spectrum_id
-        tmp['scan_2_rt'][spectrum_id] = scan_time
-        tmp['unit'] = 'minute'
+                """
+                )
+        tmp["rt_2_scan"][scan_time] = spectrum_id
+        tmp["scan_2_rt"][spectrum_id] = scan_time
+        tmp["unit"] = "minute"
 
         if spec_ms_level != ms_level:
             continue
 
         if signal_to_noise_threshold is not None:
             spec = spec.remove_noise(
-                mode='median',
+                mode="median",
                 signal_to_noise_threshold=signal_to_noise_threshold,
             )
-            peaks_2_write = spec.peaks('centroided')
+            peaks_2_write = spec.peaks("centroided")
         else:
-            peaks_2_write = spec.peaks('centroided')
+            peaks_2_write = spec.peaks("centroided")
 
-        precursor_mz = spec.selected_precursors[0]['mz']
-        precursor_charge = spec.selected_precursors[0].get('charge', None)
+        precursor_mz = spec.selected_precursors[0]["mz"]
+        precursor_charge = spec.selected_precursors[0].get("charge", None)
 
         if scan_inclusion_list is not None:
             if int(spectrum_id) not in scan_inclusion_list:
@@ -158,110 +152,67 @@ def main(
         if len(peaks_2_write) == 0:
             continue
 
+        print("BEGIN IONS", file=oof)
         print(
-            'BEGIN IONS',
-            file=oof
-        )
-        print(
-            'TITLE={0}.{1}.{1}.{2}'.format(
+            "TITLE={0}.{1}.{1}.{2}".format(
                 mzml_name_base,
                 spectrum_id,
                 precursor_charge,
             ),
-            file=oof
+            file=oof,
         )
-        print(
-            'SCANS={0}'.format(
-                spectrum_id
-            ),
-            file=oof
-        )
+        print("SCANS={0}".format(spectrum_id), file=oof)
 
         scan_time = float(scan_time) * 60
-        print(
-            'RTINSECONDS={0}'.format(
-                round(
-                    scan_time,
-                    11
-                )
-            ),
-            file=oof
-        )
+        print("RTINSECONDS={0}".format(round(scan_time, 11)), file=oof)
 
         precursor_mz += precursor_mz * mz_correction_factor
-        tmp['scan_2_mz'][spectrum_id] = precursor_mz
-        print(
-            'PEPMASS={0}'.format(
-                precursor_mz
-            ),
-            file=oof
-        )
+        tmp["scan_2_mz"][spectrum_id] = precursor_mz
+        print("PEPMASS={0}".format(precursor_mz), file=oof)
         if precursor_charge is not None:
-            print(
-                'CHARGE={0}{1}'.format(
-                    precursor_charge,
-                    ion_mode
-                ),
-                file=oof
-            )
+            print("CHARGE={0}{1}".format(precursor_charge, ion_mode), file=oof)
         elif precursor_charge_range is not None:
-            print(
-                'CHARGE={0}{1}'.format(
-                    precursor_charge_range,
-                    ion_mode
-                ),
-                file=oof
-            )
+            print("CHARGE={0}{1}".format(precursor_charge_range, ion_mode), file=oof)
         else:
-            print(
-                'CHARGE=',
-                file=oof
-            )
+            print("CHARGE=", file=oof)
 
         for mz, intensity in peaks_2_write:
             # if fragment_ppm_offset is not None:
             mz += mz * mz_correction_factor
             print(
-                '{0:<10.{mzDecimals}f} {1:<10.{intensityDecimals}f}'.format(
-                    mz,
-                    intensity,
-                    mzDecimals=mz_decimals,
-                    intensityDecimals=i_decimals
+                "{0:<10.{mzDecimals}f} {1:<10.{intensityDecimals}f}".format(
+                    mz, intensity, mzDecimals=mz_decimals, intensityDecimals=i_decimals
                 ),
-                file=oof
+                file=oof,
             )
 
-        print(
-            'END IONS\n',
-            file=oof
-        )
-    print('')
-    print(
-        'Wrote {0} mgf entries to file {1}'.format(
-            mgf_entries,
-            mgf
-        )
-    )
+        print("END IONS\n", file=oof)
+    print("")
+    print("Wrote {0} mgf entries to file {1}".format(mgf_entries, mgf))
 
     oof.close()
     return tmp
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # parsing command line arguments:
     parser = argparse.ArgumentParser()
+    parser.add_argument("mzml", help="mzml input file")
+    parser.add_argument("mgf", help="mzml output file")
     parser.add_argument(
-        'mzml',
-        help='mzml input file')
+        "-m",
+        "--mz_decimals",
+        default=5,
+        help="Number of decimals for mz values",
+        type=int,
+    )
     parser.add_argument(
-        'mgf',
-        help='mzml output file')
-    parser.add_argument(
-        '-m', '--mz_decimals', default=5,
-        help='Number of decimals for mz values', type=int)
-    parser.add_argument(
-        '-i', '--i_decimals', default=5,
-        help='Number of decimals for intensity values', type=int)
+        "-i",
+        "--i_decimals",
+        default=5,
+        help="Number of decimals for intensity values",
+        type=int,
+    )
 
     if len(sys.argv) <= 1:
         parser.print_help()

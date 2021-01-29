@@ -8,7 +8,7 @@ import csv
 
 
 def main(folder=None, sanitized_search_results=None):
-    '''
+    """
     Downstream processing of mass differences from open modification search results
     using PTM-Shepherd.
     A folder containing all relevant mzML files and a sanitized (one PSM per spectrum)
@@ -17,7 +17,7 @@ def main(folder=None, sanitized_search_results=None):
     usage:
         ./ptmshepherd_mass_difference_processing.py <folder_with_mzML> <sanitized_result_file>
 
-    '''
+    """
     mzml_files = []
     for mzml in glob.glob(os.path.join(folder, "*.mzML")):
         mzml_files.append(mzml)
@@ -33,29 +33,30 @@ def main(folder=None, sanitized_search_results=None):
         "modifications": [
             "C,opt,any,Carbamidomethyl",
         ],
-        "-xmx": '12G',
-        'psm_defining_colnames': [
-            'Spectrum Title',
-            'Sequence',
+        "-xmx": "12G",
+        "psm_defining_colnames": [
+            "Spectrum Title",
+            "Sequence",
             # 'Modifications',
             # 'Mass Difference',
             # 'Charge',
             # 'Is decoy',
         ],
-        'mzml_input_files' : mzml_files,
-        'validation_score_field': 'combined PEP',
-        'bigger_scores_better': False,
+        "mzml_input_files": mzml_files,
+        "validation_score_field": "combined PEP",
+        "bigger_scores_better": False,
     }
 
     uc = ursgal.UController(params=params, profile="QExactive+", verbose=False)
 
     ptmshepherd_results = uc.validate(
         input_file=sanitized_search_results,
-        engine='ptmshepherd_0_3_5',
+        engine="ptmshepherd_0_3_5",
         # force=True,
     )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main(
         folder=sys.argv[1],
         sanitized_search_results=sys.argv[2],

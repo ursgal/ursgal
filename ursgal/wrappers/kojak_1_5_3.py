@@ -4,7 +4,7 @@ import os
 import shutil
 
 
-class kojak_1_5_3( ursgal.UNode ):
+class kojak_1_5_3(ursgal.UNode):
     """
     Kojak UNode
     Parameter options at http://www.kojak-ms.org/param/index.html
@@ -18,140 +18,137 @@ class kojak_1_5_3( ursgal.UNode ):
         'kojak_1_5_3' in the resources folder.
 
     """
+
     META_INFO = {
-        'edit_version'                : 1.00,
-        'name'                        : 'Kojak',
-        'version'                     : '1.5.3',
-        'release_date'                : '2015-5-1',
-        'engine_type' : {
-            'cross_link_search_engine' : True,
+        "edit_version": 1.00,
+        "name": "Kojak",
+        "version": "1.5.3",
+        "release_date": "2015-5-1",
+        "engine_type": {
+            "cross_link_search_engine": True,
         },
-        'input_extensions'            : ['.mzML', '.mzXML'],
-        'output_extensions' : ['.kojak.txt', '.pep.xml', '.perc.inter.txt', \
-            '.perc.intra.txt', '.perc.loop.txt', '.perc.single.txt'],
-        'create_own_folder'           : True,
-        'distributable'               : False,
-        'in_development'              : False,
-        'include_in_git'              : None,
-        'utranslation_style'          : 'kojak_style_1',
-        'engine' : {
-            'linux' : {
-                '64bit' : {
-                    'exe'            : 'kojak',
-                    'url'            : '',
-                    'zip_md5'        : '',
-                    'additional_exe' : [],
+        "input_extensions": [".mzML", ".mzXML"],
+        "output_extensions": [
+            ".kojak.txt",
+            ".pep.xml",
+            ".perc.inter.txt",
+            ".perc.intra.txt",
+            ".perc.loop.txt",
+            ".perc.single.txt",
+        ],
+        "create_own_folder": True,
+        "distributable": False,
+        "in_development": False,
+        "include_in_git": None,
+        "utranslation_style": "kojak_style_1",
+        "engine": {
+            "linux": {
+                "64bit": {
+                    "exe": "kojak",
+                    "url": "",
+                    "zip_md5": "",
+                    "additional_exe": [],
                 },
             },
-            'win32' : {
-                '64bit' : {
-                    'exe'            : 'kojak',
-                    'url'            : '',
-                    'zip_md5'        : '',
-                    'additional_exe' : [],
+            "win32": {
+                "64bit": {
+                    "exe": "kojak",
+                    "url": "",
+                    "zip_md5": "",
+                    "additional_exe": [],
                 }
             },
         },
-        'citation' : \
-            'Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis '\
-            'TN, Moritz RL (2015) Kojak: Efficient analysis of chemically '\
-            'cross-linked protein complexes. J Proteome Res 14: 2190-198',
+        "citation": "Hoopmann MR, Zelter A, Johnson RS, Riffle M, Maccoss MJ, Davis "
+        "TN, Moritz RL (2015) Kojak: Efficient analysis of chemically "
+        "cross-linked protein complexes. J Proteome Res 14: 2190-198",
     }
-
 
     def __init__(self, *args, **kwargs):
         super(kojak_1_5_3, self).__init__(*args, **kwargs)
         pass
 
-    def preflight( self ):
-        '''
+    def preflight(self):
+        """
         Formatting the command line via self.params
 
-        '''
-        self.params['translations']['output_file_incl_path'] = os.path.join(
-            self.params['output_dir_path'],
-            self.params['output_file']
+        """
+        self.params["translations"]["output_file_incl_path"] = os.path.join(
+            self.params["output_dir_path"], self.params["output_file"]
         )
         input_file = os.path.join(
-            self.params['input_dir_path'],
-            self.params['input_file']
+            self.params["input_dir_path"], self.params["input_file"]
         )
-        if input_file.lower().endswith('.mzml') or \
-            input_file.lower().endswith('.mzml.gz'):
-            self.params['translations']['mzml_input_file'] = input_file
-        elif input_file.lower().endswith('.mgf'):
-            self.params['translations']['mzml_input_file'] = \
-                self.meta_unodes['ucontroller'].get_mzml_that_corresponds_to_mgf( input_file )
+        if input_file.lower().endswith(".mzml") or input_file.lower().endswith(
+            ".mzml.gz"
+        ):
+            self.params["translations"]["mzml_input_file"] = input_file
+        elif input_file.lower().endswith(".mgf"):
+            self.params["translations"]["mzml_input_file"] = self.meta_unodes[
+                "ucontroller"
+            ].get_mzml_that_corresponds_to_mgf(input_file)
             self.print_info(
-                'Kojak cannot read .mgf files.'
-                'the corresponding mzML file {0} will be used instead.'.format(
-                    os.path.abspath(self.params['translations']['mzml_input_file'])
+                "Kojak cannot read .mgf files."
+                "the corresponding mzML file {0} will be used instead.".format(
+                    os.path.abspath(self.params["translations"]["mzml_input_file"])
                 ),
-                caller = "INFO"
+                caller="INFO",
             )
         else:
-            raise Exception('Kojak input spectrum file must be in mzML or MGF format!')
-
+            raise Exception("Kojak input spectrum file must be in mzML or MGF format!")
 
         # remap modifications to adapt to kojak format
-        self.params['translations']['kojak_fix_modifications'] = ''
-        self.params['translations']['kojak_opt_modifications'] = ''
-        for mod_type, mod_list in self.params['mods'].items():
-            mod_dict_key = 'kojak_{0}_modifications'.format(mod_type)
+        self.params["translations"]["kojak_fix_modifications"] = ""
+        self.params["translations"]["kojak_opt_modifications"] = ""
+        for mod_type, mod_list in self.params["mods"].items():
+            mod_dict_key = "kojak_{0}_modifications".format(mod_type)
             # if len(mod_list) > 0:
             #     self.p[]
-            if mod_type == 'fix':
-                param_name = 'fixed_modification'
+            if mod_type == "fix":
+                param_name = "fixed_modification"
             else:
-                param_name = 'modification'
+                param_name = "modification"
             for mod_dict in mod_list:
-                self.params['translations'][mod_dict_key] += '{0} = {1} {2}\n'.format(
-                    param_name,
-                    mod_dict['aa'],
-                    mod_dict['mass']
+                self.params["translations"][mod_dict_key] += "{0} = {1} {2}\n".format(
+                    param_name, mod_dict["aa"], mod_dict["mass"]
                 )
-        self.params['translations']['formatted_cross_link'] = ''
-        self.params['translations']['formatted_mono_link'] = ''
-        if len(self.params['translations']['cross_link_definition']) > 0:
-            for cross_link in self.params['translations']['cross_link_definition']:
-                self.params['translations']['formatted_cross_link'] += 'cross_link = {0}\n'.format(cross_link)
+        self.params["translations"]["formatted_cross_link"] = ""
+        self.params["translations"]["formatted_mono_link"] = ""
+        if len(self.params["translations"]["cross_link_definition"]) > 0:
+            for cross_link in self.params["translations"]["cross_link_definition"]:
+                self.params["translations"][
+                    "formatted_cross_link"
+                ] += "cross_link = {0}\n".format(cross_link)
 
-        if len(self.params['translations']['mono_link_definition']) > 0:
-            for mono_link in self.params['translations']['mono_link_definition']:
-                if mono_link not in [None, '']:
-                    self.params['translations']['formatted_mono_link'] += 'mono_link = {0}\n'.format(mono_link)
+        if len(self.params["translations"]["mono_link_definition"]) > 0:
+            for mono_link in self.params["translations"]["mono_link_definition"]:
+                if mono_link not in [None, ""]:
+                    self.params["translations"][
+                        "formatted_mono_link"
+                    ] += "mono_link = {0}\n".format(mono_link)
 
-        for ion in ['a', 'b', 'c', 'x', 'y', 'z']:
-            if ion in self.params['translations']['score_ion_list']:
-                self.params['translations']['ion_series_{0}'.format(ion.upper())] = 1
+        for ion in ["a", "b", "c", "x", "y", "z"]:
+            if ion in self.params["translations"]["score_ion_list"]:
+                self.params["translations"]["ion_series_{0}".format(ion.upper())] = 1
             else:
-                self.params['translations']['ion_series_{0}'.format(ion.upper())] = 0
+                self.params["translations"]["ion_series_{0}".format(ion.upper())] = 0
 
         # building command_list !
 
-        templates = self.format_templates( )
-        config_file_path = os.path.join(
-            self.params['output_dir_path'],
-            'Kojak.conf'
-        )
-        with open( config_file_path, 'w') as out:
-            print(
-                templates['Kojak.conf'],
-                file = out
-            )
-            self.print_info('wrote input file {0}'.format( config_file_path ))
-        self.params['command_list'] =[
-            self.exe,
-            '{0}'.format(config_file_path)
-        ]
+        templates = self.format_templates()
+        config_file_path = os.path.join(self.params["output_dir_path"], "Kojak.conf")
+        with open(config_file_path, "w") as out:
+            print(templates["Kojak.conf"], file=out)
+            self.print_info("wrote input file {0}".format(config_file_path))
+        self.params["command_list"] = [self.exe, "{0}".format(config_file_path)]
 
         return self.params
 
-    def postflight( self ):
-        '''
+    def postflight(self):
+        """
         Move the result files to the Kojak folder, since the output files can
         not be specified manually.
-        '''
+        """
         # kojak_extensions = [
         #     '.kojak.txt',
         #     '.pep.xml',
@@ -160,32 +157,26 @@ class kojak_1_5_3( ursgal.UNode ):
         #     '.perc.loop.txt',
         #     '.perc.single.txt',
         # ]
-        for extension in self.META_INFO['all_extensions']:
+        for extension in self.META_INFO["all_extensions"]:
             org_path = os.path.join(
-                self.params['input_dir_path'],
-                '{0}{1}'.format(
-                    self.params['file_root'],
-                    extension
-                )
+                self.params["input_dir_path"],
+                "{0}{1}".format(self.params["file_root"], extension),
             )
             new_path = os.path.join(
-                self.params['output_dir_path'],
-                '{0}_kojak_{1}{2}'.format(
-                    self.params['file_root'],
-                    self.META_INFO['version'].replace('.', '_'),
-                    extension
-                )
+                self.params["output_dir_path"],
+                "{0}_kojak_{1}{2}".format(
+                    self.params["file_root"],
+                    self.META_INFO["version"].replace(".", "_"),
+                    extension,
+                ),
             )
             if os.path.exists(org_path):
-                shutil.move(
-                    org_path,
-                    new_path
-                )
+                shutil.move(org_path, new_path)
 
         pass
 
-    def format_templates( self ):
-        '''
+    def format_templates(self):
+        """
         Returns formatted input files as a dict.
 
         The standard parametern file is used and adjustes.
@@ -193,9 +184,9 @@ class kojak_1_5_3( ursgal.UNode ):
         Returns:
             dict: keys are the names of the parametern template file
 
-        '''
+        """
         templates = {
-            'Kojak.conf' : '''\
+            "Kojak.conf": """\
 # Kojak version 1.5.3 parameter file
 # Please see online documentation at:
 # http://www.kojak-ms.org/param
@@ -322,8 +313,8 @@ top_count               =   {kojak_top_count}     #number of top scoring single 
 truncate_prot_names     =   {kojak_truncate_prot_names}       #Max protein name character to export, 0=off
 turbo_button            =   {kojak_turbo_button}       #Generally speeds up analysis. Special cases cause reverse
                                     #effect, thus this is allowed to be disabled. 0=off
-        '''.format(
-            **self.params['translations']
+        """.format(
+                **self.params["translations"]
             )
         }
         return templates

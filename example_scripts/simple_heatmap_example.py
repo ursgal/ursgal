@@ -8,7 +8,7 @@ import pyGCluster
 
 
 def main():
-    '''
+    """
     Please visit pyGCluster documentation for more information on this plotting
     function:
         http://pygcluster.github.io/usage.html#clustered-data-visualization
@@ -30,32 +30,30 @@ def main():
         error estimate.
         Please refer to the documentation for further details on parameters.
 
-    '''
+    """
     uc = ursgal.UController(
-        profile='LTQ XL low res',
+        profile="LTQ XL low res",
         params={
-            'heatmap_column_positions' : {},
-            'heatmap_annotation_field_name': 'map to uniprot',
-            'heatmap_identifier_field_name': 'Protein',
-            'heatmap_max_value': 3,
-            'heatmap_min_value': -3,
-            'heatmap_color_gradient': 'RdBu',
-            'heatmap_box_style': 'classic'
-        }
+            "heatmap_column_positions": {},
+            "heatmap_annotation_field_name": "map to uniprot",
+            "heatmap_identifier_field_name": "Protein",
+            "heatmap_max_value": 3,
+            "heatmap_min_value": -3,
+            "heatmap_color_gradient": "RdBu",
+            "heatmap_box_style": "classic",
+        },
     )
     uc.visualize(
         input_files=sys.argv[1],
-        engine='plot_pygcluster',
-        output_file_name='{0}_heatmap.svg'.format(
-            os.path.basename(sys.argv[1])
-        ),
+        engine="plot_pygcluster",
+        output_file_name="{0}_heatmap.svg".format(os.path.basename(sys.argv[1])),
         multi=False,
-        force=True
+        force=True,
     )
     return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) == 1:
         print(main.__doc__)
         sys.exit(1)

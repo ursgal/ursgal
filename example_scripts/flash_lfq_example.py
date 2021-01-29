@@ -6,16 +6,13 @@ import os
 def main():
     """."""
     params = {
-        'csv_filter_rules': [
-            ['q-value', 'lte', 0.01],
-            ['Is decoy', 'equals', 'false']
-        ],
-        'modifications': [
+        "csv_filter_rules": [["q-value", "lte", 0.01], ["Is decoy", "equals", "false"]],
+        "modifications": [
             "M,opt,any,Oxidation",
             "*,opt,Prot-N-term,Acetyl",
             "C,fix,any,Carbamidomethyl",
         ],
-        'database': '/media/external/Projects/proteomics_blog_hackathon/data/Uniprot_swissprot_TREMBL_cRAP_target_decoy.fasta',
+        "database": "/media/external/Projects/proteomics_blog_hackathon/data/Uniprot_swissprot_TREMBL_cRAP_target_decoy.fasta",
         "isotopic_distribution_tolerance": 5,
         "normalize_intensities": False,
         "integrate_peak_areas": False,
@@ -32,17 +29,14 @@ def main():
         "random_seed": 200,
     }
 
-    uc = ursgal.UController(
-        profile='QExactive+',
-        params=params
-    )
-    uc.params['experiment_setup'] = {
+    uc = ursgal.UController(profile="QExactive+", params=params)
+    uc.params["experiment_setup"] = {
         # "1": {"FileName": "TN_CSF_062617_03", "Condition": "WT", "Biorep": 1, "Fraction": 1, "Techrep":1},
         # "2": {"FileName": "TN_CSF_062617_04", "Condition": "KO", "Biorep": 1, "Fraction": 1, "Techrep":1},
     }
 
     mzml_files = [
-        '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_03.mzML',
+        "/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_03.mzML",
         # '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_04.mzML',
     ]
     all_res = []
@@ -51,30 +45,25 @@ def main():
         res = uc.search(
             input_file=file,
             # force=True,
-            engine='xtandem_alanine',
+            engine="xtandem_alanine",
         )
-        val = uc.validate(
-            input_file=res,
-            engine='percolator_2_08'
-        )
-        fil = uc.filter_csv(
-            input_file=val
-        )
+        val = uc.validate(input_file=res, engine="percolator_2_08")
+        fil = uc.filter_csv(input_file=val)
         all_res.append(fil)
 
     merged_res = uc.merge_csvs(input_files=all_res)
-    merged_res = '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/All_merged_results_accepted.csv'
-    uc.params['quantification_evidences'] = merged_res
+    merged_res = "/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/All_merged_results_accepted.csv"
+    uc.params["quantification_evidences"] = merged_res
     print(mzml_files)
     print()
-    mzml_files = '/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_03.mzML'
+    mzml_files = "/media/external/Projects/proteomics_blog_hackathon/data/flash_lfq_test/TN_CSF_062617_03.mzML"
     uc.quantify(
         input_file=mzml_files,
-        engine='flash_lfq_1_1_1',
+        engine="flash_lfq_1_1_1",
         force=True,
         multi=False,
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
