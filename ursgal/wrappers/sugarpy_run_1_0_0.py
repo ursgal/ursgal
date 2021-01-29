@@ -10,29 +10,26 @@ class sugarpy_run_1_0_0(ursgal.UNode):
     SugarPy - discovery-driven analysis of glycan compositions from IS-CID of intact glycopeptides.
     """
     META_INFO = {
-        'edit_version'       : 1.00,
-        'name'               : 'SugarPy',
-        'version'            : '1.0.0',
-        'release_date'       : None,
-        'engine_type'        : {
-            'misc_engine' : True
-        },
-        'utranslation_style' : 'sugarpy_run_style_1',
-        'citation'           : '',
-        'input_extensions'   : ['.csv'],
-        'output_extensions'  : ['.csv'],
-        'create_own_folder'  : True,
-        'in_development'     : False,
-        'include_in_git'     : True,
-        'distributable'      : False,
-        'engine'             : {
-            'platform_independent' : {
-                'arc_independent' : {
-                    'exe': 'sugarpy_run_1_0_0.py',
+        "edit_version": 1.00,
+        "name": "SugarPy",
+        "version": "1.0.0",
+        "release_date": None,
+        "engine_type": {"misc_engine": True},
+        "utranslation_style": "sugarpy_run_style_1",
+        "input_extensions": [".csv"],
+        "output_extensions": [".csv"],
+        "create_own_folder": True,
+        "in_development": True,
+        "include_in_git": False,
+        "distributable": False,
+        "engine": {
+            "platform_independent": {
+                "arc_independent": {
+                    "exe": "sugarpy_run_1_0_0.py",
                 },
             },
         },
-        'citation':
+        "citation":
             'S. Schulze, A. Oltmanns, C. Fufezan, J. Krägenbring, M. Mormann, M. Pohlschröder and M. Hippler (2020).'
             'SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics',
     }
