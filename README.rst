@@ -3,7 +3,7 @@ Introduction
 
 *Ursgal - Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
 
-|pypi| |build-status-travis| |build-status-appveyor| |doc-status| |Gitter|
+|pypi| |build-status-travis| |doc-status| |Gitter|
 
 .. |pypi| image:: https://badge.fury.io/py/ursgal.svg
     :target: https://badge.fury.io/py/ursgal
@@ -11,10 +11,6 @@ Introduction
 .. |build-status-travis| image:: https://travis-ci.org/ursgal/ursgal.svg?branch=master
    :target: https://travis-ci.org/ursgal/ursgal
    :alt: Travis CI status
-
-.. |build-status-appveyor| image:: https://ci.appveyor.com/api/projects/status/github/ursgal/ursgal?branch=master&svg=true
-   :target: https://ci.appveyor.com/project/fufezan-lab/ursgal
-   :alt: AppVeyor CI status
 
 .. |doc-status| image:: http://readthedocs.org/projects/ursgal/badge/?version=latest
    :target: http://ursgal.readthedocs.io/en/latest/?badge=latest
@@ -29,9 +25,9 @@ Summary
 
 Ursgal is a Python module that offers a generalized interface to common bottom-up proteomics tools, e.g.
 
-    a) Peptide spectrum matching with up to eight different search engines (some available in multiple versions), including three open modification search engines
+    a) Peptide spectrum matching with up to eight different search engines (some available in multiple versions), including four open modification search engines
 
-    b) Evaluation and post processing of search results with up to two different engines
+    b) Evaluation and post processing of search results with up to two different engines for protein database searches as well as two engines for the post processing of mass difference results from open modification engines
 
     c) Integration of search results from different search engines
 
@@ -107,7 +103,13 @@ Execute the following command from your command line::
 
     user@localhost:~$ pip install ursgal
 
-This installs Python into your Python site-packages.
+This installs Python into your Python site-packages. 
+
+To download the executables, which we are allowed to distribute run::
+
+    user@localhost:~$ ursgal-install-resources
+
+
 You can now use it with all engines that we have built
 or that we are allowed to distribute.
 For all other third-party engines, a manual download from the respective
@@ -126,12 +128,12 @@ homepage is required (see also: `How to install third party engines`_)
     On Mac it may be neccesary to use Python3.6, since it comes with its
     own OpenSSL now. This may avoid problems when using pip.
 
-.. _How to install thrid party engines:
+.. _How to install third party engines:
     https://ursgal.readthedocs.io/en/latest/faq.html#q-how-do-i-add-an-engine-that-is-not-installed-via-install-resources-py
 
 
-Installation from the source
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Installation from  source
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Download Ursgal using `GitHub`_ **or** the zip file:
 
@@ -178,7 +180,7 @@ into the Python site-packages you can use::
 .. note::
 
     Since we are not allowed to distribute all third party engines, you might need to
-    download and install them on your own. See FAQ (`How to install thrid party engines`_) and
+    download and install them on your own. See FAQ (`How to install third party engines`_) and
     the respective engine documentation for more information.
 
 .. note::
@@ -318,4 +320,4 @@ Full list of tools with proper citations that are integrated into Ursgal are:
     * Polasky, DA; Yu, F; Teo, GC; Nesvizhskii, AI (2020) Fast and comprehensive N- and O-glycoproteomics analysis with MSFragger-Glyco. Nat Methods 17 (11)
     * Geiszler, DJ; Kong, AT; Avtonomov, DM; Yu, F; Leprevost, FV; Nesvizhskii, AI (2020) PTM-Shepherd: analysis and summarization of post-translational and chemical modifications from open search results. bioRxiv doi: https://doi.org/10.1101/2020.07.08.192583
     * An, Z; Zhai, L; Ying, W; Qian, X; Gong, F; Tan, M; Fu, Y. (2019) PTMiner: Localization and Quality Control of Protein Modifications Detected in an Open Search and Its Application to Comprehensive Post-translational Modification Characterization in Human Proteome.  Mol Cell Proteomics 18 (2)
-    *Schulze, S; Oltmanns, A; Fufezan, C; Krägenbring, J; Mormann, M; Pohlschröder, M; Hippler, M (2020). SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics
+    * Schulze, S; Oltmanns, A; Fufezan, C; Krägenbring, J; Mormann, M; Pohlschröder, M; Hippler, M (2020). SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics
