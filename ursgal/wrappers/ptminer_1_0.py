@@ -38,7 +38,11 @@ class ptminer_1_0(ursgal.UNode):
                 },
             },
         },
-        "citation": "",
+        "citation":
+            "An, Z; Zhai, L; Ying, W; Qian, X; Gong, F; Tan, M; Fu, Y. (2019) PTMiner: "\
+            "Localization and Quality Control of Protein Modifications Detected in an Open Search "\
+            "and Its Application to Comprehensive Post-translational Modification Characterization in Human Proteome. "\
+            " Mol Cell Proteomics 18 (2)",
     }
 
     def __init__(self, *args, **kwargs):

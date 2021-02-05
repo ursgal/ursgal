@@ -9,6 +9,7 @@ import importlib
 
 class glycopeptide_fragmentor_1_0_0(ursgal.UNode):
     """
+    Glycopeptide fragmentor based on:
     SugarPy - discovery-driven analysis of glycan compositions from IS-CID of intact glycopeptides.
     """
 
@@ -16,10 +17,11 @@ class glycopeptide_fragmentor_1_0_0(ursgal.UNode):
         "edit_version": 1.00,
         "name": "Glycopeptide Fragmentor",
         "version": "1.0.0",
-        "release_date": None,
-        "engine_type": {"misc_engine": True},
+        "release_date": "2020-12-26",
+        "engine_type": {
+            "misc_engine" : True,
+        },
         "utranslation_style": "glycopeptide_fragmentor_style_1",
-        "citation": "",
         "input_extensions": [".mzML", ".csv", ".idx.gz"],
         "output_extensions": [".csv"],
         "output_suffix": "glycofrag_ions",
@@ -34,6 +36,9 @@ class glycopeptide_fragmentor_1_0_0(ursgal.UNode):
                 },
             },
         },
+        "citation":
+            "S. Schulze, A. Oltmanns, C. Fufezan, J. Krägenbring, M. Mormann, M. Pohlschröder and M. Hippler (2020)."
+            "SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics",
     }
 
     def __init__(self, *args, **kwargs):
