@@ -9,7 +9,7 @@ class msgfplus2csv_py_v1_0_0(ursgal.UNode):
     """
     META_INFO = {
         'edit_version'       : 1.00,
-        'name'               : 'msgfplus_py_mzid2csv',
+        'name'               : 'Python MSGFplus mzid to csv converter',
         'version'            : 'v1.0.0',
         'release_date'       : '2018-08-28',
         'engine_type' : {
@@ -29,7 +29,10 @@ class msgfplus2csv_py_v1_0_0(ursgal.UNode):
                 },
             },
         },
-        'citation' : ''
+        'citation' : 
+            'Schulze, S.; Igiraneza, A. B.; Kösters, M.; Leufken, J.; Leidel, S. A.; Garcia, B. A.; '\
+            'Fufezan, C.; and Pohlschroder, M. (2021) Enhancing Open Modification Searches '\
+            'via a Combined Approach Facilitated by Ursgal. Journal of Proteome Research, DOI:10.1021/acs.jproteome.0c00799',
     }
 
     def __init__(self, *args, **kwargs):

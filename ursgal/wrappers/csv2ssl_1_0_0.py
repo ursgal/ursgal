@@ -31,7 +31,10 @@ class csv2ssl_1_0_0( ursgal.UNode ):
                 },
             },
         },
-        'citation' : '',
+        'citation' : 
+            'Schulze, S.; Igiraneza, A. B.; Kösters, M.; Leufken, J.; Leidel, S. A.; Garcia, B. A.; '\
+            'Fufezan, C.; and Pohlschroder, M. (2021) Enhancing Open Modification Searches '\
+            'via a Combined Approach Facilitated by Ursgal. Journal of Proteome Research, DOI:10.1021/acs.jproteome.0c00799',
     }
 
 
