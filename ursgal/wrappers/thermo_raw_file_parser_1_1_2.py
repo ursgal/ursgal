@@ -17,41 +17,43 @@ class thermo_raw_file_parser_1_1_2(ursgal.UNode):
         https://github.com/compomics/ThermoRawFileParser
 
     Reference:
-    Hulstaert N, Sachsenberg T, Walzer M, Barsnes H, Martens L and 
-    Perez-Riverol Y (2019) ThermoRawFileParser: modular, scalable and 
+    Hulstaert N, Sachsenberg T, Walzer M, Barsnes H, Martens L and
+    Perez-Riverol Y (2019) ThermoRawFileParser: modular, scalable and
     cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852
     """
 
     META_INFO = {
-        'edit_version': 1.00,
-        'name': 'ThermoRawFileParser',
-        'version': '1.1.2',
-        'release_date': '2019-04-25',
-        'utranslation_style': 'thermo_raw_file_parser_style_1',
-        'input_extensions': ['.raw'],
-        'output_extensions': ['.mzML', '.mgf',],
-        'output_suffix': None,
-        'create_own_folder': False,
-        'in_development': False,
-        'include_in_git': False,
-        'distributable': False,
-        'engine_type': {
-            'converter': True,
+        "edit_version": 1.00,
+        "name": "ThermoRawFileParser",
+        "version": "1.1.2",
+        "release_date": "2019-04-25",
+        "utranslation_style": "thermo_raw_file_parser_style_1",
+        "input_extensions": [".raw"],
+        "output_extensions": [
+            ".mzML",
+            ".mgf",
+        ],
+        "output_suffix": None,
+        "create_own_folder": False,
+        "in_development": False,
+        "include_in_git": False,
+        "distributable": False,
+        "engine_type": {
+            "converter": True,
         },
-        'engine': {
-            'platform_independent' : {
-                'arc_independent' : {
-                    'exe'            : 'ThermoRawFileParser.exe',
-                    'url'            : '',
-                    'zip_md5'        : None,
-                    'additional_exe' : [],
+        "engine": {
+            "platform_independent": {
+                "arc_independent": {
+                    "exe": "ThermoRawFileParser.exe",
+                    "url": "",
+                    "zip_md5": None,
+                    "additional_exe": [],
                 },
             },
         },
-        'citation':
-        'Hulstaert N, Sachsenberg T, Walzer M, Barsnes H, Martens L and '
-            'Perez-Riverol Y (2019) ThermoRawFileParser: modular, scalable and '
-            'cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852'
+        "citation": "Hulstaert N, Sachsenberg T, Walzer M, Barsnes H, Martens L and "
+        "Perez-Riverol Y (2019) ThermoRawFileParser: modular, scalable and "
+        "cross-platform RAW file conversion. bioRxiv https://doi.org/10.1101/622852",
     }
 
     def __init__(self, *args, **kwargs):
@@ -59,7 +61,7 @@ class thermo_raw_file_parser_1_1_2(ursgal.UNode):
         pass
 
     def preflight(self):
-        '''
+        """
         Formatting the command line via self.params
 
         Returns:
@@ -88,38 +90,36 @@ class thermo_raw_file_parser_1_1_2(ursgal.UNode):
           -v, --verbose              Enable verbose logging.
           -e, --ignoreInstrumentErrors
                                      Ignore missing properties by the instrument.
-        '''
-        self.params['translations']['raw_input_file'] = os.path.join(
-            self.params['input_dir_path'],
-            self.params['input_file']
+        """
+        self.params["translations"]["raw_input_file"] = os.path.join(
+            self.params["input_dir_path"], self.params["input_file"]
         )
-        self.params['translations']['output_file_incl_path'] = os.path.join(
-            self.params['output_dir_path'],
-            self.params['output_file']
+        self.params["translations"]["output_file_incl_path"] = os.path.join(
+            self.params["output_dir_path"], self.params["output_file"]
         )
 
         # self.created_tmp_files.append(self.param_file_name)
 
-        if sys.platform in ['win32']:
-            self.params['command_list'] = []
+        if sys.platform in ["win32"]:
+            self.params["command_list"] = []
         else:
-            self.params['command_list'] = ['mono']
+            self.params["command_list"] = ["mono"]
 
-        self.params['command_list'].extend([
-            self.exe,
-            '-i={0}'.format(self.params['translations']['raw_input_file']),
-            '-o={0}'.format(self.params['output_dir_path']),
-            '-f={0}'.format(self.params['translations']['output_file_type']),
-        ])
+        self.params["command_list"].extend(
+            [
+                self.exe,
+                "-i={0}".format(self.params["translations"]["raw_input_file"]),
+                "-o={0}".format(self.params["output_dir_path"]),
+                "-f={0}".format(self.params["translations"]["output_file_type"]),
+            ]
+        )
 
-        for flag, value in self.params['translations']['thermo_raw_file_parser_options'].items():
+        for flag, value in self.params["translations"][
+            "thermo_raw_file_parser_options"
+        ].items():
             if value is not None:
-                self.params['command_list'].append(
-                    '{0}={1}'.format(flag, value)
-                )
+                self.params["command_list"].append("{0}={1}".format(flag, value))
             else:
-                self.params['command_list'].append(
-                    '{0}'.format(flag)
-                )
+                self.params["command_list"].append("{0}".format(flag))
 
         return self.params

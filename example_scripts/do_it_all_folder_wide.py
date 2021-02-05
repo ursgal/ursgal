@@ -7,7 +7,7 @@ import os
 
 
 def main(folder=None, profile=None, target_decoy_database=None):
-    '''
+    """
     An example test script to search all mzML files which are present in the
     specified folder. The search is currently performed on 4 search engines
     and 2 validation engines.
@@ -26,10 +26,10 @@ def main(folder=None, profile=None, target_decoy_database=None):
         * 'LTQ XL low res'
         * 'LTQ XL high res'
 
-    '''
+    """
     # define folder with mzML_files as sys.argv[1]
     mzML_files = []
-    for mzml in glob.glob(os.path.join('{0}'.format(folder), '*.mzML')):
+    for mzml in glob.glob(os.path.join("{0}".format(folder), "*.mzML")):
         mzML_files.append(mzml)
 
     mass_spectrometer = profile
@@ -37,28 +37,28 @@ def main(folder=None, profile=None, target_decoy_database=None):
     # We specify all search engines and validation engines that we want to use in a list
     # (version numbers might differ on windows or mac):
     search_engines = [
-        'omssa',
-        'xtandem_vengeance',
-        'msgfplus_v2016_09_16',
+        "omssa",
+        "xtandem_vengeance",
+        "msgfplus_v2016_09_16",
         # 'msamanda_1_0_0_6300',
         # 'myrimatch_2_1_138',
     ]
 
     validation_engines = [
-        'percolator_2_08',
-        'qvality',
+        "percolator_2_08",
+        "qvality",
     ]
 
     # Modifications that should be included in the search
     all_mods = [
-        'C,fix,any,Carbamidomethyl',
-        'M,opt,any,Oxidation',
+        "C,fix,any,Carbamidomethyl",
+        "M,opt,any,Oxidation",
         # 'N,opt,any,Deamidated',
         # 'Q,opt,any,Deamidated',
         # 'E,opt,any,Methyl',
         # 'K,opt,any,Methyl',
         # 'R,opt,any,Methyl',
-        '*,opt,Prot-N-term,Acetyl',
+        "*,opt,Prot-N-term,Acetyl",
         # 'S,opt,any,Phospho',
         # 'T,opt,any,Phospho',
         # 'N,opt,any,HexNAc'
@@ -67,18 +67,15 @@ def main(folder=None, profile=None, target_decoy_database=None):
     # Initializing the Ursgal UController class with
     # our specified modifications and mass spectrometer
     params = {
-        'database': target_decoy_database,
-        'modifications': all_mods,
-        'csv_filter_rules': [
-            ['Is decoy', 'equals', 'false'],
-            ['PEP', 'lte', 0.01],
-        ]
+        "database": target_decoy_database,
+        "modifications": all_mods,
+        "csv_filter_rules": [
+            ["Is decoy", "equals", "false"],
+            ["PEP", "lte", 0.01],
+        ],
     }
 
-    uc = ursgal.UController(
-        profile=mass_spectrometer,
-        params=params
-    )
+    uc = ursgal.UController(profile=mass_spectrometer, params=params)
 
     # complete workflow:
     # every spectrum file is searched with every search engine,
@@ -102,20 +99,21 @@ def main(folder=None, profile=None, target_decoy_database=None):
 
             validated_results_from_all_engines = uc.execute_misc_engine(
                 input_file=validated_results,
-                engine='merge_csvs_1_0_0',
+                engine="merge_csvs_1_0_0",
             )
             filtered_validated_results = uc.execute_misc_engine(
                 input_file=validated_results_from_all_engines,
-                engine='filter_csv_1_0_0',
+                engine="filter_csv_1_0_0",
             )
             result_files.append(filtered_validated_results)
 
         results_all_files = uc.execute_misc_engine(
             input_file=result_files,
-            engine='merge_csvs_1_0_0',
+            engine="merge_csvs_1_0_0",
         )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     if len(sys.argv) < 3:
         print(main.__doc__)
         sys.exit(1)

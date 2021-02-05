@@ -5,6 +5,7 @@ from collections import defaultdict as ddict
 import csv
 import sys
 
+
 class pparse_2_0(ursgal.UNode):
     """
     Unode for pParse included in pGlyco 2.2.0
@@ -18,41 +19,40 @@ class pparse_2_0(ursgal.UNode):
     Reference:
     Yuan ZF, Liu C, Wang HP, Sun RX, Fu Y, Zhang JF, Wang LH,
     Chi H, Li Y, Xiu LY, Wang WP, He SM (2012)
-    pParse: a method for accurate determination of monoisotopic peaks 
+    pParse: a method for accurate determination of monoisotopic peaks
     in high-resolution mass spectra. Proteomics 12(2)
     """
 
     META_INFO = {
-        'edit_version': 1.00,
-        'name': 'pParse',
-        'version': '2.0',
-        'release_date': '2018-11-02',
-        'utranslation_style': 'pparse_style_1',
-        'input_extensions': ['.raw'],
-        'output_extensions': ['.mgf'],
-        'output_suffix' : None,
-        'create_own_folder': False,
-        'in_development': False,
-        'include_in_git': False,
-        'distributable': False,
-        'engine_type': {
-            'converter': True,
+        "edit_version": 1.00,
+        "name": "pParse",
+        "version": "2.0",
+        "release_date": "2018-11-02",
+        "utranslation_style": "pparse_style_1",
+        "input_extensions": [".raw"],
+        "output_extensions": [".mgf"],
+        "output_suffix": None,
+        "create_own_folder": False,
+        "in_development": False,
+        "include_in_git": False,
+        "distributable": False,
+        "engine_type": {
+            "converter": True,
         },
-        'engine': {
-            'win32' : {
-                '64bit' : {
-                    'exe'            : 'pParse.exe',
-                    'url'            : '',
-                    'zip_md5'        : None,
-                    'additional_exe' : [],
+        "engine": {
+            "win32": {
+                "64bit": {
+                    "exe": "pParse.exe",
+                    "url": "",
+                    "zip_md5": None,
+                    "additional_exe": [],
                 },
             },
         },
-        'citation':
-        'Yuan ZF, Liu C, Wang HP, Sun RX, Fu Y, Zhang JF, Wang LH,'
-            'Chi H, Li Y, Xiu LY, Wang WP, He SM (2012)'
-            'pParse: a method for accurate determination of monoisotopic peaks '
-            'in high-resolution mass spectra. Proteomics 12(2)'
+        "citation": "Yuan ZF, Liu C, Wang HP, Sun RX, Fu Y, Zhang JF, Wang LH,"
+        "Chi H, Li Y, Xiu LY, Wang WP, He SM (2012)"
+        "pParse: a method for accurate determination of monoisotopic peaks "
+        "in high-resolution mass spectra. Proteomics 12(2)",
     }
 
     def __init__(self, *args, **kwargs):
@@ -60,7 +60,7 @@ class pparse_2_0(ursgal.UNode):
         pass
 
     def preflight(self):
-        '''
+        """
         Formatting the command line via self.params
 
         Returns:
@@ -92,41 +92,40 @@ class pparse_2_0(ursgal.UNode):
             -v outputsvmlight         default (0)
             -z m/z                    default (5)
             -i Intensity              default (1)
-        '''
-        self.params['translations']['raw_input_file'] = os.path.join(
-            self.params['input_dir_path'],
-            self.params['input_file']
+        """
+        self.params["translations"]["raw_input_file"] = os.path.join(
+            self.params["input_dir_path"], self.params["input_file"]
         )
-        self.params['translations']['output_file_incl_path'] = os.path.join(
-            self.params['output_dir_path'],
-            self.params['output_file']
+        self.params["translations"]["output_file_incl_path"] = os.path.join(
+            self.params["output_dir_path"], self.params["output_file"]
         )
 
         # self.created_tmp_files.append(self.param_file_name)
 
-        self.params['command_list'] = [
+        self.params["command_list"] = [
             self.exe,
-            '-D',
-            self.params['translations']['raw_input_file'],
+            "-D",
+            self.params["translations"]["raw_input_file"],
             # '-O',
             # self.params['translations']['output_file_incl_path']
         ]
 
-        for flag, value in self.params['translations']['pparse_options'].items():
-            self.params['command_list'].extend(
-                [flag, value]
-            )
+        for flag, value in self.params["translations"]["pparse_options"].items():
+            self.params["command_list"].extend([flag, value])
 
         return self.params
 
-
     def postflight(self):
-        '''
+        """
         Rename output file, since that naming the output file is not properly working in pParse
-        '''
-        if os.path.exists(self.params['translations']['raw_input_file'].replace('.raw', '_HCDFT.mgf')):
+        """
+        if os.path.exists(
+            self.params["translations"]["raw_input_file"].replace(".raw", "_HCDFT.mgf")
+        ):
             os.rename(
-                self.params['translations']['raw_input_file'].replace('.raw', '_HCDFT.mgf'), 
-                self.params['translations']['output_file_incl_path']
+                self.params["translations"]["raw_input_file"].replace(
+                    ".raw", "_HCDFT.mgf"
+                ),
+                self.params["translations"]["output_file_incl_path"],
             )
-        return self.params['translations']['output_file_incl_path']
+        return self.params["translations"]["output_file_incl_path"]
