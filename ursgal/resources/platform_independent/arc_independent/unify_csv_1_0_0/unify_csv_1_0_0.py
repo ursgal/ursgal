@@ -470,7 +470,7 @@ def main(
                 if params["prefix"] is None or params["prefix"] == "":
                     pass
                 elif input_file_basename.startswith(params["prefix"]):
-                    input_file_basename = line_2_split.replace(
+                    input_file_basename = input_file_basename.replace(
                         params["prefix"] + "_", ""
                     )
                 spectrum_id = line_dict["Spectrum ID"]
