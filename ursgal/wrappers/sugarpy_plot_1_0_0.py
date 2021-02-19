@@ -33,9 +33,8 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
                 },
             },
         },
-        "citation":
-            "S. Schulze, A. Oltmanns, C. Fufezan, J. Krägenbring, M. Mormann, M. Pohlschröder and M. Hippler (2020)."
-            "SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics",
+        "citation": "S. Schulze, A. Oltmanns, C. Fufezan, J. Krägenbring, M. Mormann, M. Pohlschröder and M. Hippler (2020)."
+        "SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics",
     }
 
     def __init__(self, *args, **kwargs):
