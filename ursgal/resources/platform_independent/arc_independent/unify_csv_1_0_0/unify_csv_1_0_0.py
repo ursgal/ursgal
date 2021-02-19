@@ -1108,13 +1108,6 @@ def main(
                     line_dict_update["Modifications"] = ";".join(
                         ["{m}:{p}".format(m=mod, p=pos) for pos, mod in tmp]
                     )
-                    if len(tmp) != len(positions):
-                        print(
-                            "[ WARNING ] {Sequence}#{Modifications} will be skipped, because it contains two mods at the same position!".format(
-                                **line_dict_update
-                            )
-                        )
-                        continue
 
                 all_molecules.add(
                     "{Sequence}#{Modifications}".format(**line_dict_update)
