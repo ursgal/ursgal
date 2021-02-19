@@ -14,4 +14,4 @@ jobs:
     - name: Black Code Formatter
       uses: pyratez/black-action@v1.0.2
       with:
-          args: ". --check"
+          args: ". --line-length 89 --check"
