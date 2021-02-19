@@ -326,9 +326,7 @@ class CombinedPEP(object):
 
                     psm_rows_from_all_engines = []
                     for engine in engine_combo:
-                        psm_rows_from_all_engines.append(
-                            self.psm_dicts[engine][psm_key]
-                        )
+                        psm_rows_from_all_engines.append(self.psm_dicts[engine][psm_key])
                     # out_row = ursgal.ucore.merge_rowdicts(
                     #     psm_rows_from_all_engines,
                     #     joinchar = self.join_sep,

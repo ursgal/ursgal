@@ -165,9 +165,7 @@ class msamanda_2_0_0_9695(ursgal.UNode):
             int(self.params["translations"]["precursor_max_charge"]) + 1,
         ):
             considered_charges.append("+{0}".format(charge))
-        self.params["translations"]["considered_charges"] = ", ".join(
-            considered_charges
-        )
+        self.params["translations"]["considered_charges"] = ", ".join(considered_charges)
 
         if self.params["translations"]["label"] == "15N":
             for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():
@@ -243,16 +241,12 @@ class msamanda_2_0_0_9695(ursgal.UNode):
 
         templates = self.format_templates()
         for file_name, content in templates.items():
-            file2write = (
-                self.params["translations"]["output_file_incl_path"] + file_name
-            )
+            file2write = self.params["translations"]["output_file_incl_path"] + file_name
             if os.path.exists(file2write):
                 file2write = file2write.replace(".xml", "{0}.xml".format(time.time()))
             with open(file2write, "w") as out:
                 print(content, file=out)
-                self.print_info(
-                    "Wrote input file {0}".format(file2write), caller="Info"
-                )
+                self.print_info("Wrote input file {0}".format(file2write), caller="Info")
                 self.created_tmp_files.append(file2write)
         return self.params
 

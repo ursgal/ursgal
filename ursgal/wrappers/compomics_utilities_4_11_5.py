@@ -137,9 +137,7 @@ class compomics_utilities_4_11_5(ursgal.UNode):
                                         aa_to_replace, replace_dict["original_aa"][0]
                                     )
                             elif aa_to_replace in ["J"]:
-                                repeat_count = line_dict["Sequence"].count(
-                                    aa_to_replace
-                                )
+                                repeat_count = line_dict["Sequence"].count(aa_to_replace)
                                 # we need to do all combos for the positions of I and L in the seq...
                                 positions = []
                                 for index_of_aa, aa in enumerate(line_dict["Sequence"]):

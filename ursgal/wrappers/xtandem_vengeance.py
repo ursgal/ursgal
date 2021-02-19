@@ -234,9 +234,7 @@ class xtandem_vengeance(ursgal.UNode):
                 )
             )
         self.params["translations"]["fixed_modifications"] = ",".join(fixed_mods)
-        self.params["translations"]["potential_modifications"] = ",".join(
-            potential_mods
-        )
+        self.params["translations"]["potential_modifications"] = ",".join(potential_mods)
         self.params["translations"]["refine_potential_modifications"] = ",".join(
             refine_potential_mods
         )

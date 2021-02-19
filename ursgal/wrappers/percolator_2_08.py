@@ -339,9 +339,7 @@ class percolator_2_08(ursgal.UNode):
                         self.params["_score_list"], score
                     )
                 else:
-                    rank_of_score = bisect.bisect_left(
-                        self.params["_score_list"], score
-                    )
+                    rank_of_score = bisect.bisect_left(self.params["_score_list"], score)
                     rank_of_score = len(self.params["_score_list"]) - rank_of_score
                 #
                 if "Mascot:Rank" in line_dict.keys():
@@ -525,9 +523,7 @@ class percolator_2_08(ursgal.UNode):
                     s2l[pkey][psmid_pep_key] = line_dict
 
         opened_file = open(self.params["translations"]["csv_input_file"], "r")
-        csv_input = csv.DictReader(
-            row for row in opened_file if not row.startswith("#")
-        )
+        csv_input = csv.DictReader(row for row in opened_file if not row.startswith("#"))
 
         if "PEP" not in csv_input.fieldnames and "q-value" not in csv_input.fieldnames:
             csv_input.fieldnames += ["PEP", "q-value"]

@@ -46,9 +46,7 @@ def main(http_url=None, http_output_folder=None):
 
     try:
         with open(output_path, "wb") as ooo:
-            local_filename, headers = request.urlretrieve(
-                http_url, filename=output_path
-            )
+            local_filename, headers = request.urlretrieve(http_url, filename=output_path)
         print(
             "[ - HTTP - ] Saved file as {0}".format(
                 output_path,

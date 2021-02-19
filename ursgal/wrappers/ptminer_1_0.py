@@ -209,8 +209,7 @@ class ptminer_1_0(ursgal.UNode):
             self.params["output_dir_path"], self.params["output_file"]
         )
         self.param_file_name = os.path.join(
-            self.params["translations"]["output_file_incl_path"].strip(".csv")
-            + ".param"
+            self.params["translations"]["output_file_incl_path"].strip(".csv") + ".param"
         )
 
         # params to write
@@ -387,9 +386,7 @@ class ptminer_1_0(ursgal.UNode):
             # self.created_tmp_files.append(filtered_result)
             # self.created_tmp_files.append(loc_result)
             # self.created_tmp_files.append(prior_probability)
-            anno_result = os.path.join(
-                self.params_to_write["output"], "anno_result.txt"
-            )
+            anno_result = os.path.join(self.params_to_write["output"], "anno_result.txt")
             # self.created_tmp_files.append(anno_result)
 
         # read from annotated results csv file
@@ -421,9 +418,7 @@ class ptminer_1_0(ursgal.UNode):
                             continue
                         mod_pos_list.append("{0}:{1}".format(m, p))
                     modifications = ";".join(mod_pos_list)
-                    psm_identifier = "||".join(
-                        [spectrum_title, sequence, modifications]
-                    )
+                    psm_identifier = "||".join([spectrum_title, sequence, modifications])
                     if psm_identifier not in original_rows.keys():
                         if psm_identifier not in new_psms.keys():
                             new_psms[psm_identifier] = []
@@ -574,9 +569,7 @@ class ptminer_1_0(ursgal.UNode):
                     # for new_mod in new_modifications:
                     for line_dict in original_rows[psm_identifier]:
                         line_dict["Mass Difference Annotations"] = new_mass_shift_anno
-                        line_dict[
-                            "PTMiner:Mass Shift Localization"
-                        ] = new_mass_shift_pos
+                        line_dict["PTMiner:Mass Shift Localization"] = new_mass_shift_pos
                         line_dict[
                             "PTMiner:Posterior Probability"
                         ] = ptminer_posterior_probability

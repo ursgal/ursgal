@@ -537,9 +537,7 @@ def chk_format_param(param_name, param_dict):
                 type_list=v,
             )
 
-    elif uvalue_type == "int _uevaluation_req" and type(default_value) is not type(
-        None
-    ):
+    elif uvalue_type == "int _uevaluation_req" and type(default_value) is not type(None):
         my_type = type_info[uvalue_type]["my_type"]
 
         chk_vals_types(

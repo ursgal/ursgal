@@ -266,9 +266,9 @@ class omssa_2_1_9(ursgal.UNode):
                             ]
                             self.lookups[omssa_name] = {
                                 "name": mod["name"],
-                                "aa_targets": self.omssa_mod_Mapper[mod["id"]][
-                                    omssa_id
-                                ]["aa_targets"],
+                                "aa_targets": self.omssa_mod_Mapper[mod["id"]][omssa_id][
+                                    "aa_targets"
+                                ],
                                 "omssa_id": omssa_id,
                                 "id": mod["id"],
                             }
@@ -364,9 +364,7 @@ class omssa_2_1_9(ursgal.UNode):
                     continue
             elif translated_key == ("-mv", "mf"):
                 if self.params["_opt_mods"] != "":
-                    self.params["command_list"].extend(
-                        ("-mv", self.params["_opt_mods"])
-                    )
+                    self.params["command_list"].extend(("-mv", self.params["_opt_mods"]))
                 if self.params["_fixed_mods"] != "":
                     self.params["command_list"].extend(
                         ("-mf", self.params["_fixed_mods"])

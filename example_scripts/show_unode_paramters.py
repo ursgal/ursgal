@@ -22,9 +22,7 @@ def main(unode=None):
         if unode_key == unode:
             if uc.unodes[unode_key].get("available", False):
                 print(unode_key)
-                pprint.pprint(
-                    uc.unodes[unode_key]["class"].UNODE_UPARAMS_GROUPED_BY_TAG
-                )
+                pprint.pprint(uc.unodes[unode_key]["class"].UNODE_UPARAMS_GROUPED_BY_TAG)
 
 
 if __name__ == "__main__":

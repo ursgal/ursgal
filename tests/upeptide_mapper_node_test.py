@@ -46,9 +46,7 @@ params = {
 all_mapped_peptides = set()
 ident_list = []
 for peptide_mapper_class_version in ["UPeptideMapper_v3", "UPeptideMapper_v4"]:
-    params["translations"][
-        "peptide_mapper_class_version"
-    ] = peptide_mapper_class_version
+    params["translations"]["peptide_mapper_class_version"] = peptide_mapper_class_version
     upeptide_mapper_main(
         input_file=input_csv,
         output_file=output_csv,

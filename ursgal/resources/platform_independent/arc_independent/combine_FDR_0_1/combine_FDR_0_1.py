@@ -237,9 +237,7 @@ class MultiScorer(object):
         other_PSM_tuple_sets = [set(eng.rowdict.keys()) for eng in other_csv_instances]
 
         engines_str = ";".join(sorted({i.engine_colname for i in csv_instances}))
-        shared_PSMs = set.intersection(*PSM_tuple_sets).difference(
-            *other_PSM_tuple_sets
-        )
+        shared_PSMs = set.intersection(*PSM_tuple_sets).difference(*other_PSM_tuple_sets)
 
         PSM_rowlist = []
         for PSM in shared_PSMs:

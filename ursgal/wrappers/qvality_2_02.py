@@ -167,9 +167,7 @@ class qvality_2_02(ursgal.UNode):
         else:
             csv_kwargs["lineterminator"] = "\r\n"
 
-        csv_input = csv.DictReader(
-            row for row in opened_file if not row.startswith("#")
-        )
+        csv_input = csv.DictReader(row for row in opened_file if not row.startswith("#"))
 
         csv_output = csv.DictWriter(
             open(self.params["translations"]["output_file_incl_path"], "w"),

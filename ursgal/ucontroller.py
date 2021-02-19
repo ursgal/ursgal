@@ -81,9 +81,8 @@ class UController(ursgal.UNode):
         self.verbose = kwargs.get("verbose", True)
         if self.verbose:
             self.print_header("UController initialized", tag="init", newline=False)
-            ursgal_string = (
-                "Ursgal v{0}  -  "
-                "https://github.com/ursgal/ursgal".format(ursgal.__version__)
+            ursgal_string = "Ursgal v{0}  -  " "https://github.com/ursgal/ursgal".format(
+                ursgal.__version__
             )
             print("         -\-{0: ^58}-/-\n".format(ursgal_string))
         self.params = ParamsDict()
@@ -296,9 +295,7 @@ class UController(ursgal.UNode):
 
         """
         engine_name = self.params["mzml2mgf_converter_version"]
-        self.input_file_sanity_check(
-            input_file, engine=engine_name, extensions=["mzml"]
-        )
+        self.input_file_sanity_check(input_file, engine=engine_name, extensions=["mzml"])
         answer = self.prepare_unode_run(
             input_file, output_file=output_file_name, engine=engine_name, force=force
         )
@@ -390,10 +387,7 @@ class UController(ursgal.UNode):
                 self.unodes[engine]["resource_folder"] = engine_folder_path
 
                 alternative_exe_folder = kb_info.get("uses_unode", None)
-                if (
-                    os.path.exists(engine_exe_path)
-                    or alternative_exe_folder is not None
-                ):
+                if os.path.exists(engine_exe_path) or alternative_exe_folder is not None:
                     _wrapper_class = self.unodes[engine]["_wrapper_class"]
                     try:
                         self.unodes[engine]["class"] = _wrapper_class(
@@ -541,9 +535,7 @@ class UController(ursgal.UNode):
                 )
             else:
                 tmp_file_name = self.io["input"]["finfo"]["json"]
-            path_2_remove = os.path.join(
-                self.io["input"]["finfo"]["dir"], tmp_file_name
-            )
+            path_2_remove = os.path.join(self.io["input"]["finfo"]["dir"], tmp_file_name)
             os.remove(path_2_remove)
         except:
             self.print_info(
@@ -855,9 +847,9 @@ class UController(ursgal.UNode):
                     print("Cannot guess a suitable engine, please specify it.")
                     sys.exit(1)
 
-        elif len(self.guess_engine_name(engine)) == 1 and self.guess_engine_name(
-            engine
-        )[0] in ["mzml2mgf_1_0_0", "mzml2mgf_2_0_0"]:
+        elif len(self.guess_engine_name(engine)) == 1 and self.guess_engine_name(engine)[
+            0
+        ] in ["mzml2mgf_1_0_0", "mzml2mgf_2_0_0"]:
             outfile = self.convert_to_mgf_and_update_rt_lookup(
                 input_file=input_file, force=force, output_file_name=output_file_name
             )
@@ -951,9 +943,7 @@ class UController(ursgal.UNode):
             )
         else:
             finfo["is_compressed"] = False
-            finfo["file_root"], finfo["file_extention"] = os.path.splitext(
-                finfo["file"]
-            )
+            finfo["file_root"], finfo["file_extention"] = os.path.splitext(finfo["file"])
         finfo["json"] = finfo["file"] + self.params["json_extension"]
         if os.path.exists(os.path.join(finfo["dir"], finfo["json"])):
             finfo["json_exists"] = True
@@ -1282,9 +1272,7 @@ class UController(ursgal.UNode):
             sanitized_fname = self.sanitize_userdefined_output_filename(
                 userdefined_output_fname, engine
             )
-            output_file = os.path.join(
-                self.io["input"]["finfo"]["dir"], sanitized_fname
-            )
+            output_file = os.path.join(self.io["input"]["finfo"]["dir"], sanitized_fname)
 
         self.io["output"]["finfo"] = self.set_file_info_dict(output_file)
         self.take_care_of_params_and_stats(io_mode="output")
@@ -1586,10 +1574,7 @@ class UController(ursgal.UNode):
             self.io["output"]["finfo"]["json_exists"]
             and self.io["input"]["finfo"]["json_exists"]
         ):
-            if (
-                self.io["input"]["o_finfo"]["md5"]
-                != self.io["output"]["i_finfo"]["md5"]
-            ):
+            if self.io["input"]["o_finfo"]["md5"] != self.io["output"]["i_finfo"]["md5"]:
                 reasons.append(
                     "md5 of input file {file} changed - old run: {0} - new run: {1} ".format(
                         self.io["input"]["o_finfo"]["md5"],
@@ -2362,9 +2347,7 @@ class UController(ursgal.UNode):
                 if distributable is False:
                     continue
 
-                resource_source_folder = "ursgal{0}".format(
-                    root_dir.split("ursgal")[-1]
-                )
+                resource_source_folder = "ursgal{0}".format(root_dir.split("ursgal")[-1])
 
                 target_folder_for_zips = os.path.join(
                     root_zip_target_folder, resource_source_folder

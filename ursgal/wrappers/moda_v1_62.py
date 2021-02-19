@@ -81,9 +81,7 @@ class moda_v1_62(ursgal.UNode):
             "-i",
             self.params["translations"]["params_input_file"],
             "-o",
-            self.params["translations"]["output_file_incl_path"].replace(
-                ".csv", ".tsv"
-            ),
+            self.params["translations"]["output_file_incl_path"].replace(".csv", ".tsv"),
             "-@",
             str(self.params["translations"]["cpus"]),
         ]

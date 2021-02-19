@@ -102,9 +102,9 @@ class flash_lfq_1_1_1(ursgal.UNode):
             writer.writeheader()
             for spec_sequence in self.spec_sequence_dict.keys():
                 if len(set(self.spec_sequence_dict[spec_sequence]["masses"])) == 1:
-                    monoisotopic_mass = self.spec_sequence_dict[spec_sequence][
-                        "masses"
-                    ][0]
+                    monoisotopic_mass = self.spec_sequence_dict[spec_sequence]["masses"][
+                        0
+                    ]
                     full_seq = "|||".join(
                         sorted(set(self.spec_sequence_dict[spec_sequence]["names"]))
                     )

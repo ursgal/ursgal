@@ -158,9 +158,7 @@ class msamanda_1_0_0_5243(ursgal.UNode):
             int(self.params["translations"]["precursor_max_charge"]) + 1,
         ):
             considered_charges.append("+{0}".format(charge))
-        self.params["translations"]["considered_charges"] = ", ".join(
-            considered_charges
-        )
+        self.params["translations"]["considered_charges"] = ", ".join(considered_charges)
 
         if self.params["translations"]["label"] == "15N":
             for aminoacid, N15_Diff in ursgal.ukb.DICT_15N_DIFF.items():

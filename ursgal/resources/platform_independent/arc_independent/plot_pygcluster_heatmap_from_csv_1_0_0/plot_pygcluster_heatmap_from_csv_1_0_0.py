@@ -93,14 +93,10 @@ def main(input_file=None, output_file=None, params=None):
         for condition in params["all_conditions"]:
             try:
                 ratio = float(
-                    line_dict[
-                        "{0}{1}".format(condition, params["heatmap_value_suffix"])
-                    ]
+                    line_dict["{0}{1}".format(condition, params["heatmap_value_suffix"])]
                 )
                 sd = float(
-                    line_dict[
-                        "{0}{1}".format(condition, params["heatmap_error_suffix"])
-                    ]
+                    line_dict["{0}{1}".format(condition, params["heatmap_error_suffix"])]
                 )
                 plot_collector[line_name][condition] = (ratio, sd)
             except:

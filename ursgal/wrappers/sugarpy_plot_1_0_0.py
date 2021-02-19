@@ -107,9 +107,7 @@ class sugarpy_plot_1_0_0(ursgal.UNode):
                             self.params["translations"]["precursor_mass_tolerance_plus"]
                         )
                         + float(
-                            self.params["translations"][
-                                "precursor_mass_tolerance_minus"
-                            ]
+                            self.params["translations"]["precursor_mass_tolerance_minus"]
                         )
                     ) / 2.0
                     if (

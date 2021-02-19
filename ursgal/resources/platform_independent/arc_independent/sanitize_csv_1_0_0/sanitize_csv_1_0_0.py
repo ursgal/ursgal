@@ -107,9 +107,7 @@ def main(
             for engine in preferred_engines:
                 if len(preferred_spec_line_dicts[engine]) != 0:
                     psm_engines.append(engine)
-            line_dict_list = preferred_spec_line_dicts[psm_engines[-1]][
-                :max_output_psms
-            ]
+            line_dict_list = preferred_spec_line_dicts[psm_engines[-1]][:max_output_psms]
             for ld in line_dict_list:
                 ld["Search Engine"] = ";".join(psm_engines)
                 all_line_dicts.append(ld)

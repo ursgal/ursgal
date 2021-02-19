@@ -158,9 +158,7 @@ class UMapMaster(unittest.TestCase):
         self.assertEqual(len(maps), 1)
         # sys.exit(1)
         self.assertEqual(
-            len(
-                self.upapa_class.map_peptides(["KLEINER"], "tmp_Test.fasta")["KLEINER"]
-            ),
+            len(self.upapa_class.map_peptides(["KLEINER"], "tmp_Test.fasta")["KLEINER"]),
             1,
         )
 

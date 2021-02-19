@@ -712,9 +712,7 @@ if __name__ == "__main__":
     s.count_intra_set_features()
     s.collect_data()
 
-    print(
-        "Splitting data in half to avoid training and testing on the same features..."
-    )
+    print("Splitting data in half to avoid training and testing on the same features...")
     skfold = StratifiedKFold(s.categories, n_folds=2, shuffle=True)
 
     # use one half to score the other half, and vice versa:

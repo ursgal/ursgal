@@ -103,9 +103,7 @@ def main(
                                     file_path_on_host
                                 )
                             )
-                            download_file(
-                                file_or_directory, file_path_on_host, ftp_size
-                            )
+                            download_file(file_or_directory, file_path_on_host, ftp_size)
                         else:
                             print(
                                 "[ -<FTP>-- ] File: {0} already downloaded!".format(

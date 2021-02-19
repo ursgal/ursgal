@@ -390,9 +390,7 @@ class percolator_3_2_1(ursgal.UNode):
                         self.params["_score_list"], score
                     )
                 else:
-                    rank_of_score = bisect.bisect_left(
-                        self.params["_score_list"], score
-                    )
+                    rank_of_score = bisect.bisect_left(self.params["_score_list"], score)
                     rank_of_score = len(self.params["_score_list"]) - rank_of_score
 
                 t["lnrSp"] = math.log(1 + rank_of_score)
@@ -568,9 +566,7 @@ class percolator_3_2_1(ursgal.UNode):
                     s2l[pkey][psmid_pep_key] = line_dict
 
         opened_file = open(self.params["translations"]["csv_input_file"], "r")
-        csv_input = csv.DictReader(
-            row for row in opened_file if not row.startswith("#")
-        )
+        csv_input = csv.DictReader(row for row in opened_file if not row.startswith("#"))
 
         if "PEP" not in csv_input.fieldnames and "q-value" not in csv_input.fieldnames:
             csv_input.fieldnames += ["PEP", "q-value", "Percolator:SVM Score"]
@@ -592,9 +588,7 @@ class percolator_3_2_1(ursgal.UNode):
             #  os.path.exists(self.params['translations']['protein_output_decoy']):
             with open(
                 self.params["translations"]["protein_output_target"]
-            ) as fin1, open(
-                self.params["translations"]["protein_output_decoy"]
-            ) as fin2:
+            ) as fin1, open(self.params["translations"]["protein_output_decoy"]) as fin2:
                 target_proteins_reader = csv.DictReader(fin1, delimiter="\t")
                 decoy_proteins_reader = csv.DictReader(fin2, delimiter="\t")
 

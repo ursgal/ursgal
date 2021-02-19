@@ -184,6 +184,4 @@ def main(input_file=None, decoy_tag=None, output_file=None):
 
 
 if __name__ == "__main__":
-    script = main(
-        input_file=sys.argv[1], decoy_tag=sys.argv[2], output_file=sys.argv[3]
-    )
+    script = main(input_file=sys.argv[1], decoy_tag=sys.argv[2], output_file=sys.argv[3])

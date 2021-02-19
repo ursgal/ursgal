@@ -165,14 +165,10 @@ class novor_1_05(ursgal.UNode):
                     continue
                 else:
                     mod_type["mods"].append(
-                        "{0} ({1})".format(
-                            mod, "".join(sorted(not_available_mods[mod]))
-                        )
+                        "{0} ({1})".format(mod, "".join(sorted(not_available_mods[mod])))
                     )
 
-        self.params["translations"]["fixed_modifications"] = ",".join(
-            fixed_mods["mods"]
-        )
+        self.params["translations"]["fixed_modifications"] = ",".join(fixed_mods["mods"])
         self.params["translations"]["potential_modifications"] = ",".join(
             potential_mods["mods"]
         )
@@ -269,9 +265,7 @@ class novor_1_05(ursgal.UNode):
 
         cached_novor_output = []
         headers = None
-        result_file = open(
-            self.params["translations"]["tmp_output_file_incl_path"], "r"
-        )
+        result_file = open(self.params["translations"]["tmp_output_file_incl_path"], "r")
         for line in result_file:
             if line.startswith("#"):
                 if line.startswith("# id"):
@@ -282,9 +276,7 @@ class novor_1_05(ursgal.UNode):
         ), """Change in NOVOR output ? could not find header starting wth # id"""
 
         print("[ PARSING  ] Loading unformatted Novor results ...")
-        non_commented_csv_lines = [
-            row for row in result_file if not row.startswith("#")
-        ]
+        non_commented_csv_lines = [row for row in result_file if not row.startswith("#")]
         result_file.close()
         csv_dict_reader_object = csv.DictReader(
             [",".join(headers)] + non_commented_csv_lines
@@ -328,9 +320,7 @@ class novor_1_05(ursgal.UNode):
             ]
             new_line_dict_list.append(new_line_dict)
 
-        new_result_file = open(
-            self.params["translations"]["output_file_incl_path"], "w"
-        )
+        new_result_file = open(self.params["translations"]["output_file_incl_path"], "w")
         csv_kwargs = {}
         if sys.platform == "win32":
             csv_kwargs["lineterminator"] = "\n"

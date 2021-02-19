@@ -74,9 +74,9 @@ class quameter_1_1_10165(ursgal.UNode):
         self.input_file = os.path.join(
             self.params["input_dir_path"], self.params["input_file"]
         )
-        if self.input_file.lower().endswith(
-            ".mzml"
-        ) or self.input_file.lower().endswith(".raw"):
+        if self.input_file.lower().endswith(".mzml") or self.input_file.lower().endswith(
+            ".raw"
+        ):
             self.params["translations"]["mzml_input_file"] = self.input_file
         elif self.input_file.lower().endswith(".mgf"):
             self.params["translations"]["mzml_input_file"] = self.meta_unodes[

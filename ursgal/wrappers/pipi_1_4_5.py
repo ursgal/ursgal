@@ -245,9 +245,7 @@ class pipi_1_4_5(ursgal.UNode):
         self.params["command_list"] = [
             "java",
             "-Xmx{0}".format(
-                self.params["translations"]["_grouped_by_translated_key"]["-Xmx"][
-                    "-xmx"
-                ]
+                self.params["translations"]["_grouped_by_translated_key"]["-Xmx"]["-xmx"]
             ),
             "-jar",
             self.exe,

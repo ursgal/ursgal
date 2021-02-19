@@ -220,9 +220,7 @@ def main(folder):
             # for condition_dir in conditions:
             uc.set_profile(mass_spectrometer)
 
-            mzML_dir = os.path.join(
-                input_params["ftp_output_folder_root"], mzML_dir_ext
-            )
+            mzML_dir = os.path.join(input_params["ftp_output_folder_root"], mzML_dir_ext)
             # i.e. /media/plan-f/mzML/Christian_Fufezan/ROS_Experiment_2012/Juni_2012/2_3/Tech_A/
             # all files ending with .mzml in that directory will be used!
 

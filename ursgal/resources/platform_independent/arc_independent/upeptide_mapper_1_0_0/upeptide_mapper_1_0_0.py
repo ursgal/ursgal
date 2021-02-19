@@ -150,9 +150,7 @@ def main(input_file=None, output_file=None, params=None):
         print("[ map_peps ] Attempting re-map of non-mappable peptides")
         sequence_variants = defaultdict(set)
         tmp_peptide_set = set()
-        print(
-            "[ map_peps ] Checking for I <--> L conversions: building set of variants"
-        )
+        print("[ map_peps ] Checking for I <--> L conversions: building set of variants")
         for n, non_mappable_peptide in enumerate(non_mappable_peps):
             if len(non_mappable_peptide) > 60:
                 continue
@@ -594,9 +592,7 @@ class UPeptideMapper_v2(dict):
         self.master_buffer[fasta_name] = {}
         # self.word_len = 6
         if force:
-            for upapa_id, (id, seq) in enumerate(
-                ursgal.ucore.parse_fasta(fasta_stream)
-            ):
+            for upapa_id, (id, seq) in enumerate(ursgal.ucore.parse_fasta(fasta_stream)):
                 print(
                     "[ upapa v2 ] Indexing sequence #{0} with word_len {1}".format(
                         upapa_id, self.word_len

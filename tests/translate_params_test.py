@@ -64,9 +64,7 @@ class TestRun(unittest.TestCase):
         )
 
     def test_empty_translation_return_default(self):
-        untranslated_params, translated_params = self.uc.collect_and_translate_params(
-            {}
-        )
+        untranslated_params, translated_params = self.uc.collect_and_translate_params({})
         self.assertEqual(translated_params["score_test_ions"], "Please yes translate")
 
     def test_list_ov_values_is_kept(self):
@@ -76,9 +74,7 @@ class TestRun(unittest.TestCase):
         self.assertEqual(translated_params["list_of_things"], [False, False, False])
 
     def test_grouping_on_translated_keys(self):
-        untranslated_params, translated_params = self.uc.collect_and_translate_params(
-            {}
-        )
+        untranslated_params, translated_params = self.uc.collect_and_translate_params({})
         self.assertEqual(
             len(translated_params["_grouped_by_translated_key"]["__test_00000_ions"]), 2
         )

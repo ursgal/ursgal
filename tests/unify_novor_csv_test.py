@@ -25,9 +25,7 @@ scan_rt_lookup = pickle.load(
 )
 
 unify_csv_main = R.unodes["unify_csv_1_0_0"]["class"].import_engine_as_python_function()
-input_csv = os.path.join(
-    "tests", "data", "novor_1_1beta", "test_BSA1_novor_1_1beta.csv"
-)
+input_csv = os.path.join("tests", "data", "novor_1_1beta", "test_BSA1_novor_1_1beta.csv")
 output_csv = os.path.join(
     "tests", "data", "novor_1_1beta", "test_BSA1_novor_1_1beta_unified.csv"
 )

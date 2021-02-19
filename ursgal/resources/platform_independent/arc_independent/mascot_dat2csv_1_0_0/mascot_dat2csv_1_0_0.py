@@ -206,9 +206,7 @@ class MascotDatParser(object):
                         sub_pos, old_aa, new_aa = splitted_list[i : i + 3]
                         if int(sub_pos) == pos:
                             mods.append(
-                                "Subst({mod}):{pos}".format(
-                                    mod=new_aa, pos=int(sub_pos)
-                                )
+                                "Subst({mod}):{pos}".format(mod=new_aa, pos=int(sub_pos))
                             )
             var_mod_string = self.mods["variable"].get(mod, None)
 

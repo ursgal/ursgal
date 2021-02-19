@@ -95,13 +95,9 @@ class mzidentml_lib_1_6_10(ursgal.UNode):
                     "{0}{1}".format(translated_key, list(translation_dict.values())[0]),
                 )
             elif translated_key == "mzidentml_function":
-                self.params["command_list"].insert(
-                    4, list(translation_dict.values())[0]
-                )
+                self.params["command_list"].insert(4, list(translation_dict.values())[0])
             elif translated_key == "output_file_incl_path":
-                self.params["command_list"].insert(
-                    6, list(translation_dict.values())[0]
-                )
+                self.params["command_list"].insert(6, list(translation_dict.values())[0])
             elif len(translation_dict) == 1:
                 self.params["command_list"].extend(
                     (translated_key, str(list(translation_dict.values())[0]))

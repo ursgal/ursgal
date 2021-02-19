@@ -143,9 +143,7 @@ class tag_graph_1_8_0(ursgal.UNode):
                             new_line_dict["tag (>=0%)"] = new_sequence
                             new_line_dict["PTM"] = "; ".join(mod_list)
                         elif translated_header in ["Tag Length", "length"]:
-                            new_line_dict[translated_header] = len(
-                                line_dict["Sequence"]
-                            )
+                            new_line_dict[translated_header] = len(line_dict["Sequence"])
                         elif translated_header == "RT":
                             new_line_dict[translated_header] = (
                                 float(line_dict[header_translations[translated_header]])
@@ -172,9 +170,9 @@ class tag_graph_1_8_0(ursgal.UNode):
         )
         breakpoint()
         multi_input = False
-        if self.input_file.lower().endswith(
-            ".mzml"
-        ) or self.input_file.lower().endswith(".mzml.gz"):
+        if self.input_file.lower().endswith(".mzml") or self.input_file.lower().endswith(
+            ".mzml.gz"
+        ):
             self.params["translations"]["mzml_input_file"] = [self.input_file]
             self.input_file = [self.input_file]
         elif self.input_file.lower().endswith(".mgf"):
@@ -540,9 +538,7 @@ class tag_graph_1_8_0(ursgal.UNode):
             "{0}_TopResults.txt".format(self.params["output_file"].replace(".csv", "")),
         )
 
-        csv_out_fobject = open(
-            self.params["translations"]["output_file_incl_path"], "w"
-        )
+        csv_out_fobject = open(self.params["translations"]["output_file_incl_path"], "w")
         csv_writer = csv.DictWriter(csv_out_fobject, fieldnames=translated_headers)
         csv_writer.writeheader()
 

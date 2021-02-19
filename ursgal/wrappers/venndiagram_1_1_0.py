@@ -88,9 +88,7 @@ class venndiagram_1_1_0(ursgal.UNode):
             ]:
                 continue
             elif translated_key == "visualization_font":
-                venn_params["font"] = translation_dict["visualization_font"][
-                    "font_type"
-                ]
+                venn_params["font"] = translation_dict["visualization_font"]["font_type"]
                 venn_params["label font-size header"] = translation_dict[
                     "visualization_font"
                 ]["font_size_header"]

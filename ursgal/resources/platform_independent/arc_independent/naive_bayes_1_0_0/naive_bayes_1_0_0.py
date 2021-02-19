@@ -93,9 +93,7 @@ def main(
     )
     merged_fieldnames.remove(pep_colname)
     with open(output_csv, "w", encoding="utf8") as outf:
-        writer = csv.DictWriter(
-            outf, fieldnames=merged_fieldnames, delimiter=output_sep
-        )
+        writer = csv.DictWriter(outf, fieldnames=merged_fieldnames, delimiter=output_sep)
         writer.writeheader()
         for out_row in merged_dict.values():
             all_PEPs = [float(p) for p in out_row["combined PEP"]]

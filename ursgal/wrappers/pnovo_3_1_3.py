@@ -106,9 +106,9 @@ class pnovo_3_1_3(ursgal.UNode):
                 "_grouped_by_translated_key"
             ][pnovo_param_name].items():
                 if pnovo_param_name == "spec_path1":
-                    self.params_to_write[pnovo_param_name] = self.params[
-                        "translations"
-                    ]["mgf_input_file"].replace(".mgf", ".ms2")
+                    self.params_to_write[pnovo_param_name] = self.params["translations"][
+                        "mgf_input_file"
+                    ].replace(".mgf", ".ms2")
                     self.params_to_write["out_path"] = os.path.dirname(
                         self.params["translations"]["output_file_incl_path"]
                     )

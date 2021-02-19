@@ -196,12 +196,8 @@ def main(
             charges=charges,
         )
 
-        venn_output_file = output_file.replace(
-            ".txt", "_peak_presence_venn_diagram.svg"
-        )
-        venn_results = venndiagram_function(
-            data=venn_data, output_file=venn_output_file
-        )
+        venn_output_file = output_file.replace(".txt", "_peak_presence_venn_diagram.svg")
+        venn_results = venndiagram_function(data=venn_data, output_file=venn_output_file)
 
         created_files.extend(
             [

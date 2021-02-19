@@ -302,9 +302,7 @@ def main(*args, **kwargs):
         vdTypeSpecific[vdLen][k]["label font-size minor"] = kwargs[
             "label font-size minor"
         ]
-        vdTypeSpecific[vdLen][k]["label font-size venn"] = kwargs[
-            "label font-size venn"
-        ]
+        vdTypeSpecific[vdLen][k]["label font-size venn"] = kwargs["label font-size venn"]
 
         if k not in kwargs.keys():
             kwargs[k] = v

@@ -228,9 +228,9 @@ class deepnovo_pointnovo(ursgal.UNode):
                 base_mz=self.params["translations"]["base_mz"],
             )
         elif self.params["translations"]["frag_mass_tolerance_unit"] == "da":
-            self.params_to_write["frag_mass_tolerance_da"] = self.params[
-                "translations"
-            ]["frag_mass_tolerance"]
+            self.params_to_write["frag_mass_tolerance_da"] = self.params["translations"][
+                "frag_mass_tolerance"
+            ]
 
         assert (
             self.params["translations"]["deepnovo_mode"] == "search_denovo"
