@@ -276,7 +276,7 @@ Citation
 ********
 
 In an academic world, citations are the only credit that one can hope for ;)
-Therefore, please do not forget to cite us if you use Ursagl:
+Therefore, please do not forget to cite us if you use Ursgal:
 
 Schulze, S., Igiraneza, A. B., Kösters, M., Leufken, J., Leidel, S. A., Garcia, B. A., Fufezan, C., and Pohlschroder, M. (2021) `Enhancing Open Modification Searches via a Combined Approach Facilitated by Ursgal`_ Journal of Proteome Research, DOI:10.1021/acs.jproteome.0c00799
 
