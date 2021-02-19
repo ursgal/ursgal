@@ -62,9 +62,7 @@ class csv2ssl_1_0_0(ursgal.UNode):
         csv2ssl_main(
             input_file=input_file,
             output_file=output_file,
-            score_column_name=self.params["translations"][
-                "ssl_score_column_name"
-            ],
+            score_column_name=self.params["translations"]["ssl_score_column_name"],
             score_type=self.params["translations"]["ssl_score_type"],
         )
 

@@ -80,9 +80,7 @@ class csv2counted_results_1_0_0(ursgal.UNode):
             identifier_colum_names=self.params["translations"][
                 "identifier_column_names"
             ],
-            count_column_names=self.params["translations"][
-                "count_column_names"
-            ],
+            count_column_names=self.params["translations"]["count_column_names"],
             count_by_file=self.params["translations"]["count_by_file"],
             convert2sfinx=self.params["translations"]["convert_to_sfinx"],
             keep_column_names=self.params["translations"]["keep_column_names"],
