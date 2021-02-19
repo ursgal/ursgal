@@ -38,7 +38,7 @@ class csv2ssl_1_0_0(ursgal.UNode):
 
     def _execute(self):
         """
-        Result files (.csv) are converted to spectrum sequence list (.ssl) files.
+        Result files (.csv) are converted to spectrum sequence list(.ssl) files
         These .ssl can be used as input files for BiblioSpec.
 
         Input file has to be a .csv
@@ -62,7 +62,9 @@ class csv2ssl_1_0_0(ursgal.UNode):
         csv2ssl_main(
             input_file=input_file,
             output_file=output_file,
-            score_column_name=self.params["translations"]["ssl_score_column_name"],
+            score_column_name=self.params["translations"][
+                "ssl_score_column_name"
+            ],
             score_type=self.params["translations"]["ssl_score_type"],
         )
 

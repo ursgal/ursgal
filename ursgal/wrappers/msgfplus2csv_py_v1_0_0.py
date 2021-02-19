@@ -36,11 +36,13 @@ class msgfplus2csv_py_v1_0_0(ursgal.UNode):
         msgf_mzid2csv = self.import_engine_as_python_function()
 
         output_file = os.path.join(
-            self.params["output_dir_path"], self.params["output_file"]
+            self.params["output_dir_path"],
+            self.params["output_file"],
         )
 
         input_file = os.path.join(
-            self.params["input_dir_path"], self.params["input_file"]
+            self.params["input_dir_path"],
+            self.params["input_file"],
         )
 
         msgf_mzid2csv(input_file, output_file)
