@@ -278,7 +278,11 @@ Citation
 In an academic world, citations are the only credit that one can hope for ;)
 Therefore, please do not forget to cite us if you use Ursagl:
 
-Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S., and Fufezan, C. (2016) `Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis`_ Journal of Proteome research 15, 788–794, DOI:10.1021/acs.jproteome.5b00860
+Schulze, S., Igiraneza, A. B., Kösters, M., Leufken, J., Leidel, S. A., Garcia, B. A., Fufezan, C., and Pohlschroder, M. (2021) `Enhancing Open Modification Searches via a Combined Approach Facilitated by Ursgal`_ Journal of Proteome Research, DOI:10.1021/acs.jproteome.0c00799
+
+Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S., and Fufezan, C. (2016) `Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis`_ Journal of Proteome Research 15, 788–794, DOI:10.1021/acs.jproteome.5b00860
+
+.. _Enhancing Open Modification Searches via a Combined Approach Facilitated by Ursgal: https://doi.org/10.1021/acs.jproteome.0c00799
 
 .. _Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis: http://dx.doi.org/10.1021/acs.jproteome.5b00860
 
