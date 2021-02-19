@@ -47,8 +47,10 @@ class csv2counted_results_1_0_0(ursgal.UNode):
         Creates a _counted.csv file and returns its path.
 
         Columns containing the elements that should be counted (identifiers)
-        are given as a list of headers using uc.params["identifier_column_names"].
-        Columns defining a unique countable element (e.g. "Sequence", "Spectrum ID")
+        are given as a list of headers using
+        uc.params["identifier_column_names"].
+        Columns defining a unique countable element
+        (e.g. "Sequence", "Spectrum ID")
         are given as a list of headers using uc.params["count_column_names"].
 
         This can be used to create a SFINX (http://sfinx.ugent.be/) input file,
@@ -78,7 +80,9 @@ class csv2counted_results_1_0_0(ursgal.UNode):
             identifier_colum_names=self.params["translations"][
                 "identifier_column_names"
             ],
-            count_column_names=self.params["translations"]["count_column_names"],
+            count_column_names=self.params["translations"][
+                "count_column_names"
+            ],
             count_by_file=self.params["translations"]["count_by_file"],
             convert2sfinx=self.params["translations"]["convert_to_sfinx"],
             keep_column_names=self.params["translations"]["keep_column_names"],
