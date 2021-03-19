@@ -5,6 +5,7 @@ import sys
 import glob
 import os
 import pprint
+from collections import defaultdict
 
 
 def main(folder=None, database=None, enzyme=None):
