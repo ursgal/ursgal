@@ -170,7 +170,6 @@ class tag_graph_1_8_0(ursgal.UNode):
         self.input_file = os.path.join(
             self.params["input_dir_path"], self.params["input_file"]
         )
-        breakpoint()
         multi_input = False
         if self.input_file.lower().endswith(
             ".mzml"
@@ -484,7 +483,6 @@ class tag_graph_1_8_0(ursgal.UNode):
             ),
         ]
         print(" ".join(self.params["command_list"]))
-        # breakpoint()
         return self.params
 
     def postflight(self):
@@ -566,10 +564,6 @@ class tag_graph_1_8_0(ursgal.UNode):
                         ].split(".")[1]
                     else:
                         out_line_dict[header_translations[column]] = line_dict[column]
-                from pprint import pprint
-
-                pprint(line_dict)
-                breakpoint()
                 out_line_dict["Raw data location"] = os.path.abspath(
                     os.path.join(
                         os.path.dirname(
@@ -624,7 +618,6 @@ class tag_graph_1_8_0(ursgal.UNode):
                             frac = i + 1
                             line["Fraction"] = frac
                             writer.writerow(line)
-            # breakpoint()
             self.params_to_write["denovo_mzml_input_line"] = ";".join(file_input_lines)
             # self.params_to_write['denovo_mzml_input_line'] = ''
             # self.params_to_write['de_novo_tag_graph'] = self.params_to_write['de_novo'][0]
@@ -636,7 +629,6 @@ class tag_graph_1_8_0(ursgal.UNode):
                 self.params_to_write["dataDirectory"], os.path.basename(merged_path)
             )
             # print(mapping_file)
-            breakpoint()
             self.params_to_write["de_novo_tag_graph"] = mapping_file
 
             # TODO rewrite denovo files to to file and include fraction column!
