@@ -82,7 +82,7 @@ as well as a broad set of `Example Scripts`_ and many more.
 Download and Installation
 *************************
 
-Ursgal requires `Python`_ 3.4 or higher.
+Ursgal requires `Python`_ 3.5 or higher.
 If you want to run Ursgal on a Windows system, Python 3.6 or higher is
 recommended.
 
