@@ -81,7 +81,7 @@ deploy:
   distributions: sdist bdist_wheel bdist_egg
   on:
     tags: true
-    all_branches: true
+    branch: master
     skip_existing: true
     skip_cleanup: true
 
