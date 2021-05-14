@@ -276,9 +276,13 @@ Citation
 ********
 
 In an academic world, citations are the only credit that one can hope for ;)
-Therefore, please do not forget to cite us if you use Ursagl:
+Therefore, please do not forget to cite us if you use Ursgal:
 
-Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S., and Fufezan, C. (2016) `Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis`_ Journal of Proteome research 15, 788–794, DOI:10.1021/acs.jproteome.5b00860
+Schulze, S., Igiraneza, A. B., Kösters, M., Leufken, J., Leidel, S. A., Garcia, B. A., Fufezan, C., and Pohlschroder, M. (2021) `Enhancing Open Modification Searches via a Combined Approach Facilitated by Ursgal`_ Journal of Proteome Research, DOI:10.1021/acs.jproteome.0c00799
+
+Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S., and Fufezan, C. (2016) `Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis`_ Journal of Proteome Research 15, 788–794, DOI:10.1021/acs.jproteome.5b00860
+
+.. _Enhancing Open Modification Searches via a Combined Approach Facilitated by Ursgal: https://doi.org/10.1021/acs.jproteome.0c00799
 
 .. _Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis: http://dx.doi.org/10.1021/acs.jproteome.5b00860
 
@@ -320,3 +324,4 @@ Full list of tools with proper citations that are integrated into Ursgal are:
     * Polasky, DA; Yu, F; Teo, GC; Nesvizhskii, AI (2020) Fast and comprehensive N- and O-glycoproteomics analysis with MSFragger-Glyco. Nat Methods 17 (11)
     * Geiszler, DJ; Kong, AT; Avtonomov, DM; Yu, F; Leprevost, FV; Nesvizhskii, AI (2020) PTM-Shepherd: analysis and summarization of post-translational and chemical modifications from open search results. bioRxiv doi: https://doi.org/10.1101/2020.07.08.192583
     * An, Z; Zhai, L; Ying, W; Qian, X; Gong, F; Tan, M; Fu, Y. (2019) PTMiner: Localization and Quality Control of Protein Modifications Detected in an Open Search and Its Application to Comprehensive Post-translational Modification Characterization in Human Proteome.  Mol Cell Proteomics 18 (2)
+    * Schulze, S; Oltmanns, A; Fufezan, C; Krägenbring, J; Mormann, M; Pohlschröder, M; Hippler, M (2020). SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics

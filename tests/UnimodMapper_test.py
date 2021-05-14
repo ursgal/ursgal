@@ -69,7 +69,7 @@ TESTS = [
         },  # ursgal.UnimodMapper.mass2composition_list,
         {
             "in": {"args": [18], "kwargs": {"decimal_places": 0}},
-            "out": ['1079', '1167', '127', '1922', '329', '608'],
+            "out": ["1079", "1167", "127", "1922", "329", "608"],
         },  # ursgal.UnimodMapper.appMass2id_list
         {
             "in": {"args": [18], "kwargs": {"decimal_places": 0}},
@@ -79,7 +79,7 @@ TESTS = [
                 {"H": -2, "C": -1, "S": 1},
                 {"H": 2, "C": 4, "O": -2},
                 {"H": -2, "C": -1, "O": 2},
-                {"H": 2, "O": 1}
+                {"H": 2, "O": 1},
             ],
         },  # ursgal.UnimodMapper.appMass2element_list
         {
@@ -131,7 +131,8 @@ def mapper_function_check(test_dict, mapper_function):
     )
     print("Mapper output:", mapper_output)
     print(
-        "Expected output:", test_dict["out"],
+        "Expected output:",
+        test_dict["out"],
     )
     assert mapper_output == test_dict["out"]
 

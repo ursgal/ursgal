@@ -307,6 +307,29 @@ Filter validated results
 
 
 
+SugarPy Example Scripts
+^^^^^^^^^^^^^^^^^^^^^^^
+
+SugarPy complete workflow
+-------------------------
+
+.. autofunction:: sugarpy_example_workflow.main
+
+
+.. include:: code_inc/sugarpy_example_workflow.inc
+
+
+
+SugarPy plot annotated specs
+----------------------------
+
+.. autofunction:: sugarpy_plot_annotated_specs.main
+
+
+.. include:: code_inc/sugarpy_plot_annotated_specs.inc
+
+
+
 Cascade Search
 ^^^^^^^^^^^^^^
 

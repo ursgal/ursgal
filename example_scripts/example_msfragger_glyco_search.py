@@ -7,42 +7,42 @@ import sys
 import shutil
 
 
-def main(database=None,ms_file=None):
-    '''
+def main(database=None, ms_file=None):
+    """
     Executes a search with MSFragger Glyco
 
     usage:
         ./simple_example_search.py <mzml> <database>
 
 
-    '''
+    """
     uc = ursgal.UController(
-        profile='QExactive+',
+        profile="QExactive+",
         params={
-            'database': database,
-            'modifications': [
-                'M,opt,any,Oxidation',        # Met oxidation
-                'C,fix,any,Carbamidomethyl',  # Carbamidomethylation
+            "database": database,
+            "modifications": [
+                "M,opt,any,Oxidation",  # Met oxidation
+                "C,fix,any,Carbamidomethyl",  # Carbamidomethylation
             ],
-            'peptide_mapper_class_version': 'UPeptideMapper_v4',
-            '-xmx': '10g',
-            'cpus': 4,
-            'csv_filter_rules' : [
-                ['Is decoy', 'equals', 'false'],
-                ['PEP','lte', 0.01],
+            "peptide_mapper_class_version": "UPeptideMapper_v4",
+            "-xmx": "10g",
+            "cpus": 4,
+            "csv_filter_rules": [
+                ["Is decoy", "equals", "false"],
+                ["PEP", "lte", 0.01],
             ],
-            'use_pyqms_for_mz_calculation' : False,
-            'use_spectrum_charge' : False,
-            'enzyme': 'trypsin',
-            'percolator_post_processing': 'mix-max',
-            'precursor_mass_tolerance_minus': 10,
-            'precursor_mass_tolerance_plus': 10,
-            'precursor_true_tolerance': 10,
-            'frag_mass_tolerance': 20,
-            'frag_mass_tolerance_unit': 'ppm',
-            'modifications_offsets': {
-                'chemical_formulas': [],
-                'masses': [
+            "use_pyqms_for_mz_calculation": False,
+            "use_spectrum_charge": False,
+            "enzyme": "trypsin",
+            "percolator_post_processing": "mix-max",
+            "precursor_mass_tolerance_minus": 10,
+            "precursor_mass_tolerance_plus": 10,
+            "precursor_true_tolerance": 10,
+            "frag_mass_tolerance": 20,
+            "frag_mass_tolerance_unit": "ppm",
+            "modifications_offsets": {
+                "chemical_formulas": [],
+                "masses": [
                     0,
                     # 203.07937,
                     # 349.137279,
@@ -227,7 +227,7 @@ def main(database=None,ms_file=None):
                     # 2946.089159,
                     # 3432.247619],
                 ],
-                'glycans': [
+                "glycans": [
                     # 'HexNAc(1)',
                     # 'Hex(1)HexNAc(1)',
                     # 'HexNAc(2)',
@@ -243,7 +243,7 @@ def main(database=None,ms_file=None):
                     # 'dHex(2)Hex(1)HexNAc(2)',
                     # 'dHex(1)Hex(2)HexNAc(2)',
                     # 'dHex(1)Hex(1)HexNAc(3)',
-                    'Hex(2)HexNAc(3)',
+                    "Hex(2)HexNAc(3)",
                     # 'Hex(1)HexNAc(1)NeuAc(2)',
                     # 'Hex(1)HexNAc(4)',
                     # 'dHex(1)Hex(1)HexNAc(2)NeuAc(1)',
@@ -265,7 +265,7 @@ def main(database=None,ms_file=None):
                     # 'dHex(2)Hex(1)HexNAc(4)',
                     # 'dHex(1)Hex(2)HexNAc(4)',
                     # 'dHex(1)Hex(1)HexNAc(2)NeuAc(2)',
-                    'Hex(3)HexNAc(4)',
+                    "Hex(3)HexNAc(4)",
                     # 'Hex(2)HexNAc(2)NeuAc(2)',
                     # 'dHex(2)Hex(2)HexNAc(2)NeuAc(1)',
                     # 'Hex(2)HexNAc(5)',
@@ -502,8 +502,8 @@ def main(database=None,ms_file=None):
                     # 'Hex(7)HexNAc(8)NeuAc(3)',
                     # 'dHex(4)Hex(7)HexNAc(7)NeuAc(1)',
                     # 'dHex(2)Hex(6)HexNAc(6)NeuAc(1)',
-                    'Hex(9)HexNAc(5)',
-                    'Hex(7)HexNAc(2)',
+                    "Hex(9)HexNAc(5)",
+                    "Hex(7)HexNAc(2)",
                     # 'dHex(2)Hex(8)HexNAc(5)NeuAc(1)',
                     # 'dHex(2)Hex(8)HexNAc(8)NeuAc(3)',
                     # 'dHex(1)Hex(7)HexNAc(6)NeuAc(4)',
@@ -516,7 +516,7 @@ def main(database=None,ms_file=None):
                     # 'dHex(1)Hex(8)HexNAc(8)NeuAc(5)',
                     # 'dHex(5)Hex(7)HexNAc(8)NeuAc(3)',
                     # 'dHex(5)Hex(8)HexNAc(8)NeuAc(2)',
-                    'Hex(6)HexNAc(2)',
+                    "Hex(6)HexNAc(2)",
                     # 'dHex(2)Hex(5)HexNAc(6)',
                     # 'Hex(9)HexNAc(4)NeuAc(2)',
                     # 'Hex(6)HexNAc(5)',
@@ -608,7 +608,7 @@ def main(database=None,ms_file=None):
                     # 'dHex(2)Hex(8)HexNAc(8)NeuAc(2)',
                     # 'dHex(3)Hex(6)HexNAc(6)NeuAc(1)',
                     # 'dHex(4)Hex(6)HexNAc(8)NeuAc(3)',
-                    'Hex(4)HexNAc(2)',
+                    "Hex(4)HexNAc(2)",
                     # 'dHex(5)Hex(7)HexNAc(6)NeuAc(2)',
                     # 'dHex(3)Hex(5)HexNAc(6)NeuAc(2)',
                     # 'dHex(3)Hex(5)HexNAc(7)NeuAc(1)',
@@ -623,7 +623,7 @@ def main(database=None,ms_file=None):
                     # 'dHex(4)Hex(6)HexNAc(7)NeuAc(3)',
                     # 'dHex(5)Hex(8)HexNAc(8)',
                     # 'Hex(7)HexNAc(7)NeuAc(2)',
-                    'Hex(5)HexNAc(2)',
+                    "Hex(5)HexNAc(2)",
                     # 'dHex(3)Hex(8)HexNAc(7)NeuAc(4)',
                     # 'dHex(1)Hex(7)HexNAc(3)',
                     # 'dHex(1)Hex(5)HexNAc(6)',
@@ -797,16 +797,16 @@ def main(database=None,ms_file=None):
                     # 'dHex(4)Hex(7)HexNAc(6)NeuAc(3)',
                     # 'dHex(3)Hex(5)HexNAc(7)',
                     # 'dHex(2)Hex(7)HexNAc(7)NeuAc(4)',
-                    'Hex(7)HexNAc(5)NeuAc(2)',
+                    "Hex(7)HexNAc(5)NeuAc(2)",
                     # 'Hex(6)HexNAc(8)NeuAc(3)',
                     # 'dHex(1)Hex(5)HexNAc(8)NeuAc(2)',
                     # 'Hex(5)HexNAc(8)NeuAc(2)',
                 ],
-                'unimods': [],
+                "unimods": [],
             },
-            'modifications_y_ion_offsets': {
-                'chemical_formulas': [],
-                'masses': [
+            "modifications_y_ion_offsets": {
+                "chemical_formulas": [],
+                "masses": [
                     0,
                     # 203.07937,
                     # 406.15874,
@@ -815,19 +815,19 @@ def main(database=None,ms_file=None):
                     # 892.3172,
                     # 349.137279
                 ],
-                'glycans': [
-                    'HexNAc(1)',
-                    'HexNAc(2)',
-                    'HexNAc(2)Hex(1)',
-                    'HexNAc(2)Hex(2)',
-                    'HexNAc(2)Hex(3)',
-                    'HexNAc(1)dHex(1)',
+                "glycans": [
+                    "HexNAc(1)",
+                    "HexNAc(2)",
+                    "HexNAc(2)Hex(1)",
+                    "HexNAc(2)Hex(2)",
+                    "HexNAc(2)Hex(3)",
+                    "HexNAc(1)dHex(1)",
                 ],
-                'unimods': [],
+                "unimods": [],
             },
-            'diagnostic_fragments': {
-                'chemical_formulas': [],
-                'masses': [
+            "diagnostic_fragments": {
+                "chemical_formulas": [],
+                "masses": [
                     # 204.086646,
                     # 186.076086,
                     # 168.065526,
@@ -843,39 +843,41 @@ def main(database=None,ms_file=None):
                     # 485.045576,
                     # 308.09761
                 ],
-                'glycans': [
-                    'HexNAc(1)',
-                    'HexNAc(2)',
-                    'HexNAc(2)Hex(1)',
-                    'HexNAc(1)Hex(1)',
-                    'Hex(1)',
+                "glycans": [
+                    "HexNAc(1)",
+                    "HexNAc(2)",
+                    "HexNAc(2)Hex(1)",
+                    "HexNAc(1)Hex(1)",
+                    "Hex(1)",
                 ],
-                'unimods': [],
+                "unimods": [],
             },
-            'msfragger_labile_mode': 'nglycan',
-            'score_ion_list': ['b','y','b~','y~','Y']
-        }
+            "msfragger_labile_mode": "nglycan",
+            "score_ion_list": ["b", "y", "b~", "y~", "Y"],
+        },
     )
 
     unified_search_result = uc.search(
-        input_file = ms_file,
-        engine = 'msfragger_3_0',
+        input_file=ms_file,
+        engine="msfragger_3_0",
     )
     validated_file = uc.validate(
         input_file=unified_search_result,
-        engine='percolator_3_4_0',
+        engine="percolator_3_4_0",
         force=False,
     )
 
     filtered_file = uc.execute_misc_engine(
-        input_file = validated_file,
-        engine = 'filter_csv',
+        input_file=validated_file,
+        engine="filter_csv",
     )
-    print('''
+    print(
+        """
         All done.
-    ''')
+    """
+    )
     return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(database=sys.argv[2], ms_file=sys.argv[1])

@@ -19,34 +19,34 @@ class deepnovo_0_0_1(ursgal.UNode):
     Tran, N.H.; Zhang, X.; Xin, L.; Shan, B.; Li, M. (2017) De novo peptide sequencing by deep learning. PNAS 114 (31)
 
     """
+
     META_INFO = {
-        'edit_version'       : 1.00,
-        'name'               : 'DeepNovo',
-        'version'            : '0.0.1',
-        'release_date'       : '2017-11-29',
-        'engine_type' : {
-            'de_novo_search_engine' : True,
+        "edit_version": 1.00,
+        "name": "DeepNovo",
+        "version": "0.0.1",
+        "release_date": "2017-11-29",
+        "engine_type": {
+            "de_novo_search_engine": True,
         },
-        'input_extensions'   : ['.mgf'],
-        'output_extensions'  : ['.csv'],
-        'in_development'     : False,
-        'create_own_folder'  : True,
-        'include_in_git'     : False,
-        'distributable'      : False,
-        'utranslation_style' : 'deepnovo_style_1',
-        'engine' : {
-            'platform_independent'    : {
-                'arc_independent' : {
-                    'exe'            : 'deepnovo_main.py',
-                    'url'            : 'https://github.com/nh2tran/DeepNovo',
-                    'zip_md5'        : '',
-                    'additional_exe' : [],
+        "input_extensions": [".mgf"],
+        "output_extensions": [".csv"],
+        "in_development": False,
+        "create_own_folder": True,
+        "include_in_git": False,
+        "distributable": False,
+        "utranslation_style": "deepnovo_style_1",
+        "engine": {
+            "platform_independent": {
+                "arc_independent": {
+                    "exe": "deepnovo_main.py",
+                    "url": "https://github.com/nh2tran/DeepNovo",
+                    "zip_md5": "",
+                    "additional_exe": [],
                 },
             },
         },
-        'citation' :
-        'Tran, N.H.; Zhang, X.; Xin, L.; Shan, B.; Li, M. (2017) '
-            'De novo peptide sequencing by deep learning. PNAS 114 (31)'
+        "citation": "Tran, N.H.; Zhang, X.; Xin, L.; Shan, B.; Li, M. (2017) "
+        "De novo peptide sequencing by deep learning. PNAS 114 (31)",
     }
 
     def __init__(self, *args, **kwargs):
@@ -61,133 +61,131 @@ class deepnovo_0_0_1(ursgal.UNode):
                 dict: self.params
         """
 
-        self.time_point(tag='execution')
+        self.time_point(tag="execution")
 
         # main = self.import_engine_as_python_function()
 
-        self.params['translations']['mgf_input_file'] = os.path.join(
-            self.params['input_dir_path'],
-            self.params['input_file']
+        self.params["translations"]["mgf_input_file"] = os.path.join(
+            self.params["input_dir_path"], self.params["input_file"]
         )
 
-        self.params['translations']['mgf_new_input_file'] = os.path.join(
-            self.params['input_dir_path'],
-            self.params['file_root'] + '_tmp.mgf'
+        self.params["translations"]["mgf_new_input_file"] = os.path.join(
+            self.params["input_dir_path"], self.params["file_root"] + "_tmp.mgf"
         )
-        self.created_tmp_files.append(
-            self.params['translations']['mgf_new_input_file']
-        )
+        self.created_tmp_files.append(self.params["translations"]["mgf_new_input_file"])
 
-        self.params['translations']['tmp_output_file_incl_path'] = os.path.join(
-            self.params['translations']['mgf_new_input_file'] + '.tsv'
+        self.params["translations"]["tmp_output_file_incl_path"] = os.path.join(
+            self.params["translations"]["mgf_new_input_file"] + ".tsv"
         )
         # self.created_tmp_files.append(
         #     self.params['translations']['tmp_output_file_incl_path']
         # )
 
-        self.params['translations']['params_file'] = os.path.join(
-            os.path.dirname(self.exe),
-            'deepnovo_config.py'
+        self.params["translations"]["params_file"] = os.path.join(
+            os.path.dirname(self.exe), "deepnovo_config.py"
         )
         # self.created_tmp_files.append(
         #     self.params['translations']['params_file'])
 
-        self.params['translations']['output_file_incl_path'] = os.path.join(
-            self.params['output_dir_path'],
-            self.params['output_file']
+        self.params["translations"]["output_file_incl_path"] = os.path.join(
+            self.params["output_dir_path"], self.params["output_file"]
         )
 
         mgf_org_input_file = open(
-            self.params['translations']['mgf_input_file'], 'r', encoding='UTF-8'
+            self.params["translations"]["mgf_input_file"], "r", encoding="UTF-8"
         )
         lines = mgf_org_input_file.readlines()
         mgf_org_input_file.close()
 
         self.scan_lookup = {}
-        print('rewriting mgf input file to include SEQ')
+        print("rewriting mgf input file to include SEQ")
         with open(
-            self.params['translations']['mgf_new_input_file'], 'w', encoding='UTF-8'
+            self.params["translations"]["mgf_new_input_file"], "w", encoding="UTF-8"
         ) as mgf_new_input_file:
             for n, line in enumerate(lines):
                 line = line.strip()
-                if line.startswith('BEGIN IONS'):
+                if line.startswith("BEGIN IONS"):
                     entry = [line]
                     entry_dict = {}
-                elif line.startswith('TITLE='):
-                    entry_dict['TITLE'] = line
-                elif line.startswith('SEQ='):
-                    entry_dict['SEQ'] = line
-                elif line.startswith('PEPMASS='):
-                    entry_dict['PEPMASS'] = line
-                elif line.startswith('CHARGE='):
-                    entry_dict['CHARGE'] = line
-                elif line.startswith('SCANS='):
-                    entry_dict['SCANS'] = line
-                elif line.startswith('RTINSECONDS='):
-                    entry_dict['RTINSECONDS'] = line
-                elif line.startswith('END IONS'):
+                elif line.startswith("TITLE="):
+                    entry_dict["TITLE"] = line
+                elif line.startswith("SEQ="):
+                    entry_dict["SEQ"] = line
+                elif line.startswith("PEPMASS="):
+                    entry_dict["PEPMASS"] = line
+                elif line.startswith("CHARGE="):
+                    entry_dict["CHARGE"] = line
+                elif line.startswith("SCANS="):
+                    entry_dict["SCANS"] = line
+                elif line.startswith("RTINSECONDS="):
+                    entry_dict["RTINSECONDS"] = line
+                elif line.startswith("END IONS"):
                     entry.append(line)
-                    entry.append('')
+                    entry.append("")
                     # if 'SEQ' not in entry_dict:
                     #     entry_dict['SEQ'] = 'SEQ= '
-                    scan = entry_dict['SCANS'].split('=')[1]
-                    charge = entry_dict['CHARGE'].split('=')[1].strip('+')
+                    scan = entry_dict["SCANS"].split("=")[1]
+                    charge = entry_dict["CHARGE"].split("=")[1].strip("+")
                     self.scan_lookup[scan] = charge
                     for n, write_line in enumerate(entry):
                         if n == 1:
                             for header in [
-                                'TITLE',
-                                'PEPMASS',
-                                'CHARGE',
-                                'SCANS',
-                                'RTINSECONDS',
+                                "TITLE",
+                                "PEPMASS",
+                                "CHARGE",
+                                "SCANS",
+                                "RTINSECONDS",
                                 # 'SEQ',
                             ]:
-                                print(
-                                    entry_dict[header],
-                                    file=mgf_new_input_file
-                                )
+                                print(entry_dict[header], file=mgf_new_input_file)
                         print(write_line, file=mgf_new_input_file)
                 else:
                     entry.append(line)
         mgf_new_input_file.close()
 
         print(
-            '''
+            """
             [ WARNING ] precursor_mass_tolerance_plus and precursor_mass_tolerance_minus
             [ WARNING ] need to be combined for DeepNovo (use of symmetric tolerance window).
             [ WARNING ] The arithmetic mean is used.
-            '''
+            """
         )
 
         self.params_to_write = {
-            'mgf_new_input_file' : self.params['translations']['mgf_new_input_file'],
-            'output_path' : self.params['translations']['tmp_output_file_incl_path'],
+            "mgf_new_input_file": self.params["translations"]["mgf_new_input_file"],
+            "output_path": self.params["translations"]["tmp_output_file_incl_path"],
         }
-        self.params['translations']['precursor_mass_tolerance'] = (float(self.params['precursor_mass_tolerance_plus']) +
-                                                                   float(self.params['precursor_mass_tolerance_minus']) ) \
-            / 2.0
+        self.params["translations"]["precursor_mass_tolerance"] = (
+            float(self.params["precursor_mass_tolerance_plus"])
+            + float(self.params["precursor_mass_tolerance_minus"])
+        ) / 2.0
 
-        if self.params['translations']['precursor_mass_tolerance_unit'] == 'ppm':
-            self.params_to_write['precursor_mass_tolerance_da'] = \
-                ursgal.ucore.convert_ppm_to_dalton(
-                    self.params['translations']['precursor_mass_tolerance'],
-                    base_mz=self.params['translations']['base_mz']
+        if self.params["translations"]["precursor_mass_tolerance_unit"] == "ppm":
+            self.params_to_write[
+                "precursor_mass_tolerance_da"
+            ] = ursgal.ucore.convert_ppm_to_dalton(
+                self.params["translations"]["precursor_mass_tolerance"],
+                base_mz=self.params["translations"]["base_mz"],
             )
-            self.params_to_write['precursor_mass_tolerance_ppm'] = \
-                self.params['translations']['precursor_mass_tolerance']
-        elif self.params['translations']['precursor_mass_tolerance_unit'] == 'da':
-            self.params_to_write['precursor_mass_tolerance_ppm'] = \
-                ursgal.ucore.convert_dalton_to_ppm(
-                    self.params['translations']['precursor_mass_tolerance'],
-                    base_mz=self.params['translations']['base_mz']
+            self.params_to_write["precursor_mass_tolerance_ppm"] = self.params[
+                "translations"
+            ]["precursor_mass_tolerance"]
+        elif self.params["translations"]["precursor_mass_tolerance_unit"] == "da":
+            self.params_to_write[
+                "precursor_mass_tolerance_ppm"
+            ] = ursgal.ucore.convert_dalton_to_ppm(
+                self.params["translations"]["precursor_mass_tolerance"],
+                base_mz=self.params["translations"]["base_mz"],
             )
-            self.params_to_write['precursor_mass_tolerance_da'] = \
-                self.params['translations']['precursor_mass_tolerance']
+            self.params_to_write["precursor_mass_tolerance_da"] = self.params[
+                "translations"
+            ]["precursor_mass_tolerance"]
 
-        assert self.params['translations']['deepnovo_mode'] == 'search_denovo', '''
+        assert (
+            self.params["translations"]["deepnovo_mode"] == "search_denovo"
+        ), """
             [ ERROR ] Only search_denovo supported as deepnovo_mmode so far!
-            '''
+            """
         # self.params_to_write['denovo_mode'] = False
         # self.params_to_write['db_mode'] = False
         # self.params_to_write['hybrid_mode'] = False
@@ -251,41 +249,48 @@ class deepnovo_0_0_1(ursgal.UNode):
         # import pprint
         # pprint.pprint(self.params['translations'])
         # exit()
-        for deepnovo_param in self.params['translations']['_grouped_by_translated_key'].keys():
-            for ursgal_param_name, param_value in self.params['translations']['_grouped_by_translated_key'][deepnovo_param].items():
+        for deepnovo_param in self.params["translations"][
+            "_grouped_by_translated_key"
+        ].keys():
+            for ursgal_param_name, param_value in self.params["translations"][
+                "_grouped_by_translated_key"
+            ][deepnovo_param].items():
                 if type(deepnovo_param) is tuple:
                     continue
-                elif deepnovo_param == 'knapsack_file':
-                    if param_value is None or param_value == 'default':
+                elif deepnovo_param == "knapsack_file":
+                    if param_value is None or param_value == "default":
                         knapsack_file = os.path.join(
-                            os.path.dirname(self.exe),
-                            'knapsack.npy'
+                            os.path.dirname(self.exe), "knapsack.npy"
                         )
                     else:
                         knapsack_file = param_value
-                    self.params_to_write['knapsack_file'] = knapsack_file
-                elif deepnovo_param == 'train_dir':
-                    if param_value is None or param_value == 'default':
+                    self.params_to_write["knapsack_file"] = knapsack_file
+                elif deepnovo_param == "train_dir":
+                    if param_value is None or param_value == "default":
                         train_dir = os.path.join(
-                            os.path.dirname(self.exe),
-                            'train.example'
+                            os.path.dirname(self.exe), "train.example"
                         )
                     else:
                         train_dir = param_value
-                    self.params_to_write['train_dir'] = train_dir
-                elif deepnovo_param == 'modifications':
+                    self.params_to_write["train_dir"] = train_dir
+                elif deepnovo_param == "modifications":
                     assert set(param_value) == set(
-                        ['M,opt,any,Oxidation',
-                         'C,fix,any,Carbamidomethyl',
-                         'N,opt,any,Deamidated',
-                         'Q,opt,any,Deamidated']), '''
+                        [
+                            "M,opt,any,Oxidation",
+                            "C,fix,any,Carbamidomethyl",
+                            "N,opt,any,Deamidated",
+                            "Q,opt,any,Deamidated",
+                        ]
+                    ), """
                     [ ERROR ] The default model of DeepNovo only supports the following modification list:
                         ['M,opt,any,Oxidation',
                          'C,fix,any,Carbamidomethyl',
                          'N,opt,any,Deamidated',
                          'Q,opt,any,Deamidated']
                     [ ERROR ] You specified instead: {0}
-                    '''.format(param_value)
+                    """.format(
+                        param_value
+                    )
                 #     cc = ursgal.ChemicalComposition()
                 #     for mod_dict in self.params['mods']['opt']:
                 #         '''
@@ -351,105 +356,104 @@ class deepnovo_0_0_1(ursgal.UNode):
 
         self.write_params_file()
 
-        self.params['command_list'] = [
+        self.params["command_list"] = [
             sys.executable,
             self.exe,
-            '--{0}'.format(self.params['translations']['deepnovo_mode'])
+            "--{0}".format(self.params["translations"]["deepnovo_mode"]),
         ]
 
         return self.params
 
-
     def postflight(self):
-        '''
+        """
         Reformats the DeepNovo output file
-        '''
+        """
         deepnovo_header = [
-            'scan',
-            'predicted_sequence',
-            'predicted_score',
-            'predicted_position_score',
+            "scan",
+            "predicted_sequence",
+            "predicted_score",
+            "predicted_position_score",
         ]
 
         mod_lookup = {
-            'Cmod': ('C', 'Carbamidomethyl'),
-            'Mmod': ('M', 'Oxidation'),
-            'Nmod': ('N', 'Deamidated'),
-            'Qmod': ('Q', 'Deamidated'),
+            "Cmod": ("C", "Carbamidomethyl"),
+            "Mmod": ("M", "Oxidation"),
+            "Nmod": ("N", "Deamidated"),
+            "Qmod": ("Q", "Deamidated"),
         }
 
         translated_headers = []
-        header_translations = self.UNODE_UPARAMS[
-            'header_translations']['uvalue_style_translation']
+        header_translations = self.UNODE_UPARAMS["header_translations"][
+            "uvalue_style_translation"
+        ]
         for original_header_key in deepnovo_header:
             ursgal_header_key = header_translations[original_header_key]
             if ursgal_header_key not in translated_headers:
                 translated_headers.append(ursgal_header_key)
 
         translated_headers += [
-            'Raw data location',
-            'Spectrum Title',
-            'Charge',
-            'Retention Time (s)',
-            'Exp m/z',
-            'Modifications',
+            "Raw data location",
+            "Spectrum Title",
+            "Charge",
+            "Retention Time (s)",
+            "Exp m/z",
+            "Modifications",
         ]
 
         csv_kwargs = {}
-        if sys.platform == 'win32':
-            csv_kwargs['lineterminator'] = '\n'
+        if sys.platform == "win32":
+            csv_kwargs["lineterminator"] = "\n"
         else:
-            csv_kwargs['lineterminator'] = '\r\n'
+            csv_kwargs["lineterminator"] = "\r\n"
         csv_writer = csv.DictWriter(
-            open(self.params['translations']['output_file_incl_path'], 'w'),
+            open(self.params["translations"]["output_file_incl_path"], "w"),
             fieldnames=translated_headers,
             **csv_kwargs
         )
 
         deepnovo_output = os.path.join(
-            self.params['translations']['tmp_output_file_incl_path']
+            self.params["translations"]["tmp_output_file_incl_path"]
         )
         csv_reader = csv.DictReader(
-            open(deepnovo_output, 'r'),
+            open(deepnovo_output, "r"),
             fieldnames=translated_headers,
-            delimiter='\t',
+            delimiter="\t",
         )
 
         csv_writer.writeheader()
         for n, line_dict in enumerate(csv_reader):
             if n == 0:
                 continue
-            line_dict['Raw data location'] = os.path.abspath(
-                self.params['translations']['mgf_input_file']
+            line_dict["Raw data location"] = os.path.abspath(
+                self.params["translations"]["mgf_input_file"]
             )
-            line_dict['Charge'] = self.scan_lookup[line_dict['Spectrum ID']]
+            line_dict["Charge"] = self.scan_lookup[line_dict["Spectrum ID"]]
 
-        #     ############################################
-        #     # all fixing here has to go into unify csv! #
-        #     ############################################
+            #     ############################################
+            #     # all fixing here has to go into unify csv! #
+            #     ############################################
 
-            tmp_seq = ''
-            seq_list = line_dict['Sequence'].split(',')
+            tmp_seq = ""
+            seq_list = line_dict["Sequence"].split(",")
             tmp_mods = []
             for n, aa in enumerate(seq_list):
-                if 'mod' in aa:
+                if "mod" in aa:
                     org_aa, mod = mod_lookup[aa]
-                    tmp_mods.append(
-                        '{0}:{1}'.format(mod, n+1)
-                    )
+                    tmp_mods.append("{0}:{1}".format(mod, n + 1))
                     tmp_seq += org_aa
                 else:
                     tmp_seq += aa
-            line_dict['Sequence'] = tmp_seq
-            line_dict['Modifications'] = ';'.join(tmp_mods)
-            if line_dict['Sequence'] == '':
+            line_dict["Sequence"] = tmp_seq
+            line_dict["Modifications"] = ";".join(tmp_mods)
+            if line_dict["Sequence"] == "":
                 continue
             csv_writer.writerow(line_dict)
         return
 
     def write_params_file(self):
-        with open(self.params['translations']['params_file'], 'w') as io:
-            print('''
+        with open(self.params["translations"]["params_file"], "w") as io:
+            print(
+                """
 # Copyright 2017 Hieu Tran. All Rights Reserved.
 #
 # DeepNovo is publicly available for non-commercial uses.
@@ -774,8 +778,9 @@ hybrid_output_file = r"{output_path}"
 # predicted_file = denovo_output_file
 # accuracy_file = predicted_file + ".accuracy"
 # ==============================================================================
-'''.format(
-                **self.params_to_write),
-                file=io
+""".format(
+                    **self.params_to_write
+                ),
+                file=io,
             )
         return

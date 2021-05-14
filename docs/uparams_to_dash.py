@@ -53,11 +53,11 @@ app.layout = html.Div(
                     """
 .
 """,
-                    #containerProps={
+                    # containerProps={
                     #    "style": {
                     #        "color": "rgb(30, 120, 210)",
                     #    },
-                    #},
+                    # },
                 )
             ],
             style={
@@ -74,11 +74,11 @@ Use the dropdown options to select one or multiple engines or tags \
 for which the corresponding parameters should be displayed
 
         """,
-                    #containerProps={
+                    # containerProps={
                     #    "style": {
                     #        "color": "rgb(35, 35, 35)",
                     #    },
-                    #},
+                    # },
                 )
             ],
             style={
@@ -188,11 +188,11 @@ for which the corresponding parameters should be displayed
                     """
 .
 """,
-                    #containerProps={
+                    # containerProps={
                     #    "style": {
                     #        "color": "rgb(30, 120, 210)",
                     #    },
-                    #},
+                    # },
                 )
             ],
             style={
@@ -203,11 +203,11 @@ for which the corresponding parameters should be displayed
             [
                 dcc.Markdown(
                     id="selected_params",
-                    #containerProps={
+                    # containerProps={
                     #    "style": {
                     #        "color": "rgb(37, 37, 37)",
                     #    },
-                    #},
+                    # },
                 ),
             ],
             style={
@@ -229,7 +229,7 @@ for which the corresponding parameters should be displayed
 )
 def set_uparams_dropdown(selected_uparams):
     if selected_uparams == "all_uparams":
-        return [{'label': '', 'value': '', 'disabled': True}]
+        return [{"label": "", "value": "", "disabled": True}]
     if selected_uparams == "select_uparams":
         return [{"label": i, "value": i} for i in sorted(ursgal_params) if i != ""]
 
@@ -268,7 +268,7 @@ def set_engines_value(selected_uparams):
 )
 def set_engines_dropdown(selected_engines):
     if selected_engines == "all_engines":
-        return [{'label': '', 'value': '', 'disabled': True}]
+        return [{"label": "", "value": "", "disabled": True}]
     if selected_engines == "select_engines":
         return [{"label": i, "value": i} for i in sorted(available_engines) if i != ""]
 
@@ -307,7 +307,7 @@ def set_engines_value(selected_engines):
 )
 def set_engines_dropdown(selected_tags):
     if selected_tags == "all_tags":
-        return [{'label': '', 'value': '', 'disabled': True}]
+        return [{"label": "", "value": "", "disabled": True}]
     if selected_tags == "select_tags":
         return [{"label": i, "value": i} for i in sorted(available_tags) if i != ""]
 
