@@ -1,0 +1,6 @@
+nose==1.3.7
+coverage
+codecov
+tox
+pre-commit
+-r install_requires.txt

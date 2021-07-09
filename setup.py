@@ -107,7 +107,7 @@ version_path = os.path.join(os.path.dirname(__file__), "ursgal", "version.txt")
 with open(version_path, "r") as version_file:
     ursgal_version = version_file.read().strip()
 
-with open("install_requires.txt") as req:
+with open("requirements/install_requires.txt") as req:
     requirements = req.readlines()
 
 setup(
