@@ -1,0 +1,17 @@
+on:
+  create:
+    tags:
+      - v*
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: casperdcl/deploy-pypi@v2
+        with:
+          password: ${{ secrets.PROD_PYPI }}
+          requirements: twine wheel
+          pip: wheel -w dist/ --no-deps .
+          # only upload if a tag is pushed (otherwise just build & check)
+          upload: ${{ github.event_name == 'create' && startsWith(github.event.ref, 'v') }}
