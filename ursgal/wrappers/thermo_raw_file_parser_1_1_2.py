@@ -4,6 +4,7 @@ import os
 from collections import defaultdict as ddict
 import csv
 import sys
+import shutil
 
 
 class thermo_raw_file_parser_1_1_2(ursgal.UNode):
@@ -123,3 +124,9 @@ class thermo_raw_file_parser_1_1_2(ursgal.UNode):
                 self.params["command_list"].append("{0}".format(flag))
 
         return self.params
+
+
+    def postflight(self):
+        if self.params['prefix'] != '':
+            shutil.move(self.params['translations']['output_file_incl_path'].replace(self.params['prefix'] +'_', ''), self.params['translations']['output_file_incl_path'] )
+        return
