@@ -28,5 +28,5 @@ include COPYING.txt
 include CONTRIBUTING.rst
 include AUTHORS.txt
 include README.rst
-recursive-include requirements
+graft requirements
 
