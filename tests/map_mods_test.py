@@ -44,6 +44,21 @@ TESTS = [
             "unimod": True,
         },
     },
+    {
+        "modifications": ["K,fix,any,TEST,+13C(10)15N(3)C(2)H(20)O(2)-N(1)"],
+        "type": "fix",
+        "result_dict": {
+            "_id": 0,
+            "aa": "K",
+            "mass": 237.17713092699998,
+            "pos": "any",
+            "name": "TEST",
+            "composition": {"13C": 10, "15N": 3, "C": 2, "H": 20, "O": 2, "N": -1},
+            "org": "K,fix,any,TEST,+13C(10)15N(3)C(2)H(20)O(2)-N(1)",
+            "id": "u1",
+            "unimod": True,
+        },
+    },
 ]
 
 
