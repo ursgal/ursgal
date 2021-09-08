@@ -921,7 +921,7 @@ class UNode(object, metaclass=Meta_UNode):
                 name = mod_params[3].strip()
                 chemical_formula = mod_params[4].strip()
                 chemical_composition = ursgal.ChemicalComposition()
-                chemical_composition.add_chemical_formula(chemical_formula)
+                chemical_composition.use(chemical_formula)
                 composition = chemical_composition
                 composition_unimod_style = chemical_composition.hill_notation_unimod()
                 unimod_name_list = ursgal.GlobalUnimodMapper.composition2name_list(
