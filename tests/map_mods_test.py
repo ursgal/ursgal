@@ -55,8 +55,7 @@ TESTS = [
             "name": "TEST",
             "composition": {"13C": 10, "15N": 3, "C": 2, "H": 20, "O": 2, "N": -1},
             "org": "K,fix,any,TEST,+13C(10)15N(3)C(2)H(20)O(2)-N(1)",
-            "id": "u1",
-            "unimod": True,
+            "unimod": False,
         },
     },
 ]
@@ -68,12 +67,34 @@ def map_mods_test():
 
 
 def map_mods(test_dict):
+    file_exists = False
+    usermods_file = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        "..",
+        "ursgal",
+        "resources",
+        "platform_independent",
+        "arc_independent",
+        "ext",
+        "userdefined_unimod.xml",
+    )
+    if os.path.exists(usermods_file):
+        import shutil
+
+        tmp_usermods_file = usermods_file.replace(".xml", "_tmp.xml")
+        shutil.copy(usermods_file, tmp_usermods_file)
+        file_exists = True
     R = ursgal.UController(params={"modifications": test_dict["modifications"]})
     ursgal.UNode.map_mods(R)
     map_mod_dict = R.params["mods"][test_dict["type"]][0]
     for k, v in test_dict["result_dict"].items():
         assert v == map_mod_dict[k]
-    # os.remove(output_csv)
+
+    if file_exists:
+        shutil.copy(tmp_usermods_file, usermods_file)
+        os.remove(tmp_usermods_file)
+    elif os.path.exists(usermods_file):
+        os.remove(usermods_file)
 
 
 if __name__ == "__main__":
