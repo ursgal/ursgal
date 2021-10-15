@@ -4,4 +4,4 @@ dash==1.20.0
 dash-html-components==1.1.1
 dash-renderer==1.9.0
 dash-table==4.11.0
-plotly==4.14.3
+plotly==5.3.1
