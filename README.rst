@@ -82,8 +82,8 @@ as well as a broad set of `Example Scripts`_ and many more.
 Download and Installation
 *************************
 
-Ursgal requires `Python`_ 3.4 or higher.
-If you want to run Ursgal on a Windows system, Python 3.6 or higher is
+Ursgal requires `Python`_ 3.7 or higher.
+If you want to run Ursgal on a Windows system, Python 3.7 or higher is
 recommended.
 
 There are two recommended ways for installing Ursgal:
@@ -117,16 +117,11 @@ homepage is required (see also: `How to install third party engines`_)
 
 .. note::
 
-    Pip is included in Python 3.4 and higher. However, it might not be
+    Pip is included in Python 3.7 and higher. However, it might not be
     included in in your system's PATH environment variable.
     If this is the case, you can either add the Python scripts directory to your
     PATH env variable or use the path to the pip.exe directly for the
-    installation, e.g.: ~/Python34/Scripts/pip.exe install ursgal
-
-.. note::
-
-    On Mac it may be neccesary to use Python3.6, since it comes with its
-    own OpenSSL now. This may avoid problems when using pip.
+    installation, e.g.: ~/Python37/Scripts/pip.exe install ursgal
 
 .. _How to install third party engines:
     https://ursgal.readthedocs.io/en/latest/faq.html#q-how-do-i-add-an-engine-that-is-not-installed-via-install-resources-py
@@ -156,16 +151,12 @@ Installation from  source
 
 .. note::
 
-    Pip is included in Python 3.4 and higher. However, it might not be
+    Pip is included in Python 3.7 and higher. However, it might not be
     included in in your system's PATH environment variable.
     If this is the case, you can either add the Python scripts directory to your
     PATH env variable or use the path to the pip.exe directly for the
-    installation, e.g.: ~/Python34/Scripts/pip.exe install -r requirements.txt
+    installation, e.g.: ~/Python37/Scripts/pip.exe install -r requirements.txt
 
-.. note::
-
-    On Mac it may be neccesary to use Python3.6, since it comes with its
-    own OpenSSL now. This may avoid problems when using pip.
 
 3. Finally, use setup.py to download third-party engines (those that we are allowed to distribute) 
 and to install Ursgal into the Python site-packages::
@@ -204,9 +195,9 @@ should have installed it already. Then just execute::
 
     user@localhost:~/ursgal$ tox
 
-In case you only want to test one python version (e.g because you only have one installed), run for e.g. python3.5::
+In case you only want to test one python version (e.g because you only have one installed), run for e.g. python3.9::
     
-    user@localhost:~/ursgal$ tox -e py35
+    user@localhost:~/ursgal$ tox -e py39
 
 For other environments to run, check out the tox.ini file
 to test the package.
