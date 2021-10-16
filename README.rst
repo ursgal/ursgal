@@ -40,12 +40,21 @@ Abstract
 
 Proteomics data integration has become a broad field with a variety of programs offering innovative algorithms to analyze increasing amounts of data. Unfortunately, this software diversity leads to many problems as soon as the data is analyzed using more than one algorithm for the same task. Although it was shown that the combination of multiple peptide identification algorithms yields more robust results (Nahnsen et al. 2011, Vaudel et al. 2015, Kwon et al. 2011), it is only recently that unified approaches are emerging (Vaudel et al. 2011, Wen et al. 2015); however, workflows that, for example, aim to optimize search parameters or that employ cascaded style searches (Kertesz-Farkas et al. 2015) can only be made accessible if data analysis becomes not only unified but also and most importantly scriptable. Here we introduce Ursgal, a Python interface to many commonly used bottom-up proteomics tools and to additional auxiliary programs. Complex workflows can thus be composed using the Python scripting language using a few lines of code. Ursgal is easily extensible, and we have made several database search engines (X!Tandem (Craig and Beavis 2004), OMSSA (Geer et al. 2004), MS-GF+ (Kim et al. 2010), Myrimatch (Tabb et al. 2008), MS Amanda (Dorfer et al. 2014)), statistical postprocessing algorithms (qvality (Käll et al. 2009), Percolator (Käll et al. 2008)), and one algorithm that combines statistically postprocessed outputs from multiple search engines (“combined FDR” (Jones et al. 2009)) accessible as an interface in Python. Furthermore, we have implemented a new algorithm (“combined PEP”) that combines multiple search engines employing elements of “combined FDR” (Jones et al. 2009), PeptideShaker (Vaudel et al. 2015), and Bayes’ theorem.
 
+Recently, we also included multiple open modification search engines (MSFragger (Kong et al. 2017), MODa (Na et al. 2012), PIPI (Yu et al. 2016), TagGraph (Devabhaktuni et al. 2019)) and engines for the downstream processing of open modification search results (PTM-Shepherd (Geiszler et al. 2020), PTMiner (An et al 2019)). The combination of these engines allows for the analysis of wide PTM landscapes.
+
+*Schulze, S., Igiraneza, A. B., Koesters, M., Leufken, J., Leidel, S. A., Garcia, B. A., Fufezan, C., and Pohlschroder, M.
+(2021):* |new_publicationtitle|_ *, Journal of Proteome research, 20, 1986-1996.
+DOI:10.1021/acs.jproteome.0c00799*
+
+.. _new_publicationtitle: https://doi.org/10.1021/acs.jproteome.0c00799
+.. |new_publicationtitle| replace:: *Enhancing Open Modification Searches via a Combined Approach Facilitated by Ursgal*
+
 *Kremer, L. P. M., Leufken, J., Oyunchimeg, P., Schulze, S. and Fufezan, C.
-(2015):* |publicationtitle|_ *, Journal of Proteome research, 15, 788-.
+(2015):* |org_publicationtitle|_ *, Journal of Proteome research, 15, 788-.
 DOI:10.1021/acs.jproteome.5b00860*
 
-.. _publicationtitle: http://dx.doi.org/10.1021/acs.jproteome.5b00860
-.. |publicationtitle| replace:: *Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
+.. _org_publicationtitle: http://dx.doi.org/10.1021/acs.jproteome.5b00860
+.. |org_publicationtitle| replace:: *Ursgal, Universal Python Module Combining Common Bottom-Up Proteomics Tools for Large-Scale Analysis*
 
 
 Documentation
