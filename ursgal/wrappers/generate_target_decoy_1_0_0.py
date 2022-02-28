@@ -119,6 +119,7 @@ class generate_target_decoy_1_0_0(ursgal.UNode):
             mode=self.params["translations"]["decoy_generation_mode"],
             decoy_tag=self.params["translations"]["decoy_tag"],
             convert_aa_in_motif=self.params["translations"]["convert_aa_in_motif"],
+            random_seed=self.params['translations']['random_seed']
         )
 
         # self.print_execution_time(tag='execution')
