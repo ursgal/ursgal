@@ -34,7 +34,10 @@ def main(
     decoy_tag="decoy_",
     mode="shuffle_peptide",
     convert_aa_in_motif=None,  # 'new_aa,motif,position_to_be_replaced'
+    random_seed=None
 ):
+    if random_seed is not None:
+        random.seed(random_seed)
 
     # first do the redundancy check of aa seqeucnes...
     sequenceFastaDict = ddict(list)
