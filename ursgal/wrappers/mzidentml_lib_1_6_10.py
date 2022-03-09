@@ -28,7 +28,7 @@ class mzidentml_lib_1_6_10(ursgal.UNode):
         "output_suffix": None,
         "in_development": False,
         "include_in_git": False,
-        "distributable": True,
+        "distributable": False,
         "utranslation_style": "mzidentml_style_1",
         "engine": {
             "platform_independent": {
