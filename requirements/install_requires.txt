@@ -1,5 +1,5 @@
 pymzml>=2.5.0,<3 
 regex
 pyahocorasick >= 1.1.4; sys_platform != 'win32'
-pyqms~=0.6.2
+pyqms~=0.6.5
 packaging
