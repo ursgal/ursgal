@@ -98,13 +98,22 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 self.spec_sequence_dict[spec_seq_id]["line_dicts"].append(line_to_write)
 
         with open(out_name, "wt") as fout:
-            writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
+            if sys.platform == "win32":
+                lineterminator = "\n"
+            else:
+                lineterminator = "\r\n"
+            writer = csv.DictWriter(
+                fout,
+                fieldnames=fieldnames,
+                delimiter="\t",
+                lineterminator=lineterminator,
+            )
             writer.writeheader()
             for spec_sequence in self.spec_sequence_dict.keys():
                 if len(set(self.spec_sequence_dict[spec_sequence]["masses"])) == 1:
-                    monoisotopic_mass = self.spec_sequence_dict[spec_sequence][
-                        "masses"
-                    ][0]
+                    monoisotopic_mass = self.spec_sequence_dict[spec_sequence]["masses"][
+                        0
+                    ]
                     full_seq = "|||".join(
                         sorted(set(self.spec_sequence_dict[spec_sequence]["names"]))
                     )

@@ -79,9 +79,7 @@ class Meta_UNode(type):
             for tag in mDict["utag"]:
                 initd_klass.UNODE_UPARAMS_GROUPED_BY_TAG[tag].append(mDict["ukey"])
 
-            initd_klass.DEFAULT_PARAMS[mDict["ukey"]] = mDict[
-                "default_value_translated"
-            ]
+            initd_klass.DEFAULT_PARAMS[mDict["ukey"]] = mDict["default_value_translated"]
 
             initd_klass.UNODE_UPARAMS[mDict["ukey"]] = mDict
 
@@ -816,7 +814,7 @@ class UNode(object, metaclass=Meta_UNode):
         return j_content
 
     def compare_json_and_local_ursgal_version(self, history, json_path):
-        """ Print a warning if the history is a from a different version number """
+        """Print a warning if the history is a from a different version number"""
         json_version = None
         if len(history) > 0 and "ursgal_version" in history[-1]:
             json_version = history[-1]["ursgal_version"]
@@ -898,9 +896,7 @@ class UNode(object, metaclass=Meta_UNode):
                     unimod_name = mod_params[3].strip()
                     unimod_id = ursgal.GlobalUnimodMapper.name2id(unimod_name)
                     mass = ursgal.GlobalUnimodMapper.name2mass(unimod_name)
-                    composition = ursgal.GlobalUnimodMapper.name2composition(
-                        unimod_name
-                    )
+                    composition = ursgal.GlobalUnimodMapper.name2composition(unimod_name)
                     if unimod_id is None:
                         print(
                             """
@@ -921,7 +917,7 @@ class UNode(object, metaclass=Meta_UNode):
                 name = mod_params[3].strip()
                 chemical_formula = mod_params[4].strip()
                 chemical_composition = ursgal.ChemicalComposition()
-                chemical_composition.use(chemical_formula)
+                chemical_composition.add_chemical_formula(chemical_formula)
                 composition = chemical_composition
                 composition_unimod_style = chemical_composition.hill_notation_unimod()
                 unimod_name_list = ursgal.GlobalUnimodMapper.composition2name_list(
@@ -1086,9 +1082,7 @@ class UNode(object, metaclass=Meta_UNode):
                             pos_aa_protein
                         )
                     else:
-                        self.lookups["peptide_pos_buffer"][buffer_key] = [
-                            pos_aa_protein
-                        ]
+                        self.lookups["peptide_pos_buffer"][buffer_key] = [pos_aa_protein]
                 if match_found == False:
                     self.lookups["peptide_pos_buffer"][buffer_key] = [
                         (None, None, None, None, protein_id)
@@ -1329,9 +1323,7 @@ class UNode(object, metaclass=Meta_UNode):
         # self.check_if_all_default_params_are_in_params()
 
         # self.time_point(tag = 'run')
-        self.stats["history"] = self.update_history_status(
-            history=self.stats["history"]
-        )
+        self.stats["history"] = self.update_history_status(history=self.stats["history"])
         self.print_info("Preparing engine", caller="run")
 
         # We use translated in the first json dump
@@ -1395,9 +1387,7 @@ class UNode(object, metaclass=Meta_UNode):
                 validation_score_field=self.params["translations"][
                     "validation_score_field"
                 ],
-                bigger_scores_better=self.params["translations"][
-                    "bigger_scores_better"
-                ],
+                bigger_scores_better=self.params["translations"]["bigger_scores_better"],
             )
             self.print_execution_time(tag="group_psms")
 

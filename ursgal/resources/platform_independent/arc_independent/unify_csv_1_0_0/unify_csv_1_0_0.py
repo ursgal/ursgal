@@ -299,9 +299,9 @@ def main(
             open_mod_search = True
 
     if params["translations"]["enzyme"] != "nonspecific":
-        allowed_aa, cleavage_site, inhibitor_aa = params["translations"][
-            "enzyme"
-        ].split(";")
+        allowed_aa, cleavage_site, inhibitor_aa = params["translations"]["enzyme"].split(
+            ";"
+        )
     else:
         allowed_aa = "".join(list(ursgal.ukb.NITROGENS.keys()))
         cleavage_site = "C"
@@ -418,7 +418,9 @@ def main(
                     pNovo
                 """
                 if "RTINSECONDS=" in line_dict["Spectrum Title"]:
-                    line_2_split = line_dict["Spectrum Title"].split(" ")[0].strip()
+                    line_2_split = (
+                        line_dict["Spectrum Title"].split(" RTINSECONDS=")[0].strip()
+                    )
                 elif line_dict["Spectrum Title"].endswith(".dta"):
                     line_2_split = ".".join(line_dict["Spectrum Title"].split(".")[:-2])
                 else:
@@ -602,9 +604,7 @@ def main(
                             for single_mod in mod_string.split("|"):
                                 if single_mod in ["M", ""]:
                                     continue
-                                msfragger_pos, raw_msfragger_mass = single_mod.split(
-                                    "$"
-                                )
+                                msfragger_pos, raw_msfragger_mass = single_mod.split("$")
                                 msfragger_mass = mass_format_string.format(
                                     # mass rounded as defined above
                                     Decimal(raw_msfragger_mass)
@@ -618,9 +618,7 @@ def main(
                             for single_mod in mod_string.split(", "):
                                 if single_mod.startswith("N-term"):
                                     msfragger_pos = 0
-                                    match = mod_pattern_msfragger_term.search(
-                                        single_mod
-                                    )
+                                    match = mod_pattern_msfragger_term.search(single_mod)
                                 elif single_mod.startswith("C-term"):
                                     msfragger_pos = len(line_dict["Sequence"])
                                 else:
@@ -788,9 +786,9 @@ def main(
                                         mod = match.group("modname")
                                         pos = match.group("pos")
                                         try:
-                                            if round(
-                                                mod_dict[name]["mass"], 5
-                                            ) == round(float(mod), 5):
+                                            if round(mod_dict[name]["mass"], 5) == round(
+                                                float(mod), 5
+                                            ):
                                                 append_mod = False
                                         except:
                                             pass
@@ -805,10 +803,7 @@ def main(
                 # Note: masses are checked below to avoid any mismatch           #
                 ##################################################################
                 if use15N:
-                    if (
-                        "myrimatch" in search_engine
-                        or "msgfplus_v9979" in search_engine
-                    ):
+                    if "myrimatch" in search_engine or "msgfplus_v9979" in search_engine:
                         for p in range(1, len(line_dict["Sequence"]) + 1):
                             line_dict["Modifications"] = line_dict[
                                 "Modifications"
@@ -818,10 +813,7 @@ def main(
                                 1,
                             )
                     if "myrimatch" in search_engine:
-                        if (
-                            "Carboxymethyl" in line_dict["Modifications"]
-                            and cam is True
-                        ):
+                        if "Carboxymethyl" in line_dict["Modifications"] and cam is True:
                             line_dict["Modifications"] = line_dict[
                                 "Modifications"
                             ].replace("Carboxymethyl", "Carbamidomethyl")
@@ -1371,9 +1363,7 @@ def main(
                 else:
                     line_dict["Complies search criteria"] = "false"
                     line_dict["Conflicting uparam"] = ";".join(
-                        sorted(
-                            database_lookup[lookup_identifier]["conflicting_uparams"]
-                        )
+                        sorted(database_lookup[lookup_identifier]["conflicting_uparams"])
                     )
                 line_dict["Enzyme Specificity"] = database_lookup[lookup_identifier][
                     "enzyme_specificity"
