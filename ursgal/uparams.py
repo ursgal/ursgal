@@ -11636,6 +11636,7 @@ Format:
         "available_in_unode": [
             "sugarpy_run_1_0_0",
             "sugarpy_plot_1_0_0",
+            "glycopeptide_fragmentor_1_0_0",
         ],
         "default_value": [
             "HexNAc",
@@ -11646,6 +11647,7 @@ Format:
         "ukey_translation": {
             "sugarpy_run_style_1": "unimod_glycans_incl_in_search",
             "sugarpy_plot_style_1": "unimod_glycans_incl_in_search",
+            "glycopeptide_fragmentor_style_1": "glycans_incl_in_search",
         },
         "utag": [
             "modifications",

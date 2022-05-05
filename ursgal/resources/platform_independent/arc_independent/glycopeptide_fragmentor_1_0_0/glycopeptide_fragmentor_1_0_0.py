@@ -53,7 +53,9 @@ def main(
         non_glycopep_line_dicts,
         psm2glycopep_lookup,
     ) = parse_result_file(
-        glycopep_ident_file, glycans_incl_in_search=glycans_incl_in_search
+        glycopep_ident_file,
+        glycans_incl_in_search=glycans_incl_in_search,
+        psm_defining_colnames=psm_defining_colnames,
     )
     glycopep_to_frag_ions = check_frag_specs(
         mzml_file_list=mzml_file_list,
@@ -71,11 +73,13 @@ def main(
         psm2glycopep_lookup=psm2glycopep_lookup,
         non_glycopep_line_dicts=non_glycopep_line_dicts,
         psm_defining_colnames=psm_defining_colnames,
+        min_Y_ions=min_Y_ions,
+        min_oxonium_ions=min_oxonium_ions,
     )
     return output_file
 
 
-def parse_result_file(result_file, glycans_incl_in_search=[]):
+def parse_result_file(result_file, glycans_incl_in_search=[], psm_defining_colnames=[]):
     """
     Parses an Ursgal results .csv file and extracts identified peptides
     together with their glycans and charges.
@@ -83,6 +87,7 @@ def parse_result_file(result_file, glycans_incl_in_search=[]):
     Arguments:
         result_file (str): Path to the Ursgal result .csv file.
         glycans_incl_in_search (list): list of glycans that were included in search as modifications
+        psm_defining_colnames (list): header of columns that define the psm
 
     Returns:
         glycopep_ident_dict (dict): The dict contains all mzml files as keys and as values a dict with
@@ -93,7 +98,7 @@ def parse_result_file(result_file, glycans_incl_in_search=[]):
     print("[ SugarPy  ] Parsing Ursgal result file")
 
     glycopep_ident_dict = {}
-    non_glycopep_line_dicts = []
+    non_glycopep_line_dicts = ddict(list)
     psm2glycopep_lookup = {}
     with open(result_file, "r") as in_file:
         csv_input = csv.DictReader(in_file)
@@ -101,8 +106,8 @@ def parse_result_file(result_file, glycans_incl_in_search=[]):
             ms_file = line_dict["Spectrum Title"].split(".")[0]
             if ms_file not in glycopep_ident_dict.keys():
                 glycopep_ident_dict[ms_file] = ddict(list)
-            spec_id = line_dict["Spectrum Title"].split(".")[-2]
-            charge = line_dict["Charge"]
+            spec_id = int(line_dict["Spectrum Title"].split(".")[-2])
+            charge = int(line_dict["Charge"])
             pep = line_dict["Sequence"]
             glycans = []
             if "Glycan" in line_dict.keys():
@@ -115,7 +120,10 @@ def parse_result_file(result_file, glycans_incl_in_search=[]):
                     modname = match.group("modname")
                     pos = match.group("pos")
                     if modname in glycans_incl_in_search:
-                        glycans.append(modname)
+                        if "(" in modname:
+                            glycans.append(modname)
+                        else:
+                            glycans.append(modname + "(1)")
                     elif ":" in modname:
                         unimod_list.append(mod)
                     else:
@@ -124,15 +132,15 @@ def parse_result_file(result_file, glycans_incl_in_search=[]):
                             glycans.append(modname)
                         else:
                             unimod_list.append(mod)
+            psm = "#".join([line_dict[x] for x in psm_defining_colnames])
             if glycans != []:
                 pep_unimod_glycan = "{0}#{1}#{2}".format(
                     pep, ";".join(unimod_list), ";".join(glycans)
                 )
-                psm = "#".join([line_dict[x]] for x in psm_defining_colnames)
-                psm2glycopep_lookup[psm] = peptide_unimod
+                psm2glycopep_lookup[psm] = pep_unimod_glycan
                 glycopep_ident_dict[ms_file][pep_unimod_glycan].append((spec_id, charge))
             else:
-                non_glycopep_line_dicts.append(line_dict)
+                non_glycopep_line_dicts[psm].append(line_dict)
     return glycopep_ident_dict, non_glycopep_line_dicts, psm2glycopep_lookup
 
 
@@ -143,6 +151,8 @@ def write_output_file(
     psm2glycopep_lookup=None,
     non_glycopep_line_dicts=None,
     psm_defining_colnames=[],
+    min_Y_ions=1,
+    min_oxonium_ions=1,
 ):
     # info about oxonium and Y-ions is added to the Ursgal ident file
     if sys.platform == "win32":
@@ -159,7 +169,7 @@ def write_output_file(
                 "Glycopeptide Y-ions",
             ]
         )
-        with open(ursgal_output_file, "w") as u_out_file:
+        with open(output_file_name, "w") as u_out_file:
             csv_writer = csv.DictWriter(
                 u_out_file, csv_fieldnames, lineterminator=lineterminator
             )
@@ -167,18 +177,23 @@ def write_output_file(
             for line_dict in csv_input:
                 has_oxonium_ions = False
                 has_Y_ions = False
-                if line_dict in non_glycopep_line_dicts:
-                    csv_writer.writerow(line_dict)
+                psm = "#".join([line_dict[x] for x in psm_defining_colnames])
+                if psm in non_glycopep_line_dicts.keys():
+                    for ld in non_glycopep_line_dicts[psm]:
+                        csv_writer.writerow(ld)
                     continue
-                psm = "#".join([line_dict[x]] for x in psm_defining_colnames)
                 spec_id = int(line_dict["Spectrum ID"])
+                ms_file = line_dict["Spectrum Title"].split(".")[0]
                 glycopep = psm2glycopep_lookup[psm]
 
                 spec_frag_ions = glycopep_to_frag_ions[ms_file][glycopep][spec_id]
                 Y_ions = spec_frag_ions["Y_ions"]
                 line_dict["Glycopeptide Y-ions"] = ";".join(Y_ions)
                 if len(Y_ions) >= min_Y_ions:
+                    # has_Y_ions = True
                     for obligatory in [
+                        "Hex(1)",
+                        "Hex(1)-H2O(1)",
                         # "HexNAc(1)",
                         # "HexNAc(1)-H2O(1)",
                         # 'HexNAc(2)',
@@ -191,6 +206,9 @@ def write_output_file(
                 line_dict["Oxonium Ions"] = ";".join(oxonium_ions)
                 if len(oxonium_ions) >= min_oxonium_ions:
                     has_oxonium_ions = True
+                line_dict["MS2 Glycopep Frag Ions Present"] = all(
+                    [has_oxonium_ions, has_Y_ions]
+                )
                 csv_writer.writerow(line_dict)
     print("[ SugarPy  ] Updated results file: ", output_file_name)
 
@@ -202,7 +220,6 @@ def check_frag_specs(
     glycopep_ident_dict=None,
     frag_mass_tolerance=None,
     decoy_glycan="End(HexNAc)Hex(5)HexNAc(3)NeuAc(1)dHex(1)",
-    glycans_incl_in_search=[],
     min_oxonium_ions=3,
     min_Y_ions=1,
     output_file=None,
@@ -260,12 +277,12 @@ def check_frag_specs(
             pep, unimod, glycan = pep_unimod_glycan.split("#")
             peptide_unimod = "#".join([pep, unimod])
             glycan_list = glycan.split(";")
-            spec_id__charge_list = glycopep_ident_dict[ms_file][pep_unimod_glycan]
+            spec_id_charge_list = glycopep_ident_dict[ms_file][pep_unimod_glycan]
             spec_to_frag_ions = calc_and_match_frag_ions(
                 pymzml_run=pymzml_run,
                 glycan_list=glycan_list,
                 peptide_unimod=peptide_unimod,
-                spec_id_list=spec_id__charge_list,
+                spec_id_charge_list=spec_id_charge_list,
                 internal_precision=internal_precision,
             )
             glycopep_to_frag_ions[ms_file][pep_unimod_glycan] = {}

@@ -91,6 +91,9 @@ class glycopeptide_fragmentor_1_0_0(ursgal.UNode):
         glycopep_params["psm_defining_colnames"] = self.params["translations"][
             "psm_defining_colnames"
         ]
+        glycopep_params["glycans_incl_in_search"] = self.params["translations"][
+            "glycans_incl_as_mods"
+        ]
 
         out = main(**glycopep_params)
 
