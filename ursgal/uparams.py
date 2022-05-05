@@ -9025,6 +9025,7 @@ Format:
             "sanitize_csv_1_0_0",
             "combine_pep_1_0_0",
             "unify_csv_1_0_0",
+            "glycopeptide_fragmentor_1_0_0",
         ],
         "triggers_rerun": True,
         "ukey_translation": {
@@ -9032,6 +9033,7 @@ Format:
             "sanitize_csv_style_1": "psm_defining_colnames",
             "combine_pep_style_1": "columns_for_grouping",
             "unify_csv_style_1": "psm_defining_colnames",
+            "glycopeptide_fragmentor_style_1": "psm_defining_colnames",
         },
         "utag": [
             "conversion",

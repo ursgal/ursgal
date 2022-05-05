@@ -19,7 +19,7 @@ class glycopeptide_fragmentor_1_0_0(ursgal.UNode):
         "version": "1.0.0",
         "release_date": "2020-12-26",
         "engine_type": {
-            "misc_engine" : True,
+            "misc_engine": True,
         },
         "utranslation_style": "glycopeptide_fragmentor_style_1",
         "input_extensions": [".mzML", ".csv", ".idx.gz"],
@@ -36,9 +36,8 @@ class glycopeptide_fragmentor_1_0_0(ursgal.UNode):
                 },
             },
         },
-        "citation":
-            "S. Schulze, A. Oltmanns, C. Fufezan, J. Krägenbring, M. Mormann, M. Pohlschröder and M. Hippler (2020)."
-            "SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics",
+        "citation": "S. Schulze, A. Oltmanns, C. Fufezan, J. Krägenbring, M. Mormann, M. Pohlschröder and M. Hippler (2020)."
+        "SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics",
     }
 
     def __init__(self, *args, **kwargs):
@@ -88,6 +87,9 @@ class glycopeptide_fragmentor_1_0_0(ursgal.UNode):
         glycopep_params["min_Y_ions"] = self.params["translations"]["min_y_ions"]
         glycopep_params["min_oxonium_ions"] = self.params["translations"][
             "min_oxonium_ions"
+        ]
+        glycopep_params["psm_defining_colnames"] = self.params["translations"][
+            "psm_defining_colnames"
         ]
 
         out = main(**glycopep_params)
