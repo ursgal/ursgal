@@ -190,18 +190,18 @@ def write_output_file(
                 Y_ions = spec_frag_ions["Y_ions"]
                 line_dict["Glycopeptide Y-ions"] = ";".join(Y_ions)
                 if len(Y_ions) >= min_Y_ions:
-                    # has_Y_ions = True
-                    for obligatory in [
-                        "Hex(1)",
-                        "Hex(1)-H2O(1)",
-                        # "HexNAc(1)",
-                        # "HexNAc(1)-H2O(1)",
-                        # 'HexNAc(2)',
-                        # 'HexNAc(2)-H2O(1)',
-                        # 'HexNAc(2)-H2O(2)'
-                    ]:
-                        if obligatory in Y_ions:
-                            has_Y_ions = True
+                    has_Y_ions = True
+                    # for obligatory in [
+                    #     "Hex(1)",
+                    #     "Hex(1)-H2O(1)",
+                    #     # "HexNAc(1)",
+                    #     # "HexNAc(1)-H2O(1)",
+                    #     # 'HexNAc(2)',
+                    #     # 'HexNAc(2)-H2O(1)',
+                    #     # 'HexNAc(2)-H2O(2)'
+                    # ]:
+                    #     if obligatory in Y_ions:
+                    #         has_Y_ions = True
                 oxonium_ions = spec_frag_ions["oxonium_ions"]
                 line_dict["Oxonium Ions"] = ";".join(oxonium_ions)
                 if len(oxonium_ions) >= min_oxonium_ions:
