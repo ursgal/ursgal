@@ -113,8 +113,8 @@ def parse_result_file(result_file, glycans_incl_in_search=[], psm_defining_colna
             if "Glycan" in line_dict.keys():
                 if line_dict["Glycan"] != "":
                     glycans.append(line_dict["Glycan"])
+            unimod_list = []
             if line_dict["Modifications"] != "":
-                unimod_list = []
                 for mod in line_dict["Modifications"].split(";"):
                     match = mod_pattern.search(mod)
                     modname = match.group("modname")

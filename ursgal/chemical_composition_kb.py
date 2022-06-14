@@ -335,6 +335,7 @@ monosaccharide_compositions = {
     "174": "C6H10O4N2",
     "129": "C6H12N1O2",
     "PO3": "PO3",
+    "PO4": "PO4",
     "OHC4FmPse": "C16H26N3O8",
 }
 
