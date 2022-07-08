@@ -31,7 +31,6 @@ if sys.platform in ["win32"]:
     class my_install_lib(setuptools.command.install_lib.install_lib):
         pass
 
-
 else:
 
     class my_install_lib(setuptools.command.install_lib.install_lib):
