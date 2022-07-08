@@ -16,4 +16,4 @@ jobs:
       - name: install black
         run: pip install black
       - name: run black
-        run: black --check --exclude 'ursgal/|.tox' .
+        run: black --check --exclude 'ursgal/|example_scripts/|.tox' .
