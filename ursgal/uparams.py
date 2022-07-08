@@ -305,12 +305,14 @@ Format:
         "edit_version": 1.00,
         "available_in_unode": [
             "flash_lfq_1_1_1",
+            "generate_target_decoy_1_0_0",
         ],
         "default_value": 10,
         "description": """Random seed for random number generators""",
         "triggers_rerun": True,
         "ukey_translation": {
             "flash_lfq_style_1": "--rns",
+            "generate_target_decoy_style_1": "random_seed",
         },
         "utag": [
             "quantification",
