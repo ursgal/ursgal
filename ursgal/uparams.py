@@ -13089,7 +13089,7 @@ Format:
             "msfragger_3_0",
         ],
         "default_value": False,
-        "description": """ Perform mass calibration """,
+        "description": """ Perform mass calibration (no_calibration, perform_calibration, optimize_parameters)""",
         "triggers_rerun": True,
         "ukey_translation": {
             "msfragger_style_2": "calibrate_mass",
@@ -13099,15 +13099,17 @@ Format:
         "uvalue_option": {},
         "uvalue_translation": {
             "msfragger_style_2": {
-                False: 0,
-                True: 1,
+                "no_calibration": 0,
+                "perform_calibration": 1,
+                "optimize_parameters": 2,
             },
             "msfragger_style_3": {
-                False: 0,
-                True: 1,
+                "no_calibration": 0,
+                "perform_calibration": 1,
+                "optimize_parameters": 2,
             },
         },
-        "uvalue_type": "bool",
+        "uvalue_type": "select",
     },
     "write_calibrated_mgf": {
         "edit_version": 1.00,
