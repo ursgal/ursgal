@@ -433,8 +433,8 @@ def calc_Y_ions(
                 tmz = int(round(mz * internal_precision))
                 # print(z, peptide_unimod, mz, name_hill)
                 if tmz not in Y_ions.keys():
-                    Y_ions[tmz] = []
-                Y_ions[tmz].append(name_hill)
+                    Y_ions[tmz] = set()
+                Y_ions[tmz].add(name_hill)
                 if length == 1:
                     nr_water = [1]
                 else:
@@ -445,8 +445,8 @@ def calc_Y_ions(
                     mz = ursgal.ucore.calculate_mz(cc._mass(), z)
                     tmz = int(round(mz * internal_precision))
                     if tmz not in Y_ions.keys():
-                        Y_ions[tmz] = []
-                    Y_ions[tmz].append(new_name_hill)
+                        Y_ions[tmz] = set()
+                    Y_ions[tmz].add(new_name_hill)
                     cc.add_chemical_formula("H(2)O(1)", factor=water_loss_count)
     return Y_ions
 
