@@ -2900,6 +2900,7 @@ Format:
                 "trypsin_cnbr": "KRM;C;P",
                 "trypsin_gluc": "DEKR;C;P",
                 "trypsin_p": "KR;C;",
+                "no_cleavage": ";C;",
             },
             "kojak_style_1": {
                 "gluc": "[DE]|{P}",
@@ -3099,6 +3100,7 @@ Format:
                 "trypsin_cnbr": "[KR]|{P},[M]|{P}",
                 "trypsin_gluc": "[DEKR]|{P}",
                 "trypsin_p": "[RK]|[X]",
+                "no_cleavage": "[]|[]",
             },
             "msfragger_style_1": {
                 "argc": "R;C;P",
@@ -3177,6 +3179,7 @@ Format:
                 "trypsin_gluc": "DEKR;C;P",
                 "trypsin_p": "KR;C;",
                 "nonspecific": "ACDEFGHIKLMNPQRSTVWY;C;",
+                "no_cleavage": ";C;",
             },
             "pipi_style_1": {
                 "aspn": "AspN;0;D;-",

@@ -30,9 +30,8 @@ class sugarpy_run_1_0_0(ursgal.UNode):
                 },
             },
         },
-        "citation":
-            "S. Schulze, A. Oltmanns, C. Fufezan, J. Krägenbring, M. Mormann, M. Pohlschröder and M. Hippler (2020)."
-            "SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics",
+        "citation": "S. Schulze, A. Oltmanns, C. Fufezan, J. Krägenbring, M. Mormann, M. Pohlschröder and M. Hippler (2020)."
+        "SugarPy facilitates the universal, discovery-driven analysis of intact glycopeptides. Bioinformatics",
     }
 
     def __init__(self, *args, **kwargs):
@@ -58,7 +57,7 @@ class sugarpy_run_1_0_0(ursgal.UNode):
             self.params["input_dir_path"], self.params["input_file"]
         )
 
-        translations = self.params['translations']['_grouped_by_translated_key']
+        translations = self.params["translations"]["_grouped_by_translated_key"]
 
         pyqms_params = {
             "PERCENTILE_FORMAT_STRING": None,
@@ -104,9 +103,7 @@ class sugarpy_run_1_0_0(ursgal.UNode):
                             self.params["translations"]["precursor_mass_tolerance_plus"]
                         )
                         + float(
-                            self.params["translations"][
-                                "precursor_mass_tolerance_minus"
-                            ]
+                            self.params["translations"]["precursor_mass_tolerance_minus"]
                         )
                     ) / 2.0
                     if (

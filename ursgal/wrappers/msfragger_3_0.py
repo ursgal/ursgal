@@ -397,9 +397,7 @@ class msfragger_3_0(ursgal.UNode):
         self.params["command_list"] = [
             "java",
             "-Xmx{0}".format(
-                self.params["translations"]["_grouped_by_translated_key"]["-Xmx"][
-                    "-xmx"
-                ]
+                self.params["translations"]["_grouped_by_translated_key"]["-Xmx"]["-xmx"]
             ),
             "-jar",
             self.exe,
@@ -522,9 +520,7 @@ class msfragger_3_0(ursgal.UNode):
                         "[ERROR]: MSFragger could not find the correct output tsv file"
                     )
 
-        csv_out_fobject = open(
-            self.params["translations"]["output_file_incl_path"], "w"
-        )
+        csv_out_fobject = open(self.params["translations"]["output_file_incl_path"], "w")
         csv_writer = csv.DictWriter(csv_out_fobject, fieldnames=translated_headers)
         csv_writer.writeheader()
 
