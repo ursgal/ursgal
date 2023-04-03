@@ -8,6 +8,7 @@ import shutil
 from pprint import pprint
 import pickle
 import statistics
+import re
 
 from ursgal.ukb import PROTON
 
@@ -25,7 +26,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
         },
         "input_extensions": [".mzML"],
         "output_extensions": [".csv"],
-        "in_development": True,
+        "in_development": False,
         "create_own_folder": True,
         "include_in_git": False,
         "distributable": False,
@@ -65,6 +66,8 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     continue
                 file = line["Spectrum Title"].split(".")[0]
                 if file not in self.all_filenames:
+                    print("[ERROR] Could not find:", file)
+                    exit()
                     continue
                 full_seq_name, full_mass = self.get_full_seq_and_mass(line)
                 if line["Retention Time (s)"] == "":
@@ -98,13 +101,18 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 self.spec_sequence_dict[spec_seq_id]["line_dicts"].append(line_to_write)
 
         with open(out_name, "wt") as fout:
-            writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
+            writer = csv.DictWriter(
+                fout,
+                fieldnames=fieldnames,
+                delimiter="\t",
+                lineterminator=self.lineterminator,
+            )
             writer.writeheader()
             for spec_sequence in self.spec_sequence_dict.keys():
                 if len(set(self.spec_sequence_dict[spec_sequence]["masses"])) == 1:
-                    monoisotopic_mass = self.spec_sequence_dict[spec_sequence][
-                        "masses"
-                    ][0]
+                    monoisotopic_mass = self.spec_sequence_dict[spec_sequence]["masses"][
+                        0
+                    ]
                     full_seq = "|||".join(
                         sorted(set(self.spec_sequence_dict[spec_sequence]["names"]))
                     )
@@ -115,14 +123,40 @@ class flash_lfq_1_1_1(ursgal.UNode):
                     full_seq = "|||".join(
                         sorted(set(self.spec_sequence_dict[spec_sequence]["names"]))
                     )
-                seq = full_seq.split("#")[0]
+                seq, modifications, mass_diff, glycan = full_seq.split("#")
+                if "Hex" in modifications:
+                    glycan = self.combine_glycans(modifications)
                 seq_mod = "{0}[{1}]".format(seq, full_seq)
                 for line_dict in self.spec_sequence_dict[spec_sequence]["line_dicts"]:
                     line_dict["Full Sequence"] = seq_mod
                     line_dict["Peptide Monoisotopic Mass"] = monoisotopic_mass
-                    line_dict["Protein Accession"]  # += '|###|{0}'.format(full_seq)
+                    if glycan != "":
+                        line_dict["Protein Accession"] += "|###|{0}".format(glycan)
                     writer.writerow(line_dict)
         return out_name
+
+    def combine_glycans(self, modifications):
+        pattern = re.compile(r"""(?P<monosacch>[A-z0-9]*)(?P<count>\([A-z0-9]*\))""")
+        glycan_dict = {}
+        for mod in modifications.split(";"):
+            if "Hex" in mod:
+                for glyc_match in pattern.finditer(mod):
+                    monosacch = glyc_match.group("monosacch")
+                    if monosacch == "End":
+                        count = glyc_match.group("count").strip("(").strip(")")
+                        if count == "None":
+                            count = None
+                    elif glyc_match.group("count") == "":
+                        count = 1
+                    else:
+                        count = int(glyc_match.group("count").strip("(").strip(")"))
+                    if monosacch not in glycan_dict.keys():
+                        glycan_dict[monosacch] = 0
+                    glycan_dict[monosacch] += count
+        sorted_glycan = ""
+        for k, v in sorted(glycan_dict.items()):
+            sorted_glycan += "{0}({1})".format(k, v)
+        return sorted_glycan
 
     def get_full_seq_and_mass(self, full_line_dict):
         sequence = full_line_dict["Sequence"]
@@ -131,6 +165,7 @@ class flash_lfq_1_1_1(ursgal.UNode):
         glycan_mass = full_line_dict.get("Glycan Mass", "")
 
         seq_mod = "{0}#{1}".format(sequence, modifications)
+        # print(seq_mod)
         self.cc.use(seq_mod)
         seq_mod_mass = self.cc._mass()
 
@@ -162,7 +197,9 @@ class flash_lfq_1_1_1(ursgal.UNode):
         with open(tsv_path) as fin, open(csv_path, "wt") as fout:
             reader = csv.DictReader(fin, delimiter="\t")
             fieldnames = reader.fieldnames
-            writer = csv.DictWriter(fout, fieldnames=fieldnames)
+            writer = csv.DictWriter(
+                fout, fieldnames=fieldnames, lineterminator=self.lineterminator
+            )
             writer.writeheader()
             for line in reader:
                 # only header translation for quantifiedPeaks
@@ -207,7 +244,9 @@ class flash_lfq_1_1_1(ursgal.UNode):
         with open(tsv_path) as fin, open(csv_path, "wt") as fout:
             reader = csv.DictReader(fin, delimiter="\t")
             fieldnames = translated_headers
-            writer = csv.DictWriter(fout, fieldnames=translated_headers)
+            writer = csv.DictWriter(
+                fout, fieldnames=translated_headers, lineterminator=self.lineterminator
+            )
             writer.writeheader()
             for line in reader:
                 out_line_dict = {}
@@ -248,6 +287,11 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 )
             )
 
+        if sys.platform == "win32":
+            self.lineterminator = "\n"
+        else:
+            self.lineterminator = "\r\n"
+
         # assert all mzml files are in the same folder
         if isinstance(mzml_files, list):
             mzml_dirs = []
@@ -272,7 +316,12 @@ class flash_lfq_1_1_1(ursgal.UNode):
                 os.path.join(input_file_dir, "ExperimentalDesign.tsv"), "wt"
             ) as fout:
                 fieldnames = ["FileName", "Condition", "Biorep", "Fraction", "Techrep"]
-                writer = csv.DictWriter(fout, fieldnames=fieldnames, delimiter="\t")
+                writer = csv.DictWriter(
+                    fout,
+                    fieldnames=fieldnames,
+                    delimiter="\t",
+                    lineterminator=self.lineterminator,
+                )
                 writer.writeheader()
                 for i, line_dict in experiment_setup.items():
                     self.all_filenames.add(line_dict["FileName"])
