@@ -38849,63 +38849,6 @@ antiserum and mass spectrometric analysis</umod:text>
             <umod:url>https://glyconnect.expasy.org/browser/global/compositions/search?hex=3&amp;hexnac=3&amp;mode=exact</umod:url>
          </umod:xref>
       </umod:mod>
-      <umod:mod title="dHex(1)Hex(3)HexNAc(2)Sulf(1)" full_name="dHex Hex(3) HexNAc(2) Sulf"
-                username_of_poster="unimod"
-                group_of_poster=""
-                date_time_posted="2015-05-05 12:00:00"
-                date_time_modified="2015-05-06 09:49:45"
-                approved="0"
-                record_id="1764">
-         <umod:specificity hidden="1" site="N" position="Anywhere" classification="N-linked glycosylation"
-                           spec_group="2">
-            <umod:NeutralLoss mono_mass="1118.331939" avge_mass="1119.0112" flag="false"
-                              composition="O(3) S dHex Hex(3) HexNAc(2)">
-               <umod:element symbol="H" number="66"/>
-               <umod:element symbol="C" number="40"/>
-               <umod:element symbol="N" number="2"/>
-               <umod:element symbol="O" number="32"/>
-               <umod:element symbol="S" number="1"/>
-            </umod:NeutralLoss>
-            <umod:NeutralLoss mono_mass="0" avge_mass="0" flag="false" composition="0"/>
-         </umod:specificity>
-         <umod:specificity hidden="1" site="T" position="Anywhere" classification="O-linked glycosylation"
-                           spec_group="1">
-            <umod:NeutralLoss mono_mass="0" avge_mass="0" flag="false" composition="0"/>
-            <umod:NeutralLoss mono_mass="1118.331939" avge_mass="1119.0112" flag="false"
-                              composition="O(3) S dHex Hex(3) HexNAc(2)">
-               <umod:element symbol="H" number="66"/>
-               <umod:element symbol="C" number="40"/>
-               <umod:element symbol="N" number="2"/>
-               <umod:element symbol="O" number="32"/>
-               <umod:element symbol="S" number="1"/>
-            </umod:NeutralLoss>
-         </umod:specificity>
-         <umod:specificity hidden="1" site="S" position="Anywhere" classification="O-linked glycosylation"
-                           spec_group="1">
-            <umod:NeutralLoss mono_mass="0" avge_mass="0" flag="false" composition="0"/>
-            <umod:NeutralLoss mono_mass="1118.331939" avge_mass="1119.0112" flag="false"
-                              composition="O(3) S dHex Hex(3) HexNAc(2)">
-               <umod:element symbol="H" number="66"/>
-               <umod:element symbol="C" number="40"/>
-               <umod:element symbol="N" number="2"/>
-               <umod:element symbol="O" number="32"/>
-               <umod:element symbol="S" number="1"/>
-            </umod:NeutralLoss>
-         </umod:specificity>
-         <umod:delta mono_mass="1118.331939" avge_mass="1119.0112"
-                     composition="O(3) S dHex Hex(3) HexNAc(2)">
-            <umod:element symbol="H" number="66"/>
-            <umod:element symbol="C" number="40"/>
-            <umod:element symbol="N" number="2"/>
-            <umod:element symbol="O" number="32"/>
-            <umod:element symbol="S" number="1"/>
-         </umod:delta>
-         <umod:xref>
-            <umod:text>Composition search GlyConnect</umod:text>
-            <umod:source>Misc. URL</umod:source>
-            <umod:url>https://glyconnect.expasy.org/browser/global/compositions/search?sulfate=1&amp;dhex=1&amp;hex=3&amp;hexnac=2&amp;mode=exact</umod:url>
-         </umod:xref>
-      </umod:mod>
       <umod:mod title="dHex(2)Hex(3)HexNAc(2)" full_name="dHex(2) Hex(3) HexNAc(2)"
                 username_of_poster="unimod"
                 group_of_poster=""

@@ -64,9 +64,7 @@ class ptmshepherd_0_3_5(ursgal.UNode):
 
         n = 0
         while os.path.exists(
-            os.path.join(
-                self.params["input_dir_path"], "ptmshephered_tmp_{0}".format(n)
-            )
+            os.path.join(self.params["input_dir_path"], "ptmshephered_tmp_{0}".format(n))
         ):
             n += 1
         self.tmp_dir = os.path.join(
@@ -274,6 +272,8 @@ class ptmshepherd_0_3_5(ursgal.UNode):
                 csv_out, fieldnames=fieldnames, lineterminator=lineterminator
             )
             csv_writer.writeheader()
+            skip_rawloc = set()
+            skip_simrt = set()
             for n, line_dict in enumerate(csv_reader):
                 total_mass_shift = 0
                 for single_mass_shift in line_dict["Mass Difference"].split(";"):
@@ -290,56 +290,66 @@ class ptmshepherd_0_3_5(ursgal.UNode):
                 spec_pep_key = "{0}||{1}".format(
                     line_dict["Spectrum Title"], line_dict["Sequence"]
                 )
-                # rawloc_line_dict =  next(rawloc_reader)
-                # print(rawloc_line_dict)
-                assert (
-                    len(rawloc_dict[spec_pep_key]) == 1
-                ), """
-                [ERROR] Spectrum Title + Peptide from original input matches to multiple
-                [ERROR] entries in rawlocalization output
-                {0}
-                """.format(
-                    rawloc_dict[spec_pep_key]
-                )
-                # for rawloc_line_dict in rawloc_dict[spec_pep_key]:
-                rawloc_line_dict = rawloc_dict[spec_pep_key][0]
-                line_dict["PTM-Shepherd:Localized_Pep"] = rawloc_line_dict[
-                    "Localized_Pep"
-                ]
-                line_dict["PTM-Shepherd:MaxHyper_Unloc"] = rawloc_line_dict[
-                    "MaxHyper_Unloc"
-                ]
-                line_dict["PTM-Shepherd:MaxHyper_Loc"] = rawloc_line_dict[
-                    "MaxHyper_Loc"
-                ]
-                line_dict["PTM-Shepherd:MaxPeaks_Unloc"] = rawloc_line_dict[
-                    "MaxPeaks_Unloc"
-                ]
-                line_dict["PTM-Shepherd:MaxPeaks_Loc"] = rawloc_line_dict[
-                    "MaxPeaks_Loc"
-                ]
-                # rawsimrt_line_dict =  next(rawsimrt_reader)
-                # print(rawsimrt_line_dict)
-                assert (
-                    len(simrt_dict[spec_pep_key]) == 1
-                ), """
-                [ERROR] Spectrum Title + Peptide from original input matches to multiple
-                [ERROR] entries in rawsimrt output
-                {0}
-                """.format(
-                    simrt_dict[spec_pep_key]
-                )
-                rawsimrt_line_dict = simrt_dict[spec_pep_key][0]
-                line_dict["PTM-Shepherd:DeltaRT"] = rawsimrt_line_dict["DeltaRT"]
-                line_dict["PTM-Shepherd:nZeroSpecs_DeltaRT"] = rawsimrt_line_dict[
-                    "nZeroSpecs_DeltaRT"
-                ]
-                line_dict["PTM-Shepherd:Avg_Sim"] = rawsimrt_line_dict["Avg_Sim"]
-                line_dict["PTM-Shepherd:Avg_ZeroSim"] = rawsimrt_line_dict[
-                    "Avg_ZeroSim"
-                ]
+
+                if spec_pep_key not in rawloc_dict.keys():
+                    skip_rawloc.add(spec_pep_key)
+                else:
+                    # rawloc_line_dict =  next(rawloc_reader)
+                    # print(rawloc_line_dict)
+                    assert (
+                        len(rawloc_dict[spec_pep_key]) == 1
+                    ), """
+                    [ERROR] Spectrum Title + Peptide from original input matches to multiple
+                    [ERROR] entries in rawlocalization output
+                    {0}
+                    """.format(
+                        rawloc_dict[spec_pep_key]
+                    )
+                    # for rawloc_line_dict in rawloc_dict[spec_pep_key]:
+                    rawloc_line_dict = rawloc_dict[spec_pep_key][0]
+                    line_dict["PTM-Shepherd:Localized_Pep"] = rawloc_line_dict[
+                        "Localized_Pep"
+                    ]
+                    line_dict["PTM-Shepherd:MaxHyper_Unloc"] = rawloc_line_dict[
+                        "MaxHyper_Unloc"
+                    ]
+                    line_dict["PTM-Shepherd:MaxHyper_Loc"] = rawloc_line_dict[
+                        "MaxHyper_Loc"
+                    ]
+                    line_dict["PTM-Shepherd:MaxPeaks_Unloc"] = rawloc_line_dict[
+                        "MaxPeaks_Unloc"
+                    ]
+                    line_dict["PTM-Shepherd:MaxPeaks_Loc"] = rawloc_line_dict[
+                        "MaxPeaks_Loc"
+                    ]
+                if spec_pep_key not in simrt_dict.keys():
+                    skip_simrt.add(spec_pep_key)
+                else:
+                    # rawsimrt_line_dict =  next(rawsimrt_reader)
+                    # print(rawsimrt_line_dict)
+
+                    assert (
+                        len(simrt_dict[spec_pep_key]) == 1
+                    ), """
+                    [ERROR] Spectrum Title + Peptide from original input matches to multiple
+                    [ERROR] entries in rawsimrt output
+                    {0}
+                    """.format(
+                        simrt_dict[spec_pep_key]
+                    )
+                    rawsimrt_line_dict = simrt_dict[spec_pep_key][0]
+                    line_dict["PTM-Shepherd:DeltaRT"] = rawsimrt_line_dict["DeltaRT"]
+                    line_dict["PTM-Shepherd:nZeroSpecs_DeltaRT"] = rawsimrt_line_dict[
+                        "nZeroSpecs_DeltaRT"
+                    ]
+                    line_dict["PTM-Shepherd:Avg_Sim"] = rawsimrt_line_dict["Avg_Sim"]
+                    line_dict["PTM-Shepherd:Avg_ZeroSim"] = rawsimrt_line_dict[
+                        "Avg_ZeroSim"
+                    ]
 
                 csv_writer.writerow(line_dict)
+            print("skipped rawloc:", len(skip_rawloc))
+            print("skipped simrt:", len(skip_simrt))
 
         shutil.copyfile(
             "global.modsummary.tsv",
@@ -415,9 +425,7 @@ class ptmshepherd_0_3_5(ursgal.UNode):
             csv_reader = csv.DictReader(csv_file)
             for n, row in enumerate(csv_reader):
                 if n % 500 == 0:
-                    print(
-                        "[ PREFLGHT ] Processing line number: {0}".format(n), end="\r"
-                    )
+                    print("[ PREFLGHT ] Processing line number: {0}".format(n), end="\r")
                 mass_diffs = row["Mass Difference"].split(";")
                 mass_diffs_sum = 0.0
                 for n, mass in enumerate(mass_diffs):
@@ -439,9 +447,7 @@ class ptmshepherd_0_3_5(ursgal.UNode):
                 if rt == "":
                     spectrum_id = int(row["Spectrum ID"])
                     raw_file_name = os.path.basename(row["Raw data location"])
-                    input_file_basename_for_rt_lookup = raw_file_name.replace(
-                        ".mgf", ""
-                    )
+                    input_file_basename_for_rt_lookup = raw_file_name.replace(".mgf", "")
                     retention_time_in_minutes = scan_rt_lookup_dict[
                         input_file_basename_for_rt_lookup
                     ]["scan_2_rt"][spectrum_id]
