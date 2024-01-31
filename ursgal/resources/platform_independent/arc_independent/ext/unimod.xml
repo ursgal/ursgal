@@ -41720,46 +41720,6 @@ antiserum and mass spectrometric analysis</umod:text>
             <umod:url>http://pubs.acs.org/doi/10.1021/cr300073p</umod:url>
          </umod:xref>
       </umod:mod>
-      <umod:mod title="Hex(2)Sulf(1)" full_name="Hex(2) O(3) S" username_of_poster="unimod"
-                group_of_poster=""
-                date_time_posted="2017-11-23 15:39:42"
-                date_time_modified="2017-11-23 15:40:36"
-                approved="0"
-                record_id="1932">
-         <umod:specificity hidden="1" site="T" position="Anywhere" classification="O-linked glycosylation"
-                           spec_group="1">
-            <umod:NeutralLoss mono_mass="404.062462" avge_mass="404.3444" flag="false"
-                              composition="O(3) S Hex(2)">
-               <umod:element symbol="H" number="20"/>
-               <umod:element symbol="C" number="12"/>
-               <umod:element symbol="O" number="13"/>
-               <umod:element symbol="S" number="1"/>
-            </umod:NeutralLoss>
-            <umod:NeutralLoss mono_mass="0" avge_mass="0" flag="false" composition="0"/>
-         </umod:specificity>
-         <umod:specificity hidden="1" site="S" position="Anywhere" classification="O-linked glycosylation"
-                           spec_group="1">
-            <umod:NeutralLoss mono_mass="0" avge_mass="0" flag="false" composition="0"/>
-            <umod:NeutralLoss mono_mass="404.062462" avge_mass="404.3444" flag="false"
-                              composition="O(3) S Hex(2)">
-               <umod:element symbol="H" number="20"/>
-               <umod:element symbol="C" number="12"/>
-               <umod:element symbol="O" number="13"/>
-               <umod:element symbol="S" number="1"/>
-            </umod:NeutralLoss>
-         </umod:specificity>
-         <umod:delta mono_mass="404.062462" avge_mass="404.3444" composition="O(3) S Hex(2)">
-            <umod:element symbol="H" number="20"/>
-            <umod:element symbol="C" number="12"/>
-            <umod:element symbol="O" number="13"/>
-            <umod:element symbol="S" number="1"/>
-         </umod:delta>
-         <umod:xref>
-            <umod:text>Composition search GlyConnect</umod:text>
-            <umod:source>Misc. URL</umod:source>
-            <umod:url>https://glyconnect.expasy.org/browser/global/compositions/search?sulfate=1&amp;hex=2&amp;mode=exact</umod:url>
-         </umod:xref>
-      </umod:mod>
       <umod:mod title="Pent(2)" full_name="Pent(2)" username_of_poster="unimod"
                 group_of_poster=""
                 date_time_posted="2017-11-23 12:05:50"

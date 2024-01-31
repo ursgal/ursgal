@@ -71,7 +71,10 @@ class msfragger_3_0(ursgal.UNode):
             for msfragger_param_name, param_value in sorted(
                 self.params_to_write.items()
             ):
-                print("{0} = {1}".format(msfragger_param_name, param_value), file=io)
+                print(
+                    "{0} = {1}".format(msfragger_param_name, param_value),
+                    file=io,
+                )
 
         return
 
@@ -123,7 +126,9 @@ class msfragger_3_0(ursgal.UNode):
 
         additional_15N_modifications = []
         if (
-            self.params["translations"]["_grouped_by_translated_key"]["label"]["label"]
+            self.params["translations"]["_grouped_by_translated_key"]["label"][
+                "label"
+            ]
             == "15N"
         ):
             self.print_info(
@@ -141,7 +146,8 @@ class msfragger_3_0(ursgal.UNode):
                     continue
                 else:
                     mod_key = "add_{0}_{1}".format(
-                        aminoacid, ursgal.chemical_composition_kb.aa_names[aminoacid]
+                        aminoacid,
+                        ursgal.chemical_composition_kb.aa_names[aminoacid],
                     )
                     self.params_to_write[mod_key] = N15_Diff
 
@@ -162,39 +168,47 @@ class msfragger_3_0(ursgal.UNode):
                     search_enzyme_butnotafter = P
                     """
                     aa_site, term, inhibitor = param_value.split(";")
-                    self.params_to_write["search_enzyme_name"] = self.params["enzyme"]
+                    self.params_to_write["search_enzyme_name"] = self.params[
+                        "enzyme"
+                    ]
                     self.params_to_write["search_enzyme_cutafter"] = aa_site
-                    self.params_to_write["search_enzyme_butnotafter"] = inhibitor
+                    self.params_to_write[
+                        "search_enzyme_butnotafter"
+                    ] = inhibitor
                 elif msfragger_param_name == "num_enzyme_termini":
                     # num_enzyme_termini = 2 # 2 for enzymatic, 1 for
                     # semi-enzymatic, 0 for nonspecific digestion
 
                     if (
-                        self.params["translations"]["_grouped_by_translated_key"][
-                            "enzyme"
-                        ]["enzyme"]
+                        self.params["translations"][
+                            "_grouped_by_translated_key"
+                        ]["enzyme"]["enzyme"]
                         == "nonspecific"
                     ):
                         self.params_to_write[msfragger_param_name] = 0
                     else:
-                        self.params_to_write[msfragger_param_name] = param_value
+                        self.params_to_write[
+                            msfragger_param_name
+                        ] = param_value
                 elif msfragger_param_name == "clear_mz_range":
                     min_mz, max_mz = param_value
-                    self.params_to_write[msfragger_param_name] = "{0} {1}".format(
-                        min_mz, max_mz
-                    )
+                    self.params_to_write[
+                        msfragger_param_name
+                    ] = "{0} {1}".format(min_mz, max_mz)
                 elif msfragger_param_name == "remove_precursor_range":
                     min_mz, max_mz = param_value
-                    self.params_to_write[msfragger_param_name] = "{0},{1}".format(
-                        min_mz, max_mz
-                    )
+                    self.params_to_write[
+                        msfragger_param_name
+                    ] = "{0},{1}".format(min_mz, max_mz)
                 elif msfragger_param_name == "delta_mass_exclude_ranges":
                     min_mz, max_mz = param_value
-                    self.params_to_write[msfragger_param_name] = "({0},{1})".format(
-                        min_mz, max_mz
-                    )
+                    self.params_to_write[
+                        msfragger_param_name
+                    ] = "({0},{1})".format(min_mz, max_mz)
                 elif msfragger_param_name == "precursor_mass_lower":
-                    self.params_to_write[msfragger_param_name] = -1 * param_value
+                    self.params_to_write[msfragger_param_name] = (
+                        -1 * param_value
+                    )
                 elif msfragger_param_name == "modifications":
                     """
                     #maximum of 7 mods - amino acid codes, * for any amino acid, [ and ] specifies protein termini, n and c specifies peptide termini
@@ -245,9 +259,13 @@ class msfragger_3_0(ursgal.UNode):
                             )
                             sys.exit(1)
                         if pos_modifier is not None:
-                            aa_to_append = "{0}{1}".format(pos_modifier, aa_to_append)
+                            aa_to_append = "{0}{1}".format(
+                                pos_modifier, aa_to_append
+                            )
                         mass_to_mod_aa[mod_dict["mass"]].append(aa_to_append)
-                    for pos, (mass, aa_list) in enumerate(mass_to_mod_aa.items()):
+                    for pos, (mass, aa_list) in enumerate(
+                        mass_to_mod_aa.items()
+                    ):
                         self.params_to_write[
                             "variable_mod_0{0}".format(pos + 1)
                         ] = "{0} {1}".format(mass, "".join(aa_list))
@@ -266,20 +284,24 @@ class msfragger_3_0(ursgal.UNode):
                         else:
                             mod_key = "add_{0}_{1}".format(
                                 mod_dict["aa"],
-                                ursgal.chemical_composition_kb.aa_names[mod_dict["aa"]],
+                                ursgal.chemical_composition_kb.aa_names[
+                                    mod_dict["aa"]
+                                ],
                             )
                         self.params_to_write[mod_key] = mod_dict["mass"]
 
                 elif msfragger_param_name == "override_charge":
                     self.params_to_write[msfragger_param_name] = param_value
                     if param_value == 1:
-                        self.params_to_write["precursor_charge"] = "{0} {1}".format(
-                            self.params["translations"]["_grouped_by_translated_key"][
-                                "precursor_min_charge"
-                            ]["precursor_min_charge"],
-                            self.params["translations"]["_grouped_by_translated_key"][
-                                "precursor_max_charge"
-                            ]["precursor_max_charge"],
+                        self.params_to_write[
+                            "precursor_charge"
+                        ] = "{0} {1}".format(
+                            self.params["translations"][
+                                "_grouped_by_translated_key"
+                            ]["precursor_min_charge"]["precursor_min_charge"],
+                            self.params["translations"][
+                                "_grouped_by_translated_key"
+                            ]["precursor_max_charge"]["precursor_max_charge"],
                         )
                 elif msfragger_param_name == "fragment_ion_series":
                     ion_list = []
@@ -308,7 +330,9 @@ class msfragger_3_0(ursgal.UNode):
                             )
                             continue
                         ion_list.append(ion)
-                    self.params_to_write[msfragger_param_name] = ",".join(ion_list)
+                    self.params_to_write[msfragger_param_name] = ",".join(
+                        ion_list
+                    )
                 elif msfragger_param_name in [
                     "mass_offsets",
                     "Y_type_masses",
@@ -346,7 +370,9 @@ class msfragger_3_0(ursgal.UNode):
                         if tm not in self.mass_shift_lookup.keys():
                             self.mass_shift_lookup[tm] = set()
                         self.mass_shift_lookup[tm].add(m)
-                    self.params_to_write[msfragger_param_name] = "/".join(masses)
+                    self.params_to_write[msfragger_param_name] = "/".join(
+                        masses
+                    )
                 elif msfragger_param_name == "diagnostic_fragments":
                     cc = ursgal.ChemicalComposition()
                     umama = ursgal.UnimodMapper()
@@ -397,9 +423,9 @@ class msfragger_3_0(ursgal.UNode):
         self.params["command_list"] = [
             "java",
             "-Xmx{0}".format(
-                self.params["translations"]["_grouped_by_translated_key"]["-Xmx"][
-                    "-xmx"
-                ]
+                self.params["translations"]["_grouped_by_translated_key"][
+                    "-Xmx"
+                ]["-xmx"]
             ),
             "-jar",
             self.exe,
@@ -413,7 +439,10 @@ class msfragger_3_0(ursgal.UNode):
         return self.params
 
     def transform_mass_add_error(self, mass):
-        if self.params["translations"]["precursor_mass_tolerance_unit"] != "ppm":
+        if (
+            self.params["translations"]["precursor_mass_tolerance_unit"]
+            != "ppm"
+        ):
             lower_mass = (
                 mass
                 - self.params["translations"]["precursor_mass_tolerance_minus"]
@@ -426,22 +455,31 @@ class msfragger_3_0(ursgal.UNode):
                 * mass
                 / 1e6
             )
-        elif self.params["translations"]["precursor_mass_tolerance_unit"] != "Da":
+        elif (
+            self.params["translations"]["precursor_mass_tolerance_unit"]
+            != "Da"
+        ):
             lower_mass = (
-                mass - self.params["translations"]["precursor_mass_tolerance_minus"]
+                mass
+                - self.params["translations"]["precursor_mass_tolerance_minus"]
             )
             upper_mass = (
-                mass + self.params["translations"]["precursor_mass_tolerance_plus"]
+                mass
+                + self.params["translations"]["precursor_mass_tolerance_plus"]
             )
         else:
             print(
                 "[ERROR] mass tolerance unit {0} not supported".format(
-                    self.params["translations"]["precursor_mass_tolerance_unit"]
+                    self.params["translations"][
+                        "precursor_mass_tolerance_unit"
+                    ]
                 )
             )
             sys.exit(1)
         transformed_mass_range = []
-        for m in range(round(lower_mass * 1e5), round(((upper_mass * 1e5) + 1))):
+        for m in range(
+            round(lower_mass * 1e5), round(((upper_mass * 1e5) + 1))
+        ):
             transformed_mass_range.append(m)
         return transformed_mass_range
 
@@ -510,7 +548,8 @@ class msfragger_3_0(ursgal.UNode):
         if os.path.exists(msfragger_output_tsv) is False:
             msfragger_output_tsv = os.path.join(
                 self.params["input_dir_path"],
-                self.params["file_root"][len(self.params["prefix"]) + 1 :] + ".tsv",
+                self.params["file_root"][len(self.params["prefix"]) + 1 :]
+                + ".tsv",
             )
             if os.path.exists(msfragger_output_tsv) is False:
                 msfragger_output_tsv = os.path.join(
@@ -525,7 +564,9 @@ class msfragger_3_0(ursgal.UNode):
         csv_out_fobject = open(
             self.params["translations"]["output_file_incl_path"], "w"
         )
-        csv_writer = csv.DictWriter(csv_out_fobject, fieldnames=translated_headers)
+        csv_writer = csv.DictWriter(
+            csv_out_fobject, fieldnames=translated_headers
+        )
         csv_writer.writeheader()
 
         with open(msfragger_output_tsv) as temp_tsv:
@@ -561,7 +602,9 @@ class msfragger_3_0(ursgal.UNode):
                     mass_diff = float(line_dict["Mass Difference"])
                     matching_glycans = []
                     matching_annotations = []
-                    for t_mass_diff in self.transform_mass_add_error(mass_diff):
+                    for t_mass_diff in self.transform_mass_add_error(
+                        mass_diff
+                    ):
                         # t_mass_diff = round(float(line_dict['Mass Difference']) * 1e5)
                         if t_mass_diff in self.mass_glycan_lookup.keys():
                             matching_glycans.extend(
@@ -578,10 +621,14 @@ class msfragger_3_0(ursgal.UNode):
                         mass_diff = mass_diff - ursgal.ukb.PROTON
                         if n == 4:
                             break
-                        for t_mass_diff in self.transform_mass_add_error(mass_diff):
+                        for t_mass_diff in self.transform_mass_add_error(
+                            mass_diff
+                        ):
                             if t_mass_diff in self.mass_glycan_lookup.keys():
                                 matching_glycans.extend(
-                                    sorted(self.mass_glycan_lookup[t_mass_diff])
+                                    sorted(
+                                        self.mass_glycan_lookup[t_mass_diff]
+                                    )
                                 )
                                 annotated = True
                             elif t_mass_diff in self.mass_shift_lookup.keys():

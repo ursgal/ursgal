@@ -137,6 +137,9 @@ def main(
         precursor_mz = spec.selected_precursors[0]["mz"]
         precursor_charge = spec.selected_precursors[0].get("charge", None)
 
+#        if precursor_charge is None:
+#          continue
+
         if scan_inclusion_list is not None:
             if int(spectrum_id) not in scan_inclusion_list:
                 continue
