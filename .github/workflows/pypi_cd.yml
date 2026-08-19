@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - uses: casperdcl/deploy-pypi@v2
+      - uses: casperdcl/deploy-pypi@v3.0.1
         with:
           password: ${{ secrets.PROD_PYPI }}
           requirements: twine wheel
